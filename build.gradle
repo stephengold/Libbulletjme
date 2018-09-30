@@ -3,15 +3,6 @@ apply plugin: 'java' // for IDE access
 
 def javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 
-gradle.projectsEvaluated {
-    tasks.withType(CppCompile) {
-        // compile-time options:
-        includes "$javaHome/include"
-        includes "$projectDir/src/native/bullet3"
-        includes "$projectDir/src/native/glue"
-    }
-}
-
 model {
     platforms {
         Linux32 {
@@ -65,9 +56,13 @@ model {
             binaries.withType(SharedLibraryBinarySpec) {
                 if (toolChain in VisualCpp) {
                     cppCompiler.define('WIN32')
-                    cppCompiler.args("/I$javaHome\\include\\win32")
+                    cppCompiler.args("/I$javaHome/include")
+                    cppCompiler.args("/I$javaHome/include/win32")
+                    cppCompiler.args("/I$projectDir/src/native/bullet3")
 
-                } else if (toolChain in Gcc) {
+                } else {
+                    cppCompiler.args '-I', "$javaHome/include"
+                    cppCompiler.args '-I', "$projectDir/src/native/bullet3"
                     cppCompiler.args '-Ofast'
                     cppCompiler.args '-U_FORTIFY_SOURCE'
 
@@ -87,7 +82,20 @@ model {
                         cppCompiler.args "-static"
                         linker.args "-static"
                         linker.args "-Wl,--exclude-all-symbols"
+                    } else {
+                        buildable = false
                     }
+                }
+                if (buildable) {
+                    task "copyToDist${targetPlatform.name}" (type: Copy, dependsOn: "bulletjme${targetPlatform.name}SharedLibrary") {
+                        from sharedLibraryFile
+                        def arch = targetPlatform.architecture.name
+                        rename { String filename ->
+                            return arch + '_' + filename
+                        }
+                        into 'dist'
+                    }
+                    jar.dependsOn("copyToDist${targetPlatform.name}");
                 }
             }
         }

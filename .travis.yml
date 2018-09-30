@@ -1,0 +1,36 @@
+language: cpp
+
+compiler: gcc
+
+matrix:
+  include:
+  - os: osx
+    osx_image: xcode9.3
+  - os: linux
+    jdk: oraclejdk8
+
+addons:
+  apt:
+    packages:
+    - gcc-multilib
+    - g++-multilib
+
+install:
+- chmod 755 gradlew
+
+script:
+- ./gradlew build --console=plain --no-daemon
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: I4YNAjqr53GqaW5KH7NJUp2WMCP4idRDh/t8T6iGCOa/izyEpj/WE7Vz45wac2u9XP1iRHrVPg8EzeZCd8GPVClXgWR5acc/1fSp++AZVDqZ+rV5TabhihjE9DwE0MTmmesAZyjrVoY2q4/jO5zRpkW4ohwpiKYn+odm0m5B6DKkOBJIFQ0IKNqj5a2KSe0QQbYj5Vg6/++XFilDhEWwVUzhDF+bdaTMUHMh5Iy8UZnZkk3K5keLo+f5e56ZR0H/+m7nxGzJ+IXW68phpZdEvjgXbrH83QKYv0MjxbMdFGGtA24IlbNKWbIvfY3wjUqG9t2AOtptz1VQpI/6EzZGFhDYr40lNboQjhrRg/TGh7PJhUbSBfC2TqM9uhb3r7qzV1fjRbvHnpBV8p+o+ntiDionE0hjtKqadGHe6yeOO0vVCdEFt1ZHlmU7TAaIY4tsTgtSV0RBXbQQkHmhUgcesqF0hAIw2MMgaV0MROmcW2G10ZqqhQTXYxHR0PoA06M4ts5IpxKtKCtQgGirNPXNTiaNPoW3/vg/e2d6wp90s7TYV5dbvRtOaGQuJsCO+ZzoEhrwu2S6dTJcGxbGubqifvkmRdkvyF8a78tldN7M7FcxNGiotUsrpSpI5zLxfrQ35tmlLKT+UONIdTCRBMn0Rffkt0KUPK/RoxwK1LMzEu4=
+  file:
+  - dist/x86_libbulletjme.so
+  - dist/x86-64_libbulletjme.so
+  - dist/x86_libbulletjme.dylib
+  - dist/x86-64_libbulletjme.dylib
+  on:
+    repo: stephengold/jme3-bullet-native
+    tags: true
