@@ -1,0 +1,24 @@
+version: 1.0.{build}
+
+image: Visual Studio 2017
+
+build_script:
+  - cmd: gradlew.bat build --no-daemon
+
+artifacts:
+  - path: dist/x86_bulletjme.dll
+    name: dll32
+  - path: dist/x86-64_bulletjme.dll
+    name: dll64
+
+deploy:
+  release: 2018-09-30
+  description: 2018-09-30 Release
+  artifact: dll32,dll64
+  provider: GitHub
+  auth_token:
+    secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz
+  force_update: true
+  tag: $(APPVEYOR_REPO_TAG_NAME)
+  on:
+    appveyor_repo_tag: true        # deploy on tag push only
