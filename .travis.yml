@@ -34,3 +34,4 @@ deploy:
   on:
     repo: stephengold/jme3-bullet-native
     tags: true
+    all_branches: true
