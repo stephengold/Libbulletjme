@@ -12,8 +12,8 @@ artifacts:
     name: dll64
 
 deploy:
-  release: 2018-09-30+3
-  description: test deployment
+  release: 1.0.0
+  description: initial release
   artifact: dll32,dll64
   provider: GitHub
   auth_token:
