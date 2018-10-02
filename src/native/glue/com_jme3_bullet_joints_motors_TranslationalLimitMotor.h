@@ -25,10 +25,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMo
 
 /*
  * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
- * Method:    getLetLimitSoftness
+ * Method:    getLimitSoftness
  * Signature: (J)F
  */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getLetLimitSoftness
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getLimitSoftness
   (JNIEnv *, jobject, jlong);
 
 /*
