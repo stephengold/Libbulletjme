@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,22 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    getLocalScaling
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getLocalScaling
+    (JNIEnv *env, jobject object, jlong shapeId, jobject vector) {
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, &shape->getLocalScaling(), vector);
+    }
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
