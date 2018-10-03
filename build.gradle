@@ -103,6 +103,12 @@ model {
     }
 }
 
+// cleanup tasks
+clean.dependsOn('cleanDist')
+task cleanDist(type: Delete) {
+    delete 'dist'
+}
+
 sourceSets { // for IDE access
     main {
         java {
