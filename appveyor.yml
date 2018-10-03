@@ -12,7 +12,7 @@ artifacts:
     name: dll64
 
 deploy:
-  description: +release notes, try again
+  description: release description goes here
   artifact: dll32,dll64
   provider: GitHub
   auth_token:
