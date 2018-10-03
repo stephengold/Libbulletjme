@@ -19,11 +19,13 @@ This project made use of the following software:
   + Microsoft Windows
   + the [NetBeans][] integrated development environment
 
-I am grateful to [Github][] for providing free hosting for this project.
+I am grateful to [Github][], [AppVeyor][], and [Travis][]
+for providing free hosting for this project.
 
 If I've misattributed anything or left anyone out, please let me know so I can
 correct the situation: sgold@sonic.net
 
+[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [chrome]: https://www.google.com/chrome "Chrome"
 [git]: https://git-scm.com "Git"
@@ -32,3 +34,4 @@ correct the situation: sgold@sonic.net
 [jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
+[travis]: https://travis-ci.org "Travis CI"
