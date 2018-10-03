@@ -1,5 +1,9 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.5 released on 3 October 2018
+
+ + Disabled Quickprof to avoid its thread limit.
+
 ## Version 1.0.4 released on 2 October 2018
 
  + Fixed JME issues 918 and 919.
