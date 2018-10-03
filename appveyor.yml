@@ -12,13 +12,11 @@ artifacts:
     name: dll64
 
 deploy:
-  release: 1.0.3
-  description: fix JME issues 918,919; +getLocalScaling()
+  description: +release notes, try again
   artifact: dll32,dll64
   provider: GitHub
   auth_token:
     secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz
-  force_update: true
-  tag: $(APPVEYOR_REPO_TAG_NAME)
+  force_update: true               # overwrite existing release if present
   on:
     appveyor_repo_tag: true        # deploy on tag push only
