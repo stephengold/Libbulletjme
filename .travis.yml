@@ -33,4 +33,4 @@ deploy:
   - dist/x86-64_libbulletjme.dylib
   on:
     repo: stephengold/jme3-bullet-native
-    tags: true   # true inhibits deployment even for tagged builds!
+    tags: false   # true inhibits deployment even for tagged builds!
