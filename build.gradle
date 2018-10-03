@@ -13,11 +13,11 @@ model {
             architecture 'x86_64'
             operatingSystem 'linux'
         }
-        OSX32 {
+        MacOSX32 {
             architecture 'x86'
             operatingSystem 'osx'
         }
-        OSX64 {
+        MacOSX64 {
             architecture 'x86_64'
             operatingSystem 'osx'
         }
@@ -33,12 +33,12 @@ model {
 
     components {
         bulletjme(NativeLibrarySpec) {
-            targetPlatform 'Windows32'
-            targetPlatform 'Windows64'
             targetPlatform 'Linux32'
             targetPlatform 'Linux64'
-            targetPlatform 'OSX32'
-            targetPlatform 'OSX64'
+            targetPlatform 'MacOSX32'
+            targetPlatform 'MacOSX64'
+            targetPlatform 'Windows32'
+            targetPlatform 'Windows64'
 
             sources {
                 cpp {
