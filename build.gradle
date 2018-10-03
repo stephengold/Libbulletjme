@@ -54,6 +54,7 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
+                cppCompiler.define('BT_NO_PROFILE')
                 if (toolChain in VisualCpp) {
                     cppCompiler.define('WIN32')
                     cppCompiler.args("/I$javaHome/include")
@@ -71,17 +72,17 @@ model {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {
                         cppCompiler.args '-I', "$javaHome/include/linux"
-                        cppCompiler.args "-fPIC"
-                        cppCompiler.args "-fpermissive"
-                        cppCompiler.args "-fvisibility=hidden"
-                        linker.args "-fvisibility=hidden"
+                        cppCompiler.args '-fPIC'
+                        cppCompiler.args '-fpermissive'
+                        cppCompiler.args '-fvisibility=hidden'
+                        linker.args '-fvisibility=hidden'
                     } else if (os == "windows") {
                         cppCompiler.define('WIN32')
                         cppCompiler.args '-I', "$javaHome/include/win32"
-                        cppCompiler.args "-fpermissive"
-                        cppCompiler.args "-static"
-                        linker.args "-static"
-                        linker.args "-Wl,--exclude-all-symbols"
+                        cppCompiler.args '-fpermissive'
+                        cppCompiler.args '-static'
+                        linker.args '-static'
+                        linker.args '-Wl,--exclude-all-symbols'
                     } else {
                         buildable = false
                     }
