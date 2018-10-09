@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -165,6 +165,66 @@ extern "C" {
         btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(*bodyA, *bodyB, transA, transB, useLinearReferenceFrameA);
         return reinterpret_cast<jlong>(joint);
     }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofJoint
+     * Method:    getFrameOffsetA
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetA
+    (JNIEnv * env, jobject object, jlong jointId, jobject frameA) {
+        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+
+        btTransform a = joint->getFrameOffsetA();
+        jmeBulletUtil::convert(env, &a, frameA);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofJoint
+     * Method:    getFrameOffsetB
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetB
+    (JNIEnv * env, jobject object, jlong jointId, jobject frameB) {
+        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+
+        btTransform b = joint->getFrameOffsetB();
+        jmeBulletUtil::convert(env, &b, frameB);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofJoint
+     * Method:    setFrames
+     * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setFrames
+    (JNIEnv * env, jobject object, jlong jointId, jobject frameA, jobject frameB) {
+        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+
+        btTransform a = btTransform();
+        jmeBulletUtil::convert(env, frameA, &a);
+
+        btTransform b = btTransform();
+        jmeBulletUtil::convert(env, frameB, &b);
+
+        joint->setFrames(a, b);
+    }
+
 #ifdef __cplusplus
 }
 #endif
