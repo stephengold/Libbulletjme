@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -106,27 +106,15 @@ jmethodID jmeClasses::PhysicsSweep_addmethod;
 jclass jmeClasses::Transform;
 jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
+jmethodID jmeClasses::Transform_scale;
 
 //private fields
-//JNIEnv* jmeClasses::env;
 JavaVM* jmeClasses::vm;
 
 void jmeClasses::initJavaClasses(JNIEnv* env) {
-//    if (env != NULL) {
-//        fprintf(stdout, "Check Java VM state\n");
-//        fflush(stdout);
-//        int res = vm->AttachCurrentThread((void**) &jmeClasses::env, NULL);
-//        if (res < 0) {
-//            fprintf(stdout, "** ERROR: getting Java env!\n");
-//            if (res == JNI_EVERSION) fprintf(stdout, "GetEnv Error because of different JNI Version!\n");
-//            fflush(stdout);
-//        }
-//        return;
-//    }
-    if(PhysicsSpace!=NULL) return;
+    if (PhysicsSpace != NULL) return;
     fprintf(stdout, "Bullet-Native: Initializing java classes\n");
     fflush(stdout);
-//    jmeClasses::env = env;
     env->GetJavaVM(&vm);
 
     PhysicsSpace = (jclass)env->NewGlobalRef(env->FindClass("com/jme3/bullet/PhysicsSpace"));
@@ -321,6 +309,12 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
 		return;
 	}
 
+    Transform_scale = env->GetMethodID(Transform, "getScale",
+            "()Lcom/jme3/math/Vector3f;");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
 }
 
 void jmeClasses::throwNPE(JNIEnv* env) {

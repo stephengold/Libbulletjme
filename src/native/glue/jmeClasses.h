@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,7 +57,7 @@ public:
     static jfieldID Vector3f_x;
     static jfieldID Vector3f_y;
     static jfieldID Vector3f_z;
-    
+
     static jclass Quaternion;
     static jmethodID Quaternion_set;
     static jmethodID Quaternion_getX;
@@ -98,15 +98,21 @@ public:
 	static jclass PhysicsSweep_listresult;
 	static jmethodID PhysicsSweep_addmethod;
 
-	static jclass Transform;
-	static jmethodID Transform_rotation;
-	static jmethodID Transform_translation;
+    static jclass Transform;
+    static jmethodID Transform_rotation;
+    static jmethodID Transform_translation;
+    static jmethodID Transform_scale;
 
     static jclass DebugMeshCallback;
     static jmethodID DebugMeshCallback_addVector;
 
     static void throwNPE(JNIEnv* env);
+
 private:
-    jmeClasses(){};
-    ~jmeClasses(){};
+
+    jmeClasses() {
+    };
+
+    ~jmeClasses() {
+    };
 };
