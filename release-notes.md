@@ -1,5 +1,9 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.6 released on 8 October 2018
+
+ + Removed all Bullet3 source files except Bullet3Common.
+
 ## Version 1.0.5 released on 3 October 2018
 
  + Disabled Quickprof to avoid its thread limit.
