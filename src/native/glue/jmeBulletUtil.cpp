@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -90,7 +90,6 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btQuaternion* out) {
 	out->setW(w);
 }
 
-
 void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
     if (in == NULL || out == NULL) {
         jmeClasses::throwNPE(env);
@@ -114,6 +113,42 @@ void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
+}
+
+// Copy a btQuaternion to a JME Quaternion
+
+void jmeBulletUtil::convert(JNIEnv* env, const btQuaternion* in, jobject out) {
+    if (in == NULL || out == NULL) {
+        jmeClasses::throwNPE(env);
+    }
+
+    env->SetFloatField(out, jmeClasses::Quaternion_w, in->w());
+    env->SetFloatField(out, jmeClasses::Quaternion_x, in->x());
+    env->SetFloatField(out, jmeClasses::Quaternion_y, in->y());
+    env->SetFloatField(out, jmeClasses::Quaternion_z, in->z());
+}
+
+// Copy a btTransform to a JME Transform
+
+void jmeBulletUtil::convert(JNIEnv* env, const btTransform* in, jobject out) {
+    if (in == NULL || out == NULL) {
+        jmeClasses::throwNPE(env);
+    }
+
+    jobject translation_out
+            = env->CallObjectMethod(out, jmeClasses::Transform_translation);
+    const btVector3& origin = in->getOrigin();
+    convert(env, &origin, translation_out);
+
+    jobject rotation_out
+            = env->CallObjectMethod(out, jmeClasses::Transform_rotation);
+    const btQuaternion rotation = in->getRotation();
+    convert(env, &rotation, rotation_out);
+
+    jobject scale_out = env->CallObjectMethod(out, jmeClasses::Transform_scale);
+    env->SetFloatField(scale_out, jmeClasses::Vector3f_x, 1);
+    env->SetFloatField(scale_out, jmeClasses::Vector3f_y, 1);
+    env->SetFloatField(scale_out, jmeClasses::Vector3f_z, 1);
 }
 
 void jmeBulletUtil::convert(JNIEnv* env, jobject in, btMatrix3x3* out) {
@@ -358,7 +393,6 @@ void jmeBulletUtil::addResult(JNIEnv* env, jobject resultlist, btVector3* hitnor
     }
 }
 
-
 void jmeBulletUtil::addSweepResult(JNIEnv* env, jobject resultlist, btVector3* hitnormal, btVector3* m_hitPointWorld, btScalar m_hitFraction, const btCollisionObject* hitobject) {
 
 	jobject singleresult = env->AllocObject(jmeClasses::PhysicsSweep_Class);
@@ -395,23 +429,14 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* out) {
 		return;
 	}
 	
-	/*
-	//Scale currently not supported by bullet
-	//@TBD: Create an assertion somewhere to avoid scale values
-	jobject scale_vec = env->GetObjectField(in, jmeClasses::Transform_scale);
-	if (env->ExceptionCheck()) {
-		env->Throw(env->ExceptionOccurred());
-		return;
-	}
-	*/
-	btVector3 native_translation_vec = btVector3();
-	//btVector3 native_scale_vec = btVector3();
-	btQuaternion native_rot_quat = btQuaternion();
-	
-	convert(env, translation_vec, &native_translation_vec);
-	//convert(env, scale_vec, native_scale_vec);
-	convert(env, rot_quat, &native_rot_quat);
+    //Scale currently not supported by bullet
+    //@TBD: Create an assertion somewhere to avoid scale values
+    btVector3 native_translation_vec = btVector3();
+    btQuaternion native_rot_quat = btQuaternion();
 
-	out->setRotation(native_rot_quat);
-	out->setOrigin(native_translation_vec);
+    convert(env, translation_vec, &native_translation_vec);
+    convert(env, rot_quat, &native_rot_quat);
+
+    out->setRotation(native_rot_quat);
+    out->setOrigin(native_translation_vec);
 }
