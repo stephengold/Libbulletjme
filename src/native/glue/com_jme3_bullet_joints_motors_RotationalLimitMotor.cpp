@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -154,6 +154,38 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getNormalCFM
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getNormalCFM
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return 0;
+        }
+        return motor->m_normalCFM;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getStopCFM
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getStopCFM
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return 0;
+        }
+        return motor->m_stopCFM;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
      * Method:    setMaxMotorForce
      * Signature: (JF)V
      */
@@ -166,6 +198,38 @@ extern "C" {
             return;
         }
         motor->m_maxMotorForce = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setNormalCFM
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setNormalCFM
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        motor->m_normalCFM = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setStopCFM
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setStopCFM
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        motor->m_stopCFM = value;
     }
 
     /*

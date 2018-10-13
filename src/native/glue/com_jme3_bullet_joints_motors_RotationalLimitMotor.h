@@ -73,6 +73,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    getNormalCFM
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getNormalCFM
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    getStopCFM
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getStopCFM
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
  * Method:    getTargetVelocity
  * Signature: (J)F
  */
@@ -157,6 +173,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_s
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setMaxMotorForce
+  (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    setNormalCFM
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setNormalCFM
+  (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    setStopCFM
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setStopCFM
   (JNIEnv *, jobject, jlong, jfloat);
 
 /*
