@@ -9,10 +9,26 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    getAccumulatedImpulse
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getAccumulatedImpulse
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
  * Method:    getBounce
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getBounce
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    getCurrentPosition
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getCurrentPosition
   (JNIEnv *, jobject, jlong);
 
 /*

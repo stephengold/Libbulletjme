@@ -42,6 +42,38 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getAccumulatedImpulse
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getAccumulatedImpulse
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return 0;
+        }
+        return motor->m_accumulatedImpulse;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getCurrentPosition
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getCurrentPosition
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return 0;
+        }
+        return motor->m_currentPosition;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
      * Method:    getLoLimit
      * Signature: (J)F
      */
