@@ -1,5 +1,19 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.8 released on TBD
+
+ + Removed the unused `addConstraint()` and `initNativePhysics()` from
+   the `PhysicsSpace` class.
+ + Added 4 CFM accessors to the `RotationalLimitMotor` class.
+ + Added 8 accessors to the `TranslationalLimitMotor` class for CFM, ERP,
+   and max motor force.
+
+## Version 1.0.7 released on 8 October 2018
+
+ + Provided access to JME's `Transform.getScale()` method.
+ + Added methods to convert a `btQuaternion` or `btTransform` to JME.
+ + Added 3 frame accessors to the `SixDofJoint` class.
+
 ## Version 1.0.6 released on 8 October 2018
 
  + Removed all Bullet3 source files except Bullet3Common.
