@@ -1,6 +1,13 @@
 # release notes for the jme3-bullet-native project
 
-## Version 1.0.8 released on TBD
+## Version 1.0.9 released on 13 October 2018
+
+ + Added `getAccumulatedImpulse()` and `getCurrentPosition()` to the
+   `RotationalLimitMotor` class.
+ + Added `getOffset()` and `setTargetVelocity()` to the
+   `TranslationalLimitMotor` class.
+
+## Version 1.0.8 released on 12 October 2018
 
  + Removed the unused `addConstraint()` and `initNativePhysics()` from
    the `PhysicsSpace` class.
