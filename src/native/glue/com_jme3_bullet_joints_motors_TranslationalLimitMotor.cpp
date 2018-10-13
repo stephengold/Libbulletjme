@@ -186,6 +186,134 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getERP
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getERP
+    (JNIEnv *env, jobject object, jlong motorId, jobject storeResult) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, &motor->m_stopERP, storeResult);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getMaxMotorForce
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getMaxMotorForce
+    (JNIEnv *env, jobject object, jlong motorId, jobject storeResult) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, &motor->m_maxMotorForce, storeResult);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getNormalCFM
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getNormalCFM
+    (JNIEnv *env, jobject object, jlong motorId, jobject storeResult) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, &motor->m_normalCFM, storeResult);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getStopCFM
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getStopCFM
+    (JNIEnv *env, jobject object, jlong motorId, jobject storeResult) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, &motor->m_stopCFM, storeResult);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setERP
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setERP
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, vector, &motor->m_stopERP);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setMaxMotorForce
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setMaxMotorForce
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, vector, &motor->m_maxMotorForce);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setNormalCFM
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setNormalCFM
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, vector, &motor->m_normalCFM);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setStopCFM
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setStopCFM
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        if (motor == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return;
+        }
+        jmeBulletUtil::convert(env, vector, &motor->m_stopCFM);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
      * Method:    setDamping
      * Signature: (JF)V
      */
