@@ -39,14 +39,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCollisionObject
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    addConstraint
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraint
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    addConstraintC
  * Signature: (JJZ)V
  */
@@ -84,14 +76,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_finalizeNative
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    initNativePhysics
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_initNativePhysics
-  (JNIEnv *, jclass);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
