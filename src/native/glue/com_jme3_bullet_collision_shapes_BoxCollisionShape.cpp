@@ -48,10 +48,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
     (JNIEnv *env, jobject object, jobject halfExtents) {
         jmeClasses::initJavaClasses(env);
-        btVector3 extents =  btVector3();
+        btVector3 extents = btVector3();
         jmeBulletUtil::convert(env, halfExtents, &extents);
         btBoxShape* shape = new btBoxShape(extents);
-        return reinterpret_cast<jlong>(shape);
+        return reinterpret_cast<jlong> (shape);
     }
 
 #ifdef __cplusplus

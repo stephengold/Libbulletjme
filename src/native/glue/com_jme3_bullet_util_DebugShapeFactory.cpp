@@ -61,7 +61,7 @@ public:
             env->Throw(env->ExceptionOccurred());
             return;
         }
-//        triangle = 
+        //        triangle =
         env->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexB.getX(), vertexB.getY(), vertexB.getZ(), partId, triangleIndex);
         if (env->ExceptionCheck()) {
             env->Throw(env->ExceptionOccurred());
@@ -88,16 +88,16 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
     (JNIEnv *env, jclass clazz, jlong shapeId, jobject callback) {
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*>(shapeId);
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape->isConcave()) {
-            btConcaveShape* concave = reinterpret_cast<btConcaveShape*>(shape);
+            btConcaveShape* concave = reinterpret_cast<btConcaveShape*> (shape);
             DebugCallback* clb = new DebugCallback(env, callback);
             btVector3 min = btVector3(-1e30, -1e30, -1e30);
             btVector3 max = btVector3(1e30, 1e30, 1e30);
             concave->processAllTriangles(clb, min, max);
             delete(clb);
         } else if (shape->isConvex()) {
-            btConvexShape* convexShape = reinterpret_cast<btConvexShape*>(shape);
+            btConvexShape* convexShape = reinterpret_cast<btConvexShape*> (shape);
             // Check there is a hull shape to render
             if (convexShape->getUserPointer() == NULL) {
                 // create a hull approximation
@@ -112,7 +112,7 @@ extern "C" {
             int numberOfTriangles = hull->numTriangles();
             int numberOfFloats = 3 * 3 * numberOfTriangles;
             int byteBufferSize = numberOfFloats * 4;
-            
+
             // Loop variables
             const unsigned int* hullIndices = hull->getIndexPointer();
             const btVector3* hullVertices = hull->getVertexPointer();

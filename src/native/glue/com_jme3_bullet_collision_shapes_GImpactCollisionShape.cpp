@@ -49,10 +49,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_createShape
     (JNIEnv * env, jobject object, jlong meshId) {
         jmeClasses::initJavaClasses(env);
-        btTriangleIndexVertexArray* array = reinterpret_cast<btTriangleIndexVertexArray*>(meshId);
+        btTriangleIndexVertexArray* array = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
         btGImpactMeshShape* shape = new btGImpactMeshShape(array);
         shape->updateBound();
-        return reinterpret_cast<jlong>(shape);
+        return reinterpret_cast<jlong> (shape);
     }
 
     /*
@@ -65,7 +65,7 @@ extern "C" {
         btTriangleIndexVertexArray* array = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
         delete(array);
     }
-    
+
 #ifdef __cplusplus
 }
 #endif

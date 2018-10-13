@@ -118,8 +118,8 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
                 if (up0 != NULL && up1 != NULL) {
                     collides = (up0->group & up1->groups) != 0 || (up1->group & up0->groups) != 0;
 
-                    if(collides){
-                        jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *)up0->space;
+                    if (collides) {
+                        jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
                         JNIEnv* env = dynamicsWorld->getEnv();
                         jobject javaPhysicsSpace = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());
                         jobject javaCollisionObject0 = env->NewLocalRef(up0->javaCollisionObject);
@@ -190,7 +190,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0,
     btCollisionObject* co1 = (btCollisionObject*) body1;
     jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
     if (up0 != NULL) {
-        jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *)up0->space;
+        jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
         if (dynamicsWorld != NULL) {
             JNIEnv* env = dynamicsWorld->getEnv();
             jobject javaPhysicsSpace = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());

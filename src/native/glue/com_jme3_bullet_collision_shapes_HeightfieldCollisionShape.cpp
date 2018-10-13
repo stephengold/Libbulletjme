@@ -50,8 +50,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jint heightStickWidth, jint heightStickLength, jobject heightfieldData, jfloat heightScale, jfloat minHeight, jfloat maxHeight, jint upAxis, jboolean flipQuadEdges) {
         jmeClasses::initJavaClasses(env);
         void* data = env->GetDirectBufferAddress(heightfieldData);
-        btHeightfieldTerrainShape* shape=new btHeightfieldTerrainShape(heightStickWidth, heightStickLength, data, heightScale, minHeight, maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
-        return reinterpret_cast<jlong>(shape);
+        btHeightfieldTerrainShape* shape = new btHeightfieldTerrainShape(heightStickWidth, heightStickLength, data, heightScale, minHeight, maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
+        return reinterpret_cast<jlong> (shape);
     }
 
 #ifdef __cplusplus

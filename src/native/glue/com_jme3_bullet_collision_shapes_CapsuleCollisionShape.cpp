@@ -49,7 +49,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jint axis, jfloat radius, jfloat height) {
         jmeClasses::initJavaClasses(env);
         btCollisionShape* shape;
-        switch(axis){
+        switch (axis) {
             case 0:
                 shape = new btCapsuleShapeX(radius, height);
                 break;
@@ -60,7 +60,7 @@ extern "C" {
                 shape = new btCapsuleShapeZ(radius, height);
                 break;
         }
-        return reinterpret_cast<jlong>(shape);
+        return reinterpret_cast<jlong> (shape);
     }
 
 #ifdef __cplusplus

@@ -51,17 +51,17 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
         float* data = (float*) env->GetDirectBufferAddress(array);
         //TODO: capacity will not always be length!
-        int length = env->GetDirectBufferCapacity(array)/4;
+        int length = env->GetDirectBufferCapacity(array) / 4;
         btConvexHullShape* shape = new btConvexHullShape();
-        for (int i = 0; i < length; i+=3) {
+        for (int i = 0; i < length; i += 3) {
             btVector3 vect = btVector3(data[i],
                     data[i + 1],
                     data[i + 2]);
-            
+
             shape->addPoint(vect);
         }
 
-        return reinterpret_cast<jlong>(shape);
+        return reinterpret_cast<jlong> (shape);
     }
 
 #ifdef __cplusplus

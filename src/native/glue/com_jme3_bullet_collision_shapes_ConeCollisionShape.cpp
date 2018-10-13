@@ -60,7 +60,7 @@ extern "C" {
                 shape = new btConeShapeZ(radius, height);
                 break;
         }
-        return reinterpret_cast<jlong>(shape);
+        return reinterpret_cast<jlong> (shape);
     }
 
 #ifdef __cplusplus
