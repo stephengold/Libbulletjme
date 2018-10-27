@@ -50,7 +50,17 @@ extern "C" {
     (JNIEnv *env, jobject object, jfloat mass, jlong motionstatId, jlong shapeId) {
         jmeClasses::initJavaClasses(env);
         btMotionState* motionState = reinterpret_cast<btMotionState*> (motionstatId);
+        if (motionState == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btMotionState does not exist.");
+            return 0L;
+        }
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return 0L;
+        }
         btVector3 localInertia = btVector3();
         if (mass > 0) {
             shape->calculateLocalInertia(mass, localInertia);
@@ -70,7 +80,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return false;
         }
         return body->isInWorld();
@@ -86,7 +96,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         //        if (body->isStaticOrKinematicObject() || !body->isInWorld())
@@ -111,7 +121,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         //        if (body->isStaticOrKinematicObject() || !body->isInWorld())
@@ -136,7 +146,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         //        if (body->isStaticOrKinematicObject() || !body->isInWorld())
@@ -161,7 +171,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -179,7 +189,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getInvInertiaDiagLocal(), value);
@@ -195,7 +205,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getWorldTransform().getOrigin(), value);
@@ -211,7 +221,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convertQuat(env, &body->getWorldTransform().getBasis(), value);
@@ -227,7 +237,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getWorldTransform().getBasis(), value);
@@ -243,7 +253,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         if (value) {
@@ -266,7 +276,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setCcdSweptSphereRadius(value);
@@ -282,7 +292,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setCcdMotionThreshold(value);
@@ -298,7 +308,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getCcdSweptSphereRadius();
@@ -314,7 +324,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getCcdMotionThreshold();
@@ -330,7 +340,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getCcdSquareMotionThreshold();
@@ -346,7 +356,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         if (value) {
@@ -366,7 +376,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
@@ -386,7 +396,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getGravity(), value);
@@ -402,7 +412,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -420,7 +430,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getFriction();
@@ -436,7 +446,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setFriction(value);
@@ -452,7 +462,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setDamping(value1, value2);
@@ -468,7 +478,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setDamping(body->getLinearDamping(), value);
@@ -484,7 +494,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getLinearDamping();
@@ -500,7 +510,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getAngularDamping();
@@ -516,7 +526,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getRestitution();
@@ -532,7 +542,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setRestitution(value);
@@ -548,7 +558,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getAngularVelocity(), value);
@@ -564,7 +574,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -582,7 +592,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getLinearVelocity(), value);
@@ -598,7 +608,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -616,7 +626,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec1 = btVector3();
@@ -636,7 +646,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec1 = btVector3();
@@ -654,7 +664,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec1 = btVector3();
@@ -672,7 +682,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec1 = btVector3();
@@ -692,7 +702,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec1 = btVector3();
@@ -710,7 +720,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->clearForces();
@@ -726,7 +736,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
@@ -743,7 +753,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->activate(true);
@@ -759,7 +769,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return false;
         }
         return body->isActive();
@@ -775,7 +785,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setSleepingThresholds(linear, angular);
@@ -791,7 +801,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setSleepingThresholds(value, body->getAngularSleepingThreshold());
@@ -807,7 +817,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         body->setSleepingThresholds(body->getLinearSleepingThreshold(), value);
@@ -823,7 +833,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getLinearSleepingThreshold();
@@ -839,7 +849,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         return body->getAngularSleepingThreshold();
@@ -855,7 +865,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getAngularFactor(), factor);
@@ -871,7 +881,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -889,7 +899,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         jmeBulletUtil::convert(env, &body->getLinearFactor(), factor);
@@ -905,7 +915,7 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
         btVector3 vec = btVector3();
