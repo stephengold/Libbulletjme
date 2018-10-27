@@ -1,5 +1,9 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.10 released on 18 October 2018
+
+ + Use the Force in `PhysicsRigidBody.activate()`.
+
 ## Version 1.0.9 released on 13 October 2018
 
  + Added `getAccumulatedImpulse()` and `getCurrentPosition()` to the
