@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_enableSpring
     (JNIEnv *env, jobject object, jlong jointId, jint index, jboolean onOff) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
+            return;
+        }
         joint -> enableSpring(index, onOff);
     }
 
@@ -59,6 +64,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setStiffness
     (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat stiffness) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
+            return;
+        }
         joint -> setStiffness(index, stiffness);
     }
 
@@ -70,6 +80,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setDamping
     (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat damping) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
+            return;
+        }
         joint -> setDamping(index, damping);
     }
 
@@ -81,6 +96,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibriumPoint__J
     (JNIEnv *env, jobject object, jlong jointId) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
+            return;
+        }
         joint -> setEquilibriumPoint();
     }
 
@@ -92,6 +112,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibriumPoint__JI
     (JNIEnv *env, jobject object, jlong jointId, jint index) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
+            return;
+        }
         joint -> setEquilibriumPoint(index);
     }
 
@@ -104,7 +129,17 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject rotA, jobject pivotB, jobject rotB, jboolean useLinearReferenceFrameA) {
         jmeClasses::initJavaClasses(env);
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (bodyA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body A does not exist.");
+            return 0L;
+        }
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (bodyB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body B does not exist.");
+            return 0L;
+        }
         btTransform transA;
         jmeBulletUtil::convert(env, pivotA, &transA.getOrigin());
         jmeBulletUtil::convert(env, rotA, &transA.getBasis());

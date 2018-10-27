@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getLowerLinLimit();
@@ -66,7 +66,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setLowerLinLimit(value);
@@ -82,7 +82,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getUpperLinLimit();
@@ -98,7 +98,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setUpperLinLimit(value);
@@ -114,7 +114,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getLowerAngLimit();
@@ -130,7 +130,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setLowerAngLimit(value);
@@ -146,7 +146,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getUpperAngLimit();
@@ -162,7 +162,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setUpperAngLimit(value);
@@ -178,7 +178,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getSoftnessDirLin();
@@ -194,7 +194,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setSoftnessDirLin(value);
@@ -210,7 +210,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getRestitutionDirLin();
@@ -226,7 +226,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setRestitutionDirLin(value);
@@ -242,7 +242,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getDampingDirLin();
@@ -258,7 +258,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setDampingDirLin(value);
@@ -274,7 +274,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getSoftnessDirAng();
@@ -290,7 +290,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setSoftnessDirAng(value);
@@ -306,7 +306,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getRestitutionDirAng();
@@ -322,7 +322,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setRestitutionDirAng(value);
@@ -338,7 +338,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getDampingDirAng();
@@ -354,7 +354,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setDampingDirAng(value);
@@ -370,7 +370,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getSoftnessLimLin();
@@ -386,7 +386,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setSoftnessLimLin(value);
@@ -402,7 +402,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getRestitutionLimLin();
@@ -418,7 +418,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setRestitutionLimLin(value);
@@ -434,7 +434,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getDampingLimLin();
@@ -450,7 +450,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setDampingLimLin(value);
@@ -466,7 +466,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getSoftnessLimAng();
@@ -482,7 +482,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setSoftnessLimAng(value);
@@ -498,7 +498,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getRestitutionLimAng();
@@ -514,7 +514,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setRestitutionLimAng(value);
@@ -530,7 +530,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getDampingLimAng();
@@ -546,7 +546,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setDampingLimAng(value);
@@ -562,7 +562,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getSoftnessOrthoLin();
@@ -578,7 +578,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setSoftnessOrthoLin(value);
@@ -594,7 +594,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getRestitutionOrthoLin();
@@ -610,7 +610,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setRestitutionOrthoLin(value);
@@ -626,7 +626,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getDampingOrthoLin();
@@ -642,7 +642,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setDampingOrthoLin(value);
@@ -658,7 +658,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getSoftnessOrthoAng();
@@ -674,7 +674,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setSoftnessOrthoAng(value);
@@ -690,7 +690,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getRestitutionOrthoAng();
@@ -706,7 +706,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setRestitutionOrthoAng(value);
@@ -722,7 +722,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getDampingOrthoAng();
@@ -738,7 +738,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setDampingOrthoAng(value);
@@ -754,7 +754,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return false;
         }
         return joint->getPoweredLinMotor();
@@ -770,7 +770,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setPoweredLinMotor(value);
@@ -786,7 +786,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getTargetLinMotorVelocity();
@@ -802,7 +802,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setTargetLinMotorVelocity(value);
@@ -818,7 +818,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getMaxLinMotorForce();
@@ -834,7 +834,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setMaxLinMotorForce(value);
@@ -850,7 +850,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return false;
         }
         return joint->getPoweredAngMotor();
@@ -866,7 +866,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setPoweredAngMotor(value);
@@ -882,7 +882,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getTargetAngMotorVelocity();
@@ -898,7 +898,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setTargetAngMotorVelocity(value);
@@ -914,7 +914,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return 0;
         }
         return joint->getMaxAngMotorForce();
@@ -930,7 +930,7 @@ extern "C" {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
             return;
         }
         joint->setMaxAngMotorForce(value);
@@ -945,7 +945,17 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject rotA, jobject pivotB, jobject rotB, jboolean useLinearReferenceFrameA) {
         jmeClasses::initJavaClasses(env);
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (bodyA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body A does not exist.");
+            return 0L;
+        }
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (bodyB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body B does not exist.");
+            return 0L;
+        }
         btMatrix3x3 mtx1 = btMatrix3x3();
         btMatrix3x3 mtx2 = btMatrix3x3();
         btTransform transA = btTransform(mtx1);

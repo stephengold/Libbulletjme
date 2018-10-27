@@ -50,7 +50,7 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return 0;
         }
         return reinterpret_cast<jlong> (joint->getRotationalLimitMotor(index));
@@ -66,7 +66,7 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return 0;
         }
         return reinterpret_cast<jlong> (joint->getTranslationalLimitMotor());
@@ -82,7 +82,7 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -100,7 +100,7 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -118,7 +118,7 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -136,7 +136,7 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return;
         }
         btVector3 vec = btVector3();
@@ -153,7 +153,17 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject rotA, jobject pivotB, jobject rotB, jboolean useLinearReferenceFrameA) {
         jmeClasses::initJavaClasses(env);
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (bodyA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body A does not exist.");
+            return 0L;
+        }
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (bodyB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body B does not exist.");
+            return 0L;
+        }
         btMatrix3x3 mtx1 = btMatrix3x3();
         btMatrix3x3 mtx2 = btMatrix3x3();
         btTransform transA = btTransform(mtx1);

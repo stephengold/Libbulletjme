@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return;
         }
         joint->enableAngularMotor(enable, targetVelocity, maxMotorImpulse);
@@ -66,7 +66,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return false;
         }
         return joint->getEnableAngularMotor();
@@ -82,7 +82,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return 0;
         }
         return joint->getMotorTargetVelocity();
@@ -98,7 +98,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return 0;
         }
         return joint->getMaxMotorImpulse();
@@ -114,7 +114,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return;
         }
         return joint->setLimit(low, high);
@@ -130,7 +130,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return;
         }
         return joint->setLimit(low, high, softness, biasFactor, relaxationFactor);
@@ -146,7 +146,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return 0;
         }
         return joint->getUpperLimit();
@@ -162,7 +162,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return 0;
         }
         return joint->getLowerLimit();
@@ -178,7 +178,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return;
         }
         joint->setAngularOnly(angular);
@@ -194,7 +194,7 @@ extern "C" {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The joint does not exist.");
             return 0;
         }
         return joint->getHingeAngle();
@@ -209,7 +209,17 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject axisA, jobject pivotB, jobject axisB) {
         jmeClasses::initJavaClasses(env);
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (bodyA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body A does not exist.");
+            return 0L;
+        }
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (bodyB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body B does not exist.");
+            return 0L;
+        }
         btVector3 vec1 = btVector3();
         btVector3 vec2 = btVector3();
         btVector3 vec3 = btVector3();
