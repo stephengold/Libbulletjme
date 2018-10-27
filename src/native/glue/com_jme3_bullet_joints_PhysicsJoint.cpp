@@ -50,7 +50,7 @@ extern "C" {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
             return 0;
         }
         return joint->getAppliedImpulse();
@@ -66,7 +66,7 @@ extern "C" {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
             return;
         }
         delete(joint);

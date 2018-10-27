@@ -50,7 +50,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_accumulatedImpulse;
@@ -66,7 +66,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_currentPosition;
@@ -82,7 +82,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_loLimit;
@@ -98,7 +98,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_loLimit = value;
@@ -114,7 +114,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_hiLimit;
@@ -130,7 +130,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_hiLimit = value;
@@ -146,7 +146,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_targetVelocity;
@@ -162,7 +162,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_targetVelocity = value;
@@ -178,7 +178,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_maxMotorForce;
@@ -194,7 +194,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_normalCFM;
@@ -210,7 +210,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_stopCFM;
@@ -226,7 +226,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_maxMotorForce = value;
@@ -242,7 +242,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_normalCFM = value;
@@ -258,7 +258,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_stopCFM = value;
@@ -274,7 +274,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_maxLimitForce;
@@ -290,7 +290,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_maxLimitForce = value;
@@ -306,7 +306,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_damping;
@@ -322,7 +322,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_damping = value;
@@ -338,7 +338,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_limitSoftness;
@@ -354,7 +354,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_limitSoftness = value;
@@ -370,7 +370,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_stopERP;
@@ -386,7 +386,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_stopERP = value;
@@ -402,7 +402,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return 0;
         }
         return motor->m_bounce;
@@ -418,7 +418,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_bounce = value;
@@ -434,7 +434,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return false;
         }
         return motor->m_enableMotor;
@@ -450,7 +450,7 @@ extern "C" {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         if (motor == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRotationalLimitMotor does not exist.");
             return;
         }
         motor->m_enableMotor = value;
