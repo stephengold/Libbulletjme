@@ -89,6 +89,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMoto
 
 /*
  * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+ * Method:    getTargetVelocity
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getTargetVelocity
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
  * Method:    getUpperLimit
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
