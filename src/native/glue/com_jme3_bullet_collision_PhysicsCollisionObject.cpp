@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,6 +43,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    activate
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_activate
+    (JNIEnv * env, jobject object, jlong objectId, jboolean forceFlag) {
+        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/IllegalStateException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return;
+        }
+        collisionObject->activate(forceFlag);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    attachCollisionShape
      * Signature: (JJ)V
      */
@@ -51,13 +67,13 @@ extern "C" {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
         if (collisionObject == NULL) {
             jclass newExc = env->FindClass("java/lang/IllegalStateException");
-            env->ThrowNew(newExc, "The collision object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
             return;
         }
         btCollisionShape* collisionShape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (collisionShape == NULL) {
             jclass newExc = env->FindClass("java/lang/IllegalStateException");
-            env->ThrowNew(newExc, "The collision shape does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return;
         }
         collisionObject->setCollisionShape(collisionShape);
@@ -73,7 +89,7 @@ extern "C" {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
         if (collisionObject == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
             return;
         }
         if (collisionObject -> getUserPointer() != NULL) {
@@ -93,7 +109,7 @@ extern "C" {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
         if (collisionObject == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
             return;
         }
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
@@ -118,7 +134,7 @@ extern "C" {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
         if (collisionObject == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
             return;
         }
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
@@ -137,7 +153,7 @@ extern "C" {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
         if (collisionObject == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
             return;
         }
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
