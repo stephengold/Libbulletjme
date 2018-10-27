@@ -1,5 +1,16 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.12 released on 27 October 2018
+
+ + Added `activate()` to the `PhysicsCollisionObject` class.
+ + Added `getTargetVelocity()` to the `TranslationalLimitMotor` class.
+ + Removed an accidentally committed DLL.
+ + Improved argument validation for JNI methods.
+
+## Version 1.0.11 released on 27 October 2018
+
+ + Upgraded the Bullet sources to version 2.87.
+
 ## Version 1.0.10 released on 18 October 2018
 
  + Use the Force in `PhysicsRigidBody.activate()`.
