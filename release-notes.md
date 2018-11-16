@@ -1,5 +1,9 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.13 released on 15 November 2018
+
+ + Upgraded Bullet source to SHA1 ID=9ad77a2 .
+
 ## Version 1.0.12 released on 27 October 2018
 
  + Added `activate()` to the `PhysicsCollisionObject` class.
@@ -9,7 +13,7 @@
 
 ## Version 1.0.11 released on 27 October 2018
 
- + Upgraded the Bullet sources to version 2.87.
+ + Upgraded the Bullet sources to match release 2.87 of the bullet3 project.
 
 ## Version 1.0.10 released on 18 October 2018
 
@@ -53,5 +57,5 @@
 ## Version 1.0.2 released on 30 September 2018
 
 This was the initial baseline release, combining
-source-code from release 2.86.1 of the bullet3 project
+source code from release 2.86.1 of the bullet3 project
 with glue code from the `master` branch of the jmonkeyengine project.
