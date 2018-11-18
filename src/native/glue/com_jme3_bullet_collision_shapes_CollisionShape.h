@@ -33,6 +33,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_ge
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isConcave
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConcave
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    setLocalScaling
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */

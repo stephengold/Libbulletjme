@@ -74,6 +74,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    isConcave
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConcave
+    (JNIEnv * env, jobject object, jlong shapeId) {
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The native object does not exist.");
+            return false;
+        }
+        return shape->isConcave();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    setLocalScaling
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
