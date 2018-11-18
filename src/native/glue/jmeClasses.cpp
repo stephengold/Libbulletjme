@@ -112,9 +112,11 @@ jmethodID jmeClasses::Transform_scale;
 JavaVM* jmeClasses::vm;
 
 void jmeClasses::initJavaClasses(JNIEnv* env) {
-    if (PhysicsSpace != NULL) return;
-    fprintf(stdout, "Bullet-Native: Initializing java classes\n");
+    if (PhysicsSpace != NULL) return; // already initialized
+
+    fprintf(stdout, "jme3-bullet-native: initializing Java classes\n");
     fflush(stdout);
+
     env->GetJavaVM(&vm);
 
     PhysicsSpace = (jclass) env->NewGlobalRef(env->FindClass("com/jme3/bullet/PhysicsSpace"));
