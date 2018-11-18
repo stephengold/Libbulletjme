@@ -45,14 +45,6 @@ extern "C" {
 #define com_jme3_bullet_objects_PhysicsRigidBody_massForStatic 0.0f
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    activate
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_activate
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    applyCentralForce
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
