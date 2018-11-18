@@ -1,8 +1,14 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.14 released on 18 November 2018
+
+ + Added a multi-sphere collision shape.
+ + Added `isConcave()` to the `CollisionShape` class.
+ + Changed the initialization message.
+
 ## Version 1.0.13 released on 15 November 2018
 
- + Upgraded Bullet source to SHA1 ID=9ad77a2 .
+ + Upgraded the Bullet sources to match SHA1 ID=9ad77a2 of the bullet3 project.
 
 ## Version 1.0.12 released on 27 October 2018
 
