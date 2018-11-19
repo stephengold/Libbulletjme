@@ -80,13 +80,7 @@ extern "C" {
 
     /* Inaccessible static: _00024assertionsDisabled */
 
-    /*
-     * Class:     com_jme3_bullet_util_DebugShapeFactory
-     * Method:    getVertices
-     * Signature: (JLcom/jme3/bullet/util/DebugMeshCallback;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
-    (JNIEnv *env, jclass clazz, jlong shapeId, jobject callback) {
+    void getVertices(JNIEnv *env, jlong shapeId, jint resolution, jobject callback) {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape->isConcave()) {
             btConcaveShape* concave = reinterpret_cast<btConcaveShape*> (shape);
@@ -103,13 +97,9 @@ extern "C" {
             // Create a hull approximation
             btShapeHull* hull = new btShapeHull(convexShape);
             float margin = convexShape->getMargin();
-            hull->buildHull(margin);
+            hull->buildHull(margin, resolution);
 
             int numberOfTriangles = hull->numTriangles();
-            int numberOfFloats = 3 * 3 * numberOfTriangles;
-            int byteBufferSize = numberOfFloats * 4;
-
-            // Loop variables
             const unsigned int* hullIndices = hull->getIndexPointer();
             const btVector3* hullVertices = hull->getVertexPointer();
             btVector3 vertexA, vertexB, vertexC;
@@ -140,6 +130,26 @@ extern "C" {
             }
             delete hull;
         }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_util_DebugShapeFactory
+     * Method:    getVertices
+     * Signature: (JLcom/jme3/bullet/util/DebugMeshCallback;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
+    (JNIEnv *env, jclass clazz, jlong shapeId, jobject callback) {
+        getVertices(env, shapeId, /* resolution */ 0, callback);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_util_DebugShapeFactory
+     * Method:    getVertices2
+     * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices2
+    (JNIEnv *env, jclass clazz, jlong shapeId, jint resolution, jobject callback) {
+        getVertices(env, shapeId, resolution, callback);
     }
 
 #ifdef __cplusplus
