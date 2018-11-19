@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -61,7 +61,6 @@ public:
             env->Throw(env->ExceptionOccurred());
             return;
         }
-        //        triangle =
         env->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexB.getX(), vertexB.getY(), vertexB.getZ(), partId, triangleIndex);
         if (env->ExceptionCheck()) {
             env->Throw(env->ExceptionOccurred());
@@ -91,23 +90,20 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape->isConcave()) {
             btConcaveShape* concave = reinterpret_cast<btConcaveShape*> (shape);
+
             DebugCallback* clb = new DebugCallback(env, callback);
             btVector3 min = btVector3(-1e30, -1e30, -1e30);
             btVector3 max = btVector3(1e30, 1e30, 1e30);
             concave->processAllTriangles(clb, min, max);
             delete(clb);
+
         } else if (shape->isConvex()) {
             btConvexShape* convexShape = reinterpret_cast<btConvexShape*> (shape);
-            // Check there is a hull shape to render
-            if (convexShape->getUserPointer() == NULL) {
-                // create a hull approximation
-                btShapeHull* hull = new btShapeHull(convexShape);
-                float margin = convexShape->getMargin();
-                hull->buildHull(margin);
-                convexShape->setUserPointer(hull);
-            }
 
-            btShapeHull* hull = (btShapeHull*) convexShape->getUserPointer();
+            // Create a hull approximation
+            btShapeHull* hull = new btShapeHull(convexShape);
+            float margin = convexShape->getMargin();
+            hull->buildHull(margin);
 
             int numberOfTriangles = hull->numTriangles();
             int numberOfFloats = 3 * 3 * numberOfTriangles;
@@ -120,12 +116,12 @@ extern "C" {
             int index = 0;
 
             for (int i = 0; i < numberOfTriangles; i++) {
-                // Grab the data for this triangle from the hull
+                // Copy the triangle's vertices from the hull.
                 vertexA = hullVertices[hullIndices[index++]];
                 vertexB = hullVertices[hullIndices[index++]];
                 vertexC = hullVertices[hullIndices[index++]];
 
-                // Put the verticies into the vertex buffer
+                // Add the vertices to the callback object.
                 env->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexA.getX(), vertexA.getY(), vertexA.getZ());
                 if (env->ExceptionCheck()) {
                     env->Throw(env->ExceptionOccurred());
@@ -143,7 +139,6 @@ extern "C" {
                 }
             }
             delete hull;
-            convexShape->setUserPointer(NULL);
         }
     }
 
