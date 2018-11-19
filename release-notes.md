@@ -1,5 +1,11 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.15 released on 19 November 2018
+
+ + Added an option to generate debug meshes with 256 vertices for convex shapes,
+   instead of the usual 42 vertices.
+ + Avoid trashing the shape's user pointer in DebugShapeFactory.
+
 ## Version 1.0.14 released on 18 November 2018
 
  + Added a multi-sphere collision shape.
