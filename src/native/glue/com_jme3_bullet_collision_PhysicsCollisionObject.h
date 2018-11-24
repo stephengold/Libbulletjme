@@ -75,18 +75,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_ini
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
- * Method:    setCollisionGroup
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionGroup
-  (JNIEnv *, jobject, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    setCollideWithGroups
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollideWithGroups
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setCollisionGroup
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionGroup
   (JNIEnv *, jobject, jlong, jint);
 
 #ifdef __cplusplus
