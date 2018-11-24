@@ -7,6 +7,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_jme3_bullet_util_DebugShapeFactory_highResolution
+#define com_jme3_bullet_util_DebugShapeFactory_highResolution 1L
+#undef com_jme3_bullet_util_DebugShapeFactory_lowResolution
+#define com_jme3_bullet_util_DebugShapeFactory_lowResolution 0L
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
  * Method:    getVertices2
