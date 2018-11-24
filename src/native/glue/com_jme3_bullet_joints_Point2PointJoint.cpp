@@ -156,11 +156,33 @@ extern "C" {
             env->ThrowNew(newExc, "Rigid body B does not exist.");
             return 0L;
         }
-        btVector3 pivotAIn;
-        btVector3 pivotBIn;
-        jmeBulletUtil::convert(env, pivotA, &pivotAIn);
-        jmeBulletUtil::convert(env, pivotB, &pivotBIn);
-        btPoint2PointConstraint * joint = new btPoint2PointConstraint(*bodyA, *bodyB, pivotAIn, pivotBIn);
+        btVector3 pivotInA;
+        btVector3 pivotInB;
+        jmeBulletUtil::convert(env, pivotA, &pivotInA);
+        jmeBulletUtil::convert(env, pivotB, &pivotInB);
+        btPoint2PointConstraint * joint
+                = new btPoint2PointConstraint(*bodyA, *bodyB, pivotInA, pivotInB);
+        return reinterpret_cast<jlong> (joint);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_Point2PointJoint
+     * Method:    createJoint1
+     * Signature: (JLcom/jme3/math/Vector3f;)J
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint1
+    (JNIEnv * env, jobject object, jlong bodyIdA, jobject pivotA) {
+        jmeClasses::initJavaClasses(env);
+        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (bodyA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body A does not exist.");
+            return 0L;
+        }
+        btVector3 pivotInA;
+        jmeBulletUtil::convert(env, pivotA, &pivotInA);
+        btPoint2PointConstraint * joint
+                = new btPoint2PointConstraint(*bodyA, pivotInA);
         return reinterpret_cast<jlong> (joint);
     }
 

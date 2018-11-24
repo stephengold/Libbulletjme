@@ -17,6 +17,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
 
 /*
  * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    createJoint1
+ * Signature: (JLcom/jme3/math/Vector3f;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint1
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
  * Method:    getDamping
  * Signature: (J)F
  */
