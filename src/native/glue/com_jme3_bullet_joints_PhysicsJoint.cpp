@@ -72,6 +72,70 @@ extern "C" {
         delete(joint);
     }
 
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    getBreakingImpulseThreshold
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_getBreakingImpulseThreshold
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
+            return 0;
+        }
+        return joint->getBreakingImpulseThreshold();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    isEnabled
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_isEnabled
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
+            return 0;
+        }
+        return joint->isEnabled();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    setBreakingImpulseThreshold
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_setBreakingImpulseThreshold
+    (JNIEnv * env, jobject object, jlong jointId, jfloat desiredValue) {
+        btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
+            return;
+        }
+        joint->setBreakingImpulseThreshold(desiredValue);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    setEnabled
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_setEnabled
+    (JNIEnv * env, jobject object, jlong jointId, jboolean desiredSetting) {
+        btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
+            return;
+        }
+        joint->setEnabled(desiredSetting);
+    }
+
 #ifdef __cplusplus
 }
 #endif
