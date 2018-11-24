@@ -76,7 +76,7 @@ model {
                         cppCompiler.args '-fpermissive'
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
-                    } else if (os == "windows") {
+                    } else if (os == 'windows') {
                         cppCompiler.define('WIN32')
                         cppCompiler.args '-I', "$javaHome/include/win32"
                         cppCompiler.args '-fpermissive'
