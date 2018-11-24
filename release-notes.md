@@ -1,10 +1,16 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.16 released on 24 November 2018
+
+ + Added `getBreakingImpulseThreshold()`, `setBreakingImpulseThreshold()`,
+   `isEnabled()`, and `setEnabled()` to the `PhysicsJoint` class.
+ + Added a method to create a single-ended `Point2PointJoint`.
+
 ## Version 1.0.15 released on 19 November 2018
 
  + Added an option to generate debug meshes with 256 vertices for convex shapes,
    instead of the usual 42 vertices.
- + Avoid trashing the shape's user pointer in DebugShapeFactory.
+ + Avoid trashing the shape's user pointer in `DebugShapeFactory`.
 
 ## Version 1.0.14 released on 18 November 2018
 
