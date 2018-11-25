@@ -17,6 +17,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
 
 /*
  * Class:     com_jme3_bullet_joints_ConeJoint
+ * Method:    createJoint1
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
+  (JNIEnv *, jobject, jlong, jobject, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_ConeJoint
  * Method:    setAngularOnly
  * Signature: (JZ)V
  */

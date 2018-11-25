@@ -17,6 +17,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
+ * Method:    createJoint1
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
+  (JNIEnv *, jobject, jlong, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_joints_HingeJoint
  * Method:    enableMotor
  * Signature: (JZFF)V
  */

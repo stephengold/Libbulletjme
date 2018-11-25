@@ -81,6 +81,7 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
     (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject rotA, jobject pivotB, jobject rotB) {
         jmeClasses::initJavaClasses(env);
+
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
         if (bodyA == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
@@ -101,7 +102,32 @@ extern "C" {
         btTransform transB = btTransform(mtx2);
         jmeBulletUtil::convert(env, pivotB, &transB.getOrigin());
         jmeBulletUtil::convert(env, rotB, &transB.getBasis());
+
         btConeTwistConstraint* joint = new btConeTwistConstraint(*bodyA, *bodyB, transA, transB);
+        return reinterpret_cast<jlong> (joint);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_ConeJoint
+     * Method:    createJoint1
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
+    (JNIEnv * env, jobject object, jlong bodyIdA, jobject pivotInA, jobject rotInA) {
+        jmeClasses::initJavaClasses(env);
+
+        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (bodyA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0L;
+        }
+        btMatrix3x3 matrix = btMatrix3x3();
+        btTransform rbAFrame = btTransform(matrix);
+        jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
+        jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
+
+        btConeTwistConstraint* joint = new btConeTwistConstraint(*bodyA, rbAFrame);
         return reinterpret_cast<jlong> (joint);
     }
 
