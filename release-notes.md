@@ -1,5 +1,10 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.17 released on 25 November 2018
+
+ + Added methods to create single-ended `ConeJoint`, `HingeJoint`,
+   `SixDofJoint`, and `SixDofSpringJoint`.
+
 ## Version 1.0.16 released on 24 November 2018
 
  + Added `getBreakingImpulseThreshold()`, `setBreakingImpulseThreshold()`,
