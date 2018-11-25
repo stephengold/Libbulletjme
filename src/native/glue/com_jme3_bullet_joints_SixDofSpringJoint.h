@@ -17,6 +17,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoin
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
+ * Method:    createJoint1
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Z)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoint1
+  (JNIEnv *, jobject, jlong, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_joints_SixDofSpringJoint
  * Method:    enableSpring
  * Signature: (JIZ)V
  */
