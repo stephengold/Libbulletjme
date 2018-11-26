@@ -942,31 +942,94 @@ extern "C" {
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Z)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SliderJoint_createJoint
-    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject rotA, jobject pivotB, jobject rotB, jboolean useLinearReferenceFrameA) {
+    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB,
+            jobject pivotInA, jobject rotInA, jobject pivotInB, jobject rotInB,
+            jboolean useLinearReferenceFrameA) {
         jmeClasses::initJavaClasses(env);
-        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
+
+        btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (rbA == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "Rigid body A does not exist.");
             return 0L;
         }
-        btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (bodyB == NULL) {
+
+        btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (rbB == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "Rigid body B does not exist.");
             return 0L;
         }
-        btMatrix3x3 mtx1 = btMatrix3x3();
-        btMatrix3x3 mtx2 = btMatrix3x3();
-        btTransform transA = btTransform(mtx1);
-        jmeBulletUtil::convert(env, pivotA, &transA.getOrigin());
-        jmeBulletUtil::convert(env, rotA, &transA.getBasis());
-        btTransform transB = btTransform(mtx2);
-        jmeBulletUtil::convert(env, pivotB, &transB.getOrigin());
-        jmeBulletUtil::convert(env, rotB, &transB.getBasis());
-        btSliderConstraint* joint = new btSliderConstraint(*bodyA, *bodyB, transA, transB, useLinearReferenceFrameA);
+
+        if (pivotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInA");
+            return 0L;
+        }
+        if (rotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null rotInA");
+            return 0L;
+        }
+        btTransform frameInA;
+        jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
+        jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
+
+        if (pivotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInB");
+            return 0L;
+        }
+        if (rotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null rotInB");
+            return 0L;
+        }
+        btTransform frameInB;
+        jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
+        jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
+
+        btSliderConstraint* joint = new btSliderConstraint(*rbA, *rbB, frameInA,
+                frameInB, useLinearReferenceFrameA);
         return reinterpret_cast<jlong> (joint);
     }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SliderJoint
+     * Method:    createJoint1
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Z)J
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SliderJoint_createJoint1
+    (JNIEnv *env, jobject object, jlong bodyIdB, jobject pivotInB,
+            jobject rotInB, jboolean useLinearReferenceFrameA) {
+        jmeClasses::initJavaClasses(env);
+
+        btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (rbB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "Rigid body B does not exist.");
+            return 0L;
+        }
+
+        if (pivotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInB");
+            return 0L;
+        }
+        if (rotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null rotInB");
+            return 0L;
+        }
+        btTransform frameInB;
+        jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
+        jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
+
+        btSliderConstraint* joint = new btSliderConstraint(*rbB, frameInB,
+                useLinearReferenceFrameA);
+        return reinterpret_cast<jlong> (joint);
+    }
+
 
 #ifdef __cplusplus
 }
