@@ -215,7 +215,7 @@ extern "C" {
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         if (rbB == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0L;
         }
 
