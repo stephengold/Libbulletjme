@@ -79,31 +79,55 @@ extern "C" {
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
-    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject rotA, jobject pivotB, jobject rotB) {
+    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB,
+            jobject pivotInA, jobject rotInA, jobject pivotInB,
+            jobject rotInB) {
         jmeClasses::initJavaClasses(env);
 
-        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
+        btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (rbA == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "Rigid body A does not exist.");
             return 0L;
         }
-        btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (bodyB == NULL) {
+
+        btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (rbB == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "Rigid body B does not exist.");
             return 0L;
         }
-        btMatrix3x3 mtx1 = btMatrix3x3();
-        btMatrix3x3 mtx2 = btMatrix3x3();
-        btTransform transA = btTransform(mtx1);
-        jmeBulletUtil::convert(env, pivotA, &transA.getOrigin());
-        jmeBulletUtil::convert(env, rotA, &transA.getBasis());
-        btTransform transB = btTransform(mtx2);
-        jmeBulletUtil::convert(env, pivotB, &transB.getOrigin());
-        jmeBulletUtil::convert(env, rotB, &transB.getBasis());
 
-        btConeTwistConstraint* joint = new btConeTwistConstraint(*bodyA, *bodyB, transA, transB);
+        if (pivotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInA");
+            return 0L;
+        }
+        if (rotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null rotInA");
+            return 0L;
+        }
+        btTransform rbAFrame;
+        jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
+        jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
+
+        if (pivotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInB");
+            return 0L;
+        }
+        if (rotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null rotInB");
+            return 0L;
+        }
+        btTransform rbBFrame;
+        jmeBulletUtil::convert(env, pivotInB, &rbBFrame.getOrigin());
+        jmeBulletUtil::convert(env, rotInB, &rbBFrame.getBasis());
+
+        btConeTwistConstraint* joint
+                = new btConeTwistConstraint(*rbA, *rbB, rbAFrame, rbBFrame);
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -113,21 +137,33 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
-    (JNIEnv * env, jobject object, jlong bodyIdA, jobject pivotInA, jobject rotInA) {
+    (JNIEnv * env, jobject object, jlong bodyIdA, jobject pivotInA,
+            jobject rotInA) {
         jmeClasses::initJavaClasses(env);
 
-        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
+        btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (rbA == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0L;
         }
-        btMatrix3x3 matrix = btMatrix3x3();
-        btTransform rbAFrame = btTransform(matrix);
+
+        if (pivotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInA");
+            return 0L;
+        }
+        if (rotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null rotInA");
+            return 0L;
+        }
+        btTransform rbAFrame;
         jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
 
-        btConeTwistConstraint* joint = new btConeTwistConstraint(*bodyA, rbAFrame);
+        btConeTwistConstraint* joint
+                = new btConeTwistConstraint(*rbA, rbAFrame);
         return reinterpret_cast<jlong> (joint);
     }
 

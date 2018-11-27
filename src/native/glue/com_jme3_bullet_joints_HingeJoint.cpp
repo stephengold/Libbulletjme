@@ -206,31 +206,59 @@ extern "C" {
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
-    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB, jobject pivotA, jobject axisA, jobject pivotB, jobject axisB) {
+    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB,
+            jobject pivotInA, jobject axisInA, jobject pivotInB,
+            jobject axisInB) {
         jmeClasses::initJavaClasses(env);
 
-        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
+        btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (rbA == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "Rigid body A does not exist.");
             return 0L;
         }
-        btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (bodyB == NULL) {
+
+        btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
+        if (rbB == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "Rigid body B does not exist.");
             return 0L;
         }
-        btVector3 vec1 = btVector3();
-        btVector3 vec2 = btVector3();
-        btVector3 vec3 = btVector3();
-        btVector3 vec4 = btVector3();
-        jmeBulletUtil::convert(env, pivotA, &vec1);
-        jmeBulletUtil::convert(env, pivotB, &vec2);
-        jmeBulletUtil::convert(env, axisA, &vec3);
-        jmeBulletUtil::convert(env, axisB, &vec4);
 
-        btHingeConstraint* joint = new btHingeConstraint(*bodyA, *bodyB, vec1, vec2, vec3, vec4);
+        if (pivotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInA");
+            return 0L;
+        }
+        btVector3 pivotA;
+        jmeBulletUtil::convert(env, pivotInA, &pivotA);
+
+        if (pivotInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInB");
+            return 0L;
+        }
+        btVector3 pivotB;
+        jmeBulletUtil::convert(env, pivotInB, &pivotB);
+
+        if (axisInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null axisInA");
+            return 0L;
+        }
+        btVector3 axisA;
+        jmeBulletUtil::convert(env, axisInA, &axisA);
+
+        if (axisInB == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null axisInB");
+            return 0L;
+        }
+        btVector3 axisB;
+        jmeBulletUtil::convert(env, axisInB, &axisB);
+
+        btHingeConstraint* joint = new btHingeConstraint(*rbA, *rbB, pivotA,
+                pivotB, axisA, axisB);
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -240,21 +268,35 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
-    (JNIEnv * env, jobject object, jlong bodyIdA, jobject pivotInA, jobject axisInA, jboolean useReferenceFrameA) {
+    (JNIEnv * env, jobject object, jlong bodyIdA, jobject pivotInA,
+            jobject axisInA, jboolean useReferenceFrameA) {
         jmeClasses::initJavaClasses(env);
 
-        btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
+        btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
+        if (rbA == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0L;
         }
-        btVector3 pivot = btVector3();
+
+        if (pivotInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null pivotInA");
+            return 0L;
+        }
+        btVector3 pivot;
         jmeBulletUtil::convert(env, pivotInA, &pivot);
-        btVector3 axis = btVector3();
+
+        if (axisInA == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "null axisInA");
+            return 0L;
+        }
+        btVector3 axis;
         jmeBulletUtil::convert(env, axisInA, &axis);
 
-        btHingeConstraint* joint = new btHingeConstraint(*bodyA, pivot, axis);
+        btHingeConstraint* joint
+                = new btHingeConstraint(*rbA, pivot, axis, useReferenceFrameA);
         return reinterpret_cast<jlong> (joint);
     }
 
