@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,12 +64,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setGhostFlags
     (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
+
         ghost->setCollisionFlags(ghost->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
     }
 
@@ -80,13 +83,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsLocation
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, value, &ghost->getWorldTransform().getOrigin());
+
+        jmeBulletUtil::convert(env, value,
+                &ghost->getWorldTransform().getOrigin());
     }
 
     /*
@@ -96,12 +103,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Matrix3f_2
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btPairCachingGhostObject does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, value, &ghost->getWorldTransform().getBasis());
     }
 
@@ -112,13 +121,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Quaternion_2
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
-        jmeBulletUtil::convertQuat(env, value, &ghost->getWorldTransform().getBasis());
+
+        jmeBulletUtil::convertQuat(env, value,
+                &ghost->getWorldTransform().getBasis());
     }
 
     /*
@@ -128,13 +141,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsLocation
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getOrigin(), value);
+
+        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getOrigin(),
+                value);
     }
 
     /*
@@ -144,13 +161,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsRotation
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
-        jmeBulletUtil::convertQuat(env, &ghost->getWorldTransform().getBasis(), value);
+
+        jmeBulletUtil::convertQuat(env, &ghost->getWorldTransform().getBasis(),
+                value);
     }
 
     /*
@@ -160,13 +181,16 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsRotationMatrix
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getBasis(), value);
+        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getBasis(),
+                value);
     }
 
     class jmeGhostOverlapCallback : public btOverlapCallback {
@@ -192,8 +216,11 @@ extern "C" {
                 other = (btCollisionObject *) pair.m_pProxy1->m_clientObject;
             }
             jmeUserPointer *up1 = (jmeUserPointer*) other -> getUserPointer();
-            jobject javaCollisionObject1 = m_env->NewLocalRef(up1->javaCollisionObject);
-            m_env->CallVoidMethod(m_object, jmeClasses::PhysicsGhostObject_addOverlappingObject, javaCollisionObject1);
+            jobject javaCollisionObject1
+                    = m_env->NewLocalRef(up1->javaCollisionObject);
+            m_env->CallVoidMethod(m_object,
+                    jmeClasses::PhysicsGhostObject_addOverlappingObject,
+                    javaCollisionObject1);
             m_env->DeleteLocalRef(javaCollisionObject1);
             if (m_env->ExceptionCheck()) {
                 m_env->Throw(m_env->ExceptionOccurred());
@@ -211,10 +238,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverlappingObjects
     (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
         btHashedOverlappingPairCache * pc = ghost->getOverlappingPairCache();
@@ -229,12 +258,15 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverlappingCount
     (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return 0;
         }
+
         return ghost->getNumOverlappingObjects();
     }
 
@@ -245,12 +277,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setCcdSweptSphereRadius
     (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
+
         ghost->setCcdSweptSphereRadius(value);
     }
 
@@ -261,12 +296,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setCcdMotionThreshold
     (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return;
         }
+
         ghost->setCcdMotionThreshold(value);
     }
 
@@ -277,12 +315,15 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getCcdSweptSphereRadius
     (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return 0;
         }
+
         return ghost->getCcdSweptSphereRadius();
     }
 
@@ -293,12 +334,15 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getCcdMotionThreshold
     (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btPairCachingGhostObject does not exist.");
             return 0;
         }
+
         return ghost->getCcdMotionThreshold();
     }
 
@@ -309,12 +353,14 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getCcdSquareMotionThreshold
     (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost = reinterpret_cast<btPairCachingGhostObject*> (objectId);
+        btPairCachingGhostObject* ghost
+                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         if (ghost == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btPairCachingGhostObject does not exist.");
             return 0;
         }
+
         return ghost->getCcdSquareMotionThreshold();
     }
 

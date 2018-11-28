@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,14 +47,19 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocation
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jobject out) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(), out);
+
+        jmeBulletUtil::convert(env,
+                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(),
+                out);
     }
 
     /*
@@ -63,14 +68,19 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Matrix3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotation
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jobject out) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(), out);
+
+        jmeBulletUtil::convert(env,
+                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
+                out);
     }
 
     /*
@@ -79,15 +89,32 @@ extern "C" {
      * Signature: (JFFFFFFFFZF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_applyInfo
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jfloat suspensionStiffness, jfloat wheelsDampingRelaxation, jfloat wheelsDampingCompression, jfloat frictionSlip, jfloat rollInfluence, jfloat maxSuspensionTravelCm, jfloat maxSuspensionForce, jfloat radius, jboolean frontWheel, jfloat restLength) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        vehicle->getWheelInfo(wheelIndex).m_suspensionStiffness = suspensionStiffness;
-        vehicle->getWheelInfo(wheelIndex).m_wheelsDampingRelaxation = wheelsDampingRelaxation;
-        vehicle->getWheelInfo(wheelIndex).m_wheelsDampingCompression = wheelsDampingCompression;
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jfloat suspensionStiffness, jfloat wheelsDampingRelaxation,
+            jfloat wheelsDampingCompression, jfloat frictionSlip,
+            jfloat rollInfluence, jfloat maxSuspensionTravelCm,
+            jfloat maxSuspensionForce, jfloat radius, jboolean frontWheel,
+            jfloat restLength) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        if (vehicle == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
+            return;
+        }
+
+        vehicle->getWheelInfo(wheelIndex).m_suspensionStiffness
+                = suspensionStiffness;
+        vehicle->getWheelInfo(wheelIndex).m_wheelsDampingRelaxation
+                = wheelsDampingRelaxation;
+        vehicle->getWheelInfo(wheelIndex).m_wheelsDampingCompression
+                = wheelsDampingCompression;
         vehicle->getWheelInfo(wheelIndex).m_frictionSlip = frictionSlip;
         vehicle->getWheelInfo(wheelIndex).m_rollInfluence = rollInfluence;
-        vehicle->getWheelInfo(wheelIndex).m_maxSuspensionTravelCm = maxSuspensionTravelCm;
-        vehicle->getWheelInfo(wheelIndex).m_maxSuspensionForce = maxSuspensionForce;
+        vehicle->getWheelInfo(wheelIndex).m_maxSuspensionTravelCm
+                = maxSuspensionTravelCm;
+        vehicle->getWheelInfo(wheelIndex).m_maxSuspensionForce
+                = maxSuspensionForce;
         vehicle->getWheelInfo(wheelIndex).m_wheelsRadius = radius;
         vehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel = frontWheel;
         vehicle->getWheelInfo(wheelIndex).m_suspensionRestLength1 = restLength;
@@ -101,13 +128,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionLocation
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &vehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactPointWS, out);
+
+        jmeBulletUtil::convert(env,
+                &vehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactPointWS,
+                out);
     }
 
     /*
@@ -116,14 +147,19 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionNormal
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jobject out) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &vehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactNormalWS, out);
+
+        jmeBulletUtil::convert(env,
+                &vehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactNormalWS,
+                out);
     }
 
     /*
@@ -133,12 +169,14 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSkidInfo
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return 0;
         }
+
         return vehicle->getWheelInfo(wheelIndex).m_skidInfo;
     }
 
@@ -149,12 +187,14 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotation
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return 0;
         }
+
         return vehicle->getWheelInfo(wheelIndex).m_deltaRotation;
     }
 
