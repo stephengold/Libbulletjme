@@ -1,5 +1,10 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.18 released on 27 November 2018
+
+ + Added a method to create a single-ended `SliderJoint`.
+ + Added null checks and improved exception messages.
+
 ## Version 1.0.17 released on 25 November 2018
 
  + Added methods to create single-ended `ConeJoint`, `HingeJoint`,
