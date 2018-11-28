@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,15 +46,20 @@ extern "C" {
      * Signature: (FFFFFFI)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
-    (JNIEnv * env, jobject object, jfloat minX, jfloat minY, jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase, jboolean threading) {
+    (JNIEnv * env, jobject object, jfloat minX, jfloat minY, jfloat minZ,
+            jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase,
+            jboolean threading) {
         jmeClasses::initJavaClasses(env);
+
         jmePhysicsSpace* space = new jmePhysicsSpace(env, object);
         if (space == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "The physics space has not been created.");
             return 0;
         }
-        space->createPhysicsSpace(minX, minY, minZ, maxX, maxY, maxZ, broadphase, threading);
+
+        space->createPhysicsSpace(minX, minY, minZ, maxX, maxY, maxZ,
+                broadphase, threading);
         return reinterpret_cast<jlong> (space);
     }
 
@@ -64,7 +69,8 @@ extern "C" {
      * Signature: (JFIF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_stepSimulation
-    (JNIEnv * env, jobject object, jlong spaceId, jfloat tpf, jint maxSteps, jfloat accuracy) {
+    (JNIEnv * env, jobject object, jlong spaceId, jfloat tpf, jint maxSteps,
+            jfloat accuracy) {
         jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
         if (space == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
@@ -389,8 +395,10 @@ extern "C" {
             env->ThrowNew(newExc, "The physics space does not exist.");
             return;
         }
-        btVector3 gravity = btVector3();
+
+        btVector3 gravity;
         jmeBulletUtil::convert(env, vector, &gravity);
+
         space->getDynamicsWorld()->setGravity(gravity);
     }
 
@@ -454,10 +462,10 @@ extern "C" {
             }
         };
 
-        btVector3 native_to = btVector3();
+        btVector3 native_to;
         jmeBulletUtil::convert(env, to, &native_to);
 
-        btVector3 native_from = btVector3();
+        btVector3 native_from;
         jmeBulletUtil::convert(env, from, &native_from);
 
         AllRayResultCallback resultCallback(native_from, native_to);
@@ -465,6 +473,7 @@ extern "C" {
         resultCallback.resultlist = resultlist;
         resultCallback.m_flags = flags;
         space->getDynamicsWorld()->rayTest(native_from, native_to, resultCallback);
+
         return;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,8 +48,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
     (JNIEnv *env, jobject object, jobject halfExtents) {
         jmeClasses::initJavaClasses(env);
-        btVector3 extents = btVector3();
+
+        btVector3 extents;
         jmeBulletUtil::convert(env, halfExtents, &extents);
+
         btBoxShape* shape = new btBoxShape(extents);
         return reinterpret_cast<jlong> (shape);
     }

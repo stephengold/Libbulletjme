@@ -431,12 +431,12 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* out) {
 
     //Scale currently not supported by bullet
     //@TBD: Create an assertion somewhere to avoid scale values
-    btVector3 native_translation_vec = btVector3();
-    btQuaternion native_rot_quat = btQuaternion();
 
+    btVector3 native_translation_vec;
     convert(env, translation_vec, &native_translation_vec);
-    convert(env, rot_quat, &native_rot_quat);
-
-    out->setRotation(native_rot_quat);
     out->setOrigin(native_translation_vec);
+
+    btQuaternion native_rot_quat;
+    convert(env, rot_quat, &native_rot_quat);
+    out->setRotation(native_rot_quat);
 }

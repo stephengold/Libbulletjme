@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,8 +49,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_PlaneCollisionShape_createShape
     (JNIEnv * env, jobject object, jobject normal, jfloat constant) {
         jmeClasses::initJavaClasses(env);
-        btVector3 norm = btVector3();
+        
+        btVector3 norm;
         jmeBulletUtil::convert(env, normal, &norm);
+        
         btStaticPlaneShape* shape = new btStaticPlaneShape(norm, constant);
         return reinterpret_cast<jlong> (shape);
     }
