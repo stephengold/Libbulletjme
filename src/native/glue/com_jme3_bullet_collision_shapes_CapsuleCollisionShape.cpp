@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,7 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CapsuleCollisionShape_createShape
     (JNIEnv * env, jobject object, jint axis, jfloat radius, jfloat height) {
         jmeClasses::initJavaClasses(env);
+
         btCollisionShape* shape;
         switch (axis) {
             case 0:

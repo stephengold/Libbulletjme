@@ -55,9 +55,10 @@ extern "C" {
             jobject center = env->GetObjectArrayElement(centers, i);
             jmeBulletUtil::convert(env, center, &positions[i]);
         }
+        
         btScalar* radi = env->GetFloatArrayElements(radii, 0);
+        
         btMultiSphereShape* shape = new btMultiSphereShape(positions, radi, n);
-
         return reinterpret_cast<jlong> (shape);
     }
 

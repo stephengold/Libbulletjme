@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,10 +47,17 @@ extern "C" {
      * Signature: (II[FFFFIZ)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape
-    (JNIEnv * env, jobject object, jint heightStickWidth, jint heightStickLength, jobject heightfieldData, jfloat heightScale, jfloat minHeight, jfloat maxHeight, jint upAxis, jboolean flipQuadEdges) {
+    (JNIEnv * env, jobject object, jint heightStickWidth,
+            jint heightStickLength, jobject heightfieldData, jfloat heightScale,
+            jfloat minHeight, jfloat maxHeight, jint upAxis,
+            jboolean flipQuadEdges) {
         jmeClasses::initJavaClasses(env);
+
         void* data = env->GetDirectBufferAddress(heightfieldData);
-        btHeightfieldTerrainShape* shape = new btHeightfieldTerrainShape(heightStickWidth, heightStickLength, data, heightScale, minHeight, maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
+        btHeightfieldTerrainShape* shape
+                = new btHeightfieldTerrainShape(heightStickWidth,
+                heightStickLength, data, heightScale, minHeight, maxHeight,
+                upAxis, PHY_FLOAT, flipQuadEdges);
         return reinterpret_cast<jlong> (shape);
     }
 
