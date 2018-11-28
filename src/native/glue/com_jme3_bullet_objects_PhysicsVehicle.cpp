@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,12 +50,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_updateWheelTransform
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jboolean interpolated) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
+
         vehicle->updateWheelTransform(wheel, interpolated);
     }
 
@@ -68,13 +70,16 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jlong spaceId) {
         //btRigidBody* body = reinterpret_cast<btRigidBody*> bodyId;
         jmeClasses::initJavaClasses(env);
+
         jmePhysicsSpace *space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
         if (space == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The jmePhysicsSpace does not exist.");
             return 0;
         }
-        btDefaultVehicleRaycaster* caster = new btDefaultVehicleRaycaster(space->getDynamicsWorld());
+
+        btDefaultVehicleRaycaster* caster
+                = new btDefaultVehicleRaycaster(space->getDynamicsWorld());
         return reinterpret_cast<jlong> (caster);
     }
 
@@ -86,19 +91,23 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createRaycastVehicle
     (JNIEnv *env, jobject object, jlong objectId, jlong casterId) {
         jmeClasses::initJavaClasses(env);
+
         btRigidBody* body = reinterpret_cast<btRigidBody*> (objectId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
         body->setActivationState(DISABLE_DEACTIVATION);
-        btVehicleRaycaster* caster = reinterpret_cast<btDefaultVehicleRaycaster*> (casterId);
+
+        btVehicleRaycaster* caster
+                = reinterpret_cast<btDefaultVehicleRaycaster*> (casterId);
         if (caster == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btVehicleRaycaster does not exist.");
             return 0;
         }
+
         btRaycastVehicle::btVehicleTuning tuning;
         btRaycastVehicle* vehicle = new btRaycastVehicle(tuning, body, caster);
         return reinterpret_cast<jlong> (vehicle);
@@ -112,12 +121,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setCoordinateSystem
     (JNIEnv *env, jobject object, jlong vehicleId, jint right, jint up, jint forward) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
+
         vehicle->setCoordinateSystem(right, up, forward);
     }
 
@@ -127,21 +138,29 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFLcom/jme3/bullet/objects/infos/VehicleTuning;Z)J
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_addWheel
-    (JNIEnv *env, jobject object, jlong vehicleId, jobject location, jobject direction, jobject axle, jfloat restLength, jfloat radius, jobject tuning, jboolean frontWheel) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+    (JNIEnv *env, jobject object, jlong vehicleId, jobject location,
+            jobject direction, jobject axle, jfloat restLength, jfloat radius,
+            jobject tuning, jboolean frontWheel) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return 0;
         }
-        btVector3 vec1 = btVector3();
-        btVector3 vec2 = btVector3();
-        btVector3 vec3 = btVector3();
+
+        btVector3 vec1;
         jmeBulletUtil::convert(env, location, &vec1);
+
+        btVector3 vec2;
         jmeBulletUtil::convert(env, direction, &vec2);
+
+        btVector3 vec3;
         jmeBulletUtil::convert(env, axle, &vec3);
+
         btRaycastVehicle::btVehicleTuning tune;
-        btWheelInfo* info = &vehicle->addWheel(vec1, vec2, vec3, restLength, radius, tune, frontWheel);
+        btWheelInfo* info = &vehicle->addWheel(vec1, vec2, vec3, restLength,
+                radius, tune, frontWheel);
         int idx = vehicle->getNumWheels();
         return idx - 1;
     }
@@ -153,10 +172,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_resetSuspension
     (JNIEnv *env, jobject object, jlong vehicleId) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
         vehicle->resetSuspension();
@@ -169,10 +189,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_applyEngineForce
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat force) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
         vehicle->applyEngineForce(force, wheel);
@@ -185,10 +206,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_steer
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat value) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
         vehicle->setSteeringValue(value, wheel);
@@ -201,10 +223,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_brake
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat value) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
         vehicle->setBrake(value, wheel);
@@ -217,10 +240,11 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getCurrentVehicleSpeedKmHour
     (JNIEnv *env, jobject object, jlong vehicleId) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return 0;
         }
         return vehicle->getCurrentSpeedKmHour();
@@ -233,10 +257,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getForwardVector
     (JNIEnv *env, jobject object, jlong vehicleId, jobject out) {
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
         btVector3 forwardVector = vehicle->getForwardVector();
@@ -250,17 +275,20 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_finalizeNative
     (JNIEnv *env, jobject object, jlong casterId, jlong vehicleId) {
-        btVehicleRaycaster* rayCaster = reinterpret_cast<btVehicleRaycaster*> (casterId);
-        btRaycastVehicle* vehicle = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         if (vehicle == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
             return;
         }
         delete(vehicle);
+
+        btVehicleRaycaster* rayCaster
+                = reinterpret_cast<btVehicleRaycaster*> (casterId);
         if (rayCaster == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btVehicleRaycaster does not exist.");
             return;
         }
         delete(rayCaster);

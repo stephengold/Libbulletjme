@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,9 +49,19 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_createShape
     (JNIEnv * env, jobject object, jlong meshId) {
         jmeClasses::initJavaClasses(env);
-        btTriangleIndexVertexArray* array = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
+
+        btTriangleIndexVertexArray* array
+                = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
+        if (array == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc,
+                    "The btTriangleIndexVertexArray does not exist.");
+            return 0;
+        }
+
         btGImpactMeshShape* shape = new btGImpactMeshShape(array);
         shape->updateBound();
+
         return reinterpret_cast<jlong> (shape);
     }
 
@@ -62,7 +72,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_finalizeNative
     (JNIEnv * env, jobject object, jlong meshId) {
-        btTriangleIndexVertexArray* array = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
+        btTriangleIndexVertexArray* array
+                = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
+        if (array == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc,
+                    "The btTriangleIndexVertexArray does not exist.");
+            return;
+        }
+
         delete(array);
     }
 

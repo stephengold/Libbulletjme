@@ -50,9 +50,10 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &shape->getLocalScaling(), vector);
     }
 
@@ -66,9 +67,10 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return 0;
         }
+
         return shape->getMargin();
     }
 
@@ -82,9 +84,10 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return false;
         }
+
         return shape->isConcave();
     }
 
@@ -98,11 +101,13 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return;
         }
-        btVector3 scl = btVector3();
+
+        btVector3 scl;
         jmeBulletUtil::convert(env, scale, &scl);
+
         shape->setLocalScaling(scl);
     }
 
@@ -116,9 +121,10 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return;
         }
+
         shape->setMargin(newMargin);
     }
 
@@ -132,11 +138,13 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return;
         }
+
         delete(shape);
     }
+
 #ifdef __cplusplus
 }
 #endif

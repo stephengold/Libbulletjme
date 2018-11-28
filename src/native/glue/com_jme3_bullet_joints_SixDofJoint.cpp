@@ -47,10 +47,12 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getRotationalLimitMotor
     (JNIEnv * env, jobject object, jlong jointId, jint index) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return 0;
         }
         return reinterpret_cast<jlong> (joint->getRotationalLimitMotor(index));
@@ -63,10 +65,12 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getTranslationalLimitMotor
     (JNIEnv * env, jobject object, jlong jointId) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return 0;
         }
         return reinterpret_cast<jlong> (joint->getTranslationalLimitMotor());
@@ -79,14 +83,18 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setLinearUpperLimit
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
+
         joint->setLinearUpperLimit(vec);
     }
 
@@ -97,14 +105,18 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setLinearLowerLimit
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
+
         joint->setLinearLowerLimit(vec);
     }
 
@@ -118,11 +130,14 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
+
         joint->setAngularUpperLimit(vec);
     }
 
@@ -133,14 +148,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularLowerLimit
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
+
         joint->setAngularLowerLimit(vec);
     }
 
@@ -245,10 +263,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetA
     (JNIEnv * env, jobject object, jlong jointId, jobject frameA) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return;
         }
 
@@ -263,10 +283,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetB
     (JNIEnv * env, jobject object, jlong jointId, jobject frameB) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return;
         }
 
@@ -284,7 +306,8 @@ extern "C" {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
         if (joint == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
             return;
         }
 

@@ -49,24 +49,29 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_createRigidBody
     (JNIEnv *env, jobject object, jfloat mass, jlong motionstatId, jlong shapeId) {
         jmeClasses::initJavaClasses(env);
+
         btMotionState* motionState = reinterpret_cast<btMotionState*> (motionstatId);
         if (motionState == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "The btMotionState does not exist.");
             return 0L;
         }
+
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         if (shape == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc, "The btCollisionShape does not exist.");
             return 0L;
         }
-        btVector3 localInertia = btVector3();
+
+        btVector3 localInertia;
         if (mass > 0) {
             shape->calculateLocalInertia(mass, localInertia);
         }
+
         btRigidBody* body = new btRigidBody(mass, motionState, shape, localInertia);
         body->setUserPointer(NULL);
+
         return reinterpret_cast<jlong> (body);
     }
 
@@ -174,8 +179,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, value, &vec);
+
         body->setInvInertiaDiagLocal(vec);
     }
 
@@ -192,6 +199,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &body->getInvInertiaDiagLocal(), value);
     }
 
@@ -208,7 +216,9 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &body->getWorldTransform().getOrigin(), value);
+
+        jmeBulletUtil::convert(env, &body->getWorldTransform().getOrigin(),
+                value);
     }
 
     /*
@@ -224,7 +234,9 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        jmeBulletUtil::convertQuat(env, &body->getWorldTransform().getBasis(), value);
+
+        jmeBulletUtil::convertQuat(env, &body->getWorldTransform().getBasis(),
+                value);
     }
 
     /*
@@ -240,7 +252,9 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        jmeBulletUtil::convert(env, &body->getWorldTransform().getBasis(), value);
+
+        jmeBulletUtil::convert(env, &body->getWorldTransform().getBasis(),
+                value);
     }
 
     /*
@@ -279,6 +293,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setCcdSweptSphereRadius(value);
     }
 
@@ -295,6 +310,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setCcdMotionThreshold(value);
     }
 
@@ -311,6 +327,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getCcdSweptSphereRadius();
     }
 
@@ -327,6 +344,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getCcdMotionThreshold();
     }
 
@@ -343,6 +361,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getCcdSquareMotionThreshold();
     }
 
@@ -359,6 +378,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         if (value) {
             body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
         } else {
@@ -379,10 +399,18 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        btVector3 localInertia = btVector3();
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return 0;
+        }
+
+        btVector3 localInertia;
         shape->calculateLocalInertia(mass, localInertia);
         body->setMassProps(mass, localInertia);
+
         return reinterpret_cast<jlong> (body);
     }
 
@@ -399,6 +427,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &body->getGravity(), value);
     }
 
@@ -415,8 +444,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, value, &vec);
+
         body->setGravity(vec);
     }
 
@@ -433,6 +464,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getFriction();
     }
 
@@ -449,6 +481,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setFriction(value);
     }
 
@@ -465,6 +498,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setDamping(value1, value2);
     }
 
@@ -481,6 +515,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setDamping(body->getLinearDamping(), value);
     }
 
@@ -497,6 +532,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getLinearDamping();
     }
 
@@ -513,6 +549,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getAngularDamping();
     }
 
@@ -529,6 +566,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getRestitution();
     }
 
@@ -545,6 +583,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setRestitution(value);
     }
 
@@ -561,6 +600,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &body->getAngularVelocity(), value);
     }
 
@@ -577,8 +617,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, value, &vec);
+
         body->setAngularVelocity(vec);
     }
 
@@ -595,6 +637,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &body->getLinearVelocity(), value);
     }
 
@@ -611,8 +654,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, value, &vec);
+
         body->setLinearVelocity(vec);
     }
 
@@ -629,10 +674,13 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec1 = btVector3();
-        btVector3 vec2 = btVector3();
+
+        btVector3 vec1;
         jmeBulletUtil::convert(env, force, &vec1);
+
+        btVector3 vec2;
         jmeBulletUtil::convert(env, location, &vec2);
+
         body->applyForce(vec1, vec2);
     }
 
@@ -649,8 +697,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec1 = btVector3();
+
+        btVector3 vec1;
         jmeBulletUtil::convert(env, force, &vec1);
+
         body->applyCentralForce(vec1);
     }
 
@@ -667,8 +717,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec1 = btVector3();
+
+        btVector3 vec1;
         jmeBulletUtil::convert(env, force, &vec1);
+
         body->applyTorque(vec1);
     }
 
@@ -685,10 +737,13 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec1 = btVector3();
-        btVector3 vec2 = btVector3();
+
+        btVector3 vec1;
         jmeBulletUtil::convert(env, force, &vec1);
+
+        btVector3 vec2;
         jmeBulletUtil::convert(env, location, &vec2);
+
         body->applyImpulse(vec1, vec2);
     }
 
@@ -705,8 +760,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec1 = btVector3();
+
+        btVector3 vec1;
         jmeBulletUtil::convert(env, force, &vec1);
+
         body->applyTorqueImpulse(vec1);
     }
 
@@ -723,6 +780,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->clearForces();
     }
 
@@ -739,6 +797,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         body->setCollisionShape(shape);
     }
@@ -756,6 +815,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->activate(true);
     }
 
@@ -772,6 +832,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return false;
         }
+
         return body->isActive();
     }
 
@@ -788,6 +849,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setSleepingThresholds(linear, angular);
     }
 
@@ -804,6 +866,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setSleepingThresholds(value, body->getAngularSleepingThreshold());
     }
 
@@ -820,6 +883,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         body->setSleepingThresholds(body->getLinearSleepingThreshold(), value);
     }
 
@@ -836,6 +900,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getLinearSleepingThreshold();
     }
 
@@ -852,6 +917,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return 0;
         }
+
         return body->getAngularSleepingThreshold();
     }
 
@@ -868,6 +934,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &body->getAngularFactor(), factor);
     }
 
@@ -884,8 +951,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, factor, &vec);
+
         body->setAngularFactor(vec);
     }
 
@@ -902,6 +971,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
+
         jmeBulletUtil::convert(env, &body->getLinearFactor(), factor);
     }
 
@@ -918,8 +988,10 @@ extern "C" {
             env->ThrowNew(newExc, "The btRigidBody does not exist.");
             return;
         }
-        btVector3 vec = btVector3();
+
+        btVector3 vec;
         jmeBulletUtil::convert(env, factor, &vec);
+
         body->setLinearFactor(vec);
     }
 
