@@ -34,8 +34,6 @@
 #include "BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
 #include "com_jme3_bullet_collision_PhysicsCollisionEvent.h"
 
-// Change to trigger build
-
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getAppliedImpulse
@@ -198,22 +196,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
- * Method:    isLateralFrictionInitialized
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_isLateralFrictionInitialized
-(JNIEnv * env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
-    if (mp == NULL) {
-        jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
-        return 0;
-    }
-    return (mp -> m_contactPointFlags) & BT_CONTACT_FLAG_LATERAL_FRICTION_INITIALIZED;
-}
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getLifeTime
  * Signature: (J)I
  */
@@ -338,4 +320,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_positionWorldOnB, positionWorldOnB);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    isLateralFrictionInitialized
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_isLateralFrictionInitialized
+(JNIEnv * env, jobject object, jlong manifoldPointObjectId) {
+    btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
+    if (mp == NULL) {
+        jclass newExc = env->FindClass("java/lang/NullPointerException");
+        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        return 0;
+    }
+    return (mp -> m_contactPointFlags) & BT_CONTACT_FLAG_LATERAL_FRICTION_INITIALIZED;
 }
