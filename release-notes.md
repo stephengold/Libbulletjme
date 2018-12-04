@@ -1,9 +1,14 @@
-# release notes for the jme3-bullet-native project
+# release notes for the Jme3-bullet-native Project
 
-## Version 1.0.19 released on TBD
+## Version 1.0.20 released on 4 December 2018
+
+ + Added missing source file for `PhysicsSoftBody`.
+ + Removed portions of the Bullet Physics library that are not needed here.
+
+## Version 1.0.19 released on 3 December 2018
 
  + Added soft-body physics support, mostly copied straight from Dokthar's fork.
- + Added to `getCollisionFlags()` and `setCollisionFlags()` to
+ + Added `getCollisionFlags()` and `setCollisionFlags()` to
    the `PhysicsCollisionObject` class.
 
 ## Version 1.0.18 released on 27 November 2018
