@@ -251,6 +251,11 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
     }
 
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    rayTest_native
+     * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
+     */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_rayTest_1native
     (JNIEnv * env, jobject object, jobject from, jobject to, jlong spaceId, jobject resultlist, jint flags) {
 
@@ -460,6 +465,11 @@ extern "C" {
         space->getDynamicsWorld()->setGravity(gravity);
     }
 
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    setSolverNumIterations
+     * Signature: (JI)V
+     */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverNumIterations
     (JNIEnv *env, jobject object, jlong spaceId, jint value) {
         jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
@@ -489,6 +499,11 @@ extern "C" {
         space->stepSimulation(tpf, maxSteps, accuracy);
     }
 
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    sweepTest_native
+     * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
+     */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_sweepTest_1native
     (JNIEnv * env, jobject object, jlong shapeId, jobject from, jobject to, jlong spaceId, jobject resultlist, jfloat allowedCcdPenetration) {
 
