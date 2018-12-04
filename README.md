@@ -1,5 +1,13 @@
-The jme3-bullet-native project adds "glue code" to the Bullet Physics Library,
+The Jme3-bullet-native Project adds "glue code" to the Bullet Physics Library,
 providing Java code with access to Bullet Physics functionality.
+
+### History
+
+The Jme3-bullet-native Project is hosted at
+[GitHub](https://github.com/stephengold/jme3-bullet-native).
+
+The evolution of Jme3-bullet-native is chronicled in
+[its release notes](https://github.com/stephengold/jme3-bullet-native/blob/master/release-notes.md).
 
 ## Acknowledgments
 
@@ -7,6 +15,7 @@ This project is based on open-source software:
 
   + the [Bullet][] physics simulation kit
   + [jMonkeyEngine][jme]
+  + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
 
 This project made use of the following software:
 
