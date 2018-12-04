@@ -1,5 +1,8 @@
 # release notes for the jme3-bullet-native project
 
+## Version 1.0.19 released on TBD
+
+ + Added soft-body physics support, mostly copied straight from Dokthar's fork.
  + Added to `getCollisionFlags()` and `setCollisionFlags()` to
    the `PhysicsCollisionObject` class.
 
@@ -73,7 +76,7 @@ Use the Force in `PhysicsRigidBody.activate()`.
 
 ## Version 1.0.6 released on 8 October 2018
 
-Removed all Bullet3 source files except Bullet3Common.
+Removed all Bullet3 source files except `Bullet3Common`.
 
 ## Version 1.0.5 released on 3 October 2018
 
