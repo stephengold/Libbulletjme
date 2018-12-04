@@ -101,6 +101,24 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    getCollisionFlags
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionFlags
+    (JNIEnv *env, jobject object, jlong objectId) {
+        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return 0;
+        }
+
+        jint result = collisionObject->getCollisionFlags();
+        return result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    initUserPointer
      * Signature: (JII)V
      */
@@ -112,6 +130,7 @@ extern "C" {
             env->ThrowNew(newExc, "The btCollisionObject does not exist.");
             return;
         }
+
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         if (userPointer != NULL) {
             //            delete(userPointer);
@@ -122,6 +141,23 @@ extern "C" {
         userPointer -> groups = groups;
         userPointer -> space = NULL;
         collisionObject -> setUserPointer(userPointer);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    setCollisionFlags
+     * Signature: (JI)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionFlags
+    (JNIEnv *env, jobject object, jlong objectId, jint desiredFlags) {
+        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return;
+        }
+
+        collisionObject->setCollisionFlags(desiredFlags);
     }
 
     /*

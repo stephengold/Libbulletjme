@@ -1,5 +1,8 @@
 # release notes for the jme3-bullet-native project
 
+ + Added to `getCollisionFlags()` and `setCollisionFlags()` to
+   the `PhysicsCollisionObject` class.
+
 ## Version 1.0.18 released on 27 November 2018
 
  + Added a method to create a single-ended `SliderJoint`.
@@ -7,8 +10,8 @@
 
 ## Version 1.0.17 released on 25 November 2018
 
- + Added methods to create single-ended `ConeJoint`, `HingeJoint`,
-   `SixDofJoint`, and `SixDofSpringJoint`.
+Added methods to create single-ended `ConeJoint`, `HingeJoint`,
+`SixDofJoint`, and `SixDofSpringJoint`.
 
 ## Version 1.0.16 released on 24 November 2018
 
@@ -30,7 +33,7 @@
 
 ## Version 1.0.13 released on 15 November 2018
 
- + Upgraded the Bullet sources to match SHA1 ID=9ad77a2 of the bullet3 project.
+Upgraded the Bullet sources to match SHA1 ID=9ad77a2 of the bullet3 project.
 
 ## Version 1.0.12 released on 27 October 2018
 
@@ -41,11 +44,11 @@
 
 ## Version 1.0.11 released on 27 October 2018
 
- + Upgraded the Bullet sources to match release 2.87 of the bullet3 project.
+Upgraded the Bullet sources to match release 2.87 of the bullet3 project.
 
 ## Version 1.0.10 released on 18 October 2018
 
- + Use the Force in `PhysicsRigidBody.activate()`.
+Use the Force in `PhysicsRigidBody.activate()`.
 
 ## Version 1.0.9 released on 13 October 2018
 
@@ -70,11 +73,11 @@
 
 ## Version 1.0.6 released on 8 October 2018
 
- + Removed all Bullet3 source files except Bullet3Common.
+Removed all Bullet3 source files except Bullet3Common.
 
 ## Version 1.0.5 released on 3 October 2018
 
- + Disabled Quickprof to avoid its thread limit.
+Disabled Quickprof to avoid its thread limit.
 
 ## Version 1.0.4 released on 2 October 2018
 
