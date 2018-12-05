@@ -405,14 +405,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleeping
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    setStatic
- * Signature: (JZ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setStatic
-  (JNIEnv *, jobject, jlong, jboolean);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    updateMassProps
  * Signature: (JJF)J
  */
