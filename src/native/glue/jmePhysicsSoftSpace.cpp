@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2015 jMonkeyEngine
+ * Copyright (c) 2009-2018 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,9 +45,6 @@ jmePhysicsSoftSpace::jmePhysicsSoftSpace(JNIEnv* env, jobject javaSpace)
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_vec, jint broadphaseId, jboolean threading) {
     // collision configuration contains default setup for memory, collision setup
     btDefaultCollisionConstructionInfo cci;
-    //    if(threading){
-    //        cci.m_defaultMaxPersistentManifoldPoolSize = 32768;
-    //    }
 
     btVector3 min = btVector3();
     btVector3 max = btVector3();
@@ -80,30 +77,11 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_ve
 
     btSoftBodyRigidBodyCollisionConfiguration* collisionConfiguration = new btSoftBodyRigidBodyCollisionConfiguration();
 
-    btCollisionDispatcher* dispatcher;
-    // use the default collision dispatcher. For parallel processing you can use a different dispatcher (see Extras/BulletMultiThreaded)
-    if (threading) {
-        // TODO
-        //btThreadSupportInterface* dispatchThreads = createDispatchThreadSupport(4);
-        //dispatcher = new SpuGatheringCollisionDispatcher(dispatchThreads, 4, collisionConfiguration);
-        //dispatcher->setDispatcherFlags(btCollisionDispatcher::CD_DISABLE_CONTACTPOOL_DYNAMIC_ALLOCATION);
-    } else {
-        dispatcher = new btCollisionDispatcher(collisionConfiguration);
-    }
+    // Use the default collision dispatcher.
+    btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
 
-
-
-    btConstraintSolver* solver;
-    // the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
-    if (threading) {
-        // TODO
-        //btThreadSupportInterface* solverThreads = createSolverThreadSupport(4);
-        //solver = new btParallelConstraintSolver(solverThreads);
-    } else {
-        solver = new btSequentialImpulseConstraintSolver;
-    }
-
-
+    // Use the default constraint solver.
+    btConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
 
     //create dynamics world
     btSoftBodySolver* softBodySolver = 0; //use default
@@ -111,14 +89,6 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_ve
     //btDiscreteDynamicsWorld* world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
     dynamicsWorld = world;
     dynamicsWorld->setWorldUserInfo(this);
-
-    //parallel solver requires the contacts to be in a contiguous pool, so avoid dynamic allocation
-    if (threading) {
-        world->getSimulationIslandManager()->setSplitIslands(false);
-        world->getSolverInfo().m_numIterations = 4;
-        world->getSolverInfo().m_solverMode = SOLVER_SIMD + SOLVER_USE_WARMSTARTING; //+SOLVER_RANDMIZE_ORDER;
-        world->getDispatchInfo().m_enableSPU = true;
-    }
 
     broadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 
