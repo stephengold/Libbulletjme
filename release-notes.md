@@ -1,5 +1,13 @@
 # release notes for the Jme3-bullet-native Project
 
+## Version 1.0.21 released on 8 December 2018
+
+ + Print version number during initialization.
+ + Added `EmptyShape` class based on `btEmptyShape`.
+ + Added `isActive()` method to the `PhysicsCollisionObject` class.
+ + Upgraded the Bullet sources to match SHA1 ID=4a66d6c of the bullet3 project.
+ + Removed ancient threading support from `jmePhysicsSoftSpace`.
+
 ## Version 1.0.20 released on 4 December 2018
 
  + Added missing source file for `PhysicsSoftBody`.
