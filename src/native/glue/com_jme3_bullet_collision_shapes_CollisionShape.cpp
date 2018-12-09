@@ -42,6 +42,23 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    finalizeNative
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_finalizeNative
+    (JNIEnv * env, jobject object, jlong shapeId) {
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return;
+        }
+
+        delete(shape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    getLocalScaling
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -126,23 +143,6 @@ extern "C" {
         }
 
         shape->setMargin(newMargin);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_finalizeNative
-    (JNIEnv * env, jobject object, jlong shapeId) {
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
-            return;
-        }
-
-        delete(shape);
     }
 
 #ifdef __cplusplus
