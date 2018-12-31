@@ -48,7 +48,7 @@ jmePhysicsSpace::jmePhysicsSpace(JNIEnv* env, jobject javaSpace) {
 
 void jmePhysicsSpace::attachThread() {
 #ifdef ANDROID
-    vm->AttachCurrentThread((JNIEnv**) &env, NULL);
+    vm->AttachCurrentThread((JNIEnv**) & env, NULL);
 #elif defined (JNI_VERSION_1_2)
     vm->AttachCurrentThread((void**) &env, NULL);
 #else
@@ -184,20 +184,26 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *world, btScalar timeStep
 }
 
 bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0, void *body1) {
-    //    printf("contactProcessedCallback %d %dn", body0, body1);
+    //    printf("contactProcessedCallback %d %d\n", body0, body1);
     btCollisionObject* co0 = (btCollisionObject*) body0;
     jmeUserPointer *up0 = (jmeUserPointer*) co0 -> getUserPointer();
-    btCollisionObject* co1 = (btCollisionObject*) body1;
-    jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
     if (up0 != NULL) {
         jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
         if (dynamicsWorld != NULL) {
             JNIEnv* env = dynamicsWorld->getEnv();
-            jobject javaPhysicsSpace = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());
+            jobject javaPhysicsSpace
+                    = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());
             if (javaPhysicsSpace != NULL) {
-                jobject javaCollisionObject0 = env->NewLocalRef(up0->javaCollisionObject);
-                jobject javaCollisionObject1 = env->NewLocalRef(up1->javaCollisionObject);
-                env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_addCollisionEvent, javaCollisionObject0, javaCollisionObject1, (jlong) & cp);
+                btCollisionObject* co1 = (btCollisionObject*) body1;
+                jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
+                jobject javaCollisionObject0
+                        = env->NewLocalRef(up0->javaCollisionObject);
+                jobject javaCollisionObject1
+                        = env->NewLocalRef(up1->javaCollisionObject);
+                env->CallVoidMethod(javaPhysicsSpace,
+                        jmeClasses::PhysicsSpace_addCollisionEvent,
+                        javaCollisionObject0, javaCollisionObject1,
+                        (jlong) & cp);
                 env->DeleteLocalRef(javaPhysicsSpace);
                 env->DeleteLocalRef(javaCollisionObject0);
                 env->DeleteLocalRef(javaCollisionObject1);
@@ -205,9 +211,16 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0,
                     env->Throw(env->ExceptionOccurred());
                     return true;
                 }
+            } else {
+                printf("null javaPhysicsSpace in contactProcessedCallback\n");
             }
+        } else {
+            printf("null dynamicsWorld in contactProcessedCallback\n");
         }
+    } else {
+        printf("null up0 in contactProcessedCallback\n");
     }
+
     return true;
 }
 
