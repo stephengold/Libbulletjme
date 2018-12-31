@@ -1,5 +1,10 @@
 # release notes for the Jme3-bullet-native Project
 
+## Version 1.0.22 released on 30 December 2018
+
+Added diagnostic messages when a contact is ignored
+by `jmePhysicsSpace::contactProcessedCallback`
+
 ## Version 1.0.21 released on 8 December 2018
 
  + Print version number during initialization.
