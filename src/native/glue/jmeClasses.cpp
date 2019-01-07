@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -114,7 +114,7 @@ JavaVM* jmeClasses::vm;
 void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
-    fprintf(stdout, "jme3-bullet-native v1.0.23: initializing Java classes\n");
+    fprintf(stdout, "jme3-bullet-native v1.0.24: initializing Java classes\n");
     fflush(stdout);
 
     env->GetJavaVM(&vm);
