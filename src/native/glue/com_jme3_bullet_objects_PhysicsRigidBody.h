@@ -245,14 +245,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestit
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    isActive
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    isInWorld
  * Signature: (J)Z
  */
