@@ -114,7 +114,7 @@ JavaVM* jmeClasses::vm;
 void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
-    fprintf(stdout, "libbulletjme v1.0.25: initializing Java classes\n");
+    fprintf(stdout, "libbulletjme v1.0.26: initializing Java classes\n");
     fflush(stdout);
 
     env->GetJavaVM(&vm);

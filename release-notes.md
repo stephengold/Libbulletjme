@@ -1,5 +1,10 @@
 # release notes for the Jme3-bullet-native Project
 
+## Version 1.0.26 released on 17 January 2019
+
+ + Added `createShapeB(ByteBuffer, int)` methods to the `HullCollisionShape`
+   and `MultiSphere` classes.
+
 ## Version 1.0.24 released on 7 January 2019
 
 Upgraded the Bullet sources to match release 2.88 of the bullet3 project.
