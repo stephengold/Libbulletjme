@@ -9,11 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_collision_shapes_MultiSphere
- * Method:    createShape
- * Signature: ([Lcom/jme3/math/Vector3f;[FI)J
+ * Method:    createShapeB
+ * Signature: (Ljava/nio/ByteBuffer;I)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
-  (JNIEnv *, jobject, jobjectArray, jfloatArray, jint);
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShapeB
+  (JNIEnv *, jobject, jobject, jint);
 
 #ifdef __cplusplus
 }

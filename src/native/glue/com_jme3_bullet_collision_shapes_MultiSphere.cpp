@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 jMonkeyEngine
+ * Copyright (c) 2018-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,6 +42,55 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MultiSphere
+     * Method:    createShapeB
+     * Signature: (Ljava/nio/ByteBuffer;I)J
+     *
+     * buffer contains float values: x,y,z,r for each sphere
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShapeB
+    (JNIEnv *env, jobject object, jobject buffer, jint numSpheres) {
+        jmeClasses::initJavaClasses(env);
+
+        int n = numSpheres;
+        if (n < 1) {
+            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "numSpheres must be positive");
+            return 0L;
+        }
+
+        btAlignedObjectArray<btVector3> centers;
+        centers.resize(n);
+        btAlignedObjectArray<btScalar> radii;
+        radii.resize(n);
+
+        int numBytes = env->GetDirectBufferCapacity(buffer);
+        if (numBytes < 16 * n) {
+            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "buffer too small");
+            return 0L;
+        }
+
+        float* data = (float*) env->GetDirectBufferAddress(buffer);
+        for (int i = 0; i < n; ++i) {
+            int j = 4 * i;
+            centers[i] = btVector3(data[j], data[j + 1], data[j + 2]);
+            radii[i] = data[j + 3];
+            if (!(radii[i] >= 0)) {
+                jclass newExc
+                        = env->FindClass("java/lang/IllegalArgumentException");
+                env->ThrowNew(newExc, "Illegal radius for btMultiSphereShape.");
+                return 0L;
+            }
+        }
+
+        btMultiSphereShape* shape
+                = new btMultiSphereShape(&centers[0], &radii[0], n);
+
+        return reinterpret_cast<jlong> (shape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
      * Method:    createShape
      * Signature: (F)J
      */
@@ -55,9 +104,9 @@ extern "C" {
             jobject center = env->GetObjectArrayElement(centers, i);
             jmeBulletUtil::convert(env, center, &positions[i]);
         }
-        
+
         btScalar* radi = env->GetFloatArrayElements(radii, 0);
-        
+
         btMultiSphereShape* shape = new btMultiSphereShape(positions, radi, n);
         return reinterpret_cast<jlong> (shape);
     }
