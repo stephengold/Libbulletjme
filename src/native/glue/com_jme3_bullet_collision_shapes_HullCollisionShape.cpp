@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,8 +43,47 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+     * Method:    createShapeB
+     * Signature: (Ljava/nio/ByteBuffer;I)J
+     *
+     * buffer contains float values: x,y,z for each vertex
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeB
+    (JNIEnv * env, jobject object, jobject buffer, jint numVertices) {
+        jmeClasses::initJavaClasses(env);
+
+        int n = numVertices;
+        if (n < 1) {
+            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "numVertices must be positive");
+            return 0L;
+        }
+
+        int numBytes = env->GetDirectBufferCapacity(buffer);
+        if (numBytes < 12 * n) {
+            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "buffer too small");
+            return 0L;
+        }
+
+        btConvexHullShape* shape = new btConvexHullShape();
+
+        float* data = (float*) env->GetDirectBufferAddress(buffer);
+        for (int i = 0; i < n; ++i) {
+            int j = 3 * i;
+            btVector3 vect = btVector3(data[j], data[j + 1], data[j + 2]);
+            shape->addPoint(vect);
+        }
+
+        return reinterpret_cast<jlong> (shape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
      * Method:    createShape
      * Signature: ([F)J
+     *
+     * buffer contains float values: x,y,z for each vertex
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShape
     (JNIEnv *env, jobject object, jobject array) {

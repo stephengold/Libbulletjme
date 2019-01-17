@@ -9,11 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
- * Method:    createShape
- * Signature: (Ljava/nio/ByteBuffer;)J
+ * Method:    createShapeB
+ * Signature: (Ljava/nio/ByteBuffer;I)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShape
-  (JNIEnv *, jobject, jobject);
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeB
+  (JNIEnv *, jobject, jobject, jint);
 
 #ifdef __cplusplus
 }
