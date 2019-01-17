@@ -1,6 +1,10 @@
 The Jme3-bullet-native Project adds "glue code" to the Bullet Physics Library,
 providing Java code with access to Bullet Physics functionality.
 
+The Jme3-bullet-native Project supports the 3 major desktop operating systems: 
+Windows, Linux, and OSX.  Both x86 and x64 architectures are supported for
+each operating system.
+
 ### History
 
 The Jme3-bullet-native Project is hosted at
