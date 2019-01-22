@@ -2,8 +2,8 @@
 
 ## Version 1.0.26 released on 17 January 2019
 
- + Added `createShapeB(ByteBuffer, int)` methods to the `HullCollisionShape`
-   and `MultiSphere` classes.
+Added `createShapeB(ByteBuffer, int)` methods to the `HullCollisionShape`
+and `MultiSphere` classes.
 
 ## Version 1.0.24 released on 7 January 2019
 
