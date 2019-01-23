@@ -32,5 +32,5 @@ deploy:
   - dist/x86_libbulletjme.dylib
   - dist/x86-64_libbulletjme.dylib
   on:
-    repo: stephengold/jme3-bullet-native
+    repo: stephengold/Libbulletjme
     tags: true   # deploy on tag push only

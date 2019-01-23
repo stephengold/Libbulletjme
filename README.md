@@ -1,27 +1,27 @@
-The Jme3-bullet-native Project adds "glue code" to the Bullet Physics Library,
+The Libbulletjme Project adds "glue code" to the Bullet Physics Library,
 providing Java code with access to Bullet Physics functionality.
 
-The Jme3-bullet-native Project supports the 3 major desktop operating systems: 
+The project supports the 3 major desktop operating systems:
 Windows, Linux, and OSX.  Both x86 and x64 architectures are supported for
 each operating system.
 
 ### History
 
-The Jme3-bullet-native Project is hosted at
-[GitHub](https://github.com/stephengold/jme3-bullet-native).
+The Libbulletjme Project is hosted at
+[GitHub](https://github.com/stephengold/Libbulletjme).
 
-The evolution of Jme3-bullet-native is chronicled in
-[its release notes](https://github.com/stephengold/jme3-bullet-native/blob/master/release-notes.md).
+The evolution of the project is chronicled in
+[its release notes](https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md).
 
 ## Acknowledgments
 
-This project is based on open-source software:
+The Libbulletjme Project is based on open-source software:
 
   + the [Bullet][] physics simulation kit
   + [jMonkeyEngine][jme]
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
 
-This project made use of the following software:
+This project also made use of the following software:
 
   + the [Git][] revision-control system and GitK commit viewer
   + the [Google Chrome web browser][chrome]

@@ -1,4 +1,12 @@
-# release notes for the Jme3-bullet-native Project
+# release notes for the Libbulletjme Project
+
+## Version 1.0.27 released on 23 January 2019
+
+ + Renamed the project from Jme3-bullet-native to Libbulletjme.
+ + Added `countSpheres()`, `getSpherePosition()`, and `getSphereRadius()`
+   to the `MultiSphere` class.
+ + Added `DebugTools.setStartupMessageEnabled()` in order to make the startup
+   message optional.
 
 ## Version 1.0.26 released on 17 January 2019
 
