@@ -112,7 +112,6 @@ public:
 private:
 
     jmeClasses() {
-        printFlag = 1;
     };
 
     ~jmeClasses() {

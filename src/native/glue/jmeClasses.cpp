@@ -109,7 +109,7 @@ jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
 jmethodID jmeClasses::Transform_scale;
 
-int jmeClasses::printFlag;
+int jmeClasses::printFlag = 1; // TRUE
 
 //private fields
 JavaVM* jmeClasses::vm;
