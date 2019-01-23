@@ -35,6 +35,7 @@
 /**
  * Author: Normen Hansen,Empire Phoenix, Lutherion
  */
+
 //public fields
 jclass jmeClasses::PhysicsSpace;
 jmethodID jmeClasses::PhysicsSpace_preTick;
@@ -108,14 +109,21 @@ jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
 jmethodID jmeClasses::Transform_scale;
 
+int jmeClasses::printFlag;
+
 //private fields
 JavaVM* jmeClasses::vm;
 
+/*
+ * Initialize Java classes for the specified environment.
+ */
 void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
-    fprintf(stdout, "libbulletjme v1.0.26: initializing Java classes\n");
-    fflush(stdout);
+    if (printFlag) {
+        fprintf(stdout, "libbulletjme v1.0.26: initializing Java classes\n");
+        fflush(stdout);
+    }
 
     env->GetJavaVM(&vm);
 

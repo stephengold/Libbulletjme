@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,6 @@
 class jmeClasses {
 public:
     static void initJavaClasses(JNIEnv* env);
-//    static JNIEnv* env;
     static JavaVM* vm;
     static jclass PhysicsSpace;
     static jmethodID PhysicsSpace_preTick;
@@ -90,13 +89,13 @@ public:
     static jclass PhysicsRay_listresult;
     static jmethodID PhysicsRay_addmethod;
 
-	static jclass PhysicsSweep_Class;
-	static jmethodID PhysicsSweep_newSingleResult;
-	static jfieldID PhysicsSweep_normalInWorldSpace;
-	static jfieldID PhysicsSweep_hitfraction;
-	static jfieldID PhysicsSweep_collisionObject;
-	static jclass PhysicsSweep_listresult;
-	static jmethodID PhysicsSweep_addmethod;
+    static jclass PhysicsSweep_Class;
+    static jmethodID PhysicsSweep_newSingleResult;
+    static jfieldID PhysicsSweep_normalInWorldSpace;
+    static jfieldID PhysicsSweep_hitfraction;
+    static jfieldID PhysicsSweep_collisionObject;
+    static jclass PhysicsSweep_listresult;
+    static jmethodID PhysicsSweep_addmethod;
 
     static jclass Transform;
     static jmethodID Transform_rotation;
@@ -106,11 +105,14 @@ public:
     static jclass DebugMeshCallback;
     static jmethodID DebugMeshCallback_addVector;
 
+    static int printFlag;
+
     static void throwNPE(JNIEnv* env);
 
 private:
 
     jmeClasses() {
+        printFlag = 1;
     };
 
     ~jmeClasses() {
