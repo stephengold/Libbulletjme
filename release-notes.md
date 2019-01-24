@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.28 released on 24 January 2019
+
+ + Bugfix: `setStartupMessageEnabled()` should default to TRUE.
+
 ## Version 1.0.27 released on 23 January 2019
 
  + Renamed the project from Jme3-bullet-native to Libbulletjme.
