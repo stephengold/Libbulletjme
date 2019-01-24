@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -67,6 +67,35 @@ extern "C" {
         return reinterpret_cast<jlong> (shape);
     }
 
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+     * Method:    finalizeNative
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeNative
+    (JNIEnv* env, jobject object, jlong arrayId, jlong nativeBVHBuffer) {
+        btTriangleIndexVertexArray* array
+                = reinterpret_cast<btTriangleIndexVertexArray*> (arrayId);
+        if (array == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc,
+                    "The btTriangleIndexVertexArray does not exist.");
+            return;
+        }
+
+        delete(array);
+
+        if (nativeBVHBuffer > 0) {
+            void* buffer = reinterpret_cast<void*> (nativeBVHBuffer);
+            btAlignedFree(buffer);
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+     * Method:    saveBVH
+     * Signature: (J)[B
+     */
     JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_saveBVH
     (JNIEnv* env, jobject, jlong meshobj) {
         btBvhTriangleMeshShape* mesh
@@ -93,6 +122,11 @@ extern "C" {
         return byteArray;
     };
 
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+     * Method:    setBVH
+     * Signature: ([BJ)J
+     */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setBVH
     (JNIEnv* env, jobject, jbyteArray bytearray, jlong meshobj) {
         int len = env->GetArrayLength(bytearray);
@@ -108,30 +142,6 @@ extern "C" {
 
         return reinterpret_cast<jlong> (buffer);
     };
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeNative
-    (JNIEnv* env, jobject object, jlong arrayId, jlong nativeBVHBuffer) {
-        btTriangleIndexVertexArray* array
-                = reinterpret_cast<btTriangleIndexVertexArray*> (arrayId);
-        if (array == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btTriangleIndexVertexArray does not exist.");
-            return;
-        }
-
-        delete(array);
-
-        if (nativeBVHBuffer > 0) {
-            void* buffer = reinterpret_cast<void*> (nativeBVHBuffer);
-            btAlignedFree(buffer);
-        }
-    }
 
 #ifdef __cplusplus
 }
