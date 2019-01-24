@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,166 +39,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    enableMotor
-     * Signature: (JZFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
-    (JNIEnv * env, jobject object, jlong jointId, jboolean enable, jfloat targetVelocity, jfloat maxMotorImpulse) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
-        joint->enableAngularMotor(enable, targetVelocity, maxMotorImpulse);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    getEnableAngularMotor
-     * Signature: (J)Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngularMotor
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return false;
-        }
-        return joint->getEnableAngularMotor();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    getMotorTargetVelocity
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVelocity
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
-        return joint->getMotorTargetVelocity();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    getMaxMotorImpulse
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpulse
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
-        return joint->getMaxMotorImpulse();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    setLimit
-     * Signature: (JFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFF
-    (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
-        return joint->setLimit(low, high);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    setLimit
-     * Signature: (JFFFFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFFFFF
-    (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high, jfloat softness, jfloat biasFactor, jfloat relaxationFactor) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
-        return joint->setLimit(low, high, softness, biasFactor, relaxationFactor);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    getUpperLimit
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
-        return joint->getUpperLimit();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    getLowerLimit
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
-        return joint->getLowerLimit();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    setAngularOnly
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
-    (JNIEnv * env, jobject object, jlong jointId, jboolean angular) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
-        joint->setAngularOnly(angular);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    getHingeAngle
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
-        return joint->getHingeAngle();
-    }
 
     /*
      * Class:     com_jme3_bullet_joints_HingeJoint
@@ -298,6 +138,166 @@ extern "C" {
         btHingeConstraint* joint
                 = new btHingeConstraint(*rbA, pivot, axis, useReferenceFrameA);
         return reinterpret_cast<jlong> (joint);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    enableMotor
+     * Signature: (JZFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
+    (JNIEnv * env, jobject object, jlong jointId, jboolean enable, jfloat targetVelocity, jfloat maxMotorImpulse) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return;
+        }
+        joint->enableAngularMotor(enable, targetVelocity, maxMotorImpulse);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getEnableAngularMotor
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngularMotor
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return false;
+        }
+        return joint->getEnableAngularMotor();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getHingeAngle
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return 0;
+        }
+        return joint->getHingeAngle();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getLowerLimit
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return 0;
+        }
+        return joint->getLowerLimit();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getMaxMotorImpulse
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpulse
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return 0;
+        }
+        return joint->getMaxMotorImpulse();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getMotorTargetVelocity
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVelocity
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return 0;
+        }
+        return joint->getMotorTargetVelocity();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getUpperLimit
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return 0;
+        }
+        return joint->getUpperLimit();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    setAngularOnly
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
+    (JNIEnv * env, jobject object, jlong jointId, jboolean angular) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return;
+        }
+        joint->setAngularOnly(angular);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    setLimit
+     * Signature: (JFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFF
+    (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return;
+        }
+        return joint->setLimit(low, high);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    setLimit
+     * Signature: (JFFFFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFFFFF
+    (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high, jfloat softness, jfloat biasFactor, jfloat relaxationFactor) {
+        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
+            return;
+        }
+        return joint->setLimit(low, high, softness, biasFactor, relaxationFactor);
     }
 
 #ifdef __cplusplus
