@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,39 +39,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-    /*
-     * Class:     com_jme3_bullet_joints_ConeJoint
-     * Method:    setLimit
-     * Signature: (JFFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setLimit
-    (JNIEnv * env, jobject object, jlong jointId, jfloat swingSpan1, jfloat swingSpan2, jfloat twistSpan) {
-        btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btConeTwistConstraint does not exist.");
-            return;
-        }
-        //TODO: extended setLimit!
-        joint->setLimit(swingSpan1, swingSpan2, twistSpan);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_ConeJoint
-     * Method:    setAngularOnly
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setAngularOnly
-    (JNIEnv * env, jobject object, jlong jointId, jboolean angularOnly) {
-        btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btConeTwistConstraint does not exist.");
-            return;
-        }
-        joint->setAngularOnly(angularOnly);
-    }
 
     /*
      * Class:     com_jme3_bullet_joints_ConeJoint
@@ -166,6 +133,42 @@ extern "C" {
                 = new btConeTwistConstraint(*rbA, rbAFrame);
         return reinterpret_cast<jlong> (joint);
     }
+
+    /*
+     * Class:     com_jme3_bullet_joints_ConeJoint
+     * Method:    setAngularOnly
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setAngularOnly
+    (JNIEnv * env, jobject object, jlong jointId, jboolean angularOnly) {
+        btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btConeTwistConstraint does not exist.");
+            return;
+        }
+
+        joint->setAngularOnly(angularOnly);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_ConeJoint
+     * Method:    setLimit
+     * Signature: (JFFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setLimit
+    (JNIEnv * env, jobject object, jlong jointId, jfloat swingSpan1, jfloat swingSpan2, jfloat twistSpan) {
+        btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btConeTwistConstraint does not exist.");
+            return;
+        }
+
+        //TODO: extended setLimit!
+        joint->setLimit(swingSpan1, swingSpan2, twistSpan);
+    }
+
 
 #ifdef __cplusplus
 }
