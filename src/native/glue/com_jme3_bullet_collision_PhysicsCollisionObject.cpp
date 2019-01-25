@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -101,6 +101,40 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    getCcdMotionThreshold
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCcdMotionThreshold
+    (JNIEnv *env, jobject object, jlong objectId) {
+        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return 0;
+        }
+
+        return collisionObject->getCcdMotionThreshold();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    getCcdSweptSphereRadius
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCcdSweptSphereRadius
+    (JNIEnv *env, jobject object, jlong objectId) {
+        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return 0;
+        }
+
+        return collisionObject->getCcdSweptSphereRadius();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    getCollisionFlags
      * Signature: (J)I
      */
@@ -158,6 +192,42 @@ extern "C" {
         }
 
         return collisionObject->isActive();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    setCcdMotionThreshold
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCcdMotionThreshold
+    (JNIEnv *env, jobject object, jlong objectId, jfloat threshold) {
+        btCollisionObject* collisionObject
+                = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return;
+        }
+
+        collisionObject->setCcdMotionThreshold(threshold);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    setCcdSweptSphereRadius
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCcdSweptSphereRadius
+    (JNIEnv *env, jobject object, jlong objectId, jfloat radius) {
+        btCollisionObject* collisionObject
+                = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return;
+        }
+
+        collisionObject->setCcdSweptSphereRadius(radius);
     }
 
     /*
