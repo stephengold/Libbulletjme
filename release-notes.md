@@ -1,8 +1,17 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.29 released on 25 January 2019
+
+ + Added `getFallSpeed()`, `getJumpSpeed()`, `getUpDirection()`, `reset()`,
+   and `setUseGhostSweepTest()` to the `PhysicsCharacter` class.
+ + Added `getCcdMotionThreshold()`, `getCcdSweptSphereRadius()`,
+   `setCcdMotionThreshold()`, and `setCcdSweptSphereRadius()` to the
+   `PhysicsCollisionObject` class.
+ + Verify convex shape in `PhysicsCharacter.createCharacterObject()`.
+
 ## Version 1.0.28 released on 24 January 2019
 
- + Bugfix: `setStartupMessageEnabled()` should default to TRUE.
+Bugfix: `setStartupMessageEnabled()` should default to TRUE.
 
 ## Version 1.0.27 released on 23 January 2019
 
