@@ -81,14 +81,19 @@ extern "C" {
                     "The btPairCachingGhostObject does not exist.");
             return 0;
         }
-        //TODO: check convexshape!
-        btConvexShape* shape = reinterpret_cast<btConvexShape*> (shapeId);
-        if (ghost == NULL) {
+
+        btCollisionShape* sh = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (sh == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btConvexShape does not exist.");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return 0;
+        } else if (sh->isConcave()) {
+            jclass newExc
+                    = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "The btCollisionShape is concave.");
             return 0;
         }
+        btConvexShape* shape = reinterpret_cast<btConvexShape*> (shapeId);
 
         btKinematicCharacterController* character
                 = new btKinematicCharacterController(ghost, shape, stepHeight);
