@@ -155,6 +155,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getStepHe
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsCharacter
+ * Method:    getUpDirection
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getUpDirection
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsCharacter
  * Method:    jump
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -168,6 +176,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_jump
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_onGround
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsCharacter
+ * Method:    reset
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_reset
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsCharacter
@@ -264,6 +280,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setStepHeig
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setUp
   (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsCharacter
+ * Method:    setUseGhostSweepTest
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setUseGhostSweepTest
+  (JNIEnv *, jobject, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsCharacter
