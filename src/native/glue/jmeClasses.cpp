@@ -32,8 +32,8 @@
 #include "jmeClasses.h"
 #include <stdio.h>
 
-/**
- * Author: Normen Hansen,Empire Phoenix, Lutherion
+/*
+ * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
 
 //public fields
@@ -121,7 +121,7 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
     if (printFlag) {
-        fprintf(stdout, "Libbulletjme v1.0.29: initializing Java classes\n");
+        fprintf(stdout, "Libbulletjme v1.0.30: initializing Java classes\n");
         fflush(stdout);
     }
 

@@ -1,5 +1,20 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.30 released on 30 January 2019
+
+Added 21 methods to PhysicsCollisionObject:
+
+ + `{get/has/set}AnisotropicFriction()`
+ + `getBasis()`, `getLocation()`, and `setLocationAndBasis()`
+ + `getContactDamping()`, `getContactStiffness()`,
+    and `setContactStiffnessAndDamping()`
+ + `{get/set}ContactProcessingThreshold()`
+ + `{get/set}DeactivationTime`
+ + `{get/set}Friction()`
+ + `{get/set}Restitution()`
+ + `{get/set}RollingFriction()`
+ + `{get/set}SpinningFriction()`
+
 ## Version 1.0.29 released on 25 January 2019
 
  + Added `getFallSpeed()`, `getJumpSpeed()`, `getUpDirection()`, `reset()`,
