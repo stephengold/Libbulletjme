@@ -31,7 +31,7 @@
  */
 #include <jni.h>
 
-/**
+/*
  * Author: Normen Hansen
  */
 

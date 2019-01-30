@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/*
  * Author: Normen Hansen
  */
 #include "com_jme3_bullet_joints_SixDofSpringJoint.h"

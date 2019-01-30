@@ -32,7 +32,7 @@
 #include "jmePhysicsSpace.h"
 #include "jmeBulletUtil.h"
 
-/**
+/*
  * Author: Normen Hansen
  */
 jmePhysicsSpace::jmePhysicsSpace(JNIEnv* env, jobject javaSpace) {

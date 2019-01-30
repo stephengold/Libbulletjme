@@ -33,7 +33,7 @@
 #include "jmePhysicsSpace.h"
 #include "jmeBulletUtil.h"
 
-/**
+/*
  * Author: Normen Hansen
  */
 #ifdef __cplusplus

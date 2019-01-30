@@ -33,7 +33,7 @@
 #include "jmeBulletUtil.h"
 #include <stdio.h>
 
-/**
+/*
  * Author: dokthar
  */
 jmePhysicsSoftSpace::jmePhysicsSoftSpace(JNIEnv* env, jobject javaSpace)

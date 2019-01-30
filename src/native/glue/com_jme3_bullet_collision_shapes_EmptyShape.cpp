@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/*
  * Author: Stephen Gold
  */
 #include "com_jme3_bullet_collision_shapes_EmptyShape.h"

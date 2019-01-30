@@ -35,7 +35,7 @@
 #include "BulletSoftBody/btSoftBody.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 
-/**
+/*
  * Author: Dokthar
  */
 #ifdef __cplusplus

@@ -41,7 +41,7 @@
 #include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 #include "BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
 
-/**
+/*
  * Author: Normen Hansen
  */
 class jmePhysicsSpace {

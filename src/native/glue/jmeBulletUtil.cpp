@@ -32,8 +32,8 @@
 #include <math.h>
 #include "jmeBulletUtil.h"
 
-/**
- * Author: Normen Hansen,Empire Phoenix, Lutherion
+/*
+ * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
 void jmeBulletUtil::convert(JNIEnv* env, jobject in, btVector3* out) {
     if (in == NULL || out == NULL) {

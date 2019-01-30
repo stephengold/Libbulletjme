@@ -32,7 +32,7 @@
 #include "jmeMotionState.h"
 #include "jmeBulletUtil.h"
 
-/**
+/*
  * Author: Normen Hansen
  */
 

@@ -32,7 +32,7 @@
 #include "com_jme3_bullet_debug_DebugTools.h"
 #include "jmeClasses.h"
 
-/**
+/*
  * Author: Stephen Gold
  */
 #ifdef __cplusplus

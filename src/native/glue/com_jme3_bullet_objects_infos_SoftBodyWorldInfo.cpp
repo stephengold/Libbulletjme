@@ -34,7 +34,7 @@
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
 
-/**
+/*
  * Author: Dokthar
  */
 #ifdef __cplusplus

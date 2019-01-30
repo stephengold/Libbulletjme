@@ -35,7 +35,7 @@
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 //#include "LinearMath/TaskScheduler/btThreadSupportInterface.h"
 
-/**
+/*
  * Author: Dokthar
  */
 class jmePhysicsSoftSpace : public jmePhysicsSpace {

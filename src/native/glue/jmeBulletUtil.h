@@ -34,7 +34,7 @@
 #include "btBulletCollisionCommon.h"
 #include "LinearMath/btVector3.h"
 
-/**
+/*
  * Author: Normen Hansen
  */
 class jmeBulletUtil {

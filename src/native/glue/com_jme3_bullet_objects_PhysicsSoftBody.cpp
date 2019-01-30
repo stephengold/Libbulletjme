@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/*
  * Author: Dokthar
  */
 #include "com_jme3_bullet_objects_PhysicsSoftBody.h"
