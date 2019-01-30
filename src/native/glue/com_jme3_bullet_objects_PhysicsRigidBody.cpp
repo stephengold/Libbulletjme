@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -491,7 +491,7 @@ extern "C" {
      * Signature: (JFF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setDamping
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value1, jfloat value2) {
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
@@ -499,7 +499,7 @@ extern "C" {
             return;
         }
 
-        body->setDamping(value1, value2);
+        body->setDamping(linear, angular);
     }
 
     /*
