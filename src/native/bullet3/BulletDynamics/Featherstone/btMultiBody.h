@@ -182,7 +182,10 @@ public:
 	// get/set pos/vel/rot/omega for the base link
 	//
 
-	const btVector3 &getBasePos() const { return m_basePos; }  // in world frame
+	const btVector3 &getBasePos() const 
+	{ 
+		return m_basePos; 
+	}  // in world frame
 	const btVector3 getBaseVel() const
 	{
 		return btVector3(m_realBuf[3], m_realBuf[4], m_realBuf[5]);
@@ -467,6 +470,11 @@ public:
 	bool hasFixedBase() const
 	{
 		return m_fixedBase;
+	}
+
+	void setFixedBase(bool fixedBase)
+	{
+		m_fixedBase = fixedBase;
 	}
 
 	int getCompanionId() const
