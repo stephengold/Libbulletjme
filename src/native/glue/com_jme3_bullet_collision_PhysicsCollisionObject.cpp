@@ -320,6 +320,30 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    getOrientation
+     * Signature: (JLcom/jme3/math/Quaternion;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getOrientation
+    (JNIEnv *env, jobject object, jlong objectId, jobject storeQuat) {
+        btCollisionObject* collisionObject
+                = reinterpret_cast<btCollisionObject*> (objectId);
+        if (collisionObject == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
+            return;
+        }
+        if (storeQuat == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The storeQuat does not exist.");
+            return;
+        }
+
+        btMatrix3x3& basis = collisionObject->getWorldTransform().getBasis();
+        jmeBulletUtil::convertQuat(env, &basis, storeQuat);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    getRestitution
      * Signature: (J)F
      */
