@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2016 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,13 +38,13 @@
 #include "BulletSoftBody/btSoftBody.h"
 #include "BulletSoftBody/btSoftBodyHelpers.h"
 
+static inline btVector3 getBoundingCenter(btSoftBody* body) {
+    return (body->m_bounds[0] + body->m_bounds[1]) / 2;
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-    static inline btVector3 getBoundingCenter(btSoftBody* body) {
-        return (body->m_bounds[0] + body->m_bounds[1]) / 2;
-    }
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
