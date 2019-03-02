@@ -57,6 +57,7 @@ model {
                 cppCompiler.define('BT_NO_PROFILE')
                 if (toolChain in VisualCpp) {
                     cppCompiler.define('WIN32')
+                    cppCompiler.args('/EHsc');
                     cppCompiler.args("/I$javaHome/include")
                     cppCompiler.args("/I$javaHome/include/win32")
                     cppCompiler.args("/I$projectDir/src/native/bullet3")
