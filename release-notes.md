@@ -1,8 +1,15 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.31 released on 2 March 2019
+
+ + Added a `getOrientation()` method to the `PhysicsCollisionObject` class.
+ + In `jmePhysicsSpace::contactProcessedCallback()`, check both collision
+   objects for NULL user pointers.
+ + Upgraded the Bullet sources to match SHA1 id=1bac759a of the bullet3 project.
+
 ## Version 1.0.30 released on 30 January 2019
 
-Added 21 methods to PhysicsCollisionObject:
+Added 21 methods to `PhysicsCollisionObject`:
 
  + `{get/has/set}AnisotropicFriction()`
  + `getBasis()`, `getLocation()`, and `setLocationAndBasis()`
