@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_appliedImpulse;
@@ -60,7 +60,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_appliedImpulseLateral1;
@@ -76,7 +76,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_appliedImpulseLateral2;
@@ -92,7 +92,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_combinedFriction;
@@ -108,7 +108,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_combinedRestitution;
@@ -124,7 +124,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_distance1;
@@ -140,7 +140,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getI
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_index0;
@@ -156,7 +156,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getI
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_index1;
@@ -172,7 +172,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_lateralFrictionDir1, lateralFrictionDir1);
@@ -188,7 +188,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_lateralFrictionDir2, lateralFrictionDir2);
@@ -204,7 +204,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_lifeTime;
@@ -220,7 +220,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_localPointA, localPointA);
@@ -236,7 +236,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_localPointB, localPointB);
@@ -252,7 +252,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getN
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_normalWorldOnB, normalWorldOnB);
@@ -268,7 +268,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_partId0;
@@ -284,7 +284,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return mp -> m_partId1;
@@ -300,7 +300,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_positionWorldOnA, positionWorldOnA);
@@ -316,7 +316,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return;
     }
     jmeBulletUtil::convert(env, &mp -> m_positionWorldOnB, positionWorldOnB);
@@ -332,7 +332,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_
     btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
     if (mp == NULL) {
         jclass newExc = env->FindClass("java/lang/NullPointerException");
-        env->ThrowNew(newExc, "The manifoldPoint does not exist.");
+        env->ThrowNew(newExc, "The btManifoldPoint does not exist.");
         return 0;
     }
     return (mp -> m_contactPointFlags) & BT_CONTACT_FLAG_LATERAL_FRICTION_INITIALIZED;
