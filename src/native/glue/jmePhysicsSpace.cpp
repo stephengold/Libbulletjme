@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -187,15 +187,15 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0,
     //    printf("contactProcessedCallback %d %d\n", body0, body1);
     btCollisionObject* co0 = (btCollisionObject*) body0;
     jmeUserPointer *up0 = (jmeUserPointer*) co0 -> getUserPointer();
-    if (up0 != NULL) {
+    btCollisionObject* co1 = (btCollisionObject*) body1;
+    jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
+    if (up0 != NULL && up1 != NULL) {
         jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
         if (dynamicsWorld != NULL) {
             JNIEnv* env = dynamicsWorld->getEnv();
             jobject javaPhysicsSpace
                     = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());
             if (javaPhysicsSpace != NULL) {
-                btCollisionObject* co1 = (btCollisionObject*) body1;
-                jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
                 jobject javaCollisionObject0
                         = env->NewLocalRef(up0->javaCollisionObject);
                 jobject javaCollisionObject1
@@ -218,7 +218,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0,
             printf("null dynamicsWorld in contactProcessedCallback\n");
         }
     } else {
-        printf("null up0 in contactProcessedCallback\n");
+        printf("null userPointer in contactProcessedCallback\n");
     }
 
     return true;
