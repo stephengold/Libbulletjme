@@ -150,8 +150,8 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
     dynamicsWorld->getPairCache()->setOverlapFilterCallback(new jmeFilterCallback());
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
-    if (gContactProcessedCallback == NULL) {
-        gContactProcessedCallback = &jmePhysicsSpace::contactProcessedCallback;
+    if (gContactStartedCallback == NULL) {
+        gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
     }
 }
 
@@ -183,11 +183,11 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *world, btScalar timeStep
     }
 }
 
-bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0, void *body1) {
-    //    printf("contactProcessedCallback %d %d\n", body0, body1);
-    btCollisionObject* co0 = (btCollisionObject*) body0;
+void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
+    const btCollisionObject* co0 = pm->getBody0();
+    const btCollisionObject* co1 = pm->getBody1();
+    //printf("contactProcessedCallback %x %x\n", co0, co1);
     jmeUserPointer *up0 = (jmeUserPointer*) co0 -> getUserPointer();
-    btCollisionObject* co1 = (btCollisionObject*) body1;
     jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
     if (up0 != NULL && up1 != NULL) {
         jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
@@ -200,16 +200,22 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0,
                         = env->NewLocalRef(up0->javaCollisionObject);
                 jobject javaCollisionObject1
                         = env->NewLocalRef(up1->javaCollisionObject);
-                env->CallVoidMethod(javaPhysicsSpace,
-                        jmeClasses::PhysicsSpace_addCollisionEvent,
-                        javaCollisionObject0, javaCollisionObject1,
-                        (jlong) & cp);
+                for (int i = 0; i < pm->getNumContacts(); i++) {
+                    env->CallVoidMethod(javaPhysicsSpace,
+                            jmeClasses::PhysicsSpace_addCollisionEvent,
+                            javaCollisionObject0, javaCollisionObject1,
+                            (jlong) & pm->getContactPoint(i));
+                    if (env->ExceptionCheck()) {
+                        env->Throw(env->ExceptionOccurred());
+                        return;
+                    }
+                }
                 env->DeleteLocalRef(javaPhysicsSpace);
                 env->DeleteLocalRef(javaCollisionObject0);
                 env->DeleteLocalRef(javaCollisionObject1);
                 if (env->ExceptionCheck()) {
                     env->Throw(env->ExceptionOccurred());
-                    return true;
+                    return;
                 }
             } else {
                 printf("null javaPhysicsSpace in contactProcessedCallback\n");
@@ -220,8 +226,6 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint &cp, void *body0,
     } else {
         printf("null userPointer in contactProcessedCallback\n");
     }
-
-    return true;
 }
 
 btDynamicsWorld* jmePhysicsSpace::getDynamicsWorld() {

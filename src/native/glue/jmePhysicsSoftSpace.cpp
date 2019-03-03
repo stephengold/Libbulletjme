@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -128,8 +128,8 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_ve
     dynamicsWorld->getPairCache()->setOverlapFilterCallback(new jmeFilterCallback());
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
-    if (gContactProcessedCallback == NULL) {
-        gContactProcessedCallback = &jmePhysicsSpace::contactProcessedCallback;
+    if (gContactStartedCallback == NULL) {
+        gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
     }
 }
 

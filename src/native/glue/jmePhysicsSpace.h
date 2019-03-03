@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,5 +63,5 @@ public:
         JNIEnv* getEnv();
         static void preTickCallback(btDynamicsWorld*, btScalar);
         static void postTickCallback(btDynamicsWorld*, btScalar);
-        static bool contactProcessedCallback(btManifoldPoint &, void *, void *);
+        static void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm);
 };
