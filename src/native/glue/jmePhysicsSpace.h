@@ -63,5 +63,5 @@ public:
         JNIEnv* getEnv();
         static void preTickCallback(btDynamicsWorld*, btScalar);
         static void postTickCallback(btDynamicsWorld*, btScalar);
-        static void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm);
+        static void contactStartedCallback(btPersistentManifold * const &pm);
 };
