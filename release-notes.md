@@ -1,12 +1,16 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.34 released on 3 March 2019
+
+ + Remove extra qualification from `jmePhysicsSpace.h`.
+
 ## Version 1.0.33 released on 3 March 2019
 
  + Try riccardobl's fix for JME issue #1029.
 
 ## Version 1.0.32 released on 2 March 2019
 
- + Use a copy of btSphereSphereCollisionAlgorithm.cpp from Bullet v2.82
+ + Use a copy of `btSphereSphereCollisionAlgorithm.cpp` from Bullet v2.82
    in an attempt to work around JME issue #1029.
 
 ## Version 1.0.31 released on 2 March 2019
