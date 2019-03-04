@@ -28,7 +28,7 @@ This project also made use of the following software:
   + the [Gradle][] build tool
   + the Java compiler, standard doclet, and runtime environment
   + the jME3 Software Development Kit
-  + the [Markdown][] document conversion tool
+  + the [Markdown][] document-conversion tool
   + Microsoft Windows
   + the [NetBeans][] integrated development environment
 
