@@ -394,7 +394,7 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaLocal
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
@@ -402,7 +402,26 @@ extern "C" {
             return;
         }
 
-        jmeBulletUtil::convert(env, &body->getInvInertiaDiagLocal(), value);
+        btVector3 invInertia = body->getInvInertiaDiagLocal();
+        jmeBulletUtil::convert(env, &invInertia, storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getInverseInertiaWorld
+     * Signature: (JLcom/jme3/math/Matrix3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaWorld
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeMatrix) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btMatrix3x3 invInertia = body->getInvInertiaTensorWorld();
+        jmeBulletUtil::convert(env, &invInertia, storeMatrix);
     }
 
     /*
