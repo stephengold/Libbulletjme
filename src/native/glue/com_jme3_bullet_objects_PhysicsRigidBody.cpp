@@ -43,6 +43,43 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    activate
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_activate
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->activate(true);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    applyCentralForce
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyCentralForce
+    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec1;
+        jmeBulletUtil::convert(env, force, &vec1);
+
+        body->applyCentralForce(vec1);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    applyCentralImpulse
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -59,6 +96,109 @@ extern "C" {
         jmeBulletUtil::convert(env, impulse, &vec);
 
         body->applyCentralImpulse(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    applyForce
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyForce
+    (JNIEnv *env, jobject object, jlong bodyId, jobject force, jobject location) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec1;
+        jmeBulletUtil::convert(env, force, &vec1);
+
+        btVector3 vec2;
+        jmeBulletUtil::convert(env, location, &vec2);
+
+        body->applyForce(vec1, vec2);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    applyImpulse
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyImpulse
+    (JNIEnv *env, jobject object, jlong bodyId, jobject force, jobject location) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec1;
+        jmeBulletUtil::convert(env, force, &vec1);
+
+        btVector3 vec2;
+        jmeBulletUtil::convert(env, location, &vec2);
+
+        body->applyImpulse(vec1, vec2);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    applyTorque
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorque
+    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec1;
+        jmeBulletUtil::convert(env, force, &vec1);
+
+        body->applyTorque(vec1);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    applyTorqueImpulse
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorqueImpulse
+    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec1;
+        jmeBulletUtil::convert(env, force, &vec1);
+
+        body->applyTorqueImpulse(vec1);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    clearForces
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_clearForces
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->clearForces();
     }
 
     /*
@@ -97,6 +237,332 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getAngularDamping
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularDamping
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getAngularDamping();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getAngularFactor
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularFactor
+    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getAngularFactor(), factor);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getAngularSleepingThreshold
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularSleepingThreshold
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getAngularSleepingThreshold();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getAngularVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getAngularVelocity(), value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getCcdMotionThreshold
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdMotionThreshold
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getCcdMotionThreshold();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getCcdSquareMotionThreshold
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdSquareMotionThreshold
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getCcdSquareMotionThreshold();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getCcdSweptSphereRadius
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdSweptSphereRadius
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getCcdSweptSphereRadius();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getFriction
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getFriction
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getFriction();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getGravity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getGravity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getGravity(), value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getInverseInertiaLocal
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaLocal
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getInvInertiaDiagLocal(), value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getLinearDamping
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearDamping
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getLinearDamping();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getLinearFactor
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearFactor
+    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getLinearFactor(), factor);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getLinearSleepingThreshold
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearSleepingThreshold
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getLinearSleepingThreshold();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getLinearVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getLinearVelocity(), value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getPhysicsLocation
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsLocation
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getWorldTransform().getOrigin(),
+                value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getPhysicsRotation
+     * Signature: (JLcom/jme3/math/Quaternion;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotation
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convertQuat(env, &body->getWorldTransform().getBasis(),
+                value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getPhysicsRotationMatrix
+     * Signature: (JLcom/jme3/math/Matrix3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotationMatrix
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        jmeBulletUtil::convert(env, &body->getWorldTransform().getBasis(),
+                value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getRestitution
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestitution
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return 0;
+        }
+
+        return body->getRestitution();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    isActive
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return false;
+        }
+
+        return body->isActive();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    isInWorld
      * Signature: (J)Z
      */
@@ -109,6 +575,287 @@ extern "C" {
             return false;
         }
         return body->isInWorld();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setAngularDamping
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setDamping(body->getLinearDamping(), value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setAngularFactor
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularFactor
+    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec;
+        jmeBulletUtil::convert(env, factor, &vec);
+
+        body->setAngularFactor(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setAngularSleepingThreshold
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularSleepingThreshold
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setSleepingThresholds(body->getLinearSleepingThreshold(), value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setAngularVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec;
+        jmeBulletUtil::convert(env, value, &vec);
+
+        body->setAngularVelocity(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setCcdMotionThreshold
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCcdMotionThreshold
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setCcdMotionThreshold(value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setCcdSweptSphereRadius
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCcdSweptSphereRadius
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setCcdSweptSphereRadius(value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setCollisionShape
+     * Signature: (JJ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCollisionShape
+    (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        body->setCollisionShape(shape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setDamping
+     * Signature: (JFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setDamping(linear, angular);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setFriction
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setFriction
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setFriction(value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setGravity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec;
+        jmeBulletUtil::convert(env, value, &vec);
+
+        body->setGravity(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setInverseInertiaLocal
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setInverseInertiaLocal
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec;
+        jmeBulletUtil::convert(env, value, &vec);
+
+        body->setInvInertiaDiagLocal(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setKinematic
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinematic
+    (JNIEnv *env, jobject object, jlong bodyId, jboolean value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        if (value) {
+            body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+            body->setActivationState(DISABLE_DEACTIVATION);
+        } else {
+            body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_KINEMATIC_OBJECT);
+            body->activate(true);
+            body->forceActivationState(ACTIVE_TAG);
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setLinearFactor
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearFactor
+    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec;
+        jmeBulletUtil::convert(env, factor, &vec);
+
+        body->setLinearFactor(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setLinearSleepingThreshold
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearSleepingThreshold
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        body->setSleepingThresholds(value, body->getAngularSleepingThreshold());
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setLinearVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec;
+        jmeBulletUtil::convert(env, value, &vec);
+
+        body->setLinearVelocity(vec);
     }
 
     /*
@@ -188,124 +935,10 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setInverseInertiaLocal
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setInverseInertiaLocal
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
-
-        body->setInvInertiaDiagLocal(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getInverseInertiaLocal
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaLocal
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getInvInertiaDiagLocal(), value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getPhysicsLocation
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsLocation
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getWorldTransform().getOrigin(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getPhysicsRotation
-     * Signature: (JLcom/jme3/math/Quaternion;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotation
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convertQuat(env, &body->getWorldTransform().getBasis(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getPhysicsRotationMatrix
-     * Signature: (JLcom/jme3/math/Matrix3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotationMatrix
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getWorldTransform().getBasis(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setKinematic
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinematic
-    (JNIEnv *env, jobject object, jlong bodyId, jboolean value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-        if (value) {
-            body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
-            body->setActivationState(DISABLE_DEACTIVATION);
-        } else {
-            body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_KINEMATIC_OBJECT);
-            body->activate(true);
-            body->forceActivationState(ACTIVE_TAG);
-        }
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setCcdSweptSphereRadius
+     * Method:    setRestitution
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCcdSweptSphereRadius
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setRestitution
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
@@ -314,16 +947,16 @@ extern "C" {
             return;
         }
 
-        body->setCcdSweptSphereRadius(value);
+        body->setRestitution(value);
     }
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setCcdMotionThreshold
-     * Signature: (JF)V
+     * Method:    setSleepingThresholds
+     * Signature: (JFF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleepingThresholds
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         if (body == NULL) {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
@@ -331,58 +964,7 @@ extern "C" {
             return;
         }
 
-        body->setCcdMotionThreshold(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getCcdSweptSphereRadius
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getCcdSweptSphereRadius();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getCcdMotionThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getCcdMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getCcdSquareMotionThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdSquareMotionThreshold
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getCcdSquareMotionThreshold();
+        body->setSleepingThresholds(linear, angular);
     }
 
     /*
@@ -432,587 +1014,6 @@ extern "C" {
         body->setMassProps(mass, localInertia);
 
         return reinterpret_cast<jlong> (body);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getGravity
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getGravity
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getGravity(), value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setGravity
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
-
-        body->setGravity(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getFriction
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getFriction
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getFriction();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setFriction
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setFriction
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setFriction(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setDamping
-     * Signature: (JFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setDamping
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setDamping(linear, angular);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setAngularDamping
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularDamping
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setDamping(body->getLinearDamping(), value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getLinearDamping
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearDamping
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getLinearDamping();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getAngularDamping
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularDamping
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getAngularDamping();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getRestitution
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestitution
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getRestitution();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setRestitution
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setRestitution
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setRestitution(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getAngularVelocity
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularVelocity
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getAngularVelocity(), value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setAngularVelocity
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularVelocity
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
-
-        body->setAngularVelocity(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getLinearVelocity
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVelocity
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getLinearVelocity(), value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setLinearVelocity
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVelocity
-    (JNIEnv *env, jobject object, jlong bodyId, jobject value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
-
-        body->setLinearVelocity(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    applyForce
-     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyForce
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force, jobject location) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec1;
-        jmeBulletUtil::convert(env, force, &vec1);
-
-        btVector3 vec2;
-        jmeBulletUtil::convert(env, location, &vec2);
-
-        body->applyForce(vec1, vec2);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    applyCentralForce
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyCentralForce
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec1;
-        jmeBulletUtil::convert(env, force, &vec1);
-
-        body->applyCentralForce(vec1);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    applyTorque
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorque
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec1;
-        jmeBulletUtil::convert(env, force, &vec1);
-
-        body->applyTorque(vec1);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    applyImpulse
-     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyImpulse
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force, jobject location) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec1;
-        jmeBulletUtil::convert(env, force, &vec1);
-
-        btVector3 vec2;
-        jmeBulletUtil::convert(env, location, &vec2);
-
-        body->applyImpulse(vec1, vec2);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    applyTorqueImpulse
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorqueImpulse
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec1;
-        jmeBulletUtil::convert(env, force, &vec1);
-
-        body->applyTorqueImpulse(vec1);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    clearForces
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_clearForces
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->clearForces();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setCollisionShape
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCollisionShape
-    (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        body->setCollisionShape(shape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    activate
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_activate
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->activate(true);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    isActive
-     * Signature: (J)Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return false;
-        }
-
-        return body->isActive();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setSleepingThresholds
-     * Signature: (JFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleepingThresholds
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setSleepingThresholds(linear, angular);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setLinearSleepingThreshold
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearSleepingThreshold
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setSleepingThresholds(value, body->getAngularSleepingThreshold());
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setAngularSleepingThreshold
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularSleepingThreshold
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        body->setSleepingThresholds(body->getLinearSleepingThreshold(), value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getLinearSleepingThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearSleepingThreshold
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getLinearSleepingThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getAngularSleepingThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularSleepingThreshold
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
-
-        return body->getAngularSleepingThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getAngularFactor
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularFactor
-    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getAngularFactor(), factor);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setAngularFactor
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularFactor
-    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec;
-        jmeBulletUtil::convert(env, factor, &vec);
-
-        body->setAngularFactor(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getLinearFactor
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearFactor
-    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        jmeBulletUtil::convert(env, &body->getLinearFactor(), factor);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setLinearFactor
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearFactor
-    (JNIEnv *env, jobject object, jlong bodyId, jobject factor) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return;
-        }
-
-        btVector3 vec;
-        jmeBulletUtil::convert(env, factor, &vec);
-
-        body->setLinearFactor(vec);
     }
 
 #ifdef __cplusplus
