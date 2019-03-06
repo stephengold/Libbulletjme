@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.35 released on 5 March 2019
+
+ + Added an `applyCentralImpulse()` method to the `PhysicsRigidBody` class.
+
 ## Version 1.0.34 released on 3 March 2019
 
  + Remove extra qualification from `jmePhysicsSpace.h`.
