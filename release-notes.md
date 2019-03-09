@@ -1,21 +1,27 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.36 released on 9 March 2019
+
+ + Added `countHullVertices()` and `getHullVertices()` methods to
+   the `HullCollisionShape` class.
+ + Added a `getInverseInertiaWorld()` method to the `PhysicsRigidBody` class.
+
 ## Version 1.0.35 released on 5 March 2019
 
- + Added an `applyCentralImpulse()` method to the `PhysicsRigidBody` class.
+Added an `applyCentralImpulse()` method to the `PhysicsRigidBody` class.
 
 ## Version 1.0.34 released on 3 March 2019
 
- + Remove extra qualification from `jmePhysicsSpace.h`.
+Remove extra qualification from `jmePhysicsSpace.h`.
 
 ## Version 1.0.33 released on 3 March 2019
 
- + Try riccardobl's fix for JME issue #1029.
+Try riccardobl's fix for JME issue #1029.
 
 ## Version 1.0.32 released on 2 March 2019
 
- + Use a copy of `btSphereSphereCollisionAlgorithm.cpp` from Bullet v2.82
-   in an attempt to work around JME issue #1029.
+Use a copy of `btSphereSphereCollisionAlgorithm.cpp` from Bullet v2.82
+in an attempt to work around JME issue #1029.
 
 ## Version 1.0.31 released on 2 March 2019
 
