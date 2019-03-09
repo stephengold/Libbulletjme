@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.37 released on 9 March 2019
+
+Optimize the convex hull when creating a `HullCollisionShape`.
+
 ## Version 1.0.36 released on 9 March 2019
 
  + Added `countHullVertices()` and `getHullVertices()` methods to
