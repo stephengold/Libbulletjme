@@ -79,9 +79,9 @@ extern "C" {
         }
 
         int numBytes = env->GetDirectBufferCapacity(buffer);
-        if (numBytes < 12 * n) {
+        if (numBytes < 3 * sizeof (float) * n) {
             jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "buffer too small");
+            env->ThrowNew(newExc, "The buffer provided is too small.");
             return 0L;
         }
 
@@ -93,6 +93,8 @@ extern "C" {
             btVector3 vect = btVector3(data[j], data[j + 1], data[j + 2]);
             shape->addPoint(vect);
         }
+
+        shape->optimizeConvexHull();
 
         return reinterpret_cast<jlong> (shape);
     }
@@ -110,13 +112,15 @@ extern "C" {
 
         float* data = (float*) env->GetDirectBufferAddress(array);
         //TODO: capacity will not always be length!
-        int length = env->GetDirectBufferCapacity(array) / 4;
+        int length = env->GetDirectBufferCapacity(array) / sizeof (float);
         btConvexHullShape* shape = new btConvexHullShape();
         for (int i = 0; i < length; i += 3) {
             btVector3 vect = btVector3(data[i], data[i + 1], data[i + 2]);
 
             shape->addPoint(vect);
         }
+
+        shape->optimizeConvexHull();
 
         return reinterpret_cast<jlong> (shape);
     }
@@ -137,7 +141,7 @@ extern "C" {
         }
         jlong bytesCapacity = env->GetDirectBufferCapacity(buffer);
         int numVerts = hull->getNumPoints();
-        long bytesNeeded = 12 * (long) numVerts;
+        long bytesNeeded = 3 * sizeof (float) * (long) numVerts;
         if (bytesNeeded > bytesCapacity) {
             jclass newExc
                     = env->FindClass("java/lang/IllegalArgumentException");
