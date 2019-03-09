@@ -43,6 +43,25 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+     * Method:    countHullVertices
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_countHullVertices
+    (JNIEnv * env, jobject object, jlong shapeId) {
+        btConvexHullShape* hull
+                = reinterpret_cast<btConvexHullShape*> (shapeId);
+        if (hull == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btConvexHullShape does not exist.");
+            return 0;
+        }
+
+        int count = hull->getNumPoints();
+        return count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
      * Method:    createShapeB
      * Signature: (Ljava/nio/ByteBuffer;I)J
      *
@@ -100,6 +119,41 @@ extern "C" {
         }
 
         return reinterpret_cast<jlong> (shape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+     * Method:    getHullVertices
+     * Signature: (JLjava/nio/ByteBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVertices
+    (JNIEnv *env, jobject object, jlong shapeId, jobject buffer) {
+        btConvexHullShape* hull
+                = reinterpret_cast<btConvexHullShape*> (shapeId);
+        if (hull == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btConvexHullShape does not exist.");
+            return;
+        }
+        jlong bytesCapacity = env->GetDirectBufferCapacity(buffer);
+        int numVerts = hull->getNumPoints();
+        long bytesNeeded = 12 * (long) numVerts;
+        if (bytesNeeded > bytesCapacity) {
+            jclass newExc
+                    = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "The buffer provided is too small.");
+            return;
+        }
+
+        const btVector3* vertexPtr = hull->getUnscaledPoints();
+        float* writePtr = (float*) env->GetDirectBufferAddress(buffer);
+        for (int i = 0; i < numVerts; ++i) {
+            writePtr[0] = vertexPtr->m_floats[0];
+            writePtr[1] = vertexPtr->m_floats[1];
+            writePtr[2] = vertexPtr->m_floats[2];
+            ++vertexPtr;
+            writePtr += 3;
+        }
     }
 
 #ifdef __cplusplus
