@@ -111,6 +111,24 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    setLocalScaling
+     * Signature: (JFFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling__JFFF
+    (JNIEnv * env, jobject object, jlong shapeId, jfloat xScale, jfloat yScale, jfloat zScale) {
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return;
+        }
+
+        btVector3 scl = btVector3(xScale, yScale, zScale);
+        shape->setLocalScaling(scl);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    setLocalScaling
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling
