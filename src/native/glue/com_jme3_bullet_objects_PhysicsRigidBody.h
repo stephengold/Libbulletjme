@@ -294,6 +294,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setFriction
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    setGravity
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity__JFFF
+  (JNIEnv *, jobject, jlong, jfloat, jfloat, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity

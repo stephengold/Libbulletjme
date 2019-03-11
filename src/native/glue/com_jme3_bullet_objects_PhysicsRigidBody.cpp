@@ -759,6 +759,24 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    setGravity
+     * Signature: (JFFF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity__JFFF
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat xGravity, jfloat yGravity, jfloat zGravity) {
+        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
+        if (body == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btRigidBody does not exist.");
+            return;
+        }
+
+        btVector3 vec = btVector3(xGravity, yGravity, zGravity);
+        body->setGravity(vec);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    setGravity
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity
