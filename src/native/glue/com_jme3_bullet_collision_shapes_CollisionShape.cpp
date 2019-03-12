@@ -122,7 +122,10 @@ extern "C" {
             return;
         }
 
-        btVector3 scl = btVector3(xScale, yScale, zScale);
+        btVector3 scl;
+        scl.setX(xScale);
+        scl.setY(yScale);
+        scl.setZ(zScale);
         shape->setLocalScaling(scl);
     }
 

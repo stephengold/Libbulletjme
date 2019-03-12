@@ -770,7 +770,10 @@ extern "C" {
             return;
         }
 
-        btVector3 vec = btVector3(xGravity, yGravity, zGravity);
+        btVector3 vec;
+        vec.setX(xGravity);
+        vec.setY(yGravity);
+        vec.setZ(zGravity);
         body->setGravity(vec);
     }
 
