@@ -1,9 +1,13 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.39 released on 11 March 2019
+
+Try a different method of constructing `btVector3`.
+
 ## Version 1.0.38 released on 11 March 2019
 
- + CollisionShape: add setLocalScaling() using scalars
- + PhysicsRigidBody: add setGravity() using scalars
+ + Added a `CollisionShape.setLocalScaling()` using scalars.
+ + Added a `PhysicsRigidBody.setGravity()` using scalars.
  + Updated the Bullet sources to match SHA1 id=d56b1361 of the bullet3 project.
 
 ## Version 1.0.37 released on 9 March 2019
