@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.38 released on 11 March 2019
+
+ + CollisionShape: add setLocalScaling() using scalars
+ + PhysicsRigidBody: add setGravity() using scalars
+ + Updated the Bullet sources to match SHA1 id=d56b1361 of the bullet3 project.
+
 ## Version 1.0.37 released on 9 March 2019
 
 Optimize the convex hull when creating a `HullCollisionShape`.
@@ -32,7 +38,7 @@ in an attempt to work around JME issue #1029.
  + Added a `getOrientation()` method to the `PhysicsCollisionObject` class.
  + In `jmePhysicsSpace::contactProcessedCallback()`, check both collision
    objects for NULL user pointers.
- + Upgraded the Bullet sources to match SHA1 id=1bac759a of the bullet3 project.
+ + Updated the Bullet sources to match SHA1 id=1bac759a of the bullet3 project.
 
 ## Version 1.0.30 released on 30 January 2019
 
