@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.40 released on 23 March 2019
+
+Added `getAabb()` and `getBoundingSphere()` methods to 
+the `CollisionShape` class.
+
 ## Version 1.0.39 released on 11 March 2019
 
 Try a different method of constructing `btVector3`.
