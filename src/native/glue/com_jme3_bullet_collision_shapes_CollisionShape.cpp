@@ -59,6 +59,56 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    getAabb
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getAabb
+    (JNIEnv * env, jobject object, jlong shapeId, jobject location, jobject orientation, jobject storeMinima, jobject storeMaxima) {
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return;
+        }
+
+        btMatrix3x3 mtx = btMatrix3x3();
+        btTransform trans = btTransform(mtx);
+        jmeBulletUtil::convert(env, location, &trans.getOrigin());
+        jmeBulletUtil::convert(env, orientation, &trans.getBasis());
+
+        btVector3 aabbMin;
+        btVector3 aabbMax;
+        shape->getAabb(trans, aabbMin, aabbMax);
+
+        jmeBulletUtil::convert(env, &aabbMin, storeMinima);
+        jmeBulletUtil::convert(env, &aabbMax, storeMaxima);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    getBoundingSphere
+     * Signature: (JLcom/jme3/math/Vector3f;)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getBoundingSphere
+    (JNIEnv * env, jobject object, jlong shapeId, jobject storeCenter) {
+        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
+        if (shape == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
+            return 0;
+        }
+
+        btVector3 center;
+        btScalar radius;
+        shape->getBoundingSphere(center, radius);
+
+        jmeBulletUtil::convert(env, &center, storeCenter);
+
+        return radius;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    getLocalScaling
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */

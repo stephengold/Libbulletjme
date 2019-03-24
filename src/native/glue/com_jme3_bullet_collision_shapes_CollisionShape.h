@@ -17,6 +17,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_fina
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getAabb
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getAabb
+  (JNIEnv *, jobject, jlong, jobject, jobject, jobject, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getBoundingSphere
+ * Signature: (JLcom/jme3/math/Vector3f;)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getBoundingSphere
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    isConcave
  * Signature: (J)Z
  */
