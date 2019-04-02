@@ -243,6 +243,24 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    getNumConstraints
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
+    (JNIEnv * env, jobject object, jlong spaceId) {
+        jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
+        if (space == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The physics space does not exist.");
+            return 0;
+        }
+
+        int count = space->getDynamicsWorld()->getNumConstraints();
+        return count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
      * Method:    initNativePhysics
      * Signature: ()V
      */

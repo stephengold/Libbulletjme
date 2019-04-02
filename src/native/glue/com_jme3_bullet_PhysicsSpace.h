@@ -79,6 +79,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_finalizeNative
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getNumConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    rayTest_native
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
