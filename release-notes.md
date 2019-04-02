@@ -1,8 +1,14 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.41 released on 1 April 2019
+
+ + Add a `getNumConstaints()` method to the `PhysicsSpace` class.
+ + Implement `AXIS_SWEEP_3_32` broadphase algorithm; was aliased
+   to `btAxisSweep3`.
+
 ## Version 1.0.40 released on 23 March 2019
 
-Added `getAabb()` and `getBoundingSphere()` methods to 
+Added `getAabb()` and `getBoundingSphere()` methods to
 the `CollisionShape` class.
 
 ## Version 1.0.39 released on 11 March 2019
