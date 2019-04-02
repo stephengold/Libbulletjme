@@ -81,8 +81,7 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
             broadphase = new btAxisSweep3(min, max);
             break;
         case 2:
-            //TODO: 32bit!
-            broadphase = new btAxisSweep3(min, max);
+            broadphase = new bt32BitAxisSweep3(min, max);
             break;
         case 3:
             broadphase = new btDbvtBroadphase();
