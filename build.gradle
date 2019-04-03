@@ -65,8 +65,8 @@ model {
                 } else {
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
-                    //cppCompiler.args '-Ofast'
-                    cppCompiler.args '-O0', '-g3'
+                    cppCompiler.args '-Ofast'
+                    //cppCompiler.args '-O0', '-g3'
                     cppCompiler.args '-U_FORTIFY_SOURCE'
 
                     def os = targetPlatform.operatingSystem.name
