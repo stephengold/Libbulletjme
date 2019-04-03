@@ -1,6 +1,11 @@
 # release notes for the Libbulletjme Project
 
-## Version 1.0.42 released on 3 April 2019
+## Version 1.0.43 released on 2 April 2019
+
+Reordered 2 statements in `btSimpleBroadphase::destroyProxy()` while
+trying to fix JME issue #1058.
+
+## Version 1.0.42 released on 2 April 2019
 
 GCC options for debugging.
 
