@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.42 released on 3 April 2019
+
+GCC options for debugging.
+
 ## Version 1.0.41 released on 1 April 2019
 
  + Add a `getNumConstaints()` method to the `PhysicsSpace` class.
