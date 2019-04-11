@@ -158,7 +158,7 @@ extern "C" {
         btScalar x = joint->getAngle(0);
         btScalar y = joint->getAngle(1);
         btScalar z = joint->getAngle(2);
-        btVector3& angles = btVector3(x, y, z);
+        const btVector3& angles = btVector3(x, y, z);
         jmeBulletUtil::convert(env, &angles, storeVector);
     }
 
@@ -226,7 +226,7 @@ extern "C" {
         btScalar x = joint->getRelativePivotPosition(0);
         btScalar y = joint->getRelativePivotPosition(1);
         btScalar z = joint->getRelativePivotPosition(2);
-        btVector3& offset = btVector3(x, y, z);
+        const btVector3& offset = btVector3(x, y, z);
         jmeBulletUtil::convert(env, &offset, storeVector);
     }
 
