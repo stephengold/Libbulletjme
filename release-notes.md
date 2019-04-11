@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.46 released on 10 April 2019
+
+Bugfix: compile-time errors in `SixDofJoint`.
+
 ## Version 1.0.45 released on 10 April 2019
 
  + Added `getAngles()` and `getPivotOffset()` methods
