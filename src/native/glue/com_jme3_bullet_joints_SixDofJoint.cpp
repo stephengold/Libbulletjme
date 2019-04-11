@@ -32,6 +32,8 @@
 
 /*
  * Author: Normen Hansen
+ *
+ * TODO re-order methods
  */
 #include "com_jme3_bullet_joints_SixDofJoint.h"
 #include "jmeBulletUtil.h"
@@ -39,6 +41,52 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofJoint
+     * Method:    getAngles
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getAngles
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeVector) {
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
+            return;
+        }
+
+        btScalar x = joint->getAngle(0);
+        btScalar y = joint->getAngle(1);
+        btScalar z = joint->getAngle(2);
+        btVector3& angles = btVector3(x, y, z);
+        jmeBulletUtil::convert(env, &angles, storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofJoint
+     * Method:    getPivotOffset
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getPivotOffset
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeVector) {
+        btGeneric6DofConstraint* joint
+                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
+        if (joint == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc,
+                    "The btGeneric6DofConstraint does not exist.");
+            return;
+        }
+
+        btScalar x = joint->getRelativePivotPosition(0);
+        btScalar y = joint->getRelativePivotPosition(1);
+        btScalar z = joint->getRelativePivotPosition(2);
+        btVector3& offset = btVector3(x, y, z);
+        jmeBulletUtil::convert(env, &offset, storeVector);
+    }
 
     /*
      * Class:     com_jme3_bullet_joints_SixDofJoint

@@ -25,6 +25,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_createJoint1
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofJoint
+ * Method:    getAngles
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getAngles
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_SixDofJoint
  * Method:    getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
@@ -37,6 +45,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetB
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_SixDofJoint
+ * Method:    getPivotOffset
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getPivotOffset
   (JNIEnv *, jobject, jlong, jobject);
 
 /*
