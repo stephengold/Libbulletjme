@@ -1,8 +1,14 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.45 released on 10 April 2019
+
+ + Added `getAngles()` and `getPivotOffset()` methods
+   to the `SixDofJoint` class.
+ + Updated the Bullet sources to match SHA1 ID=c6a43e0a5 of the bullet3 project.
+
 ## Version 1.0.44 released on 2 April 2019
 
- + Revert GCC options for debugging.
+ + Reverted GCC options for debugging.
  + Final fix for JME issue #1058.
 
 ## Version 1.0.43 released on 2 April 2019
@@ -16,7 +22,7 @@ GCC options for debugging.
 
 ## Version 1.0.41 released on 1 April 2019
 
- + Add a `getNumConstaints()` method to the `PhysicsSpace` class.
+ + Added a `getNumConstaints()` method to the `PhysicsSpace` class.
  + Implement `AXIS_SWEEP_3_32` broadphase algorithm; was aliased
    to `btAxisSweep3`.
 
