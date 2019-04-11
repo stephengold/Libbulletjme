@@ -149,6 +149,11 @@ extern "C" {
                     "The btGeneric6DofConstraint does not exist.");
             return;
         }
+        if (storeVector == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The storeVector does not exist.");
+            return;
+        }
 
         btScalar x = joint->getAngle(0);
         btScalar y = joint->getAngle(1);
@@ -210,6 +215,11 @@ extern "C" {
             jclass newExc = env->FindClass("java/lang/NullPointerException");
             env->ThrowNew(newExc,
                     "The btGeneric6DofConstraint does not exist.");
+            return;
+        }
+        if (storeVector == NULL) {
+            jclass newExc = env->FindClass("java/lang/NullPointerException");
+            env->ThrowNew(newExc, "The storeVector does not exist.");
             return;
         }
 
