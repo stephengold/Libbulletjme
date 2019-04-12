@@ -48,11 +48,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setDamping
     (JNIEnv * env, jobject object, jlong jointId, jfloat damping) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPoint2PointConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.",)
+
         joint->m_setting.m_damping = damping;
     }
 
@@ -64,11 +61,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setImpulseClamp
     (JNIEnv * env, jobject object, jlong jointId, jfloat clamp) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPoint2PointConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.",)
+
         joint->m_setting.m_impulseClamp = clamp;
     }
 
@@ -80,11 +74,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setTau
     (JNIEnv * env, jobject object, jlong jointId, jfloat tau) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPoint2PointConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.",)
+
         joint->m_setting.m_tau = tau;
     }
 
@@ -96,11 +87,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getDamping
     (JNIEnv * env, jobject object, jlong jointId) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPoint2PointConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.", 0)
+
         return joint->m_setting.m_damping;
     }
 
@@ -112,11 +100,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getImpulseClamp
     (JNIEnv * env, jobject object, jlong jointId) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPoint2PointConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.", 0)
+
         return joint->m_setting.m_impulseClamp;
     }
 
@@ -128,11 +113,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getTau
     (JNIEnv * env, jobject object, jlong jointId) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPoint2PointConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.", 0)
+
         return joint->m_setting.m_tau;
     }
 
@@ -146,26 +128,23 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body A does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(bodyA, "Rigid body A does not exist.", 0)
 
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (bodyB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(bodyB, "Rigid body B does not exist.", 0)
 
+        NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivotInA;
-        btVector3 pivotInB;
         jmeBulletUtil::convert(env, pivotA, &pivotInA);
+
+        NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
+        btVector3 pivotInB;
         jmeBulletUtil::convert(env, pivotB, &pivotInB);
 
         btPoint2PointConstraint * joint
                 = new btPoint2PointConstraint(*bodyA, *bodyB, pivotInA, pivotInB);
+        NULL_CHECK(joint, "A btPoint2PointConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -179,17 +158,16 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (bodyA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(bodyA, "Rigid body A does not exist.", 0)
 
+        NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivotInA;
         jmeBulletUtil::convert(env, pivotA, &pivotInA);
 
         btPoint2PointConstraint * joint
                 = new btPoint2PointConstraint(*bodyA, pivotInA);
+        NULL_CHECK(joint, "A btPoint2PointConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 

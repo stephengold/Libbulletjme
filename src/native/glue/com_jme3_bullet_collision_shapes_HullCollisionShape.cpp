@@ -50,11 +50,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong shapeId) {
         btConvexHullShape* hull
                 = reinterpret_cast<btConvexHullShape*> (shapeId);
-        if (hull == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btConvexHullShape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(hull, "The btConvexHullShape does not exist.", 0);
 
         int count = hull->getNumPoints();
         return count;
@@ -86,6 +82,7 @@ extern "C" {
         }
 
         btConvexHullShape* shape = new btConvexHullShape();
+        NULL_CHECK(shape, "A btConvexHullShape was not created.", 0);
 
         float* data = (float*) env->GetDirectBufferAddress(buffer);
         for (int i = 0; i < n; ++i) {
@@ -114,9 +111,10 @@ extern "C" {
         //TODO: capacity will not always be length!
         int length = env->GetDirectBufferCapacity(array) / sizeof (float);
         btConvexHullShape* shape = new btConvexHullShape();
+        NULL_CHECK(shape, "A btConvexHullShape was not created.", 0)
+
         for (int i = 0; i < length; i += 3) {
             btVector3 vect = btVector3(data[i], data[i + 1], data[i + 2]);
-
             shape->addPoint(vect);
         }
 
@@ -134,11 +132,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId, jobject buffer) {
         btConvexHullShape* hull
                 = reinterpret_cast<btConvexHullShape*> (shapeId);
-        if (hull == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btConvexHullShape does not exist.");
-            return;
-        }
+        NULL_CHECK(hull, "The btConvexHullShape does not exist.",)
+
         jlong bytesCapacity = env->GetDirectBufferCapacity(buffer);
         int numVerts = hull->getNumPoints();
         long bytesNeeded = 3 * sizeof (float) * (long) numVerts;

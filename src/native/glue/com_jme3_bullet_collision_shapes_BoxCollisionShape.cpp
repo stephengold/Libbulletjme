@@ -49,10 +49,14 @@ extern "C" {
     (JNIEnv *env, jobject object, jobject halfExtents) {
         jmeClasses::initJavaClasses(env);
 
+        NULL_CHECK(halfExtents, "The halfExtents vector does not exist.", 0)
+
         btVector3 extents;
         jmeBulletUtil::convert(env, halfExtents, &extents);
 
         btBoxShape* shape = new btBoxShape(extents);
+        NULL_CHECK(shape, "A btBoxShape was not created.", 0)
+
         return reinterpret_cast<jlong> (shape);
     }
 

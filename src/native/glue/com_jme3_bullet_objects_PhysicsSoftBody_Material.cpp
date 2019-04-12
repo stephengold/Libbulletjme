@@ -49,11 +49,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_getLinearStiffnessFactor
     (JNIEnv *env, jobject object, jlong matId) {
         btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        if (mat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(mat, "The material does not exist.", 0)
+
         return mat->m_kLST;
     }
 
@@ -65,11 +62,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_setLinearStiffnessFactor
     (JNIEnv *env, jobject object, jlong matId, jfloat factor) {
         btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        if (mat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(mat, "The material does not exist.",)
+
         mat->m_kLST = factor;
     }
 
@@ -81,11 +75,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_getAngularStiffnessFactor
     (JNIEnv *env, jobject object, jlong matId) {
         btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        if (mat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(mat, "The material does not exist.", 0)
+
         return mat->m_kAST;
     }
 
@@ -97,11 +88,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_setAngularStiffnessFactor
     (JNIEnv *env, jobject object, jlong matId, jfloat factor) {
         btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        if (mat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(mat, "The material does not exist.",)
+
         mat->m_kAST = factor;
     }
 
@@ -113,11 +101,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_getVolumeStiffnessFactor
     (JNIEnv *env, jobject object, jlong matId) {
         btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        if (mat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(mat, "The material does not exist.", 0)
+
         return mat->m_kVST;
     }
 
@@ -129,11 +114,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_setVolumeStiffnessFactor
     (JNIEnv *env, jobject object, jlong matId, jfloat factor) {
         btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        if (mat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(mat, "The material does not exist.",)
+
         mat->m_kVST = factor;
     }
 

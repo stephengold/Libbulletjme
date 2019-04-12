@@ -49,12 +49,9 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_setPosition
     (JNIEnv *env, jobject object, jlong jointId, jobject position) {
         btSoftBody::LJoint* joint = reinterpret_cast<btSoftBody::LJoint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
 
+        NULL_CHECK(position, "The position vector does not exist.",)
         btVector3 pos = btVector3();
         jmeBulletUtil::convert(env, position, &pos);
 
@@ -70,29 +67,26 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointSoftRigid
     (JNIEnv *env, jobject object, jlong softIdA, jlong rigidIdB, jobject pivotA, jobject pivotB, jfloat erp, jfloat cfm, jfloat split, jobject position) {
         btSoftBody* softA = reinterpret_cast<btSoftBody*> (softIdA);
-        if (softA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(softA, "Soft body A does not exist.", 0)
 
         btRigidBody* rigidB = reinterpret_cast<btRigidBody*> (rigidIdB);
-        if (rigidB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(rigidB, "Rigid body B does not exist.", 0)
 
+        NULL_CHECK(position, "The position vector does not exist.", 0)
         btVector3 pos = btVector3();
         jmeBulletUtil::convert(env, position, &pos);
 
+        NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivA = btVector3();
         jmeBulletUtil::convert(env, pivotA, &pivA);
 
+        NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
         btVector3 pivB = btVector3();
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::LJoint* ljoint = new(btAlignedAlloc(sizeof (btSoftBody::LJoint), 16)) btSoftBody::LJoint();
+        NULL_CHECK(ljoint, "A linear joint was not created.", 0)
+
         ljoint->m_bodies[0] = softA->m_clusters[0];
         ljoint->m_bodies[1] = rigidB;
 
@@ -114,29 +108,25 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointSoftSoft
     (JNIEnv *env, jobject object, jlong softIdA, jlong softIdB, jobject pivotA, jobject pivotB, jfloat erp, jfloat cfm, jfloat split, jobject position) {
         btSoftBody* softA = reinterpret_cast<btSoftBody*> (softIdA);
-        if (softA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(softA, "Soft body A does not exist.", 0)
 
         btSoftBody* softB = reinterpret_cast<btSoftBody*> (softIdB);
-        if (softB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(softB, "Soft body B does not exist.", 0)
 
+        NULL_CHECK(position, "The position vector does not exist.", 0)
         btVector3 pos = btVector3();
         jmeBulletUtil::convert(env, position, &pos);
 
+        NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivA = btVector3();
         jmeBulletUtil::convert(env, pivotA, &pivA);
 
+        NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
         btVector3 pivB = btVector3();
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::LJoint* ljoint = new(btAlignedAlloc(sizeof (btSoftBody::LJoint), 16)) btSoftBody::LJoint();
+        NULL_CHECK(ljoint, "A linear joint was not created.", 0)
         ljoint->m_bodies[0] = softA->m_clusters[0];
         ljoint->m_bodies[1] = softB->m_clusters[0];
 

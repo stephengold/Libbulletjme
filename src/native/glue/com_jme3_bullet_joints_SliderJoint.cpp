@@ -48,11 +48,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getLowerLinLimit
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getLowerLinLimit();
     }
 
@@ -64,11 +61,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setLowerLinLimit
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setLowerLinLimit(value);
     }
 
@@ -80,11 +74,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getUpperLinLimit
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getUpperLinLimit();
     }
 
@@ -96,11 +87,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setUpperLinLimit
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setUpperLinLimit(value);
     }
 
@@ -112,11 +100,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getLowerAngLimit
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getLowerAngLimit();
     }
 
@@ -128,11 +113,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setLowerAngLimit
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setLowerAngLimit(value);
     }
 
@@ -144,11 +126,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getUpperAngLimit
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getUpperAngLimit();
     }
 
@@ -160,11 +139,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setUpperAngLimit
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setUpperAngLimit(value);
     }
 
@@ -176,11 +152,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getSoftnessDirLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getSoftnessDirLin();
     }
 
@@ -192,11 +165,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setSoftnessDirLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setSoftnessDirLin(value);
     }
 
@@ -208,11 +178,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getRestitutionDirLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getRestitutionDirLin();
     }
 
@@ -224,11 +191,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setRestitutionDirLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setRestitutionDirLin(value);
     }
 
@@ -240,11 +204,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingDirLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getDampingDirLin();
     }
 
@@ -256,11 +217,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setDampingDirLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setDampingDirLin(value);
     }
 
@@ -272,11 +230,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getSoftnessDirAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getSoftnessDirAng();
     }
 
@@ -288,11 +243,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setSoftnessDirAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setSoftnessDirAng(value);
     }
 
@@ -304,11 +256,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getRestitutionDirAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getRestitutionDirAng();
     }
 
@@ -320,11 +269,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setRestitutionDirAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setRestitutionDirAng(value);
     }
 
@@ -336,11 +282,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingDirAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getDampingDirAng();
     }
 
@@ -352,11 +295,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setDampingDirAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setDampingDirAng(value);
     }
 
@@ -368,11 +308,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getSoftnessLimLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getSoftnessLimLin();
     }
 
@@ -384,11 +321,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setSoftnessLimLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setSoftnessLimLin(value);
     }
 
@@ -400,11 +334,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getRestitutionLimLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getRestitutionLimLin();
     }
 
@@ -416,11 +347,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setRestitutionLimLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setRestitutionLimLin(value);
     }
 
@@ -432,11 +360,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingLimLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getDampingLimLin();
     }
 
@@ -448,11 +373,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setDampingLimLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setDampingLimLin(value);
     }
 
@@ -464,11 +386,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getSoftnessLimAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getSoftnessLimAng();
     }
 
@@ -480,11 +399,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setSoftnessLimAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setSoftnessLimAng(value);
     }
 
@@ -496,11 +412,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getRestitutionLimAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getRestitutionLimAng();
     }
 
@@ -512,11 +425,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setRestitutionLimAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setRestitutionLimAng(value);
     }
 
@@ -528,11 +438,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingLimAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getDampingLimAng();
     }
 
@@ -544,11 +451,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setDampingLimAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setDampingLimAng(value);
     }
 
@@ -560,11 +464,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getSoftnessOrthoLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getSoftnessOrthoLin();
     }
 
@@ -576,11 +477,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setSoftnessOrthoLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setSoftnessOrthoLin(value);
     }
 
@@ -592,11 +490,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getRestitutionOrthoLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getRestitutionOrthoLin();
     }
 
@@ -608,11 +503,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setRestitutionOrthoLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setRestitutionOrthoLin(value);
     }
 
@@ -624,11 +516,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingOrthoLin
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getDampingOrthoLin();
     }
 
@@ -640,11 +529,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setDampingOrthoLin
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setDampingOrthoLin(value);
     }
 
@@ -656,11 +542,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getSoftnessOrthoAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getSoftnessOrthoAng();
     }
 
@@ -672,11 +555,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setSoftnessOrthoAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setSoftnessOrthoAng(value);
     }
 
@@ -688,11 +568,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getRestitutionOrthoAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getRestitutionOrthoAng();
     }
 
@@ -704,11 +581,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setRestitutionOrthoAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setRestitutionOrthoAng(value);
     }
 
@@ -720,11 +594,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingOrthoAng
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getDampingOrthoAng();
     }
 
@@ -736,11 +607,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setDampingOrthoAng
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setDampingOrthoAng(value);
     }
 
@@ -752,11 +620,8 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_SliderJoint_isPoweredLinMotor
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return false;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", false)
+
         return joint->getPoweredLinMotor();
     }
 
@@ -768,11 +633,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setPoweredLinMotor
     (JNIEnv * env, jobject object, jlong jointId, jboolean value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setPoweredLinMotor(value);
     }
 
@@ -784,11 +646,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getTargetLinMotorVelocity
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getTargetLinMotorVelocity();
     }
 
@@ -800,11 +659,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setTargetLinMotorVelocity
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setTargetLinMotorVelocity(value);
     }
 
@@ -816,11 +672,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getMaxLinMotorForce
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getMaxLinMotorForce();
     }
 
@@ -832,11 +685,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setMaxLinMotorForce
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setMaxLinMotorForce(value);
     }
 
@@ -848,11 +698,8 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_SliderJoint_isPoweredAngMotor
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return false;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", false)
+
         return joint->getPoweredAngMotor();
     }
 
@@ -864,11 +711,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setPoweredAngMotor
     (JNIEnv * env, jobject object, jlong jointId, jboolean value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setPoweredAngMotor(value);
     }
 
@@ -880,11 +724,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getTargetAngMotorVelocity
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getTargetAngMotorVelocity();
     }
 
@@ -896,11 +737,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setTargetAngMotorVelocity
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setTargetAngMotorVelocity(value);
     }
 
@@ -912,11 +750,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getMaxAngMotorForce
     (JNIEnv * env, jobject object, jlong jointId) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.", 0)
+
         return joint->getMaxAngMotorForce();
     }
 
@@ -928,11 +763,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_setMaxAngMotorForce
     (JNIEnv * env, jobject object, jlong jointId, jfloat value) {
         btSliderConstraint* joint = reinterpret_cast<btSliderConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btSliderConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+
         joint->setMaxAngMotorForce(value);
     }
 
@@ -948,49 +780,27 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body A does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
-        if (rotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform frameInA;
         jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
         btSliderConstraint* joint = new btSliderConstraint(*rbA, *rbB, frameInA,
                 frameInB, useLinearReferenceFrameA);
+        NULL_CHECK(joint, "A btSliderConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -1005,28 +815,18 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
         btSliderConstraint* joint = new btSliderConstraint(*rbB, frameInB,
                 useLinearReferenceFrameA);
+        NULL_CHECK(joint, "A btSliderConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 

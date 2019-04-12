@@ -49,6 +49,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jint axis, jobject halfExtents) {
         jmeClasses::initJavaClasses(env);
 
+        NULL_CHECK(halfExtents, "The halfExtents vector does not exist.", 0)
+
         btVector3 extents;
         jmeBulletUtil::convert(env, halfExtents, &extents);
 
@@ -64,6 +66,7 @@ extern "C" {
                 shape = new btCylinderShapeZ(extents);
                 break;
         }
+        NULL_CHECK(shape, "A cylinder shape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }

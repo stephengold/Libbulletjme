@@ -49,11 +49,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getErrorReductionParameter
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The joint does not exist.", 0)
 
         return joint->m_erp;
     }
@@ -66,11 +62,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setErrorReductionParameter
     (JNIEnv *env, jobject object, jlong jointId, jfloat erp) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
 
         joint->m_erp = erp;
     }
@@ -83,11 +75,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getConstraintForceMixing
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The joint does not exist.", 0)
 
         return joint->m_cfm;
     }
@@ -100,11 +88,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setConstraintForceMixing
     (JNIEnv *env, jobject object, jlong jointId, jfloat cfm) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
 
         joint->m_cfm = cfm;
     }
@@ -117,11 +101,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getSplit
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The joint does not exist.", 0)
 
         return joint->m_split;
     }
@@ -134,11 +114,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setSplit
     (JNIEnv *env, jobject object, jlong jointId, jfloat split) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
 
         joint->m_split = split;
     }
@@ -151,18 +127,10 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_addConstraint
     (JNIEnv *env, jobject object, jlong jointId, jlong bodyId) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
 
         btSoftBody* soft = reinterpret_cast<btSoftBody*> (bodyId);
-        if (soft == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(soft, "The btSoftBody does not exist.",)
 
         soft->m_joints.push_back(joint);
     }
@@ -175,18 +143,10 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_removeConstraint
     (JNIEnv *env, jobject object, jlong jointId, jlong bodyId) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
 
         btSoftBody* soft = reinterpret_cast<btSoftBody*> (bodyId);
-        if (soft == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(soft, "The btSoftBody does not exist.",)
 
         soft->m_joints.remove(joint);
     }
@@ -199,11 +159,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNative
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The joint does not exist.",)
+
         btAlignedFree(joint);
     }
 

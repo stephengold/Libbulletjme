@@ -48,11 +48,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_countSpheres
     (JNIEnv *env, jobject object, jlong shapeId) {
         btMultiSphereShape* shape = reinterpret_cast<btMultiSphereShape*> (shapeId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btMultiSphereShape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(shape, "The btMultiSphereShape does not exist.", 0)
 
         jint numSpheres = (jint) shape->getSphereCount();
         return numSpheres;
@@ -103,6 +99,7 @@ extern "C" {
 
         btMultiSphereShape* shape
                 = new btMultiSphereShape(&centers[0], &radii[0], n);
+        NULL_CHECK(shape, "A btMultiSphereShape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }
@@ -126,6 +123,8 @@ extern "C" {
         btScalar* radi = env->GetFloatArrayElements(radii, 0);
 
         btMultiSphereShape* shape = new btMultiSphereShape(positions, radi, n);
+        NULL_CHECK(shape, "A btMultiSphereShape was not created.", 0)
+
         return reinterpret_cast<jlong> (shape);
     }
 
@@ -137,11 +136,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_getSpherePosition
     (JNIEnv *env, jobject object, jlong shapeId, jint sphereIndex, jobject storeVector) {
         btMultiSphereShape* shape = reinterpret_cast<btMultiSphereShape*> (shapeId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btMultiSphereShape does not exist.");
-            return;
-        }
+        NULL_CHECK(shape, "The btMultiSphereShape does not exist.",);
 
         int index = (int) sphereIndex;
         btVector3 vec = shape->getSpherePosition(index);
@@ -156,11 +151,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_getSphereRadius
     (JNIEnv *env, jobject object, jlong shapeId, jint sphereIndex) {
         btMultiSphereShape* shape = reinterpret_cast<btMultiSphereShape*> (shapeId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btMultiSphereShape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(shape, "The btMultiSphereShape does not exist.", 0);
 
         int index = (int) sphereIndex;
         jfloat sphereRadius = (jfloat) shape->getSphereRadius(index);

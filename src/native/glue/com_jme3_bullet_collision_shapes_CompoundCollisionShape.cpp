@@ -50,6 +50,8 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btCompoundShape* shape = new btCompoundShape();
+        NULL_CHECK(shape, "A btCompoundShape was not created.", 0)
+
         return reinterpret_cast<jlong> (shape);
     }
 
@@ -63,18 +65,10 @@ extern "C" {
             jobject childLocation, jobject childRotation) {
         btCompoundShape* shape
                 = reinterpret_cast<btCompoundShape*> (compoundId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCompoundShape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(shape, "The btCompoundShape does not exist.", 0)
 
         btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The child shape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(child, "The child shape does not exist.", 0)
 
         btMatrix3x3 mtx = btMatrix3x3();
         btTransform trans = btTransform(mtx);
@@ -82,7 +76,7 @@ extern "C" {
         jmeBulletUtil::convert(env, childRotation, &trans.getBasis());
         shape->addChildShape(trans, child);
 
-        return 0;
+        return 0; // why?
     }
 
     /*
@@ -94,21 +88,14 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong compoundId, jlong childId) {
         btCompoundShape* shape
                 = reinterpret_cast<btCompoundShape*> (compoundId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCompoundShape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(shape, "The btCompoundShape does not exist.", 0)
 
         btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
-        if (shape == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The child shape does not exist.");
-            return 0;
-        }
+        NULL_CHECK(child, "The child shape does not exist.", 0)
+
         shape->removeChildShape(child);
 
-        return 0;
+        return 0; // why?
     }
 
 #ifdef __cplusplus

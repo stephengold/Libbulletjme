@@ -61,6 +61,8 @@ extern "C" {
                 shape = new btCapsuleShapeZ(radius, height);
                 break;
         }
+        NULL_CHECK(shape, "A capsule shape was not created.", 0)
+
         return reinterpret_cast<jlong> (shape);
     }
 

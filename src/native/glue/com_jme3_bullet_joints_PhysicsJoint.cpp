@@ -48,11 +48,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_getAppliedImpulse
     (JNIEnv * env, jobject object, jlong jointId) {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.", 0)
+
         return joint->getAppliedImpulse();
     }
 
@@ -64,12 +61,9 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_finalizeNative
     (JNIEnv * env, jobject object, jlong jointId) {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
-            return;
-        }
-        delete(joint);
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.",);
+
+        delete joint;
     }
 
     /*
@@ -80,11 +74,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_getBreakingImpulseThreshold
     (JNIEnv * env, jobject object, jlong jointId) {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.", 0)
+
         return joint->getBreakingImpulseThreshold();
     }
 
@@ -96,11 +87,8 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_isEnabled
     (JNIEnv * env, jobject object, jlong jointId) {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.", false)
+
         return joint->isEnabled();
     }
 
@@ -112,11 +100,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_setBreakingImpulseThreshold
     (JNIEnv * env, jobject object, jlong jointId, jfloat desiredValue) {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.",)
+
         joint->setBreakingImpulseThreshold(desiredValue);
     }
 
@@ -128,11 +113,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_setEnabled
     (JNIEnv * env, jobject object, jlong jointId, jboolean desiredSetting) {
         btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btTypedConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.",)
+
         joint->setEnabled(desiredSetting);
     }
 

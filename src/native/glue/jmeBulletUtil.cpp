@@ -36,9 +36,9 @@
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
 void jmeBulletUtil::convert(JNIEnv* env, jobject in, btVector3* out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input Vector3f does not exist.",)
+    NULL_CHECK(out, "The output btVector3 does not exist.",);
+
     float x = env->GetFloatField(in, jmeClasses::Vector3f_x); //env->CallFloatMethod(in, jmeClasses::Vector3f_getX);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -60,9 +60,9 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btVector3* out) {
 }
 
 void jmeBulletUtil::convert(JNIEnv* env, jobject in, btQuaternion* out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input Quaternion does not exist.",)
+    NULL_CHECK(out, "The output btQuaternion does not exist.",);
+
     float x = env->GetFloatField(in, jmeClasses::Quaternion_x);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -91,9 +91,9 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btQuaternion* out) {
 }
 
 void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input btVector3 does not exist.",)
+    NULL_CHECK(out, "The output Vector3f does not exist.",);
+
     float x = in->getX();
     float y = in->getY();
     float z = in->getZ();
@@ -118,9 +118,8 @@ void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
 // Copy a btQuaternion to a JME Quaternion
 
 void jmeBulletUtil::convert(JNIEnv* env, const btQuaternion* in, jobject out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input btQuaternion does not exist.",)
+    NULL_CHECK(out, "The output Quaternion does not exist.",);
 
     env->SetFloatField(out, jmeClasses::Quaternion_w, in->w());
     env->SetFloatField(out, jmeClasses::Quaternion_x, in->x());
@@ -131,9 +130,8 @@ void jmeBulletUtil::convert(JNIEnv* env, const btQuaternion* in, jobject out) {
 // Copy a btTransform to a JME Transform
 
 void jmeBulletUtil::convert(JNIEnv* env, const btTransform* in, jobject out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input btTransform does not exist.",)
+    NULL_CHECK(out, "The output Transform does not exist.",);
 
     jobject translation_out
             = env->CallObjectMethod(out, jmeClasses::Transform_translation);
@@ -152,9 +150,9 @@ void jmeBulletUtil::convert(JNIEnv* env, const btTransform* in, jobject out) {
 }
 
 void jmeBulletUtil::convert(JNIEnv* env, jobject in, btMatrix3x3* out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input Matrix3f does not exist.",)
+    NULL_CHECK(out, "The output btMatrix3x3 does not exist.",);
+
     float m00 = env->GetFloatField(in, jmeClasses::Matrix3f_m00);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -204,9 +202,9 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btMatrix3x3* out) {
 }
 
 void jmeBulletUtil::convert(JNIEnv* env, const btMatrix3x3* in, jobject out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input btMatrix3x3 does not exist.",)
+    NULL_CHECK(out, "The output Matrix3f does not exist.",);
+
     float m00 = in->getRow(0).m_floats[0];
     float m01 = in->getRow(0).m_floats[1];
     float m02 = in->getRow(0).m_floats[2];
@@ -264,9 +262,9 @@ void jmeBulletUtil::convert(JNIEnv* env, const btMatrix3x3* in, jobject out) {
 }
 
 void jmeBulletUtil::convertQuat(JNIEnv* env, jobject in, btMatrix3x3* out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input Quaternion does not exist.",)
+    NULL_CHECK(out, "The output btMatrix3x3 does not exist.",);
+
     float x = env->GetFloatField(in, jmeClasses::Quaternion_x);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -313,9 +311,9 @@ void jmeBulletUtil::convertQuat(JNIEnv* env, jobject in, btMatrix3x3* out) {
 }
 
 void jmeBulletUtil::convertQuat(JNIEnv* env, const btMatrix3x3* in, jobject out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input btMatrix3x3 does not exist.",)
+    NULL_CHECK(out, "The output Quaternion does not exist.",);
+
     // the trace is the sum of the diagonal elements; see
     // http://mathworld.wolfram.com/MatrixTrace.html
     float t = in->getRow(0).m_floats[0] + in->getRow(1).m_floats[1] + in->getRow(2).m_floats[2];
@@ -413,9 +411,8 @@ void jmeBulletUtil::addSweepResult(JNIEnv* env, jobject resultlist, btVector3* h
 }
 
 void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* out) {
-    if (in == NULL || out == NULL) {
-        jmeClasses::throwNPE(env);
-    }
+    NULL_CHECK(in, "The input Transform does not exist.",)
+    NULL_CHECK(out, "The output btTransform does not exist.",);
 
     jobject translation_vec = env->CallObjectMethod(in, jmeClasses::Transform_translation);
     if (env->ExceptionCheck()) {

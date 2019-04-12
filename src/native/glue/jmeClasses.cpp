@@ -326,10 +326,3 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
         return;
     }
 }
-
-void jmeClasses::throwNPE(JNIEnv* env) {
-    if (env == NULL) return;
-    jclass newExc = env->FindClass("java/lang/NullPointerException");
-    env->ThrowNew(newExc, "");
-    return;
-}

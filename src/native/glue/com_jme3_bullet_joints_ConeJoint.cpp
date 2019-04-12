@@ -52,49 +52,27 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body A does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
-        if (rotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform rbAFrame;
         jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform rbBFrame;
         jmeBulletUtil::convert(env, pivotInB, &rbBFrame.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &rbBFrame.getBasis());
 
         btConeTwistConstraint* joint
                 = new btConeTwistConstraint(*rbA, *rbB, rbAFrame, rbBFrame);
+        NULL_CHECK(joint, "A btConeTwistConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -109,28 +87,18 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
-        if (rotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform rbAFrame;
         jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
 
         btConeTwistConstraint* joint
                 = new btConeTwistConstraint(*rbA, rbAFrame);
+        NULL_CHECK(joint, "A btConeTwistConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -142,11 +110,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setAngularOnly
     (JNIEnv * env, jobject object, jlong jointId, jboolean angularOnly) {
         btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btConeTwistConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
 
         joint->setAngularOnly(angularOnly);
     }
@@ -159,11 +123,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setLimit
     (JNIEnv * env, jobject object, jlong jointId, jfloat swingSpan1, jfloat swingSpan2, jfloat twistSpan) {
         btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btConeTwistConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
 
         //TODO: extended setLimit!
         joint->setLimit(swingSpan1, swingSpan2, twistSpan);

@@ -50,17 +50,10 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_copyValues
     (JNIEnv *env, jobject object, jlong thisId, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (thisId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The target btSoftBody does not exist.",)
+
         btSoftBody* other = reinterpret_cast<btSoftBody*> (bodyId);
-        if (other == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(other, "The source btSoftBody does not exist.",)
 
         body->m_cfg.kVCF = other->m_cfg.kVCF; // Velocities correction factor (Baumgarte)
         body->m_cfg.kDP = other->m_cfg.kDP; // Damping coefficient [0,1]
@@ -103,11 +96,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setVelocitiesCorrectionFactor
     (JNIEnv *env, jobject object, jlong bodyId, jfloat factor) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->m_cfg.kVCF = factor;
     }
@@ -120,11 +109,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getVelocitiesCorrectionFactor
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kVCF;
     }
 
@@ -136,11 +122,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setDampingCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat ceof) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kDP = ceof;
     }
 
@@ -152,11 +135,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getDampingCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kDP;
     }
 
@@ -168,11 +148,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setDragCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kDG = coef;
     }
 
@@ -184,11 +161,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getDragCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kDG;
     }
 
@@ -200,11 +174,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setLiftCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kLF = coef;
     }
 
@@ -216,11 +187,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getLiftCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kLF;
     }
 
@@ -232,11 +200,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setPressureCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kPR = coef;
     }
 
@@ -248,11 +213,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getPressureCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kPR;
     }
 
@@ -264,11 +226,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setVolumeConservationCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kVC = coef;
     }
 
@@ -280,11 +239,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getVolumeConservationCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kVC;
     }
 
@@ -296,11 +252,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setDynamicFrictionCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kDF = coef;
     }
 
@@ -312,11 +265,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getDynamicFrictionCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kDF;
     }
 
@@ -328,11 +278,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setPoseMatchingCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->m_cfg.kMT = coef;
     }
@@ -345,11 +291,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getPoseMatchingCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kMT;
     }
 
@@ -361,11 +304,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setRigidContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kCHR = coef;
     }
 
@@ -377,11 +317,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getRigidContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kCHR;
     }
 
@@ -393,11 +330,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setKineticContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kKHR = coef;
     }
 
@@ -409,11 +343,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getKineticContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kKHR;
     }
 
@@ -425,11 +356,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setSoftContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSHR = coef;
     }
 
@@ -441,11 +369,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getSoftContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSHR;
     }
 
@@ -457,11 +382,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setAnchorsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kAHR = coef;
     }
 
@@ -473,11 +395,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getAnchorsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kAHR;
     }
 
@@ -489,11 +408,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterRigidHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSRHR_CL = coef;
     }
 
@@ -505,11 +421,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterRigidHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSRHR_CL;
     }
 
@@ -521,11 +434,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterKineticHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSKHR_CL = coef;
     }
 
@@ -537,11 +447,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterKineticHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSKHR_CL;
     }
 
@@ -553,11 +460,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterSoftHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSSHR_CL = coef;
     }
 
@@ -569,11 +473,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterSoftHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSSHR_CL;
     }
 
@@ -585,11 +486,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterRigidImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSR_SPLT_CL = coef;
     }
 
@@ -601,11 +499,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterRigidImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSR_SPLT_CL;
     }
 
@@ -617,11 +512,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterKineticImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSK_SPLT_CL = coef;
     }
 
@@ -633,11 +525,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterKineticImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSK_SPLT_CL;
     }
 
@@ -649,11 +538,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterSoftImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.kSS_SPLT_CL = coef;
     }
 
@@ -665,11 +551,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterSoftImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.kSS_SPLT_CL;
     }
 
@@ -681,11 +564,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setMaximumVolumeRatio
     (JNIEnv *env, jobject object, jlong bodyId, jfloat ratio) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.maxvolume = ratio;
     }
 
@@ -697,11 +577,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getMaximumVolumeRatio
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.maxvolume;
     }
 
@@ -713,11 +590,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setTimeScale
     (JNIEnv *env, jobject object, jlong bodyId, jfloat scale) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.timescale = scale;
     }
 
@@ -729,11 +603,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getTimeScale
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.timescale;
     }
 
@@ -745,11 +616,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setVelocitiesIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.viterations = iter;
     }
 
@@ -761,11 +629,8 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getVelocitiesIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.viterations;
     }
 
@@ -777,11 +642,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setPositionIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->m_cfg.piterations = iter;
     }
@@ -794,11 +655,8 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getPositionIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.piterations;
     }
 
@@ -810,11 +668,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setDriftIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.diterations = iter;
     }
 
@@ -826,11 +681,8 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getDriftIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.diterations;
     }
 
@@ -842,11 +694,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setClusterIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.citerations = iter;
     }
 
@@ -858,11 +707,8 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getClusterIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.citerations;
     }
 
@@ -875,11 +721,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_setCollisionsFlags
     (JNIEnv *env, jobject object, jlong bodyId, jint flags) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
         body->m_cfg.collisions = flags;
     }
 
@@ -891,11 +734,8 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Config_getCollisionsFlags
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
         return body->m_cfg.collisions;
     }
 

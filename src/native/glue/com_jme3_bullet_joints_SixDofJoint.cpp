@@ -52,49 +52,27 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body A does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
-        if (rotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform frameInA;
         jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
         btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(*rbA, *rbB,
                 frameInA, frameInB, useLinearReferenceFrameA);
+        NULL_CHECK(joint, "A btGeneric6DofConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -109,28 +87,18 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
         btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(
                 *rbB, frameInB, useLinearReferenceFrameB);
+        NULL_CHECK(joint, "A btGeneric6DofConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -143,17 +111,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject storeVector) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
-        if (storeVector == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The storeVector does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
         btScalar x = joint->getAngle(0);
         btScalar y = joint->getAngle(1);
@@ -171,12 +130,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject frameA) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(frameA, "The frameA transform does not exist.",)
 
         btTransform a = joint->getFrameOffsetA();
         jmeBulletUtil::convert(env, &a, frameA);
@@ -191,12 +146,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject frameB) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(frameB, "The frameB transform does not exist.",)
 
         btTransform b = joint->getFrameOffsetB();
         jmeBulletUtil::convert(env, &b, frameB);
@@ -211,17 +162,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject storeVector) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
-        if (storeVector == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The storeVector does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
         btScalar x = joint->getRelativePivotPosition(0);
         btScalar y = joint->getRelativePivotPosition(1);
@@ -239,12 +181,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jint index) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.", 0)
+
         return reinterpret_cast<jlong> (joint->getRotationalLimitMotor(index));
     }
 
@@ -257,12 +195,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.", 0)
+
         return reinterpret_cast<jlong> (joint->getTranslationalLimitMotor());
     }
 
@@ -275,11 +209,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(vector, "The limit vector does not exist.",)
 
         btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
@@ -295,12 +226,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularUpperLimit
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(vector, "The limit vector does not exist.",)
 
         btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
@@ -316,16 +243,13 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setFrames
     (JNIEnv * env, jobject object, jlong jointId, jobject frameA, jobject frameB) {
         btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
 
+        NULL_CHECK(frameA, "The frameA transform does not exist.",)
         btTransform a = btTransform();
         jmeBulletUtil::convert(env, frameA, &a);
 
+        NULL_CHECK(frameB, "The frameB transform does not exist.",)
         btTransform b = btTransform();
         jmeBulletUtil::convert(env, frameB, &b);
 
@@ -341,13 +265,9 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
 
+        NULL_CHECK(vector, "The vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
 
@@ -363,13 +283,9 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
         btGeneric6DofConstraint* joint
                 = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btGeneric6DofConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
 
+        NULL_CHECK(vector, "The vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, vector, &vec);
 

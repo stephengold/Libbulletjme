@@ -49,11 +49,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_activate
     (JNIEnv * env, jobject object, jlong objectId, jboolean forceFlag) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/IllegalStateException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+
         collisionObject->activate(forceFlag);
     }
 
@@ -65,17 +62,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_attachCollisionShape
     (JNIEnv * env, jobject object, jlong objectId, jlong shapeId) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/IllegalStateException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+
         btCollisionShape* collisionShape = reinterpret_cast<btCollisionShape*> (shapeId);
-        if (collisionShape == NULL) {
-            jclass newExc = env->FindClass("java/lang/IllegalStateException");
-            env->ThrowNew(newExc, "The btCollisionShape does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionShape, "The btCollisionShape does not exist.",)
+
         collisionObject->setCollisionShape(collisionShape);
     }
 
@@ -87,16 +78,13 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_finalizeNative
     (JNIEnv * env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+
         if (collisionObject -> getUserPointer() != NULL) {
             jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
-            delete(userPointer);
+            delete userPointer;
         }
-        delete(collisionObject);
+        delete collisionObject;
     }
 
     /*
@@ -108,18 +96,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject storeVector) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
-        if (storeVector == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The storeVector does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
-        const btVector3& frictionComponents = collisionObject->getAnisotropicFriction();
+                const btVector3& frictionComponents = collisionObject->getAnisotropicFriction();
         jmeBulletUtil::convert(env, &frictionComponents, storeVector);
     }
 
@@ -132,16 +112,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject storeMatrix) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
-        if (storeMatrix == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The storeMatrix does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(storeMatrix, "The storeMatrix does not exist.",)
 
         btMatrix3x3& basis = collisionObject->getWorldTransform().getBasis();
         jmeBulletUtil::convert(env, &basis, storeMatrix);
@@ -155,11 +127,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCcdMotionThreshold
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         return collisionObject->getCcdMotionThreshold();
     }
@@ -172,11 +140,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCcdSweptSphereRadius
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         return collisionObject->getCcdSweptSphereRadius();
     }
@@ -189,11 +153,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionFlags
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jint result = collisionObject->getCollisionFlags();
         return result;
@@ -208,11 +168,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getContactDamping();
         return result;
@@ -227,11 +183,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getContactProcessingThreshold();
         return result;
@@ -246,11 +198,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getContactStiffness();
         return result;
@@ -265,11 +213,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getDeactivationTime();
         return result;
@@ -284,11 +228,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getFriction();
         return result;
@@ -303,16 +243,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject storeVector) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
-        if (storeVector == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The storeVector does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
         btVector3& location = collisionObject->getWorldTransform().getOrigin();
         jmeBulletUtil::convert(env, &location, storeVector);
@@ -327,16 +259,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject storeQuat) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
-        if (storeQuat == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The storeQuat does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(storeQuat, "The storeQuat does not exist.",)
 
         btMatrix3x3& basis = collisionObject->getWorldTransform().getBasis();
         jmeBulletUtil::convertQuat(env, &basis, storeQuat);
@@ -351,11 +275,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getRestitution();
         return result;
@@ -370,11 +290,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getRollingFriction();
         return result;
@@ -389,11 +305,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", 0)
 
         jfloat result = collisionObject->getSpinningFriction();
         return result;
@@ -408,11 +320,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jint mode) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", false)
 
         jboolean result = collisionObject->hasAnisotropicFriction(mode);
         return result;
@@ -426,15 +334,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_initUserPointer
     (JNIEnv *env, jobject object, jlong objectId, jint group, jint groups) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         if (userPointer != NULL) {
-            //            delete(userPointer);
+            //            delete userPointer;
         }
         userPointer = new jmeUserPointer();
         userPointer -> javaCollisionObject = env->NewWeakGlobalRef(object);
@@ -452,11 +356,7 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_isActive
     (JNIEnv *env, jobject object, jlong objectId) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return false;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.", false)
 
         return collisionObject->isActive();
     }
@@ -470,16 +370,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject components, jint mode) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
-        if (components == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The components do not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(components, "The components vector does not exist.",)
 
         btVector3 tempVector;
         jmeBulletUtil::convert(env, components, &tempVector);
@@ -495,11 +387,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat threshold) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setCcdMotionThreshold(threshold);
     }
@@ -513,11 +401,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat radius) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setCcdSweptSphereRadius(radius);
     }
@@ -530,11 +414,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionFlags
     (JNIEnv *env, jobject object, jlong objectId, jint desiredFlags) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setCollisionFlags(desiredFlags);
     }
@@ -547,11 +427,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionGroup
     (JNIEnv *env, jobject object, jlong objectId, jint group) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         if (userPointer != NULL) {
             userPointer -> group = group;
@@ -566,11 +443,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollideWithGroups
     (JNIEnv *env, jobject object, jlong objectId, jint groups) {
         btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         if (userPointer != NULL) {
             userPointer -> groups = groups;
@@ -586,11 +460,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat thresholdDistance) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setContactProcessingThreshold(thresholdDistance);
     }
@@ -604,11 +474,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat stiffness, jfloat damping) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setContactStiffnessAndDamping(stiffness, damping);
     }
@@ -622,11 +488,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat time) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setDeactivationTime(time);
     }
@@ -640,11 +502,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat friction) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setFriction(friction);
     }
@@ -658,21 +516,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject locationVector, jobject basisMatrix) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
-        if (locationVector == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The locationVector does not exist.");
-            return;
-        }
-        if (basisMatrix == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The basisMatrix does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(locationVector, "The locationVector does not exist.",)
+        NULL_CHECK(basisMatrix, "The basisMatrix does not exist.",)
 
         btTransform transform;
         jmeBulletUtil::convert(env, locationVector, &transform.getOrigin());
@@ -690,11 +536,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat restitution) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setRestitution(restitution);
     }
@@ -708,11 +550,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat friction) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setRollingFriction(friction);
     }
@@ -726,11 +564,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat friction) {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btCollisionObject does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
 
         collisionObject->setSpinningFriction(friction);
     }

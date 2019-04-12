@@ -49,11 +49,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__JLjava_nio_IntBuffer_2Ljava_nio_FloatBuffer_2Ljava_nio_FloatBuffer_2ZZ
     (JNIEnv *env, jclass clazz, jlong bodyId, jobject indexMap, jobject positionsBuffer, jobject normalsBuffer, jboolean meshInLocalSpace, jboolean doNormalUpdate) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
         const jint* jme2bulletMap = (jint*) env->GetDirectBufferAddress(indexMap);
         const int mapCapacity = env->GetDirectBufferCapacity(indexMap);
 
@@ -92,11 +89,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__JLjava_nio_FloatBuffer_2Ljava_nio_FloatBuffer_2ZZ
     (JNIEnv *env, jclass clazz, jlong bodyId, jobject positionsBuffer, jobject normalsBuffer, jboolean meshInLocalSpace, jboolean doNormalUpdate) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The native object does not exist.");
-            return;
-        }
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
         const int nodeSize = body->m_nodes.size();
 
         jfloat* positions = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);

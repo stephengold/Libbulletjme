@@ -55,15 +55,12 @@ extern "C" {
 
         btTriangleIndexVertexArray* array
                 = reinterpret_cast<btTriangleIndexVertexArray*> (arrayId);
-        if (array == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btTriangleIndexVertexArray does not exist.");
-            return 0;
-        }
+        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.", 0)
 
         btBvhTriangleMeshShape* shape = new btBvhTriangleMeshShape(array,
                 isMemoryEfficient, buildBVH);
+        NULL_CHECK(shape, "A btBvhTriangleMeshShape was not created.", 0)
+
         return reinterpret_cast<jlong> (shape);
     }
 
@@ -76,14 +73,9 @@ extern "C" {
     (JNIEnv* env, jobject object, jlong arrayId, jlong nativeBVHBuffer) {
         btTriangleIndexVertexArray* array
                 = reinterpret_cast<btTriangleIndexVertexArray*> (arrayId);
-        if (array == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btTriangleIndexVertexArray does not exist.");
-            return;
-        }
+        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.",);
 
-        delete(array);
+        delete array;
 
         if (nativeBVHBuffer > 0) {
             void* buffer = reinterpret_cast<void*> (nativeBVHBuffer);
@@ -100,11 +92,7 @@ extern "C" {
     (JNIEnv* env, jobject, jlong meshobj) {
         btBvhTriangleMeshShape* mesh
                 = reinterpret_cast<btBvhTriangleMeshShape*> (meshobj);
-        if (mesh == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btBvhTriangleMeshShape does not exist.");
-            return NULL;
-        }
+        NULL_CHECK(mesh, "The btBvhTriangleMeshShape does not exist.", 0);
 
         btOptimizedBvh* bvh = mesh->getOptimizedBvh();
         unsigned int ssize = bvh->calculateSerializeBufferSize();
@@ -138,6 +126,7 @@ extern "C" {
                 = btOptimizedBvh::deSerializeInPlace(buffer, len, true);
         btBvhTriangleMeshShape* mesh
                 = reinterpret_cast<btBvhTriangleMeshShape*> (meshobj);
+        NULL_CHECK(mesh, "The btBvhTriangleMeshShape does not exist.", 0);
         mesh->setOptimizedBvh(bvh);
 
         return reinterpret_cast<jlong> (buffer);

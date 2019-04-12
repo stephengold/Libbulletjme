@@ -50,12 +50,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftSpace
     (JNIEnv *env, jobject object, jobject min_vec, jobject max_vec, jint broadphase, jboolean threading) {
         jmeClasses::initJavaClasses(env);
+
         jmePhysicsSoftSpace* space = new jmePhysicsSoftSpace(env, object);
-        if (space == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The physics space has not been created.");
-            return 0;
-        }
+        NULL_CHECK(space, "A physics space was not created.", 0)
+
         space->createPhysicsSoftSpace(min_vec, max_vec, broadphase, threading);
         return reinterpret_cast<jlong> (space);
     }
@@ -68,19 +66,14 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
     (JNIEnv *env, jobject object, jlong spaceId, jlong softBodyId) {
         jmePhysicsSoftSpace* space = reinterpret_cast<jmePhysicsSoftSpace*> (spaceId);
+        NULL_CHECK(space, "The physics space does not exist.",)
+
         btSoftBody* collisionObject = reinterpret_cast<btSoftBody*> (softBodyId);
-        if (space == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The physics space does not exist.");
-            return;
-        }
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The collision object does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The collision object does not exist.",)
+
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         userPointer->space = space;
+
         space->getSoftDynamicsWorld()->addSoftBody(collisionObject);
     }
 
@@ -92,19 +85,14 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
     (JNIEnv *env, jobject object, jlong spaceId, jlong softBodyId) {
         jmePhysicsSoftSpace* space = reinterpret_cast<jmePhysicsSoftSpace*> (spaceId);
+        NULL_CHECK(space, "The physics space does not exist.",)
+
         btSoftBody* collisionObject = reinterpret_cast<btSoftBody*> (softBodyId);
-        if (space == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The physics space does not exist.");
-            return;
-        }
-        if (collisionObject == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The collision object does not exist.");
-            return;
-        }
+        NULL_CHECK(collisionObject, "The collision object does not exist.",)
+
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         userPointer->space = NULL;
+
         space->getSoftDynamicsWorld()->removeSoftBody(collisionObject);
     }
 
@@ -116,6 +104,8 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getWorldInfo
     (JNIEnv *env, jobject object, jlong spaceId) {
         jmePhysicsSoftSpace* space = reinterpret_cast<jmePhysicsSoftSpace*> (spaceId);
+        NULL_CHECK(space, "The physics space does not exist.", 0)
+
         btSoftRigidDynamicsWorld* world = space->getSoftDynamicsWorld();
         btSoftBodyWorldInfo* worldInfo = &(world->getWorldInfo());
         return reinterpret_cast<jlong> (worldInfo);

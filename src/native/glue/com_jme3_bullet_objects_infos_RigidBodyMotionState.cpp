@@ -62,11 +62,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject location, jobject rotation) {
         jmeMotionState* motionState
                 = reinterpret_cast<jmeMotionState*> (stateId);
-        if (motionState == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The jmeMotionState does not exist.");
-            return false;
-        }
+        NULL_CHECK(motionState, "The motion state does not exist.", false)
 
         return motionState->applyTransform(env, location, rotation);
     }
@@ -80,11 +76,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject value) {
         jmeMotionState* motionState
                 = reinterpret_cast<jmeMotionState*> (stateId);
-        if (motionState == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The jmeMotionState does not exist.");
-            return;
-        }
+        NULL_CHECK(motionState, "The motion state does not exist.",)
 
         jmeBulletUtil::convert(env, &motionState->worldTransform.getOrigin(), value);
     }
@@ -98,11 +90,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject value) {
         jmeMotionState* motionState
                 = reinterpret_cast<jmeMotionState*> (stateId);
-        if (motionState == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The jmeMotionState does not exist.");
-            return;
-        }
+        NULL_CHECK(motionState, "The motion state does not exist.",)
 
         jmeBulletUtil::convert(env, &motionState->worldTransform.getBasis(),
                 value);
@@ -117,11 +105,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject value) {
         jmeMotionState* motionState
                 = reinterpret_cast<jmeMotionState*> (stateId);
-        if (motionState == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The jmeMotionState does not exist.");
-            return;
-        }
+        NULL_CHECK(motionState, "The motion state does not exist.",)
+
         jmeBulletUtil::convertQuat(env, &motionState->worldTransform.getBasis(),
                 value);
     }
@@ -135,13 +120,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId) {
         jmeMotionState* motionState
                 = reinterpret_cast<jmeMotionState*> (stateId);
-        if (motionState == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The jmeMotionState does not exist.");
-            return;
-        }
+        NULL_CHECK(motionState, "The motion state does not exist.",);
 
-        delete(motionState);
+        delete motionState;
     }
 
 #ifdef __cplusplus

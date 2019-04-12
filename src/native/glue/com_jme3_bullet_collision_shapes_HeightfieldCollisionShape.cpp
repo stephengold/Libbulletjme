@@ -58,6 +58,8 @@ extern "C" {
                 = new btHeightfieldTerrainShape(heightStickWidth,
                 heightStickLength, data, heightScale, minHeight, maxHeight,
                 upAxis, PHY_FLOAT, flipQuadEdges);
+        NULL_CHECK(shape, "A btHeightfieldTerrainShape was not created.", 0)
+
         return reinterpret_cast<jlong> (shape);
     }
 

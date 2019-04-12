@@ -48,11 +48,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_enableSpring
     (JNIEnv *env, jobject object, jlong jointId, jint index, jboolean onOff) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+
         joint -> enableSpring(index, onOff);
     }
 
@@ -64,11 +61,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setStiffness
     (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat stiffness) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+
         joint -> setStiffness(index, stiffness);
     }
 
@@ -80,11 +74,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setDamping
     (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat damping) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+
         joint -> setDamping(index, damping);
     }
 
@@ -96,11 +87,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibriumPoint__J
     (JNIEnv *env, jobject object, jlong jointId) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+
         joint -> setEquilibriumPoint();
     }
 
@@ -112,11 +100,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibriumPoint__JI
     (JNIEnv *env, jobject object, jlong jointId, jint index) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btGeneric6DofSpringConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+
         joint -> setEquilibriumPoint(index);
     }
 
@@ -132,43 +117,19 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body A does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
-        if (rotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform frameInA;
         jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -176,6 +137,8 @@ extern "C" {
         btGeneric6DofSpringConstraint* joint
                 = new btGeneric6DofSpringConstraint(*rbA, *rbB, frameInA,
                 frameInB, useLinearReferenceFrameA);
+        NULL_CHECK(joint, "A btGeneric6DofSpringConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -190,22 +153,10 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
-        if (rotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null rotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -213,6 +164,8 @@ extern "C" {
         btGeneric6DofSpringConstraint* joint
                 = new btGeneric6DofSpringConstraint(*rbB, frameInB,
                 useLinearReferenceFrameB);
+        NULL_CHECK(joint, "A btGeneric6DofSpringConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 

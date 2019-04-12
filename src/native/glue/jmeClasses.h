@@ -35,6 +35,13 @@
  * Author: Normen Hansen
  */
 
+#define NULL_CHECK(pointer, message, retval) \
+    if ((pointer) == NULL) { \
+        jclass npe = env->FindClass("java/lang/NullPointerException"); \
+        env->ThrowNew(npe, message); \
+        return retval; \
+    }
+
 class jmeClasses {
 public:
     static void initJavaClasses(JNIEnv* env);
@@ -106,8 +113,6 @@ public:
     static jmethodID DebugMeshCallback_addVector;
 
     static int printFlag;
-
-    static void throwNPE(JNIEnv* env);
 
 private:
 

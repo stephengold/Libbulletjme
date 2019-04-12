@@ -54,18 +54,17 @@ extern "C" {
             jobject tuning, jboolean frontWheel) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return 0;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.", 0)
 
+        NULL_CHECK(location, "The location vector does not exist.", 0)
         btVector3 vec1;
         jmeBulletUtil::convert(env, location, &vec1);
 
+        NULL_CHECK(direction, "The direction vector does not exist.", 0)
         btVector3 vec2;
         jmeBulletUtil::convert(env, direction, &vec2);
 
+        NULL_CHECK(axle, "The axle vector does not exist.", 0)
         btVector3 vec3;
         jmeBulletUtil::convert(env, axle, &vec3);
 
@@ -85,11 +84,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat force) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
 
         vehicle->applyEngineForce(force, wheel);
     }
@@ -103,11 +98,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat value) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+
         vehicle->setBrake(value, wheel);
     }
 
@@ -121,23 +113,18 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* body = reinterpret_cast<btRigidBody*> (objectId);
-        if (body == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0;
-        }
+        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
+
         body->setActivationState(DISABLE_DEACTIVATION);
 
         btVehicleRaycaster* caster
                 = reinterpret_cast<btDefaultVehicleRaycaster*> (casterId);
-        if (caster == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btVehicleRaycaster does not exist.");
-            return 0;
-        }
+        NULL_CHECK(caster, "The btVehicleRaycaster does not exist.", 0)
 
         btRaycastVehicle::btVehicleTuning tuning;
         btRaycastVehicle* vehicle = new btRaycastVehicle(tuning, body, caster);
+        NULL_CHECK(vehicle, "A btRaycastVehicle was not created.", 0)
+
         return reinterpret_cast<jlong> (vehicle);
     }
 
@@ -148,18 +135,15 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicleRaycaster
     (JNIEnv *env, jobject object, jlong bodyId, jlong spaceId) {
-        //btRigidBody* body = reinterpret_cast<btRigidBody*> bodyId;
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSpace *space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
-        if (space == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The jmePhysicsSpace does not exist.");
-            return 0;
-        }
+        NULL_CHECK(space, "The physics space does not exist.", 0)
 
         btDefaultVehicleRaycaster* caster
                 = new btDefaultVehicleRaycaster(space->getDynamicsWorld());
+        NULL_CHECK(caster, "A btDefaultVehicleRaycaster was not created.", 0)
+
         return reinterpret_cast<jlong> (caster);
     }
 
@@ -172,21 +156,15 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong casterId, jlong vehicleId) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
-        delete(vehicle);
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
+
+        delete vehicle;
 
         btVehicleRaycaster* rayCaster
                 = reinterpret_cast<btVehicleRaycaster*> (casterId);
-        if (rayCaster == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btVehicleRaycaster does not exist.");
-            return;
-        }
-        delete(rayCaster);
+        NULL_CHECK(rayCaster, "The btVehicleRaycaster does not exist.",);
+
+        delete rayCaster;
     }
 
     /*
@@ -198,11 +176,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return 0;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.", 0);
 
         return vehicle->getCurrentSpeedKmHour();
     }
@@ -216,13 +190,11 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jobject out) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
 
         btVector3 forwardVector = vehicle->getForwardVector();
+
+        NULL_CHECK(out, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &forwardVector, out);
     }
 
@@ -235,11 +207,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
 
         vehicle->resetSuspension();
     }
@@ -253,11 +221,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jint right, jint up, jint forward) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
 
         vehicle->setCoordinateSystem(right, up, forward);
     }
@@ -271,11 +235,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat value) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
 
         vehicle->setSteeringValue(value, wheel);
     }
@@ -289,11 +249,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jboolean interpolated) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        if (vehicle == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRaycastVehicle does not exist.");
-            return;
-        }
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
 
         vehicle->updateWheelTransform(wheel, interpolated);
     }

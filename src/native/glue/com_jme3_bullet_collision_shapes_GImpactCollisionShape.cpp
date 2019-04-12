@@ -52,14 +52,10 @@ extern "C" {
 
         btTriangleIndexVertexArray* array
                 = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
-        if (array == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btTriangleIndexVertexArray does not exist.");
-            return 0;
-        }
+        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.", 0)
 
         btGImpactMeshShape* shape = new btGImpactMeshShape(array);
+        NULL_CHECK(shape, "A btGImpactMeshShape was not created.", 0)
         shape->updateBound();
 
         return reinterpret_cast<jlong> (shape);
@@ -74,14 +70,9 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong meshId) {
         btTriangleIndexVertexArray* array
                 = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
-        if (array == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btTriangleIndexVertexArray does not exist.");
-            return;
-        }
+        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.",);
 
-        delete(array);
+        delete array;
     }
 
 #ifdef __cplusplus

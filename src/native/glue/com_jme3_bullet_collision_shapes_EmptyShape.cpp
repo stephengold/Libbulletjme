@@ -48,7 +48,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_EmptyShape_createShapeNative
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
+        
         btEmptyShape* shape = new btEmptyShape();
+        NULL_CHECK(shape, "A btEmptyShape was not created.", 0)
+        
         return reinterpret_cast<jlong> (shape);
     }
 

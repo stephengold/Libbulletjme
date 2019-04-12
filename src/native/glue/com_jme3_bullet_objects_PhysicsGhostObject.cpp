@@ -53,7 +53,10 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGhostObject
     (JNIEnv * env, jobject object) {
         jmeClasses::initJavaClasses(env);
+
         btPairCachingGhostObject* ghost = new btPairCachingGhostObject();
+        NULL_CHECK(ghost, "The btPairCachingGhostObject was not created.", 0)
+
         return reinterpret_cast<jlong> (ghost);
     }
 
@@ -66,12 +69,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
 
         ghost->setCollisionFlags(ghost->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
     }
@@ -85,12 +83,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
+        NULL_CHECK(value, "The vector does not exist.",)
 
         jmeBulletUtil::convert(env, value,
                 &ghost->getWorldTransform().getOrigin());
@@ -105,11 +99,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
+        NULL_CHECK(value, "The matrix does not exist.",)
 
         jmeBulletUtil::convert(env, value, &ghost->getWorldTransform().getBasis());
     }
@@ -123,12 +114,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
+        NULL_CHECK(value, "The quaternion does not exist.",)
 
         jmeBulletUtil::convertQuat(env, value,
                 &ghost->getWorldTransform().getBasis());
@@ -143,13 +130,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
 
+        NULL_CHECK(value, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &ghost->getWorldTransform().getOrigin(),
                 value);
     }
@@ -163,13 +146,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
 
+        NULL_CHECK(value, "The store quaternion does not exist.",)
         jmeBulletUtil::convertQuat(env, &ghost->getWorldTransform().getBasis(),
                 value);
     }
@@ -183,12 +162,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
+
+        NULL_CHECK(value, "The store matrix does not exist.",)
         jmeBulletUtil::convert(env, &ghost->getWorldTransform().getBasis(),
                 value);
     }
@@ -240,12 +216,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
+
         btHashedOverlappingPairCache * pc = ghost->getOverlappingPairCache();
         jmeGhostOverlapCallback cb(env, object, ghost);
         pc -> processAllOverlappingPairs(&cb, NULL);
@@ -260,12 +232,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
 
         return ghost->getNumOverlappingObjects();
     }
@@ -279,12 +246,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
 
         ghost->setCcdSweptSphereRadius(value);
     }
@@ -298,12 +260,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
 
         ghost->setCcdMotionThreshold(value);
     }
@@ -317,12 +274,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
 
         return ghost->getCcdSweptSphereRadius();
     }
@@ -336,12 +288,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc,
-                    "The btPairCachingGhostObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
 
         return ghost->getCcdMotionThreshold();
     }
@@ -355,11 +302,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId) {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        if (ghost == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btPairCachingGhostObject does not exist.");
-            return 0;
-        }
+        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
 
         return ghost->getCcdSquareMotionThreshold();
     }

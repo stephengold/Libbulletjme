@@ -52,53 +52,31 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body A does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        if (rbB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "Rigid body B does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         btVector3 pivotA;
         jmeBulletUtil::convert(env, pivotInA, &pivotA);
 
-        if (pivotInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInB");
-            return 0L;
-        }
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
         btVector3 pivotB;
         jmeBulletUtil::convert(env, pivotInB, &pivotB);
 
-        if (axisInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null axisInA");
-            return 0L;
-        }
+        NULL_CHECK(axisInA, "The axisInA vector does not exist.", 0)
         btVector3 axisA;
         jmeBulletUtil::convert(env, axisInA, &axisA);
 
-        if (axisInB == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null axisInB");
-            return 0L;
-        }
+        NULL_CHECK(axisInB, "The axisInB vector does not exist.", 0)
         btVector3 axisB;
         jmeBulletUtil::convert(env, axisInB, &axisB);
 
         btHingeConstraint* joint = new btHingeConstraint(*rbA, *rbB, pivotA,
                 pivotB, axisA, axisB);
+        NULL_CHECK(joint, "A btHingeConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -113,30 +91,20 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        if (rbA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btRigidBody does not exist.");
-            return 0L;
-        }
+        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
 
-        if (pivotInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null pivotInA");
-            return 0L;
-        }
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         btVector3 pivot;
         jmeBulletUtil::convert(env, pivotInA, &pivot);
 
-        if (axisInA == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "null axisInA");
-            return 0L;
-        }
+        NULL_CHECK(axisInA, "The axisInA vector does not exist.", 0)
         btVector3 axis;
         jmeBulletUtil::convert(env, axisInA, &axis);
 
         btHingeConstraint* joint
                 = new btHingeConstraint(*rbA, pivot, axis, useReferenceFrameA);
+        NULL_CHECK(joint, "A btHingeConstraint was not created.", 0)
+
         return reinterpret_cast<jlong> (joint);
     }
 
@@ -148,11 +116,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
     (JNIEnv * env, jobject object, jlong jointId, jboolean enable, jfloat targetVelocity, jfloat maxMotorImpulse) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+
         joint->enableAngularMotor(enable, targetVelocity, maxMotorImpulse);
     }
 
@@ -164,11 +129,8 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngularMotor
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return false;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.", false)
+
         return joint->getEnableAngularMotor();
     }
 
@@ -180,11 +142,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+
         return joint->getHingeAngle();
     }
 
@@ -196,11 +155,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+
         return joint->getLowerLimit();
     }
 
@@ -212,11 +168,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpulse
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+
         return joint->getMaxMotorImpulse();
     }
 
@@ -228,11 +181,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVelocity
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+
         return joint->getMotorTargetVelocity();
     }
 
@@ -244,11 +194,8 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return 0;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+
         return joint->getUpperLimit();
     }
 
@@ -260,11 +207,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
     (JNIEnv * env, jobject object, jlong jointId, jboolean angular) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+
         joint->setAngularOnly(angular);
     }
 
@@ -276,11 +220,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFF
     (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+
         return joint->setLimit(low, high);
     }
 
@@ -292,11 +233,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFFFFF
     (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high, jfloat softness, jfloat biasFactor, jfloat relaxationFactor) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        if (joint == NULL) {
-            jclass newExc = env->FindClass("java/lang/NullPointerException");
-            env->ThrowNew(newExc, "The btHingeConstraint does not exist.");
-            return;
-        }
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+
         return joint->setLimit(low, high, softness, biasFactor, relaxationFactor);
     }
 
