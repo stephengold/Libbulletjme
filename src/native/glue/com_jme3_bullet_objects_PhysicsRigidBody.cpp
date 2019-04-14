@@ -504,7 +504,6 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
 
-        NULL_CHECK(value, "The vector does not exist.",)
         body->setDamping(body->getLinearDamping(), value);
     }
 
