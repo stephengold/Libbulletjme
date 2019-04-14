@@ -1,8 +1,13 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.49 released on 14 April 2019
+
+Bugfix: `NullPointerException` thrown by `NULL_CHECK` in
+`PhysicsRigidBody.setAngularDamping()`.
+
 ## Version 1.0.48 released on 14 April 2019
 
- + Forced recalculation of pivot offset in `SixDofJoint.getPivotOffset()`.
+Forced recalculation of pivot offset in `SixDofJoint.getPivotOffset()`.
 
 ## Version 1.0.47 released on 14 April 2019
 
