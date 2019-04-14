@@ -114,7 +114,7 @@ extern "C" {
         NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
         NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
-        joint->calculateAngleInfo();
+        joint->calculateTransforms();
         btScalar x = joint->getAngle(0);
         btScalar y = joint->getAngle(1);
         btScalar z = joint->getAngle(2);
