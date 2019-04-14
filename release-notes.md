@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.47 released on 14 April 2019
+
+ + Forced recalculation of joint angles in `SixDofJoint.getAngles()`.
+ + Deployed a `NULL_CHECK` macro.
+
 ## Version 1.0.46 released on 10 April 2019
 
 Bugfix: compile-time errors in `SixDofJoint`.
