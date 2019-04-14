@@ -166,6 +166,7 @@ extern "C" {
         NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
         NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
+        joint->calculateTransforms();
         btScalar x = joint->getRelativePivotPosition(0);
         btScalar y = joint->getRelativePivotPosition(1);
         btScalar z = joint->getRelativePivotPosition(2);
