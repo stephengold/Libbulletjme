@@ -42,19 +42,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_PhysicsJoint
-     * Method:    getAppliedImpulse
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_getAppliedImpulse
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
-        NULL_CHECK(joint, "The btTypedConstraint does not exist.", 0)
-
-        return joint->getAppliedImpulse();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_PhysicsJoint
      * Method:    finalizeNative
      * Signature: (J)V
      */
@@ -64,6 +51,19 @@ extern "C" {
         NULL_CHECK(joint, "The btTypedConstraint does not exist.",);
 
         delete joint;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    getAppliedImpulse
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_getAppliedImpulse
+    (JNIEnv * env, jobject object, jlong jointId) {
+        btTypedConstraint* joint = reinterpret_cast<btTypedConstraint*> (jointId);
+        NULL_CHECK(joint, "The btTypedConstraint does not exist.", 0)
+
+        return joint->getAppliedImpulse();
     }
 
     /*
