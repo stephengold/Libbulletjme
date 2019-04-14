@@ -42,21 +42,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
-     * Method:    createShape
-     * Signature: ()J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape
-    (JNIEnv *env, jobject object) {
-        jmeClasses::initJavaClasses(env);
-
-        btCompoundShape* shape = new btCompoundShape();
-        NULL_CHECK(shape, "A btCompoundShape was not created.", 0)
-
-        return reinterpret_cast<jlong> (shape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    addChildShape
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
      */
@@ -77,6 +62,21 @@ extern "C" {
         shape->addChildShape(trans, child);
 
         return 0; // why?
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+     * Method:    createShape
+     * Signature: ()J
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape
+    (JNIEnv *env, jobject object) {
+        jmeClasses::initJavaClasses(env);
+
+        btCompoundShape* shape = new btCompoundShape();
+        NULL_CHECK(shape, "A btCompoundShape was not created.", 0)
+
+        return reinterpret_cast<jlong> (shape);
     }
 
     /*
