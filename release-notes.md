@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.48 released on 14 April 2019
+
+ + Forced recalculation of pivot offset in `SixDofJoint.getPivotOffset()`.
+
 ## Version 1.0.47 released on 14 April 2019
 
  + Forced recalculation of joint angles in `SixDofJoint.getAngles()`.
