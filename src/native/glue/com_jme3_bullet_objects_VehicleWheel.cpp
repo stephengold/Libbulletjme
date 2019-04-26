@@ -43,40 +43,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_VehicleWheel
-     * Method:    getWheelLocation
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocation
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
-            jobject out) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
-
-        jmeBulletUtil::convert(env,
-                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(),
-                out);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_VehicleWheel
-     * Method:    getWheelRotation
-     * Signature: (JLcom/jme3/math/Matrix3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotation
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
-            jobject out) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
-
-        jmeBulletUtil::convert(env,
-                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
-                out);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_VehicleWheel
      * Method:    applyInfo
      * Signature: (JFFFFFFFFZF)V
      */
@@ -143,6 +109,20 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getDeltaRotation
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotation
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.", 0)
+
+        return vehicle->getWheelInfo(wheelIndex).m_deltaRotation;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
      * Method:    getSkidInfo
      * Signature: (J)F
      */
@@ -157,16 +137,36 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_VehicleWheel
-     * Method:    getDeltaRotation
-     * Signature: (J)F
+     * Method:    getWheelLocation
+     * Signature: (JLcom/jme3/math/Vector3f;)V
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotation
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocation
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jobject out) {
         btRaycastVehicle* vehicle
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.", 0)
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
 
-        return vehicle->getWheelInfo(wheelIndex).m_deltaRotation;
+        jmeBulletUtil::convert(env,
+                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(),
+                out);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getWheelRotation
+     * Signature: (JLcom/jme3/math/Matrix3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotation
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jobject out) {
+        btRaycastVehicle* vehicle
+                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
+        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+
+        jmeBulletUtil::convert(env,
+                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
+                out);
     }
 
 #ifdef __cplusplus

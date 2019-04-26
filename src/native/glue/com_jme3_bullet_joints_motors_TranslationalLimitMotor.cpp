@@ -42,62 +42,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    getLowerLimit
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getLowerLimit
-    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(vector, "The vector does not exist.",)
-
-        jmeBulletUtil::convert(env, &motor->m_lowerLimit, vector);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    setLowerLimit
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setLowerLimit
-    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(vector, "The vector does not exist.",)
-
-        jmeBulletUtil::convert(env, vector, &motor->m_lowerLimit);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    getUpperLimit
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getUpperLimit
-    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(vector, "The vector does not exist.",)
-
-        jmeBulletUtil::convert(env, &motor->m_upperLimit, vector);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    setUpperLimit
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setUpperLimit
-    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(vector, "The vector does not exist.",)
-
-        jmeBulletUtil::convert(env, vector, &motor->m_upperLimit);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
      * Method:    getAccumulatedImpulse
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -108,46 +52,6 @@ extern "C" {
         NULL_CHECK(vector, "The vector does not exist.",)
 
         jmeBulletUtil::convert(env, &motor->m_accumulatedImpulse, vector);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    setAccumulatedImpulse
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setAccumulatedImpulse
-    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(vector, "The vector does not exist.",)
-
-        jmeBulletUtil::convert(env, vector, &motor->m_accumulatedImpulse);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    getLimitSoftness
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getLimitSoftness
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.", 0)
-
-        return motor->m_limitSoftness;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    setLimitSoftness
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setLimitSoftness
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-
-        motor->m_limitSoftness = value;
     }
 
     /*
@@ -175,6 +79,33 @@ extern "C" {
 
         NULL_CHECK(storeResult, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &motor->m_stopERP, storeResult);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getLimitSoftness
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getLimitSoftness
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.", 0)
+
+        return motor->m_limitSoftness;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getLowerLimit
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getLowerLimit
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(vector, "The vector does not exist.",)
+
+        jmeBulletUtil::convert(env, &motor->m_lowerLimit, vector);
     }
 
     /*
@@ -221,6 +152,19 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getRestitution
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getRestitution
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.", 0)
+
+        return motor->m_restitution;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
      * Method:    getStopCFM
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -249,6 +193,47 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    getUpperLimit
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getUpperLimit
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(vector, "The vector does not exist.",)
+
+        jmeBulletUtil::convert(env, &motor->m_upperLimit, vector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setAccumulatedImpulse
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setAccumulatedImpulse
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(vector, "The vector does not exist.",)
+
+        jmeBulletUtil::convert(env, vector, &motor->m_accumulatedImpulse);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setDamping
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setDamping
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+
+        motor->m_damping = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
      * Method:    setERP
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -259,6 +244,33 @@ extern "C" {
         NULL_CHECK(vector, "The vector does not exist.",)
 
         jmeBulletUtil::convert(env, vector, &motor->m_stopERP);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setLimitSoftness
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setLimitSoftness
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+
+        motor->m_limitSoftness = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setLowerLimit
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setLowerLimit
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(vector, "The vector does not exist.",)
+
+        jmeBulletUtil::convert(env, vector, &motor->m_lowerLimit);
     }
 
     /*
@@ -291,6 +303,19 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setRestitution
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setRestitution
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+
+        motor->m_restitution = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
      * Method:    setStopCFM
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -301,45 +326,6 @@ extern "C" {
         NULL_CHECK(vector, "The vector does not exist.",)
 
         jmeBulletUtil::convert(env, vector, &motor->m_stopCFM);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    setDamping
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setDamping
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-
-        motor->m_damping = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    getRestitution
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_getRestitution
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.", 0)
-
-        return motor->m_restitution;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
-     * Method:    setRestitution
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setRestitution
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
-
-        motor->m_restitution = value;
     }
 
     /*
@@ -356,6 +342,19 @@ extern "C" {
         jmeBulletUtil::convert(env, vector, &motor->m_targetVelocity);
     }
 
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setUpperLimit
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setUpperLimit
+    (JNIEnv *env, jobject object, jlong motorId, jobject vector) {
+        btTranslationalLimitMotor* motor = reinterpret_cast<btTranslationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(vector, "The vector does not exist.",)
+
+        jmeBulletUtil::convert(env, vector, &motor->m_upperLimit);
+    }
 
 #ifdef __cplusplus
 }

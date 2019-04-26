@@ -55,6 +55,19 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getBounce
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getBounce
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
+
+        return motor->m_bounce;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
      * Method:    getCurrentPosition
      * Signature: (J)F
      */
@@ -68,28 +81,28 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getLoLimit
+     * Method:    getDamping
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getLoLimit
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getDamping
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
 
-        return motor->m_loLimit;
+        return motor->m_damping;
     }
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setLoLimit
-     * Signature: (JF)V
+     * Method:    getERP
+     * Signature: (J)F
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setLoLimit
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getERP
+    (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
 
-        motor->m_loLimit = value;
+        return motor->m_stopERP;
     }
 
     /*
@@ -107,41 +120,41 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setHiLimit
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setHiLimit
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
-
-        motor->m_hiLimit = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getTargetVelocity
+     * Method:    getLimitSoftness
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getTargetVelocity
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getLimitSoftness
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
 
-        return motor->m_targetVelocity;
+        return motor->m_limitSoftness;
     }
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setTargetVelocity
-     * Signature: (JF)V
+     * Method:    getLoLimit
+     * Signature: (J)F
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setTargetVelocity
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getLoLimit
+    (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
 
-        motor->m_targetVelocity = value;
+        return motor->m_loLimit;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getMaxLimitForce
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getMaxLimitForce
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
+
+        return motor->m_maxLimitForce;
     }
 
     /*
@@ -185,6 +198,136 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    getTargetVelocity
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getTargetVelocity
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
+
+        return motor->m_targetVelocity;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    isEnableMotor
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_isEnableMotor
+    (JNIEnv *env, jobject object, jlong motorId) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", false)
+
+        return motor->m_enableMotor;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setBounce
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setBounce
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_bounce = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setDamping
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setDamping
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_damping = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setEnableMotor
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setEnableMotor
+    (JNIEnv *env, jobject object, jlong motorId, jboolean value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_enableMotor = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setERP
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setERP
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_stopERP = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setHiLimit
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setHiLimit
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_hiLimit = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setLimitSoftness
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setLimitSoftness
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_limitSoftness = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setLoLimit
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setLoLimit
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_loLimit = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setMaxLimitForce
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setMaxLimitForce
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
+
+        motor->m_maxLimitForce = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
      * Method:    setMaxMotorForce
      * Signature: (JF)V
      */
@@ -224,158 +367,15 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getMaxLimitForce
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getMaxLimitForce
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
-
-        return motor->m_maxLimitForce;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setMaxLimitForce
+     * Method:    setTargetVelocity
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setMaxLimitForce
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setTargetVelocity
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
         NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
 
-        motor->m_maxLimitForce = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getDamping
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getDamping
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
-
-        return motor->m_damping;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setDamping
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setDamping
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
-
-        motor->m_damping = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getLimitSoftness
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getLimitSoftness
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
-
-        return motor->m_limitSoftness;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setLimitSoftness
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setLimitSoftness
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
-
-        motor->m_limitSoftness = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getERP
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getERP
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
-
-        return motor->m_stopERP;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setERP
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setERP
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
-
-        motor->m_stopERP = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    getBounce
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_getBounce
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", 0)
-
-        return motor->m_bounce;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setBounce
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setBounce
-    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
-
-        motor->m_bounce = value;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    isEnableMotor
-     * Signature: (J)Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_isEnableMotor
-    (JNIEnv *env, jobject object, jlong motorId) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.", false)
-
-        return motor->m_enableMotor;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
-     * Method:    setEnableMotor
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setEnableMotor
-    (JNIEnv *env, jobject object, jlong motorId, jboolean value) {
-        btRotationalLimitMotor* motor = reinterpret_cast<btRotationalLimitMotor*> (motorId);
-        NULL_CHECK(motor, "The btRotationalLimitMotor does not exist.",)
-
-        motor->m_enableMotor = value;
+        motor->m_targetVelocity = value;
     }
 
 #ifdef __cplusplus
