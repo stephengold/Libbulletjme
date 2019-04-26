@@ -142,9 +142,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btKinematicCharacterController* character
                 = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
 
-        btVector3 a_vel = character->getAngularVelocity();
+        const btVector3& a_vel = character->getAngularVelocity();
 
         NULL_CHECK(value, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &a_vel, value);
@@ -212,9 +212,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btKinematicCharacterController* character
                 = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
 
-        btVector3 g = character->getGravity();
+        const btVector3& g = character->getGravity();
 
         NULL_CHECK(value, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &g, value);
@@ -257,9 +257,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong objectId, jobject value) {
         btKinematicCharacterController* character
                 = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
 
-        btVector3 l_vel = character->getLinearVelocity();
+        const btVector3& l_vel = character->getLinearVelocity();
 
         NULL_CHECK(value, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &l_vel, value);
@@ -331,9 +331,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong characterId, jobject storeVector) {
         btKinematicCharacterController* character
                 = reinterpret_cast<btKinematicCharacterController*> (characterId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
 
-        btVector3 direction = character->getUp();
+        const btVector3& direction = character->getUp();
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &direction, storeVector);

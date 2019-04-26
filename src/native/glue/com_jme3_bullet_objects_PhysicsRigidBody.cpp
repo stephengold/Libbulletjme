@@ -332,9 +332,9 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaLocal
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        NULL_CHECK(body, "The btRigidBody does not exist.",);
 
-        btVector3 invInertia = body->getInvInertiaDiagLocal();
+        const btVector3& invInertia = body->getInvInertiaDiagLocal();
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &invInertia, storeVector);
@@ -348,9 +348,9 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaWorld
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeMatrix) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        NULL_CHECK(body, "The btRigidBody does not exist.",);
 
-        btMatrix3x3 invInertia = body->getInvInertiaTensorWorld();
+        const btMatrix3x3& invInertia = body->getInvInertiaTensorWorld();
 
         NULL_CHECK(storeMatrix, "The store matrix does not exist.",)
         jmeBulletUtil::convert(env, &invInertia, storeMatrix);

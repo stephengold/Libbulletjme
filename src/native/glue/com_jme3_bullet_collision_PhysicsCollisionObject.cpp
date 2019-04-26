@@ -97,9 +97,10 @@ extern "C" {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
         NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
-        NULL_CHECK(storeVector, "The storeVector does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",);
 
-                const btVector3& frictionComponents = collisionObject->getAnisotropicFriction();
+        const btVector3& frictionComponents
+                = collisionObject->getAnisotropicFriction();
         jmeBulletUtil::convert(env, &frictionComponents, storeVector);
     }
 
@@ -244,9 +245,9 @@ extern "C" {
         btCollisionObject* collisionObject
                 = reinterpret_cast<btCollisionObject*> (objectId);
         NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
-        NULL_CHECK(storeVector, "The storeVector does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",);
 
-        btVector3& location = collisionObject->getWorldTransform().getOrigin();
+        const btVector3& location = collisionObject->getWorldTransform().getOrigin();
         jmeBulletUtil::convert(env, &location, storeVector);
     }
 

@@ -192,7 +192,7 @@ extern "C" {
                 = reinterpret_cast<btRaycastVehicle*> (vehicleId);
         NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",);
 
-        btVector3 forwardVector = vehicle->getForwardVector();
+        const btVector3& forwardVector = vehicle->getForwardVector();
 
         NULL_CHECK(out, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &forwardVector, out);
