@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.50 released on 25 April 2019
+
+ + Added getters for frame transforms of cone, hinge, and slider joints.
+ + Built using Gradle v5.3.1
+
 ## Version 1.0.49 released on 14 April 2019
 
 Bugfix: `NullPointerException` thrown by `NULL_CHECK` in
