@@ -25,6 +25,22 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
 
 /*
  * Class:     com_jme3_bullet_joints_ConeJoint
+ * Method:    getFrameOffsetA
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetA
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_ConeJoint
+ * Method:    getFrameOffsetB
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetB
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_ConeJoint
  * Method:    setAngularOnly
  * Signature: (JZ)V
  */

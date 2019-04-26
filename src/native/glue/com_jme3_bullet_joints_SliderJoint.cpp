@@ -31,7 +31,7 @@
  */
 
 /*
- * Author: Normen Hansen
+ * Author: Normen Hansen TODO re-order methods
  */
 #include "com_jme3_bullet_joints_SliderJoint.h"
 #include "jmeBulletUtil.h"
@@ -220,6 +220,38 @@ extern "C" {
         NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
 
         joint->setDampingDirLin(value);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SliderJoint
+     * Method:    getFrameOffsetA
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_getFrameOffsetA
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeTransform) {
+        btSliderConstraint* joint
+                = reinterpret_cast<btSliderConstraint*> (jointId);
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+        NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+
+        const btTransform& transform = joint->getFrameOffsetA();
+        jmeBulletUtil::convert(env, &transform, storeTransform);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SliderJoint
+     * Method:    getFrameOffsetB
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_getFrameOffsetB
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeTransform) {
+        btSliderConstraint* joint
+                = reinterpret_cast<btSliderConstraint*> (jointId);
+        NULL_CHECK(joint, "The btSliderConstraint does not exist.",)
+        NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+
+        const btTransform& transform = joint->getFrameOffsetB();
+        jmeBulletUtil::convert(env, &transform, storeTransform);
     }
 
     /*

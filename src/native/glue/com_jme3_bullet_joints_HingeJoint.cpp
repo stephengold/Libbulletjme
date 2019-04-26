@@ -136,6 +136,38 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getFrameOffsetA
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetA
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeTransform) {
+        btHingeConstraint* joint
+                = reinterpret_cast<btHingeConstraint*> (jointId);
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+
+        const btTransform& transform = joint->getFrameOffsetA();
+        jmeBulletUtil::convert(env, &transform, storeTransform);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
+     * Method:    getFrameOffsetB
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetB
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeTransform) {
+        btHingeConstraint* joint
+                = reinterpret_cast<btHingeConstraint*> (jointId);
+        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+
+        const btTransform& transform = joint->getFrameOffsetB();
+        jmeBulletUtil::convert(env, &transform, storeTransform);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_HingeJoint
      * Method:    getHingeAngle
      * Signature: (J)F
      */

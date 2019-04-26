@@ -41,6 +41,22 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngul
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
+ * Method:    getFrameOffsetA
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetA
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_HingeJoint
+ * Method:    getFrameOffsetB
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetB
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_HingeJoint
  * Method:    getHingeAngle
  * Signature: (J)F
  */

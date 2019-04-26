@@ -73,6 +73,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SliderJoint_getDampingOrtho
 
 /*
  * Class:     com_jme3_bullet_joints_SliderJoint
+ * Method:    getFrameOffsetA
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_getFrameOffsetA
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_SliderJoint
+ * Method:    getFrameOffsetB
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SliderJoint_getFrameOffsetB
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_SliderJoint
  * Method:    getLowerAngLimit
  * Signature: (J)F
  */

@@ -104,6 +104,38 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_ConeJoint
+     * Method:    getFrameOffsetA
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetA
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeTransform) {
+        btConeTwistConstraint* joint
+                = reinterpret_cast<btConeTwistConstraint*> (jointId);
+        NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
+        NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+
+        const btTransform& transform = joint->getFrameOffsetA();
+        jmeBulletUtil::convert(env, &transform, storeTransform);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_ConeJoint
+     * Method:    getFrameOffsetB
+     * Signature: (JLcom/jme3/math/Transform;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetB
+    (JNIEnv * env, jobject object, jlong jointId, jobject storeTransform) {
+        btConeTwistConstraint* joint
+                = reinterpret_cast<btConeTwistConstraint*> (jointId);
+        NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
+        NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+
+        const btTransform& transform = joint->getFrameOffsetB();
+        jmeBulletUtil::convert(env, &transform, storeTransform);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_ConeJoint
      * Method:    setAngularOnly
      * Signature: (JZ)V
      */
