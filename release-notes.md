@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.51 released on 29 April 2019
+
+ + Clarified the buffer-reading loops in `PhysicsSoftBody`.
+ + Plugged a memory leak in `MultiSphere`.
+
 ## Version 1.0.50 released on 25 April 2019
 
  + Added getters for frame transforms of cone, hinge, and slider joints.
