@@ -339,10 +339,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getPhysicsTr
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getRestLenghtScale
+ * Method:    getRestLengthScale
  * Signature: (J)F
  */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getRestLenghtScale
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getRestLengthScale
   (JNIEnv *, jobject, jlong);
 
 /*
@@ -483,10 +483,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPose
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    setRestLenghtScale
+ * Method:    setRestLengthScale
  * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setRestLenghtScale
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setRestLengthScale
   (JNIEnv *, jobject, jlong, jfloat);
 
 /*

@@ -869,10 +869,10 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getRestLenghtScale TODO rename
+     * Method:    getRestLengthScale
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getRestLenghtScale
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getRestLengthScale
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
@@ -882,10 +882,10 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    setRestLenghtScale TODO rename
+     * Method:    setRestLengthScale
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setRestLenghtScale
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setRestLengthScale
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
