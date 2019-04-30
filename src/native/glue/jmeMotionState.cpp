@@ -85,5 +85,5 @@ bool jmeMotionState::applyTransform(JNIEnv* env, jobject location, jobject rotat
 }
 
 jmeMotionState::~jmeMotionState() {
-    free(trans);
+    delete trans;
 }
