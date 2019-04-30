@@ -111,7 +111,9 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(byteBuffer) - 1;
 
         for (int i = 0; i < capacity;) {
-            body->appendLink(link[i++], link[i++]);
+            int ni1 = link[i++];
+            int ni2 = link[i++];
+            body->appendLink(ni1, ni2);
         }
     }
 
@@ -129,7 +131,9 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(shortBuffer) - 1;
 
         for (int i = 0; i < capacity;) {
-            body->appendLink(link[i++], link[i++]);
+            int ni1 = link[i++];
+            int ni2 = link[i++];
+            body->appendLink(ni1, ni2);
         }
     }
 
@@ -147,7 +151,9 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(intBuffer) - 1;
 
         for (int i = 0; i < capacity;) {
-            body->appendLink(link[i++], link[i++]);
+            int ni1 = link[i++];
+            int ni2 = link[i++];
+            body->appendLink(ni1, ni2);
         }
     }
 
@@ -165,7 +171,10 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(byteBuffer) - 2;
 
         for (int i = 0; i < capacity;) {
-            body->appendFace(face[i++], face[i++], face[i++]);
+            int ni1 = face[i++];
+            int ni2 = face[i++];
+            int ni3 = face[i++];
+            body->appendFace(ni1, ni2, ni3);
         }
     }
 
@@ -183,7 +192,10 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(shortBuffer) - 2;
 
         for (int i = 0; i < capacity;) {
-            body->appendFace(face[i++], face[i++], face[i++]);
+            int ni1 = face[i++];
+            int ni2 = face[i++];
+            int ni3 = face[i++];
+            body->appendFace(ni1, ni2, ni3);
         }
     }
 
@@ -201,7 +213,10 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(intBuffer) - 2;
 
         for (int i = 0; i < capacity;) {
-            body->appendFace(face[i++], face[i++], face[i++]);
+            int ni1 = face[i++];
+            int ni2 = face[i++];
+            int ni3 = face[i++];
+            body->appendFace(ni1, ni2, ni3);
         }
     }
 
@@ -219,7 +234,11 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(byteBuffer) - 3;
 
         for (int i = 0; i < capacity;) {
-            body->appendTetra(tetra[i++], tetra[i++], tetra[i++], tetra[i++]);
+            int ni1 = tetra[i++];
+            int ni2 = tetra[i++];
+            int ni3 = tetra[i++];
+            int ni4 = tetra[i++];
+            body->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
 
@@ -237,7 +256,11 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(shortBuffer) - 3;
 
         for (int i = 0; i < capacity;) {
-            body->appendTetra(tetra[i++], tetra[i++], tetra[i++], tetra[i++]);
+            int ni1 = tetra[i++];
+            int ni2 = tetra[i++];
+            int ni3 = tetra[i++];
+            int ni4 = tetra[i++];
+            body->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
 
@@ -255,7 +278,11 @@ extern "C" {
         const int capacity = env->GetDirectBufferCapacity(intBuffer) - 3;
 
         for (int i = 0; i < capacity;) {
-            body->appendTetra(tetra[i++], tetra[i++], tetra[i++], tetra[i++]);
+            int ni1 = tetra[i++];
+            int ni2 = tetra[i++];
+            int ni3 = tetra[i++];
+            int ni4 = tetra[i++];
+            body->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
 
