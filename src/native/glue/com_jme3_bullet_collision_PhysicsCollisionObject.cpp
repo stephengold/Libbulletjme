@@ -364,6 +364,23 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    isInWorld
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_isInWorld
+    (JNIEnv *env, jobject object, jlong objectId) {
+        btCollisionObject* collisionObject
+                = reinterpret_cast<btCollisionObject*> (objectId);
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",
+                false);
+
+        jboolean inWorld = (collisionObject->getBroadphaseHandle() != 0);
+
+        return inWorld;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    setAnisotropicFriction
      * Signature: (JLcom/jme3/math/Vector3f;I)V
      */

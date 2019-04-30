@@ -219,6 +219,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    isInWorld
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_isInWorld
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    setAnisotropicFriction
  * Signature: (JLcom/jme3/math/Vector3f;I)V
  */
