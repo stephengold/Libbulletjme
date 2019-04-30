@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.53 released on 29 April 2019
+
+Try another fix for `MultiSphere`.
+
 ## Version 1.0.52 released on 29 April 2019
 
 Roll back half of the recent change to `MultiSphere`.
