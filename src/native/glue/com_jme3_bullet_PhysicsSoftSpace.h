@@ -15,14 +15,6 @@ extern "C" {
 #define com_jme3_bullet_PhysicsSoftSpace_AXIS_Z 2L
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
- * Method:    createPhysicsSoftSpace
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZ)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftSpace
-  (JNIEnv *, jobject, jobject, jobject, jint, jboolean);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSoftSpace
  * Method:    addSoftBody
  * Signature: (JJ)V
  */
@@ -31,11 +23,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
- * Method:    removeSoftBody
- * Signature: (JJ)V
+ * Method:    createPhysicsSoftSpace
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZ)J
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
-  (JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftSpace
+  (JNIEnv *, jobject, jobject, jobject, jint, jboolean);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
@@ -44,6 +36,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getWorldInfo
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSoftSpace
+ * Method:    removeSoftBody
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
+  (JNIEnv *, jobject, jlong, jlong);
 
 #ifdef __cplusplus
 }

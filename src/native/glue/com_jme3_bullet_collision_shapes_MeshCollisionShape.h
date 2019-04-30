@@ -7,6 +7,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_jme3_bullet_collision_shapes_MeshCollisionShape_floatSize
+#define com_jme3_bullet_collision_shapes_MeshCollisionShape_floatSize 4L
+#undef com_jme3_bullet_collision_shapes_MeshCollisionShape_intSize
+#define com_jme3_bullet_collision_shapes_MeshCollisionShape_intSize 4L
+#undef com_jme3_bullet_collision_shapes_MeshCollisionShape_numAxes
+#define com_jme3_bullet_collision_shapes_MeshCollisionShape_numAxes 3L
+#undef com_jme3_bullet_collision_shapes_MeshCollisionShape_vpt
+#define com_jme3_bullet_collision_shapes_MeshCollisionShape_vpt 3L
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    createShape

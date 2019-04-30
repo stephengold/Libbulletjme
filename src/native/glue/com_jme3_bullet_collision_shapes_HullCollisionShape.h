@@ -7,6 +7,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_jme3_bullet_collision_shapes_HullCollisionShape_floatSize
+#define com_jme3_bullet_collision_shapes_HullCollisionShape_floatSize 4L
+#undef com_jme3_bullet_collision_shapes_HullCollisionShape_numAxes
+#define com_jme3_bullet_collision_shapes_HullCollisionShape_numAxes 3L
 /*
  * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
  * Method:    countHullVertices
