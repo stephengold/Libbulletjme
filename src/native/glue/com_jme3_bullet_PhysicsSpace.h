@@ -55,14 +55,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    addVehicle
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addVehicle
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    createPhysicsSpace
  * Signature: (FFFFFFIZ)J
  */
@@ -131,14 +123,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    removeVehicle
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeVehicle
   (JNIEnv *, jobject, jlong, jlong);
 
 /*

@@ -25,27 +25,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getA
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
- * Method:    getBoundingSphere
- * Signature: (JLcom/jme3/math/Vector3f;)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getBoundingSphere
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    isConcave
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConcave
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_CollisionShape
- * Method:    setLocalScaling
- * Signature: (JFFF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling__JFFF
-  (JNIEnv *, jobject, jlong, jfloat, jfloat, jfloat);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape

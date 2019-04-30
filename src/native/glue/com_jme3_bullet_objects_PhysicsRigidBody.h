@@ -141,14 +141,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularV
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getFriction
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getFriction
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    getGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -205,38 +197,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVe
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getPhysicsLocation
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsLocation
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getPhysicsRotation
- * Signature: (JLcom/jme3/math/Quaternion;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotation
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getPhysicsRotationMatrix
- * Signature: (JLcom/jme3/math/Matrix3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotationMatrix
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getRestitution
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestitution
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    isInWorld
  * Signature: (J)Z
  */
@@ -290,22 +250,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCollisio
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setDamping
   (JNIEnv *, jobject, jlong, jfloat, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    setFriction
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setFriction
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    setGravity
- * Signature: (JFFF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity__JFFF
-  (JNIEnv *, jobject, jlong, jfloat, jfloat, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
@@ -378,14 +322,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsR
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotation__JLcom_jme3_math_Quaternion_2
   (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    setRestitution
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setRestitution
-  (JNIEnv *, jobject, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody

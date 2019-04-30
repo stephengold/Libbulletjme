@@ -67,30 +67,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverla
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsGhostObject
- * Method:    getPhysicsLocation
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsLocation
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsGhostObject
- * Method:    getPhysicsRotation
- * Signature: (JLcom/jme3/math/Quaternion;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsRotation
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsGhostObject
- * Method:    getPhysicsRotationMatrix
- * Signature: (JLcom/jme3/math/Matrix3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsRotationMatrix
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsGhostObject
  * Method:    setGhostFlags
  * Signature: (J)V
  */

@@ -89,14 +89,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularUpperLi
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofJoint
- * Method:    setFrames
- * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setFrames
-  (JNIEnv *, jobject, jlong, jobject, jobject);
-
-/*
- * Class:     com_jme3_bullet_joints_SixDofJoint
  * Method:    setLinearLowerLimit
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
