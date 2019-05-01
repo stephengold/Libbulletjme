@@ -167,10 +167,10 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
-     * Method:    setMacDisplacement TODO rename
+     * Method:    setMaxDisplacement
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setMacDisplacement
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setMaxDisplacement
     (JNIEnv *env, jobject object, jlong worldId, jfloat value) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
