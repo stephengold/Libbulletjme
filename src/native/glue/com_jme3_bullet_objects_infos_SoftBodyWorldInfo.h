@@ -17,18 +17,50 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_cre
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    setSoftBodyWorldInfo
- * Signature: (JJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setSoftBodyWorldInfo
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
  * Method:    getAirDensity
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getAirDensity
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+ * Method:    getGravity
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getGravity
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+ * Method:    getMaxDisplacement
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getMaxDisplacement
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+ * Method:    getWaterDensity
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterDensity
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+ * Method:    getWaterNormal
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterNormal
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+ * Method:    getWaterOffset
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterOffset
   (JNIEnv *, jobject, jlong);
 
 /*
@@ -41,43 +73,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setA
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    getWaterDensity
- * Signature: (J)F
+ * Method:    setGravity
+ * Signature: (JLcom/jme3/math/Vector3f;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterDensity
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    setWaterDensity
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterDensity
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    getWaterOffset
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterOffset
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    setWaterOffset
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterOffset
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    getMaxDisplacement
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getMaxDisplacement
-  (JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setGravity
+  (JNIEnv *, jobject, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
@@ -89,11 +89,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setM
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    getWaterNormal
- * Signature: (JLcom/jme3/math/Vector3f;)V
+ * Method:    setSoftBodyWorldInfo
+ * Signature: (JJ)J
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterNormal
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setSoftBodyWorldInfo
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+ * Method:    setWaterDensity
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterDensity
+  (JNIEnv *, jobject, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
@@ -105,19 +113,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setW
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    getGravity
- * Signature: (JLcom/jme3/math/Vector3f;)V
+ * Method:    setWaterOffset
+ * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getGravity
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
- * Method:    setGravity
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setGravity
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterOffset
+  (JNIEnv *, jobject, jlong, jfloat);
 
 #ifdef __cplusplus
 }
