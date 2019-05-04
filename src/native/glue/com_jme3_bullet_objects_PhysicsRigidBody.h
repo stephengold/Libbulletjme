@@ -197,14 +197,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVe
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    isInWorld
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isInWorld
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    setAngularDamping
  * Signature: (JF)V
  */
