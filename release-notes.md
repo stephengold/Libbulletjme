@@ -1,5 +1,22 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.55 released on 5 May 2019
+
+ + Removed the redundant `getBoundingCenter()` methods from the
+   `PhysicsSoftBody` class.
+ + Renamed the `setMacDisplacement()` method in the `SoftBodyWorldInfo` class.
+ + Upgraded the Bullet sources to match SHA1 ID=f4f5f708 of the bullet3 project.
+ + Added 9 methods to `PhysicsSoftBody`:
+   + `addVelocity()`
+   + `getAnchorCount()`
+   + `getClustersPositions()`
+   + `getNodeLocation()`
+   + `getNodeNormal()`
+   + `getNodesNormals()`
+   + `getNodesVelocities()`
+   + `getNodeVelocity()`
+   + `setVelocity()`
+
 ## Version 1.0.54 released on 30 April 2019
 
  + Renamed the `getRestLenghtScale()` and `setRestLenghtScale()` methods
