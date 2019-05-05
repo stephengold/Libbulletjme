@@ -99,6 +99,40 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    addVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity__JLcom_jme3_math_Vector3f_2
+    (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
+        btVector3 bulletVector;
+        jmeBulletUtil::convert(env, velocityVector, &bulletVector);
+
+        body->addVelocity(bulletVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    addVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;I)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity__JLcom_jme3_math_Vector3f_2I
+    (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector, jint nodeId) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
+        btVector3 bulletVector;
+        jmeBulletUtil::convert(env, velocityVector, &bulletVector);
+
+        body->addVelocity(bulletVector, nodeId);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendAnchor
      * Signature: (JIJLcom/jme3/math/Vector3f;ZF)V
      */
@@ -467,21 +501,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getBoundingCenter
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getBoundingCenter
-    (JNIEnv *env, jobject object, jlong bodyId, jobject vec) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        btVector3 result;
-        result = getBoundingCenter(body);
-        jmeBulletUtil::convert(env, &result, vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getClusterCount
      * Signature: (J)I
      */
@@ -491,6 +510,28 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
 
         return body->clusterCount();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClustersPositions
+     * Signature: (JLjava/nio/FloatBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersPositions
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
+        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
+        int numClusters = body->m_clusters.size();
+        for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
+            const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
+            bufPtr[0] = cluster->m_com.getX();
+            bufPtr[1] = cluster->m_com.getY();
+            bufPtr[2] = cluster->m_com.getZ();
+            bufPtr += 3;
+        }
     }
 
     /*
@@ -635,6 +676,59 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getNodeLocation
+     * Signature: (JILcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeLocation
+    (JNIEnv * env, jobject object, jlong bodyId, jint nodeIndex, jobject storeVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeVector, "The store vector does not exist.",);
+        const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        jmeBulletUtil::convert(env, &node.m_x, storeVector);
+
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getNodeNormal
+     * Signature: (JILcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeNormal
+    (JNIEnv * env, jobject object, jlong bodyId, jint nodeIndex, jobject storeVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeVector, "The store vector does not exist.",);
+        const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        jmeBulletUtil::convert(env, &node.m_n, storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getNodesNormals
+     * Signature: (JLjava/nio/FloatBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesNormals
+    (JNIEnv * env, jobject object, jlong bodyId, jobject storeBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
+        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
+        int numNodes = body->m_nodes.size();
+        for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
+            const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+            bufPtr[0] = node.m_n.getX();
+            bufPtr[1] = node.m_n.getY();
+            bufPtr[2] = node.m_n.getZ();
+            bufPtr += 3;
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getNodesPositions
      * Signature: (JLjava/nio/FloatBuffer;)V
      */
@@ -654,6 +748,43 @@ extern "C" {
             out[buffi++] = n.m_x.getY();
             out[buffi++] = n.m_x.getZ();
         }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getNodesVelocities
+     * Signature: (JLjava/nio/FloatBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesVelocities
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
+        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
+        int numNodes = body->m_nodes.size();
+        for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
+            const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+            bufPtr[0] = node.m_v.getX();
+            bufPtr[1] = node.m_v.getY();
+            bufPtr[2] = node.m_v.getZ();
+            bufPtr += 3;
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getNodeVelocity
+     * Signature: (JILcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex, jobject storeVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeVector, "The store vector does not exist.",);
+        const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        jmeBulletUtil::convert(env, &node.m_v, storeVector);
     }
 
     /*
@@ -1028,6 +1159,23 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->setTotalMass(mass, fromFaces);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
+        btVector3 bulletVector;
+        jmeBulletUtil::convert(env, velocityVector, &bulletVector);
+
+        body->setVelocity(bulletVector);
     }
 
     /*
