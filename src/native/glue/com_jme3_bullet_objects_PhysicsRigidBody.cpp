@@ -186,7 +186,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jfloat mass, jlong motionstatId, jlong shapeId) {
         jmeClasses::initJavaClasses(env);
 
-        btMotionState* motionState = reinterpret_cast<btMotionState*> (motionstatId);
+        btMotionState* motionState
+                = reinterpret_cast<btMotionState*> (motionstatId);
         NULL_CHECK(motionState, "The btMotionState does not exist.", 0)
 
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
@@ -197,7 +198,8 @@ extern "C" {
             shape->calculateLocalInertia(mass, localInertia);
         }
 
-        btRigidBody* body = new btRigidBody(mass, motionState, shape, localInertia);
+        btRigidBody* body
+                = new btRigidBody(mass, motionState, shape, localInertia);
         NULL_CHECK(body, "A btRigidBody was not created.", 0)
         body->setUserPointer(NULL);
 
@@ -681,13 +683,15 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinematic
     (JNIEnv *env, jobject object, jlong bodyId, jboolean value) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        NULL_CHECK(body, "The btRigidBody does not exist.",);
 
+        int flags = body->getCollisionFlags();
+        int bitmask = btCollisionObject::CF_KINEMATIC_OBJECT;
         if (value) {
-            body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
+            body->setCollisionFlags(flags | bitmask);
             body->setActivationState(DISABLE_DEACTIVATION);
         } else {
-            body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_KINEMATIC_OBJECT);
+            body->setCollisionFlags(flags & ~bitmask);
             body->activate(true);
             body->forceActivationState(ACTIVE_TAG);
         }
@@ -750,8 +754,8 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
 
-        NULL_CHECK(value, "The location vector does not exist.",)
-                ((jmeMotionState*) body->getMotionState())->setKinematicLocation(env, value);
+        NULL_CHECK(value, "The location vector does not exist.",);
+        ((jmeMotionState*) body->getMotionState())->setKinematicLocation(env, value);
 
         body->setCenterOfMassTransform(((jmeMotionState*) body->getMotionState())->worldTransform);
     }
@@ -766,8 +770,8 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
 
-        NULL_CHECK(value, "The rotation matrix does not exist.",)
-                ((jmeMotionState*) body->getMotionState())->setKinematicRotation(env, value);
+        NULL_CHECK(value, "The rotation matrix does not exist.",);
+        ((jmeMotionState*) body->getMotionState())->setKinematicRotation(env, value);
 
         body->setCenterOfMassTransform(((jmeMotionState*) body->getMotionState())->worldTransform);
     }
@@ -782,8 +786,8 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
 
-        NULL_CHECK(value, "The rotation quaternion does not exist.",)
-                ((jmeMotionState*) body->getMotionState())->setKinematicRotationQuat(env, value);
+        NULL_CHECK(value, "The rotation quaternion does not exist.",);
+        ((jmeMotionState*) body->getMotionState())->setKinematicRotationQuat(env, value);
 
         body->setCenterOfMassTransform(((jmeMotionState*) body->getMotionState())->worldTransform);
     }
@@ -824,10 +828,12 @@ extern "C" {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
 
+        int flags = body->getCollisionFlags();
+        int bitmask = btCollisionObject::CF_STATIC_OBJECT;
         if (value) {
-            body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
+            body->setCollisionFlags(flags | bitmask);
         } else {
-            body->setCollisionFlags(body->getCollisionFlags() & ~btCollisionObject::CF_STATIC_OBJECT);
+            body->setCollisionFlags(flags & ~bitmask);
         }
     }
 
