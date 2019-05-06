@@ -56,18 +56,9 @@ void jmePhysicsSpace::attachThread() {
 #endif
 }
 
-JNIEnv* jmePhysicsSpace::getEnv() {
-    attachThread();
-    return this->env;
-}
-
-void jmePhysicsSpace::stepSimulation(jfloat tpf, jint maxSteps, jfloat accuracy) {
-    dynamicsWorld->stepSimulation(tpf, maxSteps, accuracy);
-}
-
-void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId, jboolean threading /*unused*/) {
-    btCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
-
+void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
+        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId,
+        jboolean threading /*unused*/) {
     btVector3 min = btVector3(minX, minY, minZ);
     btVector3 max = btVector3(maxX, maxY, maxZ);
 
@@ -88,16 +79,19 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
             break;
     }
 
-
     // Use the default collision dispatcher.
-    btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+    btCollisionConfiguration* collisionConfiguration
+            = new btDefaultCollisionConfiguration();
+    btCollisionDispatcher* dispatcher
+            = new btCollisionDispatcher(collisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 
     // Use the default constraint solver.
     btConstraintSolver* solver = new btSequentialImpulseConstraintSolver();
 
     //create dynamics world
-    btDiscreteDynamicsWorld* world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+    btDiscreteDynamicsWorld* world
+            = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
     dynamicsWorld = world;
     dynamicsWorld->setWorldUserInfo(this);
 
@@ -108,8 +102,6 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
         // return true when pairs need collision
 
         virtual bool needBroadphaseCollision(btBroadphaseProxy* proxy0, btBroadphaseProxy * proxy1) const {
-            //            bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
-            //            collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
             bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
             collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
             if (collides) {
@@ -127,7 +119,8 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
                         jobject javaCollisionObject0 = env->NewLocalRef(up0->javaCollisionObject);
                         jobject javaCollisionObject1 = env->NewLocalRef(up1->javaCollisionObject);
 
-                        jboolean notifyResult = env->CallBooleanMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_notifyCollisionGroupListeners, javaCollisionObject0, javaCollisionObject1);
+                        jboolean notifyResult
+                                = env->CallBooleanMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_notifyCollisionGroupListeners, javaCollisionObject0, javaCollisionObject1);
 
                         env->DeleteLocalRef(javaPhysicsSpace);
                         env->DeleteLocalRef(javaCollisionObject0);
@@ -234,8 +227,17 @@ btDynamicsWorld* jmePhysicsSpace::getDynamicsWorld() {
     return dynamicsWorld;
 }
 
+JNIEnv* jmePhysicsSpace::getEnv() {
+    attachThread();
+    return this->env;
+}
+
 jobject jmePhysicsSpace::getJavaPhysicsSpace() {
     return javaPhysicsSpace;
+}
+
+void jmePhysicsSpace::stepSimulation(jfloat tpf, jint maxSteps, jfloat accuracy) {
+    dynamicsWorld->stepSimulation(tpf, maxSteps, accuracy);
 }
 
 jmePhysicsSpace::~jmePhysicsSpace() {
