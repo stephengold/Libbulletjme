@@ -1,12 +1,22 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.56 released on 6 May 2019
+
+ + Copied the `needBroadphaseCollision` code from `jmePhysicsSpace.cpp`
+   to `jme3PhysicsSoftSpace.cpp`.
+ + Added `getClusterCenter()` and `setNodeVelocity()` methods to
+   the `PhysicsSoftBody` class.
+ + Removed all null checks for `new` operations:  not necessary.
+ + Implemented the `bt32BitAxisSweep3` option in `jme3PhysicsSoftSpace`.
+ + Registered the `btGImpactCollisionAlgorithm` in `jme3PhysicsSoftSpace`.
+
 ## Version 1.0.55 released on 5 May 2019
 
  + Removed the redundant `getBoundingCenter()` methods from the
    `PhysicsSoftBody` class.
  + Renamed the `setMacDisplacement()` method in the `SoftBodyWorldInfo` class.
  + Upgraded the Bullet sources to match SHA1 ID=f4f5f708 of the bullet3 project.
- + Added 9 methods to `PhysicsSoftBody`:
+ + Added 9 methods to the `PhysicsSoftBody` class:
    + `addVelocity()`
    + `getAnchorCount()`
    + `getClustersPositions()`
