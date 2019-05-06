@@ -243,6 +243,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorCou
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getClusterCenter
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterCenter
+  (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getClusterCount
  * Signature: (J)I
  */
@@ -339,18 +347,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeNorma
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getNodesPositions
- * Signature: (JLjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesPositions
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getNodesNormals
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesNormals
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getNodesPositions
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesPositions
   (JNIEnv *, jobject, jlong, jobject);
 
 /*
@@ -496,6 +504,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMass
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMasses
   (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    setNodeVelocity
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNodeVelocity
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
