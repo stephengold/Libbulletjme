@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2019 jMonkeyEngine
+ * Copyright (c) 2009-2015 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,6 @@
  */
 #include "jmePhysicsSoftSpace.h"
 #include "jmeBulletUtil.h"
-#include <stdio.h>
 
 /*
  * Author: dokthar
@@ -42,13 +41,12 @@ jmePhysicsSoftSpace::jmePhysicsSoftSpace(JNIEnv* env, jobject javaSpace)
 
 // Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZ)V
 
-void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_vec, jint broadphaseId, jboolean threading) {
-    // collision configuration contains default setup for memory, collision setup
-    btDefaultCollisionConstructionInfo cci;
-
-    btVector3 min = btVector3();
-    btVector3 max = btVector3();
+void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
+        jobject max_vec, jint broadphaseId,
+        jboolean threading /*unused*/) {
+    btVector3 min;
     jmeBulletUtil::convert(this->getEnv(), min_vec, &min);
+    btVector3 max;
     jmeBulletUtil::convert(this->getEnv(), max_vec, &max);
 
     btBroadphaseInterface* broadphase;
@@ -61,37 +59,32 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_ve
             broadphase = new btAxisSweep3(min, max);
             break;
         case 2:
-            //TODO: 32bit!
-            broadphase = new btAxisSweep3(min, max);
+            broadphase = new bt32BitAxisSweep3(min, max);
             break;
         case 3:
             broadphase = new btDbvtBroadphase();
             break;
-        case 4:
-            //            broadphase = new btGpu3DGridBroadphase(
-            //                    min, max,
-            //                    20, 20, 20,
-            //                    10000, 1000, 25);
-            break;
     }
 
-    btSoftBodyRigidBodyCollisionConfiguration* collisionConfiguration = new btSoftBodyRigidBodyCollisionConfiguration();
-
     // Use the default collision dispatcher.
-    btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+    btCollisionConfiguration* collisionConfiguration
+            = new btDefaultCollisionConfiguration();
+    btCollisionDispatcher* dispatcher
+            = new btCollisionDispatcher(collisionConfiguration);
+    btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 
     // Use the default constraint solver.
-    btConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+    btConstraintSolver* solver = new btSequentialImpulseConstraintSolver();
 
     //create dynamics world
     btSoftBodySolver* softBodySolver = 0; //use default
-    btSoftRigidDynamicsWorld* world = new btSoftRigidDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration, softBodySolver);
-    //btDiscreteDynamicsWorld* world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+    btSoftRigidDynamicsWorld* world
+            = new btSoftRigidDynamicsWorld(dispatcher, broadphase, solver,
+            collisionConfiguration, softBodySolver);
     dynamicsWorld = world;
     dynamicsWorld->setWorldUserInfo(this);
 
     broadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
-
     dynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
     // do SoftBodyWorldInfo modifications
     btSoftBodyWorldInfo softBodyWorldInfo = world->getWorldInfo();
@@ -104,8 +97,6 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_ve
         // return true when pairs need collision
 
         virtual bool needBroadphaseCollision(btBroadphaseProxy* proxy0, btBroadphaseProxy * proxy1) const {
-            //            bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
-            //            collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
             bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
             collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
             if (collides) {
@@ -114,8 +105,29 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec, jobject max_ve
                 jmeUserPointer *up0 = (jmeUserPointer*) co0 -> getUserPointer();
                 jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
                 if (up0 != NULL && up1 != NULL) {
-                    collides = (up0->group & up1->groups) != 0;
-                    collides = collides && (up1->group & up0->groups);
+                    collides = (up0->group & up1->groups) != 0 || (up1->group & up0->groups) != 0;
+
+                    if (collides) {
+                        jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
+                        JNIEnv* env = dynamicsWorld->getEnv();
+                        jobject javaPhysicsSpace = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());
+                        jobject javaCollisionObject0 = env->NewLocalRef(up0->javaCollisionObject);
+                        jobject javaCollisionObject1 = env->NewLocalRef(up1->javaCollisionObject);
+
+                        jboolean notifyResult
+                                = env->CallBooleanMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_notifyCollisionGroupListeners, javaCollisionObject0, javaCollisionObject1);
+
+                        env->DeleteLocalRef(javaPhysicsSpace);
+                        env->DeleteLocalRef(javaCollisionObject0);
+                        env->DeleteLocalRef(javaCollisionObject1);
+
+                        if (env->ExceptionCheck()) {
+                            env->Throw(env->ExceptionOccurred());
+                            return collides;
+                        }
+
+                        collides = (bool) notifyResult;
+                    }
 
                     //add some additional logic here that modified 'collides'
                     return collides;
