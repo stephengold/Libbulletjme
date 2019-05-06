@@ -436,10 +436,8 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
-        NULL_CHECK(worldInfo, "A btSoftBodyWorldInfo was not created.", 0)
 
         btSoftBody* body = new btSoftBody(worldInfo);
-        NULL_CHECK(body, "A btSoftBody was not created.", 0)
 
         body->getCollisionShape()->setMargin(0); // bad idea?
 

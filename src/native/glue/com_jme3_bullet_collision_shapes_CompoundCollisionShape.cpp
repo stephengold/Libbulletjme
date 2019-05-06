@@ -74,7 +74,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btCompoundShape* shape = new btCompoundShape();
-        NULL_CHECK(shape, "A btCompoundShape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }

@@ -59,7 +59,6 @@ extern "C" {
 
         btBvhTriangleMeshShape* shape = new btBvhTriangleMeshShape(array,
                 isMemoryEfficient, buildBVH);
-        NULL_CHECK(shape, "A btBvhTriangleMeshShape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }

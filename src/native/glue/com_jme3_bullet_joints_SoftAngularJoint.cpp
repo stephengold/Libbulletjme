@@ -86,7 +86,6 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::AJoint* ajoint = new(btAlignedAlloc(sizeof (btSoftBody::AJoint), 16)) btSoftBody::AJoint();
-        NULL_CHECK(ajoint, "An angular joint was not created.", 0)
 
         ajoint->m_bodies[0] = softA->m_clusters[0];
         ajoint->m_bodies[1] = rigidB;

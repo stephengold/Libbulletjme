@@ -51,7 +51,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
-        NULL_CHECK(worldInfo, "A world info was not created.", 0);
 
         return reinterpret_cast<jlong> (worldInfo);
     }

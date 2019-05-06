@@ -85,7 +85,6 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::LJoint* ljoint = new(btAlignedAlloc(sizeof (btSoftBody::LJoint), 16)) btSoftBody::LJoint();
-        NULL_CHECK(ljoint, "A linear joint was not created.", 0)
 
         ljoint->m_bodies[0] = softA->m_clusters[0];
         ljoint->m_bodies[1] = rigidB;
@@ -126,7 +125,6 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::LJoint* ljoint = new(btAlignedAlloc(sizeof (btSoftBody::LJoint), 16)) btSoftBody::LJoint();
-        NULL_CHECK(ljoint, "A linear joint was not created.", 0)
         ljoint->m_bodies[0] = softA->m_clusters[0];
         ljoint->m_bodies[1] = softB->m_clusters[0];
 

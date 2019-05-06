@@ -55,7 +55,6 @@ extern "C" {
         jmeBulletUtil::convert(env, halfExtents, &extents);
 
         btBoxShape* shape = new btBoxShape(extents);
-        NULL_CHECK(shape, "A btBoxShape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }

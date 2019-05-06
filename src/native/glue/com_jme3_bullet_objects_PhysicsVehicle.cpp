@@ -123,7 +123,6 @@ extern "C" {
 
         btRaycastVehicle::btVehicleTuning tuning;
         btRaycastVehicle* vehicle = new btRaycastVehicle(tuning, body, caster);
-        NULL_CHECK(vehicle, "A btRaycastVehicle was not created.", 0)
 
         return reinterpret_cast<jlong> (vehicle);
     }
@@ -142,7 +141,6 @@ extern "C" {
 
         btDefaultVehicleRaycaster* caster
                 = new btDefaultVehicleRaycaster(space->getDynamicsWorld());
-        NULL_CHECK(caster, "A btDefaultVehicleRaycaster was not created.", 0)
 
         return reinterpret_cast<jlong> (caster);
     }

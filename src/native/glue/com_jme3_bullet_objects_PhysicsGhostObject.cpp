@@ -92,7 +92,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btPairCachingGhostObject* ghost = new btPairCachingGhostObject();
-        NULL_CHECK(ghost, "The btPairCachingGhostObject was not created.", 0)
 
         return reinterpret_cast<jlong> (ghost);
     }

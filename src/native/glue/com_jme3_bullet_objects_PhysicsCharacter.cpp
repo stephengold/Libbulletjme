@@ -86,7 +86,6 @@ extern "C" {
 
         btKinematicCharacterController* character
                 = new btKinematicCharacterController(ghost, shape, stepHeight);
-        NULL_CHECK(character, "The btKinematicCharacterController was not created.", 0)
 
         return reinterpret_cast<jlong> (character);
     }
@@ -101,7 +100,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btPairCachingGhostObject* ghost = new btPairCachingGhostObject();
-        NULL_CHECK(ghost, "The btPairCachingGhostObject was not created.", 0)
 
         return reinterpret_cast<jlong> (ghost);
     }

@@ -82,7 +82,6 @@ extern "C" {
         }
 
         btConvexHullShape* shape = new btConvexHullShape();
-        NULL_CHECK(shape, "A btConvexHullShape was not created.", 0);
 
         float* data = (float*) env->GetDirectBufferAddress(buffer);
         for (int i = 0; i < n; ++i) {
@@ -111,7 +110,6 @@ extern "C" {
         //TODO: capacity will not always be length!
         int length = env->GetDirectBufferCapacity(array) / sizeof (float);
         btConvexHullShape* shape = new btConvexHullShape();
-        NULL_CHECK(shape, "A btConvexHullShape was not created.", 0)
 
         for (int i = 0; i < length; i += 3) {
             btVector3 vect = btVector3(data[i], data[i + 1], data[i + 2]);

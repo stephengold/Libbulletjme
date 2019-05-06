@@ -99,7 +99,6 @@ extern "C" {
 
         btMultiSphereShape* shape
                 = new btMultiSphereShape(&centers[0], &radii[0], n);
-        NULL_CHECK(shape, "A btMultiSphereShape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }
@@ -123,7 +122,6 @@ extern "C" {
         btScalar* radi = env->GetFloatArrayElements(radii, 0);
 
         btMultiSphereShape* shape = new btMultiSphereShape(positions, radi, n);
-        NULL_CHECK(shape, "A btMultiSphereShape was not created.", 0)
 
         env->ReleaseFloatArrayElements(radii, radi, 0);
         delete positions;

@@ -75,7 +75,6 @@ extern "C" {
 
         btHingeConstraint* joint = new btHingeConstraint(*rbA, *rbB, pivotA,
                 pivotB, axisA, axisB);
-        NULL_CHECK(joint, "A btHingeConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
@@ -103,7 +102,6 @@ extern "C" {
 
         btHingeConstraint* joint
                 = new btHingeConstraint(*rbA, pivot, axis, useReferenceFrameA);
-        NULL_CHECK(joint, "A btHingeConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }

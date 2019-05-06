@@ -71,7 +71,6 @@ extern "C" {
 
         btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(*rbA, *rbB,
                 frameInA, frameInB, useLinearReferenceFrameA);
-        NULL_CHECK(joint, "A btGeneric6DofConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
@@ -97,7 +96,6 @@ extern "C" {
 
         btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(
                 *rbB, frameInB, useLinearReferenceFrameB);
-        NULL_CHECK(joint, "A btGeneric6DofConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }

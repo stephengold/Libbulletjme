@@ -200,7 +200,6 @@ extern "C" {
 
         btRigidBody* body
                 = new btRigidBody(mass, motionState, shape, localInertia);
-        NULL_CHECK(body, "A btRigidBody was not created.", 0)
         body->setUserPointer(NULL);
 
         return reinterpret_cast<jlong> (body);

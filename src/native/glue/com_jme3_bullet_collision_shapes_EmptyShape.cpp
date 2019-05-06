@@ -50,7 +50,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
         
         btEmptyShape* shape = new btEmptyShape();
-        NULL_CHECK(shape, "A btEmptyShape was not created.", 0)
         
         return reinterpret_cast<jlong> (shape);
     }

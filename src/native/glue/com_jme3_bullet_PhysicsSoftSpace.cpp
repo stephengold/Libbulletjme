@@ -52,7 +52,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSoftSpace* space = new jmePhysicsSoftSpace(env, object);
-        NULL_CHECK(space, "A physics space was not created.", 0)
 
         space->createPhysicsSoftSpace(min_vec, max_vec, broadphase, threading);
         return reinterpret_cast<jlong> (space);

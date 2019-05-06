@@ -176,7 +176,6 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSpace* space = new jmePhysicsSpace(env, object);
-        NULL_CHECK(space, "A physics space was not created.", 0)
 
         space->createPhysicsSpace(minX, minY, minZ, maxX, maxY, maxZ,
                 broadphase, threading);

@@ -61,7 +61,6 @@ extern "C" {
                 shape = new btConeShapeZ(radius, height);
                 break;
         }
-        NULL_CHECK(shape, "A cone shape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }

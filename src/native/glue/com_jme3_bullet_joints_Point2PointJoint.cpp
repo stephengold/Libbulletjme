@@ -65,7 +65,6 @@ extern "C" {
 
         btPoint2PointConstraint * joint
                 = new btPoint2PointConstraint(*bodyA, *bodyB, pivotInA, pivotInB);
-        NULL_CHECK(joint, "A btPoint2PointConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
@@ -88,7 +87,6 @@ extern "C" {
 
         btPoint2PointConstraint * joint
                 = new btPoint2PointConstraint(*bodyA, pivotInA);
-        NULL_CHECK(joint, "A btPoint2PointConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }

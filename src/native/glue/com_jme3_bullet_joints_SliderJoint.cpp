@@ -71,7 +71,6 @@ extern "C" {
 
         btSliderConstraint* joint = new btSliderConstraint(*rbA, *rbB, frameInA,
                 frameInB, useLinearReferenceFrameA);
-        NULL_CHECK(joint, "A btSliderConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
@@ -97,7 +96,6 @@ extern "C" {
 
         btSliderConstraint* joint = new btSliderConstraint(*rbB, frameInB,
                 useLinearReferenceFrameA);
-        NULL_CHECK(joint, "A btSliderConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }

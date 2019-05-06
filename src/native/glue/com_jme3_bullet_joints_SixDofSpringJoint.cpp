@@ -72,7 +72,6 @@ extern "C" {
         btGeneric6DofSpringConstraint* joint
                 = new btGeneric6DofSpringConstraint(*rbA, *rbB, frameInA,
                 frameInB, useLinearReferenceFrameA);
-        NULL_CHECK(joint, "A btGeneric6DofSpringConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
@@ -99,7 +98,6 @@ extern "C" {
         btGeneric6DofSpringConstraint* joint
                 = new btGeneric6DofSpringConstraint(*rbB, frameInB,
                 useLinearReferenceFrameB);
-        NULL_CHECK(joint, "A btGeneric6DofSpringConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }

@@ -55,7 +55,6 @@ extern "C" {
         NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.", 0)
 
         btGImpactMeshShape* shape = new btGImpactMeshShape(array);
-        NULL_CHECK(shape, "A btGImpactMeshShape was not created.", 0)
         shape->updateBound();
 
         return reinterpret_cast<jlong> (shape);

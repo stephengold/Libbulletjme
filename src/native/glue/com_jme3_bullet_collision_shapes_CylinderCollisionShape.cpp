@@ -66,7 +66,6 @@ extern "C" {
                 shape = new btCylinderShapeZ(extents);
                 break;
         }
-        NULL_CHECK(shape, "A cylinder shape was not created.", 0)
 
         return reinterpret_cast<jlong> (shape);
     }

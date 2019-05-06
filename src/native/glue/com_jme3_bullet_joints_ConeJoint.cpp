@@ -71,7 +71,6 @@ extern "C" {
 
         btConeTwistConstraint* joint
                 = new btConeTwistConstraint(*rbA, *rbB, rbAFrame, rbBFrame);
-        NULL_CHECK(joint, "A btConeTwistConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
@@ -97,7 +96,6 @@ extern "C" {
 
         btConeTwistConstraint* joint
                 = new btConeTwistConstraint(*rbA, rbAFrame);
-        NULL_CHECK(joint, "A btConeTwistConstraint was not created.", 0)
 
         return reinterpret_cast<jlong> (joint);
     }
