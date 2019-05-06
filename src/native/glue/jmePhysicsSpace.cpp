@@ -88,9 +88,12 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, 
             break;
     }
 
+
+    // Use the default collision dispatcher.
     btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
 
+    // Use the default constraint solver.
     btConstraintSolver* solver = new btSequentialImpulseConstraintSolver();
 
     //create dynamics world
