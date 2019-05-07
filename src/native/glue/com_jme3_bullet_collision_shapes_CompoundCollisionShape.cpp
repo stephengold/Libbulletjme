@@ -44,6 +44,7 @@ extern "C" {
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    addChildShape
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
+     * TODO should return void
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
     (JNIEnv *env, jobject object, jlong compoundId, jlong childId,
