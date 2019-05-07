@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2019 jMonkeyEngine
+ * Copyright (c) 2009-2016 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -495,6 +495,23 @@ extern "C" {
 
         int count = body->m_anchors.size();
         return count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getBounds
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getBounds
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeMinima, jobject storeMaxima) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
+        const btVector3& minima = body->m_bounds[0];
+        jmeBulletUtil::convert(env, &minima, storeMinima);
+
+        const btVector3& maxima = body->m_bounds[1];
+        jmeBulletUtil::convert(env, &maxima, storeMaxima);
     }
 
     /*
