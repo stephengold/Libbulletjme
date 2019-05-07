@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.57 released on 7 May 2019
+
+Added a `getBounds()` method to the `PhysicsSoftBody` class.
+
 ## Version 1.0.56 released on 6 May 2019
 
  + Copied the `needBroadphaseCollision` code from `jmePhysicsSpace.cpp`
