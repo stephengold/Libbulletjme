@@ -49,9 +49,7 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_createSoftBodyWorldInfo
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
-
         btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
-
         return reinterpret_cast<jlong> (worldInfo);
     }
 
@@ -159,9 +157,7 @@ extern "C" {
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
 
         NULL_CHECK(gravity, "The gravity vector does not exist.",);
-        btVector3 vec = btVector3();
-        jmeBulletUtil::convert(env, gravity, &vec);
-        world->m_gravity = vec;
+        jmeBulletUtil::convert(env, gravity, &world->m_gravity);
     }
 
     /*
@@ -228,9 +224,7 @@ extern "C" {
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
 
         NULL_CHECK(normal, "The normal vector does not exist.",);
-        btVector3 vec = btVector3();
-        jmeBulletUtil::convert(env, normal, &vec);
-        world->water_normal = vec;
+        jmeBulletUtil::convert(env, normal, &world->water_normal);
     }
 
     /*

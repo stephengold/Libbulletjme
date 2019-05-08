@@ -59,7 +59,8 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getAabb
-    (JNIEnv * env, jobject object, jlong shapeId, jobject location, jobject orientation, jobject storeMinima, jobject storeMaxima) {
+    (JNIEnv * env, jobject object, jlong shapeId, jobject location,
+            jobject orientation, jobject storeMinima, jobject storeMaxima) {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         NULL_CHECK(shape, "The btCollisionShape does not exist.",);
 
@@ -141,7 +142,8 @@ extern "C" {
      * Signature: (JFFF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling__JFFF
-    (JNIEnv * env, jobject object, jlong shapeId, jfloat xScale, jfloat yScale, jfloat zScale) {
+    (JNIEnv * env, jobject object, jlong shapeId, jfloat xScale, jfloat yScale,
+            jfloat zScale) {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         NULL_CHECK(shape, "The btCollisionShape does not exist.",);
 

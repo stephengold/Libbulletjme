@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2009-2016 jMonkeyEngine
  * All rights reserved.
@@ -53,7 +52,7 @@ extern "C" {
         NULL_CHECK(joint, "The joint does not exist.",)
 
         NULL_CHECK(axis, "The axis vector does not exist.",)
-        btVector3 ax = btVector3();
+        btVector3 ax;
         jmeBulletUtil::convert(env, axis, &ax);
 
         joint->m_refs[0] = joint->m_bodies[0].xform().inverse().getBasis() * ax;
@@ -66,7 +65,9 @@ extern "C" {
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftRigid
-    (JNIEnv *env, jobject object, jlong softIdA, jlong rigidIdB, jobject pivotA, jobject pivotB, jfloat erp, jfloat cfm, jfloat split, jobject axis) {
+    (JNIEnv *env, jobject object, jlong softIdA, jlong rigidIdB, jobject pivotA,
+            jobject pivotB, jfloat erp, jfloat cfm, jfloat split,
+            jobject axis) {
         btSoftBody* softA = reinterpret_cast<btSoftBody*> (softIdA);
         NULL_CHECK(softA, "Soft body A does not exist.", 0)
 
@@ -74,15 +75,15 @@ extern "C" {
         NULL_CHECK(rigidB, "Rigid body B does not exist.", 0)
 
         NULL_CHECK(axis, "The axis vector does not exist.", 0)
-        btVector3 ax = btVector3();
+        btVector3 ax;
         jmeBulletUtil::convert(env, axis, &ax);
 
         NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
-        btVector3 pivA = btVector3();
+        btVector3 pivA;
         jmeBulletUtil::convert(env, pivotA, &pivA);
 
         NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
-        btVector3 pivB = btVector3();
+        btVector3 pivB;
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::AJoint* ajoint = new(btAlignedAlloc(sizeof (btSoftBody::AJoint), 16)) btSoftBody::AJoint();
@@ -108,7 +109,9 @@ extern "C" {
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftSoft
-    (JNIEnv *env, jobject object, jlong softIdA, jlong softIdB, jobject pivotA, jobject pivotB, jfloat erp, jfloat cfm, jfloat split, jobject axis) {
+    (JNIEnv *env, jobject object, jlong softIdA, jlong softIdB, jobject pivotA,
+            jobject pivotB, jfloat erp, jfloat cfm, jfloat split,
+            jobject axis) {
         btSoftBody* softA = reinterpret_cast<btSoftBody*> (softIdA);
         NULL_CHECK(softA, "Soft body A does not exist.", 0)
 
@@ -116,15 +119,15 @@ extern "C" {
         NULL_CHECK(softB, "Soft body B does not exist.", 0)
 
         NULL_CHECK(axis, "The axis vector does not exist.", 0)
-        btVector3 ax = btVector3();
+        btVector3 ax;
         jmeBulletUtil::convert(env, axis, &ax);
 
         NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
-        btVector3 pivA = btVector3();
+        btVector3 pivA;
         jmeBulletUtil::convert(env, pivotA, &pivA);
 
         NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
-        btVector3 pivB = btVector3();
+        btVector3 pivB;
         jmeBulletUtil::convert(env, pivotB, &pivB);
 
         btSoftBody::AJoint* ajoint = new(btAlignedAlloc(sizeof (btSoftBody::AJoint), 16)) btSoftBody::AJoint();
