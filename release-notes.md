@@ -1,6 +1,6 @@
 # release notes for the Libbulletjme Project
 
-## Version 1.0.58 released on 9 May 2019
+## Version 1.0.59 released on 9 May 2019
 
 Added 8 methods to the `PhysicsSoftBody` class:
  + `cutLink()`
