@@ -1096,6 +1096,29 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setNormals
+     * Signature: (JLjava/nio/FloatBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNormals
+    (JNIEnv *env, jobject object, jlong bodyId, jobject normalBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
+        const jfloat* normals
+                = (jfloat*) env->GetDirectBufferAddress(normalBuffer);
+        int capacity = env->GetDirectBufferCapacity(normalBuffer) - 2;
+
+        for (int nodeIndex = 0, offset = 0; offset < capacity;) {
+            btScalar x = normals[offset++];
+            btScalar y = normals[offset++];
+            btScalar z = normals[offset++];
+            btSoftBody::Node& node = body->m_nodes[nodeIndex++];
+            node.m_n = btVector3(x, y, z);
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    setPhysicsLocation
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -1213,6 +1236,29 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->setTotalMass(mass, fromFaces);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setVelocities
+     * Signature: (JLjava/nio/FloatBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocities
+    (JNIEnv *env, jobject object, jlong bodyId, jobject velocityBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
+        const jfloat* velocities
+                = (jfloat*) env->GetDirectBufferAddress(velocityBuffer);
+        int capacity = env->GetDirectBufferCapacity(velocityBuffer) - 2;
+
+        for (int nodeIndex = 0, offset = 0; offset < capacity;) {
+            btScalar x = velocities[offset++];
+            btScalar y = velocities[offset++];
+            btScalar z = velocities[offset++];
+            btSoftBody::Node& node = body->m_nodes[nodeIndex++];
+            node.m_v = btVector3(x, y, z);
+        }
     }
 
     /*
