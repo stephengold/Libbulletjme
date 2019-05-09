@@ -1,5 +1,17 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.58 released on 9 May 2019
+
+Added 8 methods to the `PhysicsSoftBody` class:
+ + `cutLink()`
+ + `getAnchorInfluence()`
+ + `getAnchorNodeIndex()`
+ + `getAnchorPivot()`
+ + `getAnchorRigidId()`
+ + `isCollisionAllowed()`
+ + `setNormals()`
+ + `setVelocities()`
+
 ## Version 1.0.57 released on 7 May 2019
 
 Added a `getBounds()` method to the `PhysicsSoftBody` class.
