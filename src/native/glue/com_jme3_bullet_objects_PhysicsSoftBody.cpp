@@ -458,6 +458,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    cutLink
+     * Signature: (JIIF)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_cutLink
+    (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex0,
+            jint nodeIndex1, jfloat position) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        bool success = body->cutLink((int) nodeIndex0, (int) nodeIndex1,
+                (btScalar) position);
+        return (jboolean) success;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    generateBendingConstraints
      * Signature: (JIJ)V
      */
@@ -496,7 +512,65 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.", 0);
 
         int count = body->m_anchors.size();
-        return count;
+        return (jint) count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getAnchorInfluence
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorInfluence
+    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
+        btScalar influence = body->m_anchors[anchorIndex].m_influence;
+        return (jfloat) influence;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getAnchorNodeIndex
+     * Signature: (JI)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorNodeIndex
+    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        const btSoftBody::Node* node = body->m_anchors[anchorIndex].m_node;
+        int nodeIndex = int(node - &body->m_nodes[0]);
+
+        return (jint) nodeIndex;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getAnchorPivot
+     * Signature: (JILcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorPivot
+    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex, jobject storeVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
+        const btVector3* pPivot = &body->m_anchors[anchorIndex].m_local;
+        jmeBulletUtil::convert(env, pPivot, storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getAnchorRigidId
+     * Signature: (JI)J
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorRigidId
+    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        btRigidBody* pRigid = body->m_anchors[anchorIndex].m_body;
+        return reinterpret_cast<jlong> (pRigid);
     }
 
     /*
@@ -951,6 +1025,27 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->initDefaults();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    isCollisionAllowed
+     * Signature: (JJ)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollisionAllowed
+    (JNIEnv *env, jobject object, jlong softId, jlong rigidId) {
+        btSoftBody* softBody = reinterpret_cast<btSoftBody*> (softId);
+        NULL_CHECK(softBody, "The btSoftBody does not exist.", 0)
+
+        btCollisionObject* rigidBody
+                = reinterpret_cast<btCollisionObject*> (rigidId);
+        NULL_CHECK(rigidBody, "The btRigidBody does not exist.", 0);
+
+        btAlignedObjectArray<const class btCollisionObject*> cdos = softBody->m_collisionDisabledObjects;
+        int cdoIndex = cdos.findLinearSearch(rigidBody);
+        bool allowed = (cdoIndex == cdos.size());
+
+        return (jboolean) allowed;
     }
 
     /*

@@ -219,6 +219,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    cutLink
+ * Signature: (JIIF)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_cutLink
+  (JNIEnv *, jobject, jlong, jint, jint, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    generateBendingConstraints
  * Signature: (JIJ)V
  */
@@ -240,6 +248,38 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_generateClus
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorCount
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getAnchorInfluence
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorInfluence
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getAnchorNodeIndex
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorNodeIndex
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getAnchorPivot
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorPivot
+  (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getAnchorRigidId
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorRigidId
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
@@ -456,6 +496,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getVolume
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_initDefault
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    isCollisionAllowed
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollisionAllowed
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
