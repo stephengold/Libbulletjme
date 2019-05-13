@@ -150,9 +150,11 @@ extern "C" {
         if (localPivot != NULL) {
             btVector3 vec;
             jmeBulletUtil::convert(env, localPivot, &vec);
-            body->appendAnchor(nodeId, rigid, vec, !collisionBetweenLinkedBodies, influence);
+            body->appendAnchor(nodeId, rigid, vec,
+                    !collisionBetweenLinkedBodies, influence);
         } else {
-            body->appendAnchor(nodeId, rigid, !collisionBetweenLinkedBodies, influence);
+            body->appendAnchor(nodeId, rigid,
+                    !collisionBetweenLinkedBodies, influence);
         }
     }
 
@@ -437,11 +439,13 @@ extern "C" {
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
 
+        // Create a temporary btSoftBodyWorldInfo for this body,
+        // just until it is added to physics space. TODO null?
         btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
 
         btSoftBody* body = new btSoftBody(worldInfo);
 
-        body->getCollisionShape()->setMargin(0); // bad idea?
+        body->getCollisionShape()->setMargin(0); // TODO bad idea?
 
         /* Default material */
         btSoftBody::Material* m = body->appendMaterial();
