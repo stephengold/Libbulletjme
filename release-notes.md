@@ -1,10 +1,14 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.61 released on 13 May 2019
+
+Added `getMargin() and `setMargin()` methods to the `PhysicsSoftBody` class.
+
 ## Version 1.0.60 released on 12 May 2019
 
- + Initialize the inertia tensor of a `PhysicsRigidBody` even if it's static,
+ + Initialized the inertia tensor of a `PhysicsRigidBody` even if it's static,
    since the tensor is used in `btSoftBody::PSolve_RContacts()`.
- + Register some soft-body collision algorithms in `jmePhysicsSoftSpace`.
+ + Registered some soft-body collision algorithms in `jmePhysicsSoftSpace`.
 
 ## Version 1.0.59 released on 9 May 2019
 
