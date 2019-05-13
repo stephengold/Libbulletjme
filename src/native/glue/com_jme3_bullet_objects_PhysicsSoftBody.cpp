@@ -693,6 +693,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getMargin
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMargin
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        const btCollisionShape* shape = body->getCollisionShape();
+        btScalar margin = shape->getMargin();
+        return (jfloat) margin;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getMass
      * Signature: (JI)F
      */
@@ -1145,6 +1160,20 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->resetLinkRestLengths();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setMargin
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMargin
+    (JNIEnv *env, jobject object, jlong bodyId, jfloat margin) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
+        btCollisionShape* shape = body->getCollisionShape();
+        shape->setMargin(margin);
     }
 
     /*
