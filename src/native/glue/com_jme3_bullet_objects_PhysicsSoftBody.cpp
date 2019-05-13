@@ -409,7 +409,7 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         NULL_CHECK(transform, "The transform does not exist.",)
-        btTransform trs = btTransform();
+        btTransform trs;
         jmeBulletUtil::convert(env, transform, &trs);
 
         body->transform(trs);
@@ -1262,7 +1262,7 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         // scale unavailable with btTransform
-        btTransform trs = btTransform();
+        btTransform trs;
         jmeBulletUtil::convert(env, transform, &trs);
         body->transform(body->m_initialWorldTransform.inverse() * trs);
     }

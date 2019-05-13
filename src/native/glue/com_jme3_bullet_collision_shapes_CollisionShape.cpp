@@ -64,8 +64,7 @@ extern "C" {
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         NULL_CHECK(shape, "The btCollisionShape does not exist.",);
 
-        btMatrix3x3 mtx = btMatrix3x3();
-        btTransform trans = btTransform(mtx);
+        btTransform trans;
         jmeBulletUtil::convert(env, location, &trans.getOrigin());
         jmeBulletUtil::convert(env, orientation, &trans.getBasis());
 

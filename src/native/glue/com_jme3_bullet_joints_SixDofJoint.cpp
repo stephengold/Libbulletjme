@@ -246,11 +246,11 @@ extern "C" {
         NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
 
         NULL_CHECK(frameA, "The frameA transform does not exist.",)
-        btTransform a = btTransform();
+        btTransform a;
         jmeBulletUtil::convert(env, frameA, &a);
 
         NULL_CHECK(frameB, "The frameB transform does not exist.",)
-        btTransform b = btTransform();
+        btTransform b;
         jmeBulletUtil::convert(env, frameB, &b);
 
         joint->setFrames(a, b);

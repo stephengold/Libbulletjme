@@ -458,10 +458,10 @@ extern "C" {
             }
         };
 
-        btTransform native_to = btTransform();
+        btTransform native_to;
         jmeBulletUtil::convert(env, to, &native_to);
 
-        btTransform native_from = btTransform();
+        btTransform native_from;
         jmeBulletUtil::convert(env, from, &native_from);
 
         btScalar native_allowed_ccd_penetration = btScalar(allowedCcdPenetration);

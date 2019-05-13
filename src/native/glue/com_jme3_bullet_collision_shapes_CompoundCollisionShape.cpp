@@ -56,8 +56,7 @@ extern "C" {
         btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
         NULL_CHECK(child, "The child shape does not exist.", 0)
 
-        btMatrix3x3 mtx = btMatrix3x3();
-        btTransform trans = btTransform(mtx);
+        btTransform trans;
         jmeBulletUtil::convert(env, childLocation, &trans.getOrigin());
         jmeBulletUtil::convert(env, childRotation, &trans.getBasis());
         shape->addChildShape(trans, child);
