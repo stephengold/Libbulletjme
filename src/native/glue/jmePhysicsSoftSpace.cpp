@@ -66,9 +66,10 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
             break;
     }
 
-    // Use the default collision dispatcher.
+    // Register some soft-body collision algorithms on top of the default
+    // collision dispatcher configuration.
     btCollisionConfiguration* collisionConfiguration
-            = new btDefaultCollisionConfiguration();
+            = new btSoftBodyRigidBodyCollisionConfiguration();
     btCollisionDispatcher* dispatcher
             = new btCollisionDispatcher(collisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
@@ -129,7 +130,7 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
                         collides = (bool) notifyResult;
                     }
 
-                    //add some additional logic here that modified 'collides'
+                    //add some additional logic here that modifies 'collides'
                     return collides;
                 }
                 return false;
