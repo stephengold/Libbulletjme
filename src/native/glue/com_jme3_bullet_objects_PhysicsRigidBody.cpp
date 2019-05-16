@@ -183,11 +183,11 @@ extern "C" {
      * Signature: (FJJ)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_createRigidBody
-    (JNIEnv *env, jobject object, jfloat mass, jlong motionstatId, jlong shapeId) {
+    (JNIEnv *env, jobject object, jfloat mass, jlong motionStateId, jlong shapeId) {
         jmeClasses::initJavaClasses(env);
 
         btMotionState* motionState
-                = reinterpret_cast<btMotionState*> (motionstatId);
+                = reinterpret_cast<btMotionState*> (motionStateId);
         NULL_CHECK(motionState, "The btMotionState does not exist.", 0)
 
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
