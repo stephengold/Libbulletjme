@@ -99,7 +99,7 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
 
         virtual bool needBroadphaseCollision(btBroadphaseProxy* proxy0, btBroadphaseProxy * proxy1) const {
             bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
-            collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
+            collides = collides || (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
             if (collides) {
                 btCollisionObject* co0 = (btCollisionObject*) proxy0->m_clientObject;
                 btCollisionObject* co1 = (btCollisionObject*) proxy1->m_clientObject;

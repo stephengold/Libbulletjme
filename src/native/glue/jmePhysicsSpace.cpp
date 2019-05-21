@@ -91,7 +91,8 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
 
     //create dynamics world
     btDiscreteDynamicsWorld* world
-            = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+            = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver,
+            collisionConfiguration);
     dynamicsWorld = world;
     dynamicsWorld->setWorldUserInfo(this);
 
@@ -103,7 +104,7 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
 
         virtual bool needBroadphaseCollision(btBroadphaseProxy* proxy0, btBroadphaseProxy * proxy1) const {
             bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
-            collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
+            collides = collides || (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
             if (collides) {
                 btCollisionObject* co0 = (btCollisionObject*) proxy0->m_clientObject;
                 btCollisionObject* co1 = (btCollisionObject*) proxy1->m_clientObject;
@@ -134,7 +135,7 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
                         collides = (bool) notifyResult;
                     }
 
-                    //add some additional logic here that modified 'collides'
+                    //add some additional logic here that modifies 'collides'
                     return collides;
                 }
                 return false;
