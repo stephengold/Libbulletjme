@@ -121,7 +121,7 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
     if (printFlag) {
-        fprintf(stdout, "Libbulletjme v1.0.61 initializing Java classes\n");
+        fprintf(stdout, "Libbulletjme v1.0.62 initializing Java classes\n");
         fflush(stdout);
     }
 

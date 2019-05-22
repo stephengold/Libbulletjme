@@ -1,8 +1,13 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.62 released on 21 May 2019
+
+ + Changed "and" to "or" in the `needBroadphaseCollision()` methods.
+ + Added a `getClustersMasses()` method to the `PhysicsSoftBody` class.
+
 ## Version 1.0.61 released on 13 May 2019
 
-Added `getMargin() and `setMargin()` methods to the `PhysicsSoftBody` class.
+Added `getMargin()` and `setMargin()` methods to the `PhysicsSoftBody` class.
 
 ## Version 1.0.60 released on 12 May 2019
 
