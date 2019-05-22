@@ -267,8 +267,6 @@ extern "C" {
         resultCallback.resultlist = resultlist;
         resultCallback.m_flags = flags;
         space->getDynamicsWorld()->rayTest(native_from, native_to, resultCallback);
-
-        return;
     }
 
     /*
@@ -470,7 +468,6 @@ extern "C" {
         resultCallback.env = env;
         resultCallback.resultlist = resultlist;
         space->getDynamicsWorld()->convexSweepTest((btConvexShape *) shape, native_from, native_to, resultCallback, native_allowed_ccd_penetration);
-        return;
     }
 
 #ifdef __cplusplus
