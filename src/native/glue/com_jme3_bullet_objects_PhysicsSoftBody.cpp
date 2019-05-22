@@ -626,6 +626,26 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClustersMasses
+     * Signature: (JLjava/nio/FloatBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersMasses
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
+        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
+        int numClusters = body->m_clusters.size();
+        for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
+            const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
+            btScalar mass = btScalar(1.) / cluster->m_imass;
+            bufPtr[clusterIndex] = mass;
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getClustersPositions
      * Signature: (JLjava/nio/FloatBuffer;)V
      */
