@@ -432,6 +432,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    countNodesInCluster
+     * Signature: (JI)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_countNodesInCluster
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
+        jint count = cluster->m_nodes.size();
+
+        return count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    createEmptySoftBody
      * Signature: ()J
      */
@@ -1099,6 +1115,30 @@ extern "C" {
 
         //boolean isInWorld = body->getBroadphaseHandle() != 0; // from bullet RigidBody
         return body->getBroadphaseHandle() != 0;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    listNodesInCluster
+     * Signature: (JILjava/nio/IntBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_listNodesInCluster
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jobject intBuffer) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        jint* result = (jint*) env->GetDirectBufferAddress(intBuffer);
+
+        const btSoftBody::Node* firstNode = &body->m_nodes[0];
+        const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
+        int numNodes = cluster->m_nodes.size();
+
+        for (int i = 0; i < numNodes; ++i) {
+            const btSoftBody::Node* node = cluster->m_nodes[i];
+            jint nodeIndex = node - firstNode;
+            result[i] = nodeIndex;
+        }
     }
 
     /*

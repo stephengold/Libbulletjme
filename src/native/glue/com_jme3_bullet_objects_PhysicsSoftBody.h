@@ -211,6 +211,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysics
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    countNodesInCluster
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_countNodesInCluster
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    createEmptySoftBody
  * Signature: ()J
  */
@@ -520,6 +528,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_initDefault
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollisionAllowed
   (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    listNodesInCluster
+ * Signature: (JILjava/nio/IntBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_listNodesInCluster
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
