@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.63 released on 25 May 2019
+
+ + Added `countNodesInCluster()` and `listNodesInCluster()`
+   to the `PhysicsSoftBody` class.
+ + Upgraded the Bullet sources to match SHA1 ID=26486d56 of the bullet3 project.
+
 ## Version 1.0.62 released on 21 May 2019
 
  + Changed "and" to "or" in the `needBroadphaseCollision()` methods.

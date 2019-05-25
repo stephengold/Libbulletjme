@@ -103,7 +103,6 @@ jfieldID jmeClasses::PhysicsSweep_collisionObject;
 jclass jmeClasses::PhysicsSweep_listresult;
 jmethodID jmeClasses::PhysicsSweep_addmethod;
 
-
 jclass jmeClasses::Transform;
 jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
@@ -121,7 +120,7 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
     if (printFlag) {
-        fprintf(stdout, "Libbulletjme v1.0.62 initializing Java classes\n");
+        fprintf(stdout, "Libbulletjme v1.0.63 initializing Java classes\n");
         fflush(stdout);
     }
 
