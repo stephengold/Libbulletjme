@@ -43,6 +43,20 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
+     * Method:    applyTransform
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Quaternion;)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_applyTransform
+    (JNIEnv *env, jobject object, jlong stateId, jobject location, jobject rotation) {
+        jmeMotionState* motionState
+                = reinterpret_cast<jmeMotionState*> (stateId);
+        NULL_CHECK(motionState, "The motion state does not exist.", false)
+
+        return motionState->applyTransform(env, location, rotation);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
      * Method:    createMotionState
      * Signature: ()J
      */
@@ -55,16 +69,16 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
-     * Method:    applyTransform
-     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Quaternion;)Z
+     * Method:    finalizeNative
+     * Signature: (J)V
      */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_applyTransform
-    (JNIEnv *env, jobject object, jlong stateId, jobject location, jobject rotation) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_finalizeNative
+    (JNIEnv *env, jobject object, jlong stateId) {
         jmeMotionState* motionState
                 = reinterpret_cast<jmeMotionState*> (stateId);
-        NULL_CHECK(motionState, "The motion state does not exist.", false)
+        NULL_CHECK(motionState, "The motion state does not exist.",);
 
-        return motionState->applyTransform(env, location, rotation);
+        delete motionState;
     }
 
     /*
@@ -109,20 +123,6 @@ extern "C" {
 
         jmeBulletUtil::convertQuat(env, &motionState->worldTransform.getBasis(),
                 value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_finalizeNative
-    (JNIEnv *env, jobject object, jlong stateId) {
-        jmeMotionState* motionState
-                = reinterpret_cast<jmeMotionState*> (stateId);
-        NULL_CHECK(motionState, "The motion state does not exist.",);
-
-        delete motionState;
     }
 
 #ifdef __cplusplus
