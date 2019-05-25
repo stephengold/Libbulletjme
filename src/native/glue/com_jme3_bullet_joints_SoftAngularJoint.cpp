@@ -43,24 +43,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_SoftAngularJoint
-     * Method:    setAxis
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_setAxis
-    (JNIEnv *env, jobject object, jlong jointId, jobject axis) {
-        btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        NULL_CHECK(joint, "The joint does not exist.",)
-
-        NULL_CHECK(axis, "The axis vector does not exist.",)
-        btVector3 ax;
-        jmeBulletUtil::convert(env, axis, &ax);
-
-        joint->m_refs[0] = joint->m_bodies[0].xform().inverse().getBasis() * ax;
-        joint->m_refs[1] = joint->m_bodies[1].xform().inverse().getBasis() * ax;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_SoftAngularJoint
      * Method:    createJointSoftRigid
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
      */
@@ -144,6 +126,24 @@ extern "C" {
         ajoint->m_icontrol = btSoftBody::AJoint::IControl::Default();
 
         return reinterpret_cast<long> (ajoint);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SoftAngularJoint
+     * Method:    setAxis
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_setAxis
+    (JNIEnv *env, jobject object, jlong jointId, jobject axis) {
+        btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
+        NULL_CHECK(joint, "The joint does not exist.",)
+
+        NULL_CHECK(axis, "The axis vector does not exist.",)
+        btVector3 ax;
+        jmeBulletUtil::convert(env, axis, &ax);
+
+        joint->m_refs[0] = joint->m_bodies[0].xform().inverse().getBasis() * ax;
+        joint->m_refs[1] = joint->m_bodies[1].xform().inverse().getBasis() * ax;
     }
 
 #ifdef __cplusplus
