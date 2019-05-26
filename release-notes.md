@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.64 released on 25 May 2019
+
+Add an `updateClusterMesh()` method to the `NativeSoftBodyUtil` class.
+
 ## Version 1.0.63 released on 25 May 2019
 
  + Added `countNodesInCluster()` and `listNodesInCluster()`
