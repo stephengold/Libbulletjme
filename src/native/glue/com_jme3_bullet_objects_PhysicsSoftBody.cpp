@@ -966,33 +966,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getPhysicsRotation
-     * Signature: (JLcom/jme3/math/Quaternion;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getPhysicsRotation
-    (JNIEnv *env, jobject object, jlong bodyId, jobject rotation) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        jmeBulletUtil::convertQuat(env, &body->m_initialWorldTransform.getBasis(), rotation);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getPhysicsTransform
-     * Signature: (JLcom/jme3/math/Transform;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getPhysicsTransform
-    (JNIEnv *env, jobject object, jlong bodyId, jobject transform) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        // scale unavailable with btTransform
-        jmeBulletUtil::convert(env, &body->m_initialWorldTransform, transform);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getRestLengthScale
      * Signature: (J)F
      */
@@ -1318,40 +1291,6 @@ extern "C" {
 
         vec -= getBoundingCenter(body);
         body->translate(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    setPhysicsRotation
-     * Signature: (JLcom/jme3/math/Quaternion;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsRotation
-    (JNIEnv *env, jobject object, jlong bodyId, jobject rotation) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        btMatrix3x3 rot;
-        jmeBulletUtil::convertQuat(env, rotation, &rot);
-        rot = body->m_initialWorldTransform.inverse().getBasis() * rot;
-        btQuaternion quat;
-        rot.getRotation(quat);
-        body->rotate(quat);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    setPhysicsTransform
-     * Signature: (JLcom/jme3/math/Transform;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsTransform
-    (JNIEnv *env, jobject object, jlong bodyId, jobject transform) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        // scale unavailable with btTransform
-        btTransform trs;
-        jmeBulletUtil::convert(env, transform, &trs);
-        body->transform(body->m_initialWorldTransform.inverse() * trs);
     }
 
     /*
