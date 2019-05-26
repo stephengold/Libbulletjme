@@ -125,7 +125,7 @@ extern "C" {
      * Method:    getWaterOffset
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_infos_SoftBodyWorldInfo_getWaterOffset
+    JNIEXPORT jfloat JNICALL Java_com_jme3_SoftBodyWorldInfo_getWaterOffset
     (JNIEnv *env, jobject object, jlong worldId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.", 0);
@@ -178,7 +178,7 @@ extern "C" {
      * Method:    setSoftBodyWorldInfo
      * Signature: (JJ)J
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_infos_SoftBodyWorldInfo_setSoftBodyWorldInfo
+    JNIEXPORT jlong JNICALL Java_com_jme3_SoftBodyWorldInfo_setSoftBodyWorldInfo
     (JNIEnv *env, jobject object, jlong worldId, jlong copyId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The target btSoftBodyWorldInfo does not exist.", 0);
