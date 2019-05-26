@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "com_jme3_bullet_objects_infos_SoftBodyWorldInfo.h"
+#include "com_jme3_bullet_SoftBodyWorldInfo.h"
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
 
@@ -42,11 +42,11 @@ extern "C" {
 #endif
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    createSoftBodyWorldInfo
      * Signature: ()J
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_createSoftBodyWorldInfo
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_createSoftBodyWorldInfo
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
         btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
@@ -54,11 +54,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    getAirDensity
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getAirDensity
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_getAirDensity
     (JNIEnv *env, jobject object, jlong worldId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.", 0);
@@ -67,11 +67,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    getGravity
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getGravity
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_getGravity
     (JNIEnv *env, jobject object, jlong worldId, jobject gravity) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -81,11 +81,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    getMaxDisplacement
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getMaxDisplacement
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_getMaxDisplacement
     (JNIEnv *env, jobject object, jlong worldId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.", 0);
@@ -94,11 +94,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    getWaterDensity
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterDensity
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_getWaterDensity
     (JNIEnv *env, jobject object, jlong worldId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.", 0);
@@ -107,11 +107,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    getWaterNormal
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterNormal
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_getWaterNormal
     (JNIEnv *env, jobject object, jlong worldId, jobject normal) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -121,11 +121,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    getWaterOffset
      * Signature: (J)F
      */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_getWaterOffset
+    JNIEXPORT jfloat JNICALL Java_com_jme3_infos_SoftBodyWorldInfo_getWaterOffset
     (JNIEnv *env, jobject object, jlong worldId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.", 0);
@@ -134,11 +134,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setAirDensity
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setAirDensity
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setAirDensity
     (JNIEnv *env, jobject object, jlong worldId, jfloat value) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -147,11 +147,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setGravity
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setGravity
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setGravity
     (JNIEnv *env, jobject object, jlong worldId, jobject gravity) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -161,11 +161,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setMaxDisplacement
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setMaxDisplacement
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setMaxDisplacement
     (JNIEnv *env, jobject object, jlong worldId, jfloat value) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -174,11 +174,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setSoftBodyWorldInfo
      * Signature: (JJ)J
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setSoftBodyWorldInfo
+    JNIEXPORT jlong JNICALL Java_com_jme3_infos_SoftBodyWorldInfo_setSoftBodyWorldInfo
     (JNIEnv *env, jobject object, jlong worldId, jlong copyId) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The target btSoftBodyWorldInfo does not exist.", 0);
@@ -201,11 +201,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setWaterDensity
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterDensity
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setWaterDensity
     (JNIEnv *env, jobject object, jlong worldId, jfloat value) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -214,11 +214,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setWaterNormal
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterNormal
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setWaterNormal
     (JNIEnv *env, jobject object, jlong worldId, jobject normal) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
@@ -228,11 +228,11 @@ extern "C" {
     }
 
     /*
-     * Class:     com_jme3_bullet_objects_infos_SoftBodyWorldInfo
+     * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setWaterOffset
      * Signature: (JF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyWorldInfo_setWaterOffset
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setWaterOffset
     (JNIEnv *env, jobject object, jlong worldId, jfloat value) {
         btSoftBodyWorldInfo* world = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
         NULL_CHECK(world, "The btSoftBodyWorldInfo does not exist.",);
