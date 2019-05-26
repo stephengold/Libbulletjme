@@ -904,8 +904,6 @@ extern "C" {
         jfloat* out = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
         const int size = body->m_nodes.size();
 
-        btVector3 temp_vertex;
-
         for (int i = 0, buffi = 0; i < size; i++) {
             const btSoftBody::Node& n = body->m_nodes[i];
             out[buffi++] = n.m_x.getX();
