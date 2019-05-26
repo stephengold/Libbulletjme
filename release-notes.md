@@ -1,8 +1,18 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.65 released on 26 May 2019
+
+ + Moved the `SoftBodyWorldInfo` class from com_jme3_bullet_objects_info
+   to com_jme3_bullet
+ + Removed 4 methods from `PhysicsSoftBody`:
+   + `getPhysicsRotation`
+   + `getPhysicsTransform`
+   + `setPhysicsRotation`
+   + `setPhysicsTransform`
+
 ## Version 1.0.64 released on 25 May 2019
 
-Add an `updateClusterMesh()` method to the `NativeSoftBodyUtil` class.
+Added an `updateClusterMesh()` method to the `NativeSoftBodyUtil` class.
 
 ## Version 1.0.63 released on 25 May 2019
 
