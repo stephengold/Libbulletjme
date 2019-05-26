@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.67 released on 26 May 2019
+
+Corrected the names of 2 methods in `SoftBodyWorldInfo`.
+
 ## Version 1.0.66 released on 26 May 2019
 
 Corrected the names of 2 methods in `SoftBodyWorldInfo`.
