@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.68 released on 26 May 2019
+
+Renamed the `PhysicsSoftBody.Config` class to `SoftBodyConfig`.
+
 ## Version 1.0.67 released on 26 May 2019
 
 Corrected the names of 2 methods in `SoftBodyWorldInfo`.
@@ -11,7 +15,7 @@ Corrected the names of 2 methods in `SoftBodyWorldInfo`.
 ## Version 1.0.65 released on 26 May 2019
 
  + Moved the `SoftBodyWorldInfo` class from com_jme3_bullet_objects_info
-   to com_jme3_bullet
+   to com_jme3_bullet.
  + Removed 4 methods from `PhysicsSoftBody`:
    + `getPhysicsRotation`
    + `getPhysicsTransform`
