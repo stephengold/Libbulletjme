@@ -89,6 +89,19 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
+     * Method:    getAeroModel
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAeroModel
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
+        return body->m_cfg.aeromodel;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
      * Method:    getAnchorsHardness
      * Signature: (J)F
      */
@@ -410,6 +423,19 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
 
         return body->m_cfg.kVC;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
+     * Method:    setAeroModel
+     * Signature: (JI)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAeroModel
+    (JNIEnv *env, jobject object, jlong bodyId, jint model) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        body->m_cfg.aeromodel = model;
     }
 
     /*
