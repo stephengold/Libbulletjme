@@ -48,23 +48,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    addAeroForceToNode
-     * Signature: (JLcom/jme3/math/Vector3f;I)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addAeroForceToNode
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force, jint nodeId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        NULL_CHECK(force, "The force vector does not exist.",)
-        btVector3 vec;
-        jmeBulletUtil::convert(env, force, &vec);
-
-        body->addAeroForceToNode(vec, nodeId);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    addForce
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
