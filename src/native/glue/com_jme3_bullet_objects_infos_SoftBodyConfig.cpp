@@ -435,7 +435,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
-        body->m_cfg.aeromodel = model;
+        body->m_cfg.aeromodel = (btSoftBody::eAeroModel::_) model;
     }
 
     /*
