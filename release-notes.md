@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.70 released on 27 May 2019
+
+Added an explicit cast to enum type.
+
 ## Version 1.0.69 released on 27 May 2019
 
  + Removed `applyAeroToMode()` method from the `PhysicsSoftBody` class.
