@@ -1,5 +1,13 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.69 released on 27 May 2019
+
+ + Removed `applyAeroToMode()` method from the `PhysicsSoftBody` class.
+ + Added `getWindVelocity()` and `setWindVelocity()` methods to the
+   `PhysicsSoftBody` class.
+ + Added `getAeroModel()` and `setAeroModel()` methods to the
+   `SoftBodyConfig` class.
+
 ## Version 1.0.68 released on 26 May 2019
 
 Renamed the `PhysicsSoftBody.Config` class to `SoftBodyConfig`.

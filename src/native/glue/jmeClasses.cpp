@@ -108,6 +108,12 @@ jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
 jmethodID jmeClasses::Transform_scale;
 
+/*
+ * global flag to enable/disable the init message
+ *
+ * Invoke Java_com_jme3_bullet_debug_DebugTools_setStartupMessageEnabled()
+ * to alter this flag.
+ */
 int jmeClasses::printFlag = 1; // TRUE
 
 //private fields
@@ -120,7 +126,7 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
     if (printFlag) {
-        fprintf(stdout, "Libbulletjme v1.0.68 initializing Java classes\n");
+        fprintf(stdout, "Libbulletjme v1.0.69 initializing Java classes\n");
         fflush(stdout);
     }
 
