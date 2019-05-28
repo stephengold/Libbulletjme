@@ -1042,6 +1042,20 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getWindVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getWindVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",);
+
+        const btVector3& vec = body->getWindVelocity();
+        jmeBulletUtil::convert(env, &vec, storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    initDefault
      * Signature: (J)V
      */
@@ -1427,6 +1441,23 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->setVolumeMass(mass);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setWindVelocity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setWindVelocity
+    (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
+        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
+        btVector3 bulletVector;
+        jmeBulletUtil::convert(env, velocityVector, &bulletVector);
+
+        body->setWindVelocity(bulletVector);
     }
 
 #ifdef __cplusplus
