@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
+ * Method:    updateAnchorMesh
+ * Signature: (JLjava/nio/FloatBuffer;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateAnchorMesh
+  (JNIEnv *, jclass, jlong, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
  * Method:    updateClusterMesh
  * Signature: (JLjava/nio/FloatBuffer;Z)V
  */
