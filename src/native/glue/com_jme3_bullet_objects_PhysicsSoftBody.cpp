@@ -438,24 +438,26 @@ extern "C" {
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
 
-        // Create a temporary btSoftBodyWorldInfo for this body,
-        // just until it is added to physics space. TODO null?
+        /*
+         * Create a temporary btSoftBodyWorldInfo for this body,
+         * which will be replaced when the body gets added to a physics space.
+         */
         btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
 
         btSoftBody* body = new btSoftBody(worldInfo);
+        body->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
+        body->setUserPointer(NULL); // not in any jmePhysicsSoftSpace
 
-        body->getCollisionShape()->setMargin(0); // TODO bad idea?
-
-        /* Default material */
         btSoftBody::Material* m = body->appendMaterial();
         m->m_kLST = 1;
         m->m_kAST = 1;
         m->m_kVST = 1;
-        // The only available flag for Materials is DebugDraw (by Default)
-        // we don't want to use Bullet's debug draw, (we use JME instead).
+        /*
+         * The only available flag for materials is DebugDraw (on by Default).
+         * Disable Bullet's debug draw because Minie has its own.
+         */
         m->m_flags = 0x0000;
 
-        body->setUserPointer(NULL);
         return reinterpret_cast<jlong> (body);
     }
 
