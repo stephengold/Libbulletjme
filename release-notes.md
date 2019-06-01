@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.71 released on 31 May 2019
+
+ + Added an `updateAnchorMesh()` method to the `NativeSoftBodyUtils` class.
+ + Changed the default collision margin for soft bodies from 0 to
+   `CONVEX_DISTANCE_MARGIN` (which is currently 0.04).
+
 ## Version 1.0.70 released on 27 May 2019
 
 Added an explicit cast to enum type.
