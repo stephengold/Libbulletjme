@@ -10,13 +10,78 @@ The C++ source code is provided under
 
 Libbulletjme is used in [Minie].
 
-### History
+## Contents of this document
+
+ + [History](#history)
+ + [Lexicon of class/enum/struct names](#lexicon)
+ + [External links](#links)
+ + [Acknowledgments](#acks)
+
+<a name="history"/>
+
+## History
 
 The Libbulletjme Project is hosted at
 [GitHub](https://github.com/stephengold/Libbulletjme).
 
 The evolution of the project is chronicled in
 [its release notes](https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md).
+
+<a name="lexicon"/>
+
+## Lexicon of class/enum/struct names
+
+<pre>
+Bullet v2 C++ type:               corresponding JME3 Java class com.jme3.bullet...
+</pre>
+<pre>
+btBoxShape                        .collision.shapes.BoxCollisionShape
+btBU_Simplex1to4                  .collision.shapes.SimplexCollisionShape
+btBvhTriangleMeshShape            .collision.shapes.MeshCollisionShape
+btCapsuleShape{X//Z}              .collision.shapes.CapsuleCollisionShape
+btCollisionObject                 .collision.PhysicsCollisionObject
+btCollisionShape                  .collision.shapes.CollisionShape
+btCompoundShape                   .collision.shapes.CompoundCollisionShape
+btCompoundShapeChild              .collision.shapes.info.ChildCollisionShape
+btConeShape{X//Z}                 .collision.shapes.ConeCollisionShape
+btConeTwistConstraint             .joints.ConeJoint
+btConvexHullShape                 .collision.shapes.HullCollisionShape
+btCylinderShape{X//Z}             .collision.shapes.CylinderCollisionShape
+btDynamicsWorld                   .PhysicsSpace
+btEmptyShape                      .collision.shapes.EmptyShape
+btGeneric6DofConstraint           .joints.SixDofJoint
+btGeneric6DofSpringConstraint     .joints.SixDofSpringJoint
+btGImpactMeshShape                .collision.shapes.GImpactCollisionShape
+btHeightfieldTerrainShape         .collision.shapes.HeightfieldCollisionShape
+btHingeConstraint                 .joints.HingeJoint
+btKinematicCharacterController    .objects.PhysicsCharacter
+btManifoldPoint                   .collision.PhysicsCollisionEvent
+btMultiSphereShape                .collision.shapes.MultiSphere
+btPairCachingGhostObject          .objects.PhysicsGhostObject
+btPoint2PointConstraint           .joints.Point2PointJoint
+btRaycastVehicle                  .objects.PhysicsVehicle
+btRigidBody                       .objects.PhysicsRigidBody
+btRotationalLimitMotor            .joints.motors.RotationalLimitMotor
+btSliderConstraint                .joints.SliderJoint
+btSoftBody                        .objects.PhysicsSoftBody
+btSoftBody::Config                .objects.infos.SoftBodyConfig
+btSoftBodyWorldInfo               .SoftBodyWorldInfo
+btSoftRigidDynamicsWorld          .PhysicsSoftSpace
+btSphereShape                     .collision.shapes.SphereCollisionShape
+btStaticPlaneShape                .collision.shapes.PlaneCollisionShape
+btTriangleRaycastCallback::Eflags .RayTestFlag
+btTypedConstraint                 .joints.PhysicsJoint
+btTranslationalLimitMotor         .joints.motors.TranslationalLimitMotor
+</pre>
+
+<a name="links"/>
+
+## External links
+
+  + [The Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
+  + [The Physics section of the JME Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
+
+<a name="acks"/>
 
 ## Acknowledgments
 
