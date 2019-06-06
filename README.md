@@ -32,7 +32,7 @@ The evolution of the project is chronicled in
 ## Lexicon of class/enum/struct names
 
 <pre>
-Bullet v2 C++ type:               corresponding JME3 Java class com.jme3.bullet...
+Bullet v2 C++ type:               corresponding Java class com.jme3.bullet...
 </pre>
 <pre>
 btBoxShape                        .collision.shapes.BoxCollisionShape
@@ -70,8 +70,8 @@ btSoftRigidDynamicsWorld          .PhysicsSoftSpace
 btSphereShape                     .collision.shapes.SphereCollisionShape
 btStaticPlaneShape                .collision.shapes.PlaneCollisionShape
 btTriangleRaycastCallback::Eflags .RayTestFlag
-btTypedConstraint                 .joints.PhysicsJoint
 btTranslationalLimitMotor         .joints.motors.TranslationalLimitMotor
+btTypedConstraint                 .joints.PhysicsJoint
 </pre>
 
 <a name="links"/>
