@@ -393,8 +393,10 @@ extern "C" {
 
         NULL_CHECK(transform, "The transform does not exist.",)
         btTransform trs;
-        jmeBulletUtil::convert(env, transform, &trs);
+        btVector3 scale;
+        jmeBulletUtil::convert(env, transform, &trs, &scale);
 
+        body->scale(scale);
         body->transform(trs);
     }
 

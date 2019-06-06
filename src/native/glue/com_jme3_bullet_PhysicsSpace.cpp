@@ -456,10 +456,11 @@ extern "C" {
         };
 
         btTransform native_to;
-        jmeBulletUtil::convert(env, to, &native_to);
+        btVector3 scale; // scales are ignored
+        jmeBulletUtil::convert(env, to, &native_to, &scale);
 
         btTransform native_from;
-        jmeBulletUtil::convert(env, from, &native_from);
+        jmeBulletUtil::convert(env, from, &native_from, &scale);
 
         btScalar native_allowed_ccd_penetration = btScalar(allowedCcdPenetration);
 

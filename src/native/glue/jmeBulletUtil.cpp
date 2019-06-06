@@ -410,9 +410,10 @@ void jmeBulletUtil::addSweepResult(JNIEnv* env, jobject resultlist, btVector3* h
     }
 }
 
-void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* out) {
+void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* outTransform, btVector3* outScale) {
     NULL_CHECK(in, "The input Transform does not exist.",)
-    NULL_CHECK(out, "The output btTransform does not exist.",);
+    NULL_CHECK(outTransform, "The output btTransform does not exist.",);
+    NULL_CHECK(outScale, "The output btVector3 does not exist.",);
 
     jobject translation_vec = env->CallObjectMethod(in, jmeClasses::Transform_translation);
     if (env->ExceptionCheck()) {
@@ -426,14 +427,19 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* out) {
         return;
     }
 
-    //Scale currently not supported by bullet
-    //@TBD: Create an assertion somewhere to avoid scale values
+    jobject scale_vec = env->CallObjectMethod(in, jmeClasses::Transform_scale);
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
 
     btVector3 native_translation_vec;
     convert(env, translation_vec, &native_translation_vec);
-    out->setOrigin(native_translation_vec);
+    outTransform->setOrigin(native_translation_vec);
 
     btQuaternion native_rot_quat;
     convert(env, rot_quat, &native_rot_quat);
-    out->setRotation(native_rot_quat);
+    outTransform->setRotation(native_rot_quat);
+
+    convert(env, scale_vec, outScale);
 }

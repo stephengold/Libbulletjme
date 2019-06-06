@@ -247,11 +247,12 @@ extern "C" {
 
         NULL_CHECK(frameA, "The frameA transform does not exist.",)
         btTransform a;
-        jmeBulletUtil::convert(env, frameA, &a);
+        btVector3 scale; // scales are ignored
+        jmeBulletUtil::convert(env, frameA, &a, &scale);
 
         NULL_CHECK(frameB, "The frameB transform does not exist.",)
         btTransform b;
-        jmeBulletUtil::convert(env, frameB, &b);
+        jmeBulletUtil::convert(env, frameB, &b, &scale);
 
         joint->setFrames(a, b);
     }
