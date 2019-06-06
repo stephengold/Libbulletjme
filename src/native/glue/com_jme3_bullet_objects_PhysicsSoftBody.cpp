@@ -144,17 +144,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendFaces
-     * Signature: (JLjava/nio/ByteBuffer;)V
+     * Signature: (JILjava/nio/ByteBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JLjava_nio_ByteBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject byteBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_ByteBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numFaces,
+            jobject byteBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jbyte* face = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
-        const int capacity = env->GetDirectBufferCapacity(byteBuffer) - 2;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 3 * numFaces;) {
             int ni1 = face[i++];
             int ni2 = face[i++];
             int ni3 = face[i++];
@@ -165,17 +165,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendFaces
-     * Signature: (JLjava/nio/ShortBuffer;)V
+     * Signature: (JILjava/nio/ShortBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JLjava_nio_ShortBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject shortBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_ShortBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numFaces,
+            jobject shortBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jshort* face = (jshort*) env->GetDirectBufferAddress(shortBuffer);
-        const int capacity = env->GetDirectBufferCapacity(shortBuffer) - 2;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 3 * numFaces;) {
             int ni1 = face[i++];
             int ni2 = face[i++];
             int ni3 = face[i++];
@@ -186,17 +186,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendFaces
-     * Signature: (JLjava/nio/IntBuffer;)V
+     * Signature: (JILjava/nio/IntBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JLjava_nio_IntBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject intBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_IntBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numFaces,
+            jobject intBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jint* face = (jint*) env->GetDirectBufferAddress(intBuffer);
-        const int capacity = env->GetDirectBufferCapacity(intBuffer) - 2;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 3 * numFaces;) {
             int ni1 = face[i++];
             int ni2 = face[i++];
             int ni3 = face[i++];
@@ -207,17 +207,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendLinks
-     * Signature: (JLjava/nio/ByteBuffer;)V
+     * Signature: (JILjava/nio/ByteBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JLjava_nio_ByteBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject byteBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_ByteBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numLinks,
+            jobject byteBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jbyte* link = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
-        const int capacity = env->GetDirectBufferCapacity(byteBuffer) - 1;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
             int ni2 = link[i++];
             body->appendLink(ni1, ni2);
@@ -227,17 +227,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendLinks
-     * Signature: (JLjava/nio/ShortBuffer;)V
+     * Signature: (JILjava/nio/ShortBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JLjava_nio_ShortBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject shortBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_ShortBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numLinks,
+            jobject shortBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jshort* link = (jshort*) env->GetDirectBufferAddress(shortBuffer);
-        const int capacity = env->GetDirectBufferCapacity(shortBuffer) - 1;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
             int ni2 = link[i++];
             body->appendLink(ni1, ni2);
@@ -247,17 +247,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendLinks
-     * Signature: (JLjava/nio/IntBuffer;)V
+     * Signature: (JILjava/nio/IntBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JLjava_nio_IntBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject intBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_IntBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numLinks,
+            jobject intBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jint* link = (jint*) env->GetDirectBufferAddress(intBuffer);
-        const int capacity = env->GetDirectBufferCapacity(intBuffer) - 1;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
             int ni2 = link[i++];
             body->appendLink(ni1, ni2);
@@ -267,20 +267,20 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendNodes
-     * Signature: (JLjava/nio/FloatBuffer;)V
+     * Signature: (JILjava/nio/FloatBuffer;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendNodes
-    (JNIEnv *env, jobject object, jlong bodyId, jobject floatBuffer) {
+    (JNIEnv *env, jobject object, jlong bodyId, jint numNodes,
+            jobject floatBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jfloat* position = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
-        const int capacity = env->GetDirectBufferCapacity(floatBuffer) - 2;
 
-        for (int i = 0; i < capacity;) {
-            const float x = position[i++];
-            const float y = position[i++];
-            const float z = position[i++];
+        for (int i = 0; i < 3 * numNodes;) {
+            float x = position[i++];
+            float y = position[i++];
+            float z = position[i++];
             body->appendNode(btVector3(x, y, z), 1);
         }
     }
@@ -288,17 +288,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendTetras
-     * Signature: (JLjava/nio/ByteBuffer;)V
+     * Signature: (JILjava/nio/ByteBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_ByteBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject byteBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_ByteBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numTetras,
+            jobject byteBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jbyte* tetra = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
-        const int capacity = env->GetDirectBufferCapacity(byteBuffer) - 3;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 4 * numTetras;) {
             int ni1 = tetra[i++];
             int ni2 = tetra[i++];
             int ni3 = tetra[i++];
@@ -310,17 +310,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendTetras
-     * Signature: (JLjava/nio/ShortBuffer;)V
+     * Signature: (JILjava/nio/ShortBuffer;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_ShortBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject shortBuffer) {
+    (JNIEnv *env, jobject object, jlong bodyId, jint numTetras,
+            jobject shortBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jshort* tetra = (jshort*) env->GetDirectBufferAddress(shortBuffer);
-        const int capacity = env->GetDirectBufferCapacity(shortBuffer) - 3;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 4 * numTetras;) {
             int ni1 = tetra[i++];
             int ni2 = tetra[i++];
             int ni3 = tetra[i++];
@@ -332,17 +332,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendTetras
-     * Signature: (JLjava/nio/IntBuffer;)V
+     * Signature: (JILjava/nio/IntBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_IntBuffer_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject intBuffer) {
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_IntBuffer_2
+    (JNIEnv *env, jobject object, jlong bodyId, jint numTetras,
+            jobject intBuffer) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jint* tetra = (jint*) env->GetDirectBufferAddress(intBuffer);
-        const int capacity = env->GetDirectBufferCapacity(intBuffer) - 3;
 
-        for (int i = 0; i < capacity;) {
+        for (int i = 0; i < 4 * numTetras;) {
             int ni1 = tetra[i++];
             int ni2 = tetra[i++];
             int ni3 = tetra[i++];

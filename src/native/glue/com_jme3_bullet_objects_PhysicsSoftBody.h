@@ -92,82 +92,82 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendAnchor
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendFaces
- * Signature: (JLjava/nio/ByteBuffer;)V
+ * Signature: (JILjava/nio/ByteBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JLjava_nio_ByteBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_ByteBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendFaces
- * Signature: (JLjava/nio/IntBuffer;)V
+ * Signature: (JILjava/nio/IntBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JLjava_nio_IntBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_IntBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendFaces
- * Signature: (JLjava/nio/ShortBuffer;)V
+ * Signature: (JILjava/nio/ShortBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JLjava_nio_ShortBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_ShortBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendLinks
- * Signature: (JLjava/nio/ByteBuffer;)V
+ * Signature: (JILjava/nio/ByteBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JLjava_nio_ByteBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_ByteBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendLinks
- * Signature: (JLjava/nio/IntBuffer;)V
+ * Signature: (JILjava/nio/IntBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JLjava_nio_IntBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_IntBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendLinks
- * Signature: (JLjava/nio/ShortBuffer;)V
+ * Signature: (JILjava/nio/ShortBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JLjava_nio_ShortBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_ShortBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendNodes
- * Signature: (JLjava/nio/FloatBuffer;)V
+ * Signature: (JILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendNodes
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendTetras
- * Signature: (JLjava/nio/ByteBuffer;)V
+ * Signature: (JILjava/nio/ByteBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_ByteBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_ByteBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendTetras
- * Signature: (JLjava/nio/IntBuffer;)V
+ * Signature: (JILjava/nio/IntBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_IntBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_IntBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendTetras
- * Signature: (JLjava/nio/ShortBuffer;)V
+ * Signature: (JILjava/nio/ShortBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_ShortBuffer_2
-  (JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_ShortBuffer_2
+  (JNIEnv *, jobject, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
