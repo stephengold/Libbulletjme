@@ -753,8 +753,9 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         jfloat* masses = (jfloat*) env->GetDirectBufferAddress(massBuffer);
-        const int length = env->GetDirectBufferCapacity(massBuffer);
-        for (int i = 0; i < length; ++i) {
+        int capacity = env->GetDirectBufferCapacity(massBuffer);
+        int numNodes = body->m_nodes.size();
+        for (int i = 0; i < numNodes && i < capacity; ++i) {
             masses[i] = body->getMass(i);
         }
     }
@@ -1232,8 +1233,9 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
         const jfloat* masses = (jfloat*) env->GetDirectBufferAddress(massBuffer);
-        const int length = env->GetDirectBufferCapacity(massBuffer);
-        for (int i = 0; i < length; ++i) {
+        int capacity = env->GetDirectBufferCapacity(massBuffer);
+        int numNodes = body->m_nodes.size();
+        for (int i = 0; i < numNodes && i < capacity; ++i) {
             body->setMass(i, masses[i]);
         }
     }
@@ -1267,8 +1269,9 @@ extern "C" {
         const jfloat* normals
                 = (jfloat*) env->GetDirectBufferAddress(normalBuffer);
         int capacity = env->GetDirectBufferCapacity(normalBuffer) - 2;
-
-        for (int nodeIndex = 0, offset = 0; offset < capacity;) {
+        int numNodes = body->m_nodes.size();
+        for (int nodeIndex = 0, offset = 0;
+                nodeIndex < numNodes && offset < capacity;) {
             btScalar x = normals[offset++];
             btScalar y = normals[offset++];
             btScalar z = normals[offset++];
@@ -1377,8 +1380,9 @@ extern "C" {
         const jfloat* velocities
                 = (jfloat*) env->GetDirectBufferAddress(velocityBuffer);
         int capacity = env->GetDirectBufferCapacity(velocityBuffer) - 2;
-
-        for (int nodeIndex = 0, offset = 0; offset < capacity;) {
+        int numNodes = body->m_nodes.size();
+        for (int nodeIndex = 0, offset = 0;
+                nodeIndex < numNodes && offset < capacity;) {
             btScalar x = velocities[offset++];
             btScalar y = velocities[offset++];
             btScalar z = velocities[offset++];
