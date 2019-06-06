@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.72 released on 6 June 2019
+
+Bugfix: scaling ignored in PhysicsSoftBody.applyPhysicsTransform().
+
 ## Version 1.0.71 released on 31 May 2019
 
  + Added an `updateAnchorMesh()` method to the `NativeSoftBodyUtils` class.
