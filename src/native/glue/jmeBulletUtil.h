@@ -31,7 +31,6 @@
  */
 #include "jmeClasses.h"
 #include "btBulletDynamicsCommon.h"
-#include "btBulletCollisionCommon.h"
 #include "LinearMath/btVector3.h"
 
 /*
@@ -39,18 +38,27 @@
  */
 class jmeBulletUtil {
 public:
-    static void convert(JNIEnv* env, jobject in, btVector3* out);
-    static void convert(JNIEnv* env, const btVector3* in, jobject out);
-    static void convert(JNIEnv* env, jobject in, btMatrix3x3* out);
-    static void convert(JNIEnv* env, jobject in, btQuaternion* out);
-    static void convert(JNIEnv* env, const btMatrix3x3* in, jobject out);
-    static void convert(JNIEnv* env, const btQuaternion* in, jobject out);
-    static void convert(JNIEnv* env, const btTransform* in, jobject out);
-    static void convertQuat(JNIEnv* env, jobject in, btMatrix3x3* out);
-    static void convertQuat(JNIEnv* env, const btMatrix3x3* in, jobject out);
-    static void convert(JNIEnv* env, jobject in, btTransform* outTransform, btVector3* outScale);
-    static void addResult(JNIEnv* env, jobject resultlist, btVector3* hitnormal, btVector3* m_hitPointWorld, const btScalar m_hitFraction, const btCollisionObject* hitobject);
-    static void addSweepResult(JNIEnv* env, jobject resultlist, btVector3* hitnormal, btVector3* m_hitPointWorld, const btScalar m_hitFraction, const btCollisionObject* hitobject);
+    // convert Bullet math to jMonkeyEngine:
+    static void convert(JNIEnv*, const btMatrix3x3* in, jobject outMatrix);
+    static void convert(JNIEnv*, const btQuaternion* in, jobject outQuat);
+    static void convert(JNIEnv*, const btTransform* in, jobject outTransform);
+    static void convert(JNIEnv*, const btVector3* in, jobject outVector);
+    static void convertQuat(JNIEnv*, const btMatrix3x3* in, jobject outQuat);
+
+    // convert jMonkeyEngine math to Bullet:
+    static void convert(JNIEnv*, jobject inMatrix, btMatrix3x3* out);
+    static void convert(JNIEnv*, jobject inQuat, btQuaternion* out);
+    static void convert(JNIEnv*, jobject inTransform,
+            btTransform* outTransform, btVector3* outScale);
+    static void convert(JNIEnv*, jobject inVector, btVector3* out);
+    static void convertQuat(JNIEnv*, jobject inQuat, btMatrix3x3* out);
+
+    static void addResult(JNIEnv*, jobject resultlist, btVector3* hitnormal,
+            btVector3* m_hitPointWorld, const btScalar m_hitFraction,
+            const btCollisionObject* hitobject);
+    static void addSweepResult(JNIEnv*v, jobject resultlist,
+            btVector3* hitnormal, btVector3* m_hitPointWorld,
+            const btScalar m_hitFraction, const btCollisionObject* hitobject);
 
 private:
 
@@ -59,7 +67,6 @@ private:
 
     ~jmeBulletUtil() {
     };
-
 };
 
 class jmeUserPointer {
