@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.73 released on 6 June 2019
+
+ + Added count arguments to `appendFaces()`, `appendLinks()`, `appendNodes()`,
+   and `appendTetras()` methods in the `PhysicsSoftBody` class.
+ + Added limit checks for the number of nodes when masses, normals,
+   and velocities in the `PhysicsSoftBody` class.
+
 ## Version 1.0.72 released on 6 June 2019
 
 Bugfix: scaling ignored in PhysicsSoftBody.applyPhysicsTransform().
