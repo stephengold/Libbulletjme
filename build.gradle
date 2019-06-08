@@ -1,5 +1,7 @@
-apply plugin: 'cpp'
-apply plugin: 'java' // for IDE access
+plugins {
+    id 'cpp'
+    id 'java' // for IDE access
+}
 
 def javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 
