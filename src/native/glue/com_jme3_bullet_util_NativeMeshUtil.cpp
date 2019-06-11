@@ -48,8 +48,15 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_util_NativeMeshUtil_createTriangleIndexVertexArray
     (JNIEnv * env, jclass cls, jobject triangleIndexBase, jobject vertexIndexBase, jint numTriangles, jint numVertices, jint vertexStride, jint triangleIndexStride) {
         jmeClasses::initJavaClasses(env);
+
+        NULL_CHECK(triangleIndexBase,
+                "The triangle index buffer does not exist.",);
         int* triangles = (int*) env->GetDirectBufferAddress(triangleIndexBase);
+
+        NULL_CHECK(vertexIndexBase,
+                "The vertex index buffer does not exist.",);
         float* vertices = (float*) env->GetDirectBufferAddress(vertexIndexBase);
+
         btTriangleIndexVertexArray* array = new btTriangleIndexVertexArray(numTriangles, triangles, triangleIndexStride, numVertices, vertices, vertexStride);
         return reinterpret_cast<jlong> (array);
     }

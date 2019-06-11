@@ -56,6 +56,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat* positions
                 = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
 
@@ -89,6 +90,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat* positions
                 = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
 
@@ -117,15 +119,18 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(indexMap, "The index map does not exist.",);
         const jint* jme2bulletMap = (jint*) env->GetDirectBufferAddress(indexMap);
         const int mapCapacity = env->GetDirectBufferCapacity(indexMap);
 
+        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat* positions
                 = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
 
         const btVector3 offset = (meshInLocalSpace ? getBoundingCenter(body) : btVector3(0, 0, 0));
 
         if (doNormalUpdate) {
+            NULL_CHECK(normalsBuffer, "The normals buffer does not exist.",);
             jfloat* normals
                     = (jfloat*) env->GetDirectBufferAddress(normalsBuffer);
 
@@ -161,6 +166,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat* positions
                 = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
 
@@ -168,6 +174,7 @@ extern "C" {
         const int numNodes = body->m_nodes.size();
 
         if (doNormalUpdate) {
+            NULL_CHECK(normalsBuffer, "The normals buffer does not exist.",);
             jfloat* normals
                     = (jfloat*) env->GetDirectBufferAddress(normalsBuffer);
 

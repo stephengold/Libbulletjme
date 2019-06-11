@@ -152,6 +152,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
         const jbyte* face = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
 
         for (int i = 0; i < 3 * numFaces;) {
@@ -173,6 +174,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
         const jshort* face = (jshort*) env->GetDirectBufferAddress(shortBuffer);
 
         for (int i = 0; i < 3 * numFaces;) {
@@ -194,6 +196,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint* face = (jint*) env->GetDirectBufferAddress(intBuffer);
 
         for (int i = 0; i < 3 * numFaces;) {
@@ -215,6 +218,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
         const jbyte* link = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
 
         for (int i = 0; i < 2 * numLinks;) {
@@ -235,6 +239,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
         const jshort* link = (jshort*) env->GetDirectBufferAddress(shortBuffer);
 
         for (int i = 0; i < 2 * numLinks;) {
@@ -255,6 +260,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint* link = (jint*) env->GetDirectBufferAddress(intBuffer);
 
         for (int i = 0; i < 2 * numLinks;) {
@@ -275,6 +281,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(floatBuffer, "The FloatBuffer does not exist.",);
         const jfloat* position = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
 
         for (int i = 0; i < 3 * numNodes;) {
@@ -296,6 +303,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
         const jbyte* tetra = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
 
         for (int i = 0; i < 4 * numTetras;) {
@@ -318,6 +326,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
         const jshort* tetra = (jshort*) env->GetDirectBufferAddress(shortBuffer);
 
         for (int i = 0; i < 4 * numTetras;) {
@@ -340,6 +349,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint* tetra = (jint*) env->GetDirectBufferAddress(intBuffer);
 
         for (int i = 0; i < 4 * numTetras;) {
@@ -679,6 +689,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint* out = (jint*) env->GetDirectBufferAddress(intBuffer);
         const int size = body->m_faces.size();
 
@@ -702,6 +713,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint* out = (jint*) env->GetDirectBufferAddress(intBuffer);
         const int size = body->m_links.size();
 
@@ -752,6 +764,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
         jfloat* masses = (jfloat*) env->GetDirectBufferAddress(massBuffer);
         int capacity = env->GetDirectBufferCapacity(massBuffer);
         int numNodes = body->m_nodes.size();
@@ -889,6 +902,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        NULL_CHECK(floatBuffer, "The FloatBuffer does not exist.",);
         jfloat* out = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
         const int size = body->m_nodes.size();
 
@@ -988,6 +1002,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint* out = (jint*) env->GetDirectBufferAddress(intBuffer);
         const int size = body->m_tetras.size();
 
@@ -1101,6 +1116,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint* result = (jint*) env->GetDirectBufferAddress(intBuffer);
 
         const btSoftBody::Node* firstNode = &body->m_nodes[0];
@@ -1232,6 +1248,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
         const jfloat* masses = (jfloat*) env->GetDirectBufferAddress(massBuffer);
         int capacity = env->GetDirectBufferCapacity(massBuffer);
         int numNodes = body->m_nodes.size();
@@ -1266,6 +1283,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(normalBuffer, "The normal buffer does not exist.",);
         const jfloat* normals
                 = (jfloat*) env->GetDirectBufferAddress(normalBuffer);
         int capacity = env->GetDirectBufferCapacity(normalBuffer) - 2;
@@ -1377,6 +1395,7 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        NULL_CHECK(velocityBuffer, "The velocity buffer does not exist.",);
         const jfloat* velocities
                 = (jfloat*) env->GetDirectBufferAddress(velocityBuffer);
         int capacity = env->GetDirectBufferCapacity(velocityBuffer) - 2;

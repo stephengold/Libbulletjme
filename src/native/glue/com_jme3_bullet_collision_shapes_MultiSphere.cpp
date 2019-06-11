@@ -77,6 +77,7 @@ extern "C" {
         btAlignedObjectArray<btScalar> radii;
         radii.resize(n);
 
+        NULL_CHECK(buffer, "The buffer does not exist.", 0);
         int numBytes = env->GetDirectBufferCapacity(buffer);
         if (numBytes < 16 * n) {
             jclass newExc = env->FindClass("java/lang/IllegalArgumentException");

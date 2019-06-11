@@ -74,16 +74,17 @@ extern "C" {
             return 0L;
         }
 
+        NULL_CHECK(buffer, "The buffer does not exist.", 0);
         int numBytes = env->GetDirectBufferCapacity(buffer);
         if (numBytes < 3 * sizeof (float) * n) {
             jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
             env->ThrowNew(newExc, "The buffer provided is too small.");
             return 0L;
         }
+        float* data = (float*) env->GetDirectBufferAddress(buffer);
 
         btConvexHullShape* shape = new btConvexHullShape();
 
-        float* data = (float*) env->GetDirectBufferAddress(buffer);
         for (int i = 0; i < n; ++i) {
             int j = 3 * i;
             btVector3 vect = btVector3(data[j], data[j + 1], data[j + 2]);
@@ -106,6 +107,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jobject array) {
         jmeClasses::initJavaClasses(env);
 
+        NULL_CHECK(array, "The buffer does not exist.", 0);
         float* data = (float*) env->GetDirectBufferAddress(array);
         //TODO: capacity will not always be length!
         int length = env->GetDirectBufferCapacity(array) / sizeof (float);
@@ -132,6 +134,7 @@ extern "C" {
                 = reinterpret_cast<btConvexHullShape*> (shapeId);
         NULL_CHECK(hull, "The btConvexHullShape does not exist.",)
 
+        NULL_CHECK(buffer, "The store buffer does not exist.",);
         jlong bytesCapacity = env->GetDirectBufferCapacity(buffer);
         int numVerts = hull->getNumPoints();
         long bytesNeeded = 3 * sizeof (float) * (long) numVerts;

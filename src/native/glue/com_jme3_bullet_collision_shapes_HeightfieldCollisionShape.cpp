@@ -53,7 +53,9 @@ extern "C" {
             jboolean flipQuadEdges) {
         jmeClasses::initJavaClasses(env);
 
+        NULL_CHECK(heightfieldData, "The heightfield data does not exist.", 0);
         void* data = env->GetDirectBufferAddress(heightfieldData);
+
         btHeightfieldTerrainShape* shape
                 = new btHeightfieldTerrainShape(heightStickWidth,
                 heightStickLength, data, heightScale, minHeight, maxHeight,
