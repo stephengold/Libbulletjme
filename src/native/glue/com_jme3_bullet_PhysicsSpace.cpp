@@ -108,7 +108,7 @@ extern "C" {
         NULL_CHECK(space, "The physics space does not exist.",)
 
         btTypedConstraint* constraint = reinterpret_cast<btTypedConstraint*> (objectId);
-        NULL_CHECK(constraint, "The constraint does not exist.",)
+        NULL_CHECK(constraint, "The btTypedConstraint does not exist.",)
 
         space->getDynamicsWorld()->addConstraint(constraint);
     }
@@ -124,7 +124,7 @@ extern "C" {
         NULL_CHECK(space, "The physics space does not exist.",)
 
         btTypedConstraint* constraint = reinterpret_cast<btTypedConstraint*> (objectId);
-        NULL_CHECK(constraint, "The constraint object does not exist.",)
+        NULL_CHECK(constraint, "The btTypedConstraint does not exist.",)
 
         space->getDynamicsWorld()->addConstraint(constraint, collision);
     }
