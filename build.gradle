@@ -55,14 +55,10 @@ model {
             targetPlatform 'Windows32'
             targetPlatform 'Windows64'
 
-            sources {
-                cpp {
-                    source {
-                        srcDir 'src/native/bullet3'
-                        srcDir 'src/native/glue'
-                        include '**/*.cpp'
-                    }
-                }
+            sources.cpp.source {
+                srcDir 'src/native/bullet3'
+                srcDir 'src/native/glue'
+                include '**/*.cpp'
             }
 
             binaries.withType(StaticLibraryBinarySpec) {
@@ -138,11 +134,7 @@ task cleanDist(type: Delete) {
     delete 'dist'
 }
 
-sourceSets { // for IDE access
-    main {
-        java {
-            srcDir 'src/native/bullet3'
-            srcDir 'src/native/glue'
-        }
-    }
+sourceSets.main.java { // for IDE access
+    srcDir 'src/native/bullet3'
+    srcDir 'src/native/glue'
 }
