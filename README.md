@@ -72,6 +72,7 @@ btStaticPlaneShape                .collision.shapes.PlaneCollisionShape
 btTriangleRaycastCallback::Eflags .RayTestFlag
 btTranslationalLimitMotor         .joints.motors.TranslationalLimitMotor
 btTypedConstraint                 .joints.PhysicsJoint
+btWheelInfo                       .objects.VehicleWheel
 </pre>
 
 <a name="links"/>
