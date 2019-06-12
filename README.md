@@ -32,47 +32,51 @@ The evolution of the project is chronicled in
 ## Lexicon of class/enum/struct names
 
 <pre>
-Bullet v2 C++ type:               corresponding Java class com.jme3.bullet...
+Bullet v2 C++ type:               corresponding Java class: com.jme3...
 </pre>
 <pre>
-btBoxShape                        .collision.shapes.BoxCollisionShape
-btBU_Simplex1to4                  .collision.shapes.SimplexCollisionShape
-btBvhTriangleMeshShape            .collision.shapes.MeshCollisionShape
-btCapsuleShape{X//Z}              .collision.shapes.CapsuleCollisionShape
-btCollisionObject                 .collision.PhysicsCollisionObject
-btCollisionShape                  .collision.shapes.CollisionShape
-btCompoundShape                   .collision.shapes.CompoundCollisionShape
-btCompoundShapeChild              .collision.shapes.info.ChildCollisionShape
-btConeShape{X//Z}                 .collision.shapes.ConeCollisionShape
-btConeTwistConstraint             .joints.ConeJoint
-btConvexHullShape                 .collision.shapes.HullCollisionShape
-btCylinderShape{X//Z}             .collision.shapes.CylinderCollisionShape
-btDynamicsWorld                   .PhysicsSpace
-btEmptyShape                      .collision.shapes.EmptyShape
-btGeneric6DofConstraint           .joints.SixDofJoint
-btGeneric6DofSpringConstraint     .joints.SixDofSpringJoint
-btGImpactMeshShape                .collision.shapes.GImpactCollisionShape
-btHeightfieldTerrainShape         .collision.shapes.HeightfieldCollisionShape
-btHingeConstraint                 .joints.HingeJoint
-btKinematicCharacterController    .objects.PhysicsCharacter
-btManifoldPoint                   .collision.PhysicsCollisionEvent
-btMultiSphereShape                .collision.shapes.MultiSphere
-btPairCachingGhostObject          .objects.PhysicsGhostObject
-btPoint2PointConstraint           .joints.Point2PointJoint
-btRaycastVehicle                  .objects.PhysicsVehicle
-btRigidBody                       .objects.PhysicsRigidBody
-btRotationalLimitMotor            .joints.motors.RotationalLimitMotor
-btSliderConstraint                .joints.SliderJoint
-btSoftBody                        .objects.PhysicsSoftBody
-btSoftBody::Config                .objects.infos.SoftBodyConfig
-btSoftBodyWorldInfo               .SoftBodyWorldInfo
-btSoftRigidDynamicsWorld          .PhysicsSoftSpace
-btSphereShape                     .collision.shapes.SphereCollisionShape
-btStaticPlaneShape                .collision.shapes.PlaneCollisionShape
-btTriangleRaycastCallback::Eflags .RayTestFlag
-btTranslationalLimitMotor         .joints.motors.TranslationalLimitMotor
-btTypedConstraint                 .joints.PhysicsJoint
-btWheelInfo                       .objects.VehicleWheel
+btBoxShape                        .bullet.collision.shapes.BoxCollisionShape
+btBU_Simplex1to4                  .bullet.collision.shapes.SimplexCollisionShape
+btBvhTriangleMeshShape            .bullet.collision.shapes.MeshCollisionShape
+btCapsuleShape{X//Z}              .bullet.collision.shapes.CapsuleCollisionShape
+btCollisionObject                 .bullet.collision.PhysicsCollisionObject
+btCollisionShape                  .bullet.collision.shapes.CollisionShape
+btCompoundShape                   .bullet.collision.shapes.CompoundCollisionShape
+btCompoundShapeChild              .bullet.collision.shapes.info.ChildCollisionShape
+btConeShape{X//Z}                 .bullet.collision.shapes.ConeCollisionShape
+btConeTwistConstraint             .bullet.joints.ConeJoint
+btConvexHullShape                 .bullet.collision.shapes.HullCollisionShape
+btCylinderShape{X//Z}             .bullet.collision.shapes.CylinderCollisionShape
+btDynamicsWorld                   .bullet.PhysicsSpace
+btEmptyShape                      .bullet.collision.shapes.EmptyShape
+btGeneric6DofConstraint           .bullet.joints.SixDofJoint
+btGeneric6DofSpringConstraint     .bullet.joints.SixDofSpringJoint
+btGImpactMeshShape                .bullet.collision.shapes.GImpactCollisionShape
+btHeightfieldTerrainShape         .bullet.collision.shapes.HeightfieldCollisionShape
+btHingeConstraint                 .bullet.joints.HingeJoint
+btKinematicCharacterController    .bullet.objects.PhysicsCharacter
+btManifoldPoint                   .bullet.collision.PhysicsCollisionEvent
+btMatrix3x3                       .math.Matrix3f
+btMultiSphereShape                .bullet.collision.shapes.MultiSphere
+btPairCachingGhostObject          .bullet.objects.PhysicsGhostObject
+btPoint2PointConstraint           .bullet.joints.Point2PointJoint
+btQuaternion                      .math.Quaternion
+btRaycastVehicle                  .bullet.objects.PhysicsVehicle
+btRigidBody                       .bullet.objects.PhysicsRigidBody
+btRotationalLimitMotor            .bullet.joints.motors.RotationalLimitMotor
+btSliderConstraint                .bullet.joints.SliderJoint
+btSoftBody                        .bullet.objects.PhysicsSoftBody
+btSoftBody::Config                .bullet.objects.infos.SoftBodyConfig
+btSoftBodyWorldInfo               .bullet.SoftBodyWorldInfo
+btSoftRigidDynamicsWorld          .bullet.PhysicsSoftSpace
+btSphereShape                     .bullet.collision.shapes.SphereCollisionShape
+btStaticPlaneShape                .bullet.collision.shapes.PlaneCollisionShape
+btTransform                       .math.Transform
+btTranslationalLimitMotor         .bullet.joints.motors.TranslationalLimitMotor
+btTriangleRaycastCallback::Eflags .bullet.RayTestFlag
+btTypedConstraint                 .bullet.joints.PhysicsJoint
+btVector3                         .math.Vector3f
+btWheelInfo                       .bullet.objects.VehicleWheel
 </pre>
 
 <a name="links"/>
