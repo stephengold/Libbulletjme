@@ -46,18 +46,21 @@ extern "C" {
      * Signature: (Ljava/nio/ByteBuffer;Ljava/nio/ByteBuffer;IIII)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_util_NativeMeshUtil_createTriangleIndexVertexArray
-    (JNIEnv * env, jclass cls, jobject triangleIndexBase, jobject vertexIndexBase, jint numTriangles, jint numVertices, jint vertexStride, jint triangleIndexStride) {
+    (JNIEnv *env, jclass clazz, jobject triangleIndexBase,
+            jobject vertexIndexBase, jint numTriangles, jint numVertices,
+            jint vertexStride, jint triangleIndexStride) {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(triangleIndexBase,
-                "The triangle index buffer does not exist.",);
+                "The triangle index buffer does not exist.", 0);
         int* triangles = (int*) env->GetDirectBufferAddress(triangleIndexBase);
 
-        NULL_CHECK(vertexIndexBase,
-                "The vertex index buffer does not exist.",);
+        NULL_CHECK(vertexIndexBase, "The vertex buffer does not exist.", 0);
         float* vertices = (float*) env->GetDirectBufferAddress(vertexIndexBase);
 
-        btTriangleIndexVertexArray* array = new btTriangleIndexVertexArray(numTriangles, triangles, triangleIndexStride, numVertices, vertices, vertexStride);
+        btTriangleIndexVertexArray* array = new btTriangleIndexVertexArray(
+                numTriangles, triangles, triangleIndexStride, numVertices,
+                vertices, vertexStride);
         return reinterpret_cast<jlong> (array);
     }
 
