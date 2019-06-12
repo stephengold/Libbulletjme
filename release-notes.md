@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.74 released on 12 June 2019
+
+ + Renamed the distribution files.
+ + Added debug builds for the gcc toolchain.
+ + Added null checks for buffers passed via JNI.
+
 ## Version 1.0.73 released on 6 June 2019
 
  + Added count arguments to `appendFaces()`, `appendLinks()`, `appendNodes()`,
