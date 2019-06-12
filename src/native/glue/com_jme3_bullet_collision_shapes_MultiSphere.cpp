@@ -110,22 +110,23 @@ extern "C" {
      * Signature: (F)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
-    (JNIEnv *env, jobject object, jobjectArray centers, jfloatArray radii, jint numSpheres) {
+    (JNIEnv *env, jobject object, jobjectArray centers, jfloatArray radii,
+            jint numSpheres) {
         jmeClasses::initJavaClasses(env);
 
         int n = numSpheres;
-        btVector3* positions = new btVector3[n];
+        btVector3* pCenters = new btVector3[n];
         for (int i = 0; i < n; ++i) {
             jobject center = env->GetObjectArrayElement(centers, i);
-            jmeBulletUtil::convert(env, center, &positions[i]);
+            jmeBulletUtil::convert(env, center, &pCenters[i]);
         }
 
-        btScalar* radi = env->GetFloatArrayElements(radii, 0);
+        btScalar* pRadii = env->GetFloatArrayElements(radii, 0);
 
-        btMultiSphereShape* shape = new btMultiSphereShape(positions, radi, n);
+        btMultiSphereShape* shape = new btMultiSphereShape(pCenters, pRadii, n);
 
-        env->ReleaseFloatArrayElements(radii, radi, 0);
-        delete positions;
+        env->ReleaseFloatArrayElements(radii, pRadii, 0);
+        delete pCenters;
 
         return reinterpret_cast<jlong> (shape);
     }
