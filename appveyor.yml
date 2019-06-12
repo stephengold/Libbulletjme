@@ -6,9 +6,9 @@ build_script:
   - cmd: gradlew.bat build --no-daemon
 
 artifacts:
-  - path: dist/x86_bulletjme.dll
+  - path: dist/Windows32Release_bulletjme.dll
     name: dll32
-  - path: dist/x86-64_bulletjme.dll
+  - path: dist/Windows64Release_bulletjme.dll
     name: dll64
 
 deploy:

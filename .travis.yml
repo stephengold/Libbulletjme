@@ -27,10 +27,14 @@ deploy:
   api_key:
     secure: ObhRzkbGix4/iAgZZDhmdeuFZ/VNwHnkWRSPiZRKq+lzSNSU7EOsCSTV5eDun0ugCxV9O0LKnYdzZBFM5SwfNEIGmj1Frp4Cs7m1iSlxhL7wEv3N6rBtS+P166Fwf6XRxvtC6r54szRXwg2oD9tJ9urtm/xAwGZCVWr0M11A2/D3kIhtawVvw4a5fTg8NRwtb/8e8bfDyPddUmbElPH52539vA6CPawoXW5CHWcWZsY+sIRtkJOjJv4cK9GNBylmYmaEW74AjYL+t46U8qiMZo8Yyb/VQDgZ/xkGwnwEWWp4aROlj6NK/ICsrDZGrr8+dVIHbZ3QXpaJ0VoWB4oXDP0zFY5a8KpMFdWycu1xd2SMCzs5na4jfJHyblHJwhKpBfcW5079p4jx7n2OpCJHFxFY94HUo5HhqBRUr6QHwrM901PO/FtxF4ZmuMbGE8MfSIpmCASnl4fyh/Vp6qPrALVefId6Pub6QOuXWBDM3FKRuVAABYu5h6OX2Nwres6gWe42QkQ9On+5AGkfrw/OPw/e7ax/vmdqI89BkAD3zMLJ4SQeVcZdNtiyWDp5drRGsaXLS6lOoz8BuP6tEkOAdNhwtt9lxb9WU1XXrrmHGTvLnONZoyFg7b0eiB+/mLNDbB5I9oatPGbplCxtJF1CoNWRFJNfSJqmg31ekBSyHYc=
   file:
-  - dist/x86_libbulletjme.so
-  - dist/x86-64_libbulletjme.so
-  - dist/x86_libbulletjme.dylib
-  - dist/x86-64_libbulletjme.dylib
+  - dist/Linux32Debug_libbulletjme.so
+  - dist/Linux64Debug_libbulletjme.so
+  - dist/Linux32Release_libbulletjme.so
+  - dist/Linux64Release_libbulletjme.so
+  - dist/MacOSX32Debug_libbulletjme.dylib
+  - dist/MacOSX64Debug_libbulletjme.dylib
+  - dist/MacOSX32Release_libbulletjme.dylib
+  - dist/MacOSX64Release_libbulletjme.dylib
   on:
     repo: stephengold/Libbulletjme
     tags: true   # deploy on tag push only

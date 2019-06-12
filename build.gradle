@@ -3,9 +3,14 @@ plugins {
     id 'java' // for IDE access
 }
 
-def javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
+String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 
 model {
+    buildTypes {
+        Debug
+        Release
+    }
+
     platforms {
         Linux32 {
             architecture 'x86'
@@ -63,15 +68,22 @@ model {
                     cppCompiler.args("/I$javaHome/include")
                     cppCompiler.args("/I$javaHome/include/win32")
                     cppCompiler.args("/I$projectDir/src/native/bullet3")
+                    if (buildType == buildTypes.Debug) {
+                        buildable = false
+                    }
 
-                } else {
+                } else { // assume toolChain in Gcc
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
-                    cppCompiler.args '-Ofast'
-                    //cppCompiler.args '-O0', '-g3'
-                    cppCompiler.args '-U_FORTIFY_SOURCE'
+                    if (buildType == buildTypes.Debug) {
+                        cppCompiler.args '-O0', '-g3'
+                        cppCompiler.define('_DEBUG')
+                    } else if (buildType == buildTypes.Release) {
+                        cppCompiler.args '-Ofast'
+                    }
+                    cppCompiler.args '-U_FORTIFY_SOURCE' // why?
 
-                    def os = targetPlatform.operatingSystem.name
+                    String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {
@@ -80,7 +92,7 @@ model {
                         cppCompiler.args '-fpermissive'
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
-                    } else if (os == 'windows') {
+                    } else if (os == 'windows') { // not tested recently
                         cppCompiler.define('WIN32')
                         cppCompiler.args '-I', "$javaHome/include/win32"
                         cppCompiler.args '-fpermissive'
@@ -92,15 +104,15 @@ model {
                     }
                 }
                 if (buildable) {
-                    task "copyToDist${targetPlatform.name}" (type: Copy, dependsOn: "bulletjme${targetPlatform.name}SharedLibrary") {
+                    String q = targetPlatform.name + buildType.name
+                    task "copyToDist$q" (type: Copy, dependsOn: "bulletjme${q}SharedLibrary") {
                         from sharedLibraryFile
-                        def arch = targetPlatform.architecture.name
                         rename { String filename ->
-                            return arch + '_' + filename
+                            return q + '_' + filename
                         }
                         into 'dist'
                     }
-                    jar.dependsOn("copyToDist${targetPlatform.name}");
+                    jar.dependsOn("copyToDist$q")
                 }
             }
         }
