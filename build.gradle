@@ -12,6 +12,14 @@ model {
     }
 
     platforms {
+        LinuxArm32 {
+            architecture 'arm'
+            operatingSystem 'linux'
+        }
+        LinuxArm64 {
+            architecture 'aarch64'
+            operatingSystem 'linux'
+        }
         Linux32 {
             architecture 'x86'
             operatingSystem 'linux'
