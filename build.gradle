@@ -70,6 +70,14 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
+                if (flavor != flavors.Sp) {
+                    buildable = false; // temporarily disable non-SP builds
+                }
+                if (buildType != buildTypes.Release && targetPlatform != platforms.Linux64) {
+                    buildable = false;
+                    // temporarily disable non-Release builds for platforms other than Linux64
+                }
+
                 if (flavor == flavors.Dp) {
                     cppCompiler.define('BT_USE_DOUBLE_PRECISION')
                 }
