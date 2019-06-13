@@ -121,14 +121,29 @@ extern "C" {
             jmeBulletUtil::convert(env, center, &pCenters[i]);
         }
 
-        btScalar* pRadii = env->GetFloatArrayElements(radii, 0);
+        btScalar *pRadii;
+#ifdef BT_USE_DOUBLE_PRECISION
+        const float *pFloats = env->GetFloatArrayElements(radii, 0);
+        pRadii = new btScalar[n];
+        for (int i = 0; i < n; ++i) {
+            pRadii[i] = pFloats[i];
+        }
+#else
+        pRadii = env->GetFloatArrayElements(radii, 0);
+#endif
 
-        btMultiSphereShape* shape = new btMultiSphereShape(pCenters, pRadii, n);
+        btMultiSphereShape *pShape
+                = new btMultiSphereShape(pCenters, pRadii, n);
 
+#ifdef BT_USE_DOUBLE_PRECISION
+        delete pRadii;
+        env->ReleaseFloatArrayElements(radii, pFloats, 0);
+#else
         env->ReleaseFloatArrayElements(radii, pRadii, 0);
+#endif
         delete pCenters;
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
     /*

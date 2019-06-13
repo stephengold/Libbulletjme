@@ -51,16 +51,25 @@ extern "C" {
             jint triangleIndexStride) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(intBuffer,
-                "The triangle index buffer does not exist.", 0);
-        int* pIndices = (int*) env->GetDirectBufferAddress(intBuffer);
+        NULL_CHECK(intBuffer, "The triangle index buffer does not exist.", 0);
+        const jint* pIndices = env->GetDirectBufferAddress(intBuffer);
 
         NULL_CHECK(floatBuffer, "The vertex buffer does not exist.", 0);
-        float* pVertices = (float*) env->GetDirectBufferAddress(floatBuffer);
+        const jfloat* pVertices = env->GetDirectBufferAddress(floatBuffer);
 
-        btTriangleIndexVertexArray* result = new btTriangleIndexVertexArray(
-                numTriangles, pIndices, triangleIndexStride, numVertices,
-                pVertices, vertexStride);
+        btTriangleIndexVertexArray* result;
+#ifdef BT_USE_DOUBLE_PRECISION
+        btScalar *pDpVertices = new btScalar[numVertices];
+        for (int i = 0; i < numVertices; ++i) {
+            pDpVertices[i] = pVertices[i];
+        }
+        result = new btTriangleIndexVertexArray(numTriangles, pIndices,
+                triangleIndexStride, numVertices, pDpVertices, vertexStride);
+        delete pDpVertices;
+#else
+        result = new btTriangleIndexVertexArray(numTriangles, pIndices,
+                triangleIndexStride, numVertices, pVertices, vertexStride);
+#endif
 
         return reinterpret_cast<jlong> (result);
     }

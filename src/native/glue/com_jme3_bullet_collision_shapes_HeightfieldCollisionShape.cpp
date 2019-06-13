@@ -48,20 +48,32 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape
     (JNIEnv * env, jobject object, jint heightStickWidth,
-            jint heightStickLength, jobject heightfieldData, jfloat heightScale,
+            jint heightStickLength, jobject floatBuffer, jfloat heightScale,
             jfloat minHeight, jfloat maxHeight, jint upAxis,
             jboolean flipQuadEdges) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(heightfieldData, "The heightfield data does not exist.", 0);
-        void* data = env->GetDirectBufferAddress(heightfieldData);
+        NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
+        const jfloat* pHeights = env->GetDirectBufferAddress(floatBuffer);
 
-        btHeightfieldTerrainShape* shape
-                = new btHeightfieldTerrainShape(heightStickWidth,
-                heightStickLength, data, heightScale, minHeight, maxHeight,
-                upAxis, PHY_FLOAT, flipQuadEdges);
+        btHeightfieldTerrainShape* pShape;
+#ifdef BT_USE_DOUBLE_PRECISION
+        int numHeights = heightStickLength * heightStickWidth;
+        btScalar *pDpHeights = new btScalar[numHeights];
+        for (int i = 0; i < numHeights; ++i) {
+            pDpHeights[i] = pHeights[i];
+        }
+        pShape = new btHeightfieldTerrainShape(heightStickWidth,
+                heightStickLength, pDpHeights, heightScale, minHeight,
+                maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
+        delete pDpHeights;
+#else
+        pShape = new btHeightfieldTerrainShape(heightStickWidth,
+                heightStickLength, pHeights, heightScale, minHeight,
+                maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
+#endif
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
 #ifdef __cplusplus
