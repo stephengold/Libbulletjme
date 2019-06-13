@@ -60,8 +60,9 @@ extern "C" {
 
         btTriangleIndexVertexArray* result;
 #ifdef BT_USE_DOUBLE_PRECISION
-        btScalar *pDpVertices = new btScalar[numVertices];
-        for (int i = 0; i < numVertices; ++i) {
+        int numFloats = 3 * numVertices;
+        btScalar *pDpVertices = new btScalar[numFloats];
+        for (int i = 0; i < numFloats; ++i) {
             pDpVertices[i] = pVertices[i];
         }
         result = new btTriangleIndexVertexArray(numTriangles, pIndices,
