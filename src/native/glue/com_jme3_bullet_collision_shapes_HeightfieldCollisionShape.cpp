@@ -54,7 +54,8 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
-        const jfloat* pHeights = env->GetDirectBufferAddress(floatBuffer);
+        const jfloat* pHeights
+                = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
 
         btHeightfieldTerrainShape* pShape;
 #ifdef BT_USE_DOUBLE_PRECISION
@@ -66,7 +67,7 @@ extern "C" {
         pShape = new btHeightfieldTerrainShape(heightStickWidth,
                 heightStickLength, pDpHeights, heightScale, minHeight,
                 maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
-        delete pDpHeights;
+        delete[] pDpHeights;
 #else
         pShape = new btHeightfieldTerrainShape(heightStickWidth,
                 heightStickLength, pHeights, heightScale, minHeight,

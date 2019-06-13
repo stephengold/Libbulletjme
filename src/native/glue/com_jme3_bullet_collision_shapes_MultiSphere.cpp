@@ -123,7 +123,7 @@ extern "C" {
 
         btScalar *pRadii;
 #ifdef BT_USE_DOUBLE_PRECISION
-        const float *pFloats = env->GetFloatArrayElements(radii, 0);
+        float *pFloats = env->GetFloatArrayElements(radii, 0);
         pRadii = new btScalar[n];
         for (int i = 0; i < n; ++i) {
             pRadii[i] = pFloats[i];
@@ -136,12 +136,12 @@ extern "C" {
                 = new btMultiSphereShape(pCenters, pRadii, n);
 
 #ifdef BT_USE_DOUBLE_PRECISION
-        delete pRadii;
+        delete[] pRadii;
         env->ReleaseFloatArrayElements(radii, pFloats, 0);
 #else
         env->ReleaseFloatArrayElements(radii, pRadii, 0);
 #endif
-        delete pCenters;
+        delete[] pCenters;
 
         return reinterpret_cast<jlong> (pShape);
     }
