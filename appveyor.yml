@@ -6,14 +6,18 @@ build_script:
   - cmd: gradlew.bat build --no-daemon
 
 artifacts:
-  - path: dist/Windows32Release_bulletjme.dll
-    name: dll32
-  - path: dist/Windows64Release_bulletjme.dll
-    name: dll64
+  - path: dist/Windows32ReleaseDp_bulletjme.dll
+    name: dll32Dp
+  - path: dist/Windows32ReleaseSp_bulletjme.dll
+    name: dll32Sp
+  - path: dist/Windows64ReleaseDp_bulletjme.dll
+    name: dll64Dp
+  - path: dist/Windows64ReleaseSp_bulletjme.dll
+    name: dll64Sp
 
 deploy:
   description: release description goes here
-  artifact: dll32,dll64
+  artifact: dll32Dp,dll32Sp,dll64Dp,dll64Sp
   provider: GitHub
   auth_token:
     secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz

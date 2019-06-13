@@ -129,6 +129,9 @@ void jmeClasses::initJavaClasses(JNIEnv* env) {
 #ifdef _DEBUG
         printf("Debug_");
 #endif
+#ifdef BT_USE_DOUBLE_PRECISION
+        printf("DP_");
+#endif
         printf("Libbulletjme v1.0.74 initializing Java classes\n");
         fflush(stdout);
     }

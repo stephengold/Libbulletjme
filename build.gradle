@@ -11,6 +11,11 @@ model {
         Release
     }
 
+    flavors {
+        Sp
+        Dp
+    }
+
     platforms {
         LinuxArm32 {
             architecture 'arm'
@@ -65,10 +70,9 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
-                if (buildType == buildTypes.Debug && targetPlatform != platforms.Linux64) {
-                    buildable = false // temporarily disable build
+                if (flavor == flavors.Dp) {
+                    cppCompiler.define('BT_USE_DOUBLE_PRECISION')
                 }
-
                 cppCompiler.define('BT_NO_PROFILE')
                 if (toolChain in VisualCpp) {
                     cppCompiler.define('WIN32')
@@ -113,7 +117,7 @@ model {
                 }
 
                 if (buildable) {
-                    String q = targetPlatform.name + buildType.name
+                    String q = targetPlatform.name + buildType.name + flavor.name
                     task "copyToDist$q" (type: Copy, dependsOn: "bulletjme${q}SharedLibrary") {
                         from sharedLibraryFile
                         rename { String filename ->
