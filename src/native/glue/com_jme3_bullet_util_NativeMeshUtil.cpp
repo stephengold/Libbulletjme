@@ -52,7 +52,8 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(intBuffer, "The triangle index buffer does not exist.", 0);
-        jint* pIndices = (jint*) env->GetDirectBufferAddress(intBuffer);
+        jint* pJints = (jint*) env->GetDirectBufferAddress(intBuffer);
+        int* pIndices = reinterpret_cast<int*> (pJints);
 
         NULL_CHECK(floatBuffer, "The vertex buffer does not exist.", 0);
         jfloat* pVertices = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
