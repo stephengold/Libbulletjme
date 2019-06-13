@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.75 released on 12 June 2019
+
+ + Renamed the distribution files again.
+ + Added double-precision (DP) builds.
+
 ## Version 1.0.74 released on 12 June 2019
 
  + Renamed the distribution files.
