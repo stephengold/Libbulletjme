@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.76 released on 12 June 2019
+
+Resolved some compile-time diagnostic messages.
+
 ## Version 1.0.75 released on 12 June 2019
 
  + Renamed the distribution files again.
