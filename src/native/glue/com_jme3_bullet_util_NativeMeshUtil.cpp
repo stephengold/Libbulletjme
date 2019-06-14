@@ -61,13 +61,13 @@ extern "C" {
         btTriangleIndexVertexArray* result;
 #ifdef BT_USE_DOUBLE_PRECISION
         int numFloats = 3 * numVertices;
-        btScalar *pDpVertices = new btScalar[numFloats];
+        btScalar *pDpVertices = new btScalar[numFloats]; // never freed
         for (int i = 0; i < numFloats; ++i) {
             pDpVertices[i] = pVertices[i];
         }
+        int doubleStride = 2 * vertexStride;
         result = new btTriangleIndexVertexArray(numTriangles, pIndices,
-                triangleIndexStride, numVertices, pDpVertices, vertexStride);
-        delete[] pDpVertices;
+                triangleIndexStride, numVertices, pDpVertices, doubleStride);
 #else
         result = new btTriangleIndexVertexArray(numTriangles, pIndices,
                 triangleIndexStride, numVertices, pVertices, vertexStride);
