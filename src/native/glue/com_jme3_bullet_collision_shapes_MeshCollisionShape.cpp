@@ -65,6 +65,19 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+     * Method:    finalizeBVH
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
+    (JNIEnv *env, jobject object, jlong nativeBVHBufferId) {
+        if (nativeBVHBufferId != 0) {
+            void* buffer = reinterpret_cast<void*> (nativeBVHBufferId);
+            btAlignedFree(buffer);
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
      * Method:    finalizeNative
      * Signature: (J)V
      */
@@ -76,7 +89,7 @@ extern "C" {
 
         delete array;
 
-        if (nativeBVHBuffer > 0) {
+        if (nativeBVHBuffer != 0) {
             void* buffer = reinterpret_cast<void*> (nativeBVHBuffer);
             btAlignedFree(buffer);
         }
