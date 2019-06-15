@@ -44,7 +44,7 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
      * Method:    createShape
-     * Signature: (II[FFFFIZ)J
+     * Signature: (IILjava/nio/FloatBuffer;FFFIZ)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape
     (JNIEnv * env, jobject object, jint heightStickWidth,
