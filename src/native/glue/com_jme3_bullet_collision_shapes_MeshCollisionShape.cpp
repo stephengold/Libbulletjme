@@ -50,17 +50,17 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_createShape
     (JNIEnv* env, jobject object, jboolean isMemoryEfficient, jboolean buildBVH,
-            jlong arrayId) {
+            jlong meshId) {
         jmeClasses::initJavaClasses(env);
 
-        btTriangleIndexVertexArray* array
-                = reinterpret_cast<btTriangleIndexVertexArray*> (arrayId);
-        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.", 0)
+        btStridingMeshInterface* pMesh
+                = reinterpret_cast<btStridingMeshInterface*> (meshId);
+        NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.", 0)
 
-        btBvhTriangleMeshShape* shape = new btBvhTriangleMeshShape(array,
+        btBvhTriangleMeshShape* pShape = new btBvhTriangleMeshShape(pMesh,
                 isMemoryEfficient, buildBVH);
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
     /*
@@ -82,9 +82,9 @@ extern "C" {
      * Signature: (J)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeNative
-    (JNIEnv* env, jobject object, jlong arrayId, jlong nativeBVHBuffer) {
+    (JNIEnv *env, jobject object, jlong meshId, jlong nativeBVHBuffer) {
         btTriangleIndexVertexArray* array
-                = reinterpret_cast<btTriangleIndexVertexArray*> (arrayId);
+                = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
         NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.",);
 
         delete array;

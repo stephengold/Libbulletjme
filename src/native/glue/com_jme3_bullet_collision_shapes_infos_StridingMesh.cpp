@@ -52,8 +52,7 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(intBuffer, "The index buffer does not exist.", 0);
-        jint* pJints = (jint*) env->GetDirectBufferAddress(intBuffer);
-        int* pIndices = reinterpret_cast<int*> (pJints);
+        int* pIndices = (int *) env->GetDirectBufferAddress(intBuffer);
 
         NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
         jfloat* pVertices = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
@@ -86,7 +85,7 @@ extern "C" {
         btStridingMeshInterface* pMesh
                 = reinterpret_cast<btStridingMeshInterface*> (meshId);
         NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.",);
-        
+
 #ifdef BT_USE_DOUBLE_PRECISION
         // TODO free pMesh->m_vertexBase
 #endif

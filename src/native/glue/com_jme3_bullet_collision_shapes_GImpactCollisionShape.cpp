@@ -50,14 +50,14 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong meshId) {
         jmeClasses::initJavaClasses(env);
 
-        btTriangleIndexVertexArray* array
-                = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
-        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.", 0)
+        btStridingMeshInterface* pMesh
+                = reinterpret_cast<btStridingMeshInterface*> (meshId);
+        NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.", 0)
 
-        btGImpactMeshShape* shape = new btGImpactMeshShape(array);
-        shape->updateBound();
+        btGImpactMeshShape* pShape = new btGImpactMeshShape(pMesh);
+        pShape->updateBound();
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
     /*
