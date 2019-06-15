@@ -89,7 +89,10 @@ model {
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
-                        buildable = false // TODO
+                        cppCompiler.args '/MTd'
+                        cppCompiler.args '/Zi'
+                        cppCompiler.define '_DEBUG'
+                        linker.args '/DEBUG'
                     }
 
                 } else { // assume toolChain in Gcc
