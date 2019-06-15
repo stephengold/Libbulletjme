@@ -1,5 +1,13 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.79 released on 15 June 2019
+
+ + Added a new mechanism for creating native meshes: uses `CompoundMesh`
+   and `IndexedMesh` instead of `NativeMeshUtil`.
+ + Bugfix: `btAssert` while creating a rigid body with `EmptyShape`.
+ + Implemented `Debug` builds for the `VisualCpp` toolchain.
+ + Added a `finalizeBVH()` method to `MeshCollisionShape`.
+
 ## Version 1.0.78 released on 12 June 2019
 
 Resolved yet another compile-time error.
