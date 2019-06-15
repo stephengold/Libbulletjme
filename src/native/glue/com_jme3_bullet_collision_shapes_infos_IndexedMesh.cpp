@@ -42,37 +42,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
-     * Method:    createByte
-     * Signature: (Ljava/nio/ByteBuffer;Ljava/nio/FloatBuffer;IIII)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createByte
-    (JNIEnv *env, jobject object, jobject byteBuffer, jobject floatBuffer,
-            jint numTriangles, jint numVertices, jint vertexStride,
-            jint indexStride) {
-        jmeClasses::initJavaClasses(env);
-
-        NULL_CHECK(byteBuffer, "The index buffer does not exist.", 0);
-        unsigned char *pIndices
-                = (unsigned char *) env->GetDirectBufferAddress(byteBuffer);
-
-        NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
-        unsigned char *pVertices
-                = (unsigned char *) env->GetDirectBufferAddress(floatBuffer);
-
-        btIndexedMesh *pMesh = new btIndexedMesh();
-        pMesh->m_indexType = PHY_UCHAR;
-        pMesh->m_triangleIndexBase = pIndices;
-        pMesh->m_vertexBase = pVertices;
-        pMesh->m_numTriangles = numTriangles;
-        pMesh->m_numVertices = numVertices;
-        pMesh->m_vertexStride = vertexStride;
-        pMesh->m_triangleIndexStride = indexStride;
-
-        return reinterpret_cast<jlong> (pMesh);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
      * Method:    createInt
      * Signature: (Ljava/nio/IntBuffer;Ljava/nio/FloatBuffer;IIII)J
      */
@@ -92,37 +61,7 @@ extern "C" {
 
         btIndexedMesh *pMesh = new btIndexedMesh();
         pMesh->m_indexType = PHY_INTEGER;
-        pMesh->m_triangleIndexBase = pIndices;
-        pMesh->m_vertexBase = pVertices;
-        pMesh->m_numTriangles = numTriangles;
-        pMesh->m_numVertices = numVertices;
-        pMesh->m_vertexStride = vertexStride;
-        pMesh->m_triangleIndexStride = indexStride;
-
-        return reinterpret_cast<jlong> (pMesh);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
-     * Method:    createShort
-     * Signature: (Ljava/nio/ShortBuffer;Ljava/nio/FloatBuffer;IIII)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createShort
-    (JNIEnv *env, jobject object, jobject shortBuffer, jobject floatBuffer,
-            jint numTriangles, jint numVertices, jint vertexStride,
-            jint indexStride) {
-        jmeClasses::initJavaClasses(env);
-
-        NULL_CHECK(shortBuffer, "The index buffer does not exist.", 0);
-        unsigned char *pIndices
-                = (unsigned char *) env->GetDirectBufferAddress(shortBuffer);
-
-        NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
-        unsigned char *pVertices
-                = (unsigned char *) env->GetDirectBufferAddress(floatBuffer);
-
-        btIndexedMesh *pMesh = new btIndexedMesh();
-        pMesh->m_indexType = PHY_SHORT;
+        pMesh->m_vertexType = PHY_FLOAT;
         pMesh->m_triangleIndexBase = pIndices;
         pMesh->m_vertexBase = pVertices;
         pMesh->m_numTriangles = numTriangles;
