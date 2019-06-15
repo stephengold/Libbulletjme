@@ -79,15 +79,15 @@ model {
                 }
 
                 if (flavor == flavors.Dp) {
-                    cppCompiler.define('BT_USE_DOUBLE_PRECISION')
+                    cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                 }
-                cppCompiler.define('BT_NO_PROFILE')
+                cppCompiler.define 'BT_NO_PROFILE'
                 if (toolChain in VisualCpp) {
-                    cppCompiler.define('WIN32')
-                    cppCompiler.args('/EHsc');
-                    cppCompiler.args("/I$javaHome/include")
-                    cppCompiler.args("/I$javaHome/include/win32")
-                    cppCompiler.args("/I$projectDir/src/native/bullet3")
+                    cppCompiler.define 'WIN32'
+                    cppCompiler.args '/EHsc'
+                    cppCompiler.args "/I$javaHome/include"
+                    cppCompiler.args "/I$javaHome/include/win32"
+                    cppCompiler.args "/I$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
                         buildable = false // TODO
                     }
@@ -97,7 +97,7 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
-                        cppCompiler.define('_DEBUG')
+                        cppCompiler.define '_DEBUG'
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-Ofast'
                     }
@@ -113,7 +113,7 @@ model {
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
                     } else if (os == 'windows') { // not tested recently
-                        cppCompiler.define('WIN32')
+                        cppCompiler.define 'WIN32'
                         cppCompiler.args '-I', "$javaHome/include/win32"
                         cppCompiler.args '-fpermissive'
                         cppCompiler.args '-static'
