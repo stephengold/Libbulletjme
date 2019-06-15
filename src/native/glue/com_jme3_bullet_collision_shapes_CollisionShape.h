@@ -25,19 +25,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getA
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
- * Method:    getMargin
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getMargin
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    getLocalScaling
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getLocalScaling
   (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getMargin
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getMargin
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
