@@ -197,7 +197,11 @@ extern "C" {
         NULL_CHECK(shape, "The btCollisionShape does not exist.", 0)
 
         btVector3 localInertia;
-        shape->calculateLocalInertia(mass, localInertia);
+        if (shape->getShapeType() == EMPTY_SHAPE_PROXYTYPE) {
+            localInertia.setZero(); // avoid a btAssert()
+        } else {
+            shape->calculateLocalInertia(mass, localInertia);
+        }
         btRigidBody* body
                 = new btRigidBody(mass, motionState, shape, localInertia);
         body->setUserPointer(NULL);

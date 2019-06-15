@@ -46,7 +46,7 @@ extern "C" {
      * Signature: (Ljava/nio/IntBuffer;Ljava/nio/FloatBuffer;IIII)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_StridingMesh_createTiva
-    (JNIEnv *pEnv, jobject object, jobject intBuffer, jobject floatBuffer,
+    (JNIEnv *env, jobject object, jobject intBuffer, jobject floatBuffer,
             jint numTriangles, jint numVertices, jint vertexStride,
             jint indexStride) {
         jmeClasses::initJavaClasses(env);
@@ -58,22 +58,22 @@ extern "C" {
         NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
         jfloat* pVertices = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
 
-        btTriangleIndexVertexArray* result;
+        btTriangleIndexVertexArray* pMesh;
 #ifdef BT_USE_DOUBLE_PRECISION
-        int numFloats = 3 * numVertices;
-        btScalar *pDpVertices = new btScalar[numFloats];
-        for (int i = 0; i < numFloats; ++i) {
+        int numCoordinates = 3 * numVertices;
+        btScalar *pDpVertices = new btScalar[numCoordinates]; // never freed
+        for (int i = 0; i < numCoordinates; ++i) {
             pDpVertices[i] = pVertices[i];
         }
-        result = new btTriangleIndexVertexArray(numTriangles, pIndices,
-                triangleIndexStride, numVertices, pDpVertices, vertexStride);
-        delete[] pDpVertices;
+        int doubleStride = 2 * vertexStride;
+        pMesh = new btTriangleIndexVertexArray(numTriangles, pIndices,
+                indexStride, numVertices, pDpVertices, doubleStride);
 #else
-        result = new btTriangleIndexVertexArray(numTriangles, pIndices,
-                triangleIndexStride, numVertices, pVertices, vertexStride);
+        pMesh = new btTriangleIndexVertexArray(numTriangles, pIndices,
+                indexStride, numVertices, pVertices, vertexStride);
 #endif
 
-        return reinterpret_cast<jlong> (result);
+        return reinterpret_cast<jlong> (pMesh);
     }
 
     /*
@@ -82,10 +82,15 @@ extern "C" {
      * Signature: (J)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_StridingMesh_finalizeNative
-    (JNIEnv *pEnv, jobject object, jlong meshId) {
+    (JNIEnv *env, jobject object, jlong meshId) {
         btStridingMeshInterface* pMesh
                 = reinterpret_cast<btStridingMeshInterface*> (meshId);
         NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.",);
+        
+#ifdef BT_USE_DOUBLE_PRECISION
+        // TODO free pMesh->m_vertexBase
+#endif
+        delete pMesh;
     }
 
     /*
@@ -94,14 +99,14 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_StridingMesh_getScaling
-    (JNIEnv *pEnv, jobject object, jlong meshId, jobject storeVector) {
+    (JNIEnv *env, jobject object, jlong meshId, jobject storeVector) {
         btStridingMeshInterface* pMesh
                 = reinterpret_cast<btStridingMeshInterface*> (meshId);
         NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.",);
         NULL_CHECK(storeVector, "The store vector does not exist.",);
 
-        btVector3 *pScale = &pMesh->getLocalScaling();
-        jmeBulletUtil::convert(pEnv, pScale, storeVector);
+        const btVector3 *pScale = &pMesh->getScaling();
+        jmeBulletUtil::convert(env, pScale, storeVector);
     }
 
     /*
@@ -110,16 +115,16 @@ extern "C" {
      * Signature: (JFFF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_StridingMesh_setScaling
-    (JNIEnv *pEnv, jobject object, jlong meshId, jfloat xScale, jfloat yScale, jfloat zScale) {
+    (JNIEnv *env, jobject object, jlong meshId, jfloat xScale, jfloat yScale, jfloat zScale) {
         btStridingMeshInterface* pMesh
                 = reinterpret_cast<btStridingMeshInterface*> (meshId);
         NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.",);
 
         btVector3 scale;
-        scl.setX(xScale);
-        scl.setY(yScale);
-        scl.setZ(zScale);
-        pMesh->setLocalScaling(scale);
+        scale.setX(xScale);
+        scale.setY(yScale);
+        scale.setZ(zScale);
+        pMesh->setScaling(scale);
     }
 
 #ifdef __cplusplus
