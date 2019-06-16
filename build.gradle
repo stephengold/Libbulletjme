@@ -12,8 +12,8 @@ model {
     }
 
     flavors {
-        Sp
-        Dp
+        Sp // single-precision arithmetic
+        Dp // double-precision arithmetic
     }
 
     platforms {
@@ -70,6 +70,9 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
+                if (buildType == buildTypes.Debug) {
+                    cppCompiler.define '_DEBUG'
+                }
                 if (flavor == flavors.Dp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                 }
@@ -83,7 +86,6 @@ model {
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '/MTd'
                         cppCompiler.args '/Zi'
-                        cppCompiler.define '_DEBUG'
                         linker.args '/DEBUG'
                     }
 
@@ -92,7 +94,6 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
-                        cppCompiler.define '_DEBUG'
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-Ofast'
                     }
