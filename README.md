@@ -54,6 +54,7 @@ btGeneric6DofSpringConstraint     .bullet.joints.SixDofSpringJoint
 btGImpactMeshShape                .bullet.collision.shapes.GImpactCollisionShape
 btHeightfieldTerrainShape         .bullet.collision.shapes.HeightfieldCollisionShape
 btHingeConstraint                 .bullet.joints.HingeJoint
+btIndexedMesh                     .bullet.collision.shapes.infos.IndexedMesh
 btKinematicCharacterController    .bullet.objects.PhysicsCharacter
 btManifoldPoint                   .bullet.collision.PhysicsCollisionEvent
 btMatrix3x3                       .math.Matrix3f
@@ -73,6 +74,7 @@ btSphereShape                     .bullet.collision.shapes.SphereCollisionShape
 btStaticPlaneShape                .bullet.collision.shapes.PlaneCollisionShape
 btTransform                       .math.Transform
 btTranslationalLimitMotor         .bullet.joints.motors.TranslationalLimitMotor
+btTriangleIndexVertexArray        .bullet.collision.shapes.infos.CompoundMesh
 btTriangleRaycastCallback::Eflags .bullet.RayTestFlag
 btTypedConstraint                 .bullet.joints.PhysicsJoint
 btVector3                         .math.Vector3f
