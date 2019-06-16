@@ -2,8 +2,14 @@ The Libbulletjme Project adds "glue code" to a subset of the Bullet Physics
 Library, providing Java projects with access to Bullet Physics functionality.
 
 The project supports the 3 major desktop operating systems:
-Windows, Linux, and OSX.  Both x86 and x64 architectures are supported for
+Windows, Linux, and OSX.  Both x86 and x86_64 architectures are supported for
 each operating system.
+Up to 4 shared libraries are distributed for each
+(operating system, architecture) combination:
+ + a release build using single-precision arithmetic (intended to be the default library)
+ + a release build using double-precision arithmetic
+ + a debug build using single-precision arithmetic
+ + a debug build using double-precision arithmetic
 
 The C++ source code is provided under
 [a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
@@ -94,24 +100,25 @@ btWheelInfo                       .bullet.objects.VehicleWheel
 
 The Libbulletjme Project is based on open-source software:
 
-  + the [Bullet][] physics simulation kit
+  + the [Bullet] physics simulation kit
   + [jMonkeyEngine][jme]
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
 
 This project also made use of the following software:
 
   + the [Firefox web browser][firefox]
-  + the [Git][] revision-control system and GitK commit viewer
+  + the [Gcc] compiler
+  + the [Git] revision-control system and GitK commit viewer
   + the [Google Chrome web browser][chrome]
-  + the [Gradle][] build tool
+  + the [Gradle] build tool
   + the Java compiler, standard doclet, and runtime environment
   + the jME3 Software Development Kit
   + [Linux Mint][mint]
-  + the [Markdown][] document-conversion tool
-  + Microsoft Windows
-  + the [NetBeans][] integrated development environment
+  + the [Markdown] document-conversion tool
+  + Microsoft Windows and Visual Studio
+  + the [NetBeans] integrated development environment
 
-I am grateful to [Github][], [AppVeyor][], and [Travis][]
+I am grateful to [Github], [AppVeyor], and [Travis]
 for providing free hosting for this project.
 
 If I've misattributed anything or left anyone out, please let me know so I can
@@ -120,7 +127,8 @@ correct the situation: sgold@sonic.net
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [chrome]: https://www.google.com/chrome "Chrome"
-[firefox]: https://www.mozilla.org/en-US/firefox/ "Firefox"
+[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
+[gcc]: https://gcc.gnu.org "Gcc Compiler"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
