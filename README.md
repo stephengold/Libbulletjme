@@ -1,15 +1,12 @@
 The Libbulletjme Project adds "glue code" to a subset of the Bullet Physics
 Library, enabling real-time simulation of 3-D physics in Java applications.
 
-The project is hosted at
-[GitHub](https://github.com/stephengold/Libbulletjme).
-
 Complete source code (in C++) is provided under
 [a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
 
 The project supports the 3 major desktop operating systems:
-Windows, Linux, and OSX.  Both x86 and x86_64 architectures are supported for
-each operating system.
+Windows, Linux, and OSX.  Both the x86 and x86-64 architectures
+are supported for each operating system.
 For each (operating system, architecture) combination,
  up to 4 shared libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
@@ -17,11 +14,15 @@ For each (operating system, architecture) combination,
  + a debug build using single-precision arithmetic
  + a debug build using double-precision arithmetic
 
+The project is hosted at
+[GitHub](https://github.com/stephengold/Libbulletjme).
+
 Libbulletjme is used in [Minie].
 
 ## Contents of this document
 
  + [History](#history)
+ + [How to build Libbulletjme](#build)
  + [Lexicon of class/enum/struct names](#lexicon)
  + [External links](#links)
  + [Acknowledgments](#acks)
@@ -35,6 +36,30 @@ a library of the [jMonkeyEngine][jme] game engine.
 
 The evolution of the project is chronicled in
 [its release notes](https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md).
+
+<a name="build"/>
+
+## How to build Libbulletjme
+
+ 1. Install the right tools:
+   + [Gradle]
+   + [Gcc] (for Linux)
+   + Microsoft Visual Studio (for Windows)
+   + XCode (for MacOSX)
+ 2. Download and extract the source code from GitHub:
+   + using Git:
+     + `git clone https://github.com/stephengold/Libbulletjme.git`
+     + `cd Libbulletjme`
+   + using a web browser:
+     + browse to [https://github.com/stephengold/Libbulletjme/releases/latest](https://github.com/stephengold/Libbulletjme/releases/latest)
+     + follow the "Source code (zip)" link
+     + save the file
+     + unzip the saved file
+     + `cd` to the extracted directory/folder
+ 3. Run the Gradle wrapper: `./gradlew build`
+
+After a successful build, dynamic libraries will be found
+in the `dist` directory/folder.
 
 <a name="lexicon"/>
 
