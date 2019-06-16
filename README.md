@@ -8,7 +8,7 @@ The project supports the 3 major desktop operating systems:
 Windows, Linux, and OSX.  Both the x86 and x86-64 architectures
 are supported for each operating system.
 For each (operating system, architecture) combination,
- up to 4 shared libraries are distributed:
+up to 4 shared libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
  + a release build using double-precision arithmetic
  + a debug build using single-precision arithmetic
@@ -119,8 +119,12 @@ btWheelInfo                       .bullet.objects.VehicleWheel
 
 ## External links
 
-  + [The Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
-  + [The Physics section of the JME Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
+ + The [Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
+ + The [Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
+ + The [Minie project][minie] at [GitHub]
+ + The [physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
+ + The [Bullet Forum](https://pybullet.org/Bullet/phpBB3)
+ + The [Bullet home page][bullet]
 
 <a name="acks"/>
 
