@@ -1,18 +1,21 @@
 The Libbulletjme Project adds "glue code" to a subset of the Bullet Physics
-Library, providing Java projects with access to Bullet Physics functionality.
+Library, enabling real-time simulation of 3-D physics in Java applications.
+
+The project is hosted at
+[GitHub](https://github.com/stephengold/Libbulletjme).
+
+Complete source code (in C++) is provided under
+[a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
 
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and OSX.  Both x86 and x86_64 architectures are supported for
 each operating system.
-Up to 4 shared libraries are distributed for each
-(operating system, architecture) combination:
- + a release build using single-precision arithmetic (intended to be the default library)
+For each (operating system, architecture) combination,
+ up to 4 shared libraries are distributed:
+ + a release build using single-precision arithmetic (the default library)
  + a release build using double-precision arithmetic
  + a debug build using single-precision arithmetic
  + a debug build using double-precision arithmetic
-
-The C++ source code is provided under
-[a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
 
 Libbulletjme is used in [Minie].
 
@@ -27,8 +30,8 @@ Libbulletjme is used in [Minie].
 
 ## History
 
-The Libbulletjme Project is hosted at
-[GitHub](https://github.com/stephengold/Libbulletjme).
+The glue code of Libbulletjme was originally copied from `jme3-bullet-native`,
+a library of the [jMonkeyEngine][jme] game engine.
 
 The evolution of the project is chronicled in
 [its release notes](https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md).
@@ -101,7 +104,7 @@ btWheelInfo                       .bullet.objects.VehicleWheel
 The Libbulletjme Project is based on open-source software:
 
   + the [Bullet] physics simulation kit
-  + [jMonkeyEngine][jme]
+  + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
 
 This project also made use of the following software:
