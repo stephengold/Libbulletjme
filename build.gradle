@@ -97,7 +97,6 @@ model {
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-Ofast'
                     }
-                    cppCompiler.args '-U_FORTIFY_SOURCE' // why?
 
                     String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
