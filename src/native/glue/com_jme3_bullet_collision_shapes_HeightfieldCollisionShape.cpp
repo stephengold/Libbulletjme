@@ -60,14 +60,13 @@ extern "C" {
         btHeightfieldTerrainShape* pShape;
 #ifdef BT_USE_DOUBLE_PRECISION
         int numHeights = heightStickLength * heightStickWidth;
-        btScalar *pDpHeights = new btScalar[numHeights];
+        btScalar *pDpHeights = new btScalar[numHeights]; // never freed
         for (int i = 0; i < numHeights; ++i) {
             pDpHeights[i] = pHeights[i];
         }
         pShape = new btHeightfieldTerrainShape(heightStickWidth,
                 heightStickLength, pDpHeights, heightScale, minHeight,
                 maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
-        delete[] pDpHeights;
 #else
         pShape = new btHeightfieldTerrainShape(heightStickWidth,
                 heightStickLength, pHeights, heightScale, minHeight,
