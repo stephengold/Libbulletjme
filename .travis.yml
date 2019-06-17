@@ -15,9 +15,6 @@ addons:
     - gcc-multilib
     - g++-multilib
 
-install:
-- chmod 755 gradlew
-
 script:
 - ./gradlew build --console=plain --no-daemon
 
