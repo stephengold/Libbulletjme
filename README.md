@@ -101,7 +101,11 @@ btRigidBody                       .bullet.objects.PhysicsRigidBody
 btRotationalLimitMotor            .bullet.joints.motors.RotationalLimitMotor
 btSliderConstraint                .bullet.joints.SliderJoint
 btSoftBody                        .bullet.objects.PhysicsSoftBody
+btSoftBody::AJoint                .bullet.joints.SoftAngularJoint
 btSoftBody::Config                .bullet.objects.infos.SoftBodyConfig
+btSoftBody::eAeroModel            .bullet.objects.infos.Aero
+btSoftBody::Joint                 .bullet.joints.SoftPhysicsJoint
+btSoftBody::LJoint                .bullet.joints.SoftLinearJoint
 btSoftBodyWorldInfo               .bullet.SoftBodyWorldInfo
 btSoftRigidDynamicsWorld          .bullet.PhysicsSoftSpace
 btSphereShape                     .bullet.collision.shapes.SphereCollisionShape
@@ -136,7 +140,7 @@ The Libbulletjme Project is based on open-source software:
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
 
-This project also made use of the following software:
+This project also made use of the following tools:
 
   + the [Firefox web browser][firefox]
   + the [Gcc] compiler
