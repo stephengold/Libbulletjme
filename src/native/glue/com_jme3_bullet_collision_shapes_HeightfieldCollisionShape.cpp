@@ -42,38 +42,118 @@ extern "C" {
 #endif
 
     /*
+     * A btHeightfieldTerrainShape whose heights are represented by btScalars.
+     * Access is provided to its height data.
+     */
+    ATTRIBUTE_ALIGNED16(class)
+    HeightfieldShape : public btHeightfieldTerrainShape {
+        public:
+        BT_DECLARE_ALIGNED_ALLOCATOR();
+
+        HeightfieldShape(int heightStickWidth, int heightStickLength,
+                const void *heightfieldData, btScalar heightScale,
+                btScalar minHeight, btScalar maxHeight, int upAxis,
+                bool flipQuadEdges)
+                : btHeightfieldTerrainShape(heightStickWidth,
+                heightStickLength, heightfieldData, heightScale, minHeight,
+                maxHeight, upAxis, PHY_FLOAT, flipQuadEdges) {
+        }
+
+        const btScalar * getHeightData() {
+            return m_heightfieldDataFloat;
+        }
+    };
+
+    /*
      * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
      * Method:    createShape
      * Signature: (IILjava/nio/FloatBuffer;FFFIZ)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape
-    (JNIEnv * env, jobject object, jint heightStickWidth,
+    (JNIEnv *env, jobject object, jint heightStickWidth,
             jint heightStickLength, jobject floatBuffer, jfloat heightScale,
             jfloat minHeight, jfloat maxHeight, jint upAxis,
             jboolean flipQuadEdges) {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
-        const jfloat* pHeights
-                = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
+        const jfloat *pHeights
+                = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
 
-        btHeightfieldTerrainShape* pShape;
+        HeightfieldShape *pShape;
 #ifdef BT_USE_DOUBLE_PRECISION
         int numHeights = heightStickLength * heightStickWidth;
-        btScalar *pDpHeights = new btScalar[numHeights]; // never freed
+        btScalar *pDpHeights = new btScalar[numHeights];
         for (int i = 0; i < numHeights; ++i) {
             pDpHeights[i] = pHeights[i];
         }
-        pShape = new btHeightfieldTerrainShape(heightStickWidth,
-                heightStickLength, pDpHeights, heightScale, minHeight,
-                maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
+        pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
+                pDpHeights, heightScale, minHeight, maxHeight, upAxis,
+                flipQuadEdges);
 #else
-        pShape = new btHeightfieldTerrainShape(heightStickWidth,
-                heightStickLength, pHeights, heightScale, minHeight,
-                maxHeight, upAxis, PHY_FLOAT, flipQuadEdges);
+        pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
+                pHeights, heightScale, minHeight, maxHeight, upAxis,
+                flipQuadEdges);
 #endif
 
         return reinterpret_cast<jlong> (pShape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
+     * Method:    createShape2
+     * Signature: (IILjava/nio/FloatBuffer;FFFIZZZZ)J
+     */
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape2
+    (JNIEnv *env, jobject object, jint heightStickWidth, jint heightStickLength,
+            jobject floatBuffer, jfloat heightScale, jfloat minHeight,
+            jfloat maxHeight, jint upAxis, jboolean flipQuadEdges,
+            jboolean flipTriangleWinding, jboolean useDiamond,
+            jboolean useZigzag) {
+        jmeClasses::initJavaClasses(env);
+
+        NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
+        const jfloat *pHeights
+                = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
+
+        HeightfieldShape *pShape;
+#ifdef BT_USE_DOUBLE_PRECISION
+        int numHeights = heightStickLength * heightStickWidth;
+        btScalar *pDpHeights = new btScalar[numHeights];
+        for (int i = 0; i < numHeights; ++i) {
+            pDpHeights[i] = pHeights[i];
+        }
+        pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
+                pDpHeights, heightScale, minHeight, maxHeight, upAxis,
+                flipQuadEdges);
+#else
+        pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
+                pHeights, heightScale, minHeight, maxHeight, upAxis,
+                flipQuadEdges);
+#endif
+
+        pShape->setFlipTriangleWinding(flipTriangleWinding);
+        pShape->setUseDiamondSubdivision(useDiamond);
+        pShape->setUseZigzagSubdivision(useZigzag);
+
+        return reinterpret_cast<jlong> (pShape);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
+     * Method:    finalizeNative
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_finalizeNative
+    (JNIEnv *env, jobject object, jlong shapeId) {
+#ifdef BT_USE_DOUBLE_PRECISION
+        HeightfieldShape *pShape
+                = reinterpret_cast<HeightfieldShape *> (shapeId);
+        if (pShape != NULL) {
+            const btScalar *pDpHeights = pShape->getHeightData();
+            delete[] pDpHeights;
+        }
+#endif
     }
 
 #ifdef __cplusplus

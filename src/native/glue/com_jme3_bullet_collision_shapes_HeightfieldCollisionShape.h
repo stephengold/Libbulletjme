@@ -15,6 +15,22 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape
   (JNIEnv *, jobject, jint, jint, jobject, jfloat, jfloat, jfloat, jint, jboolean);
 
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
+ * Method:    createShape2
+ * Signature: (IILjava/nio/FloatBuffer;FFFIZZZZ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape2
+  (JNIEnv *, jobject, jint, jint, jobject, jfloat, jfloat, jfloat, jint, jboolean, jboolean, jboolean, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_finalizeNative
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif
