@@ -1,5 +1,14 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.80 released on 17 June 2019
+
+ + Bugfix: crash with `HeightfieldCollisionShape` in DP build
+   (accessing freed array).
+ + Added a `createShape2()` and `finalizeNative()` methods to the
+   `HeightfieldCollisionShape` class.
+ + Deployed debug libraries from AppVeyor.
+ + Stopped #undef-ing `_FORTIFY_SOURCE`.
+
 ## Version 1.0.79 released on 15 June 2019
 
  + Added a new mechanism for creating native meshes: uses `CompoundMesh`
