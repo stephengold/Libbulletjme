@@ -22,10 +22,18 @@ artifacts:
     name: dll64RD
   - path: dist/Windows64ReleaseSp_bulletjme.dll
     name: dll64RS
+  - path: dist/Windows32DebugDp_bulletjme.pdb
+    name: pdb32DD
+  - path: dist/Windows32DebugSp_bulletjme.pdb
+    name: pdb32DS
+  - path: dist/Windows64DebugDp_bulletjme.pdb
+    name: pdb64DD
+  - path: dist/Windows64DebugSp_bulletjme.pdb
+    name: pdb64DS
 
 deploy:
   description: release description goes here
-  artifact: dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DS,dll64RD,dll64RS
+  artifact: dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DS,dll64RD,dll64RS,pdb32DD,pdb32DS,pdb64DD,pdb64DS
   provider: GitHub
   auth_token:
     secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz
