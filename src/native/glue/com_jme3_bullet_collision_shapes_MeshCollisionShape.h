@@ -25,14 +25,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    finalizeNative
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeNative
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    saveBVH
  * Signature: (J)[B
  */

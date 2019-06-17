@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_joints_SoftLinearJoint
- * Method:    setPosition
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_setPosition
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftLinearJoint
  * Method:    createJointSoftRigid
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
  */
@@ -30,6 +22,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointS
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointSoftSoft
   (JNIEnv *, jobject, jlong, jlong, jobject, jobject, jfloat, jfloat, jfloat, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_SoftLinearJoint
+ * Method:    setPosition
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_setPosition
+  (JNIEnv *, jobject, jlong, jobject);
 
 #ifdef __cplusplus
 }

@@ -9,51 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    getErrorReductionParameter
- * Signature: (J)F
+ * Method:    finalizeNative
+ * Signature: (J)V
  */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getErrorReductionParameter
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNative
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    setErrorReductionParameter
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setErrorReductionParameter
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    getConstraintForceMixing
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getConstraintForceMixing
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    setConstraintForceMixing
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setConstraintForceMixing
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    getSplit
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getSplit
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    setSplit
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setSplit
-  (JNIEnv *, jobject, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
@@ -65,6 +25,30 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_addConstrain
 
 /*
  * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    getConstraintForceMixing
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getConstraintForceMixing
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    getErrorReductionParameter
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getErrorReductionParameter
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    getSplit
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getSplit
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
  * Method:    removeConstraint
  * Signature: (JJ)V
  */
@@ -73,11 +57,27 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_removeConstr
 
 /*
  * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    finalizeNative
- * Signature: (J)V
+ * Method:    setConstraintForceMixing
+ * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNative
-  (JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setConstraintForceMixing
+  (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    setErrorReductionParameter
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setErrorReductionParameter
+  (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    setSplit
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setSplit
+  (JNIEnv *, jobject, jlong, jfloat);
 
 #ifdef __cplusplus
 }
