@@ -77,16 +77,33 @@ model {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                 }
                 cppCompiler.define 'BT_NO_PROFILE'
+
+                String q = targetPlatform.name + buildType.name + flavor.name
                 if (toolChain in VisualCpp) {
                     cppCompiler.define 'WIN32'
-                    cppCompiler.args '/EHsc'
+                    cppCompiler.args '/EHsc' // synchronous exceptions only
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
-                        cppCompiler.args '/MTd'
-                        cppCompiler.args '/Zi'
+                        cppCompiler.args '/MTd' // use LIBCMTD
+                        cppCompiler.args '/Zi' // produce PDB file
                         linker.args '/DEBUG'
+                        if (buildable) {
+                            String pdbFile = 'build/libs/bulletjme/shared/'
+                            pdbFile += targetPlatform.name + '/debug/'
+                            pdbFile += flavor.name + '/bulletjme.pdb'
+
+                            task "copyPdbToDist$q" (type: Copy, dependsOn:
+                                 "bulletjme${q}SharedLibrary") {
+                                from pdbFile
+                                rename { String filename ->
+                                    return q + '_' + filename
+                                }
+                                into 'dist'
+                            }
+                            jar.dependsOn("copyPdbToDist$q")
+                        }
                     }
 
                 } else { // assume toolChain in Gcc
@@ -120,8 +137,8 @@ model {
                 }
 
                 if (buildable) {
-                    String q = targetPlatform.name + buildType.name + flavor.name
-                    task "copyToDist$q" (type: Copy, dependsOn: "bulletjme${q}SharedLibrary") {
+                    task "copyToDist$q" (type: Copy, dependsOn:
+                         "bulletjme${q}SharedLibrary") {
                         from sharedLibraryFile
                         rename { String filename ->
                             return q + '_' + filename
