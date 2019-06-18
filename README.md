@@ -74,20 +74,19 @@ in the `dist` directory/folder.
 
 <pre>
 Bullet v2 C++ type:               corresponding Java class: com.jme3...
-</pre>
-<pre>
+===================               =====================================
 btBoxShape                        .bullet.collision.shapes.BoxCollisionShape
 btBU_Simplex1to4                  .bullet.collision.shapes.SimplexCollisionShape
 btBvhTriangleMeshShape            .bullet.collision.shapes.MeshCollisionShape
-btCapsuleShape{X//Z}              .bullet.collision.shapes.CapsuleCollisionShape
+btCapsuleShape                    .bullet.collision.shapes.CapsuleCollisionShape
 btCollisionObject                 .bullet.collision.PhysicsCollisionObject
 btCollisionShape                  .bullet.collision.shapes.CollisionShape
 btCompoundShape                   .bullet.collision.shapes.CompoundCollisionShape
 btCompoundShapeChild              .bullet.collision.shapes.info.ChildCollisionShape
-btConeShape{X//Z}                 .bullet.collision.shapes.ConeCollisionShape
+btConeShape                       .bullet.collision.shapes.ConeCollisionShape
 btConeTwistConstraint             .bullet.joints.ConeJoint
 btConvexHullShape                 .bullet.collision.shapes.HullCollisionShape
-btCylinderShape{X//Z}             .bullet.collision.shapes.CylinderCollisionShape
+btCylinderShape                   .bullet.collision.shapes.CylinderCollisionShape
 btDynamicsWorld                   .bullet.PhysicsSpace
 btEmptyShape                      .bullet.collision.shapes.EmptyShape
 btGeneric6DofConstraint           .bullet.joints.SixDofJoint
