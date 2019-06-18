@@ -41,11 +41,13 @@ The evolution of the project is chronicled in
 
 ## How to build Libbulletjme
 
- 1. Install the right tools:
+ 1. Install build software:
+   + one of the supported C++ compilers:
+     + for Linux:  the [GNU Compiler Collection][gcc]
+     + for Windows:  Microsoft Visual Studio
+     + for macOS:  Xcode
+   + a Java Development Kit, and
    + [Gradle]
-   + [Gcc] (for Linux)
-   + Microsoft Visual Studio (for Windows)
-   + XCode (for MacOSX)
  2. Download and extract the source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
@@ -53,10 +55,15 @@ The evolution of the project is chronicled in
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
-     + save the file
-     + unzip the saved file
+     + save the ZIP file
+     + unzip the saved ZIP file
      + `cd` to the extracted directory/folder
- 3. Run the Gradle wrapper: `./gradlew build`
+ 3. Set the `JAVA_HOME` environment variable:
+   + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
+   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+ 4. Run the Gradle wrapper:
+   + using Bash:  `./gradlew build`
+   + using Windows Command Prompt:  `.\gradlew build`
 
 After a successful build, dynamic libraries will be found
 in the `dist` directory/folder.
@@ -140,10 +147,10 @@ The Libbulletjme Project is based on open-source software:
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
 
-This project also made use of the following tools:
+This project also made use of the following software tools:
 
   + the [Firefox web browser][firefox]
-  + the [Gcc] compiler
+  + the [GNU Compiler Collection][gcc]
   + the [Git] revision-control system and GitK commit viewer
   + the [Google Chrome web browser][chrome]
   + the [Gradle] build tool
