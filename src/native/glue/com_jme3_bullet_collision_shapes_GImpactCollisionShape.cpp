@@ -74,6 +74,20 @@ extern "C" {
         delete array;
     }
 
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_GImpactCollisionShape
+     * Method:    recalcAabb
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_recalcAabb
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btGImpactMeshShape *pShape
+                = reinterpret_cast<btGImpactMeshShape *> (shapeId);
+        NULL_CHECK(pShape, "The btGImpactMeshShape does not exist.",);
+
+        pShape->updateBound();
+    }
+
 #ifdef __cplusplus
 }
 #endif

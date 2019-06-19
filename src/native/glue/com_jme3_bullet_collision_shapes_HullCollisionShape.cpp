@@ -156,6 +156,20 @@ extern "C" {
         }
     }
 
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+     * Method:    recalcAabb
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_recalcAabb
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btConvexHullShape *pShape
+                = reinterpret_cast<btConvexHullShape *> (shapeId);
+        NULL_CHECK(pShape, "The btConvexHullShape does not exist.",);
+
+        pShape->recalcLocalAabb();
+    }
+
 #ifdef __cplusplus
 }
 #endif

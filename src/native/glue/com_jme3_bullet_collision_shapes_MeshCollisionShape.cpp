@@ -97,6 +97,20 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+     * Method:    recalcAabb
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_recalcAabb
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btBvhTriangleMeshShape *pShape
+                = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
+        NULL_CHECK(pShape, "The btBvhTriangleMeshShape does not exist.",);
+
+        pShape->recalcLocalAabb();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
      * Method:    saveBVH
      * Signature: (J)[B
      */

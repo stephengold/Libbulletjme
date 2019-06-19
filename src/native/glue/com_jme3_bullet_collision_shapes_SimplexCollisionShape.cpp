@@ -122,6 +122,20 @@ extern "C" {
         return reinterpret_cast<jlong> (simplexShape);
     }
 
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_SimplexCollisionShape
+     * Method:    recalcAabb
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_recalcAabb
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btBU_Simplex1to4 *pShape
+                = reinterpret_cast<btBU_Simplex1to4 *> (shapeId);
+        NULL_CHECK(pShape, "The btBU_Simplex1to4 does not exist.",);
+
+        pShape->recalcLocalAabb();
+    }
+
 #ifdef __cplusplus
 }
 #endif

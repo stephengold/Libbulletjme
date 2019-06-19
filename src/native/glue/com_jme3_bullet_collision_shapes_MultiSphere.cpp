@@ -176,6 +176,20 @@ extern "C" {
         return sphereRadius;
     }
 
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
+     * Method:    recalcAabb
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btMultiSphereShape *pShape
+                = reinterpret_cast<btMultiSphereShape *> (shapeId);
+        NULL_CHECK(pShape, "The btMultiSphereShape does not exist.",);
+
+        pShape->recalcLocalAabb();
+    }
+
 #ifdef __cplusplus
 }
 #endif

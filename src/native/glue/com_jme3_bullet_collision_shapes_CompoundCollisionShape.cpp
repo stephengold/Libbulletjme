@@ -80,6 +80,19 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+     * Method:    recalcAabb
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_recalcAabb
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btCompoundShape *pShape = reinterpret_cast<btCompoundShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCompoundShape does not exist.",);
+
+        pShape->recalculateLocalAabb();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    removeChildShape
      * Signature: (JJ)J
      */
