@@ -25,6 +25,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionS
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    recalcAabb
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_recalcAabb
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
  * Method:    removeChildShape
  * Signature: (JJ)J
  */

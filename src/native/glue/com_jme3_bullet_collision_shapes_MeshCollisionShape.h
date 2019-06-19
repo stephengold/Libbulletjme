@@ -25,6 +25,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+ * Method:    recalcAabb
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_recalcAabb
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    saveBVH
  * Signature: (J)[B
  */

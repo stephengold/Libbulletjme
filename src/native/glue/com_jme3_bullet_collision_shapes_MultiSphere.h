@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
   (JNIEnv *, jobject, jobjectArray, jfloatArray, jint);
 
+/*
+ * Class:     com_jme3_bullet_collision_shapes_MultiSphere
+ * Method:    recalcAabb
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif

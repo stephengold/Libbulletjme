@@ -35,6 +35,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVertices
   (JNIEnv *, jobject, jlong, jobject);
 
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+ * Method:    recalcAabb
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_recalcAabb
+  (JNIEnv *, jobject, jlong);
+
 #ifdef __cplusplus
 }
 #endif
