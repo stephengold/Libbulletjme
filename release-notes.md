@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.81 released on 18 June 2019
+
+ + Added `recalcAabb()` methods to 6 shape classes.
+ + Deployed PDB files from AppVeyor.
+
 ## Version 1.0.80 released on 17 June 2019
 
  + Bugfix: crash with `HeightfieldCollisionShape` in DP build
