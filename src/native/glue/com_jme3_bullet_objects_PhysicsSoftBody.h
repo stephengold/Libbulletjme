@@ -91,6 +91,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendAnchor
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    appendCluster
+ * Signature: (JILjava/nio/IntBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendCluster
+  (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendFaces
  * Signature: (JILjava/nio/ByteBuffer;)V
  */
@@ -224,6 +232,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_cutLink
   (JNIEnv *, jobject, jlong, jint, jint, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    finishClusters
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_finishClusters
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody

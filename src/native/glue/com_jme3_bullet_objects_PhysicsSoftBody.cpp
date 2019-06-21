@@ -143,6 +143,34 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    appendCluster
+     * Signature: (JILjava/nio/IntBuffer;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendCluster
+    (JNIEnv *env, jobject object, jlong softBodyId, jint numMembers, jobject intBuffer) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (softBodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+
+        NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
+        const jint *indices = (jint *) env->GetDirectBufferAddress(intBuffer);
+
+        int newClusterIndex = pBody->clusterCount();
+        pBody->m_clusters.resize(newClusterIndex + 1);
+        int clusterBytes = sizeof (btSoftBody::Cluster);
+        btSoftBody::Cluster *pCluster
+                = new (btAlignedAlloc(clusterBytes, 16)) btSoftBody::Cluster();
+        pBody->m_clusters[newClusterIndex] = pCluster;
+        pCluster->m_collide = true;
+
+        for (int i = 0; i < numMembers; ++i) {
+            int nodeIndex = indices[i];
+            btSoftBody::Node *pNode = &pBody->m_nodes[nodeIndex];
+            pCluster->m_nodes.push_back(pNode);
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendFaces
      * Signature: (JILjava/nio/ByteBuffer;)V
      */
@@ -487,6 +515,45 @@ extern "C" {
         bool success = body->cutLink((int) nodeIndex0, (int) nodeIndex1,
                 (btScalar) position);
         return (jboolean) success;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    finishClusters
+     * Signature: (J)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_finishClusters
+    (JNIEnv *env, jobject object, jlong softBodyId) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (softBodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+
+        int numClusters = pBody->m_clusters.size();
+        if (numClusters > 0) {
+            pBody->initializeClusters();
+            pBody->updateClusters();
+            /*
+             * populate the cluster connectivity matrix (for self-collisions)
+             */
+            pBody->m_clusterConnectivity.resize(numClusters * numClusters);
+            for (int c0 = 0; c0 < numClusters; ++c0) {
+                btSoftBody::Cluster *cla = pBody->m_clusters[c0];
+                cla->m_clusterIndex = c0;
+                for (int c1 = 0; c1 < numClusters; ++c1) {
+                    bool connect = false;
+                    btSoftBody::Cluster *clb = pBody->m_clusters[c1];
+                    for (int i = 0; !connect && i < cla->m_nodes.size(); ++i) {
+                        for (int j = 0; j < clb->m_nodes.size(); ++j) {
+                            if (cla->m_nodes[i] == clb->m_nodes[j]) {
+                                connect = true;
+                                break;
+                            }
+                        }
+                    }
+                    int arrayIndex = c0 + c1 * numClusters;
+                    pBody->m_clusterConnectivity[arrayIndex] = connect;
+                }
+            }
+        }
     }
 
     /*
