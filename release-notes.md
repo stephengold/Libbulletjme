@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.82 released on 21 June 2019
+
+ + Added `appendCluster()` and `finishClusters()` methods to `PhysicsSoftBody`.
+
 ## Version 1.0.81 released on 18 June 2019
 
  + Added `recalcAabb()` methods to 6 shape classes.
