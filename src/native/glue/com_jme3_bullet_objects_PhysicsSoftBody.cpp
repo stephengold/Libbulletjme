@@ -77,6 +77,9 @@ extern "C" {
         btVector3 vec;
         jmeBulletUtil::convert(env, force, &vec);
 
+        btAssert(nodeId >= 0);
+        btAssert(nodeId < body->m_nodes.size());
+
         body->addForce(vec, nodeId);
     }
 
@@ -112,6 +115,9 @@ extern "C" {
         btVector3 bulletVector;
         jmeBulletUtil::convert(env, velocityVector, &bulletVector);
 
+        btAssert(nodeId >= 0);
+        btAssert(nodeId < body->m_nodes.size());
+
         body->addVelocity(bulletVector, nodeId);
     }
 
@@ -126,6 +132,9 @@ extern "C" {
             jfloat influence) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        btAssert(nodeId >= 0);
+        btAssert(nodeId < body->m_nodes.size());
 
         btRigidBody* rigid = reinterpret_cast<btRigidBody*> (rigidId);
         NULL_CHECK(rigid, "The btRigidBody does not exist.",)
@@ -164,6 +173,8 @@ extern "C" {
 
         for (int i = 0; i < numMembers; ++i) {
             int nodeIndex = indices[i];
+            btAssert(nodeIndex >= 0);
+            btAssert(nodeIndex < pBody->m_nodes.size());
             btSoftBody::Node *pNode = &pBody->m_nodes[nodeIndex];
             pCluster->m_nodes.push_back(pNode);
         }
@@ -185,8 +196,17 @@ extern "C" {
 
         for (int i = 0; i < 3 * numFaces;) {
             int ni1 = face[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = face[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             int ni3 = face[i++];
+            btAssert(ni3 >= 0);
+            btAssert(ni3 < body->m_nodes.size());
+
             body->appendFace(ni1, ni2, ni3);
         }
     }
@@ -207,8 +227,17 @@ extern "C" {
 
         for (int i = 0; i < 3 * numFaces;) {
             int ni1 = face[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = face[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             int ni3 = face[i++];
+            btAssert(ni3 >= 0);
+            btAssert(ni3 < body->m_nodes.size());
+
             body->appendFace(ni1, ni2, ni3);
         }
     }
@@ -229,8 +258,17 @@ extern "C" {
 
         for (int i = 0; i < 3 * numFaces;) {
             int ni1 = face[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = face[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             int ni3 = face[i++];
+            btAssert(ni3 >= 0);
+            btAssert(ni3 < body->m_nodes.size());
+
             body->appendFace(ni1, ni2, ni3);
         }
     }
@@ -251,7 +289,13 @@ extern "C" {
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = link[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             body->appendLink(ni1, ni2);
         }
     }
@@ -272,7 +316,13 @@ extern "C" {
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = link[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             body->appendLink(ni1, ni2);
         }
     }
@@ -293,7 +343,13 @@ extern "C" {
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = link[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             body->appendLink(ni1, ni2);
         }
     }
@@ -336,9 +392,21 @@ extern "C" {
 
         for (int i = 0; i < 4 * numTetras;) {
             int ni1 = tetra[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = tetra[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             int ni3 = tetra[i++];
+            btAssert(ni3 >= 0);
+            btAssert(ni3 < body->m_nodes.size());
+
             int ni4 = tetra[i++];
+            btAssert(ni4 >= 0);
+            btAssert(ni4 < body->m_nodes.size());
+
             body->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
@@ -359,9 +427,21 @@ extern "C" {
 
         for (int i = 0; i < 4 * numTetras;) {
             int ni1 = tetra[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = tetra[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             int ni3 = tetra[i++];
+            btAssert(ni3 >= 0);
+            btAssert(ni3 < body->m_nodes.size());
+
             int ni4 = tetra[i++];
+            btAssert(ni4 >= 0);
+            btAssert(ni4 < body->m_nodes.size());
+
             body->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
@@ -382,9 +462,21 @@ extern "C" {
 
         for (int i = 0; i < 4 * numTetras;) {
             int ni1 = tetra[i++];
+            btAssert(ni1 >= 0);
+            btAssert(ni1 < body->m_nodes.size());
+
             int ni2 = tetra[i++];
+            btAssert(ni2 >= 0);
+            btAssert(ni2 < body->m_nodes.size());
+
             int ni3 = tetra[i++];
+            btAssert(ni3 >= 0);
+            btAssert(ni3 < body->m_nodes.size());
+
             int ni4 = tetra[i++];
+            btAssert(ni4 >= 0);
+            btAssert(ni4 < body->m_nodes.size());
+
             body->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
@@ -463,6 +555,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0);
 
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < body->clusterCount());
+
         const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
         jint count = cluster->m_nodes.size();
 
@@ -512,6 +607,12 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0);
 
+        btAssert(nodeIndex0 >= 0);
+        btAssert(nodeIndex0 < body->m_nodes.size());
+
+        btAssert(nodeIndex1 >= 0);
+        btAssert(nodeIndex1 < body->m_nodes.size());
+
         bool success = body->cutLink((int) nodeIndex0, (int) nodeIndex1,
                 (btScalar) position);
         return (jboolean) success;
@@ -527,7 +628,7 @@ extern "C" {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (softBodyId);
         NULL_CHECK(pBody, "The btSoftBody does not exist.",);
 
-        int numClusters = pBody->m_clusters.size();
+        int numClusters = pBody->clusterCount();
         if (numClusters > 0) {
             pBody->initializeClusters();
             pBody->updateClusters();
@@ -609,6 +710,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
 
+        btAssert(anchorIndex >= 0);
+        btAssert(anchorIndex < body->m_anchors.size());
+
         btScalar influence = body->m_anchors[anchorIndex].m_influence;
         return (jfloat) influence;
     }
@@ -622,6 +726,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        btAssert(anchorIndex >= 0);
+        btAssert(anchorIndex < body->m_anchors.size());
 
         const btSoftBody::Node* node = body->m_anchors[anchorIndex].m_node;
         int nodeIndex = int(node - &body->m_nodes[0]);
@@ -639,6 +746,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
 
+        btAssert(anchorIndex >= 0);
+        btAssert(anchorIndex < body->m_anchors.size());
+
         const btVector3* pPivot = &body->m_anchors[anchorIndex].m_local;
         jmeBulletUtil::convert(env, pPivot, storeVector);
     }
@@ -652,6 +762,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0);
+
+        btAssert(anchorIndex >= 0);
+        btAssert(anchorIndex < body->m_anchors.size());
 
         btRigidBody* pRigid = body->m_anchors[anchorIndex].m_body;
         return reinterpret_cast<jlong> (pRigid);
@@ -686,6 +799,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < body->clusterCount());
+
         NULL_CHECK(storeVector, "The store vector does not exist.",);
         const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
         jmeBulletUtil::convert(env, &cluster->m_com, storeVector);
@@ -716,7 +832,7 @@ extern "C" {
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
-        int numClusters = body->m_clusters.size();
+        int numClusters = body->clusterCount();
         for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
             const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
             btScalar mass = btScalar(1.) / cluster->m_imass;
@@ -736,7 +852,7 @@ extern "C" {
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
-        int numClusters = body->m_clusters.size();
+        int numClusters = body->clusterCount();
         for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
             const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
             bufPtr[0] = cluster->m_com.getX();
@@ -817,6 +933,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
+
+        btAssert(nodeId >= 0);
+        btAssert(nodeId < body->m_nodes.size());
 
         return body->getMass(nodeId);
     }
@@ -916,6 +1035,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        btAssert(nodeIndex >= 0);
+        btAssert(nodeIndex < body->m_nodes.size());
+
         NULL_CHECK(storeVector, "The store vector does not exist.",);
         const btSoftBody::Node& node = body->m_nodes[nodeIndex];
         jmeBulletUtil::convert(env, &node.m_x, storeVector);
@@ -931,6 +1053,9 @@ extern "C" {
             jobject storeVector) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        btAssert(nodeIndex >= 0);
+        btAssert(nodeIndex < body->m_nodes.size());
 
         NULL_CHECK(storeVector, "The store vector does not exist.",);
         const btSoftBody::Node& node = body->m_nodes[nodeIndex];
@@ -1013,6 +1138,9 @@ extern "C" {
             jobject storeVector) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        btAssert(nodeIndex >= 0);
+        btAssert(nodeIndex < body->m_nodes.size());
 
         NULL_CHECK(storeVector, "The store vector does not exist.",);
         const btSoftBody::Node& node = body->m_nodes[nodeIndex];
@@ -1183,6 +1311,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < body->clusterCount());
+
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint* result = (jint*) env->GetDirectBufferAddress(intBuffer);
 
@@ -1220,6 +1351,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        btAssert(index >= 0);
+        btAssert(index < body->clusterCount());
+
         body->releaseCluster(index);
     }
 
@@ -1245,6 +1379,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeId, jlong rigidId) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        btAssert(nodeId >= 0);
+        btAssert(nodeId < body->m_nodes.size());
 
         btRigidBody* rigid = reinterpret_cast<btRigidBody*> (rigidId);
         NULL_CHECK(rigid, "The btRigidBody does not exist.",);
@@ -1302,6 +1439,9 @@ extern "C" {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
+        btAssert(nodeId >= 0);
+        btAssert(nodeId < body->m_nodes.size());
+
         body->setMass(nodeId, mass);
     }
 
@@ -1334,6 +1474,9 @@ extern "C" {
             jobject velocityVector) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
+
+        btAssert(nodeIndex >= 0);
+        btAssert(nodeIndex < body->m_nodes.size());
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
         btSoftBody::Node& node = body->m_nodes[nodeIndex];
