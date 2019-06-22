@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_joints_PhysicsJoint
+ * Method:    enableFeedback
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_enableFeedback
+  (JNIEnv *, jobject, jlong, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_joints_PhysicsJoint
  * Method:    finalizeNative
  * Signature: (J)V
  */
@@ -37,6 +45,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_getBreakingImp
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_isEnabled
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_PhysicsJoint
+ * Method:    needsFeedback
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_needsFeedback
   (JNIEnv *, jobject, jlong);
 
 /*

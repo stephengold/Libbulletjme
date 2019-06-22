@@ -42,6 +42,20 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    enableFeedback
+     * Signature: (JZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_enableFeedback
+    (JNIEnv *env, jobject object, jlong jointId, jboolean enable) {
+        btTypedConstraint *pJoint
+                = reinterpret_cast<btTypedConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btTypedConstraint does not exist.",);
+
+        pJoint->enableFeedback(enable);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
      * Method:    finalizeNative
      * Signature: (J)V
      */
@@ -90,6 +104,21 @@ extern "C" {
         NULL_CHECK(joint, "The btTypedConstraint does not exist.", false)
 
         return joint->isEnabled();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_PhysicsJoint
+     * Method:    needsFeedback
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_PhysicsJoint_needsFeedback
+    (JNIEnv *env, jobject object, jlong jointId) {
+        btTypedConstraint *pJoint
+                = reinterpret_cast<btTypedConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btTypedConstraint does not exist.", 0);
+
+        jboolean result = pJoint->needsFeedback();
+        return result;
     }
 
     /*
