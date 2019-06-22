@@ -44,88 +44,70 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_joints_SoftAngularJoint
      * Method:    createJointSoftRigid
-     * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
+     * Signature: (JIJFFFLcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftRigid
-    (JNIEnv *env, jobject object, jlong softIdA, jlong rigidIdB, jobject pivotA,
-            jobject pivotB, jfloat erp, jfloat cfm, jfloat split,
+    (JNIEnv *env, jobject object, jlong softIdA, jint clusterIndexA,
+            jlong rigidIdB, jfloat erp, jfloat cfm, jfloat split,
             jobject axis) {
-        btSoftBody* softA = reinterpret_cast<btSoftBody*> (softIdA);
-        NULL_CHECK(softA, "Soft body A does not exist.", 0)
+        btSoftBody *pSoftA = reinterpret_cast<btSoftBody*> (softIdA);
+        NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
 
-        btRigidBody* rigidB = reinterpret_cast<btRigidBody*> (rigidIdB);
-        NULL_CHECK(rigidB, "Rigid body B does not exist.", 0)
+        btRigidBody *pRigidB = reinterpret_cast<btRigidBody*> (rigidIdB);
+        NULL_CHECK(pRigidB, "Rigid body B does not exist.", 0)
 
         NULL_CHECK(axis, "The axis vector does not exist.", 0)
         btVector3 ax;
         jmeBulletUtil::convert(env, axis, &ax);
 
-        NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
-        btVector3 pivA;
-        jmeBulletUtil::convert(env, pivotA, &pivA);
+        btSoftBody::AJoint::Specs specs;
+        specs.cfm = cfm;
+        specs.erp = erp;
+        specs.split = split;
+        specs.axis = ax;
 
-        NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
-        btVector3 pivB;
-        jmeBulletUtil::convert(env, pivotB, &pivB);
+        btSoftBody::Cluster *pClusterA = pSoftA->m_clusters[clusterIndexA];
+        pSoftA->appendAngularJoint(specs, pClusterA, pRigidB);
 
-        btSoftBody::AJoint* ajoint = new(btAlignedAlloc(sizeof (btSoftBody::AJoint), 16)) btSoftBody::AJoint();
+        int lastIndex = pSoftA->m_joints.size() - 1;
+        btSoftBody::Joint *pJoint = pSoftA->m_joints[lastIndex];
 
-        ajoint->m_bodies[0] = softA->m_clusters[0];
-        ajoint->m_bodies[1] = rigidB;
-
-        ajoint->m_refs[0] = ajoint->m_bodies[0].xform().inverse().getBasis() * ax;
-        ajoint->m_refs[1] = ajoint->m_bodies[1].xform().inverse().getBasis() * ax;
-
-        ajoint->m_icontrol = btSoftBody::AJoint::IControl::Default();
-
-        ajoint->m_cfm = cfm;
-        ajoint->m_erp = erp;
-        ajoint->m_split = split;
-
-        return reinterpret_cast<long> (ajoint);
+        return reinterpret_cast<long> (pJoint);
     }
 
     /*
      * Class:     com_jme3_bullet_joints_SoftAngularJoint
      * Method:    createJointSoftSoft
-     * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
+     * Signature: (JIJIFFFLcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftSoft
-    (JNIEnv *env, jobject object, jlong softIdA, jlong softIdB, jobject pivotA,
-            jobject pivotB, jfloat erp, jfloat cfm, jfloat split,
-            jobject axis) {
-        btSoftBody* softA = reinterpret_cast<btSoftBody*> (softIdA);
-        NULL_CHECK(softA, "Soft body A does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong softIdA, jint clusterIndexA,
+            jlong softIdB, jint clusterIndexB, jfloat erp,
+            jfloat cfm, jfloat split, jobject axis) {
+        btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
+        NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
 
-        btSoftBody* softB = reinterpret_cast<btSoftBody*> (softIdB);
-        NULL_CHECK(softB, "Soft body B does not exist.", 0)
+        btSoftBody *pSoftB = reinterpret_cast<btSoftBody *> (softIdB);
+        NULL_CHECK(pSoftB, "Soft body B does not exist.", 0)
 
         NULL_CHECK(axis, "The axis vector does not exist.", 0)
         btVector3 ax;
         jmeBulletUtil::convert(env, axis, &ax);
 
-        NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
-        btVector3 pivA;
-        jmeBulletUtil::convert(env, pivotA, &pivA);
+        btSoftBody::AJoint::Specs specs;
+        specs.cfm = cfm;
+        specs.erp = erp;
+        specs.split = split;
+        specs.axis = ax;
 
-        NULL_CHECK(pivotB, "The pivotB vector does not exist.", 0)
-        btVector3 pivB;
-        jmeBulletUtil::convert(env, pivotB, &pivB);
+        btSoftBody::Cluster *pClusterA = pSoftA->m_clusters[clusterIndexA];
+        btSoftBody::Cluster *pClusterB = pSoftB->m_clusters[clusterIndexB];
+        pSoftA->appendAngularJoint(specs, pClusterA, pClusterB);
 
-        btSoftBody::AJoint* ajoint = new(btAlignedAlloc(sizeof (btSoftBody::AJoint), 16)) btSoftBody::AJoint();
-        ajoint->m_bodies[0] = softA->m_clusters[0];
-        ajoint->m_bodies[1] = softB->m_clusters[0];
+        int lastIndex = pSoftA->m_joints.size() - 1;
+        btSoftBody::Joint *pJoint = pSoftA->m_joints[lastIndex];
 
-        ajoint->m_refs[0] = ajoint->m_bodies[0].xform().inverse().getBasis() * ax;
-        ajoint->m_refs[1] = ajoint->m_bodies[1].xform().inverse().getBasis() * ax;
-
-        ajoint->m_cfm = cfm;
-        ajoint->m_erp = erp;
-        ajoint->m_split = split;
-
-        ajoint->m_icontrol = btSoftBody::AJoint::IControl::Default();
-
-        return reinterpret_cast<long> (ajoint);
+        return reinterpret_cast<long> (pJoint);
     }
 
     /*
