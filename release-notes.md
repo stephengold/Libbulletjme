@@ -1,8 +1,18 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.83 released on 21 June 2019
+
+ + Redesigned the create methods for `SoftAngularJoint` and `SoftLinearJoint`.
+ + Removed the `updateBound()` call from `GImpactCollisionShape.createShape()`.
+ + Added `enableFeedback()` and `needsFeedback()` methods to the
+   `PhysicsJoint` class.
+ + Added a `getInternalType()` method to `PhysicsCollisionObject`.
+ + Added `btAssert()`s to validate indices in `PhysicsSoftBody`.
+
 ## Version 1.0.82 released on 21 June 2019
 
- + Added `appendCluster()` and `finishClusters()` methods to `PhysicsSoftBody`.
+Added `appendCluster()` and `finishClusters()` methods to the
+`PhysicsSoftBody` class.
 
 ## Version 1.0.81 released on 18 June 2019
 
@@ -13,7 +23,7 @@
 
  + Bugfix: crash with `HeightfieldCollisionShape` in DP build
    (accessing freed array).
- + Added a `createShape2()` and `finalizeNative()` methods to the
+ + Added `createShape2()` and `finalizeNative()` methods to the
    `HeightfieldCollisionShape` class.
  + Deployed debug libraries from AppVeyor.
  + Stopped #undef-ing `_FORTIFY_SOURCE`.
