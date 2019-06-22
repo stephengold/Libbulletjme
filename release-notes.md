@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.84 released on 22 June 2019
+
+Added 2 new classes: `Constraint` and `NativeLibrary`.
+
 ## Version 1.0.83 released on 21 June 2019
 
  + Redesigned the create methods for `SoftAngularJoint` and `SoftLinearJoint`.
