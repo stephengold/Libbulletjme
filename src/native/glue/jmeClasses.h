@@ -29,11 +29,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <jni.h>
 
 /*
  * Author: Normen Hansen
  */
+#ifndef _Included_jmeClasses
+#define _Included_jmeClasses
+
+#include <jni.h>
 
 #define NULL_CHECK(pointer, message, retval) \
     if ((pointer) == NULL) { \
@@ -122,3 +125,5 @@ private:
     ~jmeClasses() {
     };
 };
+
+#endif
