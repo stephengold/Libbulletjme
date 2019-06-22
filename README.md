@@ -108,6 +108,7 @@ btRotationalLimitMotor            .bullet.joints.motors.RotationalLimitMotor
 btSliderConstraint                .bullet.joints.SliderJoint
 btSoftBody                        .bullet.objects.PhysicsSoftBody
 btSoftBody::AJoint                .bullet.joints.SoftAngularJoint
+btSoftBody::Body                  .bullet.object.PhysicsBody
 btSoftBody::Config                .bullet.objects.infos.SoftBodyConfig
 btSoftBody::eAeroModel            .bullet.objects.infos.Aero
 btSoftBody::Joint                 .bullet.joints.SoftPhysicsJoint
