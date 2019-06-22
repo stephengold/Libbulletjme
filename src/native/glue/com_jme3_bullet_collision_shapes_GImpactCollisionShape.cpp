@@ -55,7 +55,7 @@ extern "C" {
         NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.", 0)
 
         btGImpactMeshShape* pShape = new btGImpactMeshShape(pMesh);
-        pShape->updateBound();
+        // no longer invoking updateBound() here -- caller must do that
 
         return reinterpret_cast<jlong> (pShape);
     }
