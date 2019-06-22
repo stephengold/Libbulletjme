@@ -237,6 +237,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    getInternalType
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getInternalType
+    (JNIEnv *env, jobject object, jlong objectId) {
+        btCollisionObject *pCollisionObject
+                = reinterpret_cast<btCollisionObject*> (objectId);
+        NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.", 0)
+
+        jint result = pCollisionObject->getInternalType();
+        return result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    getLocation
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
