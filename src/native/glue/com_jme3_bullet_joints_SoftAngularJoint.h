@@ -10,18 +10,18 @@ extern "C" {
 /*
  * Class:     com_jme3_bullet_joints_SoftAngularJoint
  * Method:    createJointSoftRigid
- * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
+ * Signature: (JIJFFFLcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftRigid
-  (JNIEnv *, jobject, jlong, jlong, jobject, jobject, jfloat, jfloat, jfloat, jobject);
+  (JNIEnv *, jobject, jlong, jint, jlong, jfloat, jfloat, jfloat, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_SoftAngularJoint
  * Method:    createJointSoftSoft
- * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFFLcom/jme3/math/Vector3f;)J
+ * Signature: (JIJIFFFLcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftSoft
-  (JNIEnv *, jobject, jlong, jlong, jobject, jobject, jfloat, jfloat, jfloat, jobject);
+  (JNIEnv *, jobject, jlong, jint, jlong, jint, jfloat, jfloat, jfloat, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_SoftAngularJoint
