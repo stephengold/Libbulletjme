@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.85 released on 23 June 2019
+
+ + Added new class `Anchor`.
+ + Upgraded the Bullet sources to match SHA1 ID=681a730e of the bullet3 project.
+
 ## Version 1.0.84 released on 22 June 2019
 
 Added 2 new classes: `Constraint` and `NativeLibrary`.
