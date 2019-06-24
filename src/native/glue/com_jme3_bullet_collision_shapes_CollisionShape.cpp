@@ -124,6 +124,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    getShapeType
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getShapeType
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0);
+
+        int shapeType = pShape->getShapeType();
+        return (jint) shapeType;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    isConcave
      * Signature: (J)Z
      */

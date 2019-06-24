@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getShapeType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getShapeType
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    finalizeNative
  * Signature: (J)V
  */
