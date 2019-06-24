@@ -83,14 +83,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity_
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    appendAnchor
- * Signature: (JIJLcom/jme3/math/Vector3f;ZF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendAnchor
-  (JNIEnv *, jobject, jlong, jint, jlong, jobject, jboolean, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    appendCluster
  * Signature: (JILjava/nio/IntBuffer;)V
  */
@@ -256,46 +248,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_generateBend
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_generateClusters
   (JNIEnv *, jobject, jlong, jint, jint);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getAnchorCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorCount
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getAnchorInfluence
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorInfluence
-  (JNIEnv *, jobject, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getAnchorNodeIndex
- * Signature: (JI)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorNodeIndex
-  (JNIEnv *, jobject, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getAnchorPivot
- * Signature: (JILcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorPivot
-  (JNIEnv *, jobject, jlong, jint, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getAnchorRigidId
- * Signature: (JI)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorRigidId
-  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
@@ -560,14 +512,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_releaseClust
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_releaseClusters
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    removeAnchor
- * Signature: (JIJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_removeAnchor
-  (JNIEnv *, jobject, jlong, jint, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody

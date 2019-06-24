@@ -17,14 +17,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNati
 
 /*
  * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    addConstraint
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_addConstraint
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
  * Method:    getConstraintForceMixing
  * Signature: (J)F
  */
@@ -46,14 +38,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getErrorRe
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getSplit
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
- * Method:    removeConstraint
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_removeConstraint
-  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
