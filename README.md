@@ -108,6 +108,7 @@ btRotationalLimitMotor            .bullet.joints.motors.RotationalLimitMotor
 btSliderConstraint                .bullet.joints.SliderJoint
 btSoftBody                        .bullet.objects.PhysicsSoftBody
 btSoftBody::AJoint                .bullet.joints.SoftAngularJoint
+btSoftBody::Anchor                .bullet.joints.Anchor
 btSoftBody::Body                  .bullet.object.PhysicsBody
 btSoftBody::Config                .bullet.objects.infos.SoftBodyConfig
 btSoftBody::eAeroModel            .bullet.objects.infos.Aero
@@ -121,7 +122,7 @@ btTransform                       .math.Transform
 btTranslationalLimitMotor         .bullet.joints.motors.TranslationalLimitMotor
 btTriangleIndexVertexArray        .bullet.collision.shapes.infos.CompoundMesh
 btTriangleRaycastCallback::Eflags .bullet.RayTestFlag
-btTypedConstraint                 .bullet.joints.PhysicsJoint
+btTypedConstraint                 .bullet.joints.Constraint
 btVector3                         .math.Vector3f
 btWheelInfo                       .bullet.objects.VehicleWheel
 </pre>
