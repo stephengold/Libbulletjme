@@ -80,6 +80,7 @@ btBU_Simplex1to4                  .bullet.collision.shapes.SimplexCollisionShape
 btBvhTriangleMeshShape            .bullet.collision.shapes.MeshCollisionShape
 btCapsuleShape                    .bullet.collision.shapes.CapsuleCollisionShape
 btCollisionObject                 .bullet.collision.PhysicsCollisionObject
+btCollisionObject::CollisionFlags .bullet.collision.CollisionFlag
 btCollisionShape                  .bullet.collision.shapes.CollisionShape
 btCompoundShape                   .bullet.collision.shapes.CompoundCollisionShape
 btCompoundShapeChild              .bullet.collision.shapes.info.ChildCollisionShape
