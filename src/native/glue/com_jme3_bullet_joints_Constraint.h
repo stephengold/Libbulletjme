@@ -41,6 +41,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpul
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getConstraintType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
  * Method:    isEnabled
  * Signature: (J)Z
  */

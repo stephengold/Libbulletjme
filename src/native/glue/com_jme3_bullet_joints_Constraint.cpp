@@ -98,6 +98,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_Constraint
+     * Method:    getConstraintType
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
+    (JNIEnv *env, jobject object, jlong constraintId) {
+        const btTypedConstraint *pConstraint
+                = reinterpret_cast<btTypedConstraint *> (constraintId);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
+
+        btTypedConstraintType constraintType = pConstraint->getConstraintType();
+        return (jint) constraintType;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_Constraint
      * Method:    isEnabled
      * Signature: (J)Z
      */
