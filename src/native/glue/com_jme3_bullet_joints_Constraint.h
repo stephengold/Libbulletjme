@@ -49,6 +49,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpul
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getOverrideIterations
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterations
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
  * Method:    isEnabled
  * Signature: (J)Z
  */
@@ -62,6 +70,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_isEnabled
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_needsFeedback
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    overrideIterations
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint

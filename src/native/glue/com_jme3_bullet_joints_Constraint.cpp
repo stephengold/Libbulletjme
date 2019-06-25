@@ -113,6 +113,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_Constraint
+     * Method:    getOverrideIterations
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterations
+    (JNIEnv *env, jobject object, jlong constraintId) {
+        const btTypedConstraint *pConstraint
+                = reinterpret_cast<btTypedConstraint *> (constraintId);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0);
+
+        int overrideIterations = pConstraint->getOverrideNumSolverIterations();
+        return (jint) overrideIterations;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_Constraint
      * Method:    isEnabled
      * Signature: (J)Z
      */
@@ -139,6 +154,20 @@ extern "C" {
 
         jboolean result = pConstraint->needsFeedback();
         return result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_Constraint
+     * Method:    overrideIterations
+     * Signature: (JI)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
+    (JNIEnv *env, jobject object, jlong constraintId, jint numIterations) {
+        btTypedConstraint *pConstraint
+                = reinterpret_cast<btTypedConstraint *> (constraintId);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
+
+        pConstraint->setOverrideNumSolverIterations(numIterations);
     }
 
     /*
