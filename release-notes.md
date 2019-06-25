@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.87 released on 24 June 2019
+
+Solved some compile-time errors with GCC.
+
 ## Version 1.0.86 released on 24 June 2019
 
  + Added a `getShapeType()` method to `CollisionShape`.
