@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.86 released on 24 June 2019
+
+ + Added a `getShapeType()` method to `CollisionShape`.
+ + Added `getConstraintType()`, `getOverrideIterations()`, and
+   `overrideIterations()` methods to the `Constraint` class.
+ + Added assertions to verify the internal type in `PhysicsGhostObject`.
+
 ## Version 1.0.85 released on 23 June 2019
 
  + Added new class `Anchor`.
