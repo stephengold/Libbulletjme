@@ -106,7 +106,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         return ghost->getCcdMotionThreshold();
     }
@@ -121,7 +121,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         return ghost->getCcdSquareMotionThreshold();
     }
@@ -136,7 +136,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         return ghost->getCcdSweptSphereRadius();
     }
@@ -151,7 +151,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         return ghost->getNumOverlappingObjects();
     }
@@ -166,7 +166,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         btHashedOverlappingPairCache * pc = ghost->getOverlappingPairCache();
         jmeGhostOverlapCallback cb(env, object, ghost);
@@ -183,7 +183,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         NULL_CHECK(value, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &ghost->getWorldTransform().getOrigin(),
@@ -200,7 +200,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         NULL_CHECK(value, "The store quaternion does not exist.",)
         jmeBulletUtil::convertQuat(env, &ghost->getWorldTransform().getBasis(),
@@ -217,7 +217,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         NULL_CHECK(value, "The store matrix does not exist.",)
         jmeBulletUtil::convert(env, &ghost->getWorldTransform().getBasis(),
@@ -234,7 +234,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         ghost->setCcdMotionThreshold(value);
     }
@@ -249,7 +249,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         ghost->setCcdSweptSphereRadius(value);
     }
@@ -264,7 +264,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         ghost->setCollisionFlags(ghost->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
     }
@@ -279,7 +279,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         NULL_CHECK(value, "The vector does not exist.",)
 
@@ -297,7 +297,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         NULL_CHECK(value, "The matrix does not exist.",)
 
@@ -314,7 +314,7 @@ extern "C" {
         btPairCachingGhostObject* ghost
                 = reinterpret_cast<btPairCachingGhostObject*> (objectId);
         NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4)
+        btAssert(ghost->getInternalType() == 4);
 
         NULL_CHECK(value, "The quaternion does not exist.",)
 
