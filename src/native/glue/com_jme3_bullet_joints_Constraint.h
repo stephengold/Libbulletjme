@@ -17,6 +17,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getConstraintType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
  * Method:    enableFeedback
  * Signature: (JZ)V
  */
@@ -37,14 +45,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getAppliedImpuls
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpulseThreshold
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_Constraint
- * Method:    getConstraintType
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
   (JNIEnv *, jobject, jlong);
 
 /*
