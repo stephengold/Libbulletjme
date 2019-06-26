@@ -1,8 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.88 released on 25 June 2019
+
+Re-try after a partial deployment.
+
 ## Version 1.0.87 released on 24 June 2019
 
-Solved some compile-time errors with GCC.
+Solved some compile-time errors reported by GCC.
 
 ## Version 1.0.86 released on 24 June 2019
 
@@ -27,7 +31,7 @@ Added 2 new classes: `Constraint` and `NativeLibrary`.
  + Added `enableFeedback()` and `needsFeedback()` methods to the
    `PhysicsJoint` class.
  + Added a `getInternalType()` method to `PhysicsCollisionObject`.
- + Added `btAssert()`s to validate indices in `PhysicsSoftBody`.
+ + Added assertions to validate indices in `PhysicsSoftBody`.
 
 ## Version 1.0.82 released on 21 June 2019
 
