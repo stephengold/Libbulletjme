@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.89 released on 27 June 2019
+
+Added accessors for 6 cluster parameters.
+
 ## Version 1.0.88 released on 25 June 2019
 
 Re-try after a partial deployment.
