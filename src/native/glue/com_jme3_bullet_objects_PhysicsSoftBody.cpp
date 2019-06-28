@@ -790,6 +790,25 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClusterAngularDamping
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterAngularDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody* pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        btScalar result = pCluster->m_adamping;
+
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getClusterCenter
      * Signature: (JILcom/jme3/math/Vector3f;)V
      */
@@ -818,6 +837,101 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
 
         return body->clusterCount();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClusterLinearDamping
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterLinearDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        btScalar result = pCluster->m_ldamping;
+
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClusterMatching
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterMatching
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        btScalar result = pCluster->m_matching;
+
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClusterMaxSelfImpulse
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterMaxSelfImpulse
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        btScalar result = pCluster->m_maxSelfCollisionImpulse;
+
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClusterNodeDamping
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterNodeDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        btScalar result = pCluster->m_ndamping;
+
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getClusterSelfImpulse
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterSelfImpulse
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        btScalar result = pCluster->m_selfCollisionImpulseFactor;
+
+        return (jfloat) result;
     }
 
     /*
@@ -1413,6 +1527,114 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->resetLinkRestLengths();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setClusterAngularDamping
+     * Signature: (JIF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setClusterAngularDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jfloat damping) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        pCluster->m_adamping = (btScalar) damping;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setClusterLinearDamping
+     * Signature: (JIF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setClusterLinearDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jfloat damping) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        pCluster->m_ldamping = (btScalar) damping;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setClusterMatching
+     * Signature: (JIF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setClusterMatching
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jfloat coefficient) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        pCluster->m_matching = (btScalar) coefficient;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setClusterMaxSelfImpulse
+     * Signature: (JIF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setClusterMaxSelfImpulse
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jfloat maxImpulse) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        pCluster->m_maxSelfCollisionImpulse = (btScalar) maxImpulse;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setClusterNodeDamping
+     * Signature: (JIF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setClusterNodeDamping
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jfloat damping) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        pCluster->m_ndamping = (btScalar) damping;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    setClusterSelfImpulse
+     * Signature: (JIF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setClusterSelfImpulse
+    (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
+            jfloat factor) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+
+        btAssert(clusterIndex >= 0);
+        btAssert(clusterIndex < pBody->clusterCount());
+
+        btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        pCluster->m_selfCollisionImpulseFactor = (btScalar) factor;
     }
 
     /*
