@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 1.0.90 released on 4 July 2019
+
+Fixed 2 bugs:
+ + `btAssert()` while creating a rigid body with a `MeshCollisionShape`
+ + `ConeJoint` causes rigid bodies to disappear (JME issue 1135)
+
 ## Version 1.0.89 released on 27 June 2019
 
 Added accessors for 6 cluster parameters.
