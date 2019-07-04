@@ -197,7 +197,9 @@ extern "C" {
         NULL_CHECK(shape, "The btCollisionShape does not exist.", 0)
 
         btVector3 localInertia;
-        if (shape->getShapeType() == EMPTY_SHAPE_PROXYTYPE) {
+        enum BroadphaseNativeTypes shapeType = shape->getShapeType();
+        if (shapeType == EMPTY_SHAPE_PROXYTYPE
+                || shapeType == TRIANGLE_MESH_SHAPE_PROXYTYPE) {
             localInertia.setZero(); // avoid a btAssert()
         } else {
             shape->calculateLocalInertia(mass, localInertia);
