@@ -112,7 +112,7 @@ model {
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
                     } else if (buildType == buildTypes.Release) {
-                        cppCompiler.args '-Ofast'
+                        cppCompiler.args '-O3'
                     }
 
                     String os = targetPlatform.operatingSystem.name
