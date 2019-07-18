@@ -33,7 +33,7 @@
 /*
  * Author: Normen Hansen
  */
-#include "com_jme3_bullet_joints_PhysicsJoint.h"
+#include "com_jme3_bullet_joints_Constraint.h"
 #include "jmeBulletUtil.h"
 
 #ifdef __cplusplus

@@ -41,6 +41,8 @@ extern "C" {
 #define com_jme3_bullet_objects_PhysicsSoftBody_COLLISION_GROUP_15 16384L
 #undef com_jme3_bullet_objects_PhysicsSoftBody_COLLISION_GROUP_16
 #define com_jme3_bullet_objects_PhysicsSoftBody_COLLISION_GROUP_16 32768L
+#undef com_jme3_bullet_objects_PhysicsSoftBody_massForStatic
+#define com_jme3_bullet_objects_PhysicsSoftBody_massForStatic 0.0f
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getMaterial

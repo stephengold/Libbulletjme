@@ -33,7 +33,6 @@
 /*
  * Author: Normen Hansen
  */
-#include "com_jme3_bullet_util_NativeMeshUtil.h"
 #include "jmeBulletUtil.h"
 
 #ifdef __cplusplus
