@@ -86,6 +86,7 @@ model {
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
+                        cppCompiler.args '/FS' // serialize PDB writes
                         cppCompiler.args '/MTd' // use LIBCMTD
                         cppCompiler.args '/Zi' // produce PDB file
                         linker.args '/DEBUG'
