@@ -42,70 +42,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MultiSphere
-     * Method:    countSpheres
-     * Signature: (J)I
-     */
-    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_countSpheres
-    (JNIEnv *env, jobject object, jlong shapeId) {
-        btMultiSphereShape* shape = reinterpret_cast<btMultiSphereShape*> (shapeId);
-        NULL_CHECK(shape, "The btMultiSphereShape does not exist.", 0)
-
-        jint numSpheres = (jint) shape->getSphereCount();
-        return numSpheres;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
-     * Method:    createShapeB
-     * Signature: (Ljava/nio/ByteBuffer;I)J
-     *
-     * buffer contains float values: x,y,z,r for each sphere
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShapeB
-    (JNIEnv *env, jobject object, jobject buffer, jint numSpheres) {
-        jmeClasses::initJavaClasses(env);
-
-        int n = numSpheres;
-        if (n < 1) {
-            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "numSpheres must be positive");
-            return 0L;
-        }
-
-        btAlignedObjectArray<btVector3> centers;
-        centers.resize(n);
-        btAlignedObjectArray<btScalar> radii;
-        radii.resize(n);
-
-        NULL_CHECK(buffer, "The buffer does not exist.", 0);
-        int numBytes = env->GetDirectBufferCapacity(buffer);
-        if (numBytes < 16 * n) {
-            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "buffer too small");
-            return 0L;
-        }
-
-        float* data = (float*) env->GetDirectBufferAddress(buffer);
-        for (int i = 0; i < n; ++i) {
-            int j = 4 * i;
-            centers[i] = btVector3(data[j], data[j + 1], data[j + 2]);
-            radii[i] = data[j + 3];
-            if (!(radii[i] >= 0)) {
-                jclass newExc
-                        = env->FindClass("java/lang/IllegalArgumentException");
-                env->ThrowNew(newExc, "Illegal radius for btMultiSphereShape.");
-                return 0L;
-            }
-        }
-
-        btMultiSphereShape* shape
-                = new btMultiSphereShape(&centers[0], &radii[0], n);
-
-        return reinterpret_cast<jlong> (shape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
      * Method:    createShape
      * Signature: (F)J
      */
@@ -144,36 +80,6 @@ extern "C" {
         delete[] pCenters;
 
         return reinterpret_cast<jlong> (pShape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
-     * Method:    getSpherePosition
-     * Signature: (JILcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_getSpherePosition
-    (JNIEnv *env, jobject object, jlong shapeId, jint sphereIndex, jobject storeVector) {
-        btMultiSphereShape* shape = reinterpret_cast<btMultiSphereShape*> (shapeId);
-        NULL_CHECK(shape, "The btMultiSphereShape does not exist.",);
-
-        int index = (int) sphereIndex;
-        btVector3 vec = shape->getSpherePosition(index);
-        jmeBulletUtil::convert(env, &vec, storeVector);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
-     * Method:    getSphereRadius
-     * Signature: (JI)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_getSphereRadius
-    (JNIEnv *env, jobject object, jlong shapeId, jint sphereIndex) {
-        btMultiSphereShape* shape = reinterpret_cast<btMultiSphereShape*> (shapeId);
-        NULL_CHECK(shape, "The btMultiSphereShape does not exist.", 0);
-
-        int index = (int) sphereIndex;
-        jfloat sphereRadius = (jfloat) shape->getSphereRadius(index);
-        return sphereRadius;
     }
 
     /*
