@@ -43,22 +43,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    addConstraint
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_addConstraint
-    (JNIEnv *env, jobject object, jlong jointId, jlong bodyId) {
-        btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        NULL_CHECK(joint, "The joint does not exist.",)
-
-        btSoftBody* soft = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(soft, "The btSoftBody does not exist.",)
-
-        soft->m_joints.push_back(joint);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
      * Method:    finalizeNative
      * Signature: (J)V
      */
@@ -107,22 +91,6 @@ extern "C" {
         NULL_CHECK(joint, "The joint does not exist.", 0)
 
         return joint->m_split;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    removeConstraint
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_removeConstraint
-    (JNIEnv *env, jobject object, jlong jointId, jlong bodyId) {
-        btSoftBody::Joint* joint = reinterpret_cast<btSoftBody::Joint*> (jointId);
-        NULL_CHECK(joint, "The joint does not exist.",)
-
-        btSoftBody* soft = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(soft, "The btSoftBody does not exist.",)
-
-        soft->m_joints.remove(joint);
     }
 
     /*
