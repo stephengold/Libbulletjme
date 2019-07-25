@@ -78,25 +78,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
-     * Method:    getBoundingSphere
-     * Signature: (JLcom/jme3/math/Vector3f;)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getBoundingSphere
-    (JNIEnv * env, jobject object, jlong shapeId, jobject storeCenter) {
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        NULL_CHECK(shape, "The btCollisionShape does not exist.", 0);
-
-        btVector3 center;
-        btScalar radius;
-        shape->getBoundingSphere(center, radius);
-
-        jmeBulletUtil::convert(env, &center, storeCenter);
-
-        return radius;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    getLocalScaling
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -148,24 +129,6 @@ extern "C" {
         NULL_CHECK(shape, "The btCollisionShape does not exist.", false);
 
         return shape->isConcave();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
-     * Method:    setLocalScaling
-     * Signature: (JFFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling__JFFF
-    (JNIEnv * env, jobject object, jlong shapeId, jfloat xScale, jfloat yScale,
-            jfloat zScale) {
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        NULL_CHECK(shape, "The btCollisionShape does not exist.",);
-
-        btVector3 scl;
-        scl.setX(xScale);
-        scl.setY(yScale);
-        scl.setZ(zScale);
-        shape->setLocalScaling(scl);
     }
 
     /*
