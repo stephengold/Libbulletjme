@@ -98,51 +98,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    getCcdMotionThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4);
-
-        return ghost->getCcdMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    getCcdSquareMotionThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getCcdSquareMotionThreshold
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4);
-
-        return ghost->getCcdSquareMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    getCcdSweptSphereRadius
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
-        btAssert(ghost->getInternalType() == 4);
-
-        return ghost->getCcdSweptSphereRadius();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
      * Method:    getOverlappingCount
      * Signature: (J)I
      */
@@ -171,87 +126,6 @@ extern "C" {
         btHashedOverlappingPairCache * pc = ghost->getOverlappingPairCache();
         jmeGhostOverlapCallback cb(env, object, ghost);
         pc -> processAllOverlappingPairs(&cb, NULL);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    getPhysicsLocation
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsLocation
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4);
-
-        NULL_CHECK(value, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getOrigin(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    getPhysicsRotation
-     * Signature: (JLcom/jme3/math/Quaternion;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsRotation
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4);
-
-        NULL_CHECK(value, "The store quaternion does not exist.",)
-        jmeBulletUtil::convertQuat(env, &ghost->getWorldTransform().getBasis(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    getPhysicsRotationMatrix
-     * Signature: (JLcom/jme3/math/Matrix3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getPhysicsRotationMatrix
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4);
-
-        NULL_CHECK(value, "The store matrix does not exist.",)
-        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getBasis(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    setCcdMotionThreshold
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4);
-
-        ghost->setCcdMotionThreshold(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsGhostObject
-     * Method:    setCcdSweptSphereRadius
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
-        btAssert(ghost->getInternalType() == 4);
-
-        ghost->setCcdSweptSphereRadius(value);
     }
 
     /*
