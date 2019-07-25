@@ -123,35 +123,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    appendAnchor
-     * Signature: (JIJLcom/jme3/math/Vector3f;ZF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendAnchor
-    (JNIEnv *env, jobject object, jlong bodyId, jint nodeId, jlong rigidId,
-            jobject localPivot, jboolean collisionBetweenLinkedBodies,
-            jfloat influence) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        btAssert(nodeId >= 0);
-        btAssert(nodeId < body->m_nodes.size());
-
-        btRigidBody* rigid = reinterpret_cast<btRigidBody*> (rigidId);
-        NULL_CHECK(rigid, "The btRigidBody does not exist.",)
-
-        if (localPivot != NULL) {
-            btVector3 vec;
-            jmeBulletUtil::convert(env, localPivot, &vec);
-            body->appendAnchor(nodeId, rigid, vec,
-                    !collisionBetweenLinkedBodies, influence);
-        } else {
-            body->appendAnchor(nodeId, rigid,
-                    !collisionBetweenLinkedBodies, influence);
-        }
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    appendCluster
      * Signature: (JILjava/nio/IntBuffer;)V
      */
@@ -684,90 +655,6 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->generateClusters(k, maxIter);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getAnchorCount
-     * Signature: (J)I
-     */
-    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorCount
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
-
-        int count = body->m_anchors.size();
-        return (jint) count;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getAnchorInfluence
-     * Signature: (JI)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorInfluence
-    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-
-        btAssert(anchorIndex >= 0);
-        btAssert(anchorIndex < body->m_anchors.size());
-
-        btScalar influence = body->m_anchors[anchorIndex].m_influence;
-        return (jfloat) influence;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getAnchorNodeIndex
-     * Signature: (JI)I
-     */
-    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorNodeIndex
-    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
-
-        btAssert(anchorIndex >= 0);
-        btAssert(anchorIndex < body->m_anchors.size());
-
-        const btSoftBody::Node* node = body->m_anchors[anchorIndex].m_node;
-        int nodeIndex = int(node - &body->m_nodes[0]);
-
-        return (jint) nodeIndex;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getAnchorPivot
-     * Signature: (JILcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorPivot
-    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex, jobject storeVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-
-        btAssert(anchorIndex >= 0);
-        btAssert(anchorIndex < body->m_anchors.size());
-
-        const btVector3* pPivot = &body->m_anchors[anchorIndex].m_local;
-        jmeBulletUtil::convert(env, pPivot, storeVector);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    getAnchorRigidId
-     * Signature: (JI)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getAnchorRigidId
-    (JNIEnv *env, jobject object, jlong bodyId, jint anchorIndex) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
-
-        btAssert(anchorIndex >= 0);
-        btAssert(anchorIndex < body->m_anchors.size());
-
-        btRigidBody* pRigid = body->m_anchors[anchorIndex].m_body;
-        return reinterpret_cast<jlong> (pRigid);
     }
 
     /*
@@ -1402,20 +1289,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    isInWorld
-     * Signature: (J)Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isInWorld
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", false);
-
-        //boolean isInWorld = body->getBroadphaseHandle() != 0; // from bullet RigidBody
-        return body->getBroadphaseHandle() != 0;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    listNodesInCluster
      * Signature: (JILjava/nio/IntBuffer;)V
      */
@@ -1482,38 +1355,6 @@ extern "C" {
         NULL_CHECK(body, "The btSoftBody does not exist.",)
 
         body->releaseClusters();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
-     * Method:    removeAnchor
-     * Signature: (JIJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_removeAnchor
-    (JNIEnv *env, jobject object, jlong bodyId, jint nodeId, jlong rigidId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-
-        btAssert(nodeId >= 0);
-        btAssert(nodeId < body->m_nodes.size());
-
-        btRigidBody* rigid = reinterpret_cast<btRigidBody*> (rigidId);
-        NULL_CHECK(rigid, "The btRigidBody does not exist.",);
-
-        const int size = body->m_anchors.size();
-        for (int i = 0; i < size; i++) {
-            if (body->m_anchors[i].m_node == &body->m_nodes[nodeId] && body->m_anchors[i].m_body == rigid) {
-                // body->m_anchors.remove(body->m_anchors[i]);
-                // as we can't use remove because of no operator== between Anchors
-                // we do the same but we don't have to do a second search
-                body->m_anchors.swap(i, size - 1);
-                body->m_anchors.pop_back();
-
-                // set to 1 when attached, 0 by default
-                body->m_nodes[nodeId].m_battach = 0;
-                break;
-            }
-        }
     }
 
     /*
