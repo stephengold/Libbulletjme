@@ -99,23 +99,7 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_PhysicsSpace
-     * Method:    addConstraint
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraint
-    (JNIEnv * env, jobject object, jlong spaceId, jlong objectId) {
-        jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
-        NULL_CHECK(space, "The physics space does not exist.",)
-
-        btTypedConstraint* constraint = reinterpret_cast<btTypedConstraint*> (objectId);
-        NULL_CHECK(constraint, "The btTypedConstraint does not exist.",)
-
-        space->getDynamicsWorld()->addConstraint(constraint);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_PhysicsSpace
-     * Method:    addConstraint
+     * Method:    addConstraintC
      * Signature: (JJZ)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
@@ -146,22 +130,6 @@ extern "C" {
         userPointer -> space = space;
 
         space->getDynamicsWorld()->addRigidBody(collisionObject);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_PhysicsSpace
-     * Method:    addVehicle
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addVehicle
-    (JNIEnv * env, jobject object, jlong spaceId, jlong objectId) {
-        jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
-        NULL_CHECK(space, "The physics space does not exist.",)
-
-        btActionInterface* actionObject = reinterpret_cast<btActionInterface*> (objectId);
-        NULL_CHECK(actionObject, "The action object does not exist.",)
-
-        space->getDynamicsWorld()->addVehicle(actionObject);
     }
 
     /*
@@ -211,17 +179,7 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_PhysicsSpace
-     * Method:    initNativePhysics
-     * Signature: ()V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_initNativePhysics
-    (JNIEnv * env, jclass clazz) {
-        jmeClasses::initJavaClasses(env);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_PhysicsSpace
-     * Method:    rayTest_native
+     * Method:    rayTest_1native
      * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_rayTest_1native
@@ -355,22 +313,6 @@ extern "C" {
         userPointer -> space = NULL;
 
         space->getDynamicsWorld()->removeRigidBody(collisionObject);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_PhysicsSpace
-     * Method:    removeVehicle
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeVehicle
-    (JNIEnv * env, jobject object, jlong spaceId, jlong objectId) {
-        jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
-        NULL_CHECK(space, "The physics space does not exist.",)
-
-        btActionInterface* actionObject = reinterpret_cast<btActionInterface*> (objectId);
-        NULL_CHECK(actionObject, "The action object does not exist.",)
-
-        space->getDynamicsWorld()->removeVehicle(actionObject);
     }
 
     /*
