@@ -134,16 +134,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_util_DebugShapeFactory
-     * Method:    getVertices
-     * Signature: (JLcom/jme3/bullet/util/DebugMeshCallback;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
-    (JNIEnv *env, jclass clazz, jlong shapeId, jobject callback) {
-        getVertices(env, shapeId, /* resolution */ 0, callback);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_util_DebugShapeFactory
      * Method:    getVertices2
      * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
      */
