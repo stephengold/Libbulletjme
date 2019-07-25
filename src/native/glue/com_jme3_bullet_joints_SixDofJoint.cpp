@@ -237,28 +237,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_SixDofJoint
-     * Method:    setFrames
-     * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setFrames
-    (JNIEnv * env, jobject object, jlong jointId, jobject frameA, jobject frameB) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
-
-        NULL_CHECK(frameA, "The frameA transform does not exist.",)
-        btTransform a;
-        btVector3 scale; // scales are ignored
-        jmeBulletUtil::convert(env, frameA, &a, &scale);
-
-        NULL_CHECK(frameB, "The frameB transform does not exist.",)
-        btTransform b;
-        jmeBulletUtil::convert(env, frameB, &b, &scale);
-
-        joint->setFrames(a, b);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_SixDofJoint
      * Method:    setLinearLowerLimit
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
