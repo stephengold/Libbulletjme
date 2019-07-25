@@ -98,33 +98,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    createShape
-     * Signature: ([F)J
-     *
-     * buffer contains float values: x,y,z for each vertex
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShape
-    (JNIEnv *env, jobject object, jobject array) {
-        jmeClasses::initJavaClasses(env);
-
-        NULL_CHECK(array, "The buffer does not exist.", 0);
-        float* data = (float*) env->GetDirectBufferAddress(array);
-        //TODO: capacity will not always be length!
-        int length = env->GetDirectBufferCapacity(array) / sizeof (float);
-        btConvexHullShape* shape = new btConvexHullShape();
-
-        for (int i = 0; i < length; i += 3) {
-            btVector3 vect = btVector3(data[i], data[i + 1], data[i + 2]);
-            shape->addPoint(vect);
-        }
-
-        shape->optimizeConvexHull();
-
-        return reinterpret_cast<jlong> (shape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
      * Method:    getHullVertices
      * Signature: (JLjava/nio/ByteBuffer;)V
      */
