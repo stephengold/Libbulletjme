@@ -245,22 +245,9 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_joints_HingeJoint
      * Method:    setLimit
-     * Signature: (JFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFF
-    (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high) {
-        btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
-        NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
-
-        return joint->setLimit(low, high);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_joints_HingeJoint
-     * Method:    setLimit
      * Signature: (JFFFFF)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit__JFFFFF
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit
     (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high, jfloat softness, jfloat biasFactor, jfloat relaxationFactor) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
