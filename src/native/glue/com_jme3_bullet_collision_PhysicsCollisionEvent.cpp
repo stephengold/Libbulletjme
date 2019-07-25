@@ -267,16 +267,3 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
 
     jmeBulletUtil::convert(env, &mp -> m_positionWorldOnB, positionWorldOnB);
 }
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
- * Method:    isLateralFrictionInitialized
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_isLateralFrictionInitialized
-(JNIEnv * env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint* mp = reinterpret_cast<btManifoldPoint*> (manifoldPointObjectId);
-    NULL_CHECK(mp, "The btManifoldPoint does not exist.", false)
-
-    return (mp -> m_contactPointFlags) & BT_CONTACT_FLAG_LATERAL_FRICTION_INITIALIZED;
-}
