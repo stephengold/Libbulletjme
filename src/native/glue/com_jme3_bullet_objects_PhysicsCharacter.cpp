@@ -46,24 +46,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    applyImpulse
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_applyImpulse
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
-
-        NULL_CHECK(value, "The vector does not exist.",)
-        btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
-
-        character->applyImpulse(vec);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    createCharacterObject
      * Signature: (JJF)J
      */
@@ -289,35 +271,6 @@ extern "C" {
         NULL_CHECK(character, "The btKinematicCharacterController does not exist.", 0)
 
         return character->getMaxSlope();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    getPhysicsLocation
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getPhysicsLocation
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btGhostObject* ghost = reinterpret_cast<btGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btGhostObject does not exist.",)
-
-        NULL_CHECK(value, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &ghost->getWorldTransform().getOrigin(),
-                value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    getStepHeight
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getStepHeight
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.", 0)
-
-        return character->getStepHeight();
     }
 
     /*
