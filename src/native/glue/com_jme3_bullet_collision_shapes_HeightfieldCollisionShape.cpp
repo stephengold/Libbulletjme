@@ -66,41 +66,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
-     * Method:    createShape
-     * Signature: (IILjava/nio/FloatBuffer;FFFIZ)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape
-    (JNIEnv *env, jobject object, jint heightStickWidth,
-            jint heightStickLength, jobject floatBuffer, jfloat heightScale,
-            jfloat minHeight, jfloat maxHeight, jint upAxis,
-            jboolean flipQuadEdges) {
-        jmeClasses::initJavaClasses(env);
-
-        NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
-        const jfloat *pHeights
-                = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
-
-        HeightfieldShape *pShape;
-#ifdef BT_USE_DOUBLE_PRECISION
-        int numHeights = heightStickLength * heightStickWidth;
-        btScalar *pDpHeights = new btScalar[numHeights];
-        for (int i = 0; i < numHeights; ++i) {
-            pDpHeights[i] = pHeights[i];
-        }
-        pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
-                pDpHeights, heightScale, minHeight, maxHeight, upAxis,
-                flipQuadEdges);
-#else
-        pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
-                pHeights, heightScale, minHeight, maxHeight, upAxis,
-                flipQuadEdges);
-#endif
-
-        return reinterpret_cast<jlong> (pShape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_HeightfieldCollisionShape
      * Method:    createShape2
      * Signature: (IILjava/nio/FloatBuffer;FFFIZZZZ)J
      */
