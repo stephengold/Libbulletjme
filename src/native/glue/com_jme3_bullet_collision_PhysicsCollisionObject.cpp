@@ -454,22 +454,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
-     * Method:    setCollisionGroup
-     * Signature: (JI)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionGroup
-    (JNIEnv *env, jobject object, jlong objectId, jint group) {
-        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
-        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
-
-        jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
-        if (userPointer != NULL) {
-            userPointer -> group = group;
-        }
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    setCollideWithGroups
      * Signature: (JI)V
      */
@@ -481,6 +465,22 @@ extern "C" {
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         if (userPointer != NULL) {
             userPointer -> groups = groups;
+        }
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    setCollisionGroup
+     * Signature: (JI)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setCollisionGroup
+    (JNIEnv *env, jobject object, jlong objectId, jint group) {
+        btCollisionObject* collisionObject = reinterpret_cast<btCollisionObject*> (objectId);
+        NULL_CHECK(collisionObject, "The btCollisionObject does not exist.",)
+
+        jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
+        if (userPointer != NULL) {
+            userPointer -> group = group;
         }
     }
 
