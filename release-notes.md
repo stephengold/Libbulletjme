@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.0 released on 25 July 2019
+
+ + Deleted `NativeMeshUtil` and `PhysicsJoint`.
+ + Deleted 51 JNI methods that Minie no longer uses.
+
 ## Version 1.0.90 released on 4 July 2019
 
 Fixed 2 bugs:
