@@ -47,40 +47,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
-     * Method:    updateAnchorMesh
-     * Signature: (JLjava/nio/FloatBuffer;Z)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateAnchorMesh
-    (JNIEnv *env, jclass clazz, jlong bodyId, jobject positionsBuffer,
-            jboolean meshInLocalSpace) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-
-        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
-        jfloat* positions
-                = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
-
-        const btVector3 offset =
-                meshInLocalSpace ? getBoundingCenter(body) : btVector3(0, 0, 0);
-        int numAnchors = body->m_anchors.size();
-
-        for (int i = 0; i < numAnchors; ++i) {
-            const btSoftBody::Anchor& anchor = body->m_anchors[i];
-            const btVector3& nodeInWorld = anchor.m_node->m_x;
-            positions[i * 6] = nodeInWorld.getX() - offset.getX();
-            positions[i * 6 + 1] = nodeInWorld.getY() - offset.getY();
-            positions[i * 6 + 2] = nodeInWorld.getZ() - offset.getZ();
-
-            const btTransform& transform = anchor.m_body->getWorldTransform();
-            btVector3 pivotInWorld = transform * anchor.m_local;
-            positions[i * 6 + 3] = pivotInWorld.getX() - offset.getX();
-            positions[i * 6 + 4] = pivotInWorld.getY() - offset.getY();
-            positions[i * 6 + 5] = pivotInWorld.getZ() - offset.getZ();
-        }
-    }
-
-    /*
-     * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
      * Method:    updateClusterMesh
      * Signature: (JLjava/nio/FloatBuffer;Z)V
      */
