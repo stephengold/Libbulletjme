@@ -62,20 +62,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_GImpactCollisionShape
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_finalizeNative
-    (JNIEnv * env, jobject object, jlong meshId) {
-        btTriangleIndexVertexArray* array
-                = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
-        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.",);
-
-        delete array;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_GImpactCollisionShape
      * Method:    recalcAabb
      * Signature: (J)V
      */
