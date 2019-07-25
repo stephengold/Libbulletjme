@@ -43,19 +43,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    activate
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_activate
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-
-        body->activate(true);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    applyCentralForce
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -263,58 +250,6 @@ extern "C" {
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &body->getAngularVelocity(), storeVector);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getCcdMotionThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
-
-        return body->getCcdMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getCcdSquareMotionThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdSquareMotionThreshold
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
-
-        return body->getCcdSquareMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getCcdSweptSphereRadius
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
-
-        return body->getCcdSweptSphereRadius();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    getFriction
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getFriction
-    (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
-
-        return body->getFriction();
     }
 
     /*
@@ -563,32 +498,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setCcdMotionThreshold
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-
-        body->setCcdMotionThreshold(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setCcdSweptSphereRadius
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-
-        body->setCcdSweptSphereRadius(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    setCollisionShape
      * Signature: (JJ)V
      */
@@ -614,36 +523,6 @@ extern "C" {
         NULL_CHECK(body, "The btRigidBody does not exist.",)
 
         body->setDamping(linear, angular);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setFriction
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setFriction
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-
-        body->setFriction(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setGravity
-     * Signature: (JFFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity__JFFF
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat xGravity, jfloat yGravity, jfloat zGravity) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-
-        btVector3 vec;
-        vec.setX(xGravity);
-        vec.setY(yGravity);
-        vec.setZ(zGravity);
-        body->setGravity(vec);
     }
 
     /*
@@ -802,19 +681,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setRestitution
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setRestitution
-    (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-
-        body->setRestitution(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    setSleepingThresholds
      * Signature: (JFF)V
      */
@@ -824,25 +690,6 @@ extern "C" {
         NULL_CHECK(body, "The btRigidBody does not exist.",);
 
         body->setSleepingThresholds(linear, angular);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
-     * Method:    setStatic
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setStatic
-    (JNIEnv *env, jobject object, jlong bodyId, jboolean value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-
-        int flags = body->getCollisionFlags();
-        int bitmask = btCollisionObject::CF_STATIC_OBJECT;
-        if (value) {
-            body->setCollisionFlags(flags | bitmask);
-        } else {
-            body->setCollisionFlags(flags & ~bitmask);
-        }
     }
 
     /*
