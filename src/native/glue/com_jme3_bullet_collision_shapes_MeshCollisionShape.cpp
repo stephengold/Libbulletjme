@@ -78,25 +78,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeNative
-    (JNIEnv *env, jobject object, jlong meshId, jlong nativeBVHBuffer) {
-        btTriangleIndexVertexArray* array
-                = reinterpret_cast<btTriangleIndexVertexArray*> (meshId);
-        NULL_CHECK(array, "The btTriangleIndexVertexArray does not exist.",);
-
-        delete array;
-
-        if (nativeBVHBuffer != 0) {
-            void* buffer = reinterpret_cast<void*> (nativeBVHBuffer);
-            btAlignedFree(buffer);
-        }
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
      * Method:    recalcAabb
      * Signature: (J)V
      */
