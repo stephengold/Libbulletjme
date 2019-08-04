@@ -51,6 +51,7 @@ extern "C" {
         btConvexHullShape* hull
                 = reinterpret_cast<btConvexHullShape*> (shapeId);
         NULL_CHECK(hull, "The btConvexHullShape does not exist.", 0);
+        btAssert(hull->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
         int count = hull->getNumPoints();
         return count;
@@ -106,6 +107,7 @@ extern "C" {
         btConvexHullShape* hull
                 = reinterpret_cast<btConvexHullShape*> (shapeId);
         NULL_CHECK(hull, "The btConvexHullShape does not exist.",)
+        btAssert(hull->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
         NULL_CHECK(buffer, "The store buffer does not exist.",);
         jlong bytesCapacity = env->GetDirectBufferCapacity(buffer);
@@ -139,6 +141,7 @@ extern "C" {
         btConvexHullShape *pShape
                 = reinterpret_cast<btConvexHullShape *> (shapeId);
         NULL_CHECK(pShape, "The btConvexHullShape does not exist.",);
+        btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();
     }
