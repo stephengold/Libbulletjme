@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.2 released on 3 August 2019
+
+ + Added `isEnabled()` and `setEnabled()` methods to the
+   `TranslationalLimitMotor` class.
+ + Added assertions to verify the internal type in `HullCollisionShape`,
+   `PhysicsRigidBody`, and `PhysicsSoftBody`.
+
 ## Version 2.0.1 released on 25 July 2019
 
  + Deleted `NativeMeshUtil` and `PhysicsJoint`.
