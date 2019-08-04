@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.3 released on 3 August 2019
+
+Re-try after a partial deployment.
+
 ## Version 2.0.2 released on 3 August 2019
 
  + Added `isEnabled()` and `setEnabled()` methods to the
