@@ -207,6 +207,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    isEnabled
+     * Signature: (JI)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_isEnabled
+    (JNIEnv *env, jobject object, jlong motorId, jint axisIndex) {
+        btTranslationalLimitMotor *pMotor
+                = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
+        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.", 0);
+
+        bool result = pMotor->m_enableMotor[axisIndex];
+        return (jboolean) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
      * Method:    setAccumulatedImpulse
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -230,6 +245,20 @@ extern "C" {
         NULL_CHECK(motor, "The btTranslationalLimitMotor does not exist.",)
 
         motor->m_damping = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+     * Method:    setEnabled
+     * Signature: (JIZ)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setEnabled
+    (JNIEnv *env, jobject object, jlong motorId, jint axisIndex, jboolean newSetting) {
+        btTranslationalLimitMotor *pMotor
+                = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
+        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+
+        pMotor->m_enableMotor[axisIndex] = (bool)newSetting;
     }
 
     /*

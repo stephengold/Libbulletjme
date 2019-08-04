@@ -105,6 +105,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMoto
 
 /*
  * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+ * Method:    isEnabled
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_isEnabled
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
  * Method:    setAccumulatedImpulse
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -118,6 +126,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMoto
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setDamping
   (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
+ * Method:    setEnabled
+ * Signature: (JIZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationalLimitMotor_setEnabled
+  (JNIEnv *, jobject, jlong, jint, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
