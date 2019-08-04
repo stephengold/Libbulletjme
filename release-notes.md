@@ -1,6 +1,6 @@
 # release notes for the Libbulletjme Project
 
-## Version 2.0.3 released on 3 August 2019
+## Version 2.0.4 released on 3 August 2019
 
 Re-try after a partial deployment.
 
