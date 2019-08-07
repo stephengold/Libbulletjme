@@ -51,9 +51,11 @@ extern "C" {
 
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(bodyA, "Rigid body A does not exist.", 0)
+        btAssert(bodyA->getInternalType() == 2);
 
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(bodyB, "Rigid body B does not exist.", 0)
+        btAssert(bodyB->getInternalType() == 2);
 
         NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivotInA;
@@ -80,6 +82,7 @@ extern "C" {
 
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(bodyA, "Rigid body A does not exist.", 0)
+        btAssert(bodyA->getInternalType() == 2);
 
         NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivotInA;
