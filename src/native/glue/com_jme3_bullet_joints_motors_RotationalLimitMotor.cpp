@@ -224,6 +224,20 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+     * Method:    setAccumulatedImpulse
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setAccumulatedImpulse
+    (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
+        btRotationalLimitMotor *pMotor
+                = reinterpret_cast<btRotationalLimitMotor*> (motorId);
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
+
+        pMotor->m_accumulatedImpulse = value;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
      * Method:    setBounce
      * Signature: (JF)V
      */

@@ -121,6 +121,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMot
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
+ * Method:    setAccumulatedImpulse
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationalLimitMotor_setAccumulatedImpulse
+  (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
  * Method:    setBounce
  * Signature: (JF)V
  */
