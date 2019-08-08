@@ -1,10 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.5 released on 7 August 2019
+
+ + Added a `setAccumulatedImpulse()` method to the `RotationalLimitMotor` class.
+ + Added internal type checks to joint constructors.
+ + Updated the Bullet sources to match SHA1 id=1981493a of the bullet3 project.
+
 ## Version 2.0.4 released on 3 August 2019
-
-Re-try after a partial deployment.
-
-## Version 2.0.2 released on 3 August 2019
 
  + Added `isEnabled()` and `setEnabled()` methods to the
    `TranslationalLimitMotor` class.
@@ -36,7 +38,7 @@ Solved some compile-time errors reported by GCC.
 
 ## Version 1.0.86 released on 24 June 2019
 
- + Added a `getShapeType()` method to `CollisionShape`.
+ + Added a `getShapeType()` method to the `CollisionShape` class.
  + Added `getConstraintType()`, `getOverrideIterations()`, and
    `overrideIterations()` methods to the `Constraint` class.
  + Added assertions to verify the internal type in `PhysicsGhostObject`.
