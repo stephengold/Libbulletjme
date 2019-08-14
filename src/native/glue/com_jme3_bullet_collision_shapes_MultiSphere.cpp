@@ -92,6 +92,7 @@ extern "C" {
         btMultiSphereShape *pShape
                 = reinterpret_cast<btMultiSphereShape *> (shapeId);
         NULL_CHECK(pShape, "The btMultiSphereShape does not exist.",);
+        btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();
     }

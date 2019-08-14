@@ -125,6 +125,8 @@ extern "C" {
 
         btRigidBody* collisionObject = reinterpret_cast<btRigidBody*> (rigidBodyId);
         NULL_CHECK(collisionObject, "The collision object does not exist.",)
+        btAssert(collisionObject->getInternalType()
+                & btCollisionObject::CO_RIGID_BODY);
 
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         userPointer -> space = space;
@@ -324,6 +326,8 @@ extern "C" {
 
         btRigidBody* collisionObject = reinterpret_cast<btRigidBody*> (rigidBodyId);
         NULL_CHECK(collisionObject, "The collision object does not exist.",)
+        btAssert(collisionObject->getInternalType()
+                & btCollisionObject::CO_RIGID_BODY);
 
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         userPointer -> space = NULL;

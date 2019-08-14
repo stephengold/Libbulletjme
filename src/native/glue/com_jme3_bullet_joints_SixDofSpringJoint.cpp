@@ -53,11 +53,11 @@ extern "C" {
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() == 2);
+        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() == 2);
+        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
@@ -90,7 +90,7 @@ extern "C" {
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() == 2);
+        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
         NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
@@ -114,6 +114,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jint index, jboolean onOff) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
         NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
 
         joint -> enableSpring(index, onOff);
     }
@@ -127,6 +128,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat damping) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
         NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
 
         joint -> setDamping(index, damping);
     }
@@ -140,6 +142,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
         NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
 
         joint -> setEquilibriumPoint();
     }
@@ -153,6 +156,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jint index) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
         NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
 
         joint -> setEquilibriumPoint(index);
     }
@@ -166,6 +170,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat stiffness) {
         btGeneric6DofSpringConstraint* joint = reinterpret_cast<btGeneric6DofSpringConstraint*> (jointId);
         NULL_CHECK(joint, "The btGeneric6DofSpringConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
 
         joint -> setStiffness(index, stiffness);
     }

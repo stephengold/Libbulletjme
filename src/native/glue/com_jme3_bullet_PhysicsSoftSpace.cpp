@@ -51,14 +51,18 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong spaceId, jlong softBodyId) {
         jmePhysicsSoftSpace* space = reinterpret_cast<jmePhysicsSoftSpace*> (spaceId);
         NULL_CHECK(space, "The physics space does not exist.",)
+        btSoftRigidDynamicsWorld *pWorld = space->getSoftDynamicsWorld();
+        btAssert(pWorld != NULL);
+        btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
         btSoftBody* collisionObject = reinterpret_cast<btSoftBody*> (softBodyId);
         NULL_CHECK(collisionObject, "The collision object does not exist.",)
+        btAssert(collisionObject->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         userPointer->space = space;
 
-        space->getSoftDynamicsWorld()->addSoftBody(collisionObject);
+        pWorld->addSoftBody(collisionObject);
     }
 
     /*
@@ -85,8 +89,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong spaceId) {
         jmePhysicsSoftSpace* space = reinterpret_cast<jmePhysicsSoftSpace*> (spaceId);
         NULL_CHECK(space, "The physics space does not exist.", 0)
-
         btSoftRigidDynamicsWorld* world = space->getSoftDynamicsWorld();
+        btAssert(world != NULL);
+        btAssert(world->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
+
         btSoftBodyWorldInfo* worldInfo = &(world->getWorldInfo());
         return reinterpret_cast<jlong> (worldInfo);
     }
@@ -100,14 +106,19 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong spaceId, jlong softBodyId) {
         jmePhysicsSoftSpace* space = reinterpret_cast<jmePhysicsSoftSpace*> (spaceId);
         NULL_CHECK(space, "The physics space does not exist.",)
+        btSoftRigidDynamicsWorld *pWorld = space->getSoftDynamicsWorld();
+        btAssert(pWorld != NULL);
+        btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
         btSoftBody* collisionObject = reinterpret_cast<btSoftBody*> (softBodyId);
         NULL_CHECK(collisionObject, "The collision object does not exist.",)
+        btAssert(collisionObject->getInternalType()
+                & btCollisionObject::CO_SOFT_BODY);
 
         jmeUserPointer *userPointer = (jmeUserPointer*) collisionObject->getUserPointer();
         userPointer->space = NULL;
 
-        space->getSoftDynamicsWorld()->removeSoftBody(collisionObject);
+        pWorld->removeSoftBody(collisionObject);
     }
 
 #ifdef __cplusplus

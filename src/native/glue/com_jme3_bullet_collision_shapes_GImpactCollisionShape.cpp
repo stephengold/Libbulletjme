@@ -70,6 +70,7 @@ extern "C" {
         btGImpactMeshShape *pShape
                 = reinterpret_cast<btGImpactMeshShape *> (shapeId);
         NULL_CHECK(pShape, "The btGImpactMeshShape does not exist.",);
+        btAssert(pShape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE);
 
         pShape->updateBound();
     }

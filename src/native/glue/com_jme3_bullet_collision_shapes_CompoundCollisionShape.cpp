@@ -52,6 +52,7 @@ extern "C" {
         btCompoundShape* shape
                 = reinterpret_cast<btCompoundShape*> (compoundId);
         NULL_CHECK(shape, "The btCompoundShape does not exist.", 0)
+        btAssert(shape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
         btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
         NULL_CHECK(child, "The child shape does not exist.", 0)
@@ -87,6 +88,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btCompoundShape *pShape = reinterpret_cast<btCompoundShape *> (shapeId);
         NULL_CHECK(pShape, "The btCompoundShape does not exist.",);
+        btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
         pShape->recalculateLocalAabb();
     }
@@ -101,6 +103,7 @@ extern "C" {
         btCompoundShape* shape
                 = reinterpret_cast<btCompoundShape*> (compoundId);
         NULL_CHECK(shape, "The btCompoundShape does not exist.", 0)
+        btAssert(shape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
         btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
         NULL_CHECK(child, "The child shape does not exist.", 0)

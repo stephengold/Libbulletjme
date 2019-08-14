@@ -53,11 +53,11 @@ extern "C" {
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() == 2);
+        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() == 2);
+        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
@@ -89,7 +89,7 @@ extern "C" {
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() == 2);
+        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
         NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)

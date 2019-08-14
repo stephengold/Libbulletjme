@@ -52,11 +52,11 @@ extern "C" {
             jobject position) {
         btSoftBody *pSoftA = reinterpret_cast<btSoftBody*> (softIdA);
         NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
-        btAssert(pSoftA->getInternalType() == 8);
+        btAssert(pSoftA->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btRigidBody *pRigidB = reinterpret_cast<btRigidBody*> (rigidIdB);
         NULL_CHECK(pRigidB, "Rigid body B does not exist.", 0)
-        btAssert(pRigidB->getInternalType() == 2);
+        btAssert(pRigidB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(position, "The position vector does not exist.", 0)
         btVector3 pos;
@@ -88,11 +88,11 @@ extern "C" {
             jfloat cfm, jfloat split, jobject position) {
         btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
         NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
-        btAssert(pSoftA->getInternalType() == 8);
+        btAssert(pSoftA->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btSoftBody *pSoftB = reinterpret_cast<btSoftBody *> (softIdB);
         NULL_CHECK(pSoftB, "Soft body B does not exist.", 0)
-        btAssert(pSoftB->getInternalType() == 8);
+        btAssert(pSoftB->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(position, "The position vector does not exist.", 0)
         btVector3 pos;

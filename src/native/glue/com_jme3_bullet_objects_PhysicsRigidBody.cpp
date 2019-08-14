@@ -432,7 +432,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.", false);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         return body->isInWorld();
     }
@@ -446,7 +446,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         body->setDamping(body->getLinearDamping(), value);
     }
@@ -460,7 +460,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject factorVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(factorVector, "The factor vector does not exist.",)
         btVector3 vec;
@@ -478,7 +478,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         body->setSleepingThresholds(body->getLinearSleepingThreshold(), value);
     }
@@ -492,7 +492,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
         btVector3 vec;
@@ -510,7 +510,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         NULL_CHECK(shape, "The btCollisionShape does not exist.",)
@@ -527,7 +527,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         body->setDamping(linear, angular);
     }
@@ -541,7 +541,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject gravityVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(gravityVector, "The gravity vector does not exist.",)
         btVector3 vec;
@@ -559,7 +559,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject invInertiaVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(invInertiaVector, "The inverse-inertia vector does not exist.",)
         btVector3 vec;
@@ -577,7 +577,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jboolean value) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         int flags = body->getCollisionFlags();
         int bitmask = btCollisionObject::CF_KINEMATIC_OBJECT;
@@ -600,7 +600,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject factorVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(factorVector, "The factor vector does not exist.",)
         btVector3 vec;
@@ -618,7 +618,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         body->setSleepingThresholds(value, body->getAngularSleepingThreshold());
     }
@@ -632,7 +632,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
         btVector3 vec;
@@ -650,7 +650,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject locationVector) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
         jmeMotionState *motionState = (jmeMotionState*) body->getMotionState();
 
         NULL_CHECK(locationVector, "The location vector does not exist.",);
@@ -668,7 +668,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject rotationMatrix) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
         jmeMotionState *motionState = (jmeMotionState*) body->getMotionState();
 
         NULL_CHECK(rotationMatrix, "The rotation matrix does not exist.",);
@@ -686,7 +686,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jobject rotationQuaternion) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
         jmeMotionState *motionState = (jmeMotionState*) body->getMotionState();
 
         NULL_CHECK(rotationQuaternion, "The rotation quaternion does not exist.",);
@@ -704,7 +704,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         body->setSleepingThresholds(linear, angular);
     }
@@ -718,7 +718,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId, jfloat mass) {
         btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
         NULL_CHECK(body, "The btRigidBody does not exist.", 0);
-        btAssert(body->getInternalType() == 2);
+        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
         NULL_CHECK(shape, "The btCollisionShape does not exist.", 0);

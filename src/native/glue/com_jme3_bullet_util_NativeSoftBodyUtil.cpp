@@ -55,6 +55,7 @@ extern "C" {
             jboolean meshInLocalSpace) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
+        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat* positions
@@ -84,6 +85,7 @@ extern "C" {
             jboolean meshInLocalSpace, jboolean doNormalUpdate) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
+        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(indexMap, "The index map does not exist.",);
         const jint* jme2bulletMap = (jint*) env->GetDirectBufferAddress(indexMap);
@@ -131,6 +133,7 @@ extern "C" {
             jboolean doNormalUpdate) {
         btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
+        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat* positions

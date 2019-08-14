@@ -86,6 +86,7 @@ extern "C" {
         btBvhTriangleMeshShape *pShape
                 = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
         NULL_CHECK(pShape, "The btBvhTriangleMeshShape does not exist.",);
+        btAssert(pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();
     }
@@ -100,6 +101,7 @@ extern "C" {
         btBvhTriangleMeshShape* mesh
                 = reinterpret_cast<btBvhTriangleMeshShape*> (meshobj);
         NULL_CHECK(mesh, "The btBvhTriangleMeshShape does not exist.", 0);
+        btAssert(mesh->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
 
         btOptimizedBvh* bvh = mesh->getOptimizedBvh();
         unsigned int ssize = bvh->calculateSerializeBufferSize();
@@ -142,4 +144,3 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-

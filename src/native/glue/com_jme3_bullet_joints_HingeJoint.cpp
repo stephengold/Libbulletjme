@@ -53,11 +53,11 @@ extern "C" {
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() == 2);
+        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() == 2);
+        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         btVector3 pivotA;
@@ -93,7 +93,7 @@ extern "C" {
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() == 2);
+        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         btVector3 pivot;
@@ -118,6 +118,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jboolean enable, jfloat targetVelocity, jfloat maxMotorImpulse) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         joint->enableAngularMotor(enable, targetVelocity, maxMotorImpulse);
     }
@@ -131,6 +132,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.", false)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return joint->getEnableAngularMotor();
     }
@@ -145,6 +147,8 @@ extern "C" {
         btHingeConstraint* joint
                 = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
+        
         NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
 
         const btTransform& transform = joint->getFrameOffsetA();
@@ -161,6 +165,8 @@ extern "C" {
         btHingeConstraint* joint
                 = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
+        
         NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
 
         const btTransform& transform = joint->getFrameOffsetB();
@@ -176,7 +182,8 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
-
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
+        
         return joint->getHingeAngle();
     }
 
@@ -189,6 +196,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return joint->getLowerLimit();
     }
@@ -202,6 +210,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return joint->getMaxMotorImpulse();
     }
@@ -215,6 +224,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return joint->getMotorTargetVelocity();
     }
@@ -228,6 +238,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return joint->getUpperLimit();
     }
@@ -241,6 +252,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jboolean angular) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         joint->setAngularOnly(angular);
     }
@@ -254,6 +266,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jfloat low, jfloat high, jfloat softness, jfloat biasFactor, jfloat relaxationFactor) {
         btHingeConstraint* joint = reinterpret_cast<btHingeConstraint*> (jointId);
         NULL_CHECK(joint, "The btHingeConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return joint->setLimit(low, high, softness, biasFactor, relaxationFactor);
     }

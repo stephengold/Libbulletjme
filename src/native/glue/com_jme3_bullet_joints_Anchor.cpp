@@ -52,11 +52,13 @@ extern "C" {
             jboolean allowCollisions, jfloat influence) {
         btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
         NULL_CHECK(pSoftBody, "The btSoftBody does not exist.", 0)
-        btAssert(pSoftBody->getInternalType() == 8);
+        btAssert(pSoftBody->getInternalType()
+                & btCollisionObject::CO_SOFT_BODY);
 
         btRigidBody *pRigidBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
         NULL_CHECK(pRigidBody, "The btRigidBody does not exist.", 0);
-        btAssert(pRigidBody->getInternalType() == 2);
+        btAssert(pRigidBody->getInternalType()
+                & btCollisionObject::CO_RIGID_BODY);
 
         btAssert(nodeIndex >= 0);
         btAssert(nodeIndex < pSoftBody->m_nodes.size());

@@ -53,11 +53,11 @@ extern "C" {
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() == 2);
+        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() == 2);
+        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
@@ -89,7 +89,7 @@ extern "C" {
 
         btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() == 2);
+        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
@@ -113,6 +113,8 @@ extern "C" {
         btConeTwistConstraint* joint
                 = reinterpret_cast<btConeTwistConstraint*> (jointId);
         NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
+
         NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
 
         const btTransform& transform = joint->getFrameOffsetA();
@@ -129,6 +131,8 @@ extern "C" {
         btConeTwistConstraint* joint
                 = reinterpret_cast<btConeTwistConstraint*> (jointId);
         NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
+
         NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
 
         const btTransform& transform = joint->getFrameOffsetB();
@@ -144,6 +148,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jboolean angularOnly) {
         btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
         NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
 
         joint->setAngularOnly(angularOnly);
     }
@@ -157,6 +162,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jfloat swingSpan1, jfloat swingSpan2, jfloat twistSpan) {
         btConeTwistConstraint* joint = reinterpret_cast<btConeTwistConstraint*> (jointId);
         NULL_CHECK(joint, "The btConeTwistConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
 
         //TODO: extended setLimit!
         joint->setLimit(swingSpan1, swingSpan2, twistSpan);

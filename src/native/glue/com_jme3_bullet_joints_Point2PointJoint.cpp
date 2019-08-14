@@ -51,11 +51,11 @@ extern "C" {
 
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(bodyA, "Rigid body A does not exist.", 0)
-        btAssert(bodyA->getInternalType() == 2);
+        btAssert(bodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody* bodyB = reinterpret_cast<btRigidBody*> (bodyIdB);
         NULL_CHECK(bodyB, "Rigid body B does not exist.", 0)
-        btAssert(bodyB->getInternalType() == 2);
+        btAssert(bodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivotInA;
@@ -82,7 +82,7 @@ extern "C" {
 
         btRigidBody* bodyA = reinterpret_cast<btRigidBody*> (bodyIdA);
         NULL_CHECK(bodyA, "Rigid body A does not exist.", 0)
-        btAssert(bodyA->getInternalType() == 2);
+        btAssert(bodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotA, "The pivotA vector does not exist.", 0)
         btVector3 pivotInA;
@@ -103,6 +103,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
         NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
         return joint->m_setting.m_damping;
     }
@@ -116,6 +117,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
         NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
         return joint->m_setting.m_impulseClamp;
     }
@@ -129,6 +131,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
         NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.", 0)
+        btAssert(joint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
         return joint->m_setting.m_tau;
     }
@@ -142,6 +145,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jfloat damping) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
         NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
         joint->m_setting.m_damping = damping;
     }
@@ -155,6 +159,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jfloat clamp) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
         NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
         joint->m_setting.m_impulseClamp = clamp;
     }
@@ -168,6 +173,7 @@ extern "C" {
     (JNIEnv * env, jobject object, jlong jointId, jfloat tau) {
         btPoint2PointConstraint* joint = reinterpret_cast<btPoint2PointConstraint*> (jointId);
         NULL_CHECK(joint, "The btPoint2PointConstraint does not exist.",)
+        btAssert(joint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
         joint->m_setting.m_tau = tau;
     }
