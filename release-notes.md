@@ -1,6 +1,6 @@
 # release notes for the Libbulletjme Project
 
-## Version 2.0.6 released on 13 August 2019
+## Version 2.0.7 released on 13 August 2019
 
  + Added a `getGravity()` method to the `PhysicsSpace` class.
  + Added more internal type checks.
