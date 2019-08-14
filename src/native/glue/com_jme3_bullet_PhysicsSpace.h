@@ -71,6 +71,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_finalizeNative
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getGravity
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getNumConstraints
  * Signature: (J)I
  */

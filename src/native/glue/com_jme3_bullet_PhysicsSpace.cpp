@@ -165,6 +165,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    getGravity
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
+    (JNIEnv *env, jobject object, jlong spaceId, jobject storeVector) {
+        jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+        NULL_CHECK(pSpace, "The physics space does not exist.",);
+
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
+
+        btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
+        jmeBulletUtil::convert(env, &pWorld->getGravity(), storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
      * Method:    getNumConstraints
      * Signature: (J)I
      */
