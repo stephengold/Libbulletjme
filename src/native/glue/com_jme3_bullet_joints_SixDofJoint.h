@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_jme3_bullet_joints_SixDofJoint_numAxes
+#define com_jme3_bullet_joints_SixDofJoint_numAxes 3L
 /*
  * Class:     com_jme3_bullet_joints_SixDofJoint
  * Method:    createJoint
