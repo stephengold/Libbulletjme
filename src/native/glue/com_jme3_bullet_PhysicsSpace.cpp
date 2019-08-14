@@ -178,7 +178,8 @@ extern "C" {
         NULL_CHECK(storeVector, "The store vector does not exist.",)
 
         btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
-        jmeBulletUtil::convert(env, &pWorld->getGravity(), storeVector);
+        btVector3 gravity = pWorld->getGravity();
+        jmeBulletUtil::convert(env, &gravity, storeVector);
     }
 
     /*
