@@ -24,6 +24,7 @@ Libbulletjme is used in [Minie].
  + [History](#history)
  + [How to build Libbulletjme](#build)
  + [Lexicon of class/enum/struct names](#lexicon)
+ + [What's missing](#todo)
  + [External links](#links)
  + [Acknowledgments](#acks)
 
@@ -127,6 +128,31 @@ btTypedConstraint                 .bullet.joints.Constraint
 btVector3                         .math.Vector3f
 btWheelInfo                       .bullet.objects.VehicleWheel
 </pre>
+
+<a name="todo"/>
+
+## What's missing
+
+ + `btMultiBody` (Featherstone)
+ + certain constraints:
+   + `btFixedConstraint`
+   + `btGearConstraint`
+   + `btGeneric6DofSpring2Constraint`
+   + `btHinge2Constraint`
+   + `btUniversalConstraint`
+ + certain collision shapes:
+   + `btBox2dShape`
+   + `btConvex2dShape`
+   + `btMinkowskiSumShape`
+   + `btMultimaterialTriangleMeshShape`
+   + `btScaledBvhTriangleMeshShape`
+ + inverse dynamics
+ + serialization (file loader)
+ + profiling
+ + extras, examples, and tests
+ + execution tracing
+ + support for ARM architecture
+ + `btAssert()` should perhaps throw a Java exception
 
 <a name="links"/>
 
