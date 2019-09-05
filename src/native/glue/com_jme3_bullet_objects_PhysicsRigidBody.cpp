@@ -412,6 +412,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getSquaredSpeed
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getSquaredSpeed
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
+
+        btVector3 vec = pBody->getLinearVelocity();
+        float squaredSpeed = vec.length2();
+        return (jfloat) squaredSpeed;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    isActive
      * Signature: (J)Z
      */
