@@ -46,12 +46,12 @@
  */
 class jmePhysicsSpace {
 private:
-    JNIEnv * env;
     JavaVM * vm;
     jobject javaPhysicsSpace;
     void attachThread();
 protected:
     btDynamicsWorld * dynamicsWorld;
+    JNIEnv * env;
 public:
 
     jmePhysicsSpace() {

@@ -76,7 +76,10 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
         case 3:
             pBroadphase = new btDbvtBroadphase();
             break;
-            // TODO default
+        default:
+            jclass newExc
+                    = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "The broadphase type is out of range.");
     }
 
     // Use the default collision dispatcher.

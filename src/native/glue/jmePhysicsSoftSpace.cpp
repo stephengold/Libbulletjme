@@ -62,7 +62,10 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
         case 3:
             pBroadphase = new btDbvtBroadphase();
             break;
-            // TODO default
+        default:
+            jclass newExc
+                    = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "The broadphase type is out of range.");
     }
 
     // Register some soft-body collision algorithms on top of the default
