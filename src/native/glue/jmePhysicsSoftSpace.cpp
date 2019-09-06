@@ -35,88 +35,91 @@
 /*
  * Author: dokthar
  */
-jmePhysicsSoftSpace::jmePhysicsSoftSpace(JNIEnv* env, jobject javaSpace)
+jmePhysicsSoftSpace::jmePhysicsSoftSpace(JNIEnv *env, jobject javaSpace)
 : jmePhysicsSpace(env, javaSpace) {
 };
 
 // Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZ)V
 
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
-        jobject max_vec, jint broadphaseId,
-        jboolean threading /*unused*/) {
+        jobject max_vec, jint broadphaseId, jboolean unused) {
     btVector3 min;
     jmeBulletUtil::convert(this->getEnv(), min_vec, &min);
     btVector3 max;
     jmeBulletUtil::convert(this->getEnv(), max_vec, &max);
 
-    btBroadphaseInterface* broadphase;
-
+    btBroadphaseInterface *pBroadphase;
     switch (broadphaseId) {
         case 0:
-            broadphase = new btSimpleBroadphase();
+            pBroadphase = new btSimpleBroadphase();
             break;
         case 1:
-            broadphase = new btAxisSweep3(min, max);
+            pBroadphase = new btAxisSweep3(min, max);
             break;
         case 2:
-            broadphase = new bt32BitAxisSweep3(min, max);
+            pBroadphase = new bt32BitAxisSweep3(min, max);
             break;
         case 3:
-            broadphase = new btDbvtBroadphase();
+            pBroadphase = new btDbvtBroadphase();
             break;
+            // TODO default
     }
 
     // Register some soft-body collision algorithms on top of the default
     // collision dispatcher configuration.
-    btCollisionConfiguration* collisionConfiguration
+    btCollisionConfiguration *pCollisionConfiguration
             = new btSoftBodyRigidBodyCollisionConfiguration();
-    btCollisionDispatcher* dispatcher
-            = new btCollisionDispatcher(collisionConfiguration);
-    btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
+    btCollisionDispatcher *pDispatcher
+            = new btCollisionDispatcher(pCollisionConfiguration);
+    btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Use the default constraint solver.
-    btConstraintSolver* solver = new btSequentialImpulseConstraintSolver();
+    btConstraintSolver *pConstraintSolver
+            = new btSequentialImpulseConstraintSolver();
 
     //create dynamics world
-    btSoftBodySolver* softBodySolver = 0; //use default
-    btSoftRigidDynamicsWorld* world
-            = new btSoftRigidDynamicsWorld(dispatcher, broadphase, solver,
-            collisionConfiguration, softBodySolver);
-    dynamicsWorld = world;
+    btSoftBodySolver *pSoftSolver = 0; //use default
+    btSoftRigidDynamicsWorld *pWorld = new btSoftRigidDynamicsWorld(pDispatcher,
+            pBroadphase, pConstraintSolver, pCollisionConfiguration,
+            pSoftSolver);
+    dynamicsWorld = pWorld;
     dynamicsWorld->setWorldUserInfo(this);
 
-    broadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
+    pBroadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
     dynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
     // do SoftBodyWorldInfo modifications
-    btSoftBodyWorldInfo softBodyWorldInfo = world->getWorldInfo();
+    btSoftBodyWorldInfo softBodyWorldInfo = pWorld->getWorldInfo();
     softBodyWorldInfo.m_gravity.setValue(0, -9.81f, 0);
     softBodyWorldInfo.m_sparsesdf.Initialize();
-    softBodyWorldInfo.m_broadphase = broadphase;
-    softBodyWorldInfo.m_dispatcher = dispatcher;
+    softBodyWorldInfo.m_broadphase = pBroadphase;
+    softBodyWorldInfo.m_dispatcher = pDispatcher;
 
     struct jmeFilterCallback : public btOverlapFilterCallback {
         // return true when pairs need collision
 
-        virtual bool needBroadphaseCollision(btBroadphaseProxy* proxy0, btBroadphaseProxy * proxy1) const {
-            bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
-            collides = collides || (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
+        virtual bool needBroadphaseCollision(btBroadphaseProxy *pProxy0, btBroadphaseProxy *pProxy1) const {
+            bool collides = (pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask) != 0;
+            collides = collides || (pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask);
             if (collides) {
-                btCollisionObject* co0 = (btCollisionObject*) proxy0->m_clientObject;
-                btCollisionObject* co1 = (btCollisionObject*) proxy1->m_clientObject;
-                jmeUserPointer *up0 = (jmeUserPointer*) co0 -> getUserPointer();
-                jmeUserPointer *up1 = (jmeUserPointer*) co1 -> getUserPointer();
-                if (up0 != NULL && up1 != NULL) {
-                    collides = (up0->group & up1->groups) != 0 || (up1->group & up0->groups) != 0;
+                btCollisionObject *pco0 = (btCollisionObject *) pProxy0->m_clientObject;
+                btCollisionObject *pco1 = (btCollisionObject *) pProxy1->m_clientObject;
+                jmeUserPointer *pUser0 = (jmeUserPointer *) pco0->getUserPointer();
+                jmeUserPointer *pUser1 = (jmeUserPointer *) pco1->getUserPointer();
+                if (pUser0 != NULL && pUser1 != NULL) {
+                    collides = (pUser0->group & pUser1->groups) != 0
+                            || (pUser1->group & pUser0->groups) != 0;
 
                     if (collides) {
-                        jmePhysicsSpace *dynamicsWorld = (jmePhysicsSpace *) up0->space;
-                        JNIEnv* env = dynamicsWorld->getEnv();
-                        jobject javaPhysicsSpace = env->NewLocalRef(dynamicsWorld->getJavaPhysicsSpace());
-                        jobject javaCollisionObject0 = env->NewLocalRef(up0->javaCollisionObject);
-                        jobject javaCollisionObject1 = env->NewLocalRef(up1->javaCollisionObject);
+                        jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pUser0->space;
+                        JNIEnv *env = pSpace->getEnv();
+                        jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
+                        jobject javaCollisionObject0 = env->NewLocalRef(pUser0->javaCollisionObject);
+                        jobject javaCollisionObject1 = env->NewLocalRef(pUser1->javaCollisionObject);
 
-                        jboolean notifyResult
-                                = env->CallBooleanMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_notifyCollisionGroupListeners, javaCollisionObject0, javaCollisionObject1);
+                        jboolean notifyResult = env->CallBooleanMethod(
+                                javaPhysicsSpace,
+                                jmeClasses::PhysicsSpace_notifyCollisionGroupListeners,
+                                javaCollisionObject0, javaCollisionObject1);
 
                         env->DeleteLocalRef(javaPhysicsSpace);
                         env->DeleteLocalRef(javaCollisionObject0);
@@ -146,6 +149,6 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
     }
 }
 
-btSoftRigidDynamicsWorld* jmePhysicsSoftSpace::getSoftDynamicsWorld() {
-    return (btSoftRigidDynamicsWorld*) dynamicsWorld;
+btSoftRigidDynamicsWorld * jmePhysicsSoftSpace::getSoftDynamicsWorld() {
+    return (btSoftRigidDynamicsWorld *) dynamicsWorld;
 }

@@ -35,68 +35,70 @@
 /*
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
-void jmeBulletUtil::convert(JNIEnv* env, jobject in, btVector3* out) {
+void jmeBulletUtil::convert(JNIEnv *env, jobject in, btVector3 *pvOut) {
     NULL_CHECK(in, "The input Vector3f does not exist.",)
-    NULL_CHECK(out, "The output btVector3 does not exist.",);
+    NULL_CHECK(pvOut, "The output btVector3 does not exist.",);
 
-    float x = env->GetFloatField(in, jmeClasses::Vector3f_x); //env->CallFloatMethod(in, jmeClasses::Vector3f_getX);
+    float x = env->GetFloatField(in, jmeClasses::Vector3f_x);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-    float y = env->GetFloatField(in, jmeClasses::Vector3f_y); //env->CallFloatMethod(in, jmeClasses::Vector3f_getY);
+    float y = env->GetFloatField(in, jmeClasses::Vector3f_y);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-    float z = env->GetFloatField(in, jmeClasses::Vector3f_z); //env->CallFloatMethod(in, jmeClasses::Vector3f_getZ);
+    float z = env->GetFloatField(in, jmeClasses::Vector3f_z);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-    out->setX(x);
-    out->setY(y);
-    out->setZ(z);
+
+    pvOut->setX(x);
+    pvOut->setY(y);
+    pvOut->setZ(z);
 }
 
-void jmeBulletUtil::convert(JNIEnv* env, jobject in, btQuaternion* out) {
+void jmeBulletUtil::convert(JNIEnv *env, jobject in, btQuaternion *pqOut) {
     NULL_CHECK(in, "The input Quaternion does not exist.",)
-    NULL_CHECK(out, "The output btQuaternion does not exist.",);
+    NULL_CHECK(pqOut, "The output btQuaternion does not exist.",);
 
     float x = env->GetFloatField(in, jmeClasses::Quaternion_x);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-    float y = env->GetFloatField(in, jmeClasses::Quaternion_y); //env->CallFloatMethod(in, jmeClasses::Vector3f_getY);
+    float y = env->GetFloatField(in, jmeClasses::Quaternion_y);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-    float z = env->GetFloatField(in, jmeClasses::Quaternion_z); //env->CallFloatMethod(in, jmeClasses::Vector3f_getZ);
+    float z = env->GetFloatField(in, jmeClasses::Quaternion_z);
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+    float w = env->GetFloatField(in, jmeClasses::Quaternion_w);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
 
-    float w = env->GetFloatField(in, jmeClasses::Quaternion_w); //env->CallFloatMethod(in, jmeClasses::Vector3f_getZ);
-    if (env->ExceptionCheck()) {
-        env->Throw(env->ExceptionOccurred());
-        return;
-    }
-    out->setX(x);
-    out->setY(y);
-    out->setZ(z);
-    out->setW(w);
+    pqOut->setX(x);
+    pqOut->setY(y);
+    pqOut->setZ(z);
+    pqOut->setW(w);
 }
 
-void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
-    NULL_CHECK(in, "The input btVector3 does not exist.",)
+void jmeBulletUtil::convert(JNIEnv *env, const btVector3 *pvIn, jobject out) {
+    NULL_CHECK(pvIn, "The input btVector3 does not exist.",)
     NULL_CHECK(out, "The output Vector3f does not exist.",);
 
-    float x = in->getX();
-    float y = in->getY();
-    float z = in->getZ();
+    float x = pvIn->getX();
+    float y = pvIn->getY();
+    float z = pvIn->getZ();
+
     env->SetFloatField(out, jmeClasses::Vector3f_x, x);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -108,7 +110,6 @@ void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
         return;
     }
     env->SetFloatField(out, jmeClasses::Vector3f_z, z);
-    //    env->CallObjectMethod(out, jmeClasses::Vector3f_set, x, y, z);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
@@ -117,30 +118,32 @@ void jmeBulletUtil::convert(JNIEnv* env, const btVector3* in, jobject out) {
 
 // Copy a btQuaternion to a JME Quaternion
 
-void jmeBulletUtil::convert(JNIEnv* env, const btQuaternion* in, jobject out) {
-    NULL_CHECK(in, "The input btQuaternion does not exist.",)
+void jmeBulletUtil::convert(JNIEnv *env, const btQuaternion *pqIn,
+        jobject out) {
+    NULL_CHECK(pqIn, "The input btQuaternion does not exist.",)
     NULL_CHECK(out, "The output Quaternion does not exist.",);
 
-    env->SetFloatField(out, jmeClasses::Quaternion_w, in->w());
-    env->SetFloatField(out, jmeClasses::Quaternion_x, in->x());
-    env->SetFloatField(out, jmeClasses::Quaternion_y, in->y());
-    env->SetFloatField(out, jmeClasses::Quaternion_z, in->z());
+    env->SetFloatField(out, jmeClasses::Quaternion_w, pqIn->w());
+    env->SetFloatField(out, jmeClasses::Quaternion_x, pqIn->x());
+    env->SetFloatField(out, jmeClasses::Quaternion_y, pqIn->y());
+    env->SetFloatField(out, jmeClasses::Quaternion_z, pqIn->z());
 }
 
 // Copy a btTransform to a JME Transform
 
-void jmeBulletUtil::convert(JNIEnv* env, const btTransform* in, jobject out) {
-    NULL_CHECK(in, "The input btTransform does not exist.",)
+void jmeBulletUtil::convert(JNIEnv *env, const btTransform *ptIn,
+        jobject out) {
+    NULL_CHECK(ptIn, "The input btTransform does not exist.",)
     NULL_CHECK(out, "The output Transform does not exist.",);
 
     jobject translation_out
             = env->CallObjectMethod(out, jmeClasses::Transform_translation);
-    const btVector3& origin = in->getOrigin();
+    const btVector3& origin = ptIn->getOrigin();
     convert(env, &origin, translation_out);
 
     jobject rotation_out
             = env->CallObjectMethod(out, jmeClasses::Transform_rotation);
-    const btQuaternion rotation = in->getRotation();
+    const btQuaternion rotation = ptIn->getRotation();
     convert(env, &rotation, rotation_out);
 
     jobject scale_out = env->CallObjectMethod(out, jmeClasses::Transform_scale);
@@ -149,9 +152,9 @@ void jmeBulletUtil::convert(JNIEnv* env, const btTransform* in, jobject out) {
     env->SetFloatField(scale_out, jmeClasses::Vector3f_z, 1);
 }
 
-void jmeBulletUtil::convert(JNIEnv* env, jobject in, btMatrix3x3* out) {
+void jmeBulletUtil::convert(JNIEnv *env, jobject in, btMatrix3x3 *pmOut) {
     NULL_CHECK(in, "The input Matrix3f does not exist.",)
-    NULL_CHECK(out, "The output btMatrix3x3 does not exist.",);
+    NULL_CHECK(pmOut, "The output btMatrix3x3 does not exist.",);
 
     float m00 = env->GetFloatField(in, jmeClasses::Matrix3f_m00);
     if (env->ExceptionCheck()) {
@@ -198,22 +201,24 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btMatrix3x3* out) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-    out->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
+
+    pmOut->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 }
 
-void jmeBulletUtil::convert(JNIEnv* env, const btMatrix3x3* in, jobject out) {
-    NULL_CHECK(in, "The input btMatrix3x3 does not exist.",)
+void jmeBulletUtil::convert(JNIEnv *env, const btMatrix3x3 *pmIn, jobject out) {
+    NULL_CHECK(pmIn, "The input btMatrix3x3 does not exist.",)
     NULL_CHECK(out, "The output Matrix3f does not exist.",);
 
-    float m00 = in->getRow(0).m_floats[0];
-    float m01 = in->getRow(0).m_floats[1];
-    float m02 = in->getRow(0).m_floats[2];
-    float m10 = in->getRow(1).m_floats[0];
-    float m11 = in->getRow(1).m_floats[1];
-    float m12 = in->getRow(1).m_floats[2];
-    float m20 = in->getRow(2).m_floats[0];
-    float m21 = in->getRow(2).m_floats[1];
-    float m22 = in->getRow(2).m_floats[2];
+    float m00 = pmIn->getRow(0).m_floats[0];
+    float m01 = pmIn->getRow(0).m_floats[1];
+    float m02 = pmIn->getRow(0).m_floats[2];
+    float m10 = pmIn->getRow(1).m_floats[0];
+    float m11 = pmIn->getRow(1).m_floats[1];
+    float m12 = pmIn->getRow(1).m_floats[2];
+    float m20 = pmIn->getRow(2).m_floats[0];
+    float m21 = pmIn->getRow(2).m_floats[1];
+    float m22 = pmIn->getRow(2).m_floats[2];
+
     env->SetFloatField(out, jmeClasses::Matrix3f_m00, m00);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -261,9 +266,9 @@ void jmeBulletUtil::convert(JNIEnv* env, const btMatrix3x3* in, jobject out) {
     }
 }
 
-void jmeBulletUtil::convertQuat(JNIEnv* env, jobject in, btMatrix3x3* out) {
+void jmeBulletUtil::convertQuat(JNIEnv *env, jobject in, btMatrix3x3 *pmOut) {
     NULL_CHECK(in, "The input Quaternion does not exist.",)
-    NULL_CHECK(out, "The output btMatrix3x3 does not exist.",);
+    NULL_CHECK(pmOut, "The output btMatrix3x3 does not exist.",);
 
     float x = env->GetFloatField(in, jmeClasses::Quaternion_x);
     if (env->ExceptionCheck()) {
@@ -305,48 +310,49 @@ void jmeBulletUtil::convertQuat(JNIEnv* env, jobject in, btMatrix3x3* out) {
     float zw = w * zs;
 
     // using s=2/norm (instead of 1/norm) saves 9 multiplications by 2 here
-    out->setValue(1.0 - (yy + zz), (xy - zw), (xz + yw),
-            (xy + zw), 1 - (xx + zz), (yz - xw),
+    pmOut->setValue(1.0 - (yy + zz), (xy - zw), (xz + yw),
+            (xy + zw), 1.0 - (xx + zz), (yz - xw),
             (xz - yw), (yz + xw), 1.0 - (xx + yy));
 }
 
-void jmeBulletUtil::convertQuat(JNIEnv* env, const btMatrix3x3* in, jobject out) {
-    NULL_CHECK(in, "The input btMatrix3x3 does not exist.",)
+void jmeBulletUtil::convertQuat(JNIEnv *env, const btMatrix3x3 *pmIn,
+        jobject out) {
+    NULL_CHECK(pmIn, "The input btMatrix3x3 does not exist.",)
     NULL_CHECK(out, "The output Quaternion does not exist.",);
 
     // the trace is the sum of the diagonal elements; see
     // http://mathworld.wolfram.com/MatrixTrace.html
-    float t = in->getRow(0).m_floats[0] + in->getRow(1).m_floats[1] + in->getRow(2).m_floats[2];
+    float t = pmIn->getRow(0).m_floats[0] + pmIn->getRow(1).m_floats[1] + pmIn->getRow(2).m_floats[2];
     float w, x, y, z;
     // we protect the division by s by ensuring that s>=1
     if (t >= 0) { // |w| >= .5
         float s = sqrt(t + 1); // |s|>=1 ...
         w = 0.5f * s;
         s = 0.5f / s; // so this division isn't bad
-        x = (in->getRow(2).m_floats[1] - in->getRow(1).m_floats[2]) * s;
-        y = (in->getRow(0).m_floats[2] - in->getRow(2).m_floats[0]) * s;
-        z = (in->getRow(1).m_floats[0] - in->getRow(0).m_floats[1]) * s;
-    } else if ((in->getRow(0).m_floats[0] > in->getRow(1).m_floats[1]) && (in->getRow(0).m_floats[0] > in->getRow(2).m_floats[2])) {
-        float s = sqrt(1.0f + in->getRow(0).m_floats[0] - in->getRow(1).m_floats[1] - in->getRow(2).m_floats[2]); // |s|>=1
+        x = (pmIn->getRow(2).m_floats[1] - pmIn->getRow(1).m_floats[2]) * s;
+        y = (pmIn->getRow(0).m_floats[2] - pmIn->getRow(2).m_floats[0]) * s;
+        z = (pmIn->getRow(1).m_floats[0] - pmIn->getRow(0).m_floats[1]) * s;
+    } else if ((pmIn->getRow(0).m_floats[0] > pmIn->getRow(1).m_floats[1]) && (pmIn->getRow(0).m_floats[0] > pmIn->getRow(2).m_floats[2])) {
+        float s = sqrt(1.0f + pmIn->getRow(0).m_floats[0] - pmIn->getRow(1).m_floats[1] - pmIn->getRow(2).m_floats[2]); // |s|>=1
         x = s * 0.5f; // |x| >= .5
         s = 0.5f / s;
-        y = (in->getRow(1).m_floats[0] + in->getRow(0).m_floats[1]) * s;
-        z = (in->getRow(0).m_floats[2] + in->getRow(2).m_floats[0]) * s;
-        w = (in->getRow(2).m_floats[1] - in->getRow(1).m_floats[2]) * s;
-    } else if (in->getRow(1).m_floats[1] > in->getRow(2).m_floats[2]) {
-        float s = sqrt(1.0f + in->getRow(1).m_floats[1] - in->getRow(0).m_floats[0] - in->getRow(2).m_floats[2]); // |s|>=1
+        y = (pmIn->getRow(1).m_floats[0] + pmIn->getRow(0).m_floats[1]) * s;
+        z = (pmIn->getRow(0).m_floats[2] + pmIn->getRow(2).m_floats[0]) * s;
+        w = (pmIn->getRow(2).m_floats[1] - pmIn->getRow(1).m_floats[2]) * s;
+    } else if (pmIn->getRow(1).m_floats[1] > pmIn->getRow(2).m_floats[2]) {
+        float s = sqrt(1.0f + pmIn->getRow(1).m_floats[1] - pmIn->getRow(0).m_floats[0] - pmIn->getRow(2).m_floats[2]); // |s|>=1
         y = s * 0.5f; // |y| >= .5
         s = 0.5f / s;
-        x = (in->getRow(1).m_floats[0] + in->getRow(0).m_floats[1]) * s;
-        z = (in->getRow(2).m_floats[1] + in->getRow(1).m_floats[2]) * s;
-        w = (in->getRow(0).m_floats[2] - in->getRow(2).m_floats[0]) * s;
+        x = (pmIn->getRow(1).m_floats[0] + pmIn->getRow(0).m_floats[1]) * s;
+        z = (pmIn->getRow(2).m_floats[1] + pmIn->getRow(1).m_floats[2]) * s;
+        w = (pmIn->getRow(0).m_floats[2] - pmIn->getRow(2).m_floats[0]) * s;
     } else {
-        float s = sqrt(1.0f + in->getRow(2).m_floats[2] - in->getRow(0).m_floats[0] - in->getRow(1).m_floats[1]); // |s|>=1
+        float s = sqrt(1.0f + pmIn->getRow(2).m_floats[2] - pmIn->getRow(0).m_floats[0] - pmIn->getRow(1).m_floats[1]); // |s|>=1
         z = s * 0.5f; // |z| >= .5
         s = 0.5f / s;
-        x = (in->getRow(0).m_floats[2] + in->getRow(2).m_floats[0]) * s;
-        y = (in->getRow(2).m_floats[1] + in->getRow(1).m_floats[2]) * s;
-        w = (in->getRow(1).m_floats[0] - in->getRow(0).m_floats[1]) * s;
+        x = (pmIn->getRow(0).m_floats[2] + pmIn->getRow(2).m_floats[0]) * s;
+        y = (pmIn->getRow(2).m_floats[1] + pmIn->getRow(1).m_floats[2]) * s;
+        w = (pmIn->getRow(1).m_floats[0] - pmIn->getRow(0).m_floats[1]) * s;
     }
 
     env->SetFloatField(out, jmeClasses::Quaternion_x, x);
@@ -365,25 +371,28 @@ void jmeBulletUtil::convertQuat(JNIEnv* env, const btMatrix3x3* in, jobject out)
         return;
     }
     env->SetFloatField(out, jmeClasses::Quaternion_w, w);
-    //    env->CallObjectMethod(out, jmeClasses::Quaternion_set, x, y, z, w);
+    //  TODO env->CallObjectMethod(out, jmeClasses::Quaternion_set, x, y, z, w);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
 }
 
-void jmeBulletUtil::addResult(JNIEnv* env, jobject resultlist, btVector3* hitnormal, btVector3* m_hitPointWorld, btScalar m_hitFraction, const btCollisionObject* hitobject) {
+void jmeBulletUtil::addResult(JNIEnv *env, jobject resultlist,
+        btVector3 *pHitNormal, btVector3 *pUnused,
+        btScalar m_hitFraction, const btCollisionObject *pHitObject) {
 
     jobject singleresult = env->AllocObject(jmeClasses::PhysicsRay_Class);
     jobject hitnormalvec = env->AllocObject(jmeClasses::Vector3f);
 
-    convert(env, hitnormal, hitnormalvec);
-    jmeUserPointer *up1 = (jmeUserPointer*) hitobject -> getUserPointer();
+    convert(env, pHitNormal, hitnormalvec);
+    jmeUserPointer *pUser = (jmeUserPointer *) pHitObject->getUserPointer();
 
     env->SetObjectField(singleresult, jmeClasses::PhysicsRay_normalInWorldSpace, hitnormalvec);
     env->SetFloatField(singleresult, jmeClasses::PhysicsRay_hitfraction, m_hitFraction);
 
-    env->SetObjectField(singleresult, jmeClasses::PhysicsRay_collisionObject, up1->javaCollisionObject);
+    env->SetObjectField(singleresult, jmeClasses::PhysicsRay_collisionObject,
+            pUser->javaCollisionObject);
     env->CallBooleanMethod(resultlist, jmeClasses::PhysicsRay_addmethod, singleresult);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -391,18 +400,21 @@ void jmeBulletUtil::addResult(JNIEnv* env, jobject resultlist, btVector3* hitnor
     }
 }
 
-void jmeBulletUtil::addSweepResult(JNIEnv* env, jobject resultlist, btVector3* hitnormal, btVector3* m_hitPointWorld, btScalar m_hitFraction, const btCollisionObject* hitobject) {
+void jmeBulletUtil::addSweepResult(JNIEnv *env, jobject resultlist,
+        btVector3 *pHitNormal, btVector3 *pUnused,
+        btScalar m_hitFraction, const btCollisionObject *pHitObject) {
 
     jobject singleresult = env->AllocObject(jmeClasses::PhysicsSweep_Class);
     jobject hitnormalvec = env->AllocObject(jmeClasses::Vector3f);
 
-    convert(env, hitnormal, hitnormalvec);
-    jmeUserPointer *up1 = (jmeUserPointer*) hitobject->getUserPointer();
+    convert(env, pHitNormal, hitnormalvec);
+    jmeUserPointer *pUser = (jmeUserPointer *) pHitObject->getUserPointer();
 
     env->SetObjectField(singleresult, jmeClasses::PhysicsSweep_normalInWorldSpace, hitnormalvec);
     env->SetFloatField(singleresult, jmeClasses::PhysicsSweep_hitfraction, m_hitFraction);
 
-    env->SetObjectField(singleresult, jmeClasses::PhysicsSweep_collisionObject, up1->javaCollisionObject);
+    env->SetObjectField(singleresult, jmeClasses::PhysicsSweep_collisionObject,
+            pUser->javaCollisionObject);
     env->CallBooleanMethod(resultlist, jmeClasses::PhysicsSweep_addmethod, singleresult);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
@@ -410,12 +422,14 @@ void jmeBulletUtil::addSweepResult(JNIEnv* env, jobject resultlist, btVector3* h
     }
 }
 
-void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* outTransform, btVector3* outScale) {
+void jmeBulletUtil::convert(JNIEnv *env, jobject in, btTransform *ptOut,
+        btVector3 *pvOutScale) {
     NULL_CHECK(in, "The input Transform does not exist.",)
-    NULL_CHECK(outTransform, "The output btTransform does not exist.",);
-    NULL_CHECK(outScale, "The output btVector3 does not exist.",);
+    NULL_CHECK(ptOut, "The output btTransform does not exist.",);
+    NULL_CHECK(pvOutScale, "The output btVector3 does not exist.",);
 
-    jobject translation_vec = env->CallObjectMethod(in, jmeClasses::Transform_translation);
+    jobject translation_vec
+            = env->CallObjectMethod(in, jmeClasses::Transform_translation);
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
@@ -435,11 +449,11 @@ void jmeBulletUtil::convert(JNIEnv* env, jobject in, btTransform* outTransform, 
 
     btVector3 native_translation_vec;
     convert(env, translation_vec, &native_translation_vec);
-    outTransform->setOrigin(native_translation_vec);
+    ptOut->setOrigin(native_translation_vec);
 
     btQuaternion native_rot_quat;
     convert(env, rot_quat, &native_rot_quat);
-    outTransform->setRotation(native_rot_quat);
+    ptOut->setRotation(native_rot_quat);
 
-    convert(env, scale_vec, outScale);
+    convert(env, scale_vec, pvOutScale);
 }

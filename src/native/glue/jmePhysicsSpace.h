@@ -46,24 +46,25 @@
  */
 class jmePhysicsSpace {
 private:
-    JNIEnv* env;
-    JavaVM* vm;
+    JNIEnv * env;
+    JavaVM * vm;
     jobject javaPhysicsSpace;
     void attachThread();
 protected:
-    btDynamicsWorld* dynamicsWorld;
+    btDynamicsWorld * dynamicsWorld;
 public:
 
     jmePhysicsSpace() {
     };
+
     ~jmePhysicsSpace();
-    jmePhysicsSpace(JNIEnv*, jobject);
+    jmePhysicsSpace(JNIEnv *, jobject);
     void stepSimulation(jfloat, jint, jfloat);
     void createPhysicsSpace(jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jint, jboolean);
-    btDynamicsWorld* getDynamicsWorld();
+    btDynamicsWorld * getDynamicsWorld();
     jobject getJavaPhysicsSpace();
-    JNIEnv* getEnv();
-    static void preTickCallback(btDynamicsWorld*, btScalar);
-    static void postTickCallback(btDynamicsWorld*, btScalar);
+    JNIEnv * getEnv();
+    static void preTickCallback(btDynamicsWorld *, btScalar);
+    static void postTickCallback(btDynamicsWorld *, btScalar);
     static void contactStartedCallback(btPersistentManifold * const &pm);
 };

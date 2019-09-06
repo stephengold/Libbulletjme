@@ -47,8 +47,8 @@
 
 class jmeClasses {
 public:
-    static void initJavaClasses(JNIEnv* env);
-    static JavaVM* vm;
+    static void initJavaClasses(JNIEnv *env);
+    static JavaVM * vm;
     static jclass PhysicsSpace;
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;

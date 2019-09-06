@@ -41,7 +41,7 @@
 class jmeMotionState : public btMotionState {
 private:
     bool dirty;
-    btTransform* trans;
+    btTransform * trans;
 public:
     jmeMotionState();
     virtual ~jmeMotionState();
@@ -50,8 +50,8 @@ public:
     virtual void getWorldTransform(btTransform& worldTrans) const;
     virtual void setWorldTransform(const btTransform& worldTrans);
     void setKinematicTransform(const btTransform& worldTrans);
-    void setKinematicLocation(JNIEnv*, jobject);
-    void setKinematicRotation(JNIEnv*, jobject);
-    void setKinematicRotationQuat(JNIEnv*, jobject);
-    bool applyTransform(JNIEnv* env, jobject location, jobject rotation);
+    void setKinematicLocation(JNIEnv *, jobject);
+    void setKinematicRotation(JNIEnv *, jobject);
+    void setKinematicRotationQuat(JNIEnv *, jobject);
+    bool applyTransform(JNIEnv *env, jobject location, jobject rotation);
 };

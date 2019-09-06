@@ -38,7 +38,7 @@
 
 jmeMotionState::jmeMotionState() {
     trans = new btTransform();
-    trans -> setIdentity();
+    trans->setIdentity();
     worldTransform = *trans;
     dirty = true;
 }
@@ -57,22 +57,22 @@ void jmeMotionState::setKinematicTransform(const btTransform& worldTrans) {
     dirty = true;
 }
 
-void jmeMotionState::setKinematicLocation(JNIEnv* env, jobject location) {
+void jmeMotionState::setKinematicLocation(JNIEnv *env, jobject location) {
     jmeBulletUtil::convert(env, location, &worldTransform.getOrigin());
     dirty = true;
 }
 
-void jmeMotionState::setKinematicRotation(JNIEnv* env, jobject rotation) {
+void jmeMotionState::setKinematicRotation(JNIEnv *env, jobject rotation) {
     jmeBulletUtil::convert(env, rotation, &worldTransform.getBasis());
     dirty = true;
 }
 
-void jmeMotionState::setKinematicRotationQuat(JNIEnv* env, jobject rotation) {
+void jmeMotionState::setKinematicRotationQuat(JNIEnv *env, jobject rotation) {
     jmeBulletUtil::convertQuat(env, rotation, &worldTransform.getBasis());
     dirty = true;
 }
 
-bool jmeMotionState::applyTransform(JNIEnv* env, jobject location, jobject rotation) {
+bool jmeMotionState::applyTransform(JNIEnv *env, jobject location, jobject rotation) {
     if (dirty) {
         //        fprintf(stdout, "Apply world translation\n");
         //        fflush(stdout);

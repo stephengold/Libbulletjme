@@ -117,12 +117,12 @@ jmethodID jmeClasses::Transform_scale;
 int jmeClasses::printFlag = 1; // TRUE
 
 //private fields
-JavaVM* jmeClasses::vm;
+JavaVM * jmeClasses::vm;
 
 /*
  * Initialize Java classes for the specified environment.
  */
-void jmeClasses::initJavaClasses(JNIEnv* env) {
+void jmeClasses::initJavaClasses(JNIEnv *env) {
     if (PhysicsSpace != NULL) return; // already initialized
 
     if (printFlag) {
