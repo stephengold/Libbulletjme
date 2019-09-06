@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.8 released on 6 September 2019
+
+ + Add a `getSquaredSpeed()` method to the `PhysicsRigidBody` class.
+ + Extensive refactoring and reformatting.
+
 ## Version 2.0.7 released on 13 August 2019
 
  + Added a `getGravity()` method to the `PhysicsSpace` class.
