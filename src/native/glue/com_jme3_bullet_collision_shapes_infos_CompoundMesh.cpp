@@ -76,7 +76,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_finalizeNative
     (JNIEnv *env, jobject object, jlong meshId) {
-        btTriangleIndexVertexArray* pMesh
+        btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
         NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
@@ -90,7 +90,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_getScaling
     (JNIEnv *env, jobject object, jlong meshId, jobject storeVector) {
-        btTriangleIndexVertexArray* pMesh
+        btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
         NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
         NULL_CHECK(storeVector, "The store vector does not exist.",);
@@ -107,7 +107,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_setScaling
     (JNIEnv *env, jobject object, jlong meshId, jfloat xScale, jfloat yScale,
             jfloat zScale) {
-        btTriangleIndexVertexArray* pMesh
+        btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
         NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 

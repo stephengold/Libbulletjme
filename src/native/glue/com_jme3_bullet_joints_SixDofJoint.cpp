@@ -46,18 +46,18 @@ extern "C" {
      * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Z)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_createJoint
-    (JNIEnv * env, jobject object, jlong bodyIdA, jlong bodyIdB,
+    (JNIEnv *env, jobject object, jlong bodyIdA, jlong bodyIdB,
             jobject pivotInA, jobject rotInA, jobject pivotInB, jobject rotInB,
             jboolean useLinearReferenceFrameA) {
         jmeClasses::initJavaClasses(env);
 
-        btRigidBody* rbA = reinterpret_cast<btRigidBody*> (bodyIdA);
-        NULL_CHECK(rbA, "Rigid body A does not exist.", 0)
-        btAssert(rbA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
+        NULL_CHECK(pBodyA, "Rigid body A does not exist.", 0)
+        btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
+        NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
+        btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
         NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
@@ -71,10 +71,10 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
-        btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(*rbA, *rbB,
-                frameInA, frameInB, useLinearReferenceFrameA);
+        btGeneric6DofConstraint *pJoint = new btGeneric6DofConstraint(*pBodyA,
+                *pBodyB, frameInA, frameInB, useLinearReferenceFrameA);
 
-        return reinterpret_cast<jlong> (joint);
+        return reinterpret_cast<jlong> (pJoint);
     }
 
     /*
@@ -83,13 +83,13 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Z)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_createJoint1
-    (JNIEnv * env, jobject object, jlong bodyIdB, jobject pivotInB,
+    (JNIEnv *env, jobject object, jlong bodyIdB, jobject pivotInB,
             jobject rotInB, jboolean useLinearReferenceFrameB) {
         jmeClasses::initJavaClasses(env);
 
-        btRigidBody* rbB = reinterpret_cast<btRigidBody*> (bodyIdB);
-        NULL_CHECK(rbB, "Rigid body B does not exist.", 0)
-        btAssert(rbB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
+        NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
+        btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
         NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
@@ -97,10 +97,10 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
-        btGeneric6DofConstraint* joint = new btGeneric6DofConstraint(
-                *rbB, frameInB, useLinearReferenceFrameB);
+        btGeneric6DofConstraint *pJoint = new btGeneric6DofConstraint(
+                *pBodyB, frameInB, useLinearReferenceFrameB);
 
-        return reinterpret_cast<jlong> (joint);
+        return reinterpret_cast<jlong> (pJoint);
     }
 
     /*
@@ -109,16 +109,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getAngles
-    (JNIEnv * env, jobject object, jlong jointId, jobject storeVector) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject storeVector) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
         NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
-        joint->calculateTransforms();
-        btScalar x = joint->getAngle(0);
-        btScalar y = joint->getAngle(1);
-        btScalar z = joint->getAngle(2);
+        pJoint->calculateTransforms();
+        btScalar x = pJoint->getAngle(0);
+        btScalar y = pJoint->getAngle(1);
+        btScalar z = pJoint->getAngle(2);
         const btVector3& angles = btVector3(x, y, z);
         jmeBulletUtil::convert(env, &angles, storeVector);
     }
@@ -129,13 +129,13 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Transform;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetA
-    (JNIEnv * env, jobject object, jlong jointId, jobject frameA) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject frameA) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
         NULL_CHECK(frameA, "The frameA transform does not exist.",)
 
-        btTransform a = joint->getFrameOffsetA();
+        btTransform a = pJoint->getFrameOffsetA();
         jmeBulletUtil::convert(env, &a, frameA);
     }
 
@@ -145,13 +145,13 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Transform;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getFrameOffsetB
-    (JNIEnv * env, jobject object, jlong jointId, jobject frameB) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject frameB) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
         NULL_CHECK(frameB, "The frameB transform does not exist.",)
 
-        btTransform b = joint->getFrameOffsetB();
+        btTransform b = pJoint->getFrameOffsetB();
         jmeBulletUtil::convert(env, &b, frameB);
     }
 
@@ -161,16 +161,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getPivotOffset
-    (JNIEnv * env, jobject object, jlong jointId, jobject storeVector) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject storeVector) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
         NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
-        joint->calculateTransforms();
-        btScalar x = joint->getRelativePivotPosition(0);
-        btScalar y = joint->getRelativePivotPosition(1);
-        btScalar z = joint->getRelativePivotPosition(2);
+        pJoint->calculateTransforms();
+        btScalar x = pJoint->getRelativePivotPosition(0);
+        btScalar y = pJoint->getRelativePivotPosition(1);
+        btScalar z = pJoint->getRelativePivotPosition(2);
         const btVector3& offset = btVector3(x, y, z);
         jmeBulletUtil::convert(env, &offset, storeVector);
     }
@@ -181,12 +181,12 @@ extern "C" {
      * Signature: (JI)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getRotationalLimitMotor
-    (JNIEnv * env, jobject object, jlong jointId, jint index) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong jointId, jint index) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.", 0)
 
-        return reinterpret_cast<jlong> (joint->getRotationalLimitMotor(index));
+        return reinterpret_cast<jlong> (pJoint->getRotationalLimitMotor(index));
     }
 
     /*
@@ -195,12 +195,12 @@ extern "C" {
      * Signature: (J)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_getTranslationalLimitMotor
-    (JNIEnv * env, jobject object, jlong jointId) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong jointId) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.", 0)
 
-        return reinterpret_cast<jlong> (joint->getTranslationalLimitMotor());
+        return reinterpret_cast<jlong> (pJoint->getTranslationalLimitMotor());
     }
 
     /*
@@ -209,16 +209,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularLowerLimit
-    (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(vector, "The limit vector does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
 
         btVector3 vec;
-        jmeBulletUtil::convert(env, vector, &vec);
+        jmeBulletUtil::convert(env, limitVector, &vec);
 
-        joint->setAngularLowerLimit(vec);
+        pJoint->setAngularLowerLimit(vec);
     }
 
     /*
@@ -227,15 +227,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularUpperLimit
-    (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(vector, "The limit vector does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
 
         btVector3 vec;
-        jmeBulletUtil::convert(env, vector, &vec);
+        jmeBulletUtil::convert(env, limitVector, &vec);
 
-        joint->setAngularUpperLimit(vec);
+        pJoint->setAngularUpperLimit(vec);
     }
 
     /*
@@ -244,16 +245,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setLinearLowerLimit
-    (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
 
-        NULL_CHECK(vector, "The vector does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, vector, &vec);
+        jmeBulletUtil::convert(env, limitVector, &vec);
 
-        joint->setLinearLowerLimit(vec);
+        pJoint->setLinearLowerLimit(vec);
     }
 
     /*
@@ -262,16 +263,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setLinearUpperLimit
-    (JNIEnv * env, jobject object, jlong jointId, jobject vector) {
-        btGeneric6DofConstraint* joint
-                = reinterpret_cast<btGeneric6DofConstraint*> (jointId);
-        NULL_CHECK(joint, "The btGeneric6DofConstraint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
+        btGeneric6DofConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
 
-        NULL_CHECK(vector, "The vector does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, vector, &vec);
+        jmeBulletUtil::convert(env, limitVector, &vec);
 
-        joint->setLinearUpperLimit(vec);
+        pJoint->setLinearUpperLimit(vec);
     }
 
 #ifdef __cplusplus

@@ -38,8 +38,8 @@
 #include "BulletSoftBody/btSoftBody.h"
 #include "BulletSoftBody/btSoftBodyHelpers.h"
 
-static inline btVector3 getBoundingCenter(btSoftBody* body) {
-    return (body->m_bounds[0] + body->m_bounds[1]) / 2;
+static inline btVector3 getBoundingCenter(btSoftBody *pBody) {
+    return (pBody->m_bounds[0] + pBody->m_bounds[1]) / 2;
 }
 
 #ifdef __cplusplus
@@ -52,16 +52,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addForce__JLcom_jme3_math_Vector3f_2
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    (JNIEnv *env, jobject object, jlong bodyId, jobject forceVector) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        NULL_CHECK(force, "The force vector does not exist.",)
+        NULL_CHECK(forceVector, "The force vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, force, &vec);
+        jmeBulletUtil::convert(env, forceVector, &vec);
 
-        body->addForce(vec);
+        pBody->addForce(vec);
     }
 
     /*
@@ -70,19 +70,19 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;I)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addForce__JLcom_jme3_math_Vector3f_2I
-    (JNIEnv *env, jobject object, jlong bodyId, jobject force, jint nodeId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    (JNIEnv *env, jobject object, jlong bodyId, jobject forceVector, jint nodeId) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        NULL_CHECK(force, "The force vector does not exist.",)
+        NULL_CHECK(forceVector, "The force vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, force, &vec);
+        jmeBulletUtil::convert(env, forceVector, &vec);
 
         btAssert(nodeId >= 0);
-        btAssert(nodeId < body->m_nodes.size());
+        btAssert(nodeId < pBody->m_nodes.size());
 
-        body->addForce(vec, nodeId);
+        pBody->addForce(vec, nodeId);
     }
 
     /*
@@ -92,15 +92,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity__JLcom_jme3_math_Vector3f_2
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
         btVector3 bulletVector;
         jmeBulletUtil::convert(env, velocityVector, &bulletVector);
 
-        body->addVelocity(bulletVector);
+        pBody->addVelocity(bulletVector);
     }
 
     /*
@@ -111,18 +111,18 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity__JLcom_jme3_math_Vector3f_2I
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector,
             jint nodeId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
         btVector3 bulletVector;
         jmeBulletUtil::convert(env, velocityVector, &bulletVector);
 
         btAssert(nodeId >= 0);
-        btAssert(nodeId < body->m_nodes.size());
+        btAssert(nodeId < pBody->m_nodes.size());
 
-        body->addVelocity(bulletVector, nodeId);
+        pBody->addVelocity(bulletVector, nodeId);
     }
 
     /*
@@ -137,7 +137,7 @@ extern "C" {
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        const jint *indices = (jint *) env->GetDirectBufferAddress(intBuffer);
+        const jint *pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
 
         int newClusterIndex = pBody->clusterCount();
         pBody->m_clusters.resize(newClusterIndex + 1);
@@ -148,7 +148,7 @@ extern "C" {
         pCluster->m_collide = true;
 
         for (int i = 0; i < numMembers; ++i) {
-            int nodeIndex = indices[i];
+            int nodeIndex = pBuffer[i];
             btAssert(nodeIndex >= 0);
             btAssert(nodeIndex < pBody->m_nodes.size());
             btSoftBody::Node *pNode = &pBody->m_nodes[nodeIndex];
@@ -164,27 +164,28 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_ByteBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numFaces,
             jobject byteBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
-        const jbyte* face = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
+        const jbyte *pBuffer
+                = (jbyte *) env->GetDirectBufferAddress(byteBuffer);
 
         for (int i = 0; i < 3 * numFaces;) {
-            int ni1 = face[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = face[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            int ni3 = face[i++];
+            int ni3 = pBuffer[i++];
             btAssert(ni3 >= 0);
-            btAssert(ni3 < body->m_nodes.size());
+            btAssert(ni3 < pBody->m_nodes.size());
 
-            body->appendFace(ni1, ni2, ni3);
+            pBody->appendFace(ni1, ni2, ni3);
         }
     }
 
@@ -196,27 +197,28 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_ShortBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numFaces,
             jobject shortBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
-        const jshort* face = (jshort*) env->GetDirectBufferAddress(shortBuffer);
+        const jshort *pBuffer
+                = (jshort *) env->GetDirectBufferAddress(shortBuffer);
 
         for (int i = 0; i < 3 * numFaces;) {
-            int ni1 = face[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = face[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            int ni3 = face[i++];
+            int ni3 = pBuffer[i++];
             btAssert(ni3 >= 0);
-            btAssert(ni3 < body->m_nodes.size());
+            btAssert(ni3 < pBody->m_nodes.size());
 
-            body->appendFace(ni1, ni2, ni3);
+            pBody->appendFace(ni1, ni2, ni3);
         }
     }
 
@@ -228,27 +230,27 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces__JILjava_nio_IntBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numFaces,
             jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        const jint* face = (jint*) env->GetDirectBufferAddress(intBuffer);
+        const jint *pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
 
         for (int i = 0; i < 3 * numFaces;) {
-            int ni1 = face[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = face[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            int ni3 = face[i++];
+            int ni3 = pBuffer[i++];
             btAssert(ni3 >= 0);
-            btAssert(ni3 < body->m_nodes.size());
+            btAssert(ni3 < pBody->m_nodes.size());
 
-            body->appendFace(ni1, ni2, ni3);
+            pBody->appendFace(ni1, ni2, ni3);
         }
     }
 
@@ -260,23 +262,24 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_ByteBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numLinks,
             jobject byteBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
-        const jbyte* link = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
+        const jbyte *pBuffer
+                = (jbyte *) env->GetDirectBufferAddress(byteBuffer);
 
         for (int i = 0; i < 2 * numLinks;) {
-            int ni1 = link[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = link[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            body->appendLink(ni1, ni2);
+            pBody->appendLink(ni1, ni2);
         }
     }
 
@@ -288,23 +291,24 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_ShortBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numLinks,
             jobject shortBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
-        const jshort* link = (jshort*) env->GetDirectBufferAddress(shortBuffer);
+        const jshort *pBuffer
+                = (jshort *) env->GetDirectBufferAddress(shortBuffer);
 
         for (int i = 0; i < 2 * numLinks;) {
-            int ni1 = link[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = link[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            body->appendLink(ni1, ni2);
+            pBody->appendLink(ni1, ni2);
         }
     }
 
@@ -316,23 +320,23 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks__JILjava_nio_IntBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numLinks,
             jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        const jint* link = (jint*) env->GetDirectBufferAddress(intBuffer);
+        const jint * link = (jint *) env->GetDirectBufferAddress(intBuffer);
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = link[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
             int ni2 = link[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            body->appendLink(ni1, ni2);
+            pBody->appendLink(ni1, ni2);
         }
     }
 
@@ -344,18 +348,19 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendNodes
     (JNIEnv *env, jobject object, jlong bodyId, jint numNodes,
             jobject floatBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(floatBuffer, "The FloatBuffer does not exist.",);
-        const jfloat* position = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
+        const jfloat * position
+                = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
 
         for (int i = 0; i < 3 * numNodes;) {
             float x = position[i++];
             float y = position[i++];
             float z = position[i++];
-            body->appendNode(btVector3(x, y, z), 1);
+            pBody->appendNode(btVector3(x, y, z), 1);
         }
     }
 
@@ -367,31 +372,32 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_ByteBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numTetras,
             jobject byteBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
-        const jbyte* tetra = (jbyte*) env->GetDirectBufferAddress(byteBuffer);
+        const jbyte *pBuffer
+                = (jbyte *) env->GetDirectBufferAddress(byteBuffer);
 
         for (int i = 0; i < 4 * numTetras;) {
-            int ni1 = tetra[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = tetra[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            int ni3 = tetra[i++];
+            int ni3 = pBuffer[i++];
             btAssert(ni3 >= 0);
-            btAssert(ni3 < body->m_nodes.size());
+            btAssert(ni3 < pBody->m_nodes.size());
 
-            int ni4 = tetra[i++];
+            int ni4 = pBuffer[i++];
             btAssert(ni4 >= 0);
-            btAssert(ni4 < body->m_nodes.size());
+            btAssert(ni4 < pBody->m_nodes.size());
 
-            body->appendTetra(ni1, ni2, ni3, ni4);
+            pBody->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
 
@@ -403,31 +409,32 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JLjava_nio_ShortBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numTetras,
             jobject shortBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
-        const jshort* tetra = (jshort*) env->GetDirectBufferAddress(shortBuffer);
+        const jshort *pBuffer
+                = (jshort *) env->GetDirectBufferAddress(shortBuffer);
 
         for (int i = 0; i < 4 * numTetras;) {
-            int ni1 = tetra[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = tetra[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            int ni3 = tetra[i++];
+            int ni3 = pBuffer[i++];
             btAssert(ni3 >= 0);
-            btAssert(ni3 < body->m_nodes.size());
+            btAssert(ni3 < pBody->m_nodes.size());
 
-            int ni4 = tetra[i++];
+            int ni4 = pBuffer[i++];
             btAssert(ni4 >= 0);
-            btAssert(ni4 < body->m_nodes.size());
+            btAssert(ni4 < pBody->m_nodes.size());
 
-            body->appendTetra(ni1, ni2, ni3, ni4);
+            pBody->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
 
@@ -439,31 +446,31 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras__JILjava_nio_IntBuffer_2
     (JNIEnv *env, jobject object, jlong bodyId, jint numTetras,
             jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        const jint* tetra = (jint*) env->GetDirectBufferAddress(intBuffer);
+        const jint *pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
 
         for (int i = 0; i < 4 * numTetras;) {
-            int ni1 = tetra[i++];
+            int ni1 = pBuffer[i++];
             btAssert(ni1 >= 0);
-            btAssert(ni1 < body->m_nodes.size());
+            btAssert(ni1 < pBody->m_nodes.size());
 
-            int ni2 = tetra[i++];
+            int ni2 = pBuffer[i++];
             btAssert(ni2 >= 0);
-            btAssert(ni2 < body->m_nodes.size());
+            btAssert(ni2 < pBody->m_nodes.size());
 
-            int ni3 = tetra[i++];
+            int ni3 = pBuffer[i++];
             btAssert(ni3 >= 0);
-            btAssert(ni3 < body->m_nodes.size());
+            btAssert(ni3 < pBody->m_nodes.size());
 
-            int ni4 = tetra[i++];
+            int ni4 = pBuffer[i++];
             btAssert(ni4 >= 0);
-            btAssert(ni4 < body->m_nodes.size());
+            btAssert(ni4 < pBody->m_nodes.size());
 
-            body->appendTetra(ni1, ni2, ni3, ni4);
+            pBody->appendTetra(ni1, ni2, ni3, ni4);
         }
     }
 
@@ -474,13 +481,13 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysicsRotation
     (JNIEnv *env, jobject object, jlong bodyId, jobject rotation) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btQuaternion rot = btQuaternion();
         jmeBulletUtil::convert(env, rotation, &rot);
-        body->rotate(rot);
+        pBody->rotate(rot);
     }
 
     /*
@@ -489,14 +496,14 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysicsScale
-    (JNIEnv *env, jobject object, jlong bodyId, jobject scl) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    (JNIEnv *env, jobject object, jlong bodyId, jobject scaleVector) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btVector3 vec;
-        jmeBulletUtil::convert(env, scl, &vec);
-        body->scale(vec);
+        jmeBulletUtil::convert(env, scaleVector, &vec);
+        pBody->scale(vec);
     }
 
     /*
@@ -506,17 +513,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysicsTransform
     (JNIEnv *env, jobject object, jlong bodyId, jobject transform) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(transform, "The transform does not exist.",)
         btTransform trs;
         btVector3 scale;
         jmeBulletUtil::convert(env, transform, &trs, &scale);
 
-        body->scale(scale);
-        body->transform(trs);
+        pBody->scale(scale);
+        pBody->transform(trs);
     }
 
     /*
@@ -525,14 +532,14 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysicsTranslate
-    (JNIEnv *env, jobject object, jlong bodyId, jobject translate) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    (JNIEnv *env, jobject object, jlong bodyId, jobject offsetVector) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btVector3 vec;
-        jmeBulletUtil::convert(env, translate, &vec);
-        body->translate(vec);
+        jmeBulletUtil::convert(env, offsetVector, &vec);
+        pBody->translate(vec);
     }
 
     /*
@@ -542,15 +549,15 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_countNodesInCluster
     (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(clusterIndex >= 0);
-        btAssert(clusterIndex < body->clusterCount());
+        btAssert(clusterIndex < pBody->clusterCount());
 
-        const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
-        jint count = cluster->m_nodes.size();
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        jint count = pCluster->m_nodes.size();
 
         return count;
     }
@@ -563,28 +570,27 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmptySoftBody
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
-
         /*
          * Create a temporary btSoftBodyWorldInfo for this body,
          * which will be replaced when the body gets added to a physics space.
          */
-        btSoftBodyWorldInfo* worldInfo = new btSoftBodyWorldInfo();
+        btSoftBodyWorldInfo *pInfo = new btSoftBodyWorldInfo();
 
-        btSoftBody* body = new btSoftBody(worldInfo);
-        body->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
-        body->setUserPointer(NULL); // not in any jmePhysicsSoftSpace
+        btSoftBody *pBody = new btSoftBody(pInfo);
+        pBody->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
+        pBody->setUserPointer(NULL); // not in any jmePhysicsSoftSpace
 
-        btSoftBody::Material* m = body->appendMaterial();
-        m->m_kLST = 1;
-        m->m_kAST = 1;
-        m->m_kVST = 1;
+        btSoftBody::Material *pMaterial = pBody->appendMaterial();
+        pMaterial->m_kLST = 1;
+        pMaterial->m_kAST = 1;
+        pMaterial->m_kVST = 1;
         /*
          * The only available flag for materials is DebugDraw (on by Default).
          * Disable Bullet's debug draw because Minie has its own.
          */
-        m->m_flags = 0x0000;
+        pMaterial->m_flags = 0x0000;
 
-        return reinterpret_cast<jlong> (body);
+        return reinterpret_cast<jlong> (pBody);
     }
 
     /*
@@ -595,17 +601,17 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_cutLink
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex0,
             jint nodeIndex1, jfloat position) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeIndex0 >= 0);
-        btAssert(nodeIndex0 < body->m_nodes.size());
+        btAssert(nodeIndex0 < pBody->m_nodes.size());
 
         btAssert(nodeIndex1 >= 0);
-        btAssert(nodeIndex1 < body->m_nodes.size());
+        btAssert(nodeIndex1 < pBody->m_nodes.size());
 
-        bool success = body->cutLink((int) nodeIndex0, (int) nodeIndex1,
+        bool success = pBody->cutLink((int) nodeIndex0, (int) nodeIndex1,
                 (btScalar) position);
         return (jboolean) success;
     }
@@ -630,14 +636,14 @@ extern "C" {
              */
             pBody->m_clusterConnectivity.resize(numClusters * numClusters);
             for (int c0 = 0; c0 < numClusters; ++c0) {
-                btSoftBody::Cluster *cla = pBody->m_clusters[c0];
-                cla->m_clusterIndex = c0;
+                btSoftBody::Cluster *pCluster0 = pBody->m_clusters[c0];
+                pCluster0->m_clusterIndex = c0;
                 for (int c1 = 0; c1 < numClusters; ++c1) {
                     bool connect = false;
-                    btSoftBody::Cluster *clb = pBody->m_clusters[c1];
-                    for (int i = 0; !connect && i < cla->m_nodes.size(); ++i) {
-                        for (int j = 0; j < clb->m_nodes.size(); ++j) {
-                            if (cla->m_nodes[i] == clb->m_nodes[j]) {
+                    btSoftBody::Cluster *pCluster1 = pBody->m_clusters[c1];
+                    for (int i = 0; !connect && i < pCluster0->m_nodes.size(); ++i) {
+                        for (int j = 0; j < pCluster1->m_nodes.size(); ++j) {
+                            if (pCluster0->m_nodes[i] == pCluster1->m_nodes[j]) {
                                 connect = true;
                                 break;
                             }
@@ -657,14 +663,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_generateBendingConstraints
     (JNIEnv *env, jobject object, jlong bodyId, jint dist, jlong matId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.",)
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (matId);
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
-        body->generateBendingConstraints(dist, mat);
+        body->generateBendingConstraints(dist, pMaterial);
     }
 
     /*
@@ -674,11 +681,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_generateClusters
     (JNIEnv *env, jobject object, jlong bodyId, jint k, jint maxIter) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->generateClusters(k, maxIter);
+        pBody->generateClusters(k, maxIter);
     }
 
     /*
@@ -689,14 +696,14 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getBounds
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeMinima,
             jobject storeMaxima) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        const btVector3& minima = body->m_bounds[0];
+        const btVector3& minima = pBody->m_bounds[0];
         jmeBulletUtil::convert(env, &minima, storeMinima);
 
-        const btVector3& maxima = body->m_bounds[1];
+        const btVector3& maxima = pBody->m_bounds[1];
         jmeBulletUtil::convert(env, &maxima, storeMaxima);
     }
 
@@ -707,7 +714,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterAngularDamping
     (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex) {
-        btSoftBody* pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -728,16 +735,16 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterCenter
     (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
             jobject storeVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(clusterIndex >= 0);
-        btAssert(clusterIndex < body->clusterCount());
+        btAssert(clusterIndex < pBody->clusterCount());
 
         NULL_CHECK(storeVector, "The store vector does not exist.",);
-        const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
-        jmeBulletUtil::convert(env, &cluster->m_com, storeVector);
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        jmeBulletUtil::convert(env, &pCluster->m_com, storeVector);
     }
 
     /*
@@ -747,7 +754,7 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClusterCount
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -861,16 +868,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersMasses
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
-        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
-        int numClusters = body->clusterCount();
+        jfloat * bufPtr = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
+        int numClusters = pBody->clusterCount();
         for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
-            const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
-            btScalar mass = btScalar(1.) / cluster->m_imass;
+            const btSoftBody::Cluster *pCluster
+                    = pBody->m_clusters[clusterIndex];
+            btScalar mass = btScalar(1.) / pCluster->m_imass;
             bufPtr[clusterIndex] = mass;
         }
     }
@@ -882,18 +890,19 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersPositions
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
-        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
-        int numClusters = body->clusterCount();
+        jfloat * bufPtr = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
+        int numClusters = pBody->clusterCount();
         for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
-            const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
-            bufPtr[0] = cluster->m_com.getX();
-            bufPtr[1] = cluster->m_com.getY();
-            bufPtr[2] = cluster->m_com.getZ();
+            const btSoftBody::Cluster *pCluster
+                    = pBody->m_clusters[clusterIndex];
+            bufPtr[0] = pCluster->m_com.getX();
+            bufPtr[1] = pCluster->m_com.getY();
+            bufPtr[2] = pCluster->m_com.getZ();
             bufPtr += 3;
         }
     }
@@ -905,21 +914,21 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getFacesIndexes
     (JNIEnv *env, jobject object, jlong bodyId, jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        jint* out = (jint*) env->GetDirectBufferAddress(intBuffer);
-        const int size = body->m_faces.size();
+        jint *pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
+        const int size = pBody->m_faces.size();
 
-        btSoftBody::Node* firstNode = &body->m_nodes[0];
+        btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
 
         for (int i = 0, buffi = 0; i < size; ++i) {
-            const btSoftBody::Face& f = body->m_faces[i];
-            out[buffi++] = int(f.m_n[0] - firstNode);
-            out[buffi++] = int(f.m_n[1] - firstNode);
-            out[buffi++] = int(f.m_n[2] - firstNode);
+            const btSoftBody::Face& pFace = pBody->m_faces[i];
+            pBuffer[buffi++] = int(pFace.m_n[0] - pFirstNode);
+            pBuffer[buffi++] = int(pFace.m_n[1] - pFirstNode);
+            pBuffer[buffi++] = int(pFace.m_n[2] - pFirstNode);
         }
     }
 
@@ -930,20 +939,20 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getLinksIndexes
     (JNIEnv *env, jobject object, jlong bodyId, jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        jint* out = (jint*) env->GetDirectBufferAddress(intBuffer);
-        const int size = body->m_links.size();
+        jint * out = (jint *) env->GetDirectBufferAddress(intBuffer);
+        const int size = pBody->m_links.size();
 
-        btSoftBody::Node* firstNode = &body->m_nodes[0];
+        btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
 
         for (int i = 0, buffi = 0; i < size; ++i) {
-            const btSoftBody::Link& l = body->m_links[i];
-            out[buffi++] = int(l.m_n[0] - firstNode);
-            out[buffi++] = int(l.m_n[1] - firstNode);
+            const btSoftBody::Link& l = pBody->m_links[i];
+            out[buffi++] = int(l.m_n[0] - pFirstNode);
+            out[buffi++] = int(l.m_n[1] - pFirstNode);
         }
     }
 
@@ -954,12 +963,12 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMargin
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        const btCollisionShape* shape = body->getCollisionShape();
-        btScalar margin = shape->getMargin();
+        const btCollisionShape *pShape = pBody->getCollisionShape();
+        btScalar margin = pShape->getMargin();
         return (jfloat) margin;
     }
 
@@ -970,14 +979,14 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMass
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeId >= 0);
-        btAssert(nodeId < body->m_nodes.size());
+        btAssert(nodeId < pBody->m_nodes.size());
 
-        return body->getMass(nodeId);
+        return pBody->getMass(nodeId);
     }
 
     /*
@@ -987,16 +996,16 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMasses
     (JNIEnv *env, jobject object, jlong bodyId, jobject massBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
-        jfloat* masses = (jfloat*) env->GetDirectBufferAddress(massBuffer);
+        jfloat * masses = (jfloat *) env->GetDirectBufferAddress(massBuffer);
         int capacity = env->GetDirectBufferCapacity(massBuffer);
-        int numNodes = body->m_nodes.size();
+        int numNodes = pBody->m_nodes.size();
         for (int i = 0; i < numNodes && i < capacity; ++i) {
-            masses[i] = body->getMass(i);
+            masses[i] = pBody->getMass(i);
         }
     }
 
@@ -1007,11 +1016,11 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMaterial
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return reinterpret_cast<long> (body->m_materials[0]);
+        return reinterpret_cast<long> (pBody->m_materials[0]);
     }
 
     /*
@@ -1021,11 +1030,11 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbFaces
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return body->m_faces.size();
+        return pBody->m_faces.size();
     }
 
     /*
@@ -1035,11 +1044,11 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbLinks
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return body->m_links.size();
+        return pBody->m_links.size();
     }
 
     /*
@@ -1049,11 +1058,11 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbNodes
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return body->m_nodes.size();
+        return pBody->m_nodes.size();
     }
 
     /*
@@ -1063,11 +1072,11 @@ extern "C" {
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbTetras
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return body->m_tetras.size();
+        return pBody->m_tetras.size();
     }
 
     /*
@@ -1076,17 +1085,17 @@ extern "C" {
      * Signature: (JILcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeLocation
-    (JNIEnv * env, jobject object, jlong bodyId, jint nodeIndex,
+    (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex,
             jobject storeVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeIndex >= 0);
-        btAssert(nodeIndex < body->m_nodes.size());
+        btAssert(nodeIndex < pBody->m_nodes.size());
 
         NULL_CHECK(storeVector, "The store vector does not exist.",);
-        const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        const btSoftBody::Node& node = pBody->m_nodes[nodeIndex];
         jmeBulletUtil::convert(env, &node.m_x, storeVector);
     }
 
@@ -1096,17 +1105,17 @@ extern "C" {
      * Signature: (JILcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeNormal
-    (JNIEnv * env, jobject object, jlong bodyId, jint nodeIndex,
+    (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex,
             jobject storeVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeIndex >= 0);
-        btAssert(nodeIndex < body->m_nodes.size());
+        btAssert(nodeIndex < pBody->m_nodes.size());
 
         NULL_CHECK(storeVector, "The store vector does not exist.",);
-        const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        const btSoftBody::Node& node = pBody->m_nodes[nodeIndex];
         jmeBulletUtil::convert(env, &node.m_n, storeVector);
     }
 
@@ -1116,16 +1125,16 @@ extern "C" {
      * Signature: (JLjava/nio/FloatBuffer;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesNormals
-    (JNIEnv * env, jobject object, jlong bodyId, jobject storeBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
-        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
-        int numNodes = body->m_nodes.size();
+        jfloat * bufPtr = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
+        int numNodes = pBody->m_nodes.size();
         for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
-            const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+            const btSoftBody::Node& node = pBody->m_nodes[nodeIndex];
             bufPtr[0] = node.m_n.getX();
             bufPtr[1] = node.m_n.getY();
             bufPtr[2] = node.m_n.getZ();
@@ -1140,16 +1149,16 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesPositions
     (JNIEnv *env, jobject object, jlong bodyId, jobject floatBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(floatBuffer, "The FloatBuffer does not exist.",);
-        jfloat* out = (jfloat*) env->GetDirectBufferAddress(floatBuffer);
-        const int size = body->m_nodes.size();
+        jfloat * out = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
+        const int size = pBody->m_nodes.size();
 
         for (int i = 0, buffi = 0; i < size; i++) {
-            const btSoftBody::Node& n = body->m_nodes[i];
+            const btSoftBody::Node& n = pBody->m_nodes[i];
             out[buffi++] = n.m_x.getX();
             out[buffi++] = n.m_x.getY();
             out[buffi++] = n.m_x.getZ();
@@ -1163,15 +1172,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesVelocities
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
-        jfloat* bufPtr = (jfloat*) env->GetDirectBufferAddress(storeBuffer);
-        int numNodes = body->m_nodes.size();
+        jfloat * bufPtr = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
+        int numNodes = pBody->m_nodes.size();
         for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
-            const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+            const btSoftBody::Node& node = pBody->m_nodes[nodeIndex];
             bufPtr[0] = node.m_v.getX();
             bufPtr[1] = node.m_v.getY();
             bufPtr[2] = node.m_v.getZ();
@@ -1187,15 +1196,15 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodeVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex,
             jobject storeVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeIndex >= 0);
-        btAssert(nodeIndex < body->m_nodes.size());
+        btAssert(nodeIndex < pBody->m_nodes.size());
 
         NULL_CHECK(storeVector, "The store vector does not exist.",);
-        const btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        const btSoftBody::Node& node = pBody->m_nodes[nodeIndex];
         jmeBulletUtil::convert(env, &node.m_v, storeVector);
     }
 
@@ -1206,7 +1215,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getPhysicsLocation
     (JNIEnv *env, jobject object, jlong bodyId, jobject location) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -1221,7 +1230,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getRestLengthScale
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -1235,7 +1244,7 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getSoftBodyWorldInfo
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.", 0)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -1249,22 +1258,22 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getTetrasIndexes
     (JNIEnv *env, jobject object, jlong bodyId, jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        jint* out = (jint*) env->GetDirectBufferAddress(intBuffer);
+        jint * out = (jint *) env->GetDirectBufferAddress(intBuffer);
         const int size = body->m_tetras.size();
 
-        btSoftBody::Node* firstNode = &body->m_nodes[0];
+        btSoftBody::Node *pFirstNode = &body->m_nodes[0];
 
         for (int i = 0, buffi = 0; i < size; ++i) {
             const btSoftBody::Tetra& t = body->m_tetras[i];
-            out[buffi++] = int(t.m_n[0] - firstNode);
-            out[buffi++] = int(t.m_n[1] - firstNode);
-            out[buffi++] = int(t.m_n[2] - firstNode);
-            out[buffi++] = int(t.m_n[3] - firstNode);
+            out[buffi++] = int(t.m_n[0] - pFirstNode);
+            out[buffi++] = int(t.m_n[1] - pFirstNode);
+            out[buffi++] = int(t.m_n[2] - pFirstNode);
+            out[buffi++] = int(t.m_n[3] - pFirstNode);
         }
     }
 
@@ -1275,11 +1284,11 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getTotalMass
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return body->getTotalMass();
+        return pBody->getTotalMass();
     }
 
     /*
@@ -1289,11 +1298,11 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getVolume
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.", 0)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        return body->getVolume();
+        return pBody->getVolume();
     }
 
     /*
@@ -1303,11 +1312,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getWindVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        const btVector3& vec = body->getWindVelocity();
+        const btVector3& vec = pBody->getWindVelocity();
         jmeBulletUtil::convert(env, &vec, storeVector);
     }
 
@@ -1318,11 +1327,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_initDefault
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->initDefaults();
+        pBody->initDefaults();
     }
 
     /*
@@ -1332,18 +1341,20 @@ extern "C" {
      */
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollisionAllowed
     (JNIEnv *env, jobject object, jlong softId, jlong rigidId) {
-        btSoftBody* softBody = reinterpret_cast<btSoftBody*> (softId);
-        NULL_CHECK(softBody, "The btSoftBody does not exist.", 0)
-        btAssert(softBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softId);
+        NULL_CHECK(pSoftBody, "The btSoftBody does not exist.", 0)
+        btAssert(
+                pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btCollisionObject* rigidBody
-                = reinterpret_cast<btCollisionObject*> (rigidId);
-        NULL_CHECK(rigidBody, "The btRigidBody does not exist.", 0);
-        btAssert(rigidBody->getInternalType()
+        btCollisionObject *pRigidBody
+                = reinterpret_cast<btCollisionObject *> (rigidId);
+        NULL_CHECK(pRigidBody, "The btRigidBody does not exist.", 0);
+        btAssert(pRigidBody->getInternalType()
                 & btCollisionObject::CO_RIGID_BODY);
 
-        btAlignedObjectArray<const class btCollisionObject*> cdos = softBody->m_collisionDisabledObjects;
-        int cdoIndex = cdos.findLinearSearch(rigidBody);
+        btAlignedObjectArray<const class btCollisionObject *> cdos
+        = pSoftBody->m_collisionDisabledObjects;
+        int cdoIndex = cdos.findLinearSearch(pRigidBody);
         bool allowed = (cdoIndex == cdos.size());
 
         return (jboolean) allowed;
@@ -1357,23 +1368,23 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_listNodesInCluster
     (JNIEnv *env, jobject object, jlong bodyId, jint clusterIndex,
             jobject intBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(clusterIndex >= 0);
-        btAssert(clusterIndex < body->clusterCount());
+        btAssert(clusterIndex < pBody->clusterCount());
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
-        jint* result = (jint*) env->GetDirectBufferAddress(intBuffer);
+        jint * result = (jint *) env->GetDirectBufferAddress(intBuffer);
 
-        const btSoftBody::Node* firstNode = &body->m_nodes[0];
-        const btSoftBody::Cluster* cluster = body->m_clusters[clusterIndex];
-        int numNodes = cluster->m_nodes.size();
+        const btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
+        const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
+        int numNodes = pCluster->m_nodes.size();
 
         for (int i = 0; i < numNodes; ++i) {
-            const btSoftBody::Node* node = cluster->m_nodes[i];
-            jint nodeIndex = node - firstNode;
+            const btSoftBody::Node *pNode = pCluster->m_nodes[i];
+            jint nodeIndex = pNode - pFirstNode;
             result[i] = nodeIndex;
         }
     }
@@ -1385,11 +1396,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_randomizeConstraints
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->randomizeConstraints();
+        pBody->randomizeConstraints();
     }
 
     /*
@@ -1399,14 +1410,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_releaseCluster
     (JNIEnv *env, jobject object, jlong bodyId, jint index) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(index >= 0);
-        btAssert(index < body->clusterCount());
+        btAssert(index < pBody->clusterCount());
 
-        body->releaseCluster(index);
+        pBody->releaseCluster(index);
     }
 
     /*
@@ -1416,11 +1427,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_releaseClusters
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->releaseClusters();
+        pBody->releaseClusters();
     }
 
     /*
@@ -1430,11 +1441,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_resetLinkRestLengths
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->resetLinkRestLengths();
+        pBody->resetLinkRestLengths();
     }
 
     /*
@@ -1558,12 +1569,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMargin
     (JNIEnv *env, jobject object, jlong bodyId, jfloat margin) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",);
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btCollisionShape* shape = body->getCollisionShape();
-        shape->setMargin(margin);
+        btCollisionShape *pShape = body->getCollisionShape();
+        pShape->setMargin(margin);
     }
 
     /*
@@ -1573,14 +1584,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMass
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeId, jfloat mass) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeId >= 0);
-        btAssert(nodeId < body->m_nodes.size());
+        btAssert(nodeId < pBody->m_nodes.size());
 
-        body->setMass(nodeId, mass);
+        pBody->setMass(nodeId, mass);
     }
 
     /*
@@ -1590,16 +1601,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMasses
     (JNIEnv *env, jobject object, jlong bodyId, jobject massBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
-        const jfloat* masses = (jfloat*) env->GetDirectBufferAddress(massBuffer);
+        const jfloat *pBuffer
+                = (jfloat *) env->GetDirectBufferAddress(massBuffer);
         int capacity = env->GetDirectBufferCapacity(massBuffer);
-        int numNodes = body->m_nodes.size();
+        int numNodes = pBody->m_nodes.size();
         for (int i = 0; i < numNodes && i < capacity; ++i) {
-            body->setMass(i, masses[i]);
+            pBody->setMass(i, pBuffer[i]);
         }
     }
 
@@ -1611,15 +1623,15 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNodeVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex,
             jobject velocityVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeIndex >= 0);
-        btAssert(nodeIndex < body->m_nodes.size());
+        btAssert(nodeIndex < pBody->m_nodes.size());
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
-        btSoftBody::Node& node = body->m_nodes[nodeIndex];
+        btSoftBody::Node& node = pBody->m_nodes[nodeIndex];
         jmeBulletUtil::convert(env, velocityVector, &node.m_v);
     }
 
@@ -1630,21 +1642,21 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNormals
     (JNIEnv *env, jobject object, jlong bodyId, jobject normalBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(normalBuffer, "The normal buffer does not exist.",);
-        const jfloat* normals
-                = (jfloat*) env->GetDirectBufferAddress(normalBuffer);
+        const jfloat *pBuffer
+                = (jfloat *) env->GetDirectBufferAddress(normalBuffer);
         int capacity = env->GetDirectBufferCapacity(normalBuffer) - 2;
-        int numNodes = body->m_nodes.size();
+        int numNodes = pBody->m_nodes.size();
         for (int nodeIndex = 0, offset = 0;
                 nodeIndex < numNodes && offset < capacity;) {
-            btScalar x = normals[offset++];
-            btScalar y = normals[offset++];
-            btScalar z = normals[offset++];
-            btSoftBody::Node& node = body->m_nodes[nodeIndex++];
+            btScalar x = pBuffer[offset++];
+            btScalar y = pBuffer[offset++];
+            btScalar z = pBuffer[offset++];
+            btSoftBody::Node& node = pBody->m_nodes[nodeIndex++];
             node.m_n = btVector3(x, y, z);
         }
     }
@@ -1655,16 +1667,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLocation
-    (JNIEnv *env, jobject object, jlong bodyId, jobject location) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    (JNIEnv *env, jobject object, jlong bodyId, jobject locationVector) {
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btVector3 vec;
-        jmeBulletUtil::convert(env, location, &vec);
+        btVector3 vec; // TODO null check locationVector
+        jmeBulletUtil::convert(env, locationVector, &vec);
 
-        vec -= getBoundingCenter(body);
-        body->translate(vec);
+        vec -= getBoundingCenter(pBody);
+        pBody->translate(vec);
     }
 
     /*
@@ -1675,11 +1687,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPose
     (JNIEnv *env, jobject object, jlong bodyId, jboolean bvolume,
             jboolean bframe) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->setPose(bvolume, bframe);
+        pBody->setPose(bvolume, bframe);
     }
 
     /*
@@ -1689,11 +1701,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setRestLengthScale
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->setRestLengthScale(value);
+        pBody->setRestLengthScale(value);
     }
 
     /*
@@ -1703,14 +1715,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setSoftBodyWorldInfo
     (JNIEnv *env, jobject object, jlong bodyId, jlong worldId) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btSoftBodyWorldInfo* worldInfo = reinterpret_cast<btSoftBodyWorldInfo*> (worldId);
-        NULL_CHECK(worldInfo, "The btSoftBodyWorldInfo does not exist.",)
+        btSoftBodyWorldInfo *pWorldInfo
+                = reinterpret_cast<btSoftBodyWorldInfo *> (worldId);
+        NULL_CHECK(pWorldInfo, "The btSoftBodyWorldInfo does not exist.",)
 
-        body->m_worldInfo = worldInfo;
+        pBody->m_worldInfo = pWorldInfo;
     }
 
     /*
@@ -1720,11 +1733,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setTotalDensity
     (JNIEnv *env, jobject object, jlong bodyId, jfloat density) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->setTotalDensity(density);
+        pBody->setTotalDensity(density);
     }
 
     /*
@@ -1735,11 +1748,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setTotalMass
     (JNIEnv *env, jobject object, jlong bodyId, jfloat mass,
             jboolean fromFaces) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        body->setTotalMass(mass, fromFaces);
+        pBody->setTotalMass(mass, fromFaces);
     }
 
     /*
@@ -1749,21 +1762,21 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocities
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityBuffer) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(velocityBuffer, "The velocity buffer does not exist.",);
-        const jfloat* velocities
-                = (jfloat*) env->GetDirectBufferAddress(velocityBuffer);
+        const jfloat * velocities
+                = (jfloat *) env->GetDirectBufferAddress(velocityBuffer);
         int capacity = env->GetDirectBufferCapacity(velocityBuffer) - 2;
-        int numNodes = body->m_nodes.size();
+        int numNodes = pBody->m_nodes.size();
         for (int nodeIndex = 0, offset = 0;
                 nodeIndex < numNodes && offset < capacity;) {
             btScalar x = velocities[offset++];
             btScalar y = velocities[offset++];
             btScalar z = velocities[offset++];
-            btSoftBody::Node& node = body->m_nodes[nodeIndex++];
+            btSoftBody::Node& node = pBody->m_nodes[nodeIndex++];
             node.m_v = btVector3(x, y, z);
         }
     }
@@ -1775,15 +1788,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",);
         btVector3 bulletVector;
         jmeBulletUtil::convert(env, velocityVector, &bulletVector);
 
-        body->setVelocity(bulletVector);
+        pBody->setVelocity(bulletVector);
     }
 
     /*
@@ -1793,7 +1806,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVolumeDensity
     (JNIEnv *env, jobject object, jlong bodyId, jfloat density) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -1807,7 +1820,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVolumeMass
     (JNIEnv *env, jobject object, jlong bodyId, jfloat mass) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
@@ -1821,7 +1834,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setWindVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
+        btSoftBody * body = reinterpret_cast<btSoftBody *> (bodyId);
         NULL_CHECK(body, "The btSoftBody does not exist.",)
         btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 

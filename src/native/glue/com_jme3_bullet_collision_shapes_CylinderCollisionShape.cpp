@@ -46,28 +46,30 @@ extern "C" {
      * Signature: (ILcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionShape_createShape
-    (JNIEnv * env, jobject object, jint axis, jobject halfExtents) {
+    (JNIEnv *env, jobject object, jint axis, jobject halfExtentsVector) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(halfExtents, "The halfExtents vector does not exist.", 0)
+        NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.",
+                0);
 
-        btVector3 extents;
-        jmeBulletUtil::convert(env, halfExtents, &extents);
+        btVector3 vec;
+        jmeBulletUtil::convert(env, halfExtentsVector, &vec);
 
-        btCollisionShape* shape;
+        btCollisionShape *pShape;
         switch (axis) {
             case 0:
-                shape = new btCylinderShapeX(extents);
+                pShape = new btCylinderShapeX(vec);
                 break;
             case 1:
-                shape = new btCylinderShape(extents);
+                pShape = new btCylinderShape(vec);
                 break;
             case 2:
-                shape = new btCylinderShapeZ(extents);
+                pShape = new btCylinderShapeZ(vec);
                 break;
+                // TODO default case
         }
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
 #ifdef __cplusplus

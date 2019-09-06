@@ -48,14 +48,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyCentralForce
     (JNIEnv *env, jobject object, jlong bodyId, jobject forceVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(forceVector, "The force vector does not exist.",)
         btVector3 vec1;
         jmeBulletUtil::convert(env, forceVector, &vec1);
 
-        body->applyCentralForce(vec1);
+        pBody->applyCentralForce(vec1);
     }
 
     /*
@@ -65,14 +65,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyCentralImpulse
     (JNIEnv *env, jobject object, jlong bodyId, jobject impulseVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(impulseVector, "The impulse vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, impulseVector, &vec);
 
-        body->applyCentralImpulse(vec);
+        pBody->applyCentralImpulse(vec);
     }
 
     /*
@@ -83,8 +83,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyForce
     (JNIEnv *env, jobject object, jlong bodyId, jobject forceVector,
             jobject locationVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(forceVector, "The force vector does not exist.",)
         btVector3 vec1;
@@ -94,7 +94,7 @@ extern "C" {
         btVector3 vec2;
         jmeBulletUtil::convert(env, locationVector, &vec2);
 
-        body->applyForce(vec1, vec2);
+        pBody->applyForce(vec1, vec2);
     }
 
     /*
@@ -105,8 +105,8 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyImpulse
     (JNIEnv *env, jobject object, jlong bodyId, jobject impulseVector,
             jobject locationVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(impulseVector, "The impulse vector does not exist.",)
         btVector3 vec1;
@@ -116,7 +116,7 @@ extern "C" {
         btVector3 vec2;
         jmeBulletUtil::convert(env, locationVector, &vec2);
 
-        body->applyImpulse(vec1, vec2);
+        pBody->applyImpulse(vec1, vec2);
     }
 
     /*
@@ -126,14 +126,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorque
     (JNIEnv *env, jobject object, jlong bodyId, jobject torqueVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(torqueVector, "The torque vector does not exist.",)
         btVector3 vec1;
         jmeBulletUtil::convert(env, torqueVector, &vec1);
 
-        body->applyTorque(vec1);
+        pBody->applyTorque(vec1);
     }
 
     /*
@@ -143,14 +143,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorqueImpulse
     (JNIEnv *env, jobject object, jlong bodyId, jobject torqueImpulseVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
-        NULL_CHECK(torqueImpulseVector, "The torque-impulse vector does not exist.",)
-        btVector3 vec1;
+        NULL_CHECK(torqueImpulseVector,
+                "The torque-impulse vector does not exist.",)
+                btVector3 vec1;
         jmeBulletUtil::convert(env, torqueImpulseVector, &vec1);
 
-        body->applyTorqueImpulse(vec1);
+        pBody->applyTorqueImpulse(vec1);
     }
 
     /*
@@ -160,10 +161,10 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_clearForces
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
-        body->clearForces();
+        pBody->clearForces();
     }
 
     /*
@@ -176,26 +177,27 @@ extern "C" {
             jlong shapeId) {
         jmeClasses::initJavaClasses(env);
 
-        btMotionState* motionState
-                = reinterpret_cast<btMotionState*> (motionStateId);
-        NULL_CHECK(motionState, "The btMotionState does not exist.", 0)
+        btMotionState *pMotionState
+                = reinterpret_cast<btMotionState *> (motionStateId);
+        NULL_CHECK(pMotionState, "The btMotionState does not exist.", 0)
 
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        NULL_CHECK(shape, "The btCollisionShape does not exist.", 0)
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0)
 
         btVector3 localInertia;
-        int shapeType = shape->getShapeType();
+        int shapeType = pShape->getShapeType();
         if (shapeType == EMPTY_SHAPE_PROXYTYPE
                 || shapeType == TRIANGLE_MESH_SHAPE_PROXYTYPE) {
             localInertia.setZero(); // avoid a btAssert()
         } else {
-            shape->calculateLocalInertia(mass, localInertia);
+            pShape->calculateLocalInertia(mass, localInertia);
         }
-        btRigidBody* body
-                = new btRigidBody(mass, motionState, shape, localInertia);
-        body->setUserPointer(NULL);
+        btRigidBody *pBody
+                = new btRigidBody(mass, pMotionState, pShape, localInertia);
+        pBody->setUserPointer(NULL);
 
-        return reinterpret_cast<jlong> (body);
+        return reinterpret_cast<jlong> (pBody);
     }
 
     /*
@@ -205,10 +207,10 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularDamping
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
-        return body->getAngularDamping();
+        return pBody->getAngularDamping();
     }
 
     /*
@@ -218,11 +220,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularFactor
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &body->getAngularFactor(), storeVector);
+        jmeBulletUtil::convert(env, &pBody->getAngularFactor(), storeVector);
     }
 
     /*
@@ -232,10 +234,10 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularSleepingThreshold
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
-        return body->getAngularSleepingThreshold();
+        return pBody->getAngularSleepingThreshold();
     }
 
     /*
@@ -245,11 +247,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &body->getAngularVelocity(), storeVector);
+        jmeBulletUtil::convert(env, &pBody->getAngularVelocity(), storeVector);
     }
 
     /*
@@ -259,11 +261,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getGravity
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &body->getGravity(), storeVector);
+        jmeBulletUtil::convert(env, &pBody->getGravity(), storeVector);
     }
 
     /*
@@ -273,10 +275,10 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaLocal
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
 
-        const btVector3& invInertia = body->getInvInertiaDiagLocal();
+        const btVector3& invInertia = pBody->getInvInertiaDiagLocal();
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &invInertia, storeVector);
@@ -289,10 +291,10 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseInertiaWorld
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeMatrix) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
 
-        const btMatrix3x3& invInertia = body->getInvInertiaTensorWorld();
+        const btMatrix3x3& invInertia = pBody->getInvInertiaTensorWorld();
 
         NULL_CHECK(storeMatrix, "The store matrix does not exist.",)
         jmeBulletUtil::convert(env, &invInertia, storeMatrix);
@@ -305,10 +307,10 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearDamping
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
-        return body->getLinearDamping();
+        return pBody->getLinearDamping();
     }
 
     /*
@@ -318,11 +320,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearFactor
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &body->getLinearFactor(), storeVector);
+        jmeBulletUtil::convert(env, &pBody->getLinearFactor(), storeVector);
     }
 
     /*
@@ -332,10 +334,10 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearSleepingThreshold
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
-        return body->getLinearSleepingThreshold();
+        return pBody->getLinearSleepingThreshold();
     }
 
     /*
@@ -345,11 +347,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &body->getLinearVelocity(), storeVector);
+        jmeBulletUtil::convert(env, &pBody->getLinearVelocity(), storeVector);
     }
 
     /*
@@ -359,11 +361,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsLocation
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &body->getWorldTransform().getOrigin(),
+        jmeBulletUtil::convert(env, &pBody->getWorldTransform().getOrigin(),
                 storeVector);
     }
 
@@ -374,11 +376,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotation
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeQuaternion) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeQuaternion, "The store quaternion does not exist.",)
-        jmeBulletUtil::convertQuat(env, &body->getWorldTransform().getBasis(),
+        jmeBulletUtil::convertQuat(env, &pBody->getWorldTransform().getBasis(),
                 storeQuaternion);
     }
 
@@ -389,11 +391,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotationMatrix
     (JNIEnv *env, jobject object, jlong bodyId, jobject storeMatrix) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
         NULL_CHECK(storeMatrix, "The store matrix does not exist.",)
-        jmeBulletUtil::convert(env, &body->getWorldTransform().getBasis(),
+        jmeBulletUtil::convert(env, &pBody->getWorldTransform().getBasis(),
                 storeMatrix);
     }
 
@@ -404,10 +406,10 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestitution
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
-        return body->getRestitution();
+        return pBody->getRestitution();
     }
 
     /*
@@ -432,10 +434,10 @@ extern "C" {
      */
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", false)
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", false)
 
-        return body->isActive();
+        return pBody->isActive();
     }
 
     /*
@@ -445,11 +447,11 @@ extern "C" {
      */
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isInWorld
     (JNIEnv *env, jobject object, jlong bodyId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", false);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", false);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        return body->isInWorld();
+        return pBody->isInWorld();
     }
 
     /*
@@ -459,11 +461,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularDamping
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        body->setDamping(body->getLinearDamping(), value);
+        pBody->setDamping(pBody->getLinearDamping(), value);
     }
 
     /*
@@ -473,15 +475,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularFactor
     (JNIEnv *env, jobject object, jlong bodyId, jobject factorVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(factorVector, "The factor vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, factorVector, &vec);
 
-        body->setAngularFactor(vec);
+        pBody->setAngularFactor(vec);
     }
 
     /*
@@ -491,11 +493,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularSleepingThreshold
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        body->setSleepingThresholds(body->getLinearSleepingThreshold(), value);
+        pBody->setSleepingThresholds(pBody->getLinearSleepingThreshold(), value);
     }
 
     /*
@@ -505,15 +507,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, velocityVector, &vec);
 
-        body->setAngularVelocity(vec);
+        pBody->setAngularVelocity(vec);
     }
 
     /*
@@ -523,14 +525,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCollisionShape
     (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        NULL_CHECK(shape, "The btCollisionShape does not exist.",)
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.",)
 
-        body->setCollisionShape(shape);
+        pBody->setCollisionShape(pShape);
     }
 
     /*
@@ -540,11 +543,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setDamping
     (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        body->setDamping(linear, angular);
+        pBody->setDamping(linear, angular);
     }
 
     /*
@@ -554,15 +557,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity
     (JNIEnv *env, jobject object, jlong bodyId, jobject gravityVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(gravityVector, "The gravity vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, gravityVector, &vec);
 
-        body->setGravity(vec);
+        pBody->setGravity(vec);
     }
 
     /*
@@ -572,15 +575,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setInverseInertiaLocal
     (JNIEnv *env, jobject object, jlong bodyId, jobject invInertiaVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(invInertiaVector, "The inverse-inertia vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, invInertiaVector, &vec);
 
-        body->setInvInertiaDiagLocal(vec);
+        pBody->setInvInertiaDiagLocal(vec);
     }
 
     /*
@@ -590,19 +593,19 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinematic
     (JNIEnv *env, jobject object, jlong bodyId, jboolean value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        int flags = body->getCollisionFlags();
+        int flags = pBody->getCollisionFlags();
         int bitmask = btCollisionObject::CF_KINEMATIC_OBJECT;
         if (value) {
-            body->setCollisionFlags(flags | bitmask);
-            body->setActivationState(DISABLE_DEACTIVATION);
+            pBody->setCollisionFlags(flags | bitmask);
+            pBody->setActivationState(DISABLE_DEACTIVATION);
         } else {
-            body->setCollisionFlags(flags & ~bitmask);
-            body->activate(true);
-            body->forceActivationState(ACTIVE_TAG);
+            pBody->setCollisionFlags(flags & ~bitmask);
+            pBody->activate(true);
+            pBody->forceActivationState(ACTIVE_TAG);
         }
     }
 
@@ -613,15 +616,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearFactor
     (JNIEnv *env, jobject object, jlong bodyId, jobject factorVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(factorVector, "The factor vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, factorVector, &vec);
 
-        body->setLinearFactor(vec);
+        pBody->setLinearFactor(vec);
     }
 
     /*
@@ -631,11 +634,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearSleepingThreshold
     (JNIEnv *env, jobject object, jlong bodyId, jfloat value) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        body->setSleepingThresholds(value, body->getAngularSleepingThreshold());
+        pBody->setSleepingThresholds(value,
+                pBody->getAngularSleepingThreshold());
     }
 
     /*
@@ -645,15 +649,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVelocity
     (JNIEnv *env, jobject object, jlong bodyId, jobject velocityVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",)
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, velocityVector, &vec);
 
-        body->setLinearVelocity(vec);
+        pBody->setLinearVelocity(vec);
     }
 
     /*
@@ -663,15 +667,15 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsLocation
     (JNIEnv *env, jobject object, jlong bodyId, jobject locationVector) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
-        jmeMotionState *motionState = (jmeMotionState*) body->getMotionState();
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        jmeMotionState *pMotionState = (jmeMotionState *) pBody->getMotionState();
 
         NULL_CHECK(locationVector, "The location vector does not exist.",);
-        motionState->setKinematicLocation(env, locationVector);
+        pMotionState->setKinematicLocation(env, locationVector);
 
-        body->setCenterOfMassTransform(motionState->worldTransform);
+        pBody->setCenterOfMassTransform(pMotionState->worldTransform);
     }
 
     /*
@@ -681,15 +685,16 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotation__JLcom_jme3_math_Matrix3f_2
     (JNIEnv *env, jobject object, jlong bodyId, jobject rotationMatrix) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
-        jmeMotionState *motionState = (jmeMotionState*) body->getMotionState();
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        jmeMotionState *pMotionState
+                = (jmeMotionState *) pBody->getMotionState();
 
         NULL_CHECK(rotationMatrix, "The rotation matrix does not exist.",);
-        motionState->setKinematicRotation(env, rotationMatrix);
 
-        body->setCenterOfMassTransform(motionState->worldTransform);
+        pMotionState->setKinematicRotation(env, rotationMatrix);
+        pBody->setCenterOfMassTransform(pMotionState->worldTransform);
     }
 
     /*
@@ -699,15 +704,17 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotation__JLcom_jme3_math_Quaternion_2
     (JNIEnv *env, jobject object, jlong bodyId, jobject rotationQuaternion) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
-        jmeMotionState *motionState = (jmeMotionState*) body->getMotionState();
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        jmeMotionState *pMotionState
+                = (jmeMotionState *) pBody->getMotionState();
 
-        NULL_CHECK(rotationQuaternion, "The rotation quaternion does not exist.",);
-        motionState->setKinematicRotationQuat(env, rotationQuaternion);
+        NULL_CHECK(rotationQuaternion,
+                "The rotation quaternion does not exist.",);
 
-        body->setCenterOfMassTransform(motionState->worldTransform);
+        pMotionState->setKinematicRotationQuat(env, rotationQuaternion);
+        pBody->setCenterOfMassTransform(pMotionState->worldTransform);
     }
 
     /*
@@ -717,11 +724,11 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleepingThresholds
     (JNIEnv *env, jobject object, jlong bodyId, jfloat linear, jfloat angular) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        body->setSleepingThresholds(linear, angular);
+        pBody->setSleepingThresholds(linear, angular);
     }
 
     /*
@@ -731,18 +738,18 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_updateMassProps
     (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId, jfloat mass) {
-        btRigidBody* body = reinterpret_cast<btRigidBody*> (bodyId);
-        NULL_CHECK(body, "The btRigidBody does not exist.", 0);
-        btAssert(body->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+        btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        btCollisionShape* shape = reinterpret_cast<btCollisionShape*> (shapeId);
-        NULL_CHECK(shape, "The btCollisionShape does not exist.", 0);
+        btCollisionShape *pShape = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0);
 
         btVector3 localInertia;
-        shape->calculateLocalInertia(mass, localInertia);
-        body->setMassProps(mass, localInertia);
+        pShape->calculateLocalInertia(mass, localInertia);
+        pBody->setMassProps(mass, localInertia);
 
-        return reinterpret_cast<jlong> (body);
+        return reinterpret_cast<jlong> (pBody); // TODO why?
     }
 
 #ifdef __cplusplus

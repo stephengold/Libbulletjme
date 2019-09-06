@@ -53,25 +53,25 @@ extern "C" {
             jfloat rollInfluence, jfloat maxSuspensionTravelCm,
             jfloat maxSuspensionForce, jfloat radius, jboolean frontWheel,
             jfloat restLength) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
 
-        vehicle->getWheelInfo(wheelIndex).m_suspensionStiffness
+        pVehicle->getWheelInfo(wheelIndex).m_suspensionStiffness
                 = suspensionStiffness;
-        vehicle->getWheelInfo(wheelIndex).m_wheelsDampingRelaxation
+        pVehicle->getWheelInfo(wheelIndex).m_wheelsDampingRelaxation
                 = wheelsDampingRelaxation;
-        vehicle->getWheelInfo(wheelIndex).m_wheelsDampingCompression
+        pVehicle->getWheelInfo(wheelIndex).m_wheelsDampingCompression
                 = wheelsDampingCompression;
-        vehicle->getWheelInfo(wheelIndex).m_frictionSlip = frictionSlip;
-        vehicle->getWheelInfo(wheelIndex).m_rollInfluence = rollInfluence;
-        vehicle->getWheelInfo(wheelIndex).m_maxSuspensionTravelCm
+        pVehicle->getWheelInfo(wheelIndex).m_frictionSlip = frictionSlip;
+        pVehicle->getWheelInfo(wheelIndex).m_rollInfluence = rollInfluence;
+        pVehicle->getWheelInfo(wheelIndex).m_maxSuspensionTravelCm
                 = maxSuspensionTravelCm;
-        vehicle->getWheelInfo(wheelIndex).m_maxSuspensionForce
+        pVehicle->getWheelInfo(wheelIndex).m_maxSuspensionForce
                 = maxSuspensionForce;
-        vehicle->getWheelInfo(wheelIndex).m_wheelsRadius = radius;
-        vehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel = frontWheel;
-        vehicle->getWheelInfo(wheelIndex).m_suspensionRestLength1 = restLength;
+        pVehicle->getWheelInfo(wheelIndex).m_wheelsRadius = radius;
+        pVehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel = frontWheel;
+        pVehicle->getWheelInfo(wheelIndex).m_suspensionRestLength1 = restLength;
     }
 
     /*
@@ -81,12 +81,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionLocation
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
 
         jmeBulletUtil::convert(env,
-                &vehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactPointWS,
+                &pVehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactPointWS,
                 out);
     }
 
@@ -98,12 +98,12 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionNormal
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
             jobject out) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
 
         jmeBulletUtil::convert(env,
-                &vehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactNormalWS,
+                &pVehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactNormalWS,
                 out);
     }
 
@@ -114,11 +114,11 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotation
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.", 0)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
 
-        return vehicle->getWheelInfo(wheelIndex).m_deltaRotation;
+        return pVehicle->getWheelInfo(wheelIndex).m_deltaRotation;
     }
 
     /*
@@ -128,11 +128,11 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSkidInfo
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.", 0)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
 
-        return vehicle->getWheelInfo(wheelIndex).m_skidInfo;
+        return pVehicle->getWheelInfo(wheelIndex).m_skidInfo;
     }
 
     /*
@@ -143,12 +143,12 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocation
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
             jobject out) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
 
         jmeBulletUtil::convert(env,
-                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(),
+                &pVehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(),
                 out);
     }
 
@@ -160,12 +160,12 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotation
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
             jobject out) {
-        btRaycastVehicle* vehicle
-                = reinterpret_cast<btRaycastVehicle*> (vehicleId);
-        NULL_CHECK(vehicle, "The btRaycastVehicle does not exist.",)
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
 
         jmeBulletUtil::convert(env,
-                &vehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
+                &pVehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
                 out);
     }
 

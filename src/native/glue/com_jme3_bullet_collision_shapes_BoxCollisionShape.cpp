@@ -46,17 +46,18 @@ extern "C" {
      * Signature: (Lcom/jme3/math/Vector3f;)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
-    (JNIEnv *env, jobject object, jobject halfExtents) {
+    (JNIEnv *env, jobject object, jobject halfExtentsVector) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(halfExtents, "The halfExtents vector does not exist.", 0)
+        NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.",
+                0);
 
-        btVector3 extents;
-        jmeBulletUtil::convert(env, halfExtents, &extents);
+        btVector3 vec;
+        jmeBulletUtil::convert(env, halfExtentsVector, &vec);
 
-        btBoxShape* shape = new btBoxShape(extents);
+        btBoxShape *pShape = new btBoxShape(vec);
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
 #ifdef __cplusplus

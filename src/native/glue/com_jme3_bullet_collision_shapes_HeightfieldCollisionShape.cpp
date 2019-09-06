@@ -51,11 +51,11 @@ extern "C" {
         BT_DECLARE_ALIGNED_ALLOCATOR();
 
         HeightfieldShape(int heightStickWidth, int heightStickLength,
-                const void *heightfieldData, btScalar heightScale,
+                const void *pHeightfieldData, btScalar heightScale,
                 btScalar minHeight, btScalar maxHeight, int upAxis,
                 bool flipQuadEdges)
                 : btHeightfieldTerrainShape(heightStickWidth,
-                heightStickLength, heightfieldData, heightScale, minHeight,
+                heightStickLength, pHeightfieldData, heightScale, minHeight,
                 maxHeight, upAxis, PHY_FLOAT, flipQuadEdges) {
         }
 

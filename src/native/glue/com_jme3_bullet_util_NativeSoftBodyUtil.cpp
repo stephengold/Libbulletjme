@@ -37,8 +37,8 @@
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
 
-static inline btVector3 getBoundingCenter(btSoftBody* body) {
-    return (body->m_bounds[0] + body->m_bounds[1]) / 2;
+static inline btVector3 getBoundingCenter(btSoftBody *pBody) {
+    return (pBody->m_bounds[0] + pBody->m_bounds[1]) / 2;
 }
 
 #ifdef __cplusplus
@@ -53,24 +53,24 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateClusterMesh
     (JNIEnv *env, jclass clazz, jlong bodyId, jobject positionsBuffer,
             jboolean meshInLocalSpace) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
-        jfloat* positions
-                = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
+        jfloat *pBuffer
+                = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
 
         const btVector3 offset =
-                meshInLocalSpace ? getBoundingCenter(body) : btVector3(0, 0, 0);
-        int numClusters = body->m_clusters.size();
+                meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0);
+        int numClusters = pBody->m_clusters.size();
 
         for (int i = 0; i < numClusters; ++i) {
-            const btSoftBody::Cluster* cluster = body->m_clusters[i];
-            const btVector3& clusterCom = cluster->m_com;
-            positions[i * 3] = clusterCom.getX() - offset.getX();
-            positions[i * 3 + 1] = clusterCom.getY() - offset.getY();
-            positions[i * 3 + 2] = clusterCom.getZ() - offset.getZ();
+            const btSoftBody::Cluster *pCluster = pBody->m_clusters[i];
+            const btVector3& clusterCom = pCluster->m_com;
+            pBuffer[i * 3] = clusterCom.getX() - offset.getX();
+            pBuffer[i * 3 + 1] = clusterCom.getY() - offset.getY();
+            pBuffer[i * 3 + 2] = clusterCom.getZ() - offset.getZ();
         }
     }
 
@@ -83,41 +83,42 @@ extern "C" {
     (JNIEnv *env, jclass clazz, jlong bodyId, jobject indexMap,
             jobject positionsBuffer, jobject normalsBuffer,
             jboolean meshInLocalSpace, jboolean doNormalUpdate) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(indexMap, "The index map does not exist.",);
-        const jint* jme2bulletMap = (jint*) env->GetDirectBufferAddress(indexMap);
+        const jint *pJme2bulletMap
+                = (jint *) env->GetDirectBufferAddress(indexMap);
         const int mapCapacity = env->GetDirectBufferCapacity(indexMap);
 
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
-        jfloat* positions
-                = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
+        jfloat *pPositions
+                = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
 
-        const btVector3 offset = (meshInLocalSpace ? getBoundingCenter(body) : btVector3(0, 0, 0));
+        const btVector3 offset = (meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0));
 
         if (doNormalUpdate) {
             NULL_CHECK(normalsBuffer, "The normals buffer does not exist.",);
-            jfloat* normals
-                    = (jfloat*) env->GetDirectBufferAddress(normalsBuffer);
+            jfloat *pNormals
+                    = (jfloat *) env->GetDirectBufferAddress(normalsBuffer);
 
             for (int i = 0; i < mapCapacity; ++i) {
-                const btSoftBody::Node& n = body->m_nodes[jme2bulletMap[i]];
-                positions[i * 3] = n.m_x.getX() - offset.getX();
-                positions[i * 3 + 1] = n.m_x.getY() - offset.getY();
-                positions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
+                const btSoftBody::Node& n = pBody->m_nodes[pJme2bulletMap[i]];
+                pPositions[i * 3] = n.m_x.getX() - offset.getX();
+                pPositions[i * 3 + 1] = n.m_x.getY() - offset.getY();
+                pPositions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
                 //--- normals
-                normals[i * 3] = n.m_n.getX();
-                normals[i * 3 + 1] = n.m_n.getY();
-                normals[i * 3 + 2] = n.m_n.getZ();
+                pNormals[i * 3] = n.m_n.getX();
+                pNormals[i * 3 + 1] = n.m_n.getY();
+                pNormals[i * 3 + 2] = n.m_n.getZ();
             }
         } else {
             for (int i = 0; i < mapCapacity; ++i) {
-                const btSoftBody::Node& n = body->m_nodes[jme2bulletMap[i]];
-                positions[i * 3] = n.m_x.getX() - offset.getX();
-                positions[i * 3 + 1] = n.m_x.getY() - offset.getY();
-                positions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
+                const btSoftBody::Node& n = pBody->m_nodes[pJme2bulletMap[i]];
+                pPositions[i * 3] = n.m_x.getX() - offset.getX();
+                pPositions[i * 3 + 1] = n.m_x.getY() - offset.getY();
+                pPositions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
             }
         }
     }
@@ -131,38 +132,38 @@ extern "C" {
     (JNIEnv *env, jclass clazz, jlong bodyId, jobject positionsBuffer,
             jobject normalsBuffer, jboolean meshInLocalSpace,
             jboolean doNormalUpdate) {
-        btSoftBody* body = reinterpret_cast<btSoftBody*> (bodyId);
-        NULL_CHECK(body, "The btSoftBody does not exist.",);
-        btAssert(body->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+        btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.",);
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
-        jfloat* positions
-                = (jfloat*) env->GetDirectBufferAddress(positionsBuffer);
+        jfloat *pPositions
+                = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
 
-        const btVector3 offset = (meshInLocalSpace ? getBoundingCenter(body) : btVector3(0, 0, 0));
-        const int numNodes = body->m_nodes.size();
+        const btVector3 offset = (meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0));
+        const int numNodes = pBody->m_nodes.size();
 
         if (doNormalUpdate) {
             NULL_CHECK(normalsBuffer, "The normals buffer does not exist.",);
-            jfloat* normals
-                    = (jfloat*) env->GetDirectBufferAddress(normalsBuffer);
+            jfloat *pNormals
+                    = (jfloat *) env->GetDirectBufferAddress(normalsBuffer);
 
             for (int i = 0; i < numNodes; ++i) {
-                const btSoftBody::Node& n = body->m_nodes[i];
-                positions[i * 3] = n.m_x.getX() - offset.getX();
-                positions[i * 3 + 1] = n.m_x.getY() - offset.getY();
-                positions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
+                const btSoftBody::Node& n = pBody->m_nodes[i];
+                pPositions[i * 3] = n.m_x.getX() - offset.getX();
+                pPositions[i * 3 + 1] = n.m_x.getY() - offset.getY();
+                pPositions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
                 //--- normals
-                normals[i * 3] = n.m_n.getX();
-                normals[i * 3 + 1] = n.m_n.getY();
-                normals[i * 3 + 2] = n.m_n.getZ();
+                pNormals[i * 3] = n.m_n.getX();
+                pNormals[i * 3 + 1] = n.m_n.getY();
+                pNormals[i * 3 + 2] = n.m_n.getZ();
             }
         } else {
             for (int i = 0; i < numNodes; ++i) {
-                const btSoftBody::Node& n = body->m_nodes[i];
-                positions[i * 3] = n.m_x.getX() - offset.getX();
-                positions[i * 3 + 1] = n.m_x.getY() - offset.getY();
-                positions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
+                const btSoftBody::Node& n = pBody->m_nodes[i];
+                pPositions[i * 3] = n.m_x.getX() - offset.getX();
+                pPositions[i * 3 + 1] = n.m_x.getY() - offset.getY();
+                pPositions[i * 3 + 2] = n.m_x.getZ() - offset.getZ();
             }
         }
     }

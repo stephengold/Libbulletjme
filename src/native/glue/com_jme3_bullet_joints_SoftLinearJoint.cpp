@@ -49,18 +49,18 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointSoftRigid
     (JNIEnv *env, jobject object, jlong softIdA, jint clusterIndexA,
             jlong rigidIdB, jfloat erp, jfloat cfm, jfloat split,
-            jobject position) {
-        btSoftBody *pSoftA = reinterpret_cast<btSoftBody*> (softIdA);
+            jobject positionVector) {
+        btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
         NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
         btAssert(pSoftA->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btRigidBody *pRigidB = reinterpret_cast<btRigidBody*> (rigidIdB);
+        btRigidBody *pRigidB = reinterpret_cast<btRigidBody *> (rigidIdB);
         NULL_CHECK(pRigidB, "Rigid body B does not exist.", 0)
         btAssert(pRigidB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        NULL_CHECK(position, "The position vector does not exist.", 0)
+        NULL_CHECK(positionVector, "The position vector does not exist.", 0)
         btVector3 pos;
-        jmeBulletUtil::convert(env, position, &pos);
+        jmeBulletUtil::convert(env, positionVector, &pos);
 
         btSoftBody::LJoint::Specs specs;
         specs.cfm = cfm;
@@ -85,7 +85,7 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointSoftSoft
     (JNIEnv *env, jobject object, jlong softIdA, jint clusterIndexA,
             jlong softIdB, jint clusterIndexB, jfloat erp,
-            jfloat cfm, jfloat split, jobject position) {
+            jfloat cfm, jfloat split, jobject positionVector) {
         btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
         NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
         btAssert(pSoftA->getInternalType() & btCollisionObject::CO_SOFT_BODY);
@@ -94,9 +94,9 @@ extern "C" {
         NULL_CHECK(pSoftB, "Soft body B does not exist.", 0)
         btAssert(pSoftB->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        NULL_CHECK(position, "The position vector does not exist.", 0)
+        NULL_CHECK(positionVector, "The position vector does not exist.", 0)
         btVector3 pos;
-        jmeBulletUtil::convert(env, position, &pos);
+        jmeBulletUtil::convert(env, positionVector, &pos);
 
         btSoftBody::LJoint::Specs specs;
         specs.cfm = cfm;
@@ -120,16 +120,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_setPosition
-    (JNIEnv *env, jobject object, jlong jointId, jobject position) {
-        btSoftBody::LJoint* joint = reinterpret_cast<btSoftBody::LJoint*> (jointId);
-        NULL_CHECK(joint, "The joint does not exist.",)
+    (JNIEnv *env, jobject object, jlong jointId, jobject positionVector) {
+        btSoftBody::LJoint *pJoint
+                = reinterpret_cast<btSoftBody::LJoint *> (jointId);
+        NULL_CHECK(pJoint, "The joint does not exist.",)
 
-        NULL_CHECK(position, "The position vector does not exist.",)
+        NULL_CHECK(positionVector, "The position vector does not exist.",)
         btVector3 pos;
-        jmeBulletUtil::convert(env, position, &pos);
+        jmeBulletUtil::convert(env, positionVector, &pos);
 
-        joint->m_refs[0] = joint->m_bodies[0].xform().inverse() * pos;
-        joint->m_refs[1] = joint->m_bodies[1].xform().inverse() * pos;
+        pJoint->m_refs[0] = pJoint->m_bodies[0].xform().inverse() * pos;
+        pJoint->m_refs[1] = pJoint->m_bodies[1].xform().inverse() * pos;
     }
 
 #ifdef __cplusplus

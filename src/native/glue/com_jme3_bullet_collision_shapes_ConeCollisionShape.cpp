@@ -46,23 +46,24 @@ extern "C" {
      * Signature: (IFF)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_ConeCollisionShape_createShape
-    (JNIEnv * env, jobject object, jint axis, jfloat radius, jfloat height) {
+    (JNIEnv *env, jobject object, jint axis, jfloat radius, jfloat height) {
         jmeClasses::initJavaClasses(env);
 
-        btCollisionShape* shape;
+        btCollisionShape *pShape;
         switch (axis) {
             case 0:
-                shape = new btConeShapeX(radius, height);
+                pShape = new btConeShapeX(radius, height);
                 break;
             case 1:
-                shape = new btConeShape(radius, height);
+                pShape = new btConeShape(radius, height);
                 break;
             case 2:
-                shape = new btConeShapeZ(radius, height);
+                pShape = new btConeShapeZ(radius, height);
                 break;
+                // TODO default case
         }
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
 #ifdef __cplusplus

@@ -47,11 +47,12 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_getAngularStiffnessFactor
-    (JNIEnv *env, jobject object, jlong matId) {
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong materialId) {
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (materialId);
+        NULL_CHECK(pMaterial, "The material does not exist.", 0)
 
-        return mat->m_kAST;
+        return pMaterial->m_kAST;
     }
 
     /*
@@ -60,11 +61,12 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_getLinearStiffnessFactor
-    (JNIEnv *env, jobject object, jlong matId) {
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong materialId) {
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (materialId);
+        NULL_CHECK(pMaterial, "The material does not exist.", 0)
 
-        return mat->m_kLST;
+        return pMaterial->m_kLST;
     }
 
     /*
@@ -73,11 +75,12 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_getVolumeStiffnessFactor
-    (JNIEnv *env, jobject object, jlong matId) {
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong materialId) {
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (materialId);
+        NULL_CHECK(pMaterial, "The material does not exist.", 0)
 
-        return mat->m_kVST;
+        return pMaterial->m_kVST;
     }
 
     /*
@@ -86,11 +89,12 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_setAngularStiffnessFactor
-    (JNIEnv *env, jobject object, jlong matId, jfloat factor) {
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.",)
+    (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (materialId);
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
-        mat->m_kAST = factor;
+        pMaterial->m_kAST = factor;
     }
 
     /*
@@ -99,11 +103,12 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_setLinearStiffnessFactor
-    (JNIEnv *env, jobject object, jlong matId, jfloat factor) {
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.",)
+    (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (materialId);
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
-        mat->m_kLST = factor;
+        pMaterial->m_kLST = factor;
     }
 
     /*
@@ -112,11 +117,12 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Material_setVolumeStiffnessFactor
-    (JNIEnv *env, jobject object, jlong matId, jfloat factor) {
-        btSoftBody::Material* mat = reinterpret_cast<btSoftBody::Material*> (matId);
-        NULL_CHECK(mat, "The material does not exist.",)
+    (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
+        btSoftBody::Material *pMaterial
+                = reinterpret_cast<btSoftBody::Material *> (materialId);
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
-        mat->m_kVST = factor;
+        pMaterial->m_kVST = factor;
     }
 
 #ifdef __cplusplus

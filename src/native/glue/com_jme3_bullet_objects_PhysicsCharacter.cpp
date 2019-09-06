@@ -50,26 +50,28 @@ extern "C" {
      * Signature: (JJF)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createCharacterObject
-    (JNIEnv *env, jobject object, jlong objectId, jlong shapeId,
+    (JNIEnv *env, jobject object, jlong ghostId, jlong shapeId,
             jfloat stepHeight) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.", 0)
+        btPairCachingGhostObject *pGhost
+                = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.", 0)
 
-        btCollisionShape* sh = reinterpret_cast<btCollisionShape*> (shapeId);
-        NULL_CHECK(sh, "The btCollisionShape does not exist.", 0)
-        if (sh->isConcave()) {
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0)
+        if (pShape->isConcave()) {
             jclass newExc
                     = env->FindClass("java/lang/IllegalArgumentException");
             env->ThrowNew(newExc, "The btCollisionShape is concave.");
             return 0;
         }
-        btConvexShape* shape = reinterpret_cast<btConvexShape*> (shapeId);
+        btConvexShape *pConvex = reinterpret_cast<btConvexShape *> (shapeId);
 
-        btKinematicCharacterController* character
-                = new btKinematicCharacterController(ghost, shape, stepHeight);
+        btKinematicCharacterController *pController
+                = new btKinematicCharacterController(pGhost, pConvex,
+                stepHeight);
 
-        return reinterpret_cast<jlong> (character);
+        return reinterpret_cast<jlong> (pController);
     }
 
     /*
@@ -78,12 +80,10 @@ extern "C" {
      * Signature: ()J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createGhostObject
-    (JNIEnv * env, jobject object) {
+    (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
-
-        btPairCachingGhostObject* ghost = new btPairCachingGhostObject();
-
-        return reinterpret_cast<jlong> (ghost);
+        btPairCachingGhostObject *pGhost = new btPairCachingGhostObject();
+        return reinterpret_cast<jlong> (pGhost);
     }
 
     /*
@@ -92,12 +92,13 @@ extern "C" {
      * Signature: (J)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_finalizeNativeCharacter
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        delete character;
+        delete pController;
     }
 
     /*
@@ -106,11 +107,13 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getAngularDamping
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0)
 
-        return character->getAngularDamping();
+        return pController->getAngularDamping();
     }
 
     /*
@@ -119,15 +122,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getAngularVelocity
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
+    (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        const btVector3& a_vel = character->getAngularVelocity();
+        const btVector3& a_vel = pController->getAngularVelocity();
 
-        NULL_CHECK(value, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &a_vel, value);
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        jmeBulletUtil::convert(env, &a_vel, storeVector);
     }
 
     /*
@@ -136,11 +140,11 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btGhostObject* ghost = reinterpret_cast<btGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btGhostObject does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong ghostId) {
+        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btGhostObject does not exist.", 0)
 
-        return ghost->getCcdMotionThreshold();
+        return pGhost->getCcdMotionThreshold();
     }
 
     /*
@@ -149,11 +153,11 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdSquareMotionThreshold
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btGhostObject* ghost = reinterpret_cast<btGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btGhostObject does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong ghostId) {
+        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btGhostObject does not exist.", 0)
 
-        return ghost->getCcdSquareMotionThreshold();
+        return pGhost->getCcdSquareMotionThreshold();
     }
 
     /*
@@ -162,11 +166,11 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btGhostObject* ghost = reinterpret_cast<btGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btGhostObject does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong ghostId) {
+        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btGhostObject does not exist.", 0)
 
-        return ghost->getCcdSweptSphereRadius();
+        return pGhost->getCcdSweptSphereRadius();
     }
 
     /*
@@ -175,12 +179,13 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getFallSpeed
-    (JNIEnv *env, jobject object, jlong controllerId) {
-        btKinematicCharacterController* controller
-                = reinterpret_cast<btKinematicCharacterController*> (controllerId);
-        NULL_CHECK(controller, "The btKinematicCharacterController does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0)
 
-        return controller->getFallSpeed();
+        return pController->getFallSpeed();
     }
 
     /*
@@ -189,15 +194,16 @@ extern "C" {
      * Signature:  (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getGravity
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
+    (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        const btVector3& g = character->getGravity();
+        const btVector3& g = pController->getGravity();
 
-        NULL_CHECK(value, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &g, value);
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        jmeBulletUtil::convert(env, &g, storeVector);
     }
 
     /*
@@ -206,12 +212,13 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getJumpSpeed
-    (JNIEnv *env, jobject object, jlong controllerId) {
-        btKinematicCharacterController* controller
-                = reinterpret_cast<btKinematicCharacterController*> (controllerId);
-        NULL_CHECK(controller, "The btKinematicCharacterController does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0)
 
-        return controller->getJumpSpeed();
+        return pController->getJumpSpeed();
     }
 
     /*
@@ -220,12 +227,13 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getLinearDamping
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0)
 
-        return character->getLinearDamping();
+        return pController->getLinearDamping();
     }
 
     /*
@@ -234,15 +242,16 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getLinearVelocity
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
+    (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        const btVector3& l_vel = character->getLinearVelocity();
+        const btVector3& l_vel = pController->getLinearVelocity();
 
-        NULL_CHECK(value, "The store vector does not exist.",)
-        jmeBulletUtil::convert(env, &l_vel, value);
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        jmeBulletUtil::convert(env, &l_vel, storeVector);
     }
 
     /*
@@ -251,12 +260,13 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getMaxPenetrationDepth
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0);
 
-        return character->getMaxPenetrationDepth();
+        return pController->getMaxPenetrationDepth();
     }
 
     /*
@@ -265,12 +275,13 @@ extern "C" {
      * Signature: (J)F
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getMaxSlope
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.", 0)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0);
 
-        return character->getMaxSlope();
+        return pController->getMaxSlope();
     }
 
     /*
@@ -279,12 +290,13 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getUpDirection
-    (JNIEnv *env, jobject object, jlong characterId, jobject storeVector) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (characterId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",);
+    (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        const btVector3& direction = character->getUp();
+        const btVector3& direction = pController->getUp();
 
         NULL_CHECK(storeVector, "The store vector does not exist.",)
         jmeBulletUtil::convert(env, &direction, storeVector);
@@ -296,16 +308,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_jump
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
-        NULL_CHECK(value, "The vector does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject jumpVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
+        NULL_CHECK(jumpVector, "The jump vector does not exist.",);
 
         btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
+        jmeBulletUtil::convert(env, jumpVector, &vec);
 
-        character->jump(vec);
+        pController->jump(vec);
     }
 
     /*
@@ -314,12 +327,13 @@ extern "C" {
      * Signature: (J)Z
      */
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_onGround
-    (JNIEnv *env, jobject object, jlong objectId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.", false)
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", false)
 
-        return character->onGround();
+        return pController->onGround();
     }
 
     /*
@@ -328,18 +342,19 @@ extern "C" {
      * Signature: (JJ)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_reset
-    (JNIEnv *env, jobject object, jlong characterId, jlong spaceId) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (characterId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jlong spaceId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        jmePhysicsSpace* space = reinterpret_cast<jmePhysicsSpace*> (spaceId);
-        NULL_CHECK(space, "The physics space does not exist.",)
+        jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+        NULL_CHECK(pSpace, "The physics space does not exist.",)
 
-        btDynamicsWorld* world = space->getDynamicsWorld();
-        NULL_CHECK(world, "The btDynamicsWorld does not exist.",)
+        btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
+        NULL_CHECK(pWorld, "The btDynamicsWorld does not exist.",)
 
-        character->reset(world);
+        pController->reset(pWorld);
     }
 
     /*
@@ -348,12 +363,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setAngularDamping
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        character->setAngularDamping(value);
+        pController->setAngularDamping(value);
     }
 
     /*
@@ -362,16 +378,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setAngularVelocity
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject velocityVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        NULL_CHECK(value, "The vector does not exist.",)
+        NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
+        jmeBulletUtil::convert(env, velocityVector, &vec);
 
-        character->setAngularVelocity(vec);
+        pController->setAngularVelocity(vec);
     }
 
     /*
@@ -380,11 +397,11 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btGhostObject* ghost = reinterpret_cast<btGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btGhostObject does not exist.",)
+    (JNIEnv *env, jobject object, jlong ghostId, jfloat value) {
+        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btGhostObject does not exist.",)
 
-        ghost->setCcdMotionThreshold(value);
+        pGhost->setCcdMotionThreshold(value);
     }
 
     /*
@@ -393,11 +410,11 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btGhostObject* ghost = reinterpret_cast<btGhostObject*> (objectId);
-        NULL_CHECK(ghost, "The btGhostObject does not exist.",)
+    (JNIEnv *env, jobject object, jlong ghostId, jfloat value) {
+        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btGhostObject does not exist.",)
 
-        ghost->setCcdSweptSphereRadius(value);
+        pGhost->setCcdSweptSphereRadius(value);
     }
 
     /*
@@ -407,12 +424,12 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCharacterFlags
     (JNIEnv *env, jobject object, jlong ghostId) {
-        btPairCachingGhostObject* ghost
-                = reinterpret_cast<btPairCachingGhostObject*> (ghostId);
-        NULL_CHECK(ghost, "The btPairCachingGhostObject does not exist.",)
+        btPairCachingGhostObject *pGhost
+                = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
 
-        ghost->setCollisionFlags(/*ghost->getCollisionFlags() |*/ btCollisionObject::CF_CHARACTER_OBJECT);
-        ghost->setCollisionFlags(ghost->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
+        pGhost->setCollisionFlags(/*pGhost->getCollisionFlags() |*/ btCollisionObject::CF_CHARACTER_OBJECT);
+        pGhost->setCollisionFlags(pGhost->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
     }
 
     /*
@@ -421,12 +438,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setFallSpeed
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",)
 
-        character->setFallSpeed(value);
+                pController->setFallSpeed(value);
     }
 
     /*
@@ -435,16 +453,18 @@ extern "C" {
      * Signature:  (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setGravity
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject accelerationVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        NULL_CHECK(value, "The vector does not exist.",)
-        btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
+        NULL_CHECK(accelerationVector,
+                "The acceleration vector does not exist.",)
+                btVector3 vec;
+        jmeBulletUtil::convert(env, accelerationVector, &vec);
 
-        character->setGravity(vec);
+        pController->setGravity(vec);
     }
 
     /*
@@ -453,12 +473,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setJumpSpeed
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        character->setJumpSpeed(value);
+        pController->setJumpSpeed(value);
     }
 
     /*
@@ -467,11 +488,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setLinearDamping
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        character->setLinearDamping(value);
+        pController->setLinearDamping(value);
     }
 
     /*
@@ -480,16 +503,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setLinearVelocity
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject velocityVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        NULL_CHECK(value, "The vector does not exist.",)
+        NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
+        jmeBulletUtil::convert(env, velocityVector, &vec);
 
-        character->setLinearVelocity(vec);
+        pController->setLinearVelocity(vec);
     }
 
     /*
@@ -498,12 +522,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setMaxPenetrationDepth
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        character->setMaxPenetrationDepth(value);
+        pController->setMaxPenetrationDepth(value);
     }
 
     /*
@@ -512,12 +537,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setMaxSlope
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        character->setMaxSlope(value);
+        pController->setMaxSlope(value);
     }
 
     /*
@@ -526,11 +552,13 @@ extern "C" {
      * Signature: (JF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setStepHeight
-    (JNIEnv *env, jobject object, jlong objectId, jfloat value) {
-        btKinematicCharacterController* character = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        character->setStepHeight(value);
+        pController->setStepHeight(value);
     }
 
     /*
@@ -539,16 +567,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setUp
-    (JNIEnv *env, jobject object, jlong objectId, jobject value) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject upVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        NULL_CHECK(value, "The vector does not exist.",)
+        NULL_CHECK(upVector, "The vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, value, &vec);
+        jmeBulletUtil::convert(env, upVector, &vec);
 
-        character->setUp(vec);
+        pController->setUp(vec);
     }
 
     /*
@@ -557,13 +586,14 @@ extern "C" {
      * Signature: (JZ)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setUseGhostSweepTest
-    (JNIEnv *env, jobject object, jlong characterId, jboolean useGhostSweepTest) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (characterId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jboolean useGhostSweepTest) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-                bool flag = (bool)useGhostSweepTest;
-        character->setUseGhostSweepTest(flag);
+        bool flag = (bool)useGhostSweepTest;
+        pController->setUseGhostSweepTest(flag);
     }
 
     /*
@@ -572,15 +602,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setWalkDirection
-    (JNIEnv *env, jobject object, jlong objectId, jobject vector) {
-        btKinematicCharacterController* character = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject directionVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        NULL_CHECK(vector, "The direction vector does not exist.",)
+        NULL_CHECK(directionVector, "The direction vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, vector, &vec);
+        jmeBulletUtil::convert(env, directionVector, &vec);
 
-        character->setWalkDirection(vec);
+        pController->setWalkDirection(vec);
     }
 
     /*
@@ -589,16 +621,17 @@ extern "C" {
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_warp
-    (JNIEnv *env, jobject object, jlong objectId, jobject vector) {
-        btKinematicCharacterController* character
-                = reinterpret_cast<btKinematicCharacterController*> (objectId);
-        NULL_CHECK(character, "The btKinematicCharacterController does not exist.",)
+    (JNIEnv *env, jobject object, jlong kccId, jobject locationVector) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.",);
 
-        NULL_CHECK(vector, "The vector does not exist.",)
+        NULL_CHECK(locationVector, "The location vector does not exist.",)
         btVector3 vec;
-        jmeBulletUtil::convert(env, vector, &vec);
+        jmeBulletUtil::convert(env, locationVector, &vec);
 
-        character->warp(vec);
+        pController->warp(vec);
     }
 
 #ifdef __cplusplus

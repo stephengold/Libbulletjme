@@ -49,18 +49,19 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
     (JNIEnv *env, jobject object, jlong compoundId, jlong childId,
             jobject childLocation, jobject childRotation) {
-        btCompoundShape* shape
-                = reinterpret_cast<btCompoundShape*> (compoundId);
-        NULL_CHECK(shape, "The btCompoundShape does not exist.", 0)
-        btAssert(shape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+        btCompoundShape *pShape
+                = reinterpret_cast<btCompoundShape *> (compoundId);
+        NULL_CHECK(pShape, "The btCompoundShape does not exist.", 0)
+        btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
-        btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
-        NULL_CHECK(child, "The child shape does not exist.", 0)
+        btCollisionShape *pChild
+                = reinterpret_cast<btCollisionShape *> (childId);
+        NULL_CHECK(pChild, "The child shape does not exist.", 0)
 
         btTransform trans;
         jmeBulletUtil::convert(env, childLocation, &trans.getOrigin());
         jmeBulletUtil::convert(env, childRotation, &trans.getBasis());
-        shape->addChildShape(trans, child);
+        pShape->addChildShape(trans, pChild);
 
         return 0; // why?
     }
@@ -73,10 +74,8 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
-
-        btCompoundShape* shape = new btCompoundShape();
-
-        return reinterpret_cast<jlong> (shape);
+        btCompoundShape *pShape = new btCompoundShape();
+        return reinterpret_cast<jlong> (pShape);
     }
 
     /*
@@ -97,18 +96,20 @@ extern "C" {
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    removeChildShape
      * Signature: (JJ)J
+     * TODO should return void
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
-    (JNIEnv * env, jobject object, jlong compoundId, jlong childId) {
-        btCompoundShape* shape
-                = reinterpret_cast<btCompoundShape*> (compoundId);
-        NULL_CHECK(shape, "The btCompoundShape does not exist.", 0)
-        btAssert(shape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    (JNIEnv *env, jobject object, jlong compoundId, jlong childId) {
+        btCompoundShape *pShape
+                = reinterpret_cast<btCompoundShape *> (compoundId);
+        NULL_CHECK(pShape, "The btCompoundShape does not exist.", 0)
+        btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
-        btCollisionShape* child = reinterpret_cast<btCollisionShape*> (childId);
-        NULL_CHECK(child, "The child shape does not exist.", 0)
+        btCollisionShape *pChild
+                = reinterpret_cast<btCollisionShape *> (childId);
+        NULL_CHECK(pChild, "The child shape does not exist.", 0)
 
-        shape->removeChildShape(child);
+        pShape->removeChildShape(pChild);
 
         return 0; // why?
     }

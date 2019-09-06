@@ -47,13 +47,13 @@ extern "C" {
      * Signature: (J)I
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_countHullVertices
-    (JNIEnv * env, jobject object, jlong shapeId) {
-        btConvexHullShape* hull
-                = reinterpret_cast<btConvexHullShape*> (shapeId);
-        NULL_CHECK(hull, "The btConvexHullShape does not exist.", 0);
-        btAssert(hull->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btConvexHullShape *pShape
+                = reinterpret_cast<btConvexHullShape *> (shapeId);
+        NULL_CHECK(pShape, "The btConvexHullShape does not exist.", 0);
+        btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
-        int count = hull->getNumPoints();
+        int count = pShape->getNumPoints();
         return count;
     }
 
@@ -65,7 +65,7 @@ extern "C" {
      * buffer contains float values: x,y,z for each vertex
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeB
-    (JNIEnv * env, jobject object, jobject buffer, jint numVertices) {
+    (JNIEnv *env, jobject object, jobject buffer, jint numVertices) {
         jmeClasses::initJavaClasses(env);
 
         int n = numVertices;
@@ -82,19 +82,20 @@ extern "C" {
             env->ThrowNew(newExc, "The buffer provided is too small.");
             return 0L;
         }
-        float* data = (float*) env->GetDirectBufferAddress(buffer);
+        float *pBuffer = (float *) env->GetDirectBufferAddress(buffer);
 
-        btConvexHullShape* shape = new btConvexHullShape();
+        btConvexHullShape *pShape = new btConvexHullShape();
 
         for (int i = 0; i < n; ++i) {
             int j = 3 * i;
-            btVector3 vect = btVector3(data[j], data[j + 1], data[j + 2]);
-            shape->addPoint(vect);
+            btVector3 vect
+                    = btVector3(pBuffer[j], pBuffer[j + 1], pBuffer[j + 2]);
+            pShape->addPoint(vect);
         }
 
-        shape->optimizeConvexHull();
+        pShape->optimizeConvexHull();
 
-        return reinterpret_cast<jlong> (shape);
+        return reinterpret_cast<jlong> (pShape);
     }
 
     /*
@@ -103,15 +104,15 @@ extern "C" {
      * Signature: (JLjava/nio/ByteBuffer;)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVertices
-    (JNIEnv *env, jobject object, jlong shapeId, jobject buffer) {
-        btConvexHullShape* hull
-                = reinterpret_cast<btConvexHullShape*> (shapeId);
-        NULL_CHECK(hull, "The btConvexHullShape does not exist.",)
-        btAssert(hull->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+    (JNIEnv *env, jobject object, jlong shapeId, jobject storeBuffer) {
+        btConvexHullShape *pShape
+                = reinterpret_cast<btConvexHullShape *> (shapeId);
+        NULL_CHECK(pShape, "The btConvexHullShape does not exist.",)
+        btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
-        NULL_CHECK(buffer, "The store buffer does not exist.",);
-        jlong bytesCapacity = env->GetDirectBufferCapacity(buffer);
-        int numVerts = hull->getNumPoints();
+        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
+        jlong bytesCapacity = env->GetDirectBufferCapacity(storeBuffer);
+        int numVerts = pShape->getNumPoints();
         long bytesNeeded = 3 * sizeof (float) * (long) numVerts;
         if (bytesNeeded > bytesCapacity) {
             jclass newExc
@@ -120,14 +121,14 @@ extern "C" {
             return;
         }
 
-        const btVector3* vertexPtr = hull->getUnscaledPoints();
-        float* writePtr = (float*) env->GetDirectBufferAddress(buffer);
+        const btVector3* vertexPtr = pShape->getUnscaledPoints();
+        float *pWrite = (float *) env->GetDirectBufferAddress(storeBuffer);
         for (int i = 0; i < numVerts; ++i) {
-            writePtr[0] = vertexPtr->m_floats[0];
-            writePtr[1] = vertexPtr->m_floats[1];
-            writePtr[2] = vertexPtr->m_floats[2];
+            pWrite[0] = vertexPtr->m_floats[0];
+            pWrite[1] = vertexPtr->m_floats[1];
+            pWrite[2] = vertexPtr->m_floats[2];
             ++vertexPtr;
-            writePtr += 3;
+            pWrite += 3;
         }
     }
 

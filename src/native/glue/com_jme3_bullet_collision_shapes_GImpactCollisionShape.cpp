@@ -47,14 +47,14 @@ extern "C" {
      * Signature: (J)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_createShape
-    (JNIEnv * env, jobject object, jlong meshId) {
+    (JNIEnv *env, jobject object, jlong meshId) {
         jmeClasses::initJavaClasses(env);
 
-        btStridingMeshInterface* pMesh
-                = reinterpret_cast<btStridingMeshInterface*> (meshId);
+        btStridingMeshInterface *pMesh
+                = reinterpret_cast<btStridingMeshInterface *> (meshId);
         NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.", 0)
 
-        btGImpactMeshShape* pShape = new btGImpactMeshShape(pMesh);
+        btGImpactMeshShape *pShape = new btGImpactMeshShape(pMesh);
         // no longer invoking updateBound() here -- caller must do that
 
         return reinterpret_cast<jlong> (pShape);
