@@ -138,6 +138,62 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    isConvex
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConvex
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+
+        return pShape->isConvex();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    isInfinite
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isInfinite
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+
+        return pShape->isInfinite();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    isNonMoving
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isNonMoving
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+
+        return pShape->isNonMoving();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+     * Method:    isPolyhedral
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isPolyhedral
+    (JNIEnv *env, jobject object, jlong shapeId) {
+        btCollisionShape *pShape
+                = reinterpret_cast<btCollisionShape *> (shapeId);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+
+        return pShape->isPolyhedral();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_shapes_CollisionShape
      * Method:    setLocalScaling
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */

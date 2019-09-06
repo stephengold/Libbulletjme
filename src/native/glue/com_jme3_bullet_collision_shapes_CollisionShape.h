@@ -57,6 +57,38 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isConvex
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConvex
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isInfinite
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isInfinite
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isNonMoving
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isNonMoving
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isPolyhedral
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isPolyhedral
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    setLocalScaling
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
