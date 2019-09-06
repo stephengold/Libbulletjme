@@ -82,11 +82,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong pcoId) {
         btCollisionObject *pCollisionObject
                 = reinterpret_cast<btCollisionObject *> (pcoId);
-        NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",)
+        NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",);
 
-        if (pCollisionObject->getUserPointer() != NULL) { // TODO simplify
-            jmeUserPointer *pUser
-                    = (jmeUserPointer *) pCollisionObject->getUserPointer();
+        void *pUser = pCollisionObject->getUserPointer();
+        if (pUser != NULL) {
             delete pUser;
         }
         delete pCollisionObject;
