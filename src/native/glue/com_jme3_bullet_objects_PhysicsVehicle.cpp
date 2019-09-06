@@ -114,7 +114,7 @@ extern "C" {
 
         btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
         NULL_CHECK(pBody, "The btRigidBody does not exist.", 0);
-        // TODO type check
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         pBody->setActivationState(DISABLE_DEACTIVATION);
 

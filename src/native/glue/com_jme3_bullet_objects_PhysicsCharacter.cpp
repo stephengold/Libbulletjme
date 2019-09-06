@@ -54,15 +54,17 @@ extern "C" {
             jfloat stepHeight) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.", 0)
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.", 0);
+        btAssert(
+                pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
         btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
         NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0)
-        if (pShape->isConcave()) {
+        if (!pShape->isConvex()) {
             jclass newExc
                     = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "The btCollisionShape is concave.");
+            env->ThrowNew(newExc, "The btCollisionShape isn't convex.");
             return 0;
         }
         btConvexShape *pConvex = reinterpret_cast<btConvexShape *> (shapeId);
@@ -138,6 +140,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    getCcdMotionThreshold
      * Signature: (J)F
+     * TODO delete
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdMotionThreshold
     (JNIEnv *env, jobject object, jlong ghostId) {
@@ -151,6 +154,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    getCcdSquareMotionThreshold
      * Signature: (J)F
+     * TODO delete
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdSquareMotionThreshold
     (JNIEnv *env, jobject object, jlong ghostId) {
@@ -164,6 +168,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    getCcdSweptSphereRadius
      * Signature: (J)F
+     * TODO delete
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdSweptSphereRadius
     (JNIEnv *env, jobject object, jlong ghostId) {
@@ -395,6 +400,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    setCcdMotionThreshold
      * Signature: (JF)V
+     * TODO delete
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCcdMotionThreshold
     (JNIEnv *env, jobject object, jlong ghostId, jfloat value) {
@@ -408,6 +414,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    setCcdSweptSphereRadius
      * Signature: (JF)V
+     * TODO delete
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCcdSweptSphereRadius
     (JNIEnv *env, jobject object, jlong ghostId, jfloat value) {
@@ -427,6 +434,8 @@ extern "C" {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
         NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
+        btAssert(
+                pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
         pGhost->setCollisionFlags(/*pGhost->getCollisionFlags() |*/ btCollisionObject::CF_CHARACTER_OBJECT);
         pGhost->setCollisionFlags(pGhost->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
@@ -619,6 +628,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    warp
      * Signature: (JLcom/jme3/math/Vector3f;)V
+     * TODO delete
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_warp
     (JNIEnv *env, jobject object, jlong kccId, jobject locationVector) {

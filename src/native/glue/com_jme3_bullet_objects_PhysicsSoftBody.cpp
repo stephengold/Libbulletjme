@@ -1672,7 +1672,8 @@ extern "C" {
         NULL_CHECK(pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        btVector3 vec; // TODO null check locationVector
+        NULL_CHECK(locationVector, "The location vector does not exist.",);
+        btVector3 vec;
         jmeBulletUtil::convert(env, locationVector, &vec);
 
         vec -= getBoundingCenter(pBody);
