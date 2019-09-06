@@ -93,6 +93,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    getActivationState
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getActivationState
+    (JNIEnv *env, jobject object, jlong pcoId) {
+        btCollisionObject *pCollisionObject
+                = reinterpret_cast<btCollisionObject *> (pcoId);
+        NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",
+                0);
+
+        int state = pCollisionObject->getActivationState();
+        return (jint) state;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
      * Method:    getAnisotropicFriction
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -406,6 +422,20 @@ extern "C" {
         jboolean inWorld = (pCollisionObject->getBroadphaseHandle() != 0);
 
         return inWorld;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+     * Method:    setActivationState
+     * Signature: (JI)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setActivationState
+    (JNIEnv *env, jobject object, jlong pcoId, jint state) {
+        btCollisionObject *pCollisionObject
+                = reinterpret_cast<btCollisionObject *> (pcoId);
+        NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",)
+
+        pCollisionObject->forceActivationState(state);
     }
 
     /*
