@@ -402,13 +402,22 @@ extern "C" {
         jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
         NULL_CHECK(pSpace, "The physics space does not exist.",)
 
-        btCollisionShape *pShape // TODO btConvexShape
+        btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
         NULL_CHECK(pShape, "The shape does not exist.",);
+        if (!pShape->isConvex()) {
+            jclass newExc
+                    = env->FindClass("java/lang/IllegalArgumentException");
+            env->ThrowNew(newExc, "The btCollisionShape isn't convex.");
+            return;
+        }
 
-        struct AllConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
+        struct AllConvexResultCallback :
+                public btCollisionWorld::ConvexResultCallback {
 
-            AllConvexResultCallback(const btTransform& convexFromWorld, const btTransform & convexToWorld) : m_convexFromWorld(convexFromWorld), m_convexToWorld(convexToWorld) {
+            AllConvexResultCallback(const btTransform& convexFromWorld,
+                    const btTransform & convexToWorld)
+            : m_convexFromWorld(convexFromWorld), m_convexToWorld(convexToWorld) {
             }
             jobject resultlist;
             JNIEnv *env;
@@ -418,19 +427,32 @@ extern "C" {
             btVector3 m_hitNormalWorld;
             btVector3 m_hitPointWorld;
 
-            virtual btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace) {
+            virtual btScalar addSingleResult(
+                    btCollisionWorld::LocalConvexResult& convexResult,
+                    bool normalInWorldSpace) {
                 if (normalInWorldSpace) {
                     m_hitNormalWorld = convexResult.m_hitNormalLocal;
                 } else {
-                    m_hitNormalWorld = convexResult.m_hitCollisionObject->getWorldTransform().getBasis() * convexResult.m_hitNormalLocal;
+                    m_hitNormalWorld
+                            = convexResult.m_hitCollisionObject->getWorldTransform().getBasis()
+                            * convexResult.m_hitNormalLocal;
                 }
-                m_hitPointWorld.setInterpolate3(m_convexFromWorld.getBasis() * m_convexFromWorld.getOrigin(), m_convexToWorld.getBasis() * m_convexToWorld.getOrigin(), convexResult.m_hitFraction);
+                m_hitPointWorld.setInterpolate3(
+                        m_convexFromWorld.getBasis() * m_convexFromWorld.getOrigin(),
+                        m_convexToWorld.getBasis() * m_convexToWorld.getOrigin(),
+                        convexResult.m_hitFraction);
 
-                jmeBulletUtil::addSweepResult(env, resultlist, &m_hitNormalWorld, &m_hitPointWorld, convexResult.m_hitFraction, convexResult.m_hitCollisionObject);
+                jmeBulletUtil::addSweepResult(env, resultlist,
+                        &m_hitNormalWorld, &m_hitPointWorld,
+                        convexResult.m_hitFraction,
+                        convexResult.m_hitCollisionObject);
 
                 return 1.f;
             }
         };
+
+        const btConvexShape *pConvexShape
+                = reinterpret_cast<btConvexShape *> (shapeId);
 
         btTransform native_to;
         btVector3 scale; // scales are ignored
@@ -439,12 +461,14 @@ extern "C" {
         btTransform native_from;
         jmeBulletUtil::convert(env, from, &native_from, &scale);
 
-        btScalar native_allowed_ccd_penetration = btScalar(allowedCcdPenetration);
+        btScalar allowed_penetration = btScalar(allowedCcdPenetration);
 
         AllConvexResultCallback resultCallback(native_from, native_to);
         resultCallback.env = env;
         resultCallback.resultlist = resultlist;
-        pSpace->getDynamicsWorld()->convexSweepTest((btConvexShape *) pShape, native_from, native_to, resultCallback, native_allowed_ccd_penetration);
+
+        pSpace->getDynamicsWorld()->convexSweepTest(pConvexShape, native_from,
+                native_to, resultCallback, allowed_penetration);
     }
 
 #ifdef __cplusplus
