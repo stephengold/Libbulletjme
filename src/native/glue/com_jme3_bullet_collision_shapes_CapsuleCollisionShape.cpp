@@ -60,7 +60,11 @@ extern "C" {
             case 2:
                 pShape = new btCapsuleShapeZ(radius, height);
                 break;
-                // TODO default case
+            default:
+                jclass newExc
+                        = env->FindClass("java/lang/IllegalArgumentException");
+                env->ThrowNew(newExc, "The axis is out of range.");
+                return 0;
         }
 
         return reinterpret_cast<jlong> (pShape);
