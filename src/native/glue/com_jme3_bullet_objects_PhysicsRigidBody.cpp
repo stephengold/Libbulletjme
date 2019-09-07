@@ -735,6 +735,7 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    updateMassProps
      * Signature: (JJF)J
+     * TODO should return void
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_updateMassProps
     (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId, jfloat mass) {
@@ -749,7 +750,7 @@ extern "C" {
         pShape->calculateLocalInertia(mass, localInertia);
         pBody->setMassProps(mass, localInertia);
 
-        return reinterpret_cast<jlong> (pBody); // TODO why?
+        return reinterpret_cast<jlong> (pBody);
     }
 
 #ifdef __cplusplus
