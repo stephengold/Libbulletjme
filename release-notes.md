@@ -1,5 +1,13 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.9 released on 6 September 2019
+
+ + Added `getActivationState()` and `setActivationState()` methods to the
+   `PhysicsCollisionObject` class.
+ + Added `isConvex()`, `isInfinite()`, `isNonMoving()`, and `isPolyhedral()`
+   methods to the `CollisionShape` class.
+ + Added more internal checks.
+
 ## Version 2.0.8 released on 6 September 2019
 
  + Add a `getSquaredSpeed()` method to the `PhysicsRigidBody` class.
