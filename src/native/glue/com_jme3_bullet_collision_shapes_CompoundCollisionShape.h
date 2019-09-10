@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_jme3_bullet_collision_shapes_CompoundCollisionShape_defaultCapacity
+#define com_jme3_bullet_collision_shapes_CompoundCollisionShape_defaultCapacity 6L
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
  * Method:    addChildShape
@@ -17,11 +19,27 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionS
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
- * Method:    createShape
- * Signature: ()J
+ * Method:    calculatePrincipalAxisTransform
+ * Signature: (JLjava/nio/FloatBuffer;Lcom/jme3/math/Transform;Lcom/jme3/math/Vector3f;)V
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape
-  (JNIEnv *, jobject);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_calculatePrincipalAxisTransform
+  (JNIEnv *, jobject, jlong, jobject, jobject, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    countChildren
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_countChildren
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    createShape2
+ * Signature: (ZI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape2
+  (JNIEnv *, jobject, jboolean, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
@@ -38,6 +56,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
   (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    setChildTransform
+ * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_setChildTransform
+  (JNIEnv *, jobject, jlong, jlong, jobject, jobject);
 
 #ifdef __cplusplus
 }
