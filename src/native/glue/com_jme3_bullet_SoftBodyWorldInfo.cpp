@@ -186,6 +186,7 @@ extern "C" {
      * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setSoftBodyWorldInfo
      * Signature: (JJ)J
+     * TODO should return void
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setSoftBodyWorldInfo
     (JNIEnv *env, jobject object, jlong destId, jlong sourceId) {
@@ -209,7 +210,7 @@ extern "C" {
             pDest->m_sparsesdf = pSource->m_sparsesdf;
         }
 
-        return 0; // TODO should return void
+        return 0;
     }
 
     /*
