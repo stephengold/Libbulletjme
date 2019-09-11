@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.10 released on 10 September 2019
+
+ + Added `calculatePrincipalAxisTransform()`, `countChildren()`,
+   `createShape2()`, and `setChildTransform()` methods to the
+   `CompoundCollisionShape` class.
+ + Disabled NULL_CHECKs except in Debug builds.
+
 ## Version 2.0.9 released on 6 September 2019
 
  + Added `getActivationState()` and `setActivationState()` methods to the
