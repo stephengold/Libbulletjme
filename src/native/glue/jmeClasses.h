@@ -38,12 +38,16 @@
 
 #include <jni.h>
 
+#ifdef _DEBUG
 #define NULL_CHECK(pointer, message, retval) \
     if ((pointer) == NULL) { \
         jclass npe = env->FindClass("java/lang/NullPointerException"); \
         env->ThrowNew(npe, message); \
         return retval; \
     }
+#else
+#define NULL_CHECK(pointer, message, retval)
+#endif
 
 class jmeClasses {
 public:
