@@ -107,7 +107,7 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_joints_SixDofSpringJoint
-     * Method:    enableString
+     * Method:    enableSpring
      * Signature: (JIZ)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_enableSpring
@@ -116,8 +116,82 @@ extern "C" {
                 = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
         NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
         btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
 
         pJoint->enableSpring(index, onOff);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofSpringJoint
+     * Method:    getDamping
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getDamping
+    (JNIEnv *env, jobject object, jlong jointId, jint index) {
+        btGeneric6DofSpringConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+        btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
+
+        btScalar result = pJoint->getDamping(index);
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofSpringJoint
+     * Method:    getEquilibriumPoint
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getEquilibriumPoint
+    (JNIEnv *env, jobject object, jlong jointId, jint index) {
+        btGeneric6DofSpringConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+        btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
+
+        btScalar result = pJoint->getEquilibriumPoint(index);
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofSpringJoint
+     * Method:    getStiffness
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getStiffness
+    (JNIEnv *env, jobject object, jlong jointId, jint index) {
+        btGeneric6DofSpringConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+        btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
+
+        btScalar result = pJoint->getStiffness(index);
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_joints_SixDofSpringJoint
+     * Method:    isSpringEnabled
+     * Signature: (JI)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_isSpringEnabled
+    (JNIEnv *env, jobject object, jlong jointId, jint index) {
+        btGeneric6DofSpringConstraint *pJoint
+                = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
+        NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+        btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
+
+        bool result = pJoint->isSpringEnabled(index);
+        return (jboolean) result;
     }
 
     /*
@@ -131,6 +205,8 @@ extern "C" {
                 = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
         NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
         btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
 
         pJoint->setDamping(index, damping);
     }
@@ -161,6 +237,8 @@ extern "C" {
                 = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
         NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
         btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
 
         pJoint->setEquilibriumPoint(index);
     }
@@ -176,6 +254,8 @@ extern "C" {
                 = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
         NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
         btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
+        btAssert(index >= 0);
+        btAssert(index < 6);
 
         pJoint->setStiffness(index, stiffness);
     }
