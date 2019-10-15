@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.11 released on 14 October 2019
+
+ + Added `getDamping()`, `getEquilibriumPoint()`, `getStiffness()`, and
+   `isSpringEnabled()` methods to the `SixDofSpringJoint` class.
+ + Updated the Bullet sources to match SHA1 id=837e333 of the bullet3 project.
+
 ## Version 2.0.10 released on 10 September 2019
 
  + Added `calculatePrincipalAxisTransform()`, `countChildren()`,
