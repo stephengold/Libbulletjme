@@ -15,7 +15,6 @@ class btCollisionObject;
 struct btCollisionObjectWrapper;
 class btManifoldPoint;
 class btIDebugDraw;
-class btHeightfieldTerrainShape;
 
 enum btInternalEdgeAdjustFlags
 {
@@ -26,8 +25,6 @@ enum btInternalEdgeAdjustFlags
 
 ///Call btGenerateInternalEdgeInfo to create triangle info, store in the shape 'userInfo'
 void btGenerateInternalEdgeInfo(btBvhTriangleMeshShape* trimeshShape, btTriangleInfoMap* triangleInfoMap);
-
-void btGenerateInternalEdgeInfo(btHeightfieldTerrainShape* trimeshShape, btTriangleInfoMap* triangleInfoMap);
 
 ///Call the btFixMeshNormal to adjust the collision normal, using the triangle info map (generated using btGenerateInternalEdgeInfo)
 ///If this info map is missing, or the triangle is not store in this map, nothing will be done
