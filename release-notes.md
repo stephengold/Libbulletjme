@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.12 released on 4 November 2019
+
+ + Updated the Bullet sources to match SHA1 id=aac737017 of the bullet3 project,
+   to resolve soft-body performance issues at id=837e333.
+
 ## Version 2.0.11 released on 14 October 2019
 
  + Added `getDamping()`, `getEquilibriumPoint()`, `getStiffness()`, and
