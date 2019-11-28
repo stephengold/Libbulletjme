@@ -233,7 +233,7 @@ void btSimulationIslandManager::buildIslands(btDispatcher* dispatcher, btCollisi
 				//				printf("error in island management\n");
 			}
 
-            btAssert((colObj0->getIslandTag() == islandId) || (colObj0->getIslandTag() == -1));
+			btAssert((colObj0->getIslandTag() == islandId) || (colObj0->getIslandTag() == -1));
 			if (colObj0->getIslandTag() == islandId)
 			{
 				if (colObj0->getActivationState() == ACTIVE_TAG ||
@@ -257,7 +257,7 @@ void btSimulationIslandManager::buildIslands(btDispatcher* dispatcher, btCollisi
 					//					printf("error in island management\n");
 				}
 
-                btAssert((colObj0->getIslandTag() == islandId) || (colObj0->getIslandTag() == -1));
+				btAssert((colObj0->getIslandTag() == islandId) || (colObj0->getIslandTag() == -1));
 
 				if (colObj0->getIslandTag() == islandId)
 				{
@@ -278,8 +278,7 @@ void btSimulationIslandManager::buildIslands(btDispatcher* dispatcher, btCollisi
 					//					printf("error in island management\n");
 				}
 
-                 btAssert((colObj0->getIslandTag() == islandId) || (colObj0->getIslandTag() == -1));
-
+				btAssert((colObj0->getIslandTag() == islandId) || (colObj0->getIslandTag() == -1));
 
 				if (colObj0->getIslandTag() == islandId)
 				{
@@ -338,17 +337,13 @@ void btSimulationIslandManager::buildIslands(btDispatcher* dispatcher, btCollisi
 	}
 }
 
-
 ///@todo: this is random access, it can be walked 'cache friendly'!
 void btSimulationIslandManager::buildAndProcessIslands(btDispatcher* dispatcher, btCollisionWorld* collisionWorld, IslandCallback* callback)
 {
-	buildIslands(dispatcher, collisionWorld);
-    processIslands(dispatcher, collisionWorld, callback);
-}
+	btCollisionObjectArray& collisionObjects = collisionWorld->getCollisionObjectArray();
 
-void btSimulationIslandManager::processIslands(btDispatcher* dispatcher, btCollisionWorld* collisionWorld, IslandCallback* callback)
-{
-    btCollisionObjectArray& collisionObjects = collisionWorld->getCollisionObjectArray();
+	buildIslands(dispatcher, collisionWorld);
+
 	int endIslandIndex = 1;
 	int startIslandIndex;
 	int numElem = getUnionFind().getNumElements();

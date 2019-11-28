@@ -890,8 +890,6 @@ static void setupSpatialGridBatchesMt(
 
 	btVector3 gridExtent = bboxMax - bboxMin;
 
-	gridExtent.setMax(btVector3(btScalar(1), btScalar(1), btScalar(1)));
-
 	btVector3 gridCellSize = consExtent;
 	int gridDim[3];
 	gridDim[0] = int(1.0 + gridExtent.x() / gridCellSize.x());
