@@ -107,7 +107,7 @@ model {
                         }
                     }
 
-                } else { // assume toolChain in Gcc
+                } else if (toolChain in Gcc) {
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
                     if (buildType == buildTypes.Debug) {
@@ -135,6 +135,8 @@ model {
                     } else {
                         buildable = false
                     }
+                } else {
+                    buildable = false
                 }
 
                 if (buildable) {
