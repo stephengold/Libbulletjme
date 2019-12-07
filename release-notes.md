@@ -1,6 +1,6 @@
 # release notes for the Libbulletjme Project
 
-## Version 2.0.13 released on 4 November 2019
+## Version 2.0.13 released on 6 December 2019
 
  + Reverted the Bullet sources to match SHA1 id=1981493a of the bullet3 project.
  + Built using Gradle v6.0.1
