@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 #undef com_jme3_bullet_collision_PhysicsCollisionEvent_serialVersionUID
-#define com_jme3_bullet_collision_PhysicsCollisionEvent_serialVersionUID 5516075349620653480i64
+#define com_jme3_bullet_collision_PhysicsCollisionEvent_serialVersionUID 5516075349620653480LL
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getAppliedImpulse
