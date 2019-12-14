@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.15 released on 14 December 2019
+
+ + add support for btGeneric6DofSpring2Constrant
+
 ## Version 2.0.14 released on 6 December 2019
 
  + Reverted the Bullet sources to match SHA1 id=1981493a of the bullet3 project.
