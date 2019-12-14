@@ -87,11 +87,13 @@ btCompoundShape                   .bullet.collision.shapes.CompoundCollisionShap
 btCompoundShapeChild              .bullet.collision.shapes.info.ChildCollisionShape
 btConeShape                       .bullet.collision.shapes.ConeCollisionShape
 btConeTwistConstraint             .bullet.joints.ConeJoint
+btConstraintParams                .bullet.joints.motors.MotorParam
 btConvexHullShape                 .bullet.collision.shapes.HullCollisionShape
 btCylinderShape                   .bullet.collision.shapes.CylinderCollisionShape
 btDynamicsWorld                   .bullet.PhysicsSpace
 btEmptyShape                      .bullet.collision.shapes.EmptyShape
 btGeneric6DofConstraint           .bullet.joints.SixDofJoint
+btGeneric6DofSpring2Constraint    .bullet.joints.New6Dof
 btGeneric6DofSpringConstraint     .bullet.joints.SixDofSpringJoint
 btGImpactMeshShape                .bullet.collision.shapes.GImpactCollisionShape
 btHeightfieldTerrainShape         .bullet.collision.shapes.HeightfieldCollisionShape
@@ -107,6 +109,7 @@ btQuaternion                      .math.Quaternion
 btRaycastVehicle                  .bullet.objects.PhysicsVehicle
 btRigidBody                       .bullet.objects.PhysicsRigidBody
 btRotationalLimitMotor            .bullet.joints.motors.RotationalLimitMotor
+btRotationalLimitMotor2           .bullet.joints.motors.RotationMotor
 btSliderConstraint                .bullet.joints.SliderJoint
 btSoftBody                        .bullet.objects.PhysicsSoftBody
 btSoftBody::AJoint                .bullet.joints.SoftAngularJoint
@@ -122,6 +125,7 @@ btSphereShape                     .bullet.collision.shapes.SphereCollisionShape
 btStaticPlaneShape                .bullet.collision.shapes.PlaneCollisionShape
 btTransform                       .math.Transform
 btTranslationalLimitMotor         .bullet.joints.motors.TranslationalLimitMotor
+btTranslationalLimitMotor2        .bullet.joints.motors.TranslationMotor
 btTriangleIndexVertexArray        .bullet.collision.shapes.infos.CompoundMesh
 btTriangleRaycastCallback::Eflags .bullet.RayTestFlag
 btTypedConstraint                 .bullet.joints.Constraint
@@ -137,7 +141,6 @@ btWheelInfo                       .bullet.objects.VehicleWheel
  + certain constraints:
    + `btFixedConstraint`
    + `btGearConstraint`
-   + `btGeneric6DofSpring2Constraint`
    + `btHinge2Constraint`
    + `btUniversalConstraint`
  + certain collision shapes:
