@@ -2,7 +2,7 @@
 
 ## Version 2.0.16 released on 14 December 2019
 
- + add support for btGeneric6DofSpring2Constrant
+Added support for `btGeneric6DofSpring2Constrant` (new class `New6Dof`).
 
 ## Version 2.0.14 released on 6 December 2019
 
@@ -11,8 +11,8 @@
 
 ## Version 2.0.12 released on 4 November 2019
 
- + Updated the Bullet sources to match SHA1 id=aac737017 of the bullet3 project,
-   to resolve soft-body performance issues at id=837e333.
+Updated the Bullet sources to match SHA1 id=aac737017 of the bullet3 project,
+to resolve soft-body performance issues at id=837e333.
 
 ## Version 2.0.11 released on 14 October 2019
 
@@ -37,7 +37,7 @@
 
 ## Version 2.0.8 released on 6 September 2019
 
- + Add a `getSquaredSpeed()` method to the `PhysicsRigidBody` class.
+ + Added a `getSquaredSpeed()` method to the `PhysicsRigidBody` class.
  + Extensive refactoring and reformatting.
 
 ## Version 2.0.7 released on 13 August 2019
