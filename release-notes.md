@@ -1,6 +1,6 @@
 # release notes for the Libbulletjme Project
 
-## Version 2.0.15 released on 14 December 2019
+## Version 2.0.16 released on 14 December 2019
 
  + add support for btGeneric6DofSpring2Constrant
 
