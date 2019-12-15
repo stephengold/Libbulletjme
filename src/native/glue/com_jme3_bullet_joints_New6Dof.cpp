@@ -48,7 +48,7 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
     (JNIEnv *env, jobject object, jlong bodyIdA, jlong bodyIdB,
             jobject pivotInA, jobject rotInA, jobject pivotInB, jobject rotInB,
-            jint rotOrder) {
+            jint rotOrderIndex) {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
@@ -71,9 +71,10 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
+        RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
         btGeneric6DofSpring2Constraint *pConstraint
                 = new btGeneric6DofSpring2Constraint(*pBodyA, *pBodyB,
-                frameInA, frameInB, rotOrder);
+                frameInA, frameInB, rotateOrder);
 
         return reinterpret_cast<jlong> (pConstraint);
     }
@@ -85,7 +86,7 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
     (JNIEnv *env, jobject object, jlong bodyIdB, jobject pivotInB,
-            jobject rotInB, jint rotOrder) {
+            jobject rotInB, jint rotOrderIndex) {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
@@ -98,9 +99,10 @@ extern "C" {
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
 
+        RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
         btGeneric6DofSpring2Constraint *pConstraint
                 = new btGeneric6DofSpring2Constraint(*pBodyB, frameInB,
-                rotOrder);
+                rotateOrder);
 
         return reinterpret_cast<jlong> (pConstraint);
     }
