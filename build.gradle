@@ -138,6 +138,7 @@ model {
                 }
 
                 if (buildable) {
+                    println 'Build ' + q + ' using ' + toolChain
                     task "copyToDist$q" (type: Copy, dependsOn:
                          "bulletjme${q}SharedLibrary") {
                         from sharedLibraryFile

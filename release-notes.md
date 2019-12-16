@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.17 released on 16 December 2019
+
+ + Added `getAngles()`, `getAxis()`, `getFrameOffsetA()`, `getFrameOffsetB()`,
+   `getPivotOffset()`, `getRotationOrder()`, and `setRotationOrder()` methods
+   to the `New6Dof` class.
+ + Added range checks for axis indices in `TranslationMotor`.
+
 ## Version 2.0.16 released on 14 December 2019
 
 Added support for `btGeneric6DofSpring2Constrant` (new class `New6Dof`).
