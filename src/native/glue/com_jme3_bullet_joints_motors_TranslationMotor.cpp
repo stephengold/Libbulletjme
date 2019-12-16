@@ -217,6 +217,8 @@ extern "C" {
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
                 false);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = pMotor->m_springDampingLimited[axisIndex];
         return (jboolean) flag;
@@ -233,6 +235,8 @@ extern "C" {
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
                 false);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = pMotor->m_enableMotor[axisIndex];
         return (jboolean) flag;
@@ -249,6 +253,8 @@ extern "C" {
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
                 false);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = pMotor->m_servoMotor[axisIndex];
         return (jboolean) flag;
@@ -265,6 +271,8 @@ extern "C" {
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
                 false);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = pMotor->m_enableSpring[axisIndex];
         return (jboolean) flag;
@@ -281,6 +289,8 @@ extern "C" {
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
                 false);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = pMotor->m_springStiffnessLimited[axisIndex];
         return (jboolean) flag;
@@ -327,6 +337,8 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = (bool) limitFlag;
         pMotor->m_springDampingLimited[axisIndex] = flag;
@@ -388,6 +400,8 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = (bool) enableFlag;
         pMotor->m_enableMotor[axisIndex] = flag;
@@ -434,6 +448,8 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = (bool) enableFlag;
         pMotor->m_servoMotor[axisIndex] = flag;
@@ -465,6 +481,8 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = (bool) enableFlag;
         pMotor->m_enableSpring[axisIndex] = flag;
@@ -497,6 +515,8 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",);
+        btAssert(axisIndex >= 0);
+        btAssert(axisIndex < 3);
 
         bool flag = (bool) limitFlag;
         pMotor->m_springStiffnessLimited[axisIndex] = flag;
