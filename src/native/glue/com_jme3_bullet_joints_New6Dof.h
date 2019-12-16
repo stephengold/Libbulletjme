@@ -35,11 +35,59 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getAngles
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getAxis
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
+  (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getFrameOffsetA
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getFrameOffsetB
+ * Signature: (JLcom/jme3/math/Transform;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getPivotOffset
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
  * Method:    getRotationalMotor
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
   (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getRotationOrder
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -79,6 +127,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointToCurrent
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    setRotationOrder
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
   (JNIEnv *, jobject, jlong, jint);
 
 /*
