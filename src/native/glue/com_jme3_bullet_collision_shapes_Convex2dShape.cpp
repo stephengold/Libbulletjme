@@ -54,8 +54,9 @@ extern "C" {
                 = reinterpret_cast<btCollisionShape *> (childShapeId);
         NULL_CHECK(pChild, "The child shape does not exist.", 0)
         btAssert(pChild->isConvex());
+        btConvexShape *pConvex = (btConvexShape *) pChild;
 
-        btConvex2dShape *pShape = new btConvex2dShape(pChild);
+        btConvex2dShape *pShape = new btConvex2dShape(pConvex);
 
         return reinterpret_cast<jlong> (pShape);
     }
