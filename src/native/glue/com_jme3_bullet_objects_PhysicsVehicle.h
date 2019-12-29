@@ -125,14 +125,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getRightAxisI
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getSteeringValue
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getSteeringValue
-  (JNIEnv *, jobject, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
  * Method:    getNumWheels
  * Signature: (J)I
  */

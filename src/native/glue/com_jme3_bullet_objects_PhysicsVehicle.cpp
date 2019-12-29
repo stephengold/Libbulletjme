@@ -236,23 +236,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
-     * Method:    getSteeringValue
-     * Signature: (JI)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getSteeringValue
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
-        btRaycastVehicle *pVehicle
-                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
-        btAssert(wheelIndex >= 0);
-        btAssert(wheelIndex < pVehicle->getNumWheels());
-
-        btScalar angle = pVehicle->getSteeringValue(wheelIndex);
-        return (jfloat) angle;
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    getNumWheels
      * Signature: (J)I
      */
