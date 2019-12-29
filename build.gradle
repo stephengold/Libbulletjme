@@ -51,6 +51,12 @@ model {
         }
     }
 
+    toolChains { // prioritize toolchains
+        visualCpp(VisualCpp)
+        gcc(Gcc)
+        clang(Clang)
+    }
+
     components {
         bulletjme(NativeLibrarySpec) {
             targetPlatform 'Linux32'
