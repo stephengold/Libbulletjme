@@ -44,7 +44,7 @@ The evolution of the project is chronicled in
 
  1. Install build software:
    + one of the supported C++ compilers:
-     + for Linux:  the [GNU Compiler Collection][gcc]
+     + for Linux:  the [GNU Compiler Collection][gcc] or Clang
      + for Windows:  Microsoft Visual Studio
      + for macOS:  Xcode
    + a Java Development Kit, and
@@ -76,6 +76,7 @@ in the `dist` directory/folder.
 <pre>
 Bullet v2 C++ type:               corresponding Java class: com.jme3...
 ===================               =====================================
+btBox2dShape                      .bullet.collision.shapes.Box2dShape
 btBoxShape                        .bullet.collision.shapes.BoxCollisionShape
 btBU_Simplex1to4                  .bullet.collision.shapes.SimplexCollisionShape
 btBvhTriangleMeshShape            .bullet.collision.shapes.MeshCollisionShape
@@ -88,6 +89,7 @@ btCompoundShapeChild              .bullet.collision.shapes.info.ChildCollisionSh
 btConeShape                       .bullet.collision.shapes.ConeCollisionShape
 btConeTwistConstraint             .bullet.joints.ConeJoint
 btConstraintParams                .bullet.joints.motors.MotorParam
+btConvex2dShape                   .bullet.collision.shapes.Convex2dShape
 btConvexHullShape                 .bullet.collision.shapes.HullCollisionShape
 btCylinderShape                   .bullet.collision.shapes.CylinderCollisionShape
 btDynamicsWorld                   .bullet.PhysicsSpace
@@ -144,8 +146,6 @@ btWheelInfo                       .bullet.objects.VehicleWheel
    + `btHinge2Constraint`
    + `btUniversalConstraint`
  + certain collision shapes:
-   + `btBox2dShape`
-   + `btConvex2dShape`
    + `btMinkowskiSumShape`
    + `btMultimaterialTriangleMeshShape`
    + `btScaledBvhTriangleMeshShape`
