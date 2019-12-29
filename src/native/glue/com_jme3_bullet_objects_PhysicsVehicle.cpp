@@ -189,6 +189,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    getForwardAxisIndex
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getForwardAxisIndex
+    (JNIEnv *env, jobject object, jlong vehicleId) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+
+        int axisIndex = pVehicle->getForwardAxis();
+        return (jint) axisIndex;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    getForwardVector
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -206,6 +221,87 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    getRightAxisIndex
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getRightAxisIndex
+    (JNIEnv *env, jobject object, jlong vehicleId) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+
+        int axisIndex = pVehicle->getRightAxis();
+        return (jint) axisIndex;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    getSteeringValue
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getSteeringValue
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+        btAssert(wheelIndex >= 0);
+        btAssert(wheelIndex < pVehicle->getNumWheels());
+
+        btScalar angle = pVehicle->getSteeringValue(wheelIndex);
+        return (jfloat) angle;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    getNumWheels
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getNumWheels
+    (JNIEnv *env, jobject object, jlong vehicleId) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+
+        int count = pVehicle->getNumWheels();
+        return (jint) count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    getUpAxisIndex
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getUpAxisIndex
+    (JNIEnv *env, jobject object, jlong vehicleId) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+
+        int axisIndex = pVehicle->getUpAxis();
+        return (jint) axisIndex;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    rayCast
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_rayCast
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+        btAssert(wheelIndex >= 0);
+        btAssert(wheelIndex < pVehicle->getNumWheels());
+
+        btWheelInfo& wheel = pVehicle->m_wheelInfo[wheelIndex];
+        btScalar result = pVehicle->rayCast(wheel);
+
+        return (jfloat) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    resetSuspension
      * Signature: (J)V
      */
@@ -216,6 +312,21 @@ extern "C" {
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
 
         pVehicle->resetSuspension();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsVehicle
+     * Method:    setPitchControl
+     * Signature: (JF)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setPitchControl
+    (JNIEnv *env, jobject object, jlong vehicleId, jfloat pitch) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+
+        btScalar value = (btScalar) pitch;
+        pVehicle->setPitchControl(value);
     }
 
     /*
