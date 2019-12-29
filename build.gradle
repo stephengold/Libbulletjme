@@ -107,9 +107,10 @@ model {
                         }
                     }
 
-                } else {
+                } else { // toolChain in Clang or Gcc
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
+                    cppCompiler.args '-std=c++11'
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
                     } else if (buildType == buildTypes.Release) {
