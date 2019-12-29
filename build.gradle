@@ -155,6 +155,8 @@ model {
                         into 'dist'
                     }
                     jar.dependsOn("copyToDist$q")
+                } else {
+                    println 'Do not build ' + q
                 }
             }
         }
