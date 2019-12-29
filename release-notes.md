@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.18 released on 28 December 2019
+
+Added support for `btBox2dShape` and `btConvex2dShape`
+(new classes `Box2dShape` and `Convex2dShape`).
+
 ## Version 2.0.17 released on 16 December 2019
 
  + Added `getAngles()`, `getAxis()`, `getFrameOffsetA()`, `getFrameOffsetB()`,
