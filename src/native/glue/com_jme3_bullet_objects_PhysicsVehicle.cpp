@@ -81,12 +81,15 @@ extern "C" {
      * Signature: (JIF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_applyEngineForce
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat force) {
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jfloat force) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
+        btAssert(wheelIndex >= 0);
+        btAssert(wheelIndex < pVehicle->getNumWheels());
 
-        pVehicle->applyEngineForce(force, wheel);
+        pVehicle->applyEngineForce(force, wheelIndex);
     }
 
     /*
@@ -95,12 +98,15 @@ extern "C" {
      * Signature: (JIF)F
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_brake
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat value) {
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jfloat value) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
+        btAssert(wheelIndex >= 0);
+        btAssert(wheelIndex < pVehicle->getNumWheels());
 
-        pVehicle->setBrake(value, wheel);
+        pVehicle->setBrake(value, wheelIndex);
     }
 
     /*
@@ -218,10 +224,17 @@ extern "C" {
      * Signature: (JIII)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setCoordinateSystem
-    (JNIEnv *env, jobject object, jlong vehicleId, jint right, jint up, jint forward) {
+    (JNIEnv *env, jobject object, jlong vehicleId, jint right, jint up,
+            jint forward) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+        btAssert(right >= 0);
+        btAssert(right <= 2);
+        btAssert(up >= 0);
+        btAssert(up <= 2);
+        btAssert(forward >= 0);
+        btAssert(forward <= 2);
 
         pVehicle->setCoordinateSystem(right, up, forward);
     }
@@ -232,12 +245,15 @@ extern "C" {
      * Signature: (JIF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_steer
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jfloat value) {
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jfloat angle) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+        btAssert(wheelIndex >= 0);
+        btAssert(wheelIndex < pVehicle->getNumWheels());
 
-        pVehicle->setSteeringValue(value, wheel);
+        pVehicle->setSteeringValue(angle, wheelIndex);
     }
 
     /*
@@ -246,12 +262,15 @@ extern "C" {
      * Signature: (JIZ)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_updateWheelTransform
-    (JNIEnv *env, jobject object, jlong vehicleId, jint wheel, jboolean interpolated) {
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+            jboolean interpolated) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+        btAssert(wheelIndex >= 0);
+        btAssert(wheelIndex < pVehicle->getNumWheels());
 
-        pVehicle->updateWheelTransform(wheel, interpolated);
+        pVehicle->updateWheelTransform(wheelIndex, interpolated);
     }
 
 #ifdef __cplusplus
