@@ -76,6 +76,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getBrake
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getBrake
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+
+        btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_brake;
+        return (jfloat) scalar;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
      * Method:    getCollisionLocation
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
@@ -123,6 +138,67 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getEngineForce
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getEngineForce
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+
+        btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_engineForce;
+        return (jfloat) scalar;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getRadius
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRadius
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+
+        btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_wheelsRadius;
+        return (jfloat) scalar;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getRestLength
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRestLength
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+
+        btScalar scalar
+                = pVehicle->getWheelInfo(wheelIndex).m_suspensionRestLength1;
+        return (jfloat) scalar;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getRollInfluence
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRollInfluence
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+
+        btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_rollInfluence;
+        return (jfloat) scalar;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
      * Method:    getSkidInfo
      * Signature: (J)F
      */
@@ -133,6 +209,21 @@ extern "C" {
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
 
         return pVehicle->getWheelInfo(wheelIndex).m_skidInfo;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    getSteerAngle
+     * Signature: (JI)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSteerAngle
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+
+        btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_steering;
+        return (jfloat) scalar;
     }
 
     /*
@@ -167,6 +258,21 @@ extern "C" {
         jmeBulletUtil::convert(env,
                 &pVehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
                 out);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_VehicleWheel
+     * Method:    isFront
+     * Signature: (JI)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_VehicleWheel_isFront
+    (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+        btRaycastVehicle *pVehicle
+                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", JNI_FALSE);
+
+        bool result = pVehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel;
+        return (jboolean) result;
     }
 
 #ifdef __cplusplus

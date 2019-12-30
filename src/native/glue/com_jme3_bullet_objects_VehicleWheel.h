@@ -17,6 +17,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_applyInfo
 
 /*
  * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getBrake
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getBrake
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
  * Method:    getCollisionLocation
  * Signature: (JILcom/jme3/math/Vector3f;)V
  */
@@ -41,10 +49,50 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotat
 
 /*
  * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getEngineForce
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getEngineForce
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getRadius
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRadius
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getRestLength
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRestLength
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getRollInfluence
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRollInfluence
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
  * Method:    getSkidInfo
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSkidInfo
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getSteerAngle
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSteerAngle
   (JNIEnv *, jobject, jlong, jint);
 
 /*
@@ -62,6 +110,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocatio
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotation
   (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    isFront
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_VehicleWheel_isFront
+  (JNIEnv *, jobject, jlong, jint);
 
 #ifdef __cplusplus
 }
