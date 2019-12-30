@@ -301,21 +301,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
-     * Method:    setPitchControl
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setPitchControl
-    (JNIEnv *env, jobject object, jlong vehicleId, jfloat pitch) {
-        btRaycastVehicle *pVehicle
-                = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
-
-        btScalar value = (btScalar) pitch;
-        pVehicle->setPitchControl(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    setCoordinateSystem
      * Signature: (JIII)V
      */

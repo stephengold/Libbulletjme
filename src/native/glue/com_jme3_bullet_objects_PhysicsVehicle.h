@@ -165,14 +165,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setCoordinate
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    setPitchControl
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setPitchControl
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
  * Method:    steer
  * Signature: (JIF)V
  */
