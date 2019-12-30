@@ -1,5 +1,14 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.19 released on 29 December 2019
+
+ + Added `getForwardAxisIndex()`, `getRightAxisIndex()`, `getNumWheels()`,
+   `getUpAxisIndex()`, and `rayCast()` methods to the `PhysicsVehicle` class.
+ + Added `getBrake()`, `getEngineForce()`, `getRadius()`, `getRestLength()`,
+   `getRollInfluence()`, `getSteerAngle()`, and `isFront()` methods to the
+   `VehicleWheel` class.
+ + Added many assertions to the `PhysicsVehicle` class.
+
 ## Version 2.0.18 released on 28 December 2019
 
 Added support for `btBox2dShape` and `btConvex2dShape`
