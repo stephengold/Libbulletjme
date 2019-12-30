@@ -52,6 +52,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jobject locationVector,
             jobject directionVector, jobject axleVector, jfloat restLength,
             jfloat radius, jobject unused, jboolean frontWheel) {
+        // TODO remove unused argument
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
@@ -142,6 +143,7 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicleRaycaster
     (JNIEnv *env, jobject object, jlong unused, jlong spaceId) {
+        // TODO remove unused argument
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);

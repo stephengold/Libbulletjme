@@ -43,6 +43,7 @@ jmePhysicsSoftSpace::jmePhysicsSoftSpace(JNIEnv *env, jobject javaSpace)
 
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
         jobject max_vec, jint broadphaseId, jboolean unused) {
+    // TODO remove unused argument
     btVector3 min;
     jmeBulletUtil::convert(this->getEnv(), min_vec, &min);
     btVector3 max;
