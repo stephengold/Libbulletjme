@@ -216,7 +216,7 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
         btAssert(axisIndex >= 0);
         btAssert(axisIndex < 3);
 
@@ -234,7 +234,7 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
         btAssert(axisIndex >= 0);
         btAssert(axisIndex < 3);
 
@@ -252,7 +252,7 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
         btAssert(axisIndex >= 0);
         btAssert(axisIndex < 3);
 
@@ -270,7 +270,7 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
         btAssert(axisIndex >= 0);
         btAssert(axisIndex < 3);
 
@@ -288,7 +288,7 @@ extern "C" {
         btTranslationalLimitMotor2 *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btTranslationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
         btAssert(axisIndex >= 0);
         btAssert(axisIndex < 3);
 

@@ -135,9 +135,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", false)
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
+                JNI_FALSE)
 
-        jboolean result = pConstraint->isEnabled();
+                jboolean result = pConstraint->isEnabled();
         return result;
     }
 
@@ -150,7 +151,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
+                JNI_FALSE);
 
         jboolean result = pConstraint->needsFeedback();
         return result;

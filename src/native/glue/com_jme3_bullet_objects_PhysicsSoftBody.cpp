@@ -602,7 +602,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId, jint nodeIndex0,
             jint nodeIndex1, jfloat position) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", JNI_FALSE);
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btAssert(nodeIndex0 >= 0);
@@ -1342,13 +1342,13 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollisionAllowed
     (JNIEnv *env, jobject object, jlong softId, jlong rigidId) {
         btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softId);
-        NULL_CHECK(pSoftBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(pSoftBody, "The btSoftBody does not exist.", JNI_FALSE)
         btAssert(
                 pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btCollisionObject *pRigidBody
                 = reinterpret_cast<btCollisionObject *> (rigidId);
-        NULL_CHECK(pRigidBody, "The btRigidBody does not exist.", 0);
+        NULL_CHECK(pRigidBody, "The btRigidBody does not exist.", JNI_FALSE);
         btAssert(pRigidBody->getInternalType()
                 & btCollisionObject::CO_RIGID_BODY);
 

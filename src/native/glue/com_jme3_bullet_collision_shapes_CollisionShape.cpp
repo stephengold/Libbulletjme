@@ -131,7 +131,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
-        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
         return pShape->isConcave();
     }
@@ -145,7 +145,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
-        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
         return pShape->isConvex();
     }
@@ -159,7 +159,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
-        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
         return pShape->isInfinite();
     }
@@ -173,7 +173,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
-        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
         return pShape->isNonMoving();
     }
@@ -187,7 +187,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btCollisionShape *pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
-        NULL_CHECK(pShape, "The btCollisionShape does not exist.", false);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
         return pShape->isPolyhedral();
     }

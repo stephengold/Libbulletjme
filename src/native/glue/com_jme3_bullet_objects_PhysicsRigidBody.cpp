@@ -435,7 +435,7 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
     (JNIEnv *env, jobject object, jlong bodyId) {
         btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
-        NULL_CHECK(pBody, "The btRigidBody does not exist.", false)
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", JNI_FALSE)
 
         return pBody->isActive();
     }
@@ -448,7 +448,7 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isInWorld
     (JNIEnv *env, jobject object, jlong bodyId) {
         btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
-        NULL_CHECK(pBody, "The btRigidBody does not exist.", false);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", JNI_FALSE);
         btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         return pBody->isInWorld();

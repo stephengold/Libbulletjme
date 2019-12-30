@@ -361,7 +361,7 @@ extern "C" {
         btCollisionObject *pCollisionObject
                 = reinterpret_cast<btCollisionObject *> (pcoId);
         NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",
-                false);
+                JNI_FALSE);
 
         jboolean result = pCollisionObject->hasAnisotropicFriction(mode);
         return result;
@@ -402,7 +402,7 @@ extern "C" {
         btCollisionObject *pCollisionObject
                 = reinterpret_cast<btCollisionObject *> (pcoId);
         NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",
-                false)
+                JNI_FALSE)
 
         return pCollisionObject->isActive();
     }
@@ -417,7 +417,7 @@ extern "C" {
         btCollisionObject *pCollisionObject
                 = reinterpret_cast<btCollisionObject *> (pcoId);
         NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.",
-                false);
+                JNI_FALSE);
 
         jboolean inWorld = (pCollisionObject->getBroadphaseHandle() != 0);
 

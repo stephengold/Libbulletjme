@@ -336,7 +336,7 @@ extern "C" {
         btKinematicCharacterController *pController
                 = reinterpret_cast<btKinematicCharacterController *> (kccId);
         NULL_CHECK(pController,
-                "The btKinematicCharacterController does not exist.", false)
+                "The btKinematicCharacterController does not exist.", JNI_FALSE)
 
         return pController->onGround();
     }

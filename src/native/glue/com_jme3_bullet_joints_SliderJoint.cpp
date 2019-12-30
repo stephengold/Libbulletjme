@@ -508,7 +508,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btSliderConstraint *pJoint
                 = reinterpret_cast<btSliderConstraint *> (jointId);
-        NULL_CHECK(pJoint, "The btSliderConstraint does not exist.", false)
+        NULL_CHECK(pJoint, "The btSliderConstraint does not exist.", JNI_FALSE)
 
         return pJoint->getPoweredAngMotor();
     }
@@ -522,7 +522,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btSliderConstraint *pJoint
                 = reinterpret_cast<btSliderConstraint *> (jointId);
-        NULL_CHECK(pJoint, "The btSliderConstraint does not exist.", false)
+        NULL_CHECK(pJoint, "The btSliderConstraint does not exist.", JNI_FALSE)
 
         return pJoint->getPoweredLinMotor();
     }

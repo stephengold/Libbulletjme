@@ -231,7 +231,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", false)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",
+                JNI_FALSE)
 
         return pMotor->m_enableMotor;
     }

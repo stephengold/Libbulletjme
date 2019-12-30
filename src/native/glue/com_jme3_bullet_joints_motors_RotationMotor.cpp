@@ -217,7 +217,7 @@ extern "C" {
         btRotationalLimitMotor2 *pMotor
                 = reinterpret_cast<btRotationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btRotationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
 
         bool flag = pMotor->m_springDampingLimited;
         return (jboolean) flag;
@@ -233,7 +233,7 @@ extern "C" {
         btRotationalLimitMotor2 *pMotor
                 = reinterpret_cast<btRotationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btRotationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
 
         bool flag = pMotor->m_enableMotor;
         return (jboolean) flag;
@@ -249,7 +249,7 @@ extern "C" {
         btRotationalLimitMotor2 *pMotor
                 = reinterpret_cast<btRotationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btRotationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
 
         bool flag = pMotor->m_servoMotor;
         return (jboolean) flag;
@@ -265,7 +265,7 @@ extern "C" {
         btRotationalLimitMotor2 *pMotor
                 = reinterpret_cast<btRotationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btRotationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
 
         bool flag = pMotor->m_enableSpring;
         return (jboolean) flag;
@@ -281,7 +281,7 @@ extern "C" {
         btRotationalLimitMotor2 *pMotor
                 = reinterpret_cast<btRotationalLimitMotor2 *> (motorId);
         NULL_CHECK(pMotor, "The btRotationalLimitMotor2 does not exist.",
-                false);
+                JNI_FALSE);
 
         bool flag = pMotor->m_springStiffnessLimited;
         return (jboolean) flag;

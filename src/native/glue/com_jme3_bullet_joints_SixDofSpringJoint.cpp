@@ -185,7 +185,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jint index) {
         btGeneric6DofSpringConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-        NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+        NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",
+                JNI_FALSE);
         btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
         btAssert(index >= 0);
         btAssert(index < 6);

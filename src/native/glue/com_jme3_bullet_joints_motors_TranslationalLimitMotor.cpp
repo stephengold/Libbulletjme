@@ -226,7 +226,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jint axisIndex) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.", 0);
+        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",
+                JNI_FALSE);
 
         bool result = pMotor->m_enableMotor[axisIndex];
         return (jboolean) result;

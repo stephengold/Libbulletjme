@@ -50,7 +50,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject location, jobject rotation) {
         jmeMotionState *pMotionState
                 = reinterpret_cast<jmeMotionState *> (stateId);
-        NULL_CHECK(pMotionState, "The motion state does not exist.", false)
+        NULL_CHECK(pMotionState, "The motion state does not exist.", JNI_FALSE)
 
         return pMotionState->applyTransform(env, location, rotation);
     }

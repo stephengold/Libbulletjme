@@ -133,7 +133,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btHingeConstraint *pJoint
                 = reinterpret_cast<btHingeConstraint *> (jointId);
-        NULL_CHECK(pJoint, "The btHingeConstraint does not exist.", false)
+        NULL_CHECK(pJoint, "The btHingeConstraint does not exist.", JNI_FALSE)
         btAssert(pJoint->getConstraintType() == HINGE_CONSTRAINT_TYPE);
 
         return pJoint->getEnableAngularMotor();
