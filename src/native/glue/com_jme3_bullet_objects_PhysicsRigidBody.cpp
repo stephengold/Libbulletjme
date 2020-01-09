@@ -747,7 +747,13 @@ extern "C" {
         NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0);
 
         btVector3 localInertia;
-        pShape->calculateLocalInertia(mass, localInertia);
+        int shapeType = pShape->getShapeType();
+        if (shapeType == EMPTY_SHAPE_PROXYTYPE
+                || shapeType == TRIANGLE_MESH_SHAPE_PROXYTYPE) {
+            localInertia.setZero(); // avoid a btAssert()
+        } else {
+            pShape->calculateLocalInertia(mass, localInertia);
+        }
         pBody->setMassProps(mass, localInertia);
 
         return reinterpret_cast<jlong> (pBody);
