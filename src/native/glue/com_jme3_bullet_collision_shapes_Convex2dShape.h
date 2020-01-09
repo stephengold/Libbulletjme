@@ -7,8 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef com_jme3_bullet_collision_shapes_Convex2dShape_numAxes
-#define com_jme3_bullet_collision_shapes_Convex2dShape_numAxes 3L
 /*
  * Class:     com_jme3_bullet_collision_shapes_Convex2dShape
  * Method:    createShape

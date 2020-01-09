@@ -13,8 +13,6 @@ extern "C" {
 #define com_jme3_bullet_util_DebugShapeFactory_lowResolution 0L
 #undef com_jme3_bullet_util_DebugShapeFactory_numAxes
 #define com_jme3_bullet_util_DebugShapeFactory_numAxes 3L
-#undef com_jme3_bullet_util_DebugShapeFactory_vpt
-#define com_jme3_bullet_util_DebugShapeFactory_vpt 3L
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
  * Method:    getVertices2
