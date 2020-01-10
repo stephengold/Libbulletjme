@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.20 released on 10 January 2020
+
+ + Fixed a `btAssert()` that occured (in Debug builds) while rescaling
+   a rigid body with a `MeshCollisionShape`.
+ + Upgraded the Bullet sources to match version 2.89 (SHA1 ID=830f0a956)
+   of the bullet3 project.
+
 ## Version 2.0.19 released on 29 December 2019
 
  + Added `getForwardAxisIndex()`, `getRightAxisIndex()`, `getNumWheels()`,
