@@ -69,6 +69,7 @@ model {
             sources.cpp.source {
                 srcDir 'src/native/bullet3'
                 srcDir 'src/native/glue'
+                srcDir 'src/native/v-hacd/src'
                 include '**/*.cpp'
             }
 
@@ -91,6 +92,9 @@ model {
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/native/bullet3"
+                    cppCompiler.args "/I$projectDir/src/native/v-hacd/inc"
+                    cppCompiler.args "/I$projectDir/src/native/v-hacd/public"
+                    cppCompiler.args "/I$projectDir/src/native/bullet3/LinearMath"
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '/FS' // serialize PDB writes
                         cppCompiler.args '/MTd' // use LIBCMTD
@@ -116,6 +120,9 @@ model {
                 } else { // toolChain in Clang or Gcc
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/native/bullet3"
+                    cppCompiler.args '-I', "$projectDir/src/native/v-hacd/inc"
+                    cppCompiler.args '-I', "$projectDir/src/native/v-hacd/public"
+                    cppCompiler.args '-I', "$projectDir/src/native/bullet3/LinearMath"
                     cppCompiler.args '-std=c++11'
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
@@ -172,4 +179,5 @@ task cleanDist(type: Delete) {
 sourceSets.main.java { // for IDE access
     srcDir 'src/native/bullet3'
     srcDir 'src/native/glue'
+    srcDir 'src/native/v-hacd'
 }

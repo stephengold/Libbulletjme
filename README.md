@@ -1,5 +1,6 @@
-The Libbulletjme Project adds "glue code" to a subset of the Bullet Physics
-Library, enabling real-time simulation of 3-D physics in Java applications.
+The Libbulletjme Project adds JNI "glue code" to subsets of the Bullet Physics
+Library and Khaled Mamou's V-HACD Library,
+enabling real-time simulation of 3-D physics in Java applications.
 
 Complete source code (in C++) is provided under
 [a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
@@ -164,6 +165,7 @@ btWheelInfo                       .bullet.objects.VehicleWheel
  + The [Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
  + The [Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
  + The [Minie project][minie] at [GitHub]
+ + The [V-HACD Library][vhacd] at [GitHub]
  + The [physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
  + The [Bullet Forum](https://pybullet.org/Bullet/phpBB3)
  + The [Bullet home page][bullet]
@@ -177,6 +179,7 @@ The Libbulletjme Project is based on open-source software:
   + the [Bullet] physics simulation kit
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
+  + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
 
 This project also made use of the following software tools:
 
@@ -212,3 +215,4 @@ correct the situation: sgold@sonic.net
 [mint]: https://linuxmint.com/ "Linux Mint"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [travis]: https://travis-ci.org "Travis CI"
+[vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
