@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.22 released on 13 January 2020
+
+Solved a compile-time error on platforms where jint != int.
+
 ## Version 2.0.21 released on 12 January 2020
 
 Added V-HACD sources from March 2016 (SHA1 ID=ded1fe4) plus new JNI glue code.
