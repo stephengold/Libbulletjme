@@ -78,13 +78,14 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
-        const jfloat *pHeights
+        const jfloat * const pHeights
                 = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
+        NULL_CHECK(pHeights, "The heightfield data has no direct buffer.", 0);
 
         HeightfieldShape *pShape;
 #ifdef BT_USE_DOUBLE_PRECISION
-        int numHeights = heightStickLength * heightStickWidth;
-        btScalar *pDpHeights = new btScalar[numHeights];
+        const int numHeights = heightStickLength * heightStickWidth;
+        btScalar * const pDpHeights = new btScalar[numHeights];
         for (int i = 0; i < numHeights; ++i) {
             pDpHeights[i] = pHeights[i];
         }

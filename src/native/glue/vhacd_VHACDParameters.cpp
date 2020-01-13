@@ -186,7 +186,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_maxNumVerticesPerCH;
+        unsigned int result = pParam->m_maxNumVerticesPerCH;
         return (jint) result;
     }
 
@@ -276,7 +276,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_resolution;
+        unsigned int result = pParam->m_resolution;
         return (jint) result;
     }
 
@@ -389,7 +389,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_maxNumVerticesPerCH = (int) numVertices;
+        pParam->m_maxNumVerticesPerCH = (unsigned int) numVertices;
     }
 
     /*
@@ -473,7 +473,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_resolution = (int) maxVoxels;
+        pParam->m_resolution = (unsigned int) maxVoxels;
     }
 
 #ifdef __cplusplus

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,14 +52,16 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         NULL_CHECK(intBuffer, "The index buffer does not exist.", 0);
-        unsigned char *pIndices
+        const unsigned char * const pIndices
                 = (unsigned char *) env->GetDirectBufferAddress(intBuffer);
+        NULL_CHECK(pIndices, "The index buffer has no direct buffer.", 0);
 
         NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
-        unsigned char *pVertices
+        const unsigned char * const pVertices
                 = (unsigned char *) env->GetDirectBufferAddress(floatBuffer);
+        NULL_CHECK(pVertices, "The position buffer has no direct buffer.", 0);
 
-        btIndexedMesh *pMesh = new btIndexedMesh();
+        btIndexedMesh * const pMesh = new btIndexedMesh();
         pMesh->m_indexType = PHY_INTEGER;
         pMesh->m_vertexType = PHY_FLOAT;
         pMesh->m_triangleIndexBase = pIndices;
