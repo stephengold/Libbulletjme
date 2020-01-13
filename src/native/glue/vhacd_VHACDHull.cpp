@@ -60,7 +60,8 @@ extern "C" {
         NULL_CHECK(pIndices, "The indices buffer has no direct buffer.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
-        for (int i = 0; i < 3 * pHull->m_nTriangles && i < capacity; ++i) {
+        const uint32_t numInts = 3 * pHull->m_nTriangles;
+        for (uint32_t i = 0; i < numInts && i < capacity; ++i) {
             pIndices[i] = pHull->m_triangles[i];
         }
     }
@@ -76,7 +77,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
         NULL_CHECK(pHull, "The hull does not exist.", 0);
 
-        unsigned int numFloats = 3 * pHull->m_nPoints;
+        uint32_t numFloats = 3 * pHull->m_nPoints;
 
         return (jint) numFloats;
     }
@@ -92,7 +93,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
         NULL_CHECK(pHull, "The hull does not exist.", 0);
 
-        unsigned int numInts = 3 * pHull->m_nTriangles;
+        uint32_t numInts = 3 * pHull->m_nTriangles;
 
         return (jint) numInts;
     }
@@ -112,9 +113,10 @@ extern "C" {
         jfloat * const pPositions
                 = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
         NULL_CHECK(pPositions, "The positions buffer has no direct buffer.",);
-        const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
 
-        for (int i = 0; i < 3 * pHull->m_nPoints && i < capacity; ++i) {
+        const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
+        const uint32_t numFloats = 3 * pHull->m_nPoints;
+        for (uint32_t i = 0; i < numFloats && i < capacity; ++i) {
             pPositions[i] = pHull->m_points[i];
         }
     }
