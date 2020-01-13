@@ -87,14 +87,14 @@ extern "C" {
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         const jfloat * const pPositions
                 = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(pPositions, "The positions buffer does not exist.",);
-        int numFloats = env->GetDirectBufferCapacity(positionsBuffer);
+        NULL_CHECK(pPositions, "The positions buffer has no direct buffer.",);
+        const jlong numFloats = env->GetDirectBufferCapacity(positionsBuffer);
 
         NULL_CHECK(indicesBuffer, "The indices buffer does not exist.",);
         const jint * const pIndices
                 = (jint *) env->GetDirectBufferAddress(indicesBuffer);
-        NULL_CHECK(pIndices, "The indices buffer does not exist.",);
-        int numInts = env->GetDirectBufferCapacity(indicesBuffer);
+        NULL_CHECK(pIndices, "The indices buffer has no direct buffer.",);
+        const jlong numInts = env->GetDirectBufferCapacity(indicesBuffer);
 
         IVHACD::Parameters * const pParams
                 = reinterpret_cast<IVHACD::Parameters *> (paramsId);
@@ -112,22 +112,28 @@ extern "C" {
         const unsigned int nTriangles = numInts / strideTriangles;
         IVHACD * const pIvhacd = CreateVHACD();
 
-        bool success = pIvhacd->Compute(pPositions, stridePoints, nPoints,
-                pIndices, strideTriangles, nTriangles, *pParams);
+        int * const pTriangles = new int[numInts];
+        for (int i = 0; i < numInts; ++i) {
+            pTriangles[i] = (int) pIndices[i];
+        }
+
+        const bool success = pIvhacd->Compute(pPositions, stridePoints, nPoints,
+                pTriangles, strideTriangles, nTriangles, *pParams);
 
         if (success) {
-            unsigned int n_hulls = pIvhacd->GetNConvexHulls();
+            const unsigned int n_hulls = pIvhacd->GetNConvexHulls();
 
             for (unsigned int i = 0; i < n_hulls; ++i) {
                 IVHACD::ConvexHull *pHull = new IVHACD::ConvexHull();
                 pIvhacd->GetConvexHull(i, *pHull);
-                jlong hullId = reinterpret_cast<jlong> (pHull);
+                const jlong hullId = reinterpret_cast<jlong> (pHull);
 
                 env->CallStaticVoidMethod(jmeClasses::Vhacd,
                         jmeClasses::Vhacd_addHull, hullId);
             }
         }
 
+        delete[] pTriangles;
         pIvhacd->Clean();
         pIvhacd->Release();
     }
