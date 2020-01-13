@@ -340,7 +340,7 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
         return;
     }
 
-    Vhacd = env->NewGlobalRef(env->FindClass("vhacd/VHACD"));
+    Vhacd = (jclass) env->NewGlobalRef(env->FindClass("vhacd/VHACD"));
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
