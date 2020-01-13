@@ -12,10 +12,14 @@
  
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include "btConvexHullComputer.h"
 #include "vhacdMesh.h"
+#include "FloatMath.h"
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
@@ -31,6 +35,55 @@ Mesh::Mesh()
 Mesh::~Mesh()
 {
 }
+
+Vec3<double>& Mesh::ComputeCenter(void)
+{
+	const size_t nV = GetNPoints();
+	if (nV)
+	{
+		double center[3];
+		uint32_t pcount = uint32_t(GetNPoints());
+		const double *points = GetPoints();
+		uint32_t tcount = uint32_t(GetNTriangles());
+		const uint32_t *indices = (const uint32_t *)GetTriangles();
+		FLOAT_MATH::fm_computeCentroid(pcount, points, tcount, indices, center);
+		m_center.X() = center[0];
+		m_center.Y() = center[1];
+		m_center.Z() = center[2];
+		m_minBB = GetPoint(0);
+		m_maxBB = GetPoint(0);
+		for (size_t v = 1; v < nV; v++)
+		{
+			Vec3<double> p = GetPoint(v);
+			if (p.X() < m_minBB.X())
+			{
+				m_minBB.X() = p.X();
+			}
+			if (p.Y() < m_minBB.Y())
+			{
+				m_minBB.Y() = p.Y();
+			}
+			if (p.Z() < m_minBB.Z())
+			{
+				m_minBB.Z() = p.Z();
+			}
+			if (p.X() > m_maxBB.X())
+			{
+				m_maxBB.X() = p.X();
+			}
+			if (p.Y() > m_maxBB.Y())
+			{
+				m_maxBB.Y() = p.Y();
+			}
+			if (p.Z() > m_maxBB.Z())
+			{
+				m_maxBB.Z() = p.Z();
+			}
+		}
+	}
+	return m_center;
+}
+
 double Mesh::ComputeVolume() const
 {
     const size_t nV = GetNPoints();
@@ -47,8 +100,8 @@ double Mesh::ComputeVolume() const
 
     Vec3<double> ver0, ver1, ver2;
     double totalVolume = 0.0;
-    for (int t = 0; t < nT; t++) {
-        const Vec3<int>& tri = GetTriangle(t);
+    for (int32_t t = 0; t < int32_t(nT); t++) {
+        const Vec3<int32_t>& tri = GetTriangle(t);
         ver0 = GetPoint(tri[0]);
         ver1 = GetPoint(tri[1]);
         ver2 = GetPoint(tri[2]);
@@ -63,19 +116,19 @@ void Mesh::ComputeConvexHull(const double* const pts,
     ResizePoints(0);
     ResizeTriangles(0);
     btConvexHullComputer ch;
-    ch.compute(pts, 3 * sizeof(double), (int)nPts, -1.0, -1.0);
-    for (int v = 0; v < ch.vertices.size(); v++) {
+    ch.compute(pts, 3 * sizeof(double), (int32_t)nPts, -1.0, -1.0);
+    for (int32_t v = 0; v < ch.vertices.size(); v++) {
         AddPoint(Vec3<double>(ch.vertices[v].getX(), ch.vertices[v].getY(), ch.vertices[v].getZ()));
     }
-    const int nt = ch.faces.size();
-    for (int t = 0; t < nt; ++t) {
+    const int32_t nt = ch.faces.size();
+    for (int32_t t = 0; t < nt; ++t) {
         const btConvexHullComputer::Edge* sourceEdge = &(ch.edges[ch.faces[t]]);
-        int a = sourceEdge->getSourceVertex();
-        int b = sourceEdge->getTargetVertex();
+        int32_t a = sourceEdge->getSourceVertex();
+        int32_t b = sourceEdge->getTargetVertex();
         const btConvexHullComputer::Edge* edge = sourceEdge->getNextEdgeOfFace();
-        int c = edge->getTargetVertex();
+        int32_t c = edge->getTargetVertex();
         while (c != a) {
-            AddTriangle(Vec3<int>(a, b, c));
+            AddTriangle(Vec3<int32_t>(a, b, c));
             edge = edge->getNextEdgeOfFace();
             b = c;
             c = edge->getTargetVertex();
@@ -115,8 +168,8 @@ bool Mesh::IsInside(const Vec3<double>& pt) const
     }
     Vec3<double> ver0, ver1, ver2;
     double volume;
-    for (int t = 0; t < nT; t++) {
-        const Vec3<int>& tri = GetTriangle(t);
+    for (int32_t t = 0; t < int32_t(nT); t++) {
+        const Vec3<int32_t>& tri = GetTriangle(t);
         ver0 = GetPoint(tri[0]);
         ver1 = GetPoint(tri[1]);
         ver2 = GetPoint(tri[2]);
@@ -270,9 +323,9 @@ bool Mesh::LoadOFF(const std::string& fileName, bool invert)
             return false;
         }
         else {
-            int nv = 0;
-            int nf = 0;
-            int ne = 0;
+            int32_t nv = 0;
+            int32_t nf = 0;
+            int32_t ne = 0;
             fscanf(fid, "%i", &nv);
             fscanf(fid, "%i", &nf);
             fscanf(fid, "%i", &ne);
@@ -280,7 +333,7 @@ bool Mesh::LoadOFF(const std::string& fileName, bool invert)
             m_triangles.Resize(nf);
             Vec3<double> coord;
             float x, y, z;
-            for (int p = 0; p < nv; p++) {
+            for (int32_t p = 0; p < nv; p++) {
                 fscanf(fid, "%f", &x);
                 fscanf(fid, "%f", &y);
                 fscanf(fid, "%f", &z);
@@ -288,8 +341,8 @@ bool Mesh::LoadOFF(const std::string& fileName, bool invert)
                 m_points[p][1] = y;
                 m_points[p][2] = z;
             }
-            int i, j, k, s;
-            for (int t = 0; t < nf; ++t) {
+            int32_t i, j, k, s;
+            for (int32_t t = 0; t < nf; ++t) {
                 fscanf(fid, "%i", &s);
                 if (s == 3) {
                     fscanf(fid, "%i", &i);
@@ -307,7 +360,7 @@ bool Mesh::LoadOFF(const std::string& fileName, bool invert)
                 }
                 else // Fix me: support only triangular meshes
                 {
-                    for (int h = 0; h < s; ++h)
+                    for (int32_t h = 0; h < s; ++h)
                         fscanf(fid, "%i", &s);
                 }
             }

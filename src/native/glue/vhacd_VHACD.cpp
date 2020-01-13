@@ -106,25 +106,23 @@ extern "C" {
         Logger logger(debug);
         pParams->m_logger = &logger;
 
-        const unsigned int stridePoints = 3;
-        const unsigned int nPoints = numFloats / stridePoints;
-        const unsigned int strideTriangles = 3;
-        const unsigned int nTriangles = numInts / strideTriangles;
-        IVHACD * const pIvhacd = CreateVHACD();
-
+        // on some platforms, jint != int
         int * const pTriangles = new int[numInts];
         for (int i = 0; i < numInts; ++i) {
             pTriangles[i] = (int) pIndices[i];
         }
 
-        const bool success = pIvhacd->Compute(pPositions, stridePoints, nPoints,
-                pTriangles, strideTriangles, nTriangles, *pParams);
+        IVHACD * const pIvhacd = CreateVHACD();
+        const unsigned int nPoints = numFloats / 3;
+        const unsigned int nTriangles = numInts / 3;
+        const bool success = pIvhacd->Compute(pPositions, nPoints, pTriangles,
+                nTriangles, *pParams);
 
         if (success) {
             const unsigned int n_hulls = pIvhacd->GetNConvexHulls();
 
             for (unsigned int i = 0; i < n_hulls; ++i) {
-                IVHACD::ConvexHull *pHull = new IVHACD::ConvexHull();
+                IVHACD::ConvexHull * const pHull = new IVHACD::ConvexHull();
                 pIvhacd->GetConvexHull(i, *pHull);
                 const jlong hullId = reinterpret_cast<jlong> (pHull);
 

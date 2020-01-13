@@ -26,6 +26,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 #include "vhacdMutex.h"
 #include "vhacdVolume.h"
+#include "vhacdRaycastMesh.h"
+#include <vector>
 
 #define USE_THREAD 1
 #define OCL_MIN_NUM_PRIMITIVES 4096
@@ -52,25 +54,37 @@ public:
         Init();
     }
     //! Destructor.
-    ~VHACD(void) {}
-    unsigned int GetNConvexHulls() const
+    ~VHACD(void) 
     {
-        return (unsigned int)m_convexHulls.Size();
+    }
+    uint32_t GetNConvexHulls() const
+    {
+        return (uint32_t)m_convexHulls.Size();
     }
     void Cancel()
     {
         SetCancel(true);
     }
-    void GetConvexHull(const unsigned int index, ConvexHull& ch) const
+    void GetConvexHull(const uint32_t index, ConvexHull& ch) const
     {
         Mesh* mesh = m_convexHulls[index];
-        ch.m_nPoints = (unsigned int)mesh->GetNPoints();
-        ch.m_nTriangles = (unsigned int)mesh->GetNTriangles();
+        ch.m_nPoints = (uint32_t)mesh->GetNPoints();
+        ch.m_nTriangles = (uint32_t)mesh->GetNTriangles();
         ch.m_points = mesh->GetPoints();
-        ch.m_triangles = mesh->GetTriangles();
+        ch.m_triangles = (uint32_t *)mesh->GetTriangles();
+		ch.m_volume = mesh->ComputeVolume();
+		Vec3<double> &center = mesh->ComputeCenter();
+		ch.m_center[0] = center.X();
+		ch.m_center[1] = center.Y();
+		ch.m_center[2] = center.Z();
     }
     void Clean(void)
     {
+        if (mRaycastMesh)
+        {
+            mRaycastMesh->release();
+            mRaycastMesh = nullptr;
+        }
         delete m_volume;
         delete m_pset;
         size_t nCH = m_convexHulls.Size();
@@ -85,22 +99,20 @@ public:
         delete this;
     }
     bool Compute(const float* const points,
-        const unsigned int stridePoints,
-        const unsigned int nPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int nTriangles,
+        const uint32_t nPoints,
+        const uint32_t* const triangles,
+        const uint32_t nTriangles,
         const Parameters& params);
     bool Compute(const double* const points,
-        const unsigned int stridePoints,
-        const unsigned int nPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int nTriangles,
+        const uint32_t nPoints,
+        const uint32_t* const triangles,
+        const uint32_t nTriangles,
         const Parameters& params);
     bool OCLInit(void* const oclDevice,
         IUserLogger* const logger = 0);
     bool OCLRelease(IUserLogger* const logger = 0);
+
+	virtual bool ComputeCenterOfMass(double centerOfMass[3]) const;
 
 private:
     void SetCancel(bool cancel)
@@ -133,6 +145,11 @@ private:
     }
     void Init()
     {
+		if (mRaycastMesh)
+		{
+			mRaycastMesh->release();
+			mRaycastMesh = nullptr;
+		}
         memset(m_rot, 0, sizeof(double) * 9);
         m_dim = 64;
         m_volume = 0;
@@ -150,6 +167,7 @@ private:
     void ComputePrimitiveSet(const Parameters& params);
     void ComputeACD(const Parameters& params);
     void MergeConvexHulls(const Parameters& params);
+    void SimplifyConvexHull(Mesh* const ch, const size_t nvertices, const double minVolume);
     void SimplifyConvexHulls(const Parameters& params);
     void ComputeBestClippingPlane(const PrimitiveSet* inputPSet,
         const double volume,
@@ -158,7 +176,7 @@ private:
         const double w,
         const double alpha,
         const double beta,
-        const int convexhullDownsampling,
+        const int32_t convexhullDownsampling,
         const double progress0,
         const double progress1,
         Plane& bestPlane,
@@ -166,11 +184,11 @@ private:
         const Parameters& params);
     template <class T>
     void AlignMesh(const T* const points,
-        const unsigned int stridePoints,
-        const unsigned int nPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int nTriangles,
+        const uint32_t stridePoints,
+        const uint32_t nPoints,
+        const int32_t* const triangles,
+        const uint32_t strideTriangles,
+        const uint32_t nTriangles,
         const Parameters& params)
     {
         if (GetCancel() || !params.m_pca) {
@@ -222,11 +240,11 @@ private:
     }
     template <class T>
     void VoxelizeMesh(const T* const points,
-        const unsigned int stridePoints,
-        const unsigned int nPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int nTriangles,
+        const uint32_t stridePoints,
+        const uint32_t nPoints,
+        const int32_t* const triangles,
+        const uint32_t strideTriangles,
+        const uint32_t nTriangles,
         const Parameters& params)
     {
         if (GetCancel()) {
@@ -244,8 +262,8 @@ private:
 
         delete m_volume;
         m_volume = 0;
-        int iteration = 0;
-        const int maxIteration = 5;
+        int32_t iteration = 0;
+        const int32_t maxIteration = 5;
         double progress = 0.0;
         while (iteration++ < maxIteration && !m_cancel) {
             msg.str("");
@@ -292,25 +310,27 @@ private:
     }
     template <class T>
     bool ComputeACD(const T* const points,
-        const unsigned int stridePoints,
-        const unsigned int nPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int nTriangles,
+        const uint32_t nPoints,
+        const uint32_t* const triangles,
+        const uint32_t nTriangles,
         const Parameters& params)
     {
         Init();
-        if (params.m_oclAcceleration) {
-            // build kernals
+        if (params.m_projectHullVertices)
+        {
+            mRaycastMesh = RaycastMesh::createRaycastMesh(nPoints, points, nTriangles, (const uint32_t *)triangles);
         }
-        AlignMesh(points, stridePoints, nPoints, triangles, strideTriangles, nTriangles, params);
-        VoxelizeMesh(points, stridePoints, nPoints, triangles, strideTriangles, nTriangles, params);
+        if (params.m_oclAcceleration) {
+            // build kernels
+        }
+        AlignMesh(points, 3, nPoints, (int32_t *)triangles, 3, nTriangles, params);
+        VoxelizeMesh(points, 3, nPoints, (int32_t *)triangles, 3, nTriangles, params);
         ComputePrimitiveSet(params);
         ComputeACD(params);
         MergeConvexHulls(params);
         SimplifyConvexHulls(params);
         if (params.m_oclAcceleration) {
-            // Release kernals
+            // Release kernels
         }
         if (GetCancel()) {
             Clean();
@@ -320,6 +340,7 @@ private:
     }
 
 private:
+	RaycastMesh		*mRaycastMesh{ nullptr };
     SArray<Mesh*> m_convexHulls;
     std::string m_stage;
     std::string m_operation;
@@ -335,7 +356,7 @@ private:
     PrimitiveSet* m_pset;
     Mutex m_cancelMutex;
     bool m_cancel;
-    int m_ompNumProcessors;
+    int32_t m_ompNumProcessors;
 #ifdef CL_VERSION_1_1
     cl_device_id* m_oclDevice;
     cl_context m_oclContext;

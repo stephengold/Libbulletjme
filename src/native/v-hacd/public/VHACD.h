@@ -17,7 +17,27 @@
 #define VHACD_H
 
 #define VHACD_VERSION_MAJOR 2
-#define VHACD_VERSION_MINOR 2
+#define VHACD_VERSION_MINOR 3
+
+// Changes for version 2.3
+//
+// m_gamma : Has been removed.  This used to control the error metric to merge convex hulls.  Now it uses the 'm_maxConvexHulls' value instead.
+// m_maxConvexHulls : This is the maximum number of convex hulls to produce from the merge operation; replaces 'm_gamma'.
+//
+// Note that decomposition depth is no longer a user provided value.  It is now derived from the 
+// maximum number of hulls requested.
+//
+// As a convenience to the user, each convex hull produced now includes the volume of the hull as well as it's center.
+//
+// This version supports a convenience method to automatically make V-HACD run asynchronously in a background thread.
+// To get a fully asynchronous version, call 'CreateVHACD_ASYNC' instead of 'CreateVHACD'.  You get the same interface however,
+// now when computing convex hulls, it is no longer a blocking operation.  All callback messages are still returned
+// in the application's thread so you don't need to worry about mutex locks or anything in that case.
+// To tell if the operation is complete, the application should call 'IsReady'.  This will return true if
+// the last approximation operation is complete and will dispatch any pending messages.
+// If you call 'Compute' while a previous operation was still running, it will automatically cancel the last request
+// and begin a new one.  To cancel a currently running approximation just call 'Cancel'.
+#include <stdint.h>
 
 namespace VHACD {
 class IVHACD {
@@ -42,9 +62,11 @@ public:
     class ConvexHull {
     public:
         double* m_points;
-        int* m_triangles;
-        unsigned int m_nPoints;
-        unsigned int m_nTriangles;
+        uint32_t* m_triangles;
+        uint32_t m_nPoints;
+        uint32_t m_nTriangles;
+		double		m_volume;
+		double		m_center[3];
     };
 
     class Parameters {
@@ -53,13 +75,11 @@ public:
         void Init(void)
         {
             m_resolution = 100000;
-            m_depth = 20;
             m_concavity = 0.001;
             m_planeDownsampling = 4;
             m_convexhullDownsampling = 4;
             m_alpha = 0.05;
             m_beta = 0.05;
-            m_gamma = 0.0005;
             m_pca = 0;
             m_mode = 0; // 0: voxel-based (recommended), 1: tetrahedron-based
             m_maxNumVerticesPerCH = 64;
@@ -68,44 +88,42 @@ public:
             m_logger = 0;
             m_convexhullApproximation = true;
             m_oclAcceleration = true;
+            m_maxConvexHulls = 1024;
+			m_projectHullVertices = true; // This will project the output convex hull vertices onto the original source mesh to increase the floating point accuracy of the results
         }
         double m_concavity;
         double m_alpha;
         double m_beta;
-        double m_gamma;
         double m_minVolumePerCH;
         IUserCallback* m_callback;
         IUserLogger* m_logger;
-        unsigned int m_resolution;
-        unsigned int m_maxNumVerticesPerCH;
-        int m_depth;
-        int m_planeDownsampling;
-        int m_convexhullDownsampling;
-        int m_pca;
-        int m_mode;
-        int m_convexhullApproximation;
-        int m_oclAcceleration;
+        uint32_t m_resolution;
+        uint32_t m_maxNumVerticesPerCH;
+        uint32_t m_planeDownsampling;
+        uint32_t m_convexhullDownsampling;
+        uint32_t m_pca;
+        uint32_t m_mode;
+        uint32_t m_convexhullApproximation;
+        uint32_t m_oclAcceleration;
+        uint32_t	m_maxConvexHulls;
+		bool	m_projectHullVertices;
     };
 
     virtual void Cancel() = 0;
     virtual bool Compute(const float* const points,
-        const unsigned int stridePoints,
-        const unsigned int countPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int countTriangles,
+        const uint32_t countPoints,
+        const uint32_t* const triangles,
+        const uint32_t countTriangles,
         const Parameters& params)
         = 0;
     virtual bool Compute(const double* const points,
-        const unsigned int stridePoints,
-        const unsigned int countPoints,
-        const int* const triangles,
-        const unsigned int strideTriangles,
-        const unsigned int countTriangles,
+        const uint32_t countPoints,
+        const uint32_t* const triangles,
+        const uint32_t countTriangles,
         const Parameters& params)
         = 0;
-    virtual unsigned int GetNConvexHulls() const = 0;
-    virtual void GetConvexHull(const unsigned int index, ConvexHull& ch) const = 0;
+    virtual uint32_t GetNConvexHulls() const = 0;
+    virtual void GetConvexHull(const uint32_t index, ConvexHull& ch) const = 0;
     virtual void Clean(void) = 0; // release internally allocated memory
     virtual void Release(void) = 0; // release IVHACD
     virtual bool OCLInit(void* const oclDevice,
@@ -113,9 +131,23 @@ public:
         = 0;
     virtual bool OCLRelease(IUserLogger* const logger = 0) = 0;
 
+	// Will compute the center of mass of the convex hull decomposition results and return it
+	// in 'centerOfMass'.  Returns false if the center of mass could not be computed.
+	virtual bool ComputeCenterOfMass(double centerOfMass[3]) const = 0;
+
+	// In synchronous mode (non-multi-threaded) the state is always 'ready'
+	// In asynchronous mode, this returns true if the background thread is not still actively computing
+	// a new solution.  In an asynchronous config the 'IsReady' call will report any update or log
+	// messages in the caller's current thread.
+	virtual bool IsReady(void) const
+	{
+		return true;
+	}
+
 protected:
     virtual ~IVHACD(void) {}
 };
 IVHACD* CreateVHACD(void);
+IVHACD* CreateVHACD_ASYNC(void);
 }
 #endif // VHACD_H

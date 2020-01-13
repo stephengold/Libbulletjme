@@ -65,22 +65,6 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullDownsampling
 
 /*
  * Class:     vhacd_VHACDParameters
- * Method:    getDepth
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getDepth
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getGamma
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getGamma
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
  * Method:    getMaxNumVerticesPerCH
  * Signature: (J)I
  */
@@ -174,22 +158,6 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullApproximation
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullDownsampling
   (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setDepth
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setDepth
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setGamma
- * Signature: (JD)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setGamma
-  (JNIEnv *, jclass, jlong, jdouble);
 
 /*
  * Class:     vhacd_VHACDParameters

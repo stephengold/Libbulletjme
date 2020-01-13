@@ -147,36 +147,6 @@ extern "C" {
 
     /*
      * Class:     vhacd_VHACDParameters
-     * Method:    getDepth
-     * Signature: (J)I
-     */
-    JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getDepth
-    (JNIEnv *env, jclass clas, jlong objectId) {
-        const IVHACD::Parameters * const pParam
-                = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
-
-        int result = pParam->m_depth;
-        return (jint) result;
-    }
-
-    /*
-     * Class:     vhacd_VHACDParameters
-     * Method:    getGamma
-     * Signature: (J)D
-     */
-    JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getGamma
-    (JNIEnv *env, jclass clas, jlong objectId) {
-        const IVHACD::Parameters * const pParam
-                = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
-
-        double result = pParam->m_gamma;
-        return (jdouble) result;
-    }
-
-    /*
-     * Class:     vhacd_VHACDParameters
      * Method:    getMaxNumVerticesPerCH
      * Signature: (J)I
      */
@@ -348,34 +318,6 @@ extern "C" {
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
         pParam->m_convexhullDownsampling = (int) precision;
-    }
-
-    /*
-     * Class:     vhacd_VHACDParameters
-     * Method:    setDepth
-     * Signature: (JI)V
-     */
-    JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setDepth
-    (JNIEnv *env, jclass clas, jlong objectId, jint depth) {
-        IVHACD::Parameters * const pParam
-                = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
-
-        pParam->m_depth = (int) depth;
-    }
-
-    /*
-     * Class:     vhacd_VHACDParameters
-     * Method:    setGamma
-     * Signature: (JD)V
-     */
-    JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setGamma
-    (JNIEnv *env, jclass clas, jlong objectId, jdouble gamma) {
-        IVHACD::Parameters * const pParam
-                = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
-
-        pParam->m_gamma = (double) gamma;
     }
 
     /*
