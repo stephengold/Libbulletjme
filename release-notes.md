@@ -1,5 +1,9 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.21 released on 12 January 2020
+
+Added V-HACD sources from March 2016 (SHA1 ID=ded1fe4) plus new JNI glue code.
+
 ## Version 2.0.20 released on 10 January 2020
 
  + Fixed a `btAssert()` that occured (in Debug builds) while rescaling
