@@ -126,7 +126,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_convexhullApproximation;
+        uint32_t result = pParam->m_convexhullApproximation;
         return (jint) result;
     }
 
@@ -141,7 +141,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_convexhullDownsampling;
+        uint32_t result = pParam->m_convexhullDownsampling;
         return (jint) result;
     }
 
@@ -156,7 +156,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        unsigned int result = pParam->m_maxNumVerticesPerCH;
+        uint32_t result = pParam->m_maxNumVerticesPerCH;
         return (jint) result;
     }
 
@@ -186,7 +186,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_mode;
+        uint32_t result = pParam->m_mode;
         return (jint) result;
     }
 
@@ -201,7 +201,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_oclAcceleration;
+        uint32_t result = pParam->m_oclAcceleration;
         return (jint) result;
     }
 
@@ -216,7 +216,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_pca;
+        uint32_t result = pParam->m_pca;
         return (jboolean) result;
     }
 
@@ -231,7 +231,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        int result = pParam->m_planeDownsampling;
+        uint32_t result = pParam->m_planeDownsampling;
         return (jint) result;
     }
 
@@ -246,7 +246,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.", 0);
 
-        unsigned int result = pParam->m_resolution;
+        uint32_t result = pParam->m_resolution;
         return (jint) result;
     }
 
@@ -303,7 +303,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_convexhullApproximation = (int) value;
+        pParam->m_convexhullApproximation = (uint32_t) value;
     }
 
     /*
@@ -317,7 +317,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_convexhullDownsampling = (int) precision;
+        pParam->m_convexhullDownsampling = (uint32_t) precision;
     }
 
     /*
@@ -331,7 +331,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_maxNumVerticesPerCH = (unsigned int) numVertices;
+        pParam->m_maxNumVerticesPerCH = (uint32_t) numVertices;
     }
 
     /*
@@ -359,7 +359,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_mode = (int) mode;
+        pParam->m_mode = (uint32_t) mode;
     }
 
     /*
@@ -373,7 +373,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_oclAcceleration = (int) value;
+        pParam->m_oclAcceleration = (uint32_t) value;
     }
 
     /*
@@ -387,7 +387,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_pca = (int) enable;
+        pParam->m_pca = (uint32_t) enable;
     }
 
     /*
@@ -401,7 +401,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_planeDownsampling = (int) granularity;
+        pParam->m_planeDownsampling = (uint32_t) granularity;
     }
 
     /*
@@ -415,7 +415,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
         NULL_CHECK(pParam, "The parameters do not exist.",);
 
-        pParam->m_resolution = (unsigned int) maxVoxels;
+        pParam->m_resolution = (uint32_t) maxVoxels;
     }
 
 #ifdef __cplusplus

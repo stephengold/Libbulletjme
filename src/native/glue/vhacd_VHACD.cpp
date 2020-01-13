@@ -106,16 +106,10 @@ extern "C" {
         Logger logger(debug);
         pParams->m_logger = &logger;
 
-        // on some platforms, jint != int
-        int * const pTriangles = new int[numInts];
-        for (int i = 0; i < numInts; ++i) {
-            pTriangles[i] = (int) pIndices[i];
-        }
-
         IVHACD * const pIvhacd = CreateVHACD();
-        const unsigned int nPoints = numFloats / 3;
-        const unsigned int nTriangles = numInts / 3;
-        const bool success = pIvhacd->Compute(pPositions, nPoints, pTriangles,
+        const uint32_t nPoints = numFloats / 3;
+        const uint32_t nTriangles = numInts / 3;
+        const bool success = pIvhacd->Compute(pPositions, nPoints, pIndices,
                 nTriangles, *pParams);
 
         if (success) {
@@ -131,7 +125,6 @@ extern "C" {
             }
         }
 
-        delete[] pTriangles;
         pIvhacd->Clean();
         pIvhacd->Release();
     }
