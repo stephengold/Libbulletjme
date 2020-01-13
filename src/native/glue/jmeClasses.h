@@ -116,6 +116,9 @@ public:
     static jmethodID Transform_translation;
     static jmethodID Transform_scale;
 
+    static jclass Vhacd;
+    static jmethodID Vhacd_addHull;
+
     static jclass DebugMeshCallback;
     static jmethodID DebugMeshCallback_addVector;
 

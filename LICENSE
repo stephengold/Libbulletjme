@@ -1,4 +1,4 @@
-The src/native/glue software is Copyright (c) 2009-2019 jMonkeyEngine
+The src/native/glue software is Copyright (c) 2009-2020 jMonkeyEngine
 
 The src/native/v-hacd software except vhacdMutex.h
 is Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)

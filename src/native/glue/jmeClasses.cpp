@@ -108,6 +108,9 @@ jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
 jmethodID jmeClasses::Transform_scale;
 
+jclass jmeClasses::Vhacd;
+jmethodID jmeClasses::Vhacd_addHull;
+
 /*
  * global flag to enable/disable the init message
  *
@@ -332,6 +335,18 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
 
     Transform_scale = env->GetMethodID(Transform, "getScale",
             "()Lcom/jme3/math/Vector3f;");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+
+    Vhacd = env->NewGlobalRef(env->FindClass("vhacd/VHACD"));
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+
+    Vhacd_addHull = env->GetStaticMethodID(Vhacd, "addHull", "(J)V");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
