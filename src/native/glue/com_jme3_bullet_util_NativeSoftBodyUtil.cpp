@@ -60,7 +60,7 @@ extern "C" {
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(pBuffer, "The positions buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The positions buffer is not direct.",);
 
         const btVector3 offset =
                 meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0);
@@ -91,12 +91,12 @@ extern "C" {
         NULL_CHECK(indexMap, "The index map does not exist.",);
         const jint * const pJme2bulletMap
                 = (jint *) env->GetDirectBufferAddress(indexMap);
-        NULL_CHECK(pJme2bulletMap, "The index map has no direct buffer.",);
+        NULL_CHECK(pJme2bulletMap, "The index map is not direct.",);
 
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat *pPositions
                 = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(pPositions, "The positions buffer has no direct buffer.",);
+        NULL_CHECK(pPositions, "The positions buffer is not direct.",);
 
         const jlong mapCapacity = env->GetDirectBufferCapacity(indexMap);
         const btVector3 offset
@@ -106,7 +106,7 @@ extern "C" {
             NULL_CHECK(normalsBuffer, "The normals buffer does not exist.",);
             jfloat * const pNormals
                     = (jfloat *) env->GetDirectBufferAddress(normalsBuffer);
-            NULL_CHECK(pNormals, "The normals buffer has no direct buffer.",);
+            NULL_CHECK(pNormals, "The normals buffer is not direct.",);
 
             for (int i = 0; i < mapCapacity; ++i) {
                 const btSoftBody::Node& n = pBody->m_nodes[pJme2bulletMap[i]];
@@ -145,7 +145,7 @@ extern "C" {
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         jfloat * const pPositions
                 = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(pPositions, "The positions buffer has no direct buffer.",);
+        NULL_CHECK(pPositions, "The positions buffer is not direct.",);
 
         const btVector3 offset
                 = (meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0));
@@ -155,7 +155,7 @@ extern "C" {
             NULL_CHECK(normalsBuffer, "The normals buffer does not exist.",);
             jfloat *pNormals
                     = (jfloat *) env->GetDirectBufferAddress(normalsBuffer);
-            NULL_CHECK(pNormals, "The normals buffer has no direct buffer.",);
+            NULL_CHECK(pNormals, "The normals buffer is not direct.",);
 
             for (int i = 0; i < numNodes; ++i) {
                 const btSoftBody::Node& n = pBody->m_nodes[i];

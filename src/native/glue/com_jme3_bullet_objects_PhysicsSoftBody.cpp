@@ -139,7 +139,7 @@ extern "C" {
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint * const pBuffer
                 = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         int newClusterIndex = pBody->clusterCount();
         pBody->m_clusters.resize(newClusterIndex + 1);
@@ -173,7 +173,7 @@ extern "C" {
         NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
         const jbyte * const pBuffer
                 = (jbyte *) env->GetDirectBufferAddress(byteBuffer);
-        NULL_CHECK(pBuffer, "The ByteBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The ByteBuffer is not direct.",);
 
         for (int i = 0; i < 3 * numFaces;) {
             int ni1 = pBuffer[i++];
@@ -207,7 +207,7 @@ extern "C" {
         NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
         const jshort * const pBuffer
                 = (jshort *) env->GetDirectBufferAddress(shortBuffer);
-        NULL_CHECK(pBuffer, "The ShortBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The ShortBuffer is not direct.",);
 
         for (int i = 0; i < 3 * numFaces;) {
             int ni1 = pBuffer[i++];
@@ -241,7 +241,7 @@ extern "C" {
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint * const pBuffer
                 = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         for (int i = 0; i < 3 * numFaces;) {
             int ni1 = pBuffer[i++];
@@ -275,7 +275,7 @@ extern "C" {
         NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
         const jbyte * const pBuffer
                 = (jbyte *) env->GetDirectBufferAddress(byteBuffer);
-        NULL_CHECK(pBuffer, "The ByteBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The ByteBuffer is not direct.",);
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = pBuffer[i++];
@@ -305,7 +305,7 @@ extern "C" {
         NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
         const jshort * const pBuffer
                 = (jshort *) env->GetDirectBufferAddress(shortBuffer);
-        NULL_CHECK(pBuffer, "The ShortBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The ShortBuffer is not direct.",);
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = pBuffer[i++];
@@ -335,7 +335,7 @@ extern "C" {
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint * const pBuffer
                 = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         for (int i = 0; i < 2 * numLinks;) {
             int ni1 = pBuffer[i++];
@@ -365,7 +365,7 @@ extern "C" {
         NULL_CHECK(floatBuffer, "The FloatBuffer does not exist.",);
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
-        NULL_CHECK(pBuffer, "The FloatBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The FloatBuffer is not direct.",);
 
         for (int i = 0; i < 3 * numNodes;) {
             float x = pBuffer[i++];
@@ -390,7 +390,7 @@ extern "C" {
         NULL_CHECK(byteBuffer, "The ByteBuffer does not exist.",);
         const jbyte * const pBuffer
                 = (jbyte *) env->GetDirectBufferAddress(byteBuffer);
-        NULL_CHECK(pBuffer, "The ByteBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The ByteBuffer is not direct.",);
 
         for (int i = 0; i < 4 * numTetras;) {
             int ni1 = pBuffer[i++];
@@ -428,7 +428,7 @@ extern "C" {
         NULL_CHECK(shortBuffer, "The ShortBuffer does not exist.",);
         const jshort * const pBuffer
                 = (jshort *) env->GetDirectBufferAddress(shortBuffer);
-        NULL_CHECK(pBuffer, "The ShortBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The ShortBuffer is not direct.",);
 
         for (int i = 0; i < 4 * numTetras;) {
             int ni1 = pBuffer[i++];
@@ -466,7 +466,7 @@ extern "C" {
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         const jint * const pBuffer
                 = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         for (int i = 0; i < 4 * numTetras;) {
             int ni1 = pBuffer[i++];
@@ -896,7 +896,7 @@ extern "C" {
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pBuffer, "The store buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The store buffer is not direct.",);
 
         int numClusters = pBody->clusterCount();
         for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
@@ -920,7 +920,7 @@ extern "C" {
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         jfloat * pBuffer = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pBuffer, "The store buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The store buffer is not direct.",);
 
         int numClusters = pBody->clusterCount();
         for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
@@ -946,7 +946,7 @@ extern "C" {
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint * const pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         const int size = pBody->m_faces.size();
 
@@ -974,7 +974,7 @@ extern "C" {
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint * const pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         const int size = pBody->m_links.size();
         const btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
@@ -1034,7 +1034,7 @@ extern "C" {
         NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
         jfloat * const pMasses
                 = (jfloat *) env->GetDirectBufferAddress(massBuffer);
-        NULL_CHECK(pMasses, "The mass buffer has no direct buffer.",);
+        NULL_CHECK(pMasses, "The mass buffer is not direct.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(massBuffer);
         int numNodes = pBody->m_nodes.size();
@@ -1175,7 +1175,7 @@ extern "C" {
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         jfloat * pWrite
                 = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pWrite, "The store buffer has no direct buffer.",);
+        NULL_CHECK(pWrite, "The store buffer is not direct.",);
 
         int numNodes = pBody->m_nodes.size();
         for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
@@ -1202,7 +1202,7 @@ extern "C" {
         NULL_CHECK(floatBuffer, "The FloatBuffer does not exist.",);
         jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
-        NULL_CHECK(pBuffer, "The FloatBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The FloatBuffer is not direct.",);
 
         const int size = pBody->m_nodes.size();
 
@@ -1228,7 +1228,7 @@ extern "C" {
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pWrite, "The store buffer has no direct buffer.",);
+        NULL_CHECK(pWrite, "The store buffer is not direct.",);
 
         int numNodes = pBody->m_nodes.size();
         for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
@@ -1318,7 +1318,7 @@ extern "C" {
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint * const pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         const int size = pBody->m_tetras.size();
         const btSoftBody::Node * const pFirstNode = &pBody->m_nodes[0];
@@ -1436,7 +1436,7 @@ extern "C" {
 
         NULL_CHECK(intBuffer, "The IntBuffer does not exist.",);
         jint * const pBuffer = (jint *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pBuffer, "The IntBuffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The IntBuffer is not direct.",);
 
         const btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
         const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
@@ -1668,7 +1668,7 @@ extern "C" {
         NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(massBuffer);
-        NULL_CHECK(pBuffer, "The mass buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The mass buffer is not direct.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(massBuffer);
         int numNodes = pBody->m_nodes.size();
@@ -1711,7 +1711,7 @@ extern "C" {
         NULL_CHECK(normalBuffer, "The normal buffer does not exist.",);
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(normalBuffer);
-        NULL_CHECK(pBuffer, "The normal buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The normal buffer is not direct.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(normalBuffer) - 2;
         int numNodes = pBody->m_nodes.size();
@@ -1834,7 +1834,7 @@ extern "C" {
         NULL_CHECK(velocityBuffer, "The velocity buffer does not exist.",);
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(velocityBuffer);
-        NULL_CHECK(pBuffer, "The velocity buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The velocity buffer is not direct.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(velocityBuffer) - 2;
         int numNodes = pBody->m_nodes.size();

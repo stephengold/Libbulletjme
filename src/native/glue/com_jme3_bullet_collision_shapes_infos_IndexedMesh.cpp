@@ -54,12 +54,12 @@ extern "C" {
         NULL_CHECK(intBuffer, "The index buffer does not exist.", 0);
         const unsigned char * const pIndices
                 = (unsigned char *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pIndices, "The index buffer has no direct buffer.", 0);
+        NULL_CHECK(pIndices, "The index buffer is not direct.", 0);
 
         NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
         const unsigned char * const pVertices
                 = (unsigned char *) env->GetDirectBufferAddress(floatBuffer);
-        NULL_CHECK(pVertices, "The position buffer has no direct buffer.", 0);
+        NULL_CHECK(pVertices, "The position buffer is not direct.", 0);
 
         btIndexedMesh * const pMesh = new btIndexedMesh();
         pMesh->m_indexType = PHY_INTEGER;

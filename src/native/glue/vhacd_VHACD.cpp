@@ -108,13 +108,13 @@ extern "C" {
         NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         const jfloat * const pPositions
                 = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(pPositions, "The positions buffer has no direct buffer.",);
+        NULL_CHECK(pPositions, "The positions buffer is not direct.",);
         const jlong numFloats = env->GetDirectBufferCapacity(positionsBuffer);
 
         NULL_CHECK(indicesBuffer, "The indices buffer does not exist.",);
         const jint * const pIndices
                 = (jint *) env->GetDirectBufferAddress(indicesBuffer);
-        NULL_CHECK(pIndices, "The indices buffer has no direct buffer.",);
+        NULL_CHECK(pIndices, "The indices buffer is not direct.",);
         const jlong numInts = env->GetDirectBufferCapacity(indicesBuffer);
 
         IVHACD::Parameters * const pParams

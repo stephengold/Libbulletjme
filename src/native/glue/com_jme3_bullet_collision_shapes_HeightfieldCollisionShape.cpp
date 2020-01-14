@@ -77,10 +77,10 @@ extern "C" {
             jboolean useZigzag) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(floatBuffer, "The heightfield data does not exist.", 0);
+        NULL_CHECK(floatBuffer, "The heightfield buffer does not exist.", 0);
         const jfloat * const pHeights
                 = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
-        NULL_CHECK(pHeights, "The heightfield data has no direct buffer.", 0);
+        NULL_CHECK(pHeights, "The heightfield buffer is not direct.", 0);
 
         HeightfieldShape *pShape;
 #ifdef BT_USE_DOUBLE_PRECISION

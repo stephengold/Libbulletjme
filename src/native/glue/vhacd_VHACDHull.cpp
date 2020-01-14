@@ -57,7 +57,7 @@ extern "C" {
         NULL_CHECK(storeBuffer, "The indices buffer does not exist.",);
         jint * const pIndices
                 = (jint *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pIndices, "The indices buffer has no direct buffer.",);
+        NULL_CHECK(pIndices, "The indices buffer is not direct.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
         const uint32_t numInts = 3 * pHull->m_nTriangles;
@@ -112,7 +112,7 @@ extern "C" {
         NULL_CHECK(storeBuffer, "The positions buffer does not exist.",);
         jfloat * const pPositions
                 = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pPositions, "The positions buffer has no direct buffer.",);
+        NULL_CHECK(pPositions, "The positions buffer is not direct.",);
 
         const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
         const uint32_t numFloats = 3 * pHull->m_nPoints;

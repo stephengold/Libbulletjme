@@ -84,7 +84,7 @@ extern "C" {
         }
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(buffer);
-        NULL_CHECK(pBuffer, "The buffer has no direct buffer.", 0);
+        NULL_CHECK(pBuffer, "The buffer is not direct.", 0);
 
         btConvexHullShape * const pShape = new btConvexHullShape();
 
@@ -123,7 +123,7 @@ extern "C" {
             return;
         }
         jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pWrite, "The store buffer has no direct buffer.",);
+        NULL_CHECK(pWrite, "The store buffer is not direct.",);
 
         const btVector3* vertexPtr = pShape->getUnscaledPoints();
         for (int i = 0; i < numVerts; ++i) {

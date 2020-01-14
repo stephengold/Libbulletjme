@@ -85,7 +85,7 @@ extern "C" {
         NULL_CHECK(massBuffer, "The mass buffer does not exist.",);
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(massBuffer);
-        NULL_CHECK(pBuffer, "The mass buffer has no direct buffer.",);
+        NULL_CHECK(pBuffer, "The mass buffer is not direct.",);
         const jlong capacity = env->GetDirectBufferCapacity(massBuffer);
 
         const int numChildren = pShape->getNumChildShapes();
