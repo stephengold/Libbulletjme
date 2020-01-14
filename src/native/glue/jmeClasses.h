@@ -118,6 +118,7 @@ public:
 
     static jclass Vhacd;
     static jmethodID Vhacd_addHull;
+    static jmethodID Vhacd_update;
 
     static jclass DebugMeshCallback;
     static jmethodID DebugMeshCallback_addVector;

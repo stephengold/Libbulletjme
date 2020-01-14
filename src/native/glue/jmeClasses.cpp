@@ -110,6 +110,7 @@ jmethodID jmeClasses::Transform_scale;
 
 jclass jmeClasses::Vhacd;
 jmethodID jmeClasses::Vhacd_addHull;
+jmethodID jmeClasses::Vhacd_update;
 
 /*
  * global flag to enable/disable the init message
@@ -347,6 +348,12 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
     }
 
     Vhacd_addHull = env->GetStaticMethodID(Vhacd, "addHull", "(J)V");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+
+    Vhacd_update = env->GetStaticMethodID(Vhacd, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;

@@ -48,12 +48,33 @@ extern "C" {
 
     class Callback : public IVHACD::IUserCallback {
     public:
+        JNIEnv *env;
 
-        void Update(const double overallProgress,
-                const double stageProgress,
-                const double operationProgress,
-                const char* const stage,
-                const char* const operation) {
+        Callback(JNIEnv *pJNIEnv) {
+            env = pJNIEnv;
+        };
+
+        void Update(const double overallPercent, const double stagePercent,
+                const double operationPercent, const char* const stageName,
+                const char* const operationName) {
+
+            jstring arg4 = env->NewStringUTF(stageName);
+            if (env->ExceptionCheck()) {
+                env->Throw(env->ExceptionOccurred());
+                return;
+            }
+
+            jstring arg5 = env->NewStringUTF(operationName);
+            if (env->ExceptionCheck()) {
+                env->Throw(env->ExceptionOccurred());
+                return;
+            }
+
+            jfloat arg1 = overallPercent;
+            jfloat arg2 = stagePercent;
+            jfloat arg3 = operationPercent;
+            env->CallStaticVoidMethod(jmeClasses::Vhacd,
+                    jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
         };
     };
 
@@ -100,7 +121,7 @@ extern "C" {
                 = reinterpret_cast<IVHACD::Parameters *> (paramsId);
         NULL_CHECK(pParams, "The parameters do not exist.",)
 
-        Callback callback;
+        Callback callback = Callback(env);
         pParams->m_callback = &callback;
 
         Logger logger(debug);
