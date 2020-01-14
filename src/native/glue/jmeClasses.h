@@ -41,8 +41,7 @@
 #ifdef _DEBUG
 #define NULL_CHECK(pJNIEnv, pointer, message, retval) \
     if ((pointer) == NULL) { \
-        jclass npe = (pJNIEnv)->FindClass("java/lang/NullPointerException"); \
-        (pJNIEnv)->ThrowNew(npe, message); \
+        (pJNIEnv)->ThrowNew(jmeClasses::NullPointerException, message); \
         return retval; \
     }
 #else
@@ -94,6 +93,8 @@ public:
     static jfieldID Matrix3f_m20;
     static jfieldID Matrix3f_m21;
     static jfieldID Matrix3f_m22;
+
+    static jclass NullPointerException;
 
     static jclass PhysicsRay_Class;
     static jmethodID PhysicsRay_newSingleResult;

@@ -80,6 +80,8 @@ jfieldID jmeClasses::Matrix3f_m20;
 jfieldID jmeClasses::Matrix3f_m21;
 jfieldID jmeClasses::Matrix3f_m22;
 
+jclass jmeClasses::NullPointerException;
+
 jclass jmeClasses::DebugMeshCallback;
 jmethodID jmeClasses::DebugMeshCallback_addVector;
 
@@ -213,6 +215,9 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
     Matrix3f_m20 = env->GetFieldID(Matrix3f, "m20", "F");
     Matrix3f_m21 = env->GetFieldID(Matrix3f, "m21", "F");
     Matrix3f_m22 = env->GetFieldID(Matrix3f, "m22", "F");
+
+    NullPointerException = (jclass) env->NewGlobalRef(env->FindClass(
+            "java/lang/NullPointerException"));
 
     DebugMeshCallback = (jclass) env->NewGlobalRef(env->FindClass("com/jme3/bullet/util/DebugMeshCallback"));
     if (env->ExceptionCheck()) {
