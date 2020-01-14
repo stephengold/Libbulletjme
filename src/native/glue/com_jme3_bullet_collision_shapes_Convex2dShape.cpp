@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,7 @@ extern "C" {
 
         btCollisionShape *pChild
                 = reinterpret_cast<btCollisionShape *> (childShapeId);
-        NULL_CHECK(env, pChild, "The child shape does not exist.", 0)
+        NULL_CHECK(pChild, "The child shape does not exist.", 0)
         btAssert(pChild->isConvex());
         btConvexShape *pConvex = (btConvexShape *) pChild;
 

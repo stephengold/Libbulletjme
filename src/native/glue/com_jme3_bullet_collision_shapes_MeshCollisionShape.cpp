@@ -55,7 +55,7 @@ extern "C" {
 
         btStridingMeshInterface *pMesh
                 = reinterpret_cast<btStridingMeshInterface *> (meshId);
-        NULL_CHECK(env, pMesh, "The btStridingMeshInterface does not exist.", 0)
+        NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.", 0)
 
         btBvhTriangleMeshShape *pShape = new btBvhTriangleMeshShape(pMesh,
                 isMemoryEfficient, buildBVH);
@@ -85,7 +85,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btBvhTriangleMeshShape *pShape
                 = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
-        NULL_CHECK(env, pShape, "The btBvhTriangleMeshShape does not exist.",);
+        NULL_CHECK(pShape, "The btBvhTriangleMeshShape does not exist.",);
         btAssert(pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();
@@ -100,7 +100,7 @@ extern "C" {
     (JNIEnv *env, jobject, jlong meshobj) {
         btBvhTriangleMeshShape *pMesh
                 = reinterpret_cast<btBvhTriangleMeshShape *> (meshobj);
-        NULL_CHECK(env, pMesh, "The btBvhTriangleMeshShape does not exist.", 0);
+        NULL_CHECK(pMesh, "The btBvhTriangleMeshShape does not exist.", 0);
         btAssert(pMesh->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
 
         btOptimizedBvh *pBvh = pMesh->getOptimizedBvh();
@@ -135,8 +135,7 @@ extern "C" {
                 = btOptimizedBvh::deSerializeInPlace(pBuffer, len, true);
         btBvhTriangleMeshShape *pShape
                 = reinterpret_cast<btBvhTriangleMeshShape *> (meshobj);
-        NULL_CHECK(env, pShape, "The btBvhTriangleMeshShape does not exist.",
-                0);
+        NULL_CHECK(pShape, "The btBvhTriangleMeshShape does not exist.", 0);
         pShape->setOptimizedBvh(pBvh);
 
         return reinterpret_cast<jlong> (pBuffer);

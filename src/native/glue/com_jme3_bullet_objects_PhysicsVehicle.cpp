@@ -55,19 +55,17 @@ extern "C" {
         // TODO remove unused argument
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
 
-        NULL_CHECK(env, locationVector,
-                "The location vector does not exist.", 0);
+        NULL_CHECK(locationVector, "The location vector does not exist.", 0)
         btVector3 location;
         jmeBulletUtil::convert(env, locationVector, &location);
 
-        NULL_CHECK(env, directionVector,
-                "The direction vector does not exist.", 0);
+        NULL_CHECK(directionVector, "The direction vector does not exist.", 0)
         btVector3 direction;
         jmeBulletUtil::convert(env, directionVector, &direction);
 
-        NULL_CHECK(env, axleVector, "The axle vector does not exist.", 0)
+        NULL_CHECK(axleVector, "The axle vector does not exist.", 0)
         btVector3 axle;
         jmeBulletUtil::convert(env, axleVector, &axle);
 
@@ -88,7 +86,7 @@ extern "C" {
             jfloat force) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
         btAssert(wheelIndex >= 0);
         btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -105,7 +103,7 @@ extern "C" {
             jfloat value) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
         btAssert(wheelIndex >= 0);
         btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -122,14 +120,14 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
-        NULL_CHECK(env, pBody, "The btRigidBody does not exist.", 0);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0);
         btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         pBody->setActivationState(DISABLE_DEACTIVATION);
 
         btVehicleRaycaster *pCaster
                 = reinterpret_cast<btDefaultVehicleRaycaster *> (casterId);
-        NULL_CHECK(env, pCaster, "The btVehicleRaycaster does not exist.", 0)
+        NULL_CHECK(pCaster, "The btVehicleRaycaster does not exist.", 0)
 
         btRaycastVehicle::btVehicleTuning tuning;
         btRaycastVehicle *pVehicle
@@ -149,7 +147,7 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-        NULL_CHECK(env, pSpace, "The physics space does not exist.", 0)
+        NULL_CHECK(pSpace, "The physics space does not exist.", 0)
 
         btDefaultVehicleRaycaster *pCaster
                 = new btDefaultVehicleRaycaster(pSpace->getDynamicsWorld());
@@ -166,13 +164,13 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong casterId, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
 
         delete pVehicle;
 
         btVehicleRaycaster *pCaster
                 = reinterpret_cast<btVehicleRaycaster *> (casterId);
-        NULL_CHECK(env, pCaster, "The btVehicleRaycaster does not exist.",);
+        NULL_CHECK(pCaster, "The btVehicleRaycaster does not exist.",);
 
         delete pCaster;
     }
@@ -186,7 +184,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
 
         return pVehicle->getCurrentSpeedKmHour();
     }
@@ -200,7 +198,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
 
         int axisIndex = pVehicle->getForwardAxis();
         return (jint) axisIndex;
@@ -215,11 +213,11 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jobject storeVector) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
 
         const btVector3& forwardVector = pVehicle->getForwardVector();
 
-        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
+        NULL_CHECK(storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &forwardVector, storeVector);
     }
 
@@ -232,7 +230,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
 
         int axisIndex = pVehicle->getRightAxis();
         return (jint) axisIndex;
@@ -247,7 +245,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
 
         int count = pVehicle->getNumWheels();
         return (jint) count;
@@ -262,7 +260,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
 
         int axisIndex = pVehicle->getUpAxis();
         return (jint) axisIndex;
@@ -277,7 +275,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
         btAssert(wheelIndex >= 0);
         btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -296,7 +294,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong vehicleId) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
 
         pVehicle->resetSuspension();
     }
@@ -311,7 +309,7 @@ extern "C" {
             jint forward) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
         btAssert(right >= 0);
         btAssert(right <= 2);
         btAssert(up >= 0);
@@ -332,7 +330,7 @@ extern "C" {
             jfloat angle) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
         btAssert(wheelIndex >= 0);
         btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -349,7 +347,7 @@ extern "C" {
             jboolean interpolated) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-        NULL_CHECK(env, pVehicle, "The btRaycastVehicle does not exist.",);
+        NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
         btAssert(wheelIndex >= 0);
         btAssert(wheelIndex < pVehicle->getNumWheels());
 

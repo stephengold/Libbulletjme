@@ -50,7 +50,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong materialId) {
         btSoftBody::Material *pMaterial
                 = reinterpret_cast<btSoftBody::Material *> (materialId);
-        NULL_CHECK(env, pMaterial, "The material does not exist.", 0)
+        NULL_CHECK(pMaterial, "The material does not exist.", 0)
 
         return pMaterial->m_kAST;
     }
@@ -64,7 +64,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong materialId) {
         btSoftBody::Material *pMaterial
                 = reinterpret_cast<btSoftBody::Material *> (materialId);
-        NULL_CHECK(env, pMaterial, "The material does not exist.", 0)
+        NULL_CHECK(pMaterial, "The material does not exist.", 0)
 
         return pMaterial->m_kLST;
     }
@@ -78,7 +78,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong materialId) {
         btSoftBody::Material *pMaterial
                 = reinterpret_cast<btSoftBody::Material *> (materialId);
-        NULL_CHECK(env, pMaterial, "The material does not exist.", 0)
+        NULL_CHECK(pMaterial, "The material does not exist.", 0)
 
         return pMaterial->m_kVST;
     }
@@ -92,7 +92,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
         btSoftBody::Material *pMaterial
                 = reinterpret_cast<btSoftBody::Material *> (materialId);
-        NULL_CHECK(env, pMaterial, "The material does not exist.",)
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
         pMaterial->m_kAST = factor;
     }
@@ -106,7 +106,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
         btSoftBody::Material *pMaterial
                 = reinterpret_cast<btSoftBody::Material *> (materialId);
-        NULL_CHECK(env, pMaterial, "The material does not exist.",)
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
         pMaterial->m_kLST = factor;
     }
@@ -120,7 +120,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
         btSoftBody::Material *pMaterial
                 = reinterpret_cast<btSoftBody::Material *> (materialId);
-        NULL_CHECK(env, pMaterial, "The material does not exist.",)
+        NULL_CHECK(pMaterial, "The material does not exist.",)
 
         pMaterial->m_kVST = factor;
     }

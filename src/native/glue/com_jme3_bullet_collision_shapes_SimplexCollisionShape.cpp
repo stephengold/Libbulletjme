@@ -134,7 +134,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btBU_Simplex1to4 *pShape
                 = reinterpret_cast<btBU_Simplex1to4 *> (shapeId);
-        NULL_CHECK(env, pShape, "The btBU_Simplex1to4 does not exist.",);
+        NULL_CHECK(pShape, "The btBU_Simplex1to4 does not exist.",);
         btAssert(pShape->getShapeType() == TETRAHEDRAL_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();

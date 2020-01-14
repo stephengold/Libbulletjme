@@ -39,13 +39,13 @@
 #include <jni.h>
 
 #ifdef _DEBUG
-#define NULL_CHECK(unused, pointer, message, retval) \
+#define NULL_CHECK(pointer, message, retval) \
     if ((pointer) == NULL) { \
         jmeClasses::pEnv->ThrowNew(jmeClasses::NullPointerException, message); \
         return retval; \
     }
 #else
-#define NULL_CHECK(unused, pointer, message, retval)
+#define NULL_CHECK(pointer, message, retval)
 #endif
 
 class jmeClasses {

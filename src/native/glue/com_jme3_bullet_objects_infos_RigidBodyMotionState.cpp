@@ -50,8 +50,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject location, jobject rotation) {
         jmeMotionState *pMotionState
                 = reinterpret_cast<jmeMotionState *> (stateId);
-        NULL_CHECK(env, pMotionState,
-                "The motion state does not exist.", JNI_FALSE)
+        NULL_CHECK(pMotionState, "The motion state does not exist.", JNI_FALSE)
 
         return pMotionState->applyTransform(env, location, rotation);
     }
@@ -77,7 +76,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId) {
         jmeMotionState *pMotionState
                 = reinterpret_cast<jmeMotionState *> (stateId);
-        NULL_CHECK(env, pMotionState, "The motion state does not exist.",);
+        NULL_CHECK(pMotionState, "The motion state does not exist.",);
 
         delete pMotionState;
     }
@@ -91,7 +90,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject value) {
         jmeMotionState *pMotionState
                 = reinterpret_cast<jmeMotionState *> (stateId);
-        NULL_CHECK(env, pMotionState, "The motion state does not exist.",)
+        NULL_CHECK(pMotionState, "The motion state does not exist.",)
 
         jmeBulletUtil::convert(env, &pMotionState->worldTransform.getOrigin(), value);
     }
@@ -105,7 +104,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject value) {
         jmeMotionState *pMotionState
                 = reinterpret_cast<jmeMotionState *> (stateId);
-        NULL_CHECK(env, pMotionState, "The motion state does not exist.",)
+        NULL_CHECK(pMotionState, "The motion state does not exist.",)
 
         jmeBulletUtil::convert(env, &pMotionState->worldTransform.getBasis(),
                 value);
@@ -120,7 +119,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong stateId, jobject value) {
         jmeMotionState *pMotionState
                 = reinterpret_cast<jmeMotionState *> (stateId);
-        NULL_CHECK(env, pMotionState, "The motion state does not exist.",)
+        NULL_CHECK(pMotionState, "The motion state does not exist.",)
 
         jmeBulletUtil::convertQuat(env, &pMotionState->worldTransform.getBasis(),
                 value);

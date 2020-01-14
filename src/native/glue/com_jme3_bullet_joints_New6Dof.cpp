@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,21 +52,21 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
-        NULL_CHECK(env, pBodyA, "Rigid body A does not exist.", 0)
+        NULL_CHECK(pBodyA, "Rigid body A does not exist.", 0)
         btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-        NULL_CHECK(env, pBodyB, "Rigid body B does not exist.", 0)
+        NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
         btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        NULL_CHECK(env, pivotInA, "The pivotInA vector does not exist.", 0)
-        NULL_CHECK(env, rotInA, "The rotInA matrix does not exist.", 0)
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform frameInA;
         jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
 
-        NULL_CHECK(env, pivotInB, "The pivotInB vector does not exist.", 0)
-        NULL_CHECK(env, rotInB, "The rotInB matrix does not exist.", 0)
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -90,11 +90,11 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-        NULL_CHECK(env, pBodyB, "Rigid body B does not exist.", 0)
+        NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
         btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        NULL_CHECK(env, pivotInB, "The pivotInB vector does not exist.", 0)
-        NULL_CHECK(env, rotInB, "The rotInB matrix does not exist.", 0)
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -118,7 +118,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -138,11 +138,11 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-        NULL_CHECK(env, storeVector, "The store vector does not exist.",)
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
 
         pConstraint->calculateTransforms();
 
@@ -164,13 +164,13 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
         btAssert(axisIndex >= 0);
         btAssert(axisIndex < 3);
-        NULL_CHECK(env, storeVector, "The store vector does not exist.",)
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
 
         pConstraint->calculateTransforms();
 
@@ -188,11 +188,11 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-        NULL_CHECK(env, storeTransform, "The store transform does not exist.",)
+        NULL_CHECK(storeTransform, "The store transform does not exist.",)
 
         btTransform a = pConstraint->getFrameOffsetA();
         jmeBulletUtil::convert(env, &a, storeTransform);
@@ -208,11 +208,11 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-        NULL_CHECK(env, storeTransform, "The store transform does not exist.",)
+        NULL_CHECK(storeTransform, "The store transform does not exist.",)
 
         btTransform b = pConstraint->getFrameOffsetB();
         jmeBulletUtil::convert(env, &b, storeTransform);
@@ -228,11 +228,11 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-        NULL_CHECK(env, storeVector, "The storeVector does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
         pConstraint->calculateTransforms();
 
@@ -253,7 +253,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.", 0);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -275,7 +275,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.", 0);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -294,7 +294,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.", 0);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -314,7 +314,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -333,7 +333,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -354,7 +354,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -374,7 +374,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -394,7 +394,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -414,7 +414,7 @@ extern "C" {
         btGeneric6DofSpring2Constraint *pConstraint
                 = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
                 constraintId);
-        NULL_CHECK(env, pConstraint,
+        NULL_CHECK(pConstraint,
                 "The btGeneric6DofSpring2Constraint does not exist.",);
         btTypedConstraintType type = pConstraint->getConstraintType();
         btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);

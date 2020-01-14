@@ -105,22 +105,21 @@ extern "C" {
             jlong paramsId, jboolean debug) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(env, positionsBuffer,
-                "The positions buffer does not exist.",);
+        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
         const jfloat * const pPositions
                 = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(env, pPositions, "The positions buffer is not direct.",);
+        NULL_CHECK(pPositions, "The positions buffer is not direct.",);
         const jlong numFloats = env->GetDirectBufferCapacity(positionsBuffer);
 
-        NULL_CHECK(env, indicesBuffer, "The indices buffer does not exist.",);
+        NULL_CHECK(indicesBuffer, "The indices buffer does not exist.",);
         const jint * const pIndices
                 = (jint *) env->GetDirectBufferAddress(indicesBuffer);
-        NULL_CHECK(env, pIndices, "The indices buffer is not direct.",);
+        NULL_CHECK(pIndices, "The indices buffer is not direct.",);
         const jlong numInts = env->GetDirectBufferCapacity(indicesBuffer);
 
         IVHACD::Parameters * const pParams
                 = reinterpret_cast<IVHACD::Parameters *> (paramsId);
-        NULL_CHECK(env, pParams, "The parameters do not exist.",)
+        NULL_CHECK(pParams, "The parameters do not exist.",)
 
         Callback callback = Callback(env);
         pParams->m_callback = &callback;

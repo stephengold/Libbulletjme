@@ -52,21 +52,21 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
-        NULL_CHECK(env, pBodyA, "Rigid body A does not exist.", 0)
+        NULL_CHECK(pBodyA, "Rigid body A does not exist.", 0)
         btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-        NULL_CHECK(env, pBodyB, "Rigid body B does not exist.", 0)
+        NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
         btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        NULL_CHECK(env, pivotInA, "The pivotInA vector does not exist.", 0)
-        NULL_CHECK(env, rotInA, "The rotInA matrix does not exist.", 0)
+        NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
+        NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
         btTransform frameInA;
         jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
         jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
 
-        NULL_CHECK(env, pivotInB, "The pivotInB vector does not exist.", 0)
-        NULL_CHECK(env, rotInB, "The rotInB matrix does not exist.", 0)
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -88,11 +88,11 @@ extern "C" {
         jmeClasses::initJavaClasses(env);
 
         btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-        NULL_CHECK(env, pBodyB, "Rigid body B does not exist.", 0)
+        NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
         btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        NULL_CHECK(env, pivotInB, "The pivotInB vector does not exist.", 0)
-        NULL_CHECK(env, rotInB, "The rotInB matrix does not exist.", 0)
+        NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
+        NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
         btTransform frameInB;
         jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
         jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -112,8 +112,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject storeVector) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(env, storeVector, "The storeVector does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
         pJoint->calculateTransforms();
         btScalar x = pJoint->getAngle(0);
@@ -132,8 +132,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject frameA) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(env, frameA, "The frameA transform does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(frameA, "The frameA transform does not exist.",)
 
         btTransform a = pJoint->getFrameOffsetA();
         jmeBulletUtil::convert(env, &a, frameA);
@@ -148,8 +148,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject frameB) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(env, frameB, "The frameB transform does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(frameB, "The frameB transform does not exist.",)
 
         btTransform b = pJoint->getFrameOffsetB();
         jmeBulletUtil::convert(env, &b, frameB);
@@ -164,8 +164,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject storeVector) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(env, storeVector, "The storeVector does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(storeVector, "The storeVector does not exist.",)
 
         pJoint->calculateTransforms();
         btScalar x = pJoint->getRelativePivotPosition(0);
@@ -184,8 +184,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jint index) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint,
-                "The btGeneric6DofConstraint does not exist.", 0)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.", 0)
 
         return reinterpret_cast<jlong> (pJoint->getRotationalLimitMotor(index));
     }
@@ -199,8 +198,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint,
-                "The btGeneric6DofConstraint does not exist.", 0)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.", 0)
 
         return reinterpret_cast<jlong> (pJoint->getTranslationalLimitMotor());
     }
@@ -214,8 +212,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(env, limitVector, "The limit vector does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
 
         btVector3 vec;
         jmeBulletUtil::convert(env, limitVector, &vec);
@@ -232,8 +230,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
-        NULL_CHECK(env, limitVector, "The limit vector does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
 
         btVector3 vec;
         jmeBulletUtil::convert(env, limitVector, &vec);
@@ -250,9 +248,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
 
-        NULL_CHECK(env, limitVector, "The limit vector does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, limitVector, &vec);
 
@@ -268,9 +266,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject limitVector) {
         btGeneric6DofConstraint *pJoint
                 = reinterpret_cast<btGeneric6DofConstraint *> (jointId);
-        NULL_CHECK(env, pJoint, "The btGeneric6DofConstraint does not exist.",)
+        NULL_CHECK(pJoint, "The btGeneric6DofConstraint does not exist.",)
 
-        NULL_CHECK(env, limitVector, "The limit vector does not exist.",)
+        NULL_CHECK(limitVector, "The limit vector does not exist.",)
         btVector3 vec;
         jmeBulletUtil::convert(env, limitVector, &vec);
 

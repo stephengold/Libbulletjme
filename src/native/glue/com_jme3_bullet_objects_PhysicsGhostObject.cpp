@@ -104,8 +104,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong ghostId) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(env, pGhost,
-                "The btPairCachingGhostObject does not exist.", 0);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.", 0)
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
@@ -121,8 +120,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong ghostId) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(env, pGhost,
-                "The btPairCachingGhostObject does not exist.",);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
@@ -141,8 +139,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong ghostId) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(env, pGhost,
-                "The btPairCachingGhostObject does not exist.",);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
@@ -158,12 +155,11 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong ghostId, jobject locationVector) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(env, pGhost,
-                "The btPairCachingGhostObject does not exist.",);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-        NULL_CHECK(env, locationVector, "The location vector does not exist.",)
+        NULL_CHECK(locationVector, "The location vector does not exist.",)
 
         jmeBulletUtil::convert(env, locationVector,
                 &pGhost->getWorldTransform().getOrigin());
@@ -178,12 +174,11 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong ghostId, jobject matrix) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(env, pGhost,
-                "The btPairCachingGhostObject does not exist.",);
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-        NULL_CHECK(env, matrix, "The rotation matrix does not exist.",)
+        NULL_CHECK(matrix, "The rotation matrix does not exist.",)
 
         jmeBulletUtil::convert(env, matrix,
                 &pGhost->getWorldTransform().getBasis());
@@ -198,11 +193,11 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong ghostId, jobject quaternion) {
         btPairCachingGhostObject *pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-        NULL_CHECK(env, pGhost, "The btPairCachingGhostObject does not exist.",)
+        NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-        NULL_CHECK(env, quaternion, "The quaternion does not exist.",)
+        NULL_CHECK(quaternion, "The quaternion does not exist.",)
 
         jmeBulletUtil::convertQuat(env, quaternion,
                 &pGhost->getWorldTransform().getBasis());

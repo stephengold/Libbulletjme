@@ -49,7 +49,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId, jboolean enable) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
 
         pConstraint->enableFeedback(enable);
     }
@@ -63,7 +63,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
 
         delete pConstraint;
     }
@@ -77,7 +77,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.", 0)
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
 
         return pConstraint->getAppliedImpulse();
     }
@@ -91,7 +91,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.", 0)
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
 
         return pConstraint->getBreakingImpulseThreshold();
     }
@@ -105,7 +105,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         const btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.", 0)
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
 
         btTypedConstraintType constraintType = pConstraint->getConstraintType();
         return (jint) constraintType;
@@ -120,8 +120,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         const btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint,
-                "The btTypedConstraint does not exist.", 0);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0);
 
         int overrideIterations = pConstraint->getOverrideNumSolverIterations();
         return (jint) overrideIterations;
@@ -136,10 +135,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",
-                JNI_FALSE);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
+                JNI_FALSE)
 
-        jboolean result = pConstraint->isEnabled();
+                jboolean result = pConstraint->isEnabled();
         return result;
     }
 
@@ -152,7 +151,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
                 JNI_FALSE);
 
         jboolean result = pConstraint->needsFeedback();
@@ -168,7 +167,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId, jint numIterations) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",);
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
 
         pConstraint->setOverrideNumSolverIterations(numIterations);
     }
@@ -182,7 +181,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId, jfloat desiredValue) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",)
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",)
 
         pConstraint->setBreakingImpulseThreshold(desiredValue);
     }
@@ -196,7 +195,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong constraintId, jboolean desiredSetting) {
         btTypedConstraint *pConstraint
                 = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(env, pConstraint, "The btTypedConstraint does not exist.",)
+        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",)
 
         pConstraint->setEnabled(desiredSetting);
     }

@@ -50,7 +50,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btConvexHullShape * const pShape
                 = reinterpret_cast<btConvexHullShape *> (shapeId);
-        NULL_CHECK(env, pShape, "The btConvexHullShape does not exist.", 0);
+        NULL_CHECK(pShape, "The btConvexHullShape does not exist.", 0);
         btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
         int count = pShape->getNumPoints();
@@ -75,7 +75,7 @@ extern "C" {
             return 0L;
         }
 
-        NULL_CHECK(env, buffer, "The buffer does not exist.", 0);
+        NULL_CHECK(buffer, "The buffer does not exist.", 0);
         const jlong numBytes = env->GetDirectBufferCapacity(buffer);
         if (numBytes < 3 * sizeof (float) * n) {
             jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
@@ -84,7 +84,7 @@ extern "C" {
         }
         const jfloat * const pBuffer
                 = (jfloat *) env->GetDirectBufferAddress(buffer);
-        NULL_CHECK(env, pBuffer, "The buffer is not direct.", 0);
+        NULL_CHECK(pBuffer, "The buffer is not direct.", 0);
 
         btConvexHullShape * const pShape = new btConvexHullShape();
 
@@ -109,10 +109,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId, jobject storeBuffer) {
         btConvexHullShape * const pShape
                 = reinterpret_cast<btConvexHullShape *> (shapeId);
-        NULL_CHECK(env, pShape, "The btConvexHullShape does not exist.",)
+        NULL_CHECK(pShape, "The btConvexHullShape does not exist.",)
         btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
-        NULL_CHECK(env, storeBuffer, "The store buffer does not exist.",);
+        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
         const jlong bytesCapacity = env->GetDirectBufferCapacity(storeBuffer);
         int numVerts = pShape->getNumPoints();
         long bytesNeeded = 3 * sizeof (float) * (long) numVerts;
@@ -123,7 +123,7 @@ extern "C" {
             return;
         }
         jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(env, pWrite, "The store buffer is not direct.",);
+        NULL_CHECK(pWrite, "The store buffer is not direct.",);
 
         const btVector3* vertexPtr = pShape->getUnscaledPoints();
         for (int i = 0; i < numVerts; ++i) {
@@ -144,7 +144,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btConvexHullShape * const pShape
                 = reinterpret_cast<btConvexHullShape *> (shapeId);
-        NULL_CHECK(env, pShape, "The btConvexHullShape does not exist.",);
+        NULL_CHECK(pShape, "The btConvexHullShape does not exist.",);
         btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();

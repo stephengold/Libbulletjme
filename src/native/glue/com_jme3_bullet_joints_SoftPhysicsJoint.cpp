@@ -50,7 +50,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.",)
+        NULL_CHECK(pJoint, "The joint does not exist.",)
 
         btAlignedFree(pJoint);
     }
@@ -64,7 +64,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.", 0)
+        NULL_CHECK(pJoint, "The joint does not exist.", 0)
 
         return pJoint->m_cfm;
     }
@@ -78,7 +78,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.", 0)
+        NULL_CHECK(pJoint, "The joint does not exist.", 0)
 
         return pJoint->m_erp;
     }
@@ -92,7 +92,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.", 0)
+        NULL_CHECK(pJoint, "The joint does not exist.", 0)
 
         return pJoint->m_split;
     }
@@ -106,7 +106,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jfloat cfm) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.",)
+        NULL_CHECK(pJoint, "The joint does not exist.",)
 
         pJoint->m_cfm = cfm;
     }
@@ -120,7 +120,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jfloat erp) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.",)
+        NULL_CHECK(pJoint, "The joint does not exist.",)
 
         pJoint->m_erp = erp;
     }
@@ -134,7 +134,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jfloat split) {
         btSoftBody::Joint *pJoint
                 = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(env, pJoint, "The joint does not exist.",)
+        NULL_CHECK(pJoint, "The joint does not exist.",)
 
         pJoint->m_split = split;
     }

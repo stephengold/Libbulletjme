@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,11 +49,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong compoundMeshId, jlong submeshId) {
         btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (compoundMeshId);
-        NULL_CHECK(env, pMesh,
-                "The btTriangleIndexVertexArray does not exist.",);
+        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
         btIndexedMesh *pSubmesh = reinterpret_cast<btIndexedMesh *> (submeshId);
-        NULL_CHECK(env, pSubmesh, "The btIndexedMesh does not exist.",);
+        NULL_CHECK(pSubmesh, "The btIndexedMesh does not exist.",);
 
         pMesh->addIndexedMesh(*pSubmesh);
     }
@@ -79,8 +78,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong meshId) {
         btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
-        NULL_CHECK(env, pMesh,
-                "The btTriangleIndexVertexArray does not exist.",);
+        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
         delete pMesh;
     }
@@ -94,9 +92,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong meshId, jobject storeVector) {
         btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
-        NULL_CHECK(env, pMesh,
-                "The btTriangleIndexVertexArray does not exist.",);
-        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
+        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
+        NULL_CHECK(storeVector, "The store vector does not exist.",);
 
         const btVector3 *pScale = &pMesh->getScaling();
         jmeBulletUtil::convert(env, pScale, storeVector);
@@ -112,8 +109,7 @@ extern "C" {
             jfloat zScale) {
         btTriangleIndexVertexArray *pMesh
                 = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
-        NULL_CHECK(env, pMesh,
-                "The btTriangleIndexVertexArray does not exist.",);
+        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
         btVector3 scale;
         scale.setX(xScale);

@@ -49,7 +49,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_accumulatedImpulse;
     }
@@ -63,7 +63,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_bounce;
     }
@@ -77,7 +77,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_currentPosition;
     }
@@ -91,7 +91,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_damping;
     }
@@ -105,7 +105,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_stopERP;
     }
@@ -119,7 +119,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_hiLimit;
     }
@@ -133,7 +133,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_limitSoftness;
     }
@@ -147,7 +147,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_loLimit;
     }
@@ -161,7 +161,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_maxLimitForce;
     }
@@ -175,7 +175,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_maxMotorForce;
     }
@@ -189,7 +189,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_normalCFM;
     }
@@ -203,7 +203,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_stopCFM;
     }
@@ -217,7 +217,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.", 0)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.", 0)
 
         return pMotor->m_targetVelocity;
     }
@@ -231,7 +231,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",
                 JNI_FALSE)
 
         return pMotor->m_enableMotor;
@@ -246,7 +246,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_accumulatedImpulse = value;
     }
@@ -260,7 +260,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_bounce = value;
     }
@@ -274,7 +274,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_damping = value;
     }
@@ -288,7 +288,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jboolean value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_enableMotor = value;
     }
@@ -302,7 +302,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_stopERP = value;
     }
@@ -316,7 +316,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_hiLimit = value;
     }
@@ -330,7 +330,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_limitSoftness = value;
     }
@@ -344,7 +344,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_loLimit = value;
     }
@@ -358,7 +358,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_maxLimitForce = value;
     }
@@ -372,7 +372,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_maxMotorForce = value;
     }
@@ -386,7 +386,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_normalCFM = value;
     }
@@ -400,7 +400,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_stopCFM = value;
     }
@@ -414,7 +414,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btRotationalLimitMotor *pMotor
                 = reinterpret_cast<btRotationalLimitMotor *> (motorId);
-        NULL_CHECK(env, pMotor, "The btRotationalLimitMotor does not exist.",)
+        NULL_CHECK(pMotor, "The btRotationalLimitMotor does not exist.",)
 
         pMotor->m_targetVelocity = value;
     }
