@@ -36,7 +36,11 @@
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
 
-//public fields
+// public fields
+
+JNIEnv * jmeClasses::pEnv;
+JavaVM * jmeClasses::vm;
+
 jclass jmeClasses::PhysicsSpace;
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
@@ -122,14 +126,12 @@ jmethodID jmeClasses::Vhacd_update;
  */
 int jmeClasses::printFlag = 1; // TRUE
 
-//private fields
-JavaVM * jmeClasses::vm;
-
 /*
  * Initialize Java classes for the specified environment.
  */
 void jmeClasses::initJavaClasses(JNIEnv *env) {
-    if (PhysicsSpace != NULL) return; // already initialized
+    if (pEnv != NULL) return; // already initialized
+    pEnv = env;
 
     if (printFlag) {
 #ifdef _DEBUG

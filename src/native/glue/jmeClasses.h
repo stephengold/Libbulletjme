@@ -39,18 +39,19 @@
 #include <jni.h>
 
 #ifdef _DEBUG
-#define NULL_CHECK(pJNIEnv, pointer, message, retval) \
+#define NULL_CHECK(unused, pointer, message, retval) \
     if ((pointer) == NULL) { \
-        (pJNIEnv)->ThrowNew(jmeClasses::NullPointerException, message); \
+        jmeClasses::pEnv->ThrowNew(jmeClasses::NullPointerException, message); \
         return retval; \
     }
 #else
-#define NULL_CHECK(pJNIEnv, pointer, message, retval)
+#define NULL_CHECK(unused, pointer, message, retval)
 #endif
 
 class jmeClasses {
 public:
     static void initJavaClasses(JNIEnv *env);
+    static JNIEnv * pEnv;
     static JavaVM * vm;
     static jclass PhysicsSpace;
     static jmethodID PhysicsSpace_preTick;
