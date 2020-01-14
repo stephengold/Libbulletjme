@@ -1,5 +1,12 @@
 # release notes for the Libbulletjme Project
 
+## Version 2.0.23 released on 13 January 2020
+
+ + Updated the V-HACD sources to match SHA1 ID=b07958e1 of the v-hacd project.
+   This eliminated the depth and gamma properties from `VHACDParameters`.
+ + Began reporting V-HACD progress to a `VHACD.update()` method.
+ + Switched from Visual Studio 2017 to Visual Studio 2019 for Windows builds.
+
 ## Version 2.0.22 released on 13 January 2020
 
 Solved a compile-time error on platforms where jint != int.
