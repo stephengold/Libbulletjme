@@ -77,11 +77,13 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
+                //buildable = targetPlatform.name.equals('Linux64')
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
                 }
                 if (flavor == flavors.Dp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
+                    //buildable = false
                 }
                 cppCompiler.define 'BT_NO_PROFILE'
 
