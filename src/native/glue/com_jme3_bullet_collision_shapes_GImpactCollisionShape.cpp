@@ -52,7 +52,7 @@ extern "C" {
 
         btStridingMeshInterface *pMesh
                 = reinterpret_cast<btStridingMeshInterface *> (meshId);
-        NULL_CHECK(pMesh, "The btStridingMeshInterface does not exist.", 0)
+        NULL_CHECK(env, pMesh, "The btStridingMeshInterface does not exist.", 0)
 
         btGImpactMeshShape *pShape = new btGImpactMeshShape(pMesh);
         // no longer invoking updateBound() here -- caller must do that
@@ -69,7 +69,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btGImpactMeshShape *pShape
                 = reinterpret_cast<btGImpactMeshShape *> (shapeId);
-        NULL_CHECK(pShape, "The btGImpactMeshShape does not exist.",);
+        NULL_CHECK(env, pShape, "The btGImpactMeshShape does not exist.",);
         btAssert(pShape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE);
 
         pShape->updateBound();

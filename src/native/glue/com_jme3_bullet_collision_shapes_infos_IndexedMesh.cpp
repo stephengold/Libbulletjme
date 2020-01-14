@@ -51,15 +51,15 @@ extern "C" {
             jint indexStride) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(intBuffer, "The index buffer does not exist.", 0);
+        NULL_CHECK(env, intBuffer, "The index buffer does not exist.", 0);
         const unsigned char * const pIndices
                 = (unsigned char *) env->GetDirectBufferAddress(intBuffer);
-        NULL_CHECK(pIndices, "The index buffer is not direct.", 0);
+        NULL_CHECK(env, pIndices, "The index buffer is not direct.", 0);
 
-        NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
+        NULL_CHECK(env, floatBuffer, "The position buffer does not exist.", 0);
         const unsigned char * const pVertices
                 = (unsigned char *) env->GetDirectBufferAddress(floatBuffer);
-        NULL_CHECK(pVertices, "The position buffer is not direct.", 0);
+        NULL_CHECK(env, pVertices, "The position buffer is not direct.", 0);
 
         btIndexedMesh * const pMesh = new btIndexedMesh();
         pMesh->m_indexType = PHY_INTEGER;
@@ -82,7 +82,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_finalizeNative
     (JNIEnv *env, jobject object, jlong meshId) {
         btIndexedMesh *pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
-        NULL_CHECK(pMesh, "The btIndexedMesh does not exist.",);
+        NULL_CHECK(env, pMesh, "The btIndexedMesh does not exist.",);
 
         delete pMesh;
     }

@@ -62,7 +62,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong worldId) {
         const btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (worldId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
 
         return pInfo->air_density;
     }
@@ -76,9 +76,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong worldId, jobject storeVector) {
         const btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (worldId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",);
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pInfo->m_gravity, storeVector);
     }
 
@@ -91,7 +91,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId) {
         const btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
 
         return pInfo->m_maxDisplacement;
     }
@@ -105,7 +105,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId) {
         const btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
 
         return pInfo->water_density;
     }
@@ -119,9 +119,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jobject storeVector) {
         const btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",);
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pInfo->water_normal, storeVector);
     }
 
@@ -134,7 +134,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId) {
         const btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
 
         return pInfo->water_offset;
     }
@@ -148,7 +148,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jfloat value) {
         btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
         pInfo->air_density = value;
     }
@@ -162,9 +162,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jobject gravityVector) {
         btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
-        NULL_CHECK(gravityVector, "The gravity vector does not exist.",);
+        NULL_CHECK(env, gravityVector, "The gravity vector does not exist.",);
         jmeBulletUtil::convert(env, gravityVector, &pInfo->m_gravity);
     }
 
@@ -177,7 +177,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jfloat value) {
         btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
         pInfo->m_maxDisplacement = value;
     }
@@ -192,11 +192,13 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong destId, jlong sourceId) {
         btSoftBodyWorldInfo * const pDest
                 = reinterpret_cast<btSoftBodyWorldInfo *> (destId);
-        NULL_CHECK(pDest, "The target btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(env, pDest, "The target btSoftBodyWorldInfo does not exist.",
+                0);
 
         btSoftBodyWorldInfo *pSource
                 = reinterpret_cast<btSoftBodyWorldInfo *> (sourceId);
-        NULL_CHECK(pSource, "The source btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(env, pSource,
+                "The source btSoftBodyWorldInfo does not exist.", 0);
 
         if (pDest != pSource) {
             pDest->air_density = pSource->air_density;
@@ -222,7 +224,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jfloat value) {
         btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
         pInfo->water_density = value;
     }
@@ -236,9 +238,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jobject normalVector) {
         btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
-        NULL_CHECK(normalVector, "The normal vector does not exist.",);
+        NULL_CHECK(env, normalVector, "The normal vector does not exist.",);
         jmeBulletUtil::convert(env, normalVector, &pInfo->water_normal);
     }
 
@@ -251,7 +253,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong infoId, jfloat value) {
         btSoftBodyWorldInfo * const pInfo
                 = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
-        NULL_CHECK(pInfo, "The btSoftBodyWorldInfo does not exist.",);
+        NULL_CHECK(env, pInfo, "The btSoftBodyWorldInfo does not exist.",);
 
         pInfo->water_offset = value;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,12 +51,12 @@ extern "C" {
             jlong rigidBodyId, jobject pivotVector,
             jboolean allowCollisions, jfloat influence) {
         btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-        NULL_CHECK(pSoftBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pSoftBody, "The btSoftBody does not exist.", 0)
         btAssert(pSoftBody->getInternalType()
                 & btCollisionObject::CO_SOFT_BODY);
 
         btRigidBody *pRigidBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
-        NULL_CHECK(pRigidBody, "The btRigidBody does not exist.", 0);
+        NULL_CHECK(env, pRigidBody, "The btRigidBody does not exist.", 0);
         btAssert(pRigidBody->getInternalType()
                 & btCollisionObject::CO_RIGID_BODY);
 
@@ -83,7 +83,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong anchorId, jfloat influence) {
         btSoftBody::Anchor *pAnchor
                 = reinterpret_cast<btSoftBody::Anchor *> (anchorId);
-        NULL_CHECK(pAnchor, "The btSoftBody::Anchor does not exist.",)
+        NULL_CHECK(env, pAnchor, "The btSoftBody::Anchor does not exist.",)
 
         pAnchor->m_influence = (btScalar) influence;
     }

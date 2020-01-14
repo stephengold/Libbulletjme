@@ -39,14 +39,14 @@
 #include <jni.h>
 
 #ifdef _DEBUG
-#define NULL_CHECK(pointer, message, retval) \
+#define NULL_CHECK(pJNIEnv, pointer, message, retval) \
     if ((pointer) == NULL) { \
-        jclass npe = env->FindClass("java/lang/NullPointerException"); \
-        env->ThrowNew(npe, message); \
+        jclass npe = (pJNIEnv)->FindClass("java/lang/NullPointerException"); \
+        (pJNIEnv)->ThrowNew(npe, message); \
         return retval; \
     }
 #else
-#define NULL_CHECK(pointer, message, retval)
+#define NULL_CHECK(pJNIEnv, pointer, message, retval)
 #endif
 
 class jmeClasses {

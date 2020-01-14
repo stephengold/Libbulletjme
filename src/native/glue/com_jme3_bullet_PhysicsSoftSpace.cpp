@@ -51,13 +51,13 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong spaceId, jlong softBodyId) {
         jmePhysicsSoftSpace *pSpace
                 = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-        NULL_CHECK(pSpace, "The physics space does not exist.",)
+        NULL_CHECK(env, pSpace, "The physics space does not exist.",)
         btSoftRigidDynamicsWorld *pWorld = pSpace->getSoftDynamicsWorld();
-        btAssert(pWorld != NULL);
+        NULL_CHECK(env, pWorld, "The btSoftRigidDynamicsWorld does not exist.",)
         btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
         btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-        NULL_CHECK(pSoftBody, "The collision object does not exist.",)
+        NULL_CHECK(env, pSoftBody, "The collision object does not exist.",)
         btAssert(pSoftBody->getInternalType()
                 & btCollisionObject::CO_SOFT_BODY);
 
@@ -92,9 +92,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong spaceId) {
         jmePhysicsSoftSpace *pSpace
                 = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-        NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+        NULL_CHECK(env, pSpace, "The physics space does not exist.", 0)
         btSoftRigidDynamicsWorld *pWorld = pSpace->getSoftDynamicsWorld();
-        btAssert(pWorld != NULL);
+        NULL_CHECK(env, pWorld, "The btSoftRigidDynamicsWorld does not exist.",)
         btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
         btSoftBodyWorldInfo *pWorldInfo = &(pWorld->getWorldInfo());
@@ -110,13 +110,13 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong spaceId, jlong softBodyId) {
         jmePhysicsSoftSpace *pSpace
                 = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-        NULL_CHECK(pSpace, "The physics space does not exist.",)
+        NULL_CHECK(env, pSpace, "The physics space does not exist.",)
         btSoftRigidDynamicsWorld *pWorld = pSpace->getSoftDynamicsWorld();
-        btAssert(pWorld != NULL);
+        NULL_CHECK(env, pWorld, "The btSoftRigidDynamicsWorld does not exist.",)
         btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
         btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-        NULL_CHECK(pSoftBody, "The collision object does not exist.",)
+        NULL_CHECK(env, pSoftBody, "The collision object does not exist.",)
         btAssert(pSoftBody->getInternalType()
                 & btCollisionObject::CO_SOFT_BODY);
 

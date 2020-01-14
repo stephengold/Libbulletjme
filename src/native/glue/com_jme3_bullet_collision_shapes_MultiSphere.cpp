@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019 jMonkeyEngine
+ * Copyright (c) 2018-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -91,7 +91,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong shapeId) {
         btMultiSphereShape *pShape
                 = reinterpret_cast<btMultiSphereShape *> (shapeId);
-        NULL_CHECK(pShape, "The btMultiSphereShape does not exist.",);
+        NULL_CHECK(env, pShape, "The btMultiSphereShape does not exist.",);
         btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
 
         pShape->recalcLocalAabb();

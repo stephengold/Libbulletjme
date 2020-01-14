@@ -65,9 +65,9 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",)
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
-                delete pParam;
+        delete pParam;
     }
 
     /*
@@ -79,7 +79,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         double result = pParam->m_alpha;
         return (jdouble) result;
@@ -94,7 +94,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         double result = pParam->m_beta;
         return (jdouble) result;
@@ -109,7 +109,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         double result = pParam->m_concavity;
         return (jdouble) result;
@@ -124,7 +124,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_convexhullApproximation;
         return (jint) result;
@@ -139,7 +139,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_convexhullDownsampling;
         return (jint) result;
@@ -154,7 +154,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_maxNumVerticesPerCH;
         return (jint) result;
@@ -169,7 +169,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         double result = pParam->m_minVolumePerCH;
         return (jdouble) result;
@@ -184,7 +184,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_mode;
         return (jint) result;
@@ -199,7 +199,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_oclAcceleration;
         return (jint) result;
@@ -214,7 +214,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_pca;
         return (jboolean) result;
@@ -229,7 +229,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_planeDownsampling;
         return (jint) result;
@@ -244,7 +244,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId) {
         const IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.", 0);
+        NULL_CHECK(env, pParam, "The parameters do not exist.", 0);
 
         uint32_t result = pParam->m_resolution;
         return (jint) result;
@@ -259,7 +259,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jdouble alpha) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_alpha = (double) alpha;
     }
@@ -273,7 +273,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jdouble beta) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_beta = (double) beta;
     }
@@ -287,7 +287,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jdouble depth) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_concavity = (double) depth;
     }
@@ -301,7 +301,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint value) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_convexhullApproximation = (uint32_t) value;
     }
@@ -315,7 +315,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint precision) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_convexhullDownsampling = (uint32_t) precision;
     }
@@ -329,7 +329,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint numVertices) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_maxNumVerticesPerCH = (uint32_t) numVertices;
     }
@@ -343,7 +343,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jdouble volume) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_minVolumePerCH = (double) volume;
     }
@@ -357,7 +357,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint mode) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_mode = (uint32_t) mode;
     }
@@ -371,7 +371,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint value) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_oclAcceleration = (uint32_t) value;
     }
@@ -385,7 +385,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jboolean enable) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_pca = (uint32_t) enable;
     }
@@ -399,7 +399,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint granularity) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_planeDownsampling = (uint32_t) granularity;
     }
@@ -413,7 +413,7 @@ extern "C" {
     (JNIEnv *env, jclass clas, jlong objectId, jint maxVoxels) {
         IVHACD::Parameters * const pParam
                 = reinterpret_cast<IVHACD::Parameters *> (objectId);
-        NULL_CHECK(pParam, "The parameters do not exist.",);
+        NULL_CHECK(env, pParam, "The parameters do not exist.",);
 
         pParam->m_resolution = (uint32_t) maxVoxels;
     }

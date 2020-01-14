@@ -49,8 +49,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jobject halfExtentsVector) {
         jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.",
-                0);
+        NULL_CHECK(env, halfExtentsVector,
+                "The halfExtents vector does not exist.", 0);
 
         btVector3 vec;
         jmeBulletUtil::convert(env, halfExtentsVector, &vec);

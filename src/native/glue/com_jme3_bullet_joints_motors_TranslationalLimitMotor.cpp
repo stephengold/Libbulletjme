@@ -49,8 +49,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(storeVector, "The storeVector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, storeVector, "The storeVector does not exist.",);
 
         jmeBulletUtil::convert(env, &pMotor->m_accumulatedImpulse, storeVector);
     }
@@ -64,7 +65,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.", 0)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.", 0)
 
         return pMotor->m_damping;
     }
@@ -78,9 +80,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pMotor->m_stopERP, storeVector);
     }
 
@@ -93,7 +96,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.", 0)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.", 0)
 
         return pMotor->m_limitSoftness;
     }
@@ -107,8 +111,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
 
         jmeBulletUtil::convert(env, &pMotor->m_lowerLimit, storeVector);
     }
@@ -122,9 +127,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pMotor->m_maxMotorForce, storeVector);
     }
 
@@ -137,9 +143,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeResult) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
-        NULL_CHECK(storeResult, "The store vector does not exist.",)
+        NULL_CHECK(env, storeResult, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pMotor->m_normalCFM, storeResult);
     }
 
@@ -152,9 +159,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pMotor->m_currentLinearDiff, storeVector);
     }
 
@@ -167,7 +175,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.", 0)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.", 0);
 
         return pMotor->m_restitution;
     }
@@ -181,9 +190,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pMotor->m_stopCFM, storeVector);
     }
 
@@ -196,9 +206,10 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
         jmeBulletUtil::convert(env, &pMotor->m_targetVelocity, storeVector);
     }
 
@@ -211,8 +222,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject storeVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, storeVector, "The store vector does not exist.",);
 
         jmeBulletUtil::convert(env, &pMotor->m_upperLimit, storeVector);
     }
@@ -226,7 +238,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jint axisIndex) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",
+        NULL_CHECK(env, pMotor, "The btTranslationalLimitMotor does not exist.",
                 JNI_FALSE);
 
         bool result = pMotor->m_enableMotor[axisIndex];
@@ -242,8 +254,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject impulseVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(impulseVector, "The impulseVector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, impulseVector, "The impulseVector does not exist.",);
 
         jmeBulletUtil::convert(env, impulseVector,
                 &pMotor->m_accumulatedImpulse);
@@ -258,7 +271,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
         pMotor->m_damping = value;
     }
@@ -272,7 +286,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jint axisIndex, jboolean newSetting) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
         pMotor->m_enableMotor[axisIndex] = (bool)newSetting;
     }
@@ -286,8 +301,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject erpVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(erpVector, "The ERP vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, erpVector, "The ERP vector does not exist.",);
 
         jmeBulletUtil::convert(env, erpVector, &pMotor->m_stopERP);
     }
@@ -301,7 +317,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
         pMotor->m_limitSoftness = value;
     }
@@ -315,8 +332,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject limitVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(limitVector, "The limit vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, limitVector, "The limit vector does not exist.",);
 
         jmeBulletUtil::convert(env, limitVector, &pMotor->m_lowerLimit);
     }
@@ -330,8 +348,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject forceVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(forceVector, "The force vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, forceVector, "The force vector does not exist.",);
 
         jmeBulletUtil::convert(env, forceVector, &pMotor->m_maxMotorForce);
     }
@@ -345,8 +364,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject cfmVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(cfmVector, "The CFM vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, cfmVector, "The CFM vector does not exist.",);
 
         jmeBulletUtil::convert(env, cfmVector, &pMotor->m_normalCFM);
     }
@@ -360,7 +380,8 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jfloat value) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
 
         pMotor->m_restitution = value;
     }
@@ -374,8 +395,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject cfmVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(cfmVector, "The CFM vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, cfmVector, "The CFM vector does not exist.",);
 
         jmeBulletUtil::convert(env, cfmVector, &pMotor->m_stopCFM);
     }
@@ -389,8 +411,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject velocityVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, velocityVector, "The velocity vector does not exist.",);
 
         jmeBulletUtil::convert(env, velocityVector, &pMotor->m_targetVelocity);
     }
@@ -404,8 +427,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong motorId, jobject limitVector) {
         btTranslationalLimitMotor *pMotor
                 = reinterpret_cast<btTranslationalLimitMotor *> (motorId);
-        NULL_CHECK(pMotor, "The btTranslationalLimitMotor does not exist.",)
-        NULL_CHECK(limitVector, "The limit vector does not exist.",)
+        NULL_CHECK(env, pMotor,
+                "The btTranslationalLimitMotor does not exist.",);
+        NULL_CHECK(env, limitVector, "The limit vector does not exist.",);
 
         jmeBulletUtil::convert(env, limitVector, &pMotor->m_upperLimit);
     }

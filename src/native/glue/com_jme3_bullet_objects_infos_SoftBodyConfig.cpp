@@ -50,11 +50,11 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_copyValues
     (JNIEnv *env, jobject object, jlong destId, jlong sourceId) {
         btSoftBody *pDest = reinterpret_cast<btSoftBody *> (destId);
-        NULL_CHECK(pDest, "The destination btSoftBody does not exist.",);
+        NULL_CHECK(env, pDest, "The destination btSoftBody does not exist.",);
         btAssert(pDest->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btSoftBody *pSource = reinterpret_cast<btSoftBody *> (sourceId);
-        NULL_CHECK(pSource, "The source btSoftBody does not exist.",)
+        NULL_CHECK(env, pSource, "The source btSoftBody does not exist.",)
         btAssert(pSource->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pDest->m_cfg.kVCF = pSource->m_cfg.kVCF; // Velocities correction factor (Baumgarte)
@@ -97,7 +97,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAeroModel
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.aeromodel;
@@ -111,7 +111,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAnchorsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kAHR;
@@ -125,7 +125,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.citerations;
@@ -139,7 +139,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterKineticHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSKHR_CL;
@@ -153,7 +153,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterKineticImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSK_SPLT_CL;
@@ -167,7 +167,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterRigidHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSRHR_CL;
@@ -181,7 +181,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterRigidImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSR_SPLT_CL;
@@ -195,7 +195,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterSoftHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSSHR_CL;
@@ -209,7 +209,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterSoftImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSS_SPLT_CL;
@@ -223,7 +223,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCollisionsFlags
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.collisions;
@@ -237,7 +237,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDampingCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kDP;
@@ -251,7 +251,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDragCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kDG;
@@ -265,7 +265,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDriftIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.diterations;
@@ -279,7 +279,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDynamicFrictionCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kDF;
@@ -293,7 +293,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getKineticContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kKHR;
@@ -307,7 +307,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getLiftCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kLF;
@@ -321,7 +321,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getMaximumVolumeRatio
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.maxvolume;
@@ -335,7 +335,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPoseMatchingCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kMT;
@@ -349,7 +349,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPositionIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.piterations;
@@ -363,7 +363,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPressureCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kPR;
@@ -377,7 +377,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getRigidContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kCHR;
@@ -391,7 +391,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getSoftContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kSHR;
@@ -405,7 +405,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getTimeScale
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.timescale;
@@ -419,7 +419,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVelocitiesCorrectionFactor
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kVCF;
@@ -433,7 +433,7 @@ extern "C" {
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVelocitiesIterations
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.viterations;
@@ -447,7 +447,7 @@ extern "C" {
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVolumeConservationCoef
     (JNIEnv *env, jobject object, jlong bodyId) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.", 0)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         return pBody->m_cfg.kVC;
@@ -461,7 +461,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAeroModel
     (JNIEnv *env, jobject object, jlong bodyId, jint model) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.aeromodel = (btSoftBody::eAeroModel::_) model;
@@ -475,7 +475,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAnchorsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kAHR = coef;
@@ -489,7 +489,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.citerations = iter;
@@ -503,7 +503,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterKineticHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSKHR_CL = coef;
@@ -517,7 +517,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterKineticImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSK_SPLT_CL = coef;
@@ -531,7 +531,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterRigidHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSRHR_CL = coef;
@@ -545,7 +545,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterRigidImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSR_SPLT_CL = coef;
@@ -559,7 +559,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterSoftHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSSHR_CL = coef;
@@ -573,7 +573,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterSoftImpulseSplitCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSS_SPLT_CL = coef;
@@ -587,7 +587,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setCollisionsFlags
     (JNIEnv *env, jobject object, jlong bodyId, jint flags) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.collisions = flags;
@@ -601,7 +601,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDampingCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat ceof) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kDP = ceof;
@@ -615,7 +615,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDragCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kDG = coef;
@@ -629,7 +629,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDriftIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.diterations = iter;
@@ -643,7 +643,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDynamicFrictionCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kDF = coef;
@@ -657,7 +657,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setKineticContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kKHR = coef;
@@ -671,7 +671,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setLiftCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kLF = coef;
@@ -685,7 +685,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setMaximumVolumeRatio
     (JNIEnv *env, jobject object, jlong bodyId, jfloat ratio) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.maxvolume = ratio;
@@ -699,7 +699,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPoseMatchingCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kMT = coef;
@@ -713,7 +713,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPositionIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.piterations = iter;
@@ -727,7 +727,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPressureCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kPR = coef;
@@ -741,7 +741,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setRigidContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kCHR = coef;
@@ -755,7 +755,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setSoftContactsHardness
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kSHR = coef;
@@ -769,7 +769,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setTimeScale
     (JNIEnv *env, jobject object, jlong bodyId, jfloat scale) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.timescale = scale;
@@ -783,7 +783,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVelocitiesCorrectionFactor
     (JNIEnv *env, jobject object, jlong bodyId, jfloat factor) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kVCF = factor;
@@ -797,7 +797,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVelocitiesIterations
     (JNIEnv *env, jobject object, jlong bodyId, jint iter) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.viterations = iter;
@@ -811,7 +811,7 @@ extern "C" {
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVolumeConservationCoef
     (JNIEnv *env, jobject object, jlong bodyId, jfloat coef) {
         btSoftBody *pBody = reinterpret_cast<btSoftBody *> (bodyId);
-        NULL_CHECK(pBody, "The btSoftBody does not exist.",)
+        NULL_CHECK(env, pBody, "The btSoftBody does not exist.",)
         btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         pBody->m_cfg.kVC = coef;

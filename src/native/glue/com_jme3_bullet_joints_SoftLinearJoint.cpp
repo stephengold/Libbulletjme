@@ -51,14 +51,14 @@ extern "C" {
             jlong rigidIdB, jfloat erp, jfloat cfm, jfloat split,
             jobject positionVector) {
         btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
-        NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
+        NULL_CHECK(env, pSoftA, "Soft body A does not exist.", 0)
         btAssert(pSoftA->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btRigidBody *pRigidB = reinterpret_cast<btRigidBody *> (rigidIdB);
-        NULL_CHECK(pRigidB, "Rigid body B does not exist.", 0)
+        NULL_CHECK(env, pRigidB, "Rigid body B does not exist.", 0)
         btAssert(pRigidB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-        NULL_CHECK(positionVector, "The position vector does not exist.", 0)
+        NULL_CHECK(env, positionVector, "The position vector does not exist.", 0)
         btVector3 pos;
         jmeBulletUtil::convert(env, positionVector, &pos);
 
@@ -87,14 +87,14 @@ extern "C" {
             jlong softIdB, jint clusterIndexB, jfloat erp,
             jfloat cfm, jfloat split, jobject positionVector) {
         btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
-        NULL_CHECK(pSoftA, "Soft body A does not exist.", 0)
+        NULL_CHECK(env, pSoftA, "Soft body A does not exist.", 0)
         btAssert(pSoftA->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
         btSoftBody *pSoftB = reinterpret_cast<btSoftBody *> (softIdB);
-        NULL_CHECK(pSoftB, "Soft body B does not exist.", 0)
+        NULL_CHECK(env, pSoftB, "Soft body B does not exist.", 0)
         btAssert(pSoftB->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-        NULL_CHECK(positionVector, "The position vector does not exist.", 0)
+        NULL_CHECK(env, positionVector, "The position vector does not exist.", 0)
         btVector3 pos;
         jmeBulletUtil::convert(env, positionVector, &pos);
 
@@ -123,9 +123,9 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong jointId, jobject positionVector) {
         btSoftBody::LJoint *pJoint
                 = reinterpret_cast<btSoftBody::LJoint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.",)
+        NULL_CHECK(env, pJoint, "The joint does not exist.",)
 
-        NULL_CHECK(positionVector, "The position vector does not exist.",)
+        NULL_CHECK(env, positionVector, "The position vector does not exist.",)
         btVector3 pos;
         jmeBulletUtil::convert(env, positionVector, &pos);
 
