@@ -215,11 +215,9 @@ extern "C" {
             }
             jobject resultlist;
             JNIEnv *env;
-            btVector3 m_rayFromWorld; //used to calculate hitPointWorld from hitFraction
+            btVector3 m_rayFromWorld; //used to calculate from hitFraction
             btVector3 m_rayToWorld;
-
             btVector3 m_hitNormalWorld;
-            btVector3 m_hitPointWorld;
 
             virtual btScalar addSingleResult(btCollisionWorld::LocalRayResult& rayResult, bool normalInWorldSpace) {
                 if (normalInWorldSpace) {
@@ -227,9 +225,7 @@ extern "C" {
                 } else {
                     m_hitNormalWorld = m_collisionObject->getWorldTransform().getBasis() * rayResult.m_hitNormalLocal;
                 }
-                m_hitPointWorld.setInterpolate3(m_rayFromWorld, m_rayToWorld, rayResult.m_hitFraction);
-
-                jmeBulletUtil::addResult(env, resultlist, &m_hitNormalWorld, &m_hitPointWorld, rayResult.m_hitFraction, rayResult.m_collisionObject);
+                jmeBulletUtil::addResult(env, resultlist, &m_hitNormalWorld, rayResult.m_hitFraction, rayResult.m_collisionObject);
 
                 return 1.f;
             }

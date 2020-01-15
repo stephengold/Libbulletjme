@@ -379,10 +379,8 @@ void jmeBulletUtil::convertQuat(JNIEnv *env, const btMatrix3x3 *pmIn,
 }
 
 void jmeBulletUtil::addResult(JNIEnv *env, jobject resultlist,
-        btVector3 *pHitNormal, btVector3 *pUnused,
-        btScalar m_hitFraction, const btCollisionObject *pHitObject) {
-    // TODO remove unused argument
-
+        const btVector3 * pHitNormal, btScalar m_hitFraction,
+        const btCollisionObject * pHitObject) {
     jobject singleresult = env->AllocObject(jmeClasses::PhysicsRay_Class);
     jobject hitnormalvec = env->AllocObject(jmeClasses::Vector3f);
 

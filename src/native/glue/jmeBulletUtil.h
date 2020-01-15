@@ -53,8 +53,8 @@ public:
     static void convert(JNIEnv *, jobject inVector, btVector3 * out);
     static void convertQuat(JNIEnv *, jobject inQuat, btMatrix3x3 * out);
 
-    static void addResult(JNIEnv *, jobject resultlist, btVector3 * hitnormal,
-            btVector3 * hitPointWorld, const btScalar hitFraction,
+    static void addResult(JNIEnv *, jobject resultlist,
+            const btVector3 * hitnormal, btScalar hitFraction,
             const btCollisionObject * hitobject);
     static void addSweepResult(JNIEnv *env, jobject resultlist,
             btVector3 * hitnormal, btVector3 * m_hitPointWorld,
