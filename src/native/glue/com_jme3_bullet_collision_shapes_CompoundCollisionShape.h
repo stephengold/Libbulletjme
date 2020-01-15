@@ -12,9 +12,9 @@ extern "C" {
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
  * Method:    addChildShape
- * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
+ * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
   (JNIEnv *, jobject, jlong, jlong, jobject, jobject);
 
 /*
@@ -52,9 +52,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
  * Method:    removeChildShape
- * Signature: (JJ)J
+ * Signature: (JJ)V
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
   (JNIEnv *, jobject, jlong, jlong);
 
 /*

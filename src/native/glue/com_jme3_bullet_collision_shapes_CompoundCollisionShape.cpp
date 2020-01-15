@@ -43,30 +43,27 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    addChildShape
-     * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
-     * TODO should return void
+     * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
     (JNIEnv *env, jobject object, jlong compoundShapeId, jlong childShapeId,
             jobject offsetVector, jobject rotationMatrix) {
         btCompoundShape *pCompound
                 = reinterpret_cast<btCompoundShape *> (compoundShapeId);
-        NULL_CHECK(pCompound, "The btCompoundShape does not exist.", 0)
+        NULL_CHECK(pCompound, "The btCompoundShape does not exist.",)
         btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
         btCollisionShape *pChild
                 = reinterpret_cast<btCollisionShape *> (childShapeId);
-        NULL_CHECK(pChild, "The child shape does not exist.", 0)
+        NULL_CHECK(pChild, "The child shape does not exist.",)
 
-        NULL_CHECK(offsetVector, "The offset vector does not exist.", 0)
-        NULL_CHECK(rotationMatrix, "The rotation matrix does not exist.", 0)
+        NULL_CHECK(offsetVector, "The offset vector does not exist.",)
+        NULL_CHECK(rotationMatrix, "The rotation matrix does not exist.",)
         btTransform trans;
         jmeBulletUtil::convert(env, offsetVector, &trans.getOrigin());
         jmeBulletUtil::convert(env, rotationMatrix, &trans.getBasis());
 
         pCompound->addChildShape(trans, pChild);
-
-        return 0;
     }
 
     /*
@@ -122,19 +119,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
-     * Method:    createShape
-     * Signature: ()J
-     * TODO delete
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape
-    (JNIEnv *env, jobject object) {
-        jmeClasses::initJavaClasses(env);
-        btCompoundShape * const pShape = new btCompoundShape();
-        return reinterpret_cast<jlong> (pShape);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    createShape2
      * Signature: (ZI)J
      */
@@ -168,23 +152,20 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
      * Method:    removeChildShape
-     * Signature: (JJ)J
-     * TODO should return void
+     * Signature: (JJ)V
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
     (JNIEnv *env, jobject object, jlong compoundShapeId, jlong childShapeId) {
         btCompoundShape * const pCompound
                 = reinterpret_cast<btCompoundShape *> (compoundShapeId);
-        NULL_CHECK(pCompound, "The btCompoundShape does not exist.", 0)
+        NULL_CHECK(pCompound, "The btCompoundShape does not exist.",)
         btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
         btCollisionShape * const pChild
                 = reinterpret_cast<btCollisionShape *> (childShapeId);
-        NULL_CHECK(pChild, "The child shape does not exist.", 0)
+        NULL_CHECK(pChild, "The child shape does not exist.",)
 
         pCompound->removeChildShape(pChild);
-
-        return 0;
     }
 
     /*
