@@ -6,7 +6,7 @@ Complete source code (in C++) is provided under
 [a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
 
 The project supports the 3 major desktop operating systems:
-Windows, Linux, and OSX.  Both the x86 and x86-64 architectures
+Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
 For each (operating system, architecture) combination,
 up to 4 shared libraries are distributed:
@@ -110,6 +110,7 @@ btPairCachingGhostObject          .bullet.objects.PhysicsGhostObject
 btPoint2PointConstraint           .bullet.joints.Point2PointJoint
 btQuaternion                      .math.Quaternion
 btRaycastVehicle                  .bullet.objects.PhysicsVehicle
+btRaycastVehicle::btVehicleTuning .bullet.objects.infos.VehicleTuning
 btRigidBody                       .bullet.objects.PhysicsRigidBody
 btRotationalLimitMotor            .bullet.joints.motors.RotationalLimitMotor
 btRotationalLimitMotor2           .bullet.joints.motors.RotationMotor
@@ -191,9 +192,13 @@ This project also made use of the following software tools:
   + the Java compiler, standard doclet, and runtime environment
   + the jME3 Software Development Kit
   + [Linux Mint][mint]
+  + the [LLVM Compiler Infrastructure][llvm]
   + the [Markdown] document-conversion tool
   + Microsoft Windows and Visual Studio
   + the [NetBeans] integrated development environment
+
+I am grateful to Riccardo Balbo (aka "riccardo") for bringing
+V-HACD to my attention.
 
 I am grateful to [Github], [AppVeyor], and [Travis]
 for providing free hosting for this project.
@@ -210,6 +215,7 @@ correct the situation: sgold@sonic.net
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
 [jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
+[llvm]: https://www.llvm.org "LLVM Compiler"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [minie]: https://github.com/stephengold/Minie "Minie Project"
 [mint]: https://linuxmint.com/ "Linux Mint"
