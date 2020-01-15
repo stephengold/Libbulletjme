@@ -360,7 +360,7 @@ extern "C" {
     (JNIEnv *env, jobject object, jlong bodyId) {
         const btRigidBody * const pBody
                 = reinterpret_cast<btRigidBody *> (bodyId);
-        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
         btScalar mass = pBody->getMass();
 
