@@ -39,20 +39,17 @@
 #include "jmePhysicsSpace.h"
 #include "BulletDynamics/Vehicle/btRaycastVehicle.h"
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    addWheel
-     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFLcom/jme3/bullet/objects/infos/VehicleTuning;Z)J
+     * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFJZ)I
      */
     JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_addWheel
     (JNIEnv *env, jobject object, jlong vehicleId, jobject locationVector,
             jobject directionVector, jobject axleVector, jfloat restLength,
-            jfloat radius, jobject unused, jboolean frontWheel) {
-        // TODO remove unused argument
+            jfloat radius, jlong tuningId, jboolean frontWheel) {
         btRaycastVehicle *pVehicle
                 = reinterpret_cast<btRaycastVehicle *> (vehicleId);
         NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
@@ -69,9 +66,13 @@ extern "C" {
         btVector3 axle;
         jmeBulletUtil::convert(env, axleVector, &axle);
 
-        btRaycastVehicle::btVehicleTuning tuning; // TODO use jobject?
+        btRaycastVehicle::btVehicleTuning *pTuning
+                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+                vehicleId);
+        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.", 0);
+
         &pVehicle->addWheel(location, direction, axle, restLength,
-                radius, tuning, frontWheel);
+                radius, *pTuning, frontWheel);
         int idx = pVehicle->getNumWheels();
         return idx - 1;
     }
@@ -96,7 +97,7 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    brake
-     * Signature: (JIF)F
+     * Signature: (JIF)V
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_brake
     (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
@@ -352,8 +353,4 @@ extern "C" {
 
         pVehicle->updateWheelTransform(wheelIndex, interpolated);
     }
-
-#ifdef __cplusplus
 }
-#endif
-
