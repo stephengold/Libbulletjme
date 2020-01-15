@@ -60,7 +60,8 @@ public:
     ~jmePhysicsSpace();
     jmePhysicsSpace(JNIEnv *, jobject);
     void stepSimulation(jfloat, jint, jfloat);
-    void createPhysicsSpace(jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jint, jboolean);
+    void createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, jfloat maxX,
+            jfloat maxY, jfloat maxZ, jint ordinal);
     btDynamicsWorld * getDynamicsWorld();
     jobject getJavaPhysicsSpace();
     JNIEnv * getEnv();

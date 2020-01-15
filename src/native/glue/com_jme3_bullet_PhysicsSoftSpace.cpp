@@ -79,7 +79,7 @@ extern "C" {
 
         jmePhysicsSoftSpace *pSpace = new jmePhysicsSoftSpace(env, object);
 
-        pSpace->createPhysicsSoftSpace(min_vec, max_vec, broadphase, threading);
+        pSpace->createPhysicsSoftSpace(min_vec, max_vec, broadphase);
         return reinterpret_cast<jlong> (pSpace);
     }
 

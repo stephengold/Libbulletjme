@@ -147,14 +147,13 @@ extern "C" {
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
     (JNIEnv *env, jobject object, jfloat minX, jfloat minY, jfloat minZ,
-            jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase,
-            jboolean threading) {
+            jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase) {
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSpace *pSpace = new jmePhysicsSpace(env, object);
 
         pSpace->createPhysicsSpace(minX, minY, minZ, maxX, maxY, maxZ,
-                broadphase, threading);
+                broadphase);
         return reinterpret_cast<jlong> (pSpace);
     }
 

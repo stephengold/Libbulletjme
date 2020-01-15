@@ -45,7 +45,6 @@ public:
     };
     jmePhysicsSoftSpace(JNIEnv *, jobject);
 
-    // Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZ)V
-    void createPhysicsSoftSpace(jobject, jobject, jint, jboolean);
+    void createPhysicsSoftSpace(jobject min_vec, jobject max_vec, jint ordinal);
     btSoftRigidDynamicsWorld * getSoftDynamicsWorld();
 };

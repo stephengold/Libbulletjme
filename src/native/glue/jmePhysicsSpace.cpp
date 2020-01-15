@@ -57,9 +57,7 @@ void jmePhysicsSpace::attachThread() {
 }
 
 void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
-        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId,
-        jboolean unused) {
-    // TODO remove unused argument
+        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId) {
     btVector3 min = btVector3(minX, minY, minZ);
     btVector3 max = btVector3(maxX, maxY, maxZ);
 
