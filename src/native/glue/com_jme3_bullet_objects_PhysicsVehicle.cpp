@@ -139,11 +139,10 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsVehicle
      * Method:    createVehicleRaycaster
-     * Signature: (JJ)J
+     * Signature: (J)J
      */
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicleRaycaster
-    (JNIEnv *env, jobject object, jlong unused, jlong spaceId) {
-        // TODO remove unused argument
+    (JNIEnv *env, jobject object, jlong spaceId) {
         jmeClasses::initJavaClasses(env);
 
         jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);

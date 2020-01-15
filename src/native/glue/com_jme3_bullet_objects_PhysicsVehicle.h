@@ -78,10 +78,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createRaycas
 /*
  * Class:     com_jme3_bullet_objects_PhysicsVehicle
  * Method:    createVehicleRaycaster
- * Signature: (JJ)J
+ * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicleRaycaster
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsVehicle
