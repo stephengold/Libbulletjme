@@ -185,18 +185,17 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_SoftBodyWorldInfo
      * Method:    setSoftBodyWorldInfo
-     * Signature: (JJ)J
-     * TODO should return void
+     * Signature: (JJ)V
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setSoftBodyWorldInfo
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setSoftBodyWorldInfo
     (JNIEnv *env, jobject object, jlong destId, jlong sourceId) {
         btSoftBodyWorldInfo * const pDest
                 = reinterpret_cast<btSoftBodyWorldInfo *> (destId);
-        NULL_CHECK(pDest, "The target btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(pDest, "The target btSoftBodyWorldInfo does not exist.",);
 
         btSoftBodyWorldInfo *pSource
                 = reinterpret_cast<btSoftBodyWorldInfo *> (sourceId);
-        NULL_CHECK(pSource, "The source btSoftBodyWorldInfo does not exist.", 0);
+        NULL_CHECK(pSource, "The source btSoftBodyWorldInfo does not exist.",);
 
         if (pDest != pSource) {
             pDest->air_density = pSource->air_density;
@@ -209,8 +208,6 @@ extern "C" {
             pDest->m_gravity = pSource->m_gravity;
             pDest->m_sparsesdf = pSource->m_sparsesdf;
         }
-
-        return 0;
     }
 
     /*

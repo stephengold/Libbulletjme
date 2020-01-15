@@ -90,9 +90,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setMaxDisplacement
 /*
  * Class:     com_jme3_bullet_SoftBodyWorldInfo
  * Method:    setSoftBodyWorldInfo
- * Signature: (JJ)J
+ * Signature: (JJ)V
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setSoftBodyWorldInfo
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setSoftBodyWorldInfo
   (JNIEnv *, jobject, jlong, jlong);
 
 /*
