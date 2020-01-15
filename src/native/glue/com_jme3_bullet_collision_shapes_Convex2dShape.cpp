@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_collision_shapes_Convex2dShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btConvex2dShape.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_Convex2dShape
@@ -60,7 +57,4 @@ extern "C" {
 
         return reinterpret_cast<jlong> (pShape);
     }
-
-#ifdef __cplusplus
 }
-#endif

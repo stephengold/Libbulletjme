@@ -41,10 +41,7 @@
 static inline btVector3 getBoundingCenter(const btSoftBody *pBody) {
     return (pBody->m_bounds[0] + pBody->m_bounds[1]) / 2;
 }
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
@@ -1911,7 +1908,4 @@ extern "C" {
 
         pBody->setWindVelocity(bulletVector);
     }
-
-#ifdef __cplusplus
 }
-#endif

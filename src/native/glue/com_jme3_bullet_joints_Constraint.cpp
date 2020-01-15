@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_Constraint.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_Constraint
@@ -199,7 +196,4 @@ extern "C" {
 
         pConstraint->setEnabled(desiredSetting);
     }
-
-#ifdef __cplusplus
 }
-#endif

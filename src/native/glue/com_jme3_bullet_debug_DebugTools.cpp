@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,15 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "com_jme3_bullet_debug_DebugTools.h"
-#include "jmeClasses.h"
 
 /*
  * Author: Stephen Gold
  */
-#ifdef __cplusplus
+#include "com_jme3_bullet_debug_DebugTools.h"
+#include "jmeClasses.h"
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_debug_DebugTools
@@ -48,7 +46,4 @@ extern "C" {
     (JNIEnv *env, jclass clazz, jboolean printFlag) {
         jmeClasses::printFlag = (int) printFlag;
     }
-
-#ifdef __cplusplus
 }
-#endif

@@ -37,10 +37,7 @@
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
 #include "BulletSoftBody/btSoftBodyHelpers.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -816,7 +813,4 @@ extern "C" {
 
         pBody->m_cfg.kVC = coef;
     }
-
-#ifdef __cplusplus
 }
-#endif

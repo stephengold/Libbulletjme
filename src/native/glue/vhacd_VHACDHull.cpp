@@ -36,11 +36,7 @@
 #include "vhacd_VHACDHull.h"
 #include "jmeBulletUtil.h"
 #include "VHACD.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
-
     using namespace VHACD;
 
     /*
@@ -120,8 +116,4 @@ extern "C" {
             pPositions[i] = pHull->m_points[i];
         }
     }
-
-#ifdef __cplusplus
 }
-#endif
-

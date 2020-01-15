@@ -33,16 +33,12 @@
 /*
  * Author: Normen Hansen
  */
-
 #include <BulletCollision/CollisionDispatch/btGhostObject.h>
 #include "com_jme3_bullet_objects_PhysicsGhostObject.h"
 #include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     class jmeGhostOverlapCallback : public btOverlapCallback {
         JNIEnv * m_env;
@@ -202,7 +198,4 @@ extern "C" {
         jmeBulletUtil::convertQuat(env, quaternion,
                 &pGhost->getWorldTransform().getBasis());
     }
-
-#ifdef __cplusplus
 }
-#endif

@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_objects_PhysicsSoftBody_Material.h"
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody_Material
@@ -124,7 +121,4 @@ extern "C" {
 
         pMaterial->m_kVST = factor;
     }
-
-#ifdef __cplusplus
 }
-#endif

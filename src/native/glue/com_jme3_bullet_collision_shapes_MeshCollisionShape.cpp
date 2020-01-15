@@ -38,10 +38,7 @@
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision/Gimpact/btGImpactShape.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -140,7 +137,4 @@ extern "C" {
 
         return reinterpret_cast<jlong> (pBuffer);
     };
-
-#ifdef __cplusplus
 }
-#endif

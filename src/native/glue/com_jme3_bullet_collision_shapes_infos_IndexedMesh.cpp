@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_collision_shapes_infos_IndexedMesh.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
@@ -86,7 +83,4 @@ extern "C" {
 
         delete pMesh;
     }
-
-#ifdef __cplusplus
 }
-#endif

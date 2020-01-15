@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_collision_shapes_CollisionShape.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -223,7 +220,4 @@ extern "C" {
 
         pShape->setMargin(newMargin);
     }
-
-#ifdef __cplusplus
 }
-#endif

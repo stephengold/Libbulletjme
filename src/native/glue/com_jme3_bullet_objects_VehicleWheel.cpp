@@ -33,13 +33,9 @@
 /*
  * Author: Normen Hansen
  */
-
 #include "com_jme3_bullet_objects_VehicleWheel.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_VehicleWheel
@@ -274,7 +270,4 @@ extern "C" {
         bool result = pVehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel;
         return (jboolean) result;
     }
-
-#ifdef __cplusplus
 }
-#endif

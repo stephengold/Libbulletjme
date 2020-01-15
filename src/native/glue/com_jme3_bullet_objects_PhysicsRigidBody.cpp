@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_objects_PhysicsRigidBody.h"
 #include "jmeBulletUtil.h"
 #include "jmeMotionState.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
@@ -771,7 +768,4 @@ extern "C" {
         }
         pBody->setMassProps(mass, localInertia);
     }
-
-#ifdef __cplusplus
 }
-#endif

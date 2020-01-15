@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_objects_infos_RigidBodyMotionState.h"
 #include "jmeBulletUtil.h"
 #include "jmeMotionState.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
@@ -124,7 +121,4 @@ extern "C" {
         jmeBulletUtil::convertQuat(env, &pMotionState->worldTransform.getBasis(),
                 value);
     }
-
-#ifdef __cplusplus
 }
-#endif

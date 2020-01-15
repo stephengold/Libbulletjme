@@ -29,18 +29,16 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * Author: Dokthar
+ */
 #include "com_jme3_bullet_PhysicsSoftSpace.h"
 #include "jmePhysicsSoftSpace.h"
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
-
-/*
- * Author: Dokthar
- */
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_PhysicsSoftSpace
@@ -125,7 +123,4 @@ extern "C" {
 
         pWorld->removeSoftBody(pSoftBody);
     }
-
-#ifdef __cplusplus
 }
-#endif

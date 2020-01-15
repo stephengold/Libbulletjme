@@ -33,16 +33,12 @@
 /*
  * Author: Normen Hansen
  */
-
 #include "com_jme3_bullet_objects_PhysicsCharacter.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
 #include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "BulletDynamics/Character/btKinematicCharacterController.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
@@ -571,7 +567,4 @@ extern "C" {
 
         pController->warp(vec);
     }
-
-#ifdef __cplusplus
 }
-#endif

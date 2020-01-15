@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_collision_shapes_GImpactCollisionShape.h"
 #include "jmeBulletUtil.h"
 #include <BulletCollision/Gimpact/btGImpactShape.h>
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_GImpactCollisionShape
@@ -74,7 +71,4 @@ extern "C" {
 
         pShape->updateBound();
     }
-
-#ifdef __cplusplus
 }
-#endif

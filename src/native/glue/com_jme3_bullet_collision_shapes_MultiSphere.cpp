@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2019 jMonkeyEngine
+ * Copyright (c) 2018-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_collision_shapes_MultiSphere.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_MultiSphere
@@ -96,7 +93,4 @@ extern "C" {
 
         pShape->recalcLocalAabb();
     }
-
-#ifdef __cplusplus
 }
-#endif

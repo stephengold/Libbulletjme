@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_collision_shapes_CylinderCollisionShape.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_CylinderCollisionShape
@@ -74,7 +71,4 @@ extern "C" {
 
         return reinterpret_cast<jlong> (pShape);
     }
-
-#ifdef __cplusplus
 }
-#endif

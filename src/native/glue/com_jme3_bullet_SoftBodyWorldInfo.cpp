@@ -30,16 +30,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "com_jme3_bullet_SoftBodyWorldInfo.h"
-#include "jmeBulletUtil.h"
-#include "BulletSoftBody/btSoftBody.h"
-
 /*
  * Author: Dokthar
  */
-#ifdef __cplusplus
+#include "com_jme3_bullet_SoftBodyWorldInfo.h"
+#include "jmeBulletUtil.h"
+#include "BulletSoftBody/btSoftBody.h"
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_SoftBodyWorldInfo
@@ -252,7 +249,4 @@ extern "C" {
 
         pInfo->water_offset = value;
     }
-
-#ifdef __cplusplus
 }
-#endif

@@ -29,16 +29,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "com_jme3_bullet_PhysicsSpace.h"
-#include "jmePhysicsSpace.h"
-#include "jmeBulletUtil.h"
 
 /*
  * Author: Normen Hansen
  */
-#ifdef __cplusplus
+#include "com_jme3_bullet_PhysicsSpace.h"
+#include "jmePhysicsSpace.h"
+#include "jmeBulletUtil.h"
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_PhysicsSpace
@@ -468,7 +466,4 @@ extern "C" {
         pSpace->getDynamicsWorld()->convexSweepTest(pConvexShape, native_from,
                 native_to, resultCallback, allowed_penetration);
     }
-
-#ifdef __cplusplus
 }
-#endif

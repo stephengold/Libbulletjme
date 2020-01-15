@@ -36,11 +36,7 @@
 #include "vhacd_VHACDParameters.h"
 #include "jmeBulletUtil.h"
 #include "VHACD.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
-
     using namespace VHACD;
 
     /*
@@ -417,8 +413,4 @@ extern "C" {
 
         pParam->m_resolution = (uint32_t) maxVoxels;
     }
-
-#ifdef __cplusplus
 }
-#endif
-

@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_motors_TranslationalLimitMotor.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationalLimitMotor
@@ -409,7 +406,4 @@ extern "C" {
 
         jmeBulletUtil::convert(env, limitVector, &pMotor->m_upperLimit);
     }
-
-#ifdef __cplusplus
 }
-#endif

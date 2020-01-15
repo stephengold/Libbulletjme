@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_collision_shapes_HeightfieldCollisionShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * A btHeightfieldTerrainShape whose heights are represented by btScalars.
@@ -121,7 +118,4 @@ extern "C" {
         }
 #endif
     }
-
-#ifdef __cplusplus
 }
-#endif

@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_collision_PhysicsCollisionObject.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
@@ -653,7 +650,4 @@ extern "C" {
 
         pCollisionObject->setSpinningFriction(friction);
     }
-
-#ifdef __cplusplus
 }
-#endif

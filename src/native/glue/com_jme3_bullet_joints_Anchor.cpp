@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_joints_Anchor.h"
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_Anchor
@@ -87,7 +84,4 @@ extern "C" {
 
         pAnchor->m_influence = (btScalar) influence;
     }
-
-#ifdef __cplusplus
 }
-#endif

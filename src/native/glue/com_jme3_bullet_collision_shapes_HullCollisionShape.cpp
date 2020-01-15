@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_collision_shapes_HullCollisionShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btConvexHullShape.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
@@ -148,7 +145,4 @@ extern "C" {
 
         pShape->recalcLocalAabb();
     }
-
-#ifdef __cplusplus
 }
-#endif

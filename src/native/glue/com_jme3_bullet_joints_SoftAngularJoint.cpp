@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_joints_SoftAngularJoint.h"
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_SoftAngularJoint
@@ -134,7 +131,4 @@ extern "C" {
         pJoint->m_refs[1]
                 = pJoint->m_bodies[1].xform().inverse().getBasis() * ax;
     }
-
-#ifdef __cplusplus
 }
-#endif

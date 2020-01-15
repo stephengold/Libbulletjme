@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_motors_RotationalLimitMotor.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_motors_RotationalLimitMotor
@@ -418,7 +415,4 @@ extern "C" {
 
         pMotor->m_targetVelocity = value;
     }
-
-#ifdef __cplusplus
 }
-#endif

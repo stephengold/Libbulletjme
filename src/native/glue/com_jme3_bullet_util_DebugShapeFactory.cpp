@@ -74,11 +74,7 @@ public:
     }
 };
 
-#ifdef __cplusplus
 extern "C" {
-#endif
-
-    /* Inaccessible static: _00024assertionsDisabled */
 
     void getVertices(JNIEnv *env, jlong shapeId, jint resolution,
             jobject callback) {
@@ -152,7 +148,4 @@ extern "C" {
             jobject callback) {
         getVertices(env, shapeId, resolution, callback);
     }
-
-#ifdef __cplusplus
 }
-#endif

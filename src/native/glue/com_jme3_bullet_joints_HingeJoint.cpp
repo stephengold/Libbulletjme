@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_HingeJoint.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_HingeJoint
@@ -281,7 +278,4 @@ extern "C" {
         return pJoint->setLimit(low, high, softness, biasFactor,
                 relaxationFactor);
     }
-
-#ifdef __cplusplus
 }
-#endif

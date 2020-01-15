@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_motors_TranslationMotor.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_motors_TranslationMotor
@@ -551,7 +548,4 @@ extern "C" {
 
         jmeBulletUtil::convert(env, offsetVector, &pMotor->m_upperLimit);
     }
-
-#ifdef __cplusplus
 }
-#endif

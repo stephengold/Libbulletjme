@@ -40,10 +40,7 @@
 #include "jmeBulletUtil.h"
 #include "VHACD.h"
 
-#ifdef __cplusplus
 extern "C" {
-#endif
-
     using namespace VHACD;
 
     class Callback : public IVHACD::IUserCallback {
@@ -156,8 +153,4 @@ extern "C" {
         pIvhacd->Clean();
         pIvhacd->Release();
     }
-
-#ifdef __cplusplus
 }
-#endif
-

@@ -36,10 +36,7 @@
 #include "com_jme3_bullet_collision_shapes_PlaneCollisionShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btStaticPlaneShape.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_PlaneCollisionShape
@@ -56,7 +53,4 @@ extern "C" {
         btStaticPlaneShape *pShape = new btStaticPlaneShape(norm, constant);
         return reinterpret_cast<jlong> (pShape);
     }
-
-#ifdef __cplusplus
 }
-#endif

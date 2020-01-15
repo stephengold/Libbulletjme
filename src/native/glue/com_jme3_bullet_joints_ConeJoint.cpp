@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_ConeJoint.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_ConeJoint
@@ -170,8 +167,4 @@ extern "C" {
         //TODO: extended setLimit!
         pJoint->setLimit(swingSpan1, swingSpan2, twistSpan);
     }
-
-
-#ifdef __cplusplus
 }
-#endif

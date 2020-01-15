@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_Point2PointJoint.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_Point2PointJoint
@@ -184,7 +181,4 @@ extern "C" {
 
         pJoint->m_setting.m_tau = tau;
     }
-
-#ifdef __cplusplus
 }
-#endif

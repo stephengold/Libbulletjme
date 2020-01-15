@@ -40,10 +40,7 @@
 static inline btVector3 getBoundingCenter(const btSoftBody *pBody) {
     return (pBody->m_bounds[0] + pBody->m_bounds[1]) / 2;
 }
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
@@ -176,7 +173,4 @@ extern "C" {
             }
         }
     }
-
-#ifdef __cplusplus
 }
-#endif

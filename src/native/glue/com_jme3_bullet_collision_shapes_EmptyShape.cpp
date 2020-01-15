@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 jMonkeyEngine
+ * Copyright (c) 2018-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_collision_shapes_EmptyShape.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_EmptyShape
@@ -51,7 +48,4 @@ extern "C" {
         btEmptyShape *pShape = new btEmptyShape();
         return reinterpret_cast<jlong> (pShape);
     }
-
-#ifdef __cplusplus
 }
-#endif

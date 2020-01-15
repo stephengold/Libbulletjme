@@ -35,10 +35,7 @@
  */
 #include "com_jme3_bullet_joints_SixDofJoint.h"
 #include "jmeBulletUtil.h"
-
-#ifdef __cplusplus
 extern "C" {
-#endif
 
     /*
      * Class:     com_jme3_bullet_joints_SixDofJoint
@@ -274,7 +271,4 @@ extern "C" {
 
         pJoint->setLinearUpperLimit(vec);
     }
-
-#ifdef __cplusplus
 }
-#endif
