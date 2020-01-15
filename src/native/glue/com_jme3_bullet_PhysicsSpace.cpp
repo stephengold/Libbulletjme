@@ -415,9 +415,7 @@ extern "C" {
             JNIEnv *env;
             btTransform m_convexFromWorld; //used to calculate hitPointWorld from hitFraction
             btTransform m_convexToWorld;
-
             btVector3 m_hitNormalWorld;
-            btVector3 m_hitPointWorld;
 
             virtual btScalar addSingleResult(
                     btCollisionWorld::LocalConvexResult& convexResult,
@@ -429,14 +427,9 @@ extern "C" {
                             = convexResult.m_hitCollisionObject->getWorldTransform().getBasis()
                             * convexResult.m_hitNormalLocal;
                 }
-                m_hitPointWorld.setInterpolate3(
-                        m_convexFromWorld.getBasis() * m_convexFromWorld.getOrigin(),
-                        m_convexToWorld.getBasis() * m_convexToWorld.getOrigin(),
-                        convexResult.m_hitFraction);
 
                 jmeBulletUtil::addSweepResult(env, resultlist,
-                        &m_hitNormalWorld, &m_hitPointWorld,
-                        convexResult.m_hitFraction,
+                        &m_hitNormalWorld, convexResult.m_hitFraction,
                         convexResult.m_hitCollisionObject);
 
                 return 1.f;

@@ -57,8 +57,8 @@ public:
             const btVector3 * hitnormal, btScalar hitFraction,
             const btCollisionObject * hitobject);
     static void addSweepResult(JNIEnv *env, jobject resultlist,
-            btVector3 * hitnormal, btVector3 * m_hitPointWorld,
-            const btScalar m_hitFraction, const btCollisionObject * hitobject);
+            const btVector3 * hitnormal, btScalar m_hitFraction,
+            const btCollisionObject * hitobject);
 
 private:
 
