@@ -7,8 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef com_jme3_bullet_collision_shapes_HullCollisionShape_floatSize
-#define com_jme3_bullet_collision_shapes_HullCollisionShape_floatSize 4L
 #undef com_jme3_bullet_collision_shapes_HullCollisionShape_numAxes
 #define com_jme3_bullet_collision_shapes_HullCollisionShape_numAxes 3L
 /*
@@ -21,18 +19,18 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
- * Method:    createShapeB
- * Signature: (Ljava/nio/ByteBuffer;I)J
+ * Method:    createShapeF
+ * Signature: (Ljava/nio/FloatBuffer;I)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeB
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeF
   (JNIEnv *, jobject, jobject, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
- * Method:    getHullVertices
- * Signature: (JLjava/nio/ByteBuffer;)V
+ * Method:    getHullVerticesF
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVertices
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVerticesF
   (JNIEnv *, jobject, jlong, jobject);
 
 /*

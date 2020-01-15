@@ -59,12 +59,12 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    createShapeB
-     * Signature: (Ljava/nio/ByteBuffer;I)J
+     * Method:    createShapeF
+     * Signature: (Ljava/nio/FloatBuffer;I)J
      *
      * buffer contains float values: x,y,z for each vertex
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeB
+    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeF
     (JNIEnv *env, jobject object, jobject buffer, jint numVertices) {
         jmeClasses::initJavaClasses(env);
 
@@ -76,8 +76,8 @@ extern "C" {
         }
 
         NULL_CHECK(buffer, "The buffer does not exist.", 0);
-        const jlong numBytes = env->GetDirectBufferCapacity(buffer);
-        if (numBytes < 3 * sizeof (float) * n) {
+        const jlong numFloats = env->GetDirectBufferCapacity(buffer);
+        if (numFloats < 3 * n) {
             jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
             env->ThrowNew(newExc, "The buffer is too small.");
             return 0L;
@@ -89,7 +89,7 @@ extern "C" {
         btConvexHullShape * const pShape = new btConvexHullShape();
 
         for (int i = 0; i < n; ++i) {
-            int j = 3 * i;
+            const int j = 3 * i;
             btVector3 vect
                     = btVector3(pBuffer[j], pBuffer[j + 1], pBuffer[j + 2]);
             pShape->addPoint(vect);
@@ -102,21 +102,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    getHullVertices
-     * Signature: (JLjava/nio/ByteBuffer;)V
+     * Method:    getHullVerticesF
+     * Signature: (JLjava/nio/FloatBuffer;)V
      */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVertices
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVerticesF
     (JNIEnv *env, jobject object, jlong shapeId, jobject storeBuffer) {
-        btConvexHullShape * const pShape
+        const btConvexHullShape * const pShape
                 = reinterpret_cast<btConvexHullShape *> (shapeId);
         NULL_CHECK(pShape, "The btConvexHullShape does not exist.",)
         btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
         NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
-        const jlong bytesCapacity = env->GetDirectBufferCapacity(storeBuffer);
+        const jlong floatsCapacity = env->GetDirectBufferCapacity(storeBuffer);
         int numVerts = pShape->getNumPoints();
-        long bytesNeeded = 3 * sizeof (float) * (long) numVerts;
-        if (bytesNeeded > bytesCapacity) {
+        jlong floatsNeeded = 3 * (jlong) numVerts;
+        if (floatsNeeded > floatsCapacity) {
             jclass newExc
                     = env->FindClass("java/lang/IllegalArgumentException");
             env->ThrowNew(newExc, "The store buffer is too small.");
@@ -125,12 +125,12 @@ extern "C" {
         jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
         NULL_CHECK(pWrite, "The store buffer is not direct.",);
 
-        const btVector3* vertexPtr = pShape->getUnscaledPoints();
+        const btVector3 *pVertices = pShape->getUnscaledPoints();
         for (int i = 0; i < numVerts; ++i) {
-            pWrite[0] = vertexPtr->m_floats[0];
-            pWrite[1] = vertexPtr->m_floats[1];
-            pWrite[2] = vertexPtr->m_floats[2];
-            ++vertexPtr;
+            pWrite[0] = pVertices->m_floats[0];
+            pWrite[1] = pVertices->m_floats[1];
+            pWrite[2] = pVertices->m_floats[2];
+            ++pVertices;
             pWrite += 3;
         }
     }
