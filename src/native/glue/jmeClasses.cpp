@@ -41,6 +41,8 @@
 JNIEnv * jmeClasses::pEnv;
 JavaVM * jmeClasses::vm;
 
+jclass jmeClasses::IllegalArgumentException;
+
 jclass jmeClasses::PhysicsSpace;
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
@@ -145,6 +147,9 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
     }
 
     env->GetJavaVM(&vm);
+
+    IllegalArgumentException = (jclass) env->NewGlobalRef(env->FindClass(
+            "java/lang/IllegalArgumentException"));
 
     PhysicsSpace = (jclass) env->NewGlobalRef(env->FindClass("com/jme3/bullet/PhysicsSpace"));
     if (env->ExceptionCheck()) {

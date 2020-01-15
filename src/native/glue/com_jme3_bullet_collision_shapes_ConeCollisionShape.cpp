@@ -61,9 +61,8 @@ extern "C" {
                 pShape = new btConeShapeZ(radius, height);
                 break;
             default:
-                jclass newExc
-                        = env->FindClass("java/lang/IllegalArgumentException");
-                env->ThrowNew(newExc, "The axis is out of range.");
+                env->ThrowNew(jmeClasses::IllegalArgumentException,
+                        "The axis is out of range.");
                 return 0;
         }
 

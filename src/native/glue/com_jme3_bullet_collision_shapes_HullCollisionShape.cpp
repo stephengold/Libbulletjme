@@ -70,16 +70,16 @@ extern "C" {
 
         int n = numVertices;
         if (n < 1) {
-            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "numVertices must be positive");
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "numVertices must be positive");
             return 0L;
         }
 
         NULL_CHECK(buffer, "The buffer does not exist.", 0);
         const jlong numFloats = env->GetDirectBufferCapacity(buffer);
         if (numFloats < 3 * n) {
-            jclass newExc = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "The buffer is too small.");
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The buffer is too small.");
             return 0L;
         }
         const jfloat * const pBuffer
@@ -117,9 +117,8 @@ extern "C" {
         int numVerts = pShape->getNumPoints();
         jlong floatsNeeded = 3 * (jlong) numVerts;
         if (floatsNeeded > floatsCapacity) {
-            jclass newExc
-                    = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "The store buffer is too small.");
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The store buffer is too small.");
             return;
         }
         jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);

@@ -405,9 +405,8 @@ extern "C" {
                 = reinterpret_cast<btCollisionShape *> (shapeId);
         NULL_CHECK(pShape, "The shape does not exist.",);
         if (!pShape->isConvex()) {
-            jclass newExc
-                    = env->FindClass("java/lang/IllegalArgumentException");
-            env->ThrowNew(newExc, "The btCollisionShape isn't convex.");
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The btCollisionShape isn't convex.");
             return;
         }
 

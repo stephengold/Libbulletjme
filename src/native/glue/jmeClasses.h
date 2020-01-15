@@ -53,6 +53,9 @@ public:
     static void initJavaClasses(JNIEnv *env);
     static JNIEnv * pEnv;
     static JavaVM * vm;
+    
+    static jclass IllegalArgumentException;
+
     static jclass PhysicsSpace;
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;
