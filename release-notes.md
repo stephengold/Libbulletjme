@@ -1,5 +1,27 @@
 # release notes for the Libbulletjme Project
 
+## Version 3.0.0 released on 14 January 2020
+
+ + Removed JNI methods:
+   + `CompoundCollisionShape.createShape()`
+   + `PhysicsCharacter.getCcdMotionThreshold()`
+   + `PhysicsCharacter.getCcdSquareMotionThreshold()`
+   + `PhysicsCharacter.getCcdSweptSphereRadius()`
+   + `PhysicsCharacter.setCcdMotionThreshold()`
+   + `PhysicsCharacter.setCcdSweptSphereRadius()`
+ + Replaced `jobject` argument with `jlong` in `PhysicsVehicle.addWheel()`.
+ + Replaced `ByteBuffer` arguments with `FloatBuffer` in `HullCollisionShape`.
+ + Removed unused arguments of JNI methods:
+   + `PhysicsSpace.createPhysicsSpace()`
+   + `PhysicsVehicle.createVehicleRaycaster()`
+ + Changed the return-type of JNI methods:
+   + `CompoundCollisionShape.addChildShape()`
+   + `CompoundCollisionShape.removeChildShape()`
+   + `PhysicsRigidBody.updateMassProps()`
+   + `SoftBodyWorldInfo.setSoftBodyWorldInfo()`
+ + Added a new `VehicleTuning` class.
+ + Added a new `PhysicsRigidBody.getMass()` method.
+
 ## Version 2.0.23 released on 13 January 2020
 
  + Updated the V-HACD sources to match SHA1 ID=b07958e1 of the v-hacd project.
