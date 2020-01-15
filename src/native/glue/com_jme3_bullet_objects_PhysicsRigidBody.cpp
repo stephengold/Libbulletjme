@@ -734,17 +734,16 @@ extern "C" {
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    updateMassProps
-     * Signature: (JJF)J
-     * TODO should return void
+     * Signature: (JJF)V
      */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_updateMassProps
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_updateMassProps
     (JNIEnv *env, jobject object, jlong bodyId, jlong shapeId, jfloat mass) {
         btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
-        NULL_CHECK(pBody, "The btRigidBody does not exist.", 0);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",);
         btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
         btCollisionShape *pShape = reinterpret_cast<btCollisionShape *> (shapeId);
-        NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0);
+        NULL_CHECK(pShape, "The btCollisionShape does not exist.",);
 
         btVector3 localInertia;
         int shapeType = pShape->getShapeType();
@@ -755,8 +754,6 @@ extern "C" {
             pShape->calculateLocalInertia(mass, localInertia);
         }
         pBody->setMassProps(mass, localInertia);
-
-        return reinterpret_cast<jlong> (pBody);
     }
 
 #ifdef __cplusplus
