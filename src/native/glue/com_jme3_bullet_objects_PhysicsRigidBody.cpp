@@ -356,6 +356,22 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+     * Method:    getMass
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getMass
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        const btRigidBody * const pBody
+                = reinterpret_cast<btRigidBody *> (bodyId);
+        NULL_CHECK(pBody, "The btRigidBody does not exist.",)
+
+        btScalar mass = pBody->getMass();
+
+        return (jfloat) mass;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsRigidBody
      * Method:    getPhysicsLocation
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */
