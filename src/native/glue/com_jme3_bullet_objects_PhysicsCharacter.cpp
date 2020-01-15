@@ -138,48 +138,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    getCcdMotionThreshold
-     * Signature: (J)F
-     * TODO delete
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong ghostId) {
-        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
-        NULL_CHECK(pGhost, "The btGhostObject does not exist.", 0)
-
-        return pGhost->getCcdMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    getCcdSquareMotionThreshold
-     * Signature: (J)F
-     * TODO delete
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdSquareMotionThreshold
-    (JNIEnv *env, jobject object, jlong ghostId) {
-        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
-        NULL_CHECK(pGhost, "The btGhostObject does not exist.", 0)
-
-        return pGhost->getCcdSquareMotionThreshold();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    getCcdSweptSphereRadius
-     * Signature: (J)F
-     * TODO delete
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong ghostId) {
-        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
-        NULL_CHECK(pGhost, "The btGhostObject does not exist.", 0)
-
-        return pGhost->getCcdSweptSphereRadius();
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    getFallSpeed
      * Signature: (J)F
      */
@@ -398,34 +356,6 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    setCcdMotionThreshold
-     * Signature: (JF)V
-     * TODO delete
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCcdMotionThreshold
-    (JNIEnv *env, jobject object, jlong ghostId, jfloat value) {
-        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
-        NULL_CHECK(pGhost, "The btGhostObject does not exist.",)
-
-        pGhost->setCcdMotionThreshold(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
-     * Method:    setCcdSweptSphereRadius
-     * Signature: (JF)V
-     * TODO delete
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCcdSweptSphereRadius
-    (JNIEnv *env, jobject object, jlong ghostId, jfloat value) {
-        btGhostObject *pGhost = reinterpret_cast<btGhostObject *> (ghostId);
-        NULL_CHECK(pGhost, "The btGhostObject does not exist.",)
-
-        pGhost->setCcdSweptSphereRadius(value);
-    }
-
-    /*
-     * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    setCharacterFlags
      * Signature: (J)V
      */
@@ -628,7 +558,6 @@ extern "C" {
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    warp
      * Signature: (JLcom/jme3/math/Vector3f;)V
-     * TODO delete
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_warp
     (JNIEnv *env, jobject object, jlong kccId, jobject locationVector) {
