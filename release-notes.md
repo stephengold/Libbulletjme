@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 3.0.1 released on 21 January 2020
+
+ + Provided part and triangle indices from ray tests and sweep tests.
+ + Cleaned up the handling of results from ray tests and sweep tests.
+ + Built using Gradle v6.1
+
 ## Version 3.0.0 released on 14 January 2020
 
  + Removed JNI methods:
