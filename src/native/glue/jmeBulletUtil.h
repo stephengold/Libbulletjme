@@ -38,14 +38,14 @@
  */
 class jmeBulletUtil {
 public:
-    // convert Bullet math to jMonkeyEngine:
+    // convert Bullet math objects to jMonkeyEngine:
     static void convert(JNIEnv *, const btMatrix3x3 * in, jobject outMatrix);
     static void convert(JNIEnv *, const btQuaternion * in, jobject outQuat);
     static void convert(JNIEnv *, const btTransform * in, jobject outTransform);
     static void convert(JNIEnv *, const btVector3 * in, jobject outVector);
     static void convertQuat(JNIEnv *, const btMatrix3x3 * in, jobject outQuat);
 
-    // convert jMonkeyEngine math to Bullet:
+    // convert jMonkeyEngine math objects to Bullet:
     static void convert(JNIEnv *, jobject inMatrix, btMatrix3x3 * out);
     static void convert(JNIEnv *, jobject inQuat, btQuaternion * out);
     static void convert(JNIEnv *, jobject inTransform,
@@ -53,12 +53,12 @@ public:
     static void convert(JNIEnv *, jobject inVector, btVector3 * out);
     static void convertQuat(JNIEnv *, jobject inQuat, btMatrix3x3 * out);
 
-    static void addResult(JNIEnv *, jobject resultlist,
-            const btVector3 * hitnormal, btScalar hitFraction,
-            const btCollisionObject * hitobject);
-    static void addSweepResult(JNIEnv *env, jobject resultlist,
-            const btVector3 * hitnormal, btScalar m_hitFraction,
-            const btCollisionObject * hitobject);
+    static void addRayTestResult(JNIEnv *, jobject resultList,
+            const btVector3 *pNormal, btScalar hitFraction,
+            const btCollisionObject *, int partIndex, int triangleIndex);
+    static void addSweepTestResult(JNIEnv *, jobject resultList,
+            const btVector3 *pNormal, btScalar hitFraction,
+            const btCollisionObject *, int partIndex, int triangleIndex);
 
 private:
 

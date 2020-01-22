@@ -93,20 +93,22 @@ jmethodID jmeClasses::DebugMeshCallback_addVector;
 
 jclass jmeClasses::PhysicsRay_Class;
 jmethodID jmeClasses::PhysicsRay_newSingleResult;
-
-jfieldID jmeClasses::PhysicsRay_normalInWorldSpace;
-jfieldID jmeClasses::PhysicsRay_hitfraction;
 jfieldID jmeClasses::PhysicsRay_collisionObject;
+jfieldID jmeClasses::PhysicsRay_hitFraction;
+jfieldID jmeClasses::PhysicsRay_normal;
+jfieldID jmeClasses::PhysicsRay_partIndex;
+jfieldID jmeClasses::PhysicsRay_triangleIndex;
 
 jclass jmeClasses::PhysicsRay_listresult;
 jmethodID jmeClasses::PhysicsRay_addmethod;
 
 jclass jmeClasses::PhysicsSweep_Class;
 jmethodID jmeClasses::PhysicsSweep_newSingleResult;
-
-jfieldID jmeClasses::PhysicsSweep_normalInWorldSpace;
-jfieldID jmeClasses::PhysicsSweep_hitfraction;
 jfieldID jmeClasses::PhysicsSweep_collisionObject;
+jfieldID jmeClasses::PhysicsSweep_hitFraction;
+jfieldID jmeClasses::PhysicsSweep_normal;
+jfieldID jmeClasses::PhysicsSweep_partIndex;
+jfieldID jmeClasses::PhysicsSweep_triangleIndex;
 
 jclass jmeClasses::PhysicsSweep_listresult;
 jmethodID jmeClasses::PhysicsSweep_addmethod;
@@ -250,21 +252,32 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
         return;
     }
 
-    PhysicsRay_normalInWorldSpace = env->GetFieldID(PhysicsRay_Class, "hitNormalLocal", "Lcom/jme3/math/Vector3f;");
+    PhysicsRay_collisionObject = env->GetFieldID(PhysicsRay_Class,
+            "collisionObject",
+            "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-
-
-    PhysicsRay_hitfraction = env->GetFieldID(PhysicsRay_Class, "hitFraction", "F");
+    PhysicsRay_hitFraction = env->GetFieldID(PhysicsRay_Class, "hitFraction",
+            "F");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-
-
-    PhysicsRay_collisionObject = env->GetFieldID(PhysicsRay_Class, "collisionObject", "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
+    PhysicsRay_normal = env->GetFieldID(PhysicsRay_Class, "normal",
+            "Lcom/jme3/math/Vector3f;");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+    PhysicsRay_partIndex = env->GetFieldID(PhysicsRay_Class, "partIndex", "I");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+    PhysicsRay_triangleIndex = env->GetFieldID(PhysicsRay_Class,
+            "triangleIndex", "I");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
@@ -295,21 +308,33 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
         return;
     }
 
-    PhysicsSweep_normalInWorldSpace = env->GetFieldID(PhysicsSweep_Class, "hitNormalLocal", "Lcom/jme3/math/Vector3f;");
+    PhysicsSweep_collisionObject = env->GetFieldID(PhysicsSweep_Class,
+            "collisionObject",
+            "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-
-
-    PhysicsSweep_hitfraction = env->GetFieldID(PhysicsSweep_Class, "hitFraction", "F");
+    PhysicsSweep_hitFraction = env->GetFieldID(PhysicsSweep_Class,
+            "hitFraction", "F");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;
     }
-
-
-    PhysicsSweep_collisionObject = env->GetFieldID(PhysicsSweep_Class, "collisionObject", "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
+    PhysicsSweep_normal = env->GetFieldID(PhysicsSweep_Class, "normal",
+            "Lcom/jme3/math/Vector3f;");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+    PhysicsSweep_partIndex = env->GetFieldID(PhysicsSweep_Class, "partIndex",
+            "I");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+    PhysicsSweep_triangleIndex = env->GetFieldID(PhysicsSweep_Class,
+            "triangleIndex", "I");
     if (env->ExceptionCheck()) {
         env->Throw(env->ExceptionOccurred());
         return;

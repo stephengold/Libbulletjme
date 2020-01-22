@@ -53,7 +53,7 @@ public:
     static void initJavaClasses(JNIEnv *env);
     static JNIEnv * pEnv;
     static JavaVM * vm;
-    
+
     static jclass IllegalArgumentException;
 
     static jclass PhysicsSpace;
@@ -102,17 +102,23 @@ public:
 
     static jclass PhysicsRay_Class;
     static jmethodID PhysicsRay_newSingleResult;
-    static jfieldID PhysicsRay_normalInWorldSpace;
-    static jfieldID PhysicsRay_hitfraction;
     static jfieldID PhysicsRay_collisionObject;
+    static jfieldID PhysicsRay_hitFraction;
+    static jfieldID PhysicsRay_normal;
+    static jfieldID PhysicsRay_partIndex;
+    static jfieldID PhysicsRay_triangleIndex;
+
     static jclass PhysicsRay_listresult;
     static jmethodID PhysicsRay_addmethod;
 
     static jclass PhysicsSweep_Class;
     static jmethodID PhysicsSweep_newSingleResult;
-    static jfieldID PhysicsSweep_normalInWorldSpace;
-    static jfieldID PhysicsSweep_hitfraction;
     static jfieldID PhysicsSweep_collisionObject;
+    static jfieldID PhysicsSweep_hitFraction;
+    static jfieldID PhysicsSweep_normal;
+    static jfieldID PhysicsSweep_partIndex;
+    static jfieldID PhysicsSweep_triangleIndex;
+
     static jclass PhysicsSweep_listresult;
     static jmethodID PhysicsSweep_addmethod;
 

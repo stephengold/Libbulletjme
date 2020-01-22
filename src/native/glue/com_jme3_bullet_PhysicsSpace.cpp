@@ -209,23 +209,46 @@ extern "C" {
         jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
         NULL_CHECK(pSpace, "The physics space does not exist.",);
 
-        struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
+        struct AllRayResultCallback :
+                public btCollisionWorld::RayResultCallback {
 
-            AllRayResultCallback(const btVector3& rayFromWorld, const btVector3 & rayToWorld) : m_rayFromWorld(rayFromWorld), m_rayToWorld(rayToWorld) {
+            AllRayResultCallback(const btVector3& rayFromWorld,
+                    const btVector3 & rayToWorld)
+            : m_rayFromWorld(rayFromWorld), m_rayToWorld(rayToWorld) {
             }
-            jobject resultlist;
-            JNIEnv *env;
-            btVector3 m_rayFromWorld; //used to calculate from hitFraction
+            jobject m_resultlist;
+            JNIEnv *m_pEnv;
+            btVector3 m_rayFromWorld;
             btVector3 m_rayToWorld;
             btVector3 m_hitNormalWorld;
 
-            virtual btScalar addSingleResult(btCollisionWorld::LocalRayResult& rayResult, bool normalInWorldSpace) {
+            virtual btScalar addSingleResult(
+                    btCollisionWorld::LocalRayResult& rayResult,
+                    bool normalInWorldSpace) {
                 if (normalInWorldSpace) {
                     m_hitNormalWorld = rayResult.m_hitNormalLocal;
                 } else {
-                    m_hitNormalWorld = m_collisionObject->getWorldTransform().getBasis() * rayResult.m_hitNormalLocal;
+                    m_hitNormalWorld
+                            = m_collisionObject->getWorldTransform().getBasis()
+                            * rayResult.m_hitNormalLocal;
                 }
-                jmeBulletUtil::addResult(env, resultlist, &m_hitNormalWorld, rayResult.m_hitFraction, rayResult.m_collisionObject);
+                /*
+                 * If the shape of the hit collision object is a
+                 * btBvhTriangleMeshShape, Bullet determines which
+                 * part and triangle were hit.
+                 */
+                int partIndex = -1;
+                int triangleIndex = -1;
+                btCollisionWorld::LocalShapeInfo *pLsi
+                        = rayResult.m_localShapeInfo;
+                if (pLsi != NULL) {
+                    partIndex = pLsi->m_shapePart;
+                    triangleIndex = pLsi->m_triangleIndex;
+                }
+
+                jmeBulletUtil::addRayTestResult(m_pEnv, m_resultlist,
+                        &m_hitNormalWorld, rayResult.m_hitFraction,
+                        rayResult.m_collisionObject, partIndex, triangleIndex);
 
                 return 1.f;
             }
@@ -238,8 +261,8 @@ extern "C" {
         jmeBulletUtil::convert(env, from, &native_from);
 
         AllRayResultCallback resultCallback(native_from, native_to);
-        resultCallback.env = env;
-        resultCallback.resultlist = resultlist;
+        resultCallback.m_pEnv = env;
+        resultCallback.m_resultlist = resultlist;
         resultCallback.m_flags = flags;
         pSpace->getDynamicsWorld()->rayTest(native_from, native_to,
                 resultCallback);
@@ -411,9 +434,9 @@ extern "C" {
                     const btTransform & convexToWorld)
             : m_convexFromWorld(convexFromWorld), m_convexToWorld(convexToWorld) {
             }
-            jobject resultlist;
-            JNIEnv *env;
-            btTransform m_convexFromWorld; //used to calculate hitPointWorld from hitFraction
+            jobject m_resultlist;
+            JNIEnv *m_pEnv;
+            btTransform m_convexFromWorld;
             btTransform m_convexToWorld;
             btVector3 m_hitNormalWorld;
 
@@ -427,10 +450,24 @@ extern "C" {
                             = convexResult.m_hitCollisionObject->getWorldTransform().getBasis()
                             * convexResult.m_hitNormalLocal;
                 }
+                /*
+                 * If the shape of the hit collision object is a
+                 * btBvhTriangleMeshShape, Bullet determines which
+                 * part and triangle were hit.
+                 */
+                int partIndex = -1;
+                int triangleIndex = -1;
+                btCollisionWorld::LocalShapeInfo *pLsi
+                        = convexResult.m_localShapeInfo;
+                if (pLsi != NULL) {
+                    partIndex = pLsi->m_shapePart;
+                    triangleIndex = pLsi->m_triangleIndex;
+                }
 
-                jmeBulletUtil::addSweepResult(env, resultlist,
+                jmeBulletUtil::addSweepTestResult(m_pEnv, m_resultlist,
                         &m_hitNormalWorld, convexResult.m_hitFraction,
-                        convexResult.m_hitCollisionObject);
+                        convexResult.m_hitCollisionObject, partIndex,
+                        triangleIndex);
 
                 return 1.f;
             }
@@ -449,8 +486,8 @@ extern "C" {
         btScalar allowed_penetration = btScalar(allowedCcdPenetration);
 
         AllConvexResultCallback resultCallback(native_from, native_to);
-        resultCallback.env = env;
-        resultCallback.resultlist = resultlist;
+        resultCallback.m_pEnv = env;
+        resultCallback.m_resultlist = resultlist;
 
         pSpace->getDynamicsWorld()->convexSweepTest(pConvexShape, native_from,
                 native_to, resultCallback, allowed_penetration);
