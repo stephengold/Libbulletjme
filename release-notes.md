@@ -1,5 +1,10 @@
 # release notes for the Libbulletjme Project
 
+## Version 3.0.2 released on 3 February 2020
+
+ + Added a new `PhysicsSoftBody.getNbPinnedNodes()` method.
+ + Built using Gradle v6.1.1
+
 ## Version 3.0.1 released on 21 January 2020
 
  + Provided part and triangle indices from ray tests and sweep tests.
