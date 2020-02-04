@@ -1102,6 +1102,30 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+     * Method:    getNbPinnedNodes
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbPinnedNodes
+    (JNIEnv *env, jobject object, jlong bodyId) {
+        const btSoftBody * const pBody
+                = reinterpret_cast<btSoftBody *> (bodyId);
+        NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
+        btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+
+        jint result = 0;
+        int numNodes = pBody->m_nodes.size();
+        for (int i = 0; i < numNodes; ++i) {
+            btScalar mass = pBody->getMass(i);
+            if (mass == 0) {
+                ++result;
+            }
+        }
+
+        return result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsSoftBody
      * Method:    getNbTetras
      * Signature: (J)I
      */

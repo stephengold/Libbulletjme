@@ -43,6 +43,12 @@ extern "C" {
 #define com_jme3_bullet_objects_PhysicsSoftBody_COLLISION_GROUP_16 32768L
 #undef com_jme3_bullet_objects_PhysicsSoftBody_massForStatic
 #define com_jme3_bullet_objects_PhysicsSoftBody_massForStatic 0.0f
+#undef com_jme3_bullet_objects_PhysicsSoftBody_numAxes
+#define com_jme3_bullet_objects_PhysicsSoftBody_numAxes 3L
+#undef com_jme3_bullet_objects_PhysicsSoftBody_vpe
+#define com_jme3_bullet_objects_PhysicsSoftBody_vpe 2L
+#undef com_jme3_bullet_objects_PhysicsSoftBody_vpt
+#define com_jme3_bullet_objects_PhysicsSoftBody_vpt 3L
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getMaterial
@@ -401,6 +407,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbLinks
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbNodes
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getNbPinnedNodes
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNbPinnedNodes
   (JNIEnv *, jobject, jlong);
 
 /*
