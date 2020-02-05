@@ -1,12 +1,17 @@
-The src/native/glue software is Copyright (c) 2009-2020 jMonkeyEngine
-
-The src/native/v-hacd software except vhacdMutex.h
-is Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)
-
+The src/java/com/jme3 and src/native/glue software
+are Copyright (c) 2009-2020 jMonkeyEngine
 All rights reserved.
 
-Note: the BSD 3-Clause License does not apply to the src/native/bullet3
-software, which is licensed under a zlib license.
+The src/native/vhacd software except vhacdMutex.h
+is Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)
+All rights reserved.
+
+The src/java/vhacd software
+is Copyright (c) 2016, Riccardo Balbo
+All rights reserved.
+
+  Note: the BSD 3-Clause License does not apply to the src/native/bullet3
+  software, which is separately licensed.
 
 BSD 3-Clause License
 
@@ -39,8 +44,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The src/native/bullet3 software is licensed under a zlib license.
 
-Note: the zlib license does not apply to the src/native/glue
-software, which is under different licenses.
+  Note: the zlib license does not apply to the src/native/glue
+  software, which is separately licensed.
 
 Bullet Continuous Collision Detection and Physics Library
 http://bulletphysics.org
