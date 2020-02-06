@@ -35,8 +35,6 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Mesh;
-import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -159,19 +157,6 @@ public class HullCollisionShape extends CollisionShape {
             points[i] = flippedBuffer.get(i);
         }
 
-        createShape();
-    }
-
-    /**
-     * Instantiate a shape based on the specified JME mesh(es). For best
-     * performance and stability, the convex hull should have no more than 100
-     * vertices.
-     *
-     * @param meshes the mesh(es) on which to base the shape (all non-null, at
-     * least one vertex, unaffected)
-     */
-    public HullCollisionShape(Mesh... meshes) {
-        points = getPoints(meshes);
         createShape();
     }
 
@@ -401,34 +386,6 @@ public class HullCollisionShape extends CollisionShape {
 
         setScale(scale);
         setMargin(margin);
-    }
-
-    /**
-     * Copy the vertex positions from JME mesh(es).
-     *
-     * @param meshes the mesh(es) to read (not null)
-     * @return a new array (not null, length a multiple of 3)
-     */
-    private float[] getPoints(Mesh... meshes) {
-        int numVectors = 0;
-        for (Mesh mesh : meshes) {
-            numVectors += mesh.getVertexCount();
-        }
-        int numFloats = numAxes * numVectors;
-        float[] pointsArray = new float[numFloats];
-
-        int arrayIndex = 0;
-        for (Mesh mesh : meshes) {
-            FloatBuffer buffer = mesh.getFloatBuffer(Type.Position);
-            int bufNumFloats = numAxes * mesh.getVertexCount();
-            for (int bufPos = 0; bufPos < bufNumFloats; ++bufPos) {
-                pointsArray[arrayIndex] = buffer.get(bufPos);
-                ++arrayIndex;
-            }
-        }
-        assert arrayIndex == numFloats : arrayIndex;
-
-        return pointsArray;
     }
     // *************************************************************************
     // native methods

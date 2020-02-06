@@ -39,7 +39,6 @@ import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.PhysicsSweepTestResult;
 import com.jme3.bullet.collision.shapes.CollisionShape;
-import com.jme3.bullet.control.PhysicsControl;
 import com.jme3.bullet.joints.Constraint;
 import com.jme3.bullet.joints.JointEnd;
 import com.jme3.bullet.joints.PhysicsJoint;
@@ -50,8 +49,6 @@ import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsVehicle;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import com.jme3.util.SafeArrayList;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -288,16 +285,7 @@ public class PhysicsSpace {
     public void add(Object obj) {
         Validate.nonNull(obj, "obj");
 
-        if (obj instanceof PhysicsControl) {
-            ((PhysicsControl) obj).setPhysicsSpace(this);
-        } else if (obj instanceof Spatial) {
-            Spatial node = (Spatial) obj;
-            for (int i = 0; i < node.getNumControls(); ++i) {
-                if (node.getControl(i) instanceof PhysicsControl) {
-                    add(node.getControl(i));
-                }
-            }
-        } else if (obj instanceof PhysicsCollisionObject) {
+        if (obj instanceof PhysicsCollisionObject) {
             addCollisionObject((PhysicsCollisionObject) obj);
         } else if (obj instanceof PhysicsJoint) {
             addJoint((PhysicsJoint) obj);
@@ -305,27 +293,6 @@ public class PhysicsSpace {
             String typeName = obj.getClass().getCanonicalName();
             String msg = "Cannot add a " + typeName + " to a physics space.";
             throw new IllegalArgumentException(msg);
-        }
-    }
-
-    /**
-     * Add all physics controls in the specified subtree of the scene graph to
-     * this space (e.g. after loading from disk).
-     * <p>
-     * Does not add any joints.
-     * <p>
-     * Note: recursive!
-     *
-     * @param spatial the root of the subtree (not null)
-     */
-    public void addAll(Spatial spatial) {
-        add(spatial);
-        //recursion
-        if (spatial instanceof Node) {
-            List<Spatial> children = ((Node) spatial).getChildren();
-            for (Spatial spat : children) {
-                addAll(spat);
-            }
         }
     }
 
@@ -814,16 +781,7 @@ public class PhysicsSpace {
         if (obj == null) {
             return;
         }
-        if (obj instanceof PhysicsControl) {
-            ((PhysicsControl) obj).setPhysicsSpace(null);
-        } else if (obj instanceof Spatial) {
-            Spatial node = (Spatial) obj;
-            for (int i = 0; i < node.getNumControls(); ++i) {
-                if (node.getControl(i) instanceof PhysicsControl) {
-                    remove((node.getControl(i)));
-                }
-            }
-        } else if (obj instanceof PhysicsCollisionObject) {
+        if (obj instanceof PhysicsCollisionObject) {
             removeCollisionObject((PhysicsCollisionObject) obj);
         } else if (obj instanceof PhysicsJoint) {
             removeJoint((PhysicsJoint) obj);
@@ -832,27 +790,6 @@ public class PhysicsSpace {
             String msg
                     = "Cannot remove a " + typeName + " from a physics space.";
             throw new IllegalArgumentException(msg);
-        }
-    }
-
-    /**
-     * Remove all physics controls in the specified subtree of the scene graph
-     * from this space (e.g. before saving to disk).
-     * <p>
-     * Does not remove any joints.
-     * <p>
-     * Note: recursive!
-     *
-     * @param spatial the root of the subtree (not null)
-     */
-    public void removeAll(Spatial spatial) {
-        remove(spatial);
-        //recursion
-        if (spatial instanceof Node) {
-            List<Spatial> children = ((Node) spatial).getChildren();
-            for (Spatial spat : children) {
-                removeAll(spat);
-            }
         }
     }
 

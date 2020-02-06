@@ -31,20 +31,13 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
-import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Mesh;
-import com.jme3.scene.VertexBuffer;
-import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jme3utilities.MyMesh;
 import jme3utilities.Validate;
-import jme3utilities.math.MyBuffer;
-import jme3utilities.math.MyMath;
 
 /**
  * An indexed mesh based on Bullet's btIndexedMesh. Immutable except for
@@ -89,7 +82,7 @@ public class IndexedMesh {
      * configured index data: typically 3 ints per triangle (not null, direct,
      * never flipped)
      */
-    private IntBuffer indices; // TODO use an IndexBuffer to conserve memory
+    private IntBuffer indices;
     /**
      * configured bytes per triangle in the index buffer (typically 12)
      */
@@ -113,34 +106,6 @@ public class IndexedMesh {
     private long nativeId = 0L;
     // *************************************************************************
     // constructors
-
-    /**
-     * Instantiate an IndexedMesh based on the specified JME mesh, without
-     * transforming coordinates.
-     *
-     * @param jmeMesh the input JME mesh (not null, unaffected,
-     * mode=Triangles/TriangleFan/TriangleStrip)
-     */
-    public IndexedMesh(Mesh jmeMesh) {
-        Validate.nonNull(jmeMesh, "JME mesh");
-        create(jmeMesh, null);
-    }
-
-    /**
-     * Instantiate an IndexedMesh based on the specified JME mesh and coordinate
-     * transform.
-     *
-     * @param jmeMesh the input JME mesh (not null, unaffected,
-     * mode=Triangles/TriangleFan/TriangleStrip)
-     * @param transform the Transform to apply to vertex positions (unaffected)
-     * or null to use untransformed vertex positions
-     */
-    public IndexedMesh(Mesh jmeMesh, Transform transform) {
-        Validate.nonNull(jmeMesh, "JME mesh");
-        Validate.nonNull(transform, "transform");
-
-        create(jmeMesh, transform);
-    }
 
     /**
      * Instantiate an IndexedMesh based on the specified positions and indices.
@@ -211,50 +176,6 @@ public class IndexedMesh {
     }
     // *************************************************************************
     // private methods
-
-    /**
-     * Configure and create a new btIndexedMesh from the specified JME mesh and
-     * Transform.
-     *
-     * @param jmeMesh the input JME mesh (not null, unaffected,
-     * mode=Triangles/TriangleFan/TriangleStrip)
-     * @param transform the Transform to apply to vertex positions (unaffected)
-     * or null to use untransformed vertex positions
-     */
-    private void create(Mesh jmeMesh, Transform transform) {
-        assert MyMesh.hasTriangles(jmeMesh);
-
-        numVertices = jmeMesh.getVertexCount();
-        vertexStride = numAxes * floatSize;
-
-        FloatBuffer meshVs = jmeMesh.getFloatBuffer(VertexBuffer.Type.Position);
-        int numFloats = numAxes * numVertices;
-        vertexPositions = BufferUtils.createFloatBuffer(numFloats);
-        for (int position = 0; position < numFloats; ++position) {
-            float temp = meshVs.get(position);
-            vertexPositions.put(position, temp);
-        }
-
-        if (transform != null && !MyMath.isIdentity(transform)) {
-            MyBuffer.transform(vertexPositions, 0, numFloats, transform);
-        }
-
-        indexStride = vpt * intSize;
-        numTriangles = jmeMesh.getTriangleCount();
-
-        int numIndices = vpt * numTriangles;
-        indices = BufferUtils.createIntBuffer(numIndices);
-
-        IndexBuffer triangleIndices = jmeMesh.getIndicesAsList();
-        for (int position = 0; position < numIndices; ++position) {
-            int index = triangleIndices.get(position);
-            assert index >= 0 : index;
-            assert index < numVertices : index;
-            indices.put(position, index);
-        }
-
-        createMesh();
-    }
 
     /**
      * Create a new btIndexedMesh using the current configuration.

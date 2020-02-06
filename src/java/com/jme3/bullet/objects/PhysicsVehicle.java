@@ -36,7 +36,6 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.objects.infos.RigidBodyMotionState;
 import com.jme3.bullet.objects.infos.VehicleTuning;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Spatial;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -164,7 +163,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      * false&rarr;non-front wheel
      * @return a new VehicleWheel for access (not null)
      */
-    public VehicleWheel addWheel(Spatial spat, Vector3f connectionPoint,
+    public VehicleWheel addWheel(Vector3f connectionPoint,
             Vector3f direction, Vector3f axle, float suspensionRestLength,
             float wheelRadius, boolean isFrontWheel) {
         Validate.positive(wheelRadius, "wheel radius");
@@ -191,29 +190,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         }
 
         return wheel;
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @param connectionPoint the location where the suspension connects to the
-     * chassis (in chassis coordinates, not null, unaffected)
-     * @param direction the suspension direction (in chassis coordinates, not
-     * null, unaffected, typically down/0,-1,0)
-     * @param axle the axis direction (in chassis coordinates, not null,
-     * unaffected, typically -1,0,0)
-     * @param suspensionRestLength the rest length of the suspension (in
-     * physics-space units)
-     * @param wheelRadius the wheel radius (in physics-space units, &gt;0)
-     * @param isFrontWheel true&rarr;front (steering) wheel,
-     * false&rarr;non-front wheel
-     * @return a new VehicleWheel for access (not null)
-     */
-    public VehicleWheel addWheel(Vector3f connectionPoint,
-            Vector3f direction, Vector3f axle, float suspensionRestLength,
-            float wheelRadius, boolean isFrontWheel) {
-        return addWheel(null, connectionPoint, direction, axle,
-                suspensionRestLength, wheelRadius, isFrontWheel);
     }
 
     /**

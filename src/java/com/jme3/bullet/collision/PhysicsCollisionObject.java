@@ -31,12 +31,8 @@
  */
 package com.jme3.bullet.collision;
 
-import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.collision.shapes.CollisionShape;
-import com.jme3.bullet.collision.shapes.infos.DebugMeshNormals;
-import com.jme3.bullet.debug.DebugMeshInitListener;
 import com.jme3.bullet.util.DebugShapeFactory;
-import com.jme3.material.Material;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
@@ -140,14 +136,6 @@ abstract public class PhysicsCollisionObject
      */
     private CollisionShape collisionShape;
     /**
-     * listener for new debug meshes, or null for none
-     */
-    private DebugMeshInitListener debugMeshInitListener = null;
-    /**
-     * which normals to include in new debug meshes (default=None)
-     */
-    private DebugMeshNormals debugMeshNormals = DebugMeshNormals.None;
-    /**
      * collision groups with which this object can collide (default=only group
      * #1)
      */
@@ -157,25 +145,11 @@ abstract public class PhysicsCollisionObject
      */
     private int collisionGroup = COLLISION_GROUP_01;
     /**
-     * resolution for new debug meshes (default=low, effective only for convex
-     * shapes)
-     */
-    private int debugMeshResolution = DebugShapeFactory.lowResolution;
-    /**
-     * number of visible sides for default debug materials (&ge;0, &le;2,
-     * default=1)
-     */
-    private int debugNumSides = 1;
-    /**
      * Unique identifier of the btCollisionObject. Constructors are responsible
      * for setting this to a non-zero value. The ID might change if the object
      * gets rebuilt. TODO privatize and rename nativeId
      */
     protected long objectId = 0L;
-    /**
-     * custom material for debug shape, or null to use the default material
-     */
-    private Material debugMaterial = null;
     /**
      * object that uses this collision object, typically a PhysicsControl,
      * PhysicsLink, or Spatial
@@ -206,69 +180,6 @@ abstract public class PhysicsCollisionObject
         if (objectId != 0L) {
             setCollideWithGroups(objectId, collideWithGroups);
         }
-    }
-
-    /**
-     * Calculate an axis-aligned bounding box for this object, based on its
-     * collision shape. Note: the calculated bounds are seldom minimal; they are
-     * typically larger than necessary due to centering constraints and
-     * collision margins.
-     *
-     * @param storeResult storage for the result (modified if not null)
-     * @return a bounding box in physics-space coordinates (either storeResult
-     * or a new instance)
-     */
-    public BoundingBox boundingBox(BoundingBox storeResult) {
-        BoundingBox result
-                = (storeResult == null) ? new BoundingBox() : storeResult;
-
-        Vector3f translation = getPhysicsLocation(null);
-        Matrix3f rotation = getPhysicsRotationMatrix(null);
-        collisionShape.boundingBox(translation, rotation, result);
-
-        return result;
-    }
-
-    /**
-     * Access the listener for new debug meshes.
-     *
-     * @return the pre-existing instance, or null if none
-     */
-    public DebugMeshInitListener debugMeshInitListener() {
-        return debugMeshInitListener;
-    }
-
-    /**
-     * Read which normals to include in new debug meshes.
-     *
-     * @return an enum value (not null)
-     */
-    public DebugMeshNormals debugMeshNormals() {
-        assert debugMeshNormals != null;
-        return debugMeshNormals;
-    }
-
-    /**
-     * Read mesh resolution for new debug meshes.
-     *
-     * @return 0=low, 1=high
-     */
-    public int debugMeshResolution() {
-        assert debugMeshResolution >= 0 : debugMeshResolution;
-        assert debugMeshResolution <= 1 : debugMeshResolution;
-        return debugMeshResolution;
-    }
-
-    /**
-     * Determine how many sides of this object's default debug materials are
-     * visible.
-     *
-     * @return the number of sides (&ge;0, &le;2)
-     */
-    public int debugNumSides() {
-        assert debugNumSides >= 0 : debugNumSides;
-        assert debugNumSides <= 2 : debugNumSides;
-        return debugNumSides;
     }
 
     /**
@@ -400,15 +311,6 @@ abstract public class PhysicsCollisionObject
     public float getDeactivationTime() {
         float time = getDeactivationTime(objectId);
         return time;
-    }
-
-    /**
-     * Access the custom debug material, if specified.
-     *
-     * @return the pre-existing instance, or null for default materials
-     */
-    public Material getDebugMaterial() {
-        return debugMaterial;
     }
 
     /**
@@ -741,61 +643,6 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter or remove the custom debug material.
-     *
-     * @param material the desired material, or null to use the default debug
-     * materials (alias created, default=null)
-     */
-    public void setDebugMaterial(Material material) {
-        debugMaterial = material;
-    }
-
-    /**
-     * Alter the listener for new debug meshes.
-     *
-     * @param listener the desired listener, or null for none (default=null)
-     */
-    public void setDebugMeshInitListener(DebugMeshInitListener listener) {
-        debugMeshInitListener = listener;
-    }
-
-    /**
-     * Alter which normals to include in new debug meshes.
-     *
-     * @param newSetting an enum value (not null, default=None)
-     */
-    public void setDebugMeshNormals(DebugMeshNormals newSetting) {
-        Validate.nonNull(newSetting, "new setting");
-        debugMeshNormals = newSetting;
-    }
-
-    /**
-     * Alter the mesh resolution for new debug meshes. Effective only for
-     * objects with convex shapes.
-     *
-     * @see com.jme3.bullet.collision.shapes.CollisionShape#isConvex()
-     *
-     * @param newSetting 0=low, 1=high (default=0)
-     */
-    public void setDebugMeshResolution(int newSetting) {
-        Validate.inRange(newSetting, "new setting",
-                DebugShapeFactory.lowResolution,
-                DebugShapeFactory.highResolution);
-        debugMeshResolution = newSetting;
-    }
-
-    /**
-     * Alter how many sides of this object's default debug materials are
-     * visible. This setting has no effect on custom debug materials.
-     *
-     * @param numSides the desired number of sides (&ge;0, &le;2, default=1)
-     */
-    public void setDebugNumSides(int numSides) {
-        Validate.inRange(numSides, "number of sides", 0, 2);
-        debugNumSides = numSides;
-    }
-
-    /**
      * Alter this object's friction.
      *
      * @param friction the desired friction coefficient (&ge;0, default=0.5)
@@ -1024,7 +871,6 @@ abstract public class PhysicsCollisionObject
     @Override
     public String toString() {
         String result = getClass().getSimpleName();
-        result = result.replace("Control", "C");
         result = result.replace("Physics", "");
         result = result.replace("Object", "");
         result += "#" + Long.toHexString(objectId);

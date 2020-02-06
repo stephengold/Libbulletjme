@@ -31,19 +31,15 @@
  */
 package com.jme3.bullet.objects;
 
-import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.SoftBodyWorldInfo;
 import com.jme3.bullet.collision.shapes.CollisionShape;
-import com.jme3.bullet.collision.shapes.infos.DebugMeshNormals;
 import com.jme3.bullet.objects.infos.Cluster;
 import com.jme3.bullet.objects.infos.SoftBodyConfig;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.util.BufferUtils;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -144,65 +140,6 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * Append faces to this body. A Face is a triangle connecting 3 nodes.
-     *
-     * @param nodeIndices a face is created for every 3 indices in this buffer
-     * (not null, direct, size a multiple of 3)
-     */
-    public void appendFaces(IndexBuffer nodeIndices) {
-        if (!nodeIndices.getBuffer().isDirect()) {
-            throw new IllegalArgumentException("The buffer must be direct.");
-        }
-        if (nodeIndices.size() % vpt != 0) {
-            throw new IllegalArgumentException(
-                    "The number of indices must be a multiple of 3.");
-        }
-
-        int numFaces = nodeIndices.size() / vpt;
-        Buffer buffer = nodeIndices.getBuffer();
-        if (buffer instanceof ByteBuffer) {
-            appendFaces(objectId, numFaces, (ByteBuffer) buffer);
-        } else if (buffer instanceof ShortBuffer) {
-            appendFaces(objectId, numFaces, (ShortBuffer) buffer);
-        } else if (buffer instanceof IntBuffer) {
-            appendFaces(objectId, numFaces, (IntBuffer) buffer);
-        } else {
-            throw new IllegalArgumentException(
-                    buffer.getClass().getSimpleName());
-        }
-    }
-
-    /**
-     * Append links to this body. A link is an interaction (or force) between 2
-     * nodes.
-     *
-     * @param nodeIndices a link is created for each pair of indices in this
-     * buffer (not null, direct, size a multiple of 2)
-     */
-    public void appendLinks(IndexBuffer nodeIndices) {
-        if (!nodeIndices.getBuffer().isDirect()) {
-            throw new IllegalArgumentException("The buffer must be direct.");
-        }
-        if (nodeIndices.size() % vpe != 0) {
-            throw new IllegalArgumentException(
-                    "The number of indices must be a multiple of 2.");
-        }
-
-        int numLinks = nodeIndices.size() / vpe;
-        Buffer buffer = nodeIndices.getBuffer();
-        if (buffer instanceof ByteBuffer) {
-            appendLinks(objectId, numLinks, (ByteBuffer) buffer);
-        } else if (buffer instanceof ShortBuffer) {
-            appendLinks(objectId, numLinks, (ShortBuffer) buffer);
-        } else if (buffer instanceof IntBuffer) {
-            appendLinks(objectId, numLinks, (IntBuffer) buffer);
-        } else {
-            throw new IllegalArgumentException(
-                    buffer.getClass().getSimpleName());
-        }
-    }
-
-    /**
      * Append nodes to this body, each with mass=1. Nodes provide the shape of a
      * soft body. Each node has its own location, velocity, mass, etcetera.
      *
@@ -220,36 +157,6 @@ public class PhysicsSoftBody extends PhysicsBody {
 
         int numNodes = nodeLocations.limit() / numAxes;
         appendNodes(objectId, numNodes, nodeLocations);
-    }
-
-    /**
-     * Append tetrahedra to this body. A tetrahedron defines a volume between 4
-     * nodes.
-     *
-     * @param tetrahedra a tetrahedron is created for every 4 indices in this
-     * buffer (not null, direct, size a multiple of 4)
-     */
-    public void appendTetras(IndexBuffer tetrahedra) {
-        if (!tetrahedra.getBuffer().isDirect()) {
-            throw new IllegalArgumentException("The buffer must be direct.");
-        }
-        if (tetrahedra.size() % 4 != 0) {
-            throw new IllegalArgumentException(
-                    "The number of indices must be a multiple of 4.");
-        }
-
-        int numTetras = tetrahedra.size() / 4;
-        Buffer buffer = tetrahedra.getBuffer();
-        if (buffer instanceof ByteBuffer) {
-            appendTetras(objectId, numTetras, (ByteBuffer) buffer);
-        } else if (buffer instanceof ShortBuffer) {
-            appendTetras(objectId, numTetras, (ShortBuffer) buffer);
-        } else if (buffer instanceof IntBuffer) {
-            appendTetras(objectId, numTetras, (IntBuffer) buffer);
-        } else {
-            throw new IllegalArgumentException(
-                    buffer.getClass().getSimpleName());
-        }
     }
 
     /**
@@ -1190,26 +1097,6 @@ public class PhysicsSoftBody extends PhysicsBody {
     // PhysicsBody methods
 
     /**
-     * Calculate the axis-aligned bounding box for this body.
-     *
-     * @param storeResult storage for the result (modified if not null)
-     * @return a bounding box (in physics-space coordinates, either storeResult
-     * or a new instance)
-     */
-    @Override
-    public BoundingBox boundingBox(BoundingBox storeResult) {
-        BoundingBox result
-                = (storeResult == null) ? new BoundingBox() : storeResult;
-
-        Vector3f minima = new Vector3f(); // TODO garbage
-        Vector3f maxima = new Vector3f();
-        getBounds(objectId, minima, maxima);
-        result.setMinMax(minima, maxima);
-
-        return result;
-    }
-
-    /**
      * Copy this body's gravitational acceleration.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -1294,24 +1181,6 @@ public class PhysicsSoftBody extends PhysicsBody {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         result.set(1f, 1f, 1f);
         return result;
-    }
-
-    /**
-     * Alter which normals to include in new debug meshes.
-     *
-     * @param newSetting an enum value (either None or Smooth)
-     */
-    @Override
-    public void setDebugMeshNormals(DebugMeshNormals newSetting) {
-        Validate.nonNull(newSetting, "new setting");
-        switch (newSetting) {
-            case None:
-            case Smooth:
-                super.setDebugMeshNormals(newSetting);
-                break;
-            default:
-                throw new IllegalArgumentException(newSetting.toString());
-        }
     }
 
     /**

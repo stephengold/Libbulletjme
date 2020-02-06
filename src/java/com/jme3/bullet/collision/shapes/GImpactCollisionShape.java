@@ -34,7 +34,6 @@ package com.jme3.bullet.collision.shapes;
 import com.jme3.bullet.collision.shapes.infos.CompoundMesh;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Mesh;
 import java.util.logging.Logger;
 
 /**
@@ -71,17 +70,6 @@ public class GImpactCollisionShape extends CollisionShape {
         for (IndexedMesh submesh : submeshes) {
             nativeMesh.add(submesh);
         }
-        createShape();
-    }
-
-    /**
-     * Instantiate a shape based on the specified JME mesh(es).
-     *
-     * @param jmeMeshes the mesh(es) on which to base the shape (not null,
-     * unaffected)
-     */
-    public GImpactCollisionShape(Mesh... jmeMeshes) {
-        nativeMesh = new CompoundMesh(jmeMeshes);
         createShape();
     }
     // *************************************************************************

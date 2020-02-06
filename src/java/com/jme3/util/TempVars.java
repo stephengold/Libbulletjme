@@ -35,7 +35,6 @@ import com.jme3.bounding.BoundingBox;
 import com.jme3.collision.CollisionResults;
 import com.jme3.collision.bih.BIHNode.BIHStackData;
 import com.jme3.math.*;
-import com.jme3.scene.Spatial;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -146,10 +145,6 @@ public class TempVars {
     public final IntBuffer intBuffer16 = BufferUtils.createIntBuffer(16);
     public final FloatBuffer floatBuffer16 = BufferUtils.createFloatBuffer(16);
     /**
-     * BoundingVolumes (for shadows etc.)
-     */
-    public final BoundingBox bbox = new BoundingBox();
-    /**
      * Skinning buffers
      */
     public final float[] skinPositions = new float[512 * 3];
@@ -160,10 +155,6 @@ public class TempVars {
      * Fetching triangle from mesh
      */
     public final Triangle triangle = new Triangle();
-    /**
-     * Color
-     */
-    public final ColorRGBA color = new ColorRGBA();
     /**
      * General vectors.
      */
@@ -207,19 +198,6 @@ public class TempVars {
      * Plane
      */
     public final Plane plane = new Plane();
-    /**
-     * BoundingBox ray collision
-     */
-    public final float[] fWdU = new float[3];
-    public final float[] fAWdU = new float[3];
-    public final float[] fDdU = new float[3];
-    public final float[] fADdU = new float[3];
-    public final float[] fAWxDdU = new float[3];
-    /**
-     * Maximum tree depth .. 32 levels??
-     */
-    public final Spatial[] spatialStack = new Spatial[32];
-    public final float[] matrixWrite = new float[16];
     /**
      * BIHTree
      */

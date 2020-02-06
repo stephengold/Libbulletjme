@@ -32,7 +32,6 @@
 package com.jme3.bullet.collision;
 
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Spatial;
 import java.util.EventObject;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -92,36 +91,6 @@ public class PhysicsCollisionEvent extends EventObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Access the user object of collision object A, provided it's a Spatial.
-     *
-     * @return the pre-existing Spatial, or null if none
-     */
-    public Spatial getNodeA() {
-        Spatial result = null;
-        Object userObject = nodeA.getUserObject();
-        if (userObject instanceof Spatial) {
-            result = (Spatial) userObject;
-        }
-
-        return result;
-    }
-
-    /**
-     * Access the user object of collision object B, provided it's a Spatial.
-     *
-     * @return the pre-existing Spatial, or null if none
-     */
-    public Spatial getNodeB() {
-        Spatial result = null;
-        Object userObject = nodeB.getUserObject();
-        if (userObject instanceof Spatial) {
-            result = (Spatial) userObject;
-        }
-
-        return result;
-    }
 
     /**
      * Access collision object A.

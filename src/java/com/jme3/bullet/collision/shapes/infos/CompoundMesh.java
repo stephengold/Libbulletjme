@@ -32,7 +32,6 @@
 package com.jme3.bullet.collision.shapes.infos;
 
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Mesh;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,21 +77,6 @@ public class CompoundMesh {
      */
     public CompoundMesh() {
         createEmpty();
-    }
-
-    /**
-     * Instantiate a mesh based on the specified JME mesh(es).
-     *
-     * @param jmeMeshes the JME mesh(es) (all non-null,
-     * modes=Triangles/TriangleStrip/TriangleFan, unaffected)
-     */
-    public CompoundMesh(Mesh... jmeMeshes) {
-        createEmpty();
-
-        for (Mesh jmeMesh : jmeMeshes) {
-            IndexedMesh indexedMesh = new IndexedMesh(jmeMesh);
-            add(indexedMesh);
-        }
     }
     // *************************************************************************
     // new methods exposed

@@ -31,14 +31,12 @@ import com.jme3.math.Line;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Spatial;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import jme3utilities.MySpatial;
 import jme3utilities.MyString;
 import jme3utilities.Validate;
 
@@ -952,35 +950,6 @@ public class MyVector3f {
             result.addLocal(center);
         }
 
-        return result;
-    }
-
-    /**
-     * Transform a direction vector from world coordinates to the local
-     * coordinates of the specified spatial.
-     *
-     * @param worldDirection input direction to transform (not null, unaffected,
-     * length&gt;0)
-     * @param spatial which spatial (not null)
-     * @param storeResult storage for the result (modified if not null)
-     * @return a unit vector (either storeResult or a new instance)
-     */
-    public static Vector3f localizeDirection(Vector3f worldDirection,
-            Spatial spatial, Vector3f storeResult) {
-        Validate.nonZero(worldDirection, "direction");
-        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
-
-        if (MySpatial.isIgnoringTransforms(spatial)) {
-            result.set(worldDirection);
-        } else {
-            spatial.worldToLocal(worldDirection, result);
-        }
-
-        double lengthSquared = lengthSquared(result);
-        double scaleFactor = 1.0 / Math.sqrt(lengthSquared);
-        result.multLocal((float) scaleFactor);
-
-        assert result.isUnitVector();
         return result;
     }
 

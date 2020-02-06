@@ -36,7 +36,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Spatial;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -89,42 +88,6 @@ public class RigidBodyMotionState {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * If the motion state has been updated, apply the new transform to the
-     * specified Spatial.
-     *
-     * @param spatial where to apply the physics transform (not null, modified)
-     * @return true if changed
-     */
-    public boolean applyTransform(Spatial spatial) {
-        Vector3f localLocation = spatial.getLocalTranslation();
-        Quaternion localRotationQuat = spatial.getLocalRotation();
-        boolean physicsLocationDirty = applyTransform(motionStateId,
-                localLocation, localRotationQuat);
-        if (!physicsLocationDirty) {
-            return false;
-        }
-        if (!applyPhysicsLocal && spatial.getParent() != null) {
-            localLocation.subtractLocal(
-                    spatial.getParent().getWorldTranslation());
-            localLocation.divideLocal(spatial.getParent().getWorldScale());
-            tmp_inverseWorldRotation.set(spatial.getParent().getWorldRotation())
-                    .inverseLocal().multLocal(localLocation);
-            tmp_inverseWorldRotation.mult(localRotationQuat, localRotationQuat);
-
-            spatial.setLocalTranslation(localLocation);
-            spatial.setLocalRotation(localRotationQuat);
-        } else {
-            spatial.setLocalTranslation(localLocation);
-            spatial.setLocalRotation(localRotationQuat);
-        }
-        if (vehicle != null) {
-            vehicle.updateWheels();
-        }
-
-        return true;
-    }
 
     /**
      * Read the unique ID of the native object.

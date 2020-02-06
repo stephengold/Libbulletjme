@@ -35,7 +35,6 @@ import com.jme3.bullet.objects.infos.VehicleTuning;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Spatial;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -100,10 +99,6 @@ public class VehicleWheel {
      */
     private Quaternion wheelWorldRotation = new Quaternion();
     /**
-     * associated spatial, or null if none
-     */
-    private Spatial wheelSpatial;
-    /**
      * axis direction (in chassis coordinates, typically to the right/-1,0,0)
      */
     private Vector3f axisDirection = new Vector3f();
@@ -130,7 +125,6 @@ public class VehicleWheel {
     /**
      * Instantiate a wheel.
      *
-     * @param spatial the associated spatial, or null if none
      * @param location the location where the suspension connects to the chassis
      * (in chassis coordinates, not null, unaffected)
      * @param direction the suspension direction (in chassis coordinates, not
@@ -143,7 +137,7 @@ public class VehicleWheel {
      * @param frontWheel true&rarr;front (steering) wheel, false&rarr;non-front
      * wheel
      */
-    public VehicleWheel(Spatial spatial, Vector3f location, Vector3f direction,
+    public VehicleWheel(Vector3f location, Vector3f direction,
             Vector3f axle, float restLength, float radius, boolean frontWheel) {
         Validate.positive(radius, "radius");
 
@@ -157,38 +151,6 @@ public class VehicleWheel {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Apply this wheel's physics location and orientation to its associated
-     * Spatial, if any.
-     */
-    public void applyWheelTransform() {
-        if (wheelSpatial == null) {
-            return;
-        }
-
-        Quaternion localRotationQuat = wheelSpatial.getLocalRotation();
-        Vector3f localLocation = wheelSpatial.getLocalTranslation();
-        Spatial parent = wheelSpatial.getParent();
-        if (!applyLocal && parent != null) {
-            Vector3f parentOffset = parent.getWorldTranslation();
-            Quaternion parentRot = parent.getWorldRotation();
-            localLocation.set(wheelWorldLocation).subtractLocal(parentOffset);
-            localLocation.divideLocal(parent.getWorldScale());
-            tmp_inverseWorldRotation.set(parentRot).inverseLocal()
-                    .multLocal(localLocation);
-
-            localRotationQuat.set(wheelWorldRotation);
-            tmp_inverseWorldRotation.set(parentRot).inverseLocal()
-                    .mult(localRotationQuat, localRotationQuat);
-
-            wheelSpatial.setLocalTranslation(localLocation);
-            wheelSpatial.setLocalRotation(localRotationQuat);
-        } else {
-            wheelSpatial.setLocalTranslation(wheelWorldLocation);
-            wheelSpatial.setLocalRotation(wheelWorldRotation);
-        }
-    }
 
     /**
      * Compare Bullet's values to the local copies.
@@ -453,15 +415,6 @@ public class VehicleWheel {
     }
 
     /**
-     * Access the spatial associated with this wheel.
-     *
-     * @return the pre-existing instance, or null
-     */
-    public Spatial getWheelSpatial() {
-        return wheelSpatial;
-    }
-
-    /**
      * Copy this wheel's location to the specified vector.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -674,15 +627,6 @@ public class VehicleWheel {
     public void setWheelsDampingRelaxation(float wheelsDampingRelaxation) {
         tuning.setSuspensionDamping(wheelsDampingRelaxation);
         applyInfo();
-    }
-
-    /**
-     * Alter which spatial is associated with this wheel.
-     *
-     * @param wheelSpatial the desired spatial, or null for none
-     */
-    public void setWheelSpatial(Spatial wheelSpatial) {
-        this.wheelSpatial = wheelSpatial;
     }
 
     /**
