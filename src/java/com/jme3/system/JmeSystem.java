@@ -31,192 +31,57 @@
  */
 package com.jme3.system;
 
-import com.jme3.asset.AssetManager;
-import com.jme3.audio.AudioRenderer;
-import com.jme3.input.SoftTextDialogInput;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class JmeSystem {
 
-    private static final Logger logger = Logger.getLogger(JmeSystem.class.getName());
-    public static enum StorageFolderType {
-        Internal,
-        External,
-    }
-
-    private static JmeSystemDelegate systemDelegate;
-
-    public static void setSystemDelegate(JmeSystemDelegate systemDelegate) {
-        JmeSystem.systemDelegate = systemDelegate;
-    }
-
-    public static synchronized File getStorageFolder() {
-        return getStorageFolder(StorageFolderType.External);
-    }
-
-    public static synchronized File getStorageFolder(StorageFolderType type) {
-        checkDelegate();
-        return systemDelegate.getStorageFolder(type);
-    }
-
-    public static String getFullName() {
-        checkDelegate();
-        return systemDelegate.getFullName();
-    }
-
-    public static InputStream getResourceAsStream(String name) {
-        checkDelegate();
-        return systemDelegate.getResourceAsStream(name);
-    }
-
-    public static URL getResource(String name) {
-        checkDelegate();
-        return systemDelegate.getResource(name);
-    }
-
-    public static boolean trackDirectMemory() {
-        checkDelegate();
-        return systemDelegate.trackDirectMemory();
-    }
-
-    public static void setLowPermissions(boolean lowPerm) {
-        checkDelegate();
-        systemDelegate.setLowPermissions(lowPerm);
-    }
-
-    public static boolean isLowPermissions() {
-        checkDelegate();
-        return systemDelegate.isLowPermissions();
-    }
-
-    public static void setSoftTextDialogInput(SoftTextDialogInput input) {
-        checkDelegate();
-        systemDelegate.setSoftTextDialogInput(input);
-    }
-
-    /**
-     * Displays or hides the onscreen soft keyboard
-     * @param show If true, the keyboard is displayed, if false, the screen is hidden.
-     */
-    public static void showSoftKeyboard(boolean show) {
-        checkDelegate();
-        systemDelegate.showSoftKeyboard(show);
-    }
-
-    public static SoftTextDialogInput getSoftTextDialogInput() {
-        checkDelegate();
-        return systemDelegate.getSoftTextDialogInput();
-    }
-
-    /**
-     * Compresses a raw image into a stream.
-     * 
-     * The encoding is performed via system libraries. On desktop, the encoding
-     * is performed via ImageIO, whereas on Android, is done via the 
-     * Bitmap class.
-     * 
-     * @param outStream The stream where to write the image data.
-     * @param format The format to use, either "png" or "jpg".
-     * @param imageData The image data in {@link com.jme3.texture.Image.Format#RGBA8} format.
-     * @param width The width of the image.
-     * @param height The height of the image.
-     * @throws IOException If outStream throws an exception while writing.
-     */
-    public static void writeImageFile(OutputStream outStream, String format, ByteBuffer imageData, int width, int height) throws IOException {
-        checkDelegate();
-        systemDelegate.writeImageFile(outStream, format, imageData, width, height);
-    }
-
-    public static AssetManager newAssetManager(URL configFile) {
-        checkDelegate();
-        return systemDelegate.newAssetManager(configFile);
-    }
-
-    public static AssetManager newAssetManager() {
-        checkDelegate();
-        return systemDelegate.newAssetManager();
-    }
-
-    public static boolean showSettingsDialog(AppSettings sourceSettings, final boolean loadFromRegistry) {
-        checkDelegate();
-        return systemDelegate.showSettingsDialog(sourceSettings, loadFromRegistry);
-    }
-
-    public static Platform getPlatform() {
-        checkDelegate();
-        return systemDelegate.getPlatform();
-    }
-
-    public static JmeContext newContext(AppSettings settings, JmeContext.Type contextType) {
-        checkDelegate();
-        return systemDelegate.newContext(settings, contextType);
-    }
-
-    public static AudioRenderer newAudioRenderer(AppSettings settings) {
-        checkDelegate();
-        return systemDelegate.newAudioRenderer(settings);
-    }
-
-    public static URL getPlatformAssetConfigURL() {
-        checkDelegate();
-        return systemDelegate.getPlatformAssetConfigURL();
-    }
-    
-    /**
-     * Displays an error message to the user in whichever way the context
-     * feels is appropriate. If this is a headless or an offscreen surface
-     * context, this method should do nothing.
-     *
-     * @param message The error message to display. May contain new line
-     * characters.
-     */
-    public static void showErrorDialog(String message){
-        checkDelegate();
-        systemDelegate.showErrorDialog(message);
-    }
-
-    public static void initialize(AppSettings settings) {
-        checkDelegate();
-        systemDelegate.initialize(settings);
-    }
-
-    private static JmeSystemDelegate tryLoadDelegate(String className) throws InstantiationException, IllegalAccessException {
-        try {
-            return (JmeSystemDelegate) Class.forName(className).newInstance();
-        } catch (ClassNotFoundException ex) {
-            return null;
+    private static boolean is64Bit(String arch) {
+        if (arch.equals("x86")) {
+            return false;
+        } else if (arch.equals("amd64")) {
+            return true;
+        } else if (arch.equals("x86_64")) {
+            return true;
+        } else if (arch.equals("ppc") || arch.equals("PowerPC")) {
+            return false;
+        } else if (arch.equals("ppc64")) {
+            return true;
+        } else if (arch.equals("i386") || arch.equals("i686")) {
+            return false;
+        } else if (arch.equals("universal")) {
+            return false;
+        } else if (arch.equals("aarch32")) {
+            return false;
+        } else if (arch.equals("aarch64")) {
+            return true;
+        } else if (arch.equals("armv7") || arch.equals("armv7l")) {
+            return false;
+        } else if (arch.equals("arm")) {
+            return false;
+        } else {
+            throw new UnsupportedOperationException("Unsupported architecture: " + arch);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static void checkDelegate() {
-        if (systemDelegate == null) {
-            try {
-                systemDelegate = tryLoadDelegate("com.jme3.system.JmeDesktopSystem");
-                if (systemDelegate == null) {
-                    systemDelegate = tryLoadDelegate("com.jme3.system.android.JmeAndroidSystem");
-                    if (systemDelegate == null) {
-                        systemDelegate = tryLoadDelegate("com.jme3.system.ios.JmeIosSystem");
-                        if (systemDelegate == null) {
-                            // None of the system delegates were found ..
-                            Logger.getLogger(JmeSystem.class.getName()).log(Level.SEVERE,
-                                    "Failed to find a JmeSystem delegate!\n"
-                                    + "Ensure either desktop or android jME3 jar is in the classpath.");
-                        }
-                    }
-                }
-            } catch (InstantiationException ex) {
-                Logger.getLogger(JmeSystem.class.getName()).log(Level.SEVERE, "Failed to create JmeSystem delegate:\n{0}", ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(JmeSystem.class.getName()).log(Level.SEVERE, "Failed to create JmeSystem delegate:\n{0}", ex);
+    public static Platform getPlatform() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String arch = System.getProperty("os.arch").toLowerCase();
+        boolean is64 = is64Bit(arch);
+        if (os.contains("windows")) {
+            return is64 ? Platform.Windows64 : Platform.Windows32;
+        } else if (os.contains("linux") || os.contains("freebsd")
+                || os.contains("sunos") || os.contains("unix")) {
+            if (arch.startsWith("arm")) {
+                return is64 ? Platform.Linux_ARM64 : Platform.Linux_ARM32;
+            } else {
+                return is64 ? Platform.Linux64 : Platform.Linux32;
             }
+        } else if (os.contains("mac os x") || os.contains("darwin")) {
+            if (arch.startsWith("ppc")) {
+                return is64 ? Platform.MacOSX_PPC64 : Platform.MacOSX_PPC32;
+            } else {
+                return is64 ? Platform.MacOSX64 : Platform.MacOSX32;
+            }
+        } else {
+            throw new UnsupportedOperationException("The specified platform: " + os + " is not supported.");
         }
     }
 }
