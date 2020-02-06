@@ -1,5 +1,11 @@
 # release notes for the Libbulletjme Project
 
+## Version 3.0.3 released on 6 February 2020
+
+ + Build a class JAR, javadoc JAR, and POM.
+ + Added automated testing with Junit.
+ + Moved all source files from "src" to "src/main".
+
 ## Version 3.0.2 released on 3 February 2020
 
  + Added a new `PhysicsSoftBody.getNbPinnedNodes()` method.

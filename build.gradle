@@ -7,7 +7,7 @@ plugins {
 ext {
     baseName = 'Libbulletjme'
     group = 'com.github.stephengold'
-    version = '3.0.2'
+    version = '3.0.3'
 }
 
 sourceSets.main.java {
