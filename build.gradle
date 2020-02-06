@@ -15,6 +15,10 @@ sourceSets.main.java {
     srcDir 'src/main/native' // for IDE access (no Java there)
 }
 
+sourceSets.test.java {
+    srcDir 'src/test/java'
+}
+
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 model {
     buildTypes {
@@ -182,6 +186,15 @@ model {
             }
         }
     }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+    //mavenLocal()
+    jcenter()
 }
 
 compileJava.options.headerOutputDirectory = new File('src/main/native/glue')
