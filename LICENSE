@@ -6,6 +6,10 @@ The src/native/vhacd software except vhacdMutex.h
 is Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)
 All rights reserved.
 
+The src/java/jme3utilities/math software
+is Copyright (c) 2013-2020, Stephen Gold
+All rights reserved.
+
 The src/java/vhacd software
 is Copyright (c) 2016, Riccardo Balbo
 All rights reserved.
