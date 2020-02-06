@@ -66,10 +66,6 @@ public:
 
     static jclass Vector3f;
     static jmethodID Vector3f_set;
-    static jmethodID Vector3f_getX;
-    static jmethodID Vector3f_getY;
-    static jmethodID Vector3f_getZ;
-    static jmethodID Vector3f_toArray;
     static jfieldID Vector3f_x;
     static jfieldID Vector3f_y;
     static jfieldID Vector3f_z;

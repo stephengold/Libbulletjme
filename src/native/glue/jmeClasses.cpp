@@ -54,10 +54,6 @@ jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
 
 jclass jmeClasses::Vector3f;
 jmethodID jmeClasses::Vector3f_set;
-jmethodID jmeClasses::Vector3f_toArray;
-jmethodID jmeClasses::Vector3f_getX;
-jmethodID jmeClasses::Vector3f_getY;
-jmethodID jmeClasses::Vector3f_getZ;
 jfieldID jmeClasses::Vector3f_x;
 jfieldID jmeClasses::Vector3f_y;
 jfieldID jmeClasses::Vector3f_z;
@@ -181,10 +177,6 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
 
     Vector3f = (jclass) env->NewGlobalRef(env->FindClass("com/jme3/math/Vector3f"));
     Vector3f_set = env->GetMethodID(Vector3f, "set", "(FFF)Lcom/jme3/math/Vector3f;");
-    Vector3f_toArray = env->GetMethodID(Vector3f, "toArray", "([F)[F");
-    Vector3f_getX = env->GetMethodID(Vector3f, "getX", "()F");
-    Vector3f_getY = env->GetMethodID(Vector3f, "getY", "()F");
-    Vector3f_getZ = env->GetMethodID(Vector3f, "getZ", "()F");
     Vector3f_x = env->GetFieldID(Vector3f, "x", "F");
     Vector3f_y = env->GetFieldID(Vector3f, "y", "F");
     Vector3f_z = env->GetFieldID(Vector3f, "z", "F");
