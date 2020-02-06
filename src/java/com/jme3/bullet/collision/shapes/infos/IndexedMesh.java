@@ -42,8 +42,6 @@ import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.util.BufferUtils;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -60,7 +58,7 @@ import jme3utilities.math.MyMath;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class IndexedMesh implements JmeCloneable, Savable {
+public class IndexedMesh implements Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -216,55 +214,6 @@ public class IndexedMesh implements JmeCloneable, Savable {
     public long nativeId() {
         assert nativeId != 0L;
         return nativeId;
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned mesh into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this mesh (not null)
-     * @param original the instance from which this mesh was shallow-cloned (not
-     * null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        IndexedMesh originalMesh = (IndexedMesh) original;
-
-        int numFloats = vertexPositions.capacity();
-        vertexPositions = BufferUtils.createFloatBuffer(numFloats);
-
-        for (int offset = 0; offset < numFloats; ++offset) {
-            float tmpFloat = originalMesh.vertexPositions.get(offset);
-            vertexPositions.put(tmpFloat);
-        }
-
-        int numIndices = indices.capacity();
-        indices = BufferUtils.createIntBuffer(numIndices);
-        for (int offset = 0; offset < numIndices; ++offset) {
-            int tmpIndex = originalMesh.indices.get(offset);
-            indices.put(tmpIndex);
-        }
-
-        nativeId = 0L;
-        createMesh();
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public IndexedMesh jmeClone() {
-        try {
-            IndexedMesh clone = (IndexedMesh) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

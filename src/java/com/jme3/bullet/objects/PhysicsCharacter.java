@@ -41,7 +41,6 @@ import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -555,62 +554,6 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
     // *************************************************************************
     // PhysicsCollisionObject methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned character into a deep-cloned one, using the specified
-     * Cloner and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this character (not null)
-     * @param original the instance from which this character was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        characterId = 0L;
-        buildObject();
-        walkOffset = cloner.clone(walkOffset);
-
-        PhysicsCharacter old = (PhysicsCharacter) original;
-        copyPcoProperties(old);
-
-        setAngularDamping(old.getAngularDamping());
-        setAngularVelocity(old.getAngularVelocity(null));
-        setContactResponse(old.isContactResponse());
-        setFallSpeed(old.getFallSpeed());
-        setGravity(old.getGravity(null));
-        setJumpSpeed(old.getJumpSpeed());
-        setLinearDamping(old.getLinearDamping());
-        /*
-         * Walk direction affects linear velocity, so set it first!
-         */
-        setWalkDirection(old.getWalkDirection(null));
-        setLinearVelocity(old.getLinearVelocity(null));
-        setDeactivationTime(old.getDeactivationTime());
-
-        setMaxPenetrationDepth(old.getMaxPenetrationDepth());
-        setMaxSlope(old.getMaxSlope());
-        setPhysicsLocation(old.getPhysicsLocation(null));
-        setStepHeight(old.getStepHeight());
-        setSweepTest(old.isUsingGhostSweepTest());
-        setUp(old.getUpDirection(null));
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsCharacter jmeClone() {
-        try {
-            PhysicsCharacter clone = (PhysicsCharacter) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this character from the specified importer, for example when

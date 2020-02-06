@@ -37,8 +37,6 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.export.Savable;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -51,7 +49,7 @@ import jme3utilities.Validate;
  *
  * Based on PhysicsSoftBody by dokthar.
  */
-public class SoftBodyConfig implements JmeCloneable, Savable {
+public class SoftBodyConfig implements Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -406,40 +404,6 @@ public class SoftBodyConfig implements JmeCloneable, Savable {
     public int velocityIterations() {
         long bodyId = body.getObjectId();
         return getVelocitiesIterations(bodyId);
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned config into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this config (not null)
-     * @param original the instance from which this config was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        body = cloner.clone(body);
-
-        SoftBodyConfig oldConfig = (SoftBodyConfig) original;
-        copyAll(oldConfig);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public SoftBodyConfig jmeClone() {
-        try {
-            SoftBodyConfig clone = (SoftBodyConfig) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

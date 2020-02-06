@@ -42,8 +42,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -63,7 +61,7 @@ import jme3utilities.minie.MyShape;
  * @author normenhansen
  */
 abstract public class CollisionShape
-        implements Comparable<CollisionShape>, JmeCloneable, Savable {
+        implements Comparable<CollisionShape>, Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -466,38 +464,6 @@ abstract public class CollisionShape
         int result = Long.compare(nativeId, otherId);
 
         return result;
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned shape into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this shape (not null)
-     * @param original the instance from which this shape was shallow-cloned
-     * (unused)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        scale = cloner.clone(scale);
-        nativeId = 0L; // subclass must create the btCollisionShape
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public CollisionShape jmeClone() {
-        try {
-            CollisionShape clone = (CollisionShape) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

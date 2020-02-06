@@ -42,7 +42,6 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -354,38 +353,6 @@ public class HullCollisionShape extends CollisionShape {
     }
     // *************************************************************************
     // CollisionShape methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned shape into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this shape (not null)
-     * @param original the instance from which this shape was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        directBuffer = null; // directBuffer not cloned
-        points = cloner.clone(points);
-        createShape();
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public HullCollisionShape jmeClone() {
-        try {
-            HullCollisionShape clone = (HullCollisionShape) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * Calculate how far this shape extends from its center, including margin.

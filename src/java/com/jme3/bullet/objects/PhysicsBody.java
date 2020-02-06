@@ -36,7 +36,6 @@ import com.jme3.bullet.joints.PhysicsJoint;
 import com.jme3.export.InputCapsule;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.ArrayList;
 import jme3utilities.Validate;
@@ -80,15 +79,6 @@ abstract public class PhysicsBody extends PhysicsCollisionObject {
         if (!joints.contains(joint)) {
             joints.add(joint);
         }
-    }
-
-    /**
-     * Clone this body's joints.
-     *
-     * @param cloner the Cloner that's cloning this body (not null, modified)
-     */
-    protected void cloneJoints(Cloner cloner) {
-        joints = cloner.clone(joints);
     }
 
     /**

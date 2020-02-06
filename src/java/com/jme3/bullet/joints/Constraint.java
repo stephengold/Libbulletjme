@@ -38,7 +38,6 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -436,24 +435,6 @@ abstract public class Constraint extends PhysicsJoint {
     // PhysicsJoint methods
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned Constraint into a deep-cloned one, using the specified
-     * Cloner and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this Constraint (not null)
-     * @param original the instance from which this Constraint was
-     * shallow-cloned (unused)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        pivotA = cloner.clone(pivotA);
-        pivotB = cloner.clone(pivotB);
-        // Each subclass must create the btTypedConstraint.
-    }
-
-    /**
      * Access the rigid body at the A end.
      *
      * @return the pre-existing rigid body, or null if none
@@ -498,21 +479,6 @@ abstract public class Constraint extends PhysicsJoint {
         boolean result = isEnabled(constraintId);
 
         return result;
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public Constraint jmeClone() {
-        try {
-            Constraint clone = (Constraint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     /**

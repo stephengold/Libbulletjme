@@ -38,7 +38,6 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -148,43 +147,6 @@ public class SoftAngularJoint extends SoftPhysicsJoint {
     }
     // *************************************************************************
     // SoftPhysicsJoint methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned joint into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        axis = cloner.clone(axis);
-        createJoint();
-
-        SoftAngularJoint originalJoint = (SoftAngularJoint) original;
-        setCFM(originalJoint.getCFM());
-        setERP(originalJoint.getERP());
-        setSplit(originalJoint.getSplit());
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public SoftAngularJoint jmeClone() {
-        try {
-            SoftAngularJoint clone = (SoftAngularJoint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this joint from the specified importer, for example when

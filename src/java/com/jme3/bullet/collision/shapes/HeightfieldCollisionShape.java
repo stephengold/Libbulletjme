@@ -39,7 +39,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
@@ -230,23 +229,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
     // CollisionShape methods
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned shape into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this shape (not null)
-     * @param original the instance from which this shape was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        // directBuffer not cloned
-        // heightfieldData not cloned
-        createShape();
-    }
-
-    /**
      * Finalize this shape just before it is destroyed. Should be invoked only
      * by a subclass or by the garbage collector.
      *
@@ -258,22 +240,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
         finalizeNative(nativeId);
 
         super.finalize();
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public HeightfieldCollisionShape jmeClone() {
-        try {
-            HeightfieldCollisionShape clone
-                    = (HeightfieldCollisionShape) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     /**

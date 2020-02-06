@@ -40,7 +40,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.scene.Mesh;
 import com.jme3.system.JmeSystem;
 import com.jme3.system.Platform;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -165,24 +164,6 @@ public class MeshCollisionShape extends CollisionShape {
     // CollisionShape methods
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned shape into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this shape (not null)
-     * @param original the instance from which this shape was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        nativeMesh = cloner.clone(nativeMesh);
-        nativeBVHBuffer = 0L;
-        createShape(null);
-    }
-
-    /**
      * Finalize this shape just before it is destroyed. Should be invoked only
      * by a subclass or by the garbage collector.
      *
@@ -193,21 +174,6 @@ public class MeshCollisionShape extends CollisionShape {
         super.finalize();
         if (nativeBVHBuffer != 0L) {
             finalizeBVH(nativeBVHBuffer);
-        }
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public MeshCollisionShape jmeClone() {
-        try {
-            MeshCollisionShape clone = (MeshCollisionShape) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
         }
     }
 

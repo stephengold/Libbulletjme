@@ -39,7 +39,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -820,86 +819,6 @@ public class SliderJoint extends Constraint {
     }
     // *************************************************************************
     // Constraint methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned joint into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        rotA = cloner.clone(rotA);
-        rotB = cloner.clone(rotB);
-        createJoint();
-
-        SliderJoint old = (SliderJoint) original;
-
-        float bit = old.getBreakingImpulseThreshold();
-        setBreakingImpulseThreshold(bit);
-
-        boolean enableJoint = old.isEnabled();
-        setEnabled(enableJoint);
-
-        int numIterations = old.getOverrideIterations();
-        overrideIterations(numIterations);
-
-        setDampingDirAng(old.getDampingDirAng());
-        setDampingDirLin(old.getDampingDirLin());
-        setDampingLimAng(old.getDampingLimAng());
-        setDampingLimLin(old.getDampingLimLin());
-        setDampingOrthoAng(old.getDampingOrthoAng());
-        setDampingOrthoLin(old.getDampingOrthoLin());
-
-        setLowerAngLimit(old.getLowerAngLimit());
-        setLowerLinLimit(old.getLowerLinLimit());
-
-        setMaxAngMotorForce(old.getMaxAngMotorForce());
-        setMaxLinMotorForce(old.getMaxLinMotorForce());
-
-        setPoweredAngMotor(old.isPoweredAngMotor());
-        setPoweredLinMotor(old.isPoweredLinMotor());
-
-        setRestitutionDirAng(old.getRestitutionDirAng());
-        setRestitutionDirLin(old.getRestitutionDirLin());
-        setRestitutionLimAng(old.getRestitutionLimAng());
-        setRestitutionLimLin(old.getRestitutionLimLin());
-        setRestitutionOrthoAng(old.getRestitutionOrthoAng());
-        setRestitutionOrthoLin(old.getRestitutionOrthoLin());
-
-        setSoftnessDirAng(old.getSoftnessDirAng());
-        setSoftnessDirLin(old.getSoftnessDirLin());
-        setSoftnessLimAng(old.getSoftnessLimAng());
-        setSoftnessLimLin(old.getSoftnessLimLin());
-        setSoftnessOrthoAng(old.getSoftnessOrthoAng());
-        setSoftnessOrthoLin(old.getSoftnessOrthoLin());
-
-        setTargetAngMotorVelocity(old.getTargetAngMotorVelocity());
-        setTargetLinMotorVelocity(old.getTargetLinMotorVelocity());
-
-        setUpperAngLimit(old.getUpperAngLimit());
-        setUpperLinLimit(old.getUpperLinLimit());
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public SliderJoint jmeClone() {
-        try {
-            SliderJoint clone = (SliderJoint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this joint from the specified importer, for example when

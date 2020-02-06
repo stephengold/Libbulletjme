@@ -41,7 +41,6 @@ import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -745,25 +744,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     // PhysicsRigidBody methods
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned body into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this vehicle (not null)
-     * @param original the instance from which this vehicle was shallow-cloned
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        RigidBodyMotionState ms = getMotionState();
-        ms.setVehicle(this);
-
-        //physicsSpace not cloned
-        tuning = cloner.clone(tuning);
-        wheels = cloner.clone(wheels);
-    }
-
-    /**
      * Finalize this vehicle just before it is destroyed. Should be invoked only
      * by a subclass or by the garbage collector.
      *
@@ -778,21 +758,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         logger3.log(Level.FINE, "Finalizing Vehicle {0}",
                 Long.toHexString(vehicleId));
         finalizeNative(rayCasterId, vehicleId);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsVehicle jmeClone() {
-        try {
-            PhysicsVehicle clone = (PhysicsVehicle) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     /**

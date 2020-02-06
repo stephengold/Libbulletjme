@@ -41,8 +41,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -52,7 +50,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-public class VehicleWheel implements JmeCloneable, Savable {
+public class VehicleWheel implements Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -722,45 +720,6 @@ public class VehicleWheel implements JmeCloneable, Savable {
         getWheelLocation(vehicleId, wheelIndex, wheelWorldLocation);
         getWheelRotation(vehicleId, wheelIndex, tmp_Matrix);
         wheelWorldRotation.fromRotationMatrix(tmp_Matrix);
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned wheel into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this wheel (not null)
-     * @param original the instance from which this wheel was shallow-cloned
-     * (unused)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        location = cloner.clone(location);
-        suspensionDirection = cloner.clone(suspensionDirection);
-        axisDirection = cloner.clone(axisDirection);
-        tuning = cloner.clone(tuning);
-        wheelWorldLocation = cloner.clone(wheelWorldLocation);
-        wheelWorldRotation = cloner.clone(wheelWorldRotation);
-        wheelSpatial = cloner.clone(wheelSpatial);
-        tmp_Matrix = cloner.clone(tmp_Matrix);
-        tmp_inverseWorldRotation = cloner.clone(tmp_inverseWorldRotation);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public VehicleWheel jmeClone() {
-        try {
-            VehicleWheel clone = (VehicleWheel) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

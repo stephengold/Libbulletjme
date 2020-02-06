@@ -37,8 +37,6 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.export.Savable;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +49,7 @@ import jme3utilities.Validate;
  * @author normenhansen
  */
 abstract public class PhysicsJoint
-        implements Comparable<PhysicsJoint>, JmeCloneable, Savable {
+        implements Comparable<PhysicsJoint>, Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -211,43 +209,6 @@ abstract public class PhysicsJoint
 
         objectId = jointId;
         logger.log(Level.FINE, "Created {0}.", this);
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned object into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        bodyA = cloner.clone(bodyA);
-        bodyB = cloner.clone(bodyB);
-        objectId = 0L;
-        /*
-         * Each subclass must create the btTypedConstraint, btSoftBody::Anchor,
-         * or btSoftBody::Joint.
-         */
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsJoint jmeClone() {
-        try {
-            PhysicsJoint clone = (PhysicsJoint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

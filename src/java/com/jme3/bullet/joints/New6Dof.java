@@ -46,7 +46,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -546,82 +545,6 @@ public class New6Dof extends Constraint {
     }
     // *************************************************************************
     // Constraint methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned constraint into a deep-cloned one, using the specified
-     * Cloner and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this constraint (not null)
-     * @param original the instance from which this constraint was
-     * shallow-cloned (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        rotA = cloner.clone(rotA);
-        rotB = cloner.clone(rotB);
-        rotationMotor = null;
-        translationMotor = null;
-        createConstraint();
-
-        New6Dof old = (New6Dof) original;
-
-        float bit = old.getBreakingImpulseThreshold();
-        setBreakingImpulseThreshold(bit);
-
-        boolean enableConstraint = old.isEnabled();
-        setEnabled(enableConstraint);
-
-        int numIterations = old.getOverrideIterations();
-        overrideIterations(numIterations);
-
-        for (int i = 0; i < numAxes; ++i) {
-            RotationMotor motor = getRotationMotor(i);
-            RotationMotor oldMotor = old.getRotationMotor(i);
-
-            motor.setDampingLimited(oldMotor.isDampingLimited());
-            motor.setMotorEnabled(oldMotor.isMotorEnabled());
-            motor.setServoEnabled(oldMotor.isServoEnabled());
-            motor.setSpringEnabled(oldMotor.isSpringEnabled());
-            motor.setStiffnessLimited(oldMotor.isStiffnessLimited());
-
-            for (MotorParam p : MotorParam.values()) {
-                motor.set(p, oldMotor.get(p));
-            }
-        }
-
-        TranslationMotor motor = getTranslationMotor();
-        TranslationMotor oldMotor = old.getTranslationMotor();
-
-        for (int i = 0; i < numAxes; ++i) {
-            motor.setDampingLimited(i, oldMotor.isDampingLimited(i));
-            motor.setMotorEnabled(i, oldMotor.isMotorEnabled(i));
-            motor.setServoEnabled(i, oldMotor.isServoEnabled(i));
-            motor.setSpringEnabled(i, oldMotor.isSpringEnabled(i));
-            motor.setStiffnessLimited(i, oldMotor.isStiffnessLimited(i));
-        }
-
-        for (MotorParam p : MotorParam.values()) {
-            motor.set(p, oldMotor.get(p, null));
-        }
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public New6Dof jmeClone() {
-        try {
-            New6Dof clone = (New6Dof) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this Constraint from the specified importer, for example

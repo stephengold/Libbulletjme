@@ -38,7 +38,6 @@ import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -318,28 +317,6 @@ public class SixDofSpringJoint extends SixDofJoint {
     @Override
     native protected long createJoint1(long bodyIdB, Vector3f pivotInB,
             Matrix3f rotInB, boolean useLinearReferenceFrameB);
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned joint into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        SixDofSpringJoint old = (SixDofSpringJoint) original;
-
-        for (int dofIndex = 0; dofIndex < 6; ++dofIndex) {
-            setDamping(dofIndex, old.getDamping(dofIndex));
-            setStiffness(dofIndex, old.getStiffness(dofIndex));
-            // TODO: enableSpring, equilibrium points
-        }
-    }
 
     /**
      * De-serialize this joint from the specified importer, for example when

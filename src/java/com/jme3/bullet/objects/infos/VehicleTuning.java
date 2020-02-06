@@ -36,8 +36,6 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.export.Savable;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -46,7 +44,7 @@ import java.util.logging.Logger;
  *
  * @author normenhansen
  */
-public class VehicleTuning implements JmeCloneable, Savable {
+public class VehicleTuning implements Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -249,37 +247,6 @@ public class VehicleTuning implements JmeCloneable, Savable {
     public void setSuspensionStiffness(float stiffness) {
         suspensionStiffness = stiffness;
         setSuspensionStiffness(nativeId, stiffness);
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned tuning into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this tuning (unused)
-     * @param original the instance from which this tuning was shallow-cloned
-     * (unused)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        create();
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public VehicleTuning jmeClone() {
-        try {
-            VehicleTuning clone = (VehicleTuning) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

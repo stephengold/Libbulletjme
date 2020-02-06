@@ -38,8 +38,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.export.Savable;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -52,7 +50,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CompoundMesh implements JmeCloneable, Savable {
+public class CompoundMesh implements Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -191,46 +189,6 @@ public class CompoundMesh implements JmeCloneable, Savable {
         logger.log(Level.FINE, "Scaled CompoundMesh {0}",
                 Long.toHexString(nativeId));
         this.scale.set(scale);
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned mesh into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this mesh (not null)
-     * @param original the instance from which this mesh was shallow-cloned (not
-     * null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        submeshes = cloner.clone(submeshes);
-        scale = cloner.clone(scale);
-
-        nativeId = 0L;
-        createEmpty();
-        setScale(scale);
-        for (IndexedMesh submesh : submeshes) {
-            long submeshId = submesh.nativeId();
-            addIndexedMesh(nativeId, submeshId);
-        }
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public CompoundMesh jmeClone() {
-        try {
-            CompoundMesh clone = (CompoundMesh) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

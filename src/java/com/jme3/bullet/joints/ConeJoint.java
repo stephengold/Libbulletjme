@@ -39,7 +39,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -277,50 +276,6 @@ public class ConeJoint extends Constraint {
     }
     // *************************************************************************
     // Constraint methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned joint into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        rotA = cloner.clone(rotA);
-        rotB = cloner.clone(rotB);
-        createJoint();
-
-        ConeJoint old = (ConeJoint) original;
-
-        float bit = old.getBreakingImpulseThreshold();
-        setBreakingImpulseThreshold(bit);
-
-        boolean enableJoint = old.isEnabled();
-        setEnabled(enableJoint);
-
-        int numIterations = old.getOverrideIterations();
-        overrideIterations(numIterations);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public ConeJoint jmeClone() {
-        try {
-            ConeJoint clone = (ConeJoint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this joint from the specified importer, for example when

@@ -32,7 +32,6 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.export.JmeImporter;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -81,36 +80,6 @@ public class EmptyShape extends CollisionShape {
     }
     // *************************************************************************
     // CollisionShape methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned shape into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this shape (not null)
-     * @param original the instance from which this shape was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        createShape();
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public EmptyShape jmeClone() {
-        try {
-            EmptyShape clone = (EmptyShape) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * Determine how far the shape extends from its center.

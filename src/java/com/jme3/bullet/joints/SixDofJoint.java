@@ -43,7 +43,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -470,99 +469,6 @@ public class SixDofJoint extends Constraint {
             Matrix3f rotInB, boolean useLinearReferenceFrameB);
     // *************************************************************************
     // Constraint methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned joint into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        rotA = cloner.clone(rotA);
-        rotB = cloner.clone(rotB);
-        rotationalMotors = null;
-        translationalMotor = null;
-        createJoint();
-
-        angularLowerLimit = cloner.clone(angularLowerLimit);
-        angularUpperLimit = cloner.clone(angularUpperLimit);
-        linearLowerLimit = cloner.clone(linearLowerLimit);
-        linearUpperLimit = cloner.clone(linearUpperLimit);
-
-        SixDofJoint old = (SixDofJoint) original;
-
-        float bit = old.getBreakingImpulseThreshold();
-        setBreakingImpulseThreshold(bit);
-
-        boolean enableJoint = old.isEnabled();
-        setEnabled(enableJoint);
-
-        int numIterations = old.getOverrideIterations();
-        overrideIterations(numIterations);
-
-        setAngularLowerLimit(old.getAngularLowerLimit(null));
-        setAngularUpperLimit(old.getAngularUpperLimit(null));
-        setLinearLowerLimit(old.getLinearLowerLimit(null));
-        setLinearLowerLimit(old.getLinearUpperLimit(null));
-
-        TranslationalLimitMotor tlm = getTranslationalLimitMotor();
-        TranslationalLimitMotor oldTlm = old.getTranslationalLimitMotor();
-
-        tlm.setAccumulatedImpulse(oldTlm.getAccumulatedImpulse(null));
-        tlm.setDamping(oldTlm.getDamping());
-        for (int i = 0; i < numAxes; ++i) {
-            tlm.setEnabled(i, oldTlm.isEnabled(i));
-        }
-        tlm.setERP(oldTlm.getERP(null));
-        tlm.setLimitSoftness(oldTlm.getLimitSoftness());
-        tlm.setLowerLimit(oldTlm.getLowerLimit(null));
-        tlm.setMaxMotorForce(oldTlm.getMaxMotorForce(null));
-        tlm.setNormalCFM(oldTlm.getNormalCFM(null));
-        tlm.setRestitution(oldTlm.getRestitution());
-        tlm.setStopCFM(oldTlm.getStopCFM(null));
-        tlm.setTargetVelocity(oldTlm.getTargetVelocity(null));
-        tlm.setUpperLimit(oldTlm.getUpperLimit(null));
-
-        for (int i = 0; i < numAxes; ++i) {
-            RotationalLimitMotor rlm = getRotationalLimitMotor(i);
-            RotationalLimitMotor oldRlm = old.getRotationalLimitMotor(i);
-
-            rlm.setAccumulatedImpulse(oldRlm.getAccumulatedImpulse());
-            rlm.setRestitution(oldRlm.getRestitution());
-            rlm.setDamping(oldRlm.getDamping());
-            rlm.setEnableMotor(oldRlm.isEnableMotor());
-            rlm.setERP(oldRlm.getERP());
-            rlm.setUpperLimit(oldRlm.getUpperLimit());
-            rlm.setLimitSoftness(oldRlm.getLimitSoftness());
-            rlm.setLowerLimit(oldRlm.getLowerLimit());
-            rlm.setMaxLimitForce(oldRlm.getMaxLimitForce());
-            rlm.setMaxMotorForce(oldRlm.getMaxMotorForce());
-            rlm.setNormalCFM(oldRlm.getNormalCFM());
-            rlm.setStopCFM(oldRlm.getStopCFM());
-            rlm.setTargetVelocity(oldRlm.getTargetVelocity());
-        }
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public SixDofJoint jmeClone() {
-        try {
-            SixDofJoint clone = (SixDofJoint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this joint from the specified importer, for example when

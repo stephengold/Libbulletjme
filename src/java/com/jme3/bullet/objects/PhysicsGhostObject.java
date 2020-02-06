@@ -40,7 +40,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -173,44 +172,6 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
     // *************************************************************************
     // PhysicsCollisionObject methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned object into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this object (not null)
-     * @param original the instance from which this object was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        overlappingObjects = cloner.clone(overlappingObjects);
-        buildObject();
-
-        PhysicsGhostObject old = (PhysicsGhostObject) original;
-        copyPcoProperties(old);
-
-        setPhysicsLocation(old.getPhysicsLocation(null));
-        setPhysicsRotation(old.getPhysicsRotationMatrix(null));
-        setDeactivationTime(old.getDeactivationTime());
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsGhostObject jmeClone() {
-        try {
-            PhysicsGhostObject clone = (PhysicsGhostObject) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * Apply the specified CollisionShape to this object. Note that the object

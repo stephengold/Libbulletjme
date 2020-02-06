@@ -47,7 +47,6 @@ import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.util.BufferUtils;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
@@ -1231,75 +1230,6 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned body into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this body (not null)
-     * @param original the instance from which this body was shallow-cloned (not
-     * null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        newEmptySoftBody();
-
-        PhysicsSoftBody old = (PhysicsSoftBody) original;
-        copyPcoProperties(old);
-
-        config = cloner.clone(config);
-
-        Material oldMaterial = old.getSoftMaterial();
-        material = new Material(this);
-        material.setAngularStiffness(oldMaterial.angularStiffness());
-        material.setLinearStiffness(oldMaterial.linearStiffness());
-        material.setVolumeStiffness(oldMaterial.volumeStiffness());
-
-        FloatBuffer floats = old.copyLocations(null);
-        appendNodes(floats);
-        old.copyNormals(floats);
-        setNormals(floats);
-        old.copyVelocities(floats);
-        setVelocities(floats);
-
-        FloatBuffer masses = old.copyMasses(null);
-        setMasses(masses);
-
-        IntBuffer faces = old.copyFaces(null);
-        IndexBuffer faceIndices = IndexBuffer.wrapIndexBuffer(faces);
-        appendFaces(faceIndices);
-
-        IntBuffer links = old.copyLinks(null);
-        IndexBuffer linkIndices = IndexBuffer.wrapIndexBuffer(links);
-        appendLinks(linkIndices);
-
-        IntBuffer tetras = old.copyTetras(null);
-        IndexBuffer tetraIndices = IndexBuffer.wrapIndexBuffer(tetras);
-        appendLinks(tetraIndices);
-
-        assert countClusters() == 0 : countClusters();
-        int numClusters = old.countClusters();
-        for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
-            IntBuffer nodeIndices = old.listNodesInCluster(clusterIndex, null);
-            int numNodesInCluster = nodeIndices.capacity();
-            appendCluster(objectId, numNodesInCluster, nodeIndices);
-
-            for (Cluster clusterParameter : Cluster.values()) {
-                float value = old.get(clusterParameter, clusterIndex);
-                set(clusterParameter, clusterIndex, value);
-            }
-        }
-        finishClusters(objectId);
-        assert countClusters() == numClusters : countClusters();
-
-        setDeactivationTime(old.getDeactivationTime());
-        /*
-         * Soft joints require clusters; clone them after appending clusters.
-         */
-        cloneJoints(cloner);
-    }
-
-    /**
      * Copy this body's gravitational acceleration.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -1384,21 +1314,6 @@ public class PhysicsSoftBody extends PhysicsBody {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         result.set(1f, 1f, 1f);
         return result;
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsSoftBody jmeClone() {
-        try {
-            PhysicsSoftBody clone = (PhysicsSoftBody) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     /**

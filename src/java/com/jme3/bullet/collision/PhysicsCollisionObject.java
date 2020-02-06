@@ -46,8 +46,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +61,7 @@ import jme3utilities.Validate;
  * @author normenhansen
  */
 abstract public class PhysicsCollisionObject
-        implements Comparable<PhysicsCollisionObject>, JmeCloneable, Savable {
+        implements Comparable<PhysicsCollisionObject>, Savable {
     // *************************************************************************
     // constants and loggers
 
@@ -1030,51 +1028,6 @@ abstract public class PhysicsCollisionObject
         int result = Long.compare(objectId, otherId);
 
         return result;
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned object into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this object (not null)
-     * @param original the instance from which this object was shallow-cloned
-     * (unused)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        if (userObject instanceof Cloneable
-                || userObject instanceof JmeCloneable) {
-            userObject = cloner.clone(userObject);
-        }
-
-        collisionShape = cloner.clone(collisionShape);
-        debugMaterial = cloner.clone(debugMaterial);
-
-        objectId = 0L;
-        /*
-         * The subclass should create the btCollisionObject and then
-         * invoke copyPcoProperties() .
-         */
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner. Note that the cloned object
-     * won't be added to any PhysicsSpace, even if the original was.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsCollisionObject jmeClone() {
-        try {
-            PhysicsCollisionObject clone
-                    = (PhysicsCollisionObject) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Savable methods

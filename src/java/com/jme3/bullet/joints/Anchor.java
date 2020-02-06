@@ -38,7 +38,6 @@ import com.jme3.export.JmeExporter;
 import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -216,23 +215,6 @@ public class Anchor extends PhysicsJoint {
     // PhysicsJoint methods
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned Anchor into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this Anchor (not null)
-     * @param original the instance from which this Anchor was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        pivotInB = cloner.clone(pivotInB);
-        createAnchor();
-    }
-
-    /**
      * Test whether this Anchor is enabled.
      *
      * @return true
@@ -240,21 +222,6 @@ public class Anchor extends PhysicsJoint {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public Anchor jmeClone() {
-        try {
-            Anchor clone = (Anchor) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     /**

@@ -40,7 +40,6 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.math.MyVector3f;
@@ -400,61 +399,6 @@ public class HingeJoint extends Constraint {
     }
     // *************************************************************************
     // Constraint methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned object into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this joint (not null)
-     * @param original the instance from which this joint was shallow-cloned
-     * (not null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-
-        axisA = cloner.clone(axisA);
-        axisB = cloner.clone(axisB);
-        createJoint();
-
-        setAngularOnly(angularOnly);
-
-        HingeJoint old = (HingeJoint) original;
-
-        float bit = old.getBreakingImpulseThreshold();
-        setBreakingImpulseThreshold(bit);
-
-        boolean enableJoint = old.isEnabled();
-        setEnabled(enableJoint);
-
-        int numIterations = old.getOverrideIterations();
-        overrideIterations(numIterations);
-
-        float low = old.getLowerLimit();
-        float high = old.getUpperLimit();
-        setLimit(low, high, limitSoftness, biasFactor, relaxationFactor);
-
-        boolean enable = old.getEnableMotor();
-        float targetVelocity = old.getMotorTargetVelocity();
-        float maxImpulse = old.getMaxMotorImpulse();
-        enableMotor(enable, targetVelocity, maxImpulse);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new joint
-     */
-    @Override
-    public HingeJoint jmeClone() {
-        try {
-            HingeJoint clone = (HingeJoint) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
 
     /**
      * De-serialize this joint from the specified importer, for example when

@@ -46,7 +46,6 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -875,44 +874,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     // PhysicsBody methods
 
     /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned body into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this body (not null)
-     * @param original the instance from which this body was shallow-cloned (not
-     * null, unaffected)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        super.cloneFields(cloner, original);
-        rebuildRigidBody();
-
-        cloneJoints(cloner);
-        motionState = cloner.clone(motionState);
-
-        PhysicsRigidBody old = (PhysicsRigidBody) original;
-        copyPcoProperties(old);
-
-        Vector3f tmpVector = new Vector3f();
-        setAngularDamping(old.getAngularDamping());
-        setAngularFactor(old.getAngularFactor(tmpVector));
-        setAngularSleepingThreshold(old.getAngularSleepingThreshold());
-        setContactResponse(old.isContactResponse());
-        setInverseInertiaLocal(old.getInverseInertiaLocal(tmpVector));
-        setLinearDamping(old.getLinearDamping());
-        setLinearFactor(old.getLinearFactor(tmpVector));
-        setLinearSleepingThreshold(old.getLinearSleepingThreshold());
-        if (old.isDynamic()) {
-            setAngularVelocity(old.getAngularVelocity(tmpVector));
-            setLinearVelocity(old.getLinearVelocity(tmpVector));
-        }
-        setPhysicsLocation(old.getPhysicsLocation(tmpVector));
-        setPhysicsRotation(old.getPhysicsRotationMatrix(null));
-        setDeactivationTime(old.getDeactivationTime());
-    }
-
-    /**
      * Copy this body's gravitational acceleration.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -935,21 +896,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     public float getMass() {
         assert checkMass();
         return mass;
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public PhysicsRigidBody jmeClone() {
-        try {
-            PhysicsRigidBody clone = (PhysicsRigidBody) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
 
     /**

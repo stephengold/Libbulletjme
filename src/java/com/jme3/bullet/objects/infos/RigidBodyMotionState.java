@@ -37,8 +37,6 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +45,7 @@ import java.util.logging.Logger;
  *
  * @author normenhansen
  */
-public class RigidBodyMotionState implements JmeCloneable {
+public class RigidBodyMotionState {
     // *************************************************************************
     // constants and loggers
 
@@ -229,40 +227,6 @@ public class RigidBodyMotionState implements JmeCloneable {
      */
     public void setVehicle(PhysicsVehicle vehicle) {
         this.vehicle = vehicle;
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned state into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this state (not null)
-     * @param original the instance from which this state was shallow-cloned
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        motionStateId = createMotionState();
-        assert motionStateId != 0L;
-
-        tmp_inverseWorldRotation = cloner.clone(tmp_inverseWorldRotation);
-        vehicle = cloner.clone(vehicle);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public RigidBodyMotionState jmeClone() {
-        try {
-            RigidBodyMotionState clone = (RigidBodyMotionState) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
     }
     // *************************************************************************
     // Object methods
