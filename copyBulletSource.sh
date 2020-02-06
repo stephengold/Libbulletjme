@@ -4,7 +4,7 @@
 # from the SRC directory to the DST directory.
 
 SRC=/home/sgold/Git/ext/bullet3/src
-DST=/home/sgold/Git/Libbulletjme/src/native/bullet3
+DST=/home/sgold/Git/Libbulletjme/src/main/native/bullet3
 
 cd $SRC
 cp --recursive btBulletCollisionCommon.h btBulletDynamicsCommon.h \

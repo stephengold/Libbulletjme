@@ -1,20 +1,20 @@
-The src/java/com/jme3 and src/native/glue software
+The src/main/java/com/jme3 and src/main/native/glue software
 are Copyright (c) 2009-2020 jMonkeyEngine
 All rights reserved.
 
-The src/native/vhacd software except vhacdMutex.h
+The src/main/native/v-hacd software except vhacdMutex.h
 is Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)
 All rights reserved.
 
-The src/java/jme3utilities/math software
+The src/main/java/jme3utilities software
 is Copyright (c) 2013-2020, Stephen Gold
 All rights reserved.
 
-The src/java/vhacd software
+The src/main/java/vhacd software
 is Copyright (c) 2016, Riccardo Balbo
 All rights reserved.
 
-  Note: the BSD 3-Clause License does not apply to the src/native/bullet3
+  Note: the BSD 3-Clause License does not apply to the src/main/native/bullet3
   software, which is separately licensed.
 
 BSD 3-Clause License
@@ -46,7 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ================================================================================
 
-The src/native/bullet3 software is licensed under a zlib license.
+The src/main/native/bullet3 software is licensed under a zlib license.
 
   Note: the zlib license does not apply to the src/native/glue
   software, which is separately licensed.
@@ -71,7 +71,7 @@ subject to the following restrictions:
 
 ================================================================================
 
-src/native/v-hacd/inc/vhacdMutex.h is licensed under an MIT license.
+src/main/native/v-hacd/inc/vhacdMutex.h is licensed under an MIT license.
 
 Copyright (c) 2009 by John W. Ratcliff mailto:jratcliffscarab@gmail.com
 

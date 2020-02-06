@@ -11,8 +11,8 @@ ext {
 }
 
 sourceSets.main.java {
-    srcDir 'src/java'
-    srcDir 'src/native' // for IDE access (no Java there)
+    srcDir 'src/main/java'
+    srcDir 'src/main/native' // for IDE access (no Java there)
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
@@ -78,9 +78,9 @@ model {
             targetPlatform 'Windows64'
 
             sources.cpp.source {
-                srcDir 'src/native/bullet3'
-                srcDir 'src/native/glue'
-                srcDir 'src/native/v-hacd/src'
+                srcDir 'src/main/native/bullet3'
+                srcDir 'src/main/native/glue'
+                srcDir 'src/main/native/v-hacd/src'
                 include '**/*.cpp'
             }
 
@@ -105,10 +105,10 @@ model {
                     cppCompiler.args '/EHsc' // synchronous exceptions only
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
-                    cppCompiler.args "/I$projectDir/src/native/bullet3"
-                    cppCompiler.args "/I$projectDir/src/native/v-hacd/inc"
-                    cppCompiler.args "/I$projectDir/src/native/v-hacd/public"
-                    cppCompiler.args "/I$projectDir/src/native/bullet3/LinearMath"
+                    cppCompiler.args "/I$projectDir/src/main/native/bullet3"
+                    cppCompiler.args "/I$projectDir/src/main/native/v-hacd/inc"
+                    cppCompiler.args "/I$projectDir/src/main/native/v-hacd/public"
+                    cppCompiler.args "/I$projectDir/src/main/native/bullet3/LinearMath"
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '/FS' // serialize PDB writes
                         cppCompiler.args '/MTd' // use LIBCMTD
@@ -133,10 +133,10 @@ model {
 
                 } else { // toolChain in Clang or Gcc
                     cppCompiler.args '-I', "$javaHome/include"
-                    cppCompiler.args '-I', "$projectDir/src/native/bullet3"
-                    cppCompiler.args '-I', "$projectDir/src/native/v-hacd/inc"
-                    cppCompiler.args '-I', "$projectDir/src/native/v-hacd/public"
-                    cppCompiler.args '-I', "$projectDir/src/native/bullet3/LinearMath"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/bullet3"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args '-std=c++11'
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
@@ -184,7 +184,7 @@ model {
     }
 }
 
-compileJava.options.headerOutputDirectory = new File('src/native/glue')
+compileJava.options.headerOutputDirectory = new File('src/main/native/glue')
 
 assemble.dependsOn('copyToDistJars')
 task copyToDistJars (type: Copy) {

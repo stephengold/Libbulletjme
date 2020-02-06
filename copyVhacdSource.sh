@@ -4,7 +4,7 @@
 # from the SRC directory to the DST directory.
 
 SRC=/home/sgold/Git/ext/v-hacd/src/VHACD_Lib
-DST=/home/sgold/Git/Libbulletjme/src/native/v-hacd
+DST=/home/sgold/Git/Libbulletjme/src/main/native/v-hacd
 
 cd $SRC
 cp --recursive inc public src $DST
