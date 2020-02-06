@@ -60,26 +60,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
         this.scale.set(scale);
     }
 
-    public Transform(Vector3f translation){
-        this(translation, Quaternion.IDENTITY);
-    }
-
-    public Transform(Quaternion rot){
-        this(Vector3f.ZERO, rot);
-    }
-
     public Transform(){
         this(Vector3f.ZERO, Quaternion.IDENTITY);
-    }
-
-    /**
-     * Sets this rotation to the given Quaternion value.
-     * @param rot The new rotation for this matrix.
-     * @return this
-     */
-    public Transform setRotation(Quaternion rot) {
-        this.rot.set(rot);
-        return this;
     }
 
     /**
@@ -105,16 +87,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * @param scale The new scale for this matrix.
      * @return this
      */
-    public Transform setScale(Vector3f scale) {
-        this.scale.set(scale);
-        return this;
-    }
-
-    /**
-     * Sets this scale to the given value.
-     * @param scale The new scale for this matrix.
-     * @return this
-     */
     public Transform setScale(float scale) {
         this.scale.set(scale, scale, scale);
         return this;
@@ -129,30 +101,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Stores this translation value into the given vector3f.  If trans is null, a new vector3f is created to
-     * hold the value.  The value, once stored, is returned.
-     * @param trans The store location for this matrix's translation.
-     * @return The value of this matrix's translation.
-     */
-    public Vector3f getTranslation(Vector3f trans) {
-        if (trans==null) trans=new Vector3f();
-        trans.set(this.translation);
-        return trans;
-    }
-
-    /**
-     * Stores this rotation value into the given Quaternion.  If quat is null, a new Quaternion is created to
-     * hold the value.  The value, once stored, is returned.
-     * @param quat The store location for this matrix's rotation.
-     * @return The value of this matrix's rotation.
-     */
-    public Quaternion getRotation(Quaternion quat) {
-        if (quat==null) quat=new Quaternion();
-        quat.set(rot);
-        return quat;
-    }
-    
-    /**
      * Return the rotation quaternion in this matrix.
      * @return rotation quaternion.
      */
@@ -160,31 +108,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return rot;
     } 
     
-    /**
-     * Stores this scale value into the given vector3f.  If scale is null, a new vector3f is created to
-     * hold the value.  The value, once stored, is returned.
-     * @param scale The store location for this matrix's scale.
-     * @return The value of this matrix's scale.
-     */
-    public Vector3f getScale(Vector3f scale) {
-        if (scale==null) scale=new Vector3f();
-        scale.set(this.scale);
-        return scale;
-    }
-
-    /**
-     * Sets this transform to the interpolation between the first transform and the second by delta amount.
-     * @param t1 The beginning transform.
-     * @param t2 The ending transform.
-     * @param delta An amount between 0 and 1 representing how far to interpolate from t1 to t2.
-     */
-    public void interpolateTransforms(Transform t1, Transform t2, float delta) {
-        t1.rot.nlerp(t2.rot, delta);
-        this.rot.set(t1.rot);
-        this.translation.interpolateLocal(t1.translation,t2.translation,delta);
-        this.scale.interpolateLocal(t1.scale,t2.scale,delta);
-    }
-
     /**
      * Changes the values of this matrix according to its parent.  Very similar to the concept of Node/Spatial transforms.
      * @param parent The parent matrix.
@@ -207,30 +130,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return this;
     }
 
-    /**
-     * Sets this matrix's translation to the given x,y,z values.
-     * @param x This matrix's new x translation.
-     * @param y This matrix's new y translation.
-     * @param z This matrix's new z translation.
-     * @return this
-     */
-    public Transform setTranslation(float x,float y, float z) {
-        translation.set(x,y,z);
-        return this;
-    }
-
-    /**
-     * Sets this matrix's scale to the given x,y,z values.
-     * @param x This matrix's new x scale.
-     * @param y This matrix's new y scale.
-     * @param z This matrix's new z scale.
-     * @return this
-     */
-    public Transform setScale(float x, float y, float z) {
-        scale.set(x,y,z);
-        return this;
-    }
-
     public Vector3f transformVector(final Vector3f in, Vector3f store){
         if (store == null)
             store = new Vector3f();
@@ -238,22 +137,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
         // multiply with scale first, then rotate, finally translate (cf.
         // Eberly)
         return rot.mult(store.set(in).multLocal(scale), store).addLocal(translation);
-    }
-
-    public Vector3f transformInverseVector(final Vector3f in, Vector3f store){
-        if (store == null)
-            store = new Vector3f();
-
-        // The author of this code should look above and take the inverse of that
-        // But for some reason, they didn't ..
-//        in.subtract(translation, store).divideLocal(scale);
-//        rot.inverse().mult(store, store);
-
-        in.subtract(translation, store);
-        rot.inverse().mult(store, store);
-        store.divideLocal(scale);
-
-        return store;
     }
 
     public Matrix4f toTransformMatrix() {
@@ -284,26 +167,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return t;
     }
     
-    /**
-     * Loads the identity.  Equal to translation=0,0,0 scale=1,1,1 rot=0,0,0,1.
-     */
-    public void loadIdentity() {
-        translation.set(0, 0, 0);
-        scale.set(1, 1, 1);
-        rot.set(0, 0, 0, 1);
-    }
-
-    /**
-     * Test for exact identity.
-     *
-     * @return true if exactly equal to {@link #IDENTITY}, otherwise false
-     */
-    public boolean isIdentity() {
-        return translation.x == 0f && translation.y == 0f && translation.z == 0f
-                && scale.x == 1f && scale.y == 1f && scale.z == 1f
-                && rot.w == 1f && rot.x == 0f && rot.y == 0f && rot.z == 0f;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -332,18 +195,6 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return getClass().getSimpleName() + "[ " + translation.x + ", " + translation.y + ", " + translation.z + "]\n"
                                           + "[ " + rot.x + ", " + rot.y + ", " + rot.z + ", " + rot.w + "]\n"
                                           + "[ " + scale.x + " , " + scale.y + ", " + scale.z + "]";
-    }
-
-    /**
-     * Sets this matrix to be equal to the given matrix.
-     * @param matrixQuat The matrix to be equal to.
-     * @return this
-     */
-    public Transform set(Transform matrixQuat) {
-        this.translation.set(matrixQuat.translation);
-        this.rot.set(matrixQuat.rot);
-        this.scale.set(matrixQuat.scale);
-        return this;
     }
 
     @Override

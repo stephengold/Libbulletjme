@@ -59,9 +59,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     public static final Quaternion DIRECTION_Z = new Quaternion();
     public static final Quaternion ZERO = new Quaternion(0, 0, 0, 0);
     
-    static {
-        DIRECTION_Z.fromAxes(Vector3f.UNIT_X, Vector3f.UNIT_Y, Vector3f.UNIT_Z);
-    }
     protected float x, y, z, w;
 
     /**
@@ -152,47 +149,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Constructor instantiates a new <code>Quaternion</code> object from a
-     * collection of rotation angles.
-     *
-     * @param angles
-     *            the angles of rotation (x, y, z) that will define the
-     *            <code>Quaternion</code>.
-     */
-    public Quaternion(float[] angles) {
-        fromAngles(angles);
-    }
-
-    /**
-     * Constructor instantiates a new <code>Quaternion</code> object from an
-     * interpolation between two other quaternions.
-     *
-     * @param q1
-     *            the first quaternion.
-     * @param q2
-     *            the second quaternion.
-     * @param interp
-     *            the amount to interpolate between the two quaternions.
-     */
-    public Quaternion(Quaternion q1, Quaternion q2, float interp) {
-        slerp(q1, q2, interp);
-    }
-
-    /**
-     * Constructor instantiates a new <code>Quaternion</code> object from an
-     * existing quaternion, creating a copy.
-     *
-     * @param q
-     *            the quaternion to copy.
-     */
-    public Quaternion(Quaternion q) {
-        this.x = q.x;
-        this.y = q.y;
-        this.z = q.z;
-        this.w = q.w;
-    }
-
-    /**
      * Sets this Quaternion to {0, 0, 0, 1}.  Same as calling set(0,0,0,1).
      */
     public void loadIdentity() {
@@ -209,66 +165,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         } else {
             return false;
         }
-    }
-
-    /**
-     * <code>fromAngles</code> builds a quaternion from the Euler rotation
-     * angles (x,y,z) aka (pitch, yaw, roll).
-     *
-     * @param angles
-     *            the Euler angles of rotation (in radians).
-     */
-    public Quaternion fromAngles(float[] angles) {
-        if (angles.length != 3) {
-            throw new IllegalArgumentException(
-                    "Angles array must have three elements");
-        }
-
-        return fromAngles(angles[0], angles[1], angles[2]);
-    }
-
-    /**
-     * <code>fromAngles</code> builds a Quaternion from the Euler rotation
-     * angles (x,y,z) aka (pitch, yaw, roll)). Note that we are applying in order: (y, z, x) aka (yaw, roll, pitch) but
-     * we've ordered them in x, y, and z for convenience.
-     * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
-     * 
-     * @param xAngle
-     *            the Euler pitch of rotation (in radians). (aka Attitude, often rot
-     *            around x)
-     * @param yAngle
-     *            the Euler yaw of rotation (in radians). (aka Heading, often
-     *            rot around y)
-     * @param zAngle
-     *            the Euler roll of rotation (in radians). (aka Bank, often
-     *            rot around z)
-     */
-    public Quaternion fromAngles(float xAngle, float yAngle, float zAngle) {
-        float angle;
-        float sinY, sinZ, sinX, cosY, cosZ, cosX;
-        angle = zAngle * 0.5f;
-        sinZ = FastMath.sin(angle);
-        cosZ = FastMath.cos(angle);
-        angle = yAngle * 0.5f;
-        sinY = FastMath.sin(angle);
-        cosY = FastMath.cos(angle);
-        angle = xAngle * 0.5f;
-        sinX = FastMath.sin(angle);
-        cosX = FastMath.cos(angle);
-
-        // variables used to reduce multiplication calls.
-        float cosYXcosZ = cosY * cosZ;
-        float sinYXsinZ = sinY * sinZ;
-        float cosYXsinZ = cosY * sinZ;
-        float sinYXcosZ = sinY * cosZ;
-
-        w = (cosYXcosZ * cosX - sinYXsinZ * sinX);
-        x = (cosYXcosZ * sinX + sinYXsinZ * cosX);
-        y = (sinYXcosZ * cosX + cosYXsinZ * sinX);
-        z = (cosYXsinZ * cosX - sinYXcosZ * sinX);
-
-        normalizeLocal();
-        return this;
     }
 
     /**
@@ -547,92 +443,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>getRotationColumn</code> returns one of three columns specified
-     * by the parameter. This column is returned as a <code>Vector3f</code>
-     * object.
-     *
-     * @param i
-     *            the column to retrieve. Must be between 0 and 2.
-     * @return the column specified by the index.
-     */
-    public Vector3f getRotationColumn(int i) {
-        return getRotationColumn(i, null);
-    }
-
-    /**
-     * <code>getRotationColumn</code> returns one of three columns specified
-     * by the parameter. This column is returned as a <code>Vector3f</code>
-     * object. The value is retrieved as if this quaternion was first normalized.
-     *
-     * @param i
-     *            the column to retrieve. Must be between 0 and 2.
-     * @param store
-     *            the vector object to store the result in. if null, a new one
-     *            is created.
-     * @return the column specified by the index.
-     */
-    public Vector3f getRotationColumn(int i, Vector3f store) {
-        if (store == null) {
-            store = new Vector3f();
-        }
-
-        float norm = norm();
-        if (norm != 1.0f) {
-            norm = FastMath.invSqrt(norm);
-        }
-
-        float xx = x * x * norm;
-        float xy = x * y * norm;
-        float xz = x * z * norm;
-        float xw = x * w * norm;
-        float yy = y * y * norm;
-        float yz = y * z * norm;
-        float yw = y * w * norm;
-        float zz = z * z * norm;
-        float zw = z * w * norm;
-
-        switch (i) {
-            case 0:
-                store.x = 1 - 2 * (yy + zz);
-                store.y = 2 * (xy + zw);
-                store.z = 2 * (xz - yw);
-                break;
-            case 1:
-                store.x = 2 * (xy - zw);
-                store.y = 1 - 2 * (xx + zz);
-                store.z = 2 * (yz + xw);
-                break;
-            case 2:
-                store.x = 2 * (xz + yw);
-                store.y = 2 * (yz - xw);
-                store.z = 1 - 2 * (xx + yy);
-                break;
-            default:
-                logger.warning("Invalid column index.");
-                throw new IllegalArgumentException("Invalid column index. " + i);
-        }
-
-        return store;
-    }
-
-    /**
-     * <code>fromAngleAxis</code> sets this quaternion to the values specified
-     * by an angle and an axis of rotation. This method creates an object, so
-     * use fromAngleNormalAxis if your axis is already normalized.
-     *
-     * @param angle
-     *            the angle to rotate (in radians).
-     * @param axis
-     *            the axis of rotation.
-     * @return this quaternion
-     */
-    public Quaternion fromAngleAxis(float angle, Vector3f axis) {
-        Vector3f normAxis = axis.normalize();
-        fromAngleNormalAxis(angle, normAxis);
-        return this;
-    }
-
-    /**
      * <code>fromAngleNormalAxis</code> sets this quaternion to the values
      * specified by an angle and a normalized axis of rotation.
      *
@@ -686,65 +496,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         }
 
         return angle;
-    }
-
-    /**
-     * <code>slerp</code> sets this quaternion's value as an interpolation
-     * between two other quaternions.
-     *
-     * @param q1
-     *            the first quaternion.
-     * @param q2
-     *            the second quaternion.
-     * @param t
-     *            the amount to interpolate between the two quaternions.
-     */
-    public Quaternion slerp(Quaternion q1, Quaternion q2, float t) {
-        // Create a local quaternion to store the interpolated quaternion
-        if (q1.x == q2.x && q1.y == q2.y && q1.z == q2.z && q1.w == q2.w) {
-            this.set(q1);
-            return this;
-        }
-
-        float result = (q1.x * q2.x) + (q1.y * q2.y) + (q1.z * q2.z)
-                + (q1.w * q2.w);
-
-        if (result < 0.0f) {
-            // Negate the second quaternion and the result of the dot product
-            q2.x = -q2.x;
-            q2.y = -q2.y;
-            q2.z = -q2.z;
-            q2.w = -q2.w;
-            result = -result;
-        }
-
-        // Set the first and second scale for the interpolation
-        float scale0 = 1 - t;
-        float scale1 = t;
-
-        // Check if the angle between the 2 quaternions was big enough to
-        // warrant such calculations
-        if ((1 - result) > 0.1f) {// Get the angle between the 2 quaternions,
-            // and then store the sin() of that angle
-            float theta = FastMath.acos(result);
-            float invSinTheta = 1f / FastMath.sin(theta);
-
-            // Calculate the scale for q1 and q2, according to the angle and
-            // its sine
-            scale0 = FastMath.sin((1 - t) * theta) * invSinTheta;
-            scale1 = FastMath.sin((t * theta)) * invSinTheta;
-        }
-
-        // Calculate the x, y, z and w values for the quaternion by using a
-        // special
-        // form of linear interpolation for quaternions.
-        this.x = (scale0 * q1.x) + (scale1 * q2.x);
-        this.y = (scale0 * q1.y) + (scale1 * q2.y);
-        this.z = (scale0 * q1.z) + (scale1 * q2.z);
-        this.w = (scale0 * q1.w) + (scale1 * q2.w);
-
-        // Return the interpolated quaternion
-        return this;
     }
 
     /**
@@ -802,28 +553,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Sets the values of this quaternion to the nlerp from itself to q2 by blend.
-     * @param q2
-     * @param blend
-     */
-    public void nlerp(Quaternion q2, float blend) {
-        float dot = dot(q2);
-        float blendI = 1.0f - blend;
-        if (dot < 0.0f) {
-            x = blendI * x - blend * q2.x;
-            y = blendI * y - blend * q2.y;
-            z = blendI * z - blend * q2.z;
-            w = blendI * w - blend * q2.w;
-        } else {
-            x = blendI * x + blend * q2.x;
-            y = blendI * y + blend * q2.y;
-            z = blendI * z + blend * q2.z;
-            w = blendI * w + blend * q2.w;
-        }
-        normalizeLocal();
-    }
-
-    /**
      * <code>add</code> adds the values of this quaternion to those of the
      * parameter quaternion. The result is returned as a new quaternion.
      *
@@ -833,35 +562,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      */
     public Quaternion add(Quaternion q) {
         return new Quaternion(x + q.x, y + q.y, z + q.z, w + q.w);
-    }
-
-    /**
-     * <code>add</code> adds the values of this quaternion to those of the
-     * parameter quaternion. The result is stored in this Quaternion.
-     *
-     * @param q
-     *            the quaternion to add to this.
-     * @return This Quaternion after addition.
-     */
-    public Quaternion addLocal(Quaternion q) {
-        this.x += q.x;
-        this.y += q.y;
-        this.z += q.z;
-        this.w += q.w;
-        return this;
-    }
-
-    /**
-     * <code>subtract</code> subtracts the values of the parameter quaternion
-     * from those of this quaternion. The result is returned as a new
-     * quaternion.
-     *
-     * @param q
-     *            the quaternion to subtract from this.
-     * @return the new quaternion.
-     */
-    public Quaternion subtract(Quaternion q) {
-        return new Quaternion(x - q.x, y - q.y, z - q.z, w - q.w);
     }
 
     /**
@@ -945,26 +645,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * must insure that the three axes being provided indeed represents a proper
      * right handed coordinate system.
      *
-     * @param axis
-     *            the array containing the three vectors representing the
-     *            coordinate system.
-     */
-    public Quaternion fromAxes(Vector3f[] axis) {
-        if (axis.length != 3) {
-            throw new IllegalArgumentException(
-                    "Axis array must have three elements");
-        }
-        return fromAxes(axis[0], axis[1], axis[2]);
-    }
-
-    /**
-     *
-     * <code>fromAxes</code> creates a <code>Quaternion</code> that
-     * represents the coordinate system defined by three axes. These axes are
-     * assumed to be orthogonal and no error checking is applied. Thus, the user
-     * must insure that the three axes being provided indeed represents a proper
-     * right handed coordinate system.
-     *
      * @param xAxis vector representing the x-axis of the coordinate system.
      * @param yAxis vector representing the y-axis of the coordinate system.
      * @param zAxis vector representing the z-axis of the coordinate system.
@@ -988,18 +668,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         axis[0] = tempMat.getColumn(0, axis[0]);
         axis[1] = tempMat.getColumn(1, axis[1]);
         axis[2] = tempMat.getColumn(2, axis[2]);
-    }
-
-    /**
-     * <code>mult</code> multiplies this quaternion by a parameter vector. The
-     * result is returned as a new vector.
-     *
-     * @param v
-     *            the vector to multiply this quaternion by.
-     * @return the new vector.
-     */
-    public Vector3f mult(Vector3f v) {
-        return mult(v, null);
     }
 
     /**
@@ -1153,20 +821,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         return w * w + x * x + y * y + z * z;
     }
 
-//    /**
-//     * <code>normalize</code> normalizes the current <code>Quaternion</code>
-//     * @deprecated The naming of this method doesn't follow convention.
-//     * Please use {@link Quaternion#normalizeLocal() } instead.
-//     */
-//    @Deprecated
-//    public void normalize() {
-//        float n = FastMath.invSqrt(norm());
-//        x *= n;
-//        y *= n;
-//        z *= n;
-//        w *= n;
-//    }
-
     /**
      * <code>normalize</code> normalizes the current <code>Quaternion</code>.
      * The result is stored internally.
@@ -1279,29 +933,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
     
     /**
-     * Returns true if this quaternion is similar to the specified quaternion
-     * within some value of epsilon.
-     */
-    public boolean isSimilar(Quaternion other, float epsilon) {
-        if (other == null) {
-            return false;
-        }
-        if (Float.compare(Math.abs(other.x - x), epsilon) > 0) {
-            return false;
-        }
-        if (Float.compare(Math.abs(other.y - y), epsilon) > 0) {
-            return false;
-        }
-        if (Float.compare(Math.abs(other.z - z), epsilon) > 0) {
-            return false;
-        }
-        if (Float.compare(Math.abs(other.w - w), epsilon) > 0) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * 
      * <code>hashCode</code> returns the hash code value as an integer and is
      * supported for the benefit of hashing based collection classes such as
@@ -1355,44 +986,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         out.writeFloat(y);
         out.writeFloat(z);
         out.writeFloat(w);
-    }
-
-    /**
-     * @return A new quaternion that describes a rotation that would point you
-     *         in the exact opposite direction of this Quaternion.
-     */
-    public Quaternion opposite() {
-        return opposite(null);
-    }
-
-    /**
-     * FIXME: This seems to have singularity type issues with angle == 0, possibly others such as PI.
-     * @param store
-     *            A Quaternion to store our result in. If null, a new one is
-     *            created.
-     * @return The store quaternion (or a new Quaternion, if store is null) that
-     *         describes a rotation that would point you in the exact opposite
-     *         direction of this Quaternion.
-     */
-    public Quaternion opposite(Quaternion store) {
-        if (store == null) {
-            store = new Quaternion();
-        }
-
-        Vector3f axis = new Vector3f();
-        float angle = toAngleAxis(axis);
-
-        store.fromAngleAxis(FastMath.PI + angle, axis);
-        return store;
-    }
-
-    /**
-     * @return This Quaternion, altered to describe a rotation that would point
-     *         you in the exact opposite direction of where it is pointing
-     *         currently.
-     */
-    public Quaternion oppositeLocal() {
-        return opposite(this);
     }
 
     @Override
