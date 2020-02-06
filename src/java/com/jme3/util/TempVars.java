@@ -32,8 +32,6 @@
 package com.jme3.util;
 
 import com.jme3.math.*;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 /**
  * Temporary variables assigned to each thread. Engine classes may access
@@ -135,48 +133,12 @@ public class TempVars {
         }
     }
     /**
-     * For interfacing with OpenGL in Renderer.
-     */
-    public final IntBuffer intBuffer1 = BufferUtils.createIntBuffer(1);
-    public final IntBuffer intBuffer16 = BufferUtils.createIntBuffer(16);
-    public final FloatBuffer floatBuffer16 = BufferUtils.createFloatBuffer(16);
-    /**
-     * Skinning buffers
-     */
-    public final float[] skinPositions = new float[512 * 3];
-    public final float[] skinNormals = new float[512 * 3];
-     //tangent buffer as 4 components by elements
-    public final float[] skinTangents = new float[512 * 4];
-    /**
      * General vectors.
      */
     public final Vector3f vect1 = new Vector3f();
     public final Vector3f vect2 = new Vector3f();
-    public final Vector3f vect3 = new Vector3f();
-    public final Vector3f vect4 = new Vector3f();
-    public final Vector3f vect5 = new Vector3f();
-    public final Vector3f vect6 = new Vector3f();
-    public final Vector3f vect7 = new Vector3f();
-    //seems the maximum number of vector used is 7 in com.jme3.bounding.java
-    public final Vector3f vect8 = new Vector3f();
-    public final Vector3f vect9 = new Vector3f();
-    public final Vector3f vect10 = new Vector3f();
-    public final Vector3f[] tri = {new Vector3f(),
-        new Vector3f(),
-        new Vector3f()};
-    /**
-     * General matrices.
-     */
-    public final Matrix3f tempMat3 = new Matrix3f();
-    public final Matrix4f tempMat4 = new Matrix4f();
-    public final Matrix4f tempMat42 = new Matrix4f();    
     /**
      * General quaternions.
      */
     public final Quaternion quat1 = new Quaternion();
-    public final Quaternion quat2 = new Quaternion();
-    /**
-     * Plane
-     */
-    public final Plane plane = new Plane();
 }

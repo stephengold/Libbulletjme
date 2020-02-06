@@ -1358,28 +1358,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>lookAt</code> is a convienence method for auto-setting the
-     * quaternion based on a direction and an up vector. It computes
-     * the rotation to transform the z-axis to point into 'direction'
-     * and the y-axis to 'up'.
-     *
-     * @param direction
-     *            where to look at in terms of local coordinates
-     * @param up
-     *            a vector indicating the local up direction.
-     *            (typically {0, 1, 0} in jME.)
-     */
-    public Quaternion lookAt(Vector3f direction, Vector3f up) {
-        TempVars vars = TempVars.get();
-        vars.vect3.set(direction).normalizeLocal();
-        vars.vect1.set(up).crossLocal(direction).normalizeLocal();
-        vars.vect2.set(direction).crossLocal(vars.vect1).normalizeLocal();
-        fromAxes(vars.vect1, vars.vect2, vars.vect3);
-        vars.release();
-        return this;
-    }
-
-    /**
      * @return A new quaternion that describes a rotation that would point you
      *         in the exact opposite direction of this Quaternion.
      */
