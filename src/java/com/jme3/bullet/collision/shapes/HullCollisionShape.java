@@ -32,18 +32,15 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
-import jme3utilities.math.RectangularSolid;
 import vhacd.VHACDHull;
 
 /**
@@ -159,44 +156,6 @@ public class HullCollisionShape extends CollisionShape {
 
         createShape();
     }
-
-    /**
-     * Instantiate an 8-vertex shape to match the specified rectangular solid.
-     *
-     * @param rectangularSolid the solid on which to base the shape (not null)
-     */
-    public HullCollisionShape(RectangularSolid rectangularSolid) {
-        Vector3f maxima = rectangularSolid.maxima(null);
-        Vector3f minima = rectangularSolid.minima(null);
-        /*
-         * Enumerate the local coordinates of the 8 corners of the box.
-         */
-        Collection<Vector3f> cornerLocations = new ArrayList<>(8);
-        cornerLocations.add(new Vector3f(maxima.x, maxima.y, maxima.z));
-        cornerLocations.add(new Vector3f(maxima.x, maxima.y, minima.z));
-        cornerLocations.add(new Vector3f(maxima.x, minima.y, maxima.z));
-        cornerLocations.add(new Vector3f(maxima.x, minima.y, minima.z));
-        cornerLocations.add(new Vector3f(minima.x, maxima.y, maxima.z));
-        cornerLocations.add(new Vector3f(minima.x, maxima.y, minima.z));
-        cornerLocations.add(new Vector3f(minima.x, minima.y, maxima.z));
-        cornerLocations.add(new Vector3f(minima.x, minima.y, minima.z));
-        /*
-         * Transform corner locations to shape coordinates.
-         */
-        int numFloats = numAxes * cornerLocations.size();
-        points = new float[numFloats];
-        int floatIndex = 0;
-        Vector3f tempVector = new Vector3f();
-        for (Vector3f location : cornerLocations) {
-            rectangularSolid.localToWorld(location, tempVector);
-            points[floatIndex + PhysicsSpace.AXIS_X] = tempVector.x;
-            points[floatIndex + PhysicsSpace.AXIS_Y] = tempVector.y;
-            points[floatIndex + PhysicsSpace.AXIS_Z] = tempVector.z;
-            floatIndex += numAxes;
-        }
-
-        createShape();
-    }
     // *************************************************************************
     // new methods exposed
 
@@ -306,18 +265,6 @@ public class HullCollisionShape extends CollisionShape {
 
         assert MyVector3f.isAllNonNegative(result) : result;
         return result;
-    }
-
-    /**
-     * Estimate the scaled volume of the hull, based on its debug mesh.
-     *
-     * @return the volume (in physics-space units cubed, &ge;0)
-     */
-    public float scaledVolume() {
-        int meshResolution = DebugShapeFactory.lowResolution;
-        float volume = DebugShapeFactory.volumeConvex(this, meshResolution);
-        assert volume >= 0f : volume;
-        return volume;
     }
     // *************************************************************************
     // CollisionShape methods

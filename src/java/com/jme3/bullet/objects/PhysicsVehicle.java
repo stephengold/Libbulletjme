@@ -168,7 +168,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
             float wheelRadius, boolean isFrontWheel) {
         Validate.positive(wheelRadius, "wheel radius");
 
-        VehicleWheel wheel = new VehicleWheel(spat, connectionPoint, direction,
+        VehicleWheel wheel = new VehicleWheel(connectionPoint, direction,
                 axle, suspensionRestLength, wheelRadius, isFrontWheel);
 
         wheel.setFrictionSlip(tuning.getFrictionSlip());
@@ -190,17 +190,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         }
 
         return wheel;
-    }
-
-    /**
-     * used internally
-     */
-    public void applyWheelTransforms() {
-        if (wheels != null) {
-            for (VehicleWheel wheel : wheels) {
-                wheel.applyWheelTransform();
-            }
-        }
     }
 
     /**

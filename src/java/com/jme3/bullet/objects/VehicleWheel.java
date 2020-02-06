@@ -141,7 +141,6 @@ public class VehicleWheel {
             Vector3f axle, float restLength, float radius, boolean frontWheel) {
         Validate.positive(radius, "radius");
 
-        this.wheelSpatial = spatial;
         this.location.set(location);
         this.suspensionDirection.set(direction);
         this.axisDirection.set(axle);

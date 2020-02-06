@@ -38,7 +38,6 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
-import jme3utilities.math.MyVolume;
 
 /**
  * A cylindrical CollisionShape based on Bullet's btCylinderShapeX,
@@ -191,18 +190,6 @@ public class CylinderCollisionShape extends CollisionShape {
      */
     public float getHeight() {
         float result = 2f * halfExtents.get(axis);
-
-        assert result >= 0f : result;
-        return result;
-    }
-
-    /**
-     * Calculate the unscaled volume of the cylinder.
-     *
-     * @return the volume (&ge;0)
-     */
-    public float unscaledVolume() {
-        float result = MyVolume.cylinderVolume(halfExtents);
 
         assert result >= 0f : result;
         return result;

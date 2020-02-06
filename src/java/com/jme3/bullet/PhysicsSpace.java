@@ -31,10 +31,7 @@
  */
 package com.jme3.bullet;
 
-import com.jme3.app.AppTask;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
-import com.jme3.bullet.collision.PhysicsCollisionGroupListener;
-import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.PhysicsSweepTestResult;
@@ -49,7 +46,6 @@ import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsVehicle;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.SafeArrayList;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,12 +55,8 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.TreeSet;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -169,25 +161,10 @@ public class PhysicsSpace {
      */
     private int solverNumIterations = 10;
     /**
-     * list of registered collision listeners
-     */
-    final private List<PhysicsCollisionListener> collisionListeners
-            = new SafeArrayList<>(PhysicsCollisionListener.class);
-    /**
-     * list of registered tick listeners
-     */
-    final private List<PhysicsTickListener> tickListeners
-            = new SafeArrayList<>(PhysicsTickListener.class);
-    /**
      * Bullet identifier of the space. The constructor sets this to a non-zero
      * value.
      */
     private long nativeId = 0L;
-    /**
-     * map from collision groups to registered group listeners
-     */
-    final private Map<Integer, PhysicsCollisionGroupListener> collisionGroupListeners
-            = new ConcurrentHashMap<>(20);
     /**
      * map character IDs to added objects
      */
@@ -214,25 +191,10 @@ public class PhysicsSpace {
     final private Map<Long, PhysicsVehicle> physicsVehicles
             = new ConcurrentHashMap<>(64);
     /**
-     * first-in/first-out (FIFO) queue of physics tasks
-     */
-    final protected Queue<AppTask<?>> pQueue
-            = new ConcurrentLinkedQueue<>();
-    /**
      * physics-space reference for each thread
      */
     final protected static ThreadLocal<PhysicsSpace> physicsSpaceTL
             = new ThreadLocal<PhysicsSpace>();
-    /**
-     * first-in/first-out (FIFO) queue of physics tasks for each thread
-     */
-    final protected static ThreadLocal<Queue<AppTask<?>>> pQueueTL
-            = new ThreadLocal<Queue<AppTask<?>>>() {
-        @Override
-        protected ConcurrentLinkedQueue<AppTask<?>> initialValue() {
-            return new ConcurrentLinkedQueue<>();
-        }
-    };
     /**
      * copy of gravity-acceleration vector for newly-added bodies (default is
      * 9.81 in the -Y direction, corresponding to Earth-normal in MKS units)
@@ -297,40 +259,6 @@ public class PhysicsSpace {
     }
 
     /**
-     * Register the specified collision-group listener with the specified
-     * collision group of this space.
-     * <p>
-     * Such a listener can disable collisions when they occur. There can be only
-     * one listener per collision group per space.
-     *
-     * @param listener the listener to register (not null, alias created)
-     * @param collisionGroup which group it should listen for (bit mask with
-     * exactly one bit set)
-     */
-    public void addCollisionGroupListener(
-            PhysicsCollisionGroupListener listener, int collisionGroup) {
-        Validate.nonNull(listener, "listener");
-        assert collisionGroupListeners.get(collisionGroup) == null;
-        assert Integer.bitCount(collisionGroup) == 1 : collisionGroup;
-
-        collisionGroupListeners.put(collisionGroup, listener);
-    }
-
-    /**
-     * Register the specified collision listener with this space.
-     * <p>
-     * Collision listeners are notified when collisions occur in the space.
-     *
-     * @param listener the listener to register (not null, alias created)
-     */
-    public void addCollisionListener(PhysicsCollisionListener listener) {
-        Validate.nonNull(listener, "listener");
-        assert !collisionListeners.contains(listener);
-
-        collisionListeners.add(listener);
-    }
-
-    /**
      * Add the specified collision object to this space.
      *
      * @param obj the PhysicsCollisionObject to add (not null, modified)
@@ -349,24 +277,6 @@ public class PhysicsSpace {
             String msg = "Unknown type of collision object: " + typeName;
             throw new IllegalArgumentException(msg);
         }
-    }
-
-    /**
-     * Register the specified tick listener with this space.
-     * <p>
-     * Tick listeners are notified before and after each physics step. A physics
-     * step is not necessarily the same as a frame; it is more influenced by the
-     * accuracy of the PhysicsSpace.
-     *
-     * @see #setAccuracy(float)
-     *
-     * @param listener the listener to register (not null, alias created)
-     */
-    public void addTickListener(PhysicsTickListener listener) {
-        Validate.nonNull(listener, "listener");
-        assert !tickListeners.contains(listener);
-
-        tickListeners.add(listener);
     }
 
     /**
@@ -407,26 +317,6 @@ public class PhysicsSpace {
     }
 
     /**
-     * Count how many collision-group listeners are registered with this space.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countCollisionGroupListeners() {
-        int count = collisionGroupListeners.size();
-        return count;
-    }
-
-    /**
-     * Count how many collision listeners are registered with this space.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countCollisionListeners() {
-        int count = collisionListeners.size();
-        return count;
-    }
-
-    /**
      * Count the joints in this space.
      *
      * @return count (&ge;0)
@@ -445,53 +335,6 @@ public class PhysicsSpace {
     public int countRigidBodies() {
         int count = physicsBodies.size();
         return count;
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     */
-    public void destroy() {
-    }
-
-    /**
-     * Distribute each collision event to all listeners.
-     */
-    public void distributeEvents() {
-        while (!collisionEvents.isEmpty()) {
-            PhysicsCollisionEvent event = collisionEvents.pop();
-            for (PhysicsCollisionListener listener : collisionListeners) {
-                listener.collision(event);
-            }
-        }
-    }
-
-    /**
-     * Invoke the specified callable during the next physics tick. This is
-     * useful for applying forces.
-     *
-     * @param <V> the return type of the callable
-     * @param callable which callable to invoke
-     * @return Future object
-     */
-    public <V> Future<V> enqueue(Callable<V> callable) {
-        AppTask<V> task = new AppTask<>(callable);
-        pQueue.add(task);
-
-        return task;
-    }
-
-    /**
-     * Enqueue a callable on the currently executing thread.
-     *
-     * @param <V> the task's result type
-     * @param callable the task to be executed
-     * @return a new task (not null)
-     */
-    public static <V> Future<V> enqueueOnThisThread(Callable<V> callable) {
-        AppTask<V> task = new AppTask<>(callable);
-        pQueueTL.get().add(task);
-
-        return task;
     }
 
     /**
@@ -794,36 +637,6 @@ public class PhysicsSpace {
     }
 
     /**
-     * De-register the specified collision-group listener.
-     *
-     * @see
-     * #addCollisionGroupListener(com.jme3.bullet.collision.PhysicsCollisionGroupListener,
-     * int)
-     * @param collisionGroup the group of the listener to de-register (bit mask
-     * with exactly one bit set)
-     */
-    public void removeCollisionGroupListener(int collisionGroup) {
-        assert collisionGroupListeners.get(collisionGroup) != null;
-        assert Integer.bitCount(collisionGroup) == 1 : collisionGroup;
-
-        collisionGroupListeners.remove(collisionGroup);
-    }
-
-    /**
-     * De-register the specified collision listener.
-     *
-     * @see
-     * #addCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
-     * @param listener the listener to de-register (not null)
-     */
-    public void removeCollisionListener(PhysicsCollisionListener listener) {
-        Validate.nonNull(listener, "listener");
-
-        boolean success = collisionListeners.remove(listener);
-        assert success;
-    }
-
-    /**
      * Remove the specified collision object from this space.
      *
      * @param obj the PhysicsControl or Spatial with PhysicsControl to remove
@@ -840,19 +653,6 @@ public class PhysicsSpace {
             String msg = "Unknown type of collision object: " + typeName;
             throw new IllegalArgumentException(msg);
         }
-    }
-
-    /**
-     * De-register the specified tick listener.
-     *
-     * @see #addTickListener(com.jme3.bullet.PhysicsTickListener)
-     * @param listener the listener to de-register (not null, unaffected)
-     */
-    public void removeTickListener(PhysicsTickListener listener) {
-        Validate.nonNull(listener, "listener");
-
-        boolean success = tickListeners.remove(listener);
-        assert success;
     }
 
     /**
@@ -1068,7 +868,6 @@ public class PhysicsSpace {
         assert nativeId == 0L : nativeId;
 
         nativeId = spaceId;
-        pQueueTL.set(pQueue);
         physicsSpaceTL.set(this);
     }
     // *************************************************************************
@@ -1130,11 +929,6 @@ public class PhysicsSpace {
      */
     private void addCollisionEvent_native(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
-        if (!collisionListeners.isEmpty()) {
-            PhysicsCollisionEvent event
-                    = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
-            collisionEvents.add(event);
-        }
     }
 
     /**
@@ -1260,20 +1054,7 @@ public class PhysicsSpace {
      */
     private boolean notifyCollisionGroupListeners_native(
             PhysicsCollisionObject pcoA, PhysicsCollisionObject pcoB) {
-        PhysicsCollisionGroupListener listenerA
-                = collisionGroupListeners.get(pcoA.getCollisionGroup());
-        PhysicsCollisionGroupListener listenerB
-                = collisionGroupListeners.get(pcoB.getCollisionGroup());
         boolean result = true;
-
-        if (listenerA != null) {
-            result = listenerA.collide(pcoA, pcoB);
-        }
-        if (listenerB != null
-                && pcoA.getCollisionGroup() != pcoB.getCollisionGroup()) {
-            result = listenerB.collide(pcoA, pcoB) && result;
-        }
-
         return result;
     }
 
@@ -1285,9 +1066,6 @@ public class PhysicsSpace {
      * @param timeStep the time per physics step (in seconds, &ge;0)
      */
     private void postTick_native(float timeStep) {
-        for (PhysicsTickListener listener : tickListeners) {
-            listener.physicsTick(this, timeStep);
-        }
     }
 
     /**
@@ -1298,21 +1076,6 @@ public class PhysicsSpace {
      * @param timeStep the time per physics step (in seconds, &ge;0)
      */
     private void preTick_native(float timeStep) {
-        AppTask task;
-        while ((task = pQueue.poll()) != null) {
-            if (task.isCancelled()) {
-                continue;
-            }
-            try {
-                task.invoke();
-            } catch (Exception exception) {
-                logger.log(Level.SEVERE, null, exception);
-            }
-        }
-
-        for (PhysicsTickListener listener : tickListeners) {
-            listener.prePhysicsTick(this, timeStep);
-        }
     }
 
     /**

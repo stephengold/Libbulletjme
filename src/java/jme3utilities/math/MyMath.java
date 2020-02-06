@@ -27,10 +27,6 @@
 package jme3utilities.math;
 
 import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Transform;
-import com.jme3.math.Triangle;
-import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -68,27 +64,6 @@ public class MyMath {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Calculate the area of the specified triangle.
-     *
-     * @param triangle (not null, unaffected)
-     * @return the area (&ge;0)
-     */
-    public static double area(Triangle triangle) {
-        Vector3f a = triangle.get1();
-        Vector3f b = triangle.get2();
-        Vector3f c = triangle.get3();
-
-        Vector3f ab = b.subtract(a); // TODO garbage
-        Vector3f ac = c.subtract(a);
-
-        Vector3f cross = ab.cross(ac); // TODO garbage
-        double areaSquared = MyVector3f.lengthSquared(cross) / 4.0;
-        double area = Math.sqrt(areaSquared);
-
-        return area;
-    }
 
     /**
      * Compute the circle function sqrt(1 - x^2) for a double-precision value.
@@ -370,26 +345,6 @@ public class MyMath {
     }
 
     /**
-     * Test the specified transform for exact identity.
-     *
-     * @param transform which transform to test (not null, unaffected)
-     * @return true if exact identity, otherwise false
-     */
-    public static boolean isIdentity(Transform transform) {
-        boolean result = false;
-        Vector3f translation = transform.getTranslation();
-        if (MyVector3f.isZero(translation)) {
-            Quaternion rotation = transform.getRotation();
-            if (MyQuaternion.isRotationIdentity(rotation)) {
-                Vector3f scale = transform.getScale();
-                result = MyVector3f.isScaleIdentity(scale);
-            }
-        }
-
-        return result;
-    }
-
-    /**
      * Test whether an integer value is odd.
      *
      * @param iValue input value to be tested
@@ -622,42 +577,6 @@ public class MyMath {
 
         assert result >= 0.0 : result;
         assert result < modulus : result;
-        return result;
-    }
-
-    /**
-     * Interpolate between 2 transforms using spherical linear (Slerp)
-     * interpolation. This method is slower (but more accurate) than
-     * {@link com.jme3.math.Transform#interpolateTransforms(com.jme3.math.Transform, com.jme3.math.Transform, float)}
-     * and doesn't trash t1. The caller is responsible for flipping quaternion
-     * signs when it's appropriate to do so.
-     *
-     * @param t descaled parameter value (&ge;0, &le;1)
-     * @param t0 function value at t=0 (not null, unaffected unless it's also
-     * storeResult)
-     * @param t1 function value at t=1 (not null, unaffected unless it's also
-     * storeResult)
-     * @param storeResult storage for the result (modified if not null, may be
-     * t0 or t1)
-     * @return an interpolated transform (either storeResult or a new instance)
-     */
-    public static Transform slerp(float t, Transform t0, Transform t1,
-            Transform storeResult) {
-        Validate.inRange(t, "t", 0f, 1f);
-        Validate.nonNull(t0, "t0");
-        Validate.nonNull(t1, "t1");
-        Transform result
-                = (storeResult == null) ? new Transform() : storeResult;
-
-        MyVector3f.lerp(t, t0.getTranslation(), t1.getTranslation(),
-                result.getTranslation());
-
-        MyQuaternion.slerp(t, t0.getRotation(), t1.getRotation(),
-                result.getRotation());
-
-        MyVector3f.lerp(t, t0.getScale(), t1.getScale(),
-                result.getScale());
-
         return result;
     }
 

@@ -33,9 +33,7 @@ package com.jme3.bullet.objects;
 
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.joints.PhysicsJoint;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.ArrayList;
 import jme3utilities.Validate;
 

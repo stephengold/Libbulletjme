@@ -41,7 +41,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyVector3f;
-import jme3utilities.minie.MyShape;
 
 /**
  * The abstract base class for collision shapes based on Bullet's
@@ -64,17 +63,9 @@ abstract public class CollisionShape
     final public static Logger logger
             = Logger.getLogger(CollisionShape.class.getName());
     /**
-     * local copy of {@link com.jme3.math.Quaternion#IDENTITY}
-     */
-    final private static Quaternion rotateIdentity = new Quaternion();
-    /**
      * local copy of {@link com.jme3.math.Transform#IDENTITY}
      */
     final private static Transform transformIdentity = new Transform();
-    /**
-     * local copy of {@link com.jme3.math.Vector3f#ZERO}
-     */
-    final private static Vector3f translateIdentity = new Vector3f(0f, 0f, 0f);
     // *************************************************************************
     // fields
 
@@ -425,19 +416,6 @@ abstract public class CollisionShape
     public int hashCode() {
         int hash = Objects.hashCode(this.nativeId);
         return hash;
-    }
-
-    /**
-     * Represent this CollisionShape as a String.
-     *
-     * @return a descriptive string of text (not null, not empty)
-     */
-    @Override
-    public String toString() {
-        String result = MyShape.describeType(this);
-        result += "#" + Long.toHexString(nativeId);
-
-        return result;
     }
     // *************************************************************************
     // private methods

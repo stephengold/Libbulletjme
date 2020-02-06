@@ -31,7 +31,6 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -93,20 +92,6 @@ public class Box2dShape extends CollisionShape {
 
         halfExtentX = xHalfExtent;
         halfExtentY = yHalfExtent;
-        createShape();
-    }
-
-    /**
-     * Instantiate a rectangle shape with the specified half extents.
-     *
-     * @param halfExtents the desired unscaled half extents (not null, no
-     * negative component, unaffected, Z component ignored)
-     */
-    public Box2dShape(Vector2f halfExtents) {
-        Validate.nonNegative(halfExtents, "half extents");
-
-        halfExtentX = halfExtents.x;
-        halfExtentY = halfExtents.y;
         createShape();
     }
 

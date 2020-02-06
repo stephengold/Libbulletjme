@@ -31,20 +31,13 @@
  */
 package com.jme3.bullet.util;
 
-import com.jme3.bullet.PhysicsSpace;
 import com.jme3.math.Transform;
-import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
-import jme3utilities.math.MyVolume;
-import jme3utilities.math.RectangularSolid;
-import jme3utilities.math.VectorSet;
-import jme3utilities.math.VectorSetUsingBuffer;
 
 /**
  * Temporary objects used to return debug meshes from native Bullet.
@@ -77,107 +70,6 @@ class DebugMeshCallback {
     final private ArrayList<Vector3f> list = new ArrayList<>(250);
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Estimate the footprint of the vertex locations in world coordinates.
-     *
-     * @param meshToWorld the transform from mesh coordinates to world
-     * coordinates (not null, unaffected)
-     * @return a new array containing the corner locations of a rectangle (in
-     * world coordinates)
-     */
-    Vector3f[] footprint(Transform meshToWorld) {
-        assert meshToWorld != null;
-        /*
-         * Copy the location list, removing all duplicates in the process.
-         * TODO make this more efficient
-         */
-        VectorSet distinct = new VectorSetUsingBuffer(list.size(), false);
-        for (Vector3f vector : list) {
-            distinct.add(vector);
-        }
-        /*
-         * Transform vertex locations to world coordinates and set all the
-         * Y coordinates to the minimum coordinate value.
-         */
-        FloatBuffer floatBuffer = distinct.toBuffer();
-        int numFloats = floatBuffer.limit();
-        MyBuffer.transform(floatBuffer, 0, numFloats, meshToWorld);
-
-        float minY = Float.POSITIVE_INFINITY;
-        int numVectors = numFloats / numAxes;
-        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
-            int position = vectorIndex * numAxes + PhysicsSpace.AXIS_Y;
-            float y = floatBuffer.get(position);
-            if (y < minY) {
-                minY = y;
-            }
-        }
-
-        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
-            int position = vectorIndex * numAxes + PhysicsSpace.AXIS_Y;
-            floatBuffer.put(position, minY);
-        }
-        /*
-         * Fit a rotated rectangular solid to the vertex locations.
-         */
-        RectangularSolid solid
-                = new RectangularSolid(floatBuffer, 0, numFloats);
-        Vector3f maxima = solid.maxima(null);
-        Vector3f minima = solid.minima(null);
-        /*
-         * Enumerate the local coordinates (within the solid) of the 4 corners.
-         * Assume that the local X axis corresponds to the world Y axis, since
-         * those are the axes with the least variance.
-         */
-        float midX = (minima.x + maxima.x) / 2f;
-        Vector3f[] cornerLocations = new Vector3f[4];
-        cornerLocations[0] = new Vector3f(midX, maxima.y, maxima.z);
-        cornerLocations[1] = new Vector3f(midX, minima.y, maxima.z);
-        cornerLocations[2] = new Vector3f(midX, maxima.y, minima.z);
-        cornerLocations[3] = new Vector3f(midX, minima.y, minima.z);
-        /*
-         * Transform corner locations into the world coordinate system.
-         */
-        for (Vector3f location : cornerLocations) {
-            solid.localToWorld(location, location);
-        }
-
-        return cornerLocations;
-    }
-
-    /**
-     * Calculate face normals and store them in a FloatBuffer.
-     *
-     * @return a new flipped, direct buffer (not null)
-     */
-    FloatBuffer getFaceNormals() {
-        int numVertices = list.size();
-        int numTriangles = numVertices / vpt;
-        assert numTriangles * vpt == numVertices : numVertices;
-
-        int numFloats = numAxes * numVertices;
-        FloatBuffer buffer = BufferUtils.createFloatBuffer(numFloats);
-
-        Triangle triangle = new Triangle();
-        for (int triIndex = 0; triIndex < numTriangles; ++triIndex) {
-            int firstVertex = vpt * triIndex;
-            Vector3f pos1 = list.get(firstVertex);
-            Vector3f pos2 = list.get(firstVertex + 1);
-            Vector3f pos3 = list.get(firstVertex + 2);
-            triangle.set(pos1, pos2, pos3);
-            triangle.setNormal(null); // work around JME issue #957
-            Vector3f normal = triangle.getNormal();
-            for (int j = 0; j < vpt; ++j) {
-                buffer.put(normal.x);
-                buffer.put(normal.y);
-                buffer.put(normal.z);
-            }
-        }
-        buffer.flip();
-
-        return buffer;
-    }
 
     /**
      * Copy the vertex locations to a FloatBuffer.
@@ -217,35 +109,6 @@ class DebugMeshCallback {
         float result = (float) Math.sqrt(maxSquaredDistance);
 
         return result;
-    }
-
-    /**
-     * Calculate volume of the mesh, assuming it's closed and convex.
-     *
-     * @return the volume (in cubic mesh units)
-     */
-    float volumeConvex() {
-        int numVertices = list.size();
-        int numTriangles = numVertices / vpt;
-        assert numTriangles * vpt == numVertices : numVertices;
-
-        double total = 0.0;
-        if (numTriangles > 0) {
-            Vector3f fixed = list.get(0);
-            for (int triIndex = 0; triIndex < numTriangles; ++triIndex) {
-                int firstVertex = vpt * triIndex;
-                Vector3f pos1 = list.get(firstVertex);
-                Vector3f pos2 = list.get(firstVertex + 1);
-                Vector3f pos3 = list.get(firstVertex + 2);
-                double tetraVolume
-                        = MyVolume.tetrahedronVolume(pos1, pos2, pos3, fixed);
-                total += tetraVolume;
-            }
-        }
-        float volume = (float) total;
-
-        assert volume >= 0f : volume;
-        return volume;
     }
     // *************************************************************************
     // private methods

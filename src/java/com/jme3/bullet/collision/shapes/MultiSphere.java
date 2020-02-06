@@ -31,18 +31,11 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.bounding.BoundingSphere;
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Vector3f;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import jme3utilities.math.MyMath;
-import jme3utilities.math.MyVector3f;
-import jme3utilities.math.MyVolume;
-import jme3utilities.math.RectangularSolid;
 
 /**
  * A convex CollisionShape based on Bullet's btMultiSphereShape. Unlike a
@@ -158,22 +151,6 @@ public class MultiSphere extends CollisionShape {
     }
 
     /**
-     * Instantiate an eccentric sphere shape to match the specified
-     * BoundingSphere.
-     *
-     * @param boundingSphere (not null, unaffected)
-     */
-    public MultiSphere(BoundingSphere boundingSphere) {
-        centers = new Vector3f[1];
-        centers[0] = boundingSphere.getCenter().clone();
-
-        radii = new float[1];
-        radii[0] = boundingSphere.getRadius();
-
-        createShape();
-    }
-
-    /**
      * Instantiate a multi-sphere shape with the specified centers and radii.
      *
      * @param centers the list of center offsets (not null, not empty)
@@ -193,107 +170,6 @@ public class MultiSphere extends CollisionShape {
             float radius = radii.get(i);
             assert radius >= 0f : radius;
             this.radii[i] = radius;
-        }
-
-        createShape();
-    }
-
-    /**
-     * Instantiate a 4-sphere shape to fill the specified RectangularSolid. The
-     * spheres will be of equal size, arranged in a rectangle.
-     *
-     * @param rectangularSolid the solid on which to base the shape (not null)
-     */
-    public MultiSphere(RectangularSolid rectangularSolid) {
-        Vector3f halfExtents = rectangularSolid.halfExtents(null);
-        float radius = MyMath.min(halfExtents.x, halfExtents.y, halfExtents.z);
-        /*
-         * Enumerate the local coordinates of the centers of the 4 spheres.
-         */
-        Vector3f max = rectangularSolid.maxima(null);
-        max.subtractLocal(radius, radius, radius);
-        Vector3f min = rectangularSolid.minima(null);
-        min.addLocal(radius, radius, radius);
-        List<Vector3f> centerLocations = new ArrayList<>(4);
-        if (radius == halfExtents.x) {
-            float x = max.x;
-            centerLocations.add(new Vector3f(x, max.y, max.z));
-            centerLocations.add(new Vector3f(x, max.y, min.z));
-            centerLocations.add(new Vector3f(x, min.y, max.z));
-            centerLocations.add(new Vector3f(x, min.y, min.z));
-        } else if (radius == halfExtents.y) {
-            float y = max.y;
-            centerLocations.add(new Vector3f(max.x, y, max.z));
-            centerLocations.add(new Vector3f(max.x, y, min.z));
-            centerLocations.add(new Vector3f(min.x, y, max.z));
-            centerLocations.add(new Vector3f(min.x, y, min.z));
-        } else {
-            assert radius == halfExtents.z;
-            float z = max.z;
-            centerLocations.add(new Vector3f(max.x, max.y, z));
-            centerLocations.add(new Vector3f(max.x, min.y, z));
-            centerLocations.add(new Vector3f(min.x, max.y, z));
-            centerLocations.add(new Vector3f(min.x, min.y, z));
-        }
-        /*
-         * Transform centers to shape coordinates.
-         */
-        centers = new Vector3f[4];
-        radii = new float[4];
-        for (int sphereI = 0; sphereI < 4; ++sphereI) {
-            Vector3f localCenter = centerLocations.get(sphereI);
-            centers[sphereI] = rectangularSolid.localToWorld(localCenter, null);
-            radii[sphereI] = radius;
-        }
-
-        createShape();
-    }
-
-    /**
-     * Instantiate a 2-sphere shape to approximate the specified
-     * RectangularSolid. The spheres will be of equal size, as in a capsule.
-     *
-     * @param rectangularSolid the solid on which to base the shape (not null)
-     * @param fraction used to determine sphere radii (0&rarr;shortest axis,
-     * 1&rarr;medium axis)
-     */
-    public MultiSphere(RectangularSolid rectangularSolid, float fraction) {
-        Vector3f halfExtents = rectangularSolid.halfExtents(null);
-        float shortest
-                = MyMath.min(halfExtents.x, halfExtents.y, halfExtents.z);
-        float medium
-                = MyMath.mid(halfExtents.x, halfExtents.y, halfExtents.z);
-        float radius = MyMath.lerp(fraction, shortest, medium); // interpolate
-        float longest
-                = MyMath.max(halfExtents.x, halfExtents.y, halfExtents.z);
-        assert longest >= radius;
-        /*
-         * Calculate the local coordinates of the centers of both spheres.
-         */
-        Vector3f max = rectangularSolid.maxima(null);
-        Vector3f min = rectangularSolid.minima(null);
-        Vector3f mid = MyVector3f.midpoint(max, min, null);
-        List<Vector3f> centerLocations = new ArrayList<>(2);
-        if (longest == halfExtents.z) {
-            centerLocations.add(new Vector3f(mid.x, mid.y, min.z + radius));
-            centerLocations.add(new Vector3f(mid.x, mid.y, max.z - radius));
-        } else if (longest == halfExtents.y) {
-            centerLocations.add(new Vector3f(mid.x, min.y + radius, mid.z));
-            centerLocations.add(new Vector3f(mid.x, max.y - radius, mid.z));
-        } else {
-            assert longest == halfExtents.x;
-            centerLocations.add(new Vector3f(min.x + radius, mid.y, mid.z));
-            centerLocations.add(new Vector3f(max.x - radius, mid.y, mid.z));
-        }
-        /*
-         * Transform centers to shape coordinates.
-         */
-        centers = new Vector3f[2];
-        radii = new float[2];
-        for (int sphereI = 0; sphereI < 2; ++sphereI) {
-            Vector3f localCenter = centerLocations.get(sphereI);
-            centers[sphereI] = rectangularSolid.localToWorld(localCenter, null);
-            radii[sphereI] = radius;
         }
 
         createShape();
@@ -361,34 +237,6 @@ public class MultiSphere extends CollisionShape {
 
         assert radius >= 0f : radius;
         return radius;
-    }
-
-    /**
-     * Estimate the scaled volume of this shape.
-     *
-     * @return the volume (in physics-space units cubed, &ge;0)
-     */
-    public float scaledVolume() {
-        float volume;
-        int numSpheres = radii.length;
-        if (numSpheres == 1) {
-            float radius = radii[0];
-            float unscaledVolume = MyVolume.sphereVolume(radius);
-            volume = unscaledVolume * scale.x * scale.y * scale.z;
-
-        } else if (numSpheres == 2 && radii[0] == radii[1]) { // capsule
-            float radius = radii[0];
-            float height = centers[0].distance(centers[1]);
-            float unscaledVolume = MyVolume.capsuleVolume(radius, height);
-            volume = unscaledVolume * scale.x * scale.y * scale.z;
-
-        } else { // use the debug mesh
-            int meshResolution = DebugShapeFactory.lowResolution;
-            volume = DebugShapeFactory.volumeConvex(this, meshResolution);
-        }
-
-        assert volume >= 0f : volume;
-        return volume;
     }
     // *************************************************************************
     // CollisionShape methods

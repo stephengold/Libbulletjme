@@ -423,38 +423,6 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
         return fb;
     }
 
-    /**
-     * <code>fillFloatBuffer</code> fills a FloatBuffer object with the matrix
-     * data.
-     * 
-     * @param fb
-     *            the buffer to fill, starting at current position. Must have
-     *            room for 9 more floats.
-     * @return matrix data as a FloatBuffer. (position is advanced by 9 and any
-     *         limit set is not changed).
-     */
-    public FloatBuffer fillFloatBuffer(FloatBuffer fb, boolean columnMajor) {
-//        if (columnMajor){
-//            fb.put(m00).put(m10).put(m20);
-//            fb.put(m01).put(m11).put(m21);
-//            fb.put(m02).put(m12).put(m22);
-//        }else{
-//            fb.put(m00).put(m01).put(m02);
-//            fb.put(m10).put(m11).put(m12);
-//            fb.put(m20).put(m21).put(m22);
-//        }
-
-        TempVars vars = TempVars.get();
-
-
-        fillFloatArray(vars.matrixWrite, columnMajor);
-        fb.put(vars.matrixWrite, 0, 9);
-
-        vars.release();
-
-        return fb;
-    }
-
     public void fillFloatArray(float[] f, boolean columnMajor) {
         if (columnMajor) {
             f[ 0] = m00;

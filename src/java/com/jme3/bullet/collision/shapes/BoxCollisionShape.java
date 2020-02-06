@@ -38,7 +38,6 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
-import jme3utilities.math.MyVolume;
 
 /**
  * An axis-aligned, rectangular-solid CollisionShape based on Bullet's
@@ -151,18 +150,6 @@ public class BoxCollisionShape extends CollisionShape {
         } else {
             return storeResult.set(halfExtents);
         }
-    }
-
-    /**
-     * Calculate the unscaled volume of the box.
-     *
-     * @return the volume (&ge;0)
-     */
-    public float unscaledVolume() {
-        float result = MyVolume.boxVolume(halfExtents);
-
-        assert result >= 0f : result;
-        return result;
     }
     // *************************************************************************
     // CollisionShape methods

@@ -26,13 +26,10 @@
  */
 package jme3utilities;
 
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
 /**
@@ -466,33 +463,6 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-negative Vector2f as a method argument.
-     *
-     * @param vector the vector to validate (unaffected)
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the vector has a negative or NaN
-     * component
-     * @throws NullPointerException if the vector is null
-     */
-    public static boolean nonNegative(Vector2f vector, String description) {
-        nonNull(vector, description);
-
-        if (!(vector.x >= 0f && vector.y >= 0f)) {
-            String what;
-            if (description == null) {
-                what = "Vector2f argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not have a negative component.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a non-negative Vector3f as a method argument.
      *
      * @param vector the vector to validate (unaffected)
@@ -641,58 +611,6 @@ final public class Validate {
             String what;
             if (description == null) {
                 what = "float argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not be zero.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a non-zero Quaternion as a method argument.
-     *
-     * @param quaternion the Quaternion to validate (unaffected)
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the Quaternion equals (0,0,0,0)
-     * @throws NullPointerException if the Quaternion is null
-     */
-    public static boolean nonZero(Quaternion quaternion, String description) {
-        nonNull(quaternion, description);
-
-        if (MyQuaternion.isZero(quaternion)) {
-            String what;
-            if (description == null) {
-                what = "Quaternion argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not be zero.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a non-zero Vector2f as a method argument.
-     *
-     * @param vector the vector to validate (unaffected)
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the vector equals (0,0)
-     * @throws NullPointerException if the vector is null
-     */
-    public static boolean nonZero(Vector2f vector, String description) {
-        nonNull(vector, description);
-
-        if (vector.x == 0f && vector.y == 0f) {
-            String what;
-            if (description == null) {
-                what = "Vector2f argument";
             } else {
                 what = description;
             }

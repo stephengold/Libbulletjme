@@ -27,7 +27,6 @@
 package jme3utilities.math;
 
 import com.jme3.math.FastMath;
-import com.jme3.math.Line;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -37,7 +36,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import jme3utilities.MyString;
 import jme3utilities.Validate;
 
 /**
@@ -361,86 +359,6 @@ public class MyVector3f {
     }
 
     /**
-     * Generate a textual description of a Vector3f value.
-     *
-     * @param vector the value to describe (may be null, unaffected)
-     * @return a description (not null, not empty)
-     */
-    public static String describe(Vector3f vector) {
-        String result;
-        if (vector == null) {
-            result = "null";
-
-        } else if (isScaleUniform(vector)) {
-            result = "xyz=" + MyString.describe(vector.x);
-
-        } else {
-            StringBuilder builder = new StringBuilder(40);
-            if (vector.x != 0f) {
-                builder.append("x=");
-                String x = MyString.describe(vector.x);
-                builder.append(x);
-            }
-            if (vector.y != 0f) {
-                if (builder.length() > 0) {
-                    builder.append(' ');
-                }
-                builder.append("y=");
-                String y = MyString.describe(vector.y);
-                builder.append(y);
-            }
-            if (vector.z != 0f) {
-                if (builder.length() > 0) {
-                    builder.append(' ');
-                }
-                builder.append("z=");
-                String z = MyString.describe(vector.z);
-                builder.append(z);
-            }
-
-            result = builder.toString();
-        }
-
-        assert result != null;
-        assert !result.isEmpty();
-        return result;
-    }
-
-    /**
-     * Generate a textual description of a direction vector.
-     *
-     * @param v the value to describe (may be null, unaffected)
-     * @return a description (not null, not empty)
-     */
-    public static String describeDirection(Vector3f v) {
-        String result;
-        if (v == null) {
-            result = "null";
-
-        } else {
-            StringBuilder builder = new StringBuilder(40);
-
-            builder.append("dx=");
-            String x = MyString.describeFraction(v.x);
-            builder.append(x);
-
-            builder.append(" dy=");
-            String y = MyString.describeFraction(v.y);
-            builder.append(y);
-
-            builder.append(" dz=");
-            String z = MyString.describeFraction(v.z);
-            builder.append(z);
-
-            result = builder.toString();
-        }
-
-        assert result != null;
-        assert !result.isEmpty();
-        return result;
-    }
-
-    /**
      * Calculate the squared distance between 2 vectors. Unlike
      * {@link com.jme3.math.Vector3f#distanceSquared(Vector3f)}, this method
      * returns a double-precision value for precise comparison of distances.
@@ -620,21 +538,6 @@ public class MyVector3f {
         normalizeLocal(store2);
         in1.cross(store2, store3);
         normalizeLocal(store3);
-    }
-
-    /**
-     * Calculate the horizontal direction of an offset in world space.
-     *
-     * @param offset difference of world coordinates (not null, unaffected)
-     * @return a unit vector or a zero vector
-     */
-    public static ReadXZ horizontalDirection(Vector3f offset) {
-        Validate.nonNull(offset, "offset");
-
-        VectorXZ horizontalOffset = new VectorXZ(offset);
-        ReadXZ result = horizontalOffset.normalize();
-
-        return result;
     }
 
     /**
@@ -863,92 +766,6 @@ public class MyVector3f {
         result.x = MyMath.lerp(t, v0.x, v1.x);
         result.y = MyMath.lerp(t, v0.y, v1.y);
         result.z = MyMath.lerp(t, v0.z, v1.z);
-
-        return result;
-    }
-
-    /**
-     * Find the point on line1 closest to line2.
-     *
-     * @param line1 line1 (not null, unaffected)
-     * @param line2 line2 (not null, unaffected)
-     * @return a new coordinate vector, or null if the lines are parallel
-     */
-    public static Vector3f lineMeetsLine(Line line1, Line line2) {
-        Vector3f d1 = line1.getDirection();
-        Vector3f d2 = line2.getDirection();
-        Vector3f p1 = line1.getOrigin();
-        Vector3f p2 = line2.getOrigin();
-        Vector3f n = d1.cross(d2);
-        Vector3f n2 = d2.cross(n);
-
-        Vector3f result = null;
-        float denom = d1.dot(n2);
-        if (denom != 0f) {
-            float numer = p2.dot(n2) - p1.dot(n2);
-            result = d1.mult(numer / denom);
-            result.addLocal(p1);
-        }
-
-        return result;
-    }
-
-    /**
-     * Find the specified intersection between a specified line and a specified
-     * sphere. If there's no intersection, find the point on the sphere closest
-     * to the line.
-     *
-     * @param line the line (not null, unaffected)
-     * @param center center of the sphere (not null, unaffected)
-     * @param radius size of the sphere (&ge;0)
-     * @param farSide which intersection to use: true&rarr;far side of sphere,
-     * false&rarr;near side
-     * @return a new coordinate vector
-     */
-    public static Vector3f lineMeetsSphere(Line line, Vector3f center,
-            float radius, boolean farSide) {
-        Validate.nonNull(center, "center");
-        Validate.nonNegative(radius, "radius");
-
-        Vector3f direction = line.getDirection().normalize();
-        Vector3f lineOrigin = line.getOrigin();
-        Vector3f offset = lineOrigin.subtract(center);
-        float dDotV = direction.dot(offset);
-        float normV2 = offset.lengthSquared();
-        float discriminant = dDotV * dDotV - normV2 + radius * radius;
-
-        Vector3f result;
-        if (discriminant >= 0f) {
-            /*
-             * Calculate the pseudodistance from the line's origin
-             * to the intersection.
-             */
-            float t = -dDotV;
-            if (farSide) {
-                t += FastMath.sqrt(discriminant);
-            } else {
-                t -= FastMath.sqrt(discriminant);
-            }
-            /*
-             * Calculate the position of that point on the line.
-             */
-            result = direction.mult(t);
-            result.addLocal(lineOrigin);
-
-        } else {
-            /*
-             * Calculate the line's closest approach to the center.
-             */
-            Vector3f projection = direction.mult(dDotV);
-            result = offset.subtract(projection);
-            /*
-             * Scale and translate to the surface of the sphere.
-             */
-            float factor = radius / result.length();
-            assert factor <= 1f : factor;
-            result.multLocal(factor);
-            result.addLocal(center);
-        }
 
         return result;
     }

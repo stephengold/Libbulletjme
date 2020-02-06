@@ -31,13 +31,9 @@
  */
 package com.jme3.util;
 
-import com.jme3.bounding.BoundingBox;
-import com.jme3.collision.CollisionResults;
-import com.jme3.collision.bih.BIHNode.BIHStackData;
 import com.jme3.math.*;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
 
 /**
  * Temporary variables assigned to each thread. Engine classes may access
@@ -152,10 +148,6 @@ public class TempVars {
      //tangent buffer as 4 components by elements
     public final float[] skinTangents = new float[512 * 4];
     /**
-     * Fetching triangle from mesh
-     */
-    public final Triangle triangle = new Triangle();
-    /**
      * General vectors.
      */
     public final Vector3f vect1 = new Vector3f();
@@ -169,16 +161,9 @@ public class TempVars {
     public final Vector3f vect8 = new Vector3f();
     public final Vector3f vect9 = new Vector3f();
     public final Vector3f vect10 = new Vector3f();
-    public final Vector4f vect4f1 = new Vector4f();
-    public final Vector4f vect4f2 = new Vector4f();
     public final Vector3f[] tri = {new Vector3f(),
         new Vector3f(),
         new Vector3f()};
-    /**
-     * 2D vector
-     */
-    public final Vector2f vect2d = new Vector2f();
-    public final Vector2f vect2d2 = new Vector2f();
     /**
      * General matrices.
      */
@@ -191,17 +176,7 @@ public class TempVars {
     public final Quaternion quat1 = new Quaternion();
     public final Quaternion quat2 = new Quaternion();
     /**
-     * Eigen
-     */
-    public final Eigen3f eigen = new Eigen3f();
-    /**
      * Plane
      */
     public final Plane plane = new Plane();
-    /**
-     * BIHTree
-     */
-    public final CollisionResults collisionResults = new CollisionResults();
-    public final float[] bihSwapTmp = new float[9];
-    public final ArrayList<BIHStackData> bihStack = new ArrayList<BIHStackData>();
 }

@@ -215,16 +215,6 @@ public class Plane implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Initialize this plane using the three points of the given triangle.
-     * 
-     * @param t
-     *            the triangle
-     */
-    public void setPlanePoints(AbstractTriangle t) {
-        setPlanePoints(t.get1(), t.get2(), t.get3());
-    }
-
-    /**
      * Initialize this plane using a point of origin and a normal.
      *
      * @param origin

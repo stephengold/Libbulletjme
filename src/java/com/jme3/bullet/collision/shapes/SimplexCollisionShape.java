@@ -32,16 +32,13 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.math.AbstractTriangle;
 import com.jme3.math.FastMath;
-import com.jme3.math.LineSegment;
 import com.jme3.math.Vector3f;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
-import jme3utilities.math.MyVolume;
 
 /**
  * A simple point, line-segment, triangle, or tetrahedron CollisionShape based
@@ -141,21 +138,6 @@ public class SimplexCollisionShape extends CollisionShape {
     }
 
     /**
-     * Instantiate a triangular shape based on the specified AbstractTriangle.
-     *
-     * @param triangle the triangle (not null, unaffected)
-     */
-    public SimplexCollisionShape(AbstractTriangle triangle) {
-        Validate.nonNull(triangle, "triangle");
-
-        locations = new Vector3f[3];
-        locations[0] = triangle.get1().clone();
-        locations[1] = triangle.get2().clone();
-        locations[2] = triangle.get3().clone();
-        createShape();
-    }
-
-    /**
      * Instantiate a simplex shape based on the specified FloatBuffer range.
      *
      * @param buffer the buffer that contains the vertex locations (not null,
@@ -184,21 +166,6 @@ public class SimplexCollisionShape extends CollisionShape {
             MyBuffer.get(buffer, startPosition + vertexIndex * numAxes,
                     locations[vertexIndex]);
         }
-
-        createShape();
-    }
-
-    /**
-     * Instantiate a line-segment shape based on the specified LineSegment.
-     *
-     * @param segment the segment (not null, unaffected)
-     */
-    public SimplexCollisionShape(LineSegment segment) {
-        Validate.nonNull(segment, "segment");
-
-        locations = new Vector3f[2];
-        locations[0] = segment.getNegativeEnd(null);
-        locations[1] = segment.getPositiveEnd(null);
 
         createShape();
     }
@@ -304,22 +271,6 @@ public class SimplexCollisionShape extends CollisionShape {
 
         assert MyVector3f.isAllNonNegative(result) : result;
         return result;
-    }
-
-    /**
-     * Calculate the unscaled volume of the simplex.
-     *
-     * @return the volume (&ge;0)
-     */
-    public float unscaledVolume() {
-        float volume = 0f;
-        if (locations.length > 3) {
-            volume = (float) MyVolume.tetrahedronVolume(locations[0],
-                    locations[1], locations[2], locations[3]);
-        }
-
-        assert volume >= 0f : volume;
-        return volume;
     }
     // *************************************************************************
     // CollisionShape methods

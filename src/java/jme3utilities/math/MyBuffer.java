@@ -69,45 +69,6 @@ final public class MyBuffer {
     // new methods exposed
 
     /**
-     * Enumerate all distinct 3-D vectors in the specified FloatBuffer range,
-     * distinguishing 0 from -0.
-     *
-     * @param buffer the buffer that contains the vectors (not null, unaffected)
-     * @param startPosition the position at which the vectors start (&ge;0,
-     * &le;endPosition)
-     * @param endPosition the position at which the vectors end
-     * (&ge;startPosition, &le;capacity)
-     * @return a new VectorSet (not null)
-     */
-    public static VectorSet distinct(FloatBuffer buffer, int startPosition,
-            int endPosition) {
-        Validate.nonNull(buffer, "buffer");
-        Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
-        int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
-
-        VectorSet result;
-        int numVectors = numFloats / numAxes;
-        if (numVectors > 20) {
-            result = new VectorSetUsingCollection(numVectors);
-        } else {
-            boolean direct = false;
-            result = new VectorSetUsingBuffer(numVectors, direct);
-        }
-
-        Vector3f tmpVector = new Vector3f();
-        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
-            int position = startPosition + vectorIndex * numAxes;
-            get(buffer, position, tmpVector);
-            result.add(tmpVector);
-        }
-
-        return result;
-    }
-
-    /**
      * Calculate the sample covariance of 3-D vectors in the specified
      * FloatBuffer range.
      *

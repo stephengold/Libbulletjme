@@ -89,33 +89,6 @@ public class DebugShapeFactory {
     // new methods exposed
 
     /**
-     * Estimate the footprint of the specified (non-compound, non-plane) shape.
-     * The shape's scale and margin are taken into account, but not its
-     * debug-mesh resolution.
-     *
-     * @param shape (not null, not compound, not plane, unaffected)
-     * @param shapeToWorld the world transform of the collision object (not
-     * null, unaffected)
-     * @param meshResolution (0=low, 1=high)
-     * @return a new array of corner locations (in world coordinates)
-     */
-    public static Vector3f[] footprint(CollisionShape shape,
-            Transform shapeToWorld, int meshResolution) {
-        assert !(shape instanceof CompoundCollisionShape);
-        assert !(shape instanceof PlaneCollisionShape);
-        Validate.nonNull(shapeToWorld, "shape-to-world");
-        Validate.inRange(meshResolution, "mesh resolution", lowResolution,
-                highResolution);
-
-        long shapeId = shape.getObjectId();
-        DebugMeshCallback callback = new DebugMeshCallback();
-        getVertices2(shapeId, meshResolution, callback);
-        Vector3f[] cornerLocations = callback.footprint(shapeToWorld);
-
-        return cornerLocations;
-    }
-
-    /**
      * Estimate how far the specified (non-compound, non-plane) shape extends
      * from some origin, based on its debug mesh. The shape's scale and margin
      * are taken into account, but not its debug-mesh resolution.
@@ -140,53 +113,6 @@ public class DebugShapeFactory {
         float result = callback.maxDistance(transform);
 
         return result;
-    }
-
-    /**
-     * Alter whether to index new debug meshes. (Doesn't affect cached meshes or
-     * plane shapes.) Indexing might boost performance when there are many small
-     * meshes; it isn't recommended for very large meshes.
-     *
-     * @param setting true&rarr;always index, false&rarr;never index
-     */
-    public static void setIndexBuffers(boolean setting) {
-        maxVerticesToIndex = setting ? Integer.MAX_VALUE : -1;
-    }
-
-    /**
-     * Alter whether to index new debug meshes. (Doesn't affect cached meshes or
-     * plane shapes.) Indexing might boost performance when there are many small
-     * meshes; it isn't recommended for very large meshes.
-     *
-     * @param maxVertices the largest mesh to be indexed (vertex count, &ge;-1,
-     * default=6000)
-     */
-    public static void setIndexBuffers(int maxVertices) {
-        Validate.inRange(maxVertices, "maxVertices", -1, Integer.MAX_VALUE);
-        maxVerticesToIndex = maxVertices;
-    }
-
-    /**
-     * Calculate the volume of a debug mesh for the specified convex shape. The
-     * shape's scale and margin are taken into account, but not its debug-mesh
-     * resolution.
-     *
-     * @param shape (not null, convex, unaffected)
-     * @param meshResolution (0=low, 1=high)
-     * @return the scaled volume (in physics-space units cubed, &ge;0)
-     */
-    public static float volumeConvex(CollisionShape shape, int meshResolution) {
-        assert shape.isConvex();
-        Validate.inRange(meshResolution, "mesh resolution", lowResolution,
-                highResolution);
-
-        long shapeId = shape.getObjectId();
-        DebugMeshCallback callback = new DebugMeshCallback();
-        getVertices2(shapeId, meshResolution, callback);
-        float volume = callback.volumeConvex();
-
-        assert volume >= 0f : volume;
-        return volume;
     }
     // *************************************************************************
     // native methods
