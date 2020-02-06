@@ -32,13 +32,8 @@
 package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -68,21 +63,8 @@ public class SixDofSpringJoint extends SixDofJoint {
      */
     final public static Logger logger3
             = Logger.getLogger(SixDofSpringJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagDof = "Dof";
-    final private static String tagSpringDamping = "_SpringDamping";
-    final private static String tagStiffness = "_Stiffness";
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public SixDofSpringJoint() {
-    }
 
     /**
      * Instantiate a single-ended SixDofSpringJoint.
@@ -317,50 +299,6 @@ public class SixDofSpringJoint extends SixDofJoint {
     @Override
     native protected long createJoint1(long bodyIdB, Vector3f pivotInB,
             Matrix3f rotInB, boolean useLinearReferenceFrameB);
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        for (int dofIndex = 0; dofIndex < 6; ++dofIndex) {
-            String dofTag = tagDof + dofIndex;
-
-            setDamping(dofIndex,
-                    capsule.readFloat(dofTag + tagSpringDamping, 1f));
-            setStiffness(dofIndex,
-                    capsule.readFloat(dofTag + tagStiffness, 0f));
-            // TODO: enableSpring, equilibrium points
-        }
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        for (int dofIndex = 0; dofIndex < 6; ++dofIndex) {
-            String dofTag = tagDof + dofIndex;
-
-            capsule.write(getDamping(dofIndex), dofTag + tagSpringDamping, 1f);
-            capsule.write(getStiffness(dofIndex), dofTag + tagStiffness, 0f);
-        }
-
-    }
     // *************************************************************************
     // native private methods
 

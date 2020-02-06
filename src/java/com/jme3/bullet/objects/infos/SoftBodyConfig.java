@@ -32,12 +32,6 @@
 package com.jme3.bullet.objects.infos;
 
 import com.jme3.bullet.objects.PhysicsSoftBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -49,7 +43,7 @@ import jme3utilities.Validate;
  *
  * Based on PhysicsSoftBody by dokthar.
  */
-public class SoftBodyConfig implements Savable {
+public class SoftBodyConfig {
     // *************************************************************************
     // constants and loggers
 
@@ -58,15 +52,6 @@ public class SoftBodyConfig implements Savable {
      */
     final public static Logger logger
             = Logger.getLogger(SoftBodyConfig.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagBody = "body";
-    final private static String tagClusterIterations = "clusterIterations";
-    final private static String tagCollisionFlags = "collisionFlags";
-    final private static String tagDriftIterations = "driftIterations";
-    final private static String tagPositionIterations = "positionIterations";
-    final private static String tagVelocityIterations = "velocityIterations";
     // *************************************************************************
     // fields
 
@@ -76,13 +61,6 @@ public class SoftBodyConfig implements Savable {
     private PhysicsSoftBody body = null;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public SoftBodyConfig() {
-    }
 
     /**
      * Instantiate a config with default properties.
@@ -404,62 +382,6 @@ public class SoftBodyConfig implements Savable {
     public int velocityIterations() {
         long bodyId = body.getObjectId();
         return getVelocitiesIterations(bodyId);
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this config from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        assert body == null;
-
-        InputCapsule capsule = importer.getCapsule(this);
-        body = (PhysicsSoftBody) capsule.readSavable(tagBody, null);
-
-        setClusterIterations(capsule.readInt(tagClusterIterations, 4));
-        setCollisionFlags(capsule.readInt(tagCollisionFlags, ConfigFlag.CL_RS));
-        setDriftIterations(capsule.readInt(tagDriftIterations, 0));
-        setPositionIterations(capsule.readInt(tagPositionIterations, 1));
-        setVelocityIterations(capsule.readInt(tagVelocityIterations, 0));
-
-        for (Sbcp sbcp : Sbcp.values()) {
-            String tag = sbcp.toString();
-            float defValue = sbcp.defValue();
-            float readValue = capsule.readFloat(tag, defValue);
-            set(sbcp, readValue);
-        }
-    }
-
-    /**
-     * Serialize this config to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(body, tagBody, null);
-        capsule.write(clusterIterations(), tagClusterIterations, 4);
-        capsule.write(collisionFlags(), tagCollisionFlags, ConfigFlag.CL_RS);
-        capsule.write(driftIterations(), tagDriftIterations, 0);
-        capsule.write(positionIterations(), tagPositionIterations, 1);
-        capsule.write(velocityIterations(), tagVelocityIterations, 0);
-
-        for (Sbcp sbcp : Sbcp.values()) {
-            float value = get(sbcp);
-            String tag = sbcp.toString();
-            float defValue = sbcp.defValue();
-            capsule.write(value, tag, defValue);
-        }
     }
     // *************************************************************************
     // native methods

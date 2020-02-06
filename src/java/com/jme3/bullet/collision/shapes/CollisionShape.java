@@ -33,16 +33,10 @@ package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.util.DebugShapeFactory;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +55,7 @@ import jme3utilities.minie.MyShape;
  * @author normenhansen
  */
 abstract public class CollisionShape
-        implements Comparable<CollisionShape>, Savable {
+        implements Comparable<CollisionShape> {
     // *************************************************************************
     // constants and loggers
 
@@ -74,11 +68,6 @@ abstract public class CollisionShape
      * local copy of {@link com.jme3.math.Quaternion#IDENTITY}
      */
     final private static Quaternion rotateIdentity = new Quaternion();
-    /**
-     * field names for serialization
-     */
-    final private static String tagMargin = "margin";
-    final private static String tagScale = "scale";
     /**
      * local copy of {@link com.jme3.math.Transform#IDENTITY}
      */
@@ -464,40 +453,6 @@ abstract public class CollisionShape
         int result = Long.compare(nativeId, otherId);
 
         return result;
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        Savable s = capsule.readSavable(tagScale, new Vector3f(1f, 1f, 1f));
-        scale.set((Vector3f) s);
-        margin = capsule.readFloat(tagMargin, 0.04f);
-        // subclass must create the btCollisionShape and apply margin and scale
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(scale, tagScale, null);
-        capsule.write(margin, tagMargin, 0.04f);
     }
     // *************************************************************************
     // Object methods

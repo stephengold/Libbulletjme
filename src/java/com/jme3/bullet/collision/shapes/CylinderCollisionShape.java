@@ -32,12 +32,7 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -60,11 +55,6 @@ public class CylinderCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(CylinderCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAxis = "axis";
-    final private static String tagHalfExtents = "halfExtents";
     // *************************************************************************
     // fields
 
@@ -79,13 +69,6 @@ public class CylinderCollisionShape extends CollisionShape {
     private Vector3f halfExtents = new Vector3f(0.5f, 0.5f, 0.5f);
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public CylinderCollisionShape() {
-    }
 
     /**
      * Instantiate a cylinder shape around the specified main (height) axis.
@@ -282,41 +265,6 @@ public class CylinderCollisionShape extends CollisionShape {
         float result = (float) Math.hypot(halfHeight, bigRadius);
 
         return result;
-    }
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        Vector3f he = (Vector3f) capsule.readSavable(tagHalfExtents,
-                new Vector3f(0.5f, 0.5f, 0.5f));
-        halfExtents.set(he);
-        axis = capsule.readInt(tagAxis, PhysicsSpace.AXIS_Y);
-        createShape();
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(halfExtents, tagHalfExtents, null);
-        capsule.write(axis, tagAxis, PhysicsSpace.AXIS_Y);
     }
     // *************************************************************************
     // private methods

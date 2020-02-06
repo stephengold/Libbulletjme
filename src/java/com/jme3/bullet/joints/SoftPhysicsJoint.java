@@ -34,11 +34,6 @@ package com.jme3.bullet.joints;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsSoftBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -69,16 +64,6 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
      */
     final public static Logger logger2
             = Logger.getLogger(SoftPhysicsJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagClusterIndexA = "clusterIndexA";
-    final private static String tagClusterIndexB = "clusterIndexB";
-    final private static String tagConstraintForceMixing
-            = "constraintForceMixing";
-    final private static String tagErrorReductionParameter
-            = "errorReductionParameter";
-    final private static String tagSplit = "split";
     // *************************************************************************
     // fields
 
@@ -108,12 +93,6 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
     private int clusterIndexB = -1;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil.
-     */
-    protected SoftPhysicsJoint() {
-    }
 
     /**
      * Instantiate a SoftPhysicsJoint to join a soft-body cluster and a rigid
@@ -405,49 +384,6 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        cfm = capsule.readFloat(tagConstraintForceMixing, 1f);
-        erp = capsule.readFloat(tagErrorReductionParameter, 1f);
-        split = capsule.readFloat(tagSplit, 1f);
-
-        clusterIndexA = capsule.readInt(tagClusterIndexA, -1);
-        clusterIndexB = capsule.readInt(tagClusterIndexB, -1);
-        /*
-         * Each subclass must create the btSoftBody::Joint.
-         */
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(getCFM(), tagConstraintForceMixing, 1);
-        capsule.write(getERP(), tagErrorReductionParameter, 1);
-        capsule.write(getSplit(), tagSplit, 1);
-
-        capsule.write(clusterIndexA(), tagClusterIndexA, -1);
-        capsule.write(clusterIndexB(), tagClusterIndexB, -1);
     }
     // *************************************************************************
     // native methods

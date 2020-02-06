@@ -32,16 +32,10 @@
 package com.jme3.bullet.objects;
 
 import com.jme3.bullet.objects.infos.VehicleTuning;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -50,7 +44,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-public class VehicleWheel implements Savable {
+public class VehicleWheel {
     // *************************************************************************
     // constants and loggers
 
@@ -59,21 +53,6 @@ public class VehicleWheel implements Savable {
      */
     final public static Logger logger
             = Logger.getLogger(VehicleWheel.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagBrake = "brake";
-    final private static String tagEngineForce = "engineForce";
-    final private static String tagFrontWheel = "frontWheel";
-    final private static String tagRestLength = "restLength";
-    final private static String tagRollInfluence = "rollInfluence";
-    final private static String tagSteerAngle = "steerAngle";
-    final private static String tagTuning = "tuning";
-    final private static String tagWheelAxle = "wheelAxle";
-    final private static String tagWheelDirection = "wheelDirection";
-    final private static String tagWheelLocation = "wheelLocation";
-    final private static String tagWheelRadius = "wheelRadius";
-    final private static String tagWheelSpatial = "wheelSpatial";
     // *************************************************************************
     // fields
 
@@ -147,13 +126,6 @@ public class VehicleWheel implements Savable {
     private VehicleTuning tuning = new VehicleTuning();
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public VehicleWheel() {
-    }
 
     /**
      * Instantiate a wheel.
@@ -720,64 +692,6 @@ public class VehicleWheel implements Savable {
         getWheelLocation(vehicleId, wheelIndex, wheelWorldLocation);
         getWheelRotation(vehicleId, wheelIndex, tmp_Matrix);
         wheelWorldRotation.fromRotationMatrix(tmp_Matrix);
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this wheel from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        wheelSpatial = (Spatial) capsule.readSavable(tagWheelSpatial, null);
-        isFront = capsule.readBoolean(tagFrontWheel, false);
-        location = (Vector3f) capsule.readSavable(tagWheelLocation,
-                new Vector3f());
-        suspensionDirection = (Vector3f) capsule.readSavable(tagWheelDirection,
-                new Vector3f());
-        axisDirection = (Vector3f) capsule.readSavable(tagWheelAxle,
-                new Vector3f());
-        tuning = (VehicleTuning) capsule.readSavable(tagTuning,
-                new VehicleTuning());
-        rollInfluence = capsule.readFloat(tagRollInfluence, 1f);
-        radius = capsule.readFloat(tagWheelRadius, 0.5f);
-        restLength = capsule.readFloat(tagRestLength, 1f);
-
-        capsule.readFloat(tagBrake, 0f); // TODO
-        capsule.readFloat(tagEngineForce, 0f);
-        capsule.readFloat(tagSteerAngle, 0f);
-    }
-
-    /**
-     * Serialize this wheel to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(wheelSpatial, tagWheelSpatial, null);
-        capsule.write(isFront, tagFrontWheel, false);
-        capsule.write(location, tagWheelLocation, null);
-        capsule.write(suspensionDirection, tagWheelDirection, null);
-        capsule.write(axisDirection, tagWheelAxle, null);
-        capsule.write(tuning, tagTuning, null);
-        capsule.write(rollInfluence, tagRollInfluence, 1f);
-        capsule.write(radius, tagWheelRadius, 0.5f);
-        capsule.write(restLength, tagRestLength, 1f);
-
-        capsule.write(getBrake(), tagBrake, 0f);
-        capsule.write(getEngineForce(), tagEngineForce, 0f);
-        capsule.write(getSteerAngle(), tagSteerAngle, 0f);
     }
     // *************************************************************************
     // private methods

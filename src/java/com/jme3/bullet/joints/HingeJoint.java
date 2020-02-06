@@ -32,15 +32,10 @@
 package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.math.MyVector3f;
 
@@ -64,20 +59,6 @@ public class HingeJoint extends Constraint {
      */
     final public static Logger logger2
             = Logger.getLogger(HingeJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAngularOnly = "angularOnly";
-    final private static String tagAxisA = "axisA";
-    final private static String tagAxisB = "axisB";
-    final private static String tagBiasFactor = "biasFactor";
-    final private static String tagEnableAngularMotor = "enableAngularMotor";
-    final private static String tagLimitSoftness = "limitSoftness";
-    final private static String tagLowerLimit = "lowerLimit";
-    final private static String tagMaxMotorImpulse = "maxMotorImpulse";
-    final private static String tagRelaxationFactor = "relaxationFactor";
-    final private static String tagTargetVelocity = "targetVelocity";
-    final private static String tagUpperLimit = "upperLimit";
     // *************************************************************************
     // fields
 
@@ -116,13 +97,6 @@ public class HingeJoint extends Constraint {
     private Vector3f axisB;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public HingeJoint() {
-    }
 
     /**
      * Instantiate a single-ended HingeJoint.
@@ -396,74 +370,6 @@ public class HingeJoint extends Constraint {
         relaxationFactor = relaxation;
         limitSoftness = softness;
         setLimit(constraintId, low, high, softness, bias, relaxation);
-    }
-    // *************************************************************************
-    // Constraint methods
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        axisA = (Vector3f) capsule.readSavable(tagAxisA, new Vector3f());
-        axisB = (Vector3f) capsule.readSavable(tagAxisB, new Vector3f());
-
-        angularOnly = capsule.readBoolean(tagAngularOnly, false);
-
-        float lowerLimit = capsule.readFloat(tagLowerLimit, 1e30f);
-        float upperLimit = capsule.readFloat(tagUpperLimit, -1e30f);
-        biasFactor = capsule.readFloat(tagBiasFactor, 0.3f);
-        relaxationFactor = capsule.readFloat(tagRelaxationFactor, 1f);
-        limitSoftness = capsule.readFloat(tagLimitSoftness, 0.9f);
-
-        createJoint();
-        readConstraintProperties(capsule);
-
-        boolean enableAngularMotor
-                = capsule.readBoolean(tagEnableAngularMotor, false);
-        float targetVelocity = capsule.readFloat(tagTargetVelocity, 0f);
-        float maxMotorImpulse = capsule.readFloat(tagMaxMotorImpulse, 0f);
-        enableMotor(enableAngularMotor, targetVelocity, maxMotorImpulse);
-
-        setAngularOnly(angularOnly);
-        setLimit(lowerLimit, upperLimit, limitSoftness, biasFactor,
-                relaxationFactor);
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(axisA, tagAxisA, null);
-        capsule.write(axisB, tagAxisB, null);
-
-        capsule.write(angularOnly, tagAngularOnly, false);
-
-        capsule.write(getLowerLimit(), tagLowerLimit, 1e30f);
-        capsule.write(getUpperLimit(), tagUpperLimit, -1e30f);
-
-        capsule.write(biasFactor, tagBiasFactor, 0.3f);
-        capsule.write(relaxationFactor, tagRelaxationFactor, 1f);
-        capsule.write(limitSoftness, tagLimitSoftness, 0.9f);
-
-        capsule.write(getEnableMotor(), tagEnableAngularMotor, false);
-        capsule.write(getMotorTargetVelocity(), tagTargetVelocity, 0f);
-        capsule.write(getMaxMotorImpulse(), tagMaxMotorImpulse, 0f);
     }
     // *************************************************************************
     // private methods

@@ -31,12 +31,6 @@
  */
 package com.jme3.bullet.objects.infos;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -44,7 +38,7 @@ import java.util.logging.Logger;
  *
  * @author normenhansen
  */
-public class VehicleTuning implements Savable {
+public class VehicleTuning {
     // *************************************************************************
     // constants and loggers
 
@@ -53,18 +47,6 @@ public class VehicleTuning implements Savable {
      */
     final public static Logger logger
             = Logger.getLogger(VehicleTuning.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagFrictionSlip = "frictionSlip";
-    final private static String tagMaxSuspensionForce = "maxSuspensionForce";
-    final private static String tagMaxSuspensionTravelCm
-            = "maxSuspensionTravelCm";
-    final private static String tagSuspensionStiffness = "suspensionStiffness";
-    final private static String tagWheelsDampingRelaxation
-            = "wheelsDampingRelaxation";
-    final private static String tagWheelsDampingCompression
-            = "wheelsDampingCompression";
     // *************************************************************************
     // fields
 
@@ -247,51 +229,6 @@ public class VehicleTuning implements Savable {
     public void setSuspensionStiffness(float stiffness) {
         suspensionStiffness = stiffness;
         setSuspensionStiffness(nativeId, stiffness);
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize these parameters from the specified importer, for example
-     * when loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        suspensionStiffness = capsule.readFloat(tagSuspensionStiffness, 5.88f);
-        suspensionDamping
-                = capsule.readFloat(tagWheelsDampingRelaxation, 0.88f);
-        suspensionCompression
-                = capsule.readFloat(tagWheelsDampingCompression, 0.83f);
-        frictionSlip = capsule.readFloat(tagFrictionSlip, 10.5f);
-        maxSuspensionTravelCm
-                = capsule.readFloat(tagMaxSuspensionTravelCm, 500f);
-        maxSuspensionForce = capsule.readFloat(tagMaxSuspensionForce, 6000f);
-
-        create();
-    }
-
-    /**
-     * Serialize these parameters, for example when saving to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(suspensionStiffness, tagSuspensionStiffness, 5.88f);
-        capsule.write(suspensionDamping, tagWheelsDampingRelaxation, 0.88f);
-        capsule.write(suspensionCompression, tagWheelsDampingCompression,
-                0.83f);
-        capsule.write(frictionSlip, tagFrictionSlip, 10.5f);
-        capsule.write(maxSuspensionTravelCm, tagMaxSuspensionTravelCm, 500f);
-        capsule.write(maxSuspensionForce, tagMaxSuspensionForce, 6000f);
     }
     // *************************************************************************
     // private methods

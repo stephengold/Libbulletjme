@@ -31,14 +31,8 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +44,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CompoundMesh implements Savable {
+public class CompoundMesh {
     // *************************************************************************
     // constants and loggers
 
@@ -59,11 +53,6 @@ public class CompoundMesh implements Savable {
      */
     final public static Logger logger
             = Logger.getLogger(CompoundMesh.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagScale = "scale";
-    final private static String tagSubmeshes = "submeshes";
     // *************************************************************************
     // fields
 
@@ -189,45 +178,6 @@ public class CompoundMesh implements Savable {
         logger.log(Level.FINE, "Scaled CompoundMesh {0}",
                 Long.toHexString(nativeId));
         this.scale.set(scale);
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this mesh from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        scale = (Vector3f) capsule.readSavable(tagScale, new Vector3f(1f, 1f, 1f));
-        submeshes = capsule.readSavableArrayList(tagSubmeshes, submeshes);
-
-        setScale(scale);
-        for (IndexedMesh submesh : submeshes) {
-            long submeshId = submesh.nativeId();
-            addIndexedMesh(nativeId, submeshId);
-        }
-    }
-
-    /**
-     * Serialize this mesh to the specified exporter, for example when saving to
-     * a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(scale, tagScale, null);
-        capsule.writeSavableArrayList(submeshes, tagSubmeshes, null);
     }
     // *************************************************************************
     // Object methods

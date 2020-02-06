@@ -32,15 +32,10 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.AbstractTriangle;
 import com.jme3.math.FastMath;
 import com.jme3.math.LineSegment;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -67,13 +62,6 @@ public class SimplexCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(SimplexCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagSimplexPoint1 = "simplexPoint1";
-    final private static String tagSimplexPoint2 = "simplexPoint2";
-    final private static String tagSimplexPoint3 = "simplexPoint3";
-    final private static String tagSimplexPoint4 = "simplexPoint4";
     // *************************************************************************
     // fields
 
@@ -83,13 +71,6 @@ public class SimplexCollisionShape extends CollisionShape {
     private Vector3f[] locations;
     // *************************************************************************
     // constructors - TODO Vector3f... constructor
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public SimplexCollisionShape() {
-    }
 
     /**
      * Instantiate a point shape based on the specified location.
@@ -382,67 +363,12 @@ public class SimplexCollisionShape extends CollisionShape {
     }
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        Vector3f v1 = (Vector3f) capsule.readSavable(tagSimplexPoint1, null);
-        Vector3f v2 = (Vector3f) capsule.readSavable(tagSimplexPoint2, null);
-        Vector3f v3 = (Vector3f) capsule.readSavable(tagSimplexPoint3, null);
-        Vector3f v4 = (Vector3f) capsule.readSavable(tagSimplexPoint4, null);
-
-        if (v2 == null) {
-            locations = new Vector3f[]{v1};
-        } else if (v3 == null) {
-            locations = new Vector3f[]{v1, v2};
-        } else if (v4 == null) {
-            locations = new Vector3f[]{v1, v2, v3};
-        } else {
-            locations = new Vector3f[]{v1, v2, v3, v4};
-        }
-
-        createShape();
-    }
-
-    /**
      * Recalculate this shape's bounding box if necessary.
      */
     @Override
     protected void recalculateAabb() {
         long shapeId = getObjectId();
         recalcAabb(shapeId);
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(locations[0], tagSimplexPoint1, null);
-        int numVertices = locations.length;
-        if (numVertices > 1) {
-            capsule.write(locations[1], tagSimplexPoint2, null);
-        }
-        if (numVertices > 2) {
-            capsule.write(locations[2], tagSimplexPoint3, null);
-        }
-        if (numVertices > 3) {
-            capsule.write(locations[3], tagSimplexPoint4, null);
-        }
     }
     // *************************************************************************
     // private methods

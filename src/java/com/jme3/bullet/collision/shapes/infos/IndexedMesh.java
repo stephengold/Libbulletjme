@@ -31,18 +31,12 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.util.BufferUtils;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.logging.Level;
@@ -58,7 +52,7 @@ import jme3utilities.math.MyMath;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class IndexedMesh implements Savable {
+public class IndexedMesh {
     // *************************************************************************
     // constants and loggers
 
@@ -83,15 +77,6 @@ public class IndexedMesh implements Savable {
      */
     final public static Logger logger
             = Logger.getLogger(IndexedMesh.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagIndexInts = "indexInts";
-    final private static String tagIndexStride = "indexStride";
-    final private static String tagNumTriangles = "numTriangles";
-    final private static String tagNumVertices = "numVertices";
-    final private static String tagVertexStride = "vertexStride";
-    final private static String tagVertices = "vertices";
     // *************************************************************************
     // fields
 
@@ -128,13 +113,6 @@ public class IndexedMesh implements Savable {
     private long nativeId = 0L;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public IndexedMesh() {
-    }
 
     /**
      * Instantiate an IndexedMesh based on the specified JME mesh, without
@@ -214,66 +192,6 @@ public class IndexedMesh implements Savable {
     public long nativeId() {
         assert nativeId != 0L;
         return nativeId;
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this mesh from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        indexStride = capsule.readInt(tagIndexStride, 12);
-        numTriangles = capsule.readInt(tagNumTriangles, 0);
-        numVertices = capsule.readInt(tagNumVertices, 0);
-        vertexStride = capsule.readInt(tagVertexStride, numAxes * floatSize);
-
-        int[] intArray = capsule.readIntArray(tagIndexInts, new int[0]);
-        assert intArray.length == numTriangles * vpt;
-        indices = BufferUtils.createIntBuffer(intArray);
-
-        float[] floatArray = capsule.readFloatArray(tagVertices, new float[0]);
-        assert floatArray.length == numVertices * vpt;
-        vertexPositions = BufferUtils.createFloatBuffer(floatArray);
-
-        createMesh();
-    }
-
-    /**
-     * Serialize this mesh to the specified exporter, for example when saving to
-     * a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        int numIndices = indices.capacity();
-        int[] intArray = new int[numIndices];
-        for (int offset = 0; offset < numIndices; ++offset) {
-            intArray[offset] = indices.get(offset);
-        }
-        capsule.write(intArray, tagIndexInts, null);
-
-        capsule.write(indexStride, tagIndexStride, 12);
-        capsule.write(numTriangles, tagNumTriangles, 0);
-        capsule.write(numVertices, tagNumVertices, 0);
-        capsule.write(vertexStride, tagVertexStride, numAxes * floatSize);
-
-        int numFloats = vertexPositions.capacity();
-        float[] floatArray = new float[numFloats];
-        for (int offset = 0; offset < numFloats; ++offset) {
-            floatArray[offset] = vertexPositions.get(offset);
-        }
-        capsule.write(floatArray, tagVertices, null);
     }
     // *************************************************************************
     // Object methods

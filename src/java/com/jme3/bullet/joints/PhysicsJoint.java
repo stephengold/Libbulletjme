@@ -32,12 +32,6 @@
 package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -49,7 +43,7 @@ import jme3utilities.Validate;
  * @author normenhansen
  */
 abstract public class PhysicsJoint
-        implements Comparable<PhysicsJoint>, Savable {
+        implements Comparable<PhysicsJoint> {
     // *************************************************************************
     // constants and loggers
 
@@ -58,11 +52,6 @@ abstract public class PhysicsJoint
      */
     final public static Logger logger
             = Logger.getLogger(PhysicsJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagNodeA = "nodeA";
-    final private static String tagNodeB = "nodeB";
     // *************************************************************************
     // fields
 
@@ -82,14 +71,6 @@ abstract public class PhysicsJoint
      * with body A only
      */
     private PhysicsBody bodyB = null;
-    // *************************************************************************
-    // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil.
-     */
-    protected PhysicsJoint() {
-    }
     // *************************************************************************
     // new methods exposed
 
@@ -209,42 +190,6 @@ abstract public class PhysicsJoint
 
         objectId = jointId;
         logger.log(Level.FINE, "Created {0}.", this);
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        bodyA = (PhysicsBody) capsule.readSavable(tagNodeA, null);
-        bodyB = (PhysicsBody) capsule.readSavable(tagNodeB, null);
-        /*
-         * Each subclass must create the btTypedConstraint, btSoftBody::Anchor,
-         * or btSoftBody::Joint.
-         */
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(bodyA, tagNodeA, null);
-        capsule.write(bodyB, tagNodeB, null);
     }
     // *************************************************************************
     // Comparable methods

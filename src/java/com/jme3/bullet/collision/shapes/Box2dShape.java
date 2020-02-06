@@ -31,13 +31,8 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
@@ -56,11 +51,6 @@ public class Box2dShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(Box2dShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagX = "halfExtentX";
-    final private static String tagY = "halfExtentY";
     // *************************************************************************
     // fields
 
@@ -74,13 +64,6 @@ public class Box2dShape extends CollisionShape {
     private float halfExtentY = 1f;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public Box2dShape() {
-    }
 
     /**
      * Instantiate a square shape with the specified half extent.
@@ -171,38 +154,6 @@ public class Box2dShape extends CollisionShape {
         float result = MyMath.hypotenuse(x, y);
 
         return result;
-    }
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        halfExtentX = capsule.readFloat(tagX, 1f);
-        halfExtentY = capsule.readFloat(tagY, 1f);
-        createShape();
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-        capsule.write(halfExtentX, tagX, 1f);
-        capsule.write(halfExtentY, tagY, 1f);
     }
     // *************************************************************************
     // private methods

@@ -37,16 +37,10 @@ import com.jme3.bullet.joints.motors.MotorParam;
 import com.jme3.bullet.joints.motors.RotationMotor;
 import com.jme3.bullet.joints.motors.TranslationMotor;
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -82,19 +76,6 @@ public class New6Dof extends Constraint {
      */
     final public static Logger logger2
             = Logger.getLogger(New6Dof.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagDampingLimited = "_DampingLimited";
-    final private static String tagMotorEnabled = "_MotorEnabled";
-    final private static String tagRotA = "rotA";
-    final private static String tagRotB = "rotB";
-    final private static String tagRotOrder = "rotOrder";
-    final private static String tagRotMotor = "rm";
-    final private static String tagServoEnabled = "_ServoEnabled";
-    final private static String tagSpringEnabled = "_SpringEnabled";
-    final private static String tagStiffnessLimited = "_StiffnessLimited";
-    final private static String tagTransMotor = "tm";
     // *************************************************************************
     // fields
 
@@ -122,13 +103,6 @@ public class New6Dof extends Constraint {
     private TranslationMotor translationMotor;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public New6Dof() {
-    }
 
     /**
      * Instantiate a single-ended New6Dof constraint with all rotation DOFs free
@@ -542,138 +516,6 @@ public class New6Dof extends Constraint {
 
         long constraintId = getObjectId();
         setStiffness(constraintId, dofIndex, stiffness, limitIfNeeded);
-    }
-    // *************************************************************************
-    // Constraint methods
-
-    /**
-     * De-serialize this Constraint from the specified importer, for example
-     * when loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        rotA = (Matrix3f) capsule.readSavable(tagRotA, null);
-        rotB = (Matrix3f) capsule.readSavable(tagRotB, null);
-        rotationOrder = capsule.readEnum(tagRotOrder, RotationOrder.class,
-                RotationOrder.XYZ);
-
-        createConstraint();
-        readConstraintProperties(capsule);
-
-        for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {
-            RotationMotor motor = getRotationMotor(axisIndex);
-            String motorTag = tagRotMotor + axisIndex;
-
-            motor.setDampingLimited(capsule.readBoolean(
-                    motorTag + tagDampingLimited, false));
-            motor.setMotorEnabled(capsule.readBoolean(
-                    motorTag + tagMotorEnabled, false));
-            motor.setServoEnabled(capsule.readBoolean(
-                    motorTag + tagServoEnabled, false));
-            motor.setSpringEnabled(capsule.readBoolean(
-                    motorTag + tagSpringEnabled, false));
-            motor.setStiffnessLimited(capsule.readBoolean(
-                    motorTag + tagStiffnessLimited, false));
-
-            for (MotorParam param : MotorParam.values()) {
-                String tag = motorTag + param.tagSuffix();
-                float defaultValue = param.defaultForRotationMotor();
-                float value = capsule.readFloat(tag, defaultValue);
-                motor.set(param, value);
-            }
-        }
-
-        TranslationMotor motor = translationMotor;
-        String motorTag = tagTransMotor;
-
-        for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {
-            motor.setDampingLimited(axisIndex, capsule.readBoolean(
-                    motorTag + tagDampingLimited + axisIndex, false));
-            motor.setMotorEnabled(axisIndex, capsule.readBoolean(
-                    motorTag + tagMotorEnabled + axisIndex, false));
-            motor.setServoEnabled(axisIndex, capsule.readBoolean(
-                    motorTag + tagServoEnabled + axisIndex, false));
-            motor.setSpringEnabled(axisIndex, capsule.readBoolean(
-                    motorTag + tagSpringEnabled + axisIndex, false));
-            motor.setStiffnessLimited(axisIndex, capsule.readBoolean(
-                    motorTag + tagStiffnessLimited + axisIndex, false));
-        }
-
-        for (MotorParam p : MotorParam.values()) {
-            String tag = motorTag + p.tagSuffix();
-            float def = p.defaultForRotationMotor();
-            Vector3f defaultVector = new Vector3f(def, def, def);
-            Savable value = capsule.readSavable(tag, defaultVector);
-            motor.set(p, (Vector3f) value);
-        }
-    }
-
-    /**
-     * Serialize this Constraint to the specified exporter, for example when
-     * saving to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(rotA, tagRotA, null);
-        capsule.write(rotB, tagRotB, null);
-        capsule.write(rotationOrder, tagRotOrder, RotationOrder.XYZ);
-
-        for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {
-            RotationMotor motor = rotationMotor[axisIndex];
-            String motorTag = tagRotMotor + axisIndex;
-
-            capsule.write(motor.isDampingLimited(),
-                    motorTag + tagDampingLimited, false);
-            capsule.write(motor.isMotorEnabled(),
-                    motorTag + tagMotorEnabled, false);
-            capsule.write(motor.isServoEnabled(),
-                    motorTag + tagServoEnabled, false);
-            capsule.write(motor.isSpringEnabled(),
-                    motorTag + tagSpringEnabled, false);
-            capsule.write(motor.isStiffnessLimited(),
-                    motorTag + tagStiffnessLimited, false);
-
-            for (MotorParam param : MotorParam.values()) {
-                float value = motor.get(param);
-                String tag = motorTag + param.tagSuffix();
-                float defaultValue = param.defaultForRotationMotor();
-                capsule.write(value, tag, defaultValue);
-            }
-        }
-
-        TranslationMotor motor = translationMotor;
-        String motorTag = tagTransMotor;
-
-        for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {
-            capsule.write(motor.isDampingLimited(axisIndex),
-                    motorTag + tagDampingLimited + axisIndex, false);
-            capsule.write(motor.isMotorEnabled(axisIndex),
-                    motorTag + tagMotorEnabled + axisIndex, false);
-            capsule.write(motor.isServoEnabled(axisIndex),
-                    motorTag + tagServoEnabled + axisIndex, false);
-            capsule.write(motor.isSpringEnabled(axisIndex),
-                    motorTag + tagSpringEnabled + axisIndex, false);
-            capsule.write(motor.isStiffnessLimited(axisIndex),
-                    motorTag + tagStiffnessLimited + axisIndex, false);
-        }
-
-        for (MotorParam param : MotorParam.values()) {
-            Vector3f values = motor.get(param, null);
-            String tag = motorTag + param.tagSuffix();
-            capsule.write(values, tag, null);
-        }
     }
     // *************************************************************************
     // private methods

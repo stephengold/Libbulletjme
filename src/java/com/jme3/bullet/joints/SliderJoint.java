@@ -32,14 +32,9 @@
 package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -61,42 +56,6 @@ public class SliderJoint extends Constraint {
      */
     final public static Logger logger2
             = Logger.getLogger(SliderJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagDampingDirAng = "dampingDirAng";
-    final private static String tagDampingDirLin = "dampingDirLin";
-    final private static String tagDampingLimAng = "dampingLimAng";
-    final private static String tagDampingLimLin = "dampingLimLin";
-    final private static String tagDampingOrthoAng = "dampingOrthoAng";
-    final private static String tagDampingOrthoLin = "dampingOrthoLin";
-    final private static String tagLowerAngLimit = "lowerAngLimit";
-    final private static String tagLowerLinLimit = "lowerLinLimit";
-    final private static String tagMaxAngMotorForce = "maxAngMotorForce";
-    final private static String tagMaxLinMotorForce = "maxLinMotorForce";
-    final private static String tagPoweredAngMotor = "poweredAngMotor";
-    final private static String tagPoweredLinMotor = "poweredLinMotor";
-    final private static String tagRestitutionDirAng = "restitutionDirAng";
-    final private static String tagRestitutionDirLin = "restitutionDirLin";
-    final private static String tagRestitutionLimAng = "restitutionLimAng";
-    final private static String tagRestitutionLimLin = "restitutionLimLin";
-    final private static String tagRestitutionOrthoAng = "restitutionOrthoAng";
-    final private static String tagRestitutionOrthoLin = "restitutionOrthoLin";
-    final private static String tagRotA = "rotA";
-    final private static String tagRotB = "rotB";
-    final private static String tagSoftnessDirAng = "softnessDirAng";
-    final private static String tagSoftnessDirLin = "softnessDirLin";
-    final private static String tagSoftnessLimAng = "softnessLimAng";
-    final private static String tagSoftnessLimLin = "softnessLimLin";
-    final private static String tagSoftnessOrthoAng = "softnessOrthoAng";
-    final private static String tagSoftnessOrthoLin = "softnessOrthoLin";
-    final private static String tagTargetAngMotorVelocity
-            = "targetAngMotorVelocity";
-    final private static String tagTargetLinMotorVelocity
-            = "targetLinMotorVelocity";
-    final private static String tagUpperAngLimit = "upperAngLimit";
-    final private static String tagUpperLinLimit = "upperLinLimit";
-    final private static String tagUseLinearReferenceFrameA = "useLinearReferenceFrameA";
     // *************************************************************************
     // fields
 
@@ -117,13 +76,6 @@ public class SliderJoint extends Constraint {
     private Matrix3f rotB;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public SliderJoint() {
-    }
 
     /**
      * Instantiate a single-ended SliderJoint.
@@ -816,153 +768,6 @@ public class SliderJoint extends Constraint {
     public void setUpperLinLimit(float upperLinLimit) {
         long constraintId = getObjectId();
         setUpperLinLimit(constraintId, upperLinLimit);
-    }
-    // *************************************************************************
-    // Constraint methods
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        float dampingDirAng = capsule.readFloat(tagDampingDirAng, 0f);
-        float dampingDirLin = capsule.readFloat(tagDampingDirLin, 0f);
-        float dampingLimAng = capsule.readFloat(tagDampingLimAng, 1f);
-        float dampingLimLin = capsule.readFloat(tagDampingLimLin, 1f);
-        float dampingOrthoAng = capsule.readFloat(tagDampingOrthoAng, 1f);
-        float dampingOrthoLin = capsule.readFloat(tagDampingOrthoLin, 1f);
-
-        float lowerAngLimit = capsule.readFloat(tagLowerAngLimit, 0f);
-        float lowerLinLimit = capsule.readFloat(tagLowerLinLimit, 1f);
-        float maxAngMotorForce = capsule.readFloat(tagMaxAngMotorForce, 0f);
-        float maxLinMotorForce = capsule.readFloat(tagMaxLinMotorForce, 0f);
-        boolean poweredAngMotor
-                = capsule.readBoolean(tagPoweredAngMotor, false);
-        boolean poweredLinMotor
-                = capsule.readBoolean(tagPoweredLinMotor, false);
-
-        float restitutionDirAng = capsule.readFloat(tagRestitutionDirAng, 0.7f);
-        float restitutionDirLin = capsule.readFloat(tagRestitutionDirLin, 0.7f);
-        float restitutionLimAng = capsule.readFloat(tagRestitutionLimAng, 0.7f);
-        float restitutionLimLin = capsule.readFloat(tagRestitutionLimLin, 0.7f);
-        float restitutionOrthoAng
-                = capsule.readFloat(tagRestitutionOrthoAng, 0.7f);
-        float restitutionOrthoLin
-                = capsule.readFloat(tagRestitutionOrthoLin, 0.7f);
-
-        float softnessDirAng = capsule.readFloat(tagSoftnessDirAng, 1f);
-        float softnessDirLin = capsule.readFloat(tagSoftnessDirLin, 1f);
-        float softnessLimAng = capsule.readFloat(tagSoftnessLimAng, 1f);
-        float softnessLimLin = capsule.readFloat(tagSoftnessLimLin, 1f);
-        float softnessOrthoAng = capsule.readFloat(tagSoftnessOrthoAng, 1f);
-        float softnessOrthoLin = capsule.readFloat(tagSoftnessOrthoLin, 1f);
-
-        float targetAngMotorVelocity
-                = capsule.readFloat(tagTargetAngMotorVelocity, 0f);
-        float targetLinMotorVelocity
-                = capsule.readFloat(tagTargetLinMotorVelocity, 0f);
-
-        float upperAngLimit = capsule.readFloat(tagUpperAngLimit, 0f);
-        float upperLinLimit = capsule.readFloat(tagUpperLinLimit, -1f);
-
-        rotA = (Matrix3f) capsule.readSavable(tagRotA, new Matrix3f());
-        rotB = (Matrix3f) capsule.readSavable(tagRotB, new Matrix3f());
-        useLinearReferenceFrameA = capsule.readBoolean(
-                tagUseLinearReferenceFrameA, false);
-
-        createJoint();
-        readConstraintProperties(capsule);
-
-        setDampingDirAng(dampingDirAng);
-        setDampingDirLin(dampingDirLin);
-        setDampingLimAng(dampingLimAng);
-        setDampingLimLin(dampingLimLin);
-        setDampingOrthoAng(dampingOrthoAng);
-        setDampingOrthoLin(dampingOrthoLin);
-        setLowerAngLimit(lowerAngLimit);
-        setLowerLinLimit(lowerLinLimit);
-        setMaxAngMotorForce(maxAngMotorForce);
-        setMaxLinMotorForce(maxLinMotorForce);
-        setPoweredAngMotor(poweredAngMotor);
-        setPoweredLinMotor(poweredLinMotor);
-        setRestitutionDirAng(restitutionDirAng);
-        setRestitutionDirLin(restitutionDirLin);
-        setRestitutionLimAng(restitutionLimAng);
-        setRestitutionLimLin(restitutionLimLin);
-        setRestitutionOrthoAng(restitutionOrthoAng);
-        setRestitutionOrthoLin(restitutionOrthoLin);
-
-        setSoftnessDirAng(softnessDirAng);
-        setSoftnessDirLin(softnessDirLin);
-        setSoftnessLimAng(softnessLimAng);
-        setSoftnessLimLin(softnessLimLin);
-        setSoftnessOrthoAng(softnessOrthoAng);
-        setSoftnessOrthoLin(softnessOrthoLin);
-
-        setTargetAngMotorVelocity(targetAngMotorVelocity);
-        setTargetLinMotorVelocity(targetLinMotorVelocity);
-
-        setUpperAngLimit(upperAngLimit);
-        setUpperLinLimit(upperLinLimit);
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(getDampingDirAng(), tagDampingDirAng, 0f);
-        capsule.write(getDampingDirLin(), tagDampingDirLin, 0f);
-        capsule.write(getDampingLimAng(), tagDampingLimAng, 1f);
-        capsule.write(getDampingLimLin(), tagDampingLimLin, 1f);
-        capsule.write(getDampingOrthoAng(), tagDampingOrthoAng, 1f);
-        capsule.write(getDampingOrthoLin(), tagDampingOrthoLin, 1f);
-
-        capsule.write(getLowerAngLimit(), tagLowerAngLimit, 0f);
-        capsule.write(getLowerLinLimit(), tagLowerLinLimit, 1f);
-        capsule.write(getMaxAngMotorForce(), tagMaxAngMotorForce, 0f);
-        capsule.write(getMaxLinMotorForce(), tagMaxLinMotorForce, 0f);
-        capsule.write(isPoweredAngMotor(), tagPoweredAngMotor, false);
-        capsule.write(isPoweredLinMotor(), tagPoweredLinMotor, false);
-
-        capsule.write(getRestitutionDirAng(), tagRestitutionDirAng, 0.7f);
-        capsule.write(getRestitutionDirLin(), tagRestitutionDirLin, 0.7f);
-        capsule.write(getRestitutionLimAng(), tagRestitutionLimAng, 0.7f);
-        capsule.write(getRestitutionLimLin(), tagRestitutionLimLin, 0.7f);
-        capsule.write(getRestitutionOrthoAng(), tagRestitutionOrthoAng, 0.7f);
-        capsule.write(getRestitutionOrthoLin(), tagRestitutionOrthoLin, 0.7f);
-
-        capsule.write(getSoftnessDirAng(), tagSoftnessDirAng, 1f);
-        capsule.write(getSoftnessDirLin(), tagSoftnessDirLin, 1f);
-        capsule.write(getSoftnessLimAng(), tagSoftnessLimAng, 1f);
-        capsule.write(getSoftnessLimLin(), tagSoftnessLimLin, 1f);
-        capsule.write(getSoftnessOrthoAng(), tagSoftnessOrthoAng, 1f);
-        capsule.write(getSoftnessOrthoLin(), tagSoftnessOrthoLin, 1f);
-
-        capsule.write(getTargetAngMotorVelocity(),
-                tagTargetAngMotorVelocity, 0f);
-        capsule.write(getTargetLinMotorVelocity(),
-                tagTargetLinMotorVelocity, 0f);
-
-        capsule.write(getUpperAngLimit(), tagUpperAngLimit, 0f);
-        capsule.write(getUpperLinLimit(), tagUpperLinLimit, -1f);
-
-        capsule.write(useLinearReferenceFrameA, tagUseLinearReferenceFrameA,
-                false);
     }
     // *************************************************************************
     // private methods

@@ -33,13 +33,8 @@ package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.collision.shapes.infos.CompoundMesh;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -56,10 +51,6 @@ public class GImpactCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(GImpactCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagNativeMesh = "nativeMesh";
     // *************************************************************************
     // fields
 
@@ -69,13 +60,6 @@ public class GImpactCollisionShape extends CollisionShape {
     private CompoundMesh nativeMesh;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public GImpactCollisionShape() {
-    }
 
     /**
      * Instantiate a shape based on the specified native mesh(es).
@@ -116,21 +100,6 @@ public class GImpactCollisionShape extends CollisionShape {
     // CollisionShape methods
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-        nativeMesh = (CompoundMesh) capsule.readSavable(tagNativeMesh, null);
-        createShape();
-    }
-
-    /**
      * Recalculate this shape's bounding box if necessary.
      */
     @Override
@@ -152,20 +121,6 @@ public class GImpactCollisionShape extends CollisionShape {
     public void setScale(Vector3f scale) {
         super.setScale(scale);
         recalculateAabb();
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-        capsule.write(nativeMesh, tagNativeMesh, null);
     }
     // *************************************************************************
     // private methods

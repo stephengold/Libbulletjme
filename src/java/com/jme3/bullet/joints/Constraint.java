@@ -33,12 +33,7 @@ package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -68,16 +63,6 @@ abstract public class Constraint extends PhysicsJoint {
      */
     final public static Logger logger15
             = Logger.getLogger(Constraint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagBreakingImpulse = "breakingImpulseThreshold";
-    final private static String tagIsCollision
-            = "isCollisionBetweenLinkedBodies";
-    final private static String tagIsEnabled = "isEnabled";
-    final private static String tagNumIterations = "numIterations";
-    final private static String tagPivotA = "pivotA";
-    final private static String tagPivotB = "pivotB";
     // *************************************************************************
     // fields
 
@@ -97,12 +82,6 @@ abstract public class Constraint extends PhysicsJoint {
     protected Vector3f pivotB;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil.
-     */
-    protected Constraint() {
-    }
 
     /**
      * Instantiate an enabled, single-ended Constraint using the specified body
@@ -409,28 +388,6 @@ abstract public class Constraint extends PhysicsJoint {
      * @return a btTypedConstraintType ordinal value (&ge;3)
      */
     final native protected int getConstraintType(long constraintId);
-
-    /**
-     * Read common properties from a capsule.
-     *
-     * @param capsule the input capsule (not null, modified)
-     * @throws IOException from the importer
-     */
-    final protected void readConstraintProperties(InputCapsule capsule)
-            throws IOException {
-        float breakingImpulse
-                = capsule.readFloat(tagBreakingImpulse, Float.MAX_VALUE);
-        setBreakingImpulseThreshold(breakingImpulse);
-
-        boolean isCollision = capsule.readBoolean(tagIsCollision, true);
-        setCollisionBetweenLinkedBodies(isCollision);
-
-        boolean isEnabled = capsule.readBoolean(tagIsEnabled, true);
-        setEnabled(isEnabled);
-
-        int numIterations = capsule.readInt(tagNumIterations, -1);
-        overrideIterations(numIterations);
-    }
     // *************************************************************************
     // PhysicsJoint methods
 
@@ -479,48 +436,6 @@ abstract public class Constraint extends PhysicsJoint {
         boolean result = isEnabled(constraintId);
 
         return result;
-    }
-
-    /**
-     * De-serialize this Constraint from the specified importer, for example
-     * when loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        pivotA = (Vector3f) capsule.readSavable(tagPivotA, new Vector3f());
-        pivotB = (Vector3f) capsule.readSavable(tagPivotB, new Vector3f());
-        /*
-         * Each subclass must create the btTypedConstraint and then
-         * invoke readConstraintProperties().
-         */
-    }
-
-    /**
-     * Serialize this Constraint to the specified exporter, for example when
-     * saving to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(pivotA, tagPivotA, null);
-        capsule.write(pivotB, tagPivotB, null);
-
-        capsule.write(getBreakingImpulseThreshold(), tagBreakingImpulse,
-                Float.MAX_VALUE);
-        capsule.write(isCollisionBetweenLinkedBodies(), tagIsCollision, true);
-        capsule.write(isEnabled(), tagIsEnabled, true);
-        capsule.write(getOverrideIterations(), tagNumIterations, -1);
     }
     // *************************************************************************
     // Object methods

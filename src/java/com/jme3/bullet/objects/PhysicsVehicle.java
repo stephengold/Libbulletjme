@@ -35,13 +35,8 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.objects.infos.RigidBodyMotionState;
 import com.jme3.bullet.objects.infos.VehicleTuning;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,18 +68,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      */
     final public static Logger logger3
             = Logger.getLogger(PhysicsVehicle.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagFrictionSlip = "frictionSlip";
-    final private static String tagMaxSuspensionForce = "maxSuspensionForce";
-    final private static String tagMaxSuspensionTravelCm
-            = "maxSuspensionTravelCm";
-    final private static String tagSuspensionCompression
-            = "suspensionCompression";
-    final private static String tagSuspensionDamping = "suspensionDamping";
-    final private static String tagSuspensionStiffness = "suspensionStiffness";
-    final private static String tagWheelsList = "wheelsList";
     // *************************************************************************
     // fields
 
@@ -112,13 +95,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     protected VehicleTuning tuning = new VehicleTuning();
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public PhysicsVehicle() {
-    }
 
     /**
      * Instantiate a responsive vehicle with the specified CollisionShape and
@@ -760,45 +736,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         finalizeNative(rayCasterId, vehicleId);
     }
 
-    /**
-     * De-serialize this vehicle from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-        tuning = new VehicleTuning();
-
-        float readFloat = capsule.readFloat(tagFrictionSlip, 10.5f);
-        tuning.setFrictionSlip(readFloat);
-
-        readFloat = capsule.readFloat(tagMaxSuspensionTravelCm, 500f);
-        tuning.setMaxSuspensionTravelCm(readFloat);
-
-        readFloat = capsule.readFloat(tagMaxSuspensionForce, 6000f);
-        tuning.setMaxSuspensionForce(readFloat);
-
-        readFloat = capsule.readFloat(tagSuspensionCompression, 0.83f);
-        tuning.setSuspensionCompression(readFloat);
-
-        readFloat = capsule.readFloat(tagSuspensionDamping, 0.88f);
-        tuning.setSuspensionDamping(readFloat);
-
-        readFloat = capsule.readFloat(tagSuspensionStiffness, 5.88f);
-        tuning.setSuspensionStiffness(readFloat);
-
-        wheels = capsule.readSavableArrayList(tagWheelsList,
-                new ArrayList<VehicleWheel>(6));
-        RigidBodyMotionState ms = getMotionState();
-        ms.setVehicle(this);
-
-        super.read(importer);
-    }
-
     @Override
     protected void postRebuild() {
         super.postRebuild();
@@ -806,33 +743,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         ms.setVehicle(this);
         createVehicle(physicsSpace);
         // TODO re-create any joints
-    }
-
-    /**
-     * Serialize this vehicle to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(tuning.getFrictionSlip(), tagFrictionSlip, 10.5f);
-        capsule.write(tuning.getMaxSuspensionTravelCm(),
-                tagMaxSuspensionTravelCm, 500f);
-        capsule.write(tuning.getMaxSuspensionForce(), tagMaxSuspensionForce,
-                6000f);
-        capsule.write(tuning.getSuspensionCompression(),
-                tagSuspensionCompression, 0.83f);
-        capsule.write(tuning.getSuspensionDamping(), tagSuspensionDamping,
-                0.88f);
-        capsule.write(tuning.getSuspensionStiffness(), tagSuspensionStiffness,
-                5.88f);
-        capsule.writeSavableArrayList(wheels, tagWheelsList, null);
-
-        super.write(exporter);
     }
     // *************************************************************************
     // private methods

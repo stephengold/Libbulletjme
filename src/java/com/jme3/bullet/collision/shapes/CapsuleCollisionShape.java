@@ -32,12 +32,7 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -60,12 +55,6 @@ public class CapsuleCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(CapsuleCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAxis = "axis";
-    final private static String tagHeight = "height";
-    final private static String tagRadius = "radius";
     // *************************************************************************
     // fields
 
@@ -84,13 +73,6 @@ public class CapsuleCollisionShape extends CollisionShape {
     private int axis;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public CapsuleCollisionShape() {
-    }
 
     /**
      * Instantiate a Y-axis capsule shape with the specified radius and height.
@@ -215,24 +197,6 @@ public class CapsuleCollisionShape extends CollisionShape {
     }
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        radius = capsule.readFloat(tagRadius, 0.5f);
-        height = capsule.readFloat(tagHeight, 1f);
-        axis = capsule.readInt(tagAxis, PhysicsSpace.AXIS_Y);
-        createShape();
-    }
-
-    /**
      * Alter the collision margin of this shape. This feature is disabled for
      * capsule shapes.
      *
@@ -242,23 +206,6 @@ public class CapsuleCollisionShape extends CollisionShape {
     public void setMargin(float margin) {
         logger2.log(Level.WARNING,
                 "Cannot alter the margin of a CapsuleCollisionShape.");
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(radius, tagRadius, 0.5f);
-        capsule.write(height, tagHeight, 1f);
-        capsule.write(axis, tagAxis, PhysicsSpace.AXIS_Y);
     }
     // *************************************************************************
     // private methods

@@ -32,8 +32,6 @@
 
 package com.jme3.math;
 
-import com.jme3.export.*;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /*
@@ -49,7 +47,7 @@ import java.util.logging.Logger;
  * @author Mark Powell
  * @author Joshua Slack
  */
-public final class Vector3f implements Savable, Cloneable, java.io.Serializable {
+public final class Vector3f implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
     
@@ -1017,22 +1015,6 @@ public final class Vector3f implements Savable, Cloneable, java.io.Serializable 
     @Override
     public String toString() {
         return "(" + x + ", " + y + ", " + z + ")";
-    }
-
-    @Override
-    public void write(JmeExporter e) throws IOException {
-        OutputCapsule capsule = e.getCapsule(this);
-        capsule.write(x, "x", 0);
-        capsule.write(y, "y", 0);
-        capsule.write(z, "z", 0);
-    }
-
-    @Override
-    public void read(JmeImporter e) throws IOException {
-        InputCapsule capsule = e.getCapsule(this);
-        x = capsule.readFloat("x", 0);
-        y = capsule.readFloat("y", 0);
-        z = capsule.readFloat("z", 0);
     }
 
     public float getX() {

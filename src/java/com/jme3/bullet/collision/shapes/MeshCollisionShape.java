@@ -33,14 +33,7 @@ package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.collision.shapes.infos.CompoundMesh;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.scene.Mesh;
-import com.jme3.system.JmeSystem;
-import com.jme3.system.Platform;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -59,13 +52,6 @@ public class MeshCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(MeshCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagNativeBvh = "nativeBvh";
-    final private static String tagNativePlatform = "nativePlatform";
-    final private static String tagNativeMesh = "nativeMesh";
-    final private static String tagUseCompression = "useCompression";
     // *************************************************************************
     // fields
 
@@ -83,13 +69,6 @@ public class MeshCollisionShape extends CollisionShape {
     private long nativeBVHBuffer = 0L;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public MeshCollisionShape() {
-    }
 
     /**
      * Instantiate a shape based on the specified native mesh(es).
@@ -178,60 +157,12 @@ public class MeshCollisionShape extends CollisionShape {
     }
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        byte[] nativeBvh = capsule.readByteArray(tagNativeBvh, null);
-        Platform writePlatform
-                = capsule.readEnum(tagNativePlatform, Platform.class, null);
-        if (writePlatform == null || writePlatform != JmeSystem.getPlatform()) {
-            nativeBvh = null; // will re-create the BVH for the new platform
-        }
-
-        nativeMesh = (CompoundMesh) capsule.readSavable(tagNativeMesh, null);
-        useCompression = capsule.readBoolean(tagUseCompression, true);
-
-        createShape(nativeBvh);
-    }
-
-    /**
      * Recalculate this shape's bounding box if necessary.
      */
     @Override
     protected void recalculateAabb() {
         long shapeId = getObjectId();
         recalcAabb(shapeId);
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        long shapeId = getObjectId();
-        byte[] data = saveBVH(shapeId);
-        capsule.write(data, tagNativeBvh, null);
-
-        Platform nativePlatform = JmeSystem.getPlatform();
-        capsule.write(nativePlatform, tagNativePlatform, null);
-
-        capsule.write(nativeMesh, tagNativeMesh, null);
-        capsule.write(useCompression, tagUseCompression, true);
     }
     // *************************************************************************
     // private methods

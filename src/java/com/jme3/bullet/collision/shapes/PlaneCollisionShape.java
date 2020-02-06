@@ -31,13 +31,8 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Plane;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -54,10 +49,6 @@ public class PlaneCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(PlaneCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagCollisionPlane = "collisionPlane";
     // *************************************************************************
     // fields
 
@@ -67,13 +58,6 @@ public class PlaneCollisionShape extends CollisionShape {
     private Plane plane;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public PlaneCollisionShape() {
-    }
 
     /**
      * Instantiate a plane shape defined by the specified plane.
@@ -106,35 +90,6 @@ public class PlaneCollisionShape extends CollisionShape {
     @Override
     public float maxRadius() {
         return Float.POSITIVE_INFINITY;
-    }
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-        plane = (Plane) capsule.readSavable(tagCollisionPlane, new Plane());
-        createShape();
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-        capsule.write(plane, tagCollisionPlane, new Plane());
     }
     // *************************************************************************
     // private methods

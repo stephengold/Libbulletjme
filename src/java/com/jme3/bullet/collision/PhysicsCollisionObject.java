@@ -36,17 +36,11 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.infos.DebugMeshNormals;
 import com.jme3.bullet.debug.DebugMeshInitListener;
 import com.jme3.bullet.util.DebugShapeFactory;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.material.Material;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -61,7 +55,7 @@ import jme3utilities.Validate;
  * @author normenhansen
  */
 abstract public class PhysicsCollisionObject
-        implements Comparable<PhysicsCollisionObject>, Savable {
+        implements Comparable<PhysicsCollisionObject> {
     // *************************************************************************
     // constants and loggers
 
@@ -138,32 +132,6 @@ abstract public class PhysicsCollisionObject
      */
     final public static Logger logger
             = Logger.getLogger(PhysicsCollisionObject.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAnisotropicFrictionComponents
-            = "anisotropicFrictionComponents";
-    final private static String tagAnisotropicFrictionMode
-            = "anisotropicFrictionMode";
-    final private static String tagCcdMotionThreshold
-            = "ccdMotionThreshold";
-    final private static String tagCcdSweptSphereRadius
-            = "ccdSweptSphereRadius";
-    final private static String tagCollisionGroup = "collisionGroup";
-    final private static String tagCollisionGroupsMask = "collisionGroupsMask";
-    final private static String tagCollisionShape = "collisionShape";
-    final private static String tagContactDamping = "contactDamping";
-    final private static String tagContactProcessingThreshold
-            = "contactProcessingThreshold";
-    final private static String tagContactStiffness = "contactStiffness";
-    final private static String tagDebugMaterial = "debugMaterial";
-    final private static String tagDebugMeshNormals = "debugMeshNormals";
-    final private static String tagDebugMeshResolution = "debugMeshResolution";
-    final private static String tagFriction = "friction";
-    final private static String tagRestitution = "restitution";
-    final private static String tagRollingFriction = "rollingFriction";
-    final private static String tagSpinningFriction = "spinningFriction";
-    final private static String tagUserObject = "userObject";
     // *************************************************************************
     // fields
 
@@ -950,36 +918,6 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read common properties from a capsule.
-     *
-     * @param capsule the input capsule (not null, modified)
-     * @throws IOException from the importer
-     */
-    final protected void readPcoProperties(InputCapsule capsule)
-            throws IOException {
-        setCcdMotionThreshold(capsule.readFloat(tagCcdMotionThreshold, 0f));
-        setCcdSweptSphereRadius(
-                capsule.readFloat(tagCcdSweptSphereRadius, 0f));
-        setContactDamping(capsule.readFloat(tagContactDamping, 0.1f));
-        setContactProcessingThreshold(
-                capsule.readFloat(tagContactProcessingThreshold, 0f));
-        setContactStiffness(capsule.readFloat(tagContactStiffness, 1e30f));
-        setFriction(capsule.readFloat(tagFriction, 0.5f));
-        setRestitution(capsule.readFloat(tagRestitution, 0f));
-        setRollingFriction(capsule.readFloat(tagRollingFriction, 0f));
-        setSpinningFriction(capsule.readFloat(tagSpinningFriction, 0f));
-
-        int mode = capsule.readInt(tagAnisotropicFrictionMode, AfMode.none);
-        if (mode != AfMode.none) {
-            Vector3f components = (Vector3f) capsule.readSavable(
-                    tagAnisotropicFrictionComponents, new Vector3f(1f, 1f, 1f));
-            setAnisotropicFriction(components, mode);
-        }
-
-        userObject = capsule.readSavable(tagUserObject, null);
-    }
-
-    /**
      * Alter the activation state of this object.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
@@ -1028,84 +966,6 @@ abstract public class PhysicsCollisionObject
         int result = Long.compare(objectId, otherId);
 
         return result;
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this object from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        collisionGroup = capsule.readInt(tagCollisionGroup, COLLISION_GROUP_01);
-        collideWithGroups = capsule.readInt(tagCollisionGroupsMask,
-                COLLISION_GROUP_01);
-        debugMeshNormals = capsule.readEnum(tagDebugMeshNormals,
-                DebugMeshNormals.class, DebugMeshNormals.None);
-        debugMeshResolution = capsule.readInt(tagDebugMeshResolution, 0);
-        debugMaterial = (Material) capsule.readSavable(tagDebugMaterial, null);
-
-        Savable shape = capsule.readSavable(tagCollisionShape, null);
-        collisionShape = (CollisionShape) shape;
-        /*
-         * The subclass should create the btCollisionObject and then
-         * invoke readPcoProperties() .
-         */
-    }
-
-    /**
-     * Serialize this object to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(collisionGroup, tagCollisionGroup, COLLISION_GROUP_01);
-        capsule.write(collideWithGroups, tagCollisionGroupsMask,
-                COLLISION_GROUP_01);
-        capsule.write(debugMeshNormals, tagDebugMeshNormals,
-                DebugMeshNormals.None);
-        capsule.write(debugMeshResolution, tagDebugMeshResolution, 0);
-        capsule.write(debugMaterial, tagDebugMaterial, null);
-        capsule.write(collisionShape, tagCollisionShape, null);
-
-        if (userObject instanceof Savable) {
-            capsule.write((Savable) userObject, "userObject", null);
-        }
-
-        // common properties
-        capsule.write(getCcdMotionThreshold(), tagCcdMotionThreshold, 0f);
-        capsule.write(getCcdSweptSphereRadius(), tagCcdSweptSphereRadius, 0f);
-        capsule.write(getContactDamping(), tagContactDamping, 0.1f);
-        capsule.write(getContactProcessingThreshold(),
-                tagContactProcessingThreshold, 0f);
-        capsule.write(getContactStiffness(), tagContactStiffness, 1e30f);
-        capsule.write(getFriction(), tagFriction, 0.5f);
-        capsule.write(getRestitution(), tagRestitution, 0f);
-        capsule.write(getRollingFriction(), tagRollingFriction, 0f);
-        capsule.write(getSpinningFriction(), tagSpinningFriction, 0f);
-
-        int mode = AfMode.none;
-        if (hasAnisotropicFriction(AfMode.basic)) {
-            mode = AfMode.basic;
-        } else if (hasAnisotropicFriction(AfMode.rolling)) {
-            mode = AfMode.rolling;
-        }
-        capsule.write(mode, tagAnisotropicFrictionMode, AfMode.none);
-        if (mode != AfMode.none) {
-            Vector3f components = getAnisotropicFriction(null);
-            capsule.write(components, tagAnisotropicFrictionComponents, null);
-        }
     }
     // *************************************************************************
     // Object methods

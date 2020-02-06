@@ -31,8 +31,6 @@
  */
 package com.jme3.math;
 
-import com.jme3.export.*;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -45,7 +43,7 @@ import java.util.logging.Logger;
  * @author Joshua Slack
  * @author Ian McClean
  */
-public class Plane implements Savable, Cloneable, java.io.Serializable {
+public class Plane implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
 
@@ -267,20 +265,6 @@ public class Plane implements Savable, Cloneable, java.io.Serializable {
     public String toString() {
         return getClass().getSimpleName() + " [Normal: " + normal + " - Constant: "
                 + constant + "]";
-    }
-
-    @Override
-    public void write(JmeExporter e) throws IOException {
-        OutputCapsule capsule = e.getCapsule(this);
-        capsule.write(normal, "normal", Vector3f.ZERO);
-        capsule.write(constant, "constant", 0);
-    }
-
-    @Override
-    public void read(JmeImporter e) throws IOException {
-        InputCapsule capsule = e.getCapsule(this);
-        normal = (Vector3f) capsule.readSavable("normal", Vector3f.ZERO.clone());
-        constant = capsule.readFloat("constant", 0);
     }
 
     @Override

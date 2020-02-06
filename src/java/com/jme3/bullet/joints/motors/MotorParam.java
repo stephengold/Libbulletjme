@@ -290,13 +290,4 @@ public enum MotorParam {
                 throw new IllegalArgumentException(toString());
         }
     }
-
-    /**
-     * Determine the serialization-tag suffix for this parameter.
-     *
-     * @return the tag suffix
-     */
-    public String tagSuffix() {
-        return "_" + toString();
-    }
 }

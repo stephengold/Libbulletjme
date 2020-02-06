@@ -31,9 +31,7 @@
  */
 package com.jme3.math;
 
-import com.jme3.export.*;
 import com.jme3.util.TempVars;
-
 import java.io.*;
 import java.util.logging.Logger;
 
@@ -49,7 +47,7 @@ import java.util.logging.Logger;
  * @author Mark Powell
  * @author Joshua Slack
  */
-public final class Quaternion implements Savable, Cloneable, java.io.Serializable {
+public final class Quaternion implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
 
@@ -1379,24 +1377,6 @@ public final class Quaternion implements Savable, Cloneable, java.io.Serializabl
         fromAxes(vars.vect1, vars.vect2, vars.vect3);
         vars.release();
         return this;
-    }
-
-    @Override
-    public void write(JmeExporter e) throws IOException {
-        OutputCapsule cap = e.getCapsule(this);
-        cap.write(x, "x", 0);
-        cap.write(y, "y", 0);
-        cap.write(z, "z", 0);
-        cap.write(w, "w", 1);
-    }
-
-    @Override
-    public void read(JmeImporter e) throws IOException {
-        InputCapsule cap = e.getCapsule(this);
-        x = cap.readFloat("x", 0);
-        y = cap.readFloat("y", 0);
-        z = cap.readFloat("z", 0);
-        w = cap.readFloat("w", 1);
     }
 
     /**

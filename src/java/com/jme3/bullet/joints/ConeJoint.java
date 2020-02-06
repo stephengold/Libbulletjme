@@ -32,14 +32,9 @@
 package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -61,15 +56,6 @@ public class ConeJoint extends Constraint {
      */
     final public static Logger logger2
             = Logger.getLogger(ConeJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAngularOnly = "angularOnly";
-    final private static String tagRotA = "rotA";
-    final private static String tagRotB = "rotB";
-    final private static String tagSwingSpan1 = "swingSpan1";
-    final private static String tagSwingSpan2 = "swingSpan2";
-    final private static String tagTwistSpan = "twistSpan";
     /**
      * local copy of {@link com.jme3.math.Vector3f#ZERO}
      */
@@ -105,13 +91,6 @@ public class ConeJoint extends Constraint {
     private boolean angularOnly = false;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public ConeJoint() {
-    }
 
     /**
      * Instantiate a single-ended ConeJoint with its pivot at the physics-space
@@ -273,53 +252,6 @@ public class ConeJoint extends Constraint {
         this.swingSpan2 = swingSpan2;
         this.twistSpan = twistSpan;
         setLimit(constraintId, swingSpan1, swingSpan2, twistSpan);
-    }
-    // *************************************************************************
-    // Constraint methods
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        rotA = (Matrix3f) capsule.readSavable(tagRotA, new Matrix3f());
-        rotB = (Matrix3f) capsule.readSavable(tagRotB, new Matrix3f());
-
-        angularOnly = capsule.readBoolean(tagAngularOnly, false);
-        swingSpan1 = capsule.readFloat(tagSwingSpan1, 1e30f);
-        swingSpan2 = capsule.readFloat(tagSwingSpan2, 1e30f);
-        twistSpan = capsule.readFloat(tagTwistSpan, 1e30f);
-
-        createJoint();
-        readConstraintProperties(capsule);
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(rotA, tagRotA, null);
-        capsule.write(rotB, tagRotB, null);
-
-        capsule.write(angularOnly, tagAngularOnly, false);
-        capsule.write(swingSpan1, tagSwingSpan1, 1e30f);
-        capsule.write(swingSpan2, tagSwingSpan2, 1e30f);
-        capsule.write(twistSpan, tagTwistSpan, 1e30f);
     }
     // *************************************************************************
     // private methods

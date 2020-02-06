@@ -37,17 +37,12 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.infos.DebugMeshNormals;
 import com.jme3.bullet.objects.infos.Cluster;
 import com.jme3.bullet.objects.infos.SoftBodyConfig;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.mesh.IndexBuffer;
 import com.jme3.util.BufferUtils;
-import java.io.IOException;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -86,21 +81,6 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     final public static Logger logger2
             = Logger.getLogger(PhysicsSoftBody.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagConfig = "config";
-    final private static String tagFaceIndices = "faceIndices";
-    final private static String tagIndices = "indices";
-    final private static String tagLinkIndices = "linkIndices";
-    final private static String tagNodeLocations = "nodeLocations";
-    final private static String tagNodeMasses = "nodeMasses";
-    final private static String tagNodeNormals = "nodeNormals";
-    final private static String tagNodeVelocities = "nodeVelocities";
-    final private static String tagNumClusters = "numClusters";
-    final private static String tagPhysicsLocation = "physicsLocation";
-    final private static String tagRestLengthScale = "restLengthScale";
-    final private static String tagTetraIndices = "tetraIndices";
     // *************************************************************************
     // fields
 
@@ -1317,77 +1297,6 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * De-serialize this body from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        newEmptySoftBody();
-        readPcoProperties(capsule);
-        config = (SoftBodyConfig) capsule.readSavable(tagConfig, null);
-        assert config != null;
-
-        float[] fArray = capsule.readFloatArray(tagNodeLocations, new float[0]);
-        appendNodes(BufferUtils.createFloatBuffer(fArray));
-
-        fArray = capsule.readFloatArray(tagNodeMasses, new float[0]);
-        setMasses(BufferUtils.createFloatBuffer(fArray));
-
-        fArray = capsule.readFloatArray(tagNodeNormals, new float[0]);
-        setNormals(BufferUtils.createFloatBuffer(fArray));
-
-        fArray = capsule.readFloatArray(tagNodeVelocities, new float[0]);
-        setVelocities(BufferUtils.createFloatBuffer(fArray));
-
-        int[] nodeIndices = capsule.readIntArray(tagFaceIndices, new int[0]);
-        IndexBuffer indexBuffer = IndexBuffer.wrapIndexBuffer(
-                BufferUtils.createIntBuffer(nodeIndices));
-        appendFaces(indexBuffer);
-
-        nodeIndices = capsule.readIntArray(tagLinkIndices, new int[0]);
-        indexBuffer = IndexBuffer.wrapIndexBuffer(
-                BufferUtils.createIntBuffer(nodeIndices));
-        appendLinks(indexBuffer);
-
-        nodeIndices = capsule.readIntArray(tagTetraIndices, new int[0]);
-        indexBuffer = IndexBuffer.wrapIndexBuffer(
-                BufferUtils.createIntBuffer(nodeIndices));
-        appendTetras(indexBuffer);
-
-        assert countClusters() == 0 : countClusters();
-        int numClusters = capsule.readInt(tagNumClusters, 0);
-        for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
-            nodeIndices = capsule.readIntArray(tagIndices + clusterIndex,
-                    new int[0]);
-            int numNodesInCluster = nodeIndices.length;
-            IntBuffer intBuffer = BufferUtils.createIntBuffer(nodeIndices);
-            appendCluster(objectId, numNodesInCluster, intBuffer);
-
-            for (Cluster clusterParameter : Cluster.values()) {
-                String tag = clusterParameter.toString() + clusterIndex;
-                float defValue = clusterParameter.defValue();
-                float value = capsule.readFloat(tag, defValue);
-                set(clusterParameter, clusterIndex, value);
-            }
-        }
-        finishClusters(objectId);
-        assert countClusters() == numClusters : countClusters();
-
-        setRestingLengthScale(capsule.readFloat(tagRestLengthScale, 0f));
-        setPhysicsLocation((Vector3f) capsule.readSavable(tagPhysicsLocation,
-                new Vector3f()));
-
-        getSoftMaterial().read(capsule);
-        readJoints(capsule);
-    }
-
-    /**
      * Alter which normals to include in new debug meshes.
      *
      * @param newSetting an enum value (either None or Smooth)
@@ -1449,79 +1358,6 @@ public class PhysicsSoftBody extends PhysicsBody {
     public void setPhysicsLocation(Vector3f location) {
         Validate.finite(location, "location");
         setPhysicsLocation(objectId, location);
-    }
-
-    /**
-     * Serialize this body to the specified exporter, for example when saving to
-     * a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(restingLengthsScale(), tagRestLengthScale, 0f);
-        capsule.write(getPhysicsLocation(), tagPhysicsLocation, null);
-
-        FloatBuffer floatBuffer = copyLocations(null);
-        int capacity = floatBuffer.capacity();
-        float[] floatArray = MyBuffer.toFloatArray(floatBuffer, 0, capacity);
-        capsule.write(floatArray, tagNodeLocations, null);
-
-        floatBuffer = copyMasses(null);
-        capacity = floatBuffer.capacity();
-        floatArray = MyBuffer.toFloatArray(floatBuffer, 0, capacity);
-        capsule.write(floatArray, tagNodeMasses, null);
-
-        floatBuffer = copyNormals(null);
-        capacity = floatBuffer.capacity();
-        floatArray = MyBuffer.toFloatArray(floatBuffer, 0, capacity);
-        capsule.write(floatArray, tagNodeNormals, null);
-
-        floatBuffer = copyVelocities(null);
-        capacity = floatBuffer.capacity();
-        floatArray = MyBuffer.toFloatArray(floatBuffer, 0, capacity);
-        capsule.write(floatArray, tagNodeVelocities, null);
-
-        IntBuffer intBuffer = copyFaces(null);
-        capacity = intBuffer.capacity();
-        int[] intArray = MyBuffer.toIntArray(intBuffer, 0, capacity);
-        capsule.write(intArray, tagFaceIndices, null);
-
-        intBuffer = copyLinks(null);
-        capacity = intBuffer.capacity();
-        intArray = MyBuffer.toIntArray(intBuffer, 0, capacity);
-        capsule.write(intArray, tagLinkIndices, null);
-
-        intBuffer = copyTetras(null);
-        capacity = intBuffer.capacity();
-        intArray = MyBuffer.toIntArray(intBuffer, 0, capacity);
-        capsule.write(intArray, tagTetraIndices, null);
-
-        int numClusters = countClusters();
-        capsule.write(numClusters, tagNumClusters, 0);
-        for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
-            intBuffer = listNodesInCluster(clusterIndex, null);
-            capacity = intBuffer.capacity();
-            intArray = MyBuffer.toIntArray(intBuffer, 0, capacity);
-            capsule.write(intArray, tagIndices + clusterIndex, null);
-
-            for (Cluster clusterParameter : Cluster.values()) {
-                float value = get(clusterParameter, clusterIndex);
-                String tag = clusterParameter.toString() + clusterIndex;
-                float defValue = clusterParameter.defValue();
-                capsule.write(value, tag, defValue);
-            }
-        }
-
-        assert config != null;
-        capsule.write(config, tagConfig, null);
-        getSoftMaterial().write(capsule);
-
-        writeJoints(capsule);
     }
     // *************************************************************************
     // native methods
@@ -1745,15 +1581,6 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public class Material {
         // *********************************************************************
-        // constants and loggers
-
-        /**
-         * field names for serialization
-         */
-        final private static String tagAngularStiffness = "angularStiffness";
-        final private static String tagLinearStiffness = "linearStiffness";
-        final private static String tagVolumeStiffness = "volumeStiffness";
-        // *********************************************************************
         // fields
 
         /**
@@ -1865,34 +1692,6 @@ public class PhysicsSoftBody extends PhysicsBody {
             result = 79 * result + (int) (materialId ^ (materialId >>> 32));
 
             return result;
-        }
-        // *********************************************************************
-        // private methods
-
-        /**
-         * De-serialize this Material from the specified capsule, for example
-         * when loading from a J3O file.
-         *
-         * @param capsule the capsule to read from (not null)
-         * @throws IOException from the importer
-         */
-        private void read(InputCapsule capsule) throws IOException {
-            setAngularStiffness(capsule.readFloat(tagAngularStiffness, 1f));
-            setLinearStiffness(capsule.readFloat(tagLinearStiffness, 1f));
-            setVolumeStiffness(capsule.readFloat(tagVolumeStiffness, 1f));
-        }
-
-        /**
-         * Serialize this Material to the specified capsule, for example when
-         * saving to a J3O file.
-         *
-         * @param capsule the capsule to write to (not null)
-         * @throws IOException from the exporter
-         */
-        private void write(OutputCapsule capsule) throws IOException {
-            capsule.write(angularStiffness(), tagAngularStiffness, 1f);
-            capsule.write(linearStiffness(), tagLinearStiffness, 1f);
-            capsule.write(volumeStiffness(), tagVolumeStiffness, 1f);
         }
         // *********************************************************************
         // native methods

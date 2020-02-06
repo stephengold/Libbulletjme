@@ -33,16 +33,11 @@ package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.util.DebugShapeFactory;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,11 +65,6 @@ public class HullCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(HullCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagHullMesh = "hullMesh";
-    final private static String tagPoints = "points";
     // *************************************************************************
     // fields
 
@@ -91,13 +81,6 @@ public class HullCollisionShape extends CollisionShape {
     private float[] points;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public HullCollisionShape() {
-    }
 
     /**
      * Instantiate a shape based on the specified collection of locations. For
@@ -384,50 +367,12 @@ public class HullCollisionShape extends CollisionShape {
     }
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        // for backwards compatibility
-        Mesh mesh = (Mesh) capsule.readSavable(tagHullMesh, null);
-        if (mesh != null) {
-            points = getPoints(mesh);
-        } else {
-            points = capsule.readFloatArray(tagPoints, new float[0]);
-        }
-        createShape();
-    }
-
-    /**
      * Recalculate this shape's bounding box if necessary.
      */
     @Override
     protected void recalculateAabb() {
         long shapeId = getObjectId();
         recalcAabb(shapeId);
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        float[] vertices = copyHullVertices();
-        capsule.write(vertices, tagPoints, new float[0]);
     }
     // *************************************************************************
     // private methods

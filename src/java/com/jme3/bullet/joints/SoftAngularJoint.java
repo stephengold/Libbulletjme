@@ -33,12 +33,7 @@ package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsSoftBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -57,10 +52,6 @@ public class SoftAngularJoint extends SoftPhysicsJoint {
      */
     final public static Logger logger3
             = Logger.getLogger(SoftAngularJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAxis = "axis";
     // *************************************************************************
     // fields
 
@@ -70,13 +61,6 @@ public class SoftAngularJoint extends SoftPhysicsJoint {
     private Vector3f axis;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public SoftAngularJoint() {
-    }
 
     /**
      * Instantiate a soft-rigid angular joint.
@@ -144,37 +128,6 @@ public class SoftAngularJoint extends SoftPhysicsJoint {
         long jointId = getObjectId();
         axis.set(newAxis);
         setAxis(jointId, newAxis);
-    }
-    // *************************************************************************
-    // SoftPhysicsJoint methods
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-        axis = (Vector3f) capsule.readSavable(tagAxis, new Vector3f());
-        createJoint();
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-        capsule.write(axis, tagAxis, null);
     }
     // *************************************************************************
     // private methods

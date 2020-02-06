@@ -31,12 +31,7 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,10 +56,6 @@ public class SphereCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(SphereCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagRadius = "radius";
     // *************************************************************************
     // fields
 
@@ -74,13 +65,6 @@ public class SphereCollisionShape extends CollisionShape {
     private float radius;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public SphereCollisionShape() {
-    }
 
     /**
      * Instantiate a sphere shape that encloses the sample locations in the
@@ -179,21 +163,6 @@ public class SphereCollisionShape extends CollisionShape {
     }
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-        radius = capsule.readFloat(tagRadius, 0.5f);
-        createShape();
-    }
-
-    /**
      * Alter the collision margin of this shape. This feature is disabled for
      * sphere shapes.
      *
@@ -203,20 +172,6 @@ public class SphereCollisionShape extends CollisionShape {
     public void setMargin(float margin) {
         logger2.log(Level.WARNING,
                 "Cannot alter the margin of a SphereCollisionShape.");
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-        capsule.write(radius, tagRadius, 0.5f);
     }
     // *************************************************************************
     // private methods

@@ -32,13 +32,8 @@
 package com.jme3.bullet.joints;
 
 import com.jme3.bullet.objects.PhysicsRigidBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -60,21 +55,8 @@ public class Point2PointJoint extends Constraint {
      */
     final public static Logger logger2
             = Logger.getLogger(Point2PointJoint.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagDamping = "damping";
-    final private static String tagImpulseClamp = "impulseClamp";
-    final private static String tagTau = "tau";
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public Point2PointJoint() {
-    }
 
     /**
      * Instantiate a single-ended Point2PointJoint where the constraint is
@@ -193,45 +175,6 @@ public class Point2PointJoint extends Constraint {
     public void setTau(float value) {
         long constraintId = getObjectId();
         setTau(constraintId, value);
-    }
-    // *************************************************************************
-    // Constraint methods
-
-    /**
-     * De-serialize this joint from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        createJoint();
-        readConstraintProperties(capsule);
-
-        setDamping(capsule.readFloat(tagDamping, 1f));
-        setTau(capsule.readFloat(tagTau, 0.3f));
-        setImpulseClamp(capsule.readFloat(tagImpulseClamp, 0f));
-    }
-
-    /**
-     * Serialize this joint to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(getDamping(), tagDamping, 1f);
-        capsule.write(getTau(), tagTau, 0.3f);
-        capsule.write(getImpulseClamp(), tagImpulseClamp, 0f);
     }
     // *************************************************************************
     // private methods

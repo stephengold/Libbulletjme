@@ -32,14 +32,9 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -60,20 +55,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(HeightfieldCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagFlipQuadEdges = "flipQuadEdges";
-    final private static String tagFlipTriangleWinding = "flipTriangleWinding";
-    final private static String tagHeightfieldData = "heightfieldData";
-    final private static String tagHeightScale = "heightScale";
-    final private static String tagHeightStickLength = "heightStickLength";
-    final private static String tagHeightStickWidth = "heightStickWidth";
-    final private static String tagMaxHeight = "maxHeight";
-    final private static String tagMinHeight = "minHeight";
-    final private static String tagUpAxis = "upAxis";
-    final private static String tagUseDiamond = "useDiamond";
-    final private static String tagUseZigzag = "useZigzag";
     /**
      * local copy of {@link com.jme3.math.Vector3f#UNIT_XYZ}
      */
@@ -134,13 +115,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
     private int upAxis = PhysicsSpace.AXIS_Y;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public HeightfieldCollisionShape() {
-    }
 
     /**
      * Instantiate a square shape for the specified height map.
@@ -240,60 +214,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
         finalizeNative(nativeId);
 
         super.finalize();
-    }
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        heightStickWidth = capsule.readInt(tagHeightStickWidth, 0);
-        heightStickLength = capsule.readInt(tagHeightStickLength, 0);
-        heightScale = capsule.readFloat(tagHeightScale, 0f);
-        minHeight = capsule.readFloat(tagMinHeight, 0f);
-        maxHeight = capsule.readFloat(tagMaxHeight, 0f);
-        upAxis = capsule.readInt(tagUpAxis, PhysicsSpace.AXIS_Y);
-        heightfieldData = capsule.readFloatArray(tagHeightfieldData,
-                new float[0]);
-        flipQuadEdges = capsule.readBoolean(tagFlipQuadEdges, true);
-        flipTriangleWinding = capsule.readBoolean(tagFlipTriangleWinding,
-                false);
-        useDiamond = capsule.readBoolean(tagUseDiamond, false);
-        useZigzag = capsule.readBoolean(tagUseZigzag, false);
-
-        createShape();
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(heightStickWidth, tagHeightStickWidth, 0);
-        capsule.write(heightStickLength, tagHeightStickLength, 0);
-        capsule.write(heightScale, tagHeightScale, 0f);
-        capsule.write(minHeight, tagMinHeight, 0f);
-        capsule.write(maxHeight, tagMaxHeight, 0f);
-        capsule.write(upAxis, tagUpAxis, PhysicsSpace.AXIS_Y);
-        capsule.write(heightfieldData, tagHeightfieldData, new float[0]);
-        capsule.write(flipQuadEdges, tagFlipQuadEdges, true);
-        capsule.write(flipTriangleWinding, tagFlipTriangleWinding, false);
-        capsule.write(useDiamond, tagUseDiamond, false);
-        capsule.write(useZigzag, tagUseZigzag, false);
     }
     // *************************************************************************
     // private methods

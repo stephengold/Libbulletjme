@@ -34,13 +34,7 @@ package com.jme3.bullet.collision.shapes;
 import com.jme3.bounding.BoundingSphere;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.util.DebugShapeFactory;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -66,11 +60,6 @@ public class MultiSphere extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(MultiSphere.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagCenters = "centers";
-    final private static String tagRadii = "radii";
     // *************************************************************************
     // fields
 
@@ -84,13 +73,6 @@ public class MultiSphere extends CollisionShape {
     private Vector3f[] centers;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public MultiSphere() {
-    }
 
     /**
      * Instantiate a centered sphere shape with the specified radius.
@@ -412,51 +394,12 @@ public class MultiSphere extends CollisionShape {
     // CollisionShape methods
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        Savable[] savCenters
-                = capsule.readSavableArray(tagCenters, new Vector3f[0]);
-        int numSpheres = savCenters.length;
-        centers = new Vector3f[numSpheres];
-        for (int sphereIndex = 0; sphereIndex < numSpheres; ++sphereIndex) {
-            centers[sphereIndex] = (Vector3f) savCenters[sphereIndex];
-        }
-        radii = capsule.readFloatArray(tagRadii, new float[0]);
-        createShape();
-    }
-
-    /**
      * Recalculate this shape's bounding box if necessary.
      */
     @Override
     protected void recalculateAabb() {
         long shapeId = getObjectId();
         recalcAabb(shapeId);
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(centers, tagCenters, null);
-        capsule.write(radii, tagRadii, null);
     }
     // *************************************************************************
     // private methods

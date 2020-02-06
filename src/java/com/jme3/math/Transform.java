@@ -31,10 +31,7 @@
  */
 package com.jme3.math;
 
-import com.jme3.export.*;
 import com.jme3.util.TempVars;
-
-import java.io.IOException;
 
 /**
  * Started Date: Jul 16, 2004<br><br>
@@ -43,7 +40,7 @@ import java.io.IOException;
  * @author Jack Lindamood
  * @author Joshua Slack
  */
-public final class Transform implements Savable, Cloneable, java.io.Serializable {
+public final class Transform implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
 
@@ -349,23 +346,6 @@ public final class Transform implements Savable, Cloneable, java.io.Serializable
         return this;
     }
 
-    @Override
-    public void write(JmeExporter e) throws IOException {
-        OutputCapsule capsule = e.getCapsule(this);
-        capsule.write(rot, "rot", Quaternion.IDENTITY);
-        capsule.write(translation, "translation", Vector3f.ZERO);
-        capsule.write(scale, "scale", Vector3f.UNIT_XYZ);
-    }
-
-    @Override
-    public void read(JmeImporter e) throws IOException {
-        InputCapsule capsule = e.getCapsule(this);
-        
-        rot.set((Quaternion)capsule.readSavable("rot", Quaternion.IDENTITY));
-        translation.set((Vector3f)capsule.readSavable("translation", Vector3f.ZERO));
-        scale.set((Vector3f)capsule.readSavable("scale", Vector3f.UNIT_XYZ));
-    }
-    
     @Override
     public Transform clone() {
         try {

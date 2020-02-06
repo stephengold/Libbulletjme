@@ -32,13 +32,7 @@
 package com.jme3.bullet;
 
 import com.jme3.bullet.objects.PhysicsSoftBody;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -52,7 +46,7 @@ import jme3utilities.Validate;
  *
  * @author dokthar
  */
-public class SoftBodyWorldInfo implements Savable {
+public class SoftBodyWorldInfo {
     // *************************************************************************
     // constants and loggers
 
@@ -61,15 +55,6 @@ public class SoftBodyWorldInfo implements Savable {
      */
     final public static Logger logger
             = Logger.getLogger(PhysicsSoftBody.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagAirDensity = "airDensity";
-    final private static String tagGravity = "gravity";
-    final private static String tagMaxDisplacement = "maxDisplacement";
-    final private static String tagWaterDensity = "waterDensity";
-    final private static String tagWaterNormal = "waterNormal";
-    final private static String tagWaterOffset = "waterOffset";
     // *************************************************************************
     // fields
 
@@ -243,48 +228,6 @@ public class SoftBodyWorldInfo implements Savable {
      */
     public float waterOffset() {
         return getWaterOffset(nativeId);
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this info from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        setAirDensity(capsule.readFloat(tagAirDensity, 1.2f));
-        setGravity((Vector3f) capsule.readSavable(tagGravity,
-                new Vector3f(0f, -10f, 0f)));
-        setMaxDisplacement(capsule.readFloat(tagMaxDisplacement, 1000f));
-        setWaterDensity(capsule.readFloat(tagWaterDensity, 0f));
-        setWaterNormal((Vector3f) capsule.readSavable(tagWaterNormal,
-                new Vector3f(0f, 0f, 0f)));
-        setWaterOffset(capsule.readFloat(tagWaterOffset, 0f));
-    }
-
-    /**
-     * Serialize this info to the specified exporter, for example when saving to
-     * a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(airDensity(), tagAirDensity, 1.2f);
-        capsule.write(copyGravity(null), tagGravity, null);
-        capsule.write(maxDisplacement(), tagMaxDisplacement, 1000f);
-        capsule.write(waterDensity(), tagWaterDensity, 0f);
-        capsule.write(copyWaterNormal(null), tagWaterNormal, null);
-        capsule.write(waterOffset(), tagWaterOffset, 0f);
     }
     // *************************************************************************
     // native methods

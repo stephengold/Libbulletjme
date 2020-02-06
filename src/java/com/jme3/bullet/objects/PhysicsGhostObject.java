@@ -33,14 +33,9 @@ package com.jme3.bullet.objects;
 
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -71,12 +66,6 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
      */
     final public static Logger logger2
             = Logger.getLogger(PhysicsGhostObject.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagDeactivationTime = "deactivationTime";
-    final private static String tagPhysicsLocation = "physicsLocation";
-    final private static String tagPhysicsRotation = "physicsRotation";
     // *************************************************************************
     // fields
 
@@ -87,13 +76,6 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
             = new LinkedList<>();
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public PhysicsGhostObject() {
-    }
 
     /**
      * Instantiate a ghost object with the specified CollisionShape. The new
@@ -184,44 +166,6 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     public void setCollisionShape(CollisionShape collisionShape) {
         super.setCollisionShape(collisionShape);
         buildObject();
-    }
-
-    /**
-     * De-serialize this object from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-        buildObject();
-        readPcoProperties(capsule);
-
-        setPhysicsLocation((Vector3f) capsule.readSavable(tagPhysicsLocation,
-                new Vector3f()));
-        setPhysicsRotation(((Matrix3f) capsule.readSavable(tagPhysicsRotation,
-                new Matrix3f())));
-        setDeactivationTime(capsule.readFloat(tagDeactivationTime, 0f));
-    }
-
-    /**
-     * Serialize this object to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(getPhysicsLocation(null), tagPhysicsLocation, null);
-        capsule.write(getPhysicsRotationMatrix(null), tagPhysicsRotation, null);
-        capsule.write(getDeactivationTime(), tagDeactivationTime, 0f);
     }
     // *************************************************************************
     // private methods

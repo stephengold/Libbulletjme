@@ -33,7 +33,6 @@ package com.jme3.bullet.objects;
 
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.joints.PhysicsJoint;
-import com.jme3.export.InputCapsule;
 import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
 import java.io.IOException;
@@ -53,10 +52,6 @@ abstract public class PhysicsBody extends PhysicsCollisionObject {
      * magic mass value used to specify a static rigid body or soft-body node
      */
     final public static float massForStatic = 0f;
-    /**
-     * field name for serialization
-     */
-    final private static String tagJoints = "joints";
     // *************************************************************************
     // fields
 
@@ -132,18 +127,6 @@ abstract public class PhysicsBody extends PhysicsCollisionObject {
     }
 
     /**
-     * De-serialize joints from the specified InputCapsule, for example when
-     * loading from a J3O file.
-     *
-     * @param capsule (not null, modified)
-     * @throws IOException from the capsule
-     */
-    @SuppressWarnings("unchecked")
-    protected void readJoints(InputCapsule capsule) throws IOException {
-        joints = capsule.readSavableArrayList(tagJoints, null);
-    }
-
-    /**
      * Do not invoke directly! Joints are removed automatically when destroyed.
      *
      * @param joint the joint to remove (not null, unaffected)
@@ -181,15 +164,4 @@ abstract public class PhysicsBody extends PhysicsCollisionObject {
      * null, unaffected)
      */
     abstract public void setPhysicsLocation(Vector3f location);
-
-    /**
-     * Serialize joints to the specified OutputCapsule, for example when saving
-     * to a J3O file.
-     *
-     * @param capsule (not null, modified)
-     * @throws IOException from the capsule
-     */
-    protected void writeJoints(OutputCapsule capsule) throws IOException {
-        capsule.writeSavableArrayList(joints, tagJoints, null);
-    }
 }

@@ -31,8 +31,6 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.export.JmeImporter;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -51,13 +49,6 @@ public class EmptyShape extends CollisionShape {
             = Logger.getLogger(EmptyShape.class.getName());
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public EmptyShape() {
-    }
 
     /**
      * Instantiate an empty shape.
@@ -89,19 +80,6 @@ public class EmptyShape extends CollisionShape {
     @Override
     public float maxRadius() {
         return 0;
-    }
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        createShape();
     }
     // *************************************************************************
     // private methods

@@ -31,11 +31,8 @@
  */
 package com.jme3.math;
 
-import com.jme3.export.*;
 import com.jme3.util.BufferUtils;
 import com.jme3.util.TempVars;
-
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 
@@ -54,7 +51,7 @@ import java.util.logging.Logger;
  * @author Mark Powell
  * @author Joshua Slack
  */
-public final class Matrix4f implements Savable, Cloneable, java.io.Serializable {
+public final class Matrix4f implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
 
@@ -2223,48 +2220,6 @@ public final class Matrix4f implements Savable, Cloneable, java.io.Serializable 
         }
 
         return true;
-    }
-
-    @Override
-    public void write(JmeExporter e) throws IOException {
-        OutputCapsule cap = e.getCapsule(this);
-        cap.write(m00, "m00", 1);
-        cap.write(m01, "m01", 0);
-        cap.write(m02, "m02", 0);
-        cap.write(m03, "m03", 0);
-        cap.write(m10, "m10", 0);
-        cap.write(m11, "m11", 1);
-        cap.write(m12, "m12", 0);
-        cap.write(m13, "m13", 0);
-        cap.write(m20, "m20", 0);
-        cap.write(m21, "m21", 0);
-        cap.write(m22, "m22", 1);
-        cap.write(m23, "m23", 0);
-        cap.write(m30, "m30", 0);
-        cap.write(m31, "m31", 0);
-        cap.write(m32, "m32", 0);
-        cap.write(m33, "m33", 1);
-    }
-
-    @Override
-    public void read(JmeImporter e) throws IOException {
-        InputCapsule cap = e.getCapsule(this);
-        m00 = cap.readFloat("m00", 1);
-        m01 = cap.readFloat("m01", 0);
-        m02 = cap.readFloat("m02", 0);
-        m03 = cap.readFloat("m03", 0);
-        m10 = cap.readFloat("m10", 0);
-        m11 = cap.readFloat("m11", 1);
-        m12 = cap.readFloat("m12", 0);
-        m13 = cap.readFloat("m13", 0);
-        m20 = cap.readFloat("m20", 0);
-        m21 = cap.readFloat("m21", 0);
-        m22 = cap.readFloat("m22", 1);
-        m23 = cap.readFloat("m23", 0);
-        m30 = cap.readFloat("m30", 0);
-        m31 = cap.readFloat("m31", 0);
-        m32 = cap.readFloat("m32", 0);
-        m33 = cap.readFloat("m33", 1);
     }
 
     /**

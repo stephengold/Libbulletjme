@@ -31,12 +31,7 @@
  */
 package com.jme3.bullet.collision.shapes;
 
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -57,10 +52,6 @@ public class Convex2dShape extends CollisionShape {
      */
     final public static Logger logger2
             = Logger.getLogger(Convex2dShape.class.getName());
-    /**
-     * field name for serialization
-     */
-    final private static String tagBase = "base";
     // *************************************************************************
     // fields
 
@@ -71,13 +62,6 @@ public class Convex2dShape extends CollisionShape {
     private CollisionShape base;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public Convex2dShape() {
-    }
 
     /**
      * Instantiate a shape based on the specified convex shape.
@@ -135,23 +119,6 @@ public class Convex2dShape extends CollisionShape {
     }
 
     /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-        InputCapsule capsule = importer.getCapsule(this);
-
-        base = (CollisionShape) capsule.readSavable(tagBase, null);
-        createShape();
-    }
-
-    /**
      * Alter the scale of this shape and its base. CAUTION: Not all shapes can
      * be scaled arbitrarily.
      * <p>
@@ -169,20 +136,6 @@ public class Convex2dShape extends CollisionShape {
          * in synch with the native ones.
          */
         base.updateScale();
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-        capsule.write(base, tagBase, null);
     }
     // *************************************************************************
     // private methods

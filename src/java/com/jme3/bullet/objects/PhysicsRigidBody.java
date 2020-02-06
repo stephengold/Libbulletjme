@@ -37,16 +37,11 @@ import com.jme3.bullet.collision.CollisionFlag;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.HeightfieldCollisionShape;
 import com.jme3.bullet.objects.infos.RigidBodyMotionState;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
 import com.jme3.math.FastMath;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -70,26 +65,6 @@ public class PhysicsRigidBody extends PhysicsBody {
      * local copy of {@link com.jme3.math.Matrix3f#IDENTITY}
      */
     final private static Matrix3f matrixIdentity = new Matrix3f();
-    /**
-     * field names for serialization
-     */
-    final private static String tagAngularDamping = "angularDamping";
-    final private static String tagAngularFactor = "angularFactor";
-    final private static String tagAngularSleepingThreshold
-            = "angularSleepingThreshold";
-    final private static String tagAngularVelocity = "angularVelocity";
-    final private static String tagContactResponse = "contactResponse";
-    final private static String tagDeactivationTime = "deactivationTime";
-    final private static String tagInverseInertia = "inverseInertia";
-    final private static String tagKinematic = "kinematic";
-    final private static String tagLinearDamping = "linearDamping";
-    final private static String tagLinearFactor = "linearFactor";
-    final private static String tagLinearSleepingThreshold
-            = "linearSleepingThreshold";
-    final private static String tagLinearVelocity = "linearVelocity";
-    final private static String tagMass = "mass";
-    final private static String tagPhysicsLocation = "physicsLocation";
-    final private static String tagPhysicsRotation = "physicsRotation";
     /**
      * local copy of {@link com.jme3.math.Vector3f#UNIT_XYZ}
      */
@@ -118,13 +93,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     private RigidBodyMotionState motionState = new RigidBodyMotionState();
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public PhysicsRigidBody() {
-    }
 
     /**
      * Instantiate a responsive, dynamic body with mass=1 and the specified
@@ -899,52 +867,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
-     * De-serialize this body from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        super.read(importer);
-
-        InputCapsule capsule = importer.getCapsule(this);
-        mass = capsule.readFloat(tagMass, 1f);
-        rebuildRigidBody();
-        readPcoProperties(capsule);
-
-        setContactResponse(capsule.readBoolean(tagContactResponse, true));
-        if (mass != massForStatic) {
-            setKinematic(capsule.readBoolean(tagKinematic, false));
-        }
-
-        setInverseInertiaLocal((Vector3f) capsule.readSavable(tagInverseInertia,
-                scaleIdentity));
-        setAngularFactor((Vector3f) capsule.readSavable(tagAngularFactor,
-                scaleIdentity));
-        setLinearFactor((Vector3f) capsule.readSavable(tagLinearFactor,
-                scaleIdentity));
-        setDamping(capsule.readFloat(tagLinearDamping, 0f),
-                capsule.readFloat(tagAngularDamping, 0f));
-        setSleepingThresholds(
-                capsule.readFloat(tagLinearSleepingThreshold, 0.8f),
-                capsule.readFloat(tagAngularSleepingThreshold, 1f));
-
-        setPhysicsLocation((Vector3f) capsule.readSavable(tagPhysicsLocation,
-                translateIdentity));
-        setPhysicsRotation((Matrix3f) capsule.readSavable(tagPhysicsRotation,
-                matrixIdentity));
-        setLinearVelocity((Vector3f) capsule.readSavable(tagLinearVelocity,
-                translateIdentity));
-        setAngularVelocity((Vector3f) capsule.readSavable(tagAngularVelocity,
-                translateIdentity));
-        setDeactivationTime(capsule.readFloat(tagDeactivationTime, 0f));
-
-        readJoints(capsule);
-    }
-
-    /**
      * Alter this body's gravitational acceleration.
      * <p>
      * Invoke this method <em>after</em> adding the body to a PhysicsSpace.
@@ -1004,43 +926,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     public void setPhysicsLocation(Vector3f location) {
         Validate.finite(location, "location");
         setPhysicsLocation(objectId, location);
-    }
-
-    /**
-     * Serialize this body to the specified exporter, for example when saving to
-     * a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        super.write(exporter);
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(getMass(), tagMass, 1f);
-        capsule.write(isContactResponse(), tagContactResponse, true);
-        capsule.write(getAngularFactor(null), tagAngularFactor, null);
-        capsule.write(getLinearFactor(null), tagLinearFactor, null);
-        capsule.write(kinematic, tagKinematic, false);
-
-        capsule.write(getInverseInertiaLocal(null), tagInverseInertia, null);
-        capsule.write(getLinearDamping(), tagLinearDamping, 0f);
-        capsule.write(getAngularDamping(), tagAngularDamping, 0f);
-        capsule.write(getLinearSleepingThreshold(), tagLinearSleepingThreshold,
-                0.8f);
-        capsule.write(getAngularSleepingThreshold(),
-                tagAngularSleepingThreshold, 1f);
-
-        capsule.write(getPhysicsLocation(null), tagPhysicsLocation, null);
-        capsule.write(getPhysicsRotationMatrix(null), tagPhysicsRotation, null);
-        if (isDynamic()) {
-            capsule.write(getLinearVelocity(null), tagLinearVelocity, null);
-            capsule.write(getAngularVelocity(null), tagAngularVelocity, null);
-        }
-        capsule.write(getDeactivationTime(), tagDeactivationTime, 0f);
-
-        writeJoints(capsule);
     }
     // *************************************************************************
     // private methods
