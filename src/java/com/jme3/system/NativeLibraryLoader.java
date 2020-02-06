@@ -43,36 +43,57 @@ public final class NativeLibraryLoader {
     private NativeLibraryLoader() {
     }
 
-    public static void loadLibbulletjme() {
+    /**
+     * Load a Libbulletjme native library.
+     *
+     * @param dist true&rarr;distributed files, false&rarr;as-built files
+     * @param directory (not null, readable, unaffected)
+     * @param buildType "Debug" or "Release"
+     * @param flavor "Sp" or "Dp"
+     */
+    public static void loadLibbulletjme(boolean dist, File directory,
+            String buildType, String flavor) {
+        assert buildType.equals("Debug") || buildType.equals("Release");
+        assert flavor.equals("Sp") || flavor.equals("Dp");
+
         Platform platform = JmeSystem.getPlatform();
 
-        String relativeFilename;
+        String name;
         switch (platform) {
             case Windows32:
-                relativeFilename = "windows32/debug/sp/bulletjme.dll";
-                break;
             case Windows64:
-                relativeFilename = "windows64/debug/sp/bulletjme.dll";
+                name = "bulletjme.dll";
                 break;
             case Linux32:
-                relativeFilename = "linux32/debug/sp/libbulletjme.so";
-                break;
             case Linux64:
-                relativeFilename = "linux64/debug/sp/libbulletjme.so";
+                name = "libbulletjme.so";
                 break;
             case MacOSX32:
-                relativeFilename = "macosx32/debug/sp/libbulletjme.dylib";
-                break;
             case MacOSX64:
-                relativeFilename = "macosx64/debug/sp/libbulletjme.dylib";
+                name = "libbulletjme.dylib";
                 break;
             default:
-                throw new RuntimeException("");
+                throw new RuntimeException("platform = " + platform);
         }
-        relativeFilename = "build/libs/bulletjme/shared/" + relativeFilename;
 
-        File libraryFile = new File(relativeFilename);
-        String absoluteFilename = libraryFile.getAbsolutePath();
+        File file;
+        if (dist) {
+            name = platform.toString() + buildType + flavor + "_" + name;
+            file = directory;
+
+        } else {
+            String subdirectory = platform.toString().toLowerCase();
+            file = new File(directory, subdirectory);
+
+            String bt = buildType.toLowerCase();
+            file = new File(file, bt);
+
+            String f = flavor.toLowerCase();
+            file = new File(file, f);
+        }
+
+        file = new File(file, name);
+        String absoluteFilename = file.getAbsolutePath();
         System.load(absoluteFilename);
     }
 }
