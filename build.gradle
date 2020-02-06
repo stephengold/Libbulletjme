@@ -1,10 +1,21 @@
 plugins {
     id 'cpp'
-    id 'java' // for IDE access
+    id 'java-library'
+    id 'maven-publish'
+}
+
+ext {
+    baseName = 'Libbulletjme'
+    group = 'com.github.stephengold'
+    version = '3.0.2'
+}
+
+sourceSets.main.java {
+    srcDir 'src/java'
+    srcDir 'src/native' // for IDE access (no Java there)
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
-
 model {
     buildTypes {
         Debug
@@ -51,7 +62,7 @@ model {
         }
     }
 
-    toolChains { // prioritize toolchains
+    toolChains { // prioritize C++ toolchains
         visualCpp(VisualCpp)
         gcc(Gcc)
         clang(Clang)
@@ -80,6 +91,7 @@ model {
                 //buildable = targetPlatform.name.equals('Linux64')
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
+                    //buildable = false
                 }
                 if (flavor == flavors.Dp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
@@ -172,14 +184,54 @@ model {
     }
 }
 
+compileJava.options.headerOutputDirectory = new File('src/native/glue')
+
+assemble.dependsOn('copyToDistJars')
+task copyToDistJars (type: Copy) {
+    dependsOn 'jar', 'javadocJar'
+    from 'build/libs'
+    include '*.jar'
+    into 'dist'
+}
+
+build.dependsOn('javadocJar')
+task javadocJar(type: Jar) {
+    archiveBaseName = project.ext.baseName
+    classifier = 'javadoc'
+    dependsOn 'javadoc'
+    description 'Create a JAR of javadoc.'
+    from javadoc.destinationDir
+}
+
+build.dependsOn('pom')
+task('pom', type: Copy) {
+    dependsOn 'generatePomFileForMavenPublication'
+    from "${buildDir}/publications/maven/pom-default.xml"
+    into 'dist'
+    rename '.*', baseName + '.pom'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact javadocJar
+            pom {
+                licenses {
+                    license {
+                        distribution = 'repo'
+                        name = 'New BSD (3-clause) License'
+                        url = 'https://opensource.org/licenses/BSD-3-Clause'
+                    }
+                }
+            }
+            version project.ext.version
+        }
+    }
+}
+
 // cleanup tasks
 clean.dependsOn('cleanDist')
 task cleanDist(type: Delete) {
     delete 'dist'
-}
-
-sourceSets.main.java { // for IDE access
-    srcDir 'src/native/bullet3'
-    srcDir 'src/native/glue'
-    srcDir 'src/native/v-hacd'
 }
