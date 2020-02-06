@@ -40,8 +40,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * An indexed mesh based on Bullet's btIndexedMesh. Immutable except for
- * {@link #read(com.jme3.export.JmeImporter)}.
+ * An indexed mesh based on Bullet's btIndexedMesh.
  *
  * @author Stephen Gold sgold@sonic.net
  */

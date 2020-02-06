@@ -260,9 +260,6 @@ final public class MyBuffer {
      * @param buffer the buffer to read from (not null, unaffected)
      * @param startPosition the position at which to start reading (&ge;0)
      * @param storeVector storage for the vector (not null, modified)
-     *
-     * @see com.jme3.util.BufferUtils#populateFromBuffer(com.jme3.math.Vector3f,
-     * java.nio.FloatBuffer, int)
      */
     public static void get(FloatBuffer buffer, int startPosition,
             Vector3f storeVector) {
@@ -357,8 +354,6 @@ final public class MyBuffer {
     /**
      * Find the maximum and minimum coordinates of 3-D vectors in the specified
      * FloatBuffer range. An empty range stores infinities.
-     *
-     * @see com.jme3.bounding.BoundingBox#containAABB(java.nio.FloatBuffer)
      *
      * @param buffer the buffer that contains the vectors (not null, unaffected)
      * @param startPosition the position at which the vectors start (&ge;0,
@@ -466,9 +461,6 @@ final public class MyBuffer {
      * @param buffer the buffer to write to (not null, modified)
      * @param startPosition the position at which to start writing (&ge;0)
      * @param vector the input vector (not null, unaffected)
-     *
-     * @see com.jme3.util.BufferUtils#setInBuffer(com.jme3.math.Vector3f,
-     * java.nio.FloatBuffer, int)
      */
     public static void put(FloatBuffer buffer, int startPosition,
             Vector3f vector) {

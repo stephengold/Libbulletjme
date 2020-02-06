@@ -149,7 +149,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     /**
      * Add a wheel to this vehicle.
      *
-     * @param spat the associated spatial, or null if none
      * @param connectionPoint the location where the suspension connects to the
      * chassis (in chassis coordinates, not null, unaffected)
      * @param direction the suspension direction (in chassis coordinates, not
