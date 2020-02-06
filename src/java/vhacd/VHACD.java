@@ -15,9 +15,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 package vhacd;
 
 import com.jme3.util.BufferUtils;
-import com.jme3.util.SafeArrayList;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -42,11 +42,11 @@ public class VHACD {
      * list of registered progress listeners
      */
     final private static List<VHACDProgressListener> progressListeners
-            = new SafeArrayList<>(VHACDProgressListener.class);
+            = new ArrayList<VHACDProgressListener>(4);
     /**
      * list of hulls computed during the latest decomposition
      */
-    private static VHACDResults results;
+    private static List<VHACDHull> results;
     // *************************************************************************
     // new methods exposed
 
@@ -62,11 +62,11 @@ public class VHACD {
         progressListeners.add(listener);
     }
 
-    public static VHACDResults compute(float positions[], int indexes[],
+    public static List<VHACDHull> compute(float positions[], int indexes[],
             VHACDParameters params) {
         FloatBuffer b_pos = BufferUtils.createFloatBuffer(positions);
         IntBuffer b_ind = BufferUtils.createIntBuffer(indexes);
-        results = new VHACDResults();
+        results = new ArrayList<>();
         compute(b_pos, b_ind, params.getId(), params.getDebugEnabled());
 
         return results;
