@@ -56,6 +56,7 @@ public final class BufferUtils {
      * 
      * @param data
      *            array of Vector3f objects to place into a new FloatBuffer
+     * @return a new FloatBuffer 
      */
     public static FloatBuffer createFloatBuffer(Vector3f... data) {
         if (data == null) {
@@ -78,6 +79,7 @@ public final class BufferUtils {
      * 
      * @param data
      *            array of float primitives to place into a new FloatBuffer
+     * @return a new FloatBuffer
      */
     public static FloatBuffer createFloatBuffer(float... data) {
         if (data == null) {
@@ -97,6 +99,7 @@ public final class BufferUtils {
      * 
      * @param data
      *            array of ints to place into a new IntBuffer
+     * @return a new IntBuffer
      */
     public static IntBuffer createIntBuffer(int... data) {
         if (data == null) {

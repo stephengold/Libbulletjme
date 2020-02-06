@@ -215,6 +215,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * 
      * @param matrix
      *            the matrix that defines the rotation.
+     * @return this
      */
     public Quaternion fromRotationMatrix(Matrix3f matrix) {
         return fromRotationMatrix(matrix.m00, matrix.m01, matrix.m02, matrix.m10,
@@ -450,6 +451,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      *            the angle to rotate (in radians).
      * @param axis
      *            the axis of rotation (already normalized).
+     * @return this
      */
     public Quaternion fromAngleNormalAxis(float angle, Vector3f axis) {
         if (axis.x == 0 && axis.y == 0 && axis.z == 0) {
@@ -648,6 +650,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * @param xAxis vector representing the x-axis of the coordinate system.
      * @param yAxis vector representing the y-axis of the coordinate system.
      * @param zAxis vector representing the z-axis of the coordinate system.
+     * @return this
      */
     public Quaternion fromAxes(Vector3f xAxis, Vector3f yAxis, Vector3f zAxis) {
         return fromRotationMatrix(xAxis.x, yAxis.x, zAxis.x, xAxis.y, yAxis.y,
@@ -824,6 +827,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     /**
      * <code>normalize</code> normalizes the current <code>Quaternion</code>.
      * The result is stored internally.
+     * @return this
      */
     public Quaternion normalizeLocal() {
         float n = FastMath.invSqrt(norm());

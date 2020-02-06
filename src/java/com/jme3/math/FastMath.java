@@ -481,8 +481,8 @@ final public class FastMath {
 
     /**
      * A direct call to Math.atan2.
-     * @param fY
-     * @param fX
+     * @param fY the ordinate
+     * @param fX the abscissa
      * @return Math.atan2(fY,fX)
      * @see java.lang.Math#atan2(double, double)
      */
@@ -674,9 +674,9 @@ final public class FastMath {
     /**
      * Take a float input and clamp it between min and max.
      * 
-     * @param input
-     * @param min
-     * @param max
+     * @param input the input value
+     * @param min the lower limit
+     * @param max the upper limit
      * @return clamped input
      */
     public static float clamp(float input, float min, float max) {
@@ -686,7 +686,7 @@ final public class FastMath {
     /**
      * Clamps the given float to be between 0 and 1.
      *
-     * @param input
+     * @param input the input value
      * @return input clamped between 0 and 1.
      */
     public static float saturate(float input) {

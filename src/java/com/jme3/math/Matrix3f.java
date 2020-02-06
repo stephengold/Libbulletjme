@@ -960,7 +960,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
 
     /**
      * Inverts this matrix and stores it in the given store.
-     * 
+     * @param store modified if not null
      * @return The store
      */
     public Matrix3f invert(Matrix3f store) {

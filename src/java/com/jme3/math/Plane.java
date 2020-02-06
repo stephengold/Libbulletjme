@@ -117,6 +117,9 @@ public class Plane implements Cloneable, java.io.Serializable {
     /**
      * <code>setNormal</code> sets the normal of the plane.
      *
+     * @param x the desired X-component of the normal
+     * @param y the desired Y-component of the normal
+     * @param z the desired Z-component of the normal
      */
     public void setNormal(float x, float y, float z) {
         this.normal.set(x,y,z);
@@ -217,8 +220,8 @@ public class Plane implements Cloneable, java.io.Serializable {
     /**
      * Initialize this plane using a point of origin and a normal.
      *
-     * @param origin
-     * @param normal
+     * @param origin (not null, unaffected)
+     * @param normal (not null, unaffected)
      */
     public void setOriginNormal(Vector3f origin, Vector3f normal){
         this.normal.set(normal);

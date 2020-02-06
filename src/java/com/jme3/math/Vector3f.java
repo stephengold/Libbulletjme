@@ -553,6 +553,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
     /**
      * <code>zero</code> resets this vector's data to zero internally.
+     * @return this
      */
     public Vector3f zero() {
         x = y = z = 0;
@@ -639,7 +640,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * @param index
+     * @param index  0, 1, or 2
      * @return x value if index == 0, y value if index == 1 or z value if index ==
      *         2
      * @throws IllegalArgumentException
