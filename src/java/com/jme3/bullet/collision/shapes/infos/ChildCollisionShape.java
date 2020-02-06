@@ -31,21 +31,12 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
-import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
-import com.jme3.export.InputCapsule;
-import com.jme3.export.JmeExporter;
-import com.jme3.export.JmeImporter;
-import com.jme3.export.OutputCapsule;
-import com.jme3.export.Savable;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.util.clone.Cloner;
-import com.jme3.util.clone.JmeCloneable;
-import java.io.IOException;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -55,7 +46,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-public class ChildCollisionShape implements JmeCloneable, Savable {
+public class ChildCollisionShape {
     // *************************************************************************
     // constants and loggers
 
@@ -64,12 +55,6 @@ public class ChildCollisionShape implements JmeCloneable, Savable {
      */
     final public static Logger logger
             = Logger.getLogger(ChildCollisionShape.class.getName());
-    /**
-     * field names for serialization
-     */
-    final private static String tagOffset = "location";
-    final private static String tagRotation = "rotation";
-    final private static String tagShape = "shape";
     // *************************************************************************
     // fields
 
@@ -87,13 +72,6 @@ public class ChildCollisionShape implements JmeCloneable, Savable {
     private Vector3f offset;
     // *************************************************************************
     // constructors
-
-    /**
-     * No-argument constructor needed by SavableClassUtil. Do not invoke
-     * directly!
-     */
-    public ChildCollisionShape() {
-    }
 
     /**
      * Instantiate a child shape for use in a compound shape.
@@ -204,73 +182,5 @@ public class ChildCollisionShape implements JmeCloneable, Savable {
     public void setTransform(Vector3f offset, Matrix3f rotation) {
         this.offset.set(offset);
         this.rotation.set(rotation);
-    }
-    // *************************************************************************
-    // JmeCloneable methods
-
-    /**
-     * Callback from {@link com.jme3.util.clone.Cloner} to convert this
-     * shallow-cloned element into a deep-cloned one, using the specified Cloner
-     * and original to resolve copied fields.
-     *
-     * @param cloner the Cloner that's cloning this element (not null)
-     * @param original the instance from which this element was shallow-cloned
-     * (unused)
-     */
-    @Override
-    public void cloneFields(Cloner cloner, Object original) {
-        offset = cloner.clone(offset);
-        rotation = cloner.clone(rotation);
-        shape = cloner.clone(shape);
-    }
-
-    /**
-     * Create a shallow clone for the JME cloner.
-     *
-     * @return a new instance
-     */
-    @Override
-    public ChildCollisionShape jmeClone() {
-        try {
-            ChildCollisionShape clone = (ChildCollisionShape) super.clone();
-            return clone;
-        } catch (CloneNotSupportedException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
-    // *************************************************************************
-    // Savable methods
-
-    /**
-     * De-serialize this shape from the specified importer, for example when
-     * loading from a J3O file.
-     *
-     * @param importer (not null)
-     * @throws IOException from the importer
-     */
-    @Override
-    public void read(JmeImporter importer) throws IOException {
-        InputCapsule capsule = importer.getCapsule(this);
-
-        offset = (Vector3f) capsule.readSavable(tagOffset, new Vector3f());
-        rotation = (Matrix3f) capsule.readSavable(tagRotation, new Matrix3f());
-        shape = (CollisionShape) capsule.readSavable(tagShape,
-                new BoxCollisionShape(1f));
-    }
-
-    /**
-     * Serialize this shape to the specified exporter, for example when saving
-     * to a J3O file.
-     *
-     * @param exporter (not null)
-     * @throws IOException from the exporter
-     */
-    @Override
-    public void write(JmeExporter exporter) throws IOException {
-        OutputCapsule capsule = exporter.getCapsule(this);
-
-        capsule.write(offset, tagOffset, null);
-        capsule.write(rotation, tagRotation, null);
-        capsule.write(shape, tagShape, null);
     }
 }
