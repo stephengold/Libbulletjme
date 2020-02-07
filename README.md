@@ -1,27 +1,27 @@
 <img height="150" src="https://i.imgur.com/YEPFEcx.png">
 
-The Libbulletjme Project adds JNI "glue code" to subsets of the Bullet Physics
-Library and Khaled Mamou's V-HACD Library,
-enabling real-time simulation of 3-D physics in Java applications.
+The [Libbulletjme Project][libbulletjme] adds JNI "glue code"
+to portions of [Bullet Physics][bullet]
+and [Khaled Mamou's V-HACD Library][vhacd],
+enabling 3-D physics simulation from Java applications.
 
 Complete source code (in C++ and Java) is provided under
-[a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
+[a mixed open-source license][license].
 
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
 For each (operating system, architecture) combination,
-up to 4 shared libraries are distributed:
+4 native libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
  + a release build using double-precision arithmetic
  + a debug build using single-precision arithmetic
  + a debug build using double-precision arithmetic
 
-The project is hosted at
-[GitHub](https://github.com/stephengold/Libbulletjme).
-
-Libbulletjme is used in [Minie],
-which integrates Libbulletjme into JMonkeyEngine.
+Libbulletjme's native libraries are used in [Minie],
+which integrates Libbulletjme into [the jMonkeyEngine game engine][jme].
+For applications that don't use jMonkeyEngine,
+standalone Maven artifacts are provided.
 
 <a name="toc"/>
 
@@ -40,7 +40,7 @@ which integrates Libbulletjme into JMonkeyEngine.
 
  1. Install build software:
    + one of the supported C++ compilers:
-     + for Linux:  the [GNU Compiler Collection][gcc] or Clang
+     + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
      + for Windows:  Microsoft Visual Studio
      + for macOS:  Xcode
    + a Java Development Kit, and
@@ -63,7 +63,8 @@ which integrates Libbulletjme into JMonkeyEngine.
    + using Bash:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
 
-After a successful build, dynamic libraries will be found
+After a successful build,
+Maven artifacts and native libraries will be found
 in the `dist` directory/folder.
 
 <a name="lexicon"/>
@@ -179,8 +180,11 @@ btWheelInfo                         .bullet.objects.VehicleWheel
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
+[jbullet]: http://jbullet.advel.cz "JBullet"
 [jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
 [latest]: https://github.com/stephengold/Libbulletjme/releases/latest "latest release"
+[libbulletjme]: https://github.com/stephengold/Libbulletjme "Libbulletjme Project"
+[license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
@@ -195,15 +199,17 @@ btWheelInfo                         .bullet.objects.VehicleWheel
 
 ## History
 
-The glue code in Libbulletjme was originally copied from `jme3-bullet-native`,
-a library of the [jMonkeyEngine][jme] game engine.
-
-The Java code in Libbulletjme is based
-partly on [V-hacd-java-bindings] and partly on [Minie].
-Minie, in turn, is based on `jme3-bullet`,
-another library of the jMonkeyEngine.
-
 The evolution of the project is chronicled in [its release log][log].
+
+The C++ glue code for Bullet was originally copied from `jme3-bullet-native`,
+a library of [jMonkeyEngine][jme].
+The soft-body portion was added in 2018,
+and is based on the work of Jules (aka "dokthar").
+
+The Java code is based partly jMonkeyEngine,
+partly on [Riccardo's V-hacd-java-bindings][v-hacd-java-bindings],
+and partly on [Minie].
+Minie is, in turn, based on `jme3-bullet`, another library of jMonkeyEngine.
 
 <a name="acks"/>
 
