@@ -27,12 +27,38 @@ standalone Maven artifacts are provided.
 
 ## Contents of this document
 
+ + [How to add Libbulletjme to an existing project](#add)
  + [How to build Libbulletjme from source](#build)
  + [Lexicon of class/enum/struct names](#lexicon)
  + [What's missing](#todo)
  + [External links](#links)
  + [History](#history)
  + [Acknowledgments](#acks)
+
+<a name="add"/>
+
+## How to add Libbulletjme to an existing project
+
+ 1. For projects built using Gradle, add the following dependency:
+
+        repositories {
+            jcenter()
+        }
+        dependencies {
+            compile 'com.github.stephengold:Libbulletjme:3.0.4'
+        }
+
+ 2. Download appropriate native libraries from [GitHub][latest].
+    You probably don't need all 34 files.
+    Start with the ReleaseSp library for your development environment
+    (for instance, "Linux64ReleaseSp_libbulletjme.so" for 64-bit Linux).
+
+ 3. Load the native library:
+
+        import com.jme3.system.NativeLibraryLoader;
+        NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
+
+TODO HelloWorld application
 
 <a name="build"/>
 
@@ -66,6 +92,10 @@ standalone Maven artifacts are provided.
 After a successful build,
 Maven artifacts and native libraries will be found
 in the `dist` directory/folder.
+
+You can install the Maven artifacts to your local cache:
+ + using Bash:  `./gradlew :Libbulletjme:publishToMavenLocal`
+ + using Windows Command Prompt:  `.\gradlew :Libbulletjme:publishToMavenLocal`
 
 <a name="lexicon"/>
 
@@ -136,6 +166,14 @@ btVector3                           .math.Vector3f
 btWheelInfo                         .bullet.objects.VehicleWheel
 </pre>
 
+<pre>
+V-HACD C++ type:                    corresponding Java class:
+===================                 =====================================
+IVHACD                              vhacd.VHACD
+IVHACD::ConvexHull                  vhacd.VHACDHull
+IVHACD::Parameters                  vhacd.VHACDParamters
+</pre>
+
 <a name="todo"/>
 
 ## What's missing
@@ -169,6 +207,7 @@ btWheelInfo                         .bullet.objects.VehicleWheel
  + The [physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
  + The [Bullet Forum](https://pybullet.org/Bullet/phpBB3)
  + The [Bullet home page][bullet]
+ + [JBullet], a known alternative to Libbulletjme
 
 
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
