@@ -2,7 +2,7 @@ The Libbulletjme Project adds JNI "glue code" to subsets of the Bullet Physics
 Library and Khaled Mamou's V-HACD Library,
 enabling real-time simulation of 3-D physics in Java applications.
 
-Complete source code (in C++) is provided under
+Complete source code (in C++ and Java) is provided under
 [a mixed license](https://github.com/stephengold/Libbulletjme/blob/master/LICENSE).
 
 The project supports the 3 major desktop operating systems:
@@ -18,7 +18,8 @@ up to 4 shared libraries are distributed:
 The project is hosted at
 [GitHub](https://github.com/stephengold/Libbulletjme).
 
-Libbulletjme is used in [Minie].
+Libbulletjme is used in [Minie],
+which integrates Libbulletjme into JMonkeyEngine.
 
 ## Contents of this document
 
@@ -33,11 +34,15 @@ Libbulletjme is used in [Minie].
 
 ## History
 
-The glue code of Libbulletjme was originally copied from `jme3-bullet-native`,
+The glue code in Libbulletjme was originally copied from `jme3-bullet-native`,
 a library of the [jMonkeyEngine][jme] game engine.
 
-The evolution of the project is chronicled in
-[its release notes](https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md).
+The Java code in Libbulletjme is based
+partly on [V-hacd-java-bindings] and partly on [Minie].
+Minie, in turn, is based on `jme3-bullet`,
+another library of the jMonkeyEngine.
+
+The evolution of the project is chronicled in [its release log][log].
 
 <a name="build"/>
 
@@ -54,8 +59,9 @@ The evolution of the project is chronicled in
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
+     + `git checkout -b latest 3.0.4`
    + using a web browser:
-     + browse to [https://github.com/stephengold/Libbulletjme/releases/latest](https://github.com/stephengold/Libbulletjme/releases/latest)
+     + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][latest]
      + follow the "Source code (zip)" link
      + save the ZIP file
      + unzip the saved ZIP file
@@ -173,6 +179,28 @@ btWheelInfo                         .bullet.objects.VehicleWheel
  + The [Bullet Forum](https://pybullet.org/Bullet/phpBB3)
  + The [Bullet home page][bullet]
 
+
+[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
+[bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
+[chrome]: https://www.google.com/chrome "Chrome"
+[findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
+[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
+[gcc]: https://gcc.gnu.org "Gcc Compiler"
+[git]: https://git-scm.com "Git"
+[github]: https://github.com "GitHub"
+[gradle]: https://gradle.org "Gradle Project"
+[jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
+[latest]: https://github.com/stephengold/Libbulletjme/releases/latest "latest release"
+[llvm]: https://www.llvm.org "LLVM Compiler"
+[log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
+[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
+[minie]: https://github.com/stephengold/Minie "Minie Project"
+[mint]: https://linuxmint.com "Linux Mint Project"
+[netbeans]: https://netbeans.org "NetBeans Project"
+[travis]: https://travis-ci.org "Travis CI"
+[vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
+[v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
+
 <a name="acks"/>
 
 ## Acknowledgments
@@ -183,17 +211,18 @@ The Libbulletjme Project is based on open-source software:
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
+  + Riccardo's [V-hacd-java-bindings]
 
 This project also made use of the following software tools:
 
-  + the [Firefox web browser][firefox]
+  + the [FindBugs] source-code analyzer
   + the [GNU Compiler Collection][gcc]
   + the [Git] revision-control system and GitK commit viewer
-  + the [Google Chrome web browser][chrome]
+  + the [Firefox] and [Google Chrome][chrome] web browsers
   + the [Gradle] build tool
   + the Java compiler, standard doclet, and runtime environment
-  + the jME3 Software Development Kit
-  + [Linux Mint][mint]
+  + [jMonkeyEngine][jme] and the jME3 Software Development Kit
+  + the [Linux Mint][mint] operating system
   + the [LLVM Compiler Infrastructure][llvm]
   + the [Markdown] document-conversion tool
   + Microsoft Windows and Visual Studio
@@ -203,24 +232,10 @@ I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
 
 I am grateful to [Github], [AppVeyor], and [Travis]
-for providing free hosting for this project.
+for providing free hosting for this project
+and many other open-source projects.
+
+I'm also grateful to my dear Holly, for keeping me sane.
 
 If I've misattributed anything or left anyone out, please let me know so I can
 correct the situation: sgold@sonic.net
-
-[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
-[bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
-[chrome]: https://www.google.com/chrome "Chrome"
-[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
-[gcc]: https://gcc.gnu.org "Gcc Compiler"
-[git]: https://git-scm.com "Git"
-[github]: https://github.com "GitHub"
-[gradle]: https://gradle.org "Gradle Project"
-[jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
-[llvm]: https://www.llvm.org "LLVM Compiler"
-[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
-[minie]: https://github.com/stephengold/Minie "Minie Project"
-[mint]: https://linuxmint.com/ "Linux Mint"
-[netbeans]: https://netbeans.org "NetBeans Project"
-[travis]: https://travis-ci.org "Travis CI"
-[vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
