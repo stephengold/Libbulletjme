@@ -1,3 +1,5 @@
+<img height="150" src="https://i.imgur.com/YEPFEcx.png">
+
 The Libbulletjme Project adds JNI "glue code" to subsets of the Bullet Physics
 Library and Khaled Mamou's V-HACD Library,
 enabling real-time simulation of 3-D physics in Java applications.
@@ -21,32 +23,20 @@ The project is hosted at
 Libbulletjme is used in [Minie],
 which integrates Libbulletjme into JMonkeyEngine.
 
+<a name="toc"/>
+
 ## Contents of this document
 
- + [History](#history)
- + [How to build Libbulletjme](#build)
+ + [How to build Libbulletjme from source](#build)
  + [Lexicon of class/enum/struct names](#lexicon)
  + [What's missing](#todo)
  + [External links](#links)
+ + [History](#history)
  + [Acknowledgments](#acks)
-
-<a name="history"/>
-
-## History
-
-The glue code in Libbulletjme was originally copied from `jme3-bullet-native`,
-a library of the [jMonkeyEngine][jme] game engine.
-
-The Java code in Libbulletjme is based
-partly on [V-hacd-java-bindings] and partly on [Minie].
-Minie, in turn, is based on `jme3-bullet`,
-another library of the jMonkeyEngine.
-
-The evolution of the project is chronicled in [its release log][log].
 
 <a name="build"/>
 
-## How to build Libbulletjme
+## How to build Libbulletjme from source
 
  1. Install build software:
    + one of the supported C++ compilers:
@@ -201,6 +191,20 @@ btWheelInfo                         .bullet.objects.VehicleWheel
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
 [v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
 
+<a name="history"/>
+
+## History
+
+The glue code in Libbulletjme was originally copied from `jme3-bullet-native`,
+a library of the [jMonkeyEngine][jme] game engine.
+
+The Java code in Libbulletjme is based
+partly on [V-hacd-java-bindings] and partly on [Minie].
+Minie, in turn, is based on `jme3-bullet`,
+another library of the jMonkeyEngine.
+
+The evolution of the project is chronicled in [its release log][log].
+
 <a name="acks"/>
 
 ## Acknowledgments
@@ -239,3 +243,5 @@ I'm also grateful to my dear Holly, for keeping me sane.
 
 If I've misattributed anything or left anyone out, please let me know so I can
 correct the situation: sgold@sonic.net
+
+[Jump to table of contents](#toc)
