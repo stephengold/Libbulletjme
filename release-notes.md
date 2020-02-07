@@ -2,10 +2,6 @@
 
 ## Version 3.0.4 released on 6 February 2020
 
- + Tweaked the build scripts.
-
-## Version 3.0.3 released on 6 February 2020
-
  + Build a class JAR, javadoc JAR, and POM.
  + Added automated testing with Junit.
  + Moved all source files from "src" to "src/main".
