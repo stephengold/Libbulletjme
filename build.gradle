@@ -232,8 +232,9 @@ task('pom', type: Copy) {
 publishing {
     publications {
         maven(MavenPublication) {
+            artifactId artifact
             from components.java
-            artifact javadocJar
+            groupId 'com.github.stephengold'
             pom {
                 licenses {
                     license {
