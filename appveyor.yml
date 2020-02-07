@@ -12,6 +12,8 @@ artifacts:
     name: classJar
   - path: dist/Libbulletjme-3.0.4-javadoc.jar
     name: javadocJar
+  - path: dist/Libbulletjme-3.0.4-sources.jar
+    name: sourcesJar
   - path: dist/Libbulletjme-3.0.4.pom
     name: pom
   - path: dist/Windows32DebugDp_bulletjme.dll
@@ -41,7 +43,7 @@ artifacts:
 
 deploy:
   description: release description goes here
-  artifact: classJar,javadocJar,pom,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DS,dll64RD,dll64RS,pdb32DD,pdb32DS,pdb64DD,pdb64DS
+  artifact: classJar,javadocJar,sourcesJar,pom,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DS,dll64RD,dll64RS,pdb32DD,pdb32DS,pdb64DD,pdb64DS
   provider: GitHub
   auth_token:
     secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz

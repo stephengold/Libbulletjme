@@ -202,7 +202,7 @@ compileJava.options.headerOutputDirectory = new File('src/main/native/glue')
 test.dependsOn('assemble')
 assemble.dependsOn('copyToDistJars')
 task copyToDistJars (type: Copy) {
-    dependsOn 'jar', 'javadocJar'
+    dependsOn 'jar', 'javadocJar', 'sourcesJar'
     from 'build/libs'
     include '*.jar'
     into 'dist'
@@ -212,13 +212,20 @@ jar {
     archiveBaseName = project.ext.baseName
 }
 
-build.dependsOn('javadocJar')
 task javadocJar(type: Jar) {
     archiveBaseName = project.ext.baseName
     classifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Create a JAR of javadoc.'
     from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    archiveBaseName = project.ext.baseName
+    classifier = 'sources'
+    dependsOn 'classes'
+    description 'Create a JAR of Java sourcecode.'
+    from 'src/main/java'
 }
 
 build.dependsOn('pom')
