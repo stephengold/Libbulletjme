@@ -5,9 +5,9 @@ plugins {
 }
 
 ext {
-    baseName = 'Libbulletjme'
-    group = 'com.github.stephengold'
-    version = '3.0.3'
+    artifact = 'Libbulletjme'
+    version = '3.0.4'
+    baseName = "$artifact-$version"
 }
 
 sourceSets.main.java {
@@ -199,12 +199,17 @@ repositories {
 
 compileJava.options.headerOutputDirectory = new File('src/main/native/glue')
 
+test.dependsOn('assemble')
 assemble.dependsOn('copyToDistJars')
 task copyToDistJars (type: Copy) {
     dependsOn 'jar', 'javadocJar'
     from 'build/libs'
     include '*.jar'
     into 'dist'
+}
+
+jar {
+    archiveBaseName = project.ext.baseName
 }
 
 build.dependsOn('javadocJar')
