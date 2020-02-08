@@ -209,8 +209,11 @@ IVHACD::Parameters                  vhacd.VHACDParamters
  + The [Bullet home page][bullet]
  + [JBullet], a known alternative to Libbulletjme
 
+[Jump to table of contents](#toc)
+
 
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
+[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [chrome]: https://www.google.com/chrome "Chrome"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
@@ -219,8 +222,10 @@ IVHACD::Parameters                  vhacd.VHACDParamters
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
+[heart]: https://github.com/stephengold/Heart "Heart Project"
 [jbullet]: http://jbullet.advel.cz "JBullet"
-[jme]: http://jmonkeyengine.org  "jMonkeyEngine Project"
+[jfrog]: https://www.jfrog.com "JFrog"
+[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
 [latest]: https://github.com/stephengold/Libbulletjme/releases/latest "latest release"
 [libbulletjme]: https://github.com/stephengold/Libbulletjme "Libbulletjme Project"
 [license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
@@ -233,6 +238,7 @@ IVHACD::Parameters                  vhacd.VHACDParamters
 [travis]: https://travis-ci.org "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
 [v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
+
 
 <a name="history"/>
 
@@ -250,6 +256,8 @@ partly on [Riccardo's V-hacd-java-bindings][v-hacd-java-bindings],
 and partly on [Minie].
 Minie is, in turn, based on `jme3-bullet`, another library of jMonkeyEngine.
 
+[Jump to table of contents](#toc)
+
 <a name="acks"/>
 
 ## Acknowledgments
@@ -264,23 +272,23 @@ The Libbulletjme Project is based on open-source software:
 
 This project also made use of the following software tools:
 
-  + the [FindBugs] source-code analyzer
-  + the [GNU Compiler Collection][gcc]
-  + the [Git] revision-control system and GitK commit viewer
-  + the [Firefox] and [Google Chrome][chrome] web browsers
-  + the [Gradle] build tool
-  + the Java compiler, standard doclet, and runtime environment
-  + [jMonkeyEngine][jme] and the jME3 Software Development Kit
-  + the [Linux Mint][mint] operating system
-  + the [LLVM Compiler Infrastructure][llvm]
-  + the [Markdown] document-conversion tool
-  + Microsoft Windows and Visual Studio
-  + the [NetBeans] integrated development environment
+    + the [FindBugs] source-code analyzer
+    + the [GNU Compiler Collection][gcc]
+    + the [Git] revision-control system and GitK commit viewer
+    + the [Firefox] and [Google Chrome][chrome] web browsers
+    + the [Gradle] build tool
+    + the Java compiler, standard doclet, and runtime environment
+    + [jMonkeyEngine][jme] and the jME3 Software Development Kit
+    + the [Linux Mint][mint] operating system
+    + the [LLVM Compiler Infrastructure][llvm]
+    + the [Markdown] document-conversion tool
+    + Microsoft Windows and Visual Studio
+    + the [NetBeans] integrated development environment
 
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
 
-I am grateful to [Github], [AppVeyor], and [Travis]
+I am grateful to [JFrog], [Github], [AppVeyor], and [Travis]
 for providing free hosting for this project
 and many other open-source projects.
 
