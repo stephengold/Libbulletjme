@@ -25,7 +25,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
@@ -35,18 +34,106 @@ import com.jme3.math.Plane;
 import com.jme3.math.Vector3f;
 import com.jme3.system.NativeLibraryLoader;
 import java.io.File;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
+import vhacd.VHACD;
+import vhacd.VHACDHull;
+import vhacd.VHACDParameters;
 
 /**
  * JUnit automated tests for Libbulletjme.
  *
- * @author sgold
+ * @author Stephen Gold sgold@sonic.net
  */
 public class TestLibbulletjme {
 
     @Test
     public void test001() {
+        loadNativeLibrary();
+        /*
+         * Create a PhysicsSpace using DBVT for broadphase.
+         */
+        PhysicsSpace space = new PhysicsSpace(
+                new Vector3f(-10000f, -10000f, -10000f),
+                new Vector3f(10000f, 10000f, 10000f),
+                PhysicsSpace.BroadphaseType.DBVT);
+        /*
+         * Add a static horizontal plane at y=-1.
+         */
+        Plane plane = new Plane(Vector3f.UNIT_Y, -1f);
+        CollisionShape pcs = new PlaneCollisionShape(plane);
+        PhysicsRigidBody floorPrb = new PhysicsRigidBody(pcs, 0f);
+        space.addCollisionObject(floorPrb);
+        /*
+         * Add a box-shaped dynamic rigid body at y=0.
+         */
+        CollisionShape bcs = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
+        PhysicsRigidBody prb = new PhysicsRigidBody(bcs, 1f);
+        space.addCollisionObject(prb);
+        /*
+         * 50 iterations with a 20-msec timestep
+         */
+        for (int i = 0; i < 50; ++i) {
+            space.update(0.02f, 0);
+            //System.out.printf("location = %s%n", prb.getPhysicsLocation());
+        }
+        /*
+         * Check the final location of the box.
+         */
+        Vector3f location = prb.getPhysicsLocation();
+        Assert.assertEquals(0f, location.x, 0.2f);
+        Assert.assertEquals(-0.8f, location.y, 0.04f);
+        Assert.assertEquals(0f, location.z, 0.2f);
+    }
+
+    @Test
+    public void test002() {
+        loadNativeLibrary();
+        /*
+         * Generate an L-shaped mesh: 12 vertices, 20 triangles
+         */
+        float[] positionArray = new float[]{
+            0f, 0f, 0f,
+            2f, 0f, 0f,
+            2f, 1f, 0f,
+            1f, 1f, 0f,
+            1f, 3f, 0f,
+            0f, 3f, 1f,
+            0f, 0f, 1f,
+            2f, 0f, 1f,
+            2f, 1f, 1f,
+            1f, 1f, 1f,
+            1f, 3f, 1f,
+            0f, 3f, 1f
+        };
+        int[] indexArray = new int[]{
+            0, 1, 7, 0, 7, 6,
+            0, 6, 11, 0, 11, 5,
+            4, 5, 11, 4, 11, 10,
+            3, 4, 10, 3, 10, 9,
+            2, 3, 9, 2, 9, 8,
+            1, 2, 8, 1, 8, 7,
+            0, 3, 2, 0, 2, 1,
+            0, 5, 4, 0, 4, 3,
+            6, 8, 9, 6, 7, 8,
+            6, 10, 11, 6, 9, 10
+        };
+        /*
+         * Generate a hulls for the mesh.
+         */
+        VHACDParameters parameters = new VHACDParameters();
+        List<VHACDHull> hulls
+                = VHACD.compute(positionArray, indexArray, parameters);
+        /*
+         * Check the results.
+         */
+        Assert.assertEquals(2, hulls.size());
+    }
+    // *************************************************************************
+    // private methods
+
+    private void loadNativeLibrary() {
         boolean loadFromDist = false;
 
         File directory;
@@ -57,29 +144,5 @@ public class TestLibbulletjme {
         }
         NativeLibraryLoader.loadLibbulletjme(loadFromDist, directory,
                 "Debug", "Sp");
-
-        PhysicsSoftSpace space = new PhysicsSoftSpace(
-                new Vector3f(-10000f, -10000f, -10000f),
-                new Vector3f(10000f, 10000f, 10000f),
-                PhysicsSpace.BroadphaseType.DBVT);
-
-        Plane plane = new Plane(Vector3f.UNIT_Y, -1f);
-        CollisionShape pcs = new PlaneCollisionShape(plane);
-        PhysicsRigidBody floorPrb = new PhysicsRigidBody(pcs, 0f);
-        space.addCollisionObject(floorPrb);
-
-        CollisionShape bcs = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
-        PhysicsRigidBody prb = new PhysicsRigidBody(bcs, 1f);
-        space.addCollisionObject(prb);
-
-        for (int i = 0; i < 50; ++i) {
-            space.update(0.02f, 0);
-            //System.out.printf("location = %s%n", prb.getPhysicsLocation());
-        }
-
-        Vector3f location = prb.getPhysicsLocation();
-        Assert.assertEquals(0f, location.x, 0.2f);
-        Assert.assertEquals(-0.8f, location.y, 0.04f);
-        Assert.assertEquals(0f, location.z, 0.2f);
     }
 }
