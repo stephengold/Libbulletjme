@@ -1,8 +1,10 @@
-# release notes for the Libbulletjme Project
+# release log for the Libbulletjme Project
+
+ + Added more automated tests to TestLibbulletjme.
 
 ## Version 3.0.4 released on 6 February 2020
 
- + Build a class JAR, javadoc JAR, and POM.
+ + Build a class JAR, a javadoc JAR, a sources JAR, and a POM.
  + Added automated testing with Junit.
  + Moved all source files from "src" to "src/main".
 
