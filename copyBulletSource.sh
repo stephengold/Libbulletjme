@@ -3,6 +3,8 @@
 # Copy Bullet source files used by Libbulletjme
 # from the SRC directory to the DST directory.
 
+set -e
+
 SRC=/home/sgold/Git/ext/bullet3/src
 DST=/home/sgold/Git/Libbulletjme/src/main/native/bullet3
 
@@ -20,4 +22,4 @@ git status --short
 
 cd $SRC
 pwd
-git log -1 --format="updated Bullet source to SHA1 ID=%h"
+git log -1 --format="updated Bullet source to %d (SHA1 ID=%h) %s"
