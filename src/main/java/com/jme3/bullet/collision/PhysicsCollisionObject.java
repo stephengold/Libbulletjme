@@ -32,7 +32,6 @@
 package com.jme3.bullet.collision;
 
 import com.jme3.bullet.collision.shapes.CollisionShape;
-import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;

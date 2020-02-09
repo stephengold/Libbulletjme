@@ -31,7 +31,8 @@
  */
 package com.jme3.util;
 
-import com.jme3.math.*;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Vector3f;
 
 /**
  * Temporary variables assigned to each thread. Engine classes may access

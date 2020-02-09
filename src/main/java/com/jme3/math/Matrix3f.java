@@ -32,7 +32,6 @@
 package com.jme3.math;
 
 import com.jme3.util.BufferUtils;
-import com.jme3.util.TempVars;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 
