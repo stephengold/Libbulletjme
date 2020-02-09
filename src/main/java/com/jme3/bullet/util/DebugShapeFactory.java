@@ -36,6 +36,7 @@ import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -87,6 +88,32 @@ public class DebugShapeFactory {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Generate vertex locations for triangles to visualize the specified
+     * collision shape.
+     *
+     * @param shape the shape to visualize (not null, not compound, not plane,
+     * unaffected)
+     * @param meshResolution (0=low, 1=high)
+     * @return a new direct buffer containing scaled shape coordinates (capacity
+     * a multiple of 9)
+     */
+    public static FloatBuffer getDebugMeshVertices(CollisionShape shape,
+            int meshResolution) {
+        assert !(shape instanceof CompoundCollisionShape);
+        assert !(shape instanceof PlaneCollisionShape);
+        Validate.inRange(meshResolution, "mesh resolution", lowResolution,
+                highResolution);
+
+        long shapeId = shape.getObjectId();
+        DebugMeshCallback callback = new DebugMeshCallback();
+        getVertices2(shapeId, meshResolution, callback);
+        FloatBuffer result = callback.getVertices();
+
+        assert (result.capacity() % 9) == 0 : result.capacity();
+        return result;
+    }
 
     /**
      * Estimate how far the specified (non-compound, non-plane) shape extends
