@@ -25,11 +25,11 @@ public class VHACDHull {
     // *************************************************************************
     // fields
 
-    /*
+    /**
      * vertex locations (length a multiple of 3) TODO privatize
      */
     final public float[] positions;
-    /*
+    /**
      * vertex indices for each triangular face (length a multiple of 3) TODO privatize
      */
     final public int[] indexes;
