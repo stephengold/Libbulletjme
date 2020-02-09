@@ -223,6 +223,7 @@ IVHACD::Parameters                  vhacd.VHACDParamters
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
+[imgur]: https://imgur.com/ "Imgur"
 [jbullet]: http://jbullet.advel.cz "JBullet"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
@@ -254,7 +255,7 @@ and is based on the work of Jules (aka "dokthar").
 The Java code is based partly jMonkeyEngine,
 partly on [Riccardo's V-hacd-java-bindings][v-hacd-java-bindings],
 and partly on [Minie].
-Minie is, in turn, based on `jme3-bullet`, another library of jMonkeyEngine.
+Minie is, in turn, based on `jme3-bullet`, another jMonkeyEngine library.
 
 [Jump to table of contents](#toc)
 
@@ -288,7 +289,7 @@ This project also made use of the following software tools:
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
 
-I am grateful to [JFrog], [Github], [AppVeyor], and [Travis]
+I am grateful to [Github], [JFrog], [AppVeyor], [Travis], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 
