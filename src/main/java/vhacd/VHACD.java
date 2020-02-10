@@ -21,15 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyVector3f;
 
 /**
  * Utility class to perform Volumetric-Hierarchical Approximate Convex
- * Decomposition on an indexed mesh.
+ * Decomposition on an indexed mesh. TODO constructor
  */
 public class VHACD {
     // *************************************************************************
     // constants and loggers
 
+    /**
+     * number of vertices per triangle
+     */
+    final private static int vpt = 3;
     /**
      * message logger for this class
      */
@@ -62,11 +67,26 @@ public class VHACD {
         progressListeners.add(listener);
     }
 
-    public static List<VHACDHull> compute(float positions[], int indexes[],
+    /**
+     * Generate convex hulls to approximate the specified mesh.
+     *
+     * @param positions the positions of all mesh vertices (not null, length a
+     * multiple of 3, unaffected)
+     * @param indices the vertex indices of all mesh triangles (not null, length
+     * a multiple of 3, unaffected)
+     * @param params the tuning parameters to use (not null, unaffected)
+     * @return
+     */
+    public static List<VHACDHull> compute(float positions[], int indices[],
             VHACDParameters params) {
+        Validate.nonNull(positions, "positions");
+        Validate.nonNull(indices, "indices");
+        assert positions.length % MyVector3f.numAxes == 0 : positions.length;
+        assert indices.length % vpt == 0 : indices.length;
+
         FloatBuffer b_pos = BufferUtils.createFloatBuffer(positions);
-        IntBuffer b_ind = BufferUtils.createIntBuffer(indexes);
-        results = new ArrayList<>();
+        IntBuffer b_ind = BufferUtils.createIntBuffer(indices);
+        results = new ArrayList<>(50);
         compute(b_pos, b_ind, params.getId(), params.getDebugEnabled());
 
         return results;
