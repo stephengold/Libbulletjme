@@ -34,11 +34,15 @@ package com.jme3.bullet.util;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
+import com.jme3.math.Plane;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyBuffer;
+import jme3utilities.math.MyVector3f;
 
 /**
  * A utility class to generate debug meshes for Bullet collision shapes.
@@ -83,25 +87,28 @@ public class DebugShapeFactory {
 
     /**
      * Generate vertex locations for triangles to visualize the specified
-     * collision shape.
+     * collision shape. TODO re-order methods
      *
-     * @param shape the shape to visualize (not null, not compound, not plane,
-     * unaffected)
+     * @param shape the shape to visualize (not null, not compound, unaffected)
      * @param meshResolution (0=low, 1=high)
      * @return a new direct buffer containing scaled shape coordinates (capacity
      * a multiple of 9)
      */
-    public static FloatBuffer getDebugMeshVertices(CollisionShape shape,
+    public static FloatBuffer getDebugTriangles(CollisionShape shape,
             int meshResolution) {
         assert !(shape instanceof CompoundCollisionShape);
-        assert !(shape instanceof PlaneCollisionShape);
         Validate.inRange(meshResolution, "mesh resolution", lowResolution,
                 highResolution);
 
-        long shapeId = shape.getObjectId();
-        DebugMeshCallback callback = new DebugMeshCallback();
-        getVertices2(shapeId, meshResolution, callback);
-        FloatBuffer result = callback.getVertices();
+        FloatBuffer result;
+        if (shape instanceof PlaneCollisionShape) {
+            result = createPlaneTriangles((PlaneCollisionShape) shape, 1000f);
+        } else {
+            long shapeId = shape.getObjectId();
+            DebugMeshCallback callback = new DebugMeshCallback();
+            getVertices2(shapeId, meshResolution, callback);
+            result = callback.getVertices();
+        }
 
         assert (result.capacity() % 9) == 0 : result.capacity();
         return result;
@@ -130,6 +137,64 @@ public class DebugShapeFactory {
         DebugMeshCallback callback = new DebugMeshCallback();
         getVertices2(shapeId, meshResolution, callback);
         float result = callback.maxDistance(transform);
+
+        return result;
+    }
+
+    /**
+     * Generate vertex locations for triangles to visualize the specified
+     * PlaneCollisionShape.
+     *
+     * @param shape (not null, unaffected)
+     * @param halfExtent the desired half extent for the result (in scaled shape
+     * units, &gt;0)
+     * @return a new, flipped direct buffer containing scaled shape coordinates
+     * (capacity a multiple of 9)
+     */
+    private static FloatBuffer createPlaneTriangles(PlaneCollisionShape shape,
+            float halfExtent) {
+        assert halfExtent > 0f : halfExtent;
+        /*
+         * Generate vertex locations for a large square in the Y-Z plane.
+         */
+        FloatBuffer result = BufferUtils.createFloatBuffer(new float[]{
+            0f, 0f, -1f,
+            0f, 1f, 0f,
+            0f, 0f, 1f,
+            0f, -1f, 0f,
+            0f, 0f, -1f,
+            0f, 0f, 1f
+        });
+        int numFloats = result.capacity();
+        result.limit(numFloats);
+        /*
+         * Transform vertex locations to the surface of the shape.
+         */
+        Transform transform = planeTransform(shape);
+        transform.setScale(halfExtent);
+        MyBuffer.transform(result, 0, numFloats, transform);
+
+        return result;
+    }
+
+    /**
+     * Generate a Transform that maps the Y-Z plane to the surface of the
+     * specified PlaneCollisionShape.
+     *
+     * @param shape (not null, unaffected) units, &gt;0)
+     * @return a new Transform with scale=1
+     */
+    private static Transform planeTransform(PlaneCollisionShape shape) {
+        Transform result = new Transform();
+
+        Plane plane = shape.getPlane();
+        plane.getClosestPoint(translateIdentity, result.getTranslation());
+
+        Vector3f v1 = plane.getNormal();
+        Vector3f v2 = new Vector3f();
+        Vector3f v3 = new Vector3f();
+        MyVector3f.generateBasis(v1, v2, v3);
+        result.getRotation().fromAxes(v1, v2, v3);
 
         return result;
     }
