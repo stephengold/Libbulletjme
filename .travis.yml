@@ -12,6 +12,13 @@ matrix:
       apt:
         packages:
         - g++-multilib
+  - os: linux
+    arch: arm64
+    addons:
+      apt:
+        packages:
+        - default-jre
+        - g++-aarch64-linux-gnu
 
 script:
 - ./gradlew build --console=plain --no-daemon
@@ -30,6 +37,10 @@ deploy:
   - dist/Linux32ReleaseSp_libbulletjme.so
   - dist/Linux64ReleaseDp_libbulletjme.so
   - dist/Linux64ReleaseSp_libbulletjme.so
+  - dist/Linux_ARM64DebugDp_libbulletjme.so
+  - dist/Linux_ARM64DebugSp_libbulletjme.so
+  - dist/Linux_ARM64ReleaseDp_libbulletjme.so
+  - dist/Linux_ARM64ReleaseSp_libbulletjme.so
   - dist/MacOSX32DebugDp_libbulletjme.dylib
   - dist/MacOSX32DebugSp_libbulletjme.dylib
   - dist/MacOSX64DebugDp_libbulletjme.dylib

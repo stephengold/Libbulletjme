@@ -64,6 +64,8 @@ public final class NativeLibraryLoader {
             case Windows64:
                 name = "bulletjme.dll";
                 break;
+            case Linux_ARM32:
+            case Linux_ARM64:
             case Linux32:
             case Linux64:
                 name = "libbulletjme.so";
