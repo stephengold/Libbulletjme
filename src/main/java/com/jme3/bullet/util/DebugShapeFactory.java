@@ -71,14 +71,6 @@ public class DebugShapeFactory {
      */
     final private static Vector3f translateIdentity = new Vector3f(0f, 0f, 0f);
     // *************************************************************************
-    // fields
-
-    /**
-     * largest debug mesh to index (doesn't affect plane shapes, 0&rarr;never
-     * index, MAX_VALUE&rarr;always index, default=6000 vertices)
-     */
-    private static int maxVerticesToIndex = 6_000;
-    // *************************************************************************
     // constructors
 
     /**
