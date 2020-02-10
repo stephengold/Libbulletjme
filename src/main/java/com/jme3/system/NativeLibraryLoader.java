@@ -32,6 +32,9 @@
 package com.jme3.system;
 
 import java.io.File;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility class to load native libraries.
@@ -39,6 +42,9 @@ import java.io.File;
  * @author Kirill Vainer
  */
 public final class NativeLibraryLoader {
+
+    final public static Logger logger
+            = Logger.getLogger(NativeLibraryLoader.class.getName());
 
     private NativeLibraryLoader() {
     }
@@ -80,11 +86,11 @@ public final class NativeLibraryLoader {
 
         File file;
         if (dist) {
-            name = platform.toString() + buildType + flavor + "_" + name;
+            name = platform + buildType + flavor + "_" + name;
             file = directory;
 
         } else {
-            String subdirectory = platform.toString().toLowerCase();
+            String subdirectory = firstToLower(platform.toString());
             file = new File(directory, subdirectory);
 
             String bt = buildType.toLowerCase();
@@ -96,6 +102,30 @@ public final class NativeLibraryLoader {
 
         file = new File(file, name);
         String absoluteFilename = file.getAbsolutePath();
-        System.load(absoluteFilename);
+        if (!file.exists()) {
+            logger.log(Level.SEVERE, "{0} does not exist", absoluteFilename);
+        } else if (!file.canRead()) {
+            logger.log(Level.SEVERE, "{0} is not readable", absoluteFilename);
+        } else {
+            System.load(absoluteFilename);
+        }
+    }
+
+    /**
+     * Convert the first character of the specified String to lower case.
+     *
+     * @param input the input string (not null)
+     * @return the converted String (not null)
+     */
+    private static String firstToLower(String input) {
+        String result = input;
+        if (!input.isEmpty()) {
+            String first = input.substring(0, 1);
+            first = first.toLowerCase(Locale.ROOT);
+            String rest = input.substring(1);
+            result = first + rest;
+        }
+
+        return result;
     }
 }
