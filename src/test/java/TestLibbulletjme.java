@@ -210,6 +210,9 @@ public class TestLibbulletjme {
         Assert.assertFalse(compound.isInfinite());
         Assert.assertFalse(compound.isNonMoving());
         Assert.assertFalse(compound.isPolyhedral());
+        buf = DebugShapeFactory.getDebugTriangles(compound,
+                DebugShapeFactory.lowResolution);
+        Assert.assertEquals(0, buf.capacity());
         /*
          * Cone
          */
