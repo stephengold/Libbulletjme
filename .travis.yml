@@ -25,6 +25,7 @@ matrix:
         - g++
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=arm64
+    after_failure:  cat /home/travis/build/stephengold/Libbulletjme/build/reports/tests/test/index.html
 
 deploy:
   provider: releases
