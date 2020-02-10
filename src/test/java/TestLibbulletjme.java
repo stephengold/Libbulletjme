@@ -43,6 +43,7 @@ import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.util.DebugShapeFactory;
+import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Plane;
 import com.jme3.math.Vector3f;
 import com.jme3.system.NativeLibraryLoader;
@@ -441,6 +442,8 @@ public class TestLibbulletjme {
         }
         NativeLibraryLoader.loadLibbulletjme(loadFromDist, directory,
                 "Debug", "Sp");
+        Assert.assertTrue(NativeLibrary.isDebug());
+        Assert.assertFalse(NativeLibrary.isDoublePrecision());
     }
 
     /**
