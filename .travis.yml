@@ -26,9 +26,7 @@ matrix:
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=arm64
     after_failure:
-    - cat build/reports/tests/test/index.html
     - cat build/reports/tests/test/classes/TestLibbulletjme.html
-    - ls -lR build/libs
 
 deploy:
   provider: releases
