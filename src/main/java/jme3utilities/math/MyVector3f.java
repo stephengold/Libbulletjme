@@ -139,6 +139,45 @@ public class MyVector3f {
     }
 
     /**
+     * Generate an orthonormal basis that includes the specified vector.
+     *
+     * @param in1 input direction for the first basis vector (not null, not
+     * zero, modified)
+     * @param store2 storage for the 2nd basis vector (not null, modified)
+     * @param store3 storage for the 3nd basis vector (not null, modified)
+     */
+    public static void generateBasis(Vector3f in1, Vector3f store2,
+            Vector3f store3) {
+        Validate.nonZero(in1, "starting direction");
+        Validate.nonNull(store2, "2nd basis vector");
+        Validate.nonNull(store3, "3nd basis vector");
+
+        normalizeLocal(in1);
+        /*
+         * Pick a direction that's not parallel (or anti-parallel) to
+         * the input direction.
+         */
+        float x = Math.abs(in1.x);
+        float y = Math.abs(in1.y);
+        float z = Math.abs(in1.z);
+        if (x <= y && x <= z) {
+            store3.set(1f, 0f, 0f);
+        } else if (y <= z) {
+            store3.set(0f, 1f, 0f);
+        } else {
+            store3.set(0f, 0f, 1f);
+        }
+        /*
+         * Use cross products to generate unit vectors orthogonal
+         * to the input vector.
+         */
+        in1.cross(store3, store2);
+        normalizeLocal(store2);
+        in1.cross(store2, store3);
+        normalizeLocal(store3);
+    }
+
+    /**
      * Test whether all components of a vector are all non-negative: in other
      * words, whether it's in the first octant or the boundaries thereof.
      *
