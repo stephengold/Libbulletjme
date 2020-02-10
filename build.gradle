@@ -102,15 +102,35 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
-                //buildable = targetPlatform.name.equals('Linux64')
+                // Decide whether to build the current platform:
+                if (gradle.rootProject.hasProperty('travis')) {
+                    // -Ptravis= specified on the command line
+                    String ta = gradle.rootProject.ext.travis;
+                    if (ta.equals('amd64')) {
+                        buildable = !targetPlatform.name.startsWith('Linux_ARM')
+                    } else if (ta.equals('arm64')) {
+                        buildable = targetPlatform.name.startsWith('Linux_ARM')
+                    } else if (ta.equals('osx')) {
+                        buildable = targetPlatform.name.startsWith('MacOSX')
+                    }
+                } else {
+                    // -Ptravis= not specified
+                    buildable = !targetPlatform.name.startsWith('Linux_ARM')
+                    //buildable = targetPlatform.name.equals('Linux64')
+                }
+
+                // Decide whether to build the current buildType:
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
                     //buildable = false
                 }
+
+                // Decide whether to build the current flavor:
                 if (flavor == flavors.Dp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                     //buildable = false
                 }
+
                 cppCompiler.define 'BT_NO_PROFILE'
 
                 String q = targetPlatform.name + buildType.name + flavor.name
@@ -203,7 +223,6 @@ dependencies {
 }
 
 repositories {
-    //mavenLocal()
     jcenter()
 }
 
