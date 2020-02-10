@@ -75,7 +75,7 @@ model {
                 assembler.executable = 'aarch64-linux-gnu-as'
                 cCompiler.executable = ' aarch64-linux-gnu-gcc'
                 cppCompiler.executable = 'aarch64-linux-gnu-g++'
-                linker.executable = 'aarch64-linux-gnu-gcc'
+                linker.executable = 'aarch64-linux-gnu-g++'
                 path '/usr/bin'
             }
         }
@@ -105,12 +105,12 @@ model {
                 // Decide whether to build the current platform:
                 if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
-                    String ta = gradle.rootProject.ext.travis;
-                    if (ta.equals('amd64')) {
+                    String travis = gradle.rootProject.ext.travis;
+                    if (travis.equals('amd64')) {
                         buildable = !targetPlatform.name.startsWith('Linux_ARM')
-                    } else if (ta.equals('arm64')) {
+                    } else if (travis.equals('arm64')) {
                         buildable = targetPlatform.name.startsWith('Linux_ARM')
-                    } else if (ta.equals('osx')) {
+                    } else if (travis.equals('osx')) {
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }
                 } else {
