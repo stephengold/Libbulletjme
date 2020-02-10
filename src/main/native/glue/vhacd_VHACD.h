@@ -7,6 +7,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef vhacd_VHACD_vpt
+#define vhacd_VHACD_vpt 3L
 /*
  * Class:     vhacd_VHACD
  * Method:    compute
