@@ -75,7 +75,7 @@ public class VHACD {
      * @param indices the vertex indices of all mesh triangles (not null, length
      * a multiple of 3, unaffected)
      * @param params the tuning parameters to use (not null, unaffected)
-     * @return
+     * @return a new list of hulls, or an empty list if the algorithm failed
      */
     public static List<VHACDHull> compute(float positions[], int indices[],
             VHACDParameters params) {
