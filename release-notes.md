@@ -1,6 +1,12 @@
 # release log for the Libbulletjme Project
 
+## Version 3.0.5 released on 11 February 2020
+
+ + Build native libraries for `Linux_ARM64` platforms.
  + Added more automated tests to TestLibbulletjme.
+ + Added a `getDebugTriangles()` method to the `DebugShapeFactory` class.
+ + Added a `generateBasis()` method to the `MyVector3f` class.
+ + Added a `hashCode()` method to the `VHACDParameters` class.
 
 ## Version 3.0.4 released on 6 February 2020
 
@@ -10,7 +16,7 @@
 
 ## Version 3.0.2 released on 3 February 2020
 
- + Added a new `PhysicsSoftBody.getNbPinnedNodes()` method.
+ + Added a `getNbPinnedNodes()` method to the `PhysicsSoftBody` class.
  + Built using Gradle v6.1.1
 
 ## Version 3.0.1 released on 21 January 2020
@@ -21,7 +27,7 @@
 
 ## Version 3.0.0 released on 14 January 2020
 
- + Removed JNI methods:
+ + Removed 6 JNI methods:
    + `CompoundCollisionShape.createShape()`
    + `PhysicsCharacter.getCcdMotionThreshold()`
    + `PhysicsCharacter.getCcdSquareMotionThreshold()`
@@ -30,10 +36,10 @@
    + `PhysicsCharacter.setCcdSweptSphereRadius()`
  + Replaced `jobject` argument with `jlong` in `PhysicsVehicle.addWheel()`.
  + Replaced `ByteBuffer` arguments with `FloatBuffer` in `HullCollisionShape`.
- + Removed unused arguments of JNI methods:
+ + Removed unused arguments of 2 JNI methods:
    + `PhysicsSpace.createPhysicsSpace()`
    + `PhysicsVehicle.createVehicleRaycaster()`
- + Changed the return-type of JNI methods:
+ + Changed the return-type of 4 JNI methods:
    + `CompoundCollisionShape.addChildShape()`
    + `CompoundCollisionShape.removeChildShape()`
    + `PhysicsRigidBody.updateMassProps()`

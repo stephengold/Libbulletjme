@@ -121,13 +121,13 @@ jmethodID jmeClasses::Vhacd_update;
 /*
  * global flag to enable/disable the init message
  *
- * Invoke Java_com_jme3_bullet_debug_DebugTools_setStartupMessageEnabled()
+ * Invoke Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
  * to alter this flag.
  */
 int jmeClasses::printFlag = 1; // TRUE
 
 /*
- * Initialize Java classes for the specified environment.
+ * Initialize this instance for the specified environment.
  */
 void jmeClasses::initJavaClasses(JNIEnv *env) {
     if (pEnv != NULL) return; // already initialized
@@ -140,7 +140,7 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
 #ifdef BT_USE_DOUBLE_PRECISION
         printf("DP_");
 #endif
-        printf("Libbulletjme v3.0.4 initializing Java classes\n");
+        printf("Libbulletjme v3.0.5 initializing\n");
         fflush(stdout);
     }
 
