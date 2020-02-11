@@ -11,8 +11,10 @@ Complete source code (in C++ and Java) is provided under
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
-For each (operating system, architecture) combination,
-4 native libraries are distributed:
+In addition, the 64-bit ARM architecture (aarch64) is supported for Linux,
+making a total of 7 platforms.
+
+For each platform, 4 native libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
  + a release build using double-precision arithmetic
  + a debug build using single-precision arithmetic
@@ -45,7 +47,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:3.0.4'
+            compile 'com.github.stephengold:Libbulletjme:3.0.5'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -75,7 +77,7 @@ TODO HelloWorld application
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 3.0.4`
+     + `git checkout -b latest 3.0.5`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][latest]
      + follow the "Source code (zip)" link
