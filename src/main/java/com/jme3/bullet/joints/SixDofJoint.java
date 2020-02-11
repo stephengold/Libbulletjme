@@ -35,6 +35,7 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.joints.motors.RotationalLimitMotor;
 import com.jme3.bullet.joints.motors.TranslationalLimitMotor;
 import com.jme3.bullet.objects.PhysicsRigidBody;
+import com.jme3.math.FastMath;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
@@ -43,7 +44,8 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A 6 degree-of-freedom joint based on Bullet's btGeneric6DofConstraint.
+ * A 6 degree-of-freedom joint based on Bullet's btGeneric6DofConstraint. Axis
+ * rotations are applied in XYZ order.
  * <p>
  * <i>From the Bullet manual:</i><br>
  * <p>
@@ -351,23 +353,33 @@ public class SixDofJoint extends Constraint {
     /**
      * Alter the joint's lower limits for rotation of all 3 axes.
      *
-     * @param vector the desired lower limits (in radians, not null, unaffected)
+     * @param limits the desired lower limits (in radians, not null, unaffected)
      */
-    public void setAngularLowerLimit(Vector3f vector) {
-        angularLowerLimit.set(vector);
+    public void setAngularLowerLimit(Vector3f limits) {
+        Validate.inRange(limits.x, "limits.x", -FastMath.PI, FastMath.PI);
+        Validate.inRange(limits.y, "limits.y",
+                -FastMath.HALF_PI, FastMath.HALF_PI);
+        Validate.inRange(limits.z, "limits.z", -FastMath.PI, FastMath.PI);
+
+        angularLowerLimit.set(limits);
         long constraintId = getObjectId();
-        setAngularLowerLimit(constraintId, vector);
+        setAngularLowerLimit(constraintId, limits);
     }
 
     /**
      * Alter the joint's upper limits for rotation of all 3 axes.
      *
-     * @param vector the desired upper limits (in radians, not null, unaffected)
+     * @param limits the desired upper limits (in radians, not null, unaffected)
      */
-    public void setAngularUpperLimit(Vector3f vector) {
-        angularUpperLimit.set(vector);
+    public void setAngularUpperLimit(Vector3f limits) {
+        Validate.inRange(limits.x, "limits.x", -FastMath.PI, FastMath.PI);
+        Validate.inRange(limits.y,
+                "limits.y", -FastMath.HALF_PI, FastMath.HALF_PI);
+        Validate.inRange(limits.z, "limits.z", -FastMath.PI, FastMath.PI);
+
+        angularUpperLimit.set(limits);
         long constraintId = getObjectId();
-        setAngularUpperLimit(constraintId, vector);
+        setAngularUpperLimit(constraintId, limits);
     }
 
     /**
