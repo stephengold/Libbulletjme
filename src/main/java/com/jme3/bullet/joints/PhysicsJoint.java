@@ -42,8 +42,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-abstract public class PhysicsJoint
-        implements Comparable<PhysicsJoint> {
+abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
     // *************************************************************************
     // constants and loggers
 

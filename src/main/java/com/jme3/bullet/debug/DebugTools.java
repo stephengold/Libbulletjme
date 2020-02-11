@@ -34,7 +34,7 @@ package com.jme3.bullet.debug;
 import java.util.logging.Logger;
 
 /**
- * Debugging aids.  TODO make more compatible with jme3-bullet
+ * Debugging aids.
  *
  * @author normenhansen
  */

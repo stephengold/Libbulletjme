@@ -74,7 +74,8 @@ class DebugMeshCallback {
     /**
      * Copy the vertex locations to a FloatBuffer.
      *
-     * @return a new buffer (not null)
+     * @return a new direct buffer containing scaled shape coordinates (not
+     * flipped, capacity a multiple of 9)
      */
     FloatBuffer getVertices() {
         int numFloats = numAxes * list.size();

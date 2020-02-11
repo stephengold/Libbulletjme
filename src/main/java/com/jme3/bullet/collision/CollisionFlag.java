@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 jMonkeyEngine
+ * Copyright (c) 2018-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,7 +57,7 @@ public class CollisionFlag {
     final public static int NO_CONTACT_RESPONSE = 0x4;
     /**
      * flag to enable a custom material callback for per-triangle
-     * friction/restitution (not supported by Minie)
+     * friction/restitution (not supported by Libbulletjme)
      */
     final public static int CUSTOM_MATERIAL_CALLBACK = 0x8;
     /**
@@ -65,27 +65,27 @@ public class CollisionFlag {
      */
     final public static int CHARACTER_OBJECT = 0x10;
     /**
-     * flag to disable debug visualization (not supported by Minie)
+     * flag to disable debug visualization (not supported by Libbulletjme)
      */
     final public static int DISABLE_VISUALIZE_OBJECT = 0x20;
     /**
-     * flag to disable parallel/SPU processing (not supported by Minie)
+     * flag to disable parallel/SPU processing (not supported by Libbulletjme)
      */
     final public static int DISABLE_SPU_COLLISION_PROCESSING = 0x40;
     /**
-     * flag not supported by Minie
+     * flag not supported by Libbulletjme
      */
     final public static int HAS_CONTACT_STIFFNESS_DAMPING = 0x80;
     /**
-     * flag not supported by Minie
+     * flag not supported by Libbulletjme
      */
     final public static int HAS_CUSTOM_DEBUG_RENDERING_COLOR = 0x100;
     /**
-     * flag not supported by Minie
+     * flag not supported by Libbulletjme
      */
     final public static int HAS_FRICTION_ANCHOR = 0x200;
     /**
-     * flag not supported by Minie
+     * flag not supported by Libbulletjme
      */
     final public static int HAS_COLLISION_SOUND_TRIGGER = 0x400;
     /**

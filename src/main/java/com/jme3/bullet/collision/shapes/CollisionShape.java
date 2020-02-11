@@ -51,8 +51,7 @@ import jme3utilities.math.MyVector3f;
  *
  * @author normenhansen
  */
-abstract public class CollisionShape
-        implements Comparable<CollisionShape> {
+abstract public class CollisionShape implements Comparable<CollisionShape> {
     // *************************************************************************
     // constants and loggers
 
