@@ -150,9 +150,10 @@ void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
     dynamicsWorld->getPairCache()->setOverlapFilterCallback(new jmeFilterCallback());
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
-    if (gContactStartedCallback == NULL) {
-        gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
-    }
+
+    btAssert(gContactStartedCallback == NULL
+            || gContactStartedCallback == &contactStartedCallback);
+    gContactStartedCallback = &contactStartedCallback;
 }
 
 void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,

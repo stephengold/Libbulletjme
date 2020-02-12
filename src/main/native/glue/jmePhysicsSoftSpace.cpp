@@ -144,9 +144,10 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
     dynamicsWorld->getPairCache()->setOverlapFilterCallback(new jmeFilterCallback());
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
     dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
-    if (gContactStartedCallback == NULL) {
-        gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
-    }
+
+    btAssert(gContactStartedCallback == NULL
+            || gContactStartedCallback == &jmePhysicsSpace::contactStartedCallback);
+    gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
 }
 
 btSoftRigidDynamicsWorld * jmePhysicsSoftSpace::getSoftDynamicsWorld() {
