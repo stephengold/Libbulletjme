@@ -122,6 +122,7 @@ model {
                 // Decide whether to build the current buildType:
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
+                    //cppCompiler.define 'DEBUG_PERSISTENCY'
                     //buildable = false
                 }
 
@@ -211,7 +212,7 @@ model {
                     }
                     jar.dependsOn("copyToDist$q")
                 } else {
-                    println 'Do not build ' + q
+                    //println 'Do not build ' + q
                 }
             }
         }
