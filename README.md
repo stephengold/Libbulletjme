@@ -11,8 +11,8 @@ Complete source code (in C++ and Java) is provided under
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
-In addition, the 64-bit ARM architecture (aarch64) is supported for Linux,
-making a total of 7 platforms.
+It also supports Linux on the 64-bit ARM architecture (aarch64),
+for a total of 7 platforms.
 
 For each platform, 4 native libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
@@ -47,7 +47,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:3.0.5'
+            compile 'com.github.stephengold:Libbulletjme:3.0.6'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -77,7 +77,7 @@ TODO HelloWorld application
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 3.0.5`
+     + `git checkout -b latest 3.0.6`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -235,6 +235,7 @@ IVHACD::Parameters                  vhacd.VHACDParamters
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
+[meld]: https://meldmerge.org "Meld Project"
 [minie]: https://github.com/stephengold/Minie "Minie Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
@@ -285,6 +286,7 @@ This project also made use of the following software tools:
     + the [Linux Mint][mint] operating system
     + the [LLVM Compiler Infrastructure][llvm]
     + the [Markdown] document-conversion tool
+    + the [Meld] visual merge tool
     + Microsoft Windows and Visual Studio
     + the [NetBeans] integrated development environment
 
