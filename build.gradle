@@ -6,7 +6,7 @@ plugins {
 
 ext {
     artifact = 'Libbulletjme'
-    version = '3.0.5'
+    version = '3.0.6'
     baseName = "$artifact-$version"
 }
 
@@ -71,7 +71,7 @@ model {
         gcc(Gcc)
         clang(Clang)
         gccArm(Gcc) {
-            target('Linux_ARM64'){
+            target('Linux_ARM64') {
                 assembler.executable = 'aarch64-linux-gnu-as'
                 cCompiler.executable = ' aarch64-linux-gnu-gcc'
                 cppCompiler.executable = 'aarch64-linux-gnu-g++'

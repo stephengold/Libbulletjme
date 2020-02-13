@@ -1,9 +1,15 @@
 # release log for the Libbulletjme Project
 
+## Version 3.0.6 released on 12 February 2020
+
+ + Implemented filtering of predictive contacts (JME issue 1283).
+ + Added validation of angular limits to the `SixDofJoint` class.
+ + Added a `VF_DD` flag to the `ConfigFlag` class.
+
 ## Version 3.0.5 released on 11 February 2020
 
  + Build native libraries for `Linux_ARM64` platforms.
- + Added more automated tests to TestLibbulletjme.
+ + Added more automated tests to `TestLibbulletjme`.
  + Added a `getDebugTriangles()` method to the `DebugShapeFactory` class.
  + Added a `generateBasis()` method to the `MyVector3f` class.
  + Added a `hashCode()` method to the `VHACDParameters` class.
