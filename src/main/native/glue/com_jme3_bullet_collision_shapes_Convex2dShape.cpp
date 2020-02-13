@@ -50,7 +50,11 @@ extern "C" {
         btCollisionShape *pChild
                 = reinterpret_cast<btCollisionShape *> (childShapeId);
         NULL_CHECK(pChild, "The child shape does not exist.", 0)
-        btAssert(pChild->isConvex());
+        if (!pChild->isConvex()) {
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The btCollisionShape isn't convex.");
+            return;
+        }
         btConvexShape *pConvex = (btConvexShape *) pChild;
 
         btConvex2dShape *pShape = new btConvex2dShape(pConvex);
