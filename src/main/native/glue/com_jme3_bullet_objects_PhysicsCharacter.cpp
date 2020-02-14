@@ -244,6 +244,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
+     * Method:    getStepHeight
+     * Signature: (J)F
+     */
+    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getStepHeight
+    (JNIEnv *env, jobject object, jlong kccId) {
+        btKinematicCharacterController *pController
+                = reinterpret_cast<btKinematicCharacterController *> (kccId);
+        NULL_CHECK(pController,
+                "The btKinematicCharacterController does not exist.", 0);
+
+        return pController->getStepHeight();
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    getUpDirection
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */

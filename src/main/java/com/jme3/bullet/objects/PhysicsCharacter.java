@@ -242,6 +242,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * falling (in physics-space units)
      */
     public float getStepHeight() {
+        assert stepHeight == getStepHeight(characterId);
         return stepHeight;
     }
 
@@ -595,6 +596,8 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     native private float getMaxPenetrationDepth(long controllerId);
 
     native private float getMaxSlope(long controllerId);
+
+    native private float getStepHeight(long controllerId);
 
     native private void getUpDirection(long controllerId, Vector3f storeVector);
 

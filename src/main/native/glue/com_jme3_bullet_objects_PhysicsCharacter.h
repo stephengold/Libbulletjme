@@ -139,6 +139,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getMaxSlo
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsCharacter
+ * Method:    getStepHeight
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getStepHeight
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsCharacter
  * Method:    getUpDirection
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
