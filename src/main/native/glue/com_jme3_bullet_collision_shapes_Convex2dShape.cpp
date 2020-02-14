@@ -53,7 +53,7 @@ extern "C" {
         if (!pChild->isConvex()) {
             env->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The btCollisionShape isn't convex.");
-            return;
+            return 0;
         }
         btConvexShape *pConvex = (btConvexShape *) pChild;
 
