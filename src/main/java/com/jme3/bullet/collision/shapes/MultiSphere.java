@@ -44,7 +44,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MultiSphere extends CollisionShape {
+public class MultiSphere extends ConvexShape {
     // *************************************************************************
     // constants and loggers
 

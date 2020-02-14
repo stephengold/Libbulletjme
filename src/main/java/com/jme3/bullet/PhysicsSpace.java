@@ -786,7 +786,8 @@ public class PhysicsSpace {
      * A sweep test will miss a collision if it starts inside an object and
      * sweeps away from the object's center.
      *
-     * @param shape the shape to sweep (not null, convex, unaffected)
+     * @param shape the shape to sweep (not null, convex, unaffected) TODO
+     * declare as ConvexShape
      * @param start the starting physics-space transform (not null, unaffected)
      * @param end the ending physics-space transform (not null, unaffected)
      * @param results the list to hold results (not null, modified)
@@ -810,7 +811,9 @@ public class PhysicsSpace {
     }
 
     /**
-     * Update this space.
+     * Update this space. Invoked (by the BulletAppState) once per frame while
+     * the app state is attached and enabled. Can also be used to single-step
+     * the physics simulation, if maxSubSteps is set to 0 or 1.
      *
      * @see #setMaxSubSteps(int)
      * @param timeInterval time-per-frame multiplied by speed (in seconds,

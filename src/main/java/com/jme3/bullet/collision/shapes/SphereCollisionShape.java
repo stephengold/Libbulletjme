@@ -46,7 +46,7 @@ import jme3utilities.math.MyVector3f;
  * @author normenhansen
  * @see MultiSphere
  */
-public class SphereCollisionShape extends CollisionShape {
+public class SphereCollisionShape extends ConvexShape {
     // *************************************************************************
     // constants and loggers
 

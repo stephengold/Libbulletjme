@@ -106,7 +106,8 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * Instantiate a responsive character with the specified CollisionShape and
      * step height.
      *
-     * @param shape the desired shape (not null, convex, alias created)
+     * @param shape the desired shape (not null, convex, alias created) TODO
+     * declare as ConvexShape
      * @param stepHeight the maximum amount of vertical movement without jumping
      * or falling (in physics-space units)
      */
@@ -343,10 +344,13 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * character should not be in any PhysicsSpace while changing shape; the
      * character gets rebuilt on the physics side.
      *
-     * @param collisionShape the shape to apply (not null, alias created)
+     * @param collisionShape the shape to apply (not null, convex, alias
+     * created) TODO declare as ConvexShape
      */
     @Override
     public void setCollisionShape(CollisionShape collisionShape) {
+        assert collisionShape.isConvex();
+
         super.setCollisionShape(collisionShape);
         if (objectId == 0L) {
             buildObject();
@@ -550,6 +554,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
         setCharacterFlags(objectId);
 
         CollisionShape shape = getCollisionShape();
+        assert shape.isConvex();
         long shapeId = shape.getObjectId();
         attachCollisionShape(objectId, shapeId);
 

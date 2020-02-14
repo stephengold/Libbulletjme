@@ -45,7 +45,7 @@ import jme3utilities.math.MyVector3f;
  *
  * @author normenhansen
  */
-public class CylinderCollisionShape extends CollisionShape {
+public class CylinderCollisionShape extends ConvexShape {
     // *************************************************************************
     // constants and loggers
 

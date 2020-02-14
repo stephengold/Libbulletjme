@@ -41,7 +41,7 @@ import jme3utilities.math.MyMath;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Box2dShape extends CollisionShape {
+public class Box2dShape extends ConvexShape {
     // *************************************************************************
     // constants and loggers
 
