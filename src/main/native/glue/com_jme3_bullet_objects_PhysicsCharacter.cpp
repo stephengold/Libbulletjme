@@ -282,6 +282,37 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_objects_PhysicsCharacter
+     * Method:    getWalkOffset
+     * Signature: (JLcom/jme3/math/Vector3f;)V
+     */
+    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getWalkOffset
+    (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
+        NULL_CHECK(pController, "The controller does not exist.",);
+
+        const btVector3& offset = pController->getWalkOffset();
+
+        NULL_CHECK(storeVector, "The store vector does not exist.",)
+        jmeBulletUtil::convert(env, &offset, storeVector);
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsCharacter
+     * Method:    isUsingGhostSweepTest
+     * Signature: (J)Z
+     */
+    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_isUsingGhostSweepTest
+    (JNIEnv *env, jobject object, jlong kccId) {
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
+        NULL_CHECK(pController, "The controller does not exist.", 0);
+
+        bool result = pController->isUsingGhostSweepTest();
+
+        return (jboolean) result;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_objects_PhysicsCharacter
      * Method:    jump
      * Signature: (JLcom/jme3/math/Vector3f;)V
      */

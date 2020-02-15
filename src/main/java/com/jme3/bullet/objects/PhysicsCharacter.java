@@ -69,10 +69,6 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     // fields
 
     /**
-     * which convexSweepTest to use
-     */
-    private boolean isUsingGhostSweepTest = true;
-    /**
      * copy of the maximum amount of vertical movement without jumping or
      * falling (in physics-space units)
      */
@@ -94,11 +90,6 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
             return new Vector3f();
         }
     };
-    /**
-     * location change for each physics tick (in physics-space coordinates,
-     * default=(0,0,0))
-     */
-    private Vector3f walkOffset = new Vector3f();
     // *************************************************************************
     // constructors
 
@@ -164,7 +155,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Read this character's fall speed.
+     * Read this character's maximum fall speed (terminal velocity).
      *
      * @return the speed (in physics-space units per second)
      */
@@ -267,11 +258,9 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * @return an offset vector (either storeResult or a new vector, not null)
      */
     public Vector3f getWalkDirection(Vector3f storeResult) {
-        if (storeResult == null) {
-            return walkOffset.clone();
-        } else {
-            return storeResult.set(walkOffset);
-        }
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        getWalkOffset(characterId, result);
+        return result;
     }
 
     /**
@@ -280,7 +269,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * @return true if using the ghost's test, otherwise false
      */
     public boolean isUsingGhostSweepTest() {
-        return isUsingGhostSweepTest;
+        return isUsingGhostSweepTest(characterId);
     }
 
     /**
@@ -377,7 +366,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Alter this character's fall speed.
+     * Alter this character's maximum fall speed (terminal velocity).
      *
      * @param fallSpeed the desired speed (in physics-space units per second,
      * default=55)
@@ -488,7 +477,6 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * world's test (default=true)
      */
     public void setSweepTest(boolean useGhostSweepTest) {
-        this.isUsingGhostSweepTest = useGhostSweepTest;
         setUseGhostSweepTest(characterId, useGhostSweepTest);
     }
 
@@ -497,7 +485,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * vector.
      *
      * @param direction the desired direction (not null, not zero, unaffected,
-     * default=(0,0,1))
+     * default=(0,1,0))
      */
     public void setUp(Vector3f direction) {
         Validate.nonZero(direction, "direction");
@@ -512,7 +500,6 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * physics-space coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setWalkDirection(Vector3f offset) {
-        walkOffset.set(offset);
         setWalkDirection(characterId, offset);
     }
 
@@ -600,6 +587,10 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     native private float getStepHeight(long controllerId);
 
     native private void getUpDirection(long controllerId, Vector3f storeVector);
+
+    native private void getWalkOffset(long controllerId, Vector3f storeVector);
+
+    native private boolean isUsingGhostSweepTest(long controllerId);
 
     native private void jump(long controllerId, Vector3f direction);
 
