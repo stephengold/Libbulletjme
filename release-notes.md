@@ -1,6 +1,6 @@
 # release log for the Libbulletjme Project
 
-## Version 3.0.7 released on 15 February 2020
+## Version 3.0.8 released on 16 February 2020
 
  + Added an abstract class `ConvexShape`.
  + Added `getStepHeight()`, `getWalkOffset()`, and `isUsingGhostSweepTest()`
