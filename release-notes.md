@@ -1,5 +1,11 @@
 # release log for the Libbulletjme Project
 
+## Version 3.0.7 released on 15 February 2020
+
+ + Added an abstract class `ConvexShape`.
+ + Added `getStepHeight()`, `getWalkOffset()`, and `isUsingGhostSweepTest()`
+   methods to the `PhysicsCharacter` class.
+
 ## Version 3.0.6 released on 12 February 2020
 
  + Implemented filtering of predictive contacts (JME issue 1283).
