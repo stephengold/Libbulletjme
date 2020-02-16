@@ -47,7 +47,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:3.0.6'
+            compile 'com.github.stephengold:Libbulletjme:3.0.8'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -60,7 +60,65 @@ standalone Maven artifacts are provided.
         import com.jme3.system.NativeLibraryLoader;
         NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
 
-TODO HelloWorld application
+Here's a sample application:
+
+```
+import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
+import com.jme3.bullet.collision.shapes.SphereCollisionShape;
+import com.jme3.bullet.objects.PhysicsBody;
+import com.jme3.bullet.objects.PhysicsRigidBody;
+import com.jme3.math.Plane;
+import com.jme3.math.Vector3f;
+import com.jme3.system.NativeLibraryLoader;
+import java.io.File;
+
+public class HelloLibbulletjme {
+
+    public static void main(String[] args) {
+        /*
+         * Load a native library from ~/Downloads directory.
+         */
+        String homePath = System.getProperty("user.home");
+        File download = new File(homePath, "Downloads");
+        NativeLibraryLoader.loadLibbulletjme(true, download, "Release", "Sp");
+        /*
+         * Create a 20x20x20 PhysicsSpace using DBVT for broadphase.
+         */
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        PhysicsSpace.BroadphaseType bPhase = PhysicsSpace.BroadphaseType.DBVT;
+        PhysicsSpace space = new PhysicsSpace(min, max, bPhase);
+        /*
+         * Add a static horizontal plane at y=-1.
+         */
+        float planeY = -1;
+        Plane plane = new Plane(Vector3f.UNIT_Y, planeY);
+        CollisionShape planeShape = new PlaneCollisionShape(plane);
+        float mass = PhysicsBody.massForStatic;
+        PhysicsRigidBody floor = new PhysicsRigidBody(planeShape, mass);
+        space.addCollisionObject(floor);
+        /*
+         * Add a sphere-shaped, dynamic, rigid body at the origin.
+         */
+        float radius = 0.3f;
+        CollisionShape ballShape = new SphereCollisionShape(radius);
+        mass = 1f;
+        PhysicsRigidBody ball = new PhysicsRigidBody(ballShape, mass);
+        space.addCollisionObject(ball);
+        /*
+         * 50 iterations with a 20-msec timestep
+         */
+        float timeStep = 0.02f;
+        for (int i = 0; i < 50; ++i) {
+            space.update(timeStep, 0);
+            Vector3f location = ball.getPhysicsLocation();
+            System.out.println(location);
+        }
+    }
+}
+```
 
 <a name="build"/>
 
@@ -77,7 +135,7 @@ TODO HelloWorld application
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 3.0.6`
+     + `git checkout -b latest 3.0.8`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -123,6 +181,7 @@ btConeTwistConstraint               .bullet.joints.ConeJoint
 btConstraintParams                  .bullet.joints.motors.MotorParam
 btConvex2dShape                     .bullet.collision.shapes.Convex2dShape
 btConvexHullShape                   .bullet.collision.shapes.HullCollisionShape
+btConvexShape                       .bullet.collision.shapes.ConvexShape
 btCylinderShape                     .bullet.collision.shapes.CylinderCollisionShape
 btDynamicsWorld                     .bullet.PhysicsSpace
 btEmptyShape                        .bullet.collision.shapes.EmptyShape
