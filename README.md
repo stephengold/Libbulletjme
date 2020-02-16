@@ -335,19 +335,19 @@ The Libbulletjme Project is based on open-source software:
 
 This project also made use of the following software tools:
 
-    + the [FindBugs] source-code analyzer
-    + the [GNU Compiler Collection][gcc]
-    + the [Git] revision-control system and GitK commit viewer
-    + the [Firefox] and [Google Chrome][chrome] web browsers
-    + the [Gradle] build tool
-    + the Java compiler, standard doclet, and runtime environment
-    + [jMonkeyEngine][jme] and the jME3 Software Development Kit
-    + the [Linux Mint][mint] operating system
-    + the [LLVM Compiler Infrastructure][llvm]
-    + the [Markdown] document-conversion tool
-    + the [Meld] visual merge tool
-    + Microsoft Windows and Visual Studio
-    + the [NetBeans] integrated development environment
+  + the [FindBugs] source-code analyzer
+  + the [GNU Compiler Collection][gcc]
+  + the [Git] revision-control system and GitK commit viewer
+  + the [Firefox] and [Google Chrome][chrome] web browsers
+  + the [Gradle] build tool
+  + the Java compiler, standard doclet, and runtime environment
+  + [jMonkeyEngine][jme] and the jME3 Software Development Kit
+  + the [Linux Mint][mint] operating system
+  + the [LLVM Compiler Infrastructure][llvm]
+  + the [Markdown] document-conversion tool
+  + the [Meld] visual merge tool
+  + Microsoft Windows and Visual Studio
+  + the [NetBeans] integrated development environment
 
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
