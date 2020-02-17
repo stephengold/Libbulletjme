@@ -65,6 +65,10 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * local copy of {@link com.jme3.math.Vector3f#ZERO}
      */
     final private static Vector3f translateIdentity = new Vector3f(0f, 0f, 0f);
+    /**
+     * local copy of {@link com.jme3.math.Vector3f#UNIT_Y}
+     */
+    final private static Vector3f unitY = new Vector3f(0f, 1f, 0f);
     // *************************************************************************
     // fields
 
@@ -115,6 +119,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
          * So override the default.
          */
         setGravity(defaultGravity);
+        setUp(unitY);
 
         assert isContactResponse();
     }
@@ -168,8 +173,8 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return an acceleration vector (in physics-space units per second
-     * squared, in the direction opposite the "up" vector, either storeResult or
-     * a new vector, not null)
+     * squared, direction opposite the "up" vector, either storeResult or a new
+     * vector, not null)
      */
     public Vector3f getGravity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -376,8 +381,8 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Alter the character's gravitational acceleration. For compatibility with
-     * the jme3-bullet library.
+     * Alter the character's gravitational acceleration without altering its
+     * "up" vector.
      *
      * @param downwardAcceleration the desired downward acceleration (in
      * physics-space units per second squared, not null, unaffected,
@@ -493,8 +498,8 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Alter the walk offset. The offset will continue to be applied until
-     * altered again.
+     * Alter this character's walk offset. The offset must be perpendicular to
+     * the "up" direction. It will continue to be applied until altered again.
      *
      * @param offset the desired location increment for each physics tick (in
      * physics-space coordinates, not null, unaffected, default=(0,0,0))
