@@ -1,5 +1,14 @@
 # release log for the Libbulletjme Project
 
+## Version 3.0.9 released on 17 February 2020
+
+ + Bugfix: `btAssert()` in `btVector3::normalize()` (Minie issue #3).
+ + Added `countCollisionObjects()` and `getWorldType()` methods
+   to the `PhysicsSpace` class.
+ + Added more automated tests to `TestLibbulletjme`.
+ + Added package-info.java files.
+ + Built using Gradle v6.2
+
 ## Version 3.0.8 released on 16 February 2020
 
  + Added an abstract class `ConvexShape`.
