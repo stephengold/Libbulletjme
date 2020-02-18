@@ -29,21 +29,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <jni.h>
 #include "jmePhysicsSpace.h"
 #include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
-//#include "LinearMath/TaskScheduler/btThreadSupportInterface.h"
 
 /*
  * Author: Dokthar
  */
 class jmePhysicsSoftSpace : public jmePhysicsSpace {
 public:
-
-    jmePhysicsSoftSpace() {
-    };
     jmePhysicsSoftSpace(JNIEnv *, jobject);
+    ~jmePhysicsSoftSpace();
 
     void createPhysicsSoftSpace(jobject min_vec, jobject max_vec, jint ordinal);
     btSoftRigidDynamicsWorld * getSoftDynamicsWorld();

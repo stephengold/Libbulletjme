@@ -49,16 +49,15 @@ private:
     JavaVM * vm;
     jobject javaPhysicsSpace;
     void attachThread();
+
 protected:
     btDynamicsWorld * dynamicsWorld;
     JNIEnv * env;
+
 public:
-
-    jmePhysicsSpace() {
-    };
-
-    ~jmePhysicsSpace();
     jmePhysicsSpace(JNIEnv *, jobject);
+    ~jmePhysicsSpace();
+
     void stepSimulation(jfloat, jint, jfloat);
     void createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, jfloat maxX,
             jfloat maxY, jfloat maxZ, jint ordinal);
