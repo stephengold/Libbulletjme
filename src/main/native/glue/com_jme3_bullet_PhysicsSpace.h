@@ -87,6 +87,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getNumCollisionObjects
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumCollisionObjects
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getNumConstraints
  * Signature: (J)I
  */

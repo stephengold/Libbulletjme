@@ -187,6 +187,21 @@ extern "C" {
 
     /*
      * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    getNumCollisionObjects
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumCollisionObjects
+    (JNIEnv *env, jobject object, jlong spaceId) {
+        const jmePhysicsSpace * const pSpace
+                = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+        NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+
+        int count = pSpace->getDynamicsWorld()->getNumCollisionObjects();
+        return (jint) count;
+    }
+
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
      * Method:    getNumConstraints
      * Signature: (J)I
      */
