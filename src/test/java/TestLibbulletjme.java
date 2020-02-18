@@ -25,7 +25,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.RayTestFlag;
 import com.jme3.bullet.collision.shapes.Box2dShape;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
@@ -70,9 +72,7 @@ public class TestLibbulletjme {
         /*
          * Create a PhysicsSpace using DBVT for broadphase.
          */
-        PhysicsSpace space = new PhysicsSpace(
-                new Vector3f(-10000f, -10000f, -10000f),
-                new Vector3f(10000f, 10000f, 10000f),
+        PhysicsSpace space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
                 PhysicsSpace.BroadphaseType.DBVT);
         /*
          * Add a static horizontal plane at y=-1.
@@ -427,6 +427,46 @@ public class TestLibbulletjme {
                 DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
     }
+
+    /**
+     * Instantiate various physics spaces and verify their properties.
+     */
+    @Test
+    public void test004() {
+        loadNativeLibrary();
+        /*
+         * Create a PhysicsSpace using DBVT for broadphase.
+         */
+        PhysicsSpace space1 = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyPhysicsSpaceDefaults(space1);
+        /*
+         * Create a 20x20x20 PhysicsSpace using AXIS_SWEEP_3 for broadphase.
+         */
+        PhysicsSpace space2 = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyPhysicsSpaceDefaults(space2);
+        /*
+         * Create a 20x20x20 PhysicsSpace using AXIS_SWEEP_3_32 for broadphase.
+         */
+        PhysicsSpace space3 = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyPhysicsSpaceDefaults(space3);
+        /*
+         * Create a soft space using DBVT for broadphase.
+         */
+        PhysicsSoftSpace space4 = new PhysicsSoftSpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.DBVT);
+        verifyPhysicsSpaceDefaults(space4);
+        /*
+         * Create a PhysicsSpace using SIMPLE for broadphase.
+         */
+        PhysicsSpace space5 = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyPhysicsSpaceDefaults(space5);
+    }
     // *************************************************************************
     // private methods
 
@@ -459,8 +499,26 @@ public class TestLibbulletjme {
      */
     private void verifyCollisionShapeDefaults(CollisionShape shape) {
         Assert.assertNotNull(shape);
-        Assert.assertNotEquals(0, shape.getObjectId());
+        Assert.assertNotEquals(0L, shape.getObjectId());
         assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
+    }
+
+    /**
+     * Verify defaults common to all newly-created physics spaces.
+     *
+     * @param space the space to test (not null, unaffected)
+     */
+    private void verifyPhysicsSpaceDefaults(PhysicsSpace space) {
+        Assert.assertNotNull(space);
+        Assert.assertEquals(0, space.countJoints());
+        Assert.assertEquals(0, space.countRigidBodies());
+        Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
+        assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
+        Assert.assertEquals(4, space.maxSubSteps());
+        Assert.assertEquals(0.1f, space.maxTimeStep(), 0f);
+        Assert.assertEquals(RayTestFlag.SubSimplexRaytest,
+                space.getRayTestFlags());
+        Assert.assertEquals(10, space.getSolverNumIterations());
     }
 
     /**
