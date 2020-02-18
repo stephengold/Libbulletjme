@@ -199,6 +199,21 @@ extern "C" {
         return count;
     }
 
+    /*
+     * Class:     com_jme3_bullet_PhysicsSpace
+     * Method:    getWorldType
+     * Signature: (J)I
+     */
+    JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
+    (JNIEnv *env, jobject object, jlong spaceId) {
+        const jmePhysicsSpace * const pSpace
+                = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+        NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+
+        btDynamicsWorldType type = pSpace->getDynamicsWorld()->getWorldType();
+        return (jint) type;
+    }
+
     struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
         JNIEnv *m_pEnv; // TODO eliminate this
         btVector3 m_rayFromWorld;

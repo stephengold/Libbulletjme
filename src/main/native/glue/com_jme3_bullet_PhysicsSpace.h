@@ -15,6 +15,14 @@ extern "C" {
 #define com_jme3_bullet_PhysicsSpace_AXIS_Z 2L
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getWorldType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    addAction
  * Signature: (JJ)V
  */
