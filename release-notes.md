@@ -1,6 +1,6 @@
 # release log for the Libbulletjme Project
 
-## Version 3.0.10 released on 17 February 2020
+## Version 3.0.11 released on 18 February 2020
 
  + Bugfix: `btAssert()` in `btVector3::normalize()` (Minie issue #3).
  + Added `countCollisionObjects()` and `getWorldType()` methods
