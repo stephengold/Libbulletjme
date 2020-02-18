@@ -233,17 +233,9 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     }
 }
 
-btDynamicsWorld * jmePhysicsSpace::getDynamicsWorld() {
-    return dynamicsWorld;
-}
-
 JNIEnv * jmePhysicsSpace::getEnv() {
     attachThread();
     return this->env;
-}
-
-jobject jmePhysicsSpace::getJavaPhysicsSpace() {
-    return javaPhysicsSpace;
 }
 
 void jmePhysicsSpace::stepSimulation(jfloat tpf, jint maxSteps, jfloat accuracy) {

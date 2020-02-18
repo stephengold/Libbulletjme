@@ -61,10 +61,22 @@ public:
     void stepSimulation(jfloat, jint, jfloat);
     void createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, jfloat maxX,
             jfloat maxY, jfloat maxZ, jint ordinal);
-    btDynamicsWorld * getDynamicsWorld();
-    jobject getJavaPhysicsSpace();
+
+    const btDynamicsWorld * getDynamicsWorld() const {
+        return dynamicsWorld;
+    }
+
+    btDynamicsWorld * getDynamicsWorld() {
+        return dynamicsWorld;
+    }
+
     JNIEnv * getEnv();
+
+    jobject getJavaPhysicsSpace() {
+        return javaPhysicsSpace;
+    }
+
     static void preTickCallback(btDynamicsWorld *, btScalar);
     static void postTickCallback(btDynamicsWorld *, btScalar);
-    static void contactStartedCallback(btPersistentManifold * const &pm);
+    static void contactStartedCallback(btPersistentManifold * const &);
 };
