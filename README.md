@@ -47,13 +47,13 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:3.0.8'
+            compile 'com.github.stephengold:Libbulletjme:3.0.12'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 34 files.
+    You probably don't need all 28 native libraries.
     Start with the ReleaseSp library for your development environment
-    (for instance, "Linux64ReleaseSp_libbulletjme.so" for 64-bit Linux).
+    (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
  3. Load the native library:
 
@@ -81,8 +81,8 @@ public class HelloLibbulletjme {
          * Load a native library from ~/Downloads directory.
          */
         String homePath = System.getProperty("user.home");
-        File download = new File(homePath, "Downloads");
-        NativeLibraryLoader.loadLibbulletjme(true, download, "Release", "Sp");
+        File downloadDirectory = new File(homePath, "Downloads");
+        NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
         /*
          * Create a 20x20x20 PhysicsSpace using DBVT for broadphase.
          */
@@ -135,7 +135,7 @@ public class HelloLibbulletjme {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 3.0.8`
+     + `git checkout -b latest 3.0.12`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][latest]
      + follow the "Source code (zip)" link
