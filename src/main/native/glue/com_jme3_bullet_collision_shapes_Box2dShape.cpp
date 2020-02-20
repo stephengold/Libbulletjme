@@ -36,23 +36,21 @@
 #include "com_jme3_bullet_collision_shapes_Box2dShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btBox2dShape.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_Box2dShape
-     * Method:    createShape
-     * Signature: (FFF)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Box2dShape_createShape
-    (JNIEnv *env, jobject object, jfloat xHalfExtent, jfloat yHalfExtent,
-            jfloat margin) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_Box2dShape
+ * Method:    createShape
+ * Signature: (FFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Box2dShape_createShape
+(JNIEnv *env, jobject object, jfloat xHalfExtent, jfloat yHalfExtent,
+        jfloat margin) {
+    jmeClasses::initJavaClasses(env);
 
-        btVector3 he;
-        he.setValue(xHalfExtent, yHalfExtent, margin);
+    btVector3 he;
+    he.setValue(xHalfExtent, yHalfExtent, margin);
 
-        btBox2dShape *pShape = new btBox2dShape(he);
+    btBox2dShape *pShape = new btBox2dShape(he);
 
-        return reinterpret_cast<jlong> (pShape);
-    }
+    return reinterpret_cast<jlong> (pShape);
 }

@@ -35,62 +35,60 @@
  */
 #include "com_jme3_bullet_collision_shapes_MultiSphere.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
-     * Method:    createShape
-     * Signature: (F)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
-    (JNIEnv *env, jobject object, jobjectArray centers, jfloatArray radii,
-            jint numSpheres) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_MultiSphere
+ * Method:    createShape
+ * Signature: (F)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
+(JNIEnv *env, jobject object, jobjectArray centers, jfloatArray radii,
+        jint numSpheres) {
+    jmeClasses::initJavaClasses(env);
 
-        int n = numSpheres;
-        btVector3* pCenters = new btVector3[n];
-        for (int i = 0; i < n; ++i) {
-            jobject center = env->GetObjectArrayElement(centers, i);
-            jmeBulletUtil::convert(env, center, &pCenters[i]);
-        }
-
-        btScalar *pRadii;
-#ifdef BT_USE_DOUBLE_PRECISION
-        float *pFloats = env->GetFloatArrayElements(radii, 0);
-        pRadii = new btScalar[n];
-        for (int i = 0; i < n; ++i) {
-            pRadii[i] = pFloats[i];
-        }
-#else
-        pRadii = env->GetFloatArrayElements(radii, 0);
-#endif
-
-        btMultiSphereShape *pShape
-                = new btMultiSphereShape(pCenters, pRadii, n);
-
-#ifdef BT_USE_DOUBLE_PRECISION
-        delete[] pRadii;
-        env->ReleaseFloatArrayElements(radii, pFloats, 0);
-#else
-        env->ReleaseFloatArrayElements(radii, pRadii, 0);
-#endif
-        delete[] pCenters;
-
-        return reinterpret_cast<jlong> (pShape);
+    int n = numSpheres;
+    btVector3* pCenters = new btVector3[n];
+    for (int i = 0; i < n; ++i) {
+        jobject center = env->GetObjectArrayElement(centers, i);
+        jmeBulletUtil::convert(env, center, &pCenters[i]);
     }
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_MultiSphere
-     * Method:    recalcAabb
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
-    (JNIEnv *env, jobject object, jlong shapeId) {
-        btMultiSphereShape *pShape
-                = reinterpret_cast<btMultiSphereShape *> (shapeId);
-        NULL_CHECK(pShape, "The btMultiSphereShape does not exist.",);
-        btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
-
-        pShape->recalcLocalAabb();
+    btScalar *pRadii;
+#ifdef BT_USE_DOUBLE_PRECISION
+    float *pFloats = env->GetFloatArrayElements(radii, 0);
+    pRadii = new btScalar[n];
+    for (int i = 0; i < n; ++i) {
+        pRadii[i] = pFloats[i];
     }
+#else
+    pRadii = env->GetFloatArrayElements(radii, 0);
+#endif
+
+    btMultiSphereShape *pShape
+            = new btMultiSphereShape(pCenters, pRadii, n);
+
+#ifdef BT_USE_DOUBLE_PRECISION
+    delete[] pRadii;
+    env->ReleaseFloatArrayElements(radii, pFloats, 0);
+#else
+    env->ReleaseFloatArrayElements(radii, pRadii, 0);
+#endif
+    delete[] pCenters;
+
+    return reinterpret_cast<jlong> (pShape);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_MultiSphere
+ * Method:    recalcAabb
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
+(JNIEnv *env, jobject object, jlong shapeId) {
+    btMultiSphereShape *pShape
+            = reinterpret_cast<btMultiSphereShape *> (shapeId);
+    NULL_CHECK(pShape, "The btMultiSphereShape does not exist.",);
+    btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
+
+    pShape->recalcLocalAabb();
 }

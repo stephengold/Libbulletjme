@@ -35,165 +35,163 @@
  */
 #include "com_jme3_bullet_joints_Constraint.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    enableFeedback
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_enableFeedback
-    (JNIEnv *env, jobject object, jlong constraintId, jboolean enable) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    enableFeedback
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_enableFeedback
+(JNIEnv *env, jobject object, jlong constraintId, jboolean enable) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
 
-        pConstraint->enableFeedback(enable);
-    }
+    pConstraint->enableFeedback(enable);
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
+(JNIEnv *env, jobject object, jlong constraintId) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
 
-        delete pConstraint;
-    }
+    delete pConstraint;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    getAppliedImpulse
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getAppliedImpulse
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getAppliedImpulse
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getAppliedImpulse
+(JNIEnv *env, jobject object, jlong constraintId) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
 
-        return pConstraint->getAppliedImpulse();
-    }
+    return pConstraint->getAppliedImpulse();
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    getBreakingImpulseThreshold
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpulseThreshold
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getBreakingImpulseThreshold
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpulseThreshold
+(JNIEnv *env, jobject object, jlong constraintId) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
 
-        return pConstraint->getBreakingImpulseThreshold();
-    }
+    return pConstraint->getBreakingImpulseThreshold();
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    getConstraintType
-     * Signature: (J)I
-     */
-    JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        const btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getConstraintType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
+(JNIEnv *env, jobject object, jlong constraintId) {
+    const btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0)
 
-        btTypedConstraintType constraintType = pConstraint->getConstraintType();
-        return (jint) constraintType;
-    }
+    btTypedConstraintType constraintType = pConstraint->getConstraintType();
+    return (jint) constraintType;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    getOverrideIterations
-     * Signature: (J)I
-     */
-    JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterations
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        const btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0);
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getOverrideIterations
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterations
+(JNIEnv *env, jobject object, jlong constraintId) {
+    const btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.", 0);
 
-        int overrideIterations = pConstraint->getOverrideNumSolverIterations();
-        return (jint) overrideIterations;
-    }
+    int overrideIterations = pConstraint->getOverrideNumSolverIterations();
+    return (jint) overrideIterations;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    isEnabled
-     * Signature: (J)Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_isEnabled
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
-                JNI_FALSE)
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    isEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_isEnabled
+(JNIEnv *env, jobject object, jlong constraintId) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
+            JNI_FALSE)
 
-                jboolean result = pConstraint->isEnabled();
-        return result;
-    }
+            jboolean result = pConstraint->isEnabled();
+    return result;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    needsFeedback
-     * Signature: (J)Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_needsFeedback
-    (JNIEnv *env, jobject object, jlong constraintId) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
-                JNI_FALSE);
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    needsFeedback
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_needsFeedback
+(JNIEnv *env, jobject object, jlong constraintId) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",
+            JNI_FALSE);
 
-        jboolean result = pConstraint->needsFeedback();
-        return result;
-    }
+    jboolean result = pConstraint->needsFeedback();
+    return result;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    overrideIterations
-     * Signature: (JI)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
-    (JNIEnv *env, jobject object, jlong constraintId, jint numIterations) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    overrideIterations
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
+(JNIEnv *env, jobject object, jlong constraintId, jint numIterations) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",);
 
-        pConstraint->setOverrideNumSolverIterations(numIterations);
-    }
+    pConstraint->setOverrideNumSolverIterations(numIterations);
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    setBreakingImpulseThreshold
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setBreakingImpulseThreshold
-    (JNIEnv *env, jobject object, jlong constraintId, jfloat desiredValue) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",)
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    setBreakingImpulseThreshold
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setBreakingImpulseThreshold
+(JNIEnv *env, jobject object, jlong constraintId, jfloat desiredValue) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",)
 
-        pConstraint->setBreakingImpulseThreshold(desiredValue);
-    }
+    pConstraint->setBreakingImpulseThreshold(desiredValue);
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_Constraint
-     * Method:    setEnabled
-     * Signature: (JZ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setEnabled
-    (JNIEnv *env, jobject object, jlong constraintId, jboolean desiredSetting) {
-        btTypedConstraint *pConstraint
-                = reinterpret_cast<btTypedConstraint *> (constraintId);
-        NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",)
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    setEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setEnabled
+(JNIEnv *env, jobject object, jlong constraintId, jboolean desiredSetting) {
+    btTypedConstraint *pConstraint
+            = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The btTypedConstraint does not exist.",)
 
-        pConstraint->setEnabled(desiredSetting);
-    }
+    pConstraint->setEnabled(desiredSetting);
 }

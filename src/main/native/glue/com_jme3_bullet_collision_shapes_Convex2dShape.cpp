@@ -36,29 +36,27 @@
 #include "com_jme3_bullet_collision_shapes_Convex2dShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btConvex2dShape.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_Convex2dShape
-     * Method:    createShape
-     * Signature: (J)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Convex2dShape_createShape
-    (JNIEnv *env, jobject object, jlong childShapeId) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_Convex2dShape
+ * Method:    createShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Convex2dShape_createShape
+(JNIEnv *env, jobject object, jlong childShapeId) {
+    jmeClasses::initJavaClasses(env);
 
-        btCollisionShape *pChild
-                = reinterpret_cast<btCollisionShape *> (childShapeId);
-        NULL_CHECK(pChild, "The child shape does not exist.", 0)
-        if (!pChild->isConvex()) {
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
-                    "The btCollisionShape isn't convex.");
-            return 0;
-        }
-        btConvexShape *pConvex = (btConvexShape *) pChild;
-
-        btConvex2dShape *pShape = new btConvex2dShape(pConvex);
-
-        return reinterpret_cast<jlong> (pShape);
+    btCollisionShape *pChild
+            = reinterpret_cast<btCollisionShape *> (childShapeId);
+    NULL_CHECK(pChild, "The child shape does not exist.", 0)
+    if (!pChild->isConvex()) {
+        env->ThrowNew(jmeClasses::IllegalArgumentException,
+                "The btCollisionShape isn't convex.");
+        return 0;
     }
+    btConvexShape *pConvex = (btConvexShape *) pChild;
+
+    btConvex2dShape *pShape = new btConvex2dShape(pConvex);
+
+    return reinterpret_cast<jlong> (pShape);
 }

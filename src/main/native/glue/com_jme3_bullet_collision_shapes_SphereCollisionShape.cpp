@@ -35,17 +35,15 @@
  */
 #include "com_jme3_bullet_collision_shapes_SphereCollisionShape.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_SphereCollisionShape
-     * Method:    createShape
-     * Signature: (F)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SphereCollisionShape_createShape
-    (JNIEnv *env, jobject object, jfloat radius) {
-        jmeClasses::initJavaClasses(env);
-        btSphereShape *pShape = new btSphereShape(radius);
-        return reinterpret_cast<jlong> (pShape);
-    }
+/*
+ * Class:     com_jme3_bullet_collision_shapes_SphereCollisionShape
+ * Method:    createShape
+ * Signature: (F)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SphereCollisionShape_createShape
+(JNIEnv *env, jobject object, jfloat radius) {
+    jmeClasses::initJavaClasses(env);
+    btSphereShape *pShape = new btSphereShape(radius);
+    return reinterpret_cast<jlong> (pShape);
 }

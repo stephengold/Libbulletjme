@@ -35,83 +35,81 @@
  */
 #include "com_jme3_bullet_collision_shapes_infos_CompoundMesh.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
-     * Method:    addIndexedMesh
-     * Signature: (JJ)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_addIndexedMesh
-    (JNIEnv *env, jobject object, jlong compoundMeshId, jlong submeshId) {
-        btTriangleIndexVertexArray *pMesh
-                = reinterpret_cast<btTriangleIndexVertexArray *> (compoundMeshId);
-        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
+ * Method:    addIndexedMesh
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_addIndexedMesh
+(JNIEnv *env, jobject object, jlong compoundMeshId, jlong submeshId) {
+    btTriangleIndexVertexArray *pMesh
+            = reinterpret_cast<btTriangleIndexVertexArray *> (compoundMeshId);
+    NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
-        btIndexedMesh *pSubmesh = reinterpret_cast<btIndexedMesh *> (submeshId);
-        NULL_CHECK(pSubmesh, "The btIndexedMesh does not exist.",);
+    btIndexedMesh *pSubmesh = reinterpret_cast<btIndexedMesh *> (submeshId);
+    NULL_CHECK(pSubmesh, "The btIndexedMesh does not exist.",);
 
-        pMesh->addIndexedMesh(*pSubmesh);
-    }
+    pMesh->addIndexedMesh(*pSubmesh);
+}
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
-     * Method:    createEmptyTiva
-     * Signature: ()J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_createEmptyTiva
-    (JNIEnv *env, jobject object) {
-        jmeClasses::initJavaClasses(env);
-        btTriangleIndexVertexArray *pMesh = new btTriangleIndexVertexArray();
-        return reinterpret_cast<jlong> (pMesh);
-    }
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
+ * Method:    createEmptyTiva
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_createEmptyTiva
+(JNIEnv *env, jobject object) {
+    jmeClasses::initJavaClasses(env);
+    btTriangleIndexVertexArray *pMesh = new btTriangleIndexVertexArray();
+    return reinterpret_cast<jlong> (pMesh);
+}
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_finalizeNative
-    (JNIEnv *env, jobject object, jlong meshId) {
-        btTriangleIndexVertexArray *pMesh
-                = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
-        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_finalizeNative
+(JNIEnv *env, jobject object, jlong meshId) {
+    btTriangleIndexVertexArray *pMesh
+            = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
+    NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
-        delete pMesh;
-    }
+    delete pMesh;
+}
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
-     * Method:    getScaling
-     * Signature: (JLcom/jme3/math/Vector3f;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_getScaling
-    (JNIEnv *env, jobject object, jlong meshId, jobject storeVector) {
-        btTriangleIndexVertexArray *pMesh
-                = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
-        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
-        NULL_CHECK(storeVector, "The store vector does not exist.",);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
+ * Method:    getScaling
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_getScaling
+(JNIEnv *env, jobject object, jlong meshId, jobject storeVector) {
+    btTriangleIndexVertexArray *pMesh
+            = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
+    NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
-        const btVector3 *pScale = &pMesh->getScaling();
-        jmeBulletUtil::convert(env, pScale, storeVector);
-    }
+    const btVector3 *pScale = &pMesh->getScaling();
+    jmeBulletUtil::convert(env, pScale, storeVector);
+}
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
-     * Method:    setScaling
-     * Signature: (JFFF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_setScaling
-    (JNIEnv *env, jobject object, jlong meshId, jfloat xScale, jfloat yScale,
-            jfloat zScale) {
-        btTriangleIndexVertexArray *pMesh
-                = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
-        NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
+ * Method:    setScaling
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_setScaling
+(JNIEnv *env, jobject object, jlong meshId, jfloat xScale, jfloat yScale,
+        jfloat zScale) {
+    btTriangleIndexVertexArray *pMesh
+            = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
+    NULL_CHECK(pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
-        btVector3 scale;
-        scale.setX(xScale);
-        scale.setY(yScale);
-        scale.setZ(zScale);
-        pMesh->setScaling(scale);
-    }
+    btVector3 scale;
+    scale.setX(xScale);
+    scale.setY(yScale);
+    scale.setZ(zScale);
+    pMesh->setScaling(scale);
 }

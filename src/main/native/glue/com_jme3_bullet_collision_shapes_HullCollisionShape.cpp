@@ -36,113 +36,111 @@
 #include "com_jme3_bullet_collision_shapes_HullCollisionShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btConvexHullShape.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    countHullVertices
-     * Signature: (J)I
-     */
-    JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_countHullVertices
-    (JNIEnv *env, jobject object, jlong shapeId) {
-        btConvexHullShape * const pShape
-                = reinterpret_cast<btConvexHullShape *> (shapeId);
-        NULL_CHECK(pShape, "The btConvexHullShape does not exist.", 0);
-        btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+ * Method:    countHullVertices
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_countHullVertices
+(JNIEnv *env, jobject object, jlong shapeId) {
+    btConvexHullShape * const pShape
+            = reinterpret_cast<btConvexHullShape *> (shapeId);
+    NULL_CHECK(pShape, "The btConvexHullShape does not exist.", 0);
+    btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
 
-        int count = pShape->getNumPoints();
-        return count;
+    int count = pShape->getNumPoints();
+    return count;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+ * Method:    createShapeF
+ * Signature: (Ljava/nio/FloatBuffer;I)J
+ *
+ * buffer contains float values: x,y,z for each vertex
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeF
+(JNIEnv *env, jobject object, jobject buffer, jint numVertices) {
+    jmeClasses::initJavaClasses(env);
+
+    int n = numVertices;
+    if (n < 1) {
+        env->ThrowNew(jmeClasses::IllegalArgumentException,
+                "numVertices must be positive");
+        return 0L;
     }
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    createShapeF
-     * Signature: (Ljava/nio/FloatBuffer;I)J
-     *
-     * buffer contains float values: x,y,z for each vertex
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeF
-    (JNIEnv *env, jobject object, jobject buffer, jint numVertices) {
-        jmeClasses::initJavaClasses(env);
+    NULL_CHECK(buffer, "The buffer does not exist.", 0);
+    const jlong numFloats = env->GetDirectBufferCapacity(buffer);
+    if (numFloats < 3 * n) {
+        env->ThrowNew(jmeClasses::IllegalArgumentException,
+                "The buffer is too small.");
+        return 0L;
+    }
+    const jfloat * const pBuffer
+            = (jfloat *) env->GetDirectBufferAddress(buffer);
+    NULL_CHECK(pBuffer, "The buffer is not direct.", 0);
 
-        int n = numVertices;
-        if (n < 1) {
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
-                    "numVertices must be positive");
-            return 0L;
-        }
+    btConvexHullShape * const pShape = new btConvexHullShape();
 
-        NULL_CHECK(buffer, "The buffer does not exist.", 0);
-        const jlong numFloats = env->GetDirectBufferCapacity(buffer);
-        if (numFloats < 3 * n) {
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
-                    "The buffer is too small.");
-            return 0L;
-        }
-        const jfloat * const pBuffer
-                = (jfloat *) env->GetDirectBufferAddress(buffer);
-        NULL_CHECK(pBuffer, "The buffer is not direct.", 0);
-
-        btConvexHullShape * const pShape = new btConvexHullShape();
-
-        for (int i = 0; i < n; ++i) {
-            const int j = 3 * i;
-            btVector3 vect
-                    = btVector3(pBuffer[j], pBuffer[j + 1], pBuffer[j + 2]);
-            pShape->addPoint(vect);
-        }
-
-        pShape->optimizeConvexHull();
-
-        return reinterpret_cast<jlong> (pShape);
+    for (int i = 0; i < n; ++i) {
+        const int j = 3 * i;
+        btVector3 vect
+                = btVector3(pBuffer[j], pBuffer[j + 1], pBuffer[j + 2]);
+        pShape->addPoint(vect);
     }
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    getHullVerticesF
-     * Signature: (JLjava/nio/FloatBuffer;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVerticesF
-    (JNIEnv *env, jobject object, jlong shapeId, jobject storeBuffer) {
-        const btConvexHullShape * const pShape
-                = reinterpret_cast<btConvexHullShape *> (shapeId);
-        NULL_CHECK(pShape, "The btConvexHullShape does not exist.",)
-        btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+    pShape->optimizeConvexHull();
 
-        NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
-        const jlong floatsCapacity = env->GetDirectBufferCapacity(storeBuffer);
-        int numVerts = pShape->getNumPoints();
-        jlong floatsNeeded = 3 * (jlong) numVerts;
-        if (floatsNeeded > floatsCapacity) {
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
-                    "The store buffer is too small.");
-            return;
-        }
-        jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-        NULL_CHECK(pWrite, "The store buffer is not direct.",);
+    return reinterpret_cast<jlong> (pShape);
+}
 
-        const btVector3 *pVertices = pShape->getUnscaledPoints();
-        for (int i = 0; i < numVerts; ++i) {
-            pWrite[0] = pVertices->m_floats[0];
-            pWrite[1] = pVertices->m_floats[1];
-            pWrite[2] = pVertices->m_floats[2];
-            ++pVertices;
-            pWrite += 3;
-        }
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+ * Method:    getHullVerticesF
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVerticesF
+(JNIEnv *env, jobject object, jlong shapeId, jobject storeBuffer) {
+    const btConvexHullShape * const pShape
+            = reinterpret_cast<btConvexHullShape *> (shapeId);
+    NULL_CHECK(pShape, "The btConvexHullShape does not exist.",)
+    btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+
+    NULL_CHECK(storeBuffer, "The store buffer does not exist.",);
+    const jlong floatsCapacity = env->GetDirectBufferCapacity(storeBuffer);
+    int numVerts = pShape->getNumPoints();
+    jlong floatsNeeded = 3 * (jlong) numVerts;
+    if (floatsNeeded > floatsCapacity) {
+        env->ThrowNew(jmeClasses::IllegalArgumentException,
+                "The store buffer is too small.");
+        return;
     }
+    jfloat *pWrite = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
+    NULL_CHECK(pWrite, "The store buffer is not direct.",);
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
-     * Method:    recalcAabb
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_recalcAabb
-    (JNIEnv *env, jobject object, jlong shapeId) {
-        btConvexHullShape * const pShape
-                = reinterpret_cast<btConvexHullShape *> (shapeId);
-        NULL_CHECK(pShape, "The btConvexHullShape does not exist.",);
-        btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
-
-        pShape->recalcLocalAabb();
+    const btVector3 *pVertices = pShape->getUnscaledPoints();
+    for (int i = 0; i < numVerts; ++i) {
+        pWrite[0] = pVertices->m_floats[0];
+        pWrite[1] = pVertices->m_floats[1];
+        pWrite[2] = pVertices->m_floats[2];
+        ++pVertices;
+        pWrite += 3;
     }
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_HullCollisionShape
+ * Method:    recalcAabb
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_recalcAabb
+(JNIEnv *env, jobject object, jlong shapeId) {
+    btConvexHullShape * const pShape
+            = reinterpret_cast<btConvexHullShape *> (shapeId);
+    NULL_CHECK(pShape, "The btConvexHullShape does not exist.",);
+    btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+
+    pShape->recalcLocalAabb();
 }

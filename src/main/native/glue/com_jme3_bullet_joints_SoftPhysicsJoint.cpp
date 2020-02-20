@@ -36,103 +36,101 @@
 #include "com_jme3_bullet_joints_SoftPhysicsJoint.h"
 #include "jmeBulletUtil.h"
 #include "BulletSoftBody/btSoftBody.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    finalizeNative
-     * Signature: (J)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNative
-    (JNIEnv *env, jobject object, jlong jointId) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.",)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNative
+(JNIEnv *env, jobject object, jlong jointId) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.",)
 
-        btAlignedFree(pJoint);
-    }
+    btAlignedFree(pJoint);
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    getConstraintForceMixing
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getConstraintForceMixing
-    (JNIEnv *env, jobject object, jlong jointId) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.", 0)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    getConstraintForceMixing
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getConstraintForceMixing
+(JNIEnv *env, jobject object, jlong jointId) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.", 0)
 
-        return pJoint->m_cfm;
-    }
+    return pJoint->m_cfm;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    getErrorReductionParameter
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getErrorReductionParameter
-    (JNIEnv *env, jobject object, jlong jointId) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.", 0)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    getErrorReductionParameter
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getErrorReductionParameter
+(JNIEnv *env, jobject object, jlong jointId) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.", 0)
 
-        return pJoint->m_erp;
-    }
+    return pJoint->m_erp;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    getSplit
-     * Signature: (J)F
-     */
-    JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getSplit
-    (JNIEnv *env, jobject object, jlong jointId) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.", 0)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    getSplit
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_getSplit
+(JNIEnv *env, jobject object, jlong jointId) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.", 0)
 
-        return pJoint->m_split;
-    }
+    return pJoint->m_split;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    setConstraintForceMixing
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setConstraintForceMixing
-    (JNIEnv *env, jobject object, jlong jointId, jfloat cfm) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.",)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    setConstraintForceMixing
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setConstraintForceMixing
+(JNIEnv *env, jobject object, jlong jointId, jfloat cfm) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.",)
 
-        pJoint->m_cfm = cfm;
-    }
+    pJoint->m_cfm = cfm;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    setErrorReductionParameter
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setErrorReductionParameter
-    (JNIEnv *env, jobject object, jlong jointId, jfloat erp) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.",)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    setErrorReductionParameter
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setErrorReductionParameter
+(JNIEnv *env, jobject object, jlong jointId, jfloat erp) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.",)
 
-        pJoint->m_erp = erp;
-    }
+    pJoint->m_erp = erp;
+}
 
-    /*
-     * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
-     * Method:    setSplit
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setSplit
-    (JNIEnv *env, jobject object, jlong jointId, jfloat split) {
-        btSoftBody::Joint *pJoint
-                = reinterpret_cast<btSoftBody::Joint *> (jointId);
-        NULL_CHECK(pJoint, "The joint does not exist.",)
+/*
+ * Class:     com_jme3_bullet_joints_SoftPhysicsJoint
+ * Method:    setSplit
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_setSplit
+(JNIEnv *env, jobject object, jlong jointId, jfloat split) {
+    btSoftBody::Joint *pJoint
+            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    NULL_CHECK(pJoint, "The joint does not exist.",)
 
-        pJoint->m_split = split;
-    }
+    pJoint->m_split = split;
 }

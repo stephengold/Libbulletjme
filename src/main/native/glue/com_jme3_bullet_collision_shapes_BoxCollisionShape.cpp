@@ -35,25 +35,22 @@
  */
 #include "com_jme3_bullet_collision_shapes_BoxCollisionShape.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_BoxCollisionShape
-     * Method:    createShape
-     * Signature: (Lcom/jme3/math/Vector3f;)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
-    (JNIEnv *env, jobject object, jobject halfExtentsVector) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_BoxCollisionShape
+ * Method:    createShape
+ * Signature: (Lcom/jme3/math/Vector3f;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
+(JNIEnv *env, jobject object, jobject halfExtentsVector) {
+    jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.",
-                0);
+    NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.", 0);
 
-        btVector3 vec;
-        jmeBulletUtil::convert(env, halfExtentsVector, &vec);
+    btVector3 vec;
+    jmeBulletUtil::convert(env, halfExtentsVector, &vec);
 
-        btBoxShape *pShape = new btBoxShape(vec);
+    btBoxShape *pShape = new btBoxShape(vec);
 
-        return reinterpret_cast<jlong> (pShape);
-    }
+    return reinterpret_cast<jlong> (pShape);
 }

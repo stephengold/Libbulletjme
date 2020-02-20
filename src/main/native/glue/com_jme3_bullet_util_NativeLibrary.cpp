@@ -35,43 +35,41 @@
  */
 #include "com_jme3_bullet_util_NativeLibrary.h"
 #include "jmeClasses.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_util_NativeLibrary
-     * Method:    isDebug
-     * Signature: ()Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDebug
-    (JNIEnv *pEnv, jclass clazz) {
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    isDebug
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDebug
+(JNIEnv *pEnv, jclass clazz) {
 #ifdef _DEBUG
-        return JNI_TRUE;
+    return JNI_TRUE;
 #else
-        return JNI_FALSE;
+    return JNI_FALSE;
 #endif
-    }
+}
 
-    /*
-     * Class:     com_jme3_bullet_util_NativeLibrary
-     * Method:    isDoublePrecision
-     * Signature: ()Z
-     */
-    JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePrecision
-    (JNIEnv *pEnv, jclass clazz) {
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    isDoublePrecision
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePrecision
+(JNIEnv *pEnv, jclass clazz) {
 #ifdef BT_USE_DOUBLE_PRECISION
-        return JNI_TRUE;
+    return JNI_TRUE;
 #else
-        return JNI_FALSE;
+    return JNI_FALSE;
 #endif
-    }
+}
 
-    /*
-     * Class:     com_jme3_bullet_util_NativeLibrary
-     * Method:    setStartupMessageEnabled
-     * Signature: (Z)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
-    (JNIEnv *pEnv, jclass clazz, jboolean enable) {
-        jmeClasses::printFlag = (int) enable;
-    }
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    setStartupMessageEnabled
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
+(JNIEnv *pEnv, jclass clazz, jboolean enable) {
+    jmeClasses::printFlag = (int) enable;
 }

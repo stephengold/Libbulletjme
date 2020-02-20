@@ -35,110 +35,108 @@
 /*
  * Author: Stephen Gold
  */
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    createNative
-     * Signature: ()J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_createNative
-    (JNIEnv *env, jobject object) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    createNative
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_createNative
+(JNIEnv *env, jobject object) {
+    jmeClasses::initJavaClasses(env);
 
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = new btRaycastVehicle::btVehicleTuning();
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = new btRaycastVehicle::btVehicleTuning();
 
-        return reinterpret_cast<jlong> (pTuning);
-    }
+    return reinterpret_cast<jlong> (pTuning);
+}
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    setFrictionSlip
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setFrictionSlip
-    (JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
-                tuningId);
-        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    setFrictionSlip
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setFrictionSlip
+(JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
+    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
 
-        pTuning->m_frictionSlip = (btScalar) newValue;
-    }
+    pTuning->m_frictionSlip = (btScalar) newValue;
+}
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    setMaxSuspensionForce
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSuspensionForce
-    (JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
-                tuningId);
-        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    setMaxSuspensionForce
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSuspensionForce
+(JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
+    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
 
-        pTuning->m_maxSuspensionForce = (btScalar) newValue;
-    }
+    pTuning->m_maxSuspensionForce = (btScalar) newValue;
+}
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    setMaxSuspensionTravelCm
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSuspensionTravelCm
-    (JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
-                tuningId);
-        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    setMaxSuspensionTravelCm
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSuspensionTravelCm
+(JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
+    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
 
-        pTuning->m_maxSuspensionTravelCm = (btScalar) newValue;
-    }
+    pTuning->m_maxSuspensionTravelCm = (btScalar) newValue;
+}
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    setSuspensionCompression
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionCompression
-    (JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
-                tuningId);
-        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    setSuspensionCompression
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionCompression
+(JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
+    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
 
-        pTuning->m_suspensionCompression = (btScalar) newValue;
-    }
+    pTuning->m_suspensionCompression = (btScalar) newValue;
+}
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    setSuspensionDamping
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionDamping
-    (JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
-                tuningId);
-        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    setSuspensionDamping
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionDamping
+(JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
+    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
 
-        pTuning->m_suspensionDamping = (btScalar) newValue;
-    }
+    pTuning->m_suspensionDamping = (btScalar) newValue;
+}
 
-    /*
-     * Class:     com_jme3_bullet_objects_infos_VehicleTuning
-     * Method:    setSuspensionStiffness
-     * Signature: (JF)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionStiffness
-    (JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
-        btRaycastVehicle::btVehicleTuning *pTuning
-                = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
-                tuningId);
-        NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    setSuspensionStiffness
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionStiffness
+(JNIEnv *env, jobject object, jlong tuningId, jfloat newValue) {
+    btRaycastVehicle::btVehicleTuning *pTuning
+            = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
+    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.",)
 
-        pTuning->m_suspensionStiffness = (btScalar) newValue;
-    }
+    pTuning->m_suspensionStiffness = (btScalar) newValue;
 }

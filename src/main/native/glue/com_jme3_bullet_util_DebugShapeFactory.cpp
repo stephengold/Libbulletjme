@@ -74,78 +74,75 @@ public:
     }
 };
 
-extern "C" {
+void getVertices(JNIEnv *env, jlong shapeId, jint resolution,
+        jobject callback) {
+    btCollisionShape *pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    if (pShape->isConcave()) {
+        btConcaveShape *pConcave
+                = reinterpret_cast<btConcaveShape *> (shapeId);
 
-    void getVertices(JNIEnv *env, jlong shapeId, jint resolution,
-            jobject callback) {
-        btCollisionShape *pShape
-                = reinterpret_cast<btCollisionShape *> (shapeId);
-        if (pShape->isConcave()) {
-            btConcaveShape *pConcave
-                    = reinterpret_cast<btConcaveShape *> (shapeId);
+        DebugCallback *pCallback = new DebugCallback(env, callback);
+        btVector3 min = btVector3(-1e30, -1e30, -1e30);
+        btVector3 max = btVector3(1e30, 1e30, 1e30);
+        pConcave->processAllTriangles(pCallback, min, max);
+        delete pCallback;
 
-            DebugCallback *pCallback = new DebugCallback(env, callback);
-            btVector3 min = btVector3(-1e30, -1e30, -1e30);
-            btVector3 max = btVector3(1e30, 1e30, 1e30);
-            pConcave->processAllTriangles(pCallback, min, max);
-            delete pCallback;
+    } else if (pShape->isConvex()) {
+        btConvexShape *pConvex
+                = reinterpret_cast<btConvexShape *> (shapeId);
 
-        } else if (pShape->isConvex()) {
-            btConvexShape *pConvex
-                    = reinterpret_cast<btConvexShape *> (shapeId);
+        // Create a hull approximation.
+        btShapeHull *pHull = new btShapeHull(pConvex);
+        float margin = pConvex->getMargin();
+        pHull->buildHull(margin, resolution);
 
-            // Create a hull approximation.
-            btShapeHull *pHull = new btShapeHull(pConvex);
-            float margin = pConvex->getMargin();
-            pHull->buildHull(margin, resolution);
+        int numberOfTriangles = pHull->numTriangles();
+        const unsigned int *pHullIndices = pHull->getIndexPointer();
+        const btVector3 *pHullVertices = pHull->getVertexPointer();
+        btVector3 vertexA, vertexB, vertexC;
+        int index = 0;
 
-            int numberOfTriangles = pHull->numTriangles();
-            const unsigned int *pHullIndices = pHull->getIndexPointer();
-            const btVector3 *pHullVertices = pHull->getVertexPointer();
-            btVector3 vertexA, vertexB, vertexC;
-            int index = 0;
+        for (int i = 0; i < numberOfTriangles; i++) {
+            // Copy the triangle's vertices from the hull.
+            vertexA = pHullVertices[pHullIndices[index++]];
+            vertexB = pHullVertices[pHullIndices[index++]];
+            vertexC = pHullVertices[pHullIndices[index++]];
 
-            for (int i = 0; i < numberOfTriangles; i++) {
-                // Copy the triangle's vertices from the hull.
-                vertexA = pHullVertices[pHullIndices[index++]];
-                vertexB = pHullVertices[pHullIndices[index++]];
-                vertexC = pHullVertices[pHullIndices[index++]];
-
-                // Add the vertices to the callback object.
-                env->CallVoidMethod(callback,
-                        jmeClasses::DebugMeshCallback_addVector, vertexA.getX(),
-                        vertexA.getY(), vertexA.getZ());
-                if (env->ExceptionCheck()) {
-                    env->Throw(env->ExceptionOccurred());
-                    return;
-                }
-                env->CallVoidMethod(callback,
-                        jmeClasses::DebugMeshCallback_addVector, vertexB.getX(),
-                        vertexB.getY(), vertexB.getZ());
-                if (env->ExceptionCheck()) {
-                    env->Throw(env->ExceptionOccurred());
-                    return;
-                }
-                env->CallVoidMethod(callback,
-                        jmeClasses::DebugMeshCallback_addVector, vertexC.getX(),
-                        vertexC.getY(), vertexC.getZ());
-                if (env->ExceptionCheck()) {
-                    env->Throw(env->ExceptionOccurred());
-                    return;
-                }
+            // Add the vertices to the callback object.
+            env->CallVoidMethod(callback,
+                    jmeClasses::DebugMeshCallback_addVector, vertexA.getX(),
+                    vertexA.getY(), vertexA.getZ());
+            if (env->ExceptionCheck()) {
+                env->Throw(env->ExceptionOccurred());
+                return;
             }
-            delete pHull;
+            env->CallVoidMethod(callback,
+                    jmeClasses::DebugMeshCallback_addVector, vertexB.getX(),
+                    vertexB.getY(), vertexB.getZ());
+            if (env->ExceptionCheck()) {
+                env->Throw(env->ExceptionOccurred());
+                return;
+            }
+            env->CallVoidMethod(callback,
+                    jmeClasses::DebugMeshCallback_addVector, vertexC.getX(),
+                    vertexC.getY(), vertexC.getZ());
+            if (env->ExceptionCheck()) {
+                env->Throw(env->ExceptionOccurred());
+                return;
+            }
         }
+        delete pHull;
     }
+}
 
-    /*
-     * Class:     com_jme3_bullet_util_DebugShapeFactory
-     * Method:    getVertices2
-     * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
-     */
-    JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices2
-    (JNIEnv *env, jclass clazz, jlong shapeId, jint resolution,
-            jobject callback) {
-        getVertices(env, shapeId, resolution, callback);
-    }
+/*
+ * Class:     com_jme3_bullet_util_DebugShapeFactory
+ * Method:    getVertices2
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices2
+(JNIEnv *env, jclass clazz, jlong shapeId, jint resolution,
+        jobject callback) {
+    getVertices(env, shapeId, resolution, callback);
 }

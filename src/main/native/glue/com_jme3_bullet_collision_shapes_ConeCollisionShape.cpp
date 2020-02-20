@@ -35,34 +35,32 @@
  */
 #include "com_jme3_bullet_collision_shapes_ConeCollisionShape.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_ConeCollisionShape
-     * Method:    createShape
-     * Signature: (IFF)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_ConeCollisionShape_createShape
-    (JNIEnv *env, jobject object, jint axis, jfloat radius, jfloat height) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_ConeCollisionShape
+ * Method:    createShape
+ * Signature: (IFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_ConeCollisionShape_createShape
+(JNIEnv *env, jobject object, jint axis, jfloat radius, jfloat height) {
+    jmeClasses::initJavaClasses(env);
 
-        btCollisionShape *pShape;
-        switch (axis) {
-            case 0:
-                pShape = new btConeShapeX(radius, height);
-                break;
-            case 1:
-                pShape = new btConeShape(radius, height);
-                break;
-            case 2:
-                pShape = new btConeShapeZ(radius, height);
-                break;
-            default:
-                env->ThrowNew(jmeClasses::IllegalArgumentException,
-                        "The axis is out of range.");
-                return 0;
-        }
-
-        return reinterpret_cast<jlong> (pShape);
+    btCollisionShape *pShape;
+    switch (axis) {
+        case 0:
+            pShape = new btConeShapeX(radius, height);
+            break;
+        case 1:
+            pShape = new btConeShape(radius, height);
+            break;
+        case 2:
+            pShape = new btConeShapeZ(radius, height);
+            break;
+        default:
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The axis is out of range.");
+            return 0;
     }
+
+    return reinterpret_cast<jlong> (pShape);
 }

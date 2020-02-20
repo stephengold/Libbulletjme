@@ -35,40 +35,38 @@
  */
 #include "com_jme3_bullet_collision_shapes_CylinderCollisionShape.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_CylinderCollisionShape
-     * Method:    createShape
-     * Signature: (ILcom/jme3/math/Vector3f;)J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionShape_createShape
-    (JNIEnv *env, jobject object, jint axis, jobject halfExtentsVector) {
-        jmeClasses::initJavaClasses(env);
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CylinderCollisionShape
+ * Method:    createShape
+ * Signature: (ILcom/jme3/math/Vector3f;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionShape_createShape
+(JNIEnv *env, jobject object, jint axis, jobject halfExtentsVector) {
+    jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.",
-                0);
+    NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.",
+            0);
 
-        btVector3 vec;
-        jmeBulletUtil::convert(env, halfExtentsVector, &vec);
+    btVector3 vec;
+    jmeBulletUtil::convert(env, halfExtentsVector, &vec);
 
-        btCollisionShape *pShape;
-        switch (axis) {
-            case 0:
-                pShape = new btCylinderShapeX(vec);
-                break;
-            case 1:
-                pShape = new btCylinderShape(vec);
-                break;
-            case 2:
-                pShape = new btCylinderShapeZ(vec);
-                break;
-            default:
-                env->ThrowNew(jmeClasses::IllegalArgumentException,
-                        "The axis is out of range.");
-                return 0;
-        }
-
-        return reinterpret_cast<jlong> (pShape);
+    btCollisionShape *pShape;
+    switch (axis) {
+        case 0:
+            pShape = new btCylinderShapeX(vec);
+            break;
+        case 1:
+            pShape = new btCylinderShape(vec);
+            break;
+        case 2:
+            pShape = new btCylinderShapeZ(vec);
+            break;
+        default:
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The axis is out of range.");
+            return 0;
     }
+
+    return reinterpret_cast<jlong> (pShape);
 }

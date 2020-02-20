@@ -40,117 +40,115 @@
 #include "jmeBulletUtil.h"
 #include "VHACD.h"
 
-extern "C" {
-    using namespace VHACD;
+using namespace VHACD;
 
-    class Callback : public IVHACD::IUserCallback {
-    public:
-        JNIEnv *env;
+class Callback : public IVHACD::IUserCallback {
+public:
+    JNIEnv *env;
 
-        Callback(JNIEnv *pJNIEnv) {
-            env = pJNIEnv;
-        };
-
-        void Update(const double overallPercent, const double stagePercent,
-                const double operationPercent, const char* const stageName,
-                const char* const operationName) {
-
-            jstring arg4 = env->NewStringUTF(stageName);
-            if (env->ExceptionCheck()) {
-                env->Throw(env->ExceptionOccurred());
-                return;
-            }
-
-            jstring arg5 = env->NewStringUTF(operationName);
-            if (env->ExceptionCheck()) {
-                env->Throw(env->ExceptionOccurred());
-                return;
-            }
-
-            jfloat arg1 = overallPercent;
-            jfloat arg2 = stagePercent;
-            jfloat arg3 = operationPercent;
-            env->CallStaticVoidMethod(jmeClasses::Vhacd,
-                    jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
-        };
+    Callback(JNIEnv *pJNIEnv) {
+        env = pJNIEnv;
     };
 
-    class Logger : public IVHACD::IUserLogger {
-    public:
+    void Update(const double overallPercent, const double stagePercent,
+            const double operationPercent, const char* const stageName,
+            const char* const operationName) {
 
-        Logger(bool b) {
-            log = b;
-        };
+        jstring arg4 = env->NewStringUTF(stageName);
+        if (env->ExceptionCheck()) {
+            env->Throw(env->ExceptionOccurred());
+            return;
+        }
 
-        void Log(const char* const msg) {
+        jstring arg5 = env->NewStringUTF(operationName);
+        if (env->ExceptionCheck()) {
+            env->Throw(env->ExceptionOccurred());
+            return;
+        }
+
+        jfloat arg1 = overallPercent;
+        jfloat arg2 = stagePercent;
+        jfloat arg3 = operationPercent;
+        env->CallStaticVoidMethod(jmeClasses::Vhacd,
+                jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
+    };
+};
+
+class Logger : public IVHACD::IUserLogger {
+public:
+
+    Logger(bool b) {
+        log = b;
+    };
+
+    void Log(const char* const msg) {
 #ifndef NO_DEBUG
-            if (log)std::cout << msg << std::endl;
+        if (log)std::cout << msg << std::endl;
 #endif
-        };
-
-    private:
-        bool log;
     };
 
-    /*
-     * Class:     vhacd_VHACD
-     * Method:    compute
-     * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/IntBuffer;JZ)V
-     */
-    JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
-    (JNIEnv *env, jclass clas, jobject positionsBuffer, jobject indicesBuffer,
-            jlong paramsId, jboolean debug) {
-        jmeClasses::initJavaClasses(env);
+private:
+    bool log;
+};
 
-        NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
-        const jfloat * const pPositions
-                = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-        NULL_CHECK(pPositions, "The positions buffer is not direct.",);
-        const jlong numFloats = env->GetDirectBufferCapacity(positionsBuffer);
+/*
+ * Class:     vhacd_VHACD
+ * Method:    compute
+ * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/IntBuffer;JZ)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
+(JNIEnv *env, jclass clas, jobject positionsBuffer, jobject indicesBuffer,
+        jlong paramsId, jboolean debug) {
+    jmeClasses::initJavaClasses(env);
 
-        NULL_CHECK(indicesBuffer, "The indices buffer does not exist.",);
-        const jint * const pIndices
-                = (jint *) env->GetDirectBufferAddress(indicesBuffer);
-        NULL_CHECK(pIndices, "The indices buffer is not direct.",);
-        const jlong numInts = env->GetDirectBufferCapacity(indicesBuffer);
+    NULL_CHECK(positionsBuffer, "The positions buffer does not exist.",);
+    const jfloat * const pPositions
+            = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
+    NULL_CHECK(pPositions, "The positions buffer is not direct.",);
+    const jlong numFloats = env->GetDirectBufferCapacity(positionsBuffer);
 
-        IVHACD::Parameters * const pParams
-                = reinterpret_cast<IVHACD::Parameters *> (paramsId);
-        NULL_CHECK(pParams, "The parameters do not exist.",)
+    NULL_CHECK(indicesBuffer, "The indices buffer does not exist.",);
+    const jint * const pIndices
+            = (jint *) env->GetDirectBufferAddress(indicesBuffer);
+    NULL_CHECK(pIndices, "The indices buffer is not direct.",);
+    const jlong numInts = env->GetDirectBufferCapacity(indicesBuffer);
 
-        Callback callback = Callback(env);
-        pParams->m_callback = &callback;
+    IVHACD::Parameters * const pParams
+            = reinterpret_cast<IVHACD::Parameters *> (paramsId);
+    NULL_CHECK(pParams, "The parameters do not exist.",)
 
-        Logger logger(debug);
-        pParams->m_logger = &logger;
+    Callback callback = Callback(env);
+    pParams->m_callback = &callback;
 
-        // on some platforms, jint != uint32_t
-        uint32_t * const pTriangles = new uint32_t[numInts];
-        for (jlong i = 0; i < numInts; ++i) {
-            pTriangles[i] = (uint32_t) pIndices[i];
-        }
+    Logger logger(debug);
+    pParams->m_logger = &logger;
 
-        IVHACD * const pIvhacd = CreateVHACD();
-        const uint32_t nPoints = numFloats / 3;
-        const uint32_t nTriangles = numInts / 3;
-        const bool success = pIvhacd->Compute(pPositions, nPoints, pTriangles,
-                nTriangles, *pParams);
-
-        if (success) {
-            const uint32_t n_hulls = pIvhacd->GetNConvexHulls();
-
-            for (uint32_t i = 0; i < n_hulls; ++i) {
-                IVHACD::ConvexHull * const pHull = new IVHACD::ConvexHull();
-                pIvhacd->GetConvexHull(i, *pHull);
-                const jlong hullId = reinterpret_cast<jlong> (pHull);
-
-                env->CallStaticVoidMethod(jmeClasses::Vhacd,
-                        jmeClasses::Vhacd_addHull, hullId);
-            }
-        }
-
-        delete[] pTriangles;
-        pIvhacd->Clean();
-        pIvhacd->Release();
+    // on some platforms, jint != uint32_t
+    uint32_t * const pTriangles = new uint32_t[numInts];
+    for (jlong i = 0; i < numInts; ++i) {
+        pTriangles[i] = (uint32_t) pIndices[i];
     }
+
+    IVHACD * const pIvhacd = CreateVHACD();
+    const uint32_t nPoints = numFloats / 3;
+    const uint32_t nTriangles = numInts / 3;
+    const bool success = pIvhacd->Compute(pPositions, nPoints, pTriangles,
+            nTriangles, *pParams);
+
+    if (success) {
+        const uint32_t n_hulls = pIvhacd->GetNConvexHulls();
+
+        for (uint32_t i = 0; i < n_hulls; ++i) {
+            IVHACD::ConvexHull * const pHull = new IVHACD::ConvexHull();
+            pIvhacd->GetConvexHull(i, *pHull);
+            const jlong hullId = reinterpret_cast<jlong> (pHull);
+
+            env->CallStaticVoidMethod(jmeClasses::Vhacd,
+                    jmeClasses::Vhacd_addHull, hullId);
+        }
+    }
+
+    delete[] pTriangles;
+    pIvhacd->Clean();
+    pIvhacd->Release();
 }

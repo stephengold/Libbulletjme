@@ -35,17 +35,15 @@
  */
 #include "com_jme3_bullet_collision_shapes_EmptyShape.h"
 #include "jmeBulletUtil.h"
-extern "C" {
 
-    /*
-     * Class:     com_jme3_bullet_collision_shapes_EmptyShape
-     * Method:    createShapeNative
-     * Signature: ()J
-     */
-    JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_EmptyShape_createShapeNative
-    (JNIEnv *env, jobject object) {
-        jmeClasses::initJavaClasses(env);
-        btEmptyShape *pShape = new btEmptyShape();
-        return reinterpret_cast<jlong> (pShape);
-    }
+/*
+ * Class:     com_jme3_bullet_collision_shapes_EmptyShape
+ * Method:    createShapeNative
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_EmptyShape_createShapeNative
+(JNIEnv *env, jobject object) {
+    jmeClasses::initJavaClasses(env);
+    btEmptyShape *pShape = new btEmptyShape();
+    return reinterpret_cast<jlong> (pShape);
 }
