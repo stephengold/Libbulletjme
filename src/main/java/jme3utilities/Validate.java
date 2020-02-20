@@ -62,54 +62,6 @@ final public class Validate {
     // new methods exposed
 
     /**
-     * Validate a finite single-precision value as a method argument.
-     *
-     * @param fValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is NaN or infinite
-     */
-    public static boolean finite(float fValue, String description) {
-        if (Float.isNaN(fValue) || Float.isInfinite(fValue)) {
-            String what;
-            if (description == null) {
-                what = "float argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
-            String message = what + " must be a finite number.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a finite double-precision value as a method argument.
-     *
-     * @param dValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is NaN or infinite
-     */
-    public static boolean finite(double dValue, String description) {
-        if (Double.isNaN(dValue) || Double.isInfinite(dValue)) {
-            String what;
-            if (description == null) {
-                what = "double argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
-            String message = what + " must be a finite number.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a finite Vector3f as a method argument.
      *
      * @param vector the vector to validate (unaffected)
@@ -365,32 +317,6 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-null, non-empty string as a method argument.
-     *
-     * @param string the String to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws NullPointerException if the String is null
-     * @throws IllegalArgumentException if the String has zero length
-     */
-    public static boolean nonEmpty(String string, String description) {
-        nonNull(string, description);
-
-        if (string.isEmpty()) {
-            String what;
-            if (description == null) {
-                what = "String argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not be empty.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a non-negative integer as a method argument.
      *
      * @param iValue the value to validate
@@ -431,30 +357,6 @@ final public class Validate {
                 what = description;
             }
             logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
-            String message = what + " must not be negative.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a non-negative double-precision value as a method argument.
-     *
-     * @param dValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is negative or NaN
-     */
-    public static boolean nonNegative(double dValue, String description) {
-        if (!(dValue >= 0.0)) {
-            String what;
-            if (description == null) {
-                what = "double argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
             String message = what + " must not be negative.";
             throw new IllegalArgumentException(message);
         }
@@ -519,63 +421,6 @@ final public class Validate {
     }
 
     /**
-     * Validate an array of non-null objects.
-     * <p>
-     * While it might seem more logical to throw an IllegalArgumentException in
-     * the case of a method argument, the javadoc for NullPointerException says,
-     * "Applications should throw instances of this class to indicate other
-     * illegal uses of the null object."
-     *
-     * @param array the array to validate (unaffected)
-     * @param description a description of the argument
-     * @return true
-     * @throws NullPointerException if the array is null or contains a null
-     * element
-     */
-    public static boolean nonNullArray(Object[] array, String description) {
-        nonNull(array, description);
-
-        for (int index = 0; index < array.length; ++index) {
-            if (array[index] == null) {
-                String what;
-                if (description == null) {
-                    what = "Array argument";
-                } else {
-                    what = description;
-                }
-                String message = String.format(
-                        "element[%d] of %s must not be null.", index, what);
-                throw new NullPointerException(message);
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a non-zero integer value as a method argument.
-     *
-     * @param iValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is zero
-     */
-    public static boolean nonZero(int iValue, String description) {
-        if (iValue == 0) {
-            String what;
-            if (description == null) {
-                what = "int argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not be zero.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a non-zero long value as a method argument.
      *
      * @param lValue the value to validate
@@ -588,29 +433,6 @@ final public class Validate {
             String what;
             if (description == null) {
                 what = "long argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not be zero.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a non-zero single-precision value as a method argument.
-     *
-     * @param fValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is zero
-     */
-    public static boolean nonZero(float fValue, String description) {
-        if (fValue == 0f) {
-            String what;
-            if (description == null) {
-                what = "float argument";
             } else {
                 what = description;
             }
@@ -641,52 +463,6 @@ final public class Validate {
                 what = description;
             }
             String message = what + " must not be zero.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a single-precision number as a method argument.
-     *
-     * @param fValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is NaN
-     */
-    public static boolean number(float fValue, String description) {
-        if (Float.isNaN(fValue)) {
-            String what;
-            if (description == null) {
-                what = "float argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must be a number.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a double-precision number as a method argument.
-     *
-     * @param dValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is NaN
-     */
-    public static boolean number(double dValue, String description) {
-        if (Double.isNaN(dValue)) {
-            String what;
-            if (description == null) {
-                what = "double argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must be a number.";
             throw new IllegalArgumentException(message);
         }
 
@@ -735,56 +511,6 @@ final public class Validate {
             }
             logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
             String message = what + " must be positive.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate a positive double-precision value as a method argument.
-     *
-     * @param dValue the value to validate
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the value is not positive
-     */
-    public static boolean positive(double dValue, String description) {
-        if (!(dValue > 0.0)) {
-            String what;
-            if (description == null) {
-                what = "double argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
-            String message = what + " must be positive.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate an all-positive Vector3f as a method argument.
-     *
-     * @param vector the vector to validate (unaffected)
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if any component is not positive
-     * @throws NullPointerException if the vector is null
-     */
-    public static boolean positive(Vector3f vector, String description) {
-        nonNull(vector, description);
-
-        if (MyVector3f.isAllPositive(vector)) {
-            String what;
-            if (description == null) {
-                what = "Vector3f argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must have all components positive.";
             throw new IllegalArgumentException(message);
         }
 
