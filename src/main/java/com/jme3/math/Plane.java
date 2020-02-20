@@ -50,12 +50,6 @@ public class Plane implements Cloneable, java.io.Serializable {
     private static final Logger logger = Logger
             .getLogger(Plane.class.getName());
 
-    public static enum Side {
-        None,
-        Positive,
-        Negative
-    }
-
     /** 
      * Vector normal to the plane.
      */
@@ -65,13 +59,6 @@ public class Plane implements Cloneable, java.io.Serializable {
      * Constant of the plane. See formula in class definition.
      */
     protected float constant;
-
-    /**
-     * Constructor instantiates a new <code>Plane</code> object. This is the
-     * default object and contains a normal of (0,0,0) and a constant of 0.
-     */
-    public Plane() {
-    }
 
     /**
      * Constructor instantiates a new <code>Plane</code> object. The normal
@@ -92,57 +79,12 @@ public class Plane implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Constructor instantiates a new <code>Plane</code> object.
-     *
-     * @param normal      The normal of the plane.
-     * @param displacement A vector representing a point on the plane.
-     */
-    public Plane(Vector3f normal, Vector3f displacement) {
-        this(normal, displacement.dot(normal));
-    }
-
-    /**
-     * <code>setNormal</code> sets the normal of the plane.
-     * 
-     * @param normal
-     *            the new normal of the plane.
-     */
-    public void setNormal(Vector3f normal) {
-        if (normal == null) {
-            throw new IllegalArgumentException("normal cannot be null");
-        }
-        this.normal.set(normal);
-    }
-
-    /**
-     * <code>setNormal</code> sets the normal of the plane.
-     *
-     * @param x the desired X-component of the normal
-     * @param y the desired Y-component of the normal
-     * @param z the desired Z-component of the normal
-     */
-    public void setNormal(float x, float y, float z) {
-        this.normal.set(x,y,z);
-    }
-
-    /**
      * <code>getNormal</code> retrieves the normal of the plane.
      * 
      * @return the normal of the plane.
      */
     public Vector3f getNormal() {
         return normal;
-    }
-
-    /**
-     * <code>setConstant</code> sets the constant value that helps define the
-     * plane.
-     * 
-     * @param constant
-     *            the new constant value.
-     */
-    public void setConstant(float constant) {
-        this.constant = constant;
     }
 
     /**
@@ -159,90 +101,6 @@ public class Plane implements Cloneable, java.io.Serializable {
 //        return store.set(normal).multLocal(t).addLocal(point);
         float t = (constant - normal.dot(point)) / normal.dot(normal);
         return store.set(normal).multLocal(t).addLocal(point);
-    }
-
-    public Vector3f getClosestPoint(Vector3f point){
-        return getClosestPoint(point, new Vector3f());
-    }
-
-    public Vector3f reflect(Vector3f point, Vector3f store){
-        if (store == null)
-            store = new Vector3f();
-
-        float d = pseudoDistance(point);
-        store.set(normal).negateLocal().multLocal(d * 2f);
-        store.addLocal(point);
-        return store;
-    }
-
-    /**
-     * <code>pseudoDistance</code> calculates the distance from this plane to
-     * a provided point. If the point is on the negative side of the plane the
-     * distance returned is negative, otherwise it is positive. If the point is
-     * on the plane, it is zero.
-     * 
-     * @param point
-     *            the point to check.
-     * @return the signed distance from the plane to a point.
-     */
-    public float pseudoDistance(Vector3f point) {
-        return normal.dot(point) - constant;
-    }
-
-    /**
-     * <code>whichSide</code> returns the side at which a point lies on the
-     * plane. The positive values returned are: NEGATIVE_SIDE, POSITIVE_SIDE and
-     * NO_SIDE.
-     * 
-     * @param point
-     *            the point to check.
-     * @return the side at which the point lies.
-     */
-    public Side whichSide(Vector3f point) {
-        float dis = pseudoDistance(point);
-        if (dis < 0) {
-            return Side.Negative;
-        } else if (dis > 0) {
-            return Side.Positive;
-        } else {
-            return Side.None;
-        }
-    }
-
-    public boolean isOnPlane(Vector3f point){
-        float dist = pseudoDistance(point);
-        if (dist < FastMath.FLT_EPSILON && dist > -FastMath.FLT_EPSILON)
-            return true;
-        else
-            return false;
-    }
-
-    /**
-     * Initialize this plane using a point of origin and a normal.
-     *
-     * @param origin (not null, unaffected)
-     * @param normal (not null, unaffected)
-     */
-    public void setOriginNormal(Vector3f origin, Vector3f normal){
-        this.normal.set(normal);
-        this.constant = normal.x * origin.x + normal.y * origin.y + normal.z * origin.z;
-    }
-
-    /**
-     * Initialize the Plane using the given 3 points as coplanar.
-     * 
-     * @param v1
-     *            the first point
-     * @param v2
-     *            the second point
-     * @param v3
-     *            the third point
-     */
-    public void setPlanePoints(Vector3f v1, Vector3f v2, Vector3f v3) {
-        normal.set(v2).subtractLocal(v1);
-        normal.crossLocal(v3.x - v1.x, v3.y - v1.y, v3.z - v1.z)
-                .normalizeLocal();
-        constant = normal.dot(v1);
     }
 
     /**
