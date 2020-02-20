@@ -25,9 +25,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.jme3.bullet.CollisionSpace;
 import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
+import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.shapes.Box2dShape;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
@@ -43,6 +45,8 @@ import com.jme3.bullet.collision.shapes.MultiSphere;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
+import com.jme3.bullet.objects.PhysicsBody;
+import com.jme3.bullet.objects.PhysicsGhostObject;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.bullet.util.NativeLibrary;
@@ -429,43 +433,143 @@ public class TestLibbulletjme {
     }
 
     /**
-     * Instantiate various physics spaces and verify their properties.
+     * Perform rays tests against a unit sphere in various collision spaces.
      */
     @Test
     public void test004() {
         loadNativeLibrary();
-        /*
-         * Create a PhysicsSpace using DBVT for broadphase.
-         */
-        PhysicsSpace space1 = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.DBVT);
-        verifyPhysicsSpaceDefaults(space1);
-        /*
-         * Create a 20x20x20 PhysicsSpace using AXIS_SWEEP_3 for broadphase.
-         */
-        PhysicsSpace space2 = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+
+        float radius = 1f;
+        CollisionShape sphereShape = new SphereCollisionShape(radius);
+
+        CollisionSpace space = new CollisionSpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new CollisionSpace(new Vector3f(-10f, -10f, -10f),
                 new Vector3f(10f, 10f, 10f),
                 PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
-        verifyPhysicsSpaceDefaults(space2);
-        /*
-         * Create a 20x20x20 PhysicsSpace using AXIS_SWEEP_3_32 for broadphase.
-         */
-        PhysicsSpace space3 = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new CollisionSpace(new Vector3f(-10f, -10f, -10f),
                 new Vector3f(10f, 10f, 10f),
                 PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
-        verifyPhysicsSpaceDefaults(space3);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new CollisionSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
         /*
-         * Create a soft space using DBVT for broadphase.
+         * Physics spaces with various broadphase accelerators.
          */
-        PhysicsSoftSpace space4 = new PhysicsSoftSpace(Vector3f.ZERO,
-                Vector3f.ZERO, PhysicsSpace.BroadphaseType.DBVT);
-        verifyPhysicsSpaceDefaults(space4);
+        space = new PhysicsSpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
         /*
-         * Create a PhysicsSpace using SIMPLE for broadphase.
+         * Soft spaces with various broadphase accelerators.
          */
-        PhysicsSpace space5 = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
+        space = new PhysicsSoftSpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new PhysicsSoftSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+    }
+
+    /**
+     * Perform drop tests using a box-shaped rigid body.
+     */
+    @Test
+    public void test005() {
+        loadNativeLibrary();
+
+        float radius = 0.2f;
+        CollisionShape boxShape = new BoxCollisionShape(radius);
+        /*
+         * Physics spaces with various broadphase accelerators.
+         */
+        PhysicsSpace space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
                 PhysicsSpace.BroadphaseType.SIMPLE);
-        verifyPhysicsSpaceDefaults(space5);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+        /*
+         * Soft spaces with various broadphase accelerators.
+         */
+        space = new PhysicsSoftSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new PhysicsSoftSpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.DBVT);
+        verifyPhysicsSpaceDefaults(space);
+        performDropTest(boxShape, space);
     }
     // *************************************************************************
     // private methods
@@ -493,6 +597,93 @@ public class TestLibbulletjme {
     }
 
     /**
+     * Perform a drop test using the specified shape in the specified space.
+     *
+     * @param dropShape the shape to drop (not null)
+     * @param space the space in which to perform the test (not null, modified)
+     */
+    private void performDropTest(CollisionShape dropShape, PhysicsSpace space) {
+        Assert.assertTrue(space.isEmpty());
+        /*
+         * Add a static horizontal plane at y=-1.
+         */
+        Plane plane = new Plane(Vector3f.UNIT_Y, -1f);
+        CollisionShape floorShape = new PlaneCollisionShape(plane);
+        float mass = PhysicsBody.massForStatic;
+        PhysicsRigidBody floorBody = new PhysicsRigidBody(floorShape, mass);
+        space.addCollisionObject(floorBody);
+
+        Assert.assertFalse(space.isEmpty());
+        Assert.assertEquals(1, space.countCollisionObjects());
+        Assert.assertEquals(1, space.countRigidBodies());
+        Assert.assertTrue(space.contains(floorBody));
+        /*
+         * Add a dynamic rigid body at y=0.
+         */
+        mass = 1f;
+        PhysicsRigidBody dropBody = new PhysicsRigidBody(dropShape, mass);
+        space.addCollisionObject(dropBody);
+
+        Assert.assertFalse(space.isEmpty());
+        Assert.assertEquals(2, space.countCollisionObjects());
+        Assert.assertEquals(2, space.countRigidBodies());
+        Assert.assertTrue(space.contains(floorBody));
+        Assert.assertTrue(space.contains(dropBody));
+        /*
+         * 50 iterations with a 20-msec timestep
+         */
+        for (int i = 0; i < 50; ++i) {
+            space.update(0.02f, 0);
+            //System.out.printf("location = %s%n", prb.getPhysicsLocation());
+        }
+        /*
+         * Check the final location of the body.
+         */
+        Vector3f location = dropBody.getPhysicsLocation();
+        Assert.assertEquals(0f, location.x, 0.2f);
+        Assert.assertEquals(0f, location.z, 0.2f);
+
+        space.remove(floorBody);
+        space.remove(dropBody);
+
+        Assert.assertTrue(space.isEmpty());
+    }
+
+    /**
+     * Perform ray tests against the specified shape in the specified space.
+     *
+     * @param shape the shape to add to the space (not null)
+     * @param space the space in which to perform the tests (not null, modified)
+     */
+    private void performRayTests(CollisionShape shape, CollisionSpace space) {
+        Assert.assertTrue(space.isEmpty());
+
+        PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
+        space.add(ghost);
+        Assert.assertTrue(space.contains(ghost));
+        Assert.assertEquals(1, space.countCollisionObjects());
+
+        List<PhysicsRayTestResult> results0 = space.rayTest(
+                new Vector3f(0.8f, 0.8f, 2f), new Vector3f(0.8f, 0.8f, 0f));
+        Assert.assertEquals(0, results0.size());
+
+        List<PhysicsRayTestResult> results1 = space.rayTest(
+                new Vector3f(0.7f, 0.7f, 2f), new Vector3f(0.7f, 0.7f, 0f));
+        Assert.assertEquals(1, results1.size());
+
+        List<PhysicsRayTestResult> results2 = space.rayTest(
+                new Vector3f(0.7f, 0.7f, 2f), new Vector3f(0.7f, 0.7f, -2f));
+        Assert.assertEquals(1, results2.size());
+
+        space.remove(ghost);
+        Assert.assertTrue(space.isEmpty());
+
+        List<PhysicsRayTestResult> results3 = space.rayTest(
+                new Vector3f(0.7f, 0.7f, 2f), new Vector3f(0.7f, 0.7f, -2f));
+        Assert.assertEquals(0, results3.size());
+    }
+
+    /**
      * Verify defaults common to all newly-created collision shapes.
      *
      * @param shape the shape to test (not null, unaffected)
@@ -504,21 +695,31 @@ public class TestLibbulletjme {
     }
 
     /**
+     * Verify defaults common to all newly-created collision spaces.
+     *
+     * @param space the space to test (not null, unaffected)
+     */
+    private void verifyCollisionSpaceDefaults(CollisionSpace space) {
+        Assert.assertNotNull(space);
+        Assert.assertTrue(space.isEmpty());
+        Assert.assertEquals(0, space.countCollisionObjects());
+        Assert.assertEquals(RayTestFlag.SubSimplexRaytest,
+                space.getRayTestFlags());
+    }
+
+    /**
      * Verify defaults common to all newly-created physics spaces.
      *
      * @param space the space to test (not null, unaffected)
      */
     private void verifyPhysicsSpaceDefaults(PhysicsSpace space) {
-        Assert.assertNotNull(space);
-        Assert.assertEquals(0, space.countCollisionObjects());
+        verifyCollisionSpaceDefaults(space);
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
         assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
         Assert.assertEquals(4, space.maxSubSteps());
         Assert.assertEquals(0.1f, space.maxTimeStep(), 0f);
-        Assert.assertEquals(RayTestFlag.SubSimplexRaytest,
-                space.getRayTestFlags());
         Assert.assertEquals(10, space.getSolverNumIterations());
     }
 
