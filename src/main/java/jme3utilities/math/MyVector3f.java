@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2019, Stephen Gold
+ Copyright (c) 2013-2020, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -40,10 +40,6 @@ public class MyVector3f {
     // constants and loggers
 
     /**
-     * index of the first (X) axis
-     */
-    final public static int firstAxis = 0;
-    /**
      * number of axes in the coordinate system
      */
     final public static int numAxes = 3;
@@ -59,10 +55,6 @@ public class MyVector3f {
      * index of the Z axis
      */
     final public static int zAxis = 2;
-    /**
-     * index of the final (Z) axis
-     */
-    final public static int lastAxis = numAxes - 1;
     /**
      * message logger for this class
      */
@@ -193,21 +185,6 @@ public class MyVector3f {
     }
 
     /**
-     * Test whether all components of a vector are all positive: in other words,
-     * whether it's strictly inside the first octant.
-     *
-     * @param vector input (not null, unaffected)
-     * @return true if all components are positive, false otherwise
-     */
-    public static boolean isAllPositive(Vector3f vector) {
-        if (vector.x > 0f && vector.y > 0f && vector.z > 0f) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Test for a scale identity.
      *
      * @param vector input (not null, unaffected)
@@ -279,8 +256,7 @@ public class MyVector3f {
     }
 
     /**
-     * Normalize the specified vector in place. This method is less vulnerable
-     * to overflow than {@link com.jme3.math.Vector3f#normalizeLocal()}.
+     * Normalize the specified vector in place.
      *
      * @param input (not null, modified)
      */
