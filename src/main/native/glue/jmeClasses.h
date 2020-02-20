@@ -63,7 +63,6 @@ public:
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;
     static jmethodID PhysicsSpace_addCollisionEvent;
-    static jmethodID PhysicsSpace_notifyCollisionGroupListeners; // TODO delete
 
     static jclass PhysicsGhostObject;
     static jmethodID PhysicsGhostObject_addOverlappingObject;
