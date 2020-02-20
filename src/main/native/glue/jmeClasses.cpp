@@ -43,11 +43,14 @@ JavaVM * jmeClasses::vm;
 
 jclass jmeClasses::IllegalArgumentException;
 
+jclass jmeClasses::CollisionSpace;
+jmethodID jmeClasses::CollisionSpace_notifyCollisionGroupListeners;
+
 jclass jmeClasses::PhysicsSpace;
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
 jmethodID jmeClasses::PhysicsSpace_addCollisionEvent;
-jmethodID jmeClasses::PhysicsSpace_notifyCollisionGroupListeners;
+jmethodID jmeClasses::PhysicsSpace_notifyCollisionGroupListeners; // TODO delete
 
 jclass jmeClasses::PhysicsGhostObject;
 jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
@@ -148,6 +151,19 @@ void jmeClasses::initJavaClasses(JNIEnv *env) {
 
     IllegalArgumentException = (jclass) env->NewGlobalRef(env->FindClass(
             "java/lang/IllegalArgumentException"));
+
+    CollisionSpace = (jclass) env->NewGlobalRef(env->FindClass("com/jme3/bullet/CollisionSpace"));
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
+    CollisionSpace_notifyCollisionGroupListeners = env->GetMethodID(
+            CollisionSpace, "notifyCollisionGroupListeners_native",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;)Z");
+    if (env->ExceptionCheck()) {
+        env->Throw(env->ExceptionOccurred());
+        return;
+    }
 
     PhysicsSpace = (jclass) env->NewGlobalRef(env->FindClass("com/jme3/bullet/PhysicsSpace"));
     if (env->ExceptionCheck()) {
