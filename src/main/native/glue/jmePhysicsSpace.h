@@ -29,54 +29,37 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <jni.h>
+#include "jmeCollisionSpace.h"
 #include "btBulletDynamicsCommon.h"
-#include "btBulletCollisionCommon.h"
 #include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
-#include "BulletCollision/CollisionDispatch/btCollisionObject.h"
-#include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "BulletDynamics/Character/btKinematicCharacterController.h"
 #include "BulletCollision/CollisionDispatch/btSimulationIslandManager.h"
 #include "BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
 #include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
-#include "BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
 
 /*
  * Author: Normen Hansen
  */
-class jmePhysicsSpace {
-private:
-    JavaVM * vm;
-    jobject javaPhysicsSpace;
-    void attachThread();
-
-protected:
-    btDynamicsWorld * dynamicsWorld;
-    JNIEnv * env;
-
+class jmePhysicsSpace : public jmeCollisionSpace {
 public:
-    jmePhysicsSpace(JNIEnv *, jobject);
-    ~jmePhysicsSpace();
 
-    void stepSimulation(jfloat, jint, jfloat);
-    void createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ, jfloat maxX,
-            jfloat maxY, jfloat maxZ, jint ordinal);
+    jmePhysicsSpace(JNIEnv *env, jobject javaSpace)
+    : jmeCollisionSpace::jmeCollisionSpace(env, javaSpace) {
+    }
+
+    static void contactStartedCallback(btPersistentManifold * const &);
+    void createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
+            jfloat maxX, jfloat maxY, jfloat maxZ, jint ordinal);
 
     const btDynamicsWorld * getDynamicsWorld() const {
-        return dynamicsWorld;
+        return (btDynamicsWorld *) m_collisionWorld;
     }
 
     btDynamicsWorld * getDynamicsWorld() {
-        return dynamicsWorld;
+        return (btDynamicsWorld *) m_collisionWorld;
     }
 
-    JNIEnv * getEnv();
-
-    jobject getJavaPhysicsSpace() {
-        return javaPhysicsSpace;
-    }
-
-    static void preTickCallback(btDynamicsWorld *, btScalar);
     static void postTickCallback(btDynamicsWorld *, btScalar);
-    static void contactStartedCallback(btPersistentManifold * const &);
+    static void preTickCallback(btDynamicsWorld *, btScalar);
+    void stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy);
 };

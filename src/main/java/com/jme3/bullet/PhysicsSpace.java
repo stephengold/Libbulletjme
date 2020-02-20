@@ -31,29 +31,16 @@
  */
 package com.jme3.bullet;
 
-import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
-import com.jme3.bullet.collision.PhysicsRayTestResult;
-import com.jme3.bullet.collision.PhysicsSweepTestResult;
-import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.joints.Constraint;
 import com.jme3.bullet.joints.JointEnd;
 import com.jme3.bullet.joints.PhysicsJoint;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsCharacter;
-import com.jme3.bullet.objects.PhysicsGhostObject;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsVehicle;
-import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -66,7 +53,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-public class PhysicsSpace {
+public class PhysicsSpace extends CollisionSpace {
     // *************************************************************************
     // enums
 
@@ -121,24 +108,6 @@ public class PhysicsSpace {
     // fields
 
     /**
-     * copy of type of acceleration structure used
-     */
-    private BroadphaseType broadphaseType = BroadphaseType.DBVT;
-
-    final private static Comparator<PhysicsRayTestResult> hitFractionComparator
-            = new Comparator<PhysicsRayTestResult>() {
-        @Override
-        public int compare(PhysicsRayTestResult r1, PhysicsRayTestResult r2) {
-            float comp = r1.getHitFraction() - r2.getHitFraction();
-            return comp > 0 ? 1 : -1;
-        }
-    };
-    /**
-     * queue of collision events not yet distributed to listeners
-     */
-    final private Deque<PhysicsCollisionEvent> collisionEvents
-            = new ArrayDeque<>(20);
-    /**
      * time step (in seconds, &gt;0) ignored when maxSubSteps=0
      */
     private float accuracy = 1f / 60f;
@@ -152,28 +121,14 @@ public class PhysicsSpace {
      */
     private int maxSubSteps = 4;
     /**
-     * flags used in ray tests (default=SubSimplexRaytest)
-     */
-    private int rayTestFlags = RayTestFlag.SubSimplexRaytest;
-    /**
      * copy of number of iterations used by the contact-and-constraint solver
      * (default=10)
      */
     private int solverNumIterations = 10;
     /**
-     * Bullet identifier of the space. The constructor sets this to a non-zero
-     * value.
-     */
-    private long nativeId = 0L;
-    /**
      * map character IDs to added objects
      */
     final private Map<Long, PhysicsCharacter> physicsCharacters
-            = new ConcurrentHashMap<>(64);
-    /**
-     * map ghost IDs to added objects
-     */
-    final private Map<Long, PhysicsGhostObject> physicsGhostObjects
             = new ConcurrentHashMap<>(64);
     /**
      * map joint IDs to added objects
@@ -191,25 +146,10 @@ public class PhysicsSpace {
     final private Map<Long, PhysicsVehicle> physicsVehicles
             = new ConcurrentHashMap<>(64);
     /**
-     * physics-space reference for each thread
-     */
-    final protected static ThreadLocal<PhysicsSpace> physicsSpaceTL
-            = new ThreadLocal<PhysicsSpace>();
-    /**
      * copy of gravity-acceleration vector for newly-added bodies (default is
      * 9.81 in the -Y direction, corresponding to Earth-normal in MKS units)
      */
     final private Vector3f gravity = new Vector3f(0, -9.81f, 0);
-    /**
-     * copy of maximum coordinate values when using AXIS_SWEEP broadphase
-     * algorithms
-     */
-    final private Vector3f worldMax = new Vector3f(10000f, 10000f, 10000f);
-    /**
-     * copy of minimum coordinate values when using AXIS_SWEEP broadphase
-     * algorithms
-     */
-    final private Vector3f worldMin = new Vector3f(-10000f, -10000f, -10000f);
     // *************************************************************************
     // constructors
 
@@ -226,56 +166,42 @@ public class PhysicsSpace {
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
-        Validate.finite(worldMin, "world min");
-        Validate.finite(worldMax, "world max");
-        Validate.nonNull(broadphaseType, "broadphase type");
-
-        this.worldMin.set(worldMin);
-        this.worldMax.set(worldMax);
-        this.broadphaseType = broadphaseType;
-        create();
+        super(worldMin, worldMax, broadphaseType);
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Add the specified object to this space.
+     * Add the specified object to this space. TODO re-order methods
      *
-     * @param obj the PhysicsControl, Spatial-with-PhysicsControl,
-     * PhysicsCollisionObject, or PhysicsJoint to add (not null, modified)
+     * @param object the collision object or PhysicsJoint to add (not null)
      */
-    public void add(Object obj) {
-        Validate.nonNull(obj, "obj");
+    @Override
+    public void add(Object object) {
+        Validate.nonNull(object, "object");
 
-        if (obj instanceof PhysicsCollisionObject) {
-            addCollisionObject((PhysicsCollisionObject) obj);
-        } else if (obj instanceof PhysicsJoint) {
-            addJoint((PhysicsJoint) obj);
+        if (object instanceof PhysicsJoint) {
+            addJoint((PhysicsJoint) object);
         } else {
-            String typeName = obj.getClass().getCanonicalName();
-            String msg = "Cannot add a " + typeName + " to a physics space.";
-            throw new IllegalArgumentException(msg);
+            super.add(object);
         }
     }
 
     /**
      * Add the specified collision object to this space.
      *
-     * @param obj the PhysicsCollisionObject to add (not null, modified)
+     * @param pco the collision object to add (not null)
      */
-    public void addCollisionObject(PhysicsCollisionObject obj) {
-        Validate.nonNull(obj, "object");
+    @Override
+    public void addCollisionObject(PhysicsCollisionObject pco) {
+        Validate.nonNull(pco, "collision object");
 
-        if (obj instanceof PhysicsGhostObject) {
-            addGhostObject((PhysicsGhostObject) obj);
-        } else if (obj instanceof PhysicsRigidBody) {
-            addRigidBody((PhysicsRigidBody) obj);
-        } else if (obj instanceof PhysicsCharacter) {
-            addCharacter((PhysicsCharacter) obj);
+        if (pco instanceof PhysicsRigidBody) {
+            addRigidBody((PhysicsRigidBody) pco);
+        } else if (pco instanceof PhysicsCharacter) {
+            addCharacter((PhysicsCharacter) pco);
         } else {
-            String typeName = obj.getClass().getCanonicalName();
-            String msg = "Unknown type of collision object: " + typeName;
-            throw new IllegalArgumentException(msg);
+            super.addCollisionObject(pco);
         }
     }
 
@@ -285,19 +211,16 @@ public class PhysicsSpace {
      * @param pco the object to test (not null, unaffected)
      * @return true if currently added, otherwise false
      */
+    @Override
     public boolean contains(PhysicsCollisionObject pco) {
         boolean result;
         long pcoId = pco.getObjectId();
         if (pco instanceof PhysicsRigidBody) {
             result = physicsBodies.containsKey(pcoId);
-        } else if (pco instanceof PhysicsGhostObject) {
-            result = physicsGhostObjects.containsKey(pcoId);
         } else if (pco instanceof PhysicsCharacter) {
             result = physicsCharacters.containsKey(pcoId);
         } else {
-            String typeName = pco.getClass().getCanonicalName();
-            String msg = "Unknown type of collision object: " + typeName;
-            throw new IllegalArgumentException(msg);
+            result = super.contains(pco);
         }
 
         return result;
@@ -317,22 +240,13 @@ public class PhysicsSpace {
     }
 
     /**
-     * Count the collision objects in this space.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countCollisionObjects() {
-        int count = getNumCollisionObjects(nativeId);
-        return count;
-    }
-
-    /**
      * Count the joints in this space.
      *
      * @return count (&ge;0)
      */
     public int countJoints() {
-        int count = getNumConstraints(nativeId);
+        long spaceId = getSpaceId();
+        int count = getNumConstraints(spaceId);
         assert count == physicsJoints.size() : count;
         return count;
     }
@@ -357,33 +271,16 @@ public class PhysicsSpace {
     }
 
     /**
-     * Read the type of acceleration structure used for broadphase collision
-     * detection.
-     *
-     * @return an enum value (not null)
-     */
-    public BroadphaseType getBroadphaseType() {
-        return broadphaseType;
-    }
-
-    /**
      * Enumerate physics characters that have been added to this space and not
      * yet removed.
      *
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<PhysicsCharacter> getCharacterList() {
-        return new TreeSet<>(physicsCharacters.values());
-    }
+        TreeSet<PhysicsCharacter> result = new TreeSet<>();
+        result.addAll(physicsCharacters.values());
 
-    /**
-     * Enumerate ghost objects that have been added to this space and not yet
-     * removed.
-     *
-     * @return a new collection of pre-existing instances (not null)
-     */
-    public Collection<PhysicsGhostObject> getGhostObjectList() {
-        return new TreeSet<>(physicsGhostObjects.values());
+        return result;
     }
 
     /**
@@ -417,12 +314,11 @@ public class PhysicsSpace {
      *
      * @return a new collection of pre-existing instances (not null)
      */
-    @SuppressWarnings("unchecked")
+    @Override
     public Collection<PhysicsCollisionObject> getPcoList() {
-        TreeSet result = new TreeSet<>();
+        Collection<PhysicsCollisionObject> result = super.getPcoList();
         result.addAll(physicsBodies.values());
         result.addAll(physicsCharacters.values());
-        result.addAll(physicsGhostObjects.values());
 
         return result;
     }
@@ -434,17 +330,7 @@ public class PhysicsSpace {
      * @return the pre-existing PhysicsSpace running on this thread
      */
     public static PhysicsSpace getPhysicsSpace() {
-        return physicsSpaceTL.get();
-    }
-
-    /**
-     * Read the flags used in ray tests (native field: m_flags).
-     *
-     * @return which flags are used
-     * @see com.jme3.bullet.RayTestFlag
-     */
-    public int getRayTestFlags() {
-        return rayTestFlags;
+        return (PhysicsSpace) getCollisionSpace();
     }
 
     /**
@@ -468,15 +354,6 @@ public class PhysicsSpace {
     }
 
     /**
-     * Read the unique identifier of the native object.
-     *
-     * @return the ID (not zero)
-     */
-    final public long getSpaceId() {
-        return nativeId;
-    }
-
-    /**
      * Enumerate physics vehicles that have been added to this space and not yet
      * removed.
      *
@@ -487,46 +364,17 @@ public class PhysicsSpace {
     }
 
     /**
-     * Copy the maximum coordinate values for this space.
-     *
-     * @param storeResult storage for the result (modified if not null)
-     * @return the maximum coordinates (either storeResult or a new vector, not
-     * null)
-     */
-    public Vector3f getWorldMax(Vector3f storeResult) {
-        if (storeResult == null) {
-            return worldMax.clone();
-        } else {
-            return storeResult.set(worldMax);
-        }
-    }
-
-    /**
-     * Copy the minimum coordinate values for this space.
-     *
-     * @param storeResult storage for the result (modified if not null)
-     * @return the minimum coordinates (either storeResult or a new vector, not
-     * null)
-     */
-    public Vector3f getWorldMin(Vector3f storeResult) {
-        if (storeResult == null) {
-            return worldMin.clone();
-        } else {
-            return storeResult.set(worldMin);
-        }
-    }
-
-    /**
      * Test whether this space is empty.
      *
      * @return true if empty, otherwise false
      */
+    @Override
     public boolean isEmpty() {
-        boolean result = physicsGhostObjects.isEmpty()
+        boolean result = super.isEmpty()
                 && physicsCharacters.isEmpty()
                 && physicsBodies.isEmpty()
                 && physicsJoints.isEmpty()
-                && physicsVehicles.isEmpty();
+                && physicsVehicles.isEmpty(); // TODO unnecessary
 
         return result;
     }
@@ -552,116 +400,37 @@ public class PhysicsSpace {
     }
 
     /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults sorted by ascending hitFraction.
-     *
-     * @param from the starting location (physics-space coordinates, not null,
-     * unaffected)
-     * @param to the ending location (in physics-space coordinates, not null,
-     * unaffected)
-     * @return a new list of sorted results (not null)
-     */
-    public List<PhysicsRayTestResult> rayTest(Vector3f from, Vector3f to) {
-        List<PhysicsRayTestResult> results = new ArrayList<>(10);
-        rayTest(from, to, results);
-
-        return results;
-    }
-
-    /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults sorted by ascending hitFraction.
-     *
-     * @param from the starting location (in physics-space coordinates, not
-     * null, unaffected)
-     * @param to the ending location (in physics-space coordinates, not null,
-     * unaffected)
-     * @param results the list to hold results (not null, modified)
-     * @return sorted results
-     */
-    public List<PhysicsRayTestResult> rayTest(Vector3f from, Vector3f to,
-            List<PhysicsRayTestResult> results) {
-        results.clear();
-        rayTest_native(from, to, nativeId, results, rayTestFlags);
-
-        Collections.sort(results, hitFractionComparator);
-        return results;
-    }
-
-    /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults in arbitrary order.
-     *
-     * @param from the starting location (in physics-space coordinates, not
-     * null, unaffected)
-     * @param to the ending location (in physics-space coordinates, not null,
-     * unaffected)
-     * @return a new list of unsorted results (not null)
-     */
-    public List rayTestRaw(Vector3f from, Vector3f to) {
-        List<PhysicsRayTestResult> results = new ArrayList<>(10);
-        rayTestRaw(from, to, results);
-
-        return results;
-    }
-
-    /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults in arbitrary order.
-     *
-     * @param from the starting location (in physics-space coordinates, not
-     * null, unaffected)
-     * @param to the ending location (in physics-space coordinates, not null,
-     * unaffected)
-     * @param results the list to hold results (not null, modified)
-     * @return unsorted results
-     */
-    public List<PhysicsRayTestResult> rayTestRaw(Vector3f from, Vector3f to,
-            List<PhysicsRayTestResult> results) {
-        results.clear();
-        rayTest_native(from, to, nativeId, results, rayTestFlags);
-
-        return results;
-    }
-
-    /**
      * Remove the specified object from this space.
      *
-     * @param obj the PhysicsControl, Spatial-with-PhysicsControl,
-     * PhysicsCollisionObject, or PhysicsJoint to remove (modified if not null)
+     * @param object the collision object or PhysicsJoint to remove, or null
      */
-    public void remove(Object obj) {
-        if (obj == null) {
+    @Override
+    public void remove(Object object) {
+        if (object == null) {
             return;
         }
-        if (obj instanceof PhysicsCollisionObject) {
-            removeCollisionObject((PhysicsCollisionObject) obj);
-        } else if (obj instanceof PhysicsJoint) {
-            removeJoint((PhysicsJoint) obj);
+        if (object instanceof PhysicsJoint) {
+            removeJoint((PhysicsJoint) object);
         } else {
-            String typeName = obj.getClass().getCanonicalName();
-            String msg
-                    = "Cannot remove a " + typeName + " from a physics space.";
-            throw new IllegalArgumentException(msg);
+            super.remove(object);
         }
     }
 
     /**
      * Remove the specified collision object from this space.
      *
-     * @param obj the PhysicsControl or Spatial with PhysicsControl to remove
+     * @param pco the collision object to remove (not null)
      */
-    public void removeCollisionObject(PhysicsCollisionObject obj) {
-        if (obj instanceof PhysicsGhostObject) {
-            removeGhostObject((PhysicsGhostObject) obj);
-        } else if (obj instanceof PhysicsRigidBody) {
-            removeRigidBody((PhysicsRigidBody) obj);
-        } else if (obj instanceof PhysicsCharacter) {
-            removeCharacter((PhysicsCharacter) obj);
+    @Override
+    public void removeCollisionObject(PhysicsCollisionObject pco) {
+        Validate.nonNull(pco, "collision object");
+
+        if (pco instanceof PhysicsRigidBody) {
+            removeRigidBody((PhysicsRigidBody) pco);
+        } else if (pco instanceof PhysicsCharacter) {
+            removeCharacter((PhysicsCharacter) pco);
         } else {
-            String typeName = obj.getClass().getCanonicalName();
-            String msg = "Unknown type of collision object: " + typeName;
-            throw new IllegalArgumentException(msg);
+            super.removeCollisionObject(pco);
         }
     }
 
@@ -690,16 +459,8 @@ public class PhysicsSpace {
      */
     public void setGravity(Vector3f gravity) {
         this.gravity.set(gravity);
-        setGravity(nativeId, gravity);
-    }
-
-    /**
-     * Used internally
-     *
-     * @param space which space to simulate on the current thread
-     */
-    static void setLocalThreadPhysicsSpace(PhysicsSpace space) {
-        physicsSpaceTL.set(space);
+        long spaceId = getSpaceId();
+        setGravity(spaceId, gravity);
     }
 
     /**
@@ -734,16 +495,6 @@ public class PhysicsSpace {
     }
 
     /**
-     * Alter the m_flags used in ray tests.
-     *
-     * @param flags the desired flags, ORed together (default=SubSimplexRaytest)
-     * @see com.jme3.bullet.RayTestFlag
-     */
-    public void setRayTestFlags(int flags) {
-        rayTestFlags = flags;
-    }
-
-    /**
      * Alter the number of iterations used by the contact-and-constraint solver.
      * <p>
      * Use 4 for low quality, 20 for high quality.
@@ -754,70 +505,8 @@ public class PhysicsSpace {
         Validate.positive(numIterations, "number of iterations");
 
         this.solverNumIterations = numIterations;
-        setSolverNumIterations(nativeId, numIterations);
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @param shape the shape to sweep (not null, convex, unaffected)
-     * @param start the starting physics-space transform (not null, unaffected)
-     * @param end the ending physics-space transform (not null, unaffected)
-     * @return a new list of results
-     */
-    public List<PhysicsSweepTestResult> sweepTest(CollisionShape shape,
-            Transform start, Transform end) {
-        List<PhysicsSweepTestResult> results = new LinkedList<>();
-        sweepTest(shape, start, end, results);
-        return results;
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @param shape the shape to sweep (not null, convex, unaffected)
-     * @param start the starting physics-space transform (not null, unaffected)
-     * @param end the ending physics-space transform (not null, unaffected)
-     * @param results the list to hold results (not null, modified)
-     * @return results
-     */
-    public List<PhysicsSweepTestResult> sweepTest(CollisionShape shape,
-            Transform start, Transform end,
-            List<PhysicsSweepTestResult> results) {
-        return sweepTest(shape, start, end, results, 0f);
-    }
-
-    /**
-     * Perform a sweep-collision test and store the results in an existing list.
-     * <p>
-     * The starting and ending locations must be at least 0.4 physics-space
-     * units apart.
-     * <p>
-     * A sweep test will miss a collision if it starts inside an object and
-     * sweeps away from the object's center.
-     *
-     * @param shape the shape to sweep (not null, convex, unaffected) TODO
-     * declare as ConvexShape
-     * @param start the starting physics-space transform (not null, unaffected)
-     * @param end the ending physics-space transform (not null, unaffected)
-     * @param results the list to hold results (not null, modified)
-     * @param allowedCcdPenetration (in physics-space units)
-     * @return results
-     */
-    public List<PhysicsSweepTestResult> sweepTest(CollisionShape shape,
-            Transform start, Transform end,
-            List<PhysicsSweepTestResult> results, float allowedCcdPenetration) {
-        Validate.nonNull(start, "start");
-        Validate.nonNull(end, "end");
-        Validate.nonNull(results, "results");
-        assert shape.isConvex();
-
-        long shapeId = shape.getObjectId();
-        results.clear();
-        sweepTest_native(shapeId, start, end, nativeId, results,
-                allowedCcdPenetration);
-
-        return results;
+        long spaceId = getSpaceId();
+        setSolverNumIterations(spaceId, numIterations);
     }
 
     /**
@@ -832,12 +521,13 @@ public class PhysicsSpace {
     public void update(float timeInterval) {
         Validate.nonNegative(timeInterval, "time interval");
 
+        long spaceId = getSpaceId();
         assert maxSubSteps >= 0 : maxSubSteps;
         assert accuracy > 0f : accuracy;
         if (maxSubSteps == 0) {
             timeInterval = Math.min(timeInterval, maxTimeStep);
         }
-        stepSimulation(nativeId, timeInterval, maxSubSteps, accuracy);
+        stepSimulation(spaceId, timeInterval, maxSubSteps, accuracy);
     }
 
     /**
@@ -851,8 +541,9 @@ public class PhysicsSpace {
         Validate.nonNegative(timeInterval, "time interval");
         Validate.nonNegative(maxSteps, "max steps");
 
+        long spaceId = getSpaceId();
         assert accuracy > 0f : accuracy;
-        stepSimulation(nativeId, timeInterval, maxSteps, accuracy);
+        stepSimulation(spaceId, timeInterval, maxSteps, accuracy);
     }
     // *************************************************************************
     // new protected methods
@@ -860,9 +551,13 @@ public class PhysicsSpace {
     /**
      * Must be invoked on the designated physics thread.
      */
+    @Override
     protected void create() {
-        long spaceId = createPhysicsSpace(worldMin.x, worldMin.y, worldMin.z,
-                worldMax.x, worldMax.y, worldMax.z, broadphaseType.ordinal());
+        BroadphaseType type = super.getBroadphaseType();
+        Vector3f max = super.getWorldMax(null);
+        Vector3f min = super.getWorldMin(null);
+        long spaceId = createPhysicsSpace(min.x, min.y, min.z,
+                max.x, max.y, max.z, type.ordinal());
         assert spaceId != 0L;
         logger.log(Level.FINE, "Created {0}.", this);
 
@@ -872,47 +567,6 @@ public class PhysicsSpace {
     }
 
     native protected int getWorldType(long spaceId);
-
-    /**
-     * Must be invoked on the designated physics thread.
-     *
-     * @param spaceId the Bullet identifier for this space (non-zero)
-     */
-    protected void initThread(long spaceId) {
-        assert spaceId != 0L;
-        assert nativeId == 0L : nativeId;
-
-        nativeId = spaceId;
-        physicsSpaceTL.set(this);
-    }
-    // *************************************************************************
-    // Object methods
-
-    /**
-     * Finalize this space just before it is destroyed. Should be invoked only
-     * by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        logger.log(Level.FINE, "Finalizing {0}.", this);
-        finalizeNative(nativeId);
-    }
-
-    /**
-     * Represent this space as a String.
-     *
-     * @return a descriptive string of text (not null, not empty)
-     */
-    @Override
-    public String toString() {
-        String result = getClass().getSimpleName();
-        result += "#" + Long.toHexString(nativeId);
-
-        return result;
-    }
     // *************************************************************************
     // private Java methods
 
@@ -931,12 +585,13 @@ public class PhysicsSpace {
         logger.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{character, this});
 
+        long spaceId = getSpaceId();
         long characterId = character.getObjectId();
         physicsCharacters.put(characterId, character);
-        addCharacterObject(nativeId, characterId);
+        addCharacterObject(spaceId, characterId);
 
         long actionId = character.getControllerId();
-        addAction(nativeId, actionId);
+        addAction(spaceId, actionId);
     }
 
     /**
@@ -944,25 +599,6 @@ public class PhysicsSpace {
      */
     private void addCollisionEvent_native(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
-    }
-
-    /**
-     * Add the specified PhysicsGhostObject to this space.
-     *
-     * @param ghost the object to add (not null, alias created)
-     */
-    private void addGhostObject(PhysicsGhostObject ghost) {
-        if (contains(ghost)) {
-            logger.log(Level.WARNING, "{0} is already added to {1}.",
-                    new Object[]{ghost, this});
-            return;
-        }
-
-        logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{ghost, this});
-
-        long ghostId = ghost.getObjectId();
-        physicsGhostObjects.put(ghostId, ghost);
-        addCollisionObject(nativeId, ghostId);
     }
 
     /**
@@ -997,9 +633,10 @@ public class PhysicsSpace {
         physicsJoints.put(jointId, joint);
 
         if (joint instanceof Constraint) {
+            long spaceId = getSpaceId();
             Constraint constr = (Constraint) joint;
             boolean allowCollision = constr.isCollisionBetweenLinkedBodies();
-            addConstraintC(nativeId, jointId, !allowCollision);
+            addConstraintC(spaceId, jointId, !allowCollision);
         }
     }
 
@@ -1032,7 +669,8 @@ public class PhysicsSpace {
             kinematic = true;
             rigidBody.setKinematic(false);
         }
-        addRigidBody(nativeId, rigidBodyId);
+        long spaceId = getSpaceId();
+        addRigidBody(spaceId, rigidBodyId);
         if (kinematic) {
             rigidBody.setKinematic(true);
         }
@@ -1045,7 +683,7 @@ public class PhysicsSpace {
             vehicle.createVehicle(this);
             long actionId = vehicle.getVehicleId();
             physicsVehicles.put(actionId, vehicle);
-            addAction(nativeId, actionId);
+            addAction(spaceId, actionId);
         }
     }
 
@@ -1058,18 +696,10 @@ public class PhysicsSpace {
     private boolean checkGravity(Vector3f storeVector) {
         assert storeVector != null;
 
-        getGravity(nativeId, storeVector);
+        long spaceId = getSpaceId();
+        getGravity(spaceId, storeVector);
         boolean result = gravity.equals(storeVector);
 
-        return result;
-    }
-
-    /**
-     * This method is invoked from native code.
-     */
-    private boolean notifyCollisionGroupListeners_native(
-            PhysicsCollisionObject pcoA, PhysicsCollisionObject pcoB) {
-        boolean result = true;
         return result;
     }
 
@@ -1109,27 +739,9 @@ public class PhysicsSpace {
         physicsCharacters.remove(characterId);
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{character, this});
-        removeAction(nativeId, character.getControllerId());
-        removeCharacterObject(nativeId, characterId);
-    }
-
-    /**
-     * Remove the specified PhysicsGhostObject from this space.
-     *
-     * @param ghost the object to remove (not null)
-     */
-    private void removeGhostObject(PhysicsGhostObject ghost) {
-        long ghostId = ghost.getObjectId();
-        if (!physicsGhostObjects.containsKey(ghostId)) {
-            logger.log(Level.WARNING, "{0} does not exist in {1}.",
-                    new Object[]{ghost, this});
-            return;
-        }
-
-        physicsGhostObjects.remove(ghostId);
-        logger.log(Level.FINE, "Removing {0} from {1}.",
-                new Object[]{ghost, this});
-        removeCollisionObject(nativeId, ghostId);
+        long spaceId = getSpaceId();
+        removeAction(spaceId, character.getControllerId());
+        removeCharacterObject(spaceId, characterId);
     }
 
     /**
@@ -1149,7 +761,8 @@ public class PhysicsSpace {
         physicsJoints.remove(jointId);
 
         if (joint instanceof Constraint) {
-            removeConstraint(nativeId, jointId);
+            long spaceId = getSpaceId();
+            removeConstraint(spaceId, jointId);
         }
     }
 
@@ -1166,19 +779,20 @@ public class PhysicsSpace {
             return;
         }
 
+        long spaceId = getSpaceId();
         if (rigidBody instanceof PhysicsVehicle) {
             PhysicsVehicle vehicle = (PhysicsVehicle) rigidBody;
             long vehicleId = vehicle.getVehicleId();
             logger.log(Level.FINE, "Removing action for {0} from {1}.",
                     new Object[]{vehicle, this});
             physicsVehicles.remove(vehicleId);
-            removeAction(nativeId, vehicleId);
+            removeAction(spaceId, vehicleId);
         }
 
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{rigidBody, this});
         physicsBodies.remove(rigidBodyId);
-        removeRigidBody(nativeId, rigidBodyId);
+        removeRigidBody(spaceId, rigidBodyId);
     }
     // *************************************************************************
     // native methods
@@ -1186,8 +800,6 @@ public class PhysicsSpace {
     native private void addAction(long spaceId, long actionId);
 
     native private void addCharacterObject(long spaceId, long characterId);
-
-    native private void addCollisionObject(long spaceId, long pcoId);
 
     native private void addConstraintC(long spaceId, long constraintId,
             boolean collisionBetweenLinkedBodies);
@@ -1197,23 +809,13 @@ public class PhysicsSpace {
     native private long createPhysicsSpace(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ, int broadphaseType);
 
-    native private void finalizeNative(long spaceId);
-
     native private void getGravity(long spaceId, Vector3f storeVector);
 
-    native private int getNumCollisionObjects(long spaceId);
-
     native private int getNumConstraints(long spaceId);
-
-    native private void rayTest_native(Vector3f fromLocation,
-            Vector3f toLocation, long spaceId,
-            List<PhysicsRayTestResult> results, int flags);
 
     native private void removeAction(long spaceId, long actionId);
 
     native private void removeCharacterObject(long spaceId, long characterId);
-
-    native private void removeCollisionObject(long spaceId, long pcoId);
 
     native private void removeConstraint(long spaceId, long constraintId);
 
@@ -1226,8 +828,4 @@ public class PhysicsSpace {
 
     native private void stepSimulation(long spaceId, float timeInterval,
             int maxSubSteps, float accuracy);
-
-    native private void sweepTest_native(long shape, Transform from,
-            Transform to, long spaceId, List<PhysicsSweepTestResult> results,
-            float allowedCcdPenetration);
 }

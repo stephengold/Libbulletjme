@@ -38,9 +38,18 @@
  */
 class jmePhysicsSoftSpace : public jmePhysicsSpace {
 public:
-    jmePhysicsSoftSpace(JNIEnv *, jobject);
-    ~jmePhysicsSoftSpace();
+
+    jmePhysicsSoftSpace(JNIEnv *env, jobject javaSpace)
+    : jmePhysicsSpace(env, javaSpace) {
+    }
 
     void createPhysicsSoftSpace(jobject min_vec, jobject max_vec, jint ordinal);
-    btSoftRigidDynamicsWorld * getSoftDynamicsWorld();
+
+    const btSoftRigidDynamicsWorld * getSoftDynamicsWorld() const {
+        return (btSoftRigidDynamicsWorld *) m_collisionWorld;
+    }
+
+    btSoftRigidDynamicsWorld * getSoftDynamicsWorld() {
+        return (btSoftRigidDynamicsWorld *) m_collisionWorld;
+    }
 };

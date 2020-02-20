@@ -35,157 +35,40 @@
 /*
  * Author: Normen Hansen
  */
-jmePhysicsSpace::jmePhysicsSpace(JNIEnv *env, jobject javaSpace) {
-    //TODO: global ref? maybe not -> cleaning, rather callback class?
-    this->javaPhysicsSpace = env->NewWeakGlobalRef(javaSpace);
-    this->env = env;
-    env->GetJavaVM(&vm);
-    if (env->ExceptionCheck()) {
-        env->Throw(env->ExceptionOccurred());
-        return;
-    }
-}
-
-void jmePhysicsSpace::attachThread() {
-#ifdef ANDROID
-    vm->AttachCurrentThread((JNIEnv **) & env, NULL);
-#elif defined (JNI_VERSION_1_2)
-    vm->AttachCurrentThread((void **) &env, NULL);
-#else
-    vm->AttachCurrentThread(&env, NULL);
-#endif
-}
-
 void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
         jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId) {
-    btVector3 min = btVector3(minX, minY, minZ);
-    btVector3 max = btVector3(maxX, maxY, maxZ);
+    const btVector3 min = btVector3(minX, minY, minZ);
+    const btVector3 max = btVector3(maxX, maxY, maxZ);
 
-    btBroadphaseInterface *pBroadphase;
-    switch (broadphaseId) {
-        case 0:
-            pBroadphase = new btSimpleBroadphase();
-            break;
-        case 1:
-            pBroadphase = new btAxisSweep3(min, max);
-            break;
-        case 2:
-            pBroadphase = new bt32BitAxisSweep3(min, max);
-            break;
-        case 3:
-            pBroadphase = new btDbvtBroadphase();
-            break;
-        default:
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
-                    "The broadphase type is out of range.");
-    }
+    btBroadphaseInterface * const pBroadphase
+            = createBroadphase(min, max, broadphaseId);
 
-    // Use the default collision dispatcher.
-    btCollisionConfiguration *pCollisionConfiguration
+    // Use the default collision dispatcher plus GImpact.
+    btCollisionConfiguration * const pCollisionConfiguration
             = new btDefaultCollisionConfiguration();
-    btCollisionDispatcher *pDispatcher
+    btCollisionDispatcher * const pDispatcher
             = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Use the default constraint solver.
-    btConstraintSolver *pConstraintSolver
+    btConstraintSolver * const pConstraintSolver
             = new btSequentialImpulseConstraintSolver();
 
-    //create dynamics world
-    btDiscreteDynamicsWorld *pWorld = new btDiscreteDynamicsWorld(pDispatcher,
-            pBroadphase, pConstraintSolver, pCollisionConfiguration);
-    dynamicsWorld = pWorld;
-    dynamicsWorld->setWorldUserInfo(this);
+    // Create the discrete dynamics world.
+    btDiscreteDynamicsWorld * const pWorld = new btDiscreteDynamicsWorld(
+            pDispatcher, pBroadphase, pConstraintSolver,
+            pCollisionConfiguration);
+    m_collisionWorld = pWorld;
 
-    pBroadphase->getOverlappingPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
-    dynamicsWorld->setGravity(btVector3(0, -9.81f, 0));
-
-    struct jmeFilterCallback : public btOverlapFilterCallback {
-        // return true when pairs need collision
-
-        virtual bool needBroadphaseCollision(btBroadphaseProxy *pProxy0, btBroadphaseProxy *pProxy1) const {
-            bool collides = (pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask) != 0;
-            collides = collides || (pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask);
-            if (collides) {
-                btCollisionObject *pco0 = (btCollisionObject *) pProxy0->m_clientObject;
-                btCollisionObject *pco1 = (btCollisionObject *) pProxy1->m_clientObject;
-                jmeUserPointer *pUser0 = (jmeUserPointer *) pco0->getUserPointer();
-                jmeUserPointer *pUser1 = (jmeUserPointer *) pco1->getUserPointer();
-                if (pUser0 != NULL && pUser1 != NULL) {
-                    collides = (pUser0->group & pUser1->groups) != 0
-                            || (pUser1->group & pUser0->groups) != 0;
-
-                    if (collides) {
-                        jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pUser0->space;
-                        JNIEnv *env = pSpace->getEnv();
-                        jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
-                        jobject javaCollisionObject0 = env->NewLocalRef(pUser0->javaCollisionObject);
-                        jobject javaCollisionObject1 = env->NewLocalRef(pUser1->javaCollisionObject);
-
-                        jboolean notifyResult = env->CallBooleanMethod(
-                                javaPhysicsSpace,
-                                jmeClasses::PhysicsSpace_notifyCollisionGroupListeners,
-                                javaCollisionObject0, javaCollisionObject1);
-
-                        env->DeleteLocalRef(javaPhysicsSpace);
-                        env->DeleteLocalRef(javaCollisionObject0);
-                        env->DeleteLocalRef(javaCollisionObject1);
-
-                        if (env->ExceptionCheck()) {
-                            env->Throw(env->ExceptionOccurred());
-                            return collides;
-                        }
-
-                        collides = (bool) notifyResult;
-                    }
-
-                    //add some additional logic here that modifies 'collides'
-                    return collides;
-                }
-                return false;
-            }
-            return collides;
-        }
-    };
-    dynamicsWorld->getPairCache()->setOverlapFilterCallback(new jmeFilterCallback());
-    dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
-    dynamicsWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
+    // Do btDynamicsWorld modifications.
+    pWorld->setGravity(btVector3(0, -9.81f, 0));
+    pWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
+    pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
+    pWorld->setWorldUserInfo(this);
 
     btAssert(gContactStartedCallback == NULL
             || gContactStartedCallback == &contactStartedCallback);
     gContactStartedCallback = &contactStartedCallback;
-}
-
-void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
-        btScalar timeStep) {
-    jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv *env = pSpace->getEnv();
-    jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
-    if (javaPhysicsSpace != NULL) {
-        env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
-                timeStep);
-        env->DeleteLocalRef(javaPhysicsSpace);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
-            return;
-        }
-    }
-}
-
-void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
-        btScalar timeStep) {
-    jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv *env = pSpace->getEnv();
-    jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
-    if (javaPhysicsSpace != NULL) {
-        env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
-                timeStep);
-        env->DeleteLocalRef(javaPhysicsSpace);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
-            return;
-        }
-    }
 }
 
 void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
@@ -233,15 +116,40 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     }
 }
 
-JNIEnv * jmePhysicsSpace::getEnv() {
-    attachThread();
-    return this->env;
+void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
+        btScalar timeStep) {
+    jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
+    JNIEnv *env = pSpace->getEnv();
+    jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    if (javaPhysicsSpace != NULL) {
+        env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
+                timeStep);
+        env->DeleteLocalRef(javaPhysicsSpace);
+        if (env->ExceptionCheck()) {
+            env->Throw(env->ExceptionOccurred());
+            return;
+        }
+    }
 }
 
-void jmePhysicsSpace::stepSimulation(jfloat tpf, jint maxSteps, jfloat accuracy) {
-    dynamicsWorld->stepSimulation(tpf, maxSteps, accuracy);
+void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
+        btScalar timeStep) {
+    jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
+    JNIEnv *env = pSpace->getEnv();
+    jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    if (javaPhysicsSpace != NULL) {
+        env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
+                timeStep);
+        env->DeleteLocalRef(javaPhysicsSpace);
+        if (env->ExceptionCheck()) {
+            env->Throw(env->ExceptionOccurred());
+            return;
+        }
+    }
 }
 
-jmePhysicsSpace::~jmePhysicsSpace() {
-    delete(dynamicsWorld);
+void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
+        jfloat accuracy) {
+    btDynamicsWorld *pWorld = getDynamicsWorld();
+    pWorld->stepSimulation(timeInterval, maxSteps, accuracy);
 }

@@ -39,14 +39,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    addCollisionObject
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCollisionObject
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    addConstraintC
  * Signature: (JJZ)V
  */
@@ -71,14 +63,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    finalizeNative
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_finalizeNative
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -87,27 +71,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getNumCollisionObjects
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumCollisionObjects
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getNumConstraints
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    rayTest_native
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_rayTest_1native
-  (JNIEnv *, jobject, jobject, jobject, jlong, jobject, jint);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
@@ -123,14 +91,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeAction
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
-  (JNIEnv *, jobject, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    removeCollisionObject
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCollisionObject
   (JNIEnv *, jobject, jlong, jlong);
 
 /*
@@ -172,14 +132,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverNumIterations
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_stepSimulation
   (JNIEnv *, jobject, jlong, jfloat, jint, jfloat);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    sweepTest_native
- * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_sweepTest_1native
-  (JNIEnv *, jobject, jlong, jobject, jobject, jlong, jobject, jfloat);
 
 #ifdef __cplusplus
 }
