@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -65,10 +65,9 @@ public class CompoundMesh {
      */
     private long nativeId = 0L;
     /**
-     * copy of scale factors: one for each local axis (default=(1,1,1)) TODO
-     * privatize
+     * copy of scale factors: one for each local axis (default=(1,1,1))
      */
-    protected Vector3f scale = new Vector3f(1f, 1f, 1f);
+    private Vector3f scale = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
     // constructors
 
