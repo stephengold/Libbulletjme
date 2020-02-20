@@ -68,25 +68,17 @@ public:
     static jmethodID PhysicsGhostObject_addOverlappingObject;
 
     static jclass Vector3f;
-    static jmethodID Vector3f_set;
     static jfieldID Vector3f_x;
     static jfieldID Vector3f_y;
     static jfieldID Vector3f_z;
 
     static jclass Quaternion;
-    static jmethodID Quaternion_set;
-    static jmethodID Quaternion_getX;
-    static jmethodID Quaternion_getY;
-    static jmethodID Quaternion_getZ;
-    static jmethodID Quaternion_getW;
     static jfieldID Quaternion_x;
     static jfieldID Quaternion_y;
     static jfieldID Quaternion_z;
     static jfieldID Quaternion_w;
 
     static jclass Matrix3f;
-    static jmethodID Matrix3f_get;
-    static jmethodID Matrix3f_set;
     static jfieldID Matrix3f_m00;
     static jfieldID Matrix3f_m01;
     static jfieldID Matrix3f_m02;
