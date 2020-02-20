@@ -63,7 +63,7 @@ public class CollisionSpace {
     /**
      * message logger for this class
      */
-    final public static Logger logger
+    final public static Logger loggerC
             = Logger.getLogger(CollisionSpace.class.getName());
     // *************************************************************************
     // fields
@@ -507,7 +507,7 @@ public class CollisionSpace {
         long spaceId = createCollisionSpace(worldMin.x, worldMin.y, worldMin.z,
                 worldMax.x, worldMax.y, worldMax.z, broadphaseType.ordinal());
         assert spaceId != 0L;
-        logger.log(Level.FINE, "Created {0}.", this);
+        loggerC.log(Level.FINE, "Created {0}.", this);
 
         initThread(spaceId);
     }
@@ -536,7 +536,7 @@ public class CollisionSpace {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        logger.log(Level.FINE, "Finalizing {0}.", this);
+        loggerC.log(Level.FINE, "Finalizing {0}.", this);
         finalizeNative(nativeId);
     }
 
@@ -562,12 +562,13 @@ public class CollisionSpace {
      */
     private void addGhostObject(PhysicsGhostObject ghost) {
         if (contains(ghost)) {
-            logger.log(Level.WARNING, "{0} is already added to {1}.",
+            loggerC.log(Level.WARNING, "{0} is already added to {1}.",
                     new Object[]{ghost, this});
             return;
         }
 
-        logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{ghost, this});
+        loggerC.log(Level.FINE, "Adding {0} to {1}.",
+                new Object[]{ghost, this});
 
         long ghostId = ghost.getObjectId();
         physicsGhostObjects.put(ghostId, ghost);
@@ -592,13 +593,13 @@ public class CollisionSpace {
     private void removeGhostObject(PhysicsGhostObject ghost) {
         long ghostId = ghost.getObjectId();
         if (!physicsGhostObjects.containsKey(ghostId)) {
-            logger.log(Level.WARNING, "{0} does not exist in {1}.",
+            loggerC.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{ghost, this});
             return;
         }
 
         physicsGhostObjects.remove(ghostId);
-        logger.log(Level.FINE, "Removing {0} from {1}.",
+        loggerC.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{ghost, this});
         removeCollisionObject(nativeId, ghostId);
     }
