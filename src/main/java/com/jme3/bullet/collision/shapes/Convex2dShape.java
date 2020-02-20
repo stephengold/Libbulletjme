@@ -66,10 +66,9 @@ public class Convex2dShape extends ConvexShape {
     /**
      * Instantiate a shape based on the specified convex shape.
      *
-     * @param base the base shape (not null, convex, alias created) TODO declare
-     * as ConvexShape
+     * @param base the base shape (not null, convex, alias created)
      */
-    public Convex2dShape(CollisionShape base) {
+    public Convex2dShape(ConvexShape base) {
         assert base.isConvex();
         this.base = base;
         createShape();

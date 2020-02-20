@@ -34,7 +34,7 @@ package com.jme3.bullet;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.PhysicsSweepTestResult;
-import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.bullet.objects.PhysicsGhostObject;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
@@ -443,7 +443,7 @@ public class CollisionSpace {
      * @param end the ending physics-space transform (not null, unaffected)
      * @return a new list of results
      */
-    public List<PhysicsSweepTestResult> sweepTest(CollisionShape shape,
+    public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
             Transform start, Transform end) {
         List<PhysicsSweepTestResult> results = new LinkedList<>();
         sweepTest(shape, start, end, results);
@@ -459,7 +459,7 @@ public class CollisionSpace {
      * @param results the list to hold results (not null, modified)
      * @return results
      */
-    public List<PhysicsSweepTestResult> sweepTest(CollisionShape shape,
+    public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
             Transform start, Transform end,
             List<PhysicsSweepTestResult> results) {
         return sweepTest(shape, start, end, results, 0f);
@@ -474,15 +474,14 @@ public class CollisionSpace {
      * A sweep test will miss a collision if it starts inside an object and
      * sweeps away from the object's center.
      *
-     * @param shape the shape to sweep (not null, convex, unaffected) TODO
-     * declare as ConvexShape
+     * @param shape the shape to sweep (not null, convex, unaffected)
      * @param start the starting physics-space transform (not null, unaffected)
      * @param end the ending physics-space transform (not null, unaffected)
      * @param results the list to hold results (not null, modified)
      * @param allowedCcdPenetration (in physics-space units)
      * @return results
      */
-    public List<PhysicsSweepTestResult> sweepTest(CollisionShape shape,
+    public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
             Transform start, Transform end,
             List<PhysicsSweepTestResult> results, float allowedCcdPenetration) {
         Validate.nonNull(start, "start");

@@ -35,6 +35,7 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.CollisionFlag;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.math.Vector3f;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,12 +102,11 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * Instantiate a responsive character with the specified CollisionShape and
      * step height.
      *
-     * @param shape the desired shape (not null, convex, alias created) TODO
-     * declare as ConvexShape
+     * @param shape the desired shape (not null, convex, alias created)
      * @param stepHeight the maximum amount of vertical movement without jumping
      * or falling (in physics-space units)
      */
-    public PhysicsCharacter(CollisionShape shape, float stepHeight) {
+    public PhysicsCharacter(ConvexShape shape, float stepHeight) {
         Validate.nonNull(shape, "shape");
         assert shape.isConvex();
 
@@ -340,7 +340,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * character gets rebuilt on the physics side.
      *
      * @param collisionShape the shape to apply (not null, convex, alias
-     * created) TODO declare as ConvexShape
+     * created)
      */
     @Override
     public void setCollisionShape(CollisionShape collisionShape) {
