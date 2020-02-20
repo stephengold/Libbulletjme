@@ -26,13 +26,13 @@ public class VHACDHull {
     // fields
 
     /**
-     * vertex locations (length a multiple of 3) TODO privatize
+     * vertex locations (length a multiple of 3)
      */
-    final public float[] positions;
+    final private float[] positions;
     /**
-     * vertex indices for each triangular face (length a multiple of 3) TODO privatize
+     * vertex indices for each triangular face (length a multiple of 3)
      */
-    final public int[] indexes;
+    final private int[] indexes;
     // *************************************************************************
     // constructors
 
@@ -70,6 +70,21 @@ public class VHACDHull {
     protected VHACDHull(float[] positions, int[] indexes) {
         this.positions = positions;
         this.indexes = indexes;
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Copy the vertex positions to a new array.
+     *
+     * @return the new array
+     */
+    public float[] clonePositions() {
+        int numFloats = positions.length;
+        float[] result = new float[numFloats];
+        System.arraycopy(positions, 0, result, 0, numFloats);
+
+        return result;
     }
     // *************************************************************************
     // native methods

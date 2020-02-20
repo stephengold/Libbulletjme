@@ -126,12 +126,9 @@ public class HullCollisionShape extends ConvexShape {
      * unaffected)
      */
     public HullCollisionShape(VHACDHull vhacdHull) {
-        Validate.nonNull(vhacdHull, "points");
-        float positions[] = vhacdHull.positions;
-        int numFloats = positions.length;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.nonNull(vhacdHull, "V-HACD hull");
 
-        points = positions.clone();
+        points = vhacdHull.clonePositions();
         createShape();
     }
 
