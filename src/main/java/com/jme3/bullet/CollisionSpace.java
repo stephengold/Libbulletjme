@@ -142,8 +142,7 @@ public class CollisionSpace {
     /**
      * Add the specified object to this space.
      *
-     * @param object the PhysicsControl, Spatial-with-PhysicsControl, or
-     * PhysicsCollisionObject to add (not null, modified)
+     * @param object the collision object to add (not null, modified)
      */
     public void add(Object object) {
         Validate.nonNull(object, "object");
@@ -160,7 +159,7 @@ public class CollisionSpace {
     /**
      * Add the specified collision object to this space.
      *
-     * @param pco the PhysicsCollisionObject to add (not null, modified)
+     * @param pco the collision object to add (not null, modified)
      */
     public void addCollisionObject(PhysicsCollisionObject pco) {
         Validate.nonNull(pco, "collision object");
@@ -230,9 +229,8 @@ public class CollisionSpace {
      *
      * @return a new collection of pre-existing instances (not null)
      */
-    @SuppressWarnings("unchecked")
     public Collection<PhysicsCollisionObject> getPcoList() {
-        TreeSet result = new TreeSet<>();
+        TreeSet<PhysicsCollisionObject> result = new TreeSet<>();
         result.addAll(physicsGhostObjects.values());
 
         return result;
@@ -385,8 +383,7 @@ public class CollisionSpace {
     /**
      * Remove the specified object from this space.
      *
-     * @param object the PhysicsControl, Spatial-with-PhysicsControl, or
-     * PhysicsCollisionObject to remove (modified if not null)
+     * @param object the collision object to remove (modified if not null)
      */
     public void remove(Object object) {
         if (object == null) {
@@ -405,7 +402,7 @@ public class CollisionSpace {
     /**
      * Remove the specified collision object from this space.
      *
-     * @param pco the PhysicsControl or Spatial with PhysicsControl to remove
+     * @param pco the collision object to remove (not null, modified)
      */
     public void removeCollisionObject(PhysicsCollisionObject pco) {
         Validate.nonNull(pco, "collision object");
