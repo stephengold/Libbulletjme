@@ -259,39 +259,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>crossLocal</code> calculates the cross product of this vector
-     * with a parameter vector v.
-     *
-     * @param v
-     *            the vector to take the cross product of with this.
-     * @return this.
-     */
-    public Vector3f crossLocal(Vector3f v) {
-        return crossLocal(v.x, v.y, v.z);
-    }
-
-    /**
-     * <code>crossLocal</code> calculates the cross product of this vector
-     * with a parameter vector v.
-     *
-     * @param otherX
-     *            x component of the vector to take the cross product of with this.
-     * @param otherY
-     *            y component of the vector to take the cross product of with this.
-     * @param otherZ
-     *            z component of the vector to take the cross product of with this.
-     * @return this.
-     */
-    public Vector3f crossLocal(float otherX, float otherY, float otherZ) {
-        float tempx = ( y * otherZ ) - ( z * otherY );
-        float tempy = ( z * otherX ) - ( x * otherZ );
-        z = (x * otherY) - (y * otherX);
-        x = tempx;
-        y = tempy;
-        return this;
-    }
-
-    /**
      * Returns true if this vector is a unit vector (length() ~= 1),
      * returns false otherwise.
      * 
@@ -320,39 +287,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      */
     public float lengthSquared() {
         return x * x + y * y + z * z;
-    }
-
-    /**
-     *
-     * <code>mult</code> multiplies this vector by a scalar. The resultant
-     * vector is returned.
-     *
-     * @param scalar
-     *            the value to multiply this vector by.
-     * @return the new vector.
-     */
-    public Vector3f mult(float scalar) {
-        return new Vector3f(x * scalar, y * scalar, z * scalar);
-    }
-
-    /**
-     *
-     * <code>mult</code> multiplies this vector by a scalar. The resultant
-     * vector is supplied as the second parameter and returned.
-     *
-     * @param scalar the scalar to multiply this vector by.
-     * @param product the product to store the result in.
-     * @return product
-     */
-    public Vector3f mult(float scalar, Vector3f product) {
-        if (null == product) {
-            product = new Vector3f();
-        }
-
-        product.x = x * scalar;
-        product.y = y * scalar;
-        product.z = z * scalar;
-        return product;
     }
 
     /**
@@ -429,35 +363,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
 
     /**
-     * <code>divideLocal</code> divides this vector by a scalar internally,
-     * and returns a handle to this vector for easy chaining of calls. Dividing
-     * by zero will result in an exception.
-     *
-     * @param scalar
-     *            the value to divides this vector by.
-     * @return this
-     */
-    public Vector3f divideLocal(Vector3f scalar) {
-        x /= scalar.x;
-        y /= scalar.y;
-        z /= scalar.z;
-        return this;
-    }
-
-    /**
-     *
-     * <code>negateLocal</code> negates the internal values of this vector.
-     *
-     * @return this.
-     */
-    public Vector3f negateLocal() {
-        x = -x;
-        y = -y;
-        z = -z;
-        return this;
-    }
-
-    /**
      *
      * <code>subtract</code> subtracts the values of a given vector from those
      * of this vector creating a new vector object. If the provided vector is
@@ -469,46 +374,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      */
     public Vector3f subtract(Vector3f vec) {
         return new Vector3f(x - vec.x, y - vec.y, z - vec.z);
-    }
-
-    /**
-     * <code>subtractLocal</code> subtracts a provided vector to this vector
-     * internally, and returns a handle to this vector for easy chaining of
-     * calls. If the provided vector is null, null is returned.
-     *
-     * @param vec
-     *            the vector to subtract
-     * @return this
-     */
-    public Vector3f subtractLocal(Vector3f vec) {
-        if (null == vec) {
-            logger.warning("Provided vector is null, null returned.");
-            return null;
-        }
-        x -= vec.x;
-        y -= vec.y;
-        z -= vec.z;
-        return this;
-    }
-
-    /**
-     *
-     * <code>subtract</code>
-     *
-     * @param vec
-     *            the vector to subtract from this
-     * @param result
-     *            the vector to store the result in
-     * @return result
-     */
-    public Vector3f subtract(Vector3f vec, Vector3f result) {
-        if(result == null) {
-            result = new Vector3f();
-        }
-        result.x = x - vec.x;
-        result.y = y - vec.y;
-        result.z = z - vec.z;
-        return result;
     }
 
     /**
@@ -529,26 +394,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
             return new Vector3f(x * length, y * length, z * length);
         }
         return clone();
-    }
-
-    /**
-     * <code>normalizeLocal</code> makes this vector into a unit vector of
-     * itself.
-     *
-     * @return this.
-     */
-    public Vector3f normalizeLocal() {
-        // NOTE: this implementation is more optimized
-        // than the old jme normalize as this method
-        // is commonly used.
-        float length = x * x + y * y + z * z;
-        if (length != 1f && length != 0f){
-            length = 1.0f / FastMath.sqrt(length);
-            x *= length;
-            y *= length;
-            z *= length;
-        }
-        return this;
     }
 
     /**

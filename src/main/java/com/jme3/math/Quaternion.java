@@ -110,28 +110,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * sets the data in a <code>Quaternion</code> object from the given list
-     * of parameters.
-     *
-     * @param x
-     *            the x value of the quaternion.
-     * @param y
-     *            the y value of the quaternion.
-     * @param z
-     *            the z value of the quaternion.
-     * @param w
-     *            the w value of the quaternion.
-     * @return this
-     */
-    public Quaternion set(float x, float y, float z, float w) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
-        return this;
-    }
-
-    /**
      * Sets the data in this <code>Quaternion</code> object to be equal to the
      * passed <code>Quaternion</code> object. The values are copied producing
      * a new object.
@@ -154,58 +132,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     public void loadIdentity() {
         x = y = z = 0;
         w = 1;
-    }
-
-    /**
-     * @return true if this Quaternion is {0,0,0,1}
-     */
-    public boolean isIdentity() {
-        if (x == 0 && y == 0 && z == 0 && w == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * <code>toAngles</code> returns this quaternion converted to Euler rotation
-     * angles (x,y,z) aka (pitch, yaw, roll).
-     * Note that the result is not always 100% accurate due to the implications of euler angles.
-     * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/index.htm</a>
-     * 
-     * @param angles
-     *            the float[] in which the angles should be stored, or null if
-     *            you want a new float[] to be created
-     * @return the float[] in which the angles are stored.
-     */
-    public float[] toAngles(float[] angles) {
-        if (angles == null) {
-            angles = new float[3];
-        } else if (angles.length != 3) {
-            throw new IllegalArgumentException("Angles array must have three elements");
-        }
-
-        float sqw = w * w;
-        float sqx = x * x;
-        float sqy = y * y;
-        float sqz = z * z;
-        float unit = sqx + sqy + sqz + sqw; // if normalized is one, otherwise
-        // is correction factor
-        float test = x * y + z * w;
-        if (test > 0.499 * unit) { // singularity at north pole
-            angles[1] = 2 * FastMath.atan2(x, w);
-            angles[2] = FastMath.HALF_PI;
-            angles[0] = 0;
-        } else if (test < -0.499 * unit) { // singularity at south pole
-            angles[1] = -2 * FastMath.atan2(x, w);
-            angles[2] = -FastMath.HALF_PI;
-            angles[0] = 0;
-        } else {
-            angles[1] = FastMath.atan2(2 * y * w - 2 * x * z, sqx - sqy - sqz + sqw); // yaw or heading 
-            angles[2] = FastMath.asin(2 * test / unit); // roll or bank
-            angles[0] = FastMath.atan2(2 * x * w - 2 * y * z, -sqx + sqy - sqz + sqw); // pitch or attitude
-        }
-        return angles;
     }
 
     /**
@@ -468,134 +394,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>toAngleAxis</code> sets a given angle and axis to that
-     * represented by the current quaternion. The values are stored as
-     * follows: The axis is provided as a parameter and built by the method,
-     * the angle is returned as a float.
-     *
-     * @param axisStore
-     *            the object we'll store the computed axis in.
-     * @return the angle of rotation in radians.
-     */
-    public float toAngleAxis(Vector3f axisStore) {
-        float sqrLength = x * x + y * y + z * z;
-        float angle;
-        if (sqrLength == 0.0f) {
-            angle = 0.0f;
-            if (axisStore != null) {
-                axisStore.x = 1.0f;
-                axisStore.y = 0.0f;
-                axisStore.z = 0.0f;
-            }
-        } else {
-            angle = (2.0f * FastMath.acos(w));
-            if (axisStore != null) {
-                float invLength = (1.0f / FastMath.sqrt(sqrLength));
-                axisStore.x = x * invLength;
-                axisStore.y = y * invLength;
-                axisStore.z = z * invLength;
-            }
-        }
-
-        return angle;
-    }
-
-    /**
-     * Sets the values of this quaternion to the slerp from itself to q2 by
-     * changeAmnt
-     *
-     * @param q2
-     *            Final interpolation value
-     * @param changeAmnt
-     *            The amount difference
-     */
-    public void slerp(Quaternion q2, float changeAmnt) {
-        if (this.x == q2.x && this.y == q2.y && this.z == q2.z
-                && this.w == q2.w) {
-            return;
-        }
-
-        float result = (this.x * q2.x) + (this.y * q2.y) + (this.z * q2.z)
-                + (this.w * q2.w);
-
-        if (result < 0.0f) {
-            // Negate the second quaternion and the result of the dot product
-            q2.x = -q2.x;
-            q2.y = -q2.y;
-            q2.z = -q2.z;
-            q2.w = -q2.w;
-            result = -result;
-        }
-
-        // Set the first and second scale for the interpolation
-        float scale0 = 1 - changeAmnt;
-        float scale1 = changeAmnt;
-
-        // Check if the angle between the 2 quaternions was big enough to
-        // warrant such calculations
-        if ((1 - result) > 0.1f) {
-            // Get the angle between the 2 quaternions, and then store the sin()
-            // of that angle
-            float theta = FastMath.acos(result);
-            float invSinTheta = 1f / FastMath.sin(theta);
-
-            // Calculate the scale for q1 and q2, according to the angle and
-            // its sine
-            scale0 = FastMath.sin((1 - changeAmnt) * theta) * invSinTheta;
-            scale1 = FastMath.sin((changeAmnt * theta)) * invSinTheta;
-        }
-
-        // Calculate the x, y, z and w values for the quaternion by using a
-        // special
-        // form of linear interpolation for quaternions.
-        this.x = (scale0 * this.x) + (scale1 * q2.x);
-        this.y = (scale0 * this.y) + (scale1 * q2.y);
-        this.z = (scale0 * this.z) + (scale1 * q2.z);
-        this.w = (scale0 * this.w) + (scale1 * q2.w);
-    }
-
-    /**
-     * <code>add</code> adds the values of this quaternion to those of the
-     * parameter quaternion. The result is returned as a new quaternion.
-     *
-     * @param q
-     *            the quaternion to add to this.
-     * @return the new quaternion.
-     */
-    public Quaternion add(Quaternion q) {
-        return new Quaternion(x + q.x, y + q.y, z + q.z, w + q.w);
-    }
-
-    /**
-     * <code>subtract</code> subtracts the values of the parameter quaternion
-     * from those of this quaternion. The result is stored in this Quaternion.
-     *
-     * @param q
-     *            the quaternion to subtract from this.
-     * @return This Quaternion after subtraction.
-     */
-    public Quaternion subtractLocal(Quaternion q) {
-        this.x -= q.x;
-        this.y -= q.y;
-        this.z -= q.z;
-        this.w -= q.w;
-        return this;
-    }
-
-    /**
-     * <code>mult</code> multiplies this quaternion by a parameter quaternion.
-     * The result is returned as a new quaternion. It should be noted that
-     * quaternion multiplication is not commutative so q * p != p * q.
-     *
-     * @param q
-     *            the quaternion to multiply this quaternion by.
-     * @return the new quaternion.
-     */
-    public Quaternion mult(Quaternion q) {
-        return mult(q, null);
-    }
-
-    /**
      * <code>mult</code> multiplies this quaternion by a parameter quaternion.
      * The result is returned as a new quaternion. It should be noted that
      * quaternion multiplication is not commutative so q * p != p * q.
@@ -622,24 +420,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>apply</code> multiplies this quaternion by a parameter matrix
-     * internally.
-     *
-     * @param matrix
-     *            the matrix to apply to this quaternion.
-     */
-    public void apply(Matrix3f matrix) {
-        float oldX = x, oldY = y, oldZ = z, oldW = w;
-        fromRotationMatrix(matrix);
-        float tempX = x, tempY = y, tempZ = z, tempW = w;
-
-        x = oldX * tempW + oldY * tempZ - oldZ * tempY + oldW * tempX;
-        y = -oldX * tempZ + oldY * tempW + oldZ * tempX + oldW * tempY;
-        z = oldX * tempY - oldY * tempX + oldZ * tempW + oldW * tempZ;
-        w = -oldX * tempX - oldY * tempY - oldZ * tempZ + oldW * tempW;
-    }
-
-    /**
      *
      * <code>fromAxes</code> creates a <code>Quaternion</code> that
      * represents the coordinate system defined by three axes. These axes are
@@ -655,22 +435,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     public Quaternion fromAxes(Vector3f xAxis, Vector3f yAxis, Vector3f zAxis) {
         return fromRotationMatrix(xAxis.x, yAxis.x, zAxis.x, xAxis.y, yAxis.y,
                 zAxis.y, xAxis.z, yAxis.z, zAxis.z);
-    }
-
-    /**
-     *
-     * <code>toAxes</code> takes in an array of three vectors. Each vector
-     * corresponds to an axis of the coordinate system defined by the quaternion
-     * rotation.
-     *
-     * @param axis
-     *            the array of vectors to be filled.
-     */
-    public void toAxes(Vector3f axis[]) {
-        Matrix3f tempMat = toRotationMatrix();
-        axis[0] = tempMat.getColumn(0, axis[0]);
-        axis[1] = tempMat.getColumn(1, axis[1]);
-        axis[2] = tempMat.getColumn(2, axis[2]);
     }
 
     /**
@@ -693,53 +457,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         v.x = tempX;
         v.y = tempY;
         return v;
-    }
-
-    /**
-     * Multiplies this Quaternion by the supplied quaternion. The result is
-     * stored in this Quaternion, which is also returned for chaining. Similar
-     * to this *= q.
-     *
-     * @param q
-     *            The Quaternion to multiply this one by.
-     * @return This Quaternion, after multiplication.
-     */
-    public Quaternion multLocal(Quaternion q) {
-        float x1 = x * q.w + y * q.z - z * q.y + w * q.x;
-        float y1 = -x * q.z + y * q.w + z * q.x + w * q.y;
-        float z1 = x * q.y - y * q.x + z * q.w + w * q.z;
-        w = -x * q.x - y * q.y - z * q.z + w * q.w;
-        x = x1;
-        y = y1;
-        z = z1;
-        return this;
-    }
-
-    /**
-     * Multiplies this Quaternion by the supplied quaternion. The result is
-     * stored in this Quaternion, which is also returned for chaining. Similar
-     * to this *= q.
-     *
-     * @param qx -
-     *            quat x value
-     * @param qy -
-     *            quat y value
-     * @param qz -
-     *            quat z value
-     * @param qw -
-     *            quat w value
-     *
-     * @return This Quaternion, after multiplication.
-     */
-    public Quaternion multLocal(float qx, float qy, float qz, float qw) {
-        float x1 = x * qw + y * qz - z * qy + w * qx;
-        float y1 = -x * qz + y * qw + z * qx + w * qy;
-        float z1 = x * qy - y * qx + z * qw + w * qz;
-        w = -x * qx - y * qy - z * qz + w * qw;
-        x = x1;
-        y = y1;
-        z = z1;
-        return this;
     }
 
     /**
@@ -775,46 +492,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>mult</code> multiplies this quaternion by a parameter scalar. The
-     * result is returned as a new quaternion.
-     *
-     * @param scalar
-     *            the quaternion to multiply this quaternion by.
-     * @return the new quaternion.
-     */
-    public Quaternion mult(float scalar) {
-        return new Quaternion(scalar * x, scalar * y, scalar * z, scalar * w);
-    }
-
-    /**
-     * <code>mult</code> multiplies this quaternion by a parameter scalar. The
-     * result is stored locally.
-     *
-     * @param scalar
-     *            the quaternion to multiply this quaternion by.
-     * @return this.
-     */
-    public Quaternion multLocal(float scalar) {
-        w *= scalar;
-        x *= scalar;
-        y *= scalar;
-        z *= scalar;
-        return this;
-    }
-
-    /**
-     * <code>dot</code> calculates and returns the dot product of this
-     * quaternion with that of the parameter quaternion.
-     *
-     * @param q
-     *            the quaternion to calculate the dot product of.
-     * @return the dot product of this and the parameter quaternion.
-     */
-    public float dot(Quaternion q) {
-        return w * q.w + x * q.x + y * q.y + z * q.z;
-    }
-
-    /**
      * <code>norm</code> returns the norm of this quaternion. This is the dot
      * product of this quaternion with itself.
      *
@@ -822,20 +499,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      */
     public float norm() {
         return w * w + x * x + y * y + z * z;
-    }
-
-    /**
-     * <code>normalize</code> normalizes the current <code>Quaternion</code>.
-     * The result is stored internally.
-     * @return this
-     */
-    public Quaternion normalizeLocal() {
-        float n = FastMath.invSqrt(norm());
-        x *= n;
-        y *= n;
-        z *= n;
-        w *= n;
-        return this;
     }
 
     /**
@@ -855,36 +518,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         }
         // return an invalid result to flag the error
         return null;
-    }
-
-    /**
-     * <code>inverse</code> calculates the inverse of this quaternion and
-     * returns this quaternion after it is calculated. If this quaternion does
-     * not have an inverse (if its normal is 0 or less), nothing happens
-     *
-     * @return the inverse of this quaternion
-     */
-    public Quaternion inverseLocal() {
-        float norm = norm();
-        if (norm > 0.0) {
-            float invNorm = 1.0f / norm;
-            x *= -invNorm;
-            y *= -invNorm;
-            z *= -invNorm;
-            w *= invNorm;
-        }
-        return this;
-    }
-
-    /**
-     * <code>negate</code> inverts the values of the quaternion.
-     *
-     */
-    public void negate() {
-        x *= -1;
-        y *= -1;
-        z *= -1;
-        w *= -1;
     }
 
     /**
@@ -954,42 +587,6 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         hash = 37 * hash + Float.floatToIntBits(w);
         return hash;
 
-    }
-
-    /**
-     * <code>readExternal</code> builds a quaternion from an
-     * <code>ObjectInput</code> object. <br>
-     * NOTE: Used with serialization. Not to be called manually.
-     * 
-     * @param in
-     *            the ObjectInput value to read from.
-     * @throws IOException
-     *             if the ObjectInput value has problems reading a float.
-     * @see java.io.Externalizable
-     */
-    public void readExternal(ObjectInput in) throws IOException {
-        x = in.readFloat();
-        y = in.readFloat();
-        z = in.readFloat();
-        w = in.readFloat();
-    }
-
-    /**
-     * <code>writeExternal</code> writes this quaternion out to a
-     * <code>ObjectOutput</code> object. NOTE: Used with serialization. Not to
-     * be called manually.
-     * 
-     * @param out
-     *            the object to write to.
-     * @throws IOException
-     *             if writing to the ObjectOutput fails.
-     * @see java.io.Externalizable
-     */
-    public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeFloat(x);
-        out.writeFloat(y);
-        out.writeFloat(z);
-        out.writeFloat(w);
     }
 
     @Override

@@ -63,48 +63,6 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * constructs a matrix with the given values.
-     * @param m00 the value for row 0, column 0
-     * @param m01 the value for row 0, column 1
-     * @param m02 the value for row 0, column 2
-     * @param m03 the value for row 0, column 3
-     * @param m10 the value for row 1, column 0
-     * @param m11 the value for row 1, column 1
-     * @param m12 the value for row 1, column 2
-     * @param m13 the value for row 1, column 3
-     * @param m20 the value for row 2, column 0
-     * @param m21 the value for row 2, column 1
-     * @param m22 the value for row 2, column 2
-     * @param m23 the value for row 2, column 3
-     * @param m30 the value for row 3, column 0
-     * @param m31 the value for row 3, column 1
-     * @param m32 the value for row 3, column 2
-     * @param m33 the value for row 3, column 3
-     */
-    public Matrix4f(float m00, float m01, float m02, float m03,
-            float m10, float m11, float m12, float m13,
-            float m20, float m21, float m22, float m23,
-            float m30, float m31, float m32, float m33) {
-
-        this.m00 = m00;
-        this.m01 = m01;
-        this.m02 = m02;
-        this.m03 = m03;
-        this.m10 = m10;
-        this.m11 = m11;
-        this.m12 = m12;
-        this.m13 = m13;
-        this.m20 = m20;
-        this.m21 = m21;
-        this.m22 = m22;
-        this.m23 = m23;
-        this.m30 = m30;
-        this.m31 = m31;
-        this.m32 = m32;
-        this.m33 = m33;
-    }
-
-    /**
      * <code>loadIdentity</code> sets this matrix to the identity matrix,
      * namely all zeros with ones along the diagonal.
      *  
@@ -140,67 +98,6 @@ public final class Matrix4f implements Cloneable {
         m31 *= scalar;
         m32 *= scalar;
         m33 *= scalar;
-    }
-
-    /**
-     * Inverts this matrix as a new Matrix4f.
-     * 
-     * @return The new inverse matrix
-     */
-    public Matrix4f invert() {
-        return invert(null);
-    }
-
-    /**
-     * Inverts this matrix and stores it in the given store.
-     * 
-     * @param store modified if not null
-     * @return The store
-     */
-    public Matrix4f invert(Matrix4f store) {
-        if (store == null) {
-            store = new Matrix4f();
-        }
-
-        float fA0 = m00 * m11 - m01 * m10;
-        float fA1 = m00 * m12 - m02 * m10;
-        float fA2 = m00 * m13 - m03 * m10;
-        float fA3 = m01 * m12 - m02 * m11;
-        float fA4 = m01 * m13 - m03 * m11;
-        float fA5 = m02 * m13 - m03 * m12;
-        float fB0 = m20 * m31 - m21 * m30;
-        float fB1 = m20 * m32 - m22 * m30;
-        float fB2 = m20 * m33 - m23 * m30;
-        float fB3 = m21 * m32 - m22 * m31;
-        float fB4 = m21 * m33 - m23 * m31;
-        float fB5 = m22 * m33 - m23 * m32;
-        float fDet = fA0 * fB5 - fA1 * fB4 + fA2 * fB3 + fA3 * fB2 - fA4 * fB1 + fA5 * fB0;
-
-        if (FastMath.abs(fDet) <= 0f) {
-            throw new ArithmeticException("This matrix cannot be inverted");
-        }
-
-        store.m00 = +m11 * fB5 - m12 * fB4 + m13 * fB3;
-        store.m10 = -m10 * fB5 + m12 * fB2 - m13 * fB1;
-        store.m20 = +m10 * fB4 - m11 * fB2 + m13 * fB0;
-        store.m30 = -m10 * fB3 + m11 * fB1 - m12 * fB0;
-        store.m01 = -m01 * fB5 + m02 * fB4 - m03 * fB3;
-        store.m11 = +m00 * fB5 - m02 * fB2 + m03 * fB1;
-        store.m21 = -m00 * fB4 + m01 * fB2 - m03 * fB0;
-        store.m31 = +m00 * fB3 - m01 * fB1 + m02 * fB0;
-        store.m02 = +m31 * fA5 - m32 * fA4 + m33 * fA3;
-        store.m12 = -m30 * fA5 + m32 * fA2 - m33 * fA1;
-        store.m22 = +m30 * fA4 - m31 * fA2 + m33 * fA0;
-        store.m32 = -m30 * fA3 + m31 * fA1 - m32 * fA0;
-        store.m03 = -m21 * fA5 + m22 * fA4 - m23 * fA3;
-        store.m13 = +m20 * fA5 - m22 * fA2 + m23 * fA1;
-        store.m23 = -m20 * fA4 + m21 * fA2 - m23 * fA0;
-        store.m33 = +m20 * fA3 - m21 * fA1 + m22 * fA0;
-
-        float fInvDet = 1.0f / fDet;
-        store.multLocal(fInvDet);
-
-        return store;
     }
 
     /**
