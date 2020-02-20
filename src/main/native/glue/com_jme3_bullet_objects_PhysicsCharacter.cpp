@@ -48,9 +48,10 @@ jmeKcc : public btKinematicCharacterController {
     public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
 
-    jmeKcc(btPairCachingGhostObject *ghostObject, btConvexShape *convexShape,
-            btScalar stepHeight);
-    ~jmeKcc();
+    jmeKcc(btPairCachingGhostObject *ghost, btConvexShape *shape,
+            btScalar stepHeight)
+            : btKinematicCharacterController(ghost, shape, stepHeight) {
+    }
 
     const btVector3 & getWalkOffset() const {
         return m_walkDirection;
@@ -60,14 +61,6 @@ jmeKcc : public btKinematicCharacterController {
         return m_useGhostObjectSweepTest;
     }
 };
-
-jmeKcc::jmeKcc(btPairCachingGhostObject *ghostObject,
-        btConvexShape *convexShape, btScalar stepHeight)
-: btKinematicCharacterController(ghostObject, convexShape, stepHeight) {
-}
-
-jmeKcc::~jmeKcc() {
-}
 
 extern "C" {
 
@@ -79,13 +72,13 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createCharacterObject
     (JNIEnv *env, jobject object, jlong ghostId, jlong shapeId,
             jfloat stepHeight) {
-        btPairCachingGhostObject *pGhost
+        btPairCachingGhostObject * const pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
         NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.", 0);
         btAssert(
                 pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-        btCollisionShape *pShape
+        btCollisionShape * const pShape
                 = reinterpret_cast<btCollisionShape *> (shapeId);
         NULL_CHECK(pShape, "The btCollisionShape does not exist.", 0)
         if (!pShape->isConvex()) {
@@ -93,9 +86,10 @@ extern "C" {
                     "The btCollisionShape isn't convex.");
             return 0;
         }
-        btConvexShape *pConvex = reinterpret_cast<btConvexShape *> (shapeId);
+        btConvexShape * const pConvex
+                = reinterpret_cast<btConvexShape *> (shapeId);
 
-        jmeKcc *pController = new jmeKcc(pGhost, pConvex, stepHeight);
+        jmeKcc * const pController = new jmeKcc(pGhost, pConvex, stepHeight);
 
         return reinterpret_cast<jlong> (pController);
     }
@@ -108,7 +102,8 @@ extern "C" {
     JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createGhostObject
     (JNIEnv *env, jobject object) {
         jmeClasses::initJavaClasses(env);
-        btPairCachingGhostObject *pGhost = new btPairCachingGhostObject();
+        btPairCachingGhostObject * const pGhost
+                = new btPairCachingGhostObject();
         return reinterpret_cast<jlong> (pGhost);
     }
 
@@ -119,7 +114,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_finalizeNativeCharacter
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         delete pController;
@@ -132,7 +127,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getAngularDamping
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0)
 
         return pController->getAngularDamping();
@@ -145,7 +140,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getAngularVelocity
     (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         const btVector3& a_vel = pController->getAngularVelocity();
@@ -161,7 +156,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getFallSpeed
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0)
 
         return pController->getFallSpeed();
@@ -174,7 +169,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getGravity
     (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         const btVector3& g = pController->getGravity();
@@ -190,7 +185,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getJumpSpeed
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0)
 
         return pController->getJumpSpeed();
@@ -203,7 +198,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getLinearDamping
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0)
 
         return pController->getLinearDamping();
@@ -216,7 +211,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getLinearVelocity
     (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         const btVector3& l_vel = pController->getLinearVelocity();
@@ -232,7 +227,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getMaxPenetrationDepth
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0);
 
         return pController->getMaxPenetrationDepth();
@@ -245,7 +240,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getMaxSlope
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0);
 
         return pController->getMaxSlope();
@@ -258,7 +253,7 @@ extern "C" {
      */
     JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getStepHeight
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", 0);
 
         return pController->getStepHeight();
@@ -271,7 +266,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_getUpDirection
     (JNIEnv *env, jobject object, jlong kccId, jobject storeVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         const btVector3& direction = pController->getUp();
@@ -304,7 +299,7 @@ extern "C" {
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_isUsingGhostSweepTest
     (JNIEnv *env, jobject object, jlong kccId) {
         const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
-        NULL_CHECK(pController, "The controller does not exist.", 0);
+        NULL_CHECK(pController, "The controller does not exist.", JNI_FALSE);
 
         bool result = pController->isUsingGhostSweepTest();
 
@@ -318,7 +313,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_jump
     (JNIEnv *env, jobject object, jlong kccId, jobject jumpVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
         NULL_CHECK(jumpVector, "The jump vector does not exist.",);
 
@@ -335,7 +330,7 @@ extern "C" {
      */
     JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_onGround
     (JNIEnv *env, jobject object, jlong kccId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.", JNI_FALSE)
 
         return pController->onGround();
@@ -348,13 +343,14 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_reset
     (JNIEnv *env, jobject object, jlong kccId, jlong spaceId) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
-        jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+        jmePhysicsSpace * const pSpace
+                = reinterpret_cast<jmePhysicsSpace *> (spaceId);
         NULL_CHECK(pSpace, "The physics space does not exist.",)
 
-        btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
+        btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
         NULL_CHECK(pWorld, "The btDynamicsWorld does not exist.",)
 
         pController->reset(pWorld);
@@ -367,7 +363,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setAngularDamping
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setAngularDamping(value);
@@ -380,7 +376,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setAngularVelocity
     (JNIEnv *env, jobject object, jlong kccId, jobject velocityVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
@@ -397,7 +393,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setCharacterFlags
     (JNIEnv *env, jobject object, jlong ghostId) {
-        btPairCachingGhostObject *pGhost
+        btPairCachingGhostObject * const pGhost
                 = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
         NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.",)
         btAssert(
@@ -414,7 +410,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setFallSpeed
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setFallSpeed(value);
@@ -427,7 +423,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setGravity
     (JNIEnv *env, jobject object, jlong kccId, jobject accelerationVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         NULL_CHECK(accelerationVector,
@@ -445,7 +441,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setJumpSpeed
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setJumpSpeed(value);
@@ -458,7 +454,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setLinearDamping
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setLinearDamping(value);
@@ -471,7 +467,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setLinearVelocity
     (JNIEnv *env, jobject object, jlong kccId, jobject velocityVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         NULL_CHECK(velocityVector, "The velocity vector does not exist.",)
@@ -488,7 +484,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setMaxPenetrationDepth
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setMaxPenetrationDepth(value);
@@ -501,7 +497,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setMaxSlope
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setMaxSlope(value);
@@ -514,7 +510,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setStepHeight
     (JNIEnv *env, jobject object, jlong kccId, jfloat value) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         pController->setStepHeight(value);
@@ -527,7 +523,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setUp
     (JNIEnv *env, jobject object, jlong kccId, jobject upVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         NULL_CHECK(upVector, "The vector does not exist.",)
@@ -544,7 +540,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setUseGhostSweepTest
     (JNIEnv *env, jobject object, jlong kccId, jboolean useGhostSweepTest) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         bool flag = (bool)useGhostSweepTest;
@@ -558,7 +554,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_setWalkDirection
     (JNIEnv *env, jobject object, jlong kccId, jobject directionVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         NULL_CHECK(directionVector, "The direction vector does not exist.",)
@@ -575,7 +571,7 @@ extern "C" {
      */
     JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_warp
     (JNIEnv *env, jobject object, jlong kccId, jobject locationVector) {
-        jmeKcc *pController = reinterpret_cast<jmeKcc *> (kccId);
+        jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
         NULL_CHECK(pController, "The controller does not exist.",);
 
         NULL_CHECK(locationVector, "The location vector does not exist.",)
