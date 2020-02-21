@@ -79,6 +79,15 @@ model {
                 path '/usr/bin'
             }
         }
+        gcc8Arm(Gcc) {
+            target('Linux_ARM64') {
+                assembler.executable = 'aarch64-linux-gnu-as'
+                cCompiler.executable = 'aarch64-linux-gnu-gcc-8'
+                cppCompiler.executable = 'aarch64-linux-gnu-g++-8'
+                linker.executable = 'aarch64-linux-gnu-gcc-8'
+                path '/usr/bin'
+            }
+        }
     }
 
     components {
@@ -103,7 +112,13 @@ model {
             }
             binaries.withType(SharedLibraryBinarySpec) {
                 // Decide whether to build the current platform:
-                if (gradle.rootProject.hasProperty('travis')) {
+                if (gradle.rootProject.hasProperty('github')) {
+                    // -Pgithub= specified on the command line
+                    String github = gradle.rootProject.ext.github;
+                    if (github.equals('xcode11')) {
+                        buildable = targetPlatform.name.equals('MacOSX64')
+                    }
+                } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
                     String travis = gradle.rootProject.ext.travis;
                     if (travis.equals('amd64')) {
@@ -114,7 +129,7 @@ model {
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }
                 } else {
-                    // -Ptravis= not specified
+                    // neither -pgithub nor -Ptravis= specified
                     buildable = !targetPlatform.name.startsWith('Linux_ARM')
                     //buildable = targetPlatform.name.equals('Linux64')
                 }
