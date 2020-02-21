@@ -45,6 +45,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -230,7 +231,7 @@ public class CollisionSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<PhysicsCollisionObject> getPcoList() {
-        TreeSet<PhysicsCollisionObject> result = new TreeSet<>();
+        Set<PhysicsCollisionObject> result = new TreeSet<>();
         result.addAll(physicsGhostObjects.values());
 
         return result;
