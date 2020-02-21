@@ -566,6 +566,12 @@ public class PhysicsSpace extends CollisionSpace {
         initThread(spaceId);
     }
 
+    /**
+     * Determine the type of the underlying btDynamicsWorld.
+     *
+     * @param spaceId the Bullet identifier for this space (non-zero)
+     * @return 2 (for a discrete world) or 4 (for a soft-rigid world)
+     */
     native protected int getWorldType(long spaceId);
     // *************************************************************************
     // private Java methods
