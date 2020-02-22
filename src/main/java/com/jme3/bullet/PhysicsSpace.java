@@ -58,8 +58,7 @@ public class PhysicsSpace extends CollisionSpace {
     // enums
 
     /**
-     * Enumerate the available data structures for broadphase collision
-     * detection.
+     * Enumerate the available accelerators for broadphase collision detection.
      */
     public enum BroadphaseType {
         /**
@@ -68,19 +67,18 @@ public class PhysicsSpace extends CollisionSpace {
          */
         SIMPLE,
         /**
-         * btAxisSweep3: uses incremental 3-D sweep and prune, requires world
-         * bounds, limited to 16_384 physics objects
+         * btAxisSweep3: incremental 3-D sweep and prune, requires world bounds,
+         * limited to 16_384 physics objects
          */
         AXIS_SWEEP_3,
         /**
-         * bt32BitAxisSweep3: uses incremental 3-D sweep and prune, requires
-         * world bounds, limited to 1_500_000 physics objects
+         * bt32BitAxisSweep3: incremental 3-D sweep and prune, requires world
+         * bounds, limited to 1_500_000 physics objects
          */
         AXIS_SWEEP_3_32,
         /**
-         * btDbvtBroadphase: uses a fast, dynamic bounding-volume hierarchy
-         * based on AABB tree to allow quicker addition/removal of physics
-         * objects
+         * btDbvtBroadphase: a fast, dynamic bounding-volume hierarchy based on
+         * AABB tree to allow quicker addition/removal of physics objects
          */
         DBVT
     }
@@ -154,6 +152,30 @@ public class PhysicsSpace extends CollisionSpace {
     // constructors
 
     /**
+     * Instantiate a PhysicsSpace with the specified broadphase accelerator.
+     * Must be invoked on the designated physics thread.
+     *
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     */
+    public PhysicsSpace(BroadphaseType broadphaseType) {
+        this(new Vector3f(-10000f, -10000f, -10000f),
+                new Vector3f(10000f, 10000f, 10000f), broadphaseType);
+    }
+
+    /**
+     * Instantiate a PhysicsSpace with an AXIS_SWEEP_3 broadphase accelerator.
+     * Must be invoked on the designated physics thread.
+     *
+     * @param worldMin the desired minimum coordinates values (not null,
+     * unaffected)
+     * @param worldMax the desired minimum coordinates values (not null,
+     * unaffected)
+     */
+    public PhysicsSpace(Vector3f worldMin, Vector3f worldMax) {
+        this(worldMin, worldMax, BroadphaseType.AXIS_SWEEP_3);
+    }
+
+    /**
      * Instantiate a PhysicsSpace. Must be invoked on the designated physics
      * thread.
      *
@@ -161,8 +183,7 @@ public class PhysicsSpace extends CollisionSpace {
      * unaffected, default=-10k,-10k,-10k)
      * @param worldMax the desired minimum coordinates values (not null,
      * unaffected, default=10k,10k,10k)
-     * @param broadphaseType which broadphase collision-detection algorithm to
-     * use (not null)
+     * @param broadphaseType which broadphase accelerator to use (not null)
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {

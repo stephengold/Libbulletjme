@@ -76,8 +76,7 @@ public class TestLibbulletjme {
         /*
          * Create a PhysicsSpace using DBVT for broadphase.
          */
-        PhysicsSpace space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.DBVT);
+        PhysicsSpace space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
         /*
          * Add a static horizontal plane at y=-1.
          */
@@ -466,8 +465,7 @@ public class TestLibbulletjme {
         /*
          * Physics spaces with various broadphase accelerators.
          */
-        space = new PhysicsSpace(Vector3f.ZERO,
-                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        space = new PhysicsSpace(PhysicsSpace.BroadphaseType.SIMPLE);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
 
@@ -483,8 +481,7 @@ public class TestLibbulletjme {
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
 
-        space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.DBVT);
+        space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
         /*
@@ -525,8 +522,8 @@ public class TestLibbulletjme {
         /*
          * Physics spaces with various broadphase accelerators.
          */
-        PhysicsSpace space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.SIMPLE);
+        PhysicsSpace space
+                = new PhysicsSpace(PhysicsSpace.BroadphaseType.SIMPLE);
         verifyPhysicsSpaceDefaults(space);
         performDropTest(boxShape, space);
 
@@ -542,8 +539,7 @@ public class TestLibbulletjme {
         verifyPhysicsSpaceDefaults(space);
         performDropTest(boxShape, space);
 
-        space = new PhysicsSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.DBVT);
+        space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
         verifyPhysicsSpaceDefaults(space);
         performDropTest(boxShape, space);
         /*
