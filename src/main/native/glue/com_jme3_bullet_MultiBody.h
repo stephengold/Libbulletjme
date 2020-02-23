@@ -25,30 +25,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseTorque
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    addLinkForce
- * Signature: (JILcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addLinkForce
-  (JNIEnv *, jobject, jlong, jint, jobject);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    addLinkTorque
- * Signature: (JILcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addLinkTorque
-  (JNIEnv *, jobject, jlong, jint, jobject);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    canSleep
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_canSleep
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
  * Method:    clearConstraintForces
  * Signature: (J)V
  */
@@ -89,10 +65,34 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    getAngularDamping
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    getAngularMomentum
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getBaseCollider
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getBaseCollider
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getBaseForce
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseForce
   (JNIEnv *, jobject, jlong, jobject);
 
 /*
@@ -129,6 +129,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBasePos
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    getBaseTorque
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseTorque
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    getBaseVel
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -145,11 +153,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseWorldTransform
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getJointPos
- * Signature: (JI)F
+ * Method:    getCanSleep
+ * Signature: (J)Z
  */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getJointPos
-  (JNIEnv *, jobject, jlong, jint);
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getCanWakeup
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -169,19 +185,35 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getLinkInertia
- * Signature: (JILcom/jme3/math/Vector3f;)V
+ * Method:    getLinearDamping
+ * Signature: (J)F
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getLinkInertia
-  (JNIEnv *, jobject, jlong, jint, jobject);
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getLinkMass
- * Signature: (JI)F
+ * Method:    getLink
+ * Signature: (JI)J
  */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinkMass
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getLink
   (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getMaxAppliedImpulse
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxAppliedImpulse
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getMaxCoordinateVelocity
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxCoordinateVelocity
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -201,11 +233,19 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getParent
- * Signature: (JI)I
+ * Method:    getNumPosVars
+ * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getParent
-  (JNIEnv *, jobject, jlong, jint);
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getUseGyroTerm
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody

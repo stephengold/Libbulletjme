@@ -110,33 +110,13 @@ public class MultiBody {
     }
 
     /**
-     * Add an external force to the indexed link.
+     * Determine the angular damping.
      *
-     * @param linkIndex which link to add it to (&ge;0, &lt;numLinks)
-     * @param force the force to add (in physics-space coordinates, not null,
-     * unaffected)
+     * @return the damping
      */
-    public void addLinkForce(int linkIndex, Vector3f force) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-        Validate.finite(force, "force");
-
-        addLinkForce(nativeId, linkIndex, force);
-    }
-
-    /**
-     * Add an external torque to the indexed link.
-     *
-     * @param linkIndex which link to add it to (&ge;0, &lt;numLinks)
-     * @param torque the torque to add (in physics-space coordinates, not null,
-     * unaffected)
-     */
-    public void addLinkTorque(int linkIndex, Vector3f torque) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-        Validate.finite(torque, "torque");
-
-        addLinkTorque(nativeId, linkIndex, torque);
+    public float angularDamping() {
+        float result = getAngularDamping(nativeId);
+        return result;
     }
 
     /**
@@ -162,6 +142,18 @@ public class MultiBody {
     public Vector3f baseAngularVelocity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         getBaseOmega(nativeId, result);
+        return result;
+    }
+
+    /**
+     * Determine the net force on the base.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the force vector (either storeResult or a new vector, not null)
+     */
+    public Vector3f baseForce(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        getBaseForce(nativeId, result);
         return result;
     }
 
@@ -215,6 +207,18 @@ public class MultiBody {
     }
 
     /**
+     * Determine the net torque on the base.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the torque vector (either storeResult or a new vector, not null)
+     */
+    public Vector3f baseTorque(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        getBaseTorque(nativeId, result);
+        return result;
+    }
+
+    /**
      * Determine the transform of the base.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -247,7 +251,17 @@ public class MultiBody {
      * @return true if it can sleep, otherwise false
      */
     public boolean canSleep() {
-        boolean result = canSleep(nativeId);
+        boolean result = getCanSleep(nativeId);
+        return result;
+    }
+
+    /**
+     * Test whether this MultiBody can wake up.
+     *
+     * @return true if it can wake up, otherwise false
+     */
+    public boolean canWakeup() {
+        boolean result = getCanWakeup(nativeId);
         return result;
     }
 
@@ -293,6 +307,16 @@ public class MultiBody {
     }
 
     /**
+     * Count the position variables.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countPositionVariables() {
+        int result = getNumPosVars(nativeId);
+        return result;
+    }
+
+    /**
      * Read the unique identifier of the native object.
      *
      * @return the ID (not zero)
@@ -323,26 +347,22 @@ public class MultiBody {
     }
 
     /**
+     * Test whether this MultiBody uses the gyro term.
+     *
+     * @return true if using the gyro term, otherwise false
+     */
+    public boolean isUsingGyroTerm() {
+        boolean result = getUseGyroTerm(nativeId);
+        return result;
+    }
+
+    /**
      * Test whether this MultiBody uses RK4 integration.
      *
      * @return true if using RK4, otherwise false
      */
     public boolean isUsingRK4() {
         boolean result = isUsingRK4Integration(nativeId);
-        return result;
-    }
-
-    /**
-     * Determine the joint position of the indexed link.
-     *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @return the position
-     */
-    public float jointPosition(int linkIndex) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-
-        float result = getJointPos(nativeId, linkIndex);
         return result;
     }
 
@@ -371,48 +391,32 @@ public class MultiBody {
     }
 
     /**
-     * Determine the rotational inertia of the indexed link.
+     * Determine the linear damping.
      *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @param storeResult storage for the result (modified if not null)
-     * @return the principal (diagonal) components of the inertia tensor (in the
-     * link's local coordinates, either storeResult or a new vector, not null)
+     * @return the damping
      */
-    public Vector3f linkInertia(int linkIndex, Vector3f storeResult) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
-
-        getLinkInertia(nativeId, linkIndex, result);
+    public float linearDamping() {
+        float result = getLinearDamping(nativeId);
         return result;
     }
 
     /**
-     * Determine the mass of the indexed link.
+     * Determine the maximum applied impulse.
      *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @return the mass (in physics mass units, &gt;0)
+     * @return the impulse
      */
-    public float linkMass(int linkIndex) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-
-        float result = getLinkMass(nativeId, linkIndex);
+    public float maxAppliedImpulse() {
+        float result = getMaxAppliedImpulse(nativeId);
         return result;
     }
 
     /**
-     * Determine the parent of the indexed link.
+     * Determine the maximum coordinate velocity.
      *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @return the parent's link index, or -1 if the link is parented to the
-     * base
+     * @return the velocity
      */
-    public int parent(int linkIndex) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-
-        int result = getParent(nativeId, linkIndex);
+    public float maxCoordinateVelocity() {
+        float result = getMaxCoordinateVelocity(nativeId);
         return result;
     }
 
@@ -514,9 +518,9 @@ public class MultiBody {
     public void useRK4(boolean setting) {
         useRK4Integration(nativeId, setting);
     }
-
     // *************************************************************************
     // Object methods
+
     /**
      * Finalize this MultiBody just before it is destroyed. Should be invoked
      * only by a subclass or by the garbage collector.
@@ -549,14 +553,6 @@ public class MultiBody {
 
     native private void addBaseTorque(long multiBodyId, Vector3f torqueVector);
 
-    native private void addLinkForce(long multiBodyId, int linkIndex,
-            Vector3f forceVector);
-
-    native private void addLinkTorque(long multiBodyId, int linkIndex,
-            Vector3f torqueVector);
-
-    native private boolean canSleep(long multiBodyId);
-
     native private void clearConstraintForces(long multiBodyId);
 
     native private void clearForcesAndTorques(long multiBodyId);
@@ -568,8 +564,14 @@ public class MultiBody {
 
     native private void finalizeNative(long multiBodyId);
 
+    native private float getAngularDamping(long multiBodyId);
+
     native private void getAngularMomentum(long multiBodyId,
             Vector3f storeVector);
+
+    native private long getBaseCollider(long multiBodyId);
+
+    native private void getBaseForce(long multiBodyId, Vector3f storeVector);
 
     native private void getBaseInertia(long multiBodyId, Vector3f storeVector);
 
@@ -579,27 +581,36 @@ public class MultiBody {
 
     native private void getBasePos(long multiBodyId, Vector3f storeVector);
 
+    native private void getBaseTorque(long multiBodyId, Vector3f storeVector);
+
     native private void getBaseVel(long multiBodyId, Vector3f storeVector);
 
     native private void getBaseWorldTransform(long multiBodyId,
             Transform storeTransform);
 
-    native private float getJointPos(long multiBodyId, int linkIndex);
+    native private boolean getCanSleep(long multiBodyId);
+
+    native private boolean getCanWakeup(long multiBodyId);
 
     native private float getJointVel(long multiBodyId, int linkIndex);
 
     native private float getKineticEnergy(long multiBodyId);
 
-    native private void getLinkInertia(long multiBodyId, int linkIndex,
-            Vector3f storeVector);
+    native private float getLinearDamping(long multiBodyId);
 
-    native private float getLinkMass(long multiBodyId, int linkIndex);
+    native private long getLink(long multiBodyId, int linkIndex);
+
+    native private float getMaxAppliedImpulse(long multiBodyId);
+
+    native private float getMaxCoordinateVelocity(long multiBodyId);
 
     native private int getNumDofs(long multiBodyId);
 
     native private int getNumLinks(long multiBodyId);
 
-    native private int getParent(long multiBodyId, int childLinkIndex);
+    native private int getNumPosVars(long multiBodyId);
+
+    native private boolean getUseGyroTerm(long multiBodyId);
 
     native private void getWorldToBaseRot(long multiBodyId,
             Quaternion storeQuaternion);
