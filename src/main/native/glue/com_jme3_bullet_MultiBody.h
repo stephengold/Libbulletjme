@@ -337,6 +337,46 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setJointVel
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    setupFixed
+ * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
+  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setupPlanar
+ * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
+  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setupPrismatic
+ * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
+  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setupRevolute
+ * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
+  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setupSpherical
+ * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
+  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    setWorldToBaseRot
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */

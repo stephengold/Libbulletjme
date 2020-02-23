@@ -571,7 +571,7 @@ public class TestLibbulletjme {
     }
 
     /**
-     * Generate a MultiBody and verify its properties.
+     * Construct a MultiBody and verify its properties.
      */
     @Test
     public void test006() {
@@ -605,6 +605,27 @@ public class TestLibbulletjme {
         Assert.assertEquals(0.04f, multiBody.linearDamping(), 0f);
         Assert.assertEquals(1000f, multiBody.maxAppliedImpulse(), 0f);
         Assert.assertEquals(100f, multiBody.maxCoordinateVelocity(), 0f);
+
+        float linkMass = 0.1f;
+        Vector3f linkInertia = new Vector3f(0.1f, 0.1f, 0.1f);
+        int linkIndex = -1;
+        boolean disableCollision = true;
+        linkIndex = multiBody.configureFixedLink(linkMass, linkInertia,
+                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_X,
+                Vector3f.UNIT_X);
+        linkIndex = multiBody.configurePlanarLink(linkMass, linkInertia,
+                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+                Vector3f.UNIT_X, disableCollision);
+        linkIndex = multiBody.configurePrismaticLink(linkMass, linkInertia,
+                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+                Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
+        linkIndex = multiBody.configureRevoluteLink(linkMass, linkInertia,
+                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+                Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
+        linkIndex = multiBody.configureSphericalLink(linkMass, linkInertia,
+                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_X,
+                Vector3f.UNIT_X, disableCollision);
+        Assert.assertEquals(4, linkIndex);
     }
     // *************************************************************************
     // private methods
