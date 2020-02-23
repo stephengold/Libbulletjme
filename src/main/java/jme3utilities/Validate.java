@@ -518,6 +518,32 @@ final public class Validate {
     }
 
     /**
+     * Validate an all-positive Vector3f as a method argument.
+     *
+     * @param vector the vector to validate (unaffected)
+     * @param description a description of the argument
+     * @return true
+     * @throws IllegalArgumentException if any component is not positive
+     * @throws NullPointerException if the vector is null
+     */
+    public static boolean positive(Vector3f vector, String description) {
+        nonNull(vector, description);
+
+        if (!MyVector3f.isAllPositive(vector)) {
+            String what;
+            if (description == null) {
+                what = "Vector3f argument";
+            } else {
+                what = description;
+            }
+            String message = what + " must have all components positive.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
      * Validate an arbitrary boolean-valued expression involving method
      * arguments.
      *
