@@ -515,11 +515,12 @@ public class MultiBody {
     }
 
     /**
-     * Read the unique identifier of the native object.
+     * Determine the unique identifier of the native object. TODO re-order
+     * methods
      *
      * @return the ID (not zero)
      */
-    final public long getNativeId() {
+    final public long nativeId() {
         assert nativeId != 0L;
         return nativeId;
     }

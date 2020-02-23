@@ -596,7 +596,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, multiBody.countDofs());
         Assert.assertEquals(5, multiBody.countLinks());
         Assert.assertEquals(0, multiBody.countPositionVariables());
-        Assert.assertNotEquals(0L, multiBody.getNativeId());
+        Assert.assertNotEquals(0L, multiBody.nativeId());
         Assert.assertFalse(multiBody.isUsingGlobalVelocities());
         Assert.assertTrue(multiBody.isUsingGyroTerm());
         Assert.assertFalse(multiBody.isUsingRK4());
