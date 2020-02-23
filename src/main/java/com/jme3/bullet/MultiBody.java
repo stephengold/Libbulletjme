@@ -83,6 +83,7 @@ public class MultiBody {
 
         nativeId = create(numLinks, baseMass, baseInertia, fixedBase, canSleep);
         assert nativeId != 0L;
+        finalizeMultiDof(nativeId);
     }
     // *************************************************************************
     // new methods exposed
@@ -561,6 +562,8 @@ public class MultiBody {
 
     native private long create(int numLinks, float baseMass,
             Vector3f baseInertiaVector, boolean fixedBase, boolean canSleep);
+
+    native private void finalizeMultiDof(long multiBodyId);
 
     native private void finalizeNative(long multiBodyId);
 

@@ -57,6 +57,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    finalizeMultiDof
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    finalizeNative
  * Signature: (J)V
  */

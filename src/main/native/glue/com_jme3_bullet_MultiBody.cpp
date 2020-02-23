@@ -138,6 +138,20 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    finalizeMultiDof
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
+(JNIEnv *, jobject, jlong multiBodyId) {
+    btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.",)
+
+    pMultiBody->finalizeMultiDof();
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    finalizeNative
  * Signature: (J)V
  */
