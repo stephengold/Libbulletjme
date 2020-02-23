@@ -26,6 +26,7 @@
  */
 
 import com.jme3.bullet.CollisionSpace;
+import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
@@ -51,6 +52,7 @@ import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Plane;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.system.NativeLibraryLoader;
 import java.io.File;
@@ -432,7 +434,7 @@ public class TestLibbulletjme {
     }
 
     /**
-     * Perform rays tests against a unit sphere in various collision spaces.
+     * Perform ray tests against a unit sphere in various collision spaces.
      */
     @Test
     public void test004() {
@@ -567,8 +569,53 @@ public class TestLibbulletjme {
         verifyPhysicsSpaceDefaults(space);
         performDropTest(boxShape, space);
     }
+
+    /**
+     * Generate a MultiBody and verify its properties.
+     */
+    @Test
+    public void test006() {
+        loadNativeLibrary();
+
+        int numLinks = 5;
+        float baseMass = 1f;
+        Vector3f baseInertia = Vector3f.UNIT_XYZ;
+        boolean fixedBase = true;
+        boolean canSleep = true;
+        MultiBody multiBody = new MultiBody(numLinks, baseMass, baseInertia,
+                fixedBase, canSleep);
+
+        Assert.assertEquals(0.04f, multiBody.angularDamping(), 0f);
+        //assertEquals(0f, 0f, 0f, multiBody.angularMomentum(null), 0f);
+        assertEquals(0f, 0f, 0f, multiBody.baseForce(null), 0f);
+        assertEquals(0f, 0f, 0f, multiBody.baseLocation(null), 0f);
+        assertEquals(0f, 0f, 0f, 1f, multiBody.baseOrientation(null), 0f);
+        assertEquals(0f, 0f, 0f, multiBody.baseTorque(null), 0f);
+        //assertEquals(0f, 0f, 0f, multiBody.baseVelocity(null), 0f);
+        Assert.assertTrue(multiBody.canWakeup());
+        Assert.assertEquals(0, multiBody.countDofs());
+        Assert.assertEquals(5, multiBody.countLinks());
+        Assert.assertEquals(0, multiBody.countPositionVariables());
+        Assert.assertNotEquals(0L, multiBody.getNativeId());
+        Assert.assertFalse(multiBody.isUsingGlobalVelocities());
+        Assert.assertTrue(multiBody.isUsingGyroTerm());
+        Assert.assertFalse(multiBody.isUsingRK4());
+        //Assert.assertEquals(0f, multiBody.jointVelocity(4), 0f);
+        //Assert.assertEquals(0f, multiBody.kineticEnergy(), 0f);
+        Assert.assertEquals(0.04f, multiBody.linearDamping(), 0f);
+        Assert.assertEquals(1000f, multiBody.maxAppliedImpulse(), 0f);
+        Assert.assertEquals(100f, multiBody.maxCoordinateVelocity(), 0f);
+    }
     // *************************************************************************
     // private methods
+
+    private void assertEquals(float x, float y, float z, float w, Quaternion q,
+            float tolerance) {
+        Assert.assertEquals(x, q.getX(), tolerance);
+        Assert.assertEquals(y, q.getY(), tolerance);
+        Assert.assertEquals(z, q.getZ(), tolerance);
+        Assert.assertEquals(w, q.getW(), tolerance);
+    }
 
     private void assertEquals(float x, float y, float z, Vector3f vector,
             float tolerance) {
@@ -577,7 +624,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(z, vector.z, tolerance);
     }
 
-    private void loadNativeLibrary() {
+    private static void loadNativeLibrary() {
         boolean loadFromDist = false;
 
         File directory;
