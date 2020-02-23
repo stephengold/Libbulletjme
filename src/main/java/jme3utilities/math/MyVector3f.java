@@ -185,6 +185,21 @@ public class MyVector3f {
     }
 
     /**
+     * Test whether all components of a vector are all positive: in other words,
+     * whether it's strictly inside the first octant.
+     *
+     * @param vector input (not null, unaffected)
+     * @return true if all components are positive, false otherwise
+     */
+    public static boolean isAllPositive(Vector3f vector) {
+        if (vector.x > 0f && vector.y > 0f && vector.z > 0f) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Test for a scale identity.
      *
      * @param vector input (not null, unaffected)
