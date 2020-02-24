@@ -35,33 +35,28 @@
 /*
  * Author: dokthar
  */
-void jmePhysicsSoftSpace::createPhysicsSoftSpace(jobject min_vec,
-        jobject max_vec, jint broadphaseId) {
-    btVector3 min;
-    jmeBulletUtil::convert(env, min_vec, &min);
-    btVector3 max;
-    jmeBulletUtil::convert(env, max_vec, &max);
-
-    btBroadphaseInterface * const pBroadphase
-            = createBroadphase(min, max, broadphaseId);
+void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
+        const btVector3& max, int broadphaseType) {
+    btBroadphaseInterface * const
+            pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Register some soft-body collision algorithms on top of the default
     // collision dispatcher plus GImpact.
     btCollisionConfiguration * const pCollisionConfiguration
             = new btSoftBodyRigidBodyCollisionConfiguration();
-    btCollisionDispatcher * const pDispatcher
-            = new btCollisionDispatcher(pCollisionConfiguration);
+    btCollisionDispatcher * const
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Use the default constraint solver.
-    btConstraintSolver * const pConstraintSolver
-            = new btSequentialImpulseConstraintSolver();
+    btConstraintSolver * const
+            pConstraintSolver = new btSequentialImpulseConstraintSolver();
 
     // Create the soft-rigid dynamics world.
     btSoftBodySolver * const pSoftSolver = 0; //use default
-    btSoftRigidDynamicsWorld * const pWorld = new btSoftRigidDynamicsWorld(
-            pDispatcher, pBroadphase, pConstraintSolver,
-            pCollisionConfiguration, pSoftSolver);
+    btSoftRigidDynamicsWorld * const
+            pWorld = new btSoftRigidDynamicsWorld(pDispatcher, pBroadphase,
+            pConstraintSolver, pCollisionConfiguration, pSoftSolver);
     m_collisionWorld = pWorld;
 
     // Do btSoftBodyWorldInfo modifications.

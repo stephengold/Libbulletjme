@@ -43,13 +43,17 @@ public:
     : jmePhysicsSpace(env, javaSpace) {
     }
 
-    void createPhysicsSoftSpace(jobject min_vec, jobject max_vec, jint ordinal);
+    void
+    createPhysicsSoftSpace(const btVector3& min, const btVector3& max,
+            int broadphaseType);
 
-    const btSoftRigidDynamicsWorld * getSoftDynamicsWorld() const {
+    const btSoftRigidDynamicsWorld *
+    getSoftDynamicsWorld() const {
         return (btSoftRigidDynamicsWorld *) m_collisionWorld;
     }
 
-    btSoftRigidDynamicsWorld * getSoftDynamicsWorld() {
+    btSoftRigidDynamicsWorld *
+    getSoftDynamicsWorld() {
         return (btSoftRigidDynamicsWorld *) m_collisionWorld;
     }
 };
