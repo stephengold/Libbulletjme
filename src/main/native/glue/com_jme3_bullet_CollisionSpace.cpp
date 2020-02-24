@@ -43,17 +43,17 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
-(JNIEnv *env, jobject object, jlong spaceId, jlong pcoId) {
-    jmeCollisionSpace * const pSpace
-            = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+(JNIEnv *env, jobject, jlong spaceId, jlong pcoId) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.",)
 
-    btCollisionObject * const pCollisionObject
-            = reinterpret_cast<btCollisionObject *> (pcoId);
+    btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserPointer *pUser
-            = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jmeUserPointer * const
+            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
     pUser->space = pSpace;
 
     pSpace->getCollisionWorld()->addCollisionObject(pCollisionObject);
@@ -70,9 +70,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
     jmeClasses::initJavaClasses(env);
 
     jmeCollisionSpace * const pSpace = new jmeCollisionSpace(env, object);
+    btVector3 min(minX, minY, minZ);
+    btVector3 max(maxX, maxY, maxZ);
+    pSpace->createCollisionSpace(min, max, (int) broadphase);
 
-    pSpace->createCollisionSpace(minX, minY, minZ, maxX, maxY, maxZ,
-            broadphase);
     return reinterpret_cast<jlong> (pSpace);
 }
 
@@ -82,9 +83,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
-(JNIEnv *env, jobject object, jlong spaceId) {
-    jmeCollisionSpace * const pSpace
-            = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+(JNIEnv *, jobject, jlong spaceId) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     if (pSpace != NULL) {
         delete pSpace;
     }
@@ -96,9 +97,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObjects
-(JNIEnv *env, jobject object, jlong spaceId) {
-    const jmeCollisionSpace * const pSpace
-            = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.", 0);
 
     int count = pSpace->getCollisionWorld()->getNumCollisionObjects();
@@ -154,15 +155,17 @@ struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
-(JNIEnv *env, jobject object, jobject from, jobject to, jlong spaceId,
+(JNIEnv *env, jobject, jobject from, jobject to, jlong spaceId,
         jobject resultlist, jint flags) {
-    jmeCollisionSpace * const pSpace
-            = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.",);
 
+    NULL_CHECK(to, "The to vector does not exist.",);
     btVector3 native_to;
     jmeBulletUtil::convert(env, to, &native_to);
 
+    NULL_CHECK(from, "The from vector does not exist.",);
     btVector3 native_from;
     jmeBulletUtil::convert(env, from, &native_from);
 
@@ -180,18 +183,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
-(JNIEnv *env, jobject object, jlong spaceId, jlong pcoId) {
-    jmeCollisionSpace * const pSpace
-            = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+(JNIEnv *env, jobject, jlong spaceId, jlong pcoId) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.",)
 
-    btCollisionObject * const pCollisionObject
-            = reinterpret_cast<btCollisionObject *> (pcoId);
+    btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
     pSpace->getCollisionWorld()->removeCollisionObject(pCollisionObject);
 
-    jmeUserPointer *pUser
+    jmeUserPointer * const pUser
             = (jmeUserPointer *) pCollisionObject->getUserPointer();
     pUser->space = NULL;
 }
@@ -248,14 +251,14 @@ public btCollisionWorld::ConvexResultCallback {
  * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
-(JNIEnv *env, jobject object, jlong shapeId, jobject from, jobject to,
-        jlong spaceId, jobject resultlist, jfloat allowedCcdPenetration) {
-    jmeCollisionSpace * const pSpace
-            = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+(JNIEnv *env, jobject, jlong shapeId, jobject from, jobject to, jlong spaceId,
+        jobject resultlist, jfloat allowedCcdPenetration) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.",)
 
-    btCollisionShape * const pShape
-            = reinterpret_cast<btCollisionShape *> (shapeId);
+    btCollisionShape * const
+            pShape = reinterpret_cast<btCollisionShape *> (shapeId);
     NULL_CHECK(pShape, "The shape does not exist.",);
     if (!pShape->isConvex()) {
         env->ThrowNew(jmeClasses::IllegalArgumentException,

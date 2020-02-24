@@ -52,33 +52,37 @@ protected:
 
     void attachThread();
     btBroadphaseInterface * createBroadphase(const btVector3 & min,
-            const btVector3 & max, jint);
+            const btVector3 & max, int broadphaseId);
 
 public:
-    jmeCollisionSpace(JNIEnv *, jobject);
+    jmeCollisionSpace(JNIEnv *, jobject javaSpace);
 
     ~jmeCollisionSpace() {
         delete(m_collisionWorld);
     }
 
-    void createCollisionSpace(jfloat minX, jfloat minY, jfloat minZ,
-            jfloat maxX, jfloat maxY, jfloat maxZ,
-            jint ordinal);
+    void
+    createCollisionSpace(const btVector3& min, const btVector3& max,
+            int ordinal);
 
-    const btCollisionWorld * getCollisionWorld() const {
+    const btCollisionWorld *
+    getCollisionWorld() const {
         return m_collisionWorld;
     }
 
-    btCollisionWorld * getCollisionWorld() {
+    btCollisionWorld *
+    getCollisionWorld() {
         return m_collisionWorld;
     }
 
-    JNIEnv * getEnv() {
+    JNIEnv *
+    getEnv() {
         attachThread();
         return env;
     }
 
-    jobject getJavaPhysicsSpace() {
+    jobject
+    getJavaPhysicsSpace() {
         return m_javaSpace;
     }
 };

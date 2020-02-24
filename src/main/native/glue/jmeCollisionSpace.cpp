@@ -107,7 +107,7 @@ void jmeCollisionSpace::attachThread() {
 }
 
 btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
-        const btVector3 & min, const btVector3 & max, jint broadphaseId) {
+        const btVector3 & min, const btVector3 & max, int broadphaseId) {
     btBroadphaseInterface * pBroadphase;
     switch (broadphaseId) {
         case 0:
@@ -127,27 +127,24 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
                     "The broadphase type is out of range.");
     }
 
-    btOverlappingPairCache * const pPairCache
-            = pBroadphase->getOverlappingPairCache();
+    btOverlappingPairCache * const
+            pPairCache = pBroadphase->getOverlappingPairCache();
     pPairCache->setInternalGhostPairCallback(new btGhostPairCallback());
     pPairCache->setOverlapFilterCallback(new jmeFilterCallback());
 
     return pBroadphase;
 }
 
-void jmeCollisionSpace::createCollisionSpace(jfloat minX, jfloat minY, jfloat minZ,
-        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId) {
-    const btVector3 min = btVector3(minX, minY, minZ);
-    const btVector3 max = btVector3(maxX, maxY, maxZ);
-
-    btBroadphaseInterface * const pBroadphase
-            = createBroadphase(min, max, broadphaseId);
+void jmeCollisionSpace::createCollisionSpace(const btVector3& min,
+        const btVector3& max, int broadphaseId) {
+    btBroadphaseInterface * const
+            pBroadphase = createBroadphase(min, max, broadphaseId);
 
     // Use the default collision dispatcher plus GImpact.
-    btCollisionConfiguration * const pCollisionConfiguration
-            = new btDefaultCollisionConfiguration();
-    btCollisionDispatcher * const pDispatcher
-            = new btCollisionDispatcher(pCollisionConfiguration);
+    btCollisionConfiguration * const
+            pCollisionConfiguration = new btDefaultCollisionConfiguration();
+    btCollisionDispatcher * const
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Create the collision world.
