@@ -523,17 +523,6 @@ public class MultiBody {
     }
 
     /**
-     * Determine the unique identifier of the native object. TODO re-order
-     * methods
-     *
-     * @return the ID (not zero)
-     */
-    final public long nativeId() {
-        assert nativeId != 0L;
-        return nativeId;
-    }
-
-    /**
      * Test whether this MultiBody has a fixed base.
      *
      * @return true &rarr; fixed, false &rarr; movable
@@ -611,6 +600,16 @@ public class MultiBody {
     public float maxCoordinateVelocity() {
         float result = getMaxCoordinateVelocity(nativeId);
         return result;
+    }
+
+    /**
+     * Determine the unique identifier of the native object.
+     *
+     * @return the ID (not zero)
+     */
+    final public long nativeId() {
+        assert nativeId != 0L;
+        return nativeId;
     }
 
     /**
