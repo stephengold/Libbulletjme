@@ -177,14 +177,6 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getJointVel
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getJointVel
-  (JNIEnv *, jobject, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
  * Method:    getKineticEnergy
  * Signature: (J)F
  */
@@ -198,14 +190,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
   (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    getLink
- * Signature: (JI)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getLink
-  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -318,22 +302,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
   (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    setJointPos
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setJointPos
-  (JNIEnv *, jobject, jlong, jint, jfloat);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    setJointVel
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setJointVel
-  (JNIEnv *, jobject, jlong, jint, jfloat);
 
 /*
  * Class:     com_jme3_bullet_MultiBody

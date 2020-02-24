@@ -27,6 +27,8 @@
 
 import com.jme3.bullet.CollisionSpace;
 import com.jme3.bullet.MultiBody;
+import com.jme3.bullet.MultiBodyJointType;
+import com.jme3.bullet.MultiBodyLink;
 import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
@@ -594,13 +596,12 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, multiBody.baseVelocity(null), 0f);
         Assert.assertTrue(multiBody.canWakeup());
         Assert.assertEquals(0, multiBody.countDofs());
-        Assert.assertEquals(5, multiBody.countLinks());
+        Assert.assertEquals(0, multiBody.countConfiguredLinks());
         Assert.assertEquals(0, multiBody.countPositionVariables());
         Assert.assertNotEquals(0L, multiBody.nativeId());
         Assert.assertFalse(multiBody.isUsingGlobalVelocities());
         Assert.assertTrue(multiBody.isUsingGyroTerm());
         Assert.assertFalse(multiBody.isUsingRK4());
-        Assert.assertEquals(0f, multiBody.jointVelocity(4), 0f);
         Assert.assertEquals(0f, multiBody.kineticEnergy(), 0f);
         Assert.assertEquals(0.04f, multiBody.linearDamping(), 0f);
         Assert.assertEquals(1000f, multiBody.maxAppliedImpulse(), 0f);
@@ -608,24 +609,76 @@ public class TestLibbulletjme {
 
         float linkMass = 0.1f;
         Vector3f linkInertia = new Vector3f(0.1f, 0.1f, 0.1f);
-        int linkIndex = -1;
-        boolean disableCollision = true;
-        linkIndex = multiBody.configureFixedLink(linkMass, linkInertia,
-                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_X,
+        MultiBodyLink link0 = multiBody.configureFixedLink(linkMass,
+                linkInertia, null, Quaternion.IDENTITY, Vector3f.UNIT_X,
                 Vector3f.UNIT_X);
-        linkIndex = multiBody.configurePlanarLink(linkMass, linkInertia,
-                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+
+        boolean disableCollision = true;
+        MultiBodyLink link1 = multiBody.configurePlanarLink(linkMass,
+                linkInertia, link0, Quaternion.IDENTITY, Vector3f.UNIT_Y,
                 Vector3f.UNIT_X, disableCollision);
-        linkIndex = multiBody.configurePrismaticLink(linkMass, linkInertia,
-                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+        MultiBodyLink link2 = multiBody.configurePrismaticLink(linkMass,
+                linkInertia, link1, Quaternion.IDENTITY, Vector3f.UNIT_Y,
                 Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
-        linkIndex = multiBody.configureRevoluteLink(linkMass, linkInertia,
-                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+        MultiBodyLink link3 = multiBody.configureRevoluteLink(linkMass,
+                linkInertia, link2, Quaternion.IDENTITY, Vector3f.UNIT_Y,
                 Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
-        linkIndex = multiBody.configureSphericalLink(linkMass, linkInertia,
-                linkIndex, Quaternion.IDENTITY, Vector3f.UNIT_X,
-                Vector3f.UNIT_X, disableCollision);
-        Assert.assertEquals(4, linkIndex);
+
+        boolean enableCollision = false;
+        MultiBodyLink link4 = multiBody.configureSphericalLink(linkMass,
+                linkInertia, link3, Quaternion.IDENTITY, Vector3f.UNIT_X,
+                Vector3f.UNIT_X, enableCollision);
+
+        Assert.assertEquals(link0, multiBody.getLink(0));
+        assertEquals(0f, 0f, 0f, link0.appliedForce(null), 0f);
+        assertEquals(0f, 0f, 0f, link0.appliedTorque(null), 0f);
+        assertEquals(0f, 0f, 0f, link0.constraintForce(null), 0f);
+        assertEquals(0f, 0f, 0f, link0.constraintTorque(null), 0f);
+        Assert.assertEquals(0, link0.countDofs());
+        Assert.assertEquals(0, link0.countPositionVariables());
+        Assert.assertEquals(multiBody, link0.getMultiBody());
+        Assert.assertNull(link0.getParentLink());
+        Assert.assertEquals(0, link0.index());
+        assertEquals(0.1f, 0.1f, 0.1f, link0.inertia(null), 0f);
+        Assert.assertFalse(link0.isCollisionWithParent());
+        Assert.assertEquals(MultiBodyJointType.Fixed, link0.jointType());
+        Assert.assertEquals(linkMass, link0.mass(), 0f);
+
+        Assert.assertEquals(link1, multiBody.getLink(1));
+        Assert.assertEquals(3, link1.countDofs());
+        Assert.assertEquals(3, link1.countPositionVariables());
+        Assert.assertEquals(link0, link1.getParentLink());
+        Assert.assertEquals(1, link1.index());
+        Assert.assertFalse(link1.isCollisionWithParent());
+        Assert.assertEquals(0f, link1.jointPosition(2), 0f);
+        Assert.assertEquals(0f, link1.jointTorque(2), 0f);
+        Assert.assertEquals(MultiBodyJointType.Planar, link1.jointType());
+        Assert.assertEquals(0f, link1.jointVelocity(2), 0f);
+
+        Assert.assertEquals(link2, multiBody.getLink(2));
+        assertEquals(0f, 0f, 0f, link2.appliedForce(null), 0f);
+        Assert.assertEquals(1, link2.countDofs());
+        Assert.assertEquals(1, link2.countPositionVariables());
+        Assert.assertFalse(link2.isCollisionWithParent());
+        Assert.assertEquals(MultiBodyJointType.Prismatic, link2.jointType());
+
+        Assert.assertEquals(link3, multiBody.getLink(3));
+        assertEquals(0f, 0f, 0f, link3.appliedForce(null), 0f);
+        Assert.assertEquals(1, link3.countDofs());
+        Assert.assertEquals(1, link3.countPositionVariables());
+        Assert.assertFalse(link3.isCollisionWithParent());
+        Assert.assertEquals(MultiBodyJointType.Revolute, link3.jointType());
+
+        Assert.assertEquals(link4, multiBody.getLink(4));
+        assertEquals(0f, 0f, 0f, link4.appliedForce(null), 0f);
+        Assert.assertEquals(3, link4.countDofs());
+        Assert.assertEquals(4, link4.countPositionVariables());
+        Assert.assertTrue(link4.isCollisionWithParent());
+        Assert.assertEquals(MultiBodyJointType.Spherical, link4.jointType());
+
+        Assert.assertEquals(5, multiBody.countConfiguredLinks());
+        Assert.assertEquals(8, multiBody.countDofs());
+        Assert.assertEquals(9, multiBody.countPositionVariables());
     }
     // *************************************************************************
     // private methods

@@ -57,13 +57,17 @@ public class MultiBody {
     // fields
 
     /**
+     * number of links that have been configured (&ge;0)
+     */
+    private int numConfigured;
+    /**
      * unique identifier of the btMultiBody
      */
     final private long nativeId;
     /**
-     * number of links that have been configured (&ge;0)
+     * references to configured links
      */
-    private int numConfigured;
+    final private MultiBodyLink[] links;
     // *************************************************************************
     // constructors
 
@@ -87,8 +91,11 @@ public class MultiBody {
 
         nativeId = create(numLinks, baseMass, baseInertia, fixedBase, canSleep);
         assert nativeId != 0L;
-        numConfigured = 0;
+        assert getNumLinks(nativeId) == numLinks;
         finalizeMultiDof(nativeId);
+
+        numConfigured = 0;
+        links = new MultiBodyLink[numLinks];
     }
     // *************************************************************************
     // new methods exposed
@@ -293,39 +300,36 @@ public class MultiBody {
     }
 
     /**
-     * Configure a link that is fixed to its parent.
+     * Configure a new link that is fixed to its parent.
      *
      * @param mass the desired mass of the link (&gt;0)
      * @param inertia the desired moment of inertia of the link (not null,
      * unaffected)
-     * @param parentIndex the index of the parent link (&ge;0) or -1 for a link
-     * joined to the base
+     * @param parent the parent link, or null if parented by the base
      * @param orientation the orientation of the link relative to its parent
      * (not null, unaffected)
      * @param parent2Pivot the offset of the pivot from the parent's center of
      * mass (not null, unaffected)
      * @param pivot2Link the offset of the child's center of mass from the pivot
      * (not null, unaffected)
-     * @return the index of the new link (&ge;0)
+     * @return a new link
      */
-    public int configureFixedLink(float mass, Vector3f inertia, int parentIndex,
-            Quaternion orientation, Vector3f parent2Pivot,
+    public MultiBodyLink configureFixedLink(float mass, Vector3f inertia,
+            MultiBodyLink parent, Quaternion orientation, Vector3f parent2Pivot,
             Vector3f pivot2Link) {
         Validate.positive(mass, "mass");
         Validate.positive(inertia, "inertia");
-        Validate.inRange(parentIndex, "parent index", -1, numConfigured - 1);
         Validate.nonNull(orientation, "orientation");
         Validate.nonNull(parent2Pivot, "parent to pivot offset");
         Validate.nonNull(pivot2Link, "pivot to link offset");
-        assert numConfigured < countLinks();
+        assert numConfigured < links.length;
 
-        int linkIndex = numConfigured;
-        ++numConfigured;
-        setupFixed(nativeId, linkIndex, mass, inertia, parentIndex, orientation,
-                parent2Pivot, pivot2Link);
-        finalizeMultiDof(nativeId);
+        int parentIndex = (parent == null) ? -1 : parent.index();
+        setupFixed(nativeId, numConfigured, mass, inertia, parentIndex,
+                orientation, parent2Pivot, pivot2Link);
+        MultiBodyLink result = configureLink();
 
-        return linkIndex;
+        return result;
     }
 
     /**
@@ -334,8 +338,7 @@ public class MultiBody {
      * @param mass the desired mass of the link (&gt;0)
      * @param inertia the desired moment of inertia of the link (not null,
      * unaffected)
-     * @param parentIndex the index of the parent link (&ge;0) or -1 for a link
-     * joined to the base
+     * @param parent the parent link, or null if parented by the base
      * @param orientation the orientation of the link relative to its parent
      * (not null, unaffected)
      * @param axis the axis of rotation, which is also the plane's normal vector
@@ -344,26 +347,24 @@ public class MultiBody {
      * parent's center of mass (not null, unaffected)
      * @param disableCollision true to ignore collisions between the link and
      * its parent
-     * @return the index of the new link (&ge;0)
+     * @return a new link
      */
-    public int configurePlanarLink(float mass, Vector3f inertia,
-            int parentIndex, Quaternion orientation, Vector3f axis,
+    public MultiBodyLink configurePlanarLink(float mass, Vector3f inertia,
+            MultiBodyLink parent, Quaternion orientation, Vector3f axis,
             Vector3f parent2Link, boolean disableCollision) {
         Validate.positive(mass, "mass");
         Validate.positive(inertia, "inertia");
-        Validate.inRange(parentIndex, "parent index", -1, numConfigured - 1);
         Validate.nonNull(orientation, "orientation");
         Validate.nonNull(axis, "axis");
         Validate.nonNull(parent2Link, "parent to link offset");
-        assert numConfigured < countLinks();
+        assert numConfigured < links.length;
 
-        int linkIndex = numConfigured;
-        ++numConfigured;
-        setupPlanar(nativeId, linkIndex, mass, inertia, parentIndex,
+        int parentIndex = (parent == null) ? -1 : parent.index();
+        setupPlanar(nativeId, numConfigured, mass, inertia, parentIndex,
                 orientation, axis, parent2Link, disableCollision);
-        finalizeMultiDof(nativeId);
+        MultiBodyLink result = configureLink();
 
-        return linkIndex;
+        return result;
     }
 
     /**
@@ -372,8 +373,7 @@ public class MultiBody {
      * @param mass the desired mass of the link (&gt;0)
      * @param inertia the desired moment of inertia of the link (not null,
      * unaffected)
-     * @param parentIndex the index of the parent link (&ge;0) or -1 for a link
-     * joined to the base
+     * @param parent the parent link, or null if parented by the base
      * @param orientation the orientation of the link relative to its parent
      * (not null, unaffected)
      * @param axis the axis of rotation (not null, unaffected)
@@ -383,27 +383,26 @@ public class MultiBody {
      * (not null, unaffected)
      * @param disableCollision true to ignore collisions between the link and
      * its parent
-     * @return the index of the new link (&ge;0)
+     * @return a new link
      */
-    public int configurePrismaticLink(float mass, Vector3f inertia,
-            int parentIndex, Quaternion orientation, Vector3f axis,
-            Vector3f parent2Pivot, Vector3f pivot2Link, boolean disableCollision) {
+    public MultiBodyLink configurePrismaticLink(float mass, Vector3f inertia,
+            MultiBodyLink parent, Quaternion orientation, Vector3f axis,
+            Vector3f parent2Pivot, Vector3f pivot2Link,
+            boolean disableCollision) {
         Validate.positive(mass, "mass");
         Validate.positive(inertia, "inertia");
-        Validate.inRange(parentIndex, "parent index", -1, numConfigured - 1);
         Validate.nonNull(orientation, "orientation");
         Validate.nonNull(axis, "axis");
         Validate.nonNull(parent2Pivot, "parent to pivot offset");
         Validate.nonNull(pivot2Link, "pivot to link offset");
-        assert numConfigured < countLinks();
+        assert numConfigured < links.length;
 
-        int linkIndex = numConfigured;
-        ++numConfigured;
-        setupPrismatic(nativeId, linkIndex, mass, inertia, parentIndex,
+        int parentIndex = (parent == null) ? -1 : parent.index();
+        setupPrismatic(nativeId, numConfigured, mass, inertia, parentIndex,
                 orientation, axis, parent2Pivot, pivot2Link, disableCollision);
-        finalizeMultiDof(nativeId);
+        MultiBodyLink result = configureLink();
 
-        return linkIndex;
+        return result;
     }
 
     /**
@@ -412,8 +411,7 @@ public class MultiBody {
      * @param mass the desired mass of the link (&gt;0)
      * @param inertia the desired moment of inertia of the link (not null,
      * unaffected)
-     * @param parentIndex the index of the parent link (&ge;0) or -1 for a link
-     * joined to the base
+     * @param parent the parent link, or null if parented by the base
      * @param orientation the orientation of the link relative to its parent
      * (not null, unaffected)
      * @param axis the axis of rotation (not null, unaffected)
@@ -423,27 +421,26 @@ public class MultiBody {
      * (not null, unaffected)
      * @param disableCollision true to ignore collisions between the link and
      * its parent
-     * @return the index of the new link (&ge;0)
+     * @return a new link
      */
-    public int configureRevoluteLink(float mass, Vector3f inertia,
-            int parentIndex, Quaternion orientation, Vector3f axis,
-            Vector3f parent2Pivot, Vector3f pivot2Link, boolean disableCollision) {
+    public MultiBodyLink configureRevoluteLink(float mass, Vector3f inertia,
+            MultiBodyLink parent, Quaternion orientation, Vector3f axis,
+            Vector3f parent2Pivot, Vector3f pivot2Link,
+            boolean disableCollision) {
         Validate.positive(mass, "mass");
         Validate.positive(inertia, "inertia");
-        Validate.inRange(parentIndex, "parent index", -1, numConfigured - 1);
         Validate.nonNull(orientation, "orientation");
         Validate.nonNull(axis, "axis");
         Validate.nonNull(parent2Pivot, "parent to pivot offset");
         Validate.nonNull(pivot2Link, "pivot to link offset");
-        assert numConfigured < countLinks();
+        assert numConfigured < links.length;
 
-        int linkIndex = numConfigured;
-        ++numConfigured;
-        setupRevolute(nativeId, linkIndex, mass, inertia, parentIndex,
+        int parentIndex = (parent == null) ? -1 : parent.index();
+        setupRevolute(nativeId, numConfigured, mass, inertia, parentIndex,
                 orientation, axis, parent2Pivot, pivot2Link, disableCollision);
-        finalizeMultiDof(nativeId);
+        MultiBodyLink result = configureLink();
 
-        return linkIndex;
+        return result;
     }
 
     /**
@@ -452,8 +449,7 @@ public class MultiBody {
      * @param mass the desired mass of the link (&gt;0)
      * @param inertia the desired moment of inertia of the link (not null,
      * unaffected)
-     * @param parentIndex the index of the parent link (&ge;0) or -1 for a link
-     * joined to the base
+     * @param parent the parent link, or null if parented by the base
      * @param orientation the orientation of the link relative to its parent
      * (not null, unaffected)
      * @param parent2Pivot the offset of the pivot from the parent's center of
@@ -462,26 +458,34 @@ public class MultiBody {
      * (not null, unaffected)
      * @param disableCollision true to ignore collisions between the link and
      * its parent
-     * @return the index of the new link (&ge;0)
+     * @return a new link
      */
-    public int configureSphericalLink(float mass, Vector3f inertia,
-            int parentIndex, Quaternion orientation,
-            Vector3f parent2Pivot, Vector3f pivot2Link, boolean disableCollision) {
+    public MultiBodyLink configureSphericalLink(float mass, Vector3f inertia,
+            MultiBodyLink parent, Quaternion orientation, Vector3f parent2Pivot,
+            Vector3f pivot2Link, boolean disableCollision) {
         Validate.positive(mass, "mass");
         Validate.positive(inertia, "inertia");
-        Validate.inRange(parentIndex, "parent index", -1, numConfigured - 1);
         Validate.nonNull(orientation, "orientation");
         Validate.nonNull(parent2Pivot, "parent to pivot offset");
         Validate.nonNull(pivot2Link, "pivot to link offset");
-        assert numConfigured < countLinks();
+        assert numConfigured < links.length;
 
-        int linkIndex = numConfigured;
-        ++numConfigured;
-        setupSpherical(nativeId, linkIndex, mass, inertia, parentIndex,
+        int parentIndex = (parent == null) ? -1 : parent.index();
+        setupSpherical(nativeId, numConfigured, mass, inertia, parentIndex,
                 orientation, parent2Pivot, pivot2Link, disableCollision);
-        finalizeMultiDof(nativeId);
+        MultiBodyLink result = configureLink();
 
-        return linkIndex;
+        return result;
+    }
+
+    /**
+     * Count the configured links in this MultiBody.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countConfiguredLinks() {
+        assert numConfigured >= 0 : numConfigured;
+        return numConfigured;
     }
 
     /**
@@ -495,22 +499,26 @@ public class MultiBody {
     }
 
     /**
-     * Count the links.
-     *
-     * @return the count, not including the base (&ge;0)
-     */
-    public int countLinks() {
-        int result = getNumLinks(nativeId);
-        return result;
-    }
-
-    /**
-     * Count the position variables.
+     * Count the position variables in this MultiBody.
      *
      * @return the count (&ge;0)
      */
     public int countPositionVariables() {
         int result = getNumPosVars(nativeId);
+        return result;
+    }
+
+    /**
+     * Access the index link of this MultiBody.
+     *
+     * @param linkIndex (&ge;0, &lt;numConfigured)
+     * @return the pre-existing instance (not null)
+     */
+    public MultiBodyLink getLink(int linkIndex) {
+        Validate.inRange(linkIndex, "link index", 0, numConfigured - 1);
+        MultiBodyLink result = links[linkIndex];
+
+        assert result != null;
         return result;
     }
 
@@ -562,20 +570,6 @@ public class MultiBody {
      */
     public boolean isUsingRK4() {
         boolean result = isUsingRK4Integration(nativeId);
-        return result;
-    }
-
-    /**
-     * Determine the joint velocity of the indexed link.
-     *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @return the velocity
-     */
-    public float jointVelocity(int linkIndex) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-
-        float result = getJointVel(nativeId, linkIndex);
         return result;
     }
 
@@ -675,32 +669,6 @@ public class MultiBody {
     }
 
     /**
-     * Alter the position of the indexed link's joint.
-     *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @param position the desired position
-     */
-    public void setJointPosition(int linkIndex, float position) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-
-        setJointPos(nativeId, linkIndex, position);
-    }
-
-    /**
-     * Alter the velocity of the indexed link's joint.
-     *
-     * @param linkIndex which link (&ge;0, &lt;numLinks)
-     * @param velocity the desired velocity
-     */
-    public void setJointVelocity(int linkIndex, float velocity) {
-        int numLinks = countLinks();
-        Validate.inRange(linkIndex, "link index", 0, numLinks - 1);
-
-        setJointVel(nativeId, linkIndex, velocity);
-    }
-
-    /**
      * Alter whether this MultiBody uses global velocities.
      *
      * @param setting true to use global velocities
@@ -742,6 +710,25 @@ public class MultiBody {
     public String toString() {
         String result = getClass().getSimpleName();
         result += "#" + Long.toHexString(nativeId);
+
+        return result;
+    }
+    // *************************************************************************
+    // private Java methods
+
+    /**
+     * Configure a new link that's just been set up.
+     *
+     * @return the new link (not null)
+     */
+    private MultiBodyLink configureLink() {
+        int linkIndex = numConfigured;
+        ++numConfigured;
+
+        finalizeMultiDof(nativeId);
+
+        MultiBodyLink result = new MultiBodyLink(this, linkIndex);
+        links[linkIndex] = result;
 
         return result;
     }
@@ -793,13 +780,9 @@ public class MultiBody {
 
     native private boolean getCanWakeup(long multiBodyId);
 
-    native private float getJointVel(long multiBodyId, int linkIndex);
-
     native private float getKineticEnergy(long multiBodyId);
 
     native private float getLinearDamping(long multiBodyId);
-
-    native private long getLink(long multiBodyId, int linkIndex);
 
     native private float getMaxAppliedImpulse(long multiBodyId);
 
@@ -831,12 +814,6 @@ public class MultiBody {
 
     native private void setBaseWorldTransform(long multiBodyId,
             Transform transform);
-
-    native private void setJointPos(long multiBodyId, int linkIndex,
-            float position);
-
-    native private void setJointVel(long multiBodyId, int linkIndex,
-            float velocity);
 
     native private void setupFixed(long multiBodyId, int linkIndex,
             float mass, Vector3f inertiaVector, int parentLinkIndex,

@@ -190,7 +190,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& angularMomentum = pMultiBody->getAngularMomentum();
     jmeBulletUtil::convert(env, &angularMomentum, storeVector);
@@ -221,7 +221,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseForce
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& baseForce = pMultiBody->getBaseForce();
     jmeBulletUtil::convert(env, &baseForce, storeVector);
@@ -237,7 +237,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseInertia
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& baseInertia = pMultiBody->getBaseInertia();
     jmeBulletUtil::convert(env, &baseInertia, storeVector);
@@ -268,7 +268,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseOmega
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& baseOmega = pMultiBody->getBaseOmega();
     jmeBulletUtil::convert(env, &baseOmega, storeVector);
@@ -284,7 +284,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBasePos
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& basePos = pMultiBody->getBasePos();
     jmeBulletUtil::convert(env, &basePos, storeVector);
@@ -300,7 +300,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseTorque
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& baseTorque = pMultiBody->getBaseTorque();
     jmeBulletUtil::convert(env, &baseTorque, storeVector);
@@ -316,7 +316,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseVel
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",);
-    NULL_CHECK(storeVector, "The storeVector does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
 
     const btVector3& baseVel = pMultiBody->getBaseVel();
     jmeBulletUtil::convert(env, &baseVel, storeVector);
