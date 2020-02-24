@@ -215,6 +215,16 @@ public class CollisionSpace {
     }
 
     /**
+     * Access the CollisionSpace <b>running on this thread</b>. For parallel
+     * physics, this can be invoked from the OpenGL thread.
+     *
+     * @return the pre-existing CollisionSpace running on this thread
+     */
+    public static CollisionSpace getCollisionSpace() {
+        return physicsSpaceTL.get();
+    }
+
+    /**
      * Enumerate ghost objects that have been added to this space and not yet
      * removed.
      *
@@ -235,16 +245,6 @@ public class CollisionSpace {
         result.addAll(physicsGhostObjects.values());
 
         return result;
-    }
-
-    /**
-     * Access the CollisionSpace <b>running on this thread</b>. For parallel
-     * physics, this can be invoked from the OpenGL thread.
-     *
-     * @return the pre-existing CollisionSpace running on this thread
-     */
-    public static CollisionSpace getCollisionSpace() {
-        return physicsSpaceTL.get();
     }
 
     /**
