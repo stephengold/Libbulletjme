@@ -300,6 +300,26 @@ public class MultiBody {
     }
 
     /**
+     * Read the set of collision groups with which this multibody can collide.
+     *
+     * @return bit mask
+     */
+    public int collideWithGroups() {
+        int result = getCollideWithGroups(nativeId);
+        return result;
+    }
+
+    /**
+     * Read the collision group of this multibody.
+     *
+     * @return the collision group (bit mask with exactly one bit set)
+     */
+    public int collisionGroup() {
+        int result = getCollisionGroup(nativeId);
+        return result;
+    }
+
+    /**
      * Configure a new link that is fixed to its parent.
      *
      * @param mass the desired mass of the link (&gt;0)
@@ -613,6 +633,16 @@ public class MultiBody {
     }
 
     /**
+     * Determine the ID of the PhysicsSpace to which this multibody is added.
+     *
+     * @return the ID, or zero if not in any space
+     */
+    public long spaceId() {
+        long spaceId = getSpace(nativeId);
+        return spaceId;
+    }
+
+    /**
      * Alter the angular velocity of the base.
      *
      * @param angularVelocity the desired angular-velocity vector (in
@@ -665,6 +695,34 @@ public class MultiBody {
     public void setBaseVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
         setBaseVel(nativeId, velocity);
+    }
+
+    /**
+     * Directly alter the collision groups with which this multibody can
+     * collide.
+     *
+     * @param groups desired groups, ORed together (bit mask,
+     * default=COLLISION_GROUP_01)
+     */
+    public void setCollideWithGroups(int groups) {
+        setCollideWithGroups(nativeId, groups);
+    }
+
+    /**
+     * Alter which collision group this multibody belongs to.
+     * <p>
+     * Groups are represented by integer bit masks with exactly one bit set.
+     * Pre-made variables are available in PhysicsCollisionObject.
+     * <p>
+     * Two objects can collide only if one of them has the collisionGroup of the
+     * other in its collideWithGroups set.
+     *
+     * @param group the collisionGroup to apply (bit mask with exactly one bit
+     * set, default=COLLISION_GROUP_01)
+     */
+    public void setCollisionGroup(int group) {
+        Validate.require(Integer.bitCount(group) == 1, "exactly one bit set");
+        setCollisionGroup(nativeId, group);
     }
 
     /**
@@ -779,6 +837,10 @@ public class MultiBody {
 
     native private boolean getCanWakeup(long multiBodyId);
 
+    native private int getCollideWithGroups(long multiBodyId);
+
+    native private int getCollisionGroup(long multiBodyId);
+
     native private float getKineticEnergy(long multiBodyId);
 
     native private float getLinearDamping(long multiBodyId);
@@ -792,6 +854,8 @@ public class MultiBody {
     native private int getNumLinks(long multiBodyId);
 
     native private int getNumPosVars(long multiBodyId);
+
+    native private long getSpace(long multiBodyId);
 
     native private boolean getUseGyroTerm(long multiBodyId);
 
@@ -813,6 +877,11 @@ public class MultiBody {
 
     native private void setBaseWorldTransform(long multiBodyId,
             Transform transform);
+
+    native private void setCollideWithGroups(long multiBodyId,
+            int collisionGroups);
+
+    native private void setCollisionGroup(long multiBodyId, int collisionGroup);
 
     native private void setupFixed(long multiBodyId, int linkIndex,
             float mass, Vector3f inertiaVector, int parentLinkIndex,

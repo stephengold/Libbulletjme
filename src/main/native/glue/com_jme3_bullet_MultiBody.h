@@ -177,6 +177,22 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    getCollideWithGroups
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getCollisionGroup
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    getKineticEnergy
  * Signature: (J)F
  */
@@ -229,6 +245,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getSpace
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
   (JNIEnv *, jobject, jlong);
 
 /*
@@ -302,6 +326,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
   (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setCollideWithGroups
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollideWithGroups
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setCollisionGroup
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_MultiBody

@@ -29,9 +29,11 @@ import com.jme3.bullet.CollisionSpace;
 import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.MultiBodyJointType;
 import com.jme3.bullet.MultiBodyLink;
+import com.jme3.bullet.MultiBodySpace;
 import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
+import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.shapes.Box2dShape;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
@@ -110,6 +112,9 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, location.z, 0.2f);
     }
 
+    /**
+     * Generate a collision shape using V-HACD.
+     */
     @Test
     public void test002() {
         loadNativeLibrary();
@@ -146,12 +151,18 @@ public class TestLibbulletjme {
          * Generate a hulls for the mesh.
          */
         VHACDParameters parameters = new VHACDParameters();
-        List<VHACDHull> hulls
+        List<VHACDHull> vhacdHulls
                 = VHACD.compute(positionArray, indexArray, parameters);
-        /*
-         * Check the results.
-         */
-        Assert.assertEquals(2, hulls.size());
+        Assert.assertEquals(2, vhacdHulls.size());
+
+        CompoundCollisionShape compound = new CompoundCollisionShape();
+        int numHullVertices = 0;
+        for (VHACDHull vhacdHull : vhacdHulls) {
+            HullCollisionShape hullShape = new HullCollisionShape(vhacdHull);
+            numHullVertices += hullShape.countHullVertices();
+            compound.addChildShape(hullShape);
+        }
+        Assert.assertEquals(25, numHullVertices);
     }
 
     /**
@@ -512,6 +523,30 @@ public class TestLibbulletjme {
                 PhysicsSpace.BroadphaseType.DBVT);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
+        /*
+         * Multibody spaces with various broadphase accelerators.
+         */
+        space = new MultiBodySpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new MultiBodySpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new MultiBodySpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new MultiBodySpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
     }
 
     /**
@@ -570,10 +605,34 @@ public class TestLibbulletjme {
                 Vector3f.ZERO, PhysicsSpace.BroadphaseType.DBVT);
         verifyPhysicsSpaceDefaults(space);
         performDropTest(boxShape, space);
+        /*
+         * Multibody spaces with various broadphase accelerators.
+         */
+        space = new MultiBodySpace(Vector3f.ZERO,
+                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        verifyCollisionSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new MultiBodySpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        verifyCollisionSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new MultiBodySpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        verifyCollisionSpaceDefaults(space);
+        performDropTest(boxShape, space);
+
+        space = new MultiBodySpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        performDropTest(boxShape, space);
     }
 
     /**
-     * Construct a MultiBody and verify its properties.
+     * Construct a MultiBody and add it to a MultiBodySpace.
      */
     @Test
     public void test006() {
@@ -595,6 +654,10 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, multiBody.baseTorque(null), 0f);
         assertEquals(0f, 0f, 0f, multiBody.baseVelocity(null), 0f);
         Assert.assertTrue(multiBody.canWakeup());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                multiBody.collideWithGroups());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                multiBody.collisionGroup());
         Assert.assertEquals(0, multiBody.countDofs());
         Assert.assertEquals(0, multiBody.countConfiguredLinks());
         Assert.assertEquals(0, multiBody.countPositionVariables());
@@ -606,6 +669,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0.04f, multiBody.linearDamping(), 0f);
         Assert.assertEquals(1000f, multiBody.maxAppliedImpulse(), 0f);
         Assert.assertEquals(100f, multiBody.maxCoordinateVelocity(), 0f);
+        Assert.assertEquals(0L, multiBody.spaceId());
 
         float linkMass = 0.1f;
         Vector3f linkInertia = new Vector3f(0.1f, 0.1f, 0.1f);
@@ -679,19 +743,37 @@ public class TestLibbulletjme {
         Assert.assertEquals(5, multiBody.countConfiguredLinks());
         Assert.assertEquals(8, multiBody.countDofs());
         Assert.assertEquals(9, multiBody.countPositionVariables());
+
+        MultiBodySpace space = new MultiBodySpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        space.add(multiBody);
+
+        Assert.assertEquals(space.getSpaceId(), multiBody.spaceId());
+        Assert.assertEquals(0, space.countCollisionObjects());
+        Assert.assertEquals(0, space.countJoints());
+        Assert.assertEquals(1, space.countMultiBodies());
+        Assert.assertEquals(0, space.countRigidBodies());
+        Assert.assertFalse(space.isEmpty());
+
+        space.remove(multiBody);
+
+        Assert.assertEquals(0L, multiBody.spaceId());
+        Assert.assertEquals(0, space.countMultiBodies());
+        Assert.assertTrue(space.isEmpty());
     }
     // *************************************************************************
     // private methods
 
-    private void assertEquals(float x, float y, float z, float w, Quaternion q,
-            float tolerance) {
+    private static void assertEquals(float x, float y, float z, float w,
+            Quaternion q, float tolerance) {
         Assert.assertEquals(x, q.getX(), tolerance);
         Assert.assertEquals(y, q.getY(), tolerance);
         Assert.assertEquals(z, q.getZ(), tolerance);
         Assert.assertEquals(w, q.getW(), tolerance);
     }
 
-    private void assertEquals(float x, float y, float z, Vector3f vector,
+    private static void assertEquals(float x, float y, float z, Vector3f vector,
             float tolerance) {
         Assert.assertEquals(x, vector.x, tolerance);
         Assert.assertEquals(y, vector.y, tolerance);
@@ -719,7 +801,8 @@ public class TestLibbulletjme {
      * @param dropShape the shape to drop (not null)
      * @param space the space in which to perform the test (not null, modified)
      */
-    private void performDropTest(CollisionShape dropShape, PhysicsSpace space) {
+    private static void performDropTest(CollisionShape dropShape,
+            PhysicsSpace space) {
         Assert.assertTrue(space.isEmpty());
         /*
          * Add a static horizontal plane at y=-1.
@@ -772,7 +855,8 @@ public class TestLibbulletjme {
      * @param shape the shape to add to the space (not null)
      * @param space the space in which to perform the tests (not null, modified)
      */
-    private void performRayTests(CollisionShape shape, CollisionSpace space) {
+    private static void performRayTests(CollisionShape shape,
+            CollisionSpace space) {
         Assert.assertTrue(space.isEmpty());
 
         PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
@@ -805,7 +889,7 @@ public class TestLibbulletjme {
      *
      * @param shape the shape to test (not null, unaffected)
      */
-    private void verifyCollisionShapeDefaults(CollisionShape shape) {
+    private static void verifyCollisionShapeDefaults(CollisionShape shape) {
         Assert.assertNotNull(shape);
         Assert.assertNotEquals(0L, shape.getObjectId());
         assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
@@ -816,7 +900,7 @@ public class TestLibbulletjme {
      *
      * @param space the space to test (not null, unaffected)
      */
-    private void verifyCollisionSpaceDefaults(CollisionSpace space) {
+    private static void verifyCollisionSpaceDefaults(CollisionSpace space) {
         Assert.assertNotNull(space);
         Assert.assertTrue(space.isEmpty());
         Assert.assertEquals(0, space.countCollisionObjects());
@@ -829,7 +913,7 @@ public class TestLibbulletjme {
      *
      * @param space the space to test (not null, unaffected)
      */
-    private void verifyPhysicsSpaceDefaults(PhysicsSpace space) {
+    private static void verifyPhysicsSpaceDefaults(PhysicsSpace space) {
         verifyCollisionSpaceDefaults(space);
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(0, space.countRigidBodies());
@@ -845,7 +929,7 @@ public class TestLibbulletjme {
      *
      * @param simplex the shape to test (not null, unaffected)
      */
-    private void verifySimplexDefaults(SimplexCollisionShape simplex) {
+    private static void verifySimplexDefaults(SimplexCollisionShape simplex) {
         verifyCollisionShapeDefaults(simplex);
         Assert.assertEquals(0.04f, simplex.getMargin(), 0f);
 

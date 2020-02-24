@@ -29,13 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include "com_jme3_bullet_MultiBody.h"
+#include "btMultiBody.h"
+#include "jmeBulletUtil.h"
 
 /*
  * Author: Stephen Gold
  */
-#include "com_jme3_bullet_MultiBody.h"
-#include "btMultiBody.h"
-#include "jmeBulletUtil.h"
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -121,17 +121,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearVelocities
  * Signature: (IFLcom/jme3/math/Vector3f;ZZ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
-(JNIEnv *env, jobject, jint numLinks, jfloat baseMass, jobject inertiaVector,
-        jboolean fixedBase, jboolean canSleep) {
+(JNIEnv *env, jobject object, jint numLinks, jfloat baseMass,
+        jobject inertiaVector, jboolean fixedBase, jboolean canSleep) {
     jmeClasses::initJavaClasses(env);
 
     NULL_CHECK(inertiaVector, "The intertia vector does not exist.", 0)
     btVector3 inertia;
     jmeBulletUtil::convert(env, inertiaVector, &inertia);
 
-    btMultiBody * const
-            pMultiBody = new btMultiBody(numLinks, baseMass, inertia, fixedBase,
-            canSleep);
+    btMultiBody * const pMultiBody = new btMultiBody(numLinks, baseMass,
+            inertia, fixedBase, canSleep);
+
+    jmeUserPointer * const pUser = new jmeUserPointer();
+    pUser->javaCollisionObject = env->NewWeakGlobalRef(object);
+    pUser->group = 0x1;
+    pUser->groups = 0x1;
+    pUser->space = NULL;
+    pMultiBody->setUserPointer(pUser);
 
     return reinterpret_cast<jlong> (pMultiBody);
 }
@@ -161,6 +167,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
 
     if (pMultiBody) {
+        const jmeUserPointer * const
+                pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+        if (pUser) {
+            delete pUser;
+        }
         delete pMultiBody;
     }
 }
@@ -370,6 +381,40 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    getCollideWithGroups
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
+(JNIEnv *, jobject, jlong multiBodyId) {
+    const btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
+
+    const jmeUserPointer * const
+            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    jint groups = pUser->groups;
+    return groups;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getCollisionGroup
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
+(JNIEnv *, jobject, jlong multiBodyId) {
+    const btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
+
+    const jmeUserPointer * const
+            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    jint group = pUser->group;
+    return group;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    getJointVel
  * Signature: (JI)F
  */
@@ -507,6 +552,23 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
 
     const int numPosVars = pMultiBody->getNumPosVars();
     return (jint) numPosVars;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getSpace
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
+(JNIEnv *, jobject, jlong multiBodyId) {
+    const btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
+
+    const jmeUserPointer * const
+            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    const jmeCollisionSpace *pSpace = pUser->space;
+    return reinterpret_cast<jlong> (pSpace);
 }
 
 /*
@@ -657,6 +719,38 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
     jmeBulletUtil::convert(env, transform, &tr, &scale);
 
     pMultiBody->setBaseWorldTransform(tr);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setCollideWithGroups
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollideWithGroups
+(JNIEnv *, jobject, jlong multiBodyId, jint groups) {
+    btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.",);
+
+    jmeUserPointer * const
+            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    pUser->groups = groups;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setCollisionGroup
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
+(JNIEnv *, jobject, jlong multiBodyId, jint group) {
+    btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.",);
+
+    jmeUserPointer * const
+            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    pUser->group = group;
 }
 
 /*
