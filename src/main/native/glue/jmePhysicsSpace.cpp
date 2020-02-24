@@ -35,24 +35,21 @@
 /*
  * Author: Normen Hansen
  */
-void jmePhysicsSpace::createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
-        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphaseId) {
-    const btVector3 min = btVector3(minX, minY, minZ);
-    const btVector3 max = btVector3(maxX, maxY, maxZ);
-
-    btBroadphaseInterface * const pBroadphase
-            = createBroadphase(min, max, broadphaseId);
+void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
+        const btVector3& max, int broadphaseId) {
+    btBroadphaseInterface * const
+            pBroadphase = createBroadphase(min, max, broadphaseId);
 
     // Use the default collision dispatcher plus GImpact.
-    btCollisionConfiguration * const pCollisionConfiguration
-            = new btDefaultCollisionConfiguration();
-    btCollisionDispatcher * const pDispatcher
-            = new btCollisionDispatcher(pCollisionConfiguration);
+    btCollisionConfiguration * const
+            pCollisionConfiguration = new btDefaultCollisionConfiguration();
+    btCollisionDispatcher * const
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Use the default constraint solver.
-    btConstraintSolver * const pConstraintSolver
-            = new btSequentialImpulseConstraintSolver();
+    btConstraintSolver * const
+            pConstraintSolver = new btSequentialImpulseConstraintSolver();
 
     // Create the discrete dynamics world.
     btDiscreteDynamicsWorld * const pWorld = new btDiscreteDynamicsWorld(
@@ -75,12 +72,12 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
     //printf("contactProcessedCallback %x %x\n", co0, co1);
-    jmeUserPointer *pUser0 = (jmeUserPointer *) pco0->getUserPointer();
-    jmeUserPointer *pUser1 = (jmeUserPointer *) pco1->getUserPointer();
+    jmeUserPointer * const pUser0 = (jmeUserPointer *) pco0->getUserPointer();
+    jmeUserPointer * const pUser1 = (jmeUserPointer *) pco1->getUserPointer();
     if (pUser0 != NULL && pUser1 != NULL) {
-        jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pUser0->space;
+        jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->space;
         if (pSpace != NULL) {
-            JNIEnv *env = pSpace->getEnv();
+            JNIEnv * const env = pSpace->getEnv();
             jobject javaPhysicsSpace
                     = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
             if (javaPhysicsSpace != NULL) {
@@ -118,8 +115,9 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
 
 void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
         btScalar timeStep) {
-    jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv *env = pSpace->getEnv();
+    jmePhysicsSpace * const
+            pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
+    JNIEnv * const env = pSpace->getEnv();
     jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace != NULL) {
         env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
@@ -134,8 +132,9 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
 
 void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
         btScalar timeStep) {
-    jmePhysicsSpace *pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv *env = pSpace->getEnv();
+    jmePhysicsSpace * const
+            pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
+    JNIEnv * const env = pSpace->getEnv();
     jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace != NULL) {
         env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
@@ -150,6 +149,7 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 
 void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
         jfloat accuracy) {
-    btDynamicsWorld *pWorld = getDynamicsWorld();
-    pWorld->stepSimulation(timeInterval, maxSteps, accuracy);
+    btDynamicsWorld * const pWorld = getDynamicsWorld();
+    pWorld->stepSimulation((btScalar) timeInterval, (int) maxSteps,
+            (btScalar) accuracy);
 }

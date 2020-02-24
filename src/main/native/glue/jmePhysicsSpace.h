@@ -43,23 +43,33 @@
 class jmePhysicsSpace : public jmeCollisionSpace {
 public:
 
-    jmePhysicsSpace(JNIEnv *env, jobject javaSpace)
-    : jmeCollisionSpace::jmeCollisionSpace(env, javaSpace) {
+    jmePhysicsSpace(JNIEnv *pEnv, jobject javaSpace)
+    : jmeCollisionSpace::jmeCollisionSpace(pEnv, javaSpace) {
     }
 
-    static void contactStartedCallback(btPersistentManifold * const &);
-    void createPhysicsSpace(jfloat minX, jfloat minY, jfloat minZ,
-            jfloat maxX, jfloat maxY, jfloat maxZ, jint ordinal);
+    static void
+    contactStartedCallback(btPersistentManifold * const &);
 
-    const btDynamicsWorld * getDynamicsWorld() const {
+    void
+    createPhysicsSpace(const btVector3& min, const btVector3& max,
+            int ordinal);
+
+    const btDynamicsWorld *
+    getDynamicsWorld() const {
         return (btDynamicsWorld *) m_collisionWorld;
     }
 
-    btDynamicsWorld * getDynamicsWorld() {
+    btDynamicsWorld *
+    getDynamicsWorld() {
         return (btDynamicsWorld *) m_collisionWorld;
     }
 
-    static void postTickCallback(btDynamicsWorld *, btScalar);
-    static void preTickCallback(btDynamicsWorld *, btScalar);
-    void stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy);
+    static void
+    postTickCallback(btDynamicsWorld *, btScalar);
+
+    static void
+    preTickCallback(btDynamicsWorld *, btScalar);
+
+    void
+    stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy);
 };
