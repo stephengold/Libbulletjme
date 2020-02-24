@@ -69,10 +69,12 @@ private:
     };
 };
 
-class jmeUserPointer {
+class jmeCollisionSpace;
+
+class jmeUserPointer { // TODO rename - the class is not a pointer!
 public:
-    jobject javaCollisionObject;
+    jobject javaCollisionObject; // a MultiBody or PhysicsCollisionObject
     jint group;
     jint groups;
-    void * space;
+    jmeCollisionSpace * space; // NULL means not added to any space
 };
