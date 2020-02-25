@@ -18,6 +18,7 @@ matrix:
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
   - os: linux
     arch: arm64
+    dist: bionic
     compiler: gcc
     addons:
       apt:
