@@ -44,22 +44,23 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     bool collides = (pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask) != 0
             || (pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask) != 0;
     if (collides) {
-        btCollisionObject *pco0 = (btCollisionObject *) pProxy0->m_clientObject;
-        btCollisionObject *pco1 = (btCollisionObject *) pProxy1->m_clientObject;
-        jmeUserPointer *pUser0 = (jmeUserPointer *) pco0->getUserPointer();
-        jmeUserPointer *pUser1 = (jmeUserPointer *) pco1->getUserPointer();
+        btCollisionObject * const pco0 = (btCollisionObject *) pProxy0->m_clientObject;
+        btCollisionObject * const pco1 = (btCollisionObject *) pProxy1->m_clientObject;
+        jmeUserPointer * const pUser0 = (jmeUserPointer *) pco0->getUserPointer();
+        jmeUserPointer * const pUser1 = (jmeUserPointer *) pco1->getUserPointer();
         if (pUser0 != NULL && pUser1 != NULL) {
             collides = (pUser0->group & pUser1->groups) != 0
                     || (pUser1->group & pUser0->groups) != 0;
 
             if (collides) {
-                jmeCollisionSpace *pSpace = (jmeCollisionSpace *) pUser0->space;
-                JNIEnv *env = pSpace->getEnv();
+                jmeCollisionSpace * const
+                        pSpace = (jmeCollisionSpace *) pUser0->space;
+                JNIEnv * const env = pSpace->getEnv();
                 jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
                 jobject javaCollisionObject0 = env->NewLocalRef(pUser0->javaCollisionObject);
                 jobject javaCollisionObject1 = env->NewLocalRef(pUser1->javaCollisionObject);
 
-                jboolean notifyResult = env->CallBooleanMethod(
+                const jboolean notifyResult = env->CallBooleanMethod(
                         javaPhysicsSpace,
                         jmeClasses::CollisionSpace_notifyCollisionGroupListeners,
                         javaCollisionObject0, javaCollisionObject1);
