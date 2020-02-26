@@ -31,6 +31,8 @@
  */
 package com.jme3.bullet;
 
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.objects.MultiBodyCollider;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
@@ -77,6 +79,10 @@ public class MultiBodyLink {
      */
     final private MultiBody multiBody;
     /**
+     * collider for this link, or null if none
+     */
+    private MultiBodyCollider collider = null;
+    /**
      * parent of this link, or null if joined to the base
      */
     final private MultiBodyLink parentLink;
@@ -113,6 +119,24 @@ public class MultiBodyLink {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add a collider for this link.
+     *
+     * @param shape (may be null, alias created)
+     */
+    public void addCollider(CollisionShape shape) {
+        assert collider == null : collider;
+
+        collider = new MultiBodyCollider(multiBody, linkIndex);
+        long colliderId = collider.getObjectId();
+        setCollider(linkId, colliderId);
+        assert getCollider(multiBodyId, linkIndex) == colliderId;
+        if (shape != null) {
+            collider.setCollisionShape(shape);
+        }
+        assert getCollider(multiBodyId, linkIndex) == colliderId;
+    }
 
     /**
      * Add an external force to this link.
@@ -242,6 +266,22 @@ public class MultiBodyLink {
     }
 
     /**
+     * Access the collider for this link.
+     *
+     * @return the pre-existing instance, or null if none
+     */
+    public MultiBodyCollider getCollider() {
+        if (collider == null) {
+            assert getCollider(multiBodyId, linkIndex) == 0L;
+        } else {
+            assert getCollider(multiBodyId, linkIndex)
+                    == collider.getObjectId();
+        }
+
+        return collider;
+    }
+
+    /**
      * Access the MultiBody that contains this link.
      *
      * @return the pre-existing instance (not null)
@@ -326,6 +366,17 @@ public class MultiBodyLink {
     }
 
     /**
+     * Determine the type of joint between this link and its parent.
+     *
+     * @return an enum value (not null)
+     */
+    public MultiBodyJointType jointType() {
+        int ordinal = getJointType(linkId);
+        MultiBodyJointType result = MultiBodyJointType.values()[ordinal];
+        return result;
+    }
+
+    /**
      * Determine the velocity of the indexed DOF.
      *
      * @param dofIndex which degree of freedom (&ge;0, &lt;numDofs)
@@ -334,17 +385,6 @@ public class MultiBodyLink {
     public float jointVelocity(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, numDofs - 1);
         float result = getJointVel(multiBodyId, linkIndex, dofIndex);
-        return result;
-    }
-
-    /**
-     * Determine the type of joint between this link and its parent.
-     *
-     * @return an enum value (not null)
-     */
-    public MultiBodyJointType jointType() {
-        int ordinal = getJointType(linkId);
-        MultiBodyJointType result = MultiBodyJointType.values()[ordinal];
         return result;
     }
 
@@ -455,7 +495,7 @@ public class MultiBodyLink {
 
     native private void getAppliedTorque(long linkId, Vector3f storeVector);
 
-    native private long getCollider(long linkId);
+    native private long getCollider(long multiBodyId, int linkIndex);
 
     native private void getConstraintForce(long linkId, Vector3f storeVector);
 
@@ -495,6 +535,8 @@ public class MultiBodyLink {
 
     native private void localPosToWorld(long multiBodyId, int linkIndex,
             Vector3f locationVector);
+
+    native private void setCollider(long linkId, long colliderId);
 
     native private void setJointPos(long multiBodyId, int linkIndex,
             int dofIndex, float positionVector);

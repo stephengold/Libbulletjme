@@ -163,15 +163,16 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAppliedTorque
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
  * Method:    getCollider
- * Signature: (J)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodyLink_getCollider
-(JNIEnv *, jobject, jlong linkId) {
-    const btMultibodyLink * const
-            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
-    NULL_CHECK(pLink, "The link does not exist.", 0);
+(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex) {
+    const btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const class btMultiBodyLinkCollider * const pCollider = pLink->m_collider;
+    const btMultiBodyLinkCollider *
+            pCollider = pMultiBody->getLinkCollider((int) linkIndex);
     return reinterpret_cast<jlong> (pCollider);
 }
 
@@ -462,6 +463,24 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_localPosToWorld
             = pMultiBody->localPosToWorld(linkIndex, local_pos);
 
     jmeBulletUtil::convert(env, &world_pos, locationVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    setCollider
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setCollider
+(JNIEnv *, jobject, jlong linkId, jlong colliderId) {
+    btMultibodyLink * const
+            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
+    NULL_CHECK(pLink, "The link does not exist.",);
+
+    btMultiBodyLinkCollider * const
+            pCollider = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
+    NULL_CHECK(pCollider, "The collider does not exist.",);
+
+    pLink->m_collider = pCollider;
 }
 
 /*

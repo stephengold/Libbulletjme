@@ -66,10 +66,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAppliedTorque
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
  * Method:    getCollider
- * Signature: (J)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodyLink_getCollider
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
@@ -206,6 +206,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_localFrameToWorld
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_localPosToWorld
   (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    setCollider
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setCollider
+  (JNIEnv *, jobject, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
