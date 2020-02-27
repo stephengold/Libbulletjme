@@ -104,7 +104,10 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      * @return count (&ge;0)
      */
     public int countSoftBodies() {
-        int count = softBodiesAdded.size();
+        long spaceId = getSpaceId();
+        int count = getNumSoftBodies(spaceId);
+        assert count == softBodiesAdded.size();
+
         return count;
     }
 
@@ -205,7 +208,6 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     @Override
-    @SuppressWarnings("unchecked")
     public Collection<PhysicsCollisionObject> getPcoList() {
         Collection<PhysicsCollisionObject> result = super.getPcoList();
         result.addAll(softBodiesAdded.values());
@@ -301,6 +303,8 @@ public class PhysicsSoftSpace extends PhysicsSpace {
 
     native private long createPhysicsSoftSpace(Vector3f minVector,
             Vector3f maxVector, int broadphaseType, boolean threading);
+
+    native private int getNumSoftBodies(long spaceId);
 
     native private long getWorldInfo(long softSpaceId);
 

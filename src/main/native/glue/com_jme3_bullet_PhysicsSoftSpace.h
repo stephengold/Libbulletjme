@@ -31,6 +31,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
 
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
+ * Method:    getNumSoftBodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getNumSoftBodies
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSoftSpace
  * Method:    getWorldInfo
  * Signature: (J)J
  */

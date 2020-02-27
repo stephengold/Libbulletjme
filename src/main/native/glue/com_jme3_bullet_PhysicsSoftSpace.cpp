@@ -92,6 +92,26 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
 
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
+ * Method:    getNumSoftBodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getNumSoftBodies
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmePhysicsSoftSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+            const btSoftRigidDynamicsWorld * const
+            pWorld = pSpace->getSoftDynamicsWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
+
+    const btSoftBodyArray& softBodies = pWorld->getSoftBodyArray();
+    int sz = softBodies.size();
+    return (jint) sz;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSoftSpace
  * Method:    getWorldInfo
  * Signature: (J)J
  */
