@@ -305,6 +305,18 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
+     * Determine the global CFM for this space.
+     *
+     * @return the CFM value
+     */
+    public float getGlobalCfm() {
+        long spaceId = getSpaceId();
+        float result = getGlobalCfm(spaceId);
+
+        return result;
+    }
+
+    /**
      * Copy the gravitational acceleration for newly-added bodies.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -466,6 +478,16 @@ public class PhysicsSpace extends CollisionSpace {
     public void setAccuracy(float accuracy) {
         Validate.positive(accuracy, "accuracy");
         this.accuracy = accuracy;
+    }
+
+    /**
+     * Alter the global CFM for this space.
+     *
+     * @param cfm the desired value (default=0)
+     */
+    public void setGlobalCfm(float cfm) {
+        long spaceId = getSpaceId();
+        setGlobalCfm(spaceId, cfm);
     }
 
     /**
@@ -836,6 +858,8 @@ public class PhysicsSpace extends CollisionSpace {
     native private long createPhysicsSpace(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ, int broadphaseType);
 
+    native private float getGlobalCfm(long spaceId);
+
     native private void getGravity(long spaceId, Vector3f storeVector);
 
     native private int getNumConstraints(long spaceId);
@@ -847,6 +871,8 @@ public class PhysicsSpace extends CollisionSpace {
     native private void removeConstraint(long spaceId, long constraintId);
 
     native private void removeRigidBody(long spaceId, long rigidBodyId);
+
+    native private void setGlobalCfm(long spaceId, float cfm);
 
     native private void setGravity(long spaceId, Vector3f gravityVector);
 

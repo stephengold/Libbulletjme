@@ -138,6 +138,22 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getGlobalCfm
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_PhysicsSpace_getGlobalCfm
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+
+    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    btScalar globalCfm = pWorld->getSolverInfo().m_globalCfm;
+    return (jfloat) globalCfm;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -165,7 +181,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
     NULL_CHECK(pSpace, "The physics space does not exist.", 0);
 
     int count = pSpace->getDynamicsWorld()->getNumConstraints();
-    return count;
+    return (jint) count;
 }
 
 /*
@@ -260,6 +276,21 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
     pUser->space = NULL;
 
     pSpace->getDynamicsWorld()->removeRigidBody(pBody);
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setGlobalCfm
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGlobalCfm
+(JNIEnv *, jobject, jlong spaceId, jfloat cfm) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.",)
+
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    pWorld->getSolverInfo().m_globalCfm = btScalar(cfm);
 }
 
 /*
