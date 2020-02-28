@@ -415,24 +415,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getJointVel
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getJointVel
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex) {
-    const btMultiBody * const
-            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
-
-    const int i = (int) linkIndex;
-    btAssert(i >= 0);
-
-    const btScalar jointVel = pMultiBody->getJointVel(i);
-    return (jfloat) jointVel;
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBody
  * Method:    getKineticEnergy
  * Signature: (J)F
  */
@@ -459,24 +441,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
 
     const btScalar linearDamping = pMultiBody->getLinearDamping();
     return (jfloat) linearDamping;
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    getLink
- * Signature: (JI)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getLink
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex) {
-    const btMultiBody * const
-            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
-
-    const int i = (int) linkIndex;
-    btAssert(i >= 0);
-
-    const btMultibodyLink * pLink = &pMultiBody->getLink(i);
-    return reinterpret_cast<jlong> (pLink);
 }
 
 /*
@@ -645,6 +609,24 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
 
     const bool isUsingRK4Integration = pMultiBody->isUsingRK4Integration();
     return (jboolean) isUsingRK4Integration;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setBaseCollider
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseCollider
+(JNIEnv *, jobject, jlong multiBodyId, jlong colliderId) {
+    btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHECK(pMultiBody, "The multibody does not exist.",);
+
+    btMultiBodyLinkCollider * const
+            pCollider = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
+    NULL_CHECK(pCollider, "The collider does not exist.",);
+
+    pMultiBody->setBaseCollider(pCollider);
 }
 
 /*

@@ -34,6 +34,7 @@
 #include "jmeBulletUtil.h"
 #include "btMultiBody.h"
 #include "btMultiBodyDynamicsWorld.h"
+#include "btMultiBodyLinkCollider.h"
 
 /*
  * Author: Stephen Gold
@@ -62,6 +63,38 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
     pUser->space = pSpace;
 
     pWorld->addMultiBody(pMultiBody);
+
+    btMultiBodyLinkCollider *pCollider = pMultiBody->getBaseCollider();
+    if (pCollider && pCollider->getCollisionShape()) {
+        pWorld->addCollisionObject((btCollisionObject *) pCollider);
+    }
+    for (int i = 0; i < pMultiBody->getNumLinks(); ++i) {
+        pCollider = pMultiBody->getLink(i).m_collider;
+        if (pCollider && pCollider->getCollisionShape()) {
+            pWorld->addCollisionObject((btCollisionObject *) pCollider);
+        }
+    }
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    addMultiBodyConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstraint
+(JNIEnv *, jobject, jlong spaceId, jlong constraintId) {
+    jmeMultiBodySpace * const
+            pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
+
+    btMultiBodyConstraint * const
+            pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The constraint does not exist.",)
+
+    pWorld->addMultiBodyConstraint(pConstraint);
 }
 
 /*
@@ -90,6 +123,42 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    getNumMultibodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmeMultiBodySpace * const
+            pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+            const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
+
+    int numMultiBodies = pWorld->getNumMultibodies();
+    return (jint) numMultiBodies;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    getNumMultiBodyConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstraints
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmeMultiBodySpace * const
+            pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+    const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
+
+    int numConstraints = pWorld->getNumMultiBodyConstraints();
+    return (jint) numConstraints;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
  * Method:    removeMultiBody
  * Signature: (JJ)V
  */
@@ -100,7 +169,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
     NULL_CHECK(pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    // btAssert(pWorld->getWorldType() == BT_TODO_DYNAMICS_WORLD);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
@@ -110,5 +179,37 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
             pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
     pUser->space = NULL;
 
+    btMultiBodyLinkCollider *pCollider = pMultiBody->getBaseCollider();
+    if (pCollider && pCollider->getCollisionShape()) {
+        pWorld->removeCollisionObject((btCollisionObject *) pCollider);
+    }
+    for (int i = 0; i < pMultiBody->getNumLinks(); ++i) {
+        pCollider = pMultiBody->getLink(i).m_collider;
+        if (pCollider && pCollider->getCollisionShape()) {
+            pWorld->removeCollisionObject((btCollisionObject *) pCollider);
+        }
+    }
+
     pWorld->removeMultiBody(pMultiBody);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    removeMultiBodyConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstraint
+(JNIEnv *, jobject, jlong spaceId, jlong constraintId) {
+    jmeMultiBodySpace * const
+            pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
+
+    btMultiBodyConstraint * const
+            pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
+    NULL_CHECK(pConstraint, "The constraint does not exist.",)
+
+    pWorld->removeMultiBodyConstraint(pConstraint);
 }

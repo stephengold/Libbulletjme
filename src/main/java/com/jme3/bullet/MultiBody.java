@@ -31,9 +31,13 @@
  */
 package com.jme3.bullet;
 
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.objects.MultiBodyCollider;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -59,11 +63,15 @@ public class MultiBody {
     /**
      * number of links that have been configured (&ge;0)
      */
-    private int numConfigured;
+    private int numConfigured = 0;
     /**
      * unique identifier of the btMultiBody
      */
     final private long nativeId;
+    /**
+     * collider for the base, or null if none
+     */
+    private MultiBodyCollider baseCollider = null;
     /**
      * references to configured links
      */
@@ -94,11 +102,27 @@ public class MultiBody {
         assert getNumLinks(nativeId) == numLinks;
         finalizeMultiDof(nativeId);
 
-        numConfigured = 0;
         links = new MultiBodyLink[numLinks];
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add a collider for the base.
+     *
+     * @param shape (not null, alias created)
+     */
+    public void addBaseCollider(CollisionShape shape) {
+        Validate.nonNull(shape, "shape");
+        assert baseCollider == null : baseCollider;
+
+        baseCollider = new MultiBodyCollider(this, -1);
+        long colliderId = baseCollider.getObjectId();
+        setBaseCollider(nativeId, colliderId);
+
+        baseCollider.attachShape(shape);
+        assert getBaseCollider(nativeId) == colliderId;
+    }
 
     /**
      * Add an external force to the base.
@@ -499,6 +523,29 @@ public class MultiBody {
     }
 
     /**
+     * Test whether the specified collider is part of this MultiBody.
+     *
+     * @param collider the collider to search for (not null, unaffected)
+     * @return true if included, otherwise false
+     */
+    public boolean contains(MultiBodyCollider collider) {
+        boolean result = false;
+
+        for (MultiBodyLink link : links) {
+            if (link != null && link.getCollider() == collider) {
+                result = true;
+                break;
+            }
+        }
+
+        if (!result && collider == baseCollider) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    /**
      * Count the configured links in this MultiBody.
      *
      * @return the count (&ge;0)
@@ -529,6 +576,21 @@ public class MultiBody {
     }
 
     /**
+     * Access the collider for the base.
+     *
+     * @return the pre-existing instance, or null if none
+     */
+    public MultiBodyCollider getBaseCollider() {
+        if (baseCollider == null) {
+            assert getBaseCollider(nativeId) == 0L;
+        } else {
+            assert getBaseCollider(nativeId) == baseCollider.getObjectId();
+        }
+
+        return baseCollider;
+    }
+
+    /**
      * Access the index link of this MultiBody.
      *
      * @param linkIndex (&ge;0, &lt;numConfigured)
@@ -539,6 +601,30 @@ public class MultiBody {
         MultiBodyLink result = links[linkIndex];
 
         assert result != null;
+        return result;
+    }
+
+    /**
+     * Enumerate the colliders in this MultiBody.
+     *
+     * @return a new collection of pre-existing instances
+     */
+    public Collection<MultiBodyCollider> listColliders() {
+        int count = numConfigured + 1;
+        Collection<MultiBodyCollider> result = new ArrayList<>(count);
+
+        if (baseCollider != null) {
+            result.add(baseCollider);
+        }
+        for (MultiBodyLink link : links) {
+            if (link != null) {
+                MultiBodyCollider collider = link.getCollider();
+                if (collider != null) {
+                    result.add(collider);
+                }
+            }
+        }
+
         return result;
     }
 
@@ -867,6 +953,8 @@ public class MultiBody {
     native private boolean isUsingGlobalVelocities(long multiBodyId);
 
     native private boolean isUsingRK4Integration(long multiBodyId);
+
+    native private void setBaseCollider(long multiBodyId, long colliderId);
 
     native private void setBaseOmega(long multiBodyId,
             Vector3f angularVelocityVector);

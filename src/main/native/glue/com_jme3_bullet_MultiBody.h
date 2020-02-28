@@ -297,6 +297,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    setBaseCollider
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseCollider
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    setBaseOmega
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */

@@ -31,6 +31,8 @@
  */
 package com.jme3.bullet;
 
+import com.jme3.bullet.collision.PhysicsCollisionObject;
+import com.jme3.bullet.objects.MultiBodyCollider;
 import com.jme3.math.Vector3f;
 import java.util.Collection;
 import java.util.Map;
@@ -89,7 +91,10 @@ public class MultiBodySpace extends PhysicsSpace {
      * @return the count (&ge;0)
      */
     public int countMultiBodies() {
-        int count = multiBodiesAdded.size();
+        long spaceId = getSpaceId();
+        int count = getNumMultibodies(spaceId);
+        assert count == multiBodiesAdded.size();
+
         return count;
     }
 
@@ -132,6 +137,32 @@ public class MultiBodySpace extends PhysicsSpace {
     }
 
     /**
+     * Test whether the specified collision object is added to this space.
+     *
+     * @param pco the object to search for (not null, unaffected)
+     * @return true if currently added, otherwise false
+     */
+    @Override
+    public boolean contains(PhysicsCollisionObject pco) {
+        boolean result = false;
+
+        if (pco instanceof MultiBodyCollider) {
+            MultiBodyCollider collider = (MultiBodyCollider) pco;
+            for (MultiBody multiBody : multiBodiesAdded.values()) {
+                result = multiBody.contains(collider);
+                if (result) {
+                    break;
+                }
+            }
+
+        } else {
+            result = super.contains(pco);
+        }
+
+        return result;
+    }
+
+    /**
      * Must be invoked on the designated physics thread.
      */
     @Override
@@ -160,6 +191,23 @@ public class MultiBodySpace extends PhysicsSpace {
     }
 
     /**
+     * Enumerate collision objects that have been added to this space and not
+     * yet removed.
+     *
+     * @return a new collection of pre-existing instances (not null)
+     */
+    @Override
+    public Collection<PhysicsCollisionObject> getPcoList() {
+        Collection<PhysicsCollisionObject> result = super.getPcoList();
+        for (MultiBody multiBody : multiBodiesAdded.values()) {
+            Collection<MultiBodyCollider> pcos = multiBody.listColliders();
+            result.addAll(pcos);
+        }
+
+        return result;
+    }
+
+    /**
      * Remove the specified object from this space.
      *
      * @param object the object to remove, or null
@@ -179,6 +227,11 @@ public class MultiBodySpace extends PhysicsSpace {
     // *************************************************************************
     // private methods
 
+    /**
+     * Add the specified MultiBody and all its colliders.
+     *
+     * @param multiBody (not null)
+     */
     private void addMultiBody(MultiBody multiBody) {
         long multiBodyId = multiBody.nativeId();
         if (multiBodiesAdded.containsKey(multiBodyId)) {
@@ -195,6 +248,11 @@ public class MultiBodySpace extends PhysicsSpace {
         addMultiBody(spaceId, multiBodyId);
     }
 
+    /**
+     * Remove the specified MultiBody and all its colliders.
+     *
+     * @param multiBody (not null)
+     */
     private void removeMultiBody(MultiBody multiBody) {
         long multiBodyId = multiBody.nativeId();
         if (!multiBodiesAdded.containsKey(multiBodyId)) {
@@ -213,8 +271,17 @@ public class MultiBodySpace extends PhysicsSpace {
 
     native private void addMultiBody(long spaceId, long multiBodyId);
 
+    native private void addMultiBodyConstraint(long spaceId, long constraintId);
+
     native private long createMultiBodySpace(Vector3f minVector,
             Vector3f maxVector, int broadphaseType);
 
+    native private int getNumMultibodies(long spaceId);
+
+    native private int getNumMultiBodyConstraints(long spaceId);
+
     native private void removeMultiBody(long spaceId, long multiBodyId);
+
+    native private void removeMultiBodyConstraint(long spaceId,
+            long constraintId);
 }

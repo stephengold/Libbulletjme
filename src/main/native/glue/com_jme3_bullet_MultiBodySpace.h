@@ -23,6 +23,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    addMultiBodyConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstraint
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
  * Method:    createMultiBodySpace
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;I)J
  */
@@ -31,10 +39,34 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    getNumMultibodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    getNumMultiBodyConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstraints
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
  * Method:    removeMultiBody
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
+  (JNIEnv *, jobject, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    removeMultiBodyConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstraint
   (JNIEnv *, jobject, jlong, jlong);
 
 #ifdef __cplusplus
