@@ -661,6 +661,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, multiBody.countDofs());
         Assert.assertEquals(0, multiBody.countConfiguredLinks());
         Assert.assertEquals(0, multiBody.countPositionVariables());
+        Assert.assertNull(multiBody.getBaseCollider());
         Assert.assertNotEquals(0L, multiBody.nativeId());
         Assert.assertFalse(multiBody.isUsingGlobalVelocities());
         Assert.assertTrue(multiBody.isUsingGyroTerm());
@@ -671,19 +672,32 @@ public class TestLibbulletjme {
         Assert.assertEquals(100f, multiBody.maxCoordinateVelocity(), 0f);
         Assert.assertEquals(0L, multiBody.spaceId());
 
+        float radius = 0.4f;
+        CollisionShape shape = new SphereCollisionShape(radius);
+
+        multiBody.addBaseCollider(shape);
+        Assert.assertNotNull(multiBody.getBaseCollider());
+
         float linkMass = 0.1f;
         Vector3f linkInertia = new Vector3f(0.1f, 0.1f, 0.1f);
+
         MultiBodyLink link0 = multiBody.configureFixedLink(linkMass,
                 linkInertia, null, Quaternion.IDENTITY, Vector3f.UNIT_X,
                 Vector3f.UNIT_X);
+        Assert.assertNull(link0.getCollider());
+        link0.addCollider(shape);
+        Assert.assertNotNull(link0.getCollider());
 
         boolean disableCollision = true;
         MultiBodyLink link1 = multiBody.configurePlanarLink(linkMass,
                 linkInertia, link0, Quaternion.IDENTITY, Vector3f.UNIT_Y,
                 Vector3f.UNIT_X, disableCollision);
+
         MultiBodyLink link2 = multiBody.configurePrismaticLink(linkMass,
                 linkInertia, link1, Quaternion.IDENTITY, Vector3f.UNIT_Y,
                 Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
+        link2.addCollider(shape);
+
         MultiBodyLink link3 = multiBody.configureRevoluteLink(linkMass,
                 linkInertia, link2, Quaternion.IDENTITY, Vector3f.UNIT_Y,
                 Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
@@ -692,6 +706,7 @@ public class TestLibbulletjme {
         MultiBodyLink link4 = multiBody.configureSphericalLink(linkMass,
                 linkInertia, link3, Quaternion.IDENTITY, Vector3f.UNIT_X,
                 Vector3f.UNIT_X, enableCollision);
+        link4.addCollider(shape);
 
         Assert.assertEquals(link0, multiBody.getLink(0));
         assertEquals(0f, 0f, 0f, link0.appliedForce(null), 0f);
@@ -700,6 +715,7 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, link0.constraintTorque(null), 0f);
         Assert.assertEquals(0, link0.countDofs());
         Assert.assertEquals(0, link0.countPositionVariables());
+        Assert.assertNotNull(link0.getCollider());
         Assert.assertEquals(multiBody, link0.getMultiBody());
         Assert.assertNull(link0.getParentLink());
         Assert.assertEquals(0, link0.index());
@@ -730,6 +746,7 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, link3.appliedForce(null), 0f);
         Assert.assertEquals(1, link3.countDofs());
         Assert.assertEquals(1, link3.countPositionVariables());
+        Assert.assertNull(link3.getCollider());
         Assert.assertFalse(link3.isCollisionWithParent());
         Assert.assertEquals(MultiBodyJointType.Revolute, link3.jointType());
 
@@ -747,10 +764,11 @@ public class TestLibbulletjme {
         MultiBodySpace space = new MultiBodySpace(Vector3f.ZERO, Vector3f.ZERO,
                 PhysicsSpace.BroadphaseType.DBVT);
         verifyCollisionSpaceDefaults(space);
+
         space.add(multiBody);
 
         Assert.assertEquals(space.getSpaceId(), multiBody.spaceId());
-        Assert.assertEquals(0, space.countCollisionObjects());
+        Assert.assertEquals(4, space.countCollisionObjects());
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(1, space.countMultiBodies());
         Assert.assertEquals(0, space.countRigidBodies());
@@ -759,6 +777,7 @@ public class TestLibbulletjme {
         space.remove(multiBody);
 
         Assert.assertEquals(0L, multiBody.spaceId());
+        Assert.assertEquals(0, space.countCollisionObjects());
         Assert.assertEquals(0, space.countMultiBodies());
         Assert.assertTrue(space.isEmpty());
     }
@@ -918,10 +937,20 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
+        Assert.assertEquals(0f, space.getGlobalCfm(), 0f);
         assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
         Assert.assertEquals(4, space.maxSubSteps());
         Assert.assertEquals(0.1f, space.maxTimeStep(), 0f);
         Assert.assertEquals(10, space.getSolverNumIterations());
+
+        if (space instanceof MultiBodySpace) {
+            MultiBodySpace mbSpace = (MultiBodySpace) space;
+            Assert.assertEquals(0, mbSpace.countMultiBodies());
+
+        } else if (space instanceof PhysicsSoftSpace) {
+            PhysicsSoftSpace softSpace = (PhysicsSoftSpace) space;
+            Assert.assertEquals(0, softSpace.countSoftBodies());
+        }
     }
 
     /**
