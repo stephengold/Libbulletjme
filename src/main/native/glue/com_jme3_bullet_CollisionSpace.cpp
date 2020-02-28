@@ -43,7 +43,7 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
-(JNIEnv *env, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *, jobject, jlong spaceId, jlong pcoId) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.",)
@@ -125,8 +125,7 @@ struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
         if (normalInWorldSpace) {
             m_hitNormalWorld = rayResult.m_hitNormalLocal;
         } else {
-            m_hitNormalWorld
-                    = m_collisionObject->getWorldTransform().getBasis()
+            m_hitNormalWorld = m_collisionObject->getWorldTransform().getBasis()
                     * rayResult.m_hitNormalLocal;
         }
         /*
@@ -194,8 +193,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
 
     pSpace->getCollisionWorld()->removeCollisionObject(pCollisionObject);
 
-    jmeUserPointer * const pUser
-            = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jmeUserPointer * const
+            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
     pUser->space = NULL;
 }
 
@@ -212,8 +211,7 @@ public btCollisionWorld::ConvexResultCallback {
     m_resultlist(resultlist) {
     }
 
-    btScalar addSingleResult(
-            btCollisionWorld::LocalConvexResult& convexResult,
+    btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult,
             bool normalInWorldSpace) {
         btVector3 m_hitNormalWorld;
         if (normalInWorldSpace) {

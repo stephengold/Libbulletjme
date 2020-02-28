@@ -131,8 +131,7 @@ void jmeBulletUtil::convert(JNIEnv *env, const btQuaternion *pqIn,
 
 // Copy a btTransform to a JME Transform
 
-void jmeBulletUtil::convert(JNIEnv *env, const btTransform *ptIn,
-        jobject out) {
+void jmeBulletUtil::convert(JNIEnv *env, const btTransform *ptIn, jobject out) {
     NULL_CHECK(ptIn, "The input btTransform does not exist.",)
     NULL_CHECK(out, "The output Transform does not exist.",);
 
@@ -388,7 +387,8 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *env, jobject resultList,
     jobject normalvec = env->AllocObject(jmeClasses::Vector3f);
 
     convert(env, pHitNormal, normalvec);
-    jmeUserPointer *pUser = (jmeUserPointer *) pHitObject->getUserPointer();
+    jmeUserPointer * const
+            pUser = (jmeUserPointer *) pHitObject->getUserPointer();
 
     env->SetObjectField(result, jmeClasses::PhysicsRay_normal, normalvec);
     env->SetFloatField(result, jmeClasses::PhysicsRay_hitFraction, hitFraction);
