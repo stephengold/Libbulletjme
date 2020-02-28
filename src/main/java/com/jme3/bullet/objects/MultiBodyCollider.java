@@ -33,8 +33,10 @@ package com.jme3.bullet.objects;
 
 import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
+import com.jme3.bullet.collision.shapes.CollisionShape;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.Validate;
 
 /**
  * A collision object for a link or base in a MultiBody, based on Bullet's
@@ -70,6 +72,21 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
         assert getInternalType(objectId) == 64 : getInternalType(objectId);
 
         super.initUserPointer();
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Attach the specified collision shape to this collider. Used internally.
+     *
+     * @param shape the shape to attach (not null, alias created)
+     */
+    public void attachShape(CollisionShape shape) {
+        Validate.nonNull(shape, "shape");
+
+        setCollisionShape(shape);
+        long shapeId = shape.getObjectId();
+        super.attachCollisionShape(objectId, shapeId);
     }
     // *************************************************************************
     // native methods
