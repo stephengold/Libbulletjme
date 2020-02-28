@@ -1,12 +1,41 @@
 # release log for the Libbulletjme Project
 
+## Version 4.0.0 released on 28 February 2020
+
+ + API changes:
+   + Isolated collision detection from dynamics by adding 2 new classes:
+     `CollisionSpace` and `jmeCollisionSpace`.
+   + Deleted the `com.jme3.bullet.debug` package, including `DebugTools`.
+   + Deleted the `isNormalInWorldSpace()` methods from the
+     `PhysicsRayTestResult` and `PhysicsSweepTestResult` classes.
+   + Privatized the `scale` field in the `CompoundMesh` class.
+   + Privatized 2 public fields in the `VHACDHull` class.
+   + Changed arguments to `ConvexShape` in `Convex2dShape` constructor,
+     `PhysicsCharacter` constructor, and `CollisionSpace.sweepTest()`.
+   + Changed argument to `float...` in `HullCollisionShape` constructor.
+   + Changed arguments in `jmeCollisionShape.createCollisionSpace()`.
+   + Changed arguments in `jmePhysicsSpace.createPhysicsSpace()`.
+   + Deleted many fields and methods from the `jme3utilities`,
+     `jme3utilities.math`, and `com.jme3.math` packages.
+ + Provided multibody/Featherstone support by adding 5 new classes:
+   `MultiBody`, `MultiBodyCollider`, `MultiBodyJointType`, `MultiBodyLink`,
+   and `MultiBodySpace`.
+ + Added new methods:
+   + 2 `PhysicsSpace` constructors
+   + `VHACDHull.clonePositions()`
+   + `PhysicsSpace.getGlobalCfm()`
+   + `PhysicsSpace.setGlobalCfm()`
+   + `PhysicsSoftSpace.getNumSoftBodies()`
+ + Added more `package-info.java` files.
+ + Built using Gradle v6.2.1
+
 ## Version 3.0.12 released on 18 February 2020
 
  + Bugfix: `btAssert()` in `btVector3::normalize()` (Minie issue #3).
  + Added `countCollisionObjects()` and `getWorldType()` methods
    to the `PhysicsSpace` class.
  + Added more automated tests to `TestLibbulletjme`.
- + Added package-info.java files.
+ + Added `package-info.java` files.
  + Built using Gradle v6.2
 
 ## Version 3.0.8 released on 16 February 2020
