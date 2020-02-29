@@ -11,7 +11,7 @@ Complete source code (in C++ and Java) is provided under
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
-It also supports Linux on the 64-bit ARM architecture (aarch64),
+It occasionally supports Linux on the 64-bit ARM architecture (aarch64),
 for a total of 7 platforms.
 
 For each platform, 4 native libraries are distributed:
@@ -47,11 +47,11 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:3.0.12'
+            compile 'com.github.stephengold:Libbulletjme:4.0.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 28 native libraries.
+    You probably don't need all 24 (or 28) native libraries.
     Start with the ReleaseSp library for your development environment
     (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
@@ -135,7 +135,7 @@ public class HelloLibbulletjme {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 3.0.12`
+     + `git checkout -b latest 4.0.0`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][latest]
      + follow the "Source code (zip)" link
@@ -172,6 +172,7 @@ btCapsuleShape                      .bullet.collision.shapes.CapsuleCollisionSha
 btCollisionObject                   .bullet.collision.PhysicsCollisionObject
 btCollisionObject::CollisionFlags   .bullet.collision.CollisionFlag
 btCollisionShape                    .bullet.collision.shapes.CollisionShape
+btCollisionWorld                    .bullet.CollisionSpace
 btCollisionWorld::LocalConvexResult .bullet.collision.PhysicsSweepTestResult
 btCollisionWorld::LocalRayResult    .bullet.collision.PhysicsRayTestResult
 btCompoundShape                     .bullet.collision.shapes.CompoundCollisionShape
@@ -195,6 +196,11 @@ btIndexedMesh                       .bullet.collision.shapes.infos.IndexedMesh
 btKinematicCharacterController      .bullet.objects.PhysicsCharacter
 btManifoldPoint                     .bullet.collision.PhysicsCollisionEvent
 btMatrix3x3                         .math.Matrix3f
+btMultiBody                         .bullet.MultiBody
+btMultiBodyCollider                 .bullet.objects.MultiBodyCollider
+btMultibodyLink                     .bullet.MultiBodyLink
+btMultibodyLink::eFeatherstoneJointType .bullet.MultiBodyJointType
+btMultiBodyDynamicsWorld            .bullet.MultiBody
 btMultiSphereShape                  .bullet.collision.shapes.MultiSphere
 btPairCachingGhostObject            .bullet.objects.PhysicsGhostObject
 btPoint2PointConstraint             .bullet.joints.Point2PointJoint
@@ -239,7 +245,6 @@ IVHACD::Parameters                  vhacd.VHACDParamters
 
 ## What's missing
 
- + `btMultiBody` (Featherstone)
  + certain constraints:
    + `btFixedConstraint`
    + `btGearConstraint`
@@ -279,7 +284,8 @@ IVHACD::Parameters                  vhacd.VHACDParamters
 [chrome]: https://www.google.com/chrome "Chrome"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
-[gcc]: https://gcc.gnu.org "Gcc Compiler"
+[gcc]: https://gcc.gnu.org "GNU Compiler Collection"
+[gdb]: https://www.gnu.org/software/gdb/ "GNU Project Debugger"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
@@ -336,7 +342,7 @@ The Libbulletjme Project is based on open-source software:
 This project also made use of the following software tools:
 
   + the [FindBugs] source-code analyzer
-  + the [GNU Compiler Collection][gcc]
+  + the [GNU Compiler Collection][gcc] and [Project Debugger][gdb]
   + the [Git] revision-control system and GitK commit viewer
   + the [Firefox] and [Google Chrome][chrome] web browsers
   + the [Gradle] build tool
