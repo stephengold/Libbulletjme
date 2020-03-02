@@ -49,7 +49,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A Bullet-JME physics space with its own btDynamicsWorld.
+ * A CollisionSpace to simulate dynamic physics, with its own btDynamicsWorld.
  *
  * @author normenhansen
  */
@@ -193,61 +193,6 @@ public class PhysicsSpace extends CollisionSpace {
     // new methods exposed
 
     /**
-     * Add the specified object to this space. TODO re-order methods
-     *
-     * @param object the collision object or PhysicsJoint to add (not null)
-     */
-    @Override
-    public void add(Object object) {
-        Validate.nonNull(object, "object");
-
-        if (object instanceof PhysicsJoint) {
-            addJoint((PhysicsJoint) object);
-        } else {
-            super.add(object);
-        }
-    }
-
-    /**
-     * Add the specified collision object to this space.
-     *
-     * @param pco the collision object to add (not null)
-     */
-    @Override
-    public void addCollisionObject(PhysicsCollisionObject pco) {
-        Validate.nonNull(pco, "collision object");
-
-        if (pco instanceof PhysicsRigidBody) {
-            addRigidBody((PhysicsRigidBody) pco);
-        } else if (pco instanceof PhysicsCharacter) {
-            addCharacter((PhysicsCharacter) pco);
-        } else {
-            super.addCollisionObject(pco);
-        }
-    }
-
-    /**
-     * Test whether the specified collision object is added to this space.
-     *
-     * @param pco the object to test (not null, unaffected)
-     * @return true if currently added, otherwise false
-     */
-    @Override
-    public boolean contains(PhysicsCollisionObject pco) {
-        boolean result;
-        long pcoId = pco.getObjectId();
-        if (pco instanceof PhysicsRigidBody) {
-            result = physicsBodies.containsKey(pcoId);
-        } else if (pco instanceof PhysicsCharacter) {
-            result = physicsCharacters.containsKey(pcoId);
-        } else {
-            result = super.contains(pco);
-        }
-
-        return result;
-    }
-
-    /**
      * Test whether the specified PhysicsJoint is added to this space.
      *
      * @param joint the joint to test (not null, unaffected)
@@ -338,20 +283,8 @@ public class PhysicsSpace extends CollisionSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<PhysicsJoint> getJointList() {
-        return new TreeSet<>(physicsJoints.values());
-    }
-
-    /**
-     * Enumerate collision objects that have been added to this space and not
-     * yet removed.
-     *
-     * @return a new collection of pre-existing instances (not null)
-     */
-    @Override
-    public Collection<PhysicsCollisionObject> getPcoList() {
-        Collection<PhysicsCollisionObject> result = super.getPcoList();
-        result.addAll(physicsBodies.values());
-        result.addAll(physicsCharacters.values());
+        TreeSet<PhysicsJoint> result = new TreeSet<>();
+        result.addAll(physicsJoints.values());
 
         return result;
     }
@@ -397,22 +330,6 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Test whether this space is empty.
-     *
-     * @return true if empty, otherwise false
-     */
-    @Override
-    public boolean isEmpty() {
-        boolean result = super.isEmpty()
-                && physicsCharacters.isEmpty()
-                && physicsBodies.isEmpty()
-                && physicsJoints.isEmpty()
-                && physicsVehicles.isEmpty(); // TODO unnecessary
-
-        return result;
-    }
-
-    /**
      * Read the maximum number of time steps per frame.
      *
      * @return number of steps (&gt;0) or 0 for a variable time step
@@ -430,41 +347,6 @@ public class PhysicsSpace extends CollisionSpace {
     public float maxTimeStep() {
         assert maxTimeStep > 0f : maxTimeStep;
         return maxTimeStep;
-    }
-
-    /**
-     * Remove the specified object from this space.
-     *
-     * @param object the collision object or PhysicsJoint to remove, or null
-     */
-    @Override
-    public void remove(Object object) {
-        if (object == null) {
-            return;
-        }
-        if (object instanceof PhysicsJoint) {
-            removeJoint((PhysicsJoint) object);
-        } else {
-            super.remove(object);
-        }
-    }
-
-    /**
-     * Remove the specified collision object from this space.
-     *
-     * @param pco the collision object to remove (not null)
-     */
-    @Override
-    public void removeCollisionObject(PhysicsCollisionObject pco) {
-        Validate.nonNull(pco, "collision object");
-
-        if (pco instanceof PhysicsRigidBody) {
-            removeRigidBody((PhysicsRigidBody) pco);
-        } else if (pco instanceof PhysicsCharacter) {
-            removeCharacter((PhysicsCharacter) pco);
-        } else {
-            super.removeCollisionObject(pco);
-        }
     }
 
     /**
@@ -592,6 +474,71 @@ public class PhysicsSpace extends CollisionSpace {
     // new protected methods
 
     /**
+     * Determine the type of the underlying btDynamicsWorld.
+     *
+     * @param spaceId the Bullet identifier for this space (non-zero)
+     * @return 2 (for a discrete world) or 4 (for a soft-rigid world)
+     */
+    native protected int getWorldType(long spaceId);
+    // *************************************************************************
+    // CollisionSpace methods
+
+    /**
+     * Add the specified object to this space.
+     *
+     * @param object the collision object or PhysicsJoint to add (not null)
+     */
+    @Override
+    public void add(Object object) {
+        Validate.nonNull(object, "object");
+
+        if (object instanceof PhysicsJoint) {
+            addJoint((PhysicsJoint) object);
+        } else {
+            super.add(object);
+        }
+    }
+
+    /**
+     * Add the specified collision object to this space.
+     *
+     * @param pco the collision object to add (not null)
+     */
+    @Override
+    public void addCollisionObject(PhysicsCollisionObject pco) {
+        Validate.nonNull(pco, "collision object");
+
+        if (pco instanceof PhysicsRigidBody) {
+            addRigidBody((PhysicsRigidBody) pco);
+        } else if (pco instanceof PhysicsCharacter) {
+            addCharacter((PhysicsCharacter) pco);
+        } else {
+            super.addCollisionObject(pco);
+        }
+    }
+
+    /**
+     * Test whether the specified collision object is added to this space.
+     *
+     * @param pco the object to test (not null, unaffected)
+     * @return true if currently added, otherwise false
+     */
+    @Override
+    public boolean contains(PhysicsCollisionObject pco) {
+        boolean result;
+        long pcoId = pco.getObjectId();
+        if (pco instanceof PhysicsRigidBody) {
+            result = physicsBodies.containsKey(pcoId);
+        } else if (pco instanceof PhysicsCharacter) {
+            result = physicsCharacters.containsKey(pcoId);
+        } else {
+            result = super.contains(pco);
+        }
+
+        return result;
+    }
+
+    /**
      * Must be invoked on the designated physics thread.
      */
     @Override
@@ -610,12 +557,70 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Determine the type of the underlying btDynamicsWorld.
+     * Enumerate collision objects that have been added to this space and not
+     * yet removed.
      *
-     * @param spaceId the Bullet identifier for this space (non-zero)
-     * @return 2 (for a discrete world) or 4 (for a soft-rigid world)
+     * @return a new collection of pre-existing instances (not null)
      */
-    native protected int getWorldType(long spaceId);
+    @Override
+    public Collection<PhysicsCollisionObject> getPcoList() {
+        Collection<PhysicsCollisionObject> result = super.getPcoList();
+        result.addAll(physicsBodies.values());
+        result.addAll(physicsCharacters.values());
+
+        return result;
+    }
+
+    /**
+     * Test whether this space is empty.
+     *
+     * @return true if empty, otherwise false
+     */
+    @Override
+    public boolean isEmpty() {
+        boolean result = super.isEmpty()
+                && physicsCharacters.isEmpty()
+                && physicsBodies.isEmpty()
+                && physicsJoints.isEmpty()
+                && physicsVehicles.isEmpty(); // TODO unnecessary
+
+        return result;
+    }
+
+    /**
+     * Remove the specified object from this space.
+     *
+     * @param object the collision object or PhysicsJoint to remove, or null
+     */
+    @Override
+    public void remove(Object object) {
+        if (object == null) {
+            return;
+        }
+        if (object instanceof PhysicsJoint) {
+            removeJoint((PhysicsJoint) object);
+        } else {
+            super.remove(object);
+        }
+    }
+
+    /**
+     * Remove the specified collision object from this space.
+     *
+     * @param pco the collision object to remove (not null)
+     */
+    @Override
+    public void removeCollisionObject(PhysicsCollisionObject pco) {
+        Validate.nonNull(pco, "collision object");
+
+        if (pco instanceof PhysicsRigidBody) {
+            removeRigidBody((PhysicsRigidBody) pco);
+        } else if (pco instanceof PhysicsCharacter) {
+            removeCharacter((PhysicsCharacter) pco);
+        } else {
+            super.removeCollisionObject(pco);
+        }
+    }
     // *************************************************************************
     // private Java methods
 
