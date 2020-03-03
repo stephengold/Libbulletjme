@@ -65,6 +65,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAppliedTorque
 
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getAxisBottom
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAxisBottom
+  (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getAxisTop
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAxisTop
+  (JNIEnv *, jobject, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
  * Method:    getCollider
  * Signature: (JI)J
  */
@@ -94,6 +110,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getConstraintTorque
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getDofCount
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getDVector
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getDVector
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getEVector
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getEVector
+  (JNIEnv *, jobject, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
@@ -182,6 +214,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getParentIndex
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getPosVarCount
   (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getQ0Parent2LinkRotation
+ * Signature: (JLcom/jme3/math/Quaternion;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getQ0Parent2LinkRotation
+  (JNIEnv *, jobject, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBodyLink

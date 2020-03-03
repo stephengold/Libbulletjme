@@ -217,6 +217,34 @@ public class MultiBodyLink {
     }
 
     /**
+     * Determine the direction of the joint's axis for a planar, prismatic, or
+     * revolute joint.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the direction (a unit vector, either storeResult or a new vector)
+     */
+    public Vector3f axis(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        MultiBodyJointType jointType = jointType();
+        switch (jointType) {
+            case Planar:
+            case Revolute:
+                getAxisTop(linkId, 0, result);
+                break;
+
+            case Prismatic:
+                getAxisBottom(linkId, 0, result);
+                break;
+
+            default:
+                throw new IllegalStateException("jointType = " + jointType);
+        }
+
+        return result;
+    }
+
+    /**
      * Determine the net constraint force on this link.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -425,7 +453,68 @@ public class MultiBodyLink {
     }
 
     /**
-     * Alter the position of an indexed DOF.
+     * Determine the orientation of the link relative to its parent when Q=0.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the orientation (either storeResult or a new Quaterion)
+     */
+    public Quaternion orientation(Quaternion storeResult) {
+        Quaternion result
+                = (storeResult == null) ? new Quaternion() : storeResult;
+        getQ0Parent2LinkRotation(linkId, result);
+        return result;
+    }
+
+    /**
+     * Determine the offset of the link's center relative to its parent's center
+     * for a planar joint.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the offset (in this link's coordinate system, either storeResult
+     * or a new vector)
+     */
+    public Vector3f parent2Link(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        assert jointType() == MultiBodyJointType.Planar;
+
+        getEVector(linkId, result);
+        return result;
+    }
+
+    /**
+     * Determine the offset from the parent's center to the pivot for a
+     * non-planar joint.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the offset (in the parent's coordinate system, either storeResult
+     * or a new vector)
+     */
+    public Vector3f parent2Pivot(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        assert jointType() != MultiBodyJointType.Planar;
+
+        getEVector(linkId, result);
+        return result;
+    }
+
+    /**
+     * Determine the offset from the pivot to this link's center for a
+     * non-planar joint.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the offset (in this link's coordinate system, either storeResult
+     * or a new vector)
+     */
+    public Vector3f pivot2Link(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        assert jointType() != MultiBodyJointType.Planar;
+
+        getDVector(linkId, result);
+        return result;
+    }
+
+    /**
+     * Alter the position of the indexed DOF.
      *
      * @param dofIndex which degree of freedom (&ge;0, &lt;numDofs)
      * @param position the desired position
@@ -492,6 +581,12 @@ public class MultiBodyLink {
 
     native private void getAppliedTorque(long linkId, Vector3f storeVector);
 
+    native private void getAxisBottom(long linkId, int dofIndex,
+            Vector3f storeVector);
+
+    native private void getAxisTop(long linkId, int dofIndex,
+            Vector3f storeVector);
+
     native private long getCollider(long multiBodyId, int linkIndex);
 
     native private void getConstraintForce(long linkId, Vector3f storeVector);
@@ -499,6 +594,10 @@ public class MultiBodyLink {
     native private void getConstraintTorque(long linkId, Vector3f storeVector);
 
     native private int getDofCount(long linkId);
+
+    native private void getDVector(long linkId, Vector3f storeVector);
+
+    native private void getEVector(long linkId, Vector3f storeVector);
 
     native private int getFlags(long multiBodyId);
 
@@ -523,6 +622,9 @@ public class MultiBodyLink {
     native private int getParentIndex(long linkId);
 
     native private int getPosVarCount(long linkId);
+
+    native private void getQ0Parent2LinkRotation(long linkId,
+            Quaternion storeQuaternion);
 
     native private void getWorldTransform(long linkId,
             Transform storeTransform);

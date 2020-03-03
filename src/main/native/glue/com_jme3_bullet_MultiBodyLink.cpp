@@ -156,8 +156,42 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAppliedTorque
     NULL_CHECK(pLink, "The link does not exist.",);
     NULL_CHECK(storeVector, "The store vector does not exist.",);
 
-    const btVector3 * pTorque = &pLink->m_appliedTorque;
+    const btVector3 * const pTorque = &pLink->m_appliedTorque;
     jmeBulletUtil::convert(env, pTorque, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getAxisBottom
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAxisBottom
+(JNIEnv *env, jobject, jlong linkId, jint dofIndex, jobject storeVector) {
+    const btMultibodyLink * const
+            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
+    NULL_CHECK(pLink, "The link does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
+
+    int dof = (int) dofIndex;
+    const btVector3 * const pAxisBottom = &pLink->getAxisBottom(dof);
+    jmeBulletUtil::convert(env, pAxisBottom, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getAxisTop
+ * Signature: (JILcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAxisTop
+(JNIEnv *env, jobject, jlong linkId, jint dofIndex, jobject storeVector) {
+    const btMultibodyLink * const
+            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
+    NULL_CHECK(pLink, "The link does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
+
+    int dof = (int) dofIndex;
+    const btVector3 * const pAxisTop = &pLink->getAxisTop(dof);
+    jmeBulletUtil::convert(env, pAxisTop, storeVector);
 }
 
 /*
@@ -221,6 +255,38 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getDofCount
 
     const int dofCount = pLink->m_dofCount;
     return (jint) dofCount;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getDVector
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getDVector
+(JNIEnv *env, jobject, jlong linkId, jobject storeVector) {
+    const btMultibodyLink * const
+            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
+    NULL_CHECK(pLink, "The link does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
+
+    const btVector3 * const pDVector = &pLink->m_dVector;
+    jmeBulletUtil::convert(env, pDVector, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getEVector
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getEVector
+(JNIEnv *env, jobject, jlong linkId, jobject storeVector) {
+    const btMultibodyLink * const
+            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
+    NULL_CHECK(pLink, "The link does not exist.",);
+    NULL_CHECK(storeVector, "The store vector does not exist.",);
+
+    const btVector3 * const pEVector = &pLink->m_eVector;
+    jmeBulletUtil::convert(env, pEVector, storeVector);
 }
 
 /*
@@ -403,6 +469,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getPosVarCount
 
     const int posVarCount = pLink->m_posVarCount;
     return (jint) posVarCount;
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodyLink
+ * Method:    getQ0Parent2LinkRotation
+ * Signature: (JLcom/jme3/math/Quaternion;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getQ0Parent2LinkRotation
+(JNIEnv *env, jobject, jlong linkId, jobject storeQuaternion) {
+    const btMultibodyLink * const
+            pLink = reinterpret_cast<btMultibodyLink *> (linkId);
+    NULL_CHECK(pLink, "The link does not exist.",);
+    NULL_CHECK(storeQuaternion, "The store quaternion does not exist.",);
+
+    const btQuaternion * const pRotation = &pLink->m_zeroRotParentToThis;
+    jmeBulletUtil::convert(env, pRotation, storeQuaternion);
 }
 
 /*
