@@ -605,30 +605,6 @@ public class MultiBody {
     }
 
     /**
-     * Enumerate the colliders in this MultiBody.
-     *
-     * @return a new collection of pre-existing instances
-     */
-    public Collection<MultiBodyCollider> listColliders() {
-        int count = numConfigured + 1;
-        Collection<MultiBodyCollider> result = new ArrayList<>(count);
-
-        if (baseCollider != null) {
-            result.add(baseCollider);
-        }
-        for (MultiBodyLink link : links) {
-            if (link != null) {
-                MultiBodyCollider collider = link.getCollider();
-                if (collider != null) {
-                    result.add(collider);
-                }
-            }
-        }
-
-        return result;
-    }
-
-    /**
      * Test whether this MultiBody has a fixed base.
      *
      * @return true &rarr; fixed, false &rarr; movable
@@ -689,6 +665,30 @@ public class MultiBody {
     }
 
     /**
+     * Enumerate the colliders in this MultiBody.
+     *
+     * @return a new collection of pre-existing instances
+     */
+    public Collection<MultiBodyCollider> listColliders() {
+        int count = numConfigured + 1;
+        Collection<MultiBodyCollider> result = new ArrayList<>(count);
+
+        if (baseCollider != null) {
+            result.add(baseCollider);
+        }
+        for (MultiBodyLink link : links) {
+            if (link != null) {
+                MultiBodyCollider collider = link.getCollider();
+                if (collider != null) {
+                    result.add(collider);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Determine the maximum applied impulse.
      *
      * @return the impulse
@@ -716,16 +716,6 @@ public class MultiBody {
     final public long nativeId() {
         assert nativeId != 0L;
         return nativeId;
-    }
-
-    /**
-     * Determine the ID of the PhysicsSpace to which this multibody is added.
-     *
-     * @return the ID, or zero if not in any space
-     */
-    public long spaceId() {
-        long spaceId = getSpace(nativeId);
-        return spaceId;
     }
 
     /**
@@ -809,6 +799,16 @@ public class MultiBody {
     public void setCollisionGroup(int group) {
         Validate.require(Integer.bitCount(group) == 1, "exactly one bit set");
         setCollisionGroup(nativeId, group);
+    }
+
+    /**
+     * Determine the ID of the PhysicsSpace to which this multibody is added.
+     *
+     * @return the ID, or zero if not in any space
+     */
+    public long spaceId() {
+        long spaceId = getSpace(nativeId);
+        return spaceId;
     }
 
     /**
