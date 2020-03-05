@@ -814,7 +814,7 @@ public class MultiBody {
     /**
      * Alter whether this MultiBody uses global velocities.
      *
-     * @param setting true to use global velocities
+     * @param setting true to use global velocities (default=false)
      */
     public void useGlobalVelocities(boolean setting) {
         useGlobalVelocities(nativeId, setting);
@@ -823,7 +823,7 @@ public class MultiBody {
     /**
      * Alter whether this MultiBody uses RK4 integration.
      *
-     * @param setting true to use RK4
+     * @param setting true to use RK4 (default=false)
      */
     public void useRK4(boolean setting) {
         useRK4Integration(nativeId, setting);
@@ -872,6 +872,78 @@ public class MultiBody {
 
         MultiBodyLink result = new MultiBodyLink(this, linkIndex);
         links[linkIndex] = result;
+
+        return result;
+    }
+
+    /**
+     * Configure a new link that's a copy of the specified link, except it's
+     * part of this MultiBody.
+     *
+     * @param original (not null, unaffected)
+     * @return a new link of the same type
+     */
+    public MultiBodyLink configureClonedLink(MultiBodyLink original) {
+        MultiBodyJointType jointType = original.jointType();
+        float mass = original.mass();
+        Vector3f inertia = original.inertia(null);
+        Quaternion orientation = original.orientation(null);
+        boolean disableCollision = !original.isCollisionWithParent();
+
+        MultiBodyLink origParent = original.getParentLink();
+        MultiBodyLink parent = null;
+        if (origParent != null) {
+            int parentIndex = origParent.index();
+            parent = links[parentIndex];
+        }
+
+        Vector3f axis, parent2Link, parent2Pivot, pivot2Link;
+        MultiBodyLink result;
+        switch (jointType) {
+            case Fixed:
+                assert disableCollision == true;
+                parent2Pivot = original.parent2Pivot(null);
+                pivot2Link = original.pivot2Link(null);
+                result = configureFixedLink(mass, inertia, parent, orientation,
+                        parent2Pivot, pivot2Link);
+                break;
+
+            case Planar:
+                axis = original.axis(null);
+                parent2Link = original.parent2Link(null);
+                result = configurePlanarLink(mass, inertia, parent, orientation,
+                        axis, parent2Link, disableCollision);
+                break;
+
+            case Prismatic:
+                axis = original.axis(null);
+                parent2Pivot = original.parent2Pivot(null);
+                pivot2Link = original.pivot2Link(null);
+                result = configurePrismaticLink(mass, inertia, parent,
+                        orientation, axis, parent2Pivot, pivot2Link,
+                        disableCollision);
+                break;
+
+            case Revolute:
+                axis = original.axis(null);
+                parent2Pivot = original.parent2Pivot(null);
+                pivot2Link = original.pivot2Link(null);
+                result = configureRevoluteLink(mass, inertia, parent,
+                        orientation, axis, parent2Pivot, pivot2Link,
+                        disableCollision);
+                break;
+
+            case Spherical:
+                parent2Pivot = original.parent2Pivot(null);
+                pivot2Link = original.pivot2Link(null);
+                result = configureSphericalLink(mass, inertia, parent,
+                        orientation, parent2Pivot, pivot2Link,
+                        disableCollision);
+                break;
+
+            default:
+                throw new IllegalStateException("jointType = " + jointType);
+        }
 
         return result;
     }
