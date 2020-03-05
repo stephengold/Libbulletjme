@@ -74,7 +74,9 @@ public class CollisionSpace {
      */
     private PhysicsSpace.BroadphaseType broadphaseType
             = PhysicsSpace.BroadphaseType.DBVT;
-
+    /**
+     * comparitor for raytest results
+     */
     final private static Comparator<PhysicsRayTestResult> hitFractionComparator
             = new Comparator<PhysicsRayTestResult>() {
         @Override
@@ -93,7 +95,7 @@ public class CollisionSpace {
      */
     private long nativeId = 0L;
     /**
-     * map ghost IDs to added objects
+     * map ghost IDs to added objects TODO rename
      */
     final private Map<Long, PhysicsGhostObject> physicsGhostObjects
             = new ConcurrentHashMap<>(64);
@@ -143,7 +145,7 @@ public class CollisionSpace {
     /**
      * Add the specified object to this space.
      *
-     * @param object the collision object to add (not null, modified)
+     * @param object the collision object to add (not null)
      */
     public void add(Object object) {
         Validate.nonNull(object, "object");
@@ -384,7 +386,7 @@ public class CollisionSpace {
     /**
      * Remove the specified object from this space.
      *
-     * @param object the collision object to remove (modified if not null)
+     * @param object the collision object to remove, or null
      */
     public void remove(Object object) {
         if (object == null) {
@@ -394,8 +396,8 @@ public class CollisionSpace {
             removeCollisionObject((PhysicsCollisionObject) object);
         } else {
             String typeName = object.getClass().getCanonicalName();
-            String msg
-                    = "Cannot remove a " + typeName + " from a physics space.";
+            String msg = "Cannot remove a " + typeName
+                    + " from a collision space.";
             throw new IllegalArgumentException(msg);
         }
     }
