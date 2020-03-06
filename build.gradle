@@ -6,7 +6,7 @@ plugins {
 
 ext {
     artifact = 'Libbulletjme'
-    version = '4.1.0'
+    version = '4.1.1'
     baseName = "$artifact-$version"
 }
 

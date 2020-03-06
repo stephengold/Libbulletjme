@@ -1,6 +1,6 @@
 # release log for the Libbulletjme Project
 
-## Version 4.1.0 released on 5 March 2020
+## Version 4.1.1 released on 5 March 2020
 
  + Added 10 methods to the `MultiBodyLink` class:
    + `axis()`
