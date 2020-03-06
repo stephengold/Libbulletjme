@@ -686,27 +686,6 @@ public class TestLibbulletjme {
                 Vector3f.UNIT_X);
         Assert.assertNull(link0.getCollider());
         link0.addCollider(shape);
-        Assert.assertNotNull(link0.getCollider());
-
-        boolean disableCollision = true;
-        MultiBodyLink link1 = multiBody.configurePlanarLink(linkMass,
-                linkInertia, link0, Quaternion.IDENTITY, Vector3f.UNIT_Y,
-                Vector3f.UNIT_X, disableCollision);
-
-        MultiBodyLink link2 = multiBody.configurePrismaticLink(linkMass,
-                linkInertia, link1, Quaternion.IDENTITY, Vector3f.UNIT_Y,
-                Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
-        link2.addCollider(shape);
-
-        MultiBodyLink link3 = multiBody.configureRevoluteLink(linkMass,
-                linkInertia, link2, Quaternion.IDENTITY, Vector3f.UNIT_Y,
-                Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
-
-        boolean enableCollision = false;
-        MultiBodyLink link4 = multiBody.configureSphericalLink(linkMass,
-                linkInertia, link3, Quaternion.IDENTITY, Vector3f.UNIT_X,
-                Vector3f.UNIT_X, enableCollision);
-        link4.addCollider(shape);
 
         Assert.assertEquals(link0, multiBody.getLink(0));
         assertEquals(0f, 0f, 0f, link0.appliedForce(null), 0f);
@@ -727,6 +706,11 @@ public class TestLibbulletjme {
         assertEquals(1f, 0f, 0f, link0.parent2Pivot(null), 0f);
         assertEquals(1f, 0f, 0f, link0.pivot2Link(null), 0f);
 
+        boolean disableCollision = true;
+        MultiBodyLink link1 = multiBody.configurePlanarLink(linkMass,
+                linkInertia, link0, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+                Vector3f.UNIT_X, disableCollision);
+
         Assert.assertEquals(link1, multiBody.getLink(1));
         assertEquals(0f, 1f, 0f, link1.axis(null), 0f);
         Assert.assertEquals(3, link1.countDofs());
@@ -741,6 +725,11 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, 1f, link1.orientation(null), 0f);
         assertEquals(1f, 0f, 0f, link1.parent2Link(null), 0f);
 
+        MultiBodyLink link2 = multiBody.configurePrismaticLink(linkMass,
+                linkInertia, link1, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+                Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
+        link2.addCollider(shape);
+
         Assert.assertEquals(link2, multiBody.getLink(2));
         assertEquals(0f, 0f, 0f, link2.appliedForce(null), 0f);
         assertEquals(0f, 1f, 0f, link2.axis(null), 0f);
@@ -751,6 +740,10 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, 1f, link2.orientation(null), 0f);
         assertEquals(1f, 0f, 0f, link2.parent2Pivot(null), 0f);
         assertEquals(1f, 0f, 0f, link2.pivot2Link(null), 0f);
+
+        MultiBodyLink link3 = multiBody.configureRevoluteLink(linkMass,
+                linkInertia, link2, Quaternion.IDENTITY, Vector3f.UNIT_Y,
+                Vector3f.UNIT_X, Vector3f.UNIT_X, disableCollision);
 
         Assert.assertEquals(link3, multiBody.getLink(3));
         assertEquals(0f, 0f, 0f, link3.appliedForce(null), 0f);
@@ -763,6 +756,12 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, 1f, link3.orientation(null), 0f);
         assertEquals(1f, 0f, 0f, link3.parent2Pivot(null), 0f);
         assertEquals(1f, 0f, 0f, link3.pivot2Link(null), 0f);
+
+        boolean enableCollision = false;
+        MultiBodyLink link4 = multiBody.configureSphericalLink(linkMass,
+                linkInertia, link3, Quaternion.IDENTITY, Vector3f.UNIT_X,
+                Vector3f.UNIT_X, enableCollision);
+        link4.addCollider(shape);
 
         Assert.assertEquals(link4, multiBody.getLink(4));
         assertEquals(0f, 0f, 0f, link4.appliedForce(null), 0f);
