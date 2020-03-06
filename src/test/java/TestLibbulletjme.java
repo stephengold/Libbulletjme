@@ -712,7 +712,7 @@ public class TestLibbulletjme {
                 Vector3f.UNIT_X, disableCollision);
 
         Assert.assertEquals(link1, multiBody.getLink(1));
-        assertEquals(0f, 1f, 0f, link1.axis(null), 0f);
+        assertEquals(0f, 1f, 0f, link1.axis(null), 1e-6f);
         Assert.assertEquals(3, link1.countDofs());
         Assert.assertEquals(3, link1.countPositionVariables());
         Assert.assertEquals(link0, link1.getParentLink());
@@ -732,7 +732,7 @@ public class TestLibbulletjme {
 
         Assert.assertEquals(link2, multiBody.getLink(2));
         assertEquals(0f, 0f, 0f, link2.appliedForce(null), 0f);
-        assertEquals(0f, 1f, 0f, link2.axis(null), 0f);
+        assertEquals(0f, 1f, 0f, link2.axis(null), 1e-6f);
         Assert.assertEquals(1, link2.countDofs());
         Assert.assertEquals(1, link2.countPositionVariables());
         Assert.assertFalse(link2.isCollisionWithParent());
@@ -747,7 +747,7 @@ public class TestLibbulletjme {
 
         Assert.assertEquals(link3, multiBody.getLink(3));
         assertEquals(0f, 0f, 0f, link3.appliedForce(null), 0f);
-        assertEquals(0f, 1f, 0f, link3.axis(null), 0f);
+        assertEquals(0f, 1f, 0f, link3.axis(null), 1e-6f);
         Assert.assertEquals(1, link3.countDofs());
         Assert.assertEquals(1, link3.countPositionVariables());
         Assert.assertNull(link3.getCollider());
