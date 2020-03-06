@@ -34,6 +34,8 @@ package com.jme3.bullet.objects;
 import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.math.Matrix3f;
+import com.jme3.math.Vector3f;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -54,6 +56,17 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
     final public static Logger logger2
             = Logger.getLogger(MultiBodyCollider.class.getName());
     // *************************************************************************
+    // fields
+
+    /**
+     * index of the link (&ge;0) or -1 for the base
+     */
+    private int linkIndex;
+    /**
+     * MultiBody that contains this collider
+     */
+    private MultiBody multiBody;
+    // *************************************************************************
     // constructors
 
     /**
@@ -64,6 +77,11 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      * @param linkIndex the link index, or -1 for the base
      */
     public MultiBodyCollider(MultiBody multiBody, int linkIndex) {
+        Validate.inRange(linkIndex, "link index", -1, Integer.MAX_VALUE);
+
+        this.multiBody = multiBody;
+        this.linkIndex = linkIndex;
+
         assert objectId == 0L : objectId;
         long multiBodyId = multiBody.nativeId();
         objectId = createCollider(multiBodyId, linkIndex);
@@ -88,8 +106,32 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
         long shapeId = shape.getObjectId();
         super.attachCollisionShape(objectId, shapeId);
     }
+
+    /**
+     * Directly alter the location of this collider's center.
+     *
+     * @param location the desired location (in physics-space coordinates, not
+     * null, unaffected)
+     */
+    public void setPhysicsLocation(Vector3f location) {
+        setPhysicsLocation(objectId, location);
+    }
+
+    /**
+     * Directly alter this collider's orientation.
+     *
+     * @param rotation the desired orientation (a rotation matrix in
+     * physics-space coordinates, not null, unaffected)
+     */
+    public void setPhysicsRotation(Matrix3f rotation) {
+        setPhysicsRotation(objectId, rotation);
+    }
     // *************************************************************************
     // native methods
 
     native private long createCollider(long multiBodyId, int linkIndex);
+
+    native private void setPhysicsLocation(long objectId, Vector3f location);
+
+    native private void setPhysicsRotation(long objectId, Matrix3f rotation);
 }

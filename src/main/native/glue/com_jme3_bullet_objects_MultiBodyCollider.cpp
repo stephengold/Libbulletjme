@@ -55,3 +55,41 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCol
             pCollider = new btMultiBodyLinkCollider(pMultiBody, link);
     return reinterpret_cast<jlong> (pCollider);
 }
+
+/*
+ * Class:     com_jme3_bullet_objects_MultiBodyCollider
+ * Method:    setPhysicsLocation
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsLocation
+(JNIEnv *env, jobject, jlong colliderId, jobject locationVector) {
+    btMultiBodyLinkCollider * const pCollider
+            = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
+    NULL_CHECK(pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    btAssert(pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    NULL_CHECK(locationVector, "The location vector does not exist.",)
+
+    btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
+    jmeBulletUtil::convert(env, locationVector, pLocation);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_MultiBodyCollider
+ * Method:    setPhysicsRotation
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsRotation
+(JNIEnv *env, jobject, jlong colliderId, jobject rotationMatrix) {
+    btMultiBodyLinkCollider * const pCollider
+            = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
+    NULL_CHECK(pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    btAssert(pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    NULL_CHECK(rotationMatrix, "The rotation matrix does not exist.",)
+
+    btMatrix3x3 *pRotation = &pCollider->getWorldTransform().getBasis();
+    jmeBulletUtil::convert(env, rotationMatrix, pRotation);
+}
