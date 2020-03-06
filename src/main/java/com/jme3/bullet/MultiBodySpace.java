@@ -62,7 +62,7 @@ public class MultiBodySpace extends PhysicsSpace {
     /**
      * map multibody IDs to added objects
      */
-    final private Map<Long, MultiBody> multiBodiesAdded
+    final private Map<Long, MultiBody> multiBodyMap
             = new ConcurrentHashMap<>(64);
     // *************************************************************************
     // constructors
@@ -93,7 +93,7 @@ public class MultiBodySpace extends PhysicsSpace {
     public int countMultiBodies() {
         long spaceId = getSpaceId();
         int count = getNumMultibodies(spaceId);
-        assert count == multiBodiesAdded.size();
+        assert count == multiBodyMap.size();
 
         return count;
     }
@@ -105,7 +105,7 @@ public class MultiBodySpace extends PhysicsSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<MultiBody> getMultiBodyList() {
-        return new TreeSet<>(multiBodiesAdded.values());
+        return new TreeSet<>(multiBodyMap.values());
     }
 
     /**
@@ -148,7 +148,7 @@ public class MultiBodySpace extends PhysicsSpace {
 
         if (pco instanceof MultiBodyCollider) {
             MultiBodyCollider collider = (MultiBodyCollider) pco;
-            for (MultiBody multiBody : multiBodiesAdded.values()) {
+            for (MultiBody multiBody : multiBodyMap.values()) {
                 result = multiBody.contains(collider);
                 if (result) {
                     break;
@@ -185,7 +185,7 @@ public class MultiBodySpace extends PhysicsSpace {
     @Override
     public boolean isEmpty() {
         boolean result = super.isEmpty();
-        result = result && multiBodiesAdded.isEmpty();
+        result = result && multiBodyMap.isEmpty();
 
         return result;
     }
@@ -199,7 +199,7 @@ public class MultiBodySpace extends PhysicsSpace {
     @Override
     public Collection<PhysicsCollisionObject> getPcoList() {
         Collection<PhysicsCollisionObject> result = super.getPcoList();
-        for (MultiBody multiBody : multiBodiesAdded.values()) {
+        for (MultiBody multiBody : multiBodyMap.values()) {
             Collection<MultiBodyCollider> pcos = multiBody.listColliders();
             result.addAll(pcos);
         }
@@ -234,13 +234,13 @@ public class MultiBodySpace extends PhysicsSpace {
      */
     private void addMultiBody(MultiBody multiBody) {
         long multiBodyId = multiBody.nativeId();
-        if (multiBodiesAdded.containsKey(multiBodyId)) {
+        if (multiBodyMap.containsKey(multiBodyId)) {
             logger2.log(Level.WARNING, "{0} is already added to {1}.",
                     new Object[]{multiBody, this});
             return;
         }
 
-        multiBodiesAdded.put(multiBodyId, multiBody);
+        multiBodyMap.put(multiBodyId, multiBody);
         logger2.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{multiBody, this});
 
@@ -255,14 +255,14 @@ public class MultiBodySpace extends PhysicsSpace {
      */
     private void removeMultiBody(MultiBody multiBody) {
         long multiBodyId = multiBody.nativeId();
-        if (!multiBodiesAdded.containsKey(multiBodyId)) {
+        if (!multiBodyMap.containsKey(multiBodyId)) {
             logger2.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{multiBody, this});
             return;
         }
         logger2.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{multiBody, this});
-        multiBodiesAdded.remove(multiBodyId);
+        multiBodyMap.remove(multiBodyId);
         long spaceId = getSpaceId();
         removeMultiBody(spaceId, multiBodyId);
     }
