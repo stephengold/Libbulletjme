@@ -723,8 +723,12 @@ public class TestLibbulletjme {
         Assert.assertFalse(link0.isCollisionWithParent());
         Assert.assertEquals(MultiBodyJointType.Fixed, link0.jointType());
         Assert.assertEquals(linkMass, link0.mass(), 0f);
+        assertEquals(0f, 0f, 0f, 1f, link0.orientation(null), 0f);
+        assertEquals(1f, 0f, 0f, link0.parent2Pivot(null), 0f);
+        assertEquals(1f, 0f, 0f, link0.pivot2Link(null), 0f);
 
         Assert.assertEquals(link1, multiBody.getLink(1));
+        assertEquals(0f, 1f, 0f, link1.axis(null), 0f);
         Assert.assertEquals(3, link1.countDofs());
         Assert.assertEquals(3, link1.countPositionVariables());
         Assert.assertEquals(link0, link1.getParentLink());
@@ -734,21 +738,31 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, link1.jointTorque(2), 0f);
         Assert.assertEquals(MultiBodyJointType.Planar, link1.jointType());
         Assert.assertEquals(0f, link1.jointVelocity(2), 0f);
+        assertEquals(0f, 0f, 0f, 1f, link1.orientation(null), 0f);
+        assertEquals(1f, 0f, 0f, link1.parent2Link(null), 0f);
 
         Assert.assertEquals(link2, multiBody.getLink(2));
         assertEquals(0f, 0f, 0f, link2.appliedForce(null), 0f);
+        assertEquals(0f, 1f, 0f, link2.axis(null), 0f);
         Assert.assertEquals(1, link2.countDofs());
         Assert.assertEquals(1, link2.countPositionVariables());
         Assert.assertFalse(link2.isCollisionWithParent());
         Assert.assertEquals(MultiBodyJointType.Prismatic, link2.jointType());
+        assertEquals(0f, 0f, 0f, 1f, link2.orientation(null), 0f);
+        assertEquals(1f, 0f, 0f, link2.parent2Pivot(null), 0f);
+        assertEquals(1f, 0f, 0f, link2.pivot2Link(null), 0f);
 
         Assert.assertEquals(link3, multiBody.getLink(3));
         assertEquals(0f, 0f, 0f, link3.appliedForce(null), 0f);
+        assertEquals(0f, 1f, 0f, link3.axis(null), 0f);
         Assert.assertEquals(1, link3.countDofs());
         Assert.assertEquals(1, link3.countPositionVariables());
         Assert.assertNull(link3.getCollider());
         Assert.assertFalse(link3.isCollisionWithParent());
         Assert.assertEquals(MultiBodyJointType.Revolute, link3.jointType());
+        assertEquals(0f, 0f, 0f, 1f, link3.orientation(null), 0f);
+        assertEquals(1f, 0f, 0f, link3.parent2Pivot(null), 0f);
+        assertEquals(1f, 0f, 0f, link3.pivot2Link(null), 0f);
 
         Assert.assertEquals(link4, multiBody.getLink(4));
         assertEquals(0f, 0f, 0f, link4.appliedForce(null), 0f);
@@ -756,6 +770,9 @@ public class TestLibbulletjme {
         Assert.assertEquals(4, link4.countPositionVariables());
         Assert.assertTrue(link4.isCollisionWithParent());
         Assert.assertEquals(MultiBodyJointType.Spherical, link4.jointType());
+        assertEquals(0f, 0f, 0f, 1f, link4.orientation(null), 0f);
+        assertEquals(1f, 0f, 0f, link4.parent2Pivot(null), 0f);
+        assertEquals(1f, 0f, 0f, link4.pivot2Link(null), 0f);
 
         Assert.assertEquals(5, multiBody.countConfiguredLinks());
         Assert.assertEquals(8, multiBody.countDofs());
