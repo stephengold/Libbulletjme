@@ -67,7 +67,7 @@ public class MultiBody {
     /**
      * unique identifier of the btMultiBody
      */
-    final private long nativeId;
+    private long nativeId;
     /**
      * collider for the base, or null if none
      */
@@ -75,7 +75,7 @@ public class MultiBody {
     /**
      * references to configured links
      */
-    final private MultiBodyLink[] links;
+    private MultiBodyLink[] links;
     // *************************************************************************
     // constructors
 
