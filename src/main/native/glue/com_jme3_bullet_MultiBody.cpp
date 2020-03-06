@@ -354,7 +354,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseWorldTransform
  * Method:    getCanSleep
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_canSleep
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
 (JNIEnv *, jobject, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);

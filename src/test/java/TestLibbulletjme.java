@@ -653,6 +653,7 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, 1f, multiBody.baseOrientation(null), 0f);
         assertEquals(0f, 0f, 0f, multiBody.baseTorque(null), 0f);
         assertEquals(0f, 0f, 0f, multiBody.baseVelocity(null), 0f);
+        Assert.assertTrue(multiBody.canSleep());
         Assert.assertTrue(multiBody.canWakeup());
         Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
                 multiBody.collideWithGroups());
