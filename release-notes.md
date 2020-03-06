@@ -1,5 +1,21 @@
 # release log for the Libbulletjme Project
 
+## Version 4.1.0 released on 5 March 2020
+
+ + Added 10 methods to the `MultiBodyLink` class:
+   + `axis()`
+   + `orientation()`
+   + `parent2Link()`
+   + `parent2Pivot()`
+   + `pivot2Link()`
+   + `getAxisBottom()`
+   + `getAxisTop()`
+   + `getDVector()`
+   + `getEVector()`
+   + `getQ0Parent2LinkRotation()`
+ + Added a `configureClonedLink()` method to the `MultiBody` class.
+ + Built using Gradle v6.2.2
+
 ## Version 4.0.0 released on 28 February 2020
 
  + API changes:
@@ -17,7 +33,7 @@
    + Changed arguments in `jmePhysicsSpace.createPhysicsSpace()`.
    + Deleted many fields and methods from the `jme3utilities`,
      `jme3utilities.math`, and `com.jme3.math` packages.
- + Provided multibody/Featherstone support by adding 5 new classes:
+ + Implemented multibody/Featherstone support by adding 5 new classes:
    `MultiBody`, `MultiBodyCollider`, `MultiBodyJointType`, `MultiBodyLink`,
    and `MultiBodySpace`.
  + Added new methods:
