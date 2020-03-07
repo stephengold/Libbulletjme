@@ -74,7 +74,7 @@ class jmeCollisionSpace;
 class jmeUserPointer { // TODO rename - the class is not a pointer!
 public:
     jobject javaCollisionObject; // a MultiBody or PhysicsCollisionObject
-    jint group;
-    jint groups;
+    jint group; // CollisionGroup: bitmask with exactly one bit set
+    jint groups; // CollideWithGroups: bitmask
     jmeCollisionSpace * space; // NULL means not added to any space
 };
