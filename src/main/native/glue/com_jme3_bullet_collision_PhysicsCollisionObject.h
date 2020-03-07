@@ -139,6 +139,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollideWithGroups
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollideWithGroups
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollisionGroup
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionGroup
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getContactDamping
  * Signature: (J)F
  */

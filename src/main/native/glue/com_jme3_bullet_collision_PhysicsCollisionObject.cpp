@@ -166,6 +166,23 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollideWithGroups
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollideWithGroups
+(JNIEnv *, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.", 0);
+
+    const jmeUserPointer * const
+            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jint result = pUser->groups;
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getCollisionFlags
  * Signature: (J)I
  */
@@ -176,6 +193,23 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
     NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.", 0);
 
     jint result = pCollisionObject->getCollisionFlags();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollisionGroup
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionGroup
+(JNIEnv *, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHECK(pCollisionObject, "The btCollisionObject does not exist.", 0);
+
+    const jmeUserPointer * const
+            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jint result = pUser->group;
     return result;
 }
 
@@ -377,7 +411,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_ini
     jmeUserPointer *
             pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
     if (pUser != NULL) {
-        //            delete userPointer; TODO
+        delete pUser;
     }
 
     pUser = new jmeUserPointer();
@@ -506,9 +540,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
 
     jmeUserPointer * const
             pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
-    if (pUser != NULL) {
-        pUser->groups = groups;
-    }
+    pUser->groups = groups;
 }
 
 /*
@@ -524,9 +556,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
 
     jmeUserPointer * const
             pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
-    if (pUser != NULL) {
-        pUser->group = group;
-    }
+    pUser->group = group;
 }
 
 /*
