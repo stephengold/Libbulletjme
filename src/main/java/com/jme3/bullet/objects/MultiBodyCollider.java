@@ -59,11 +59,11 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
     // fields
 
     /**
-     * index of the link (&ge;0) or -1 for the base
+     * index of the link (&ge;0) or -1 for the base of the MultiBody
      */
     private int linkIndex;
     /**
-     * MultiBody that contains this collider
+     * MultiBody that contains this collider (not null)
      */
     private MultiBody multiBody;
     // *************************************************************************
@@ -77,19 +77,13 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      * @param linkIndex the link index, or -1 for the base
      */
     public MultiBodyCollider(MultiBody multiBody, int linkIndex) {
+        Validate.nonNull(multiBody, "multibody");
         Validate.inRange(linkIndex, "link index", -1, Integer.MAX_VALUE);
 
         this.multiBody = multiBody;
         this.linkIndex = linkIndex;
-
         assert objectId == 0L : objectId;
-        long multiBodyId = multiBody.nativeId();
-        objectId = createCollider(multiBodyId, linkIndex);
-        logger2.log(Level.FINE, "Created {0}.", this);
-        assert objectId != 0L;
-        assert getInternalType(objectId) == 64 : getInternalType(objectId);
-
-        super.initUserPointer();
+        buildObject();
     }
     // *************************************************************************
     // new methods exposed
@@ -105,6 +99,43 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
         setCollisionShape(shape);
         long shapeId = shape.getObjectId();
         super.attachCollisionShape(objectId, shapeId);
+    }
+
+    /**
+     * Access the MultiBody that contains this collider.
+     *
+     * @return the pre-existing instance (not null)
+     */
+    public MultiBody getMultiBody() {
+        assert multiBody != null;
+        return multiBody;
+    }
+
+    /**
+     * Determine the index of the corresponding MultiBodyLink.
+     *
+     * @return the index (&ge;0) or -1 if this is the base collider
+     */
+    public int linkIndex() {
+        assert linkIndex >= -1 : linkIndex;
+        return linkIndex;
+    }
+
+    /**
+     * Determine the mass of this collider.
+     *
+     * @return the mass (&gt;0)
+     */
+    public float mass() {
+        float result;
+        if (linkIndex >= 0) {
+            result = multiBody.getLink(linkIndex).mass();
+        } else {
+            result = multiBody.baseMass();
+        }
+
+        assert result > 0f : result;
+        return result;
     }
 
     /**
@@ -125,6 +156,21 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      */
     public void setPhysicsRotation(Matrix3f rotation) {
         setPhysicsRotation(objectId, rotation);
+    }
+    // *************************************************************************
+    // private Java methods
+
+    /**
+     * Create the configured collider in Bullet.
+     */
+    private void buildObject() {
+        long multiBodyId = multiBody.nativeId();
+        objectId = createCollider(multiBodyId, linkIndex);
+        logger2.log(Level.FINE, "Created {0}.", this);
+        assert objectId != 0L;
+        assert getInternalType(objectId) == 64 : getInternalType(objectId);
+
+        super.initUserPointer();
     }
     // *************************************************************************
     // native methods
