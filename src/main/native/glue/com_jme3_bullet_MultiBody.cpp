@@ -360,7 +360,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", JNI_FALSE);
 
-    const bool canSleep = pMultiBody->getCanSleep();
+    bool canSleep = pMultiBody->getCanSleep();
     return (jboolean) canSleep;
 }
 
@@ -375,7 +375,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", JNI_FALSE);
 
-    const bool canWakeup = pMultiBody->getCanWakeup();
+    bool canWakeup = pMultiBody->getCanWakeup();
     return (jboolean) canWakeup;
 }
 
@@ -424,7 +424,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const btScalar kineticEnergy = pMultiBody->getKineticEnergy();
+    btScalar kineticEnergy = pMultiBody->getKineticEnergy();
     return (jfloat) kineticEnergy;
 }
 
@@ -439,7 +439,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const btScalar linearDamping = pMultiBody->getLinearDamping();
+    btScalar linearDamping = pMultiBody->getLinearDamping();
     return (jfloat) linearDamping;
 }
 
@@ -454,7 +454,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxAppliedImpulse
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const btScalar maxAppliedImpulse = pMultiBody->getMaxAppliedImpulse();
+    btScalar maxAppliedImpulse = pMultiBody->getMaxAppliedImpulse();
     return (jfloat) maxAppliedImpulse;
 }
 
@@ -469,7 +469,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxCoordinateVelocity
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const btScalar maxCoordinateVelocity = pMultiBody->getMaxCoordinateVelocity();
+    btScalar maxCoordinateVelocity = pMultiBody->getMaxCoordinateVelocity();
     return (jfloat) maxCoordinateVelocity;
 }
 
@@ -484,7 +484,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumDofs
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const int numDofs = pMultiBody->getNumDofs();
+    int numDofs = pMultiBody->getNumDofs();
     return (jint) numDofs;
 }
 
@@ -499,7 +499,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const int numLinks = pMultiBody->getNumLinks();
+    int numLinks = pMultiBody->getNumLinks();
     return (jint) numLinks;
 }
 
@@ -514,7 +514,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const int numPosVars = pMultiBody->getNumPosVars();
+    int numPosVars = pMultiBody->getNumPosVars();
     return (jint) numPosVars;
 }
 
@@ -531,7 +531,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
 
     const jmeUserPointer * const
             pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
-    const jmeCollisionSpace *pSpace = pUser->space;
+    jmeCollisionSpace *pSpace = pUser->space;
     return reinterpret_cast<jlong> (pSpace);
 }
 
@@ -546,7 +546,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", JNI_FALSE);
 
-    const bool useGyroTerm = pMultiBody->getUseGyroTerm();
+    bool useGyroTerm = pMultiBody->getUseGyroTerm();
     return (jboolean) useGyroTerm;
 }
 
@@ -577,7 +577,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_hasFixedBase
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", JNI_FALSE);
 
-    const bool hasFixedBase = pMultiBody->hasFixedBase();
+    bool hasFixedBase = pMultiBody->hasFixedBase();
     return (jboolean) hasFixedBase;
 }
 
@@ -592,7 +592,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingGlobalVelocitie
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", JNI_FALSE);
 
-    const bool isUsingGlobalVelocities = pMultiBody->isUsingGlobalVelocities();
+    bool isUsingGlobalVelocities = pMultiBody->isUsingGlobalVelocities();
     return (jboolean) isUsingGlobalVelocities;
 }
 
@@ -607,7 +607,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", JNI_FALSE);
 
-    const bool isUsingRK4Integration = pMultiBody->isUsingRK4Integration();
+    bool isUsingRK4Integration = pMultiBody->isUsingRK4Integration();
     return (jboolean) isUsingRK4Integration;
 }
 
