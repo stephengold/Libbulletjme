@@ -53,8 +53,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
                     || (pUser1->group & pUser0->groups) != 0;
 
             if (collides) {
-                jmeCollisionSpace * const
-                        pSpace = (jmeCollisionSpace *) pUser0->space;
+                jmeCollisionSpace * const pSpace = pUser0->space;
                 JNIEnv * const env = pSpace->getEnv();
                 jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
                 jobject javaCollisionObject0 = env->NewLocalRef(pUser0->javaCollisionObject);
