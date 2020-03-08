@@ -46,6 +46,9 @@ struct jmeFilterCallback : public btOverlapFilterCallback {
 class jmeCollisionSpace {
 protected:
     btCollisionWorld * m_collisionWorld;
+    /*
+     * an interface pointer for the Java thread that simulates this space:
+     */
     JNIEnv * env;
     jobject m_javaSpace;
     JavaVM * vm;
@@ -58,7 +61,7 @@ public:
     jmeCollisionSpace(JNIEnv *, jobject javaSpace);
 
     ~jmeCollisionSpace() {
-        delete(m_collisionWorld);
+        delete m_collisionWorld;
     }
 
     void

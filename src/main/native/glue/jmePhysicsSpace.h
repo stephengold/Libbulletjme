@@ -43,8 +43,11 @@
 class jmePhysicsSpace : public jmeCollisionSpace {
 public:
 
+    /*
+     * constructor:
+     */
     jmePhysicsSpace(JNIEnv *pEnv, jobject javaSpace)
-    : jmeCollisionSpace::jmeCollisionSpace(pEnv, javaSpace) {
+    : jmeCollisionSpace(pEnv, javaSpace) {
     }
 
     static void

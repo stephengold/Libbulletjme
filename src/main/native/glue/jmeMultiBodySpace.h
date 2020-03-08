@@ -41,15 +41,18 @@
  */
 class jmeMultiBodySpace : public jmePhysicsSpace {
 public:
-
+    /*
+     * constructor:
+     */
     jmeMultiBodySpace(JNIEnv *pEnv, jobject javaSpace)
     : jmePhysicsSpace(pEnv, javaSpace) {
     }
-
+    /*
+     * configuration:
+     */
     void
     createMultiBodySpace(const btVector3& min, const btVector3& max,
             jint broadphaseId);
-
     /*
      * getters:
      */

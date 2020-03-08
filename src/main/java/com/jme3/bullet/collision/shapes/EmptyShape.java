@@ -53,7 +53,7 @@ public class EmptyShape extends CollisionShape {
     /**
      * Instantiate an empty shape.
      *
-     * @param unused to distinguish this from the no-argument constructor
+     * @param unused for compatibility with Minie
      */
     public EmptyShape(boolean unused) {
         createShape();
