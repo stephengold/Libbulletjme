@@ -58,20 +58,42 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",)
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    jmeUserPointer *pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
     pUser->space = pSpace;
-
     pWorld->addMultiBody(pMultiBody);
-
+    /*
+     * If there's a base collider, add it to the world.
+     */
     btMultiBodyLinkCollider *pCollider = pMultiBody->getBaseCollider();
     if (pCollider && pCollider->getCollisionShape()) {
-        pWorld->addCollisionObject((btCollisionObject *) pCollider);
+        btAssert(pCollider->getInternalType()
+                & btCollisionObject::CO_FEATHERSTONE_LINK);
+        pUser = (jmeUserPointer *) pCollider->getUserPointer();
+        pUser->space = pSpace;
+        int cfGroup, cfMask;
+        if (pMultiBody->hasFixedBase()) {
+            cfGroup = btBroadphaseProxy::StaticFilter;
+            cfMask = ~btBroadphaseProxy::StaticFilter;
+        } else {
+            cfGroup = btBroadphaseProxy::DefaultFilter;
+            cfMask = btBroadphaseProxy::AllFilter;
+        }
+        pWorld->addCollisionObject((btCollisionObject *) pCollider, cfGroup,
+                cfMask);
     }
-    for (int i = 0; i < pMultiBody->getNumLinks(); ++i) {
-        pCollider = pMultiBody->getLink(i).m_collider;
+    /*
+     * Add any link colliders to the world.
+     */
+    for (int linkI = 0; linkI < pMultiBody->getNumLinks(); ++linkI) {
+        pCollider = pMultiBody->getLink(linkI).m_collider;
         if (pCollider && pCollider->getCollisionShape()) {
-            pWorld->addCollisionObject((btCollisionObject *) pCollider);
+            btAssert(pCollider->getInternalType()
+                    & btCollisionObject::CO_FEATHERSTONE_LINK);
+            pUser = (jmeUserPointer *) pCollider->getUserPointer();
+            pUser->space = pSpace;
+            pWorld->addCollisionObject((btCollisionObject *) pCollider,
+                    btBroadphaseProxy::DefaultFilter,
+                    btBroadphaseProxy::AllFilter);
         }
     }
 }
@@ -175,17 +197,30 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",)
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    jmeUserPointer *pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
     pUser->space = NULL;
-
+    pWorld->removeMultiBody(pMultiBody);
+    /*
+     * If there's a base collider, remove it from the world.
+     */
     btMultiBodyLinkCollider *pCollider = pMultiBody->getBaseCollider();
     if (pCollider && pCollider->getCollisionShape()) {
+        btAssert(pCollider->getInternalType()
+                & btCollisionObject::CO_FEATHERSTONE_LINK);
+        pUser = (jmeUserPointer *) pCollider->getUserPointer();
+        pUser->space = NULL;
         pWorld->removeCollisionObject((btCollisionObject *) pCollider);
     }
-    for (int i = 0; i < pMultiBody->getNumLinks(); ++i) {
-        pCollider = pMultiBody->getLink(i).m_collider;
+    /*
+     * Remove any link colliders from the world.
+     */
+    for (int linkI = 0; linkI < pMultiBody->getNumLinks(); ++linkI) {
+        pCollider = pMultiBody->getLink(linkI).m_collider;
         if (pCollider && pCollider->getCollisionShape()) {
+            btAssert(pCollider->getInternalType()
+                    & btCollisionObject::CO_FEATHERSTONE_LINK);
+            pUser = (jmeUserPointer *) pCollider->getUserPointer();
+            pUser->space = NULL;
             pWorld->removeCollisionObject((btCollisionObject *) pCollider);
         }
     }
