@@ -670,8 +670,8 @@ public class MultiBody {
      * @return a new collection of pre-existing instances
      */
     public Collection<MultiBodyCollider> listColliders() {
-        int count = numConfigured + 1;
-        Collection<MultiBodyCollider> result = new ArrayList<>(count);
+        int capacity = numConfigured + 1;
+        Collection<MultiBodyCollider> result = new ArrayList<>(capacity);
 
         if (baseCollider != null) {
             result.add(baseCollider);
@@ -722,7 +722,7 @@ public class MultiBody {
      * Alter the angular velocity of the base.
      *
      * @param angularVelocity the desired angular-velocity vector (in
-     * physics-space coordinates, not null, unaffected)
+     * physics-space coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setBaseAngularVelocity(Vector3f angularVelocity) {
         Validate.finite(angularVelocity, "angular velocity");
@@ -733,7 +733,7 @@ public class MultiBody {
      * Alter the location of the base's center of mass.
      *
      * @param location the desired location vector (in physics-space
-     * coordinates, not null, unaffected)
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setBaseLocation(Vector3f location) {
         Validate.finite(location, "location");
@@ -766,7 +766,7 @@ public class MultiBody {
      * Alter the linear velocity of the base.
      *
      * @param velocity the desired velocity vector (in physics-space
-     * coordinates, not null, unaffected)
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setBaseVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
