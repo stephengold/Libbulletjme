@@ -61,23 +61,23 @@ public class MultiBodyLink {
      * index of this link in its MultiBody, which is also the index of the
      * btMultiBodyLink in its btMultiBody (&ge;0)
      */
-    final private int linkIndex;
+    private int linkIndex;
     /**
      * copy of the number of degress of freedom in this link's joint
      */
-    final private int numDofs;
+    private int numDofs;
     /**
      * copy of the ID of the btMultiBodyLink
      */
-    final private long linkId;
+    private long linkId;
     /**
      * copy of the ID of the btMultiBody
      */
-    final private long multiBodyId;
+    private long multiBodyId;
     /**
      * MultiBody that contains this link
      */
-    final private MultiBody multiBody;
+    private MultiBody multiBody;
     /**
      * collider for this link, or null if none
      */
@@ -85,7 +85,7 @@ public class MultiBodyLink {
     /**
      * parent of this link, or null if joined to the base
      */
-    final private MultiBodyLink parentLink;
+    private MultiBodyLink parentLink;
     // *************************************************************************
     // constructors
 
