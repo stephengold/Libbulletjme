@@ -120,7 +120,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
 }
 
 /*
- * Class:     com_jme3_bullet_MultiBodySpace
+ * Class:     com_jme3_bullet_MultiBodySpace - TODO delete
  * Method:    createMultiBodySpace
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;I)J
  */
@@ -138,7 +138,31 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
     jmeBulletUtil::convert(env, maxVector, &max);
 
     jmeMultiBodySpace * const pSpace = new jmeMultiBodySpace(env, object);
-    pSpace->createMultiBodySpace(min, max, (int) broadphaseType);
+    pSpace->createMultiBodySpace(min, max, broadphaseType);
+
+    return reinterpret_cast<jlong> (pSpace);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    createMultiBodySpace2
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;II)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace2
+(JNIEnv *env, jobject object, jobject minVector, jobject maxVector,
+        jint broadphaseType, jint solverType) {
+    jmeClasses::initJavaClasses(env);
+
+    NULL_CHECK(minVector, "The min vector does not exist.", 0)
+    btVector3 min;
+    jmeBulletUtil::convert(env, minVector, &min);
+
+    NULL_CHECK(maxVector, "The max vector does not exist.", 0)
+    btVector3 max;
+    jmeBulletUtil::convert(env, maxVector, &max);
+
+    jmeMultiBodySpace * const pSpace = new jmeMultiBodySpace(env, object);
+    pSpace->createMultiBodySpace(min, max, broadphaseType, solverType);
 
     return reinterpret_cast<jlong> (pSpace);
 }

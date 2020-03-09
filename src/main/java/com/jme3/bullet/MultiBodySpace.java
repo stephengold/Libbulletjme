@@ -60,6 +60,10 @@ public class MultiBodySpace extends PhysicsSpace {
     // fields
 
     /**
+     * copy of the constraint solver used
+     */
+    private MultiBodySolver solverType = MultiBodySolver.Dantzig;
+    /**
      * map multibody IDs to added objects
      */
     final private Map<Long, MultiBody> multiBodyMap
@@ -81,6 +85,25 @@ public class MultiBodySpace extends PhysicsSpace {
     public MultiBodySpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
         super(worldMin, worldMax, broadphaseType);
+    }
+
+    /**
+     * Instantiate a MultiBodySpace. Must be invoked on the designated physics
+     * thread.
+     *
+     * @param worldMin the desired minimum coordinates values (not null,
+     * unaffected, default=-10k,-10k,-10k)
+     * @param worldMax the desired minimum coordinates values (not null,
+     * unaffected, default=10k,10k,10k)
+     * @param broadphaseType which broadphase collision-detection algorithm to
+     * use (not null)
+     * @param solverType which multibody constraint solver to use (not null)
+     */
+    public MultiBodySpace(Vector3f worldMin, Vector3f worldMax,
+            BroadphaseType broadphaseType, MultiBodySolver solverType) {
+        super(worldMin, worldMax, broadphaseType);
+        Validate.nonNull(solverType, "solver type");
+        this.solverType = solverType;
     }
     // *************************************************************************
     // new methods exposed
@@ -167,8 +190,8 @@ public class MultiBodySpace extends PhysicsSpace {
      */
     @Override
     protected void create() {
-        long nativeId = createMultiBodySpace(getWorldMin(null),
-                getWorldMax(null), getBroadphaseType().ordinal());
+        long nativeId = createMultiBodySpace2(getWorldMin(null),
+                getWorldMax(null), getBroadphaseType().ordinal(), 0);
         assert nativeId != 0L;
         logger2.log(Level.FINE, "Created {0}.", this);
 
@@ -273,8 +296,8 @@ public class MultiBodySpace extends PhysicsSpace {
 
     native private void addMultiBodyConstraint(long spaceId, long constraintId);
 
-    native private long createMultiBodySpace(Vector3f minVector,
-            Vector3f maxVector, int broadphaseType);
+    native private long createMultiBodySpace2(Vector3f minVector,
+            Vector3f maxVector, int broadphaseType, int solverType);
 
     native private int getNumMultibodies(long spaceId);
 

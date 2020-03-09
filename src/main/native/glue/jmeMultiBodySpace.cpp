@@ -31,16 +31,21 @@
  */
 #include "jmeMultiBodySpace.h"
 #include "jmeBulletUtil.h"
+#include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
+#include "BulletDynamics/Featherstone/btMultiBodyMLCPConstraintSolver.h"
+#include "BulletDynamics/MLCPSolvers/btDantzigSolver.h"
+#include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
+#include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
 
 /*
  * Author: Stephen Gold
  */
 void jmeMultiBodySpace::
 createMultiBodySpace(const btVector3& min, const btVector3& max,
-        jint broadphaseId) {
+        jint broadphaseType, jint solverType) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
-            pBroadphase = createBroadphase(min, max, broadphaseId);
+            pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Use the default collision dispatcher plus GImpact.
     btCollisionConfiguration * const
@@ -49,9 +54,29 @@ createMultiBodySpace(const btVector3& min, const btVector3& max,
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
-    // Use the multibody constraint solver.
-    btMultiBodyConstraintSolver * const
+    // Create the constraint solver.
+    btMultiBodyConstraintSolver *pConstraintSolver;
+    btMLCPSolverInterface *pMLCP;
+    switch (solverType) {
+        case 0:
             pConstraintSolver = new btMultiBodyConstraintSolver();
+            break;
+        case 1:
+            pMLCP = new btDantzigSolver();
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            break;
+        case 2:
+            pMLCP = new btLemkeSolver();
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            break;
+        case 3:
+            pMLCP = new btSolveProjectedGaussSeidel();
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            break;
+        default:
+            env->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The solver type is out of range.");
+    }
 
     // Create the multibody dynamics world.
     btMultiBodyDynamicsWorld * const
@@ -59,7 +84,7 @@ createMultiBodySpace(const btVector3& min, const btVector3& max,
             pConstraintSolver, pCollisionConfiguration);
     m_collisionWorld = pWorld;
 
-    // Do btDynamicsWorld modifications. TODO subroutine
+    // Perform btDynamicsWorld modifications. TODO subroutine
     pWorld->setGravity(btVector3(0, -9.81, 0));
     pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, this);
     bool preTick = true;

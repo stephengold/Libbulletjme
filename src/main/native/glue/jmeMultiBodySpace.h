@@ -37,7 +37,7 @@
  */
 
 /*
- * Add support for multibodies to the jmePhysicsSpace class.
+ * A jmePhysicsSpace with support for multibodies.
  */
 class jmeMultiBodySpace : public jmePhysicsSpace {
 public:
@@ -52,7 +52,7 @@ public:
      */
     void
     createMultiBodySpace(const btVector3& min, const btVector3& max,
-            jint broadphaseId);
+            jint broadphaseType, jint solverType = 1);
     /*
      * getters:
      */
@@ -60,7 +60,6 @@ public:
     getMultiBodyWorld() const {
         return (btMultiBodyDynamicsWorld *) m_collisionWorld;
     }
-
     btMultiBodyDynamicsWorld *
     getMultiBodyWorld() {
         return (btMultiBodyDynamicsWorld *) m_collisionWorld;
