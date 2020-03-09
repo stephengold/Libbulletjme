@@ -66,7 +66,8 @@ model {
         }
     }
 
-    toolChains { // prioritize C++ toolchains
+    toolChains { // prioritize native toolchains
+        //clang(Clang)
         visualCpp(VisualCpp)
         gcc(Gcc)
         clang(Clang)
@@ -129,7 +130,7 @@ model {
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }
                 } else {
-                    // neither -pgithub nor -Ptravis= specified
+                    // neither -Pgithub nor -Ptravis= specified
                     buildable = !targetPlatform.name.startsWith('Linux_ARM')
                     //buildable = targetPlatform.name.equals('Linux64')
                 }
@@ -227,7 +228,7 @@ model {
                         }
                         into 'dist'
                     }
-                    jar.dependsOn("copyToDist$q")
+                    jar.dependsOn('copyToDist' + q)
                 } else {
                     //println 'Do not build ' + q
                 }
