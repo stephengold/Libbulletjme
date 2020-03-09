@@ -95,9 +95,9 @@ public class CollisionSpace {
      */
     private long nativeId = 0L;
     /**
-     * map ghost IDs to added objects TODO rename
+     * map ghost IDs to added objects
      */
-    final private Map<Long, PhysicsGhostObject> physicsGhostObjects
+    final private Map<Long, PhysicsGhostObject> ghostMap
             = new ConcurrentHashMap<>(64);
     /**
      * physics-space reference for each thread
@@ -186,7 +186,7 @@ public class CollisionSpace {
         boolean result;
         long pcoId = pco.getObjectId();
         if (pco instanceof PhysicsGhostObject) {
-            result = physicsGhostObjects.containsKey(pcoId);
+            result = ghostMap.containsKey(pcoId);
         } else {
             String typeName = pco.getClass().getCanonicalName();
             String msg = "Unknown type of collision object: " + typeName;
@@ -233,7 +233,7 @@ public class CollisionSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<PhysicsGhostObject> getGhostObjectList() {
-        return new TreeSet<>(physicsGhostObjects.values());
+        return new TreeSet<>(ghostMap.values());
     }
 
     /**
@@ -244,14 +244,13 @@ public class CollisionSpace {
      */
     public Collection<PhysicsCollisionObject> getPcoList() {
         Set<PhysicsCollisionObject> result = new TreeSet<>();
-        result.addAll(physicsGhostObjects.values());
+        result.addAll(ghostMap.values());
 
         return result;
     }
 
     /**
-     * Read the flags used in ray tests (native field: m_flags). TODO native
-     * method
+     * Read the flags used in ray tests (native field: m_flags).
      *
      * @return which flags are used
      * @see com.jme3.bullet.RayTestFlag
@@ -306,7 +305,7 @@ public class CollisionSpace {
      * @return true if empty, otherwise false
      */
     public boolean isEmpty() {
-        boolean result = physicsGhostObjects.isEmpty();
+        boolean result = ghostMap.isEmpty();
         return result;
     }
 
@@ -573,7 +572,7 @@ public class CollisionSpace {
                 new Object[]{ghost, this});
 
         long ghostId = ghost.getObjectId();
-        physicsGhostObjects.put(ghostId, ghost);
+        ghostMap.put(ghostId, ghost);
         assert nativeId != 0L;
         addCollisionObject(nativeId, ghostId);
     }
@@ -594,13 +593,13 @@ public class CollisionSpace {
      */
     private void removeGhostObject(PhysicsGhostObject ghost) {
         long ghostId = ghost.getObjectId();
-        if (!physicsGhostObjects.containsKey(ghostId)) {
+        if (!ghostMap.containsKey(ghostId)) {
             loggerC.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{ghost, this});
             return;
         }
 
-        physicsGhostObjects.remove(ghostId);
+        ghostMap.remove(ghostId);
         loggerC.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{ghost, this});
         removeCollisionObject(nativeId, ghostId);
