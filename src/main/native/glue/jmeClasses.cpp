@@ -38,7 +38,6 @@
 
 // public fields
 
-JNIEnv * jmeClasses::pEnv;
 JavaVM * jmeClasses::vm;
 
 jclass jmeClasses::IllegalArgumentException;
@@ -124,8 +123,7 @@ int jmeClasses::printFlag = 1; // TRUE
  * Initialize this instance for the specified environment.
  */
 void jmeClasses::initJavaClasses(JNIEnv *env) {
-    if (pEnv != NULL) return; // already initialized
-    pEnv = env;
+    if (vm != NULL) return; // already initialized
 
     if (printFlag) {
 #ifdef _DEBUG

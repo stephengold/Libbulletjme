@@ -43,7 +43,7 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
-(JNIEnv *, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *env, jobject, jlong spaceId, jlong pcoId) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.",)
@@ -97,7 +97,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObjects
-(JNIEnv *, jobject, jlong spaceId) {
+(JNIEnv *env, jobject, jlong spaceId) {
     const jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHECK(pSpace, "The collision space does not exist.", 0);

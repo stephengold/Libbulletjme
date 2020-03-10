@@ -97,7 +97,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGh
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverlappingCount
-(JNIEnv *, jobject, jlong ghostId) {
+(JNIEnv *env, jobject, jlong ghostId) {
     const btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHECK(pGhost, "The btPairCachingGhostObject does not exist.", 0)

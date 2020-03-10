@@ -156,7 +156,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorque
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_clearForces
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",)
 
@@ -202,7 +202,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_createRigi
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularDamping
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
@@ -229,7 +229,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularF
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularSleepingThreshold
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
@@ -302,7 +302,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getInverseI
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearDamping
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
@@ -329,7 +329,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearFa
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearSleepingThreshold
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
@@ -356,7 +356,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVe
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getMass
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody
             = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
@@ -416,7 +416,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsR
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestitution
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
@@ -429,7 +429,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestit
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getSquaredSpeed
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", 0)
 
@@ -444,7 +444,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getSquare
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", JNI_FALSE)
 
@@ -457,7 +457,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActiv
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isInWorld
-(JNIEnv *, jobject, jlong bodyId) {
+(JNIEnv *env, jobject, jlong bodyId) {
     const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.", JNI_FALSE);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -471,7 +471,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isInWor
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularDamping
-(JNIEnv *, jobject, jlong bodyId, jfloat value) {
+(JNIEnv *env, jobject, jlong bodyId, jfloat value) {
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -503,7 +503,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularF
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularSleepingThreshold
-(JNIEnv *, jobject, jlong bodyId, jfloat value) {
+(JNIEnv *env, jobject, jlong bodyId, jfloat value) {
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -535,7 +535,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularV
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCollisionShape
-(JNIEnv *, jobject, jlong bodyId, jlong shapeId) {
+(JNIEnv *env, jobject, jlong bodyId, jlong shapeId) {
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -553,7 +553,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setCollisio
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setDamping
-(JNIEnv *, jobject, jlong bodyId, jfloat linear, jfloat angular) {
+(JNIEnv *env, jobject, jlong bodyId, jfloat linear, jfloat angular) {
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -603,7 +603,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setInverseI
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinematic
-(JNIEnv *, jobject, jlong bodyId, jboolean value) {
+(JNIEnv *env, jobject, jlong bodyId, jboolean value) {
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -644,7 +644,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearFa
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearSleepingThreshold
-(JNIEnv *, jobject, jlong bodyId, jfloat value) {
+(JNIEnv *env, jobject, jlong bodyId, jfloat value) {
     btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -734,7 +734,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsR
  * Signature: (JFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleepingThresholds
-(JNIEnv *, jobject, jlong bodyId, jfloat linear, jfloat angular) {
+(JNIEnv *env, jobject, jlong bodyId, jfloat linear, jfloat angular) {
     btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
@@ -748,7 +748,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleeping
  * Signature: (JJF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_updateMassProps
-(JNIEnv *, jobject, jlong bodyId, jlong shapeId, jfloat mass) {
+(JNIEnv *env, jobject, jlong bodyId, jlong shapeId, jfloat mass) {
     btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHECK(pBody, "The btRigidBody does not exist.",);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);

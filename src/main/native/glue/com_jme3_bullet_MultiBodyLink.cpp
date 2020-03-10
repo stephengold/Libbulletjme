@@ -97,7 +97,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addForce
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addJointTorque
-(JNIEnv *, jobject, jlong linkId, jint dofIndex, jfloat torque) {
+(JNIEnv *env, jobject, jlong linkId, jint dofIndex, jfloat torque) {
     btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.",);
@@ -200,7 +200,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getAxisTop
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodyLink_getCollider
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex) {
+(JNIEnv *env, jobject, jlong multiBodyId, jint linkIndex) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
@@ -248,7 +248,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getConstraintTorque
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getDofCount
-(JNIEnv *, jobject, jlong linkId) {
+(JNIEnv *env, jobject, jlong linkId) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -295,7 +295,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getEVector
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getFlags
-(JNIEnv *, jobject, jlong linkId) {
+(JNIEnv *env, jobject, jlong linkId) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -326,7 +326,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getInertiaLocal
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointPos
-(JNIEnv *, jobject, jlong linkId, jint dofIndex) {
+(JNIEnv *env, jobject, jlong linkId, jint dofIndex) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -345,7 +345,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointPos
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointTorque
-(JNIEnv *, jobject, jlong linkId, jint dofIndex) {
+(JNIEnv *env, jobject, jlong linkId, jint dofIndex) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -364,7 +364,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointTorque
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointType
-(JNIEnv *, jobject, jlong linkId) {
+(JNIEnv *env, jobject, jlong linkId) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -379,7 +379,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointType
  * Signature: (JII)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointVel
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex, jint dofIndex) {
+(JNIEnv *env, jobject, jlong multiBodyId, jint linkIndex, jint dofIndex) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
@@ -401,7 +401,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointVel
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodyLink_getLinkId
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex) {
+(JNIEnv *env, jobject, jlong multiBodyId, jint linkIndex) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
@@ -416,7 +416,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodyLink_getLinkId
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getMass
-(JNIEnv *, jobject, jlong linkId) {
+(JNIEnv *env, jobject, jlong linkId) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -447,7 +447,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_getParent2LinkRotation
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getParentIndex
-(JNIEnv *, jobject, jlong linkId) {
+(JNIEnv *env, jobject, jlong linkId) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -462,7 +462,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getParentIndex
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodyLink_getPosVarCount
-(JNIEnv *, jobject, jlong linkId) {
+(JNIEnv *env, jobject, jlong linkId) {
     const btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.", 0);
@@ -553,7 +553,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_localPosToWorld
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setCollider
-(JNIEnv *, jobject, jlong linkId, jlong colliderId) {
+(JNIEnv *env, jobject, jlong linkId, jlong colliderId) {
     btMultibodyLink * const
             pLink = reinterpret_cast<btMultibodyLink *> (linkId);
     NULL_CHECK(pLink, "The link does not exist.",);
@@ -571,7 +571,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setCollider
  * Signature: (JIIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setJointPos
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex, jint dofIndex,
+(JNIEnv *env, jobject, jlong multiBodyId, jint linkIndex, jint dofIndex,
         jfloat position) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
@@ -592,7 +592,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setJointPos
  * Signature: (JIIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setJointVel
-(JNIEnv *, jobject, jlong multiBodyId, jint linkIndex, jint dofIndex,
+(JNIEnv *env, jobject, jlong multiBodyId, jint linkIndex, jint dofIndex,
         jfloat velocity) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);

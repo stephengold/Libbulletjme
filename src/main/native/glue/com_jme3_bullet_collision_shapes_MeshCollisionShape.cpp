@@ -65,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
-(JNIEnv *env, jobject object, jlong nativeBVHBufferId) {
+(JNIEnv *, jobject object, jlong nativeBVHBufferId) {
     if (nativeBVHBufferId != 0) {
         void *pBuffer = reinterpret_cast<void *> (nativeBVHBufferId);
         btAlignedFree(pBuffer);

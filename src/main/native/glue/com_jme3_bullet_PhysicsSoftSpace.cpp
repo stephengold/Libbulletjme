@@ -45,7 +45,7 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
-(JNIEnv *, jobject, jlong spaceId, jlong softBodyId) {
+(JNIEnv *env, jobject, jlong spaceId, jlong softBodyId) {
     jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
     NULL_CHECK(pSpace, "The physics space does not exist.",)
@@ -96,7 +96,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getNumSoftBodies
-(JNIEnv *, jobject, jlong spaceId) {
+(JNIEnv *env, jobject, jlong spaceId) {
     const jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
     NULL_CHECK(pSpace, "The physics space does not exist.", 0)
@@ -116,7 +116,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getNumSoftBodies
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getWorldInfo
-(JNIEnv *, jobject, jlong spaceId) {
+(JNIEnv *env, jobject, jlong spaceId) {
     jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
     NULL_CHECK(pSpace, "The physics space does not exist.", 0)
@@ -134,7 +134,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getWorldInfo
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
-(JNIEnv *, jobject, jlong spaceId, jlong softBodyId) {
+(JNIEnv *env, jobject, jlong spaceId, jlong softBodyId) {
     jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
     NULL_CHECK(pSpace, "The physics space does not exist.",)
