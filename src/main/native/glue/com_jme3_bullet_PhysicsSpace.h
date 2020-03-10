@@ -87,6 +87,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getSolverMinBatch
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverMinBatch
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getSolverNumIterations
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverNumIterations
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    removeAction
  * Signature: (JJ)V
  */
@@ -132,6 +148,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGlobalCfm
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
   (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setSolverMinBatch
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverMinBatch
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

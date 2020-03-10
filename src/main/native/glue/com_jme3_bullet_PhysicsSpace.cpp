@@ -186,6 +186,40 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getSolverMinBatch
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverMinBatch
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+
+    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    const btContactSolverInfo& solverInfo = pWorld->getSolverInfo();
+    int result = solverInfo.m_minimumSolverBatchSize;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getSolverNumIterations
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverNumIterations
+(JNIEnv *, jobject, jlong spaceId) {
+    const jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+
+    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    const btContactSolverInfo& solverInfo = pWorld->getSolverInfo();
+    int result = solverInfo.m_numIterations;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getWorldType
  * Signature: (J)I
  */
@@ -309,6 +343,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
     jmeBulletUtil::convert(env, gravityVector, &gravity);
 
     pSpace->getDynamicsWorld()->setGravity(gravity);
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setSolverMinBatch
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverMinBatch
+(JNIEnv *, jobject, jlong spaceId, jint numConstraints) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHECK(pSpace, "The physics space does not exist.",)
+
+    btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
+    btContactSolverInfo& solverInfo = pWorld->getSolverInfo();
+    solverInfo.m_minimumSolverBatchSize = numConstraints;
 }
 
 /*

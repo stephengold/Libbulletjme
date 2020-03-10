@@ -310,12 +310,27 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Read the number of iterations used by the contact-and-constraint solver
-     * (native field: m_numIterations).
+     * Determine the minimum batch size used by the contact-and-constraint
+     * solver (native field: m_minimumSolverBatchSize).
+     *
+     * @return the number of constraints (&ge;1)
+     */
+    public int getSolverMinBatch() {
+        long spaceId = getSpaceId();
+        int result = getSolverMinBatch(spaceId);
+
+        return result;
+    }
+
+    /**
+     * Determine the number of iterations used by the contact-and-constraint
+     * solver (native field: m_numIterations).
      *
      * @return the number of iterations used (&ge;1)
      */
     public int getSolverNumIterations() {
+        long spaceId = getSpaceId();
+        assert solverNumIterations == getSolverNumIterations(spaceId);
         return solverNumIterations;
     }
 
@@ -420,6 +435,19 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
+     * Alter the minimum batch size used by the contact-and-constraint solver.
+     *
+     * @param numConstraints the desired number of constraints (&ge;1,
+     * default=128)
+     */
+    public void setSolverMinBatch(int numConstraints) {
+        Validate.positive(numConstraints, "number of constraints");
+
+        long spaceId = getSpaceId();
+        setSolverMinBatch(spaceId, numConstraints);
+    }
+
+    /**
      * Alter the number of iterations used by the contact-and-constraint solver.
      * <p>
      * Use 4 for low quality, 20 for high quality.
@@ -429,7 +457,7 @@ public class PhysicsSpace extends CollisionSpace {
     public void setSolverNumIterations(int numIterations) {
         Validate.positive(numIterations, "number of iterations");
 
-        this.solverNumIterations = numIterations;
+        solverNumIterations = numIterations;
         long spaceId = getSpaceId();
         setSolverNumIterations(spaceId, numIterations);
     }
@@ -869,6 +897,10 @@ public class PhysicsSpace extends CollisionSpace {
 
     native private int getNumConstraints(long spaceId);
 
+    native private int getSolverMinBatch(long spaceId);
+
+    native private int getSolverNumIterations(long spaceId);
+
     native private void removeAction(long spaceId, long actionId);
 
     native private void removeCharacterObject(long spaceId, long characterId);
@@ -880,6 +912,8 @@ public class PhysicsSpace extends CollisionSpace {
     native private void setGlobalCfm(long spaceId, float cfm);
 
     native private void setGravity(long spaceId, Vector3f gravityVector);
+
+    native private void setSolverMinBatch(long spaceId, int numConstraints);
 
     native private void setSolverNumIterations(long spaceId,
             int numIterations);

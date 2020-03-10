@@ -659,8 +659,8 @@ public class TestLibbulletjme {
                 multiBody.collideWithGroups());
         Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
                 multiBody.collisionGroup());
-        Assert.assertEquals(0, multiBody.countDofs());
         Assert.assertEquals(0, multiBody.countConfiguredLinks());
+        Assert.assertEquals(0, multiBody.countDofs());
         Assert.assertEquals(0, multiBody.countPositionVariables());
         Assert.assertNull(multiBody.getBaseCollider());
         Assert.assertNotEquals(0L, multiBody.nativeId());
@@ -958,6 +958,7 @@ public class TestLibbulletjme {
         assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
         Assert.assertEquals(4, space.maxSubSteps());
         Assert.assertEquals(0.1f, space.maxTimeStep(), 0f);
+        Assert.assertEquals(128, space.getSolverMinBatch());
         Assert.assertEquals(10, space.getSolverNumIterations());
 
         if (space instanceof MultiBodySpace) {
