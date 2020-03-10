@@ -42,7 +42,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * A Bullet-JME physics space with its own btSoftRigidDynamicsWorld.
+ * A PhysicsSpace that supports soft bodies, with its own
+ * btSoftRigidDynamicsWorld.
  *
  * @author dokthar
  */
@@ -61,7 +62,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
     /**
      * map soft-body IDs to added objects
      */
-    final private Map<Long, PhysicsSoftBody> softBodiesAdded
+    final private Map<Long, PhysicsSoftBody> softBodyMap
             = new ConcurrentHashMap<>(64);
     /**
      * parameters applied when soft bodies are added to this space
@@ -78,8 +79,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      * unaffected, default=-10k,-10k,-10k)
      * @param worldMax the desired minimum coordinates values (not null,
      * unaffected, default=10k,10k,10k)
-     * @param broadphaseType which broadphase collision-detection algorithm to
-     * use (not null)
+     * @param broadphaseType which broadphase accelerator to use (not null)
      */
     public PhysicsSoftSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
@@ -101,13 +101,12 @@ public class PhysicsSoftSpace extends PhysicsSpace {
     /**
      * Count the soft bodies in this space.
      *
-     * @return count (&ge;0)
+     * @return the count (&ge;0)
      */
     public int countSoftBodies() {
         long spaceId = getSpaceId();
         int count = getNumSoftBodies(spaceId);
-        assert count == softBodiesAdded.size();
-
+        assert count == softBodyMap.size();
         return count;
     }
 
@@ -118,7 +117,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<PhysicsSoftBody> getSoftBodyList() {
-        return new TreeSet<>(softBodiesAdded.values());
+        return new TreeSet<>(softBodyMap.values());
     }
 
     /**
@@ -167,7 +166,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
         boolean result;
         if (pco instanceof PhysicsSoftBody) {
             long pcoId = pco.getObjectId();
-            result = softBodiesAdded.containsKey(pcoId);
+            result = softBodyMap.containsKey(pcoId);
         } else {
             result = super.contains(pco);
         }
@@ -211,7 +210,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
     @Override
     public Collection<PhysicsCollisionObject> getPcoList() {
         Collection<PhysicsCollisionObject> result = super.getPcoList();
-        result.addAll(softBodiesAdded.values());
+        result.addAll(softBodyMap.values());
 
         return result;
     }
@@ -224,7 +223,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
     @Override
     public boolean isEmpty() {
         boolean result = super.isEmpty();
-        result = result && softBodiesAdded.isEmpty();
+        result = result && softBodyMap.isEmpty();
 
         return result;
     }
@@ -269,13 +268,13 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      */
     private void addSoftBody(PhysicsSoftBody softBody) {
         long softBodyId = softBody.getObjectId();
-        if (softBodiesAdded.containsKey(softBodyId)) {
+        if (softBodyMap.containsKey(softBodyId)) {
             logger2.log(Level.WARNING, "{0} is already added to {1}.",
                     new Object[]{softBody, this});
             return;
         }
 
-        softBodiesAdded.put(softBodyId, softBody);
+        softBodyMap.put(softBodyId, softBody);
         logger2.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{softBody, this});
 
@@ -286,14 +285,14 @@ public class PhysicsSoftSpace extends PhysicsSpace {
 
     private void removeSoftBody(PhysicsSoftBody softBody) {
         long softBodyId = softBody.getObjectId();
-        if (!softBodiesAdded.containsKey(softBodyId)) {
+        if (!softBodyMap.containsKey(softBodyId)) {
             logger2.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{softBody, this});
             return;
         }
         logger2.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{softBody, this});
-        softBodiesAdded.remove(softBodyId);
+        softBodyMap.remove(softBodyId);
         long spaceId = getSpaceId();
         removeSoftBody(spaceId, softBodyId);
     }
