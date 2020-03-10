@@ -36,7 +36,7 @@ package com.jme3.bullet;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum MultiBodySolver {
+public enum SolverType {
     // *************************************************************************
     // values
 
@@ -55,7 +55,7 @@ public enum MultiBodySolver {
      * Algorithm (see "Fast Implementation of Lemke’s Algorithm for Rigid Body
      * Contact Simulation" by John E. Lloyd)
      * <p>
-     * Seems to require a global CFM > 0.
+     * Seems to require a global CFM &gt; 0.
      */
     Lemke,
     /**

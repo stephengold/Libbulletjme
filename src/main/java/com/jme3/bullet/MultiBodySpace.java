@@ -62,7 +62,7 @@ public class MultiBodySpace extends PhysicsSpace {
     /**
      * copy of the constraint solver used
      */
-    private MultiBodySolver solverType = MultiBodySolver.Dantzig;
+    private SolverType solverType = SolverType.Dantzig;
     /**
      * map multibody IDs to added objects
      */
@@ -100,7 +100,7 @@ public class MultiBodySpace extends PhysicsSpace {
      * @param solverType which multibody constraint solver to use (not null)
      */
     public MultiBodySpace(Vector3f worldMin, Vector3f worldMax,
-            BroadphaseType broadphaseType, MultiBodySolver solverType) {
+            BroadphaseType broadphaseType, SolverType solverType) {
         super(worldMin, worldMax, broadphaseType);
         Validate.nonNull(solverType, "solver type");
         this.solverType = solverType;
