@@ -32,7 +32,7 @@
 package com.jme3.bullet;
 
 /**
- * Enumerate the available solvers for multibody constraints.
+ * Enumerate the available contact-and-constraint solvers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -41,8 +41,8 @@ public enum MultiBodySolver {
     // values
 
     /**
-     * btMultiBodyConstraintSolver: Bullet's original sequential-impulse solver
-     * (as a fallback)
+     * btSequentialImpulseConstraintSolver/btMultiBodyConstraintSolver: Bullet's
+     * original sequential-impulse solver
      */
     SI,
     /**
@@ -54,11 +54,18 @@ public enum MultiBodySolver {
      * btLemkeSolver: accurate-but-slow MLCP direct solver using Lemke’s
      * Algorithm (see "Fast Implementation of Lemke’s Algorithm for Rigid Body
      * Contact Simulation" by John E. Lloyd)
+     * <p>
+     * Seems to require a global CFM > 0.
      */
     Lemke,
     /**
      * btSolveProjectedGaussSeidel: slow MLCP direct solver using projected
      * Gauss-Seidel (PGS) for debug/learning purposes
      */
-    PGS
+    PGS,
+    /**
+     * btNNCGConstraintSolver: using the Nonsmooth Nonlinear Conjugate Gradient
+     * (NNCG) method
+     */
+    NNCG
 }
