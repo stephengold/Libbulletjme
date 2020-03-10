@@ -46,8 +46,8 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     if (collides) {
         btCollisionObject * const pco0 = (btCollisionObject *) pProxy0->m_clientObject;
         btCollisionObject * const pco1 = (btCollisionObject *) pProxy1->m_clientObject;
-        jmeUserPointer * const pUser0 = (jmeUserPointer *) pco0->getUserPointer();
-        jmeUserPointer * const pUser1 = (jmeUserPointer *) pco1->getUserPointer();
+        jmeUserInfo * const pUser0 = (jmeUserInfo *) pco0->getUserPointer();
+        jmeUserInfo * const pUser1 = (jmeUserInfo *) pco1->getUserPointer();
         if (pUser0 != NULL && pUser1 != NULL) {
             collides = (pUser0->group & pUser1->groups) != 0
                     || (pUser1->group & pUser0->groups) != 0;

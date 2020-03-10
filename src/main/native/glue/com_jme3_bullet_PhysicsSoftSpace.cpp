@@ -59,8 +59,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
     btAssert(pSoftBody->getInternalType()
             & btCollisionObject::CO_SOFT_BODY);
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pSoftBody->getUserPointer();
+    jmeUserInfo * const pUser = (jmeUserInfo *) pSoftBody->getUserPointer();
     pUser->space = pSpace;
 
     pWorld->addSoftBody(pSoftBody);
@@ -146,8 +145,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
     NULL_CHECK(pSoftBody, "The collision object does not exist.",)
     btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pSoftBody->getUserPointer();
+    jmeUserInfo * const pUser = (jmeUserInfo *) pSoftBody->getUserPointer();
     pUser->space = NULL;
 
     pWorld->removeSoftBody(pSoftBody);

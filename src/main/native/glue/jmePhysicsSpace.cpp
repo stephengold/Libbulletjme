@@ -47,7 +47,7 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
-    // Use the default constraint solver.
+    // For now, use a sequential-impulse solver.
     btConstraintSolver * const
             pConstraintSolver = new btSequentialImpulseConstraintSolver();
 
@@ -72,8 +72,8 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
     //printf("contactProcessedCallback %x %x\n", co0, co1);
-    jmeUserPointer * const pUser0 = (jmeUserPointer *) pco0->getUserPointer();
-    jmeUserPointer * const pUser1 = (jmeUserPointer *) pco1->getUserPointer();
+    jmeUserInfo * const pUser0 = (jmeUserInfo *) pco0->getUserPointer();
+    jmeUserInfo * const pUser1 = (jmeUserInfo *) pco1->getUserPointer();
     if (pUser0 != NULL && pUser1 != NULL) {
         jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->space;
         if (pSpace != NULL) {

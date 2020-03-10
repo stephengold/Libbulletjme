@@ -71,7 +71,7 @@ private:
 
 class jmeCollisionSpace;
 
-class jmeUserPointer { // TODO rename - the class is not a pointer!
+class jmeUserInfo { // TODO typedef?
 public:
     jobject javaCollisionObject; // a MultiBody or PhysicsCollisionObject
     jint group; // CollisionGroup: bitmask with exactly one bit set

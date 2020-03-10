@@ -62,8 +62,7 @@ public:
         } else {
             pOther = (btCollisionObject *) pair.m_pProxy1->m_clientObject;
         }
-        jmeUserPointer * const
-                pUser = (jmeUserPointer *) pOther->getUserPointer();
+        jmeUserInfo * const pUser = (jmeUserInfo *) pOther->getUserPointer();
         jobject javaCollisionObject1
                 = m_env->NewLocalRef(pUser->javaCollisionObject);
         m_env->CallVoidMethod(m_object,

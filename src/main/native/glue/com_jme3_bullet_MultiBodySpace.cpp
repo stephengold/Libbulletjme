@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",)
 
-    jmeUserPointer *pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    jmeUserInfo *pUser = (jmeUserInfo *) pMultiBody->getUserPointer();
     pUser->space = pSpace;
     pWorld->addMultiBody(pMultiBody);
     /*
@@ -71,7 +71,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
     if (pCollider && pCollider->getCollisionShape()) {
         btAssert(pCollider->getInternalType()
                 & btCollisionObject::CO_FEATHERSTONE_LINK);
-        pUser = (jmeUserPointer *) pCollider->getUserPointer();
+        pUser = (jmeUserInfo *) pCollider->getUserPointer();
         pUser->space = pSpace;
         int cfGroup, cfMask;
         if (pMultiBody->hasFixedBase()) {
@@ -92,7 +92,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
         if (pCollider && pCollider->getCollisionShape()) {
             btAssert(pCollider->getInternalType()
                     & btCollisionObject::CO_FEATHERSTONE_LINK);
-            pUser = (jmeUserPointer *) pCollider->getUserPointer();
+            pUser = (jmeUserInfo *) pCollider->getUserPointer();
             pUser->space = pSpace;
             pWorld->addCollisionObject((btCollisionObject *) pCollider,
                     btBroadphaseProxy::DefaultFilter,
@@ -200,7 +200,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.",)
 
-    jmeUserPointer *pUser = (jmeUserPointer *) pMultiBody->getUserPointer();
+    jmeUserInfo *pUser = (jmeUserInfo *) pMultiBody->getUserPointer();
     pUser->space = NULL;
     pWorld->removeMultiBody(pMultiBody);
     /*
@@ -210,7 +210,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
     if (pCollider && pCollider->getCollisionShape()) {
         btAssert(pCollider->getInternalType()
                 & btCollisionObject::CO_FEATHERSTONE_LINK);
-        pUser = (jmeUserPointer *) pCollider->getUserPointer();
+        pUser = (jmeUserInfo *) pCollider->getUserPointer();
         pUser->space = NULL;
         pWorld->removeCollisionObject((btCollisionObject *) pCollider);
     }
@@ -222,7 +222,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
         if (pCollider && pCollider->getCollisionShape()) {
             btAssert(pCollider->getInternalType()
                     & btCollisionObject::CO_FEATHERSTONE_LINK);
-            pUser = (jmeUserPointer *) pCollider->getUserPointer();
+            pUser = (jmeUserInfo *) pCollider->getUserPointer();
             pUser->space = NULL;
             pWorld->removeCollisionObject((btCollisionObject *) pCollider);
         }

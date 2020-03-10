@@ -52,8 +52,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jmeUserInfo * const
+            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
     pUser->space = pSpace;
 
     pSpace->getCollisionWorld()->addCollisionObject(pCollisionObject);
@@ -193,8 +193,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
 
     pSpace->getCollisionWorld()->removeCollisionObject(pCollisionObject);
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jmeUserInfo * const
+            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
     pUser->space = NULL;
 }
 

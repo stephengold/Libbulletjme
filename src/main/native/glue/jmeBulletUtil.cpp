@@ -387,8 +387,7 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *env, jobject resultList,
     jobject normalvec = env->AllocObject(jmeClasses::Vector3f);
 
     convert(env, pHitNormal, normalvec);
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pHitObject->getUserPointer();
+    jmeUserInfo * const pUser = (jmeUserInfo *) pHitObject->getUserPointer();
 
     env->SetObjectField(result, jmeClasses::PhysicsRay_normal, normalvec);
     env->SetFloatField(result, jmeClasses::PhysicsRay_hitFraction, hitFraction);
@@ -416,7 +415,7 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *env, jobject resultList,
     jobject normalvec = env->AllocObject(jmeClasses::Vector3f);
 
     convert(env, pHitNormal, normalvec);
-    jmeUserPointer *pUser = (jmeUserPointer *) pHitObject->getUserPointer();
+    jmeUserInfo *pUser = (jmeUserInfo *) pHitObject->getUserPointer();
 
     env->SetObjectField(result, jmeClasses::PhysicsSweep_normal, normalvec);
     env->SetFloatField(result, jmeClasses::PhysicsSweep_hitFraction,

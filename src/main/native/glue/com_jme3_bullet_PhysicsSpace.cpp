@@ -91,8 +91,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jmeUserInfo * const
+            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
     pUser->space = pSpace;
 
     pSpace->getDynamicsWorld()->addCollisionObject(pCollisionObject,
@@ -133,7 +133,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
     NULL_CHECK(pBody, "The collision object does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    jmeUserPointer * const pUser = (jmeUserPointer *) pBody->getUserPointer();
+    jmeUserInfo * const pUser = (jmeUserInfo *) pBody->getUserPointer();
     pUser->space = pSpace;
 
     pSpace->getDynamicsWorld()->addRigidBody(pBody);
@@ -238,8 +238,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserPointer * const
-            pUser = (jmeUserPointer *) pCollisionObject->getUserPointer();
+    jmeUserInfo * const
+            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
     pUser->space = NULL;
 
     pSpace->getDynamicsWorld()->removeCollisionObject(pCollisionObject);
@@ -278,7 +278,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
     NULL_CHECK(pBody, "The collision object does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    jmeUserPointer * const pUser = (jmeUserPointer *) pBody->getUserPointer();
+    jmeUserInfo * const pUser = (jmeUserInfo *) pBody->getUserPointer();
     pUser->space = NULL;
 
     pSpace->getDynamicsWorld()->removeRigidBody(pBody);
