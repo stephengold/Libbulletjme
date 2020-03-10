@@ -39,6 +39,22 @@
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getWorldType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
+(JNIEnv *pEnv, jobject, jlong spaceId) {
+    const jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
+
+    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    btDynamicsWorldType type = pWorld->getWorldType();
+    return jint(type);
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    addAction
  * Signature: (JJ)V
  */
@@ -138,22 +154,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getGlobalCfm
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_PhysicsSpace_getGlobalCfm
-(JNIEnv *env, jobject, jlong spaceId) {
-    const jmePhysicsSpace * const
-            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
-
-    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
-    btScalar globalCfm = pWorld->getSolverInfo().m_globalCfm;
-    return (jfloat) globalCfm;
-}
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -186,51 +186,18 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getSolverMinBatch
- * Signature: (J)I
+ * Method:    getSolverInfo
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverMinBatch
-(JNIEnv *env, jobject, jlong spaceId) {
-    const jmePhysicsSpace * const
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
+(JNIEnv *pEnv, jobject, jlong spaceId) {
+    jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
 
-    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
-    const btContactSolverInfo& solverInfo = pWorld->getSolverInfo();
-    int result = solverInfo.m_minimumSolverBatchSize;
-    return (jint) result;
-}
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getSolverNumIterations
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverNumIterations
-(JNIEnv *env, jobject, jlong spaceId) {
-    const jmePhysicsSpace * const
-            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
-
-    const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
-    const btContactSolverInfo& solverInfo = pWorld->getSolverInfo();
-    int result = solverInfo.m_numIterations;
-    return (jint) result;
-}
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getWorldType
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
-(JNIEnv *env, jobject, jlong spaceId) {
-    const jmePhysicsSpace * const pSpace
-            = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
-
-    btDynamicsWorldType type = pSpace->getDynamicsWorld()->getWorldType();
-    return (jint) type;
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    btContactSolverInfo *pInfo = &pWorld->getSolverInfo();
+    return reinterpret_cast<jlong> (pInfo);
 }
 
 /*
@@ -314,21 +281,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    setGlobalCfm
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGlobalCfm
-(JNIEnv *env, jobject, jlong spaceId, jfloat cfm) {
-    jmePhysicsSpace * const
-            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
-
-    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
-    pWorld->getSolverInfo().m_globalCfm = btScalar(cfm);
-}
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    setGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -343,36 +295,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
     jmeBulletUtil::convert(env, gravityVector, &gravity);
 
     pSpace->getDynamicsWorld()->setGravity(gravity);
-}
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    setSolverMinBatch
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverMinBatch
-(JNIEnv *env, jobject, jlong spaceId, jint numConstraints) {
-    jmePhysicsSpace * const
-            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
-
-    btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
-    btContactSolverInfo& solverInfo = pWorld->getSolverInfo();
-    solverInfo.m_minimumSolverBatchSize = numConstraints;
-}
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    setSolverNumIterations
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverNumIterations
-(JNIEnv *env, jobject, jlong spaceId, jint value) {
-    jmePhysicsSpace * const
-            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
-
-    pSpace->getDynamicsWorld()->getSolverInfo().m_numIterations = value;
 }
 
 /*

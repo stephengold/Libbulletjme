@@ -63,14 +63,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getGlobalCfm
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_PhysicsSpace_getGlobalCfm
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    getGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -87,18 +79,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getSolverMinBatch
- * Signature: (J)I
+ * Method:    getSolverInfo
+ * Signature: (J)J
  */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverMinBatch
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    getSolverNumIterations
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverNumIterations
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
   (JNIEnv *, jobject, jlong);
 
 /*
@@ -135,35 +119,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    setGlobalCfm
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGlobalCfm
-  (JNIEnv *, jobject, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    setGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
   (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    setSolverMinBatch
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverMinBatch
-  (JNIEnv *, jobject, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_PhysicsSpace
- * Method:    setSolverNumIterations
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverNumIterations
-  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

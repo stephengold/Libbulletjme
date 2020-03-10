@@ -198,6 +198,7 @@ public class MultiBodySpace extends PhysicsSpace {
         assert getWorldType(nativeId) == 2 // BT_DISCRETE_DYNAMICS_WORLD (!)
                 : getWorldType(nativeId);
         initThread(nativeId);
+        initSolverInfo();
     }
 
     /**

@@ -199,6 +199,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
         assert getWorldType(nativeId) == 4 // BT_SOFT_RIGID_DYNAMICS_WORLD
                 : getWorldType(nativeId);
         initThread(nativeId);
+        initSolverInfo();
     }
 
     /**

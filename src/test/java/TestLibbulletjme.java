@@ -33,6 +33,7 @@ import com.jme3.bullet.MultiBodySpace;
 import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
+import com.jme3.bullet.SolverInfo;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.shapes.Box2dShape;
@@ -955,12 +956,17 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
-        Assert.assertEquals(0f, space.getGlobalCfm(), 0f);
         assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
         Assert.assertEquals(4, space.maxSubSteps());
         Assert.assertEquals(0.1f, space.maxTimeStep(), 0f);
-        Assert.assertEquals(128, space.getSolverMinBatch());
-        Assert.assertEquals(10, space.getSolverNumIterations());
+
+        SolverInfo info = space.getSolverInfo();
+        Assert.assertNotNull(info);
+        Assert.assertNotEquals(0L, info.nativeId());
+        Assert.assertEquals(0f, info.globalCfm(), 0f);
+        Assert.assertEquals(128, info.minBatch());
+        Assert.assertEquals(0x104, info.mode());
+        Assert.assertEquals(10, info.numIterations());
 
         if (space instanceof MultiBodySpace) {
             MultiBodySpace mbSpace = (MultiBodySpace) space;
