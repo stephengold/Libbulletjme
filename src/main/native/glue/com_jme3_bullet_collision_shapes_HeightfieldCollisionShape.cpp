@@ -107,10 +107,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisi
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_finalizeNative
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *, jobject object, jlong shapeId) {
 #ifdef BT_USE_DOUBLE_PRECISION
-    HeightfieldShape *pShape
-            = reinterpret_cast<HeightfieldShape *> (shapeId);
+    HeightfieldShape *pShape = reinterpret_cast<HeightfieldShape *> (shapeId);
     if (pShape != NULL) {
         const btScalar *pDpHeights = pShape->getHeightData();
         delete[] pDpHeights;

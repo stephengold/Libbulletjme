@@ -107,7 +107,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
 }
 
 struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
-    JNIEnv *m_pEnv; // TODO eliminate this
+    JNIEnv *m_pEnv;
     btVector3 m_rayFromWorld;
     btVector3 m_rayToWorld;
     jobject m_resultlist;
@@ -198,9 +198,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
     pUser->space = NULL;
 }
 
-struct AllConvexResultCallback :
-public btCollisionWorld::ConvexResultCallback {
-    JNIEnv *m_pEnv; // TODO eliminate this
+struct AllConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
+    JNIEnv *m_pEnv;
     btTransform m_convexFromWorld;
     btTransform m_convexToWorld;
     jobject m_resultlist;

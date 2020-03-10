@@ -44,8 +44,7 @@
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftPhysicsJoint_finalizeNative
 (JNIEnv *env, jobject object, jlong jointId) {
-    btSoftBody::Joint *pJoint
-            = reinterpret_cast<btSoftBody::Joint *> (jointId);
+    btSoftBody::Joint *pJoint = reinterpret_cast<btSoftBody::Joint *> (jointId);
     NULL_CHECK(pJoint, "The joint does not exist.",)
 
     btAlignedFree(pJoint);

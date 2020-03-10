@@ -8,14 +8,14 @@
  + Bugfix: unsatisfied link of `MultiBody.getCanSleep()`
  + Added capability to specify the constraint solver for a `MultiBodySpace`.
  + Added 5 methods to the `MultiBodyCollider` class:
-  + `getMultiBody()`
-  + `linkIndex()`
-  + `mass()`
-  + `setPhysicsLocation()`
-  + `setPhysicsRotation()`
+   + `getMultiBody()`
+   + `linkIndex()`
+   + `mass()`
+   + `setPhysicsLocation()`
+   + `setPhysicsRotation()`
  + Added 2 native methods to the `PhysicsCollisionObject` class:
-  + `getCollideWithGroups()`
-  + `getCollisionGroup()`
+   + `getCollideWithGroups()`
+   + `getCollisionGroup()`
 
 ## Version 4.1.1 released on 5 March 2020
 

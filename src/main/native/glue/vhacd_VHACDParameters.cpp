@@ -61,9 +61,9 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
 (JNIEnv *env, jclass clas, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
-    NULL_CHECK(pParam, "The parameters do not exist.",)
+    NULL_CHECK(pParam, "The parameters do not exist.",);
 
-            delete pParam;
+    delete pParam;
 }
 
 /*
