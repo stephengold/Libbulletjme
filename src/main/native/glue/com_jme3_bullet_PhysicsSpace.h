@@ -127,6 +127,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setSolverType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    stepSimulation
  * Signature: (JFIF)V
  */

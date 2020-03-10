@@ -52,7 +52,7 @@ public:
      */
     void
     createMultiBodySpace(const btVector3& min, const btVector3& max,
-            jint broadphaseType, jint solverType = 1);
+            jint broadphaseType);
     /*
      * getters:
      */

@@ -29,13 +29,16 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "com_jme3_bullet_MultiBodySpace.h"
-#include "jmeMultiBodySpace.h"
-#include "jmeBulletUtil.h"
 #include "btMultiBody.h"
 #include "btMultiBodyDynamicsWorld.h"
 #include "btMultiBodyLinkCollider.h"
-
+#include "btMultiBodyMLCPConstraintSolver.h"
+#include "BulletDynamics/MLCPSolvers/btDantzigSolver.h"
+#include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
+#include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
+#include "com_jme3_bullet_MultiBodySpace.h"
+#include "jmeBulletUtil.h"
+#include "jmeMultiBodySpace.h"
 /*
  * Author: Stephen Gold
  */
@@ -120,7 +123,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
 }
 
 /*
- * Class:     com_jme3_bullet_MultiBodySpace - TODO delete
+ * Class:     com_jme3_bullet_MultiBodySpace
  * Method:    createMultiBodySpace
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;I)J
  */
@@ -139,30 +142,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 
     jmeMultiBodySpace * const pSpace = new jmeMultiBodySpace(env, object);
     pSpace->createMultiBodySpace(min, max, broadphaseType);
-
-    return reinterpret_cast<jlong> (pSpace);
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBodySpace
- * Method:    createMultiBodySpace2
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;II)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace2
-(JNIEnv *env, jobject object, jobject minVector, jobject maxVector,
-        jint broadphaseType, jint solverType) {
-    jmeClasses::initJavaClasses(env);
-
-    NULL_CHECK(minVector, "The min vector does not exist.", 0)
-    btVector3 min;
-    jmeBulletUtil::convert(env, minVector, &min);
-
-    NULL_CHECK(maxVector, "The max vector does not exist.", 0)
-    btVector3 max;
-    jmeBulletUtil::convert(env, maxVector, &max);
-
-    jmeMultiBodySpace * const pSpace = new jmeMultiBodySpace(env, object);
-    pSpace->createMultiBodySpace(min, max, broadphaseType, solverType);
 
     return reinterpret_cast<jlong> (pSpace);
 }
@@ -271,4 +250,45 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstr
     NULL_CHECK(pConstraint, "The constraint does not exist.",)
 
     pWorld->removeMultiBodyConstraint(pConstraint);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBodySpace
+ * Method:    setSolverType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
+(JNIEnv *pEnv, jobject, jlong spaceId, jint solverType) {
+    jmeMultiBodySpace * const
+            pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
+    btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
+
+    btMultiBodyConstraintSolver *pConstraintSolver;
+    btMLCPSolverInterface *pMLCP;
+    switch (solverType) {
+        case 0: // SI
+            pConstraintSolver = new btMultiBodyConstraintSolver();
+            break;
+        case 1: // Dantzig
+            pMLCP = new btDantzigSolver();
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            break;
+        case 2: // Lemke
+            pMLCP = new btLemkeSolver();
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            break;
+        case 3: // PGS
+            pMLCP = new btSolveProjectedGaussSeidel();
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            break;
+        default:
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The solver type is out of range.");
+    }
+
+    pWorld->setMultiBodyConstraintSolver(pConstraintSolver);
+    // TODO delete the old solver
 }

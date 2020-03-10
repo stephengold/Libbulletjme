@@ -33,9 +33,14 @@
 /*
  * Author: Normen Hansen
  */
+#include "BulletDynamics/ConstraintSolver/btNNCGConstraintSolver.h"
+#include "BulletDynamics/MLCPSolvers/btDantzigSolver.h"
+#include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
+#include "BulletDynamics/MLCPSolvers/btMLCPSolver.h"
+#include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
 #include "com_jme3_bullet_PhysicsSpace.h"
-#include "jmePhysicsSpace.h"
 #include "jmeBulletUtil.h"
+#include "jmePhysicsSpace.h"
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
@@ -295,6 +300,51 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
     jmeBulletUtil::convert(env, gravityVector, &gravity);
 
     pSpace->getDynamicsWorld()->setGravity(gravity);
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setSolverType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
+(JNIEnv *pEnv, jobject, jlong spaceId, jint solverType) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    btAssert(pWorld != NULL);
+    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
+
+    btConstraintSolver *pConstraintSolver;
+    btMLCPSolverInterface *pMLCP;
+    switch (solverType) {
+        case 0: // SI
+            pConstraintSolver = new btSequentialImpulseConstraintSolver();
+            break;
+        case 1: // Dantzig
+            pMLCP = new btDantzigSolver();
+            pConstraintSolver = new btMLCPSolver(pMLCP);
+            break;
+        case 2: // Lemke
+            pMLCP = new btLemkeSolver();
+            pConstraintSolver = new btMLCPSolver(pMLCP);
+            break;
+        case 3: // PGS
+            pMLCP = new btSolveProjectedGaussSeidel();
+            pConstraintSolver = new btMLCPSolver(pMLCP);
+            break;
+        case 4: // NNCG
+            pConstraintSolver = new btNNCGConstraintSolver();
+            break;
+        default:
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The solver type is out of range.");
+    }
+
+    btConstraintSolver *pOldSolver = pWorld->getConstraintSolver();
+    pWorld->setConstraintSolver(pConstraintSolver);
+    delete pOldSolver;
 }
 
 /*

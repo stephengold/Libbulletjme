@@ -49,7 +49,8 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A CollisionSpace to simulate dynamic physics, with its own btDynamicsWorld.
+ * A CollisionSpace to simulate dynamic physics, with its own
+ * btDiscreteDynamicsWorld.
  *
  * @author normenhansen
  */
@@ -143,6 +144,10 @@ public class PhysicsSpace extends CollisionSpace {
      */
     private SolverInfo solverInfo;
     /**
+     * type of contact-and-constraint solver (not null)
+     */
+    private SolverType solverType = SolverType.SI;
+    /**
      * copy of gravity-acceleration vector for newly-added bodies (default is
      * 9.81 in the -Y direction, corresponding to Earth-normal in MKS units)
      */
@@ -188,6 +193,28 @@ public class PhysicsSpace extends CollisionSpace {
             BroadphaseType broadphaseType) {
         super(worldMin, worldMax, broadphaseType);
     }
+
+    /**
+     * Instantiate a PhysicsSpace. Must be invoked on the designated physics
+     * thread.
+     *
+     * @param worldMin the desired minimum coordinates values (not null,
+     * unaffected, default=-10k,-10k,-10k)
+     * @param worldMax the desired minimum coordinates values (not null,
+     * unaffected, default=10k,10k,10k)
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     * @param solverType the desired constraint solver (not null)
+     */
+    public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
+            BroadphaseType broadphaseType, SolverType solverType) {
+        super(worldMin, worldMax, broadphaseType);
+        Validate.nonNull(solverType, "solver type");
+
+        if (this.solverType != solverType) {
+            this.solverType = solverType;
+            updateSolver();
+        }
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -207,7 +234,7 @@ public class PhysicsSpace extends CollisionSpace {
     /**
      * Count the joints in this space.
      *
-     * @return count (&ge;0)
+     * @return the count (&ge;0)
      */
     public int countJoints() {
         long spaceId = getSpaceId();
@@ -303,6 +330,15 @@ public class PhysicsSpace extends CollisionSpace {
      */
     public SolverInfo getSolverInfo() {
         return solverInfo;
+    }
+
+    /**
+     * Determine the type of solver.
+     *
+     * @return an enum value (not null)
+     */
+    public SolverType getSolverType() {
+        return solverType;
     }
 
     /**
@@ -450,6 +486,16 @@ public class PhysicsSpace extends CollisionSpace {
         long solverInfoId = getSolverInfo(spaceId);
         solverInfo = new SolverInfo(solverInfoId);
     }
+
+    /**
+     * Replace the existing contact-and-constraint solver with a new one of the
+     * correct type.
+     */
+    protected void updateSolver() {
+        long spaceId = getSpaceId();
+        int ordinal = solverType.ordinal();
+        setSolverType(spaceId, ordinal);
+    }
     // *************************************************************************
     // CollisionSpace methods
 
@@ -566,9 +612,8 @@ public class PhysicsSpace extends CollisionSpace {
     @Override
     public void remove(Object object) {
         if (object == null) {
-            return;
-        }
-        if (object instanceof PhysicsJoint) {
+            // do nothing
+        } else if (object instanceof PhysicsJoint) {
             removeJoint((PhysicsJoint) object);
         } else {
             super.remove(object);
@@ -849,6 +894,8 @@ public class PhysicsSpace extends CollisionSpace {
     native private void removeRigidBody(long spaceId, long rigidBodyId);
 
     native private void setGravity(long spaceId, Vector3f gravityVector);
+
+    native private void setSolverType(long spaceId, int solverType);
 
     native private void stepSimulation(long spaceId, float timeInterval,
             int maxSubSteps, float accuracy);

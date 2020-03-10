@@ -32,17 +32,13 @@
 #include "jmeMultiBodySpace.h"
 #include "jmeBulletUtil.h"
 #include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
-#include "BulletDynamics/Featherstone/btMultiBodyMLCPConstraintSolver.h"
-#include "BulletDynamics/MLCPSolvers/btDantzigSolver.h"
-#include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
-#include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
 
 /*
  * Author: Stephen Gold
  */
 void jmeMultiBodySpace::
 createMultiBodySpace(const btVector3& min, const btVector3& max,
-        jint broadphaseType, jint solverType) {
+        jint broadphaseType) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
@@ -54,29 +50,9 @@ createMultiBodySpace(const btVector3& min, const btVector3& max,
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
-    // Create the constraint solver.
-    btMultiBodyConstraintSolver *pConstraintSolver;
-    btMLCPSolverInterface *pMLCP;
-    switch (solverType) {
-        case 0:
+    // For now, use a sequential-impulse solver.
+    btMultiBodyConstraintSolver * const
             pConstraintSolver = new btMultiBodyConstraintSolver();
-            break;
-        case 1:
-            pMLCP = new btDantzigSolver();
-            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
-            break;
-        case 2:
-            pMLCP = new btLemkeSolver();
-            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
-            break;
-        case 3:
-            pMLCP = new btSolveProjectedGaussSeidel();
-            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
-            break;
-        default:
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
-                    "The solver type is out of range.");
-    }
 
     // Create the multibody dynamics world.
     btMultiBodyDynamicsWorld * const

@@ -43,7 +43,8 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A Bullet-JME physics space with its own btMultiBodyDynamicsWorld.
+ * A PhysicsSpace that supports multibodies, with its own
+ * btMultiBodyDynamicsWorld.
  *
  * @author Stephen Gold
  */
@@ -60,10 +61,6 @@ public class MultiBodySpace extends PhysicsSpace {
     // fields
 
     /**
-     * copy of the constraint solver used
-     */
-    private SolverType solverType = SolverType.Dantzig;
-    /**
      * map multibody IDs to added objects
      */
     final private Map<Long, MultiBody> multiBodyMap
@@ -79,8 +76,7 @@ public class MultiBodySpace extends PhysicsSpace {
      * unaffected, default=-10k,-10k,-10k)
      * @param worldMax the desired minimum coordinates values (not null,
      * unaffected, default=10k,10k,10k)
-     * @param broadphaseType which broadphase collision-detection algorithm to
-     * use (not null)
+     * @param broadphaseType which broadphase accelerator to use (not null)
      */
     public MultiBodySpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
@@ -95,15 +91,12 @@ public class MultiBodySpace extends PhysicsSpace {
      * unaffected, default=-10k,-10k,-10k)
      * @param worldMax the desired minimum coordinates values (not null,
      * unaffected, default=10k,10k,10k)
-     * @param broadphaseType which broadphase collision-detection algorithm to
-     * use (not null)
-     * @param solverType which multibody constraint solver to use (not null)
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     * @param solverType the desired constraint solver (not null)
      */
     public MultiBodySpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType, SolverType solverType) {
-        super(worldMin, worldMax, broadphaseType);
-        Validate.nonNull(solverType, "solver type");
-        this.solverType = solverType;
+        super(worldMin, worldMax, broadphaseType, solverType);
     }
     // *************************************************************************
     // new methods exposed
@@ -116,8 +109,7 @@ public class MultiBodySpace extends PhysicsSpace {
     public int countMultiBodies() {
         long spaceId = getSpaceId();
         int count = getNumMultibodies(spaceId);
-        assert count == multiBodyMap.size();
-
+        assert count == multiBodyMap.size() : count;
         return count;
     }
 
@@ -128,7 +120,8 @@ public class MultiBodySpace extends PhysicsSpace {
      * @return a new collection of pre-existing instances (not null)
      */
     public Collection<MultiBody> getMultiBodyList() {
-        return new TreeSet<>(multiBodyMap.values());
+        Collection<MultiBody> result = new TreeSet<>(multiBodyMap.values());
+        return result;
     }
 
     /**
@@ -162,7 +155,7 @@ public class MultiBodySpace extends PhysicsSpace {
     /**
      * Test whether the specified collision object is added to this space.
      *
-     * @param pco the object to search for (not null, unaffected)
+     * @param pco the object to test (not null, unaffected)
      * @return true if currently added, otherwise false
      */
     @Override
@@ -190,8 +183,9 @@ public class MultiBodySpace extends PhysicsSpace {
      */
     @Override
     protected void create() {
-        long nativeId = createMultiBodySpace2(getWorldMin(null),
-                getWorldMax(null), getBroadphaseType().ordinal(), 0);
+        int broadphase = getBroadphaseType().ordinal();
+        long nativeId = createMultiBodySpace(getWorldMin(null),
+                getWorldMax(null), broadphase);
         assert nativeId != 0L;
         logger2.log(Level.FINE, "Created {0}.", this);
 
@@ -199,19 +193,6 @@ public class MultiBodySpace extends PhysicsSpace {
                 : getWorldType(nativeId);
         initThread(nativeId);
         initSolverInfo();
-    }
-
-    /**
-     * Test whether this space is empty.
-     *
-     * @return true if empty, otherwise false
-     */
-    @Override
-    public boolean isEmpty() {
-        boolean result = super.isEmpty();
-        result = result && multiBodyMap.isEmpty();
-
-        return result;
     }
 
     /**
@@ -232,6 +213,19 @@ public class MultiBodySpace extends PhysicsSpace {
     }
 
     /**
+     * Test whether this space is empty.
+     *
+     * @return true if empty, otherwise false
+     */
+    @Override
+    public boolean isEmpty() {
+        boolean result = super.isEmpty();
+        result = result && multiBodyMap.isEmpty();
+
+        return result;
+    }
+
+    /**
      * Remove the specified object from this space.
      *
      * @param object the object to remove, or null
@@ -239,17 +233,27 @@ public class MultiBodySpace extends PhysicsSpace {
     @Override
     public void remove(Object object) {
         if (object == null) {
-            return;
-        }
-
-        if (object instanceof MultiBody) {
+            // do nothing
+        } else if (object instanceof MultiBody) {
             removeMultiBody((MultiBody) object);
         } else {
             super.remove(object);
         }
     }
+
+    /**
+     * Replace the existing contact-and-constraint solver with a new one of the
+     * correct type.
+     */
+    @Override
+    protected void updateSolver() {
+        long spaceId = getSpaceId();
+        SolverType type = getSolverType();
+        int ordinal = type.ordinal();
+        setSolverType(spaceId, ordinal);
+    }
     // *************************************************************************
-    // private methods
+    // private Java methods
 
     /**
      * Add the specified MultiBody and all its colliders.
@@ -297,8 +301,8 @@ public class MultiBodySpace extends PhysicsSpace {
 
     native private void addMultiBodyConstraint(long spaceId, long constraintId);
 
-    native private long createMultiBodySpace2(Vector3f minVector,
-            Vector3f maxVector, int broadphaseType, int solverType);
+    native private long createMultiBodySpace(Vector3f minVector,
+            Vector3f maxVector, int broadphaseType);
 
     native private int getNumMultibodies(long spaceId);
 
@@ -308,4 +312,6 @@ public class MultiBodySpace extends PhysicsSpace {
 
     native private void removeMultiBodyConstraint(long spaceId,
             long constraintId);
+
+    native private void setSolverType(long spaceId, int solverType);
 }
