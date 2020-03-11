@@ -31,6 +31,7 @@
  */
 #include <math.h>
 #include "jmeBulletUtil.h"
+#include "jmeUserInfo.h"
 
 /*
  * Author: Normen Hansen, Empire Phoenix, Lutherion

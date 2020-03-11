@@ -36,6 +36,7 @@
 #include "com_jme3_bullet_collision_PhysicsCollisionObject.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
+#include "jmeUserInfo.h"
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject

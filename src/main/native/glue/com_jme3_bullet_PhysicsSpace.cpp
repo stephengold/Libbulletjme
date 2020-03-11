@@ -41,6 +41,7 @@
 #include "com_jme3_bullet_PhysicsSpace.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
+#include "jmeUserInfo.h"
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

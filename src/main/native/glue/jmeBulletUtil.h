@@ -68,13 +68,3 @@ private:
     ~jmeBulletUtil() {
     };
 };
-
-class jmeCollisionSpace;
-
-class jmeUserInfo { // TODO typedef?
-public:
-    jobject javaCollisionObject; // a MultiBody or PhysicsCollisionObject
-    jint group; // CollisionGroup: bitmask with exactly one bit set
-    jint groups; // CollideWithGroups: bitmask
-    jmeCollisionSpace * space; // NULL means not added to any space
-};

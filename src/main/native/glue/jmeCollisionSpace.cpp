@@ -31,6 +31,7 @@
  */
 #include "jmeCollisionSpace.h"
 #include "jmeBulletUtil.h"
+#include "jmeUserInfo.h"
 
 /*
  * Author: Normen Hansen

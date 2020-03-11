@@ -39,6 +39,7 @@
 #include "com_jme3_bullet_MultiBodySpace.h"
 #include "jmeBulletUtil.h"
 #include "jmeMultiBodySpace.h"
+#include "jmeUserInfo.h"
 /*
  * Author: Stephen Gold
  */

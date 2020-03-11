@@ -36,6 +36,7 @@
 #include "com_jme3_bullet_PhysicsSoftSpace.h"
 #include "jmePhysicsSoftSpace.h"
 #include "jmeBulletUtil.h"
+#include "jmeUserInfo.h"
 #include "BulletSoftBody/btSoftBody.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 

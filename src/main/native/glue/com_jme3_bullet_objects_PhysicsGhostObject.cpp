@@ -38,6 +38,7 @@
 #include "BulletCollision/BroadphaseCollision/btOverlappingPairCache.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
+#include "jmeUserInfo.h"
 
 class jmeGhostOverlapCallback : public btOverlapCallback {
     JNIEnv * m_env;
