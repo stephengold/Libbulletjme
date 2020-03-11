@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -205,7 +205,7 @@ abstract public class Constraint extends PhysicsJoint {
      */
     public float getAppliedImpulse() {
         if (!isFeedback()) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("Feedback is not enabled.");
         }
         long constraintId = getObjectId();
         float result = getAppliedImpulse(constraintId);
