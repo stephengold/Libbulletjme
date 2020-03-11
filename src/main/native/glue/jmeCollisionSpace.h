@@ -29,6 +29,9 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef _Included_jmeCollisionSpace
+#define _Included_jmeCollisionSpace
+
 #include <jni.h>
 #include "btBulletCollisionCommon.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
@@ -89,3 +92,5 @@ public:
         return m_javaSpace;
     }
 };
+
+#endif
