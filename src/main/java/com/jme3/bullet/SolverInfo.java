@@ -109,6 +109,7 @@ public class SolverInfo {
      * Determine the mode flags (native field: m_solverMode).
      *
      * @return the bitmask value
+     * @see com.jme3.bullet.SolverMode
      */
     public int mode() {
         int result = getMode(nativeId);
@@ -160,7 +161,9 @@ public class SolverInfo {
     /**
      * Alter the mode flags (native field: m_solverMode).
      *
-     * @param flags the desired bitmask (default=0x104)
+     * @param flags the desired bitmask (default=0x114 for a MultiBodySpace,
+     * otherwise 0x104)
+     * @see com.jme3.bullet.SolverMode
      */
     public void setMode(int flags) {
         setMode(nativeId, flags);

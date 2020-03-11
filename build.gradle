@@ -112,7 +112,7 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
-                // Decide whether to build the current platform:
+                // Decide whether to build the target platform:
                 if (gradle.rootProject.hasProperty('github')) {
                     // -Pgithub= specified on the command line
                     String github = gradle.rootProject.ext.github;
