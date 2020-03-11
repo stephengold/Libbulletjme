@@ -48,7 +48,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MultiBody {
+public class MultiBody implements Comparable<MultiBody> {
     // *************************************************************************
     // constants and loggers
 
@@ -827,6 +827,23 @@ public class MultiBody {
      */
     public void useRK4(boolean setting) {
         useRK4Integration(nativeId, setting);
+    }
+    // *************************************************************************
+    // Comparable methods
+
+    /**
+     * Compare (by ID) with another MultiBody.
+     *
+     * @param other (not null, unaffected)
+     * @return 0 if the objects have the same ID; negative if this comes before
+     * other; positive if this comes after other
+     */
+    @Override
+    public int compareTo(MultiBody other) {
+        long otherId = other.nativeId();
+        int result = Long.compare(nativeId, otherId);
+
+        return result;
     }
     // *************************************************************************
     // Object methods
