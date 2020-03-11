@@ -33,8 +33,10 @@ package com.jme3.bullet.collision.shapes.infos;
 
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -191,7 +193,15 @@ public class IndexedMesh {
     // *************************************************************************
     // native methods
 
+    native private long createByte(ByteBuffer indices,
+            FloatBuffer vertexPositions, int numTriangles, int numVertices,
+            int vertexStride, int indexStride);
+
     native private long createInt(IntBuffer indices,
+            FloatBuffer vertexPositions, int numTriangles, int numVertices,
+            int vertexStride, int indexStride);
+
+    native private long createShort(ShortBuffer indices,
             FloatBuffer vertexPositions, int numTriangles, int numVertices,
             int vertexStride, int indexStride);
 

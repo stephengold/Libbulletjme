@@ -38,27 +38,95 @@
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    createByte
+ * Signature: (Ljava/nio/ByteBuffer;Ljava/nio/FloatBuffer;IIII)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createByte
+(JNIEnv *pEnv, jobject, jobject byteBuffer, jobject floatBuffer,
+        jint numTriangles, jint numVertices, jint vertexStride,
+        jint indexStride) {
+    jmeClasses::initJavaClasses(pEnv);
+
+    NULL_CHK(pEnv, byteBuffer, "The index buffer does not exist.", 0);
+    const unsigned char * const pIndices
+            = (unsigned char *) pEnv->GetDirectBufferAddress(byteBuffer);
+    NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
+
+    NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
+    const unsigned char * const pVertices
+            = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
+    NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
+
+    btIndexedMesh * const pMesh = new btIndexedMesh();
+    pMesh->m_indexType = PHY_UCHAR;
+    pMesh->m_vertexType = PHY_FLOAT;
+    pMesh->m_triangleIndexBase = pIndices;
+    pMesh->m_vertexBase = pVertices;
+    pMesh->m_numTriangles = numTriangles;
+    pMesh->m_numVertices = numVertices;
+    pMesh->m_vertexStride = vertexStride;
+    pMesh->m_triangleIndexStride = indexStride;
+
+    return reinterpret_cast<jlong> (pMesh);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
  * Method:    createInt
  * Signature: (Ljava/nio/IntBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createInt
-(JNIEnv *env, jobject object, jobject intBuffer, jobject floatBuffer,
+(JNIEnv *pEnv, jobject, jobject intBuffer, jobject floatBuffer,
         jint numTriangles, jint numVertices, jint vertexStride,
         jint indexStride) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
-    NULL_CHECK(intBuffer, "The index buffer does not exist.", 0);
+    NULL_CHK(pEnv, intBuffer, "The index buffer does not exist.", 0);
     const unsigned char * const pIndices
-            = (unsigned char *) env->GetDirectBufferAddress(intBuffer);
-    NULL_CHECK(pIndices, "The index buffer is not direct.", 0);
+            = (unsigned char *) pEnv->GetDirectBufferAddress(intBuffer);
+    NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
 
-    NULL_CHECK(floatBuffer, "The position buffer does not exist.", 0);
+    NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
-            = (unsigned char *) env->GetDirectBufferAddress(floatBuffer);
-    NULL_CHECK(pVertices, "The position buffer is not direct.", 0);
+            = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
+    NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
 
     btIndexedMesh * const pMesh = new btIndexedMesh();
     pMesh->m_indexType = PHY_INTEGER;
+    pMesh->m_vertexType = PHY_FLOAT;
+    pMesh->m_triangleIndexBase = pIndices;
+    pMesh->m_vertexBase = pVertices;
+    pMesh->m_numTriangles = numTriangles;
+    pMesh->m_numVertices = numVertices;
+    pMesh->m_vertexStride = vertexStride;
+    pMesh->m_triangleIndexStride = indexStride;
+
+    return reinterpret_cast<jlong> (pMesh);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    createShort
+ * Signature: (Ljava/nio/ShortBuffer;Ljava/nio/FloatBuffer;IIII)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createShort
+(JNIEnv *pEnv, jobject, jobject shortBuffer, jobject floatBuffer,
+        jint numTriangles, jint numVertices, jint vertexStride,
+        jint indexStride) {
+    jmeClasses::initJavaClasses(pEnv);
+
+    NULL_CHK(pEnv, shortBuffer, "The index buffer does not exist.", 0);
+    const unsigned char * const pIndices
+            = (unsigned char *) pEnv->GetDirectBufferAddress(shortBuffer);
+    NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
+
+    NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
+    const unsigned char * const pVertices
+            = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
+    NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
+
+    btIndexedMesh * const pMesh = new btIndexedMesh();
+    pMesh->m_indexType = PHY_SHORT;
     pMesh->m_vertexType = PHY_FLOAT;
     pMesh->m_triangleIndexBase = pIndices;
     pMesh->m_vertexBase = pVertices;
@@ -76,9 +144,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_finalizeNative
-(JNIEnv *env, jobject object, jlong meshId) {
-    btIndexedMesh *pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
-    NULL_CHECK(pMesh, "The btIndexedMesh does not exist.",);
+(JNIEnv *pEnv, jobject, jlong meshId) {
+    btIndexedMesh * const pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
+    NULL_CHK(pEnv, pMesh, "The btIndexedMesh does not exist.",);
 
     delete pMesh;
 }
