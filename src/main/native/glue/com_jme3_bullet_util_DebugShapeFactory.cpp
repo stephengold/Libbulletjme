@@ -74,31 +74,36 @@ public:
     }
 };
 
-void getVertices(JNIEnv *env, jlong shapeId, jint resolution,
-        jobject callback) {
-    btCollisionShape *pShape
-            = reinterpret_cast<btCollisionShape *> (shapeId);
-    if (pShape->isConcave()) {
-        btConcaveShape *pConcave
-                = reinterpret_cast<btConcaveShape *> (shapeId);
+/*
+ * Class:     com_jme3_bullet_util_DebugShapeFactory
+ * Method:    getTriangles
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
+(JNIEnv *pEnv, jclass, jlong shapeId, jint resolution, jobject callback) {
+    const btCollisionShape * const
+            pShape = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
 
-        DebugCallback *pCallback = new DebugCallback(env, callback);
+    if (pShape->isConcave()) {
+        const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
+
+        DebugCallback * const pCallback = new DebugCallback(pEnv, callback);
         btVector3 min = btVector3(-1e30, -1e30, -1e30);
         btVector3 max = btVector3(1e30, 1e30, 1e30);
         pConcave->processAllTriangles(pCallback, min, max);
         delete pCallback;
 
     } else if (pShape->isConvex()) {
-        btConvexShape *pConvex
-                = reinterpret_cast<btConvexShape *> (shapeId);
+        const btConvexShape * const pConvex = (btConvexShape *) pShape;
 
         // Create a hull approximation.
-        btShapeHull *pHull = new btShapeHull(pConvex);
+        btShapeHull * const pHull = new btShapeHull(pConvex);
         float margin = pConvex->getMargin();
         pHull->buildHull(margin, resolution);
 
         int numberOfTriangles = pHull->numTriangles();
-        const unsigned int *pHullIndices = pHull->getIndexPointer();
+        const unsigned int * const pHullIndices = pHull->getIndexPointer();
         const btVector3 *pHullVertices = pHull->getVertexPointer();
         btVector3 vertexA, vertexB, vertexC;
         int index = 0;
@@ -110,25 +115,27 @@ void getVertices(JNIEnv *env, jlong shapeId, jint resolution,
             vertexC = pHullVertices[pHullIndices[index++]];
 
             // Add the vertices to the callback object.
-            env->CallVoidMethod(callback,
+            pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertexA.getX(),
                     vertexA.getY(), vertexA.getZ());
-            if (env->ExceptionCheck()) {
-                env->Throw(env->ExceptionOccurred());
+            if (pEnv->ExceptionCheck()) {
+                pEnv->Throw(pEnv->ExceptionOccurred());
                 return;
             }
-            env->CallVoidMethod(callback,
+
+            pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertexB.getX(),
                     vertexB.getY(), vertexB.getZ());
-            if (env->ExceptionCheck()) {
-                env->Throw(env->ExceptionOccurred());
+            if (pEnv->ExceptionCheck()) {
+                pEnv->Throw(pEnv->ExceptionOccurred());
                 return;
             }
-            env->CallVoidMethod(callback,
+
+            pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertexC.getX(),
                     vertexC.getY(), vertexC.getZ());
-            if (env->ExceptionCheck()) {
-                env->Throw(env->ExceptionOccurred());
+            if (pEnv->ExceptionCheck()) {
+                pEnv->Throw(pEnv->ExceptionOccurred());
                 return;
             }
         }
@@ -138,11 +145,47 @@ void getVertices(JNIEnv *env, jlong shapeId, jint resolution,
 
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
- * Method:    getVertices2
+ * Method:    getVertices
  * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices2
-(JNIEnv *env, jclass clazz, jlong shapeId, jint resolution,
-        jobject callback) {
-    getVertices(env, shapeId, resolution, callback);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
+(JNIEnv *pEnv, jclass, jlong shapeId, jint resolution, jobject callback) {
+    const btCollisionShape * const
+            pShape = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+
+    if (pShape->isConcave()) {
+        const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
+
+        DebugCallback * const pCallback = new DebugCallback(pEnv, callback);
+        btVector3 min = btVector3(-1e30, -1e30, -1e30);
+        btVector3 max = btVector3(1e30, 1e30, 1e30);
+        pConcave->processAllTriangles(pCallback, min, max);
+        delete pCallback;
+
+    } else if (pShape->isConvex()) {
+        const btConvexShape * const pConvex = (btConvexShape *) pShape;
+
+        // Create a hull approximation.
+        btShapeHull * const pHull = new btShapeHull(pConvex);
+        float margin = pConvex->getMargin();
+        pHull->buildHull(margin, resolution);
+
+        int numberOfVertices = pHull->numVertices();
+        const btVector3 * const pHullVertices = pHull->getVertexPointer();
+        for (int i = 0; i < numberOfVertices; i++) {
+            // Copy the vertex from the hull.
+            btVector3 vertex = pHullVertices[i];
+
+            // Add the vertex to the callback object.
+            pEnv->CallVoidMethod(callback,
+                    jmeClasses::DebugMeshCallback_addVector, vertex.getX(),
+                    vertex.getY(), vertex.getZ());
+            if (pEnv->ExceptionCheck()) {
+                pEnv->Throw(pEnv->ExceptionOccurred());
+                return;
+            }
+        }
+        delete pHull;
+    }
 }

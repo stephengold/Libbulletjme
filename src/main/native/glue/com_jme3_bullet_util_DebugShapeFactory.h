@@ -15,10 +15,18 @@ extern "C" {
 #define com_jme3_bullet_util_DebugShapeFactory_numAxes 3L
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
- * Method:    getVertices2
+ * Method:    getTriangles
  * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices2
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
+  (JNIEnv *, jclass, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_util_DebugShapeFactory
+ * Method:    getVertices
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
   (JNIEnv *, jclass, jlong, jint, jobject);
 
 #ifdef __cplusplus
