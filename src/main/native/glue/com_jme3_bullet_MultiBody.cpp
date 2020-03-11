@@ -168,7 +168,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
 
     if (pMultiBody) {
-        const jmeUserPointer const
+        jmeUserPointer const
                 pUser = (jmeUserPointer) pMultiBody->getUserPointer();
         if (pUser) {
             delete pUser;
