@@ -75,14 +75,16 @@ public class CollisionSpace {
     private PhysicsSpace.BroadphaseType broadphaseType
             = PhysicsSpace.BroadphaseType.DBVT;
     /**
-     * comparitor for raytest results
+     * comparator for raytest results
      */
     final private static Comparator<PhysicsRayTestResult> hitFractionComparator
             = new Comparator<PhysicsRayTestResult>() {
         @Override
         public int compare(PhysicsRayTestResult r1, PhysicsRayTestResult r2) {
-            float comp = r1.getHitFraction() - r2.getHitFraction();
-            return comp > 0 ? 1 : -1;
+            float r1Fraction = r1.getHitFraction();
+            float r2Fraction = r2.getHitFraction();
+            int result = Float.compare(r1Fraction, r2Fraction);
+            return result;
         }
     };
     /**
