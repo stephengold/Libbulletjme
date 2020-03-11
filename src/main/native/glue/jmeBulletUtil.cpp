@@ -388,7 +388,7 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *env, jobject resultList,
     jobject normalvec = env->AllocObject(jmeClasses::Vector3f);
 
     convert(env, pHitNormal, normalvec);
-    jmeUserInfo * const pUser = (jmeUserInfo *) pHitObject->getUserPointer();
+    jmeUserPointer const pUser = (jmeUserPointer) pHitObject->getUserPointer();
 
     env->SetObjectField(result, jmeClasses::PhysicsRay_normal, normalvec);
     env->SetFloatField(result, jmeClasses::PhysicsRay_hitFraction, hitFraction);
@@ -396,7 +396,7 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *env, jobject resultList,
     env->SetIntField(result, jmeClasses::PhysicsRay_triangleIndex,
             triangleIndex);
     env->SetObjectField(result, jmeClasses::PhysicsRay_collisionObject,
-            pUser->javaCollisionObject);
+            pUser->m_javaRef);
 
     env->CallBooleanMethod(resultList, jmeClasses::PhysicsRay_addmethod,
             result);
@@ -416,7 +416,7 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *env, jobject resultList,
     jobject normalvec = env->AllocObject(jmeClasses::Vector3f);
 
     convert(env, pHitNormal, normalvec);
-    jmeUserInfo *pUser = (jmeUserInfo *) pHitObject->getUserPointer();
+    jmeUserPointer pUser = (jmeUserPointer) pHitObject->getUserPointer();
 
     env->SetObjectField(result, jmeClasses::PhysicsSweep_normal, normalvec);
     env->SetFloatField(result, jmeClasses::PhysicsSweep_hitFraction,
@@ -425,7 +425,7 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *env, jobject resultList,
     env->SetIntField(result, jmeClasses::PhysicsSweep_triangleIndex,
             triangleIndex);
     env->SetObjectField(result, jmeClasses::PhysicsSweep_collisionObject,
-            pUser->javaCollisionObject);
+            pUser->m_javaRef);
 
     env->CallBooleanMethod(resultList, jmeClasses::PhysicsSweep_addmethod,
             result);

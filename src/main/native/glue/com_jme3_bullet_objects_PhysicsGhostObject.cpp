@@ -63,9 +63,8 @@ public:
         } else {
             pOther = (btCollisionObject *) pair.m_pProxy1->m_clientObject;
         }
-        jmeUserInfo * const pUser = (jmeUserInfo *) pOther->getUserPointer();
-        jobject javaCollisionObject1
-                = m_env->NewLocalRef(pUser->javaCollisionObject);
+        jmeUserPointer const pUser = (jmeUserInfo *) pOther->getUserPointer();
+        jobject javaCollisionObject1 = m_env->NewLocalRef(pUser->m_javaRef);
         m_env->CallVoidMethod(m_object,
                 jmeClasses::PhysicsGhostObject_addOverlappingObject,
                 javaCollisionObject1);

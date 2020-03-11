@@ -40,12 +40,12 @@
  *
  * Author: Stephen Gold
  */
-class jmeUserInfo { // TODO typedef/struct?
+typedef struct jmeUserInfo {
 public:
-    jobject javaCollisionObject; // a MultiBody or PhysicsCollisionObject
-    jint group; // CollisionGroup: bitmask with exactly one bit set
-    jint groups; // CollideWithGroups: bitmask
-    jmeCollisionSpace * space; // NULL means not added to any space
-};
+    jint m_group; // CollisionGroup: a bitmask with exactly one bit set
+    jint m_groups; // CollideWithGroups: a bitmask
+    jmeCollisionSpace *m_jmeSpace; // NULL means not added to any space
+    jobject m_javaRef; // a MultiBody or PhysicsCollisionObject
+} *jmeUserPointer;
 
 #endif

@@ -73,19 +73,19 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
     //printf("contactProcessedCallback %x %x\n", co0, co1);
-    jmeUserInfo * const pUser0 = (jmeUserInfo *) pco0->getUserPointer();
-    jmeUserInfo * const pUser1 = (jmeUserInfo *) pco1->getUserPointer();
+    jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
+    jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
     if (pUser0 != NULL && pUser1 != NULL) {
-        jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->space;
+        jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->m_jmeSpace;
         if (pSpace != NULL) {
             JNIEnv * const env = pSpace->getEnv();
             jobject javaPhysicsSpace
                     = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
             if (javaPhysicsSpace != NULL) {
                 jobject javaCollisionObject0
-                        = env->NewLocalRef(pUser0->javaCollisionObject);
+                        = env->NewLocalRef(pUser0->m_javaRef);
                 jobject javaCollisionObject1
-                        = env->NewLocalRef(pUser1->javaCollisionObject);
+                        = env->NewLocalRef(pUser1->m_javaRef);
                 for (int i = 0; i < pm->getNumContacts(); i++) {
                     env->CallVoidMethod(javaPhysicsSpace,
                             jmeClasses::PhysicsSpace_addCollisionEvent,

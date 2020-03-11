@@ -53,9 +53,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserInfo * const
-            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
-    pUser->space = pSpace;
+    jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    pUser->m_jmeSpace = pSpace;
 
     pSpace->getCollisionWorld()->addCollisionObject(pCollisionObject);
 }
@@ -194,9 +194,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
 
     pSpace->getCollisionWorld()->removeCollisionObject(pCollisionObject);
 
-    jmeUserInfo * const
-            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
-    pUser->space = NULL;
+    jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    pUser->m_jmeSpace = NULL;
 }
 
 struct AllConvexResultCallback : public btCollisionWorld::ConvexResultCallback {

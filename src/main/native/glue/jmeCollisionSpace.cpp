@@ -47,18 +47,18 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     if (collides) {
         btCollisionObject * const pco0 = (btCollisionObject *) pProxy0->m_clientObject;
         btCollisionObject * const pco1 = (btCollisionObject *) pProxy1->m_clientObject;
-        jmeUserInfo * const pUser0 = (jmeUserInfo *) pco0->getUserPointer();
-        jmeUserInfo * const pUser1 = (jmeUserInfo *) pco1->getUserPointer();
+        jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
+        jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
         if (pUser0 != NULL && pUser1 != NULL) {
-            collides = (pUser0->group & pUser1->groups) != 0
-                    || (pUser1->group & pUser0->groups) != 0;
+            collides = (pUser0->m_group & pUser1->m_groups) != 0
+                    || (pUser1->m_group & pUser0->m_groups) != 0;
 
             if (collides) {
-                jmeCollisionSpace * const pSpace = pUser0->space;
+                jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
                 JNIEnv * const env = pSpace->getEnv();
                 jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
-                jobject javaCollisionObject0 = env->NewLocalRef(pUser0->javaCollisionObject);
-                jobject javaCollisionObject1 = env->NewLocalRef(pUser1->javaCollisionObject);
+                jobject javaCollisionObject0 = env->NewLocalRef(pUser0->m_javaRef);
+                jobject javaCollisionObject1 = env->NewLocalRef(pUser1->m_javaRef);
 
                 const jboolean notifyResult = env->CallBooleanMethod(
                         javaPhysicsSpace,

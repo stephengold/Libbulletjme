@@ -92,9 +92,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserInfo * const
-            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
-    pUser->space = pSpace;
+    jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    pUser->m_jmeSpace = pSpace;
 
     pSpace->getDynamicsWorld()->addCollisionObject(pCollisionObject,
             btBroadphaseProxy::CharacterFilter,
@@ -134,8 +134,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
     NULL_CHECK(pBody, "The collision object does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    jmeUserInfo * const pUser = (jmeUserInfo *) pBody->getUserPointer();
-    pUser->space = pSpace;
+    jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
+    pUser->m_jmeSpace = pSpace;
 
     pSpace->getDynamicsWorld()->addRigidBody(pBody);
 }
@@ -239,9 +239,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHECK(pCollisionObject, "The collision object does not exist.",)
 
-    jmeUserInfo * const
-            pUser = (jmeUserInfo *) pCollisionObject->getUserPointer();
-    pUser->space = NULL;
+    jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    pUser->m_jmeSpace = NULL;
 
     pSpace->getDynamicsWorld()->removeCollisionObject(pCollisionObject);
 }
@@ -279,8 +279,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
     NULL_CHECK(pBody, "The collision object does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    jmeUserInfo * const pUser = (jmeUserInfo *) pBody->getUserPointer();
-    pUser->space = NULL;
+    jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
+    pUser->m_jmeSpace = NULL;
 
     pSpace->getDynamicsWorld()->removeRigidBody(pBody);
 }
