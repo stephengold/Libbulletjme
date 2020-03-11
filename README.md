@@ -47,7 +47,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:4.2.0'
+            compile 'com.github.stephengold:Libbulletjme:5.0.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -135,7 +135,7 @@ public class HelloLibbulletjme {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 4.2.0`
+     + `git checkout -b latest 5.0.0`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][the latest release]
      + follow the "Source code (zip)" link
@@ -180,6 +180,7 @@ btCompoundShapeChild                    .bullet.collision.shapes.info.ChildColli
 btConeShape                             .bullet.collision.shapes.ConeCollisionShape
 btConeTwistConstraint                   .bullet.joints.ConeJoint
 btConstraintParams                      .bullet.joints.motors.MotorParam
+btContactSolverInfo                     .bullet.SolverInfo
 btConvex2dShape                         .bullet.collision.shapes.Convex2dShape
 btConvexHullShape                       .bullet.collision.shapes.HullCollisionShape
 btConvexShape                           .bullet.collision.shapes.ConvexShape
@@ -198,9 +199,9 @@ btManifoldPoint                         .bullet.collision.PhysicsCollisionEvent
 btMatrix3x3                             .math.Matrix3f
 btMultiBody                             .bullet.MultiBody
 btMultiBodyCollider                     .bullet.objects.MultiBodyCollider
-btMultibodyLink                         .bullet.MultiBodyLink
-btMultibodyLink::eFeatherstoneJointType .bullet.MultiBodyJointType
-btMultiBodyDynamicsWorld                .bullet.MultiBody
+btMultiBodyLink                         .bullet.MultiBodyLink
+btMultiBodyLink::eFeatherstoneJointType .bullet.MultiBodyJointType
+btMultiBodyDynamicsWorld                .bullet.MultiBodySpace
 btMultiSphereShape                      .bullet.collision.shapes.MultiSphere
 btPairCachingGhostObject                .bullet.objects.PhysicsGhostObject
 btPoint2PointConstraint                 .bullet.joints.Point2PointJoint
@@ -221,6 +222,7 @@ btSoftBody::Joint                       .bullet.joints.SoftPhysicsJoint
 btSoftBody::LJoint                      .bullet.joints.SoftLinearJoint
 btSoftBodyWorldInfo                     .bullet.SoftBodyWorldInfo
 btSoftRigidDynamicsWorld                .bullet.PhysicsSoftSpace
+btSolverMode                            .bullet.SolverMode
 btSphereShape                           .bullet.collision.shapes.SphereCollisionShape
 btStaticPlaneShape                      .bullet.collision.shapes.PlaneCollisionShape
 btTransform                             .math.Transform
@@ -231,6 +233,7 @@ btTriangleRaycastCallback::Eflags       .bullet.RayTestFlag
 btTypedConstraint                       .bullet.joints.Constraint
 btVector3                               .math.Vector3f
 btWheelInfo                             .bullet.objects.VehicleWheel
+RotateOrder                             .bullet.RotationOrder
 </pre>
 
 <pre>
