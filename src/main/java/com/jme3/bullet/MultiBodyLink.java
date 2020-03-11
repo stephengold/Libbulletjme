@@ -124,8 +124,9 @@ public class MultiBodyLink {
      * Add a collider for this link.
      *
      * @param shape (not null, alias created)
+     * @return a new collider
      */
-    public void addCollider(CollisionShape shape) {
+    public MultiBodyCollider addCollider(CollisionShape shape) {
         Validate.nonNull(shape, "shape");
         assert collider == null : collider;
 
@@ -133,6 +134,8 @@ public class MultiBodyLink {
         long colliderId = collider.getObjectId();
         setCollider(linkId, colliderId);
         collider.attachShape(shape);
+
+        return collider;
     }
 
     /**
