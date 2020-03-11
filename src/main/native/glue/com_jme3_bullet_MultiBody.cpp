@@ -391,8 +391,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const jmeUserPointer const
-            pUser = (jmeUserPointer) pMultiBody->getUserPointer();
+    jmeUserPointer const pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     jint groups = pUser->m_groups;
     return groups;
 }
@@ -408,8 +407,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const jmeUserPointer const
-            pUser = (jmeUserPointer) pMultiBody->getUserPointer();
+    jmeUserPointer const pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     jint group = pUser->m_group;
     return group;
 }
@@ -530,8 +528,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHECK(pMultiBody, "The multibody does not exist.", 0);
 
-    const jmeUserPointer const
-            pUser = (jmeUserPointer) pMultiBody->getUserPointer();
+    jmeUserPointer const pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     jmeCollisionSpace *pSpace = pUser->m_jmeSpace;
     return reinterpret_cast<jlong> (pSpace);
 }
