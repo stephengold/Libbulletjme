@@ -1,5 +1,24 @@
 # release log for the Libbulletjme Project
 
+## Version 5.0.0 released on 11 March 2020
+
+ + API changes:
+   + renamed `MultiBodySolver` to `SolverType`
+   + renamed `getVertices2()` to `getTriangles()`
+     in the `DebugShapeFactory` class
+   + access the number of solver iterations via `SolverInfo`
+     instead of `PhysicsSpace`
+   + deleted the `configureClonedLink()` method from the `MultiBody` class
+   + changed the return types of the `addBaseCollider()` and `listColliders()`
+     methods in the `MultiBody` class
+   + changed the return type of the `addCollider()` method
+     in the `MultiBodyLink` class
+ + Bugfix: wrong `JNIEnv` used in multithreaded apps.
+ + Implemented the `Comparable` interface in the `MultiBody` class.
+ + Added support for MLCP and NNCG solvers to the `PhysicsSpace` class.
+ + Added 2 new classes: `SolverInfo` and `SolverMode`.
+ + Added a `getVertices()` method to the `DebugShapeFactory` class
+
 ## Version 4.2.0 released on 8 March 2020
 
  + Bugfix: incorrect filter groups and masks when adding a
