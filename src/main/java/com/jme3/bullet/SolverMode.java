@@ -131,24 +131,24 @@ public class SolverMode {
             flagList.add("Use2Directions");
         }
         if ((flags & NoVelocityDependent) == 0x0) {
-            flagList.add("NoVelocityDependent");
+            flagList.add("VelocityDependent");
         }
-        if ((flags & CacheFriendly) == 0x0) {
+        if ((flags & CacheFriendly) != 0x0) {
             flagList.add("CacheFriendly");
         }
-        if ((flags & SIMD) == 0x0) {
+        if ((flags & SIMD) != 0x0) {
             flagList.add("SIMD");
         }
-        if ((flags & Interleave) == 0x0) {
+        if ((flags & Interleave) != 0x0) {
             flagList.add("Interleave");
         }
-        if ((flags & AllowZeroLength) == 0x0) {
+        if ((flags & AllowZeroLength) != 0x0) {
             flagList.add("AllowZeroLength");
         }
         if ((flags & NoCone) == 0x0) {
-            flagList.add("NoCone");
+            flagList.add("Cone");
         }
-        if ((flags & ArticulatedWarmStart) == 0x0) {
+        if ((flags & ArticulatedWarmStart) != 0x0) {
             flagList.add("ArticulatedWarmStart");
         }
 
