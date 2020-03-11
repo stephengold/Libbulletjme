@@ -87,7 +87,7 @@ public class NativeSoftBodyUtil {
      */
     public static IntBuffer generateIndexMap(FloatBuffer positionBuffer) {
         int numFloats = positionBuffer.limit();
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "limit a multiple of 3");
         int numVertices = numFloats / numAxes;
 
         IntBuffer result = BufferUtils.createIntBuffer(numVertices);
