@@ -37,7 +37,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -111,8 +111,9 @@ public class MultiBody implements Comparable<MultiBody> {
      * Add a collider for the base.
      *
      * @param shape (not null, alias created)
+     * @return a new collider
      */
-    public void addBaseCollider(CollisionShape shape) {
+    public MultiBodyCollider addBaseCollider(CollisionShape shape) {
         Validate.nonNull(shape, "shape");
         assert baseCollider == null : baseCollider;
 
@@ -122,6 +123,8 @@ public class MultiBody implements Comparable<MultiBody> {
 
         baseCollider.attachShape(shape);
         assert getBaseCollider(nativeId) == colliderId;
+
+        return baseCollider;
     }
 
     /**
@@ -669,9 +672,9 @@ public class MultiBody implements Comparable<MultiBody> {
      *
      * @return a new collection of pre-existing instances
      */
-    public Collection<MultiBodyCollider> listColliders() {
+    public List<MultiBodyCollider> listColliders() {
         int capacity = numConfigured + 1;
-        Collection<MultiBodyCollider> result = new ArrayList<>(capacity);
+        List<MultiBodyCollider> result = new ArrayList<>(capacity);
 
         if (baseCollider != null) {
             result.add(baseCollider);
