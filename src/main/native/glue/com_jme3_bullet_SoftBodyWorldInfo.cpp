@@ -194,15 +194,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_setSoftBodyWorldIn
     NULL_CHECK(pSource, "The source btSoftBodyWorldInfo does not exist.",);
 
     if (pDest != pSource) {
-        pDest->air_density = pSource->air_density;
-        pDest->water_density = pSource->water_density;
-        pDest->water_offset = pSource->water_offset;
-        pDest->m_maxDisplacement = pSource->m_maxDisplacement;
-        pDest->water_normal = pSource->water_normal;
-        pDest->m_broadphase = pSource->m_broadphase; // <- <!> pointer variable
-        pDest->m_dispatcher = pSource->m_dispatcher; // <- <!> pointer variable
-        pDest->m_gravity = pSource->m_gravity;
-        pDest->m_sparsesdf = pSource->m_sparsesdf;
+        *pDest = *pSource;
     }
 }
 

@@ -53,36 +53,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_copyVal
     NULL_CHECK(pSource, "The source btSoftBody does not exist.",)
     btAssert(pSource->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-    pDest->m_cfg.kVCF = pSource->m_cfg.kVCF; // Velocities correction factor (Baumgarte)
-    pDest->m_cfg.kDP = pSource->m_cfg.kDP; // Damping coefficient [0,1]
-    pDest->m_cfg.kDG = pSource->m_cfg.kDG; // Drag coefficient [0,+inf]
-    pDest->m_cfg.kLF = pSource->m_cfg.kLF; // Lift coefficient [0,+inf]
-    pDest->m_cfg.kPR = pSource->m_cfg.kPR; // Pressure coefficient [-inf,+inf]
-    pDest->m_cfg.kVC = pSource->m_cfg.kVC; // Volume conversation coefficient [0,+inf]
-    pDest->m_cfg.kDF = pSource->m_cfg.kDF; // Dynamic friction coefficient [0,1]
-    pDest->m_cfg.kMT = pSource->m_cfg.kMT; // Pose matching coefficient [0,1]
-
-    pDest->m_cfg.kCHR = pSource->m_cfg.kCHR; // Rigid contacts hardness [0,1]
-    pDest->m_cfg.kKHR = pSource->m_cfg.kKHR; // Kinetic contacts hardness [0,1]
-    pDest->m_cfg.kSHR = pSource->m_cfg.kSHR; // Soft contacts hardness [0,1]
-    pDest->m_cfg.kAHR = pSource->m_cfg.kAHR; // Anchors hardness [0,1]
-
-    pDest->m_cfg.kSRHR_CL = pSource->m_cfg.kSRHR_CL; // Soft vs rigid hardness [0,1] (cluster only)
-    pDest->m_cfg.kSKHR_CL = pSource->m_cfg.kSKHR_CL; // Soft vs kinetic hardness [0,1] (cluster only)
-    pDest->m_cfg.kSSHR_CL = pSource->m_cfg.kSSHR_CL; // Soft vs soft hardness [0,1] (cluster only)
-    pDest->m_cfg.kSR_SPLT_CL = pSource->m_cfg.kSR_SPLT_CL; // Soft vs rigid impulse split [0,1] (cluster only)
-    pDest->m_cfg.kSK_SPLT_CL = pSource->m_cfg.kSK_SPLT_CL; // Soft vs kinetic impulse split [0,1] (cluster only)
-    pDest->m_cfg.kSS_SPLT_CL = pSource->m_cfg.kSS_SPLT_CL; // Soft vs soft impulse split [0,1] (cluster only)
-
-    pDest->m_cfg.maxvolume = pSource->m_cfg.maxvolume; // Maximum volume ratio for pose
-    pDest->m_cfg.timescale = pSource->m_cfg.timescale; // Time scale
-
-    pDest->m_cfg.viterations = pSource->m_cfg.viterations; // Velocities solver iterations
-    pDest->m_cfg.piterations = pSource->m_cfg.piterations; // Positions solver iterations
-    pDest->m_cfg.diterations = pSource->m_cfg.diterations; // Drift solver iterations
-    pDest->m_cfg.citerations = pSource->m_cfg.citerations; // Cluster solver iterations
-
-    pDest->m_cfg.collisions = pSource->m_cfg.collisions; // Collisions flags
+    if (pDest != pSource) {
+        pDest->m_cfg = pSource->m_cfg;
+    }
 }
 
 /*
