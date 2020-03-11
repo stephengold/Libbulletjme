@@ -66,13 +66,5 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
     softBodyWorldInfo.m_broadphase = pBroadphase;
     softBodyWorldInfo.m_dispatcher = pDispatcher;
 
-    // Do btDynamicsWorld modifications.
-    pWorld->setGravity(btVector3(0, -9.81f, 0));
-    pWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
-    pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
-    pWorld->setWorldUserInfo(this);
-
-    btAssert(gContactStartedCallback == NULL
-            || gContactStartedCallback == &jmePhysicsSpace::contactStartedCallback);
-    gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
+    modify(); // Make the standard btDynamicsWorld modifications.
 }

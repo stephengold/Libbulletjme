@@ -55,20 +55,8 @@ createMultiBodySpace(const btVector3& min, const btVector3& max,
             pConstraintSolver = new btMultiBodyConstraintSolver();
 
     // Create the multibody dynamics world.
-    btMultiBodyDynamicsWorld * const
-            pWorld = new btMultiBodyDynamicsWorld(pDispatcher, pBroadphase,
+    m_collisionWorld = new btMultiBodyDynamicsWorld(pDispatcher, pBroadphase,
             pConstraintSolver, pCollisionConfiguration);
-    m_collisionWorld = pWorld;
 
-    // Perform btDynamicsWorld modifications. TODO subroutine
-    pWorld->setGravity(btVector3(0, -9.81, 0));
-    pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, this);
-    bool preTick = true;
-    pWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, this,
-            preTick);
-    pWorld->setWorldUserInfo(this);
-
-    btAssert(gContactStartedCallback == NULL
-            || gContactStartedCallback == &jmePhysicsSpace::contactStartedCallback);
-    gContactStartedCallback = &jmePhysicsSpace::contactStartedCallback;
+    modify(); // Make the standard modifications.
 }

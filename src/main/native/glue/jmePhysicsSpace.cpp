@@ -53,20 +53,10 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
             pConstraintSolver = new btSequentialImpulseConstraintSolver();
 
     // Create the discrete dynamics world.
-    btDiscreteDynamicsWorld * const pWorld = new btDiscreteDynamicsWorld(
-            pDispatcher, pBroadphase, pConstraintSolver,
-            pCollisionConfiguration);
-    m_collisionWorld = pWorld;
+    m_collisionWorld = new btDiscreteDynamicsWorld(pDispatcher, pBroadphase,
+            pConstraintSolver, pCollisionConfiguration);
 
-    // Do btDynamicsWorld modifications.
-    pWorld->setGravity(btVector3(0, -9.81f, 0));
-    pWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback, static_cast<void *> (this), true);
-    pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback, static_cast<void *> (this));
-    pWorld->setWorldUserInfo(this);
-
-    btAssert(gContactStartedCallback == NULL
-            || gContactStartedCallback == &contactStartedCallback);
-    gContactStartedCallback = &contactStartedCallback;
+    modify(); // Make the standard modifications.
 }
 
 void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
@@ -112,6 +102,24 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     } else {
         printf("null userPointer in contactProcessedCallback\n");
     }
+}
+
+/*
+ * Apply some JME-standard modifications to a newly-created dynamics world.
+ */
+void jmePhysicsSpace::modify() {
+    btDynamicsWorld *pWorld = getDynamicsWorld();
+
+    pWorld->setGravity(btVector3(0, -9.81f, 0));
+    pWorld->setInternalTickCallback(&jmePhysicsSpace::preTickCallback,
+            static_cast<void *> (this), true);
+    pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback,
+            static_cast<void *> (this));
+    pWorld->setWorldUserInfo(this);
+
+    btAssert(gContactStartedCallback == NULL
+            || gContactStartedCallback == &contactStartedCallback);
+    gContactStartedCallback = &contactStartedCallback;
 }
 
 void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,

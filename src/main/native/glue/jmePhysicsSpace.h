@@ -41,6 +41,10 @@
  * Author: Normen Hansen
  */
 class jmePhysicsSpace : public jmeCollisionSpace {
+protected:
+    void
+    modify();
+
 public:
 
     /*
@@ -54,8 +58,7 @@ public:
     contactStartedCallback(btPersistentManifold * const &);
 
     void
-    createPhysicsSpace(const btVector3& min, const btVector3& max,
-            int ordinal);
+    createPhysicsSpace(const btVector3& min, const btVector3& max, int ordinal);
 
     const btDynamicsWorld *
     getDynamicsWorld() const {
