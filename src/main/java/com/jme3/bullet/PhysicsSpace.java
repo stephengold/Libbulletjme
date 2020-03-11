@@ -598,8 +598,7 @@ public class PhysicsSpace extends CollisionSpace {
         boolean result = super.isEmpty()
                 && characterMap.isEmpty()
                 && rigidMap.isEmpty()
-                && physicsJoints.isEmpty()
-                && vehicleMap.isEmpty(); // TODO unnecessary
+                && physicsJoints.isEmpty();
 
         return result;
     }
