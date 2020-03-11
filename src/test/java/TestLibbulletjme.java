@@ -34,6 +34,7 @@ import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
 import com.jme3.bullet.SolverInfo;
+import com.jme3.bullet.SolverType;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.shapes.Box2dShape;
@@ -560,76 +561,12 @@ public class TestLibbulletjme {
         float radius = 0.2f;
         CollisionShape boxShape = new BoxCollisionShape(radius);
         /*
-         * Physics spaces with various broadphase accelerators.
+         * Perform drop tests with various broadphase accelerators.
          */
-        PhysicsSpace space
-                = new PhysicsSpace(PhysicsSpace.BroadphaseType.SIMPLE);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new PhysicsSpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-        /*
-         * Soft spaces with various broadphase accelerators.
-         */
-        space = new PhysicsSoftSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.SIMPLE);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new PhysicsSoftSpace(Vector3f.ZERO,
-                Vector3f.ZERO, PhysicsSpace.BroadphaseType.DBVT);
-        verifyPhysicsSpaceDefaults(space);
-        performDropTest(boxShape, space);
-        /*
-         * Multibody spaces with various broadphase accelerators.
-         */
-        space = new MultiBodySpace(Vector3f.ZERO,
-                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
-        verifyCollisionSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new MultiBodySpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
-        verifyCollisionSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new MultiBodySpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
-        verifyCollisionSpaceDefaults(space);
-        performDropTest(boxShape, space);
-
-        space = new MultiBodySpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.DBVT);
-        verifyCollisionSpaceDefaults(space);
-        performDropTest(boxShape, space);
+        performDropTests(boxShape, PhysicsSpace.BroadphaseType.SIMPLE);
+        performDropTests(boxShape, PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        performDropTests(boxShape, PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
+        performDropTests(boxShape, PhysicsSpace.BroadphaseType.DBVT);
     }
 
     /**
@@ -833,6 +770,49 @@ public class TestLibbulletjme {
     }
 
     /**
+     * Perform drop tests using the specified shape and broadphase.
+     *
+     * @param dropShape the shape to drop (not null)
+     * @param broadphase the broadphase accelerator to use (not null)
+     */
+    private static void performDropTests(CollisionShape dropShape,
+            PhysicsSpace.BroadphaseType broadphase) {
+        performDropTests(dropShape, broadphase, SolverType.Dantzig);
+        performDropTests(dropShape, broadphase, SolverType.Lemke);
+        performDropTests(dropShape, broadphase, SolverType.NNCG);
+        performDropTests(dropShape, broadphase, SolverType.PGS);
+        performDropTests(dropShape, broadphase, SolverType.SI);
+    }
+
+    /**
+     * Perform drop tests using the specified shape, broadphase, and solver.
+     *
+     * @param dropShape the shape to drop (not null)
+     * @param broadphase the broadphase accelerator to use (not null)
+     * @param solver the contact-and-constraint solver to use (not null)
+     */
+    private static void performDropTests(CollisionShape dropShape,
+            PhysicsSpace.BroadphaseType broadphase, SolverType solver) {
+
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        PhysicsSpace space;
+
+        space = new PhysicsSpace(min, max, broadphase, solver);
+        performDropTest(dropShape, space);
+
+        if (solver == SolverType.SI) {
+            space = new PhysicsSoftSpace(min, max, broadphase);
+            performDropTest(dropShape, space);
+        }
+
+        if (solver != SolverType.NNCG) {
+            space = new MultiBodySpace(min, max, broadphase, solver);
+            performDropTest(dropShape, space);
+        }
+    }
+
+    /**
      * Perform a drop test using the specified shape in the specified space.
      *
      * @param dropShape the shape to drop (not null)
@@ -840,7 +820,11 @@ public class TestLibbulletjme {
      */
     private static void performDropTest(CollisionShape dropShape,
             PhysicsSpace space) {
-        Assert.assertTrue(space.isEmpty());
+        verifyPhysicsSpaceDefaults(space);
+
+        if (space.getSolverType() == SolverType.Lemke) {
+            space.getSolverInfo().setGlobalCfm(0.001f);
+        }
         /*
          * Add a static horizontal plane at y=-1.
          */
@@ -965,7 +949,10 @@ public class TestLibbulletjme {
         Assert.assertNotEquals(0L, info.nativeId());
         Assert.assertEquals(0f, info.globalCfm(), 0f);
         Assert.assertEquals(128, info.minBatch());
-        Assert.assertEquals(0x104, info.mode());
+
+        String className = space.getClass().getSimpleName();
+        int expectedMode = (className.equals("MultiBodySpace")) ? 0x114 : 0x104;
+        Assert.assertEquals(expectedMode, info.mode());
         Assert.assertEquals(10, info.numIterations());
 
         if (space instanceof MultiBodySpace) {
