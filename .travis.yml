@@ -1,7 +1,5 @@
 language: cpp
 
-compiler: gcc
-
 matrix:
   include:
   - os: osx
@@ -10,10 +8,12 @@ matrix:
     - ./gradlew build --console=plain --no-daemon -Ptravis=osx
   - os: linux
     arch: amd64
+    compiler: gcc
     addons:
       apt:
         packages:
         - g++-multilib
+        update: true
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
   - os: linux
@@ -24,10 +24,12 @@ matrix:
         packages:
         - default-jre
         - g++
+        update: true
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=arm64
-    after_failure:
-    - cat build/reports/tests/test/classes/TestLibbulletjme.html
+
+after_failure:
+ - cat build/reports/tests/test/classes/TestLibbulletjme.html
 
 deploy:
   provider: releases
