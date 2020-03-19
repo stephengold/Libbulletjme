@@ -1,5 +1,12 @@
 # release log for the Libbulletjme Project
 
+## Version 5.1.0 released on 19 March 2020
+
+ + Added `boundingBox()` methods to the `CollisionShape` class,
+   along with the `BoundingBox` class and supporting methods.
+ + Added methods `createByte()` and `createShort()` to the `IndexedMesh` class.
+ + Specify ABI version 7 for Linux builds, to support Centos 7.
+
 ## Version 5.0.0 released on 11 March 2020
 
  + API changes:
@@ -17,7 +24,7 @@
  + Implemented the `Comparable` interface in the `MultiBody` class.
  + Added support for MLCP and NNCG solvers to the `PhysicsSpace` class.
  + Added 2 new classes: `SolverInfo` and `SolverMode`.
- + Added a `getVertices()` method to the `DebugShapeFactory` class
+ + Added a `getVertices()` method to the `DebugShapeFactory` class.
 
 ## Version 4.2.0 released on 8 March 2020
 
