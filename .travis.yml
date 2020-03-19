@@ -1,12 +1,13 @@
 language: cpp
 
-matrix:
+jobs:
   include:
   - os: osx
     osx_image: xcode9.3
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=osx
   - os: linux
+    dist: xenial
     arch: amd64
     compiler: gcc
     addons:
@@ -17,6 +18,7 @@ matrix:
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
   - os: linux
+    dist: bionic
     arch: arm64
     compiler: gcc
     addons:
@@ -33,8 +35,8 @@ after_failure:
 
 deploy:
   provider: releases
-  skip_cleanup: true
-  api_key:
+  cleanup: false
+  token:
     secure: ObhRzkbGix4/iAgZZDhmdeuFZ/VNwHnkWRSPiZRKq+lzSNSU7EOsCSTV5eDun0ugC
   file:
   - dist/Linux32DebugDp_libbulletjme.so
