@@ -67,8 +67,8 @@ model {
     }
 
     toolChains { // prioritize native toolchains
-        //clang(Clang)
         visualCpp(VisualCpp)
+        //clang(Clang)
         gcc(Gcc)
         clang(Clang)
         gccArm(Gcc) {
@@ -196,6 +196,11 @@ model {
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-O3'
                     }
+                    if (!(toolChain in Clang)) {
+                        // for compatibility with Centos 7:
+                        cppCompiler.args '-fabi-version=7'
+                        linker.args '-fabi-version=7'
+                    }
 
                     String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
@@ -203,13 +208,11 @@ model {
                     } else if (os == 'linux') {
                         cppCompiler.args '-I', "$javaHome/include/linux"
                         cppCompiler.args '-fPIC'
-                        cppCompiler.args '-fpermissive'
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
                     } else if (os == 'windows') { // not tested recently
                         cppCompiler.define 'WIN32'
                         cppCompiler.args '-I', "$javaHome/include/win32"
-                        cppCompiler.args '-fpermissive'
                         cppCompiler.args '-static'
                         linker.args '-static'
                         linker.args '-Wl,--exclude-all-symbols'
