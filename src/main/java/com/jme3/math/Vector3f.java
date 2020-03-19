@@ -377,6 +377,26 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>subtractLocal</code> subtracts the provided values from this vector
+     * internally, and returns a handle to this vector for easy chaining of
+     * calls.
+     *
+     * @param subtractX
+     *            the x value to subtract.
+     * @param subtractY
+     *            the y value to subtract.
+     * @param subtractZ
+     *            the z value to subtract.
+     * @return this
+     */
+    public Vector3f subtractLocal(float subtractX, float subtractY, float subtractZ) {
+        x -= subtractX;
+        y -= subtractY;
+        z -= subtractZ;
+        return this;
+    }
+
+    /**
      * <code>normalize</code> returns the unit vector of this vector.
      *
      * @return unit vector of this vector.
