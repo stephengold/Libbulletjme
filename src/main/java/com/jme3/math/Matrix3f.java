@@ -125,6 +125,20 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * 
+     * <code>set</code> defines the values of the matrix based on a supplied
+     * <code>Quaternion</code>. It should be noted that all previous values
+     * will be overridden.
+     * 
+     * @param quaternion
+     *            the quaternion to create a rotational matrix from.
+     * @return this
+     */
+    public Matrix3f set(Quaternion quaternion) {
+        return quaternion.toRotationMatrix(this);
+    }
+
+    /**
      * <code>loadIdentity</code> sets this matrix to the identity matrix.
      * Where all values are zero except those along the diagonal which are one.
      *  
