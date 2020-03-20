@@ -364,6 +364,16 @@ public class VehicleWheel {
     }
 
     /**
+     * Read the total rotation of this wheel (native field: m_rotation).
+     *
+     * @return the angle (in radians)
+     */
+    public float getRotationAngle() {
+        float result = getRotationAngle(vehicleId, wheelIndex);
+        return result;
+    }
+
+    /**
      * Calculate to what extent the wheel is skidding (for skid sounds/smoke
      * etc.)
      *
@@ -381,6 +391,17 @@ public class VehicleWheel {
      */
     public float getSteerAngle() {
         float result = getSteerAngle(vehicleId, wheelIndex);
+        return result;
+    }
+
+    /**
+     * Read the length of this wheel's suspension (native field:
+     * m_suspensionLength).
+     *
+     * @return the length (in physics-space units)
+     */
+    public float getSuspensionLength() {
+        float result = getSuspensionLength(vehicleId, wheelIndex);
         return result;
     }
 
@@ -568,6 +589,15 @@ public class VehicleWheel {
     }
 
     /**
+     * Alter the total rotation of this wheel (native field: m_rotation).
+     *
+     * @param angle the desired angle (in radians)
+     */
+    public void setRotationAngle(float angle) {
+        setRotationAngle(vehicleId, wheelIndex, angle);
+    }
+
+    /**
      * Alter the stiffness of this wheel's suspension (native field:
      * m_suspensionStiffness).
      *
@@ -688,9 +718,13 @@ public class VehicleWheel {
 
     native private float getRollInfluence(long vehicleId, int wheelIndex);
 
+    native private float getRotationAngle(long vehicleId, int wheelIndex);
+
     native private float getSkidInfo(long vehicleId, int wheelIndex);
 
     native private float getSteerAngle(long vehicleId, int wheelIndex);
+
+    native private float getSuspensionLength(long vehicleId, int wheelIndex);
 
     native private void getWheelLocation(long vehicleId, int wheelIndex,
             Vector3f vector);
@@ -699,4 +733,7 @@ public class VehicleWheel {
             Matrix3f matrix);
 
     native private boolean isFront(long vehicleId, int wheelIndex);
+
+    native private void setRotationAngle(long vehicleId, int wheelIndex,
+            float angle);
 }

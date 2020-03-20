@@ -81,6 +81,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRollInflue
 
 /*
  * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getRotationAngle
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRotationAngle
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
  * Method:    getSkidInfo
  * Signature: (JI)F
  */
@@ -93,6 +101,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSkidInfo
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSteerAngle
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getSuspensionLength
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSuspensionLength
   (JNIEnv *, jobject, jlong, jint);
 
 /*
@@ -118,6 +134,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotatio
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_VehicleWheel_isFront
   (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    setRotationAngle
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_setRotationAngle
+  (JNIEnv *, jobject, jlong, jint, jfloat);
 
 #ifdef __cplusplus
 }

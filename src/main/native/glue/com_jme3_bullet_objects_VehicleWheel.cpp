@@ -194,6 +194,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRollInflue
 
 /*
  * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getRotationAngle
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRotationAngle
+(JNIEnv *pEnv, jobject, jlong vehicleId, jint wheelIndex) {
+    const btRaycastVehicle * const
+            pVehicle = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0);
+
+    const btWheelInfo& info = pVehicle->getWheelInfo(wheelIndex);
+    btScalar scalar = info.m_rotation;
+    return jfloat(scalar);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
  * Method:    getSkidInfo
  * Signature: (J)F
  */
@@ -219,6 +235,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSteerAngle
 
     btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_steering;
     return (jfloat) scalar;
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    getSuspensionLength
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSuspensionLength
+(JNIEnv *pEnv, jobject, jlong vehicleId, jint wheelIndex) {
+    const btRaycastVehicle * const
+            pVehicle = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0);
+
+    const btWheelInfo& info = pVehicle->getWheelInfo(wheelIndex);
+    btScalar scalar = info.m_raycastInfo.m_suspensionLength;
+    return jfloat(scalar);
 }
 
 /*
@@ -268,4 +300,20 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_VehicleWheel_isFront
 
     bool result = pVehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel;
     return (jboolean) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    setRotationAngle
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_setRotationAngle
+(JNIEnv *pEnv, jobject, jlong vehicleId, jint wheelIndex, jfloat angle) {
+    btRaycastVehicle * const
+            pVehicle = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
+
+    btWheelInfo& info = pVehicle->getWheelInfo(wheelIndex);
+    btScalar scalar = btScalar(angle);
+    info.m_rotation = scalar;
 }
