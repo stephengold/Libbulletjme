@@ -47,7 +47,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:5.0.0'
+            compile 'com.github.stephengold:Libbulletjme:5.1.1'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -135,7 +135,7 @@ public class HelloLibbulletjme {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 5.0.0`
+     + `git checkout -b latest 5.1.1`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][the latest release]
      + follow the "Source code (zip)" link
