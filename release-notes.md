@@ -1,6 +1,6 @@
 # release log for the Libbulletjme Project
 
-## Version 5.1.0 released on 19 March 2020
+## Version 5.1.1 released on 19 March 2020
 
  + Added `boundingBox()` methods to the `CollisionShape` class,
    along with the `BoundingBox` class and supporting methods.
