@@ -144,7 +144,7 @@ model {
                 // Decide whether to build the current flavor:
                 if (flavor == flavors.Dp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
-                    buildable = false
+                    //buildable = false
                 }
 
                 cppCompiler.define 'BT_NO_PROFILE'

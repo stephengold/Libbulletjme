@@ -2,10 +2,10 @@
 
 ## Version 5.2.0 released on 20 March 2020
 
- + Added 3 methods to the `VehicleWheel` class:
-   + `getRotationAngle()`
-   + `getSuspensionLength()`
-   + `setRotationAngle()`
+Added 3 methods to the `VehicleWheel` class:
+ + `getRotationAngle()`
+ + `getSuspensionLength()`
+ + `setRotationAngle()`
 
 ## Version 5.1.1 released on 19 March 2020
 
