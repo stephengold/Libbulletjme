@@ -30,6 +30,7 @@ standalone Maven artifacts are provided.
 ## Contents of this document
 
  + [How to add Libbulletjme to an existing project](#add)
+ + [Example applications](#examples)
  + [How to build Libbulletjme from source](#build)
  + [Lexicon of class/enum/struct names](#lexicon)
  + [What's missing](#todo)
@@ -60,7 +61,11 @@ standalone Maven artifacts are provided.
         import com.jme3.system.NativeLibraryLoader;
         NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
 
-Here's a sample application:
+<a name="examples"/>
+
+## Example applications
+
+### HelloLibbulletjme: drop a dynamic sphere onto a horizontal surface
 
 ```
 import com.jme3.bullet.PhysicsSpace;
@@ -118,6 +123,96 @@ public class HelloLibbulletjme {
         }
     }
 }
+```
+
+### HelloVehicle: drive a vehicle on a horizontal surface
+
+```
+import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.collision.shapes.BoxCollisionShape;
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
+import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
+import com.jme3.bullet.objects.PhysicsBody;
+import com.jme3.bullet.objects.PhysicsRigidBody;
+import com.jme3.bullet.objects.PhysicsVehicle;
+import com.jme3.math.Plane;
+import com.jme3.math.Vector3f;
+import com.jme3.system.NativeLibraryLoader;
+import java.io.File;
+
+public class HelloVehicle {
+
+    public static void main(String[] args) {
+        /*
+         * Load a native library from ~/Downloads directory.
+         */
+        String homePath = System.getProperty("user.home");
+        File downloadDirectory = new File(homePath, "Downloads");
+        NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
+        /*
+         * Create a 20x20x200 PhysicsSpace using DBVT for broadphase.
+         */
+        Vector3f min = new Vector3f(-10f, -10f, -100f);
+        Vector3f max = new Vector3f(10f, 10f, 100f);
+        PhysicsSpace.BroadphaseType bPhase = PhysicsSpace.BroadphaseType.DBVT;
+        PhysicsSpace space = new PhysicsSpace(min, max, bPhase);
+        /*
+         * Add a static horizontal plane at y=-1.
+         */
+        float planeY = -1f;
+        Plane plane = new Plane(Vector3f.UNIT_Y, planeY);
+        CollisionShape planeShape = new PlaneCollisionShape(plane);
+        float mass = PhysicsBody.massForStatic;
+        PhysicsRigidBody floor = new PhysicsRigidBody(planeShape, mass);
+        space.addCollisionObject(floor);
+        /*
+         * Add a vehicle with a boxy chassis.
+         */
+        CompoundCollisionShape chassisShape = new CompoundCollisionShape();
+        BoxCollisionShape box = new BoxCollisionShape(1.2f, 0.5f, 2.4f);
+        chassisShape.addChildShape(box, 0f, 1f, 0f);
+        mass = 400f;
+        PhysicsVehicle vehicle = new PhysicsVehicle(chassisShape, mass);
+        vehicle.setMaxSuspensionForce(9e9f);
+        vehicle.setSuspensionCompression(4f);
+        vehicle.setSuspensionDamping(6f);
+        vehicle.setSuspensionStiffness(50f);
+        /*
+         * Add 4 wheels, 2 in front (for steering) and 2 in back.
+         */
+        Vector3f axleDirection = new Vector3f(-1, 0, 0);
+        Vector3f suspensionDirection = new Vector3f(0, -1, 0);
+        float restLength = 0.3f;
+        float radius = 0.5f;
+        float xOffset = 1f;
+        float yOffset = 0.5f;
+        float zOffset = 2f;
+        vehicle.addWheel(new Vector3f(-xOffset, yOffset, zOffset),
+                suspensionDirection, axleDirection, restLength, radius,
+                true);
+        vehicle.addWheel(new Vector3f(xOffset, yOffset, zOffset),
+                suspensionDirection, axleDirection, restLength, radius,
+                true);
+        vehicle.addWheel(new Vector3f(-xOffset, yOffset, -zOffset),
+                suspensionDirection, axleDirection, restLength, radius,
+                false);
+        vehicle.addWheel(new Vector3f(xOffset, yOffset, -zOffset),
+                suspensionDirection, axleDirection, restLength, radius,
+                false);
+
+        space.add(vehicle);
+        vehicle.accelerate(500f);
+        /*
+         * 150 iterations with a 20-msec timestep
+         */
+        float timeStep = 0.02f;
+        for (int i = 0; i < 150; ++i) {
+            space.update(timeStep, 0);
+            Vector3f location = vehicle.getPhysicsLocation();
+            System.out.println(location);
+        }
+    }
 ```
 
 <a name="build"/>
