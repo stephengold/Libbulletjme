@@ -167,6 +167,15 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
+     * Read the contact-point flags (native field: m_contactPointFlags).
+     *
+     * @return a bitmask
+     */
+    public int getFlags() {
+        return getFlags(manifoldPointObjectId);
+    }
+
+    /**
      * Read the contact-triangle index for collision object 0.
      *
      * @return the triangle index
@@ -206,15 +215,6 @@ public class PhysicsCollisionEvent extends EventObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         getLateralFrictionDir2(manifoldPointObjectId, result);
         return result;
-    }
-
-    /**
-     * Test whether the collision's lateral friction is initialized.
-     *
-     * @return true if initialized, otherwise false
-     */
-    public boolean isLateralFrictionInitialized() {
-        return isLateralFrictionInitialized(manifoldPointObjectId);
     }
 
     /**
@@ -308,6 +308,18 @@ public class PhysicsCollisionEvent extends EventObject {
         getPositionWorldOnB(manifoldPointObjectId, result);
         return result;
     }
+
+    /**
+     * For compatibility with jme3-bullet.
+     *
+     * @return true if initialized, otherwise false
+     */
+    public boolean isLateralFrictionInitialized() {
+        int flags = getFlags();
+        boolean result = (flags & ContactPointFlag.LATERAL_FRICTION) != 0x0;
+
+        return result;
+    }
     // *************************************************************************
     // native methods
 
@@ -323,6 +335,8 @@ public class PhysicsCollisionEvent extends EventObject {
 
     native private float getDistance1(long manifoldPointObjectId);
 
+    native private int getFlags(long manifoldPointObjectId);
+
     native private int getIndex0(long manifoldPointObjectId);
 
     native private int getIndex1(long manifoldPointObjectId);
@@ -332,9 +346,6 @@ public class PhysicsCollisionEvent extends EventObject {
 
     native private void getLateralFrictionDir2(long manifoldPointObjectId,
             Vector3f lateralFrictionDir2);
-
-    native private boolean isLateralFrictionInitialized(
-            long manifoldPointObjectId);
 
     native private int getLifeTime(long manifoldPointObjectId);
 

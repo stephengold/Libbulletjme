@@ -59,6 +59,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    getFlags
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getFlags
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getIndex0
  * Signature: (J)I
  */
@@ -88,14 +96,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLateralFrictionDir2
   (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
- * Method:    isLateralFrictionInitialized
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_isLateralFrictionInitialized
-  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent

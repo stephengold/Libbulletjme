@@ -120,6 +120,21 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    getFlags
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getFlags
+(JNIEnv *pEnv, jobject, jlong manifoldPointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (manifoldPointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0);
+
+    int flags = pPoint->m_contactPointFlags;
+    return (jint) flags;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getIndex0
  * Signature: (J)I
  */
