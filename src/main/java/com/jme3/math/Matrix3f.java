@@ -125,6 +125,53 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>get</code> retrieves a value from the matrix at the given
+     * position. If the position is invalid a <code>JmeException</code> is
+     * thrown.
+     * 
+     * @param i
+     *            the row index.
+     * @param j
+     *            the colum index.
+     * @return the value at (i, j).
+     */
+    @SuppressWarnings("fallthrough")
+    public float get(int i, int j) {
+        switch (i) {
+            case 0:
+                switch (j) {
+                    case 0:
+                        return m00;
+                    case 1:
+                        return m01;
+                    case 2:
+                        return m02;
+                }
+            case 1:
+                switch (j) {
+                    case 0:
+                        return m10;
+                    case 1:
+                        return m11;
+                    case 2:
+                        return m12;
+                }
+            case 2:
+                switch (j) {
+                    case 0:
+                        return m20;
+                    case 1:
+                        return m21;
+                    case 2:
+                        return m22;
+                }
+        }
+
+        logger.warning("Invalid matrix index.");
+        throw new IllegalArgumentException("Invalid indices into matrix.");
+    }
+
+    /**
      * 
      * <code>set</code> defines the values of the matrix based on a supplied
      * <code>Quaternion</code>. It should be noted that all previous values
