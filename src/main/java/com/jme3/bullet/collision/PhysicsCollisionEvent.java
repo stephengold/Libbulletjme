@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * Describe a collision in physics space.
+ * Describe a collision between 2 collision objects in a PhysicsSpace.
  * <p>
  * Even though this class inherits the java.io.Serializable interface, it isn't
  * serializable.
@@ -57,15 +57,15 @@ public class PhysicsCollisionEvent extends EventObject {
     // fields
 
     /**
-     * Bullet identifier of the btManifoldPoint
+     * unique identifier of the btManifoldPoint
      */
     private long manifoldPointObjectId = 0L;
     /**
-     * 1st involved object
+     * first collision object involved
      */
     final private PhysicsCollisionObject nodeA;
     /**
-     * 2nd involved object
+     * 2nd collision object involved
      */
     final private PhysicsCollisionObject nodeB;
     // *************************************************************************
@@ -113,7 +113,7 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's applied impulse.
+     * Read the collision's applied impulse (native field: m_appliedImpulse).
      *
      * @return impulse
      */
@@ -122,7 +122,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's applied lateral impulse #1.
+     * Read the collision's applied lateral impulse #1 (native field:
+     * m_appliedImpulseLateral1).
      *
      * @return impulse
      */
@@ -131,7 +132,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's applied lateral impulse #2.
+     * Read the collision's applied lateral impulse #2 (native field:
+     * m_appliedImpulseLateral2).
      *
      * @return impulse
      */
@@ -140,7 +142,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's combined friction.
+     * Read the collision's combined friction (native field:
+     * m_combinedFriction).
      *
      * @return friction
      */
@@ -149,7 +152,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's combined restitution.
+     * Read the collision's combined restitution (native field:
+     * m_combinedRestitution).
      *
      * @return restitution
      */
@@ -158,9 +162,9 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's distance #1.
+     * Read the collision's distance #1 (native field: m_distance1).
      *
-     * @return distance
+     * @return the distance (in physics-space units)
      */
     public float getDistance1() {
         return getDistance1(manifoldPointObjectId);
@@ -176,25 +180,50 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the contact-triangle index for collision object 0.
+     * Read the triangle index from the shape of collision object A at the point
+     * of contact (native field: m_index0).
+     * <p>
+     * If shape is convex, the index is undefined.
+     * <p>
+     * If shape is a CompoundCollisionShape, the index identifies a child shape.
+     * <p>
+     * If the shape is a GImpactCollisionShape or MeshCollisionShape, the index
+     * identifies a triangle in an IndexedMesh.
+     * <p>
+     * If the shape is a HeightfieldCollisionShape, the index indicates a grid
+     * column.
      *
-     * @return the triangle index
+     * @return the index of the collision-shape triangle (&ge;0) or -1 if
+     * undefined
      */
     public int getIndex0() {
         return getIndex0(manifoldPointObjectId);
     }
 
     /**
-     * Read the contact-triangle index for collision object 1.
+     * Read the triangle index from the shape of collision object B at the point
+     * of contact (native field: m_index1).
+     * <p>
+     * If shape is convex, the index is undefined.
+     * <p>
+     * If shape is a CompoundCollisionShape, the index identifies a child shape.
+     * <p>
+     * If the shape is a GImpactCollisionShape or MeshCollisionShape, the index
+     * identifies a triangle in an IndexedMesh.
+     * <p>
+     * If the shape is a HeightfieldCollisionShape, the index indicates a grid
+     * column.
      *
-     * @return the triangle index
+     * @return the index of the collision-shape triangle (&ge;0) or -1 if
+     * undefined
      */
     public int getIndex1() {
         return getIndex1(manifoldPointObjectId);
     }
 
     /**
-     * Copy the collision's lateral friction direction #1.
+     * Copy the collision's lateral friction direction #1 (native field:
+     * m_lateralFrictionDir1).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a direction vector (either storeResult or a new instance)
@@ -206,7 +235,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Copy the collision's lateral friction direction #2.
+     * Copy the collision's lateral friction direction #2 (native field:
+     * m_lateralFrictionDir2).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a direction vector (either storeResult or a new instance)
@@ -218,16 +248,17 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's lifetime.
+     * Read the collision's lifetime (native name: m_lifeTime).
      *
-     * @return lifetime
+     * @return the duration (in ticks, &ge;0)
      */
     public int getLifeTime() {
         return getLifeTime(manifoldPointObjectId);
     }
 
     /**
-     * Copy the collision's location in the local coordinates of object A.
+     * Copy the collision's location in the local coordinates of object A
+     * (native name: m_localPointA).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in local coordinates, either storeResult or a
@@ -240,7 +271,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Copy the collision's location in the local coordinates of object B.
+     * Copy the collision's location in the local coordinates of object B
+     * (native name: m_localPointB).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in local coordinates, either storeResult or a
@@ -253,7 +285,7 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Copy the collision's normal on object B.
+     * Copy the collision's normal on object B (native name: m_normalWorldOnB).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a normal vector (in physics-space coordinates, either storeResult
@@ -266,25 +298,43 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the contact-part ID for collision object 0.
+     * Read the part index from the shape of collision object A at the point of
+     * contact (native field: m_partId0).
+     * <p>
+     * If the shape is compound or convex, the index is undefined.
+     * <p>
+     * If the shape is a GImpactCollisionShape or MeshCollisionShape, the index
+     * identifies an IndexedMesh.
+     * <p>
+     * If the shape is a HeightfieldCollisionShape, the index identifies a grid
+     * row.
      *
-     * @return the part identifier
+     * @return the index of the collision-shape part (&ge;0) or -1 if undefined
      */
     public int getPartId0() {
         return getPartId0(manifoldPointObjectId);
     }
 
     /**
-     * Read the contact-part ID for collision object 1.
+     * Read the part index from the shape of collision object B at the point of
+     * contact (native field: m_partId1).
+     * <p>
+     * If the shape is compound or convex, the index is undefined.
+     * <p>
+     * If the shape is a GImpactCollisionShape or MeshCollisionShape, the index
+     * identifies an IndexedMesh.
+     * <p>
+     * If the shape is a HeightfieldCollisionShape, the index identifies a grid
+     * row.
      *
-     * @return the part identifier
+     * @return the index of the collision-shape part (&ge;0) or -1 if undefined
      */
     public int getPartId1() {
         return getPartId1(manifoldPointObjectId);
     }
 
     /**
-     * Copy the collision's location.
+     * Copy the collision's location (native field: m_positionWorldOnA).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in physics-space coordinates, either
@@ -297,7 +347,7 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Copy the collision's location.
+     * Copy the collision's location (native field: m_positionWorldOnB).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in physics-space coordinates, either
@@ -310,7 +360,8 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * For compatibility with jme3-bullet.
+     * Test whether the collision's lateral friction is initialized. For
+     * compatibility with jme3-bullet.
      *
      * @return true if initialized, otherwise false
      */
