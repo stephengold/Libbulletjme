@@ -115,13 +115,13 @@ model {
                 // Decide whether to build the target platform:
                 if (gradle.rootProject.hasProperty('github')) {
                     // -Pgithub= specified on the command line
-                    String github = gradle.rootProject.ext.github;
+                    String github = gradle.rootProject.ext.github
                     if (github.equals('xcode11')) {
                         buildable = targetPlatform.name.equals('MacOSX64')
                     }
                 } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
-                    String travis = gradle.rootProject.ext.travis;
+                    String travis = gradle.rootProject.ext.travis
                     if (travis.equals('amd64')) {
                         buildable = !targetPlatform.name.startsWith('Linux_ARM')
                     } else if (travis.equals('arm64')) {
@@ -142,6 +142,11 @@ model {
                 }
 
                 // Decide whether to build the current flavor:
+                if (buildable && gradle.rootProject.hasProperty('flavor')) {
+                    // -Pflavor= specified on the command line
+                    String flavorArg = gradle.rootProject.ext.flavor
+                    buildable = flavor.name.equals(flavorArg)
+                }
                 if (flavor == flavors.Dp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                     //buildable = false
