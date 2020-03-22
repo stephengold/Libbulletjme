@@ -28,7 +28,7 @@ jobs:
         - g++
         update: true
     script:
-    - ./gradlew build --console=plain --no-daemon -Ptravis=arm64
+    - ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
 after_failure:
  - cat build/reports/tests/test/classes/TestLibbulletjme.html
