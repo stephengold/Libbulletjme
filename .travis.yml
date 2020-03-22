@@ -25,7 +25,17 @@ jobs:
       apt:
         packages:
         - default-jre
-        - g++
+        update: true
+    script:
+    - ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
+  - os: linux
+    dist: bionic
+    arch: arm64
+    compiler: gcc
+    addons:
+      apt:
+        packages:
+        - default-jre
         update: true
     script:
     - ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
