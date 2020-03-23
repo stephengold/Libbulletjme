@@ -329,7 +329,8 @@ public class VehicleWheel {
      * Read the travel distance for this wheel's suspension (native field:
      * m_maxSuspensionTravelCm).
      *
-     * @return the maximum travel distance (in centimeters)
+     * @return the maximum travel distance (in hundredths of a physics-space
+     * unit)
      */
     public float getMaxSuspensionTravelCm() {
         return tuning.getMaxSuspensionTravelCm();
@@ -539,8 +540,8 @@ public class VehicleWheel {
      * Alter the travel distance for this wheel's suspension (native field:
      * m_maxSuspensionTravelCm).
      *
-     * @param travelCm the desired maximum travel distance (in centimetres,
-     * default=500)
+     * @param travelCm the desired maximum travel distance (in hundredeths of a
+     * physics-space unit, default=500)
      */
     public void setMaxSuspensionTravelCm(float travelCm) {
         tuning.setMaxSuspensionTravelCm(travelCm);
@@ -595,6 +596,16 @@ public class VehicleWheel {
      */
     public void setRotationAngle(float angle) {
         setRotationAngle(vehicleId, wheelIndex, angle);
+    }
+
+    /**
+     * Alter the length of this wheel's suspension (native field:
+     * m_suspensionLength). Bullet updates the length on every physics tick.
+     *
+     * @param length the desired length (in physics-space units)
+     */
+    public void setSuspensionLength(float length) {
+        setSuspensionLength(vehicleId, wheelIndex, length);
     }
 
     /**
@@ -736,4 +747,7 @@ public class VehicleWheel {
 
     native private void setRotationAngle(long vehicleId, int wheelIndex,
             float angle);
+
+    native private void setSuspensionLength(long vehicleId, int wheelIndex,
+            float length);
 }

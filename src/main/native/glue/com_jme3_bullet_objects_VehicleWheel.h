@@ -143,6 +143,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_VehicleWheel_isFront
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_setRotationAngle
   (JNIEnv *, jobject, jlong, jint, jfloat);
 
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    setSuspensionLength
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_setSuspensionLength
+  (JNIEnv *, jobject, jlong, jint, jfloat);
+
 #ifdef __cplusplus
 }
 #endif

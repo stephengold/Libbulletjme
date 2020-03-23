@@ -317,3 +317,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_setRotationAngl
     btScalar scalar = btScalar(angle);
     info.m_rotation = scalar;
 }
+
+/*
+ * Class:     com_jme3_bullet_objects_VehicleWheel
+ * Method:    setSuspensionLength
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_setSuspensionLength
+(JNIEnv *pEnv, jobject, jlong vehicleId, jint wheelIndex, jfloat length) {
+    btRaycastVehicle * const
+            pVehicle = reinterpret_cast<btRaycastVehicle *> (vehicleId);
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
+
+    btWheelInfo& info = pVehicle->getWheelInfo(wheelIndex);
+    btScalar scalar = btScalar(length);
+    info.m_raycastInfo.m_suspensionLength = scalar;
+}
