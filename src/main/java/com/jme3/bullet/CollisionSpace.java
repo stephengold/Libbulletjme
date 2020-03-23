@@ -70,7 +70,7 @@ public class CollisionSpace {
     // fields
 
     /**
-     * copy of the type of acceleration structure used
+     * type of acceleration structure
      */
     private PhysicsSpace.BroadphaseType broadphaseType
             = PhysicsSpace.BroadphaseType.DBVT;
