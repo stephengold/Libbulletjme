@@ -840,7 +840,25 @@ public class TestLibbulletjme {
         CollisionShape floorShape = new PlaneCollisionShape(plane);
         float mass = PhysicsBody.massForStatic;
         PhysicsRigidBody floorBody = new PhysicsRigidBody(floorShape, mass);
+
+        Assert.assertNull(floorBody.getCollisionSpace());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                floorBody.getCollideWithGroups());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                floorBody.getCollisionGroup());
+        Assert.assertTrue(floorBody.isActive());
+        Assert.assertTrue(floorBody.isContactResponse());
+        Assert.assertFalse(floorBody.isDynamic());
+        Assert.assertFalse(floorBody.isInWorld());
+        Assert.assertFalse(floorBody.isKinematic());
+        Assert.assertTrue(floorBody.isStatic());
+        Assert.assertEquals(0L, floorBody.spaceId());
+
         space.addCollisionObject(floorBody);
+
+        Assert.assertSame(space, floorBody.getCollisionSpace());
+        Assert.assertEquals(space.getSpaceId(), floorBody.spaceId());
+        Assert.assertTrue(floorBody.isInWorld());
 
         Assert.assertFalse(space.isEmpty());
         Assert.assertEquals(1, space.countCollisionObjects());
@@ -851,7 +869,25 @@ public class TestLibbulletjme {
          */
         mass = 1f;
         PhysicsRigidBody dropBody = new PhysicsRigidBody(dropShape, mass);
+
+        Assert.assertNull(dropBody.getCollisionSpace());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                dropBody.getCollideWithGroups());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                dropBody.getCollisionGroup());
+        Assert.assertTrue(dropBody.isActive());
+        Assert.assertTrue(dropBody.isContactResponse());
+        Assert.assertTrue(dropBody.isDynamic());
+        Assert.assertFalse(dropBody.isInWorld());
+        Assert.assertFalse(dropBody.isKinematic());
+        Assert.assertFalse(dropBody.isStatic());
+        Assert.assertEquals(0L, dropBody.spaceId());
+
         space.addCollisionObject(dropBody);
+
+        Assert.assertSame(space, dropBody.getCollisionSpace());
+        Assert.assertEquals(space.getSpaceId(), dropBody.spaceId());
+        Assert.assertTrue(dropBody.isInWorld());
 
         Assert.assertFalse(space.isEmpty());
         Assert.assertEquals(2, space.countCollisionObjects());
@@ -866,14 +902,31 @@ public class TestLibbulletjme {
             //System.out.printf("location = %s%n", prb.getPhysicsLocation());
         }
         /*
-         * Check the final location of the body.
+         * Check the final location of the dynamic body.
          */
         Vector3f location = dropBody.getPhysicsLocation();
         Assert.assertEquals(0f, location.x, 0.2f);
         Assert.assertEquals(0f, location.z, 0.2f);
 
         space.remove(floorBody);
+
+        Assert.assertNull(floorBody.getCollisionSpace());
+        Assert.assertTrue(floorBody.isContactResponse());
+        Assert.assertFalse(floorBody.isDynamic());
+        Assert.assertFalse(floorBody.isInWorld());
+        Assert.assertFalse(floorBody.isKinematic());
+        Assert.assertTrue(floorBody.isStatic());
+        Assert.assertEquals(0L, floorBody.spaceId());
+
         space.remove(dropBody);
+
+        Assert.assertNull(dropBody.getCollisionSpace());
+        Assert.assertTrue(dropBody.isContactResponse());
+        Assert.assertTrue(dropBody.isDynamic());
+        Assert.assertFalse(dropBody.isInWorld());
+        Assert.assertFalse(dropBody.isKinematic());
+        Assert.assertFalse(dropBody.isStatic());
+        Assert.assertEquals(0L, dropBody.spaceId());
 
         Assert.assertTrue(space.isEmpty());
     }
@@ -889,7 +942,23 @@ public class TestLibbulletjme {
         Assert.assertTrue(space.isEmpty());
 
         PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
+
+        Assert.assertNull(ghost.getCollisionSpace());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                ghost.getCollideWithGroups());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                ghost.getCollisionGroup());
+        Assert.assertTrue(ghost.isActive());
+        Assert.assertFalse(ghost.isContactResponse());
+        Assert.assertFalse(ghost.isInWorld());
+        Assert.assertTrue(ghost.isStatic());
+        Assert.assertEquals(0L, ghost.spaceId());
+
         space.add(ghost);
+
+        Assert.assertSame(space, ghost.getCollisionSpace());
+        Assert.assertEquals(space.getSpaceId(), ghost.spaceId());
+        Assert.assertTrue(ghost.isInWorld());
         Assert.assertTrue(space.contains(ghost));
         Assert.assertEquals(1, space.countCollisionObjects());
 
@@ -906,6 +975,12 @@ public class TestLibbulletjme {
         Assert.assertEquals(1, results2.size());
 
         space.remove(ghost);
+
+        Assert.assertNull(ghost.getCollisionSpace());
+        Assert.assertEquals(0L, ghost.spaceId());
+        Assert.assertFalse(ghost.isInWorld());
+        Assert.assertFalse(space.contains(ghost));
+        Assert.assertEquals(0, space.countCollisionObjects());
         Assert.assertTrue(space.isEmpty());
 
         List<PhysicsRayTestResult> results3 = space.rayTest(
