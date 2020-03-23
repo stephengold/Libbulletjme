@@ -11,7 +11,7 @@ Complete source code (in C++ and Java) is provided under
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
-It occasionally supports Linux on the 64-bit ARM architecture (aarch64),
+It also supports Linux on the 64-bit ARM architecture (aarch64),
 for a total of 7 platforms.
 
 For each platform, 4 native libraries are distributed:
@@ -48,11 +48,11 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:5.2.0'
+            compile 'com.github.stephengold:Libbulletjme:5.3.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 24 (or 28) native libraries.
+    You probably don't need all 28 native libraries.
     Start with the ReleaseSp library for your development environment
     (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
@@ -230,7 +230,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 5.2.0`
+     + `git checkout -b latest 5.3.0`
    + using a web browser:
      + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][the latest release]
      + follow the "Source code (zip)" link
@@ -275,6 +275,7 @@ btCompoundShapeChild                    .bullet.collision.shapes.info.ChildColli
 btConeShape                             .bullet.collision.shapes.ConeCollisionShape
 btConeTwistConstraint                   .bullet.joints.ConeJoint
 btConstraintParams                      .bullet.joints.motors.MotorParam
+btContactPointFlags                     .bullet.collision.ContactPointFlag
 btContactSolverInfo                     .bullet.SolverInfo
 btConvex2dShape                         .bullet.collision.shapes.Convex2dShape
 btConvexHullShape                       .bullet.collision.shapes.HullCollisionShape
@@ -459,6 +460,8 @@ V-HACD to my attention.
 I am grateful to [Github], [JFrog], [AppVeyor], [Travis], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
+
+I am grateful to Yanis Boudiaf for many helpful suggestions.
 
 I'm also grateful to my dear Holly, for keeping me sane.
 
