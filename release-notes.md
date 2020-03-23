@@ -1,5 +1,14 @@
 # release log for the Libbulletjme Project
 
+## Version 5.3.0 released on 22 March 2020
+
+ + Added the `ContactPointFlag` class and also a `getFlags()` method
+   for the `PhysicsCollisionEvent` class.
+ + Added a `serializeBvh()` method and BVH-based constructor
+   to the `MeshCollisionShape` class.
+ + Added a `get()` method to the `Matrix3f` class.
+ + Added a `setSuspensionLength()` method to the `VehicleWheel` class.
+
 ## Version 5.2.0 released on 20 March 2020
 
 Added 3 methods to the `VehicleWheel` class:
