@@ -56,8 +56,9 @@ public final class NativeLibraryLoader {
      * @param directory (not null, readable, unaffected)
      * @param buildType "Debug" or "Release"
      * @param flavor "Sp" or "Dp"
+     * @return true after successful load, otherwise false
      */
-    public static void loadLibbulletjme(boolean dist, File directory,
+    public static boolean loadLibbulletjme(boolean dist, File directory,
             String buildType, String flavor) {
         assert buildType.equals("Debug") || buildType.equals("Release");
         assert flavor.equals("Sp") || flavor.equals("Dp");
@@ -102,13 +103,17 @@ public final class NativeLibraryLoader {
 
         file = new File(file, name);
         String absoluteFilename = file.getAbsolutePath();
+        boolean success = false;
         if (!file.exists()) {
             logger.log(Level.SEVERE, "{0} does not exist", absoluteFilename);
         } else if (!file.canRead()) {
             logger.log(Level.SEVERE, "{0} is not readable", absoluteFilename);
         } else {
             System.load(absoluteFilename);
+            success = true;
         }
+
+        return success;
     }
 
     /**
