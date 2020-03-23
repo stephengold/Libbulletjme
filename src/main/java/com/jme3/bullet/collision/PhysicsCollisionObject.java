@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.collision;
 
+import com.jme3.bullet.CollisionSpace;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
@@ -296,12 +297,26 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Access the collision shape of this object.
+     * Access the CollisionShape of this object.
      *
      * @return the pre-existing instance, or null if none
      */
     public CollisionShape getCollisionShape() {
         return collisionShape;
+    }
+
+    /**
+     * Access the CollisionSpace to which this object has been added.
+     *
+     * @return the pre-existing instance, or null if none
+     */
+    public CollisionSpace getCollisionSpace() {
+        CollisionSpace result = null;
+        if (spaceId() != 0L) {
+            result = getCollisionSpace(objectId);
+        }
+
+        return result;
     }
 
     /**
@@ -518,7 +533,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Test whether this object is added to a PhysicsSpace.
+     * Test whether this object is added to a CollisionSpace.
      *
      * @return true&rarr;in a space, false&rarr;not in a space
      */
@@ -718,6 +733,17 @@ abstract public class PhysicsCollisionObject
     public void setUserObject(Object userObject) {
         this.userObject = userObject;
     }
+
+    /**
+     * Determine the ID of the CollisionSpace to which this collision object is
+     * added.
+     *
+     * @return the ID, or zero if not in any space
+     */
+    public long spaceId() {
+        long spaceId = getSpaceId(objectId);
+        return spaceId;
+    }
     // *************************************************************************
     // new protected methods
 
@@ -897,6 +923,8 @@ abstract public class PhysicsCollisionObject
 
     native private int getCollisionGroup(long objectId);
 
+    native private CollisionSpace getCollisionSpace(long objectId);
+
     native private float getContactDamping(long objectId);
 
     native private float getContactProcessingThreshold(long objectId);
@@ -914,6 +942,8 @@ abstract public class PhysicsCollisionObject
     native private float getRestitution(long objectId);
 
     native private float getRollingFriction(long objectId);
+
+    native private long getSpaceId(long objectId);
 
     native private float getSpinningFriction(long objectId);
 

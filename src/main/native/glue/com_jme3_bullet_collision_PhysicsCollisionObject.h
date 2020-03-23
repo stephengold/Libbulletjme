@@ -155,6 +155,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollisionSpace
+ * Signature: (J)Lcom/jme3/bullet/CollisionSpace;
+ */
+JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionSpace
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getContactDamping
  * Signature: (J)F
  */
@@ -223,6 +231,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getRollingFriction
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getSpaceId
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getSpaceId
   (JNIEnv *, jobject, jlong);
 
 /*

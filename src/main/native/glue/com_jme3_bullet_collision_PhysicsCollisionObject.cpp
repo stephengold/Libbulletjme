@@ -216,6 +216,25 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollisionSpace
+ * Signature: (J)Lcom/jme3/bullet/CollisionSpace;
+ */
+JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionSpace
+(JNIEnv *pEnv, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject,
+            "The btCollisionObject does not exist.", 0);
+
+    jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    jmeCollisionSpace *pSpace = pUser->m_jmeSpace;
+    jobject javaSpace = pSpace->getJavaPhysicsSpace();
+    return javaSpace;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getContactDamping
  * Signature: (J)F
  */
@@ -365,6 +384,24 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 
     jfloat result = pCollisionObject->getRollingFriction();
     return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getSpaceId
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getSpaceId
+(JNIEnv *pEnv, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject,
+            "The btCollisionObject does not exist.", 0);
+
+    jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    jmeCollisionSpace *pSpace = pUser->m_jmeSpace;
+    return reinterpret_cast<jlong> (pSpace);
 }
 
 /*
