@@ -755,18 +755,26 @@ public class TestLibbulletjme {
     }
 
     private static void loadNativeLibrary() {
-        boolean loadFromDist = false;
+        boolean fromDist = false;
 
         File directory;
-        if (loadFromDist) {
+        if (fromDist) {
             directory = new File("dist");
         } else {
             directory = new File("build/libs/bulletjme/shared");
         }
-        NativeLibraryLoader.loadLibbulletjme(loadFromDist, directory,
-                "Debug", "Sp");
+
+        boolean success = NativeLibraryLoader.loadLibbulletjme(fromDist,
+                directory, "Debug", "Sp");
+        if (success) {
+            Assert.assertFalse(NativeLibrary.isDoublePrecision());
+        } else { // fallback to Dp-flavored library
+            success = NativeLibraryLoader.loadLibbulletjme(fromDist,
+                    directory, "Debug", "Dp");
+            Assert.assertTrue(success);
+            Assert.assertTrue(NativeLibrary.isDoublePrecision());
+        }
         Assert.assertTrue(NativeLibrary.isDebug());
-        Assert.assertFalse(NativeLibrary.isDoublePrecision());
     }
 
     /**
