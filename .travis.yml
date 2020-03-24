@@ -7,42 +7,43 @@ jobs:
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=osx
   - os: linux
-    dist: xenial
+    dist: bionic
     arch: amd64
     compiler: gcc
     addons:
       apt:
         packages:
         - g++-multilib
-        update: true
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
   - os: linux
-    dist: xenial
+    dist: bionic
     arch: arm64
     compiler: gcc
     addons:
       apt:
         packages:
-        - default-jre
-        update: true
+        - openjdk-8-jre-headless
     env:
-    - BUILD_NAME=arm_Dp
+    - FLAVOR=Dp
     script:
     - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
   - os: linux
-    dist: xenial
+    dist: bionic
     arch: arm64
     compiler: gcc
     addons:
       apt:
         packages:
-        - default-jre
-        update: true
+        - openjdk-8-jre-headless
     env:
-    - BUILD_NAME=arm_Sp
+    - FLAVOR=Sp
     script:
     - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
+
+addons:
+  apt:
+    update: true
 
 after_failure:
  - cat build/reports/tests/test/classes/TestLibbulletjme.html
