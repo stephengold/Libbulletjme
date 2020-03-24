@@ -64,10 +64,9 @@ public class MeshCollisionShape extends CollisionShape {
      */
     private CompoundMesh nativeMesh;
     /**
-     * unique identifier of the native buffer that holds the BVH - TODO rename
-     * bvhBufferId
+     * unique identifier of the native buffer that holds the BVH
      */
-    private long nativeBVHBuffer = 0L;
+    private long bvhBufferId = 0L;
     // *************************************************************************
     // constructors
 
@@ -154,8 +153,8 @@ public class MeshCollisionShape extends CollisionShape {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        if (nativeBVHBuffer != 0L) {
-            finalizeBVH(nativeBVHBuffer);
+        if (bvhBufferId != 0L) {
+            finalizeBVH(bvhBufferId);
         }
     }
 
@@ -182,8 +181,8 @@ public class MeshCollisionShape extends CollisionShape {
         setNativeId(shapeId);
 
         if (!buildBvh) {
-            nativeBVHBuffer = setBVH(bvh, shapeId);
-            assert nativeBVHBuffer != 0L;
+            bvhBufferId = setBVH(bvh, shapeId);
+            assert bvhBufferId != 0L;
         }
 
         setScale(scale);
@@ -195,7 +194,7 @@ public class MeshCollisionShape extends CollisionShape {
     native private long createShape(boolean useCompression, boolean buildBvh,
             long meshId);
 
-    native private void finalizeBVH(long nativeBVHBufferId);
+    native private void finalizeBVH(long bufferId);
 
     native private void recalcAabb(long shapeId);
 
