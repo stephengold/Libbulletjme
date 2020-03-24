@@ -1,5 +1,13 @@
 # release log for the Libbulletjme Project
 
+## Version 5.4.0 released on 24 March 2020
+
+ + Added `getCollisionSpace()` and `spaceId()` methods
+   to the `PhysicsCollisionObject` class.
+ + Added `boundingBox()` method to the `PhysicsCollisionObject` class.
+ + Added the `PcoType` class.
+ + Build on an older Linux distro (bionic) for more compatibility.
+
 ## Version 5.3.0 released on 22 March 2020
 
  + Added the `ContactPointFlag` class and also a `getFlags()` method
