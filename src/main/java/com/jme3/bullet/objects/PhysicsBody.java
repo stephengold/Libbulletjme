@@ -138,7 +138,7 @@ abstract public class PhysicsBody extends PhysicsCollisionObject {
     }
 
     /**
-     * Alter this body's gravitational acceleration. TODO scalar alternative
+     * Alter this body's gravitational acceleration.
      * <p>
      * Invoke this method <em>after</em> adding the body to a PhysicsSpace.
      * Adding a body to a PhysicsSpace overrides its gravity.
