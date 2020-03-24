@@ -89,14 +89,6 @@ public class RigidBodyMotionState {
     // *************************************************************************
     // new methods exposed
 
-    /**
-     * Read the unique ID of the native object.
-     *
-     * @return ID (not zero)
-     */
-    public long getObjectId() {
-        return motionStateId;
-    }
 
     /**
      * Copy the location from this motion state.
@@ -111,6 +103,15 @@ public class RigidBodyMotionState {
 
         assert Vector3f.isValidVector(result);
         return result;
+    }
+
+    /**
+     * Read the unique ID of the native object.
+     *
+     * @return ID (not zero)
+     */
+    public long getObjectId() {
+        return motionStateId;
     }
 
     /**
