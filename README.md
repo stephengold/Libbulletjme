@@ -232,7 +232,7 @@ public class HelloVehicle {
      + `cd Libbulletjme`
      + `git checkout -b latest 5.3.0`
    + using a web browser:
-     + browse to [https://github.com/stephengold/Libbulletjme/releases/latest][the latest release]
+     + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
      + save the ZIP file
      + unzip the saved ZIP file
