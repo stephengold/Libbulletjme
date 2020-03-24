@@ -801,6 +801,7 @@ abstract public class PhysicsCollisionObject
      *
      * @param objectId the ID of the btCollisionObject (not zero)
      * @return the type value
+     * @see PcoType
      */
     final native protected int getInternalType(long objectId);
 

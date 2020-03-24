@@ -32,6 +32,7 @@
 package com.jme3.bullet.objects;
 
 import com.jme3.bullet.SoftBodyWorldInfo;
+import com.jme3.bullet.collision.PcoType;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.objects.infos.Cluster;
 import com.jme3.bullet.objects.infos.SoftBodyConfig;
@@ -98,7 +99,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     public PhysicsSoftBody() {
         objectId = createEmptySoftBody();
         assert objectId != 0L;
-        assert getInternalType(objectId) == 8 : getInternalType(objectId); // TODO constant
+        assert getInternalType(objectId) == PcoType.soft :
+                getInternalType(objectId);
         logger2.log(Level.FINE, "Created {0}.", this);
 
         config = new SoftBodyConfig(this);
