@@ -50,7 +50,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
     btIndexedMesh *pSubmesh = reinterpret_cast<btIndexedMesh *> (submeshId);
     NULL_CHECK(pSubmesh, "The btIndexedMesh does not exist.",);
 
-    pMesh->addIndexedMesh(*pSubmesh);
+    PHY_ScalarType indexType = pSubmesh->m_indexType;
+    pMesh->addIndexedMesh(*pSubmesh, indexType);
 }
 
 /*
