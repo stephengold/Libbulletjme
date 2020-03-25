@@ -53,11 +53,11 @@ public class IndexedMesh {
     /**
      * number of bytes in a float
      */
-    final private static int floatSize = 4;
+    final private static int floatBytes = 4;
     /**
      * number of bytes in an int
      */
-    final private static int intSize = 4;
+    final private static int intBytes = 4;
     /**
      * number of axes in a vector
      */
@@ -75,17 +75,17 @@ public class IndexedMesh {
     // fields
 
     /**
-     * configured position data: typically 3 floats per vertex (not null,
-     * direct, never flipped)
+     * configured position data: 3 floats per vertex (not null, direct, never
+     * flipped)
      */
     private FloatBuffer vertexPositions;
     /**
-     * configured index data: typically 3 ints per triangle (not null, direct,
-     * never flipped)
+     * configured index data: 3 ints per triangle (not null, direct, never
+     * flipped)
      */
     private IntBuffer indices;
     /**
-     * configured bytes per triangle in the index buffer (typically 12)
+     * configured bytes per triangle in the index buffer (12)
      */
     private int indexStride;
     /**
@@ -97,7 +97,7 @@ public class IndexedMesh {
      */
     private int numVertices;
     /**
-     * configured bytes per vertex in the position buffer (typically 12)
+     * configured bytes per vertex in the position buffer (12)
      */
     private int vertexStride;
     /**
@@ -117,13 +117,16 @@ public class IndexedMesh {
     public IndexedMesh(Vector3f[] positionArray, int[] indexArray) {
         Validate.nonNull(positionArray, "position array");
         Validate.nonNull(indexArray, "index array");
+        int numIndices = indexArray.length;
+        Validate.require(numIndices % vpt == 0, "length a multiple of 3");
 
-        vertexPositions = BufferUtils.createFloatBuffer(positionArray);
-        indices = BufferUtils.createIntBuffer(indexArray);
-        indexStride = vpt * intSize;
-        numTriangles = indexArray.length / vpt;
         numVertices = positionArray.length;
-        vertexStride = numAxes * floatSize;
+        vertexPositions = BufferUtils.createFloatBuffer(positionArray);
+        vertexStride = numAxes * floatBytes;
+
+        numTriangles = numIndices / vpt;
+        indices = BufferUtils.createIntBuffer(indexArray);
+        indexStride = vpt * intBytes;
 
         createMesh();
     }
@@ -183,9 +186,12 @@ public class IndexedMesh {
      */
     private void createMesh() {
         assert nativeId == 0L;
+        assert vertexStride == 12 : vertexStride;
+        assert indexStride == 12 : indexStride;
 
         nativeId = createInt(indices, vertexPositions, numTriangles,
                 numVertices, vertexStride, indexStride);
+
         assert nativeId != 0L;
         logger.log(Level.FINE, "Created IndexedMesh {0}",
                 Long.toHexString(nativeId));
