@@ -7,7 +7,7 @@ jobs:
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=osx
   - os: linux
-    dist: bionic
+    dist: trusty
     arch: amd64
     compiler: gcc
     addons:
@@ -17,7 +17,7 @@ jobs:
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
   - os: linux
-    dist: bionic
+    dist: xenial
     arch: arm64
     compiler: gcc
     env:
@@ -25,7 +25,7 @@ jobs:
     script:
     - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
   - os: linux
-    dist: bionic
+    dist: xenial
     arch: arm64
     compiler: gcc
     env:
