@@ -1,5 +1,9 @@
 # release log for the Libbulletjme Project
 
+## Version 5.4.2 released on 25 March 2020
+
+Bugfix: wrong `indexType` passed to CompoundMesh.addIndexedMesh().
+
 ## Version 5.4.1 released on 24 March 2020
 
 Built on trusty (for AMD) and xenial (for ARM).
