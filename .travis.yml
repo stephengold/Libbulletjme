@@ -20,10 +20,6 @@ jobs:
     dist: bionic
     arch: arm64
     compiler: gcc
-    addons:
-      apt:
-        packages:
-        - openjdk-8-jre-headless
     env:
     - FLAVOR=Dp
     script:
@@ -32,10 +28,6 @@ jobs:
     dist: bionic
     arch: arm64
     compiler: gcc
-    addons:
-      apt:
-        packages:
-        - openjdk-8-jre-headless
     env:
     - FLAVOR=Sp
     script:
