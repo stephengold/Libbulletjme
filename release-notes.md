@@ -2,7 +2,7 @@
 
 ## Version 5.4.1 released on 24 March 2020
 
- + Built on trusty (for AMD) and xenial (for ARM).
+Built on trusty (for AMD) and xenial (for ARM).
 
 ## Version 5.4.0 released on 24 March 2020
 
