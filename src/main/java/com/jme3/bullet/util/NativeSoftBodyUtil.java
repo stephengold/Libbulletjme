@@ -31,14 +31,19 @@
  */
 package com.jme3.bullet.util;
 
+import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
+import com.jme3.bullet.objects.PhysicsSoftBody;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.IntPair;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
 
@@ -56,6 +61,10 @@ public class NativeSoftBodyUtil {
      * number of axes in a vector
      */
     final private static int numAxes = 3;
+    /**
+     * number of vertices per edge
+     */
+    final private static int vpe = 2;
     /**
      * number of vertices per triangle
      */
@@ -77,9 +86,54 @@ public class NativeSoftBodyUtil {
     // new methods exposed
 
     /**
+     * Add the triangles and unique edges in the specified native mesh to the
+     * specified soft body.
+     *
+     * @param mesh the input native mesh (not null)
+     * @param softBody the soft body to which faces and links will be added (not
+     * null, modified)
+     */
+    public static void appendFromNativeMesh(IndexedMesh mesh,
+            PhysicsSoftBody softBody) {
+        Validate.nonNull(softBody, "soft body");
+
+        FloatBuffer positions = mesh.copyVertexPositions();
+        assert positions.isDirect();
+        softBody.appendNodes(positions);
+
+        IntBuffer triangleIndices = mesh.copyIndices();
+        assert triangleIndices.isDirect();
+        softBody.appendFaces(triangleIndices);
+        /*
+         * Enumerate all unique edges among the triangles.
+         */
+        int size = triangleIndices.capacity();
+        Set<IntPair> uniqueEdges = new HashSet<>(vpt * size);
+        for (int intOffset = 0; intOffset < size; intOffset += vpt) {
+            int ti0 = triangleIndices.get(intOffset);
+            int ti1 = triangleIndices.get(intOffset + 1);
+            int ti2 = triangleIndices.get(intOffset + 2);
+
+            uniqueEdges.add(new IntPair(ti0, ti1));
+            uniqueEdges.add(new IntPair(ti1, ti2));
+            uniqueEdges.add(new IntPair(ti0, ti2));
+        }
+
+        int numUniqueEdges = uniqueEdges.size();
+        int indexCount = vpe * numUniqueEdges;
+        IntBuffer links = BufferUtils.createIntBuffer(indexCount);
+        int edgeIndex = 0;
+        for (IntPair edge : uniqueEdges) {
+            links.put(edgeIndex, edge.smaller());
+            links.put(edgeIndex + 1, edge.larger());
+            edgeIndex += vpe;
+        }
+        softBody.appendLinks(links);
+    }
+
+    /**
      * Create an index map to merge any mesh vertices that share the same
-     * position. Other vertex properties (such as bone weights, normals, and
-     * texture coordinates) are ignored.
+     * position.
      *
      * @param positionBuffer the buffer of mesh-vertex positions (not null,
      * limit a multiple of 3, unaffected)

@@ -9,6 +9,8 @@ extern "C" {
 #endif
 #undef com_jme3_bullet_util_NativeSoftBodyUtil_numAxes
 #define com_jme3_bullet_util_NativeSoftBodyUtil_numAxes 3L
+#undef com_jme3_bullet_util_NativeSoftBodyUtil_vpe
+#define com_jme3_bullet_util_NativeSoftBodyUtil_vpe 2L
 #undef com_jme3_bullet_util_NativeSoftBodyUtil_vpt
 #define com_jme3_bullet_util_NativeSoftBodyUtil_vpt 3L
 /*
