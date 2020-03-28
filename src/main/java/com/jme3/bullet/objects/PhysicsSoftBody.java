@@ -142,6 +142,45 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
+     * Append faces to this body. A Face is a triangle connecting 3 nodes.
+     *
+     * @param nodeIndices a face is created for every 3 indices in this buffer
+     * (not null, direct, size a multiple of 3)
+     */
+    public void appendFaces(IntBuffer nodeIndices) {
+        if (!nodeIndices.isDirect()) {
+            throw new IllegalArgumentException("The buffer must be direct.");
+        }
+        if (nodeIndices.capacity() % vpt != 0) {
+            throw new IllegalArgumentException(
+                    "The number of indices must be a multiple of 3.");
+        }
+
+        int numFaces = nodeIndices.capacity() / vpt;
+        appendFaces(objectId, numFaces, nodeIndices);
+    }
+
+    /**
+     * Append links to this body. A link is an interaction (or force) between 2
+     * nodes.
+     *
+     * @param nodeIndices a link is created for each pair of indices in this
+     * buffer (not null, direct, size a multiple of 2)
+     */
+    public void appendLinks(IntBuffer nodeIndices) {
+        if (!nodeIndices.isDirect()) {
+            throw new IllegalArgumentException("The buffer must be direct.");
+        }
+        if (nodeIndices.capacity() % vpe != 0) {
+            throw new IllegalArgumentException(
+                    "The number of indices must be a multiple of 2.");
+        }
+
+        int numLinks = nodeIndices.capacity() / vpe;
+        appendLinks(objectId, numLinks, nodeIndices);
+    }
+
+    /**
      * Append nodes to this body, each with mass=1. Nodes provide the shape of a
      * soft body. Each node has its own location, velocity, mass, etcetera.
      *
