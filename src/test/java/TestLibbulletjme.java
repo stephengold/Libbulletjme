@@ -52,11 +52,15 @@ import com.jme3.bullet.collision.shapes.MultiSphere;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
+import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsGhostObject;
 import com.jme3.bullet.objects.PhysicsRigidBody;
+import com.jme3.bullet.objects.PhysicsSoftBody;
+import com.jme3.bullet.objects.infos.SoftBodyConfig;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.bullet.util.NativeLibrary;
+import com.jme3.bullet.util.NativeSoftBodyUtil;
 import com.jme3.math.Plane;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -65,6 +69,7 @@ import java.io.File;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import jme3utilities.Validate;
 import org.junit.Assert;
 import org.junit.Test;
 import vhacd.VHACD;
@@ -77,6 +82,15 @@ import vhacd.VHACDParameters;
  * @author Stephen Gold sgold@sonic.net
  */
 public class TestLibbulletjme {
+    // *************************************************************************
+    // constants and loggers
+
+    /**
+     * number of vertices per triangle
+     */
+    final private static int vpt = 3;
+    // *************************************************************************
+    // new methods exposed
 
     @Test
     public void test001() {
@@ -736,6 +750,59 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countMultiBodies());
         Assert.assertTrue(space.isEmpty());
     }
+
+    /**
+     * A simple cloth simulation with a pinned node. For your eyes only!
+     */
+    @Test
+    public void test007() {
+        loadNativeLibrary();
+
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
+                PhysicsSpace.BroadphaseType.DBVT);
+
+        // Create a static, rigid sphere and add it to the physics space.
+        float radius = 1f;
+        SphereCollisionShape shape = new SphereCollisionShape(radius);
+        float mass = PhysicsRigidBody.massForStatic;
+        PhysicsRigidBody sphere = new PhysicsRigidBody(shape, mass);
+        physicsSpace.add(sphere);
+
+        // Generate a subdivided square mesh with alternating diagonals.
+        int numLines = 41;
+        float lineSpacing = 0.1f; // mesh units
+        IndexedMesh squareGrid = createClothGrid(numLines, numLines, lineSpacing);
+
+        // Create a soft square and add it to the physics space.
+        PhysicsSoftBody cloth = new PhysicsSoftBody();
+        NativeSoftBodyUtil.appendFromNativeMesh(squareGrid, cloth);
+        physicsSpace.add(cloth);
+
+        // Pin one of the corner nodes by setting its mass to zero.
+        int nodeIndex = 0;
+        cloth.setNodeMass(nodeIndex, PhysicsRigidBody.massForStatic);
+
+        // Make the cloth flexible by altering the angular stiffness
+        // of its material.
+        PhysicsSoftBody.Material mat = cloth.getSoftMaterial();
+        mat.setAngularStiffness(0f); // default=1
+
+        // Improve simulation accuracy by increasing
+        // the number of position-solver iterations for the cloth.
+        SoftBodyConfig config = cloth.getSoftConfig();
+        config.setPositionIterations(9);  // default=1
+
+        // Translate the cloth upward to its starting location.
+        cloth.applyTranslation(new Vector3f(0f, 2f, 0f));
+        /*
+         * 50 iterations with a 20-msec timestep
+         */
+        for (int i = 0; i < 50; ++i) {
+            physicsSpace.update(0.02f, 0);
+        }
+    }
     // *************************************************************************
     // private methods
 
@@ -752,6 +819,79 @@ public class TestLibbulletjme {
         Assert.assertEquals(x, vector.x, tolerance);
         Assert.assertEquals(y, vector.y, tolerance);
         Assert.assertEquals(z, vector.z, tolerance);
+    }
+
+    /**
+     * Instantiate a grid in the X-Z plane, centered on (0,0,0).
+     *
+     * @param xLines the desired number of grid lines parallel to the X axis
+     * (&ge;2)
+     * @param zLines the desired number of grid lines parallel to the Z axis
+     * (&ge;2)
+     * @param lineSpacing the desired initial distance between adjacent grid
+     * lines (in mesh units, &gt;0)
+     * @return a new IndexedMesh
+     */
+    private static IndexedMesh createClothGrid(int xLines, int zLines,
+            float lineSpacing) {
+        Validate.inRange(xLines, "X lines", 2, Integer.MAX_VALUE);
+        Validate.inRange(zLines, "Z lines", 2, Integer.MAX_VALUE);
+        Validate.positive(lineSpacing, "line spacing");
+
+        int numVertices = xLines * zLines;
+        Vector3f[] positionArray = new Vector3f[numVertices];
+        /*
+         * Write the vertex locations:
+         */
+        int vectorIndex = 0;
+        for (int xIndex = 0; xIndex < zLines; ++xIndex) {
+            float x = (2 * xIndex - zLines + 1) * lineSpacing / 2f;
+            for (int zIndex = 0; zIndex < xLines; ++zIndex) {
+                float z = (2 * zIndex - xLines + 1) * lineSpacing / 2f;
+                positionArray[vectorIndex++] = new Vector3f(x, 0f, z);
+            }
+        }
+        assert vectorIndex == positionArray.length;
+
+        int numTriangles = 2 * (xLines - 1) * (zLines - 1);
+        int numIndices = vpt * numTriangles;
+        int[] indexArray = new int[numIndices];
+        /*
+         * Write vertex indices for triangles:
+         */
+        int intIndex = 0;
+        for (int zIndex = 0; zIndex < xLines - 1; ++zIndex) {
+            for (int xIndex = 0; xIndex < zLines - 1; ++xIndex) {
+                // 4 vertices and 2 triangles forming a square
+                int vi0 = zIndex + xLines * xIndex;
+                int vi1 = vi0 + 1;
+                int vi2 = vi0 + xLines;
+                int vi3 = vi1 + xLines;
+                if ((xIndex + zIndex) % 2 == 0) {
+                    // major diagonal: joins vi1 to vi2
+                    indexArray[intIndex++] = vi0;
+                    indexArray[intIndex++] = vi1;
+                    indexArray[intIndex++] = vi2;
+
+                    indexArray[intIndex++] = vi3;
+                    indexArray[intIndex++] = vi2;
+                    indexArray[intIndex++] = vi1;
+                } else {
+                    // minor diagonal: joins vi0 to vi3
+                    indexArray[intIndex++] = vi0;
+                    indexArray[intIndex++] = vi1;
+                    indexArray[intIndex++] = vi3;
+
+                    indexArray[intIndex++] = vi3;
+                    indexArray[intIndex++] = vi2;
+                    indexArray[intIndex++] = vi0;
+                }
+            }
+        }
+        assert intIndex == indexArray.length;
+
+        IndexedMesh result = new IndexedMesh(positionArray, indexArray);
+        return result;
     }
 
     private static void loadNativeLibrary() {
