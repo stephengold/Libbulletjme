@@ -1,5 +1,9 @@
 # release log for the Libbulletjme Project
 
+## Version 5.5.1 released on 30 March 2020
+
+Use GCC 4.7 for Linux-on-AMD builds, to support Centos 7.
+
 ## Version 5.5.0 released on 30 March 2020
 
  + Bugfix: Minie issue #2 (access violations with Java 9+ on Windows).
