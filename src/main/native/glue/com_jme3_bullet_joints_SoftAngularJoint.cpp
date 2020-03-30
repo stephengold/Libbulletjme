@@ -70,7 +70,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJoint
     int lastIndex = pSoftA->m_joints.size() - 1;
     btSoftBody::Joint *pJoint = pSoftA->m_joints[lastIndex];
 
-    return reinterpret_cast<long> (pJoint);
+    return reinterpret_cast<jlong> (pJoint);
 }
 
 /*
@@ -107,7 +107,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJoint
     int lastIndex = pSoftA->m_joints.size() - 1;
     btSoftBody::Joint *pJoint = pSoftA->m_joints[lastIndex];
 
-    return reinterpret_cast<long> (pJoint);
+    return reinterpret_cast<jlong> (pJoint);
 }
 
 /*

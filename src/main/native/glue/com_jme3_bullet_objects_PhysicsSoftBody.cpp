@@ -1051,7 +1051,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMaterial
     NULL_CHECK(pBody, "The btSoftBody does not exist.", 0)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
-    return reinterpret_cast<long> (pBody->m_materials[0]);
+    return reinterpret_cast<jlong> (pBody->m_materials[0]);
 }
 
 /*
