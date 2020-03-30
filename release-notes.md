@@ -1,5 +1,17 @@
 # release log for the Libbulletjme Project
 
+## Version 5.5.0 released on 30 March 2020
+
+ + Bugfix: Minie issue #2 (access violations with Java 9+ on Windows).
+ + Added 5 methods needed for soft-body construction:
+   + `IndexedMesh.copyIndices()`
+   + `IndexedMesh.copyVertexPositions()`
+   + `NativeSoftBodyUtil.appendFromNativeMesh()`
+   + `PhysicsSoftBody.appendFaces()`
+   + `PhysicsSoftBody.appendLinks()`
+ + Added `IntPair` class.
+ + Built using Gradle v6.3.
+
 ## Version 5.4.2 released on 25 March 2020
 
 Bugfix: wrong `indexType` passed to addIndexedMesh().
