@@ -66,27 +66,21 @@ model {
         }
     }
 
-    toolChains { // prioritize native toolchains
+    toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
         //clang(Clang)
         gcc(Gcc)
         clang(Clang)
         gccArm(Gcc) {
             target('Linux_ARM64') {
-                assembler.executable = 'aarch64-linux-gnu-as'
-                cCompiler.executable = ' aarch64-linux-gnu-gcc'
                 cppCompiler.executable = 'aarch64-linux-gnu-g++'
                 linker.executable = 'aarch64-linux-gnu-g++'
-                path '/usr/bin'
             }
         }
         gcc8Arm(Gcc) {
             target('Linux_ARM64') {
-                assembler.executable = 'aarch64-linux-gnu-as'
-                cCompiler.executable = 'aarch64-linux-gnu-gcc-8'
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-8'
                 linker.executable = 'aarch64-linux-gnu-gcc-8'
-                path '/usr/bin'
             }
         }
     }
@@ -134,11 +128,9 @@ model {
                     //buildable = targetPlatform.name.equals('Linux64')
                 }
 
-                // Decide whether to build the current buildType:
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
-                    //buildable = false
                 }
 
                 // Decide whether to build the current flavor:
@@ -199,11 +191,6 @@ model {
                         cppCompiler.args '-O0', '-g3'
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-O3'
-                    }
-                    if (!(toolChain in Clang)) {
-                        // for compatibility with Centos 7:
-                        cppCompiler.args '-fabi-version=7'
-                        linker.args '-fabi-version=7'
                     }
 
                     String os = targetPlatform.operatingSystem.name
