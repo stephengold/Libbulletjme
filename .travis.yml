@@ -9,12 +9,15 @@ jobs:
   - os: linux
     dist: trusty
     arch: amd64
-    compiler: gcc
+    compiler: gcc-4.7
     addons:
       apt:
         packages:
-        - g++-multilib
+        - g++-4.7-multilib
     script:
+    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.7 90
+    - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
+    - g++ --version
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
   - os: linux
     dist: xenial
