@@ -1,3 +1,5 @@
+// Gradle build script for Maven artifacts and non-Android native libraries
+
 plugins {
     id 'cpp'
     id 'java-library'
@@ -153,10 +155,10 @@ model {
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3"
+                    cppCompiler.args "/I$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
+                    cppCompiler.args "/I$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/public"
-                    cppCompiler.args "/I$projectDir/src/main/native/bullet3/LinearMath"
-                    cppCompiler.args "/I$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '/FS' // serialize PDB writes
                         cppCompiler.args '/MTd' // use LIBCMTD
@@ -182,10 +184,10 @@ model {
                 } else { // toolChain in Clang or Gcc
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
-                    cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/LinearMath"
-                    cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
                     cppCompiler.args '-std=c++11'
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
@@ -299,7 +301,10 @@ publishing {
 }
 
 // cleanup tasks
-clean.dependsOn('cleanDist')
+clean.dependsOn('cleanCxx', 'cleanDist')
+task cleanCxx(type: Delete) {
+    delete '.cxx'
+}
 task cleanDist(type: Delete) {
     delete 'dist'
 }
