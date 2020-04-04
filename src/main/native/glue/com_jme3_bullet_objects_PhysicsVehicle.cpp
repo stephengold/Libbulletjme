@@ -69,8 +69,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_addWheel
             vehicleId);
     NULL_CHECK(pTuning, "The btVehicleTuning does not exist.", 0);
 
-    &pVehicle->addWheel(location, direction, axle, restLength,
-            radius, *pTuning, frontWheel);
+    btWheelInfo *pWheel = &pVehicle->addWheel(location, direction, axle,
+            restLength, radius, *pTuning, frontWheel);
     int idx = pVehicle->getNumWheels();
     return idx - 1;
 }
