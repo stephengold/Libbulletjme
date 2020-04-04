@@ -1,4 +1,9 @@
+# configure deployment and continuous integration at travis-ci.com
+
+arch: amd64
+dist: xenial
 language: cpp
+os: linux
 
 jobs:
   include:
@@ -6,9 +11,7 @@ jobs:
     osx_image: xcode9.3
     script:
     - ./gradlew build --console=plain --no-daemon -Ptravis=osx
-  - os: linux
-    dist: trusty
-    arch: amd64
+  - dist: trusty
     compiler: gcc-4.7
     addons:
       apt:
@@ -19,42 +22,62 @@ jobs:
     - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
     - g++ --version
     - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
-  - os: linux
-    dist: xenial
-    arch: arm64
+  - arch: arm64
     compiler: gcc
     env:
     - FLAVOR=Dp
     script:
     - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
-  - os: linux
-    dist: xenial
-    arch: arm64
+  - arch: arm64
     compiler: gcc
     env:
     - FLAVOR=Sp
     script:
     - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
+  - dist: trusty
+    language: android
+    android:
+      components:
+      - tools
+    script:
+    - echo y | sdkmanager "ndk;21.0.6113669" > /dev/null
+    - echo y | sdkmanager "patcher;v4" > /dev/null
+    - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 addons:
   apt:
     update: true
-
 after_failure:
- - cat build/reports/tests/test/classes/TestLibbulletjme.html
-
+- cat build/reports/tests/test/classes/TestLibbulletjme.html
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+    
 deploy:
   provider: releases
   skip_cleanup: true
   token:
     secure: ObhRzkbGix4/iAgZZDhmdeuFZ/VNwHnkWRSPiZRKq+lzSNSU7EOsCSTV5eDun0ugCxV9O0LKnYdzZBFM5SwfNEIGmj1Frp4Cs7m1iSlxhL7wEv3N6rBtS+P166Fwf6XRxvtC6r54szRXwg2oD9tJ9urtm/xAwGZCVWr0M11A2/D3kIhtawVvw4a5fTg8NRwtb/8e8bfDyPddUmbElPH52539vA6CPawoXW5CHWcWZsY+sIRtkJOjJv4cK9GNBylmYmaEW74AjYL+t46U8qiMZo8Yyb/VQDgZ/xkGwnwEWWp4aROlj6NK/ICsrDZGrr8+dVIHbZ3QXpaJ0VoWB4oXDP0zFY5a8KpMFdWycu1xd2SMCzs5na4jfJHyblHJwhKpBfcW5079p4jx7n2OpCJHFxFY94HUo5HhqBRUr6QHwrM901PO/FtxF4ZmuMbGE8MfSIpmCASnl4fyh/Vp6qPrALVefId6Pub6QOuXWBDM3FKRuVAABYu5h6OX2Nwres6gWe42QkQ9On+5AGkfrw/OPw/e7ax/vmdqI89BkAD3zMLJ4SQeVcZdNtiyWDp5drRGsaXLS6lOoz8BuP6tEkOAdNhwtt9lxb9WU1XXrrmHGTvLnONZoyFg7b0eiB+/mLNDbB5I9oatPGbplCxtJF1CoNWRFJNfSJqmg31ekBSyHYc=
   file:
+  - dist/Android_ARM7DebugSp_libbulletjme.so
+  - dist/Android_ARM7ReleaseSp_libbulletjme.so
+  - dist/Android_ARM8DebugSp_libbulletjme.so
+  - dist/Android_ARM8ReleaseSp_libbulletjme.so
+  - dist/Android_X86DebugSp_libbulletjme.so
+  - dist/Android_X86ReleaseSp_libbulletjme.so
+  - dist/Android_X86_64DebugSp_libbulletjme.so
+  - dist/Android_X86_64ReleaseSp_libbulletjme.so
   - dist/Linux32DebugDp_libbulletjme.so
   - dist/Linux32DebugSp_libbulletjme.so
-  - dist/Linux64DebugDp_libbulletjme.so
-  - dist/Linux64DebugSp_libbulletjme.so
   - dist/Linux32ReleaseDp_libbulletjme.so
   - dist/Linux32ReleaseSp_libbulletjme.so
+  - dist/Linux64DebugDp_libbulletjme.so
+  - dist/Linux64DebugSp_libbulletjme.so
   - dist/Linux64ReleaseDp_libbulletjme.so
   - dist/Linux64ReleaseSp_libbulletjme.so
   - dist/Linux_ARM64DebugDp_libbulletjme.so
@@ -63,10 +86,10 @@ deploy:
   - dist/Linux_ARM64ReleaseSp_libbulletjme.so
   - dist/MacOSX32DebugDp_libbulletjme.dylib
   - dist/MacOSX32DebugSp_libbulletjme.dylib
-  - dist/MacOSX64DebugDp_libbulletjme.dylib
-  - dist/MacOSX64DebugSp_libbulletjme.dylib
   - dist/MacOSX32ReleaseDp_libbulletjme.dylib
   - dist/MacOSX32ReleaseSp_libbulletjme.dylib
+  - dist/MacOSX64DebugDp_libbulletjme.dylib
+  - dist/MacOSX64DebugSp_libbulletjme.dylib
   - dist/MacOSX64ReleaseDp_libbulletjme.dylib
   - dist/MacOSX64ReleaseSp_libbulletjme.dylib
   on:
