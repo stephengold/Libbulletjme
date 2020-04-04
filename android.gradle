@@ -47,7 +47,7 @@ archmap.each { arch ->
         copyToDist.dependsOn('copyToDist_' + q)
         task "copyToDist_$q" (type: Copy, dependsOn: 'assemble' + bt.key) {
             from sharedLibraryFile
-            rename { return 'Android_' + q + 'libbulletjme.so' }
+            rename { return 'Android_' + q + '_libbulletjme.so' }
             into 'dist'
         }
     }
