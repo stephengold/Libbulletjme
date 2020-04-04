@@ -1,0 +1,63 @@
+// Gradle build script for Android native libraries
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.0'
+    }
+}
+apply plugin: 'com.android.library'
+
+String flavor = 'Sp' 
+if (gradle.rootProject.hasProperty('flavor')) {
+    flavor = gradle.rootProject.ext.flavor
+}
+
+android {
+    buildTypes.debug {
+        jniDebuggable = true
+    }
+    compileSdkVersion 28
+    externalNativeBuild.ndkBuild {
+        path 'Android.mk'
+    }
+    ndkVersion '21.0.6113669'
+}
+
+repositories {
+    google()
+    jcenter()
+}
+
+task copyToDist() {}
+def archmap = [ 'ARM7' : 'armeabi-v7a', \
+                'ARM8' : 'arm64-v8a', \
+                'X86' : 'x86', \
+                'X86_64' : 'x86_64' ]
+def btmap = [ 'Debug' : 'merged_native_libs/debug', \
+              'Release' : 'stripped_native_libs/release' ]
+archmap.each { arch ->
+    btmap.each { bt ->
+        String q = arch.key + bt.key + flavor
+        String so = bt.value + "/out/lib/${arch.value}/libbulletjme.so"
+        def sharedLibraryFile = file('build/intermediates/' + so)
+        copyToDist.dependsOn('copyToDist_' + q)
+        task "copyToDist_$q" (type: Copy, dependsOn: 'assemble' + bt.key) {
+            from sharedLibraryFile
+            rename { return 'Android_' + q + 'libbulletjme.so' }
+            into 'dist'
+        }
+    }
+}
+
+// cleanup tasks
+clean.dependsOn('cleanCxx', 'cleanDist')
+task cleanCxx(type: Delete) {
+    delete '.cxx'
+}
+task cleanDist(type: Delete) {
+    delete 'dist'
+}
