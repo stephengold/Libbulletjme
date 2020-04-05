@@ -11,10 +11,12 @@ Complete source code (in C++ and Java) is provided under
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
-It also supports Linux on the 64-bit ARM architecture (aarch64),
-for a total of 7 platforms.
+It also supports Linux on the 64-bit ARM architecture (aarch64)
+and provides native libraries for the 4 supported Android ABIs
+(armeabi-v7a, arm64-v8a, x86, and x86_64)
+making a total of 11 platforms.
 
-For each platform, 4 native libraries are distributed:
+For each desktop platform, 4 native libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
  + a release build using double-precision arithmetic
  + a debug build using single-precision arithmetic
@@ -48,7 +50,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:5.5.1
+            compile 'com.github.stephengold:Libbulletjme:5.5.3
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -230,7 +232,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 5.5.1`
+     + `git checkout -b latest 5.5.3`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -240,15 +242,21 @@ public class HelloVehicle {
  3. Set the `JAVA_HOME` environment variable:
    + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
    + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
- 4. Run the Gradle wrapper:
+ 4. Run the Gradle wrapper on the desktop build script:
    + using Bash:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
+ 5. Building Android native libraries requires additional software:
+   + the Android SDK Tools
+   + the Android SDK Patch Applier (patcher)
+   + version 21.0.6113669 of the Android Native Development Kit (NDK)
+ 6. Run the Gradle wrapper on the Android build script:
+   + using Bash:  `./gradlew copyToDist --build-file=android.gradle`
+   + using Windows Command Prompt:  `.\gradlew copyToDist --build-file=android.gradle`
 
-After a successful build,
-Maven artifacts and native libraries will be found
+After a successful build, Maven artifacts and native libraries will be found
 in the `dist` directory/folder.
 
-You can install the Maven artifacts to your local cache:
+You can also install the Maven artifacts to your local cache:
  + using Bash:  `./gradlew :Libbulletjme:publishToMavenLocal`
  + using Windows Command Prompt:  `.\gradlew :Libbulletjme:publishToMavenLocal`
 
