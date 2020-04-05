@@ -45,7 +45,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_
 (JNIEnv *env, jobject object, jobject halfExtentsVector) {
     jmeClasses::initJavaClasses(env);
 
-    NULL_CHECK(halfExtentsVector, "The halfExtents vector does not exist.", 0);
+    NULL_CHK(env, halfExtentsVector, "The halfExtents vector does not exist.", 0);
 
     btVector3 vec;
     jmeBulletUtil::convert(env, halfExtentsVector, &vec);

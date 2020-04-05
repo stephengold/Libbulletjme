@@ -46,7 +46,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Mater
 (JNIEnv *env, jobject object, jlong materialId) {
     btSoftBody::Material *pMaterial
             = reinterpret_cast<btSoftBody::Material *> (materialId);
-    NULL_CHECK(pMaterial, "The material does not exist.", 0)
+    NULL_CHK(env, pMaterial, "The material does not exist.", 0)
 
     return pMaterial->m_kAST;
 }
@@ -60,7 +60,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Mater
 (JNIEnv *env, jobject object, jlong materialId) {
     btSoftBody::Material *pMaterial
             = reinterpret_cast<btSoftBody::Material *> (materialId);
-    NULL_CHECK(pMaterial, "The material does not exist.", 0)
+    NULL_CHK(env, pMaterial, "The material does not exist.", 0)
 
     return pMaterial->m_kLST;
 }
@@ -74,7 +74,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Mater
 (JNIEnv *env, jobject object, jlong materialId) {
     btSoftBody::Material *pMaterial
             = reinterpret_cast<btSoftBody::Material *> (materialId);
-    NULL_CHECK(pMaterial, "The material does not exist.", 0)
+    NULL_CHK(env, pMaterial, "The material does not exist.", 0)
 
     return pMaterial->m_kVST;
 }
@@ -88,7 +88,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Materia
 (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
     btSoftBody::Material *pMaterial
             = reinterpret_cast<btSoftBody::Material *> (materialId);
-    NULL_CHECK(pMaterial, "The material does not exist.",)
+    NULL_CHK(env, pMaterial, "The material does not exist.",)
 
     pMaterial->m_kAST = factor;
 }
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Materia
 (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
     btSoftBody::Material *pMaterial
             = reinterpret_cast<btSoftBody::Material *> (materialId);
-    NULL_CHECK(pMaterial, "The material does not exist.",)
+    NULL_CHK(env, pMaterial, "The material does not exist.",)
 
     pMaterial->m_kLST = factor;
 }
@@ -116,7 +116,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_00024Materia
 (JNIEnv *env, jobject object, jlong materialId, jfloat factor) {
     btSoftBody::Material *pMaterial
             = reinterpret_cast<btSoftBody::Material *> (materialId);
-    NULL_CHECK(pMaterial, "The material does not exist.",)
+    NULL_CHK(env, pMaterial, "The material does not exist.",)
 
     pMaterial->m_kVST = factor;
 }

@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcA
 (JNIEnv *env, jobject object, jlong shapeId) {
     btMultiSphereShape *pShape
             = reinterpret_cast<btMultiSphereShape *> (shapeId);
-    NULL_CHECK(pShape, "The btMultiSphereShape does not exist.",);
+    NULL_CHK(env, pShape, "The btMultiSphereShape does not exist.",);
     btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
 
     pShape->recalcLocalAabb();

@@ -48,21 +48,21 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoin
     jmeClasses::initJavaClasses(env);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
-    NULL_CHECK(pBodyA, "Rigid body A does not exist.", 0)
+    NULL_CHK(env, pBodyA, "Rigid body A does not exist.", 0)
     btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-    NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
+    NULL_CHK(env, pBodyB, "Rigid body B does not exist.", 0)
     btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
-    NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
+    NULL_CHK(env, pivotInA, "The pivotInA vector does not exist.", 0)
+    NULL_CHK(env, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform frameInA;
     jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
     jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
 
-    NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
-    NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
+    NULL_CHK(env, pivotInB, "The pivotInB vector does not exist.", 0)
+    NULL_CHK(env, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
     jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -85,11 +85,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoin
     jmeClasses::initJavaClasses(env);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-    NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
+    NULL_CHK(env, pBodyB, "Rigid body B does not exist.", 0)
     btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
-    NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
+    NULL_CHK(env, pivotInB, "The pivotInB vector does not exist.", 0)
+    NULL_CHK(env, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
     jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
@@ -110,7 +110,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_enableSprin
 (JNIEnv *env, jobject object, jlong jointId, jint index, jboolean onOff) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);
@@ -127,7 +127,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getDampin
 (JNIEnv *env, jobject object, jlong jointId, jint index) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);
@@ -145,7 +145,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getEquili
 (JNIEnv *env, jobject object, jlong jointId, jint index) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);
@@ -163,7 +163,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getStiffn
 (JNIEnv *env, jobject object, jlong jointId, jint index) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.", 0)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);
@@ -181,7 +181,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_isSprin
 (JNIEnv *env, jobject object, jlong jointId, jint index) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.",
             JNI_FALSE);
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
@@ -200,7 +200,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setDamping
 (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat damping) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);
@@ -217,7 +217,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibr
 (JNIEnv *env, jobject object, jlong jointId) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
 
     pJoint->setEquilibriumPoint();
@@ -232,7 +232,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibr
 (JNIEnv *env, jobject object, jlong jointId, jint index) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);
@@ -249,7 +249,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setStiffnes
 (JNIEnv *env, jobject object, jlong jointId, jint index, jfloat stiffness) {
     btGeneric6DofSpringConstraint *pJoint
             = reinterpret_cast<btGeneric6DofSpringConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btGeneric6DofSpringConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == D6_SPRING_CONSTRAINT_TYPE);
     btAssert(index >= 0);
     btAssert(index < 6);

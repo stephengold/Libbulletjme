@@ -48,12 +48,12 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getIndices
 (JNIEnv *env, jclass clas, jlong hullId, jobject storeBuffer) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
-    NULL_CHECK(pHull, "The hull does not exist.",)
+    NULL_CHK(env, pHull, "The hull does not exist.",)
 
-    NULL_CHECK(storeBuffer, "The indices buffer does not exist.",);
+    NULL_CHK(env, storeBuffer, "The indices buffer does not exist.",);
     jint * const pIndices
             = (jint *) env->GetDirectBufferAddress(storeBuffer);
-    NULL_CHECK(pIndices, "The indices buffer is not direct.",);
+    NULL_CHK(env, pIndices, "The indices buffer is not direct.",);
 
     const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
     const uint32_t numInts = 3 * pHull->m_nTriangles;
@@ -71,7 +71,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
 (JNIEnv *env, jclass clas, jlong hullId) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
-    NULL_CHECK(pHull, "The hull does not exist.", 0);
+    NULL_CHK(env, pHull, "The hull does not exist.", 0);
 
     uint32_t numFloats = 3 * pHull->m_nPoints;
 
@@ -87,7 +87,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumInts
 (JNIEnv *env, jclass clas, jlong hullId) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
-    NULL_CHECK(pHull, "The hull does not exist.", 0);
+    NULL_CHK(env, pHull, "The hull does not exist.", 0);
 
     uint32_t numInts = 3 * pHull->m_nTriangles;
 
@@ -103,12 +103,12 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getPositions
 (JNIEnv *env, jclass clas, jlong hullId, jobject storeBuffer) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
-    NULL_CHECK(pHull, "The hull does not exist.",)
+    NULL_CHK(env, pHull, "The hull does not exist.",)
 
-    NULL_CHECK(storeBuffer, "The positions buffer does not exist.",);
+    NULL_CHK(env, storeBuffer, "The positions buffer does not exist.",);
     jfloat * const pPositions
             = (jfloat *) env->GetDirectBufferAddress(storeBuffer);
-    NULL_CHECK(pPositions, "The positions buffer is not direct.",);
+    NULL_CHK(env, pPositions, "The positions buffer is not direct.",);
 
     const jlong capacity = env->GetDirectBufferCapacity(storeBuffer);
     const uint32_t numFloats = 3 * pHull->m_nPoints;

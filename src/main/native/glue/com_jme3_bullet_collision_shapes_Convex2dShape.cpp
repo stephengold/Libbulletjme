@@ -48,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Convex2dShape_crea
 
     btCollisionShape *pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
-    NULL_CHECK(pChild, "The child shape does not exist.", 0)
+    NULL_CHK(env, pChild, "The child shape does not exist.", 0)
     if (!pChild->isConvex()) {
         env->ThrowNew(jmeClasses::IllegalArgumentException,
                 "The btCollisionShape isn't convex.");

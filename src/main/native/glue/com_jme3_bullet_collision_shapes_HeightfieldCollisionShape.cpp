@@ -73,10 +73,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisi
         jboolean useZigzag) {
     jmeClasses::initJavaClasses(env);
 
-    NULL_CHECK(floatBuffer, "The heightfield buffer does not exist.", 0);
+    NULL_CHK(env, floatBuffer, "The heightfield buffer does not exist.", 0);
     const jfloat * const pHeights
             = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
-    NULL_CHECK(pHeights, "The heightfield buffer is not direct.", 0);
+    NULL_CHK(env, pHeights, "The heightfield buffer is not direct.", 0);
 
     HeightfieldShape *pShape;
 #ifdef BT_USE_DOUBLE_PRECISION

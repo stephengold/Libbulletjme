@@ -53,14 +53,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
 (JNIEnv *env, jobject, jlong spaceId, jlong multiBodyId) {
     jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    NULL_CHK(env, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHECK(pMultiBody, "The multibody does not exist.",)
+    NULL_CHK(env, pMultiBody, "The multibody does not exist.",)
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     pUser->m_jmeSpace = pSpace;
@@ -111,14 +111,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
 (JNIEnv *env, jobject, jlong spaceId, jlong constraintId) {
     jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    NULL_CHK(env, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBodyConstraint * const
             pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
-    NULL_CHECK(pConstraint, "The constraint does not exist.",)
+    NULL_CHK(env, pConstraint, "The constraint does not exist.",)
 
     pWorld->addMultiBodyConstraint(pConstraint);
 }
@@ -133,11 +133,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
         jint broadphaseType) {
     jmeClasses::initJavaClasses(env);
 
-    NULL_CHECK(minVector, "The min vector does not exist.", 0)
+    NULL_CHK(env, minVector, "The min vector does not exist.", 0)
     btVector3 min;
     jmeBulletUtil::convert(env, minVector, &min);
 
-    NULL_CHECK(maxVector, "The max vector does not exist.", 0)
+    NULL_CHK(env, maxVector, "The max vector does not exist.", 0)
     btVector3 max;
     jmeBulletUtil::convert(env, maxVector, &max);
 
@@ -156,7 +156,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
 (JNIEnv *env, jobject, jlong spaceId) {
     const jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+    NULL_CHK(env, pSpace, "The physics space does not exist.", 0)
             const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
@@ -174,7 +174,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstr
 (JNIEnv *env, jobject, jlong spaceId) {
     const jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0);
+    NULL_CHK(env, pSpace, "The physics space does not exist.", 0);
     const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
@@ -192,14 +192,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
 (JNIEnv *env, jobject, jlong spaceId, jlong multiBodyId) {
     jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    NULL_CHK(env, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHECK(pMultiBody, "The multibody does not exist.",)
+    NULL_CHK(env, pMultiBody, "The multibody does not exist.",)
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     pUser->m_jmeSpace = NULL;
@@ -241,14 +241,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstr
 (JNIEnv *env, jobject, jlong spaceId, jlong constraintId) {
     jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    NULL_CHK(env, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBodyConstraint * const
             pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
-    NULL_CHECK(pConstraint, "The constraint does not exist.",)
+    NULL_CHK(env, pConstraint, "The constraint does not exist.",)
 
     pWorld->removeMultiBodyConstraint(pConstraint);
 }

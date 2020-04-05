@@ -49,14 +49,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
 (JNIEnv *env, jobject, jlong spaceId, jlong softBodyId) {
     jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    NULL_CHK(env, pSpace, "The physics space does not exist.",)
     btSoftRigidDynamicsWorld * const pWorld = pSpace->getSoftDynamicsWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
     btSoftBody * const
             pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-    NULL_CHECK(pSoftBody, "The collision object does not exist.",)
+    NULL_CHK(env, pSoftBody, "The collision object does not exist.",)
     btAssert(pSoftBody->getInternalType()
             & btCollisionObject::CO_SOFT_BODY);
 
@@ -76,11 +76,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
         jint broadphase, jboolean) {
     jmeClasses::initJavaClasses(env);
 
-    NULL_CHECK(minVector, "The min vector does not exist.", 0)
+    NULL_CHK(env, minVector, "The min vector does not exist.", 0)
     btVector3 min;
     jmeBulletUtil::convert(env, minVector, &min);
 
-    NULL_CHECK(maxVector, "The max vector does not exist.", 0)
+    NULL_CHK(env, maxVector, "The max vector does not exist.", 0)
     btVector3 max;
     jmeBulletUtil::convert(env, maxVector, &max);
 
@@ -99,7 +99,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getNumSoftBodies
 (JNIEnv *env, jobject, jlong spaceId) {
     const jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+    NULL_CHK(env, pSpace, "The physics space does not exist.", 0)
             const btSoftRigidDynamicsWorld * const
             pWorld = pSpace->getSoftDynamicsWorld();
     btAssert(pWorld != NULL);
@@ -119,7 +119,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getWorldInfo
 (JNIEnv *env, jobject, jlong spaceId) {
     jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+    NULL_CHK(env, pSpace, "The physics space does not exist.", 0)
     btSoftRigidDynamicsWorld * const pWorld = pSpace->getSoftDynamicsWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
@@ -137,13 +137,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
 (JNIEnv *env, jobject, jlong spaceId, jlong softBodyId) {
     jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.",)
+    NULL_CHK(env, pSpace, "The physics space does not exist.",)
     btSoftRigidDynamicsWorld * const pWorld = pSpace->getSoftDynamicsWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
 
     btSoftBody * const pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-    NULL_CHECK(pSoftBody, "The collision object does not exist.",)
+    NULL_CHK(env, pSoftBody, "The collision object does not exist.",)
     btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pSoftBody->getUserPointer();

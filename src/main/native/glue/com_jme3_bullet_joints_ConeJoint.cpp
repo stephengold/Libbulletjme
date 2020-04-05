@@ -48,21 +48,21 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
     jmeClasses::initJavaClasses(env);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
-    NULL_CHECK(pBodyA, "Rigid body A does not exist.", 0)
+    NULL_CHK(env, pBodyA, "Rigid body A does not exist.", 0)
     btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-    NULL_CHECK(pBodyB, "Rigid body B does not exist.", 0)
+    NULL_CHK(env, pBodyB, "Rigid body B does not exist.", 0)
     btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
-    NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
+    NULL_CHK(env, pivotInA, "The pivotInA vector does not exist.", 0)
+    NULL_CHK(env, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform rbAFrame;
     jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
     jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
 
-    NULL_CHECK(pivotInB, "The pivotInB vector does not exist.", 0)
-    NULL_CHECK(rotInB, "The rotInB matrix does not exist.", 0)
+    NULL_CHK(env, pivotInB, "The pivotInB vector does not exist.", 0)
+    NULL_CHK(env, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform rbBFrame;
     jmeBulletUtil::convert(env, pivotInB, &rbBFrame.getOrigin());
     jmeBulletUtil::convert(env, rotInB, &rbBFrame.getBasis());
@@ -84,11 +84,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
     jmeClasses::initJavaClasses(env);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
-    NULL_CHECK(pBodyA, "Rigid body A does not exist.", 0)
+    NULL_CHK(env, pBodyA, "Rigid body A does not exist.", 0)
     btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    NULL_CHECK(pivotInA, "The pivotInA vector does not exist.", 0)
-    NULL_CHECK(rotInA, "The rotInA matrix does not exist.", 0)
+    NULL_CHK(env, pivotInA, "The pivotInA vector does not exist.", 0)
+    NULL_CHK(env, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform rbAFrame;
     jmeBulletUtil::convert(env, pivotInA, &rbAFrame.getOrigin());
     jmeBulletUtil::convert(env, rotInA, &rbAFrame.getBasis());
@@ -108,10 +108,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetA
 (JNIEnv *env, jobject object, jlong jointId, jobject storeTransform) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btConeTwistConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btConeTwistConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
 
-    NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+    NULL_CHK(env, storeTransform, "The storeTransform does not exist.",);
 
     const btTransform& transform = pJoint->getFrameOffsetA();
     jmeBulletUtil::convert(env, &transform, storeTransform);
@@ -126,10 +126,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetB
 (JNIEnv *env, jobject object, jlong jointId, jobject storeTransform) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btConeTwistConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btConeTwistConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
 
-    NULL_CHECK(storeTransform, "The storeTransform does not exist.",);
+    NULL_CHK(env, storeTransform, "The storeTransform does not exist.",);
 
     const btTransform& transform = pJoint->getFrameOffsetB();
     jmeBulletUtil::convert(env, &transform, storeTransform);
@@ -144,7 +144,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setAngularOnly
 (JNIEnv *env, jobject object, jlong jointId, jboolean angularOnly) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btConeTwistConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btConeTwistConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
 
     pJoint->setAngularOnly(angularOnly);
@@ -160,7 +160,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setLimit
         jfloat swingSpan2, jfloat twistSpan) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
-    NULL_CHECK(pJoint, "The btConeTwistConstraint does not exist.",)
+    NULL_CHK(env, pJoint, "The btConeTwistConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == CONETWIST_CONSTRAINT_TYPE);
 
     //TODO: extended setLimit!

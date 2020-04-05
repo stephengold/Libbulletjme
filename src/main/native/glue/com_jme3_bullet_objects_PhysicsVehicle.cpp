@@ -50,24 +50,24 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_addWheel
         jfloat radius, jlong tuningId, jboolean frontWheel) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
-    NULL_CHECK(locationVector, "The location vector does not exist.", 0)
+    NULL_CHK(env, locationVector, "The location vector does not exist.", 0)
     btVector3 location;
     jmeBulletUtil::convert(env, locationVector, &location);
 
-    NULL_CHECK(directionVector, "The direction vector does not exist.", 0)
+    NULL_CHK(env, directionVector, "The direction vector does not exist.", 0)
     btVector3 direction;
     jmeBulletUtil::convert(env, directionVector, &direction);
 
-    NULL_CHECK(axleVector, "The axle vector does not exist.", 0)
+    NULL_CHK(env, axleVector, "The axle vector does not exist.", 0)
     btVector3 axle;
     jmeBulletUtil::convert(env, axleVector, &axle);
 
     btRaycastVehicle::btVehicleTuning *pTuning
             = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
             vehicleId);
-    NULL_CHECK(pTuning, "The btVehicleTuning does not exist.", 0);
+    NULL_CHK(env, pTuning, "The btVehicleTuning does not exist.", 0);
 
     btWheelInfo *pWheel = &pVehicle->addWheel(location, direction, axle,
             restLength, radius, *pTuning, frontWheel);
@@ -85,7 +85,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_applyEngineFo
         jfloat force) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
     btAssert(wheelIndex >= 0);
     btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_brake
         jfloat value) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
     btAssert(wheelIndex >= 0);
     btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -119,14 +119,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createRaycas
     jmeClasses::initJavaClasses(env);
 
     btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHECK(pBody, "The btRigidBody does not exist.", 0);
+    NULL_CHK(env, pBody, "The btRigidBody does not exist.", 0);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     pBody->setActivationState(DISABLE_DEACTIVATION);
 
     btVehicleRaycaster *pCaster
             = reinterpret_cast<btDefaultVehicleRaycaster *> (casterId);
-    NULL_CHECK(pCaster, "The btVehicleRaycaster does not exist.", 0)
+    NULL_CHK(env, pCaster, "The btVehicleRaycaster does not exist.", 0)
 
     btRaycastVehicle::btVehicleTuning tuning;
     btRaycastVehicle *pVehicle
@@ -145,7 +145,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicl
     jmeClasses::initJavaClasses(env);
 
     jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHECK(pSpace, "The physics space does not exist.", 0)
+    NULL_CHK(env, pSpace, "The physics space does not exist.", 0)
 
     btDefaultVehicleRaycaster *pCaster
             = new btDefaultVehicleRaycaster(pSpace->getDynamicsWorld());
@@ -162,13 +162,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_finalizeNativ
 (JNIEnv *env, jobject object, jlong casterId, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",);
 
     delete pVehicle;
 
     btVehicleRaycaster *pCaster
             = reinterpret_cast<btVehicleRaycaster *> (casterId);
-    NULL_CHECK(pCaster, "The btVehicleRaycaster does not exist.",);
+    NULL_CHK(env, pCaster, "The btVehicleRaycaster does not exist.",);
 
     delete pCaster;
 }
@@ -182,7 +182,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getCurrentV
 (JNIEnv *env, jobject object, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
 
     return pVehicle->getCurrentSpeedKmHour();
 }
@@ -196,7 +196,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getForwardAxi
 (JNIEnv *env, jobject object, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
 
     int axisIndex = pVehicle->getForwardAxis();
     return (jint) axisIndex;
@@ -211,11 +211,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getForwardVec
 (JNIEnv *env, jobject object, jlong vehicleId, jobject storeVector) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",);
 
     const btVector3& forwardVector = pVehicle->getForwardVector();
 
-    NULL_CHECK(storeVector, "The store vector does not exist.",);
+    NULL_CHK(env, storeVector, "The store vector does not exist.",);
     jmeBulletUtil::convert(env, &forwardVector, storeVector);
 }
 
@@ -228,7 +228,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getRightAxisI
 (JNIEnv *env, jobject object, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
 
     int axisIndex = pVehicle->getRightAxis();
     return (jint) axisIndex;
@@ -243,7 +243,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getNumWheels
 (JNIEnv *env, jobject object, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
 
     int count = pVehicle->getNumWheels();
     return (jint) count;
@@ -258,7 +258,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getUpAxisInde
 (JNIEnv *env, jobject object, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
 
     int axisIndex = pVehicle->getUpAxis();
     return (jint) axisIndex;
@@ -273,7 +273,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_rayCast
 (JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.", 0);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0);
     btAssert(wheelIndex >= 0);
     btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -292,7 +292,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_resetSuspensi
 (JNIEnv *env, jobject object, jlong vehicleId) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",);
 
     pVehicle->resetSuspension();
 }
@@ -307,7 +307,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setCoordinate
         jint forward) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",);
     btAssert(right >= 0);
     btAssert(right <= 2);
     btAssert(up >= 0);
@@ -328,7 +328,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_steer
         jfloat angle) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",);
     btAssert(wheelIndex >= 0);
     btAssert(wheelIndex < pVehicle->getNumWheels());
 
@@ -345,7 +345,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_updateWheelTr
         jboolean interpolated) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHECK(pVehicle, "The btRaycastVehicle does not exist.",);
+    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",);
     btAssert(wheelIndex >= 0);
     btAssert(wheelIndex < pVehicle->getNumWheels());
 

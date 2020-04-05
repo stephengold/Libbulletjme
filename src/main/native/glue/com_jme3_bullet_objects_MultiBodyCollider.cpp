@@ -48,7 +48,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCol
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHECK(pMultiBody, "The btMultiBody does not exist.", 0);
+    NULL_CHK(env, pMultiBody, "The btMultiBody does not exist.", 0);
 
     int link = (int) linkIndex;
     btMultiBodyLinkCollider *
@@ -65,11 +65,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
 (JNIEnv *env, jobject, jlong colliderId, jobject locationVector) {
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
-    NULL_CHECK(pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    NULL_CHK(env, pCollider, "The btMultiBodyLinkCollider does not exist.",)
     btAssert(pCollider->getInternalType()
             & btCollisionObject::CO_FEATHERSTONE_LINK);
 
-    NULL_CHECK(locationVector, "The location vector does not exist.",)
+    NULL_CHK(env, locationVector, "The location vector does not exist.",)
 
     btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
     jmeBulletUtil::convert(env, locationVector, pLocation);
@@ -84,11 +84,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
 (JNIEnv *env, jobject, jlong colliderId, jobject rotationMatrix) {
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
-    NULL_CHECK(pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    NULL_CHK(env, pCollider, "The btMultiBodyLinkCollider does not exist.",)
     btAssert(pCollider->getInternalType()
             & btCollisionObject::CO_FEATHERSTONE_LINK);
 
-    NULL_CHECK(rotationMatrix, "The rotation matrix does not exist.",)
+    NULL_CHK(env, rotationMatrix, "The rotation matrix does not exist.",)
 
     btMatrix3x3 *pRotation = &pCollider->getWorldTransform().getBasis();
     jmeBulletUtil::convert(env, rotationMatrix, pRotation);

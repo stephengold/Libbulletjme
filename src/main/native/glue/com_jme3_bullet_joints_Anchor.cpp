@@ -47,12 +47,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
         jlong rigidBodyId, jobject pivotVector,
         jboolean allowCollisions, jfloat influence) {
     btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-    NULL_CHECK(pSoftBody, "The btSoftBody does not exist.", 0)
+    NULL_CHK(env, pSoftBody, "The btSoftBody does not exist.", 0)
     btAssert(pSoftBody->getInternalType()
             & btCollisionObject::CO_SOFT_BODY);
 
     btRigidBody *pRigidBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
-    NULL_CHECK(pRigidBody, "The btRigidBody does not exist.", 0);
+    NULL_CHK(env, pRigidBody, "The btRigidBody does not exist.", 0);
     btAssert(pRigidBody->getInternalType()
             & btCollisionObject::CO_RIGID_BODY);
 
@@ -79,7 +79,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Anchor_setInfluence
 (JNIEnv *env, jobject object, jlong anchorId, jfloat influence) {
     btSoftBody::Anchor *pAnchor
             = reinterpret_cast<btSoftBody::Anchor *> (anchorId);
-    NULL_CHECK(pAnchor, "The btSoftBody::Anchor does not exist.",)
+    NULL_CHK(env, pAnchor, "The btSoftBody::Anchor does not exist.",)
 
     pAnchor->m_influence = (btScalar) influence;
 }
