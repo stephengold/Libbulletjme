@@ -21,6 +21,9 @@ android {
         jniDebuggable = true
     }
     compileSdkVersion 28
+    defaultConfig.ndk {
+        //abiFilters 'x86_64'
+    }
     externalNativeBuild.ndkBuild {
         path 'Android.mk'
     }
