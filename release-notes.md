@@ -1,5 +1,9 @@
 # release log for the Libbulletjme Project
 
+## Version 5.5.4 released on 5 April 2020
+
+bugfix: library "libc++_shared.so" not found (on Android).
+
 ## Version 5.5.3 released on 4 April 2020
 
 Build native libraries for Android (Sp flavor only).
