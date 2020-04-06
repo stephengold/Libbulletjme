@@ -50,11 +50,11 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:5.5.3
+            compile 'com.github.stephengold:Libbulletjme:5.5.4
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 28 native libraries.
+    You probably don't need all 36 native libraries.
     Start with the ReleaseSp library for your development environment
     (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
@@ -69,7 +69,7 @@ standalone Maven artifacts are provided.
 
 ### HelloLibbulletjme: drop a dynamic sphere onto a horizontal surface
 
-```
+```java
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
@@ -129,7 +129,7 @@ public class HelloLibbulletjme {
 
 ### HelloVehicle: drive a vehicle on a horizontal surface
 
-```
+```java
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.BoxCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
@@ -232,7 +232,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 5.5.3`
+     + `git checkout -b latest 5.5.4`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
