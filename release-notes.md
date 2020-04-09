@@ -1,6 +1,6 @@
 # release log for the Libbulletjme Project
 
-## Version 5.5.5 released on 9 April 2020
+## Version 5.5.6 released on 9 April 2020
 
 Specify the `c++_static` STL for Android builds.
 
