@@ -1,8 +1,12 @@
 # release log for the Libbulletjme Project
 
+## Version 5.5.5 released on 9 April 2020
+
+Specify the `c++_static` STL for Android builds.
+
 ## Version 5.5.4 released on 5 April 2020
 
-bugfix: library "libc++_shared.so" not found (on Android).
+bugfix: specify the Android STL in Application.mk, not Android.mk
 
 ## Version 5.5.3 released on 4 April 2020
 
@@ -26,7 +30,7 @@ Use GCC 4.7 for Linux-on-AMD builds, to support Centos 7.
 
 ## Version 5.4.2 released on 25 March 2020
 
-Bugfix: wrong `indexType` passed to addIndexedMesh().
+Bugfix: wrong `indexType` passed to `addIndexedMesh()`.
 
 ## Version 5.4.1 released on 24 March 2020
 
