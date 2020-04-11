@@ -3,6 +3,7 @@ on: [push]
 
 jobs:
   Java8-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -17,6 +18,7 @@ jobs:
       run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
 #  Java8-Linux-ARM:
+#    if: contains(toJson(github.event.commits), '[ci skip] ') == false
 #    runs-on: ubuntu-latest
 #    container:
 #      image: riccardoblb/buildenv-jme3:linuxArm
@@ -29,6 +31,7 @@ jobs:
 #    - run: ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
   Java8-MacOSX:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
@@ -41,6 +44,7 @@ jobs:
       run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
   Java8-Windows:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -53,6 +57,7 @@ jobs:
       run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
   Java11-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -67,6 +72,7 @@ jobs:
       run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
   Java11-MacOSX:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v2
@@ -79,6 +85,7 @@ jobs:
       run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
   Java11-Windows:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
