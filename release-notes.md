@@ -1,5 +1,10 @@
 # release log for the Libbulletjme Project
 
+## Version 5.5.7 released on 11 April 2020
+
+bugfix: the `btBvhTriangleMeshShape`, `btGImpactShape`, and `btOptimizedBvh`
+classes don't support `PHY_UCHAR` mesh indices.
+
 ## Version 5.5.6 released on 9 April 2020
 
 Specify the `c++_static` STL for Android builds.
