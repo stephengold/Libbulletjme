@@ -286,7 +286,7 @@ void btOptimizedBvh::updateBvhNodes(btStridingMeshInterface* meshInterface, int 
 				meshInterface->getLockedReadOnlyVertexIndexBase(&vertexbase, numverts, type, stride, &indexbase, indexstride, numfaces, indicestype, nodeSubPart);
 
 				curNodeSubPart = nodeSubPart;
-				btAssert(indicestype == PHY_INTEGER || indicestype == PHY_SHORT);
+				//btAssert(indicestype == PHY_INTEGER || indicestype == PHY_SHORT); // stephengold 2020-04-11
 			}
 			//triangles->getLockedReadOnlyVertexIndexBase(vertexBase,numVerts,
 
@@ -294,7 +294,13 @@ void btOptimizedBvh::updateBvhNodes(btStridingMeshInterface* meshInterface, int 
 
 			for (int j = 2; j >= 0; j--)
 			{
-				int graphicsindex = indicestype == PHY_SHORT ? ((unsigned short*)gfxbase)[j] : gfxbase[j];
+				int graphicsindex; // stephengold 2020-04-11
+                                switch (indicestype) { // stephengold 2020-04-11
+                                    case PHY_INTEGER: graphicsindex = gfxbase[j]; break; // stephengold 2020-04-11
+                                    case PHY_SHORT: graphicsindex = ((unsigned short*)gfxbase)[j]; break; // stephengold 2020-04-11
+                                    case PHY_UCHAR: graphicsindex = ((unsigned char*)gfxbase)[j]; break; // stephengold 2020-04-11
+                                    default: btAssert(0); // stephengold 2020-04-11
+                                } // stephengold 2020-04-11
 				if (type == PHY_FLOAT)
 				{
 					float* graphicsbase = (float*)(vertexbase + graphicsindex * stride);

@@ -124,12 +124,18 @@ void btBvhTriangleMeshShape::performRaycast(btTriangleCallback* callback, const 
 				nodeSubPart);
 
 			unsigned int* gfxbase = (unsigned int*)(indexbase + nodeTriangleIndex * indexstride);
-			btAssert(indicestype == PHY_INTEGER || indicestype == PHY_SHORT);
+			//btAssert(indicestype == PHY_INTEGER || indicestype == PHY_SHORT); // stephengold 2020-04-11
 
 			const btVector3& meshScaling = m_meshInterface->getScaling();
 			for (int j = 2; j >= 0; j--)
 			{
-				int graphicsindex = indicestype == PHY_SHORT ? ((unsigned short*)gfxbase)[j] : gfxbase[j];
+				int graphicsindex; // stephengold 2020-04-11
+                                switch (indicestype) { // stephengold 2020-04-11
+                                    case PHY_INTEGER: graphicsindex = gfxbase[j]; break; // stephengold 2020-04-11
+                                    case PHY_SHORT: graphicsindex = ((unsigned short*)gfxbase)[j]; break; // stephengold 2020-04-11
+                                    case PHY_UCHAR: graphicsindex = ((unsigned char*)gfxbase)[j]; break; // stephengold 2020-04-11
+                                    default: btAssert(0); // stephengold 2020-04-11
+                                } // stephengold 2020-04-11
 
 				if (type == PHY_FLOAT)
 				{
@@ -193,12 +199,18 @@ void btBvhTriangleMeshShape::performConvexcast(btTriangleCallback* callback, con
 				nodeSubPart);
 
 			unsigned int* gfxbase = (unsigned int*)(indexbase + nodeTriangleIndex * indexstride);
-			btAssert(indicestype == PHY_INTEGER || indicestype == PHY_SHORT);
+			//btAssert(indicestype == PHY_INTEGER || indicestype == PHY_SHORT); // stephengold 2020-04-11
 
 			const btVector3& meshScaling = m_meshInterface->getScaling();
 			for (int j = 2; j >= 0; j--)
 			{
-				int graphicsindex = indicestype == PHY_SHORT ? ((unsigned short*)gfxbase)[j] : gfxbase[j];
+				int graphicsindex; // stephengold 2020-04-11
+                                switch (indicestype) { // stephengold 2020-04-11
+                                    case PHY_INTEGER: graphicsindex = gfxbase[j]; break; // stephengold 2020-04-11
+                                    case PHY_SHORT: graphicsindex = ((unsigned short*)gfxbase)[j]; break; // stephengold 2020-04-11
+                                    case PHY_UCHAR: graphicsindex = ((unsigned char*)gfxbase)[j]; break; // stephengold 2020-04-11
+                                    default: btAssert(0); // stephengold 2020-04-11
+                                } // stephengold 2020-04-11
 
 				if (type == PHY_FLOAT)
 				{
