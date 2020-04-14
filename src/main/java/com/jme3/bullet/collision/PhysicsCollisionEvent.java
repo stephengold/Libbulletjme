@@ -142,20 +142,20 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
-     * Read the collision's combined friction (native field:
-     * m_combinedFriction).
+     * Read the combined friction, which is the sum of the collision-object
+     * frictions (native field: m_combinedFriction).
      *
-     * @return friction
+     * @return the friction sum
      */
     public float getCombinedFriction() {
         return getCombinedFriction(nativeId);
     }
 
     /**
-     * Read the collision's combined restitution (native field:
-     * m_combinedRestitution).
+     * Read the combined restitution, which is the product of the
+     * collision-object restitutions (native field: m_combinedRestitution).
      *
-     * @return restitution
+     * @return the restitution product
      */
     public float getCombinedRestitution() {
         return getCombinedRestitution(nativeId);
