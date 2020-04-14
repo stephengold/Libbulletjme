@@ -105,12 +105,14 @@ public class TestLibbulletjme {
         Plane plane = new Plane(Vector3f.UNIT_Y, -1f);
         CollisionShape pcs = new PlaneCollisionShape(plane);
         PhysicsRigidBody floorPrb = new PhysicsRigidBody(pcs, 0f);
+        testPco(floorPrb);
         space.addCollisionObject(floorPrb);
         /*
          * Add a box-shaped dynamic rigid body at y=0.
          */
         CollisionShape bcs = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
         PhysicsRigidBody prb = new PhysicsRigidBody(bcs, 1f);
+        testPco(prb);
         space.addCollisionObject(prb);
         /*
          * 50 iterations with a 20-msec timestep
@@ -768,6 +770,7 @@ public class TestLibbulletjme {
         SphereCollisionShape shape = new SphereCollisionShape(radius);
         float mass = PhysicsRigidBody.massForStatic;
         PhysicsRigidBody sphere = new PhysicsRigidBody(shape, mass);
+        testPco(sphere);
         physicsSpace.add(sphere);
 
         // Generate a subdivided square mesh with alternating diagonals.
@@ -777,6 +780,7 @@ public class TestLibbulletjme {
 
         // Create a soft square and add it to the physics space.
         PhysicsSoftBody cloth = new PhysicsSoftBody();
+        testPco(cloth);
         NativeSoftBodyUtil.appendFromNativeMesh(squareGrid, cloth);
         physicsSpace.add(cloth);
 
@@ -981,18 +985,11 @@ public class TestLibbulletjme {
         float mass = PhysicsBody.massForStatic;
         PhysicsRigidBody floorBody = new PhysicsRigidBody(floorShape, mass);
 
-        Assert.assertNull(floorBody.getCollisionSpace());
-        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
-                floorBody.getCollideWithGroups());
-        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
-                floorBody.getCollisionGroup());
-        Assert.assertTrue(floorBody.isActive());
+        testPco(floorBody);
         Assert.assertTrue(floorBody.isContactResponse());
         Assert.assertFalse(floorBody.isDynamic());
-        Assert.assertFalse(floorBody.isInWorld());
         Assert.assertFalse(floorBody.isKinematic());
         Assert.assertTrue(floorBody.isStatic());
-        Assert.assertEquals(0L, floorBody.spaceId());
 
         space.addCollisionObject(floorBody);
 
@@ -1010,18 +1007,11 @@ public class TestLibbulletjme {
         mass = 1f;
         PhysicsRigidBody dropBody = new PhysicsRigidBody(dropShape, mass);
 
-        Assert.assertNull(dropBody.getCollisionSpace());
-        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
-                dropBody.getCollideWithGroups());
-        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
-                dropBody.getCollisionGroup());
-        Assert.assertTrue(dropBody.isActive());
+        testPco(dropBody);
         Assert.assertTrue(dropBody.isContactResponse());
         Assert.assertTrue(dropBody.isDynamic());
-        Assert.assertFalse(dropBody.isInWorld());
         Assert.assertFalse(dropBody.isKinematic());
         Assert.assertFalse(dropBody.isStatic());
-        Assert.assertEquals(0L, dropBody.spaceId());
 
         space.addCollisionObject(dropBody);
 
@@ -1083,16 +1073,9 @@ public class TestLibbulletjme {
 
         PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
 
-        Assert.assertNull(ghost.getCollisionSpace());
-        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
-                ghost.getCollideWithGroups());
-        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
-                ghost.getCollisionGroup());
-        Assert.assertTrue(ghost.isActive());
+        testPco(ghost);
         Assert.assertFalse(ghost.isContactResponse());
-        Assert.assertFalse(ghost.isInWorld());
         Assert.assertTrue(ghost.isStatic());
-        Assert.assertEquals(0L, ghost.spaceId());
 
         space.add(ghost);
 
@@ -1126,6 +1109,42 @@ public class TestLibbulletjme {
         List<PhysicsRayTestResult> results3 = space.rayTest(
                 new Vector3f(0.7f, 0.7f, 2f), new Vector3f(0.7f, 0.7f, -2f));
         Assert.assertEquals(0, results3.size());
+    }
+
+    /**
+     * Test the defaults that are common to all newly-created collision objects.
+     *
+     * @param pco the object to test (not null, unaffected)
+     */
+    private static void testPco(PhysicsCollisionObject pco) {
+        Assert.assertNotEquals(0L, pco.getObjectId());
+        Assert.assertFalse(pco.isInWorld());
+        Assert.assertNull(pco.getCollisionSpace());
+        Assert.assertEquals(0L, pco.spaceId());
+
+        Assert.assertTrue(pco.isActive());
+        assertEquals(1f, 1f, 1f, pco.getAnisotropicFriction(null), 0f);
+        Assert.assertFalse(pco.hasAnisotropicFriction(1));
+        Assert.assertFalse(pco.hasAnisotropicFriction(2));
+        Assert.assertEquals(0f, pco.getCcdMotionThreshold(), 0f);
+        Assert.assertEquals(0f, pco.getCcdSweptSphereRadius(), 0f);
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                pco.getCollideWithGroups());
+        Assert.assertEquals(PhysicsCollisionObject.COLLISION_GROUP_01,
+                pco.getCollisionGroup());
+        Assert.assertEquals(0.1f, pco.getContactDamping(), 0f);
+
+        float largeFloat = NativeLibrary.isDoublePrecision() ? 1e30f : 1e18f;
+        Assert.assertEquals(largeFloat, pco.getContactProcessingThreshold(), 0f);
+        Assert.assertEquals(largeFloat, pco.getContactStiffness(), 0f);
+
+        Assert.assertEquals(0f, pco.getDeactivationTime(), 0f);
+        Assert.assertEquals(0.5f, pco.getFriction(), 0f);
+        assertEquals(0f, 0f, 0f, pco.getPhysicsLocation(null), 0f);
+        Assert.assertEquals(0f, pco.getRestitution(), 0f);
+        Assert.assertEquals(0f, pco.getRollingFriction(), 0f);
+        Assert.assertEquals(0f, pco.getSpinningFriction(), 0f);
+        Assert.assertNull(pco.getUserObject());
     }
 
     /**
