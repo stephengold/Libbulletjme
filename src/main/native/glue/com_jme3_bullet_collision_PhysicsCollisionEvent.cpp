@@ -40,10 +40,10 @@
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getAppliedImpulse
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_appliedImpulse;
 }
@@ -54,10 +54,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getAppliedImpulseLateral1
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_appliedImpulseLateral1;
 }
@@ -68,10 +68,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getAppliedImpulseLateral2
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_appliedImpulseLateral2;
 }
@@ -82,10 +82,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedFriction
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_combinedFriction;
 }
@@ -96,10 +96,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedRestitution
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_combinedRestitution;
 }
@@ -110,10 +110,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getDistance1
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_distance1;
 }
@@ -124,9 +124,9 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getFlags
-(JNIEnv *pEnv, jobject, jlong manifoldPointId) {
+(JNIEnv *pEnv, jobject, jlong pointId) {
     const btManifoldPoint * const
-            pPoint = reinterpret_cast<btManifoldPoint *> (manifoldPointId);
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
     NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0);
 
     int flags = pPoint->m_contactPointFlags;
@@ -139,10 +139,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getF
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getIndex0
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_index0;
 }
@@ -153,10 +153,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getI
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getIndex1
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_index1;
 }
@@ -167,14 +167,12 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getI
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLateralFrictionDir1
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject lateralFrictionDir1) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_lateralFrictionDir1,
-            lateralFrictionDir1);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_lateralFrictionDir1, storeVector);
 }
 
 /*
@@ -183,14 +181,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLateralFrictionDir2
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject lateralFrictionDir2) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_lateralFrictionDir2,
-            lateralFrictionDir2);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_lateralFrictionDir2, storeVector);
 }
 
 /*
@@ -199,10 +195,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLifeTime
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_lifeTime;
 }
@@ -213,13 +209,12 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLocalPointA
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject localPointA) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_localPointA, localPointA);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_localPointA, storeVector);
 }
 
 /*
@@ -228,13 +223,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLocalPointB
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject localPointB) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_localPointB, localPointB);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_localPointB, storeVector);
 }
 
 /*
@@ -243,13 +237,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getNormalWorldOnB
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject normalWorldOnB) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_normalWorldOnB, normalWorldOnB);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_normalWorldOnB, storeVector);
 }
 
 /*
@@ -258,10 +251,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getN
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPartId0
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_partId0;
 }
@@ -272,10 +265,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPartId1
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.", 0)
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
 
     return pPoint->m_partId1;
 }
@@ -286,13 +279,12 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPositionWorldOnA
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject positionWorldOnA) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_positionWorldOnA, positionWorldOnA);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_positionWorldOnA, storeVector);
 }
 
 /*
@@ -301,11 +293,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPositionWorldOnB
-(JNIEnv *env, jobject object, jlong manifoldPointObjectId,
-        jobject positionWorldOnB) {
-    btManifoldPoint *pPoint
-            = reinterpret_cast<btManifoldPoint *> (manifoldPointObjectId);
-    NULL_CHK(env, pPoint, "The btManifoldPoint does not exist.",)
+(JNIEnv *pEnv, jobject, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
-    jmeBulletUtil::convert(env, &pPoint->m_positionWorldOnB, positionWorldOnB);
+    jmeBulletUtil::convert(pEnv, &pPoint->m_positionWorldOnB, storeVector);
 }
