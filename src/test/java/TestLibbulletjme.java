@@ -1197,6 +1197,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(expectedMode, info.mode());
         Assert.assertEquals(10, info.numIterations());
         Assert.assertTrue(info.isSplitImpulseEnabled());
+        Assert.assertEquals(-0.04, info.splitImpulseThreshold(), 1e-7f);
 
         if (space instanceof MultiBodySpace) {
             MultiBodySpace mbSpace = (MultiBodySpace) space;

@@ -95,7 +95,8 @@ public class SolverInfo {
     }
 
     /**
-     * Test whether split impulse is enabled (native field: m_splitImpulse).
+     * Test whether split impulse is enabled globally (native field:
+     * m_splitImpulse).
      *
      * @return true if using split impulse, otherwise false
      */
@@ -192,12 +193,37 @@ public class SolverInfo {
     }
 
     /**
-     * Alter whether split impulse is enabled (native field: m_splitImpulse).
+     * Alter whether split impulse is enabled globally (native field:
+     * m_splitImpulse).
      *
      * @param setting the desired setting (default=true)
      */
     public void setSplitImpulseEnabled(boolean setting) {
         setSplitImpulseEnabled(nativeId, setting);
+    }
+
+    /**
+     * Alter the degree of penetration at which split impulse will be used. This
+     * setting no effect while split impulse is enabled globally (native field:
+     * m_splitImpulsePenetrationThreshold).
+     *
+     * @param penetration the penetration threshold (in physics-space units,
+     * default=-0.04)
+     */
+    public void setSplitImpulseThreshold(float penetration) {
+        setSplitImpulseThreshold(nativeId, penetration);
+    }
+
+    /**
+     * Determine the minimum degree of penetration at which split impulse would
+     * be used, assuming it's not enabled globally (native field:
+     * m_splitImpulsePenetrationThreshold).
+     *
+     * @return the parameter value
+     */
+    public float splitImpulseThreshold() {
+        float result = getSplitImpulseThreshold(nativeId);
+        return result;
     }
     // *************************************************************************
     // native methods
@@ -212,6 +238,8 @@ public class SolverInfo {
 
     native private int getNumIterations(long infoId);
 
+    native private float getSplitImpulseThreshold(long infoId);
+
     native private boolean isSplitImpulseEnabled(long infoId);
 
     native private void setGlobalCfm(long infoId, float cfm);
@@ -223,4 +251,7 @@ public class SolverInfo {
     native private void setNumIterations(long infoId, int numIterations);
 
     native private void setSplitImpulseEnabled(long infoId, boolean enable);
+
+    native private void setSplitImpulseThreshold(long infoId,
+            float penetration);
 }

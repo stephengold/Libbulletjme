@@ -49,6 +49,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getNumIterations
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    getSplitImpulseThreshold
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseThreshold
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    isSplitImpulseEnabled
  * Signature: (J)Z
  */
@@ -94,6 +102,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setNumIterations
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseEnabled
   (JNIEnv *, jobject, jlong, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setSplitImpulseThreshold
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseThreshold
+  (JNIEnv *, jobject, jlong, jfloat);
 
 #ifdef __cplusplus
 }
