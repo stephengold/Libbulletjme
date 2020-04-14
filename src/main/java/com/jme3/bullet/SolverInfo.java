@@ -95,6 +95,16 @@ public class SolverInfo {
     }
 
     /**
+     * Test whether split impulse is enabled (native field: m_splitImpulse).
+     *
+     * @return true if using split impulse, otherwise false
+     */
+    public boolean isSplitImpulseEnabled() {
+        boolean result = isSplitImpulseEnabled(nativeId);
+        return result;
+    }
+
+    /**
      * Determine the minimum batch size (native field:
      * m_minimumSolverBatchSize).
      *
@@ -180,6 +190,15 @@ public class SolverInfo {
         Validate.positive(numIterations, "number of iterations");
         setNumIterations(nativeId, numIterations);
     }
+
+    /**
+     * Alter whether split impulse is enabled (native field: m_splitImpulse).
+     *
+     * @param setting the desired setting (default=true)
+     */
+    public void setSplitImpulseEnabled(boolean setting) {
+        setSplitImpulseEnabled(nativeId, setting);
+    }
     // *************************************************************************
     // native methods
 
@@ -193,6 +212,8 @@ public class SolverInfo {
 
     native private int getNumIterations(long infoId);
 
+    native private boolean isSplitImpulseEnabled(long infoId);
+
     native private void setGlobalCfm(long infoId, float cfm);
 
     native private void setMinBatch(long infoId, int numConstraints);
@@ -200,4 +221,6 @@ public class SolverInfo {
     native private void setMode(long infoId, int flags);
 
     native private void setNumIterations(long infoId, int numIterations);
+
+    native private void setSplitImpulseEnabled(long infoId, boolean enable);
 }

@@ -49,6 +49,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getNumIterations
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    isSplitImpulseEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_SolverInfo_isSplitImpulseEnabled
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    setGlobalCfm
  * Signature: (JF)V
  */
@@ -78,6 +86,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setMode
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setNumIterations
   (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setSplitImpulseEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseEnabled
+  (JNIEnv *, jobject, jlong, jboolean);
 
 #ifdef __cplusplus
 }

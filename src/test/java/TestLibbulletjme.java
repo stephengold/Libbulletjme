@@ -1177,6 +1177,7 @@ public class TestLibbulletjme {
         int expectedMode = (className.equals("MultiBodySpace")) ? 0x114 : 0x104;
         Assert.assertEquals(expectedMode, info.mode());
         Assert.assertEquals(10, info.numIterations());
+        Assert.assertTrue(info.isSplitImpulseEnabled());
 
         if (space instanceof MultiBodySpace) {
             MultiBodySpace mbSpace = (MultiBodySpace) space;

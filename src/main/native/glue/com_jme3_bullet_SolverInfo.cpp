@@ -119,6 +119,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getNumIterations
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    isSplitImpulseEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_SolverInfo_isSplitImpulseEnabled
+(JNIEnv *pEnv, jobject, jlong infoId) {
+
+    const btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
+
+    int result = pInfo->m_splitImpulse;
+    return jint(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    setGlobalCfm
  * Signature: (JF)V
  */
@@ -171,4 +187,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setNumIterations
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
 
     pInfo->m_numIterations = int(numIterations);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setSplitImpulseEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseEnabled
+(JNIEnv *pEnv, jobject, jlong infoId, jboolean enable) {
+    btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
+
+    pInfo->m_splitImpulse = int(enable);
 }
