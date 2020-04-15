@@ -68,7 +68,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getGlobalCfm
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
 
-    float result = pInfo->m_globalCfm;
+    btScalar result = pInfo->m_globalCfm;
     return jfloat(result);
 }
 
@@ -119,6 +119,21 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getNumIterations
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    getSplitImpulseErp
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseErp
+(JNIEnv *pEnv, jobject, jlong infoId) {
+    const btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
+
+    btScalar result = pInfo->m_splitImpulseTurnErp;
+    return jfloat(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    getSplitImpulseThreshold
  * Signature: (J)F
  */
@@ -128,7 +143,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseThreshol
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
 
-    float result = pInfo->m_splitImpulsePenetrationThreshold;
+    btScalar result = pInfo->m_splitImpulsePenetrationThreshold;
     return jfloat(result);
 }
 
@@ -159,7 +174,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setGlobalCfm
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
 
-    pInfo->m_globalCfm = float(cfm);
+    pInfo->m_globalCfm = btScalar(cfm);
 }
 
 /*
@@ -220,6 +235,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseEnabled
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setSplitImpulseErp
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseErp
+(JNIEnv *pEnv, jobject, jlong infoId, jfloat erp) {
+    btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
+
+    pInfo->m_splitImpulseTurnErp = btScalar(erp);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    setSplitImpulseThreshold
  * Signature: (JF)V
  */
@@ -229,5 +258,5 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseThreshold
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
 
-    pInfo->m_splitImpulsePenetrationThreshold = float(penetration);
+    pInfo->m_splitImpulsePenetrationThreshold = btScalar(penetration);
 }
