@@ -1,5 +1,17 @@
 # release log for the Libbulletjme Project
 
+## Version 5.6.0 released on 14 April 2020
+
+ + Added 8 methods:
+   + PhysicsCollisionEvent.getCombinedRollingFriction()
+   + PhysicsCollisionEvent.getCombinedSpinningFriction()
+   + SolverInfo.isSplitImpulseEnabled()
+   + SolverInfo.setSplitImpulseEnabled()
+   + SolverInfo.setSplitImpulseErp()
+   + SolverInfo.setSplitImpulseThreshold()
+   + SolverInfo.splitImpulseErp()
+   + SolverInfo.splitImpulseThreshold()
+
 ## Version 5.5.7 released on 11 April 2020
 
 bugfix: the `btBvhTriangleMeshShape`, `btGImpactShape`, and `btOptimizedBvh`
@@ -70,7 +82,7 @@ Added 3 methods to the `VehicleWheel` class:
  + Added `boundingBox()` methods to the `CollisionShape` class,
    along with the `BoundingBox` class and supporting methods.
  + Added methods `createByte()` and `createShort()` to the `IndexedMesh` class.
- + Specify ABI version 7 for Linux builds, to support Centos 7.
+ + Specify ABI version 7 for Linux builds.
 
 ## Version 5.0.0 released on 11 March 2020
 
