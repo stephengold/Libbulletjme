@@ -162,6 +162,26 @@ public class PhysicsCollisionEvent extends EventObject {
     }
 
     /**
+     * Read the combined rolling friction (native field:
+     * m_combinedRollingFriction).
+     *
+     * @return the combined friction
+     */
+    public float getCombinedRollingFriction() {
+        return getCombinedRollingFriction(nativeId);
+    }
+
+    /**
+     * Read the combined spinning friction (native field:
+     * m_combinedSpinningFriction).
+     *
+     * @return the combined friction
+     */
+    public float getCombinedSpinningFriction() {
+        return getCombinedSpinningFriction(nativeId);
+    }
+
+    /**
      * Read the collision's distance #1 (native field: m_distance1).
      *
      * @return the distance (in physics-space units)
@@ -383,6 +403,10 @@ public class PhysicsCollisionEvent extends EventObject {
     native private float getCombinedFriction(long manifoldPointId);
 
     native private float getCombinedRestitution(long manifoldPointId);
+
+    native private float getCombinedRollingFriction(long manifoldPointId);
+
+    native private float getCombinedSpinningFriction(long manifoldPointId);
 
     native private float getDistance1(long manifoldPointId);
 

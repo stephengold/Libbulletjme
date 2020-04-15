@@ -51,6 +51,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    getCombinedRollingFriction
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedRollingFriction
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    getCombinedSpinningFriction
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedSpinningFriction
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getDistance1
  * Signature: (J)F
  */

@@ -106,6 +106,34 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    getCombinedRollingFriction
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedRollingFriction
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
+
+    return jfloat(pPoint->m_combinedRollingFriction);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    getCombinedSpinningFriction
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedSpinningFriction
+(JNIEnv *pEnv, jobject, jlong pointId) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.", 0)
+
+    return jfloat(pPoint->m_combinedSpinningFriction);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getDistance1
  * Signature: (J)F
  */
