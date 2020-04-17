@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * internally and is accessible via the get and set methods. Convenience methods
  * are used for matrix operations as well as generating a matrix from a given
  * set of values.
- * 
+ *
  * @author Mark Powell
  * @author Joshua Slack
  */
@@ -47,16 +47,54 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     static final long serialVersionUID = 1;
 
     private static final Logger logger = Logger.getLogger(Matrix3f.class.getName());
-    protected float m00, m01, m02;
-    protected float m10, m11, m12;
-    protected float m20, m21, m22;
+    /**
+     * the element in row 0, column 0
+     */
+    protected float m00;
+    /**
+     * the element in row 0, column 1
+     */
+    protected float m01;
+    /**
+     * the element in row 0, column 2
+     */
+    protected float m02;
+    /**
+     * the element in row 1, column 0
+     */
+    protected float m10;
+    /**
+     * the element in row 1, column 1
+     */
+    protected float m11;
+    /**
+     * the element in row 1, column 2
+     */
+    protected float m12;
+    /**
+     * the element in row 2, column 0
+     */
+    protected float m20;
+    /**
+     * the element in row 2, column 1
+     */
+    protected float m21;
+    /**
+     * the element in row 2, column 2
+     */
+    protected float m22;
+    /**
+     * an instance of the zero matrix (all elements = 0)
+     */
     public static final Matrix3f ZERO = new Matrix3f(0, 0, 0, 0, 0, 0, 0, 0, 0);
+    /**
+     * an instance of the identity matrix (diagonals = 1, other elements = 0)
+     */
     public static final Matrix3f IDENTITY = new Matrix3f();
 
     /**
      * Constructor instantiates a new <code>Matrix3f</code> object. The
      * initial values for the matrix is that of the identity matrix.
-     *  
      */
     public Matrix3f() {
         loadIdentity();
@@ -64,25 +102,16 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
 
     /**
      * constructs a matrix with the given values.
-     * 
-     * @param m00
-     *            0x0 in the matrix.
-     * @param m01
-     *            0x1 in the matrix.
-     * @param m02
-     *            0x2 in the matrix.
-     * @param m10
-     *            1x0 in the matrix.
-     * @param m11
-     *            1x1 in the matrix.
-     * @param m12
-     *            1x2 in the matrix.
-     * @param m20
-     *            2x0 in the matrix.
-     * @param m21
-     *            2x1 in the matrix.
-     * @param m22
-     *            2x2 in the matrix.
+     *
+     * @param m00 0x0 in the matrix.
+     * @param m01 0x1 in the matrix.
+     * @param m02 0x2 in the matrix.
+     * @param m10 1x0 in the matrix.
+     * @param m11 1x1 in the matrix.
+     * @param m12 1x2 in the matrix.
+     * @param m20 2x0 in the matrix.
+     * @param m21 2x1 in the matrix.
+     * @param m22 2x2 in the matrix.
      */
     public Matrix3f(float m00, float m01, float m02, float m10, float m11,
             float m12, float m20, float m21, float m22) {
@@ -102,7 +131,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      * <code>copy</code> transfers the contents of a given matrix to this
      * matrix. If a null matrix is supplied, this matrix is set to the identity
      * matrix.
-     * 
+     *
      * @param matrix
      *            the matrix to copy.
      * @return this
@@ -125,15 +154,12 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>get</code> retrieves a value from the matrix at the given
-     * position. If the position is invalid a <code>JmeException</code> is
-     * thrown.
-     * 
-     * @param i
-     *            the row index.
-     * @param j
-     *            the colum index.
+     * <code>get</code> retrieves a value from the matrix at the given position.
+     *
+     * @param i   the row index.
+     * @param j   the column index.
      * @return the value at (i, j).
+     * @throws IllegalArgumentException if either index is invalid
      */
     @SuppressWarnings("fallthrough")
     public float get(int i, int j) {
@@ -172,11 +198,10 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * 
      * <code>set</code> defines the values of the matrix based on a supplied
      * <code>Quaternion</code>. It should be noted that all previous values
      * will be overridden.
-     * 
+     *
      * @param quaternion
      *            the quaternion to create a rotational matrix from.
      * @return this
@@ -188,7 +213,6 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     /**
      * <code>loadIdentity</code> sets this matrix to the identity matrix.
      * Where all values are zero except those along the diagonal which are one.
-     *  
      */
     public void loadIdentity() {
         m01 = m02 = m10 = m12 = m20 = m21 = 0;
@@ -211,7 +235,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      * 1.0  0.0  0.0 <br>
      * 0.0  1.0  0.0 <br>
      * 0.0  0.0  1.0 <br>]<br>
-     * 
+     *
      * @return the string representation of this object.
      */
     @Override
@@ -242,11 +266,10 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * 
      * <code>hashCode</code> returns the hash code value as an integer and is
      * supported for the benefit of hashing based collection classes such as
      * Hashtable, HashMap, HashSet etc.
-     * 
+     *
      * @return the hashcode for this instance of Matrix4f.
      * @see java.lang.Object#hashCode()
      */
@@ -277,7 +300,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Matrix3f) || o == null) {
+        if (o == null || o.getClass() != getClass()) {
             return false;
         }
 
@@ -319,6 +342,11 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
         return true;
     }
 
+    /**
+     * Create a copy of this matrix.
+     *
+     * @return a new instance, equivalent to this one
+     */
     @Override
     public Matrix3f clone() {
         try {

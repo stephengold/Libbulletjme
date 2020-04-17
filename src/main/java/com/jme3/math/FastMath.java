@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,20 +39,26 @@ package com.jme3.math;
  * @version $Id: FastMath.java,v 1.45 2007/08/26 08:44:20 irrisor Exp $
  */
 final public class FastMath {
-
     private FastMath() {
     }
-    /** A "close to zero" float epsilon value for use*/
+    /**
+     * A "close to zero" double epsilon value for use
+     */
     public static final float FLT_EPSILON = 1.1920928955078125E-7f;
-    /** The value PI as a float. (180 degrees) */
+    /**
+     * The value PI as a float. (180 degrees)
+     */
     public static final float PI = (float) Math.PI;
-    /** The value PI/2 as a float. (90 degrees) */
+    /**
+     * The value PI/2 as a float. (90 degrees)
+     */
     public static final float HALF_PI = 0.5f * PI;
 
     /**
      * A direct call to Math.atan2.
-     * @param fY the ordinate
-     * @param fX the abscissa
+     *
+     * @param fY ordinate
+     * @param fX abscissa
      * @return Math.atan2(fY,fX)
      * @see java.lang.Math#atan2(double, double)
      */
@@ -62,9 +68,10 @@ final public class FastMath {
 
     /**
      * Returns cosine of an angle. Direct call to java.lang.Math
-     * @see Math#cos(double) 
+     *
+     * @see Math#cos(double)
      * @param v The angle to cosine.
-     * @return  the cosine of the angle.
+     * @return the cosine of the angle.
      */
     public static float cos(float v) {
         return (float) Math.cos(v);
@@ -72,7 +79,8 @@ final public class FastMath {
 
     /**
      * Returns the sine of an angle. Direct call to java.lang.Math
-     * @see Math#sin(double) 
+     *
+     * @see Math#sin(double)
      * @param v The angle to sine.
      * @return the sine of the angle.
      */
@@ -82,6 +90,7 @@ final public class FastMath {
 
     /**
      * Returns Absolute value of a float.
+     *
      * @param fValue The value to abs.
      * @return The abs of the value.
      * @see java.lang.Math#abs(float)
@@ -95,6 +104,7 @@ final public class FastMath {
 
     /**
      * Returns the square root of a given value.
+     *
      * @param fValue The value to sqrt.
      * @return The square root of the given value.
      * @see java.lang.Math#sqrt(double)
@@ -107,9 +117,9 @@ final public class FastMath {
      * Determine if two floats are approximately equal.
      * This takes into account the magnitude of the floats, since
      * large numbers will have larger differences be close to each other.
-     * 
+     *
      * Should return true for a=100000, b=100001, but false for a=10000, b=10001.
-     * 
+     *
      * @param a The first float to compare
      * @param b The second float to compare
      * @return True if a and b are approximately equal, false otherwise.

@@ -33,10 +33,10 @@ package com.jme3.math;
 
 /**
  * <code>Matrix4f</code> defines and maintains a 4x4 matrix in row major order.
- * This matrix is intended for use in a translation and rotational capacity. 
- * It provides convenience methods for creating the matrix from a multitude 
+ * This matrix is intended for use in a translation and rotational capacity.
+ * It provides convenience methods for creating the matrix from a multitude
  * of sources.
- * 
+ *
  * Matrices are stored assuming column vectors on the right, with the translation
  * in the rightmost column. Element numbering is row,column, so m03 is the zeroth
  * row, third column, which is the "x" translation part. This means that the implicit
@@ -48,15 +48,74 @@ package com.jme3.math;
  */
 public final class Matrix4f implements Cloneable {
 
-    public float m00, m01, m02, m03;
-    public float m10, m11, m12, m13;
-    public float m20, m21, m22, m23;
-    public float m30, m31, m32, m33;
+    /**
+     * the element in row 0, column 0
+     */
+    public float m00;
+    /**
+     * the element in row 0, column 1
+     */
+    public float m01;
+    /**
+     * the element in row 0, column 2
+     */
+    public float m02;
+    /**
+     * the element in row 0, column 3
+     */
+    public float m03;
+    /**
+     * the element in row 1, column 0
+     */
+    public float m10;
+    /**
+     * the element in row 1, column 1
+     */
+    public float m11;
+    /**
+     * the element in row 1, column 2
+     */
+    public float m12;
+    /**
+     * the element in row 1, column 3
+     */
+    public float m13;
+    /**
+     * the element in row 2, column 0
+     */
+    public float m20;
+    /**
+     * the element in row 2, column 1
+     */
+    public float m21;
+    /**
+     * the element in row 2, column 2
+     */
+    public float m22;
+    /**
+     * the element in row 2, column 3
+     */
+    public float m23;
+    /**
+     * the element in row 3, column 0
+     */
+    public float m30;
+    /**
+     * the element in row 3, column 1
+     */
+    public float m31;
+    /**
+     * the element in row 0, column 2
+     */
+    public float m32;
+    /**
+     * the element in row 3, column 3
+     */
+    public float m33;
 
     /**
      * Constructor instantiates a new <code>Matrix</code> that is set to the
      * identity matrix.
-     *  
      */
     public Matrix4f() {
         loadIdentity();
@@ -65,7 +124,6 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>loadIdentity</code> sets this matrix to the identity matrix,
      * namely all zeros with ones along the diagonal.
-     *  
      */
     public void loadIdentity() {
         m01 = m02 = m03 = 0.0f;
@@ -77,7 +135,7 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * <code>mult</code> multiplies this matrix by a scalar.
-     * 
+     *
      * @param scalar
      *            the scalar to multiply this matrix by.
      */
@@ -102,7 +160,7 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * Inverts this matrix locally.
-     * 
+     *
      * @return this
      */
     public Matrix4f invertLocal() {
@@ -167,7 +225,7 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * Sets all of the values in this matrix to zero.
-     * 
+     *
      * @return this matrix
      */
     public Matrix4f zero() {
@@ -178,10 +236,24 @@ public final class Matrix4f implements Cloneable {
         return this;
     }
 
+    /**
+     * Interpret this matrix as a 3-D coordinate transform and determine its
+     * translation component.
+     *
+     * @param vector storage for the result (not null, modified)
+     * @return the translation vector (vector)
+     */
     public Vector3f toTranslationVector(Vector3f vector) {
         return vector.set(m03, m13, m23);
     }
 
+    /**
+     * Interpret this matrix as a 3-D coordinate transform and determine its
+     * rotation component.
+     *
+     * @param q storage for the result (not null, modified)
+     * @return the rotation Quaternion (q)
+     */
     public Quaternion toRotationQuat(Quaternion q) {
         return q.fromRotationMatrix(m00, m01, m02, m10,
                 m11, m12, m20, m21, m22);
@@ -195,16 +267,16 @@ public final class Matrix4f implements Cloneable {
      * @return the store vector
      */
     public Vector3f toScaleVector(Vector3f store) {
-		float scaleX = (float) Math.sqrt(m00 * m00 + m10 * m10 + m20 * m20);
-		float scaleY = (float) Math.sqrt(m01 * m01 + m11 * m11 + m21 * m21);
-		float scaleZ = (float) Math.sqrt(m02 * m02 + m12 * m12 + m22 * m22);
+        float scaleX = (float) Math.sqrt(m00 * m00 + m10 * m10 + m20 * m20);
+        float scaleY = (float) Math.sqrt(m01 * m01 + m11 * m11 + m21 * m21);
+        float scaleZ = (float) Math.sqrt(m02 * m02 + m12 * m12 + m22 * m22);
         store.set(scaleX, scaleY, scaleZ);
         return store;
     }
 
     /**
      * Sets the scale.
-     * 
+     *
      * @param x
      *            the X scale
      * @param y
@@ -241,7 +313,7 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * Sets the scale.
-     * 
+     *
      * @param scale
      *            the scale vector to set
      */
@@ -269,7 +341,7 @@ public final class Matrix4f implements Cloneable {
      * 0.0  1.0  0.0  0.0 <br>
      * 0.0  0.0  1.0  0.0 <br>
      * 0.0  0.0  0.0  1.0 <br>]<br>
-     * 
+     *
      * @return the string representation of this object.
      */
     @Override
@@ -315,11 +387,10 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * 
      * <code>hashCode</code> returns the hash code value as an integer and is
      * supported for the benefit of hashing based collection classes such as
      * Hashtable, HashMap, HashSet etc.
-     * 
+     *
      * @return the hashcode for this instance of Matrix4f.
      * @see java.lang.Object#hashCode()
      */
@@ -358,7 +429,7 @@ public final class Matrix4f implements Cloneable {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Matrix4f) || o == null) {
+        if (o == null || o.getClass() != getClass()) {
             return false;
         }
 
@@ -422,6 +493,11 @@ public final class Matrix4f implements Cloneable {
         return true;
     }
 
+    /**
+     * Create a copy of this matrix.
+     *
+     * @return a new instance, equivalent to this one
+     */
     @Override
     public Matrix4f clone() {
         try {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ import com.jme3.util.TempVars;
 /**
  * Started Date: Jul 16, 2004<br><br>
  * Represents a translation, rotation and scale in one object.
- * 
+ *
  * @author Jack Lindamood
  * @author Joshua Slack
  */
@@ -50,23 +50,24 @@ public final class Transform implements Cloneable, java.io.Serializable {
     private Vector3f translation = new Vector3f();
     private Vector3f scale = new Vector3f(1, 1, 1);
 
-    public Transform(Vector3f translation, Quaternion rot){
+    public Transform(Vector3f translation, Quaternion rot) {
         this.translation.set(translation);
         this.rot.set(rot);
     }
-    
-    public Transform(Vector3f translation, Quaternion rot, Vector3f scale){
+
+    public Transform(Vector3f translation, Quaternion rot, Vector3f scale) {
         this(translation, rot);
         this.scale.set(scale);
     }
 
-    public Transform(){
+    public Transform() {
         this(Vector3f.ZERO, Quaternion.IDENTITY);
     }
 
     /**
      * Sets this translation to the given value.
-     * @param trans The new translation for this matrix.
+     *
+     * @param trans The new translation for this Transform.
      * @return this
      */
     public Transform setTranslation(Vector3f trans) {
@@ -75,7 +76,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Return the translation vector in this matrix.
+     * Return the translation vector in this Transform.
+     *
      * @return translation vector.
      */
     public Vector3f getTranslation() {
@@ -84,7 +86,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
 
     /**
      * Sets this scale to the given value.
-     * @param scale The new scale for this matrix.
+     *
+     * @param scale The new scale for this Transform.
      * @return this
      */
     public Transform setScale(float scale) {
@@ -93,7 +96,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Return the scale vector in this matrix.
+     * Return the scale vector in this Transform.
+     *
      * @return scale vector.
      */
     public Vector3f getScale() {
@@ -101,17 +105,20 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Return the rotation quaternion in this matrix.
+     * Return the rotation quaternion in this Transform.
+     *
      * @return rotation quaternion.
      */
     public Quaternion getRotation() {
         return rot;
-    } 
-    
+    }
+
     /**
-     * Changes the values of this matrix according to its parent.  Very similar to the concept of Node/Spatial transforms.
-     * @param parent The parent matrix.
-     * @return This matrix, after combining.
+     * Changes the values of this Transform according to its parent. Very similar
+     * to the concept of Node/Spatial transforms.
+     *
+     * @param parent The parent Transform.
+     * @return This Transform, after combining.
      */
     public Transform combineWithParent(Transform parent) {
         //applying parent scale to local scale
@@ -122,17 +129,17 @@ public final class Transform implements Cloneable, java.io.Serializable {
         translation.multLocal(parent.scale);
         //applying parent rotation to local translation, then applying parent translation to local translation.
         //Note that parent.rot.multLocal(translation) doesn't modify "parent.rot" but "translation"
-        parent
-            .rot
-            .multLocal(translation)
-            .addLocal(parent.translation);
+        parent.rot
+                .multLocal(translation)
+                .addLocal(parent.translation);
 
         return this;
     }
 
-    public Vector3f transformVector(final Vector3f in, Vector3f store){
-        if (store == null)
+    public Vector3f transformVector(final Vector3f in, Vector3f store) {
+        if (store == null) {
             store = new Vector3f();
+        }
 
         // multiply with scale first, then rotate, finally translate (cf.
         // Eberly)
@@ -152,7 +159,7 @@ public final class Transform implements Cloneable, java.io.Serializable {
         store.setScale(scale);
         return store;
     }
-    
+
     public void fromTransformMatrix(Matrix4f mat) {
         TempVars vars = TempVars.get();
         translation.set(mat.toTranslationVector(vars.vect1));
@@ -160,13 +167,13 @@ public final class Transform implements Cloneable, java.io.Serializable {
         scale.set(mat.toScaleVector(vars.vect2));
         vars.release();
     }
-    
+
     public Transform invert() {
         Transform t = new Transform();
         t.fromTransformMatrix(toTransformMatrix().invertLocal());
         return t;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -191,10 +198,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     @Override
-    public String toString(){
-        return getClass().getSimpleName() + "[ " + translation.x + ", " + translation.y + ", " + translation.z + "]\n"
-                                          + "[ " + rot.x + ", " + rot.y + ", " + rot.z + ", " + rot.w + "]\n"
-                                          + "[ " + scale.x + " , " + scale.y + ", " + scale.z + "]";
+    public String toString() {
+        return getClass().getSimpleName()
+                + "[ " + translation.x + ", " + translation.y + ", " + translation.z + "]\n"
+                + "[ " + rot.x + ", " + rot.y + ", " + rot.z + ", " + rot.w + "]\n"
+                + "[ " + scale.x + " , " + scale.y + ", " + scale.z + "]";
     }
 
     @Override

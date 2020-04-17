@@ -40,10 +40,9 @@ import java.util.logging.Logger;
  * hypercomplex numbers. Quaternions extends a rotation in three dimensions to a
  * rotation in four dimensions. This avoids "gimbal lock" and allows for smooth
  * continuous rotation.
- * 
- * <code>Quaternion</code> is defined by four floating point numbers: {x y z
- * w}.
- * 
+ *
+ * <code>Quaternion</code> is defined by four floating point numbers: {x y z w}.
+ *
  * @author Mark Powell
  * @author Joshua Slack
  */
@@ -56,10 +55,34 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * Represents the identity quaternion rotation (0, 0, 0, 1).
      */
     public static final Quaternion IDENTITY = new Quaternion();
+    /**
+     * another instance of the identity Quaternion (0, 0, 0, 1)
+     */
     public static final Quaternion DIRECTION_Z = new Quaternion();
+    /**
+     * The zero quaternion (0, 0, 0, 0) doesn't represent any rotation.
+     */
     public static final Quaternion ZERO = new Quaternion(0, 0, 0, 0);
-    
-    protected float x, y, z, w;
+
+    static {
+        DIRECTION_Z.fromAxes(Vector3f.UNIT_X, Vector3f.UNIT_Y, Vector3f.UNIT_Z);
+    }
+    /**
+     * the X component (not an angle!)
+     */
+    protected float x;
+    /**
+     * the Y component (not an angle!)
+     */
+    protected float y;
+    /**
+     * the Z component (not an angle!)
+     */
+    protected float z;
+    /**
+     * the W (real) component (not an angle!)
+     */
+    protected float w;
 
     /**
      * Constructor instantiates a new <code>Quaternion</code> object
@@ -77,14 +100,10 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * Constructor instantiates a new <code>Quaternion</code> object from the
      * given list of parameters.
      *
-     * @param x
-     *            the x value of the quaternion.
-     * @param y
-     *            the y value of the quaternion.
-     * @param z
-     *            the z value of the quaternion.
-     * @param w
-     *            the w value of the quaternion.
+     * @param x   the x value of the quaternion.
+     * @param y   the y value of the quaternion.
+     * @param z   the z value of the quaternion.
+     * @param w   the w value of the quaternion.
      */
     public Quaternion(float x, float y, float z, float w) {
         this.x = x;
@@ -93,18 +112,38 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         this.w = w;
     }
 
+    /**
+     * Determine the X component.
+     *
+     * @return x
+     */
     public float getX() {
         return x;
     }
 
+    /**
+     * Determine the Y component.
+     *
+     * @return y
+     */
     public float getY() {
         return y;
     }
 
+    /**
+     * Determine the Z component.
+     *
+     * @return z
+     */
     public float getZ() {
         return z;
     }
 
+    /**
+     * Determine the W (real) component.
+     *
+     * @return w
+     */
     public float getW() {
         return w;
     }
@@ -114,8 +153,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * passed <code>Quaternion</code> object. The values are copied producing
      * a new object.
      *
-     * @param q
-     *            The Quaternion to copy values from.
+     * @param q   The Quaternion to copy values from.
      * @return this
      */
     public Quaternion set(Quaternion q) {
@@ -127,7 +165,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Sets this Quaternion to {0, 0, 0, 1}.  Same as calling set(0,0,0,1).
+     * Sets this Quaternion to {0, 0, 0, 1}. Same as calling set(0,0,0,1).
      */
     public void loadIdentity() {
         x = y = z = 0;
@@ -135,10 +173,10 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * 
+     *
      * <code>fromRotationMatrix</code> generates a quaternion from a supplied
      * matrix. This matrix is assumed to be a rotational matrix.
-     * 
+     *
      * @param matrix
      *            the matrix that defines the rotation.
      * @return this
@@ -148,6 +186,21 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
                 matrix.m11, matrix.m12, matrix.m20, matrix.m21, matrix.m22);
     }
 
+    /**
+     * Set this quaternion based on a rotation matrix with the specified
+     * elements.
+     *
+     * @param m00 the matrix element in row 0, column 0
+     * @param m01 the matrix element in row 0, column 1
+     * @param m02 the matrix element in row 0, column 2
+     * @param m10 the matrix element in row 1, column 0
+     * @param m11 the matrix element in row 1, column 1
+     * @param m12 the matrix element in row 1, column 2
+     * @param m20 the matrix element in row 2, column 0
+     * @param m21 the matrix element in row 2, column 1
+     * @param m22 the matrix element in row 2, column 2
+     * @return this Quaternion
+     */
     public Quaternion fromRotationMatrix(float m00, float m01, float m02,
             float m10, float m11, float m12, float m20, float m21, float m22) {
         // first normalize the forward (F), up (U) and side (S) vectors of the rotation matrix
@@ -174,7 +227,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
             m22 *= lengthSquared;
         }
 
-        // Use the Graphics Gems code, from 
+        // Use the Graphics Gems code, from
         // ftp://ftp.cis.upenn.edu/pub/graphics/shoemake/quatut.ps.Z
         // *NOT* the "Matrix and Quaternions FAQ", which has errors!
 
@@ -219,7 +272,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     /**
      * <code>toRotationMatrix</code> converts this quaternion to a rotational
      * matrix. Note: the result is created from a normalized version of this quat.
-     * 
+     *
      * @return the rotation matrix representation of this quaternion.
      */
     public Matrix3f toRotationMatrix() {
@@ -230,7 +283,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     /**
      * <code>toRotationMatrix</code> converts this quaternion to a rotational
      * matrix. The result is stored in result.
-     * 
+     *
      * @param result
      *            The Matrix3f to store the result in.
      * @return the rotation matrix representation of this quaternion.
@@ -401,8 +454,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * It IS safe for q and res to be the same object.
      * It IS NOT safe for this and res to be the same object.
      *
-     * @param q
-     *            the quaternion to multiply this quaternion by.
+     * @param q   the quaternion to multiply this quaternion by.
      * @param res
      *            the quaternion to store the result in.
      * @return the new quaternion.
@@ -441,8 +493,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * <code>mult</code> multiplies this quaternion by a parameter vector. The
      * result is stored in the supplied vector
      *
-     * @param v
-     *            the vector to multiply this quaternion by.
+     * @param v   the vector to multiply this quaternion by.
      * @return v
      */
     public Vector3f multLocal(Vector3f v) {
@@ -462,7 +513,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     /**
      * <code>mult</code> multiplies this quaternion by a parameter vector. The
      * result is returned as a new vector.
-     * 
+     *
      * @param v
      *            the vector to multiply this quaternion by.
      * @param store
@@ -568,13 +619,12 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         }
         return true;
     }
-    
+
     /**
-     * 
      * <code>hashCode</code> returns the hash code value as an integer and is
      * supported for the benefit of hashing based collection classes such as
      * Hashtable, HashMap, HashSet etc.
-     * 
+     *
      * @return the hashcode for this instance of Quaternion.
      * @see java.lang.Object#hashCode()
      */
@@ -589,6 +639,11 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
 
     }
 
+    /**
+     * Create a copy of this quaternion.
+     *
+     * @return a new instance, equivalent to this one
+     */
     @Override
     public Quaternion clone() {
         try {

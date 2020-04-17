@@ -56,7 +56,7 @@ public class BoundingBox {
      * the Z-extent of the box (>=0, may be +Infinity)
      */
     float zExtent;
-    
+
     /**
      * Instantiate a <code>BoundingBox</code> without initializing it.
      */
@@ -84,7 +84,7 @@ public class BoundingBox {
 
     /**
      * Query extent.
-     * 
+     *
      * @param store
      *            where extent gets stored - null to return a new vector
      * @return store / new vector

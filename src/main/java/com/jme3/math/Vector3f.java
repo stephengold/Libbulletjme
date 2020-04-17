@@ -29,7 +29,6 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package com.jme3.math;
 
 import java.util.logging.Logger;
@@ -50,7 +49,6 @@ import java.util.logging.Logger;
 public final class Vector3f implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
-    
     private static final Logger logger = Logger.getLogger(Vector3f.class.getName());
 
     public final static Vector3f ZERO = new Vector3f(0, 0, 0);
@@ -58,17 +56,14 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     public final static Vector3f UNIT_Y = new Vector3f(0, 1, 0);
     public final static Vector3f UNIT_Z = new Vector3f(0, 0, 1);
     public final static Vector3f UNIT_XYZ = new Vector3f(1, 1, 1);
-    
-	/**
+    /**
      * the x value of the vector.
      */
     public float x;
-
     /**
      * the y value of the vector.
      */
     public float y;
-
     /**
      * the z value of the vector.
      */
@@ -135,7 +130,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     *
      * <code>add</code> adds a provided vector to this vector creating a
      * resultant vector which is returned. If the provided vector is null, null
      * is returned.
@@ -193,7 +187,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     *
      * <code>dot</code> calculates the dot product of this vector with a
      * provided vector. If the provided vector is null, 0 is returned.
      *
@@ -231,7 +224,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      *            the vector to store the cross product result.
      * @return result, after receiving the cross product vector.
      */
-    public Vector3f cross(Vector3f v,Vector3f result) {
+    public Vector3f cross(Vector3f v, Vector3f result) {
         return cross(v.x, v.y, v.z, result);
     }
 
@@ -250,8 +243,10 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * @return result, after receiving the cross product vector.
      */
     public Vector3f cross(float otherX, float otherY, float otherZ, Vector3f result) {
-        if (result == null) result = new Vector3f();
-        float resX = ((y * otherZ) - (z * otherY)); 
+        if (result == null) {
+            result = new Vector3f();
+        }
+        float resX = ((y * otherZ) - (z * otherY));
         float resY = ((z * otherX) - (x * otherZ));
         float resZ = ((x * otherY) - (y * otherX));
         result.set(resX, resY, resZ);
@@ -261,11 +256,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     /**
      * Returns true if this vector is a unit vector (length() ~= 1),
      * returns false otherwise.
-     * 
+     *
      * @return true if this vector is a unit vector (length() ~= 1),
      * or false otherwise.
      */
-    public boolean isUnitVector(){
+    public boolean isUnitVector() {
         float len = length();
         return 0.99f < len && len < 1.01f;
     }
@@ -339,10 +334,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
             logger.warning("Provided vector is null, null returned.");
             return null;
         }
-        if (store == null) store = new Vector3f();
+        if (store == null) {
+            store = new Vector3f();
+        }
         return store.set(x * vec.x, y * vec.y, z * vec.z);
     }
-
 
     /**
      * <code>divideLocal</code> divides this vector by a scalar internally,
@@ -354,7 +350,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * @return this
      */
     public Vector3f divideLocal(float scalar) {
-        scalar = 1f/scalar;
+        scalar = 1f / scalar;
         x *= scalar;
         y *= scalar;
         z *= scalar;
@@ -363,7 +359,6 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
 
     /**
-     *
      * <code>subtract</code> subtracts the values of a given vector from those
      * of this vector creating a new vector object. If the provided vector is
      * null, null is returned.
@@ -409,7 +404,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 //
 //        return divide(1);
         float length = x * x + y * y + z * z;
-        if (length != 1f && length != 0f){
+        if (length != 1f && length != 0f) {
             length = 1.0f / FastMath.sqrt(length);
             return new Vector3f(x * length, y * length, z * length);
         }
@@ -428,18 +423,25 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     /**
      * Check a vector... if it is null or its floats are NaN or infinite,
      * return false.  Else return true.
+     *
      * @param vector the vector to check
      * @return true or false as stated above.
      */
     public static boolean isValidVector(Vector3f vector) {
-      if (vector == null) return false;
-      if (Float.isNaN(vector.x) ||
-          Float.isNaN(vector.y) ||
-          Float.isNaN(vector.z)) return false;
-      if (Float.isInfinite(vector.x) ||
-          Float.isInfinite(vector.y) ||
-          Float.isInfinite(vector.z)) return false;
-      return true;
+        if (vector == null) {
+            return false;
+        }
+        if (Float.isNaN(vector.x)
+                || Float.isNaN(vector.y)
+                || Float.isNaN(vector.z)) {
+            return false;
+        }
+        if (Float.isInfinite(vector.x)
+                || Float.isInfinite(vector.y)
+                || Float.isInfinite(vector.z)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -461,21 +463,32 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Vector3f)) { return false; }
+        if (!(o instanceof Vector3f)) {
+            return false;
+        }
 
-        if (this == o) { return true; }
+        if (this == o) {
+            return true;
+        }
 
         Vector3f comp = (Vector3f) o;
-        if (Float.compare(x,comp.x) != 0) return false;
-        if (Float.compare(y,comp.y) != 0) return false;
-        if (Float.compare(z,comp.z) != 0) return false;
+        if (Float.compare(x, comp.x) != 0) {
+            return false;
+        }
+        if (Float.compare(y, comp.y) != 0) {
+            return false;
+        }
+        if (Float.compare(z, comp.z) != 0) {
+            return false;
+        }
         return true;
     }
-    
+
     /**
      * <code>hashCode</code> returns a unique code for this vector object based
      * on its values. If two vectors are logically equivalent, they will return
      * the same hash code value.
+     *
      * @return the hash code value of this vector.
      */
     @Override
@@ -522,7 +535,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
         }
         throw new IllegalArgumentException("index must be either 0, 1 or 2");
     }
-    
+
     /**
      * @param index
      *            which field index in this vector to set.
@@ -545,5 +558,4 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
         }
         throw new IllegalArgumentException("index must be either 0, 1 or 2");
     }
-
 }

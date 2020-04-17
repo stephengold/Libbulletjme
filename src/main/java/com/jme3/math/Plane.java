@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * This provides methods for calculating a "distance" of a point from this
  * plane. The distance is pseudo due to the fact that it can be negative if the
  * point is on the non-normal side of the plane.
- * 
+ *
  * @author Mark Powell
  * @author Joshua Slack
  * @author Ian McClean
@@ -50,12 +50,12 @@ public class Plane implements Cloneable, java.io.Serializable {
     private static final Logger logger = Logger
             .getLogger(Plane.class.getName());
 
-    /** 
+    /**
      * Vector normal to the plane.
      */
     protected Vector3f normal = new Vector3f();
 
-    /** 
+    /**
      * Constant of the plane. See formula in class definition.
      */
     protected float constant;
@@ -63,7 +63,7 @@ public class Plane implements Cloneable, java.io.Serializable {
     /**
      * Constructor instantiates a new <code>Plane</code> object. The normal
      * and constant values are set at creation.
-     * 
+     *
      * @param normal
      *            the normal of the plane.
      * @param constant
@@ -80,7 +80,7 @@ public class Plane implements Cloneable, java.io.Serializable {
 
     /**
      * <code>getNormal</code> retrieves the normal of the plane.
-     * 
+     *
      * @return the normal of the plane.
      */
     public Vector3f getNormal() {
@@ -89,14 +89,14 @@ public class Plane implements Cloneable, java.io.Serializable {
 
     /**
      * <code>getConstant</code> returns the constant of the plane.
-     * 
+     *
      * @return the constant of the plane.
      */
     public float getConstant() {
         return constant;
     }
 
-    public Vector3f getClosestPoint(Vector3f point, Vector3f store){
+    public Vector3f getClosestPoint(Vector3f point, Vector3f store) {
 //        float t = constant - normal.dot(point);
 //        return store.set(normal).multLocal(t).addLocal(point);
         float t = (constant - normal.dot(point)) / normal.dot(normal);
@@ -109,7 +109,7 @@ public class Plane implements Cloneable, java.io.Serializable {
      * <code>Vector3f</code> object, so the format is the following:
      * com.jme.math.Plane [Normal: org.jme.math.Vector3f [X=XX.XXXX, Y=YY.YYYY,
      * Z=ZZ.ZZZZ] - Constant: CC.CCCCC]
-     * 
+     *
      * @return the string representation of this plane.
      */
     @Override
@@ -118,6 +118,11 @@ public class Plane implements Cloneable, java.io.Serializable {
                 + constant + "]";
     }
 
+    /**
+     * Create a copy of this plane.
+     *
+     * @return a new instance, equivalent to this one
+     */
     @Override
     public Plane clone() {
         try {

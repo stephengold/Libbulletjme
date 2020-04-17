@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@ import java.nio.ShortBuffer;
 /**
  * <code>BufferUtils</code> is a helper class for generating nio buffers from
  * jME data classes such as Vectors.
- * 
+ *
  * @author Joshua Slack
  * @version $Id: BufferUtils.java,v 1.16 2007/10/29 16:56:18 nca Exp $
  */
@@ -53,7 +53,7 @@ public final class BufferUtils {
      * Generate a new FloatBuffer using the given array of Vector3f objects. The
      * FloatBuffer will be 3 * data.length long and contain the vector data as
      * data[0].x, data[0].y, data[0].z, data[1].x... etc.
-     * 
+     *
      * @param data
      *            array of Vector3f objects to place into a new FloatBuffer
      * @return a new FloatBuffer 
@@ -76,7 +76,7 @@ public final class BufferUtils {
 
     /**
      * Generate a new FloatBuffer using the given array of float primitives.
-     * 
+     *
      * @param data
      *            array of float primitives to place into a new FloatBuffer
      * @return a new FloatBuffer
@@ -96,7 +96,7 @@ public final class BufferUtils {
      * Generate a new IntBuffer using the given array of ints. The IntBuffer
      * will be data.length long and contain the int data as data[0], data[1]...
      * etc.
-     * 
+     *
      * @param data
      *            array of ints to place into a new IntBuffer
      * @return a new IntBuffer
@@ -114,7 +114,7 @@ public final class BufferUtils {
 
     /**
      * Create a new FloatBuffer of the specified size.
-     * 
+     *
      * @param size
      *            required number of floats to store.
      * @return the new FloatBuffer
@@ -127,7 +127,7 @@ public final class BufferUtils {
 
     /**
      * Create a new IntBuffer of the specified size.
-     * 
+     *
      * @param size
      *            required number of ints to store.
      * @return the new IntBuffer
@@ -140,7 +140,7 @@ public final class BufferUtils {
 
     /**
      * Create a new ByteBuffer of the specified size.
-     * 
+     *
      * @param size
      *            required number of ints to store.
      * @return the new IntBuffer
@@ -153,7 +153,7 @@ public final class BufferUtils {
 
     /**
      * Create a new ShortBuffer of the specified size.
-     * 
+     *
      * @param size
      *            required number of shorts to store.
      * @return the new ShortBuffer
