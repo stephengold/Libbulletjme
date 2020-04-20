@@ -461,9 +461,12 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      */
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-        logger.log(Level.FINE, "Finalizing {0}.", this);
-        finalizeNative(nativeId);
+        try {
+            logger.log(Level.FINE, "Finalizing {0}.", this);
+            finalizeNative(nativeId);
+        } finally {
+            super.finalize();
+        }
     }
 
     /**

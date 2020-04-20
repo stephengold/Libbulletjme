@@ -173,10 +173,13 @@ public class CompoundMesh {
      */
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-        logger.log(Level.FINE, "Finalizing CompoundMesh {0}",
-                Long.toHexString(nativeId));
-        finalizeNative(nativeId);
+        try {
+            logger.log(Level.FINE, "Finalizing CompoundMesh {0}",
+                    Long.toHexString(nativeId));
+            finalizeNative(nativeId);
+        } finally {
+            super.finalize();
+        }
     }
     // *************************************************************************
     // private methods

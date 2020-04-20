@@ -89,7 +89,6 @@ public class RigidBodyMotionState {
     // *************************************************************************
     // new methods exposed
 
-
     /**
      * Copy the location from this motion state.
      *
@@ -203,10 +202,13 @@ public class RigidBodyMotionState {
      */
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-        logger.log(Level.FINE, "Finalizing MotionState {0}",
-                Long.toHexString(motionStateId));
-        finalizeNative(motionStateId);
+        try {
+            logger.log(Level.FINE, "Finalizing MotionState {0}",
+                    Long.toHexString(motionStateId));
+            finalizeNative(motionStateId);
+        } finally {
+            super.finalize();
+        }
     }
     // *************************************************************************
     // native methods
