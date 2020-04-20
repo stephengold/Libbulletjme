@@ -343,6 +343,7 @@ public class MultiBody implements Comparable<MultiBody> {
      */
     public int collisionGroup() {
         int result = getCollisionGroup(nativeId);
+        assert Integer.bitCount(result) == 1 : result;
         return result;
     }
 
