@@ -538,9 +538,15 @@ public class CollisionSpace {
      */
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-        loggerC.log(Level.FINE, "Finalizing {0}.", this);
-        finalizeNative(nativeId);
+        try {
+            loggerC.log(Level.FINE, "Finalizing {0}.", this);
+            for (PhysicsCollisionObject pco : getPcoList()) {
+                removeCollisionObject(pco);
+            }
+            finalizeNative(nativeId);
+        } finally {
+            super.finalize();
+        }
     }
 
     /**

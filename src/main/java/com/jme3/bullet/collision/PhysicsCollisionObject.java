@@ -896,9 +896,16 @@ abstract public class PhysicsCollisionObject
      */
     @Override
     protected void finalize() throws Throwable {
-        super.finalize();
-        logger.log(Level.FINE, "Finalizing {0}.", this);
-        finalizeNative(objectId);
+        try {
+            logger.log(Level.FINE, "Finalizing {0}.", this);
+            CollisionSpace space = getCollisionSpace();
+            if (space != null) {
+                space.removeCollisionObject(this);
+            }
+            finalizeNative(objectId);
+        } finally {
+            super.finalize();
+        }
     }
 
     /**
