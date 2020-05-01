@@ -247,7 +247,13 @@ repositories {
     jcenter()
 }
 
-compileJava.options.headerOutputDirectory = new File('src/main/native/glue')
+tasks.withType(JavaCompile) { // compile-time options:
+    options.compilerArgs << '-Xdiags:verbose'
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true
+    options.encoding = 'UTF-8'
+    options.headerOutputDirectory = new File('src/main/native/glue')
+}
 
 test.dependsOn('assemble')
 assemble.dependsOn('copyToDistJars')
