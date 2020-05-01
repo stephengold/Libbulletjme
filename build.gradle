@@ -21,6 +21,11 @@ sourceSets.test.java {
     srcDir 'src/test/java'
 }
 
+// Regenerate all JNI header files before compiling any C++ source code.
+tasks.withType(CppCompile) {
+    dependsOn('classes')
+}
+
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 model {
     buildTypes {
@@ -216,6 +221,7 @@ model {
 
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
+
                     task "copyToDist$q" (type: Copy, dependsOn:
                          "bulletjme${q}SharedLibrary") {
                         from sharedLibraryFile
