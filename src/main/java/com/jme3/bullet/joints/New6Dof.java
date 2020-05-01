@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -174,7 +174,7 @@ public class New6Dof extends Constraint {
      * @return true if rotation orders are identical, otherwise false
      */
     public boolean checkRotationOrder() {
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         int rotOrder = getRotationOrder(constraintId);
         boolean result = rotOrder == rotationOrder.ordinal();
 
@@ -191,7 +191,7 @@ public class New6Dof extends Constraint {
     public Vector3f getAngles(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         getAngles(constraintId, result);
 
         return result;
@@ -211,7 +211,7 @@ public class New6Dof extends Constraint {
                 PhysicsSpace.AXIS_Z);
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         getAxis(constraintId, axisIndex, result);
 
         return result;
@@ -228,7 +228,7 @@ public class New6Dof extends Constraint {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         switch (end) {
             case A:
                 getFrameOffsetA(constraintId, result);
@@ -255,7 +255,7 @@ public class New6Dof extends Constraint {
     public void enableSpring(int dofIndex, boolean onOff) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         enableSpring(constraintId, dofIndex, onOff);
     }
 
@@ -295,7 +295,7 @@ public class New6Dof extends Constraint {
     public Vector3f getPivotOffset(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         getPivotOffset(constraintId, result);
 
         return result;
@@ -446,7 +446,7 @@ public class New6Dof extends Constraint {
     public void setDamping(int dofIndex, float damping, boolean limitIfNeeded) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setDamping(constraintId, dofIndex, damping, limitIfNeeded);
     }
 
@@ -455,7 +455,7 @@ public class New6Dof extends Constraint {
      * constraint's current location/orientation.
      */
     public void setEquilibriumPoint() {
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setAllEquilibriumPointsToCurrent(constraintId);
     }
 
@@ -470,7 +470,7 @@ public class New6Dof extends Constraint {
     public void setEquilibriumPoint(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setEquilibriumPointToCurrent(constraintId, dofIndex);
     }
 
@@ -485,7 +485,7 @@ public class New6Dof extends Constraint {
     public void setEquilibriumPoint(int dofIndex, float value) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setEquilibriumPoint(constraintId, dofIndex, value);
     }
 
@@ -495,7 +495,7 @@ public class New6Dof extends Constraint {
      * @param rotationOrder the desired order (not null)
      */
     public void setRotationOrder(RotationOrder rotationOrder) {
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         int rotOrder = rotationOrder.ordinal();
         setRotationOrder(constraintId, rotOrder);
     }
@@ -514,7 +514,7 @@ public class New6Dof extends Constraint {
             boolean limitIfNeeded) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setStiffness(constraintId, dofIndex, stiffness, limitIfNeeded);
     }
     // *************************************************************************
@@ -579,7 +579,7 @@ public class New6Dof extends Constraint {
         assert rotationMotor == null;
         assert translationMotor == null;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         rotationMotor = new RotationMotor[numAxes];
 
         for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {

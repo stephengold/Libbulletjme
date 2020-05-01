@@ -179,7 +179,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         wheels.add(wheel);
 
         if (vehicleId != 0L) {
-            long tuningId = tuning.getNativeId();
+            long tuningId = tuning.nativeId();
             int index = addWheel(vehicleId, wheel.getLocation(null),
                     wheel.getDirection(null), wheel.getAxle(null),
                     wheel.getRestLength(), wheel.getRadius(), tuningId,
@@ -242,7 +242,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         if (space == null) {
             return;
         }
-        long spaceId = space.getSpaceId();
+        long spaceId = space.nativeId();
         if (spaceId == 0L) {
             throw new IllegalStateException(
                     "Physics space is not initialized!");
@@ -263,7 +263,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         setCoordinateSystem(vehicleId, PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Y, PhysicsSpace.AXIS_Z);
 
-        long tuningId = tuning.getNativeId();
+        long tuningId = tuning.nativeId();
         for (VehicleWheel wheel : wheels) {
             wheel.setVehicleId(vehicleId, addWheel(vehicleId,
                     wheel.getLocation(null), wheel.getDirection(null),

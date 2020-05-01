@@ -174,7 +174,7 @@ public class ConeJoint extends Constraint {
     public Transform getFrameTransform(JointEnd end, Transform storeResult) {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
 
         switch (end) {
             case A:
@@ -233,7 +233,7 @@ public class ConeJoint extends Constraint {
      * @param value the desired setting (default=false)
      */
     public void setAngularOnly(boolean value) {
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         angularOnly = value;
         setAngularOnly(constraintId, value);
     }
@@ -247,7 +247,7 @@ public class ConeJoint extends Constraint {
      * radians)
      */
     public void setLimit(float swingSpan1, float swingSpan2, float twistSpan) {
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         this.swingSpan1 = swingSpan1;
         this.swingSpan2 = swingSpan2;
         this.twistSpan = twistSpan;

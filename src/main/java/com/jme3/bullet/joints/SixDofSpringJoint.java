@@ -133,7 +133,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public void enableSpring(int dofIndex, boolean onOff) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         enableSpring(constraintId, dofIndex, onOff);
     }
 
@@ -148,7 +148,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public float getDamping(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         float result = getDamping(constraintId, dofIndex);
 
         return result;
@@ -165,7 +165,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public float getEquilibriumPoint(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         float result = getEquilibriumPoint(constraintId, dofIndex);
 
         return result;
@@ -182,7 +182,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public float getStiffness(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         float result = getStiffness(constraintId, dofIndex);
 
         return result;
@@ -199,7 +199,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public boolean isSpringEnabled(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         boolean result = isSpringEnabled(constraintId, dofIndex);
 
         return result;
@@ -217,7 +217,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public void setDamping(int dofIndex, float damping) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setDamping(constraintId, dofIndex, damping);
     }
 
@@ -226,7 +226,7 @@ public class SixDofSpringJoint extends SixDofJoint {
      * joint's current location/orientation.
      */
     public void setEquilibriumPoint() {
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setEquilibriumPoint(constraintId);
     }
 
@@ -241,7 +241,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public void setEquilibriumPoint(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setEquilibriumPoint(constraintId, dofIndex);
     }
 
@@ -256,7 +256,7 @@ public class SixDofSpringJoint extends SixDofJoint {
     public void setStiffness(int dofIndex, float stiffness) {
         Validate.inRange(dofIndex, "DOF index", 0, 5);
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setStiffness(constraintId, dofIndex, stiffness);
     }
     // *************************************************************************

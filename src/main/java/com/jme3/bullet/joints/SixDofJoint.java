@@ -217,7 +217,7 @@ public class SixDofJoint extends Constraint {
     public Vector3f getAngles(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         getAngles(constraintId, result);
 
         return result;
@@ -264,7 +264,7 @@ public class SixDofJoint extends Constraint {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         switch (end) {
             case A:
                 getFrameOffsetA(constraintId, result);
@@ -320,7 +320,7 @@ public class SixDofJoint extends Constraint {
     public Vector3f getPivotOffset(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         getPivotOffset(constraintId, result);
 
         return result;
@@ -362,7 +362,7 @@ public class SixDofJoint extends Constraint {
         Validate.inRange(limits.z, "limits.z", -FastMath.PI, FastMath.PI);
 
         angularLowerLimit.set(limits);
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setAngularLowerLimit(constraintId, limits);
     }
 
@@ -378,7 +378,7 @@ public class SixDofJoint extends Constraint {
         Validate.inRange(limits.z, "limits.z", -FastMath.PI, FastMath.PI);
 
         angularUpperLimit.set(limits);
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setAngularUpperLimit(constraintId, limits);
     }
 
@@ -389,7 +389,7 @@ public class SixDofJoint extends Constraint {
      */
     public void setLinearLowerLimit(Vector3f vector) {
         linearLowerLimit.set(vector);
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setLinearLowerLimit(constraintId, vector);
     }
 
@@ -400,7 +400,7 @@ public class SixDofJoint extends Constraint {
      */
     public void setLinearUpperLimit(Vector3f vector) {
         linearUpperLimit.set(vector);
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         setLinearUpperLimit(constraintId, vector);
     }
     // *************************************************************************
@@ -504,7 +504,7 @@ public class SixDofJoint extends Constraint {
         assert rotationalMotors == null;
         assert translationalMotor == null;
 
-        long constraintId = getObjectId();
+        long constraintId = nativeId();
         rotationalMotors = new RotationalLimitMotor[numAxes];
 
         for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {

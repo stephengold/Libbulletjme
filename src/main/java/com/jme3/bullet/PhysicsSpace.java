@@ -225,7 +225,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @return true if currently added, otherwise false
      */
     public boolean contains(PhysicsJoint joint) {
-        long jointId = joint.getObjectId();
+        long jointId = joint.nativeId();
         boolean result = physicsJoints.containsKey(jointId);
 
         return result;
@@ -237,7 +237,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @return the count (&ge;0)
      */
     public int countJoints() {
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         int count = getNumConstraints(spaceId);
         assert count == physicsJoints.size() : count;
         return count;
@@ -396,7 +396,7 @@ public class PhysicsSpace extends CollisionSpace {
      */
     public void setGravity(Vector3f gravity) {
         this.gravity.set(gravity);
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         setGravity(spaceId, gravity);
     }
 
@@ -443,7 +443,7 @@ public class PhysicsSpace extends CollisionSpace {
     public void update(float timeInterval) {
         Validate.nonNegative(timeInterval, "time interval");
 
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         assert maxSubSteps >= 0 : maxSubSteps;
         assert accuracy > 0f : accuracy;
         float interval = timeInterval;
@@ -464,7 +464,7 @@ public class PhysicsSpace extends CollisionSpace {
         Validate.nonNegative(timeInterval, "time interval");
         Validate.nonNegative(maxSteps, "max steps");
 
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         assert accuracy > 0f : accuracy;
         stepSimulation(spaceId, timeInterval, maxSteps, accuracy);
     }
@@ -483,7 +483,7 @@ public class PhysicsSpace extends CollisionSpace {
      * Initialize the solverInfo field during create().
      */
     protected void initSolverInfo() {
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         long solverInfoId = getSolverInfo(spaceId);
         solverInfo = new SolverInfo(solverInfoId);
     }
@@ -493,7 +493,7 @@ public class PhysicsSpace extends CollisionSpace {
      * correct type.
      */
     protected void updateSolver() {
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         int ordinal = solverType.ordinal();
         setSolverType(spaceId, ordinal);
     }
@@ -656,7 +656,7 @@ public class PhysicsSpace extends CollisionSpace {
         logger.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{character, this});
 
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         long characterId = character.getObjectId();
         characterMap.put(characterId, character);
         addCharacterObject(spaceId, characterId);
@@ -700,11 +700,11 @@ public class PhysicsSpace extends CollisionSpace {
         }
 
         logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{joint, this});
-        long jointId = joint.getObjectId();
+        long jointId = joint.nativeId();
         physicsJoints.put(jointId, joint);
 
         if (joint instanceof Constraint) {
-            long spaceId = getSpaceId();
+            long spaceId = nativeId();
             Constraint constr = (Constraint) joint;
             boolean allowCollision = constr.isCollisionBetweenLinkedBodies();
             addConstraintC(spaceId, jointId, !allowCollision);
@@ -741,7 +741,7 @@ public class PhysicsSpace extends CollisionSpace {
             kinematic = true;
             rigidBody.setKinematic(false);
         }
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         addRigidBody(spaceId, rigidBodyId);
         if (kinematic) {
             rigidBody.setKinematic(true);
@@ -768,7 +768,7 @@ public class PhysicsSpace extends CollisionSpace {
     private boolean checkGravity(Vector3f storeVector) {
         assert storeVector != null;
 
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         getGravity(spaceId, storeVector);
         boolean result = gravity.equals(storeVector);
 
@@ -811,7 +811,7 @@ public class PhysicsSpace extends CollisionSpace {
         characterMap.remove(characterId);
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{character, this});
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         removeAction(spaceId, character.getControllerId());
         removeCharacterObject(spaceId, characterId);
     }
@@ -822,7 +822,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @param joint the joint to remove (not null)
      */
     private void removeJoint(PhysicsJoint joint) {
-        long jointId = joint.getObjectId();
+        long jointId = joint.nativeId();
         if (!physicsJoints.containsKey(jointId)) {
             logger.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{joint, this});
@@ -833,7 +833,7 @@ public class PhysicsSpace extends CollisionSpace {
         physicsJoints.remove(jointId);
 
         if (joint instanceof Constraint) {
-            long spaceId = getSpaceId();
+            long spaceId = nativeId();
             removeConstraint(spaceId, jointId);
         }
     }
@@ -851,7 +851,7 @@ public class PhysicsSpace extends CollisionSpace {
             return;
         }
 
-        long spaceId = getSpaceId();
+        long spaceId = nativeId();
         if (rigidBody instanceof PhysicsVehicle) {
             PhysicsVehicle vehicle = (PhysicsVehicle) rigidBody;
             long vehicleId = vehicle.getVehicleId();

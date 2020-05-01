@@ -494,7 +494,7 @@ public class CollisionSpace extends NativePhysicsObject {
         Validate.nonNull(results, "results");
         assert shape.isConvex();
 
-        long shapeId = shape.getObjectId();
+        long shapeId = shape.nativeId();
         results.clear();
         long spaceId = nativeId();
         sweepTest_native(shapeId, start, end, spaceId, results,

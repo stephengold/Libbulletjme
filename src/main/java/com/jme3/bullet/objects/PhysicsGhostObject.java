@@ -194,7 +194,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
             initUserPointer();
         }
         CollisionShape shape = getCollisionShape();
-        attachCollisionShape(objectId, shape.getObjectId());
+        attachCollisionShape(objectId, shape.nativeId());
     }
     // *************************************************************************
     // native methods
