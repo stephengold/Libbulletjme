@@ -738,7 +738,7 @@ public class TestLibbulletjme {
 
         space.add(multiBody);
 
-        Assert.assertEquals(space.getSpaceId(), multiBody.spaceId());
+        Assert.assertEquals(space.nativeId(), multiBody.spaceId());
         Assert.assertEquals(4, space.countCollisionObjects());
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(1, space.countMultiBodies());
@@ -994,7 +994,7 @@ public class TestLibbulletjme {
         space.addCollisionObject(floorBody);
 
         Assert.assertSame(space, floorBody.getCollisionSpace());
-        Assert.assertEquals(space.getSpaceId(), floorBody.spaceId());
+        Assert.assertEquals(space.nativeId(), floorBody.spaceId());
         Assert.assertTrue(floorBody.isInWorld());
 
         Assert.assertFalse(space.isEmpty());
@@ -1016,7 +1016,7 @@ public class TestLibbulletjme {
         space.addCollisionObject(dropBody);
 
         Assert.assertSame(space, dropBody.getCollisionSpace());
-        Assert.assertEquals(space.getSpaceId(), dropBody.spaceId());
+        Assert.assertEquals(space.nativeId(), dropBody.spaceId());
         Assert.assertTrue(dropBody.isInWorld());
 
         Assert.assertFalse(space.isEmpty());
@@ -1080,7 +1080,7 @@ public class TestLibbulletjme {
         space.add(ghost);
 
         Assert.assertSame(space, ghost.getCollisionSpace());
-        Assert.assertEquals(space.getSpaceId(), ghost.spaceId());
+        Assert.assertEquals(space.nativeId(), ghost.spaceId());
         Assert.assertTrue(ghost.isInWorld());
         Assert.assertTrue(space.contains(ghost));
         Assert.assertEquals(1, space.countCollisionObjects());
@@ -1154,7 +1154,7 @@ public class TestLibbulletjme {
      */
     private static void verifyCollisionShapeDefaults(CollisionShape shape) {
         Assert.assertNotNull(shape);
-        Assert.assertNotEquals(0L, shape.getObjectId());
+        Assert.assertNotEquals(0L, shape.nativeId());
         assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
     }
 
