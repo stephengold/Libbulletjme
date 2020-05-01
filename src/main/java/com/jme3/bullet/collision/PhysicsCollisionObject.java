@@ -44,7 +44,7 @@ import jme3utilities.Validate;
 
 /**
  * The abstract base class for collision objects based on Bullet's
- * btCollisionObject.
+ * btCollisionObject. TODO extend PhysicsNativeObject
  * <p>
  * Subclasses include MultiBodyCollider, PhysicsBody, PhysicsCharacter, and
  * PhysicsGhostObject.
@@ -137,18 +137,17 @@ abstract public class PhysicsCollisionObject
      */
     private CollisionShape collisionShape;
     /**
-     * collision groups with which this object can collide (default=only group
-     * #1)
+     * collision groups with which this object can collide
      */
     private int collideWithGroups = COLLISION_GROUP_01;
     /**
-     * collision group to which this physics object belongs (default=group #1)
+     * collision group to which this physics object belongs
      */
     private int collisionGroup = COLLISION_GROUP_01;
     /**
-     * Unique identifier of the btCollisionObject. Constructors are responsible
-     * for setting this to a non-zero value. The ID might change if the object
-     * gets rebuilt. TODO privatize and rename nativeId
+     * Identifier of the btCollisionObject. Constructors are responsible for
+     * setting this to a non-zero value. The ID might change if the object gets
+     * rebuilt.
      */
     protected long objectId = 0L;
     /**
@@ -234,7 +233,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read this object's activation state.
+     * Read this object's activation state (native field: m_activationState1).
      *
      * @return the state (1=active tag, 2=island sleeping, 3=wants deactivation,
      * 4=disable deactivation, 5=disable simulation)
@@ -248,7 +247,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Copy this object's anisotropic friction components.
+     * Copy this object's anisotropic friction components (native field:
+     * m_anisotropicFriction).
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the components of the friction (either storeResult or a new
@@ -261,8 +261,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the continuous collision detection (CCD) motion threshold for this
-     * object.
+     * Read the continuous collision detection (CCD) motion threshold (native
+     * field: m_ccdMotionThreshold).
      *
      * @return the minimum distance per timestep to trigger CCD (in
      * physics-space units, &ge;0)
@@ -274,7 +274,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the squared motion threshold for this object.
+     * Read the squared motion threshold.
      *
      * @return the minimum distance squared (in physics-space units, &ge;0)
      */
@@ -342,7 +342,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the contact damping.
+     * Read the contact damping (native field: m_contactDamping).
      *
      * @return the damping
      */
@@ -352,7 +352,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the contact processing threshold.
+     * Read the contact processing threshold (native field:
+     * m_contactProcessingThreshold).
      *
      * @return the threshold distance (in physics-space units)
      */
@@ -362,7 +363,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the contact stiffness.
+     * Read the contact stiffness (native field: m_contactStiffness).
      *
      * @return the stiffness
      */
@@ -372,7 +373,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the deactivation time.
+     * Read the deactivation time (native field: m_deactivationTime).
      *
      * @return the time (in seconds)
      */
@@ -382,7 +383,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read this object's friction coefficient.
+     * Read this object's friction coefficient (native field: m_friction).
      *
      * @return the coefficient (&ge;0)
      */
@@ -393,7 +394,7 @@ abstract public class PhysicsCollisionObject
     /**
      * Read the ID of the btCollisionObject.
      *
-     * @return the unique identifier (not zero)
+     * @return the native identifier (not zero)
      */
     final public long getObjectId() {
         assert objectId != 0L;
@@ -453,7 +454,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read this object's restitution (bounciness).
+     * Read this object's restitution (bounciness) (native field:
+     * m_restitution).
      *
      * @return restitution value
      */
@@ -462,7 +464,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read this object's rolling friction.
+     * Read this object's rolling friction (native field: m_rollingFriction).
      *
      * @return friction value
      */
@@ -483,7 +485,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read this object's spinning friction.
+     * Read this object's spinning friction (native field: m_spinningFriction).
      *
      * @return friction value
      */
@@ -588,7 +590,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter this object's anisotropic friction.
+     * Alter this object's anisotropic friction (native field:
+     * m_anisotropicFriction).
      *
      * @param components the desired friction components (not null, unaffected,
      * default=(1,1,1))
@@ -604,7 +607,7 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Alter the amount of motion required to trigger continuous collision
-     * detection (CCD).
+     * detection (CCD) (native field: m_ccdMotionThreshold).
      * <p>
      * CCD addresses the issue of fast objects passing through other objects
      * with no collision detected.
@@ -618,7 +621,7 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Alter the continuous collision detection (CCD) swept-sphere radius for
-     * this object.
+     * this object (native field: m_ccdSweptSphereRadius).
      *
      * @param radius (in physics-space units, &ge;0, default=0)
      */
@@ -668,7 +671,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter the contact damping.
+     * Alter the contact damping (native field: m_contactDamping).
      *
      * @param damping the desired damping (default=0.1)
      */
@@ -678,7 +681,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter the contact-processing threshold.
+     * Alter the contact-processing threshold (native field:
+     * m_contactProcessingThreshold).
      *
      * @param distance the desired threshold distance (in physics-space units,
      * default=1e18 with SP library or 1e30 with DP library)
@@ -688,7 +692,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter the contact stiffness.
+     * Alter the contact stiffness (native field: m_contactStiffness).
      *
      * @param stiffness the desired stiffness (default=1e18 with SP library or
      * 1e30 with DP library)
@@ -699,7 +703,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter the deactivation time.
+     * Alter the deactivation time (native field: m_deactivationTime).
      *
      * @param time the desired time (in seconds, default=0)
      */
@@ -708,7 +712,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter this object's friction.
+     * Alter this object's friction (native field: m_friction).
      *
      * @param friction the desired friction coefficient (&ge;0, default=0.5)
      */
@@ -718,8 +722,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter this object's restitution (bounciness). For perfect elasticity, set
-     * restitution=1.
+     * Alter this object's restitution (bounciness) (native field:
+     * m_restitution). For perfect elasticity, set restitution=1.
      *
      * @param restitution the desired value (default=0)
      */
@@ -729,7 +733,8 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Alter this object's rolling friction: torsional friction orthogonal to
-     * the contact normal. Use to stop objects from rolling.
+     * the contact normal (native field: m_rollingFriction). Use to stop objects
+     * from rolling.
      *
      * @param friction the desired friction value (default=0)
      */
@@ -739,7 +744,7 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Alter this object's spinning friction: torsional friction around the
-     * contact normal. Use for grasping.
+     * contact normal (native field: m_spinningFriction). Use for grasping.
      *
      * @param friction the desired friction value (default=0)
      */
@@ -806,11 +811,17 @@ abstract public class PhysicsCollisionObject
     final native protected int getInternalType(long objectId);
 
     /**
-     * Initialize the collision-group information of this object.
+     * (Re-)initialize the native user info of this object, which stores the
+     * collision group, collide-with groups, and spaceId (native field:
+     * m_userPointer).
      */
     protected void initUserPointer() {
         logger.log(Level.FINE, "initUserPointer() for {0}", this);
         initUserPointer(objectId, collisionGroup, collideWithGroups);
+
+        assert getCollisionGroup(objectId) == collisionGroup;
+        assert getCollideWithGroups(objectId) == collideWithGroups;
+        assert getSpaceId(objectId) == 0L;
     }
 
     /**
@@ -822,8 +833,9 @@ abstract public class PhysicsCollisionObject
     native protected void setActivationState(long objectId, int desiredState);
 
     /**
-     * Alter the collision flags of this object. Subclasses are responsible for
-     * cloning/loading/saving these flags. Flags are defined in
+     * Alter the collision flags of this object (native field:
+     * m_collisionFlags). Subclasses are responsible for cloning/loading/saving
+     * these flags. Flags are defined in
      * {@link com.jme3.bullet.collision.CollisionFlag}.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
