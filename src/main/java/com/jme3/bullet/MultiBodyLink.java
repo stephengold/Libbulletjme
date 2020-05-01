@@ -45,7 +45,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MultiBodyLink {
+public class MultiBodyLink extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -66,10 +66,6 @@ public class MultiBodyLink {
      * copy of the number of degress of freedom in this link's joint
      */
     private int numDofs;
-    /**
-     * copy of the ID of the btMultiBodyLink
-     */
-    private long linkId;
     /**
      * copy of the ID of the btMultiBody
      */
@@ -105,8 +101,8 @@ public class MultiBodyLink {
 
         multiBodyId = multiBody.nativeId();
 
-        linkId = getLinkId(multiBodyId, index);
-        assert linkId != 0L;
+        long linkId = getLinkId(multiBodyId, index);
+        super.setNativeId(linkId);
 
         numDofs = getDofCount(linkId);
 
@@ -131,6 +127,7 @@ public class MultiBodyLink {
         assert collider == null : collider;
 
         collider = new MultiBodyCollider(multiBody, linkIndex);
+        long linkId = nativeId();
         long colliderId = collider.getObjectId();
         setCollider(linkId, colliderId);
         collider.attachShape(shape);
@@ -146,6 +143,8 @@ public class MultiBodyLink {
      */
     public void addConstraintForce(Vector3f force) {
         Validate.finite(force, "force");
+
+        long linkId = nativeId();
         addConstraintForce(linkId, force);
     }
 
@@ -157,6 +156,8 @@ public class MultiBodyLink {
      */
     public void addConstraintTorque(Vector3f torque) {
         Validate.finite(torque, "torque");
+
+        long linkId = nativeId();
         addContraintTorque(linkId, torque);
     }
 
@@ -168,6 +169,8 @@ public class MultiBodyLink {
      */
     public void addForce(Vector3f force) {
         Validate.finite(force, "force");
+
+        long linkId = nativeId();
         addForce(linkId, force);
     }
 
@@ -179,6 +182,8 @@ public class MultiBodyLink {
      */
     public void addJointTorque(int dofIndex, float torque) {
         Validate.inRange(dofIndex, "DOF index", 0, numDofs - 1);
+
+        long linkId = nativeId();
         addJointTorque(linkId, dofIndex, torque);
     }
 
@@ -190,6 +195,8 @@ public class MultiBodyLink {
      */
     public void addTorque(Vector3f torque) {
         Validate.finite(torque, "torque");
+
+        long linkId = nativeId();
         addTorque(linkId, torque);
     }
 
@@ -202,7 +209,10 @@ public class MultiBodyLink {
      */
     public Vector3f appliedForce(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long linkId = nativeId();
         getAppliedForce(linkId, result);
+
         return result;
     }
 
@@ -215,7 +225,10 @@ public class MultiBodyLink {
      */
     public Vector3f appliedTorque(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long linkId = nativeId();
         getAppliedTorque(linkId, result);
+
         return result;
     }
 
@@ -230,6 +243,7 @@ public class MultiBodyLink {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         MultiBodyJointType jointType = jointType();
+        long linkId = nativeId();
         switch (jointType) {
             case Planar:
             case Revolute:
@@ -256,7 +270,10 @@ public class MultiBodyLink {
      */
     public Vector3f constraintForce(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long linkId = nativeId();
         getConstraintForce(linkId, result);
+
         return result;
     }
 
@@ -269,7 +286,10 @@ public class MultiBodyLink {
      */
     public Vector3f constraintTorque(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long linkId = nativeId();
         getConstraintTorque(linkId, result);
+
         return result;
     }
 
@@ -279,7 +299,7 @@ public class MultiBodyLink {
      * @return the count (&ge;0)
      */
     public int countDofs() {
-        assert numDofs == getDofCount(linkId);
+        assert numDofs == getDofCount(nativeId());
         return numDofs;
     }
 
@@ -289,7 +309,9 @@ public class MultiBodyLink {
      * @return the count (&ge;0)
      */
     public int countPositionVariables() {
+        long linkId = nativeId();
         int result = getPosVarCount(linkId);
+
         return result;
     }
 
@@ -348,7 +370,10 @@ public class MultiBodyLink {
      */
     public Vector3f inertia(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long linkId = nativeId();
         getInertiaLocal(linkId, result);
+
         return result;
     }
 
@@ -358,8 +383,9 @@ public class MultiBodyLink {
      * @return true if collisions are enabled, otherwise false
      */
     public boolean isCollisionWithParent() {
-        int disableCollisionWithParentFlag = 0x1;
+        long linkId = nativeId();
         int flags = getFlags(linkId);
+        int disableCollisionWithParentFlag = 0x1;
         if ((flags & disableCollisionWithParentFlag) != 0x0) {
             return false;
         } else {
@@ -375,7 +401,10 @@ public class MultiBodyLink {
      */
     public float jointPosition(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, numDofs - 1);
+
+        long linkId = nativeId();
         float result = getJointPos(linkId, dofIndex);
+
         return result;
     }
 
@@ -389,7 +418,10 @@ public class MultiBodyLink {
      */
     public float jointTorque(int dofIndex) {
         Validate.inRange(dofIndex, "DOF index", 0, numDofs - 1);
+
+        long linkId = nativeId();
         float result = getJointTorque(linkId, dofIndex);
+
         return result;
     }
 
@@ -399,8 +431,10 @@ public class MultiBodyLink {
      * @return an enum value (not null)
      */
     public MultiBodyJointType jointType() {
+        long linkId = nativeId();
         int ordinal = getJointType(linkId);
         MultiBodyJointType result = MultiBodyJointType.values()[ordinal];
+
         return result;
     }
 
@@ -441,18 +475,10 @@ public class MultiBodyLink {
      * @return the mass (in physics-space units, &gt;0)
      */
     public float mass() {
+        long linkId = nativeId();
         float result = getMass(linkId);
-        return result;
-    }
 
-    /**
-     * Determine the unique identifier of the native object.
-     *
-     * @return the ID (not zero)
-     */
-    public long nativeId() {
-        assert linkId != 0L;
-        return linkId;
+        return result;
     }
 
     /**
@@ -464,7 +490,10 @@ public class MultiBodyLink {
     public Quaternion orientation(Quaternion storeResult) {
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
+
+        long linkId = nativeId();
         getQ0Parent2LinkRotation(linkId, result);
+
         return result;
     }
 
@@ -480,7 +509,9 @@ public class MultiBodyLink {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         assert jointType() == MultiBodyJointType.Planar;
 
+        long linkId = nativeId();
         getEVector(linkId, result);
+
         return result;
     }
 
@@ -496,7 +527,9 @@ public class MultiBodyLink {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         assert jointType() != MultiBodyJointType.Planar;
 
+        long linkId = nativeId();
         getEVector(linkId, result);
+
         return result;
     }
 
@@ -512,7 +545,9 @@ public class MultiBodyLink {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         assert jointType() != MultiBodyJointType.Planar;
 
+        long linkId = nativeId();
         getDVector(linkId, result);
+
         return result;
     }
 
@@ -548,22 +583,9 @@ public class MultiBodyLink {
     public Transform worldTransform(Transform storeResult) {
         Transform result
                 = (storeResult == null) ? new Transform() : storeResult;
+
+        long linkId = nativeId();
         getWorldTransform(linkId, result);
-
-        return result;
-    }
-    // *************************************************************************
-    // Object methods
-
-    /**
-     * Represent this MultiBodyLink as a String.
-     *
-     * @return a descriptive string of text (not null, not empty)
-     */
-    @Override
-    public String toString() {
-        String result = getClass().getSimpleName();
-        result += "#" + Long.toHexString(linkId);
 
         return result;
     }

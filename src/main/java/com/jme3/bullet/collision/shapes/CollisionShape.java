@@ -32,12 +32,12 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bounding.BoundingBox;
+import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -53,7 +53,9 @@ import jme3utilities.math.MyVector3f;
  *
  * @author normenhansen
  */
-abstract public class CollisionShape implements Comparable<CollisionShape> {
+abstract public class CollisionShape
+        extends NativePhysicsObject
+        implements Comparable<CollisionShape> {
     // *************************************************************************
     // constants and loggers
 
@@ -78,13 +80,6 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      * copy of collision margin (in physics-space units, &gt;0, default=0.04)
      */
     protected float margin = defaultMargin;
-    /**
-     * unique identifier of the btCollisionShape
-     * <p>
-     * Constructors are responsible for setting this to a non-zero value. After
-     * that, the ID never changes.
-     */
-    private long nativeId = 0L;
     /**
      * copy of the scale factors, one for each local axis (default=(1,1,1))
      */
@@ -111,9 +106,10 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
 
         recalculateAabb();
 
+        long shapeId = nativeId();
         Vector3f maxima = new Vector3f();
         Vector3f minima = new Vector3f();
-        getAabb(nativeId, translation, rotation, minima, maxima);
+        getAabb(shapeId, translation, rotation, minima, maxima);
         result.setMinMax(minima, maxima);
 
         return result;
@@ -138,11 +134,12 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
 
         recalculateAabb();
 
+        long shapeId = nativeId();
         Matrix3f basisMatrix = new Matrix3f();
         basisMatrix.set(rotation);
         Vector3f maxima = new Vector3f();
         Vector3f minima = new Vector3f();
-        getAabb(nativeId, translation, basisMatrix, minima, maxima);
+        getAabb(shapeId, translation, basisMatrix, minima, maxima);
         result.setMinMax(minima, maxima);
 
         return result;
@@ -185,18 +182,20 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      */
     public float getMargin() {
         assert margin > 0f : margin;
-        assert margin == getMargin(nativeId);
+        assert margin == getMargin(nativeId());
         return margin;
     }
 
     /**
      * Read the native ID of the btCollisionShape.
      *
-     * @return the unique identifier (not zero)
+     * @return the identifier (not zero)
+     * @deprecated use nativeId()
      */
+    @Deprecated
     final public long getObjectId() {
-        assert nativeId != 0L;
-        return nativeId;
+        long shapeId = nativeId();
+        return shapeId;
     }
 
     /**
@@ -227,7 +226,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      * @return true if concave type, false otherwise
      */
     public boolean isConcave() {
-        boolean result = isConcave(nativeId);
+        long shapeId = nativeId();
+        boolean result = isConcave(shapeId);
+
         return result;
     }
 
@@ -244,7 +245,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      * @return true if convex type, false otherwise
      */
     public boolean isConvex() {
-        boolean result = isConvex(nativeId);
+        long shapeId = nativeId();
+        boolean result = isConvex(shapeId);
+
         return result;
     }
 
@@ -255,7 +258,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      * @return true if infinite, false otherwise
      */
     public boolean isInfinite() {
-        boolean result = isInfinite(nativeId);
+        long shapeId = nativeId();
+        boolean result = isInfinite(shapeId);
+
         return result;
     }
 
@@ -266,7 +271,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      * @return true if non-moving, false otherwise
      */
     public boolean isNonMoving() {
-        boolean result = isNonMoving(nativeId);
+        long shapeId = nativeId();
+        boolean result = isNonMoving(shapeId);
+
         return result;
     }
 
@@ -277,7 +284,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      * @return true if polyhedral, false otherwise
      */
     public boolean isPolyhedral() {
-        boolean result = isPolyhedral(nativeId);
+        long shapeId = nativeId();
+        boolean result = isPolyhedral(shapeId);
+
         return result;
     }
 
@@ -325,9 +334,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      */
     public void setMargin(float margin) {
         Validate.positive(margin, "margin");
-        assert nativeId != 0L;
 
-        setMargin(nativeId, margin);
+        long shapeId = nativeId();
+        setMargin(shapeId, margin);
         logger.log(Level.FINE, "Margining {0}.", this);
         this.margin = margin;
     }
@@ -367,9 +376,9 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
                     typeName, scale.x, scale.y, scale.z);
             throw new IllegalArgumentException(msg);
         }
-        assert nativeId != 0L;
 
-        setLocalScaling(nativeId, scale);
+        long shapeId = nativeId();
+        setLocalScaling(shapeId, scale);
         logger.log(Level.FINE, "Scaling {0}.", this);
         this.scale.set(scale);
     }
@@ -393,23 +402,11 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
     }
 
     /**
-     * Initialize the native ID.
-     *
-     * @param shapeId the unique identifier of the btCollisionShape (not zero)
-     */
-    protected void setNativeId(long shapeId) {
-        assert nativeId == 0L : nativeId;
-        assert shapeId != 0L;
-
-        nativeId = shapeId;
-        logger.log(Level.FINE, "Created {0}.", this);
-    }
-
-    /**
      * Synchronize the copied scale factors with the btCollisionShape.
      */
     protected void updateScale() {
-        getLocalScaling(nativeId, scale);
+        long shapeId = nativeId();
+        getLocalScaling(shapeId, scale);
     }
     // *************************************************************************
     // Comparable methods
@@ -423,35 +420,14 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
      */
     @Override
     public int compareTo(CollisionShape other) {
-        long otherId = other.getObjectId();
-        int result = Long.compare(nativeId, otherId);
+        long thisId = nativeId();
+        long otherId = other.nativeId();
+        int result = Long.compare(thisId, otherId);
 
         return result;
     }
     // *************************************************************************
-    // Object methods
-
-    /**
-     * Test for ID equality.
-     *
-     * @param otherObject the object to compare to (may be null, unaffected)
-     * @return true if the shapes have the same ID, otherwise false
-     */
-    @Override
-    public boolean equals(Object otherObject) {
-        boolean result;
-        if (otherObject == this) {
-            result = true;
-        } else if (otherObject != null
-                && otherObject.getClass() == getClass()) {
-            long otherId = ((CollisionShape) otherObject).getObjectId();
-            result = (nativeId == otherId);
-        } else {
-            result = false;
-        }
-
-        return result;
-    }
+    // NativePhysicsObject methods
 
     /**
      * Finalize this shape just before it is destroyed. Should be invoked only
@@ -463,21 +439,22 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
     protected void finalize() throws Throwable {
         try {
             logger.log(Level.FINE, "Finalizing {0}.", this);
-            finalizeNative(nativeId);
+            long shapeId = nativeId();
+            finalizeNative(shapeId);
         } finally {
             super.finalize();
         }
     }
 
     /**
-     * Generate the hash code for this shape.
+     * Initialize the native ID.
      *
-     * @return value for use in hashing
+     * @param shapeId the identifier of the btCollisionShape (not zero)
      */
     @Override
-    public int hashCode() {
-        int hash = Objects.hashCode(this.nativeId);
-        return hash;
+    protected void setNativeId(long shapeId) {
+        super.setNativeId(shapeId);
+        logger.log(Level.FINE, "Created {0}.", this);
     }
     // *************************************************************************
     // private methods
@@ -491,7 +468,8 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
     private boolean checkScale(Vector3f storeVector) {
         assert storeVector != null;
 
-        getLocalScaling(nativeId, storeVector);
+        long shapeId = nativeId();
+        getLocalScaling(shapeId, storeVector);
         boolean result = scale.equals(storeVector);
         if (!result) {
             logger.log(Level.WARNING,
@@ -504,26 +482,26 @@ abstract public class CollisionShape implements Comparable<CollisionShape> {
     // *************************************************************************
     // native private methods
 
-    native private void finalizeNative(long objectId);
+    native private void finalizeNative(long shapeId);
 
-    native private void getAabb(long objectId, Vector3f location,
+    native private void getAabb(long shapeId, Vector3f location,
             Matrix3f basisMatrix, Vector3f storeMinima, Vector3f storeMaxima);
 
-    native private void getLocalScaling(long objectId, Vector3f storeVector);
+    native private void getLocalScaling(long shapeId, Vector3f storeVector);
 
-    native private float getMargin(long objectId);
+    native private float getMargin(long shapeId);
 
-    native private boolean isConcave(long objectId);
+    native private boolean isConcave(long shapeId);
 
-    native private boolean isConvex(long objectId);
+    native private boolean isConvex(long shapeId);
 
-    native private boolean isInfinite(long objectId);
+    native private boolean isInfinite(long shapeId);
 
-    native private boolean isNonMoving(long objectId);
+    native private boolean isNonMoving(long shapeId);
 
-    native private boolean isPolyhedral(long objectId);
+    native private boolean isPolyhedral(long shapeId);
 
-    native private void setLocalScaling(long objectId, Vector3f scale);
+    native private void setLocalScaling(long shapeId, Vector3f scale);
 
-    native private void setMargin(long objectId, float margin);
+    native private void setMargin(long shapeId, float margin);
 }

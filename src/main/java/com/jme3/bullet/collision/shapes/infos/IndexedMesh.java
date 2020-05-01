@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
+import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
 import java.nio.ByteBuffer;
@@ -46,7 +47,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class IndexedMesh {
+public class IndexedMesh extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -100,11 +101,6 @@ public class IndexedMesh {
      * configured bytes per vertex in the position buffer (12)
      */
     private int vertexStride;
-    /**
-     * Unique identifier of the btIndexedMesh. The constructor sets this to a
-     * non-zero value. Once set, the identifier never changes.
-     */
-    private long nativeId = 0L;
     // *************************************************************************
     // constructors
 
@@ -184,18 +180,8 @@ public class IndexedMesh {
         assert numVertices >= 0 : numVertices;
         return numVertices;
     }
-
-    /**
-     * Read the ID of the btIndexedMesh.
-     *
-     * @return the unique identifier (not zero)
-     */
-    public long nativeId() {
-        assert nativeId != 0L;
-        return nativeId;
-    }
     // *************************************************************************
-    // Object methods
+    // NativePhysicsObject methods
 
     /**
      * Finalize this mesh just before it is destroyed. Should be invoked only by
@@ -206,9 +192,9 @@ public class IndexedMesh {
     @Override
     protected void finalize() throws Throwable {
         try {
-            logger.log(Level.FINE, "Finalizing IndexedMesh {0}",
-                    Long.toHexString(nativeId));
-            finalizeNative(nativeId);
+            logger.log(Level.FINE, "Finalizing IndexedMesh {0}", this);
+            long meshId = nativeId();
+            finalizeNative(meshId);
         } finally {
             super.finalize();
         }
@@ -220,16 +206,14 @@ public class IndexedMesh {
      * Create a new btIndexedMesh using the current configuration.
      */
     private void createMesh() {
-        assert nativeId == 0L;
         assert vertexStride == 12 : vertexStride;
         assert indexStride == 12 : indexStride;
 
-        nativeId = createInt(indices, vertexPositions, numTriangles,
+        long meshId = createInt(indices, vertexPositions, numTriangles,
                 numVertices, vertexStride, indexStride);
+        setNativeId(meshId);
 
-        assert nativeId != 0L;
-        logger.log(Level.FINE, "Created IndexedMesh {0}",
-                Long.toHexString(nativeId));
+        logger.log(Level.FINE, "Created {0}", this);
     }
     // *************************************************************************
     // native methods
@@ -246,5 +230,5 @@ public class IndexedMesh {
             FloatBuffer vertexPositions, int numTriangles, int numVertices,
             int vertexStride, int indexStride);
 
-    native private void finalizeNative(long nativeId);
+    native private void finalizeNative(long meshId);
 }

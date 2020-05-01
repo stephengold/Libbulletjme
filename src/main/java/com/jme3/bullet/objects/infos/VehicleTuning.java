@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.objects.infos;
 
+import com.jme3.bullet.NativePhysicsObject;
 import java.util.logging.Logger;
 
 /**
@@ -38,7 +39,7 @@ import java.util.logging.Logger;
  *
  * @author normenhansen
  */
-public class VehicleTuning {
+public class VehicleTuning extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -76,10 +77,6 @@ public class VehicleTuning {
      * car, 200&rarr;Formula-1 race car, default=5.88)
      */
     private float suspensionStiffness = 5.88f;
-    /**
-     * unique identifier of the btVehicleTuning
-     */
-    private long nativeId = 0L;
     // *************************************************************************
     // constructors
 
@@ -123,12 +120,14 @@ public class VehicleTuning {
     }
 
     /**
-     * Read the native ID of the btCollisionShape.
+     * Read the ID of the btCollisionShape.
      *
-     * @return the unique identifier (not zero)
+     * @return the native identifier (not zero)
+     * @deprecated use {@link #nativeId()}
      */
+    @Deprecated
     final public long getNativeId() {
-        assert nativeId != 0L;
+        long nativeId = nativeId();
         return nativeId;
     }
 
@@ -170,7 +169,8 @@ public class VehicleTuning {
      */
     public void setFrictionSlip(float coeff) {
         frictionSlip = coeff;
-        setFrictionSlip(nativeId, coeff);
+        long tuningId = nativeId();
+        setFrictionSlip(tuningId, coeff);
     }
 
     /**
@@ -181,7 +181,8 @@ public class VehicleTuning {
      */
     public void setMaxSuspensionForce(float maxForce) {
         maxSuspensionForce = maxForce;
-        setMaxSuspensionForce(nativeId, maxForce);
+        long tuningId = nativeId();
+        setMaxSuspensionForce(tuningId, maxForce);
     }
 
     /**
@@ -193,7 +194,8 @@ public class VehicleTuning {
      */
     public void setMaxSuspensionTravelCm(float travelCm) {
         maxSuspensionTravelCm = travelCm;
-        setMaxSuspensionTravelCm(nativeId, travelCm);
+        long tuningId = nativeId();
+        setMaxSuspensionTravelCm(tuningId, travelCm);
     }
 
     /**
@@ -205,7 +207,8 @@ public class VehicleTuning {
      */
     public void setSuspensionCompression(float damping) {
         suspensionCompression = damping;
-        setSuspensionCompression(nativeId, damping);
+        long tuningId = nativeId();
+        setSuspensionCompression(tuningId, damping);
     }
 
     /**
@@ -216,7 +219,8 @@ public class VehicleTuning {
      */
     public void setSuspensionDamping(float damping) {
         suspensionDamping = damping;
-        setSuspensionDamping(nativeId, damping);
+        long tuningId = nativeId();
+        setSuspensionDamping(tuningId, damping);
     }
 
     /**
@@ -228,7 +232,8 @@ public class VehicleTuning {
      */
     public void setSuspensionStiffness(float stiffness) {
         suspensionStiffness = stiffness;
-        setSuspensionStiffness(nativeId, stiffness);
+        long tuningId = nativeId();
+        setSuspensionStiffness(tuningId, stiffness);
     }
     // *************************************************************************
     // private methods
@@ -237,14 +242,15 @@ public class VehicleTuning {
      * Instantiate the configured tuning in Bullet.
      */
     private void create() {
-        nativeId = createNative();
+        long tuningId = createNative();
+        setNativeId(tuningId);
 
-        setFrictionSlip(nativeId, frictionSlip);
-        setMaxSuspensionForce(nativeId, maxSuspensionForce);
-        setMaxSuspensionTravelCm(nativeId, maxSuspensionTravelCm);
-        setSuspensionCompression(nativeId, suspensionCompression);
-        setSuspensionDamping(nativeId, suspensionDamping);
-        setSuspensionStiffness(nativeId, suspensionStiffness);
+        setFrictionSlip(tuningId, frictionSlip);
+        setMaxSuspensionForce(tuningId, maxSuspensionForce);
+        setMaxSuspensionTravelCm(tuningId, maxSuspensionTravelCm);
+        setSuspensionCompression(tuningId, suspensionCompression);
+        setSuspensionDamping(tuningId, suspensionDamping);
+        setSuspensionStiffness(tuningId, suspensionStiffness);
     }
     // *************************************************************************
     // native methods

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 jMonkeyEngine
+ * Copyright (c) 2019-2020 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.joints.motors;
 
+import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ import jme3utilities.Validate;
  *
  * @author sgold@sonic.net
  */
-public class TranslationMotor {
+public class TranslationMotor extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -52,24 +53,17 @@ public class TranslationMotor {
     final public static Logger logger
             = Logger.getLogger(TranslationMotor.class.getName());
     // *************************************************************************
-    // fields
-
-    /**
-     * Unique identifier of the btTranslationalLimitMotor2. The constructor sets
-     * this to a non-zero value. After that, the ID never changes.
-     */
-    private long motorId = 0L;
-    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a motor for the identified btTranslationalLimitMotor2.
+     * Instantiate a motor. Used internally.
      *
-     * @param motor the unique identifier (not zero)
+     * @param nativeId the ID of a pre-existing btTranslationalLimitMotor2 (not
+     * zero)
      */
-    public TranslationMotor(long motor) {
-        assert motor != 0L;
-        motorId = motor;
+    public TranslationMotor(long nativeId) {
+        Validate.nonZero(nativeId, "native ID");
+        super.setNativeId(nativeId);
     }
     // *************************************************************************
     // new methods exposed
@@ -83,8 +77,9 @@ public class TranslationMotor {
      * instance)
      */
     public Vector3f get(MotorParam param, Vector3f storeResult) {
-        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        long motorId = nativeId();
 
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         switch (param) {
             case Bounce:
                 getBounce(motorId, result);
@@ -133,10 +128,12 @@ public class TranslationMotor {
     /**
      * Read the ID of the btTranslationalLimitMotor2.
      *
-     * @return the unique identifier (not zero)
+     * @return the native identifier (not zero)
+     * @deprecated use {@link #nativeId()}
      */
+    @Deprecated
     public long getMotor() {
-        assert motorId != 0L;
+        long motorId = nativeId();
         return motorId;
     }
 
@@ -150,7 +147,10 @@ public class TranslationMotor {
     public boolean isDampingLimited(int axisIndex) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         boolean result = isDampingLimited(motorId, axisIndex);
+
         return result;
     }
 
@@ -163,7 +163,10 @@ public class TranslationMotor {
     public boolean isMotorEnabled(int axisIndex) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         boolean result = isMotorEnabled(motorId, axisIndex);
+
         return result;
     }
 
@@ -176,7 +179,10 @@ public class TranslationMotor {
     public boolean isServoEnabled(int axisIndex) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         boolean result = isServoEnabled(motorId, axisIndex);
+
         return result;
     }
 
@@ -189,7 +195,10 @@ public class TranslationMotor {
     public boolean isSpringEnabled(int axisIndex) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         boolean result = isSpringEnabled(motorId, axisIndex);
+
         return result;
     }
 
@@ -203,7 +212,10 @@ public class TranslationMotor {
     public boolean isStiffnessLimited(int axisIndex) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         boolean result = isStiffnessLimited(motorId, axisIndex);
+
         return result;
     }
 
@@ -217,6 +229,7 @@ public class TranslationMotor {
     public void set(MotorParam param, Vector3f values) {
         Validate.nonNull(values, "value");
 
+        long motorId = nativeId();
         switch (param) {
             case Bounce:
                 setBounce(motorId, values);
@@ -271,6 +284,8 @@ public class TranslationMotor {
     public void setDampingLimited(int axisIndex, boolean limitDamping) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         setDampingLimited(motorId, axisIndex, limitDamping);
     }
 
@@ -283,6 +298,8 @@ public class TranslationMotor {
     public void setMotorEnabled(int axisIndex, boolean enableFlag) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         setMotorEnabled(motorId, axisIndex, enableFlag);
     }
 
@@ -296,6 +313,8 @@ public class TranslationMotor {
     public void setServoEnabled(int axisIndex, boolean enableFlag) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         setServoEnabled(motorId, axisIndex, enableFlag);
     }
 
@@ -308,6 +327,8 @@ public class TranslationMotor {
     public void setSpringEnabled(int axisIndex, boolean enableFlag) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         setSpringEnabled(motorId, axisIndex, enableFlag);
     }
 
@@ -321,6 +342,8 @@ public class TranslationMotor {
     public void setStiffnessLimited(int axisIndex, boolean limitFlag) {
         Validate.inRange(axisIndex, "axis index", PhysicsSpace.AXIS_X,
                 PhysicsSpace.AXIS_Z);
+
+        long motorId = nativeId();
         setStiffnessLimited(motorId, axisIndex, limitFlag);
     }
     // *************************************************************************

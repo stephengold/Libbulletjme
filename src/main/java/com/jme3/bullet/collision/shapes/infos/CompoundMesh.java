@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
+import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.math.Vector3f;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -43,7 +44,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CompoundMesh {
+public class CompoundMesh extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -59,11 +60,6 @@ public class CompoundMesh {
      * component meshes
      */
     private ArrayList<IndexedMesh> submeshes = new ArrayList<>(4);
-    /**
-     * Unique identifier of the btTriangleIndexVertexArray. The constructor sets
-     * this to a non-zero value.
-     */
-    private long nativeId = 0L;
     /**
      * copy of scale factors: one for each local axis (default=(1,1,1))
      */
@@ -89,8 +85,10 @@ public class CompoundMesh {
         Validate.nonNull(submesh, "submesh");
 
         submeshes.add(submesh);
+
+        long compoundMeshId = nativeId();
         long submeshId = submesh.nativeId();
-        addIndexedMesh(nativeId, submeshId);
+        addIndexedMesh(compoundMeshId, submeshId);
     }
 
     /**
@@ -139,31 +137,19 @@ public class CompoundMesh {
     }
 
     /**
-     * Read the ID of the btTriangleIndexVertexArray.
-     *
-     * @return the unique identifier (not zero)
-     */
-    public long nativeId() {
-        assert nativeId != 0L;
-        return nativeId;
-    }
-
-    /**
      * Alter the scale factors.
      *
      * @param scale the desired scale factor for each local axis (not null, no
      * negative component, unaffected, default=(1,1,1))
      */
     public void setScale(Vector3f scale) {
-        assert nativeId != 0L;
-
-        setScaling(nativeId, scale.x, scale.y, scale.z);
-        logger.log(Level.FINE, "Scaled CompoundMesh {0}",
-                Long.toHexString(nativeId));
+        long compoundMeshId = nativeId();
+        setScaling(compoundMeshId, scale.x, scale.y, scale.z);
+        logger.log(Level.FINE, "Scaled {0}", this);
         this.scale.set(scale);
     }
     // *************************************************************************
-    // Object methods
+    // NativePhysicsObject methods
 
     /**
      * Finalize this mesh just before it is destroyed. Should be invoked only by
@@ -174,9 +160,9 @@ public class CompoundMesh {
     @Override
     protected void finalize() throws Throwable {
         try {
-            logger.log(Level.FINE, "Finalizing CompoundMesh {0}",
-                    Long.toHexString(nativeId));
-            finalizeNative(nativeId);
+            logger.log(Level.FINE, "Finalizing {0}", this);
+            long compoundMeshId = nativeId();
+            finalizeNative(compoundMeshId);
         } finally {
             super.finalize();
         }
@@ -193,7 +179,8 @@ public class CompoundMesh {
     private boolean checkScale(Vector3f tempVector) {
         assert tempVector != null;
 
-        getScaling(nativeId, tempVector);
+        long compoundMeshId = nativeId();
+        getScaling(compoundMeshId, tempVector);
         boolean result = scale.equals(tempVector);
 
         return result;
@@ -203,12 +190,10 @@ public class CompoundMesh {
      * Create a new empty btTriangleIndexVertexArray.
      */
     private void createEmpty() {
-        assert nativeId == 0L;
+        long compoundMeshId = createEmptyTiva();
+        setNativeId(compoundMeshId);
 
-        nativeId = createEmptyTiva();
-        assert nativeId != 0L;
-        logger.log(Level.FINE, "Created CompoundMesh {0}",
-                Long.toHexString(nativeId));
+        logger.log(Level.FINE, "Created {0}", this);
     }
     // *************************************************************************
     // native methods

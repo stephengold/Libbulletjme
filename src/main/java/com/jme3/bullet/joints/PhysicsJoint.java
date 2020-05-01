@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.joints;
 
+import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.objects.PhysicsBody;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,9 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
+abstract public class PhysicsJoint
+        extends NativePhysicsObject
+        implements Comparable<PhysicsJoint> {
     // *************************************************************************
     // constants and loggers
 
@@ -54,12 +57,6 @@ abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
     // *************************************************************************
     // fields
 
-    /**
-     * Unique identifier of the btTypedConstraint, btSoftBody::Anchor, or
-     * btSoftBody::Joint. Subtype constructors are responsible for setting this
-     * to a non-zero value. After that, the ID never changes.
-     */
-    private long objectId = 0L;
     /**
      * body A specified in the constructor, or null for a single-ended joint
      * with body B only
@@ -139,11 +136,13 @@ abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
      * Read the ID of the btTypedConstraint, btSoftBody::Anchor, or
      * btSoftBody::Joint.
      *
-     * @return the unique identifier (not zero)
+     * @return the identifier (not zero)
+     * @deprecated use nativeId()
      */
+    @Deprecated
     final public long getObjectId() {
-        assert objectId != 0L;
-        return objectId;
+        long jointId = nativeId();
+        return jointId;
     }
 
     /**
@@ -178,16 +177,14 @@ abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
     }
 
     /**
-     * Initialize the native ID.
+     * Initialize the native ID. TODO re-order methods
      *
-     * @param jointId the unique identifier of the btTypedConstraint,
+     * @param jointId the native identifier of the btTypedConstraint,
      * btSoftBody::Anchor, or btSoftBody::Joint (not zero)
      */
+    @Override
     protected void setNativeId(long jointId) {
-        assert objectId == 0L : objectId;
-        assert jointId != 0L;
-
-        objectId = jointId;
+        super.setNativeId(jointId);
         logger.log(Level.FINE, "Created {0}.", this);
     }
     // *************************************************************************
@@ -202,47 +199,14 @@ abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
      */
     @Override
     public int compareTo(PhysicsJoint otherJoint) {
-        long otherId = otherJoint.getObjectId();
-        int result = Long.compare(objectId, otherId);
+        long thisId = nativeId();
+        long otherId = otherJoint.nativeId();
+        int result = Long.compare(thisId, otherId);
 
         return result;
     }
     // *************************************************************************
-    // Object methods
-
-    /**
-     * Test for ID equality.
-     *
-     * @param otherObject the object to compare to (may be null, unaffected)
-     * @return true if the joints have the same ID, otherwise false
-     */
-    @Override
-    public boolean equals(Object otherObject) {
-        boolean result;
-        if (otherObject == this) {
-            result = true;
-        } else if (otherObject != null
-                && otherObject.getClass() == getClass()) {
-            PhysicsJoint otherJoint = (PhysicsJoint) otherObject;
-            long otherId = otherJoint.getObjectId();
-            result = (objectId == otherId);
-        } else {
-            result = false;
-        }
-
-        return result;
-    }
-
-    /**
-     * Generate the hash code for this joint.
-     *
-     * @return value for use in hashing
-     */
-    @Override
-    public int hashCode() {
-        int hash = (int) (objectId >> 4);
-        return hash;
-    }
+    // NativePhysicsObject methods
 
     /**
      * Represent this joint as a String.
@@ -256,7 +220,8 @@ abstract public class PhysicsJoint implements Comparable<PhysicsJoint> {
         result = result.replace("Physics", "");
         result = result.replace("Point", "P");
         result = result.replace("Six", "6");
-        result += "#" + Long.toHexString(objectId);
+        long jointId = nativeId();
+        result += "#" + Long.toHexString(jointId);
 
         return result;
     }
