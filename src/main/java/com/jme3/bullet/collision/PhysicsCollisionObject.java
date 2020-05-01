@@ -287,7 +287,7 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Read the radius of the sphere used for continuous collision detection
-     * (CCD).
+     * (CCD) (native field: m_ccdSweptSphereRadius).
      *
      * @return the radius (in physics-space units, &ge;0)
      */
