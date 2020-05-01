@@ -124,7 +124,7 @@ public class TestLibbulletjme {
         /*
          * Check the final location of the box.
          */
-        Vector3f location = prb.getPhysicsLocation();
+        Vector3f location = prb.getPhysicsLocation(null);
         Assert.assertEquals(0f, location.x, 0.2f);
         Assert.assertEquals(-0.8f, location.y, 0.04f);
         Assert.assertEquals(0f, location.z, 0.2f);
@@ -1034,7 +1034,7 @@ public class TestLibbulletjme {
         /*
          * Check the final location of the dynamic body.
          */
-        Vector3f location = dropBody.getPhysicsLocation();
+        Vector3f location = dropBody.getPhysicsLocation(null);
         Assert.assertEquals(0f, location.x, 0.2f);
         Assert.assertEquals(0f, location.z, 0.2f);
 
