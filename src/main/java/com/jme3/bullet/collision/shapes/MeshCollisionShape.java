@@ -33,6 +33,7 @@ package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.collision.shapes.infos.CompoundMesh;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
+import java.util.Collection;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -71,7 +72,26 @@ public class MeshCollisionShape extends CollisionShape {
     // constructors
 
     /**
-     * Instantiate a shape based on the specified native mesh(es).
+     * Instantiate a shape from the specified collection of native meshes.
+     *
+     * @param useCompression true to use quantized AABB compression
+     * @param meshes the collection on which to base the shape (not null, not
+     * empty)
+     */
+    public MeshCollisionShape(boolean useCompression,
+            Collection<IndexedMesh> meshes) {
+        Validate.nonEmpty(meshes, "meshes");
+
+        this.useCompression = useCompression;
+        nativeMesh = new CompoundMesh();
+        for (IndexedMesh submesh : meshes) {
+            nativeMesh.add(submesh);
+        }
+        createShape(null);
+    }
+
+    /**
+     * Instantiate a shape from the specified native mesh(es).
      *
      * @param useCompression true to use quantized AABB compression
      * @param submeshes the mesh(es) on which to base the shape (not null, not
@@ -90,7 +110,7 @@ public class MeshCollisionShape extends CollisionShape {
     }
 
     /**
-     * Instantiate a shape based on the specified native mesh(es) and serialized
+     * Instantiate a shape from the specified native mesh(es) and serialized
      * BVH. The submeshes must be equivalent to those used to generate the BVH.
      *
      * @param bvhData the serialized BVH (not null)
