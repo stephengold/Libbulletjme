@@ -279,8 +279,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Jump in the "up" direction. For compatibility with the jme3-bullet
-     * library.
+     * Jump in the "up" direction.
      */
     public void jump() {
         jump(translateIdentity);
