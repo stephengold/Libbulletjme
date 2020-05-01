@@ -298,7 +298,9 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @return a new velocity vector (radians per second in physics-space
      * coordinates, not null)
+     * @deprecated use getAngularVelocity(null)
      */
+    @Deprecated
     public Vector3f getAngularVelocity() {
         assert isDynamic();
         return getAngularVelocity(null);
@@ -405,7 +407,9 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @return a new velocity vector (physics-space units per second in
      * physics-space coordinates, not null)
+     * @deprecated use getLinearVelocity(null)
      */
+    @Deprecated
     public Vector3f getLinearVelocity() {
         assert isDynamic();
         return getLinearVelocity(null);
@@ -441,7 +445,9 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @return a new Quaternion (relative to physics-space coordinates, not
      * null)
+     * @deprecated use getPhysicsRotation(null)
      */
+    @Deprecated
     public Quaternion getPhysicsRotation() {
         return getPhysicsRotation(null);
     }

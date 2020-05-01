@@ -207,7 +207,9 @@ public class VehicleWheel {
      * For compatibility with the jme3-bullet library.
      *
      * @return a new location vector (in physics-space coordinates, not null)
+     * @deprecated use getCollisionLocation(null)
      */
+    @Deprecated
     public Vector3f getCollisionLocation() {
         return getCollisionLocation(null);
     }
@@ -229,7 +231,9 @@ public class VehicleWheel {
      * For compatibility with the jme3-bullet library.
      *
      * @return a new unit vector (in physics-space coordinates, not null)
+     * @deprecated use getCollisionNormal(null)
      */
+    @Deprecated
     public Vector3f getCollisionNormal() {
         return getCollisionNormal(null);
     }
@@ -295,7 +299,9 @@ public class VehicleWheel {
      * For compatibility with the jme3-bullet library.
      *
      * @return a new location vector (in physics-space coordinates, not null)
+     * @deprecated use getLocation(null)
      */
+    @Deprecated
     public Vector3f getLocation() {
         return getLocation(null);
     }

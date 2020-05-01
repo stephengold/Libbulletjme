@@ -447,7 +447,10 @@ public class CollisionSpace extends NativePhysicsObject {
      * @param start the starting physics-space transform (not null, unaffected)
      * @param end the ending physics-space transform (not null, unaffected)
      * @return a new list of results
+     * @deprecated use
+     * {@link #sweepTest(com.jme3.bullet.collision.shapes.ConvexShape, com.jme3.math.Transform, com.jme3.math.Transform, java.util.List, float)}
      */
+    @Deprecated
     public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
             Transform start, Transform end) {
         List<PhysicsSweepTestResult> results = new LinkedList<>();
@@ -463,7 +466,10 @@ public class CollisionSpace extends NativePhysicsObject {
      * @param end the ending physics-space transform (not null, unaffected)
      * @param results the list to hold results (not null, modified)
      * @return results
+     * @deprecated use
+     * {@link #sweepTest(com.jme3.bullet.collision.shapes.ConvexShape, com.jme3.math.Transform, com.jme3.math.Transform, java.util.List, float)}
      */
+    @Deprecated
     public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
             Transform start, Transform end,
             List<PhysicsSweepTestResult> results) {
