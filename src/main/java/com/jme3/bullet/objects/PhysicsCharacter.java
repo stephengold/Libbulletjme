@@ -61,8 +61,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * default gravity vector -- differs from that of
      * btKinematicCharacterController!
      */
-    final private static Vector3f defaultGravity
-            = new Vector3f(0f, -29.4f, 0f);
+    final private static Vector3f defaultGravity = new Vector3f(0f, -29.4f, 0f);
     /**
      * local copy of {@link com.jme3.math.Vector3f#ZERO}
      */
