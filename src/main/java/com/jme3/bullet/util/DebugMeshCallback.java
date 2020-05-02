@@ -53,10 +53,6 @@ class DebugMeshCallback {
      */
     final private static int numAxes = 3;
     /**
-     * number of vertices per triangle
-     */
-    final private static int vpt = 3;
-    /**
      * message logger for this class
      */
     final public static Logger logger
