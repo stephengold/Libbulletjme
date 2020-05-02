@@ -62,25 +62,12 @@ public class PhysicsRigidBody extends PhysicsBody {
      */
     final public static Logger logger2
             = Logger.getLogger(PhysicsRigidBody.class.getName());
-    /**
-     * local copy of {@link com.jme3.math.Matrix3f#IDENTITY}
-     */
-    final private static Matrix3f matrixIdentity = new Matrix3f();
-    /**
-     * local copy of {@link com.jme3.math.Vector3f#UNIT_XYZ}
-     */
-    final private static Vector3f scaleIdentity = new Vector3f(1f, 1f, 1f);
-    /**
-     * local copy of {@link com.jme3.math.Vector3f#ZERO}
-     */
-    final private static Vector3f translateIdentity = new Vector3f(0f, 0f, 0f);
     // *************************************************************************
     // fields
 
     /**
-     * copy of kinematic flag: true&rarr;set kinematic mode (spatial controls
-     * body), false&rarr;dynamic/static mode (body controls spatial)
-     * (default=false)
+     * copy of kinematic flag: true&rarr;set kinematic mode,
+     * false&rarr;dynamic/static mode (default=false)
      */
     private boolean kinematic = false;
     /**
