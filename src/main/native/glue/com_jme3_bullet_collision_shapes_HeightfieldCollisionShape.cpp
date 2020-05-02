@@ -66,17 +66,17 @@ HeightfieldShape : public btHeightfieldTerrainShape {
  * Signature: (IILjava/nio/FloatBuffer;FFFIZZZZ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape2
-(JNIEnv *env, jobject object, jint heightStickWidth, jint heightStickLength,
+(JNIEnv *pEnv, jobject object, jint heightStickWidth, jint heightStickLength,
         jobject floatBuffer, jfloat heightScale, jfloat minHeight,
         jfloat maxHeight, jint upAxis, jboolean flipQuadEdges,
         jboolean flipTriangleWinding, jboolean useDiamond,
         jboolean useZigzag) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
-    NULL_CHK(env, floatBuffer, "The heightfield buffer does not exist.", 0);
+    NULL_CHK(pEnv, floatBuffer, "The heightfield buffer does not exist.", 0);
     const jfloat * const pHeights
-            = (jfloat *) env->GetDirectBufferAddress(floatBuffer);
-    NULL_CHK(env, pHeights, "The heightfield buffer is not direct.", 0);
+            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
+    NULL_CHK(pEnv, pHeights, "The heightfield buffer is not direct.", 0);
 
     HeightfieldShape *pShape;
 #ifdef BT_USE_DOUBLE_PRECISION

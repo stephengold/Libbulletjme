@@ -39,11 +39,11 @@
 
 class DebugCallback : public btTriangleCallback, public btInternalTriangleIndexCallback {
 public:
-    JNIEnv *env;
+    JNIEnv *pEnv;
     jobject callback;
 
-    DebugCallback(JNIEnv *env, jobject object) {
-        this->env = env;
+    DebugCallback(JNIEnv *pEnv, jobject object) {
+        this->pEnv = pEnv;
         this->callback = object;
     }
 
@@ -56,19 +56,19 @@ public:
         vertexA = triangle[0];
         vertexB = triangle[1];
         vertexC = triangle[2];
-        env->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexA.getX(), vertexA.getY(), vertexA.getZ(), partId, triangleIndex);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexA.getX(), vertexA.getY(), vertexA.getZ(), partId, triangleIndex);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
-        env->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexB.getX(), vertexB.getY(), vertexB.getZ(), partId, triangleIndex);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexB.getX(), vertexB.getY(), vertexB.getZ(), partId, triangleIndex);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
-        env->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexC.getX(), vertexC.getY(), vertexC.getZ(), partId, triangleIndex);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexC.getX(), vertexC.getY(), vertexC.getZ(), partId, triangleIndex);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
     }

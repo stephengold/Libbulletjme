@@ -42,14 +42,14 @@
  * Signature: (ILcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionShape_createShape
-(JNIEnv *env, jobject object, jint axis, jobject halfExtentsVector) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object, jint axis, jobject halfExtentsVector) {
+    jmeClasses::initJavaClasses(pEnv);
 
-    NULL_CHK(env, halfExtentsVector, "The halfExtents vector does not exist.",
+    NULL_CHK(pEnv, halfExtentsVector, "The halfExtents vector does not exist.",
             0);
 
     btVector3 vec;
-    jmeBulletUtil::convert(env, halfExtentsVector, &vec);
+    jmeBulletUtil::convert(pEnv, halfExtentsVector, &vec);
 
     btCollisionShape *pShape;
     switch (axis) {
@@ -63,7 +63,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionS
             pShape = new btCylinderShapeZ(vec);
             break;
         default:
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The axis is out of range.");
             return 0;
     }

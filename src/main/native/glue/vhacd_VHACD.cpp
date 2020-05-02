@@ -44,32 +44,32 @@ using namespace VHACD;
 
 class Callback : public IVHACD::IUserCallback {
 public:
-    JNIEnv *env;
+    JNIEnv *pEnv;
 
     Callback(JNIEnv *pJNIEnv) {
-        env = pJNIEnv;
+        pEnv = pJNIEnv;
     };
 
     void Update(const double overallPercent, const double stagePercent,
             const double operationPercent, const char* const stageName,
             const char* const operationName) {
 
-        jstring arg4 = env->NewStringUTF(stageName);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        jstring arg4 = pEnv->NewStringUTF(stageName);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
 
-        jstring arg5 = env->NewStringUTF(operationName);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        jstring arg5 = pEnv->NewStringUTF(operationName);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
 
         jfloat arg1 = overallPercent;
         jfloat arg2 = stagePercent;
         jfloat arg3 = operationPercent;
-        env->CallStaticVoidMethod(jmeClasses::Vhacd,
+        pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
                 jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
     };
 };
@@ -97,27 +97,27 @@ private:
  * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/IntBuffer;JZ)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
-(JNIEnv *env, jclass clas, jobject positionsBuffer, jobject indicesBuffer,
+(JNIEnv *pEnv, jclass clas, jobject positionsBuffer, jobject indicesBuffer,
         jlong paramsId, jboolean debug) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
-    NULL_CHK(env, positionsBuffer, "The positions buffer does not exist.",);
+    NULL_CHK(pEnv, positionsBuffer, "The positions buffer does not exist.",);
     const jfloat * const pPositions
-            = (jfloat *) env->GetDirectBufferAddress(positionsBuffer);
-    NULL_CHK(env, pPositions, "The positions buffer is not direct.",);
-    const jlong numFloats = env->GetDirectBufferCapacity(positionsBuffer);
+            = (jfloat *) pEnv->GetDirectBufferAddress(positionsBuffer);
+    NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
+    const jlong numFloats = pEnv->GetDirectBufferCapacity(positionsBuffer);
 
-    NULL_CHK(env, indicesBuffer, "The indices buffer does not exist.",);
+    NULL_CHK(pEnv, indicesBuffer, "The indices buffer does not exist.",);
     const jint * const pIndices
-            = (jint *) env->GetDirectBufferAddress(indicesBuffer);
-    NULL_CHK(env, pIndices, "The indices buffer is not direct.",);
-    const jlong numInts = env->GetDirectBufferCapacity(indicesBuffer);
+            = (jint *) pEnv->GetDirectBufferAddress(indicesBuffer);
+    NULL_CHK(pEnv, pIndices, "The indices buffer is not direct.",);
+    const jlong numInts = pEnv->GetDirectBufferCapacity(indicesBuffer);
 
     IVHACD::Parameters * const pParams
             = reinterpret_cast<IVHACD::Parameters *> (paramsId);
-    NULL_CHK(env, pParams, "The parameters do not exist.",)
+    NULL_CHK(pEnv, pParams, "The parameters do not exist.",)
 
-    Callback callback = Callback(env);
+    Callback callback = Callback(pEnv);
     pParams->m_callback = &callback;
 
     Logger logger(debug);
@@ -143,7 +143,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
             pIvhacd->GetConvexHull(i, *pHull);
             const jlong hullId = reinterpret_cast<jlong> (pHull);
 
-            env->CallStaticVoidMethod(jmeClasses::Vhacd,
+            pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
                     jmeClasses::Vhacd_addHull, hullId);
         }
     }

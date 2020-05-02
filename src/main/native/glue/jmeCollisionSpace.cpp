@@ -55,22 +55,22 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
 
             if (collides) {
                 jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
-                JNIEnv * const env = pSpace->getEnv();
-                jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
-                jobject javaCollisionObject0 = env->NewLocalRef(pUser0->m_javaRef);
-                jobject javaCollisionObject1 = env->NewLocalRef(pUser1->m_javaRef);
+                JNIEnv * const pEnv = pSpace->getEnv();
+                jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
+                jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef);
+                jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
 
-                const jboolean notifyResult = env->CallBooleanMethod(
+                const jboolean notifyResult = pEnv->CallBooleanMethod(
                         javaPhysicsSpace,
                         jmeClasses::CollisionSpace_notifyCollisionGroupListeners,
                         javaCollisionObject0, javaCollisionObject1);
 
-                env->DeleteLocalRef(javaPhysicsSpace);
-                env->DeleteLocalRef(javaCollisionObject0);
-                env->DeleteLocalRef(javaCollisionObject1);
+                pEnv->DeleteLocalRef(javaPhysicsSpace);
+                pEnv->DeleteLocalRef(javaCollisionObject0);
+                pEnv->DeleteLocalRef(javaCollisionObject1);
 
-                if (env->ExceptionCheck()) {
-                    env->Throw(env->ExceptionOccurred());
+                if (pEnv->ExceptionCheck()) {
+                    pEnv->Throw(pEnv->ExceptionOccurred());
                     return 0;
                 }
 
@@ -81,29 +81,29 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     return collides;
 }
 
-jmeCollisionSpace::jmeCollisionSpace(JNIEnv *env, jobject javaSpace) {
-    this->env = env;
+jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
+    this->pEnv = pEnv;
 
-    m_javaSpace = env->NewWeakGlobalRef(javaSpace);
-    if (env->ExceptionCheck()) {
-        env->Throw(env->ExceptionOccurred());
+    m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 
-    env->GetJavaVM(&vm);
-    if (env->ExceptionCheck()) {
-        env->Throw(env->ExceptionOccurred());
+    pEnv->GetJavaVM(&vm);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 }
 
 void jmeCollisionSpace::attachThread() {
 #ifdef ANDROID
-    vm->AttachCurrentThread((JNIEnv **) & env, NULL);
+    vm->AttachCurrentThread((JNIEnv **) & pEnv, NULL);
 #elif defined (JNI_VERSION_1_2)
-    vm->AttachCurrentThread((void **) &env, NULL);
+    vm->AttachCurrentThread((void **) &pEnv, NULL);
 #else
-    vm->AttachCurrentThread(&env, NULL);
+    vm->AttachCurrentThread(&pEnv, NULL);
 #endif
 }
 
@@ -124,7 +124,7 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
             pBroadphase = new btDbvtBroadphase();
             break;
         default:
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The broadphase type is out of range.");
     }
 

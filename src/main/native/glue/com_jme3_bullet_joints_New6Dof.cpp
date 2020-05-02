@@ -42,30 +42,30 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;I)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
-(JNIEnv *env, jobject object, jlong bodyIdA, jlong bodyIdB,
+(JNIEnv *pEnv, jobject object, jlong bodyIdA, jlong bodyIdB,
         jobject pivotInA, jobject rotInA, jobject pivotInB, jobject rotInB,
         jint rotOrderIndex) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
-    NULL_CHK(env, pBodyA, "Rigid body A does not exist.", 0)
+    NULL_CHK(pEnv, pBodyA, "Rigid body A does not exist.", 0)
     btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-    NULL_CHK(env, pBodyB, "Rigid body B does not exist.", 0)
+    NULL_CHK(pEnv, pBodyB, "Rigid body B does not exist.", 0)
     btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    NULL_CHK(env, pivotInA, "The pivotInA vector does not exist.", 0)
-    NULL_CHK(env, rotInA, "The rotInA matrix does not exist.", 0)
+    NULL_CHK(pEnv, pivotInA, "The pivotInA vector does not exist.", 0)
+    NULL_CHK(pEnv, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform frameInA;
-    jmeBulletUtil::convert(env, pivotInA, &frameInA.getOrigin());
-    jmeBulletUtil::convert(env, rotInA, &frameInA.getBasis());
+    jmeBulletUtil::convert(pEnv, pivotInA, &frameInA.getOrigin());
+    jmeBulletUtil::convert(pEnv, rotInA, &frameInA.getBasis());
 
-    NULL_CHK(env, pivotInB, "The pivotInB vector does not exist.", 0)
-    NULL_CHK(env, rotInB, "The rotInB matrix does not exist.", 0)
+    NULL_CHK(pEnv, pivotInB, "The pivotInB vector does not exist.", 0)
+    NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
-    jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
-    jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
+    jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
     RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
     btGeneric6DofSpring2Constraint *pConstraint
@@ -81,19 +81,19 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;I)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
-(JNIEnv *env, jobject object, jlong bodyIdB, jobject pivotInB,
+(JNIEnv *pEnv, jobject object, jlong bodyIdB, jobject pivotInB,
         jobject rotInB, jint rotOrderIndex) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
-    NULL_CHK(env, pBodyB, "Rigid body B does not exist.", 0)
+    NULL_CHK(pEnv, pBodyB, "Rigid body B does not exist.", 0)
     btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
-    NULL_CHK(env, pivotInB, "The pivotInB vector does not exist.", 0)
-    NULL_CHK(env, rotInB, "The rotInB matrix does not exist.", 0)
+    NULL_CHK(pEnv, pivotInB, "The pivotInB vector does not exist.", 0)
+    NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
-    jmeBulletUtil::convert(env, pivotInB, &frameInB.getOrigin());
-    jmeBulletUtil::convert(env, rotInB, &frameInB.getBasis());
+    jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
     RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
     btGeneric6DofSpring2Constraint *pConstraint
@@ -109,12 +109,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
-(JNIEnv *env, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
         jboolean enableFlag) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -130,15 +130,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
-(JNIEnv *env, jobject object, jlong constraintId, jobject storeVector) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeVector) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-    NULL_CHK(env, storeVector, "The store vector does not exist.",)
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",)
 
     pConstraint->calculateTransforms();
 
@@ -146,7 +146,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
     btScalar y = pConstraint->getAngle(1);
     btScalar z = pConstraint->getAngle(2);
     const btVector3& angles = btVector3(x, y, z);
-    jmeBulletUtil::convert(env, &angles, storeVector);
+    jmeBulletUtil::convert(pEnv, &angles, storeVector);
 }
 
 /*
@@ -155,23 +155,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
  * Signature: (JILcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
-(JNIEnv *env, jobject object, jlong constraintId, jint axisIndex,
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint axisIndex,
         jobject storeVector) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
     btAssert(axisIndex >= 0);
     btAssert(axisIndex < 3);
-    NULL_CHK(env, storeVector, "The store vector does not exist.",)
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",)
 
     pConstraint->calculateTransforms();
 
     btVector3 axis = pConstraint->getAxis(axisIndex);
-    jmeBulletUtil::convert(env, &axis, storeVector);
+    jmeBulletUtil::convert(pEnv, &axis, storeVector);
 }
 
 /*
@@ -180,18 +180,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
-(JNIEnv *env, jobject object, jlong constraintId, jobject storeTransform) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeTransform) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-    NULL_CHK(env, storeTransform, "The store transform does not exist.",)
+    NULL_CHK(pEnv, storeTransform, "The store transform does not exist.",)
 
     btTransform a = pConstraint->getFrameOffsetA();
-    jmeBulletUtil::convert(env, &a, storeTransform);
+    jmeBulletUtil::convert(pEnv, &a, storeTransform);
 }
 
 /*
@@ -200,18 +200,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
-(JNIEnv *env, jobject object, jlong constraintId, jobject storeTransform) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeTransform) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-    NULL_CHK(env, storeTransform, "The store transform does not exist.",)
+    NULL_CHK(pEnv, storeTransform, "The store transform does not exist.",)
 
     btTransform b = pConstraint->getFrameOffsetB();
-    jmeBulletUtil::convert(env, &b, storeTransform);
+    jmeBulletUtil::convert(pEnv, &b, storeTransform);
 }
 
 /*
@@ -220,15 +220,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
-(JNIEnv *env, jobject object, jlong constraintId, jobject storeVector) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeVector) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
-    NULL_CHK(env, storeVector, "The storeVector does not exist.",)
+    NULL_CHK(pEnv, storeVector, "The storeVector does not exist.",)
 
     pConstraint->calculateTransforms();
 
@@ -236,7 +236,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
     btScalar y = pConstraint->getRelativePivotPosition(1);
     btScalar z = pConstraint->getRelativePivotPosition(2);
     const btVector3& offset = btVector3(x, y, z);
-    jmeBulletUtil::convert(env, &offset, storeVector);
+    jmeBulletUtil::convert(pEnv, &offset, storeVector);
 }
 
 /*
@@ -245,11 +245,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
-(JNIEnv *env, jobject object, jlong constraintId, jint axisIndex) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint axisIndex) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.", 0);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -267,11 +267,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
-(JNIEnv *env, jobject object, jlong constraintId) {
+(JNIEnv *pEnv, jobject object, jlong constraintId) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.", 0);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -286,11 +286,11 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getTranslationalMotor
-(JNIEnv *env, jobject object, jlong constraintId) {
+(JNIEnv *pEnv, jobject object, jlong constraintId) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.", 0);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -306,11 +306,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getTranslationalMoto
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setAllEquilibriumPointsToCurrent
-(JNIEnv *env, jobject object, jlong constraintId) {
+(JNIEnv *pEnv, jobject object, jlong constraintId) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -324,12 +324,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setAllEquilibriumPoin
  * Signature: (JIFZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setDamping
-(JNIEnv *env, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
         jfloat damping, jboolean limitIfNeeded) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -345,12 +345,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setDamping
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
-(JNIEnv *env, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
         jfloat value) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -366,11 +366,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointToCurrent
-(JNIEnv *env, jobject object, jlong constraintId, jint dofIndex) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -386,11 +386,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointTo
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
-(JNIEnv *env, jobject object, jlong constraintId, jint rotOrder) {
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint rotOrder) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
@@ -405,12 +405,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
  * Signature: (JIFZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setStiffness
-(JNIEnv *env, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
         jfloat stiffness, jboolean limitIfNeeded) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
-    NULL_CHK(env, pConstraint,
+    NULL_CHK(pEnv, pConstraint,
             "The btGeneric6DofSpring2Constraint does not exist.",);
     btTypedConstraintType type = pConstraint->getConstraintType();
     btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);

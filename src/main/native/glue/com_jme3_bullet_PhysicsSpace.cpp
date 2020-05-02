@@ -65,14 +65,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addAction
-(JNIEnv *env, jobject, jlong spaceId, jlong actionId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong actionId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btActionInterface * const
             pAction = reinterpret_cast<btActionInterface *> (actionId);
-    NULL_CHK(env, pAction, "The action object does not exist.",)
+    NULL_CHK(pEnv, pAction, "The action object does not exist.",)
 
     pSpace->getDynamicsWorld()->addAction(pAction);
 }
@@ -83,14 +83,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addAction
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
-(JNIEnv *env, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(env, pCollisionObject, "The collision object does not exist.",)
+    NULL_CHK(pEnv, pCollisionObject, "The collision object does not exist.",)
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
@@ -107,14 +107,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
  * Signature: (JJZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
-(JNIEnv *env, jobject, jlong spaceId, jlong constraintId, jboolean collision) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong constraintId, jboolean collision) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
-    NULL_CHK(env, pConstraint, "The btTypedConstraint does not exist.",)
+    NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",)
 
     pSpace->getDynamicsWorld()->addConstraint(pConstraint, collision);
 }
@@ -125,13 +125,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
-(JNIEnv *env, jobject, jlong spaceId, jlong rigidBodyId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong rigidBodyId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
-    NULL_CHK(env, pBody, "The collision object does not exist.",)
+    NULL_CHK(pEnv, pBody, "The collision object does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
@@ -146,11 +146,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
  * Signature: (FFFFFFI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
-(JNIEnv *env, jobject object, jfloat minX, jfloat minY, jfloat minZ,
+(JNIEnv *pEnv, jobject object, jfloat minX, jfloat minY, jfloat minZ,
         jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
-    jmePhysicsSpace * const pSpace = new jmePhysicsSpace(env, object);
+    jmePhysicsSpace * const pSpace = new jmePhysicsSpace(pEnv, object);
     btVector3 min(minX, minY, minZ);
     btVector3 max(maxX, maxY, maxZ);
     pSpace->createPhysicsSpace(min, max, (int) broadphase);
@@ -164,15 +164,15 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
-(JNIEnv *env, jobject, jlong spaceId, jobject storeVector) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jobject storeVector) {
     const jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",);
-    NULL_CHK(env, storeVector, "The store vector does not exist.",);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
 
     const btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
     const btVector3& gravity = pWorld->getGravity();
-    jmeBulletUtil::convert(env, &gravity, storeVector);
+    jmeBulletUtil::convert(pEnv, &gravity, storeVector);
 }
 
 /*
@@ -181,10 +181,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
-(JNIEnv *env, jobject, jlong spaceId) {
+(JNIEnv *pEnv, jobject, jlong spaceId) {
     const jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.", 0);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
 
     int count = pSpace->getDynamicsWorld()->getNumConstraints();
     return (jint) count;
@@ -212,14 +212,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeAction
-(JNIEnv *env, jobject, jlong spaceId, jlong actionId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong actionId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btActionInterface * const
             pAction = reinterpret_cast<btActionInterface *> (actionId);
-    NULL_CHK(env, pAction, "The action object does not exist.",)
+    NULL_CHK(pEnv, pAction, "The action object does not exist.",)
 
     pSpace->getDynamicsWorld()->removeAction(pAction);
 }
@@ -230,14 +230,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeAction
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
-(JNIEnv *env, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(env, pCollisionObject, "The collision object does not exist.",)
+    NULL_CHK(pEnv, pCollisionObject, "The collision object does not exist.",)
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
@@ -252,14 +252,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
-(JNIEnv *env, jobject, jlong spaceId, jlong constraintId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong constraintId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
-    NULL_CHK(env, pConstraint, "The constraint does not exist.",)
+    NULL_CHK(pEnv, pConstraint, "The constraint does not exist.",)
 
     pSpace->getDynamicsWorld()->removeConstraint(pConstraint);
 }
@@ -270,13 +270,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
-(JNIEnv *env, jobject, jlong spaceId, jlong rigidBodyId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong rigidBodyId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
-    NULL_CHK(env, pBody, "The collision object does not exist.",)
+    NULL_CHK(pEnv, pBody, "The collision object does not exist.",)
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
@@ -291,14 +291,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
-(JNIEnv *env, jobject, jlong spaceId, jobject gravityVector) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jobject gravityVector) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
-    NULL_CHK(env, gravityVector, "The gravity vector does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, gravityVector, "The gravity vector does not exist.",)
 
     btVector3 gravity;
-    jmeBulletUtil::convert(env, gravityVector, &gravity);
+    jmeBulletUtil::convert(pEnv, gravityVector, &gravity);
 
     pSpace->getDynamicsWorld()->setGravity(gravity);
 }
@@ -354,11 +354,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
  * Signature: (JFIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_stepSimulation
-(JNIEnv *env, jobject, jlong spaceId, jfloat tpf, jint maxSteps,
+(JNIEnv *pEnv, jobject, jlong spaceId, jfloat tpf, jint maxSteps,
         jfloat accuracy) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
-    NULL_CHK(env, pSpace, "The physics space does not exist.",)
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
     pSpace->stepSimulation(tpf, maxSteps, accuracy);
 }

@@ -42,10 +42,10 @@
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_finalizeNative
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
 
     delete pShape;
 }
@@ -56,22 +56,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_fina
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getAabb
-(JNIEnv *env, jobject object, jlong shapeId, jobject location,
+(JNIEnv *pEnv, jobject object, jlong shapeId, jobject location,
         jobject orientation, jobject storeMinima, jobject storeMaxima) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
 
     btTransform trans;
-    jmeBulletUtil::convert(env, location, &trans.getOrigin());
-    jmeBulletUtil::convert(env, orientation, &trans.getBasis());
+    jmeBulletUtil::convert(pEnv, location, &trans.getOrigin());
+    jmeBulletUtil::convert(pEnv, orientation, &trans.getBasis());
 
     btVector3 aabbMin;
     btVector3 aabbMax;
     pShape->getAabb(trans, aabbMin, aabbMax);
 
-    jmeBulletUtil::convert(env, &aabbMin, storeMinima);
-    jmeBulletUtil::convert(env, &aabbMax, storeMaxima);
+    jmeBulletUtil::convert(pEnv, &aabbMin, storeMinima);
+    jmeBulletUtil::convert(pEnv, &aabbMax, storeMaxima);
 }
 
 /*
@@ -80,13 +80,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getA
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getLocalScaling
-(JNIEnv *env, jobject object, jlong shapeId, jobject storeVector) {
+(JNIEnv *pEnv, jobject object, jlong shapeId, jobject storeVector) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.",);
-    NULL_CHK(env, storeVector, "The storeVector does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, storeVector, "The storeVector does not exist.",);
 
-    jmeBulletUtil::convert(env, &pShape->getLocalScaling(), storeVector);
+    jmeBulletUtil::convert(pEnv, &pShape->getLocalScaling(), storeVector);
 }
 
 /*
@@ -95,10 +95,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getL
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getMargin
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", 0);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);
 
     return pShape->getMargin();
 }
@@ -109,10 +109,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_ge
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getShapeType
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", 0);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);
 
     int shapeType = pShape->getShapeType();
     return (jint) shapeType;
@@ -124,10 +124,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getS
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConcave
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     return pShape->isConcave();
 }
@@ -138,10 +138,10 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConvex
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     return pShape->isConvex();
 }
@@ -152,10 +152,10 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isInfinite
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     return pShape->isInfinite();
 }
@@ -166,10 +166,10 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isNonMoving
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     return pShape->isNonMoving();
 }
@@ -180,10 +180,10 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isPolyhedral
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     return pShape->isPolyhedral();
 }
@@ -194,14 +194,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling
-(JNIEnv *env, jobject object, jlong shapeId, jobject scaleVector) {
+(JNIEnv *pEnv, jobject object, jlong shapeId, jobject scaleVector) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.",);
-    NULL_CHK(env, scaleVector, "The scale vector does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, scaleVector, "The scale vector does not exist.",);
 
     btVector3 scl;
-    jmeBulletUtil::convert(env, scaleVector, &scl);
+    jmeBulletUtil::convert(pEnv, scaleVector, &scl);
 
     pShape->setLocalScaling(scl);
 }
@@ -212,10 +212,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setL
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setMargin
-(JNIEnv *env, jobject object, jlong shapeId, jfloat newMargin) {
+(JNIEnv *pEnv, jobject object, jlong shapeId, jfloat newMargin) {
     btCollisionShape *pShape
             = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
 
     pShape->setMargin(newMargin);
 }

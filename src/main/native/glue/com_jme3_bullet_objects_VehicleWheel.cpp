@@ -42,7 +42,7 @@
  * Signature: (JFFFFFFFFZF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_applyInfo
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex,
         jfloat suspensionStiffness, jfloat wheelsDampingRelaxation,
         jfloat wheelsDampingCompression, jfloat frictionSlip,
         jfloat rollInfluence, jfloat maxSuspensionTravelCm,
@@ -50,7 +50,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_applyInfo
         jfloat restLength) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
 
     pVehicle->getWheelInfo(wheelIndex).m_suspensionStiffness
             = suspensionStiffness;
@@ -75,10 +75,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_applyInfo
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getBrake
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_brake;
     return (jfloat) scalar;
@@ -90,12 +90,12 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getBrake
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionLocation
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex, jobject out) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
 
-    jmeBulletUtil::convert(env,
+    jmeBulletUtil::convert(pEnv,
             &pVehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactPointWS,
             out);
 }
@@ -106,13 +106,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionLoc
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionNormal
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex,
         jobject out) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
 
-    jmeBulletUtil::convert(env,
+    jmeBulletUtil::convert(pEnv,
             &pVehicle->getWheelInfo(wheelIndex).m_raycastInfo.m_contactNormalWS,
             out);
 }
@@ -123,10 +123,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getCollisionNor
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotation
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     return pVehicle->getWheelInfo(wheelIndex).m_deltaRotation;
 }
@@ -137,10 +137,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getDeltaRotat
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getEngineForce
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_engineForce;
     return (jfloat) scalar;
@@ -152,10 +152,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getEngineForc
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRadius
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_wheelsRadius;
     return (jfloat) scalar;
@@ -167,10 +167,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRadius
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRestLength
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     btScalar scalar
             = pVehicle->getWheelInfo(wheelIndex).m_suspensionRestLength1;
@@ -183,10 +183,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRestLength
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRollInfluence
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_rollInfluence;
     return (jfloat) scalar;
@@ -214,10 +214,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getRotationAn
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSkidInfo
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     return pVehicle->getWheelInfo(wheelIndex).m_skidInfo;
 }
@@ -228,10 +228,10 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSkidInfo
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSteerAngle
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", 0)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", 0)
 
     btScalar scalar = pVehicle->getWheelInfo(wheelIndex).m_steering;
     return (jfloat) scalar;
@@ -259,13 +259,13 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getSuspension
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocation
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex,
         jobject out) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
 
-    jmeBulletUtil::convert(env,
+    jmeBulletUtil::convert(pEnv,
             &pVehicle->getWheelInfo(wheelIndex).m_worldTransform.getOrigin(),
             out);
 }
@@ -276,13 +276,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelLocatio
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotation
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex,
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex,
         jobject out) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.",)
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",)
 
-    jmeBulletUtil::convert(env,
+    jmeBulletUtil::convert(pEnv,
             &pVehicle->getWheelInfo(wheelIndex).m_worldTransform.getBasis(),
             out);
 }
@@ -293,10 +293,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_VehicleWheel_getWheelRotatio
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_VehicleWheel_isFront
-(JNIEnv *env, jobject object, jlong vehicleId, jint wheelIndex) {
+(JNIEnv *pEnv, jobject object, jlong vehicleId, jint wheelIndex) {
     btRaycastVehicle *pVehicle
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
-    NULL_CHK(env, pVehicle, "The btRaycastVehicle does not exist.", JNI_FALSE);
+    NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.", JNI_FALSE);
 
     bool result = pVehicle->getWheelInfo(wheelIndex).m_bIsFrontWheel;
     return (jboolean) result;

@@ -42,13 +42,13 @@
  * Signature: (Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
-(JNIEnv *env, jobject object, jobject halfExtentsVector) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object, jobject halfExtentsVector) {
+    jmeClasses::initJavaClasses(pEnv);
 
-    NULL_CHK(env, halfExtentsVector, "The halfExtents vector does not exist.", 0);
+    NULL_CHK(pEnv, halfExtentsVector, "The halfExtents vector does not exist.", 0);
 
     btVector3 vec;
-    jmeBulletUtil::convert(env, halfExtentsVector, &vec);
+    jmeBulletUtil::convert(pEnv, halfExtentsVector, &vec);
 
     btBoxShape *pShape = new btBoxShape(vec);
 

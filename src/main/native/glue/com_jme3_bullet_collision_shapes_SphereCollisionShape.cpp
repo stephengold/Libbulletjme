@@ -42,8 +42,8 @@
  * Signature: (F)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SphereCollisionShape_createShape
-(JNIEnv *env, jobject object, jfloat radius) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object, jfloat radius) {
+    jmeClasses::initJavaClasses(pEnv);
     btSphereShape *pShape = new btSphereShape(radius);
     return reinterpret_cast<jlong> (pShape);
 }

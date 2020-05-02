@@ -68,29 +68,29 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     if (pUser0 != NULL && pUser1 != NULL) {
         jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->m_jmeSpace;
         if (pSpace != NULL) {
-            JNIEnv * const env = pSpace->getEnv();
+            JNIEnv * const pEnv = pSpace->getEnv();
             jobject javaPhysicsSpace
-                    = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
+                    = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
             if (javaPhysicsSpace != NULL) {
                 jobject javaCollisionObject0
-                        = env->NewLocalRef(pUser0->m_javaRef);
+                        = pEnv->NewLocalRef(pUser0->m_javaRef);
                 jobject javaCollisionObject1
-                        = env->NewLocalRef(pUser1->m_javaRef);
+                        = pEnv->NewLocalRef(pUser1->m_javaRef);
                 for (int i = 0; i < pm->getNumContacts(); i++) {
-                    env->CallVoidMethod(javaPhysicsSpace,
+                    pEnv->CallVoidMethod(javaPhysicsSpace,
                             jmeClasses::PhysicsSpace_addCollisionEvent,
                             javaCollisionObject0, javaCollisionObject1,
                             (jlong) & pm->getContactPoint(i));
-                    if (env->ExceptionCheck()) {
-                        env->Throw(env->ExceptionOccurred());
+                    if (pEnv->ExceptionCheck()) {
+                        pEnv->Throw(pEnv->ExceptionOccurred());
                         return;
                     }
                 }
-                env->DeleteLocalRef(javaPhysicsSpace);
-                env->DeleteLocalRef(javaCollisionObject0);
-                env->DeleteLocalRef(javaCollisionObject1);
-                if (env->ExceptionCheck()) {
-                    env->Throw(env->ExceptionOccurred());
+                pEnv->DeleteLocalRef(javaPhysicsSpace);
+                pEnv->DeleteLocalRef(javaCollisionObject0);
+                pEnv->DeleteLocalRef(javaCollisionObject1);
+                if (pEnv->ExceptionCheck()) {
+                    pEnv->Throw(pEnv->ExceptionOccurred());
                     return;
                 }
             } else {
@@ -126,14 +126,14 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
         btScalar timeStep) {
     jmePhysicsSpace * const
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv * const env = pSpace->getEnv();
-    jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    JNIEnv * const pEnv = pSpace->getEnv();
+    jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace != NULL) {
-        env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
+        pEnv->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
                 timeStep);
-        env->DeleteLocalRef(javaPhysicsSpace);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        pEnv->DeleteLocalRef(javaPhysicsSpace);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
     }
@@ -143,14 +143,14 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
         btScalar timeStep) {
     jmePhysicsSpace * const
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv * const env = pSpace->getEnv();
-    jobject javaPhysicsSpace = env->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    JNIEnv * const pEnv = pSpace->getEnv();
+    jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace != NULL) {
-        env->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
+        pEnv->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
                 timeStep);
-        env->DeleteLocalRef(javaPhysicsSpace);
-        if (env->ExceptionCheck()) {
-            env->Throw(env->ExceptionOccurred());
+        pEnv->DeleteLocalRef(javaPhysicsSpace);
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
     }

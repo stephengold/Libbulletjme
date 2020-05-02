@@ -42,8 +42,8 @@
  * Signature: (IFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CapsuleCollisionShape_createShape
-(JNIEnv *env, jobject object, jint axis, jfloat radius, jfloat height) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object, jint axis, jfloat radius, jfloat height) {
+    jmeClasses::initJavaClasses(pEnv);
 
     btCollisionShape *pShape;
     switch (axis) {
@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CapsuleCollisionSh
             pShape = new btCapsuleShapeZ(radius, height);
             break;
         default:
-            env->ThrowNew(jmeClasses::IllegalArgumentException,
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The axis is out of range.");
             return 0;
     }

@@ -57,27 +57,27 @@ void jmeMotionState::setKinematicTransform(const btTransform& worldTrans) {
     dirty = true;
 }
 
-void jmeMotionState::setKinematicLocation(JNIEnv *env, jobject location) {
-    jmeBulletUtil::convert(env, location, &worldTransform.getOrigin());
+void jmeMotionState::setKinematicLocation(JNIEnv *pEnv, jobject location) {
+    jmeBulletUtil::convert(pEnv, location, &worldTransform.getOrigin());
     dirty = true;
 }
 
-void jmeMotionState::setKinematicRotation(JNIEnv *env, jobject rotation) {
-    jmeBulletUtil::convert(env, rotation, &worldTransform.getBasis());
+void jmeMotionState::setKinematicRotation(JNIEnv *pEnv, jobject rotation) {
+    jmeBulletUtil::convert(pEnv, rotation, &worldTransform.getBasis());
     dirty = true;
 }
 
-void jmeMotionState::setKinematicRotationQuat(JNIEnv *env, jobject rotation) {
-    jmeBulletUtil::convertQuat(env, rotation, &worldTransform.getBasis());
+void jmeMotionState::setKinematicRotationQuat(JNIEnv *pEnv, jobject rotation) {
+    jmeBulletUtil::convertQuat(pEnv, rotation, &worldTransform.getBasis());
     dirty = true;
 }
 
-bool jmeMotionState::applyTransform(JNIEnv *env, jobject location, jobject rotation) {
+bool jmeMotionState::applyTransform(JNIEnv *pEnv, jobject location, jobject rotation) {
     if (dirty) {
         //        fprintf(stdout, "Apply world translation\n");
         //        fflush(stdout);
-        jmeBulletUtil::convert(env, &worldTransform.getOrigin(), location);
-        jmeBulletUtil::convertQuat(env, &worldTransform.getBasis(), rotation);
+        jmeBulletUtil::convert(pEnv, &worldTransform.getOrigin(), location);
+        jmeBulletUtil::convertQuat(pEnv, &worldTransform.getBasis(), rotation);
         dirty = false;
         return true;
     }

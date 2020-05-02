@@ -42,22 +42,22 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
-(JNIEnv *env, jobject object, jlong compoundShapeId, jlong childShapeId,
+(JNIEnv *pEnv, jobject object, jlong compoundShapeId, jlong childShapeId,
         jobject offsetVector, jobject rotationMatrix) {
     btCompoundShape *pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
-    NULL_CHK(env, pCompound, "The btCompoundShape does not exist.",)
+    NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
     btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
     btCollisionShape *pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
-    NULL_CHK(env, pChild, "The child shape does not exist.",)
+    NULL_CHK(pEnv, pChild, "The child shape does not exist.",)
 
-    NULL_CHK(env, offsetVector, "The offset vector does not exist.",)
-    NULL_CHK(env, rotationMatrix, "The rotation matrix does not exist.",)
+    NULL_CHK(pEnv, offsetVector, "The offset vector does not exist.",)
+    NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
     btTransform trans;
-    jmeBulletUtil::convert(env, offsetVector, &trans.getOrigin());
-    jmeBulletUtil::convert(env, rotationMatrix, &trans.getBasis());
+    jmeBulletUtil::convert(pEnv, offsetVector, &trans.getOrigin());
+    jmeBulletUtil::convert(pEnv, rotationMatrix, &trans.getBasis());
 
     pCompound->addChildShape(trans, pChild);
 }
@@ -68,18 +68,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (JLjava/nio/FloatBuffer;Lcom/jme3/math/Transform;Lcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_calculatePrincipalAxisTransform
-(JNIEnv *env, jobject object, jlong shapeId, jobject massBuffer,
+(JNIEnv *pEnv, jobject object, jlong shapeId, jobject massBuffer,
         jobject storeTransform, jobject storeInertia) {
     const btCompoundShape * const pShape
             = reinterpret_cast<btCompoundShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCompoundShape does not exist.",)
+    NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.",)
     btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
-    NULL_CHK(env, massBuffer, "The mass buffer does not exist.",);
+    NULL_CHK(pEnv, massBuffer, "The mass buffer does not exist.",);
     const jfloat * const pBuffer
-            = (jfloat *) env->GetDirectBufferAddress(massBuffer);
-    NULL_CHK(env, pBuffer, "The mass buffer is not direct.",);
-    const jlong capacity = env->GetDirectBufferCapacity(massBuffer);
+            = (jfloat *) pEnv->GetDirectBufferAddress(massBuffer);
+    NULL_CHK(pEnv, pBuffer, "The mass buffer is not direct.",);
+    const jlong capacity = pEnv->GetDirectBufferCapacity(massBuffer);
 
     const int numChildren = pShape->getNumChildShapes();
     btTransform principal;
@@ -92,8 +92,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     pShape->calculatePrincipalAxisTransform(pMasses, principal, inertia);
     delete[] pMasses;
 
-    jmeBulletUtil::convert(env, &principal, storeTransform);
-    jmeBulletUtil::convert(env, &inertia, storeInertia);
+    jmeBulletUtil::convert(pEnv, &principal, storeTransform);
+    jmeBulletUtil::convert(pEnv, &inertia, storeInertia);
 }
 
 /*
@@ -102,10 +102,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_countChildren
-(JNIEnv *env, jobject object, jlong compoundId) {
+(JNIEnv *pEnv, jobject object, jlong compoundId) {
     const btCompoundShape * const pShape
             = reinterpret_cast<btCompoundShape *> (compoundId);
-    NULL_CHK(env, pShape, "The btCompoundShape does not exist.", 0)
+    NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.", 0)
     btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
     const int result = pShape->getNumChildShapes();
@@ -119,9 +119,9 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (ZI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape2
-(JNIEnv *env, jobject object, jboolean dynamicAabbTree,
+(JNIEnv *pEnv, jobject object, jboolean dynamicAabbTree,
         jint initialCapacity) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
     bool enableDynamicAabbTree = (bool)dynamicAabbTree;
     const int initialChildCapacity = (int) initialCapacity;
@@ -137,9 +137,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionS
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_recalcAabb
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btCompoundShape *pShape = reinterpret_cast<btCompoundShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btCompoundShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.",);
     btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
     pShape->recalculateLocalAabb();
@@ -151,15 +151,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
-(JNIEnv *env, jobject object, jlong compoundShapeId, jlong childShapeId) {
+(JNIEnv *pEnv, jobject object, jlong compoundShapeId, jlong childShapeId) {
     btCompoundShape * const pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
-    NULL_CHK(env, pCompound, "The btCompoundShape does not exist.",)
+    NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
     btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
     btCollisionShape * const pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
-    NULL_CHK(env, pChild, "The child shape does not exist.",)
+    NULL_CHK(pEnv, pChild, "The child shape does not exist.",)
 
     pCompound->removeChildShape(pChild);
 }
@@ -170,22 +170,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_setChildTransform
-(JNIEnv *env, jobject object, jlong compoundShapeId, jlong childShapeId,
+(JNIEnv *pEnv, jobject object, jlong compoundShapeId, jlong childShapeId,
         jobject offsetVector, jobject rotationMatrix) {
     btCompoundShape * const pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
-    NULL_CHK(env, pCompound, "The btCompoundShape does not exist.",)
+    NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
     btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
 
     btCollisionShape * const pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
-    NULL_CHK(env, pChild, "The child shape does not exist.",);
+    NULL_CHK(pEnv, pChild, "The child shape does not exist.",);
 
-    NULL_CHK(env, offsetVector, "The offset vector does not exist.",)
-    NULL_CHK(env, rotationMatrix, "The rotation matrix does not exist.",)
+    NULL_CHK(pEnv, offsetVector, "The offset vector does not exist.",)
+    NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
     btTransform transform;
-    jmeBulletUtil::convert(env, offsetVector, &transform.getOrigin());
-    jmeBulletUtil::convert(env, rotationMatrix, &transform.getBasis());
+    jmeBulletUtil::convert(pEnv, offsetVector, &transform.getOrigin());
+    jmeBulletUtil::convert(pEnv, rotationMatrix, &transform.getBasis());
 
     bool shouldRecalculateLocalAabb = true;
     int numChildren = pCompound->getNumChildShapes();

@@ -43,12 +43,12 @@
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_createShape
-(JNIEnv *env, jobject object, jlong meshId) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object, jlong meshId) {
+    jmeClasses::initJavaClasses(pEnv);
 
     btStridingMeshInterface *pMesh
             = reinterpret_cast<btStridingMeshInterface *> (meshId);
-    NULL_CHK(env, pMesh, "The btStridingMeshInterface does not exist.", 0)
+    NULL_CHK(pEnv, pMesh, "The btStridingMeshInterface does not exist.", 0)
 
     btGImpactMeshShape *pShape = new btGImpactMeshShape(pMesh);
     // no longer invoking updateBound() here -- caller must do that
@@ -62,10 +62,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionSh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_recalcAabb
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btGImpactMeshShape *pShape
             = reinterpret_cast<btGImpactMeshShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btGImpactMeshShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btGImpactMeshShape does not exist.",);
     btAssert(pShape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE);
 
     pShape->updateBound();

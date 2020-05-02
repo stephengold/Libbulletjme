@@ -43,14 +43,14 @@
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Convex2dShape_createShape
-(JNIEnv *env, jobject object, jlong childShapeId) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object, jlong childShapeId) {
+    jmeClasses::initJavaClasses(pEnv);
 
     btCollisionShape *pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
-    NULL_CHK(env, pChild, "The child shape does not exist.", 0)
+    NULL_CHK(pEnv, pChild, "The child shape does not exist.", 0)
     if (!pChild->isConvex()) {
-        env->ThrowNew(jmeClasses::IllegalArgumentException,
+        pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                 "The btCollisionShape isn't convex.");
         return 0;
     }

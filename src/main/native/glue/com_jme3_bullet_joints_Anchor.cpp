@@ -43,16 +43,16 @@
  * Signature: (JIJLcom/jme3/math/Vector3f;ZF)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
-(JNIEnv *env, jobject object, jlong softBodyId, jint nodeIndex,
+(JNIEnv *pEnv, jobject object, jlong softBodyId, jint nodeIndex,
         jlong rigidBodyId, jobject pivotVector,
         jboolean allowCollisions, jfloat influence) {
     btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
-    NULL_CHK(env, pSoftBody, "The btSoftBody does not exist.", 0)
+    NULL_CHK(pEnv, pSoftBody, "The btSoftBody does not exist.", 0)
     btAssert(pSoftBody->getInternalType()
             & btCollisionObject::CO_SOFT_BODY);
 
     btRigidBody *pRigidBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
-    NULL_CHK(env, pRigidBody, "The btRigidBody does not exist.", 0);
+    NULL_CHK(pEnv, pRigidBody, "The btRigidBody does not exist.", 0);
     btAssert(pRigidBody->getInternalType()
             & btCollisionObject::CO_RIGID_BODY);
 
@@ -60,7 +60,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
     btAssert(nodeIndex < pSoftBody->m_nodes.size());
 
     btVector3 vec;
-    jmeBulletUtil::convert(env, pivotVector, &vec);
+    jmeBulletUtil::convert(pEnv, pivotVector, &vec);
     pSoftBody->appendAnchor(nodeIndex, pRigidBody, vec, !allowCollisions,
             influence);
 
@@ -76,10 +76,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Anchor_setInfluence
-(JNIEnv *env, jobject object, jlong anchorId, jfloat influence) {
+(JNIEnv *pEnv, jobject object, jlong anchorId, jfloat influence) {
     btSoftBody::Anchor *pAnchor
             = reinterpret_cast<btSoftBody::Anchor *> (anchorId);
-    NULL_CHK(env, pAnchor, "The btSoftBody::Anchor does not exist.",)
+    NULL_CHK(pEnv, pAnchor, "The btSoftBody::Anchor does not exist.",)
 
     pAnchor->m_influence = (btScalar) influence;
 }

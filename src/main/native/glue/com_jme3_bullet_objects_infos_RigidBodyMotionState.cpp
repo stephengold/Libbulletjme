@@ -43,12 +43,12 @@
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Quaternion;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_applyTransform
-(JNIEnv *env, jobject object, jlong stateId, jobject location, jobject rotation) {
+(JNIEnv *pEnv, jobject object, jlong stateId, jobject location, jobject rotation) {
     jmeMotionState *pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
-    NULL_CHK(env, pMotionState, "The motion state does not exist.", JNI_FALSE)
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.", JNI_FALSE)
 
-    return pMotionState->applyTransform(env, location, rotation);
+    return pMotionState->applyTransform(pEnv, location, rotation);
 }
 
 /*
@@ -57,8 +57,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionSta
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_createMotionState
-(JNIEnv *env, jobject object) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject object) {
+    jmeClasses::initJavaClasses(pEnv);
     jmeMotionState *pMotionState = new jmeMotionState();
     return reinterpret_cast<jlong> (pMotionState);
 }
@@ -69,10 +69,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_finalizeNative
-(JNIEnv *env, jobject object, jlong stateId) {
+(JNIEnv *pEnv, jobject object, jlong stateId) {
     jmeMotionState *pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
-    NULL_CHK(env, pMotionState, "The motion state does not exist.",);
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",);
 
     delete pMotionState;
 }
@@ -83,12 +83,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_f
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldLocation
-(JNIEnv *env, jobject object, jlong stateId, jobject value) {
+(JNIEnv *pEnv, jobject object, jlong stateId, jobject value) {
     jmeMotionState *pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
-    NULL_CHK(env, pMotionState, "The motion state does not exist.",)
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
-    jmeBulletUtil::convert(env, &pMotionState->worldTransform.getOrigin(), value);
+    jmeBulletUtil::convert(pEnv, &pMotionState->worldTransform.getOrigin(), value);
 }
 
 /*
@@ -97,12 +97,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldRotation
-(JNIEnv *env, jobject object, jlong stateId, jobject value) {
+(JNIEnv *pEnv, jobject object, jlong stateId, jobject value) {
     jmeMotionState *pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
-    NULL_CHK(env, pMotionState, "The motion state does not exist.",)
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
-    jmeBulletUtil::convert(env, &pMotionState->worldTransform.getBasis(),
+    jmeBulletUtil::convert(pEnv, &pMotionState->worldTransform.getBasis(),
             value);
 }
 
@@ -112,11 +112,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldRotationQuat
-(JNIEnv *env, jobject object, jlong stateId, jobject value) {
+(JNIEnv *pEnv, jobject object, jlong stateId, jobject value) {
     jmeMotionState *pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
-    NULL_CHK(env, pMotionState, "The motion state does not exist.",)
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
-    jmeBulletUtil::convertQuat(env, &pMotionState->worldTransform.getBasis(),
+    jmeBulletUtil::convertQuat(pEnv, &pMotionState->worldTransform.getBasis(),
             value);
 }

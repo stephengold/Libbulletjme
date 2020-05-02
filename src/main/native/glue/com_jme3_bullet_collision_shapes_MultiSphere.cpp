@@ -42,26 +42,26 @@
  * Signature: (F)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
-(JNIEnv *env, jobject object, jobjectArray centers, jfloatArray radii,
+(JNIEnv *pEnv, jobject object, jobjectArray centers, jfloatArray radii,
         jint numSpheres) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
     int n = numSpheres;
     btVector3* pCenters = new btVector3[n];
     for (int i = 0; i < n; ++i) {
-        jobject center = env->GetObjectArrayElement(centers, i);
-        jmeBulletUtil::convert(env, center, &pCenters[i]);
+        jobject center = pEnv->GetObjectArrayElement(centers, i);
+        jmeBulletUtil::convert(pEnv, center, &pCenters[i]);
     }
 
     btScalar *pRadii;
 #ifdef BT_USE_DOUBLE_PRECISION
-    float *pFloats = env->GetFloatArrayElements(radii, 0);
+    float *pFloats = pEnv->GetFloatArrayElements(radii, 0);
     pRadii = new btScalar[n];
     for (int i = 0; i < n; ++i) {
         pRadii[i] = pFloats[i];
     }
 #else
-    pRadii = env->GetFloatArrayElements(radii, 0);
+    pRadii = pEnv->GetFloatArrayElements(radii, 0);
 #endif
 
     btMultiSphereShape *pShape
@@ -69,9 +69,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
 
 #ifdef BT_USE_DOUBLE_PRECISION
     delete[] pRadii;
-    env->ReleaseFloatArrayElements(radii, pFloats, 0);
+    pEnv->ReleaseFloatArrayElements(radii, pFloats, 0);
 #else
-    env->ReleaseFloatArrayElements(radii, pRadii, 0);
+    pEnv->ReleaseFloatArrayElements(radii, pRadii, 0);
 #endif
     delete[] pCenters;
 
@@ -84,10 +84,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
-(JNIEnv *env, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject object, jlong shapeId) {
     btMultiSphereShape *pShape
             = reinterpret_cast<btMultiSphereShape *> (shapeId);
-    NULL_CHK(env, pShape, "The btMultiSphereShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btMultiSphereShape does not exist.",);
     btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
 
     pShape->recalcLocalAabb();

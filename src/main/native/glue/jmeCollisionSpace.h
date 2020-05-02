@@ -52,7 +52,7 @@ protected:
     /*
      * an interface pointer for the Java thread that simulates this space:
      */
-    JNIEnv * env;
+    JNIEnv *pEnv;
     jobject m_javaSpace;
     JavaVM * vm;
 
@@ -84,7 +84,7 @@ public:
     JNIEnv *
     getEnv() {
         attachThread();
-        return env;
+        return pEnv;
     }
 
     jobject

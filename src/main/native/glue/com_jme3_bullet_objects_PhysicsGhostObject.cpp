@@ -46,9 +46,9 @@ class jmeGhostOverlapCallback : public btOverlapCallback {
     btCollisionObject * m_ghost;
 public:
 
-    jmeGhostOverlapCallback(JNIEnv *env, jobject object,
+    jmeGhostOverlapCallback(JNIEnv *pEnv, jobject object,
             btCollisionObject *pGhost)
-    : m_env(env),
+    : m_env(pEnv),
     m_object(object),
     m_ghost(pGhost) {
     }
@@ -84,8 +84,8 @@ public:
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGhostObject
-(JNIEnv *env, jobject) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject) {
+    jmeClasses::initJavaClasses(pEnv);
     btPairCachingGhostObject * const pGhost = new btPairCachingGhostObject();
     return reinterpret_cast<jlong> (pGhost);
 }
@@ -96,10 +96,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGh
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverlappingCount
-(JNIEnv *env, jobject, jlong ghostId) {
+(JNIEnv *pEnv, jobject, jlong ghostId) {
     const btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-    NULL_CHK(env, pGhost, "The btPairCachingGhostObject does not exist.", 0)
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.", 0)
     btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
     return pGhost->getNumOverlappingObjects();
@@ -111,15 +111,15 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverla
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverlappingObjects
-(JNIEnv *env, jobject object, jlong ghostId) {
+(JNIEnv *pEnv, jobject object, jlong ghostId) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-    NULL_CHK(env, pGhost, "The btPairCachingGhostObject does not exist.",)
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
     btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
     btHashedOverlappingPairCache * const
             pCache = pGhost->getOverlappingPairCache();
-    jmeGhostOverlapCallback callback(env, object, pGhost);
+    jmeGhostOverlapCallback callback(pEnv, object, pGhost);
     pCache->processAllOverlappingPairs(&callback, NULL);
 }
 
@@ -129,10 +129,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverla
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setGhostFlags
-(JNIEnv *env, jobject, jlong ghostId) {
+(JNIEnv *pEnv, jobject, jlong ghostId) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-    NULL_CHK(env, pGhost, "The btPairCachingGhostObject does not exist.",)
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
     btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
     pGhost->setCollisionFlags(pGhost->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
@@ -144,15 +144,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setGhostF
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsLocation
-(JNIEnv *env, jobject, jlong ghostId, jobject locationVector) {
+(JNIEnv *pEnv, jobject, jlong ghostId, jobject locationVector) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-    NULL_CHK(env, pGhost, "The btPairCachingGhostObject does not exist.",)
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
     btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-    NULL_CHK(env, locationVector, "The location vector does not exist.",)
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
-    jmeBulletUtil::convert(env, locationVector,
+    jmeBulletUtil::convert(pEnv, locationVector,
             &pGhost->getWorldTransform().getOrigin());
 }
 
@@ -162,15 +162,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Matrix3f_2
-(JNIEnv *env, jobject, jlong ghostId, jobject matrix) {
+(JNIEnv *pEnv, jobject, jlong ghostId, jobject matrix) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-    NULL_CHK(env, pGhost, "The btPairCachingGhostObject does not exist.",)
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
     btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-    NULL_CHK(env, matrix, "The rotation matrix does not exist.",)
+    NULL_CHK(pEnv, matrix, "The rotation matrix does not exist.",)
 
-    jmeBulletUtil::convert(env, matrix,
+    jmeBulletUtil::convert(pEnv, matrix,
             &pGhost->getWorldTransform().getBasis());
 }
 
@@ -180,14 +180,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Quaternion_2
-(JNIEnv *env, jobject, jlong ghostId, jobject quaternion) {
+(JNIEnv *pEnv, jobject, jlong ghostId, jobject quaternion) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
-    NULL_CHK(env, pGhost, "The btPairCachingGhostObject does not exist.",)
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
     btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-    NULL_CHK(env, quaternion, "The quaternion does not exist.",)
+    NULL_CHK(pEnv, quaternion, "The quaternion does not exist.",)
 
-    jmeBulletUtil::convertQuat(env, quaternion,
+    jmeBulletUtil::convertQuat(pEnv, quaternion,
             &pGhost->getWorldTransform().getBasis());
 }

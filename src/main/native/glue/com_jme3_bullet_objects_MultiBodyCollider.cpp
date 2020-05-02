@@ -43,12 +43,12 @@
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCollider
-(JNIEnv *env, jobject, jlong multiBodyId, jint linkIndex) {
-    jmeClasses::initJavaClasses(env);
+(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex) {
+    jmeClasses::initJavaClasses(pEnv);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHK(env, pMultiBody, "The btMultiBody does not exist.", 0);
+    NULL_CHK(pEnv, pMultiBody, "The btMultiBody does not exist.", 0);
 
     int link = (int) linkIndex;
     btMultiBodyLinkCollider *
@@ -62,17 +62,17 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCol
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsLocation
-(JNIEnv *env, jobject, jlong colliderId, jobject locationVector) {
+(JNIEnv *pEnv, jobject, jlong colliderId, jobject locationVector) {
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
-    NULL_CHK(env, pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
     btAssert(pCollider->getInternalType()
             & btCollisionObject::CO_FEATHERSTONE_LINK);
 
-    NULL_CHK(env, locationVector, "The location vector does not exist.",)
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
     btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
-    jmeBulletUtil::convert(env, locationVector, pLocation);
+    jmeBulletUtil::convert(pEnv, locationVector, pLocation);
 }
 
 /*
@@ -81,15 +81,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsRotation
-(JNIEnv *env, jobject, jlong colliderId, jobject rotationMatrix) {
+(JNIEnv *pEnv, jobject, jlong colliderId, jobject rotationMatrix) {
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
-    NULL_CHK(env, pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
     btAssert(pCollider->getInternalType()
             & btCollisionObject::CO_FEATHERSTONE_LINK);
 
-    NULL_CHK(env, rotationMatrix, "The rotation matrix does not exist.",)
+    NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
 
     btMatrix3x3 *pRotation = &pCollider->getWorldTransform().getBasis();
-    jmeBulletUtil::convert(env, rotationMatrix, pRotation);
+    jmeBulletUtil::convert(pEnv, rotationMatrix, pRotation);
 }

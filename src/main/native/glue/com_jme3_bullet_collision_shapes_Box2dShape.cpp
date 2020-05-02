@@ -43,9 +43,9 @@
  * Signature: (FFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Box2dShape_createShape
-(JNIEnv *env, jobject object, jfloat xHalfExtent, jfloat yHalfExtent,
+(JNIEnv *pEnv, jobject object, jfloat xHalfExtent, jfloat yHalfExtent,
         jfloat margin) {
-    jmeClasses::initJavaClasses(env);
+    jmeClasses::initJavaClasses(pEnv);
 
     btVector3 he;
     he.setValue(xHalfExtent, yHalfExtent, margin);
