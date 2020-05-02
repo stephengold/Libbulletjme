@@ -151,8 +151,7 @@ abstract public class PhysicsCollisionObject
      */
     protected long objectId = 0L;
     /**
-     * object that uses this collision object, typically a PhysicsControl,
-     * PhysicsLink, or Spatial
+     * object that uses this collision object
      */
     private Object userObject;
     // *************************************************************************
