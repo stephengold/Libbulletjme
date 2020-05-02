@@ -43,7 +43,7 @@
  * Signature: (Lcom/jme3/math/Vector3f;F)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_PlaneCollisionShape_createShape
-(JNIEnv *pEnv, jobject object, jobject normal, jfloat constant) {
+(JNIEnv *pEnv, jobject, jobject normal, jfloat constant) {
     jmeClasses::initJavaClasses(pEnv);
 
     btVector3 norm;

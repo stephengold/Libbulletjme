@@ -42,7 +42,7 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_addChildShape
-(JNIEnv *pEnv, jobject object, jlong compoundShapeId, jlong childShapeId,
+(JNIEnv *pEnv, jobject, jlong compoundShapeId, jlong childShapeId,
         jobject offsetVector, jobject rotationMatrix) {
     btCompoundShape *pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (JLjava/nio/FloatBuffer;Lcom/jme3/math/Transform;Lcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_calculatePrincipalAxisTransform
-(JNIEnv *pEnv, jobject object, jlong shapeId, jobject massBuffer,
+(JNIEnv *pEnv, jobject, jlong shapeId, jobject massBuffer,
         jobject storeTransform, jobject storeInertia) {
     const btCompoundShape * const pShape
             = reinterpret_cast<btCompoundShape *> (shapeId);
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_countChildren
-(JNIEnv *pEnv, jobject object, jlong compoundId) {
+(JNIEnv *pEnv, jobject, jlong compoundId) {
     const btCompoundShape * const pShape
             = reinterpret_cast<btCompoundShape *> (compoundId);
     NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.", 0)
@@ -119,7 +119,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (ZI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_createShape2
-(JNIEnv *pEnv, jobject object, jboolean dynamicAabbTree,
+(JNIEnv *pEnv, jobject, jboolean dynamicAabbTree,
         jint initialCapacity) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -137,7 +137,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionS
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_recalcAabb
-(JNIEnv *pEnv, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject, jlong shapeId) {
     btCompoundShape *pShape = reinterpret_cast<btCompoundShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.",);
     btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
@@ -151,7 +151,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_removeChildShape
-(JNIEnv *pEnv, jobject object, jlong compoundShapeId, jlong childShapeId) {
+(JNIEnv *pEnv, jobject, jlong compoundShapeId, jlong childShapeId) {
     btCompoundShape * const pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
     NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
@@ -170,7 +170,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_setChildTransform
-(JNIEnv *pEnv, jobject object, jlong compoundShapeId, jlong childShapeId,
+(JNIEnv *pEnv, jobject, jlong compoundShapeId, jlong childShapeId,
         jobject offsetVector, jobject rotationMatrix) {
     btCompoundShape * const pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);

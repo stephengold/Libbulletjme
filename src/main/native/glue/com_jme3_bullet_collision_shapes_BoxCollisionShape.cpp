@@ -42,7 +42,7 @@
  * Signature: (Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
-(JNIEnv *pEnv, jobject object, jobject halfExtentsVector) {
+(JNIEnv *pEnv, jobject, jobject halfExtentsVector) {
     jmeClasses::initJavaClasses(pEnv);
 
     NULL_CHK(pEnv, halfExtentsVector, "The halfExtents vector does not exist.", 0);

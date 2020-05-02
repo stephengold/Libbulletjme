@@ -45,7 +45,7 @@
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_createShape
-(JNIEnv *pEnv, jobject object, jboolean isMemoryEfficient, jboolean buildBVH,
+(JNIEnv *pEnv, jobject, jboolean isMemoryEfficient, jboolean buildBVH,
         jlong meshId) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -65,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
-(JNIEnv *, jobject object, jlong nativeBVHBufferId) {
+(JNIEnv *, jobject, jlong nativeBVHBufferId) {
     if (nativeBVHBufferId != 0) {
         void *pBuffer = reinterpret_cast<void *> (nativeBVHBufferId);
         btAlignedFree(pBuffer);
@@ -78,7 +78,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_recalcAabb
-(JNIEnv *pEnv, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject, jlong shapeId) {
     btBvhTriangleMeshShape *pShape
             = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.",);

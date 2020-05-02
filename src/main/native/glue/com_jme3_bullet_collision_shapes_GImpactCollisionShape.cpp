@@ -43,7 +43,7 @@
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_createShape
-(JNIEnv *pEnv, jobject object, jlong meshId) {
+(JNIEnv *pEnv, jobject, jlong meshId) {
     jmeClasses::initJavaClasses(pEnv);
 
     btStridingMeshInterface *pMesh
@@ -62,7 +62,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionSh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionShape_recalcAabb
-(JNIEnv *pEnv, jobject object, jlong shapeId) {
+(JNIEnv *pEnv, jobject, jlong shapeId) {
     btGImpactMeshShape *pShape
             = reinterpret_cast<btGImpactMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btGImpactMeshShape does not exist.",);

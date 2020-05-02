@@ -42,9 +42,8 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;I)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
-(JNIEnv *pEnv, jobject object, jlong bodyIdA, jlong bodyIdB,
-        jobject pivotInA, jobject rotInA, jobject pivotInB, jobject rotInB,
-        jint rotOrderIndex) {
+(JNIEnv *pEnv, jobject, jlong bodyIdA, jlong bodyIdB, jobject pivotInA,
+        jobject rotInA, jobject pivotInB, jobject rotInB, jint rotOrderIndex) {
     jmeClasses::initJavaClasses(pEnv);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
@@ -81,8 +80,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;I)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
-(JNIEnv *pEnv, jobject object, jlong bodyIdB, jobject pivotInB,
-        jobject rotInB, jint rotOrderIndex) {
+(JNIEnv *pEnv, jobject, jlong bodyIdB, jobject pivotInB, jobject rotInB,
+        jint rotOrderIndex) {
     jmeClasses::initJavaClasses(pEnv);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
@@ -109,7 +108,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject, jlong constraintId, jint dofIndex,
         jboolean enableFlag) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
@@ -130,7 +129,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
-(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeVector) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jobject storeVector) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -155,7 +154,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
  * Signature: (JILcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint axisIndex,
+(JNIEnv *pEnv, jobject, jlong constraintId, jint axisIndex,
         jobject storeVector) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
@@ -180,7 +179,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
-(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeTransform) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jobject storeTransform) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -200,7 +199,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
-(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeTransform) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jobject storeTransform) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -220,7 +219,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
-(JNIEnv *pEnv, jobject object, jlong constraintId, jobject storeVector) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jobject storeVector) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -245,7 +244,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint axisIndex) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jint axisIndex) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -267,7 +266,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
-(JNIEnv *pEnv, jobject object, jlong constraintId) {
+(JNIEnv *pEnv, jobject, jlong constraintId) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -286,7 +285,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getTranslationalMotor
-(JNIEnv *pEnv, jobject object, jlong constraintId) {
+(JNIEnv *pEnv, jobject, jlong constraintId) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -306,7 +305,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getTranslationalMoto
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setAllEquilibriumPointsToCurrent
-(JNIEnv *pEnv, jobject object, jlong constraintId) {
+(JNIEnv *pEnv, jobject, jlong constraintId) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -324,7 +323,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setAllEquilibriumPoin
  * Signature: (JIFZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setDamping
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject, jlong constraintId, jint dofIndex,
         jfloat damping, jboolean limitIfNeeded) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
@@ -345,7 +344,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setDamping
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
+(JNIEnv *pEnv, jobject, jlong constraintId, jint dofIndex,
         jfloat value) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
@@ -366,7 +365,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointToCurrent
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jint dofIndex) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -386,7 +385,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointTo
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint rotOrder) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jint rotOrder) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);
@@ -405,8 +404,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
  * Signature: (JIFZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setStiffness
-(JNIEnv *pEnv, jobject object, jlong constraintId, jint dofIndex,
-        jfloat stiffness, jboolean limitIfNeeded) {
+(JNIEnv *pEnv, jobject, jlong constraintId, jint dofIndex, jfloat stiffness,
+        jboolean limitIfNeeded) {
     btGeneric6DofSpring2Constraint *pConstraint
             = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
             constraintId);

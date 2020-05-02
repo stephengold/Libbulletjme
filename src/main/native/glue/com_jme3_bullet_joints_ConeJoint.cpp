@@ -42,9 +42,8 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
-(JNIEnv *pEnv, jobject object, jlong bodyIdA, jlong bodyIdB,
-        jobject pivotInA, jobject rotInA, jobject pivotInB,
-        jobject rotInB) {
+(JNIEnv *pEnv, jobject, jlong bodyIdA, jlong bodyIdB, jobject pivotInA,
+        jobject rotInA, jobject pivotInB, jobject rotInB) {
     jmeClasses::initJavaClasses(pEnv);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
@@ -79,8 +78,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
-(JNIEnv *pEnv, jobject object, jlong bodyIdA, jobject pivotInA,
-        jobject rotInA) {
+(JNIEnv *pEnv, jobject, jlong bodyIdA, jobject pivotInA, jobject rotInA) {
     jmeClasses::initJavaClasses(pEnv);
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
@@ -105,7 +103,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetA
-(JNIEnv *pEnv, jobject object, jlong jointId, jobject storeTransform) {
+(JNIEnv *pEnv, jobject, jlong jointId, jobject storeTransform) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btConeTwistConstraint does not exist.",)
@@ -123,7 +121,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetB
-(JNIEnv *pEnv, jobject object, jlong jointId, jobject storeTransform) {
+(JNIEnv *pEnv, jobject, jlong jointId, jobject storeTransform) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btConeTwistConstraint does not exist.",)
@@ -141,7 +139,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_getFrameOffsetB
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setAngularOnly
-(JNIEnv *pEnv, jobject object, jlong jointId, jboolean angularOnly) {
+(JNIEnv *pEnv, jobject, jlong jointId, jboolean angularOnly) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btConeTwistConstraint does not exist.",)
@@ -156,8 +154,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setAngularOnly
  * Signature: (JFFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_ConeJoint_setLimit
-(JNIEnv *pEnv, jobject object, jlong jointId, jfloat swingSpan1,
-        jfloat swingSpan2, jfloat twistSpan) {
+(JNIEnv *pEnv, jobject, jlong jointId, jfloat swingSpan1, jfloat swingSpan2,
+        jfloat twistSpan) {
     btConeTwistConstraint *pJoint
             = reinterpret_cast<btConeTwistConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btConeTwistConstraint does not exist.",)

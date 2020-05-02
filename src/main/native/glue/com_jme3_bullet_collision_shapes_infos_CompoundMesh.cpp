@@ -42,7 +42,7 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_addIndexedMesh
-(JNIEnv *env, jobject object, jlong compoundMeshId, jlong submeshId) {
+(JNIEnv *env, jobject, jlong compoundMeshId, jlong submeshId) {
     btTriangleIndexVertexArray *pMesh
             = reinterpret_cast<btTriangleIndexVertexArray *> (compoundMeshId);
     NULL_CHK(env, pMesh, "The btTriangleIndexVertexArray does not exist.",);
@@ -60,7 +60,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_createEmptyTiva
-(JNIEnv *env, jobject object) {
+(JNIEnv *env, jobject) {
     jmeClasses::initJavaClasses(env);
     btTriangleIndexVertexArray *pMesh = new btTriangleIndexVertexArray();
     return reinterpret_cast<jlong> (pMesh);
@@ -72,7 +72,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_finalizeNative
-(JNIEnv *env, jobject object, jlong meshId) {
+(JNIEnv *env, jobject, jlong meshId) {
     btTriangleIndexVertexArray *pMesh
             = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
     NULL_CHK(env, pMesh, "The btTriangleIndexVertexArray does not exist.",);
@@ -86,7 +86,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_getScaling
-(JNIEnv *env, jobject object, jlong meshId, jobject storeVector) {
+(JNIEnv *env, jobject, jlong meshId, jobject storeVector) {
     btTriangleIndexVertexArray *pMesh
             = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
     NULL_CHK(env, pMesh, "The btTriangleIndexVertexArray does not exist.",);
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
  * Signature: (JFFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_setScaling
-(JNIEnv *env, jobject object, jlong meshId, jfloat xScale, jfloat yScale,
+(JNIEnv *env, jobject, jlong meshId, jfloat xScale, jfloat yScale,
         jfloat zScale) {
     btTriangleIndexVertexArray *pMesh
             = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
