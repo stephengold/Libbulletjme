@@ -58,7 +58,7 @@ public class SoftAngularJoint extends SoftPhysicsJoint {
     /**
      * copy of the joint axis (in physics-space coordinates)
      */
-    private Vector3f axis;
+    final private Vector3f axis;
     // *************************************************************************
     // constructors
 

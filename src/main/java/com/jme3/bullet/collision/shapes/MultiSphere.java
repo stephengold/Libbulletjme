@@ -59,11 +59,11 @@ public class MultiSphere extends ConvexShape {
     /**
      * copies of radii (in unscaled units, each &ge;0)
      */
-    private float[] radii;
+    final private float[] radii;
     /**
      * copies of center locations
      */
-    private Vector3f[] centers;
+    final private Vector3f[] centers;
     // *************************************************************************
     // constructors
 

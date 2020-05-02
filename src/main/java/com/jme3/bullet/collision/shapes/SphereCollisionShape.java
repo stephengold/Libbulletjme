@@ -61,7 +61,7 @@ public class SphereCollisionShape extends ConvexShape {
     /**
      * copy of the unscaled radius (&ge;0)
      */
-    private float radius;
+    final private float radius;
     // *************************************************************************
     // constructors
 

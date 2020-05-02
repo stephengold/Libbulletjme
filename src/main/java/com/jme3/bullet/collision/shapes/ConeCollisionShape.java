@@ -59,15 +59,15 @@ public class ConeCollisionShape extends ConvexShape {
     /**
      * copy of the unscaled height (&ge;0)
      */
-    private float height;
+    final private float height;
     /**
      * copy of the unscaled radius of the base (&ge;0)
      */
-    private float radius;
+    final private float radius;
     /**
      * copy of main (height) axis (0&rarr;X, 1&rarr;Y, 2&rarr;Z)
      */
-    private int axis;
+    final private int axis;
     // *************************************************************************
     // constructors
 

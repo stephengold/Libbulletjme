@@ -62,11 +62,11 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
     /**
      * index of the link (&ge;0) or -1 for the base (of the MultiBody)
      */
-    private int linkIndex;
+    final private int linkIndex;
     /**
      * MultiBody that contains this collider (not null)
      */
-    private MultiBody multiBody;
+    final private MultiBody multiBody;
     // *************************************************************************
     // constructors
 

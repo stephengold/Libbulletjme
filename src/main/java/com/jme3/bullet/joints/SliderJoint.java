@@ -64,16 +64,16 @@ public class SliderJoint extends Constraint {
      * space, false&rarr;limits give the allowable range of movement of frameA
      * in frameB space
      */
-    private boolean useLinearReferenceFrameA;
+    final private boolean useLinearReferenceFrameA;
     /**
      * copy of the joint orientation: in physics-space coordinates if bodyA is
      * null, or else in A's local coordinates (rotation matrix)
      */
-    private Matrix3f rotA;
+    final private Matrix3f rotA;
     /**
      * copy of the joint orientation in B's local coordinates (rotation matrix)
      */
-    private Matrix3f rotB;
+    final private Matrix3f rotB;
     // *************************************************************************
     // constructors
 

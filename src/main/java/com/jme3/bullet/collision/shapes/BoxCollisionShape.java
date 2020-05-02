@@ -61,7 +61,7 @@ public class BoxCollisionShape extends ConvexShape {
      * copy of unscaled half extent for each local axis (not null, no negative
      * component)
      */
-    private Vector3f halfExtents = new Vector3f(1f, 1f, 1f);
+    final private Vector3f halfExtents = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
     // constructors
 

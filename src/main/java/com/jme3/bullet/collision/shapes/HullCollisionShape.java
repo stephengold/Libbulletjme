@@ -73,7 +73,7 @@ public class HullCollisionShape extends ConvexShape {
     /**
      * array of mesh coordinates (not null, not empty, length a multiple of 3)
      */
-    private float[] points;
+    final private float[] points;
     // *************************************************************************
     // constructors
 

@@ -81,17 +81,17 @@ public class SixDofJoint extends Constraint {
      * copy of the joint orientation: in physics-space coordinates if bodyA is
      * null, or else in A's local coordinates (rotation matrix)
      */
-    private Matrix3f rotA;
+    final private Matrix3f rotA;
     /**
      * copy of the joint orientation in B's local coordinates (rotation matrix)
      */
-    private Matrix3f rotB;
+    final private Matrix3f rotB;
     /**
      * true&rarr;limits give the allowable range of movement of frameB in frameA
      * space, false&rarr;limits give the allowable range of movement of frameA
      * in frameB space
      */
-    private boolean useLinearReferenceFrameA;
+    final private boolean useLinearReferenceFrameA;
     /**
      * rotational motor for each axis
      */
@@ -103,19 +103,19 @@ public class SixDofJoint extends Constraint {
     /**
      * upper limits for rotation of all 3 axes
      */
-    private Vector3f angularUpperLimit = new Vector3f(0f, 0f, 0f);
+    final private Vector3f angularUpperLimit = new Vector3f(0f, 0f, 0f);
     /**
      * lower limits for rotation of all 3 axes
      */
-    private Vector3f angularLowerLimit = new Vector3f(0f, 0f, 0f);
+    final private Vector3f angularLowerLimit = new Vector3f(0f, 0f, 0f);
     /**
      * upper limit for translation of all 3 axes
      */
-    private Vector3f linearUpperLimit = new Vector3f(0f, 0f, 0f);
+    final private Vector3f linearUpperLimit = new Vector3f(0f, 0f, 0f);
     /**
      * lower limits for translation of all 3 axes
      */
-    private Vector3f linearLowerLimit = new Vector3f(0f, 0f, 0f);
+    final private Vector3f linearLowerLimit = new Vector3f(0f, 0f, 0f);
     // *************************************************************************
     // constructors
 

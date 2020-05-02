@@ -66,13 +66,13 @@ public class ConeJoint extends Constraint {
     /**
      * copy of joint orientation in A's local coordinates (rotation matrix)
      */
-    private Matrix3f rotA;
+    final private Matrix3f rotA;
     /**
      * copy of joint orientation: in B's local coordinates for a double-ended
      * joint, or in physics-space coordinates for a single-ended joint (rotation
      * matrix)
      */
-    private Matrix3f rotB;
+    final private Matrix3f rotB;
     /**
      * copy of span of the first swing axis (in radians)
      */

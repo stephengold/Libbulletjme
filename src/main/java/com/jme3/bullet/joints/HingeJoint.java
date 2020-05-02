@@ -88,13 +88,13 @@ public class HingeJoint extends Constraint {
     /**
      * copy of the joint axis in A's local coordinates (unit vector)
      */
-    private Vector3f axisA;
+    final private Vector3f axisA;
     /**
      * copy of the joint axis: in B's local coordinates for a double-ended
      * joint, or in physics-space coordinates for a single-ended joint (unit
      * vector)
      */
-    private Vector3f axisB;
+    final private Vector3f axisB;
     // *************************************************************************
     // constructors
 

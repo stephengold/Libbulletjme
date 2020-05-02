@@ -61,19 +61,19 @@ public class MultiBodyLink extends NativePhysicsObject {
      * index of this link in its MultiBody, which is also the index of the
      * btMultiBodyLink in its btMultiBody (&ge;0)
      */
-    private int linkIndex;
+    final private int linkIndex;
     /**
      * copy of the number of degress of freedom in this link's joint
      */
-    private int numDofs;
+    final private int numDofs;
     /**
      * copy of the ID of the btMultiBody
      */
-    private long multiBodyId;
+    final private long multiBodyId;
     /**
      * MultiBody that contains this link
      */
-    private MultiBody multiBody;
+    final private MultiBody multiBody;
     /**
      * collider for this link, or null if none
      */
@@ -81,7 +81,7 @@ public class MultiBodyLink extends NativePhysicsObject {
     /**
      * parent of this link, or null if joined to the base
      */
-    private MultiBodyLink parentLink;
+    final private MultiBodyLink parentLink;
     // *************************************************************************
     // constructors
 

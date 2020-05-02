@@ -83,12 +83,12 @@ public class New6Dof extends Constraint {
      * copy of the constraint orientation: in physics-space coordinates if bodyA
      * is null, or else in A's local coordinates (rotation matrix)
      */
-    private Matrix3f rotA;
+    final private Matrix3f rotA;
     /**
      * copy of the constraint orientation in B's local coordinates (rotation
      * matrix)
      */
-    private Matrix3f rotB;
+    final private Matrix3f rotB;
     /**
      * rotational motor for each axis
      */
@@ -96,7 +96,7 @@ public class New6Dof extends Constraint {
     /**
      * order in which to apply axis rotations (not null)
      */
-    private RotationOrder rotationOrder;
+    final private RotationOrder rotationOrder;
     /**
      * translational motor
      */

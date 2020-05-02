@@ -79,28 +79,28 @@ public class IndexedMesh extends NativePhysicsObject {
      * configured position data: 3 floats per vertex (not null, direct, never
      * flipped)
      */
-    private FloatBuffer vertexPositions;
+    final private FloatBuffer vertexPositions;
     /**
      * configured index data: 3 ints per triangle (not null, direct, never
      * flipped)
      */
-    private IntBuffer indices;
+    final private IntBuffer indices;
     /**
      * configured bytes per triangle in the index buffer (12)
      */
-    private int indexStride;
+    final private int indexStride;
     /**
      * configured number of triangles in the mesh (&ge;0)
      */
-    private int numTriangles;
+    final private int numTriangles;
     /**
      * configured number of vertices in the mesh (&ge;0)
      */
-    private int numVertices;
+    final private int numVertices;
     /**
      * configured bytes per vertex in the position buffer (12)
      */
-    private int vertexStride;
+    final private int vertexStride;
     // *************************************************************************
     // constructors
 

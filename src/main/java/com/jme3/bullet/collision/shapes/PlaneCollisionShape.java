@@ -55,7 +55,7 @@ public class PlaneCollisionShape extends CollisionShape {
     /**
      * defining plane
      */
-    private Plane plane;
+    final private Plane plane;
     // *************************************************************************
     // constructors
 

@@ -57,7 +57,7 @@ abstract public class PhysicsBody extends PhysicsCollisionObject {
      * list of joints that connect to this body: The list isn't populated until
      * the body is added to a PhysicsSpace.
      */
-    private ArrayList<PhysicsJoint> joints = new ArrayList<>(4);
+    final private ArrayList<PhysicsJoint> joints = new ArrayList<>(4);
     // *************************************************************************
     // new methods exposed
 

@@ -81,7 +81,7 @@ public class HeightfieldCollisionShape extends CollisionShape {
     /**
      * scale factor for Bullet to apply to the heightfield
      */
-    private float heightScale = 1f;
+    final private float heightScale = 1f;
     /*
      * highest sample in the heightfield or -minHeight, whichever is higher
      */

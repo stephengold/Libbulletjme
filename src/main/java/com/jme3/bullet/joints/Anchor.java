@@ -59,7 +59,7 @@ public class Anchor extends PhysicsJoint {
      * true&rarr;allow collisions between the bodies, false&rarr;disallow such
      * collisions
      */
-    private boolean allowCollisions;
+    final private boolean allowCollisions;
     /**
      * how much influence the anchor has on the bodies (&ge;0, &le;1, 0&rarr;no
      * influence, 1&rarr;strong influence, default=1)
@@ -68,11 +68,11 @@ public class Anchor extends PhysicsJoint {
     /**
      * which node in body A to connect (&ge;0, &lt;numNodes)
      */
-    private int nodeIndexA;
+    final private int nodeIndexA;
     /**
      * copy of the pivot location in body B's local coordinates (not null)
      */
-    private Vector3f pivotInB;
+    final private Vector3f pivotInB;
     // *************************************************************************
     // constructors
 

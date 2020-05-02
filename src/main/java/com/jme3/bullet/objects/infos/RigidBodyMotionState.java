@@ -69,7 +69,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     /**
      * temporary storage for a Quaternion
      */
-    private Quaternion tmp_inverseWorldRotation = new Quaternion();
+    final private Quaternion tmp_inverseWorldRotation = new Quaternion();
     // *************************************************************************
     // constructors
 

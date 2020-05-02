@@ -60,16 +60,16 @@ public class CapsuleCollisionShape extends ConvexShape {
     /**
      * copy of the unscaled height of the cylindrical portion (&ge;0)
      */
-    private float height;
+    final private float height;
     /**
      * copy of the unscaled radius (&ge;0)
      */
-    private float radius;
+    final private float radius;
     /**
      * copy of the index of the main (height) axis (0&rarr;X, 1&rarr;Y,
      * 2&rarr;Z)
      */
-    private int axis;
+    final private int axis;
     // *************************************************************************
     // constructors
 

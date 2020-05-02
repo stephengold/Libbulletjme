@@ -89,36 +89,36 @@ public class VehicleWheel {
     /**
      * reusable rotation matrix
      */
-    private Matrix3f tmp_Matrix = new Matrix3f();
+    final private Matrix3f tmp_Matrix = new Matrix3f();
     /**
      * temporary storage during calculations
      */
-    private Quaternion tmp_inverseWorldRotation = new Quaternion();
+    final private Quaternion tmp_inverseWorldRotation = new Quaternion();
     /**
      * wheel orientation in physics-space coordinates
      */
-    private Quaternion wheelWorldRotation = new Quaternion();
+    final private Quaternion wheelWorldRotation = new Quaternion();
     /**
      * axis direction (in chassis coordinates, typically to the right/-1,0,0)
      */
-    private Vector3f axisDirection = new Vector3f();
+    final private Vector3f axisDirection = new Vector3f();
     /**
      * location where the suspension connects to the chassis (in chassis
      * coordinates)
      */
-    private Vector3f location = new Vector3f();
+    final private Vector3f location = new Vector3f();
     /**
      * suspension direction (in chassis coordinates, typically down/0,-1,0)
      */
-    private Vector3f suspensionDirection = new Vector3f();
+    final private Vector3f suspensionDirection = new Vector3f();
     /**
      * wheel location in physics-space coordinates
      */
-    private Vector3f wheelWorldLocation = new Vector3f();
+    final private Vector3f wheelWorldLocation = new Vector3f();
     /**
      * copy of tuning parameters
      */
-    private VehicleTuning tuning = new VehicleTuning();
+    final private VehicleTuning tuning = new VehicleTuning();
     // *************************************************************************
     // constructors
 

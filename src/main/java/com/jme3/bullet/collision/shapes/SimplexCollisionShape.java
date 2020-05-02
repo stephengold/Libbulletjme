@@ -65,7 +65,7 @@ public class SimplexCollisionShape extends ConvexShape {
     /**
      * vertex locations
      */
-    private Vector3f[] locations;
+    final private Vector3f[] locations;
     // *************************************************************************
     // constructors - TODO Vector3f... constructor
 

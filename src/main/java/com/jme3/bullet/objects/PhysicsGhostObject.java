@@ -73,7 +73,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     /**
      * TODO reused list
      */
-    private List<PhysicsCollisionObject> overlappingObjects
+    final private List<PhysicsCollisionObject> overlappingObjects
             = new LinkedList<>();
     // *************************************************************************
     // constructors

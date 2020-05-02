@@ -59,11 +59,11 @@ public class CompoundMesh extends NativePhysicsObject {
     /**
      * component meshes
      */
-    private ArrayList<IndexedMesh> submeshes = new ArrayList<>(4);
+    final private ArrayList<IndexedMesh> submeshes = new ArrayList<>(4);
     /**
      * copy of scale factors: one for each local axis (default=(1,1,1))
      */
-    private Vector3f scale = new Vector3f(1f, 1f, 1f);
+    final private Vector3f scale = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
     // constructors
 

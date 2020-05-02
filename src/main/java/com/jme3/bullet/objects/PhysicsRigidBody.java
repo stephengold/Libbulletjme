@@ -91,7 +91,7 @@ public class PhysicsRigidBody extends PhysicsBody {
     /**
      * motion state (not null)
      */
-    private RigidBodyMotionState motionState = new RigidBodyMotionState();
+    final private RigidBodyMotionState motionState = new RigidBodyMotionState();
     // *************************************************************************
     // constructors
 

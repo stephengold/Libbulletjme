@@ -57,7 +57,7 @@ public class SoftLinearJoint extends SoftPhysicsJoint {
     /**
      * copy of the joint location (in physics-space coordinates)
      */
-    private Vector3f location;
+    final private Vector3f location;
     // *************************************************************************
     // constructors
 

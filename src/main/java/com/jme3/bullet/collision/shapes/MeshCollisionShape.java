@@ -59,11 +59,11 @@ public class MeshCollisionShape extends CollisionShape {
     /**
      * if true, use quantized AABB compression (default=true)
      */
-    private boolean useCompression;
+    final private boolean useCompression;
     /**
      * native mesh used to construct this shape
      */
-    private CompoundMesh nativeMesh;
+    final private CompoundMesh nativeMesh;
     /**
      * unique identifier of the native buffer that holds the BVH
      */

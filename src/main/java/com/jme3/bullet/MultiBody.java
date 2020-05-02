@@ -73,7 +73,7 @@ public class MultiBody
     /**
      * references to configured links
      */
-    private MultiBodyLink[] links;
+    final private MultiBodyLink[] links;
     // *************************************************************************
     // constructors
 
