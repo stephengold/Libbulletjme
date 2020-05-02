@@ -1,16 +1,30 @@
 # release log for the Libbulletjme Project
 
+## Version 5.7.0 released on 1 May 2020
+
+ + bugfix: native crash while finalizing a non-empty `CollisionSpace`
+   (JME issue #1351).
+ + Added a `NativePhysicsObject` class and refactored 16 classes to
+   become its subclasses.
+ + Added a constructor for `MeshCollisionShape` that takes a `Collection`
+   of native meshes.
+ + Added 3 methods to the `PhysicsCollisionObject` class:
+   + `getProxyFilterGroup()`
+   + `getProxyFilterMask()`
+   + `hasBroadphaseProxy()`
+ + Deprecated many redunant methods.
+
 ## Version 5.6.0 released on 14 April 2020
 
  + Added 8 methods:
-   + PhysicsCollisionEvent.getCombinedRollingFriction()
-   + PhysicsCollisionEvent.getCombinedSpinningFriction()
-   + SolverInfo.isSplitImpulseEnabled()
-   + SolverInfo.setSplitImpulseEnabled()
-   + SolverInfo.setSplitImpulseErp()
-   + SolverInfo.setSplitImpulseThreshold()
-   + SolverInfo.splitImpulseErp()
-   + SolverInfo.splitImpulseThreshold()
+   + `PhysicsCollisionEvent.getCombinedRollingFriction()`
+   + `PhysicsCollisionEvent.getCombinedSpinningFriction()`
+   + `SolverInfo.isSplitImpulseEnabled()`
+   + `SolverInfo.setSplitImpulseEnabled()`
+   + `SolverInfo.setSplitImpulseErp()`
+   + `SolverInfo.setSplitImpulseThreshold()`
+   + `SolverInfo.splitImpulseErp()`
+   + `SolverInfo.splitImpulseThreshold()`
 
 ## Version 5.5.7 released on 11 April 2020
 
