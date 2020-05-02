@@ -983,6 +983,10 @@ abstract public class PhysicsCollisionObject
 
     native private void getOrientation(long objectId, Quaternion storeResult);
 
+    native private int getProxyFilterGroup(long objectId);
+
+    native private int getProxyFilterMask(long objectId);
+
     native private float getRestitution(long objectId);
 
     native private float getRollingFriction(long objectId);
@@ -992,6 +996,8 @@ abstract public class PhysicsCollisionObject
     native private float getSpinningFriction(long objectId);
 
     native private boolean hasAnisotropicFriction(long objectId, int mode);
+
+    native private boolean hasBroadphaseProxy(long objectId);
 
     native private void initUserPointer(long objectId, int group, int groups);
 

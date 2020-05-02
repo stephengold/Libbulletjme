@@ -358,6 +358,46 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getProxyFilterGroup
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getProxyFilterGroup
+(JNIEnv *pEnv, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
+
+    const btBroadphaseProxy * const
+            pProxy = pCollisionObject->getBroadphaseHandle();
+    NULL_CHK(pEnv, pProxy, "The btBroadphaseProxy does not exist.", 0);
+
+    int result = pProxy->m_collisionFilterGroup;
+    return jint(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getProxyFilterMask
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getProxyFilterMask
+(JNIEnv *pEnv, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
+
+    const btBroadphaseProxy * const
+            pProxy = pCollisionObject->getBroadphaseHandle();
+    NULL_CHK(pEnv, pProxy, "The btBroadphaseProxy does not exist.", 0);
+
+    int result = pProxy->m_collisionFilterMask;
+    return jint(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getRestitution
  * Signature: (J)F
  */
@@ -433,6 +473,25 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject
 
     jboolean result = pCollisionObject->hasAnisotropicFriction(mode);
     return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    hasBroadphaseProxy
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_hasBroadphaseProxy
+(JNIEnv *pEnv, jobject, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            JNI_FALSE);
+
+    const btBroadphaseProxy * const
+            pProxy = pCollisionObject->getBroadphaseHandle();
+
+    bool result = (pProxy != NULL);
+    return jboolean(result);
 }
 
 /*
