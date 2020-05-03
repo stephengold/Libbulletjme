@@ -141,7 +141,7 @@ abstract public class PhysicsCollisionObject
      */
     private int collideWithGroups = COLLISION_GROUP_01;
     /**
-     * collision group to which this physics object belongs
+     * collision group to which this object belongs
      */
     private int collisionGroup = COLLISION_GROUP_01;
     /**
@@ -151,9 +151,9 @@ abstract public class PhysicsCollisionObject
      */
     protected long objectId = 0L;
     /**
-     * object that uses this collision object
+     * scene object that's using this collision object
      */
-    private Object userObject;
+    private Object userObject = null;
     // *************************************************************************
     // new methods exposed
 
@@ -514,9 +514,10 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Access the scene object that uses this collision object.
+     * Access the scene object that's using this collision object.
      *
      * @return the pre-existing instance, or null if none
+     * @see #setUserObject(java.lang.Object)
      */
     public Object getUserObject() {
         return userObject;
@@ -754,17 +755,17 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter which scene object uses this collision object.
+     * Associate a "user" with this collision object.
      *
-     * @param userObject the desired scene object (alias created, default=null)
+     * @param user the desired scene object (alias created, default=null)
+     * @see #getUserObject()
      */
-    public void setUserObject(Object userObject) {
-        this.userObject = userObject;
+    public void setUserObject(Object user) {
+        userObject = user;
     }
 
     /**
-     * Determine the ID of the CollisionSpace to which this collision object is
-     * added.
+     * Determine the ID of the CollisionSpace to which this object is added.
      *
      * @return the ID, or zero if not in any space
      */
@@ -866,8 +867,8 @@ abstract public class PhysicsCollisionObject
      * Compare (by ID) with another collision object.
      *
      * @param other (not null, unaffected)
-     * @return 0 if the objects have the same ID; negative if this comes before
-     * other; positive if this comes after other
+     * @return 0 if the objects have the same native ID; negative if this comes
+     * before other; positive if this comes after other
      */
     @Override
     public int compareTo(PhysicsCollisionObject other) {
@@ -883,7 +884,8 @@ abstract public class PhysicsCollisionObject
      * Test for ID equality.
      *
      * @param otherObject the object to compare to (may be null, unaffected)
-     * @return true if the collision objects have the same ID, otherwise false
+     * @return true if the collision objects have the same native ID, otherwise
+     * false
      */
     @Override
     public boolean equals(Object otherObject) {
@@ -902,8 +904,8 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Finalize this collision object just before it is destroyed. Should be
-     * invoked only by a subclass or by the garbage collector.
+     * Finalize this object just before it is destroyed. Should be invoked only
+     * by a subclass or by the garbage collector.
      *
      * @throws Throwable ignored by the garbage collector
      */
@@ -933,7 +935,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Represent this collision object as a String.
+     * Represent this object as a String.
      *
      * @return a descriptive string of text (not null, not empty)
      */
