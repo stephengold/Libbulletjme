@@ -12,7 +12,7 @@
    + `getProxyFilterGroup()`
    + `getProxyFilterMask()`
    + `hasBroadphaseProxy()`
- + Deprecated many redunant methods.
+ + Deprecated many redundant methods.
 
 ## Version 5.6.0 released on 14 April 2020
 
