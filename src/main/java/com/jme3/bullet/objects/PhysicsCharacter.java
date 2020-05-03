@@ -108,7 +108,6 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      */
     public PhysicsCharacter(ConvexShape shape, float stepHeight) {
         Validate.nonNull(shape, "shape");
-        assert shape.isConvex();
 
         super.setCollisionShape(shape);
         this.stepHeight = stepHeight;
@@ -339,7 +338,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
      * character gets rebuilt on the physics side.
      *
      * @param collisionShape the shape to apply (not null, convex, alias
-     * created)
+     * created) TODO declare as ConvexShape
      */
     @Override
     public void setCollisionShape(CollisionShape collisionShape) {

@@ -69,7 +69,6 @@ public class Convex2dShape extends ConvexShape {
      * @param base the base shape (not null, convex, alias created)
      */
     public Convex2dShape(ConvexShape base) {
-        assert base.isConvex();
         this.base = base;
         createShape();
     }
