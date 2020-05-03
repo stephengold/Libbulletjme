@@ -107,6 +107,9 @@ public class TestLibbulletjme {
         PhysicsRigidBody floorPrb = new PhysicsRigidBody(pcs, 0f);
         testPco(floorPrb);
         space.addCollisionObject(floorPrb);
+
+        Assert.assertEquals(2, floorPrb.proxyGroup().intValue());
+        Assert.assertEquals(-3, floorPrb.proxyMask().intValue());
         /*
          * Add a box-shaped dynamic rigid body at y=0.
          */
@@ -114,6 +117,9 @@ public class TestLibbulletjme {
         PhysicsRigidBody prb = new PhysicsRigidBody(bcs, 1f);
         testPco(prb);
         space.addCollisionObject(prb);
+
+        Assert.assertEquals(1, prb.proxyGroup().intValue());
+        Assert.assertEquals(-1, prb.proxyMask().intValue());
         /*
          * 50 iterations with a 20-msec timestep
          */
@@ -631,7 +637,9 @@ public class TestLibbulletjme {
         CollisionShape shape = new SphereCollisionShape(radius);
 
         multiBody.addBaseCollider(shape);
+
         Assert.assertNotNull(multiBody.getBaseCollider());
+        testPco(multiBody.getBaseCollider());
 
         float linkMass = 0.1f;
         Vector3f linkInertia = new Vector3f(0.1f, 0.1f, 0.1f);
@@ -642,6 +650,8 @@ public class TestLibbulletjme {
         Assert.assertNull(link0.getCollider());
         link0.addCollider(shape);
 
+        Assert.assertNotNull(link0.getCollider());
+        testPco(link0.getCollider());
         Assert.assertEquals(link0, multiBody.getLink(0));
         assertEquals(0f, 0f, 0f, link0.appliedForce(null), 0f);
         assertEquals(0f, 0f, 0f, link0.appliedTorque(null), 0f);
@@ -745,6 +755,11 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertFalse(space.isEmpty());
 
+        Assert.assertEquals(2, multiBody.getBaseCollider().proxyGroup().intValue());
+        Assert.assertEquals(-3, multiBody.getBaseCollider().proxyMask().intValue());
+        Assert.assertEquals(1, link0.getCollider().proxyGroup().intValue());
+        Assert.assertEquals(-1, link0.getCollider().proxyMask().intValue());
+
         space.remove(multiBody);
 
         Assert.assertEquals(0L, multiBody.spaceId());
@@ -776,13 +791,17 @@ public class TestLibbulletjme {
         // Generate a subdivided square mesh with alternating diagonals.
         int numLines = 41;
         float lineSpacing = 0.1f; // mesh units
-        IndexedMesh squareGrid = createClothGrid(numLines, numLines, lineSpacing);
+        IndexedMesh squareGrid
+                = createClothGrid(numLines, numLines, lineSpacing);
 
         // Create a soft square and add it to the physics space.
         PhysicsSoftBody cloth = new PhysicsSoftBody();
         testPco(cloth);
         NativeSoftBodyUtil.appendFromNativeMesh(squareGrid, cloth);
         physicsSpace.add(cloth);
+
+        Assert.assertEquals(1, cloth.proxyGroup().intValue());
+        Assert.assertEquals(-1, cloth.proxyMask().intValue());
 
         // Pin one of the corner nodes by setting its mass to zero.
         int nodeIndex = 0;
@@ -1078,6 +1097,8 @@ public class TestLibbulletjme {
         Assert.assertTrue(ghost.isStatic());
 
         space.add(ghost);
+        Assert.assertEquals(1, ghost.proxyGroup().intValue());
+        Assert.assertEquals(-1, ghost.proxyMask().intValue());
 
         Assert.assertSame(space, ghost.getCollisionSpace());
         Assert.assertEquals(space.nativeId(), ghost.spaceId());
@@ -1141,6 +1162,8 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, pco.getDeactivationTime(), 0f);
         Assert.assertEquals(0.5f, pco.getFriction(), 0f);
         assertEquals(0f, 0f, 0f, pco.getPhysicsLocation(null), 0f);
+        Assert.assertNull(pco.proxyGroup());
+        Assert.assertNull(pco.proxyMask());
         Assert.assertEquals(0f, pco.getRestitution(), 0f);
         Assert.assertEquals(0f, pco.getRollingFriction(), 0f);
         Assert.assertEquals(0f, pco.getSpinningFriction(), 0f);
