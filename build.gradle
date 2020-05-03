@@ -239,11 +239,17 @@ model {
     }
 }
 
+description = 'JNI interface to Bullet Physics and V-HACD'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
 dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
 repositories {
+    //mavenLocal()
     jcenter()
 }
 
@@ -264,6 +270,7 @@ task copyToDistJars (type: Copy) {
     into 'dist'
 }
 
+// custom tasks for creating source/javadoc JARs
 jar {
     archiveBaseName = project.ext.baseName
 }
