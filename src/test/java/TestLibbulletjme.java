@@ -35,6 +35,8 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
 import com.jme3.bullet.SolverInfo;
 import com.jme3.bullet.SolverType;
+import com.jme3.bullet.collision.PhysicsCollisionEvent;
+import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.shapes.Box2dShape;
@@ -89,6 +91,13 @@ public class TestLibbulletjme {
      * number of vertices per triangle
      */
     final private static int vpt = 3;
+    // *************************************************************************
+    // fields
+
+    /*
+     * true if the expected collision in performDropTest() has been detected
+     */
+    public static boolean dropAndFloorHaveCollided = false;
     // *************************************************************************
     // new methods exposed
 
@@ -1002,7 +1011,8 @@ public class TestLibbulletjme {
         Plane plane = new Plane(Vector3f.UNIT_Y, -1f);
         CollisionShape floorShape = new PlaneCollisionShape(plane);
         float mass = PhysicsBody.massForStatic;
-        PhysicsRigidBody floorBody = new PhysicsRigidBody(floorShape, mass);
+        final PhysicsRigidBody floorBody
+                = new PhysicsRigidBody(floorShape, mass);
 
         testPco(floorBody);
         Assert.assertTrue(floorBody.isContactResponse());
@@ -1024,7 +1034,7 @@ public class TestLibbulletjme {
          * Add a dynamic rigid body at y=0.
          */
         mass = 1f;
-        PhysicsRigidBody dropBody = new PhysicsRigidBody(dropShape, mass);
+        final PhysicsRigidBody dropBody = new PhysicsRigidBody(dropShape, mass);
 
         testPco(dropBody);
         Assert.assertTrue(dropBody.isContactResponse());
@@ -1043,12 +1053,35 @@ public class TestLibbulletjme {
         Assert.assertEquals(2, space.countRigidBodies());
         Assert.assertTrue(space.contains(floorBody));
         Assert.assertTrue(space.contains(dropBody));
+
+        if (space instanceof PhysicsSpace) {
+            dropAndFloorHaveCollided = false;
+            PhysicsCollisionListener listener = new PhysicsCollisionListener() {
+                @Override
+                public void collision(PhysicsCollisionEvent event) {
+                    PhysicsCollisionObject a = event.getObjectA();
+                    PhysicsCollisionObject b = event.getObjectB();
+                    Assert.assertTrue(a == floorBody && b == dropBody
+                            || a == dropBody && b == floorBody);
+                    dropAndFloorHaveCollided = true;
+                }
+            };
+            ((PhysicsSpace) space).addCollisionListener(listener);
+        }
         /*
          * 50 iterations with a 20-msec timestep
          */
         for (int i = 0; i < 50; ++i) {
             space.update(0.02f, 0);
-            //System.out.printf("location = %s%n", prb.getPhysicsLocation());
+            if (space instanceof PhysicsSpace) {
+                ((PhysicsSpace) space).distributeEvents();
+            }
+            //System.out.printf("location = %s%n",
+            //        dropBody.getPhysicsLocation(null));
+        }
+
+        if (space instanceof PhysicsSpace) {
+            Assert.assertTrue(dropAndFloorHaveCollided);
         }
         /*
          * Check the final location of the dynamic body.
@@ -1202,6 +1235,7 @@ public class TestLibbulletjme {
     private static void verifyPhysicsSpaceDefaults(PhysicsSpace space) {
         verifyCollisionSpaceDefaults(space);
 
+        Assert.assertEquals(0, space.countCollisionListeners());
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
