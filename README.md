@@ -50,7 +50,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:5.7.0
+            compile 'com.github.stephengold:Libbulletjme:5.8.0
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -232,7 +232,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 5.7.0`
+     + `git checkout -b latest 5.8.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
