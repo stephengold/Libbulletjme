@@ -170,6 +170,7 @@ bool btCollisionDispatcher::needsCollision(const btCollisionObject* body0, const
 		{
 			m_dispatcherFlags |= btCollisionDispatcher::CD_STATIC_STATIC_REPORTED;
 			printf("warning btCollisionDispatcher::needsCollision: static-static collision!\n");
+                        fflush(stdout); // stephengold added 2020-05-06
 		}
 	}
 #endif  //BT_DEBUG
