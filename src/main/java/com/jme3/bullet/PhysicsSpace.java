@@ -645,12 +645,12 @@ public class PhysicsSpace extends CollisionSpace {
         long spaceId = createPhysicsSpace(min.x, min.y, min.z,
                 max.x, max.y, max.z, type.ordinal());
         assert spaceId != 0L;
-        logger.log(Level.FINE, "Created {0}.", this);
 
         assert getWorldType(spaceId) == 2 // BT_DISCRETE_DYNAMICS_WORLD
                 : getWorldType(spaceId);
         initThread(spaceId);
         initSolverInfo();
+        logger.log(Level.FINE, "Created {0}.", this);
     }
 
     /**
@@ -891,9 +891,9 @@ public class PhysicsSpace extends CollisionSpace {
             return;
         }
 
-        characterMap.remove(characterId);
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{character, this});
+        characterMap.remove(characterId);
         long spaceId = nativeId();
         removeAction(spaceId, character.getControllerId());
         removeCharacterObject(spaceId, characterId);
