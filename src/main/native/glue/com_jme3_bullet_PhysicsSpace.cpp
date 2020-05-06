@@ -115,8 +115,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",)
+    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
+    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
 
-    pSpace->getDynamicsWorld()->addConstraint(pConstraint, collision);
+    btDynamicsWorld *pWorld = pSpace->getDynamicsWorld();
+    pWorld->addConstraint(pConstraint, collision);
 }
 
 /*
@@ -260,6 +263,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The constraint does not exist.",)
+    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
+    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
 
     pSpace->getDynamicsWorld()->removeConstraint(pConstraint);
 }
