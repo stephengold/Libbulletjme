@@ -127,7 +127,7 @@ public class PhysicsSpace extends CollisionSpace {
     private float maxTimeStep = 0.1f;
     /**
      * maximum number of time steps per frame, or 0 for a variable time step
-     * (&ge;0, default=4)
+     * (&ge;0)
      */
     private int maxSubSteps = 4;
     /**
@@ -238,7 +238,7 @@ public class PhysicsSpace extends CollisionSpace {
      * Register the specified collision listener.
      * <p>
      * During distributeEvents(), registered listeners are notified of all
-     * collisions since that previous distributeEvents().
+     * collisions since the previous distributeEvents().
      *
      * @param listener the listener to register (not null, alias created)
      */
@@ -280,6 +280,7 @@ public class PhysicsSpace extends CollisionSpace {
     public int countJoints() {
         long spaceId = nativeId();
         int count = getNumConstraints(spaceId);
+
         assert count == physicsJoints.size() : count;
         return count;
     }
@@ -720,7 +721,6 @@ public class PhysicsSpace extends CollisionSpace {
 
         logger.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{character, this});
-
         long spaceId = nativeId();
         long characterId = character.getObjectId();
         characterMap.put(characterId, character);
@@ -743,7 +743,7 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Add the specified PhysicsJoint to this space.
+     * Add the specified PhysicsJoint to this space. TODO publicize
      *
      * @param joint the joint to add (not null, alias created)
      */
@@ -753,6 +753,7 @@ public class PhysicsSpace extends CollisionSpace {
                     new Object[]{joint, this});
             return;
         }
+        assert joint.getPhysicsSpace() == null;
         /*
          * Warn if the jointed bodies aren't already added to this space.
          */
@@ -772,6 +773,7 @@ public class PhysicsSpace extends CollisionSpace {
         logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{joint, this});
         long jointId = joint.nativeId();
         physicsJoints.put(jointId, joint);
+        joint.setPhysicsSpace(this);
 
         if (joint instanceof Constraint) {
             long spaceId = nativeId();
@@ -887,7 +889,7 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Remove the specified PhysicsJoint from this space.
+     * Remove the specified PhysicsJoint from this space. TODO publicize
      *
      * @param joint the joint to remove (not null)
      */
@@ -898,9 +900,11 @@ public class PhysicsSpace extends CollisionSpace {
                     new Object[]{joint, this});
             return;
         }
+
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{joint, this});
         physicsJoints.remove(jointId);
+        joint.setPhysicsSpace(null);
 
         if (joint instanceof Constraint) {
             long spaceId = nativeId();
