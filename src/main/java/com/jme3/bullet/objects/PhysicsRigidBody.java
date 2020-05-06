@@ -813,7 +813,7 @@ public class PhysicsRigidBody extends PhysicsBody {
         if (objectId != 0L) {
             removedFrom = (PhysicsSpace) getCollisionSpace();
             if (removedFrom != null) {
-                removedFrom.remove(this);
+                removedFrom.removeCollisionObject(this);
             }
             logger2.log(Level.FINE, "Clearing {0}.", this);
             finalizeNative(objectId);
@@ -830,7 +830,7 @@ public class PhysicsRigidBody extends PhysicsBody {
         postRebuild();
 
         if (removedFrom != null) {
-            removedFrom.add(this);
+            removedFrom.addCollisionObject(this);
         }
     }
     // *************************************************************************

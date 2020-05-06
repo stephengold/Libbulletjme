@@ -792,10 +792,10 @@ public class TestLibbulletjme {
         // Create a static, rigid sphere and add it to the physics space.
         float radius = 1f;
         SphereCollisionShape shape = new SphereCollisionShape(radius);
-        float mass = PhysicsRigidBody.massForStatic;
-        PhysicsRigidBody sphere = new PhysicsRigidBody(shape, mass);
+        PhysicsRigidBody sphere = new PhysicsRigidBody(shape,
+                PhysicsBody.massForStatic);
         testPco(sphere);
-        physicsSpace.add(sphere);
+        physicsSpace.addCollisionObject(sphere);
 
         // Generate a subdivided square mesh with alternating diagonals.
         int numLines = 41;
@@ -807,14 +807,14 @@ public class TestLibbulletjme {
         PhysicsSoftBody cloth = new PhysicsSoftBody();
         testPco(cloth);
         NativeSoftBodyUtil.appendFromNativeMesh(squareGrid, cloth);
-        physicsSpace.add(cloth);
+        physicsSpace.addCollisionObject(cloth);
 
         Assert.assertEquals(1, cloth.proxyGroup().intValue());
         Assert.assertEquals(-1, cloth.proxyMask().intValue());
 
         // Pin one of the corner nodes by setting its mass to zero.
         int nodeIndex = 0;
-        cloth.setNodeMass(nodeIndex, PhysicsRigidBody.massForStatic);
+        cloth.setNodeMass(nodeIndex, PhysicsBody.massForStatic);
 
         // Make the cloth flexible by altering the angular stiffness
         // of its material.
@@ -1010,9 +1010,8 @@ public class TestLibbulletjme {
          */
         Plane plane = new Plane(Vector3f.UNIT_Y, -1f);
         CollisionShape floorShape = new PlaneCollisionShape(plane);
-        float mass = PhysicsBody.massForStatic;
         final PhysicsRigidBody floorBody
-                = new PhysicsRigidBody(floorShape, mass);
+                = new PhysicsRigidBody(floorShape, PhysicsBody.massForStatic);
 
         testPco(floorBody);
         Assert.assertTrue(floorBody.isContactResponse());
@@ -1033,7 +1032,7 @@ public class TestLibbulletjme {
         /*
          * Add a dynamic rigid body at y=0.
          */
-        mass = 1f;
+        float mass = 1f;
         final PhysicsRigidBody dropBody = new PhysicsRigidBody(dropShape, mass);
 
         testPco(dropBody);
@@ -1090,7 +1089,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, location.x, 0.2f);
         Assert.assertEquals(0f, location.z, 0.2f);
 
-        space.remove(floorBody);
+        space.removeCollisionObject(floorBody);
 
         Assert.assertNull(floorBody.getCollisionSpace());
         Assert.assertTrue(floorBody.isContactResponse());
@@ -1100,7 +1099,7 @@ public class TestLibbulletjme {
         Assert.assertTrue(floorBody.isStatic());
         Assert.assertEquals(0L, floorBody.spaceId());
 
-        space.remove(dropBody);
+        space.removeCollisionObject(dropBody);
 
         Assert.assertNull(dropBody.getCollisionSpace());
         Assert.assertTrue(dropBody.isContactResponse());
@@ -1129,7 +1128,7 @@ public class TestLibbulletjme {
         Assert.assertFalse(ghost.isContactResponse());
         Assert.assertTrue(ghost.isStatic());
 
-        space.add(ghost);
+        space.addCollisionObject(ghost);
         Assert.assertEquals(1, ghost.proxyGroup().intValue());
         Assert.assertEquals(-1, ghost.proxyMask().intValue());
 
@@ -1151,7 +1150,7 @@ public class TestLibbulletjme {
                 new Vector3f(0.7f, 0.7f, 2f), new Vector3f(0.7f, 0.7f, -2f));
         Assert.assertEquals(1, results2.size());
 
-        space.remove(ghost);
+        space.removeCollisionObject(ghost);
 
         Assert.assertNull(ghost.getCollisionSpace());
         Assert.assertEquals(0L, ghost.spaceId());
