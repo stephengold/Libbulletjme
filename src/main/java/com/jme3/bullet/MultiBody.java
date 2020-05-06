@@ -78,7 +78,7 @@ public class MultiBody
     // constructors
 
     /**
-     * Instantiate a MultiBody.
+     * Instantiate a MultiBody. Note that "sleep" is synonym for "deactivate".
      *
      * @param numLinks the desired number of links, not including the base
      * (&ge;0)
@@ -321,7 +321,8 @@ public class MultiBody
     }
 
     /**
-     * Test whether this MultiBody can sleep.
+     * Test whether this MultiBody can sleep. Note that "sleep" is synonym for
+     * "deactivate".
      *
      * @return true if it can sleep, otherwise false
      */
@@ -371,7 +372,7 @@ public class MultiBody
     /**
      * Read the set of collision groups with which this multibody can collide.
      *
-     * @return bit mask
+     * @return the bitmask
      */
     public int collideWithGroups() {
         long multiBodyId = nativeId();
@@ -383,7 +384,7 @@ public class MultiBody
     /**
      * Read the collision group of this multibody.
      *
-     * @return the collision group (bit mask with exactly one bit set)
+     * @return the collision group (bitmask with exactly one bit set)
      */
     public int collisionGroup() {
         long multiBodyId = nativeId();
@@ -850,7 +851,7 @@ public class MultiBody
      * Directly alter the collision groups with which this MultiBody can
      * collide.
      *
-     * @param groups desired groups, ORed together (bit mask,
+     * @param groups the desired groups, ORed together (bitmask,
      * default=COLLISION_GROUP_01)
      */
     public void setCollideWithGroups(int groups) {
@@ -861,13 +862,13 @@ public class MultiBody
     /**
      * Alter which collision group this MultiBody belongs to.
      * <p>
-     * Groups are represented by integer bit masks with exactly one bit set.
-     * Pre-made variables are available in PhysicsCollisionObject.
+     * Groups are represented by bitmasks with exactly one bit set. Manifest
+     * constants are defined in PhysicsCollisionObject.
      * <p>
      * Two objects can collide only if one of them has the collisionGroup of the
      * other in its collideWithGroups set.
      *
-     * @param group the collisionGroup to apply (bit mask with exactly one bit
+     * @param group the collisionGroup to apply (bitmask with exactly one bit
      * set, default=COLLISION_GROUP_01)
      */
     public void setCollisionGroup(int group) {
