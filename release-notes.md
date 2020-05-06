@@ -1,5 +1,16 @@
 # release log for the Libbulletjme Project
 
+## Version 5.8.0 released on 6 May 2020
+
+ + bugfix: `FINE` logging of collision spaces reports `nativeId=0` in `create()`
+ + Implemented collision listeners in `PhysicsSpace`.
+ + Added tracking of the `PhysicsSpace` where each `PhysicsJoint` is added.
+ + Added an `activateAll()` method to the `PhysicsSpace` class.
+ + Added `proxyGroup()` and `proxyMask()` methods to the
+   `PhysicsCollisionObject` class.
+ + Check the `m_objectType` field of every `btTypedConstraint`.
+ + Build for Java 7.
+
 ## Version 5.7.0 released on 1 May 2020
 
  + bugfix: native crash while finalizing a non-empty `CollisionSpace`
