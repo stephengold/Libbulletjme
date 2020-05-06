@@ -678,9 +678,7 @@ public class PhysicsSpace extends CollisionSpace {
      */
     @Override
     public void remove(Object object) {
-        if (object == null) {
-            // do nothing
-        } else if (object instanceof PhysicsJoint) {
+        if (object instanceof PhysicsJoint) {
             removeJoint((PhysicsJoint) object);
         } else {
             super.remove(object);
