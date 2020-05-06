@@ -235,6 +235,17 @@ public class PhysicsSpace extends CollisionSpace {
     // new methods exposed
 
     /**
+     * Activate all rigid bodies in this space.
+     *
+     * @param forceFlag true to force activation
+     */
+    public void activateAll(boolean forceFlag) {
+        for (PhysicsRigidBody rigidBody : rigidMap.values()) {
+            rigidBody.activate(forceFlag);
+        }
+    }
+
+    /**
      * Register the specified collision listener.
      * <p>
      * During distributeEvents(), registered listeners are notified of all
