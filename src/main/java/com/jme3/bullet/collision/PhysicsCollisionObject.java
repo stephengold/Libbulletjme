@@ -203,8 +203,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Copy common properties from another PhysicsCollisionObject. Used during
-     * cloning.
+     * Copy common properties from another PhysicsCollisionObject.
      *
      * @param old (not null, unaffected)
      */
@@ -217,6 +216,7 @@ abstract public class PhysicsCollisionObject
         setContactDamping(old.getContactDamping());
         setContactProcessingThreshold(old.getContactProcessingThreshold());
         setContactStiffness(old.getContactStiffness());
+        setDeactivationTime(old.getDeactivationTime());
         setFriction(old.getFriction());
         setRestitution(old.getRestitution());
         setRollingFriction(old.getRollingFriction());
@@ -327,7 +327,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Access the CollisionSpace to which this object has been added.
+     * Access the CollisionSpace where this object is added.
      *
      * @return the pre-existing instance, or null if none
      */
@@ -561,7 +561,7 @@ abstract public class PhysicsCollisionObject
     /**
      * Test whether this object is added to a CollisionSpace.
      *
-     * @return true&rarr;in a space, false&rarr;not in a space
+     * @return true&rarr;added to a space, false&rarr;not added to a space
      */
     final public boolean isInWorld() {
         return isInWorld(objectId);
@@ -799,9 +799,9 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Determine the ID of the CollisionSpace to which this object is added.
+     * Determine the ID of the CollisionSpace where this object is added.
      *
-     * @return the ID, or zero if not in any space
+     * @return the ID, or zero if not added to any space
      */
     public long spaceId() {
         long spaceId = getSpaceId(objectId);
@@ -828,8 +828,7 @@ abstract public class PhysicsCollisionObject
     native protected void finalizeNative(long objectId);
 
     /**
-     * Read the collision flags of this object. Subclasses are responsible for
-     * cloning/loading/saving these flags. Flag values are defined in
+     * Read the collision flags of this object. Flag values are defined in
      * {@link com.jme3.bullet.collision.CollisionFlag}.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
@@ -870,8 +869,7 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Alter the collision flags of this object (native field:
-     * m_collisionFlags). Subclasses are responsible for cloning/loading/saving
-     * these flags. Flags are defined in
+     * m_collisionFlags). Flag values are defined in
      * {@link com.jme3.bullet.collision.CollisionFlag}.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
