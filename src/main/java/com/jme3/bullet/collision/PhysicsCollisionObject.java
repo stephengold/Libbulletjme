@@ -401,17 +401,6 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @return a new location vector (in physics-space coordinates, not null)
-     * @deprecated use getPhysicsLocation(null)
-     */
-    @Deprecated
-    public Vector3f getPhysicsLocation() {
-        return getPhysicsLocation(null);
-    }
-
-    /**
      * Copy the location of this object's center.
      *
      * @param storeResult storage for the result (modified if not null)

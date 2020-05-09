@@ -281,19 +281,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @return a new velocity vector (radians per second in physics-space
-     * coordinates, not null)
-     * @deprecated use getAngularVelocity(null)
-     */
-    @Deprecated
-    public Vector3f getAngularVelocity() {
-        assert isDynamic();
-        return getAngularVelocity(null);
-    }
-
-    /**
      * Copy this body's angular velocity. The body must be in dynamic mode.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -391,19 +378,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @return a new velocity vector (physics-space units per second in
-     * physics-space coordinates, not null)
-     * @deprecated use getLinearVelocity(null)
-     */
-    @Deprecated
-    public Vector3f getLinearVelocity() {
-        assert isDynamic();
-        return getLinearVelocity(null);
-    }
-
-    /**
      * Copy the linear velocity of this body's center of mass. The body must be
      * in dynamic mode.
      *
@@ -426,18 +400,6 @@ public class PhysicsRigidBody extends PhysicsBody {
      */
     public RigidBodyMotionState getMotionState() {
         return motionState;
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @return a new Quaternion (relative to physics-space coordinates, not
-     * null)
-     * @deprecated use getPhysicsRotation(null)
-     */
-    @Deprecated
-    public Quaternion getPhysicsRotation() {
-        return getPhysicsRotation(null);
     }
 
     /**

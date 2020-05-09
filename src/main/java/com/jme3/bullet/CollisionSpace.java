@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -261,18 +260,6 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Read the identifier of the native object.
-     *
-     * @return the ID (not zero)
-     * @deprecated use nativeId()
-     */
-    @Deprecated
-    final public long getSpaceId() {
-        long spaceId = nativeId();
-        return spaceId;
-    }
-
-    /**
      * Copy the maximum coordinate values for this space.
      *
      * @param storeResult storage for the result (modified if not null)
@@ -440,42 +427,6 @@ public class CollisionSpace extends NativePhysicsObject {
      */
     public void setRayTestFlags(int flags) {
         rayTestFlags = flags;
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @param shape the shape to sweep (not null, convex, unaffected)
-     * @param start the starting physics-space transform (not null, unaffected)
-     * @param end the ending physics-space transform (not null, unaffected)
-     * @return a new list of results
-     * @deprecated use
-     * {@link #sweepTest(com.jme3.bullet.collision.shapes.ConvexShape, com.jme3.math.Transform, com.jme3.math.Transform, java.util.List, float)}
-     */
-    @Deprecated
-    public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
-            Transform start, Transform end) {
-        List<PhysicsSweepTestResult> results = new LinkedList<>();
-        sweepTest(shape, start, end, results);
-        return results;
-    }
-
-    /**
-     * For compatibility with the jme3-bullet library.
-     *
-     * @param shape the shape to sweep (not null, convex, unaffected)
-     * @param start the starting physics-space transform (not null, unaffected)
-     * @param end the ending physics-space transform (not null, unaffected)
-     * @param results the list to hold results (not null, modified)
-     * @return results
-     * @deprecated use
-     * {@link #sweepTest(com.jme3.bullet.collision.shapes.ConvexShape, com.jme3.math.Transform, com.jme3.math.Transform, java.util.List, float)}
-     */
-    @Deprecated
-    public List<PhysicsSweepTestResult> sweepTest(ConvexShape shape,
-            Transform start, Transform end,
-            List<PhysicsSweepTestResult> results) {
-        return sweepTest(shape, start, end, results, 0f);
     }
 
     /**

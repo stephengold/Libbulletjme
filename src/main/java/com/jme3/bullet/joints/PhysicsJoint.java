@@ -140,19 +140,6 @@ abstract public class PhysicsJoint
     }
 
     /**
-     * Read the ID of the btTypedConstraint, btSoftBody::Anchor, or
-     * btSoftBody::Joint.
-     *
-     * @return the identifier (not zero)
-     * @deprecated use nativeId()
-     */
-    @Deprecated
-    final public long getObjectId() {
-        long jointId = nativeId();
-        return jointId;
-    }
-
-    /**
      * Access the PhysicsSpace where this joint is added.
      *
      * @return the pre-existing instance, or null if none

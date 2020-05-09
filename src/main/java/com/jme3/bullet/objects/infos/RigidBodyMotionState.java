@@ -102,18 +102,6 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     }
 
     /**
-     * Read the ID of the native object.
-     *
-     * @return the native ID (not zero)
-     * @deprecated use nativeId()
-     */
-    @Deprecated
-    public long getObjectId() {
-        long motionStateId = nativeId();
-        return motionStateId;
-    }
-
-    /**
      * Copy the orientation from this motion state (as a matrix).
      *
      * @param storeResult storage for the result (modified if not null)

@@ -187,18 +187,6 @@ abstract public class CollisionShape
     }
 
     /**
-     * Read the native ID of the btCollisionShape.
-     *
-     * @return the identifier (not zero)
-     * @deprecated use nativeId()
-     */
-    @Deprecated
-    final public long getObjectId() {
-        long shapeId = nativeId();
-        return shapeId;
-    }
-
-    /**
      * Copy the scale factors.
      *
      * @param storeResult storage for the result (modified if not null)
