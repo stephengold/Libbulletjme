@@ -97,7 +97,7 @@ public class TestLibbulletjme {
     /*
      * true if the expected collision in performDropTest() has been detected
      */
-    public static boolean dropAndFloorHaveCollided = false;
+    private static boolean dropAndFloorHaveCollided = false;
     // *************************************************************************
     // new methods exposed
 
@@ -1170,7 +1170,7 @@ public class TestLibbulletjme {
      * @param pco the object to test (not null, unaffected)
      */
     private static void testPco(PhysicsCollisionObject pco) {
-        Assert.assertNotEquals(0L, pco.getObjectId());
+        Assert.assertNotEquals(0L, pco.nativeId());
         Assert.assertFalse(pco.isInWorld());
         Assert.assertNull(pco.getCollisionSpace());
         Assert.assertEquals(0L, pco.spaceId());
