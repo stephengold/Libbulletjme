@@ -49,7 +49,6 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -332,13 +331,12 @@ public class PhysicsSpace extends CollisionSpace {
      * Enumerate physics characters that have been added to this space and not
      * yet removed.
      *
-     * @return a new collection of pre-existing instances (not null)
+     * @return a new unmodifiable collection of pre-existing instances (not
+     * null)
      */
     public Collection<PhysicsCharacter> getCharacterList() {
-        TreeSet<PhysicsCharacter> result = new TreeSet<>();
-        result.addAll(characterMap.values());
-
-        return result;
+        Collection<PhysicsCharacter> result = characterMap.values();
+        return Collections.unmodifiableCollection(result);
     }
 
     /**
