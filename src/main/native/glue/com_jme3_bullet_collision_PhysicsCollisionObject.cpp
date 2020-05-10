@@ -223,12 +223,16 @@ JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject,
-            "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The jmeUserInfo does not exist.", 0);
+
     jmeCollisionSpace *pSpace = pUser->m_jmeSpace;
+    NULL_CHK(pEnv, pSpace, "The jmeCollisionSpace does not exist.", 0);
+
     jobject javaSpace = pSpace->getJavaPhysicsSpace();
     return javaSpace;
 }
