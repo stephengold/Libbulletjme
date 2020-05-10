@@ -33,6 +33,7 @@ package com.jme3.bullet.collision;
 
 import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.CollisionSpace;
+import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
@@ -44,7 +45,7 @@ import jme3utilities.Validate;
 
 /**
  * The abstract base class for collision objects based on Bullet's
- * btCollisionObject. TODO extend PhysicsNativeObject
+ * btCollisionObject.
  * <p>
  * Subclasses include MultiBodyCollider, PhysicsBody, PhysicsCharacter, and
  * PhysicsGhostObject.
@@ -52,6 +53,7 @@ import jme3utilities.Validate;
  * @author normenhansen
  */
 abstract public class PhysicsCollisionObject
+        extends NativePhysicsObject
         implements Comparable<PhysicsCollisionObject> {
     // *************************************************************************
     // constants and loggers
@@ -145,12 +147,6 @@ abstract public class PhysicsCollisionObject
      */
     private int collisionGroup = COLLISION_GROUP_01;
     /**
-     * Identifier of the btCollisionObject. Constructors are responsible for
-     * setting this to a non-zero value. The ID might change if the object gets
-     * rebuilt.
-     */
-    protected long objectId = 0L;
-    /**
      * scene object that's using this collision object
      */
     private Object userObject = null;
@@ -163,6 +159,7 @@ abstract public class PhysicsCollisionObject
      * @param forceFlag true to force activation
      */
     public void activate(boolean forceFlag) {
+        long objectId = nativeId();
         activate(objectId, forceFlag);
     }
 
@@ -176,7 +173,8 @@ abstract public class PhysicsCollisionObject
      */
     public void addCollideWithGroup(int collisionGroup) {
         collideWithGroups |= collisionGroup;
-        if (objectId != 0L) {
+        if (hasAssignedNativeObject()) {
+            long objectId = nativeId();
             setCollideWithGroups(objectId, collideWithGroups);
         }
     }
@@ -208,8 +206,8 @@ abstract public class PhysicsCollisionObject
      * @param old (not null, unaffected)
      */
     final public void copyPcoProperties(PhysicsCollisionObject old) {
-        assert old.objectId != 0L;
-        assert old.objectId != objectId;
+        assert old.hasAssignedNativeObject();
+        assert old.nativeId() != nativeId();
 
         setCcdMotionThreshold(old.getCcdMotionThreshold());
         setCcdSweptSphereRadius(old.getCcdSweptSphereRadius());
@@ -239,7 +237,9 @@ abstract public class PhysicsCollisionObject
      * @see Activation
      */
     public int getActivationState() {
+        long objectId = nativeId();
         int result = getActivationState(objectId);
+
         assert result >= Activation.firstValue : result;
         assert result <= Activation.lastValue : result;
         return result;
@@ -255,7 +255,10 @@ abstract public class PhysicsCollisionObject
      */
     public Vector3f getAnisotropicFriction(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long objectId = nativeId();
         getAnisotropicFriction(objectId, result);
+
         return result;
     }
 
@@ -267,7 +270,9 @@ abstract public class PhysicsCollisionObject
      * physics-space units, &ge;0)
      */
     public float getCcdMotionThreshold() {
+        long objectId = nativeId();
         float distance = getCcdMotionThreshold(objectId);
+
         assert distance >= 0f : distance;
         return distance;
     }
@@ -291,7 +296,9 @@ abstract public class PhysicsCollisionObject
      * @return the radius (in physics-space units, &ge;0)
      */
     public float getCcdSweptSphereRadius() {
+        long objectId = nativeId();
         float radius = getCcdSweptSphereRadius(objectId);
+
         assert radius >= 0f : radius;
         return radius;
     }
@@ -302,7 +309,7 @@ abstract public class PhysicsCollisionObject
      * @return the bitmask
      */
     public int getCollideWithGroups() {
-        assert collideWithGroups == getCollideWithGroups(objectId);
+        assert collideWithGroups == getCollideWithGroups(nativeId());
         return collideWithGroups;
     }
 
@@ -312,7 +319,7 @@ abstract public class PhysicsCollisionObject
      * @return the collision group (bitmask with exactly one bit set)
      */
     public int getCollisionGroup() {
-        assert collisionGroup == getCollisionGroup(objectId);
+        assert collisionGroup == getCollisionGroup(nativeId());
         assert Integer.bitCount(collisionGroup) == 1 : collisionGroup;
         return collisionGroup;
     }
@@ -334,6 +341,7 @@ abstract public class PhysicsCollisionObject
     public CollisionSpace getCollisionSpace() {
         CollisionSpace result = null;
         if (spaceId() != 0L) {
+            long objectId = nativeId();
             result = getCollisionSpace(objectId);
         }
 
@@ -346,7 +354,9 @@ abstract public class PhysicsCollisionObject
      * @return the damping
      */
     public float getContactDamping() {
+        long objectId = nativeId();
         float damping = getContactDamping(objectId);
+
         return damping;
     }
 
@@ -357,7 +367,9 @@ abstract public class PhysicsCollisionObject
      * @return the threshold distance (in physics-space units)
      */
     public float getContactProcessingThreshold() {
+        long objectId = nativeId();
         float distance = getContactProcessingThreshold(objectId);
+
         return distance;
     }
 
@@ -367,7 +379,9 @@ abstract public class PhysicsCollisionObject
      * @return the stiffness
      */
     public float getContactStiffness() {
+        long objectId = nativeId();
         float stiffness = getContactStiffness(objectId);
+
         return stiffness;
     }
 
@@ -377,7 +391,9 @@ abstract public class PhysicsCollisionObject
      * @return the time (in seconds)
      */
     public float getDeactivationTime() {
+        long objectId = nativeId();
         float time = getDeactivationTime(objectId);
+
         return time;
     }
 
@@ -387,7 +403,10 @@ abstract public class PhysicsCollisionObject
      * @return the coefficient (&ge;0)
      */
     public float getFriction() {
-        return getFriction(objectId);
+        long objectId = nativeId();
+        float result = getFriction(objectId);
+
+        return result;
     }
 
     /**
@@ -396,8 +415,7 @@ abstract public class PhysicsCollisionObject
      * @return the native identifier (not zero)
      */
     final public long getObjectId() {
-        assert objectId != 0L;
-        return objectId;
+        return nativeId();
     }
 
     /**
@@ -409,6 +427,8 @@ abstract public class PhysicsCollisionObject
      */
     public Vector3f getPhysicsLocation(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long objectId = nativeId();
         getLocation(objectId, result);
 
         assert Vector3f.isValidVector(result);
@@ -425,7 +445,10 @@ abstract public class PhysicsCollisionObject
     public Quaternion getPhysicsRotation(Quaternion storeResult) {
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
+
+        long objectId = nativeId();
         getOrientation(objectId, result);
+
         return result;
     }
 
@@ -439,7 +462,10 @@ abstract public class PhysicsCollisionObject
      */
     public Matrix3f getPhysicsRotationMatrix(Matrix3f storeResult) {
         Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
+
+        long objectId = nativeId();
         getBasis(objectId, result);
+
         return result;
     }
 
@@ -450,7 +476,10 @@ abstract public class PhysicsCollisionObject
      * @return restitution value
      */
     public float getRestitution() {
-        return getRestitution(objectId);
+        long objectId = nativeId();
+        float result = getRestitution(objectId);
+
+        return result;
     }
 
     /**
@@ -459,7 +488,10 @@ abstract public class PhysicsCollisionObject
      * @return friction value
      */
     public float getRollingFriction() {
-        return getRollingFriction(objectId);
+        long objectId = nativeId();
+        float result = getRollingFriction(objectId);
+
+        return result;
     }
 
     /**
@@ -480,7 +512,10 @@ abstract public class PhysicsCollisionObject
      * @return friction value
      */
     public float getSpinningFriction() {
-        return getSpinningFriction(objectId);
+        long objectId = nativeId();
+        float result = getSpinningFriction(objectId);
+
+        return result;
     }
 
     /**
@@ -521,7 +556,10 @@ abstract public class PhysicsCollisionObject
      */
     public boolean hasAnisotropicFriction(int mode) {
         Validate.inRange(mode, "mode", AfMode.basic, AfMode.either);
+
+        long objectId = nativeId();
         boolean result = hasAnisotropicFriction(objectId, mode);
+
         return result;
     }
 
@@ -531,6 +569,7 @@ abstract public class PhysicsCollisionObject
      * @return true if object still active, false if deactivated
      */
     public boolean isActive() {
+        long objectId = nativeId();
         return isActive(objectId);
     }
 
@@ -541,6 +580,7 @@ abstract public class PhysicsCollisionObject
      * @return true if responsive, otherwise false
      */
     final public boolean isContactResponse() {
+        long objectId = nativeId();
         int flags = getCollisionFlags(objectId);
         boolean result = (flags & CollisionFlag.NO_CONTACT_RESPONSE) == 0x0;
 
@@ -553,7 +593,10 @@ abstract public class PhysicsCollisionObject
      * @return true&rarr;added to a space, false&rarr;not added to a space
      */
     final public boolean isInWorld() {
-        return isInWorld(objectId);
+        long objectId = nativeId();
+        boolean result = isInWorld(objectId);
+
+        return result;
     }
 
     /**
@@ -562,6 +605,7 @@ abstract public class PhysicsCollisionObject
      * @return true if static, otherwise false
      */
     final public boolean isStatic() {
+        long objectId = nativeId();
         int flags = getCollisionFlags(objectId);
         boolean result = (flags & CollisionFlag.STATIC_OBJECT) != 0x0;
 
@@ -578,6 +622,7 @@ abstract public class PhysicsCollisionObject
      */
     public Integer proxyGroup() {
         Integer result = null;
+        long objectId = nativeId();
         if (hasBroadphaseProxy(objectId)) {
             result = getProxyFilterGroup(objectId);
         }
@@ -594,6 +639,7 @@ abstract public class PhysicsCollisionObject
      */
     public Integer proxyMask() {
         Integer result = null;
+        long objectId = nativeId();
         if (hasBroadphaseProxy(objectId)) {
             result = getProxyFilterMask(objectId);
         }
@@ -608,7 +654,7 @@ abstract public class PhysicsCollisionObject
      */
     public void removeCollideWithGroup(int collisionGroup) {
         collideWithGroups &= ~collisionGroup;
-        if (objectId != 0L) {
+        if (hasAssignedNativeObject()) {
             setCollideWithGroups(collideWithGroups);
         }
     }
@@ -626,6 +672,7 @@ abstract public class PhysicsCollisionObject
         Validate.nonNull(components, "components");
         Validate.inRange(mode, "mode", AfMode.none, AfMode.rolling);
 
+        long objectId = nativeId();
         setAnisotropicFriction(objectId, components, mode);
     }
 
@@ -640,6 +687,7 @@ abstract public class PhysicsCollisionObject
      * (in physics-space units, &gt;0) or zero to disable CCD (default=0)
      */
     public void setCcdMotionThreshold(float threshold) {
+        long objectId = nativeId();
         setCcdMotionThreshold(objectId, threshold);
     }
 
@@ -650,6 +698,7 @@ abstract public class PhysicsCollisionObject
      * @param radius (in physics-space units, &ge;0, default=0)
      */
     public void setCcdSweptSphereRadius(float radius) {
+        long objectId = nativeId();
         setCcdSweptSphereRadius(objectId, radius);
     }
 
@@ -660,6 +709,7 @@ abstract public class PhysicsCollisionObject
      * default=COLLISION_GROUP_01)
      */
     public void setCollideWithGroups(int collisionGroups) {
+        long objectId = nativeId();
         collideWithGroups = collisionGroups;
         setCollideWithGroups(objectId, collideWithGroups);
     }
@@ -681,6 +731,7 @@ abstract public class PhysicsCollisionObject
                 "exactly one bit set");
 
         this.collisionGroup = collisionGroup;
+        long objectId = nativeId();
         setCollisionGroup(objectId, collisionGroup);
     }
 
@@ -701,6 +752,7 @@ abstract public class PhysicsCollisionObject
      * @param damping the desired damping (default=0.1)
      */
     public void setContactDamping(float damping) {
+        long objectId = nativeId();
         float stiffness = getContactStiffness(objectId);
         setContactStiffnessAndDamping(objectId, stiffness, damping);
     }
@@ -713,6 +765,7 @@ abstract public class PhysicsCollisionObject
      * default=1e18 with SP library or 1e30 with DP library)
      */
     public void setContactProcessingThreshold(float distance) {
+        long objectId = nativeId();
         setContactProcessingThreshold(objectId, distance);
     }
 
@@ -723,6 +776,7 @@ abstract public class PhysicsCollisionObject
      * 1e30 with DP library)
      */
     public void setContactStiffness(float stiffness) {
+        long objectId = nativeId();
         float damping = getContactDamping(objectId);
         setContactStiffnessAndDamping(objectId, stiffness, damping);
     }
@@ -733,6 +787,7 @@ abstract public class PhysicsCollisionObject
      * @param time the desired time (in seconds, default=0)
      */
     public void setDeactivationTime(float time) {
+        long objectId = nativeId();
         setDeactivationTime(objectId, time);
     }
 
@@ -743,6 +798,8 @@ abstract public class PhysicsCollisionObject
      */
     public void setFriction(float friction) {
         Validate.nonNegative(friction, "friction");
+
+        long objectId = nativeId();
         setFriction(objectId, friction);
     }
 
@@ -753,6 +810,7 @@ abstract public class PhysicsCollisionObject
      * @param restitution the desired value (default=0)
      */
     public void setRestitution(float restitution) {
+        long objectId = nativeId();
         setRestitution(objectId, restitution);
     }
 
@@ -764,6 +822,7 @@ abstract public class PhysicsCollisionObject
      * @param friction the desired friction value (default=0)
      */
     public void setRollingFriction(float friction) {
+        long objectId = nativeId();
         setRollingFriction(objectId, friction);
     }
 
@@ -774,6 +833,7 @@ abstract public class PhysicsCollisionObject
      * @param friction the desired friction value (default=0)
      */
     public void setSpinningFriction(float friction) {
+        long objectId = nativeId();
         setSpinningFriction(objectId, friction);
     }
 
@@ -793,7 +853,9 @@ abstract public class PhysicsCollisionObject
      * @return the ID, or zero if not added to any space
      */
     public long spaceId() {
+        long objectId = nativeId();
         long spaceId = getSpaceId(objectId);
+
         return spaceId;
     }
     // *************************************************************************
@@ -818,7 +880,7 @@ abstract public class PhysicsCollisionObject
 
     /**
      * Read the collision flags of this object. Flag values are defined in
-     * {@link com.jme3.bullet.collision.CollisionFlag}.
+     * {@link com.jme3.bullet.collision.CollisionFlag}. Native method.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
      * @return the flags that are set, ORed together
@@ -826,7 +888,7 @@ abstract public class PhysicsCollisionObject
     native protected int getCollisionFlags(long objectId);
 
     /**
-     * Read the type of this object.
+     * Read the type of this object. Native method.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
      * @return the type value
@@ -841,6 +903,7 @@ abstract public class PhysicsCollisionObject
      */
     protected void initUserPointer() {
         logger.log(Level.FINE, "initUserPointer() for {0}", this);
+        long objectId = nativeId();
         initUserPointer(objectId, collisionGroup, collideWithGroups);
 
         assert getCollisionGroup(objectId) == collisionGroup;
@@ -849,7 +912,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Alter the activation state of this object.
+     * Alter the activation state of this object. Native method.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
      * @param desiredState the desired state
@@ -859,7 +922,7 @@ abstract public class PhysicsCollisionObject
     /**
      * Alter the collision flags of this object (native field:
      * m_collisionFlags). Flag values are defined in
-     * {@link com.jme3.bullet.collision.CollisionFlag}.
+     * {@link com.jme3.bullet.collision.CollisionFlag}. Native method.
      *
      * @param objectId the ID of the btCollisionObject (not zero)
      * @param desiredFlags the desired collision flags, ORed together
@@ -879,6 +942,7 @@ abstract public class PhysicsCollisionObject
         Validate.finite(centerLocation, "center location");
         Validate.nonNull(orientation, "orientation");
 
+        long objectId = nativeId();
         setLocationAndBasis(objectId, centerLocation, orientation);
     }
     // *************************************************************************
@@ -893,13 +957,14 @@ abstract public class PhysicsCollisionObject
      */
     @Override
     public int compareTo(PhysicsCollisionObject other) {
-        long otherId = other.getObjectId();
+        long objectId = nativeId();
+        long otherId = other.nativeId();
         int result = Long.compare(objectId, otherId);
 
         return result;
     }
     // *************************************************************************
-    // Object methods
+    // NativePhysicsObject methods
 
     /**
      * Test for ID equality.
@@ -915,7 +980,8 @@ abstract public class PhysicsCollisionObject
             result = true;
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
-            long otherId = ((PhysicsCollisionObject) otherObject).getObjectId();
+            long objectId = nativeId();
+            long otherId = ((PhysicsCollisionObject) otherObject).nativeId();
             result = (objectId == otherId);
         } else {
             result = false;
@@ -938,21 +1004,11 @@ abstract public class PhysicsCollisionObject
             if (space != null) {
                 space.removeCollisionObject(this);
             }
+            long objectId = nativeId();
             finalizeNative(objectId);
         } finally {
             super.finalize();
         }
-    }
-
-    /**
-     * Generate the hash code for this object.
-     *
-     * @return value for use in hashing
-     */
-    @Override
-    public int hashCode() {
-        int hash = (int) (objectId >> 4);
-        return hash;
     }
 
     /**
@@ -965,6 +1021,7 @@ abstract public class PhysicsCollisionObject
         String result = getClass().getSimpleName();
         result = result.replace("Physics", "");
         result = result.replace("Object", "");
+        long objectId = nativeId();
         result += "#" + Long.toHexString(objectId);
 
         return result;

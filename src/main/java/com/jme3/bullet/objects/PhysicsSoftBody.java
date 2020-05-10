@@ -97,8 +97,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      * space.
      */
     public PhysicsSoftBody() {
-        objectId = createEmptySoftBody();
-        assert objectId != 0L;
+        long objectId = createEmptySoftBody();
+        super.setNativeId(objectId);
         assert getInternalType(objectId) == PcoType.soft :
                 getInternalType(objectId);
         logger2.log(Level.FINE, "Created {0}.", this);
@@ -123,6 +123,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void addVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
+
+        long objectId = nativeId();
         addVelocity(objectId, velocity);
     }
 
@@ -138,6 +140,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         int numNodes = countNodes();
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
 
+        long objectId = nativeId();
         addVelocity(objectId, velocity, nodeIndex);
     }
 
@@ -156,6 +159,7 @@ public class PhysicsSoftBody extends PhysicsBody {
                     "The number of indices must be a multiple of 3.");
         }
 
+        long objectId = nativeId();
         int numFaces = nodeIndices.capacity() / vpt;
         appendFaces(objectId, numFaces, nodeIndices);
     }
@@ -176,6 +180,7 @@ public class PhysicsSoftBody extends PhysicsBody {
                     "The number of indices must be a multiple of 2.");
         }
 
+        long objectId = nativeId();
         int numLinks = nodeIndices.capacity() / vpe;
         appendLinks(objectId, numLinks, nodeIndices);
     }
@@ -193,6 +198,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.require(nodeLocations.limit() % numAxes == 0,
                 "limit a multiple of 3");
 
+        long objectId = nativeId();
         int numNodes = nodeLocations.limit() / numAxes;
         appendNodes(objectId, numNodes, nodeLocations);
     }
@@ -205,6 +211,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void applyForce(Vector3f force) {
         Validate.finite(force, "force");
+
+        long objectId = nativeId();
         addForce(objectId, force);
     }
 
@@ -220,6 +228,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         int numNodes = countNodes();
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
 
+        long objectId = nativeId();
         addForce(objectId, force, nodeIndex);
     }
 
@@ -230,6 +239,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void applyRotation(Quaternion rotation) {
         Validate.nonNull(rotation, "rotation");
+
+        long objectId = nativeId();
         applyPhysicsRotation(objectId, rotation);
     }
 
@@ -241,6 +252,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void applyScale(Vector3f factors) {
         Validate.finite(factors, "factors");
+
+        long objectId = nativeId();
         applyPhysicsScale(objectId, factors);
     }
 
@@ -251,6 +264,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void applyTransform(Transform transform) {
         Validate.nonNull(transform, "transform");
+
+        long objectId = nativeId();
         applyPhysicsTransform(objectId, transform);
     }
 
@@ -262,6 +277,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void applyTranslation(Vector3f offset) {
         Validate.finite(offset, "offset");
+
+        long objectId = nativeId();
         applyPhysicsTranslate(objectId, offset);
     }
 
@@ -278,7 +295,9 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(clusterIndex, "cluster index", 0, numClusters - 1);
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
+        long objectId = nativeId();
         getClusterCenter(objectId, clusterIndex, result);
+
         return result;
     }
 
@@ -297,8 +316,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         FloatBuffer result = MyBuffer.ensureCapacity(numFloats, storeResult);
 
         if (numFloats != 0) {
+            long objectId = nativeId();
             getClustersPositions(objectId, result);
         }
+
         return result;
     }
 
@@ -317,8 +338,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         FloatBuffer result = MyBuffer.ensureCapacity(numFloats, storeResult);
 
         if (numFloats != 0) {
+            long objectId = nativeId();
             getClustersMasses(objectId, result);
         }
+
         return result;
     }
 
@@ -341,8 +364,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         }
 
         if (numInts != 0) {
+            long objectId = nativeId();
             getFacesIndexes(objectId, result);
         }
+
         return result;
     }
 
@@ -365,8 +390,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         }
 
         if (numInts != 0) {
+            long objectId = nativeId();
             getLinksIndexes(objectId, result);
         }
+
         return result;
     }
 
@@ -385,8 +412,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         FloatBuffer result = MyBuffer.ensureCapacity(numFloats, storeResult);
 
         if (numFloats != 0) {
+            long objectId = nativeId();
             getNodesPositions(objectId, result);
         }
+
         return result;
     }
 
@@ -405,8 +434,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         FloatBuffer result = MyBuffer.ensureCapacity(numFloats, storeResult);
 
         if (numFloats != 0) {
+            long objectId = nativeId();
             getMasses(objectId, result);
         }
+
         return result;
     }
 
@@ -425,8 +456,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         FloatBuffer result = MyBuffer.ensureCapacity(numFloats, storeResult);
 
         if (numFloats != 0) {
+            long objectId = nativeId();
             getNodesNormals(objectId, result);
         }
+
         return result;
     }
 
@@ -449,8 +482,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         }
 
         if (numInts != 0) {
+            long objectId = nativeId();
             getTetrasIndexes(objectId, result);
         }
+
         return result;
     }
 
@@ -469,8 +504,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         FloatBuffer result = MyBuffer.ensureCapacity(numFloats, storeResult);
 
         if (numFloats != 0) {
+            long objectId = nativeId();
             getNodesVelocities(objectId, result);
         }
+
         return result;
     }
 
@@ -480,7 +517,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the number of clusters (&ge;0)
      */
     final public int countClusters() {
-        return getClusterCount(objectId);
+        long objectId = nativeId();
+        int result = getClusterCount(objectId);
+
+        return result;
     }
 
     /**
@@ -489,7 +529,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the number of faces (&ge;0)
      */
     final public int countFaces() {
-        return getNbFaces(objectId);
+        long objectId = nativeId();
+        int result = getNbFaces(objectId);
+
+        return result;
     }
 
     /**
@@ -498,7 +541,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the number of links (&ge;0)
      */
     final public int countLinks() {
-        return getNbLinks(objectId);
+        long objectId = nativeId();
+        int result = getNbLinks(objectId);
+
+        return result;
     }
 
     /**
@@ -507,7 +553,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the number of nodes (&ge;0)
      */
     final public int countNodes() {
-        return getNbNodes(objectId);
+        long objectId = nativeId();
+        int result = getNbNodes(objectId);
+
+        return result;
     }
 
     /**
@@ -520,7 +569,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         int numClusters = countClusters();
         Validate.inRange(clusterIndex, "cluster index", 0, numClusters - 1);
 
-        return countNodesInCluster(objectId, clusterIndex);
+        long objectId = nativeId();
+        int result = countNodesInCluster(objectId, clusterIndex);
+
+        return result;
     }
 
     /**
@@ -529,7 +581,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the number of pinned nodes (&ge;0)
      */
     final public int countPinnedNodes() {
-        return getNbPinnedNodes(objectId);
+        long objectId = nativeId();
+        int result = getNbPinnedNodes(objectId);
+
+        return result;
     }
 
     /**
@@ -538,7 +593,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the number of tetrahedra (&ge;0)
      */
     final public int countTetras() {
-        return getNbTetras(objectId);
+        long objectId = nativeId();
+        int result = getNbTetras(objectId);
+
+        return result;
     }
 
     /**
@@ -555,7 +613,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(nodeIndex0, "node index 0", 0, numNodes - 1);
         Validate.inRange(nodeIndex1, "node index 1", 0, numNodes - 1);
 
-        return cutLink(objectId, nodeIndex0, nodeIndex1, cutLocation);
+        long objectId = nativeId();
+        boolean result = cutLink(objectId, nodeIndex0, nodeIndex1, cutLocation);
+
+        return result;
     }
 
     /**
@@ -568,6 +629,7 @@ public class PhysicsSoftBody extends PhysicsBody {
     public void generateBendingConstraints(int numHops, Material material) {
         Validate.inRange(numHops, "number of hops", 2, Integer.MAX_VALUE);
 
+        long objectId = nativeId();
         long materialId = material.materialId;
         generateBendingConstraints(objectId, numHops, materialId);
     }
@@ -577,6 +639,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * tetrahedra). Any pre-existing clusters are released.
      */
     public void generateClusters() {
+        long objectId = nativeId();
         generateClusters(objectId, 0, 8_192);
     }
 
@@ -592,6 +655,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(k, "k", 1, numNodes);
         Validate.positive(maxIterations, "maximum number of iterations");
 
+        long objectId = nativeId();
         generateClusters(objectId, k, maxIterations);
     }
 
@@ -607,6 +671,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(clusterIndex, "cluster index", 0, numClusters - 1);
 
         float result;
+        long objectId = nativeId();
         switch (parameter) {
             case AngularDamping:
                 result = getClusterAngularDamping(objectId, clusterIndex);
@@ -663,6 +728,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * object (not null)
      */
     public SoftBodyWorldInfo getWorldInfo() {
+        long objectId = nativeId();
         long worldInfoId = getSoftBodyWorldInfo(objectId);
         SoftBodyWorldInfo worldInfo = new SoftBodyWorldInfo(worldInfoId);
 
@@ -678,7 +744,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public boolean isCollisionAllowed(long pcoId) {
         Validate.nonZero(pcoId, "collision object ID");
+
+        long objectId = nativeId();
         boolean result = isCollisionAllowed(objectId, pcoId);
+
         return result;
     }
 
@@ -719,7 +788,9 @@ public class PhysicsSoftBody extends PhysicsBody {
             resultBuffer = storeResult;
         }
 
+        long objectId = nativeId();
         listNodesInCluster(objectId, clusterIndex, resultBuffer);
+
         return resultBuffer;
     }
 
@@ -729,7 +800,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the margin distance (in physics-space units, &gt;0)
      */
     public float margin() {
-        return getMargin(objectId);
+        long objectId = nativeId();
+        float result = getMargin(objectId);
+
+        return result;
     }
 
     /**
@@ -745,7 +819,9 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
+        long objectId = nativeId();
         getNodeLocation(objectId, nodeIndex, result);
+
         return result;
     }
 
@@ -759,7 +835,10 @@ public class PhysicsSoftBody extends PhysicsBody {
         int numNodes = countNodes();
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
 
-        return getMass(objectId, nodeIndex);
+        long objectId = nativeId();
+        float result = getMass(objectId, nodeIndex);
+
+        return result;
     }
 
     /**
@@ -775,7 +854,9 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
+        long objectId = nativeId();
         getNodeNormal(objectId, nodeIndex, result);
+
         return result;
     }
 
@@ -792,7 +873,9 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
+        long objectId = nativeId();
         getNodeVelocity(objectId, nodeIndex, result);
+
         return result;
     }
 
@@ -800,6 +883,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Randomize constraints to reduce solver bias.
      */
     public void randomizeConstraints() {
+        long objectId = nativeId();
         randomizeConstraints(objectId);
     }
 
@@ -807,6 +891,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Release all clusters.
      */
     public void releaseAllClusters() {
+        long objectId = nativeId();
         releaseClusters(objectId);
     }
 
@@ -819,6 +904,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         int numClusters = countClusters();
         Validate.inRange(clusterIndex, "cluster index", 0, numClusters - 1);
 
+        long objectId = nativeId();
         releaseCluster(objectId, clusterIndex);
     }
 
@@ -826,6 +912,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Set the resting lengths of all links to their current lengths.
      */
     public void resetRestingLengths() {
+        long objectId = nativeId();
         resetLinkRestLengths(objectId);
     }
 
@@ -835,6 +922,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the scale factor
      */
     public float restingLengthsScale() {
+        long objectId = nativeId();
         return getRestLengthScale(objectId);
     }
 
@@ -849,6 +937,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         int numClusters = countClusters();
         Validate.inRange(clusterIndex, "cluster index", 0, numClusters - 1);
 
+        long objectId = nativeId();
         switch (parameter) {
             case AngularDamping:
                 setClusterAngularDamping(objectId, clusterIndex, value);
@@ -880,6 +969,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     final public void setMargin(float margin) {
         Validate.positive(margin, "margin");
+
+        long objectId = nativeId();
         setMargin(objectId, margin);
     }
 
@@ -891,6 +982,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void setMassByArea(float totalMass) {
         Validate.positive(totalMass, "total mass");
+
+        long objectId = nativeId();
         setTotalMass(objectId, totalMass, true);
     }
 
@@ -902,6 +995,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void setMassByCurrent(float totalMass) {
         Validate.positive(totalMass, "total mass");
+
+        long objectId = nativeId();
         setTotalMass(objectId, totalMass, false);
     }
 
@@ -917,6 +1012,7 @@ public class PhysicsSoftBody extends PhysicsBody {
             throw new IllegalArgumentException("The buffer must be direct.");
         }
 
+        long objectId = nativeId();
         setMasses(objectId, masses);
     }
 
@@ -927,6 +1023,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void setMassFromDensity(float density) {
         Validate.positive(density, "density");
+
+        long objectId = nativeId();
         setTotalDensity(objectId, density);
     }
 
@@ -941,6 +1039,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
         Validate.nonNegative(mass, "mass");
 
+        long objectId = nativeId();
         setMass(objectId, nodeIndex, mass);
     }
 
@@ -955,6 +1054,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         Validate.inRange(nodeIndex, "node index", 0, numNodes - 1);
         Validate.finite(velocity, "velocity");
 
+        long objectId = nativeId();
         setNodeVelocity(objectId, nodeIndex, velocity);
     }
 
@@ -969,6 +1069,8 @@ public class PhysicsSoftBody extends PhysicsBody {
         if (!normals.isDirect()) {
             throw new IllegalArgumentException("The buffer must be direct.");
         }
+
+        long objectId = nativeId();
         setNormals(objectId, normals);
     }
 
@@ -982,6 +1084,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * alter it
      */
     public void setPose(boolean setVolumePose, boolean setFramePose) {
+        long objectId = nativeId();
         setPose(objectId, setVolumePose, setFramePose);
     }
 
@@ -991,6 +1094,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @param scale the desired scale factor
      */
     public void setRestingLengthScale(float scale) {
+        long objectId = nativeId();
         setRestLengthScale(objectId, scale);
     }
 
@@ -1005,6 +1109,8 @@ public class PhysicsSoftBody extends PhysicsBody {
         if (!velocities.isDirect()) {
             throw new IllegalArgumentException("The buffer must be direct.");
         }
+
+        long objectId = nativeId();
         setVelocities(objectId, velocities);
     }
 
@@ -1016,6 +1122,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void setVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
+
+        long objectId = nativeId();
         setVelocity(objectId, velocity);
     }
 
@@ -1025,6 +1133,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @param density the desired density
      */
     public void setVolumeDensity(float density) {
+        long objectId = nativeId();
         setVolumeDensity(objectId, density);
     }
 
@@ -1034,6 +1143,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @param mass the desired mass
      */
     public void setVolumeMass(float mass) {
+        long objectId = nativeId();
         setVolumeMass(objectId, mass);
     }
 
@@ -1045,6 +1155,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public void setWindVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
+
+        long objectId = nativeId();
         setWindVelocity(objectId, velocity);
     }
 
@@ -1061,6 +1173,7 @@ public class PhysicsSoftBody extends PhysicsBody {
             logger2.warning("The body is not in any PhysicsSoftSpace.");
         }
 
+        long objectId = nativeId();
         long worldInfoId = worldInfo.nativeId();
         setSoftBodyWorldInfo(objectId, worldInfoId);
     }
@@ -1071,6 +1184,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @return the total volume (in cubic physics-space units, &ge;0)
      */
     public float volume() {
+        long objectId = nativeId();
         return getVolume(objectId);
     }
 
@@ -1083,7 +1197,10 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public Vector3f windVelocity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long objectId = nativeId();
         getWindVelocity(objectId, result);
+
         return result;
     }
     // *************************************************************************
@@ -1093,10 +1210,11 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Destroy the pre-existing btSoftBody (if any).
      */
     protected void destroySoftBody() {
-        if (objectId != 0L) {
+        if (hasAssignedNativeObject()) {
             logger2.log(Level.FINE, "Destroying {0}.", this);
+            long objectId = nativeId();
             finalizeNative(objectId);
-            objectId = 0L;
+            unassignNativeObject();
         }
     }
 
@@ -1112,6 +1230,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Reinitialize the btSoftBody to the default values.
      */
     protected void initDefault() {
+        long objectId = nativeId();
         initDefault(objectId);
     }
 
@@ -1122,8 +1241,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     protected void newEmptySoftBody() {
         destroySoftBody();
 
-        objectId = createEmptySoftBody();
-        assert objectId != 0L;
+        long objectId = createEmptySoftBody();
+        setNativeId(objectId);
         logger2.log(Level.FINE, "Created {0}.", this);
 
         initUserPointer();
@@ -1156,7 +1275,9 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     @Override
     public float getMass() {
+        long objectId = nativeId();
         float totalMass = getTotalMass(objectId);
+
         assert totalMass >= 0f : totalMass;
         return totalMass;
     }
@@ -1171,6 +1292,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     @Override
     public Vector3f getPhysicsLocation(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long objectId = nativeId();
         getPhysicsLocation(objectId, result);
 
         assert Vector3f.isValidVector(result) : result;
@@ -1264,6 +1387,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     @Override
     public void setPhysicsLocation(Vector3f location) {
         Validate.finite(location, "location");
+
+        long objectId = nativeId();
         setPhysicsLocation(objectId, location);
     }
     // *************************************************************************

@@ -345,20 +345,23 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
         assert collisionShape.isConvex();
 
         super.setCollisionShape(collisionShape);
-        if (objectId == 0L) {
-            buildObject();
+        if (hasAssignedNativeObject()) {
+            long objectId = nativeId();
+            long shapeId = collisionShape.nativeId();
+            attachCollisionShape(objectId, shapeId);
         } else {
-            attachCollisionShape(objectId, collisionShape.nativeId());
+            buildObject();
         }
     }
 
     /**
      * Enable/disable this character's contact response.
      *
-     * @param newState true to respond to contacts, false to ignore it
+     * @param newState true to respond to contact forces, false to ignore them
      * (default=true)
      */
     public void setContactResponse(boolean newState) {
+        long objectId = nativeId();
         int flags = getCollisionFlags(objectId);
         if (newState) {
             flags &= ~CollisionFlag.NO_CONTACT_RESPONSE;
@@ -535,17 +538,20 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     // private methods
 
     /**
-     * Create the configured btKinematicCharacterController.
+     * Create the configured objects in Bullet.
      */
     private void buildObject() {
-        if (objectId == 0L) {
-            objectId = createGhostObject();
-            assert objectId != 0L;
+        if (!hasAssignedNativeObject()) {
+            long objectId = createGhostObject();
+            setNativeId(objectId);
             assert getInternalType(objectId) == PcoType.ghost :
                     getInternalType(objectId);
             logger2.log(Level.FINE, "Creating {0}.", this);
+
             initUserPointer();
         }
+
+        long objectId = nativeId();
         setCharacterFlags(objectId);
 
         CollisionShape shape = getCollisionShape();
