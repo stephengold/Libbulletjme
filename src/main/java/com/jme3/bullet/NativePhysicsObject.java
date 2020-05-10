@@ -85,7 +85,6 @@ abstract public class NativePhysicsObject {
 
     /**
      * Reassign a native object, unassigning any previous-assigned one.
-     * Typically invoked when cloning a subclass.
      *
      * @param nativeId the identifier (address) of the native object to assign
      * (not zero)

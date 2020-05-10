@@ -580,7 +580,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
 
     btSoftBody * const pBody = new btSoftBody(pInfo);
     pBody->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
-    pBody->setUserPointer(NULL); // not in any jmePhysicsSoftSpace
+    pBody->setUserPointer(NULL); // TODO unnecessary?
 
     btSoftBody::Material *pMaterial = pBody->appendMaterial();
     pMaterial->m_kLST = 1;

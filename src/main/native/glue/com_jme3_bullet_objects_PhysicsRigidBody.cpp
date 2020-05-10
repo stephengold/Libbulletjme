@@ -189,9 +189,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_createRigi
     } else {
         pShape->calculateLocalInertia(mass, localInertia);
     }
+
     btRigidBody * const
             pBody = new btRigidBody(mass, pMotionState, pShape, localInertia);
-    pBody->setUserPointer(NULL);
+    pBody->setUserPointer(NULL); // TODO unnecessary?
 
     return reinterpret_cast<jlong> (pBody);
 }
