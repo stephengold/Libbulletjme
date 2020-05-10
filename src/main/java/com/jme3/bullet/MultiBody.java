@@ -118,7 +118,7 @@ public class MultiBody
 
         baseCollider = new MultiBodyCollider(this, -1);
         long multiBodyId = nativeId();
-        long colliderId = baseCollider.getObjectId();
+        long colliderId = baseCollider.nativeId();
         setBaseCollider(multiBodyId, colliderId);
 
         baseCollider.attachShape(shape);
@@ -643,7 +643,7 @@ public class MultiBody
     public MultiBodyCollider getBaseCollider() {
         assert baseCollider == null
                 ? getBaseCollider(nativeId()) == 0L
-                : getBaseCollider(nativeId()) == baseCollider.getObjectId();
+                : getBaseCollider(nativeId()) == baseCollider.nativeId();
 
         return baseCollider;
     }

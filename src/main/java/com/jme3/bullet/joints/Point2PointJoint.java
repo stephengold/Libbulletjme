@@ -184,7 +184,7 @@ public class Point2PointJoint extends Constraint {
      */
     private void createJoint() {
         PhysicsRigidBody a = getBodyA();
-        long aId = a.getObjectId();
+        long aId = a.nativeId();
         assert pivotA != null;
         PhysicsRigidBody b = getBodyB();
 
@@ -222,7 +222,7 @@ public class Point2PointJoint extends Constraint {
             /*
              * Create a double-ended joint.
              */
-            long bId = b.getObjectId();
+            long bId = b.nativeId();
             constraintId = createJoint(aId, bId, pivotA, pivotB);
         }
 

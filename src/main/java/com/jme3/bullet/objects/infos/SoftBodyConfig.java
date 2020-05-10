@@ -80,7 +80,7 @@ public class SoftBodyConfig {
      * @return an enum value (not null)
      */
     public Aero aerodynamics() {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         int ordinal = getAeroModel(bodyId);
         Aero result = Aero.values()[ordinal];
 
@@ -93,7 +93,7 @@ public class SoftBodyConfig {
      * @return the iteration count (&ge;0)
      */
     public int clusterIterations() {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         return getClusterIterations(bodyId);
     }
 
@@ -104,7 +104,7 @@ public class SoftBodyConfig {
      * @return the flags that are set, ORed together
      */
     public int collisionFlags() {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         return getCollisionsFlags(bodyId);
     }
 
@@ -114,8 +114,8 @@ public class SoftBodyConfig {
      * @param source the config to copy from (not null, unaffected)
      */
     public void copyAll(SoftBodyConfig source) {
-        long destId = body.getObjectId();
-        long sourceId = source.body.getObjectId();
+        long destId = body.nativeId();
+        long sourceId = source.body.nativeId();
         copyValues(destId, sourceId);
     }
 
@@ -125,7 +125,7 @@ public class SoftBodyConfig {
      * @return the iteration count (&ge;0)
      */
     public int driftIterations() {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         return getDriftIterations(bodyId);
     }
 
@@ -138,7 +138,7 @@ public class SoftBodyConfig {
     public float get(Sbcp parameter) {
         Validate.nonNull(parameter, "parameter");
 
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
 
         float result;
         switch (parameter) {
@@ -217,7 +217,7 @@ public class SoftBodyConfig {
      * @return the iteration count (&ge;0)
      */
     public int positionIterations() {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         return getPositionIterations(bodyId);
     }
 
@@ -234,7 +234,7 @@ public class SoftBodyConfig {
             throw new IllegalArgumentException(message);
         }
 
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
 
         switch (parameter) {
             case AnchorHardness:
@@ -308,7 +308,7 @@ public class SoftBodyConfig {
      * @param model the desired aerodynamics model (not null, default=V_Point)
      */
     public void setAerodynamics(Aero model) {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         int ordinal = model.ordinal();
         setAeroModel(bodyId, ordinal);
     }
@@ -320,7 +320,7 @@ public class SoftBodyConfig {
      * @param numIterations the desired number of iterations (&ge;0, default=4)
      */
     public void setClusterIterations(int numIterations) {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         setClusterIterations(bodyId, numIterations);
     }
 
@@ -337,7 +337,7 @@ public class SoftBodyConfig {
             combinedFlags |= additionalFlag;
         }
 
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         setCollisionsFlags(bodyId, combinedFlags);
     }
 
@@ -347,7 +347,7 @@ public class SoftBodyConfig {
      * @param numIterations the desired number of iterations (&ge;0, default=0)
      */
     public void setDriftIterations(int numIterations) {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         setDriftIterations(bodyId, numIterations);
     }
 
@@ -358,7 +358,7 @@ public class SoftBodyConfig {
      * @param numIterations the desired number of iterations (&ge;0, default=1)
      */
     public void setPositionIterations(int numIterations) {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         setPositionIterations(bodyId, numIterations);
     }
 
@@ -369,7 +369,7 @@ public class SoftBodyConfig {
      * @param numIterations the desired number of iterations (&ge;0, default=0)
      */
     public void setVelocityIterations(int numIterations) {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         setVelocitiesIterations(bodyId, numIterations);
     }
 
@@ -380,7 +380,7 @@ public class SoftBodyConfig {
      * @return the iteration count (&ge;0)
      */
     public int velocityIterations() {
-        long bodyId = body.getObjectId();
+        long bodyId = body.nativeId();
         return getVelocitiesIterations(bodyId);
     }
     // *************************************************************************

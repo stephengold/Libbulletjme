@@ -626,7 +626,7 @@ public class PhysicsSpace extends CollisionSpace {
     @Override
     public boolean contains(PhysicsCollisionObject pco) {
         boolean result;
-        long pcoId = pco.getObjectId();
+        long pcoId = pco.nativeId();
         if (pco instanceof PhysicsRigidBody) {
             result = rigidMap.containsKey(pcoId);
         } else if (pco instanceof PhysicsCharacter) {
@@ -737,7 +737,7 @@ public class PhysicsSpace extends CollisionSpace {
         logger.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{character, this});
         long spaceId = nativeId();
-        long characterId = character.getObjectId();
+        long characterId = character.nativeId();
         characterMap.put(characterId, character);
         addCharacterObject(spaceId, characterId);
 
@@ -816,7 +816,7 @@ public class PhysicsSpace extends CollisionSpace {
 
         logger.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{rigidBody, this});
-        long rigidBodyId = rigidBody.getObjectId();
+        long rigidBodyId = rigidBody.nativeId();
         rigidMap.put(rigidBodyId, rigidBody);
 
         //Workaround
@@ -888,7 +888,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @param character the character to remove (not null)
      */
     private void removeCharacter(PhysicsCharacter character) {
-        long characterId = character.getObjectId();
+        long characterId = character.nativeId();
         if (!characterMap.containsKey(characterId)) {
             logger.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{character, this});
@@ -933,7 +933,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @param rigidBody the body to remove (not null)
      */
     private void removeRigidBody(PhysicsRigidBody rigidBody) {
-        long rigidBodyId = rigidBody.getObjectId();
+        long rigidBodyId = rigidBody.nativeId();
         if (!rigidMap.containsKey(rigidBodyId)) {
             logger.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{rigidBody, this});

@@ -1628,7 +1628,7 @@ public class PhysicsSoftBody extends PhysicsBody {
          * @param body the body to which this Material will apply (not null)
          */
         private Material(PhysicsSoftBody body) {
-            long softBodyId = body.getObjectId();
+            long softBodyId = body.nativeId();
             materialId = body.getMaterial(softBodyId);
             assert materialId != 0L;
         }
