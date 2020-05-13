@@ -48,10 +48,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    addRigidBody
- * Signature: (JJ)V
+ * Signature: (JJII)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jobject, jlong, jlong, jint, jint);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

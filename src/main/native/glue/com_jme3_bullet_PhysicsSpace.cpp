@@ -125,10 +125,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    addRigidBody
- * Signature: (JJ)V
+ * Signature: (JJII)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong rigidBodyId) {
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong rigidBodyId, jint proxyGroup,
+        jint proxyMask) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -140,7 +141,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
     jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
     pUser->m_jmeSpace = pSpace;
 
-    pSpace->getDynamicsWorld()->addRigidBody(pBody);
+    pSpace->getDynamicsWorld()->addRigidBody(pBody, proxyGroup, proxyMask);
 }
 
 /*
