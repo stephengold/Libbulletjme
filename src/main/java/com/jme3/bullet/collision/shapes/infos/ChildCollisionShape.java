@@ -63,11 +63,11 @@ public class ChildCollisionShape {
      */
     private CollisionShape shape;
     /**
-     * rotation relative to parent shape (not null)
+     * copy of rotation in the parent's coordinate system (not null)
      */
     private Matrix3f rotation;
     /**
-     * translation relative to parent shape (not null)
+     * copy of translation in the parent's coordinate system (not null)
      */
     private Vector3f offset;
     // *************************************************************************
@@ -76,10 +76,10 @@ public class ChildCollisionShape {
     /**
      * Instantiate a child shape for use in a compound shape.
      *
-     * @param offset the desired translation relative to the parent (not null,
-     * unaffected)
-     * @param rotation the desired rotation relative to the parent (not null,
-     * unaffected)
+     * @param offset the desired translation in the parent's coordinate system
+     * (not null, unaffected)
+     * @param rotation the desired rotation in the parent's coordinate system
+     * (not null, unaffected)
      * @param shape the base shape (not null, not a compound shape, alias
      * created)
      */
@@ -99,7 +99,7 @@ public class ChildCollisionShape {
     // new methods exposed
 
     /**
-     * Copy the translation relative to the parent shape.
+     * Copy the translation in the parent's coordinate system.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a translation vector (either storeResult or a new vector, not
@@ -114,7 +114,7 @@ public class ChildCollisionShape {
     }
 
     /**
-     * Copy the rotation relative to the parent shape.
+     * Copy the rotation in the parent's coordinate system.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a Quaternion (either storeResult or a new Quaternion, not null)
@@ -127,7 +127,7 @@ public class ChildCollisionShape {
     }
 
     /**
-     * Copy the rotation relative to the parent shape.
+     * Copy the rotation in the parent's coordinate system.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a rotation matrix (either storeResult or a new matrix, not null)
@@ -141,7 +141,7 @@ public class ChildCollisionShape {
     }
 
     /**
-     * Copy the Transform relative to the parent shape.
+     * Copy the Transform relative to the parent's coordinate system.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a Transform with scale=1 (either storeResult or a new instance,
@@ -169,7 +169,7 @@ public class ChildCollisionShape {
     }
 
     /**
-     * Alter the child's coordinate transform. For internal use only.
+     * Alter the child's coordinate transform copy. For internal use only.
      *
      * @param offset the desired translation relative to the parent (not null,
      * unaffected)
