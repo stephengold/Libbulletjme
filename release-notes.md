@@ -1,5 +1,32 @@
 # release log for the Libbulletjme Project
 
+## Version 6.0.0 released on 13 May 2020
+
+ + Removed 18 deprecated methods. (API changes)
+ + Added arguments for `proxyGroup` and `proxyMask` to the
+  `Java_com_jme3_bullet_PhysicsSpace_addRigidBody()` method. (API change)
+ + Changed `PhysicsCollisionObject` and `PhysicsCollisionEvent` to be
+   subclasses of `NativePhysicsObject`. (API changes)
+ + Added a no-arg constructor to the `VHACD` class. (API change)
+ + Changed 7 `PhysicsSpace` methods to return unmodifiable collections instead
+   of copies:
+   + `getCharacterList()`
+   + `getGhostObjectList()`
+   + `getJointList()`
+   + `getMultiBodyList()`
+   + `getRigidBodyList()`
+   + `getSoftBodyList()`
+   + `getVehicleList()`
+ + Added `isUseSpaceGravity()` and `setUseSpaceGravity()` methods to the
+   `PhysicsRigidBody` class.
+ + Added `rotate()` and `translate()` methods
+   to the `CompoundCollisionShape` class.
+ + Publicized the `addJoint()` and `removeJoint()` methods
+   in the `PhysicsSpace` class.
+ + Added 2 `mult()` methods to the `Matrix3f` class.
+ + Updated the V-HACD sources to match SHA1 ID=2731201 of the v-hacd project.
+ + Built using Gradle v6.4 .
+
 ## Version 5.8.0 released on 6 May 2020
 
  + bugfix: `FINE` logging of collision spaces reports `nativeId=0` in `create()`
@@ -9,7 +36,7 @@
  + Added `proxyGroup()` and `proxyMask()` methods to the
    `PhysicsCollisionObject` class.
  + Check the `m_objectType` field of every `btTypedConstraint`.
- + Build for Java 7.
+ + Build for Java 7 compatibility.
 
 ## Version 5.7.0 released on 1 May 2020
 
