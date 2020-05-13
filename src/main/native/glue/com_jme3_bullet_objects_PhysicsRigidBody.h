@@ -213,6 +213,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getSquare
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getUseSpaceGravity
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getUseSpaceGravity
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    setAngularDamping
  * Signature: (JF)V
  */
@@ -338,6 +346,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsR
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleepingThresholds
   (JNIEnv *, jobject, jlong, jfloat, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setUseSpaceGravity
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setUseSpaceGravity
+  (JNIEnv *, jobject, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody

@@ -441,6 +441,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getSquare
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getUseSpaceGravity
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getUseSpaceGravity
+(JNIEnv *pEnv, jobject, jlong bodyId) {
+    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.", JNI_FALSE);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+
+    int flags = pBody->getFlags();
+    bool result = (flags & BT_DISABLE_WORLD_GRAVITY) == 0x0;
+    return jboolean(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    isActive
  * Signature: (J)Z
  */
@@ -741,6 +757,26 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setSleeping
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     pBody->setSleepingThresholds(linear, angular);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setUseSpaceGravity
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setUseSpaceGravity
+(JNIEnv *pEnv, jobject, jlong bodyId, jboolean use) {
+    btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+
+    int flags = pBody->getFlags();
+    if (use) {
+        flags &= ~BT_DISABLE_WORLD_GRAVITY;
+    } else {
+        flags |= BT_DISABLE_WORLD_GRAVITY;
+    }
+    pBody->setFlags(flags);
 }
 
 /*
