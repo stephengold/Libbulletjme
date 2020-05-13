@@ -166,6 +166,36 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    rotate
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_rotate
+(JNIEnv *pEnv, jobject, jlong compoundShapeId, jobject rotationMatrix) {
+    btCompoundShape * const
+            pCompound = reinterpret_cast<btCompoundShape *> (compoundShapeId);
+    NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
+    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+
+    NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",);
+    btMatrix3x3 rotation;
+    jmeBulletUtil::convert(pEnv, rotationMatrix, &rotation);
+
+    bool shouldRecalculateLocalAabb = true;
+    int numChildren = pCompound->getNumChildShapes();
+    for (int childIndex = 0; childIndex < numChildren; ++childIndex) {
+        btTransform transform = pCompound->getChildTransform(childIndex);
+        btVector3 &origin = transform.getOrigin();
+        origin = rotation * origin;
+        btMatrix3x3 &basis = transform.getBasis();
+        basis = rotation * basis;
+
+        pCompound->updateChildTransform(childIndex, transform,
+                shouldRecalculateLocalAabb);
+    }
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
  * Method:    setChildTransform
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
@@ -195,5 +225,33 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
             pCompound->updateChildTransform(childIndex, transform,
                     shouldRecalculateLocalAabb);
         }
+    }
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    translate
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_translate
+(JNIEnv *pEnv, jobject, jlong compoundShapeId, jobject offsetVector) {
+    btCompoundShape * const
+            pCompound = reinterpret_cast<btCompoundShape *> (compoundShapeId);
+    NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
+    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+
+    NULL_CHK(pEnv, offsetVector, "The offset vector does not exist.",);
+    btVector3 offset;
+    jmeBulletUtil::convert(pEnv, offsetVector, &offset);
+
+    bool shouldRecalculateLocalAabb = true;
+    int numChildren = pCompound->getNumChildShapes();
+    for (int childIndex = 0; childIndex < numChildren; ++childIndex) {
+        btTransform transform = pCompound->getChildTransform(childIndex);
+        btVector3 &origin = transform.getOrigin();
+        origin += offset;
+
+        pCompound->updateChildTransform(childIndex, transform,
+                shouldRecalculateLocalAabb);
     }
 }

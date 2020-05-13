@@ -59,11 +59,27 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    rotate
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_rotate
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
  * Method:    setChildTransform
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_setChildTransform
   (JNIEnv *, jobject, jlong, jlong, jobject, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CompoundCollisionShape
+ * Method:    translate
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionShape_translate
+  (JNIEnv *, jobject, jlong, jobject);
 
 #ifdef __cplusplus
 }
