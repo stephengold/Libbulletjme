@@ -115,7 +115,6 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      */
     public Matrix3f(float m00, float m01, float m02, float m10, float m11,
             float m12, float m20, float m21, float m22) {
-
         this.m00 = m00;
         this.m01 = m01;
         this.m02 = m02;
@@ -229,12 +228,84 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>toString</code> returns the string representation of this object.
-     * It is in a format of a 3x3 matrix. For example, an identity matrix would
-     * be represented by the following string. com.jme.math.Matrix3f <br>[<br>
-     * 1.0  0.0  0.0 <br>
-     * 0.0  1.0  0.0 <br>
-     * 0.0  0.0  1.0 <br>]<br>
+     * <code>mult</code> multiplies this matrix by a given matrix. The result
+     * matrix is returned as a new object.
+     *
+     * @param mat
+     *            the matrix to multiply this matrix by.
+     * @param product
+     *            the matrix to store the result in. if null, a new matrix3f is
+     *            created.  It is safe for mat and product to be the same object.
+     * @return a matrix3f object containing the result of this operation
+     */
+    public Matrix3f mult(Matrix3f mat, Matrix3f product) {
+        float temp00, temp01, temp02;
+        float temp10, temp11, temp12;
+        float temp20, temp21, temp22;
+
+        if (product == null) {
+            product = new Matrix3f();
+        }
+        temp00 = m00 * mat.m00 + m01 * mat.m10 + m02 * mat.m20;
+        temp01 = m00 * mat.m01 + m01 * mat.m11 + m02 * mat.m21;
+        temp02 = m00 * mat.m02 + m01 * mat.m12 + m02 * mat.m22;
+        temp10 = m10 * mat.m00 + m11 * mat.m10 + m12 * mat.m20;
+        temp11 = m10 * mat.m01 + m11 * mat.m11 + m12 * mat.m21;
+        temp12 = m10 * mat.m02 + m11 * mat.m12 + m12 * mat.m22;
+        temp20 = m20 * mat.m00 + m21 * mat.m10 + m22 * mat.m20;
+        temp21 = m20 * mat.m01 + m21 * mat.m11 + m22 * mat.m21;
+        temp22 = m20 * mat.m02 + m21 * mat.m12 + m22 * mat.m22;
+
+        product.m00 = temp00;
+        product.m01 = temp01;
+        product.m02 = temp02;
+        product.m10 = temp10;
+        product.m11 = temp11;
+        product.m12 = temp12;
+        product.m20 = temp20;
+        product.m21 = temp21;
+        product.m22 = temp22;
+
+        return product;
+    }
+
+    /**
+     * Multiplies this 3x3 matrix by the 1x3 Vector vec and stores the result in
+     * product.
+     *
+     * @param vec
+     *            The Vector3f to multiply.
+     * @param product
+     *            The Vector3f to store the result, it is safe for this to be
+     *            the same as vec.
+     * @return The given product vector.
+     */
+    public Vector3f mult(Vector3f vec, Vector3f product) {
+        if (null == product) {
+            product = new Vector3f();
+        }
+
+        float x = vec.x;
+        float y = vec.y;
+        float z = vec.z;
+
+        product.x = m00 * x + m01 * y + m02 * z;
+        product.y = m10 * x + m11 * y + m12 * z;
+        product.z = m20 * x + m21 * y + m22 * z;
+        return product;
+    }
+
+    /**
+     * <code>toString</code> returns a string representation of this matrix.
+     * For example, an identity matrix would be represented by:
+     * <pre>
+     * Matrix3f
+     * [
+     *  1.0  0.0  0.0
+     *  0.0  1.0  0.0
+     *  0.0  0.0  1.0
+     * ]
+     * </pre>
      *
      * @return the string representation of this object.
      */
@@ -294,8 +365,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     /**
      * are these two matrices the same? they are is they both have the same mXX values.
      *
-     * @param o
-     *            the object to compare for equality
+     * @param o   the object to compare for equality
      * @return true if they are equal
      */
     @Override
