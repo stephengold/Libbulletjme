@@ -34,6 +34,7 @@ package com.jme3.bullet.collision.shapes;
 import com.jme3.bullet.collision.shapes.infos.ChildCollisionShape;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Matrix3f;
+import com.jme3.math.Matrix4f;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.nio.FloatBuffer;
@@ -176,22 +177,24 @@ public class CompoundCollisionShape extends CollisionShape {
     }
 
     /**
-     * Apply the inverse of the specified Transform to each child shape. Assumes
-     * that no 2 children refer to the same shape! TODO fix this
+     * Apply the inverse of the specified Transform to each child shape.
      *
      * @param paTransform the Transform to un-apply, typically one calculated by
      * {@link #principalAxes(java.nio.FloatBuffer, com.jme3.math.Transform, com.jme3.math.Vector3f)}
      * (not null, unaffected, scale=1)
      */
     public void correctAxes(Transform paTransform) {
-        Transform invTransform = paTransform.clone().invert();
+        Matrix4f tmpMatrix4f = new Matrix4f(); // TODO garbage
+        paTransform.toTransformMatrix(tmpMatrix4f);
+        tmpMatrix4f.invertLocal();
 
-        Transform tmpTransform = new Transform();
-        for (ChildCollisionShape child : children) {
-            child.copyTransform(tmpTransform);
-            tmpTransform.combineWithParent(invTransform);
-            setChildTransform(child.getShape(), tmpTransform);
-        }
+        Matrix3f rotation = new Matrix3f(); // TODO garbage
+        tmpMatrix4f.toRotationMatrix(rotation);
+        rotate(rotation);
+
+        Vector3f offset = new Vector3f(); // TODO garbage
+        tmpMatrix4f.toTranslationVector(offset);
+        translate(offset);
     }
 
     /**
@@ -240,11 +243,12 @@ public class CompoundCollisionShape extends CollisionShape {
     }
 
     /**
-     * Calculates the coordinate transform to be applied to a collision object
-     * in order for this shape to be centered at the center of mass and its
+     * Calculates the coordinate transform to be applied to a rigid body in
+     * order for this shape to be centered at the center of mass and its
      * principal axes to coincide with its local axes. Apply the inverse of this
-     * transform to each child shape. The resuling moment of inertia is also
-     * calculated.
+     * transform to each child shape using
+     * {@link #correctAxes(com.jme3.math.Transform)}. The resulting moment of
+     * inertia is also calculated.
      *
      * @param masses the mass for each child shape (not null, direct, all
      * elements &gt;0)
@@ -252,7 +256,7 @@ public class CompoundCollisionShape extends CollisionShape {
      * @param storeInertia storage for the moment of inertia (not null,
      * modified)
      * @return a coordinate transform to apply to the collision object (either
-     * storeTransform or a new instance, not null)
+     * storeTransform or a new instance, not null, scale=1)
      */
     public Transform principalAxes(FloatBuffer masses, Transform storeTransform,
             Vector3f storeInertia) {
