@@ -203,15 +203,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces_
     NULL_CHK(pEnv, pBuffer, "The ShortBuffer is not direct.",);
 
     for (int i = 0; i < 3 * numFaces;) {
-        int ni1 = pBuffer[i++];
+        int ni1 = 0xFFFF & pBuffer[i++];
         btAssert(ni1 >= 0);
         btAssert(ni1 < pBody->m_nodes.size());
 
-        int ni2 = pBuffer[i++];
+        int ni2 = 0xFFFF & pBuffer[i++];
         btAssert(ni2 >= 0);
         btAssert(ni2 < pBody->m_nodes.size());
 
-        int ni3 = pBuffer[i++];
+        int ni3 = 0xFFFF & pBuffer[i++];
         btAssert(ni3 >= 0);
         btAssert(ni3 < pBody->m_nodes.size());
 
@@ -298,11 +298,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks_
     NULL_CHK(pEnv, pBuffer, "The ShortBuffer is not direct.",);
 
     for (int i = 0; i < 2 * numLinks;) {
-        int ni1 = pBuffer[i++];
+        int ni1 = 0xFFFF & pBuffer[i++];
         btAssert(ni1 >= 0);
         btAssert(ni1 < pBody->m_nodes.size());
 
-        int ni2 = pBuffer[i++];
+        int ni2 = 0xFFFF & pBuffer[i++];
         btAssert(ni2 >= 0);
         btAssert(ni2 < pBody->m_nodes.size());
 
@@ -417,19 +417,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras
     NULL_CHK(pEnv, pBuffer, "The ShortBuffer is not direct.",);
 
     for (int i = 0; i < 4 * numTetras;) {
-        int ni1 = pBuffer[i++];
+        int ni1 = 0xFFFF & pBuffer[i++];
         btAssert(ni1 >= 0);
         btAssert(ni1 < pBody->m_nodes.size());
 
-        int ni2 = pBuffer[i++];
+        int ni2 = 0xFFFF & pBuffer[i++];
         btAssert(ni2 >= 0);
         btAssert(ni2 < pBody->m_nodes.size());
 
-        int ni3 = pBuffer[i++];
+        int ni3 = 0xFFFF & pBuffer[i++];
         btAssert(ni3 >= 0);
         btAssert(ni3 < pBody->m_nodes.size());
 
-        int ni4 = pBuffer[i++];
+        int ni4 = 0xFFFF & pBuffer[i++];
         btAssert(ni4 >= 0);
         btAssert(ni4 < pBody->m_nodes.size());
 
