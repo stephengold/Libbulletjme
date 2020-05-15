@@ -460,6 +460,18 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
+     * Test whether this body's gravity can be overwritten by PhysicsSpace.
+     *
+     * @return false if this body's gravity can be overwritten, otherwise true
+     */
+    public boolean isGravityProtected() {
+        long objectId = nativeId();
+        boolean result = !getUseSpaceGravity(objectId);
+
+        return result;
+    }
+
+    /**
      * Test whether this body is in kinematic mode.
      * <p>
      * In kinematic mode, the body is not influenced by physics but can affect
@@ -476,11 +488,12 @@ public class PhysicsRigidBody extends PhysicsBody {
     /**
      * Test whether this body's gravity can be overwritten by PhysicsSpace.
      *
-     * @return true if this body's gravity can be ovewritten, otherwise false
+     * @return true if this body's gravity can be overwritten, otherwise false
+     * @deprecated use isGravityProtected()
      */
+    @Deprecated
     public boolean isUseSpaceGravity() {
-        long objectId = nativeId();
-        boolean result = getUseSpaceGravity(objectId);
+        boolean result = !isGravityProtected();
 
         return result;
     }
@@ -812,6 +825,18 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
+     * Alter whether this body's gravity should be overwritten if the body gets
+     * added to a PhysicsSpace or the gravity of the PhysicsSpace changes.
+     *
+     * @param newState true to preserve this body's gravity, false to allow it
+     * to be overwritten (default=false)
+     */
+    public void setProtectGravity(boolean newState) {
+        long objectId = nativeId();
+        setUseSpaceGravity(objectId, !newState);
+    }
+
+    /**
      * Alter this body's sleeping thresholds. Note that "sleeping" is synonym
      * for "deactivation".
      * <p>
@@ -835,10 +860,11 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @param newState true to overwrite this body's gravity, false to preserve
      * it (default=true)
+     * @deprecated use setProtectGravity()
      */
+    @Deprecated
     public void setUseSpaceGravity(boolean newState) {
-        long objectId = nativeId();
-        setUseSpaceGravity(objectId, newState);
+        setProtectGravity(!newState);
     }
     // *************************************************************************
     // new protected methods
