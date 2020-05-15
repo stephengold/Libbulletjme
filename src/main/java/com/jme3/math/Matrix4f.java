@@ -260,6 +260,24 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
+     * Interpret this matrix as a 3-D coordinate transform and determine its
+     * rotation component.
+     *
+     * @param mat storage for the result (not null, modified)
+     */
+    public void toRotationMatrix(Matrix3f mat) {
+        mat.m00 = m00;
+        mat.m01 = m01;
+        mat.m02 = m02;
+        mat.m10 = m10;
+        mat.m11 = m11;
+        mat.m12 = m12;
+        mat.m20 = m20;
+        mat.m21 = m21;
+        mat.m22 = m22;
+    }
+
+    /**
      * Retrieves the scale vector from the matrix and stores it into a given
      * vector.
      *
