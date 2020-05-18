@@ -112,16 +112,16 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
     btBroadphaseInterface * pBroadphase;
     switch (broadphaseId) {
         case 0:
-            pBroadphase = new btSimpleBroadphase();
+            pBroadphase = new btSimpleBroadphase(); //dance009
             break;
         case 1:
-            pBroadphase = new btAxisSweep3(min, max);
+            pBroadphase = new btAxisSweep3(min, max); //dance009
             break;
         case 2:
-            pBroadphase = new bt32BitAxisSweep3(min, max);
+            pBroadphase = new bt32BitAxisSweep3(min, max); //dance009
             break;
         case 3:
-            pBroadphase = new btDbvtBroadphase();
+            pBroadphase = new btDbvtBroadphase(); //dance009
             break;
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
@@ -131,7 +131,7 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
     btOverlappingPairCache * const
             pPairCache = pBroadphase->getOverlappingPairCache();
     pPairCache->setInternalGhostPairCallback(new btGhostPairCallback());
-    pPairCache->setOverlapFilterCallback(new jmeFilterCallback());
+    pPairCache->setOverlapFilterCallback(new jmeFilterCallback()); //dance011
 
     return pBroadphase;
 }
@@ -143,12 +143,42 @@ void jmeCollisionSpace::createCollisionSpace(const btVector3& min,
 
     // Use the default collision dispatcher plus GImpact.
     btCollisionConfiguration * const
-            pCollisionConfiguration = new btDefaultCollisionConfiguration();
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(); //dance010
     btCollisionDispatcher * const
-            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Create the collision world.
     m_collisionWorld = new btCollisionWorld(pDispatcher, pBroadphase,
-            pCollisionConfiguration);
+            pCollisionConfiguration); //dance007
+}
+
+jmeCollisionSpace::~jmeCollisionSpace() {
+    btBroadphaseInterface *pBroadphase = m_collisionWorld->getBroadphase();
+    if (pBroadphase) {
+        btOverlappingPairCache * const
+                pPairCache = pBroadphase->getOverlappingPairCache();
+        if (pPairCache) {
+            btOverlapFilterCallback * const
+                    pCallback = pPairCache->getOverlapFilterCallback();
+            if (pCallback) {
+                delete pCallback; //dance011
+            }
+        }
+
+        delete pBroadphase; //dance009
+    }
+
+    btCollisionDispatcher *
+            pDispatcher = (btCollisionDispatcher *) m_collisionWorld->getDispatcher();
+    if (pDispatcher) {
+        btCollisionConfiguration *
+                pCollisionConfiguration = pDispatcher->getCollisionConfiguration();
+        if (pCollisionConfiguration) {
+            delete pCollisionConfiguration; //dance010
+        }
+        delete pDispatcher; //dance008
+    }
+
+    delete m_collisionWorld; //dance007
 }

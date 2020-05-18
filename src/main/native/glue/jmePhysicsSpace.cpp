@@ -43,18 +43,18 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 
     // Use the default collision dispatcher plus GImpact.
     btCollisionConfiguration * const
-            pCollisionConfiguration = new btDefaultCollisionConfiguration();
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(); //dance010
     btCollisionDispatcher * const
-            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // For now, use a sequential-impulse solver.
     btConstraintSolver * const
-            pConstraintSolver = new btSequentialImpulseConstraintSolver();
+            pConstraintSolver = new btSequentialImpulseConstraintSolver(); //dance006
 
     // Create the discrete dynamics world.
     m_collisionWorld = new btDiscreteDynamicsWorld(pDispatcher, pBroadphase,
-            pConstraintSolver, pCollisionConfiguration);
+            pConstraintSolver, pCollisionConfiguration); //dance007
 
     modify(); // Make the standard modifications.
 }
@@ -161,4 +161,13 @@ void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
     btDynamicsWorld * const pWorld = getDynamicsWorld();
     pWorld->stepSimulation((btScalar) timeInterval, (int) maxSteps,
             (btScalar) accuracy);
+}
+
+jmePhysicsSpace::~jmePhysicsSpace() {
+    btDynamicsWorld * const pWorld = getDynamicsWorld();
+
+    btConstraintSolver *pConstraintSolver = pWorld->getConstraintSolver();
+    if (pConstraintSolver) {
+        delete pConstraintSolver; //dance006
+    }
 }

@@ -63,9 +63,7 @@ protected:
 public:
     jmeCollisionSpace(JNIEnv *, jobject javaSpace);
 
-    ~jmeCollisionSpace() {
-        delete m_collisionWorld;
-    }
+    virtual ~jmeCollisionSpace();
 
     void
     createCollisionSpace(const btVector3& min, const btVector3& max,

@@ -54,6 +54,8 @@ public:
     : jmeCollisionSpace(pEnv, javaSpace) {
     }
 
+    virtual ~jmePhysicsSpace();
+
     static void
     contactStartedCallback(btPersistentManifold * const &);
 
