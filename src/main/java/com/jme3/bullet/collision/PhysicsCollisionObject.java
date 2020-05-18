@@ -242,6 +242,7 @@ abstract public class PhysicsCollisionObject
             setAnisotropicFriction(old.getAnisotropicFriction(null),
                     AfMode.rolling);
         }
+        // TODO ignore list
     }
 
     /**
@@ -425,10 +426,12 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the ID of the btCollisionObject.
+     * Read the ID of the btCollisionObject. TODO delete
      *
      * @return the native identifier (not zero)
+     * @deprecated use nativeId()
      */
+    @Deprecated
     final public long getObjectId() {
         return nativeId();
     }
