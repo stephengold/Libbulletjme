@@ -45,7 +45,7 @@ using namespace VHACD;
  * Signature: (JLjava/nio/IntBuffer;)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getIndices
-(JNIEnv *pEnv, jclass clas, jlong hullId, jobject storeBuffer) {
+(JNIEnv *pEnv, jclass, jlong hullId, jobject storeBuffer) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
     NULL_CHK(pEnv, pHull, "The hull does not exist.",)
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getIndices
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
-(JNIEnv *pEnv, jclass clas, jlong hullId) {
+(JNIEnv *pEnv, jclass, jlong hullId) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
     NULL_CHK(pEnv, pHull, "The hull does not exist.", 0);
@@ -84,7 +84,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumInts
-(JNIEnv *pEnv, jclass clas, jlong hullId) {
+(JNIEnv *pEnv, jclass, jlong hullId) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
     NULL_CHK(pEnv, pHull, "The hull does not exist.", 0);
@@ -100,7 +100,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumInts
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getPositions
-(JNIEnv *pEnv, jclass clas, jlong hullId, jobject storeBuffer) {
+(JNIEnv *pEnv, jclass, jlong hullId, jobject storeBuffer) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
     NULL_CHK(pEnv, pHull, "The hull does not exist.",)

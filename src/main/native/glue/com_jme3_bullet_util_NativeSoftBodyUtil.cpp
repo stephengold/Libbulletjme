@@ -47,7 +47,7 @@ static inline btVector3 getBoundingCenter(const btSoftBody *pBody) {
  * Signature: (JLjava/nio/FloatBuffer;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateClusterMesh
-(JNIEnv *pEnv, jclass clazz, jlong bodyId, jobject positionsBuffer,
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject positionsBuffer,
         jboolean meshInLocalSpace) {
     btSoftBody * const pBody = reinterpret_cast<btSoftBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
@@ -77,7 +77,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateCluste
  * Signature: (JLjava/nio/IntBuffer;Ljava/nio/FloatBuffer;Ljava/nio/FloatBuffer;ZZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__JLjava_nio_IntBuffer_2Ljava_nio_FloatBuffer_2Ljava_nio_FloatBuffer_2ZZ
-(JNIEnv *pEnv, jclass clazz, jlong bodyId, jobject indexMap,
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject indexMap,
         jobject positionsBuffer, jobject normalsBuffer,
         jboolean meshInLocalSpace, jboolean doNormalUpdate) {
     btSoftBody * const pBody = reinterpret_cast<btSoftBody *> (bodyId);
@@ -130,7 +130,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
  * Signature: (JLjava/nio/FloatBuffer;Ljava/nio/FloatBuffer;ZZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__JLjava_nio_FloatBuffer_2Ljava_nio_FloatBuffer_2ZZ
-(JNIEnv *pEnv, jclass clazz, jlong bodyId, jobject positionsBuffer,
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject positionsBuffer,
         jobject normalsBuffer, jboolean meshInLocalSpace,
         jboolean doNormalUpdate) {
     const btSoftBody * const pBody

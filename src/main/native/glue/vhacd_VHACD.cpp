@@ -97,7 +97,7 @@ private:
  * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/IntBuffer;JZ)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
-(JNIEnv *pEnv, jclass clas, jobject positionsBuffer, jobject indicesBuffer,
+(JNIEnv *pEnv, jclass, jobject positionsBuffer, jobject indicesBuffer,
         jlong paramsId, jboolean debug) {
     jmeClasses::initJavaClasses(pEnv);
 

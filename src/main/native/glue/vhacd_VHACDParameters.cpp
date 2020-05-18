@@ -45,10 +45,10 @@ using namespace VHACD;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_vhacd_VHACDParameters_create
-(JNIEnv *pEnv, jclass clas) {
+(JNIEnv *pEnv, jclass) {
     jmeClasses::initJavaClasses(pEnv);
 
-    IVHACD::Parameters * const pParam = new IVHACD::Parameters();
+    IVHACD::Parameters * const pParam = new IVHACD::Parameters(); //dance023
     return reinterpret_cast<jlong> (pParam);
 }
 
@@ -58,12 +58,12 @@ JNIEXPORT jlong JNICALL Java_vhacd_VHACDParameters_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
 
-    delete pParam;
+    delete pParam; //dance023
 }
 
 /*
@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
  * Signature: (J)D
  */
 JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getAlpha
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -87,7 +87,7 @@ JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getAlpha
  * Signature: (J)D
  */
 JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getBeta
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -102,7 +102,7 @@ JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getBeta
  * Signature: (J)D
  */
 JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getConcavity
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -117,7 +117,7 @@ JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getConcavity
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullApproximation
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -132,7 +132,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullApproximation
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullDownsampling
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -147,7 +147,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullDownsampling
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxNumVerticesPerCH
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -162,7 +162,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxNumVerticesPerCH
  * Signature: (J)D
  */
 JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getMinVolumePerCH
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -177,7 +177,7 @@ JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getMinVolumePerCH
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMode
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -192,7 +192,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMode
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getOclAcceleration
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -207,7 +207,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getOclAcceleration
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_getPca
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -222,7 +222,7 @@ JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_getPca
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getPlaneDownsampling
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -237,7 +237,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getPlaneDownsampling
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
-(JNIEnv *pEnv, jclass clas, jlong objectId) {
+(JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.", 0);
@@ -252,7 +252,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
  * Signature: (JD)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setAlpha
-(JNIEnv *pEnv, jclass clas, jlong objectId, jdouble alpha) {
+(JNIEnv *pEnv, jclass, jlong objectId, jdouble alpha) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -266,7 +266,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setAlpha
  * Signature: (JD)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setBeta
-(JNIEnv *pEnv, jclass clas, jlong objectId, jdouble beta) {
+(JNIEnv *pEnv, jclass, jlong objectId, jdouble beta) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -280,7 +280,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setBeta
  * Signature: (JD)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConcavity
-(JNIEnv *pEnv, jclass clas, jlong objectId, jdouble depth) {
+(JNIEnv *pEnv, jclass, jlong objectId, jdouble depth) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -294,7 +294,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConcavity
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullApproximation
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint value) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint value) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -308,7 +308,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullApproximation
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullDownsampling
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint precision) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint precision) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -322,7 +322,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullDownsampling
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint numVertices) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint numVertices) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -336,7 +336,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
  * Signature: (JD)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMinVolumePerCH
-(JNIEnv *pEnv, jclass clas, jlong objectId, jdouble volume) {
+(JNIEnv *pEnv, jclass, jlong objectId, jdouble volume) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -350,7 +350,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMinVolumePerCH
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMode
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint mode) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint mode) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -364,7 +364,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMode
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setOclAcceleration
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint value) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint value) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -378,7 +378,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setOclAcceleration
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setPca
-(JNIEnv *pEnv, jclass clas, jlong objectId, jboolean enable) {
+(JNIEnv *pEnv, jclass, jlong objectId, jboolean enable) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -392,7 +392,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setPca
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setPlaneDownsampling
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint granularity) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint granularity) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
@@ -406,7 +406,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setPlaneDownsampling
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setResolution
-(JNIEnv *pEnv, jclass clas, jlong objectId, jint maxVoxels) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint maxVoxels) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
