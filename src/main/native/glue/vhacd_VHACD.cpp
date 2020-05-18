@@ -124,7 +124,7 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
     pParams->m_logger = &logger;
 
     // on some platforms, jint != uint32_t
-    uint32_t * const pTriangles = new uint32_t[numInts];
+    uint32_t * const pTriangles = new uint32_t[numInts]; //dance001
     for (jlong i = 0; i < numInts; ++i) {
         pTriangles[i] = (uint32_t) pIndices[i];
     }
@@ -139,16 +139,18 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
         const uint32_t n_hulls = pIvhacd->GetNConvexHulls();
 
         for (uint32_t i = 0; i < n_hulls; ++i) {
-            IVHACD::ConvexHull * const pHull = new IVHACD::ConvexHull();
+            IVHACD::ConvexHull * const
+                    pHull = new IVHACD::ConvexHull(); //dance002
             pIvhacd->GetConvexHull(i, *pHull);
             const jlong hullId = reinterpret_cast<jlong> (pHull);
 
             pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
                     jmeClasses::Vhacd_addHull, hullId);
+            delete pHull; //dance002
         }
     }
 
-    delete[] pTriangles;
+    delete[] pTriangles; //dance001
     pIvhacd->Clean();
     pIvhacd->Release();
 }
