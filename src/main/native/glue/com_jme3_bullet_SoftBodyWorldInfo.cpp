@@ -45,8 +45,22 @@
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_createSoftBodyWorldInfo
 (JNIEnv *pEnv, jobject) {
     jmeClasses::initJavaClasses(pEnv);
-    btSoftBodyWorldInfo *pInfo = new btSoftBodyWorldInfo();
+    btSoftBodyWorldInfo *pInfo = new btSoftBodyWorldInfo(); //dance012
     return reinterpret_cast<jlong> (pInfo);
+}
+
+/*
+ * Class:     com_jme3_bullet_SoftBodyWorldInfo
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_finalizeNative
+(JNIEnv *, jobject, jlong infoId) {
+    const btSoftBodyWorldInfo * const pInfo
+            = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
+    if (pInfo != NULL) {
+        delete pInfo; //dance012
+    }
 }
 
 /*

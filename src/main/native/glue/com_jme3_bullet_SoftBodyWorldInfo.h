@@ -17,6 +17,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_createSoftBodyWor
 
 /*
  * Class:     com_jme3_bullet_SoftBodyWorldInfo
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SoftBodyWorldInfo_finalizeNative
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_SoftBodyWorldInfo
  * Method:    getAirDensity
  * Signature: (J)F
  */

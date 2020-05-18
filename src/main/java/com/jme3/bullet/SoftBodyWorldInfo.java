@@ -33,6 +33,7 @@ package com.jme3.bullet;
 
 import com.jme3.bullet.objects.PhysicsSoftBody;
 import com.jme3.math.Vector3f;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -56,6 +57,14 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     final public static Logger logger
             = Logger.getLogger(PhysicsSoftBody.class.getName());
     // *************************************************************************
+    // fields
+
+    /**
+     * true&rarr;refers to a new btSoftBodyWorldInfo, false&rarr;refers to a
+     * pre-existing one
+     */
+    final private boolean needsNativeFinalization;
+    // *************************************************************************
     // constructors
 
     /**
@@ -65,6 +74,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     public SoftBodyWorldInfo() {
         long infoId = createSoftBodyWorldInfo();
         super.setNativeId(infoId);
+        needsNativeFinalization = true;
     }
 
     /**
@@ -76,6 +86,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     public SoftBodyWorldInfo(long nativeId) {
         Validate.nonZero(nativeId, "native ID");
         super.setNativeId(nativeId);
+        needsNativeFinalization = false;
     }
     // *************************************************************************
     // new methods exposed
@@ -234,9 +245,32 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
         return getWaterOffset(infoId);
     }
     // *************************************************************************
+    // NativePhysicsObject methods
+
+    /**
+     * Finalize this info just before it is destroyed. Should be invoked only by
+     * a subclass or by the garbage collector.
+     *
+     * @throws Throwable ignored by the garbage collector
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (needsNativeFinalization) {
+                logger.log(Level.FINE, "Finalizing {0}.", this);
+                long infoId = nativeId();
+                finalizeNative(infoId);
+            }
+        } finally {
+            super.finalize();
+        }
+    }
+    // *************************************************************************
     // native methods
 
     native private long createSoftBodyWorldInfo();
+
+    native private void finalizeNative(long infoId);
 
     native private float getAirDensity(long infoId);
 
