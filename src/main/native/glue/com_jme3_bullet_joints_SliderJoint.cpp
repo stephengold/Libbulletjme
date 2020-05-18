@@ -68,7 +68,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SliderJoint_createJoint
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
     btSliderConstraint *pJoint = new btSliderConstraint(*pBodyA, *pBodyB,
-            frameInA, frameInB, useLinearReferenceFrameA);
+            frameInA, frameInB, useLinearReferenceFrameA); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }
@@ -94,7 +94,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SliderJoint_createJoint1
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
     btSliderConstraint *pJoint = new btSliderConstraint(*pBodyB, frameInB,
-            useLinearReferenceFrameA);
+            useLinearReferenceFrameA); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }

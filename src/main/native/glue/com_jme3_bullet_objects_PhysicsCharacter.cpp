@@ -72,19 +72,18 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createChar
     btPairCachingGhostObject * const pGhost
             = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.", 0);
-    btAssert(
-            pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
 
-    btCollisionShape * const pShape
-            = reinterpret_cast<btCollisionShape *> (shapeId);
+    btCollisionShape * const
+            pShape = reinterpret_cast<btCollisionShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0)
     if (!pShape->isConvex()) {
         pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                 "The btCollisionShape isn't convex.");
         return 0;
     }
-    btConvexShape * const pConvex
-            = reinterpret_cast<btConvexShape *> (shapeId);
+    btConvexShape * const
+            pConvex = reinterpret_cast<btConvexShape *> (shapeId);
 
     jmeKcc * const pController = new jmeKcc(pGhost, pConvex, stepHeight);
 
@@ -99,8 +98,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createChar
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createGhostObject
 (JNIEnv *pEnv, jobject) {
     jmeClasses::initJavaClasses(pEnv);
-    btPairCachingGhostObject * const pGhost
-            = new btPairCachingGhostObject();
+    btPairCachingGhostObject * const
+            pGhost = new btPairCachingGhostObject(); //dance014
     return reinterpret_cast<jlong> (pGhost);
 }
 

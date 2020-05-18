@@ -85,12 +85,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btTransform principal;
     btVector3 inertia;
 
-    btScalar *pMasses = new btScalar[numChildren];
+    btScalar *pMasses = new btScalar[numChildren]; //dance022
     for (int i = 0; i < numChildren && i < capacity; ++i) {
         pMasses[i] = pBuffer[i];
     }
     pShape->calculatePrincipalAxisTransform(pMasses, principal, inertia);
-    delete[] pMasses;
+    delete[] pMasses; //dance022
 
     jmeBulletUtil::convert(pEnv, &principal, storeTransform);
     jmeBulletUtil::convert(pEnv, &inertia, storeInertia);
@@ -126,7 +126,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionS
     bool enableDynamicAabbTree = (bool)dynamicAabbTree;
     const int initialChildCapacity = (int) initialCapacity;
     btCompoundShape *pShape = new btCompoundShape(enableDynamicAabbTree,
-            initialChildCapacity);
+            initialChildCapacity); //dance016
 
     return reinterpret_cast<jlong> (pShape);
 }

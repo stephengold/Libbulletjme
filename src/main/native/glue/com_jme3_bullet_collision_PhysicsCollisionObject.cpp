@@ -84,9 +84,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_fin
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
     if (pUser != NULL) {
-        delete pUser;
+        delete pUser; //dance013
     }
-    delete pCollisionObject;
+    delete pCollisionObject; //dance014
 }
 
 /*
@@ -544,10 +544,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_ini
 
     jmeUserPointer pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
     if (pUser != NULL) {
-        delete pUser;
+        delete pUser; //dance013
     }
 
-    pUser = new jmeUserInfo();
+    pUser = new jmeUserInfo(); //dance013
     pUser->m_javaRef = pEnv->NewWeakGlobalRef(object);
     pUser->m_group = group;
     pUser->m_groups = groups;

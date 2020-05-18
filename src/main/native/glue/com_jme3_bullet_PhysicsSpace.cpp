@@ -154,7 +154,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
         jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase) {
     jmeClasses::initJavaClasses(pEnv);
 
-    jmePhysicsSpace * const pSpace = new jmePhysicsSpace(pEnv, object);
+    jmePhysicsSpace * const
+            pSpace = new jmePhysicsSpace(pEnv, object); //dance003
     btVector3 min(minX, minY, minZ);
     btVector3 max(maxX, maxY, maxZ);
     pSpace->createPhysicsSpace(min, max, (int) broadphase);
@@ -327,22 +328,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
     btMLCPSolverInterface *pMLCP;
     switch (solverType) {
         case 0: // SI
-            pConstraintSolver = new btSequentialImpulseConstraintSolver();
+            pConstraintSolver = new btSequentialImpulseConstraintSolver(); //dance006
             break;
         case 1: // Dantzig
-            pMLCP = new btDantzigSolver();
-            pConstraintSolver = new btMLCPSolver(pMLCP);
+            pMLCP = new btDantzigSolver(); // TODO leak
+            pConstraintSolver = new btMLCPSolver(pMLCP); //dance006
             break;
         case 2: // Lemke
-            pMLCP = new btLemkeSolver();
-            pConstraintSolver = new btMLCPSolver(pMLCP);
+            pMLCP = new btLemkeSolver(); // TODO leak
+            pConstraintSolver = new btMLCPSolver(pMLCP); //dance006
             break;
         case 3: // PGS
-            pMLCP = new btSolveProjectedGaussSeidel();
-            pConstraintSolver = new btMLCPSolver(pMLCP);
+            pMLCP = new btSolveProjectedGaussSeidel(); // TODO leak
+            pConstraintSolver = new btMLCPSolver(pMLCP); //dance006
             break;
         case 4: // NNCG
-            pConstraintSolver = new btNNCGConstraintSolver();
+            pConstraintSolver = new btNNCGConstraintSolver(); //dance006
             break;
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
@@ -351,7 +352,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
 
     btConstraintSolver *pOldSolver = pWorld->getConstraintSolver();
     pWorld->setConstraintSolver(pConstraintSolver);
-    delete pOldSolver;
+    delete pOldSolver; //dance006
 }
 
 /*

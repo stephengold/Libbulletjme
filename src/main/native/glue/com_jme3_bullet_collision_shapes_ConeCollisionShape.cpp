@@ -48,13 +48,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_ConeCollisionShape
     btCollisionShape *pShape;
     switch (axis) {
         case 0:
-            pShape = new btConeShapeX(radius, height);
+            pShape = new btConeShapeX(radius, height); //dance016
             break;
         case 1:
-            pShape = new btConeShape(radius, height);
+            pShape = new btConeShape(radius, height); //dance016
             break;
         case 2:
-            pShape = new btConeShapeZ(radius, height);
+            pShape = new btConeShapeZ(radius, height); //dance016
             break;
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,

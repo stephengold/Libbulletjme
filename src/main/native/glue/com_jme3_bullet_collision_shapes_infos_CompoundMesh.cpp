@@ -62,7 +62,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_createEmptyTiva
 (JNIEnv *env, jobject) {
     jmeClasses::initJavaClasses(env);
-    btTriangleIndexVertexArray *pMesh = new btTriangleIndexVertexArray();
+    btTriangleIndexVertexArray *
+            pMesh = new btTriangleIndexVertexArray(); //dance019
     return reinterpret_cast<jlong> (pMesh);
 }
 
@@ -77,7 +78,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
             = reinterpret_cast<btTriangleIndexVertexArray *> (meshId);
     NULL_CHK(env, pMesh, "The btTriangleIndexVertexArray does not exist.",);
 
-    delete pMesh;
+    delete pMesh; //dance019
 }
 
 /*

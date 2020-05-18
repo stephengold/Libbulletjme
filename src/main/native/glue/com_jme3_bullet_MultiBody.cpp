@@ -130,10 +130,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 
-    btMultiBody * const pMultiBody = new btMultiBody(numLinks, baseMass,
-            inertia, fixedBase, canSleep);
+    btMultiBody * const
+            pMultiBody = new btMultiBody(numLinks, baseMass, inertia, fixedBase,
+            canSleep); //dance004
 
-    jmeUserPointer const pUser = new jmeUserInfo();
+    jmeUserPointer const pUser = new jmeUserInfo(); //dance005
     pUser->m_javaRef = pEnv->NewWeakGlobalRef(object);
     pUser->m_group = 0x1;
     pUser->m_groups = 0x1;
@@ -171,9 +172,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
         jmeUserPointer const
                 pUser = (jmeUserPointer) pMultiBody->getUserPointer();
         if (pUser) {
-            delete pUser;
+            delete pUser; //dance005
         }
-        delete pMultiBody;
+        delete pMultiBody; //dance004
     }
 }
 

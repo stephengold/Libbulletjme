@@ -82,7 +82,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
     NULL_CHK(pEnv, pBuffer, "The buffer is not direct.", 0);
 
-    btConvexHullShape * const pShape = new btConvexHullShape();
+    btConvexHullShape * const pShape = new btConvexHullShape(); //dance016
 
     for (int i = 0; i < n; ++i) {
         const int j = 3 * i;

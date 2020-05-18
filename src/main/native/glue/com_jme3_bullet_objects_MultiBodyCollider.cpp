@@ -52,7 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCol
 
     int link = (int) linkIndex;
     btMultiBodyLinkCollider *
-            pCollider = new btMultiBodyLinkCollider(pMultiBody, link);
+            pCollider = new btMultiBodyLinkCollider(pMultiBody, link); //dance014
     return reinterpret_cast<jlong> (pCollider);
 }
 

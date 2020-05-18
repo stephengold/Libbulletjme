@@ -70,8 +70,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
     btVector3 axisB;
     jmeBulletUtil::convert(pEnv, axisInB, &axisB);
 
-    btHingeConstraint *pJoint = new btHingeConstraint(*pBodyA, *pBodyB,
-            pivotA, pivotB, axisA, axisB);
+    btHingeConstraint *
+            pJoint = new btHingeConstraint(*pBodyA, *pBodyB, pivotA, pivotB,
+            axisA, axisB); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }
@@ -99,7 +100,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
     jmeBulletUtil::convert(pEnv, axisInA, &axis);
 
     btHingeConstraint *pJoint = new btHingeConstraint(*pBodyA, pivot, axis,
-            useReferenceFrameA);
+            useReferenceFrameA); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }

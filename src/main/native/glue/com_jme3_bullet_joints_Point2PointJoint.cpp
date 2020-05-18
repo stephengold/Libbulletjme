@@ -62,8 +62,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
     btVector3 pivotInB;
     jmeBulletUtil::convert(pEnv, pivotB, &pivotInB);
 
-    btPoint2PointConstraint *pJoint = new btPoint2PointConstraint(*pBodyA,
-            *pBodyB, pivotInA, pivotInB);
+    btPoint2PointConstraint *
+            pJoint = new btPoint2PointConstraint(*pBodyA, *pBodyB, pivotInA,
+            pivotInB); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }
@@ -85,8 +86,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
     btVector3 pivotInA;
     jmeBulletUtil::convert(pEnv, pivotA, &pivotInA);
 
-    btPoint2PointConstraint *pJoint
-            = new btPoint2PointConstraint(*pBodyA, pivotInA);
+    btPoint2PointConstraint *
+            pJoint = new btPoint2PointConstraint(*pBodyA, pivotInA); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }

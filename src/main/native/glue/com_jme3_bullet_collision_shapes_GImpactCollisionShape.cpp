@@ -50,7 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionSh
             = reinterpret_cast<btStridingMeshInterface *> (meshId);
     NULL_CHK(pEnv, pMesh, "The btStridingMeshInterface does not exist.", 0)
 
-    btGImpactMeshShape *pShape = new btGImpactMeshShape(pMesh);
+    btGImpactMeshShape *pShape = new btGImpactMeshShape(pMesh); //dance016
     // no longer invoking updateBound() here -- caller must do that
 
     return reinterpret_cast<jlong> (pShape);

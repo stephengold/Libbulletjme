@@ -49,6 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_PlaneCollisionShap
     btVector3 norm;
     jmeBulletUtil::convert(pEnv, normal, &norm);
 
-    btStaticPlaneShape *pShape = new btStaticPlaneShape(norm, constant);
+    btStaticPlaneShape *
+            pShape = new btStaticPlaneShape(norm, constant); //dance016
     return reinterpret_cast<jlong> (pShape);
 }

@@ -45,18 +45,18 @@ createMultiBodySpace(const btVector3& min, const btVector3& max,
 
     // Use the default collision dispatcher plus GImpact.
     btCollisionConfiguration * const
-            pCollisionConfiguration = new btDefaultCollisionConfiguration();
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(); //dance010
     btCollisionDispatcher * const
-            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // For now, use a sequential-impulse solver.
     btMultiBodyConstraintSolver * const
-            pConstraintSolver = new btMultiBodyConstraintSolver();
+            pConstraintSolver = new btMultiBodyConstraintSolver(); //dance006
 
     // Create the multibody dynamics world.
     m_collisionWorld = new btMultiBodyDynamicsWorld(pDispatcher, pBroadphase,
-            pConstraintSolver, pCollisionConfiguration);
+            pConstraintSolver, pCollisionConfiguration); //dance007
 
     modify(); // Make the standard modifications.
 }

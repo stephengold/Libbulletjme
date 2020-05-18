@@ -54,13 +54,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionS
     btCollisionShape *pShape;
     switch (axis) {
         case 0:
-            pShape = new btCylinderShapeX(vec);
+            pShape = new btCylinderShapeX(vec); //dance016
             break;
         case 1:
-            pShape = new btCylinderShape(vec);
+            pShape = new btCylinderShape(vec); //dance016
             break;
         case 2:
-            pShape = new btCylinderShapeZ(vec);
+            pShape = new btCylinderShapeZ(vec); //dance016
             break;
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,

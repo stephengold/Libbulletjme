@@ -47,7 +47,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_fina
             = reinterpret_cast<btCollisionShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
 
-    delete pShape;
+    delete pShape; //dance016
 }
 
 /*

@@ -67,9 +67,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoin
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
-    btGeneric6DofSpringConstraint *pJoint
-            = new btGeneric6DofSpringConstraint(*pBodyA, *pBodyB, frameInA,
-            frameInB, useLinearReferenceFrameA);
+    btGeneric6DofSpringConstraint *
+            pJoint = new btGeneric6DofSpringConstraint(*pBodyA, *pBodyB,
+            frameInA, frameInB, useLinearReferenceFrameA); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }
@@ -94,9 +94,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoin
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
-    btGeneric6DofSpringConstraint *pJoint
-            = new btGeneric6DofSpringConstraint(*pBodyB, frameInB,
-            useLinearReferenceFrameB);
+    btGeneric6DofSpringConstraint *
+            pJoint = new btGeneric6DofSpringConstraint(*pBodyB, frameInB,
+            useLinearReferenceFrameB); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }

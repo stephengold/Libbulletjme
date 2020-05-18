@@ -53,9 +53,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
             = reinterpret_cast<btStridingMeshInterface *> (meshId);
     NULL_CHK(pEnv, pMesh, "The btStridingMeshInterface does not exist.", 0)
 
-    btBvhTriangleMeshShape *pShape = new btBvhTriangleMeshShape(pMesh,
-            isMemoryEfficient, buildBVH);
-
+    btBvhTriangleMeshShape *
+            pShape = new btBvhTriangleMeshShape(pMesh, isMemoryEfficient,
+            buildBVH); //dance016
     return reinterpret_cast<jlong> (pShape);
 }
 
@@ -101,7 +101,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
 
     btOptimizedBvh *pBvh = pMesh->getOptimizedBvh();
     unsigned int ssize = pBvh->calculateSerializeBufferSize();
-    char *pBuffer = (char *) btAlignedAlloc(ssize, 16);
+    char *pBuffer = (char *) btAlignedAlloc(ssize, 16); //dance015
     bool success = pBvh->serialize(pBuffer, ssize, true);
     if (!success) {
         jclass newExc = pEnv->FindClass("java/lang/RuntimeException");
@@ -110,7 +110,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
 
     jbyteArray byteArray = pEnv->NewByteArray(ssize);
     pEnv->SetByteArrayRegion(byteArray, 0, ssize, (jbyte *) pBuffer);
-    btAlignedFree(pBuffer);
+    btAlignedFree(pBuffer); //dance015
 
     return byteArray;
 };

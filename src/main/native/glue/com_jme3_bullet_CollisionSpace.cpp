@@ -70,7 +70,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
         jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase) {
     jmeClasses::initJavaClasses(pEnv);
 
-    jmeCollisionSpace * const pSpace = new jmeCollisionSpace(pEnv, object);
+    jmeCollisionSpace * const
+            pSpace = new jmeCollisionSpace(pEnv, object); //dance003
     btVector3 min(minX, minY, minZ);
     btVector3 max(maxX, maxY, maxZ);
     pSpace->createCollisionSpace(min, max, (int) broadphase);
@@ -88,7 +89,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     if (pSpace != NULL) {
-        delete pSpace;
+        delete pSpace; //dance003
     }
 }
 

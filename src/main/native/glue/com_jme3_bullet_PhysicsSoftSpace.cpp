@@ -84,7 +84,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
     btVector3 max;
     jmeBulletUtil::convert(pEnv, maxVector, &max);
 
-    jmePhysicsSoftSpace * const pSpace = new jmePhysicsSoftSpace(pEnv, object);
+    jmePhysicsSoftSpace * const
+            pSpace = new jmePhysicsSoftSpace(pEnv, object); //dance003
     pSpace->createPhysicsSoftSpace(min, max, (int) broadphase);
 
     return reinterpret_cast<jlong> (pSpace);

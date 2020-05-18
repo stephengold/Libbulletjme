@@ -48,13 +48,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CapsuleCollisionSh
     btCollisionShape *pShape;
     switch (axis) {
         case 0:
-            pShape = new btCapsuleShapeX(radius, height);
+            pShape = new btCapsuleShapeX(radius, height); //dance016
             break;
         case 1:
-            pShape = new btCapsuleShape(radius, height);
+            pShape = new btCapsuleShape(radius, height); //dance016
             break;
         case 2:
-            pShape = new btCapsuleShapeZ(radius, height);
+            pShape = new btCapsuleShapeZ(radius, height); //dance016
             break;
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,

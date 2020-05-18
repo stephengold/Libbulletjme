@@ -67,9 +67,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
     RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
-    btGeneric6DofSpring2Constraint *pConstraint
-            = new btGeneric6DofSpring2Constraint(*pBodyA, *pBodyB,
-            frameInA, frameInB, rotateOrder);
+    btGeneric6DofSpring2Constraint *
+            pConstraint = new btGeneric6DofSpring2Constraint(*pBodyA, *pBodyB,
+            frameInA, frameInB, rotateOrder); //dance021
 
     return reinterpret_cast<jlong> (pConstraint);
 }
@@ -95,9 +95,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
 
     RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
-    btGeneric6DofSpring2Constraint *pConstraint
-            = new btGeneric6DofSpring2Constraint(*pBodyB, frameInB,
-            rotateOrder);
+    btGeneric6DofSpring2Constraint *
+            pConstraint = new btGeneric6DofSpring2Constraint(*pBodyB, frameInB,
+            rotateOrder); //dance021
 
     return reinterpret_cast<jlong> (pConstraint);
 }

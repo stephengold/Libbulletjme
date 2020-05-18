@@ -47,7 +47,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
     jmeClasses::initJavaClasses(pEnv);
 
     int n = numSpheres;
-    btVector3* pCenters = new btVector3[n];
+    btVector3* pCenters = new btVector3[n]; //dance017
     for (int i = 0; i < n; ++i) {
         jobject center = pEnv->GetObjectArrayElement(centers, i);
         jmeBulletUtil::convert(pEnv, center, &pCenters[i]);
@@ -56,7 +56,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
     btScalar *pRadii;
 #ifdef BT_USE_DOUBLE_PRECISION
     float *pFloats = pEnv->GetFloatArrayElements(radii, 0);
-    pRadii = new btScalar[n];
+    pRadii = new btScalar[n]; //dance018
     for (int i = 0; i < n; ++i) {
         pRadii[i] = pFloats[i];
     }
@@ -64,16 +64,16 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
     pRadii = pEnv->GetFloatArrayElements(radii, 0);
 #endif
 
-    btMultiSphereShape *pShape
-            = new btMultiSphereShape(pCenters, pRadii, n);
+    btMultiSphereShape *
+            pShape = new btMultiSphereShape(pCenters, pRadii, n); //dance016
 
 #ifdef BT_USE_DOUBLE_PRECISION
-    delete[] pRadii;
+    delete[] pRadii; //dance018
     pEnv->ReleaseFloatArrayElements(radii, pFloats, 0);
 #else
     pEnv->ReleaseFloatArrayElements(radii, pRadii, 0);
 #endif
-    delete[] pCenters;
+    delete[] pCenters; //dance017
 
     return reinterpret_cast<jlong> (pShape);
 }

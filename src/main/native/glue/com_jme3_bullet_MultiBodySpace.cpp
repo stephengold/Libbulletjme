@@ -141,7 +141,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
     btVector3 max;
     jmeBulletUtil::convert(pEnv, maxVector, &max);
 
-    jmeMultiBodySpace * const pSpace = new jmeMultiBodySpace(pEnv, object);
+    jmeMultiBodySpace * const
+            pSpace = new jmeMultiBodySpace(pEnv, object); //dance003
     pSpace->createMultiBodySpace(min, max, broadphaseType);
 
     return reinterpret_cast<jlong> (pSpace);
@@ -156,8 +157,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
 (JNIEnv *pEnv, jobject, jlong spaceId) {
     const jmeMultiBodySpace * const
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
-    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0)
-            const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
+    const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
@@ -274,15 +275,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
             pConstraintSolver = new btMultiBodyConstraintSolver();
             break;
         case 1: // Dantzig
-            pMLCP = new btDantzigSolver();
+            pMLCP = new btDantzigSolver(); // TODO leak
             pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
             break;
         case 2: // Lemke
-            pMLCP = new btLemkeSolver();
+            pMLCP = new btLemkeSolver(); // TODO leak
             pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
             break;
         case 3: // PGS
-            pMLCP = new btSolveProjectedGaussSeidel();
+            pMLCP = new btSolveProjectedGaussSeidel(); // TODO leak
             pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
             break;
         default:

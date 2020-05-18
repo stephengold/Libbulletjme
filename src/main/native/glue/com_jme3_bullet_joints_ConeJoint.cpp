@@ -66,8 +66,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint
     jmeBulletUtil::convert(pEnv, pivotInB, &rbBFrame.getOrigin());
     jmeBulletUtil::convert(pEnv, rotInB, &rbBFrame.getBasis());
 
-    btConeTwistConstraint *pJoint = new btConeTwistConstraint(*pBodyA,
-            *pBodyB, rbAFrame, rbBFrame);
+    btConeTwistConstraint *
+            pJoint = new btConeTwistConstraint(*pBodyA, *pBodyB, rbAFrame,
+            rbBFrame); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }
@@ -91,8 +92,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_ConeJoint_createJoint1
     jmeBulletUtil::convert(pEnv, pivotInA, &rbAFrame.getOrigin());
     jmeBulletUtil::convert(pEnv, rotInA, &rbAFrame.getBasis());
 
-    btConeTwistConstraint *pJoint
-            = new btConeTwistConstraint(*pBodyA, rbAFrame);
+    btConeTwistConstraint *
+            pJoint = new btConeTwistConstraint(*pBodyA, rbAFrame); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }

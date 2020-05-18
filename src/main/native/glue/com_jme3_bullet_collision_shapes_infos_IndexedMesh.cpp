@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
 
-    btIndexedMesh * const pMesh = new btIndexedMesh();
+    btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_UCHAR;
     pMesh->m_vertexType = PHY_FLOAT;
     pMesh->m_triangleIndexBase = pIndices;
@@ -91,7 +91,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
 
-    btIndexedMesh * const pMesh = new btIndexedMesh();
+    btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_INTEGER;
     pMesh->m_vertexType = PHY_FLOAT;
     pMesh->m_triangleIndexBase = pIndices;
@@ -125,7 +125,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
 
-    btIndexedMesh * const pMesh = new btIndexedMesh();
+    btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_SHORT;
     pMesh->m_vertexType = PHY_FLOAT;
     pMesh->m_triangleIndexBase = pIndices;
@@ -148,5 +148,5 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_f
     btIndexedMesh * const pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
     NULL_CHK(pEnv, pMesh, "The btIndexedMesh does not exist.",);
 
-    delete pMesh;
+    delete pMesh; //dance020
 }

@@ -56,7 +56,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Convex2dShape_crea
     }
     btConvexShape *pConvex = (btConvexShape *) pChild;
 
-    btConvex2dShape *pShape = new btConvex2dShape(pConvex);
-
+    btConvex2dShape *pShape = new btConvex2dShape(pConvex); //dance016
     return reinterpret_cast<jlong> (pShape);
 }

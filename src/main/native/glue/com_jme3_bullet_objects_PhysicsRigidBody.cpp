@@ -191,7 +191,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_createRigi
     }
 
     btRigidBody * const
-            pBody = new btRigidBody(mass, pMotionState, pShape, localInertia);
+            pBody = new btRigidBody(mass, pMotionState, pShape, localInertia); //dance014
     pBody->setUserPointer(NULL); // TODO unnecessary?
 
     return reinterpret_cast<jlong> (pBody);

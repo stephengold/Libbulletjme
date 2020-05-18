@@ -87,11 +87,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisi
     }
     pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
             pDpHeights, heightScale, minHeight, maxHeight, upAxis,
-            flipQuadEdges);
+            flipQuadEdges); //dance016
 #else
     pShape = new HeightfieldShape(heightStickWidth, heightStickLength,
             pHeights, heightScale, minHeight, maxHeight, upAxis,
-            flipQuadEdges);
+            flipQuadEdges); //dance016
 #endif
 
     pShape->setFlipTriangleWinding(flipTriangleWinding);

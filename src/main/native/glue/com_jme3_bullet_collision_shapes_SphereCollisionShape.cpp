@@ -44,6 +44,6 @@
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SphereCollisionShape_createShape
 (JNIEnv *pEnv, jobject, jfloat radius) {
     jmeClasses::initJavaClasses(pEnv);
-    btSphereShape *pShape = new btSphereShape(radius);
+    btSphereShape *pShape = new btSphereShape(radius); //dance016
     return reinterpret_cast<jlong> (pShape);
 }

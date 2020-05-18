@@ -66,7 +66,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
     btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
     btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
 
-    delete pConstraint;
+    delete pConstraint; //dance021
 }
 
 /*

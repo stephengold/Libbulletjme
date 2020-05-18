@@ -43,20 +43,20 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
     // Register some soft-body collision algorithms on top of the default
     // collision dispatcher plus GImpact.
     btCollisionConfiguration * const pCollisionConfiguration
-            = new btSoftBodyRigidBodyCollisionConfiguration();
+            = new btSoftBodyRigidBodyCollisionConfiguration(); //dance010
     btCollisionDispatcher * const
-            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration);
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Use the default constraint solver.
     btConstraintSolver * const
-            pConstraintSolver = new btSequentialImpulseConstraintSolver();
+            pConstraintSolver = new btSequentialImpulseConstraintSolver(); //dance006
 
     // Create the soft-rigid dynamics world.
     btSoftBodySolver * const pSoftSolver = 0; //use default
     btSoftRigidDynamicsWorld * const
             pWorld = new btSoftRigidDynamicsWorld(pDispatcher, pBroadphase,
-            pConstraintSolver, pCollisionConfiguration, pSoftSolver);
+            pConstraintSolver, pCollisionConfiguration, pSoftSolver); //dance007
     m_collisionWorld = pWorld;
 
     // Do btSoftBodyWorldInfo modifications.
