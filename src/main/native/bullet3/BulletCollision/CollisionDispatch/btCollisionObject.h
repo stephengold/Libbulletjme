@@ -251,6 +251,14 @@ public:
 		m_checkCollideWith = m_objectsWithoutCollisionCheck.size() > 0;
 	}
 
+        int getNumObjectsWithoutCollision() const // stephengold added 2020-05-17
+	{ // stephengold added 2020-05-17
+		return m_objectsWithoutCollisionCheck.size(); // stephengold added 2020-05-17
+	} // stephengold added 2020-05-17
+	const btCollisionObject* getObjectWithoutCollision(int index) // stephengold added 2020-05-17
+	{ // stephengold added 2020-05-17
+		return m_objectsWithoutCollisionCheck[index]; // stephengold added 2020-05-17
+	} // stephengold added 2020-05-17
 	virtual bool checkCollideWithOverride(const btCollisionObject* co) const
 	{
 		int index = m_objectsWithoutCollisionCheck.findLinearSearch(co);

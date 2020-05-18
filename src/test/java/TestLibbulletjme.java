@@ -1174,6 +1174,7 @@ public class TestLibbulletjme {
         Assert.assertFalse(pco.isInWorld());
         Assert.assertNull(pco.getCollisionSpace());
         Assert.assertEquals(0L, pco.spaceId());
+        Assert.assertEquals(0, pco.listIgnoredIds().length);
 
         Assert.assertTrue(pco.isActive());
         assertEquals(1f, 1f, 1f, pco.getAnisotropicFriction(null), 0f);

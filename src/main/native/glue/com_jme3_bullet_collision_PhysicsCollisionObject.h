@@ -211,6 +211,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getNumObjectsWithoutCollision
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getNumObjectsWithoutCollision
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getObjectWithoutCollision
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getObjectWithoutCollision
+  (JNIEnv *, jobject, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getOrientation
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
@@ -376,6 +392,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setFriction
   (JNIEnv *, jobject, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setIgnoreCollisionCheck
+ * Signature: (JJZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setIgnoreCollisionCheck
+  (JNIEnv *, jobject, jlong, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject

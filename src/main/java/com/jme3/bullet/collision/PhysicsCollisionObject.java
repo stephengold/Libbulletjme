@@ -180,6 +180,21 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
+     * Add another collision object to this object's ignore list and vice versa.
+     *
+     * Collisions with objects on the list will be ignored.
+     *
+     * @param otherPco the other collision object (not null, not this, modified)
+     */
+    public void addToIgnoreList(PhysicsCollisionObject otherPco) {
+        assert otherPco != this;
+
+        long thisId = nativeId();
+        long otherId = otherPco.nativeId();
+        setIgnoreCollisionCheck(thisId, otherId, true);
+    }
+
+    /**
      * Calculate an axis-aligned bounding box for this object, based on its
      * collision shape. Note: the calculated bounds are seldom minimal; they are
      * typically larger than necessary due to centering constraints and
@@ -613,6 +628,25 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
+     * Enumerate the native IDs of all collision objects on this object's ignore
+     * list.
+     *
+     * @return a new array (not null, may be empty)
+     * @see #addToIgnoreList(com.jme3.bullet.collision.PhysicsCollisionObject)
+     */
+    public long[] listIgnoredIds() {
+        long objectId = nativeId();
+        int numIgnoredObjects = getNumObjectsWithoutCollision(objectId);
+        long[] result = new long[numIgnoredObjects];
+        for (int listIndex = 0; listIndex < numIgnoredObjects; ++listIndex) {
+            long otherId = getObjectWithoutCollision(objectId, listIndex);
+            result[listIndex] = otherId;
+        }
+
+        return result;
+    }
+
+    /**
      * Determine the collision group of this object's broadphase proxy. A proxy
      * is created when the object is added to a CollisionSpace, and its group is
      * 32 for a PhysicsCharacter, 2 for a static object, or 1 for anything else.
@@ -657,6 +691,19 @@ abstract public class PhysicsCollisionObject
         if (hasAssignedNativeObject()) {
             setCollideWithGroups(collideWithGroups);
         }
+    }
+
+    /**
+     * Remove a collision object from this object's ignore list and vice versa.
+     *
+     * @param otherPco the other collision object (not null, not this, modified)
+     */
+    public void removeFromIgnoreList(PhysicsCollisionObject otherPco) {
+        assert otherPco != this;
+
+        long thisId = nativeId();
+        long otherId = otherPco.nativeId();
+        setIgnoreCollisionCheck(thisId, otherId, false);
     }
 
     /**
@@ -1060,6 +1107,10 @@ abstract public class PhysicsCollisionObject
 
     native private void getLocation(long objectId, Vector3f storeResult);
 
+    native private int getNumObjectsWithoutCollision(long objectId);
+
+    native private long getObjectWithoutCollision(long objectId, int listIndex);
+
     native private void getOrientation(long objectId, Quaternion storeResult);
 
     native private int getProxyFilterGroup(long objectId);
@@ -1105,6 +1156,9 @@ abstract public class PhysicsCollisionObject
     native private void setDeactivationTime(long objectId, float time);
 
     native private void setFriction(long objectId, float friction);
+
+    native private void setIgnoreCollisionCheck(long object1Id, long object2Id,
+            boolean setting);
 
     native private void setLocationAndBasis(long objectId, Vector3f location,
             Matrix3f basis);
