@@ -137,6 +137,8 @@ model {
 
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
+
+                    //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
                 }
 

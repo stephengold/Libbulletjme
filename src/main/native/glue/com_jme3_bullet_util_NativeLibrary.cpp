@@ -35,6 +35,26 @@
  */
 #include "com_jme3_bullet_util_NativeLibrary.h"
 #include "jmeClasses.h"
+#include "btAlignedAllocator.h"
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    dumpMemoryLeaks
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpMemoryLeaks
+(JNIEnv *, jclass) {
+    int numBytes;
+#ifdef BT_DEBUG_MEMORY_ALLOCATIONS
+    numBytes = btDumpMemoryLeaks();
+#else
+    printf("Warning: can't invoke btDumpMemoryLeaks()!\n");
+    numBytes = -1;
+#endif //BT_DEBUG_MEMORY_ALLOCATIONS
+    fflush(stdout);
+
+    return jint(numBytes);
+}
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
@@ -42,12 +62,12 @@
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDebug
-(JNIEnv *pEnv, jclass clazz) {
+(JNIEnv *, jclass) {
 #ifdef _DEBUG
     return JNI_TRUE;
 #else
     return JNI_FALSE;
-#endif
+#endif //_DEBUG
 }
 
 /*
@@ -56,12 +76,12 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDebug
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePrecision
-(JNIEnv *pEnv, jclass clazz) {
+(JNIEnv *, jclass) {
 #ifdef BT_USE_DOUBLE_PRECISION
     return JNI_TRUE;
 #else
     return JNI_FALSE;
-#endif
+#endif //BT_USE_DOUBLE_PRECISION
 }
 
 /*
@@ -70,6 +90,6 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
  * Signature: (Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
-(JNIEnv *pEnv, jclass clazz, jboolean enable) {
+(JNIEnv *, jclass, jboolean enable) {
     jmeClasses::printFlag = (int) enable;
 }
