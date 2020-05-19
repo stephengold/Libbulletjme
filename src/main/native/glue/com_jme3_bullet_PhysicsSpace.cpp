@@ -94,6 +94,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    btAssert(pUser->m_jmeSpace == NULL);
     pUser->m_jmeSpace = pSpace;
 
     pSpace->getDynamicsWorld()->addCollisionObject(pCollisionObject,
@@ -139,6 +141,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    btAssert(pUser->m_jmeSpace == NULL);
     pUser->m_jmeSpace = pSpace;
 
     pSpace->getDynamicsWorld()->addRigidBody(pBody, proxyGroup, proxyMask);
@@ -246,6 +250,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    assert(pUser->m_jmeSpace == pSpace);
     pUser->m_jmeSpace = NULL;
 
     pSpace->getDynamicsWorld()->removeCollisionObject(pCollisionObject);
@@ -287,6 +293,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pBody->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    assert(pUser->m_jmeSpace == pSpace);
     pUser->m_jmeSpace = NULL;
 
     pSpace->getDynamicsWorld()->removeRigidBody(pBody);

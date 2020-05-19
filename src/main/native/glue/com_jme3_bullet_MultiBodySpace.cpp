@@ -63,7 +63,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    btAssert(pUser->m_jmeSpace == NULL);
     pUser->m_jmeSpace = pSpace;
+
     pWorld->addMultiBody(pMultiBody);
     /*
      * If there's a base collider, add it to the world.
@@ -203,7 +206,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    assert(pUser->m_jmeSpace == pSpace);
     pUser->m_jmeSpace = NULL;
+
     pWorld->removeMultiBody(pMultiBody);
     /*
      * If there's a base collider, remove it from the world.

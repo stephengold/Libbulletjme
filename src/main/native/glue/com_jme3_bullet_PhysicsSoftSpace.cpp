@@ -57,10 +57,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
     btSoftBody * const
             pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
     NULL_CHK(pEnv, pSoftBody, "The collision object does not exist.",)
-    btAssert(pSoftBody->getInternalType()
-            & btCollisionObject::CO_SOFT_BODY);
+    btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pSoftBody->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    assert(pUser->m_jmeSpace == NULL);
     pUser->m_jmeSpace = pSpace;
 
     pWorld->addSoftBody(pSoftBody);
@@ -148,6 +149,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_removeSoftBody
     btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
     jmeUserPointer const pUser = (jmeUserPointer) pSoftBody->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The user object does not exist.",)
+    btAssert(pUser->m_jmeSpace == pSpace);
     pUser->m_jmeSpace = NULL;
 
     pWorld->removeSoftBody(pSoftBody);
