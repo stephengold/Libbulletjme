@@ -37,7 +37,7 @@
  */
 
 jmeMotionState::jmeMotionState() {
-    trans = new btTransform();
+    trans = new btTransform(); //dance024
     trans->setIdentity();
     worldTransform = *trans;
     dirty = true;
@@ -85,5 +85,5 @@ bool jmeMotionState::applyTransform(JNIEnv *pEnv, jobject location, jobject rota
 }
 
 jmeMotionState::~jmeMotionState() {
-    delete trans;
+    delete trans; //dance024
 }

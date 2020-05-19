@@ -59,7 +59,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionSta
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_createMotionState
 (JNIEnv *pEnv, jobject) {
     jmeClasses::initJavaClasses(pEnv);
-    jmeMotionState *pMotionState = new jmeMotionState();
+
+    jmeMotionState *pMotionState = new jmeMotionState(); //dance034
     return reinterpret_cast<jlong> (pMotionState);
 }
 
@@ -74,7 +75,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_f
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",);
 
-    delete pMotionState;
+    delete pMotionState; //dance034
 }
 
 /*

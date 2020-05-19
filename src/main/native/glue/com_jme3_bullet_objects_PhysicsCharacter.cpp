@@ -85,8 +85,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createChar
     btConvexShape * const
             pConvex = reinterpret_cast<btConvexShape *> (shapeId);
 
-    jmeKcc * const pController = new jmeKcc(pGhost, pConvex, stepHeight);
-
+    jmeKcc * const
+            pController = new jmeKcc(pGhost, pConvex, stepHeight); //dance031
     return reinterpret_cast<jlong> (pController);
 }
 
@@ -98,6 +98,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createChar
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createGhostObject
 (JNIEnv *pEnv, jobject) {
     jmeClasses::initJavaClasses(pEnv);
+
     btPairCachingGhostObject * const
             pGhost = new btPairCachingGhostObject(); //dance014
     return reinterpret_cast<jlong> (pGhost);
@@ -113,7 +114,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_finalizeNat
     const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
     NULL_CHK(pEnv, pController, "The controller does not exist.",);
 
-    delete pController;
+    delete pController; //dance031
 }
 
 /*

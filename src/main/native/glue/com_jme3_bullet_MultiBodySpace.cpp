@@ -272,19 +272,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
     btMLCPSolverInterface *pMLCP;
     switch (solverType) {
         case 0: // SI
-            pConstraintSolver = new btMultiBodyConstraintSolver();
+            pConstraintSolver = new btMultiBodyConstraintSolver(); // TODO leak
             break;
         case 1: // Dantzig
             pMLCP = new btDantzigSolver(); // TODO leak
-            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP); // TODO leak
             break;
         case 2: // Lemke
             pMLCP = new btLemkeSolver(); // TODO leak
-            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP); // TODO leak
             break;
         case 3: // PGS
             pMLCP = new btSolveProjectedGaussSeidel(); // TODO leak
-            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP);
+            pConstraintSolver = new btMultiBodyMLCPConstraintSolver(pMLCP); // TODO leak
             break;
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,

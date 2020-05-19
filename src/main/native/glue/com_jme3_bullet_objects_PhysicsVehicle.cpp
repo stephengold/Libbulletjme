@@ -127,8 +127,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createRaycas
     NULL_CHK(pEnv, pCaster, "The btVehicleRaycaster does not exist.", 0)
 
     btRaycastVehicle::btVehicleTuning tuning;
-    btRaycastVehicle *pVehicle
-            = new btRaycastVehicle(tuning, pBody, pCaster);
+    btRaycastVehicle *
+            pVehicle = new btRaycastVehicle(tuning, pBody, pCaster); //dance032
 
     return reinterpret_cast<jlong> (pVehicle);
 }
@@ -145,8 +145,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicl
     jmePhysicsSpace *pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0)
 
-    btDefaultVehicleRaycaster *pCaster
-            = new btDefaultVehicleRaycaster(pSpace->getDynamicsWorld());
+    btDefaultVehicleRaycaster *
+            pCaster = new btDefaultVehicleRaycaster(pSpace->getDynamicsWorld()); //dance033
 
     return reinterpret_cast<jlong> (pCaster);
 }
@@ -162,13 +162,13 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_finalizeNativ
             = reinterpret_cast<btRaycastVehicle *> (vehicleId);
     NULL_CHK(pEnv, pVehicle, "The btRaycastVehicle does not exist.",);
 
-    delete pVehicle;
+    delete pVehicle; //dance032
 
     btVehicleRaycaster *pCaster
             = reinterpret_cast<btVehicleRaycaster *> (casterId);
     NULL_CHK(pEnv, pCaster, "The btVehicleRaycaster does not exist.",);
 
-    delete pCaster;
+    delete pCaster; //dance033
 }
 
 /*

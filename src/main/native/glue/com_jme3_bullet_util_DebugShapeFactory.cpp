@@ -47,26 +47,34 @@ public:
         this->callback = object;
     }
 
-    virtual void internalProcessTriangleIndex(btVector3* triangle, int partId, int triangleIndex) {
+    virtual void internalProcessTriangleIndex(btVector3* triangle,
+            int partId, int triangleIndex) {
         processTriangle(triangle, partId, triangleIndex);
     }
 
-    virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex) {
+    virtual void processTriangle(btVector3* triangle,
+            int partId, int triangleIndex) {
         btVector3 vertexA, vertexB, vertexC;
         vertexA = triangle[0];
         vertexB = triangle[1];
         vertexC = triangle[2];
-        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexA.getX(), vertexA.getY(), vertexA.getZ(), partId, triangleIndex);
+        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
+                vertexA.getX(), vertexA.getY(), vertexA.getZ(),
+                partId, triangleIndex);
         if (pEnv->ExceptionCheck()) {
             pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
-        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexB.getX(), vertexB.getY(), vertexB.getZ(), partId, triangleIndex);
+        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
+                vertexB.getX(), vertexB.getY(), vertexB.getZ(),
+                partId, triangleIndex);
         if (pEnv->ExceptionCheck()) {
             pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
-        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector, vertexC.getX(), vertexC.getY(), vertexC.getZ(), partId, triangleIndex);
+        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
+                vertexC.getX(), vertexC.getY(), vertexC.getZ(),
+                partId, triangleIndex);
         if (pEnv->ExceptionCheck()) {
             pEnv->Throw(pEnv->ExceptionOccurred());
             return;
@@ -88,17 +96,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
     if (pShape->isConcave()) {
         const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
 
-        DebugCallback * const pCallback = new DebugCallback(pEnv, callback);
+        DebugCallback * const
+                pCallback = new DebugCallback(pEnv, callback); //dance028
         btVector3 min = btVector3(-1e30, -1e30, -1e30);
         btVector3 max = btVector3(1e30, 1e30, 1e30);
         pConcave->processAllTriangles(pCallback, min, max);
-        delete pCallback;
+        delete pCallback; //dance028
 
     } else if (pShape->isConvex()) {
         const btConvexShape * const pConvex = (btConvexShape *) pShape;
 
         // Create a hull approximation.
-        btShapeHull * const pHull = new btShapeHull(pConvex);
+        btShapeHull * const pHull = new btShapeHull(pConvex); //dance027
         float margin = pConvex->getMargin();
         pHull->buildHull(margin, resolution);
 
@@ -139,7 +148,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
                 return;
             }
         }
-        delete pHull;
+        delete pHull; //dance027
     }
 }
 
@@ -157,17 +166,18 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
     if (pShape->isConcave()) {
         const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
 
-        DebugCallback * const pCallback = new DebugCallback(pEnv, callback);
+        DebugCallback * const
+                pCallback = new DebugCallback(pEnv, callback); //dance025
         btVector3 min = btVector3(-1e30, -1e30, -1e30);
         btVector3 max = btVector3(1e30, 1e30, 1e30);
         pConcave->processAllTriangles(pCallback, min, max);
-        delete pCallback;
+        delete pCallback; //dance025
 
     } else if (pShape->isConvex()) {
         const btConvexShape * const pConvex = (btConvexShape *) pShape;
 
         // Create a hull approximation.
-        btShapeHull * const pHull = new btShapeHull(pConvex);
+        btShapeHull * const pHull = new btShapeHull(pConvex); //dance026
         float margin = pConvex->getMargin();
         pHull->buildHull(margin, resolution);
 
@@ -186,6 +196,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
                 return;
             }
         }
-        delete pHull;
+        delete pHull; //dance026
     }
 }

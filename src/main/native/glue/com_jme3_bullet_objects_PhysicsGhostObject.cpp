@@ -86,6 +86,7 @@ public:
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGhostObject
 (JNIEnv *pEnv, jobject) {
     jmeClasses::initJavaClasses(pEnv);
+
     btPairCachingGhostObject * const
             pGhost = new btPairCachingGhostObject(); //dance014
     return reinterpret_cast<jlong> (pGhost);

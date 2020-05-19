@@ -81,7 +81,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisi
     HeightfieldShape *pShape;
 #ifdef BT_USE_DOUBLE_PRECISION
     const int numHeights = heightStickLength * heightStickWidth;
-    btScalar * const pDpHeights = new btScalar[numHeights];
+    btScalar * const pDpHeights = new btScalar[numHeights]; //dance030
     for (int i = 0; i < numHeights; ++i) {
         pDpHeights[i] = pHeights[i];
     }
@@ -112,7 +112,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisio
     HeightfieldShape *pShape = reinterpret_cast<HeightfieldShape *> (shapeId);
     if (pShape != NULL) {
         const btScalar *pDpHeights = pShape->getHeightData();
-        delete[] pDpHeights;
+        delete[] pDpHeights; //dance030
     }
 #endif
 }
