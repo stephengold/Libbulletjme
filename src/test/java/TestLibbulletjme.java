@@ -143,6 +143,9 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, location.x, 0.2f);
         Assert.assertEquals(-0.8f, location.y, 0.04f);
         Assert.assertEquals(0f, location.z, 0.2f);
+        
+        space = null;
+        System.gc();
     }
 
     /**
@@ -196,6 +199,9 @@ public class TestLibbulletjme {
             compound.addChildShape(hullShape);
         }
         Assert.assertEquals(25, numHullVertices);
+        
+        vhacdHulls = null;
+        System.gc();
     }
 
     /**
@@ -580,6 +586,9 @@ public class TestLibbulletjme {
                 PhysicsSpace.BroadphaseType.DBVT);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
+                
+        space = null;
+        System.gc();
     }
 
     /**
@@ -775,6 +784,9 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countCollisionObjects());
         Assert.assertEquals(0, space.countMultiBodies());
         Assert.assertTrue(space.isEmpty());
+        
+        space = null;
+        System.gc();
     }
 
     /**
@@ -834,6 +846,9 @@ public class TestLibbulletjme {
         for (int i = 0; i < 50; ++i) {
             physicsSpace.update(0.02f, 0);
         }
+        
+        physicsSpace = null;
+        System.gc();
     }
     // *************************************************************************
     // private methods
@@ -990,6 +1005,9 @@ public class TestLibbulletjme {
             space = new MultiBodySpace(min, max, broadphase, solver);
             performDropTest(dropShape, space);
         }
+            
+        space = null;
+        System.gc();
     }
 
     /**
