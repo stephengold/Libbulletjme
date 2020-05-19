@@ -325,7 +325,8 @@ public class SoftBodyConfig {
     }
 
     /**
-     * Alter the collision flags. Flag values are defined in {@link ConfigFlag}.
+     * Alter the collision flags (default=SDF_RS). Flag values are defined in
+     * {@link ConfigFlag}.
      *
      * @param flag the first flag to set, or 0x0 to clear all flags
      * @param additionalFlags ... additional flags to set. Flags are ORed
