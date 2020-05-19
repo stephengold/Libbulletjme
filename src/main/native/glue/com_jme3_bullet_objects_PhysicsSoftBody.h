@@ -219,11 +219,11 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_countNodesIn
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    createEmptySoftBody
- * Signature: ()J
+ * Method:    createEmpty
+ * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmptySoftBody
-  (JNIEnv *, jobject);
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
+  (JNIEnv *, jobject, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody

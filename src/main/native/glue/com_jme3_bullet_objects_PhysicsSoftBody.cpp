@@ -139,8 +139,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendCluste
     int newClusterIndex = pBody->clusterCount();
     pBody->m_clusters.resize(newClusterIndex + 1);
     int clusterBytes = sizeof (btSoftBody::Cluster);
-    btSoftBody::Cluster *pCluster
-            = new (btAlignedAlloc(clusterBytes, 16)) btSoftBody::Cluster();
+    btSoftBody::Cluster * const
+            pCluster = new (btAlignedAlloc(clusterBytes, 16)) btSoftBody::Cluster(); // TODO leak
     pBody->m_clusters[newClusterIndex] = pCluster;
     pCluster->m_collide = true;
 
@@ -566,7 +566,37 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_countNodesIn
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    createEmptySoftBody
+ * Method:    createEmpty
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
+(JNIEnv *pEnv, jobject, jlong infoId) {
+    jmeClasses::initJavaClasses(pEnv);
+
+    btSoftBodyWorldInfo * const
+            pInfo = reinterpret_cast<btSoftBodyWorldInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btSoftBodyWorldInfo does not exist.", 0);
+
+    btSoftBody * const pBody = new btSoftBody(pInfo); //dance014
+    pBody->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
+    pBody->setUserPointer(NULL); // TODO unnecessary?
+
+    btSoftBody::Material *pMaterial = pBody->appendMaterial();
+    pMaterial->m_kLST = 1;
+    pMaterial->m_kAST = 1;
+    pMaterial->m_kVST = 1;
+    /*
+     * The only available flag for materials is DebugDraw (on by Default).
+     * Disable Bullet's debug draw because Minie has its own.
+     */
+    pMaterial->m_flags = 0x0;
+
+    return reinterpret_cast<jlong> (pBody);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    createEmptySoftBody TODO delete
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmptySoftBody
@@ -578,7 +608,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
      */
     btSoftBodyWorldInfo * const pInfo = new btSoftBodyWorldInfo();
 
-    btSoftBody * const pBody = new btSoftBody(pInfo);
+    btSoftBody * const pBody = new btSoftBody(pInfo); //dance014
     pBody->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
     pBody->setUserPointer(NULL); // TODO unnecessary?
 
