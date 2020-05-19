@@ -1,5 +1,28 @@
 # release log for the Libbulletjme Project
 
+## Version 6.1.0 released on 18 May 2020
+
+ + bugfix: crash caused by `ShortBuffer` containing index > 32767
+ + bugfix: `CompoundCollisionShape.correctAxes()` gave incorrect results for
+   some shapes
+ + Plugged native memory leaks found in:
+   + `Java_vhacd_VHACD_compute()`
+   + `jmeCollisionSpace`
+   + `jmePhysicsSpace`
+   + `SoftBodyWorldInfo`
+   + `VehicleTuning`
+ + In the `PhysicsRigidBody` class, replaced `isUseSpaceGravity()` with
+   `isGravityProtected()` and `setUseSpaceGravity()` with `setProtectGravity()`.
+ + Deprecated the `getObjectId()` method in `PhysicsCollisionObject`.
+ + Provided Java access to the ignore list of a `PhysicsCollisionObject`.
+   Formerly these lists were used only to implement
+   `setCollisionBetweenLinkedBodies()` for constraints.
+ + Added a `dumpMemoryLeaks()` method to the `NativeLibrary` class.
+   This feature requires a native library built 
+   with `-DBT_DEBUG_MEMORY_ALLOCATIONS`.
+ + Added the `toRotationMatrix()` method to the `Matrix4f` class.
+ + Built using Gradle v6.4.1 .
+
 ## Version 6.0.0 released on 13 May 2020
 
  + Removed 18 deprecated methods. (API changes)
