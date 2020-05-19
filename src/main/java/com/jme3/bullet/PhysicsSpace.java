@@ -35,7 +35,6 @@ import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.joints.Constraint;
-import com.jme3.bullet.joints.JointEnd;
 import com.jme3.bullet.joints.PhysicsJoint;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsCharacter;
@@ -276,18 +275,19 @@ public class PhysicsSpace extends CollisionSpace {
         /*
          * Warn if the jointed bodies aren't already added to this space.
          */
-        PhysicsBody a = joint.getBody(JointEnd.A);
+        PhysicsBody a = joint.getBodyA();
         if (a != null && !contains(a)) {
             logger.log(Level.WARNING,
                     "{0} at the A end of {1} has not yet been added to {2}.",
                     new Object[]{a, joint, this});
         }
-        PhysicsBody b = joint.getBody(JointEnd.B);
+        PhysicsBody b = joint.getBodyB();
         if (b != null && !contains(b)) {
             logger.log(Level.WARNING,
                     "{0} at the B end of {1} has not yet been added to {2}.",
                     new Object[]{b, joint, this});
         }
+        assert a != b : a;
 
         logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{joint, this});
         long jointId = joint.nativeId();
@@ -296,9 +296,8 @@ public class PhysicsSpace extends CollisionSpace {
 
         if (joint instanceof Constraint) {
             long spaceId = nativeId();
-            Constraint constr = (Constraint) joint;
-            boolean allowCollision = constr.isCollisionBetweenLinkedBodies();
-            addConstraintC(spaceId, jointId, !allowCollision);
+            boolean disableCollisions = false; // ignore lists are already set!
+            addConstraintC(spaceId, jointId, disableCollisions);
         }
     }
 
@@ -507,6 +506,7 @@ public class PhysicsSpace extends CollisionSpace {
                     new Object[]{joint, this});
             return;
         }
+        assert joint.getPhysicsSpace() == this;
 
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{joint, this});
@@ -968,7 +968,7 @@ public class PhysicsSpace extends CollisionSpace {
     native private void addCharacterObject(long spaceId, long characterId);
 
     native private void addConstraintC(long spaceId, long constraintId,
-            boolean collisionBetweenLinkedBodies);
+            boolean disableCollisions);
 
     native private void addRigidBody(long spaceId, long rigidBodyId,
             int proxyGroup, int proxyMask);
