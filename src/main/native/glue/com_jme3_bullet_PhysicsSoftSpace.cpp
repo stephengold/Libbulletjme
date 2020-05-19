@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
 
     jmeUserPointer const pUser = (jmeUserPointer) pSoftBody->getUserPointer();
     NULL_CHK(pEnv, pUser, "The user object does not exist.",)
-    assert(pUser->m_jmeSpace == NULL);
+    btAssert(pUser->m_jmeSpace == NULL);
     pUser->m_jmeSpace = pSpace;
 
     pWorld->addSoftBody(pSoftBody);

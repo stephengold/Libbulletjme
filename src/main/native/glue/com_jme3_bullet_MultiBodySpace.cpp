@@ -207,7 +207,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     NULL_CHK(pEnv, pUser, "The user object does not exist.",)
-    assert(pUser->m_jmeSpace == pSpace);
+    btAssert(pUser->m_jmeSpace == pSpace);
     pUser->m_jmeSpace = NULL;
 
     pWorld->removeMultiBody(pMultiBody);
