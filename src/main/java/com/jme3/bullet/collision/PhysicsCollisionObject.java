@@ -182,16 +182,20 @@ abstract public class PhysicsCollisionObject
     /**
      * Add another collision object to this object's ignore list and vice versa.
      *
-     * Collisions with objects on the list will be ignored.
+     * Any collisions with objects on the list will be ignored.
      *
      * @param otherPco the other collision object (not null, not this, modified)
      */
     public void addToIgnoreList(PhysicsCollisionObject otherPco) {
-        assert otherPco != this;
+        Validate.nonNull(otherPco, "other");
+        Validate.require(otherPco != this, "not this");
 
-        long thisId = nativeId();
-        long otherId = otherPco.nativeId();
-        setIgnoreCollisionCheck(thisId, otherId, true);
+        if (!ignores(otherPco)) {
+            long thisId = nativeId();
+            long otherId = otherPco.nativeId();
+            boolean toIgnore = true;
+            setIgnoreCollisionCheck(thisId, otherId, toIgnore);
+        }
     }
 
     /**
@@ -582,6 +586,32 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
+     * Test whether the specified collision object is in this object's ignore
+     * list.
+     *
+     * @param other the collision object to search for
+     * @return true if found, otherwise false
+     * @see #addToIgnoreList(com.jme3.bullet.collision.PhysicsCollisionObject)
+     */
+    public boolean ignores(PhysicsCollisionObject other) {
+        boolean result = false;
+        if (other != null && other != this) {
+            long objectId = nativeId();
+            long otherId = other.nativeId();
+            int numIgnoredObjects = getNumObjectsWithoutCollision(objectId);
+            for (int index = 0; index < numIgnoredObjects; ++index) {
+                long id = getObjectWithoutCollision(objectId, index);
+                if (id == otherId) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Test whether this object has been deactivated due to lack of motion.
      *
      * @return true if object still active, false if deactivated
@@ -631,7 +661,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Enumerate the native IDs of all collision objects on this object's ignore
+     * Enumerate the native IDs of all collision objects in this object's ignore
      * list.
      *
      * @return a new array (not null, may be empty)
@@ -702,11 +732,15 @@ abstract public class PhysicsCollisionObject
      * @param otherPco the other collision object (not null, not this, modified)
      */
     public void removeFromIgnoreList(PhysicsCollisionObject otherPco) {
-        assert otherPco != this;
+        Validate.nonNull(otherPco, "other");
+        Validate.require(otherPco != this, "not this");
 
-        long thisId = nativeId();
-        long otherId = otherPco.nativeId();
-        setIgnoreCollisionCheck(thisId, otherId, false);
+        if (ignores(otherPco)) {
+            long thisId = nativeId();
+            long otherId = otherPco.nativeId();
+            boolean toIgnore = false;
+            setIgnoreCollisionCheck(thisId, otherId, toIgnore);
+        }
     }
 
     /**
