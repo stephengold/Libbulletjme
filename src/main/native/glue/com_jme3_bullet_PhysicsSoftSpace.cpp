@@ -100,8 +100,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_getNumSoftBodies
 (JNIEnv *pEnv, jobject, jlong spaceId) {
     const jmePhysicsSoftSpace * const
             pSpace = reinterpret_cast<jmePhysicsSoftSpace *> (spaceId);
-    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0)
-            const btSoftRigidDynamicsWorld * const
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
+    const btSoftRigidDynamicsWorld * const
             pWorld = pSpace->getSoftDynamicsWorld();
     btAssert(pWorld != NULL);
     btAssert(pWorld->getWorldType() == BT_SOFT_RIGID_DYNAMICS_WORLD);
