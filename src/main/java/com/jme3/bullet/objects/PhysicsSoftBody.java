@@ -1212,7 +1212,7 @@ public class PhysicsSoftBody extends PhysicsBody {
     // new protected methods
 
     /**
-     * Destroy the pre-existing btSoftBody (if any).
+     * Destroy the pre-existing btSoftBody (if any) except for its worldInfo.
      */
     protected void destroySoftBody() {
         if (hasAssignedNativeObject()) {
@@ -1224,7 +1224,6 @@ public class PhysicsSoftBody extends PhysicsBody {
 
         material = null;
         config = null;
-        worldInfo = null;
     }
 
     /**
@@ -1244,16 +1243,18 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * Create a new, empty btSoftBody for this PhysicsSoftBody. The pre-existing
-     * btSoftBody (if any) will be destroyed.
+     * Create a new, empty btSoftBody for this PhysicsSoftBody, using the
+     * pre-existing worldInfo. The pre-existing btSoftBody (if any) will be
+     * destroyed.
      */
     protected void newEmptySoftBody() {
         destroySoftBody();
 
-        worldInfo = new SoftBodyWorldInfo();
         long infoId = worldInfo.nativeId();
         long objectId = createEmpty(infoId);
         setNativeId(objectId);
+        assert getInternalType(objectId) == PcoType.soft :
+                getInternalType(objectId);
         logger2.log(Level.FINE, "Created {0}.", this);
 
         config = new SoftBodyConfig(this);
