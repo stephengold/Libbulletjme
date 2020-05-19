@@ -17,6 +17,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_createN
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_finalizeNative
+  (JNIEnv *, jobject, jlong);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleTuning
  * Method:    setFrictionSlip
  * Signature: (JF)V
  */

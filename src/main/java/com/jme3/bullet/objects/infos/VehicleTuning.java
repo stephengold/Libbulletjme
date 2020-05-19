@@ -32,6 +32,7 @@
 package com.jme3.bullet.objects.infos;
 
 import com.jme3.bullet.NativePhysicsObject;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -224,6 +225,25 @@ public class VehicleTuning extends NativePhysicsObject {
         setSuspensionStiffness(tuningId, stiffness);
     }
     // *************************************************************************
+    // NativePhysicsObject methods
+
+    /**
+     * Finalize this tuning just before it is destroyed. Should be invoked only
+     * by a subclass or by the garbage collector.
+     *
+     * @throws Throwable ignored by the garbage collector
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            logger.log(Level.FINE, "Finalizing {0}", this);
+            long tuningId = nativeId();
+            finalizeNative(tuningId);
+        } finally {
+            super.finalize();
+        }
+    }
+    // *************************************************************************
     // private methods
 
     /**
@@ -244,6 +264,8 @@ public class VehicleTuning extends NativePhysicsObject {
     // native methods
 
     native private long createNative();
+
+    native private void finalizeNative(long tuningId);
 
     native private void setFrictionSlip(long tuningId, float slip);
 
