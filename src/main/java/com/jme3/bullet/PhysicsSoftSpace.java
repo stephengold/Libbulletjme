@@ -267,8 +267,8 @@ public class PhysicsSoftSpace extends PhysicsSpace {
     // private methods
 
     /**
-     * NOTE: When a soft body is added, its world info gets set to that of the
-     * space.
+     * NOTE: When a soft body is added, its world info may get replaced with
+     * that of the space.
      *
      * @param softBody the body to add (not null, not already in the space)
      */
@@ -287,7 +287,10 @@ public class PhysicsSoftSpace extends PhysicsSpace {
 
         long spaceId = nativeId();
         addSoftBody(spaceId, softBodyId);
-        softBody.setWorldInfo(getWorldInfo());
+
+        if (!softBody.isWorldInfoProtected()) { // replace the world info
+            softBody.setWorldInfo(getWorldInfo());
+        }
     }
 
     private void removeSoftBody(PhysicsSoftBody softBody) {
