@@ -53,7 +53,7 @@ JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_
     btAssert(internalType > 0);
     btAssert(internalType <= btCollisionObject::CO_FEATHERSTONE_LINK);
 
-    const jmeUserPointer const
+    jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
     NULL_CHK(pEnv, pUser, "The jmeUserInfo does not exist.", 0);
 
