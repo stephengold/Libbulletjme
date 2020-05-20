@@ -40,6 +40,29 @@
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    findInstance
+ * Signature: (J)Lcom/jme3/bullet/collision/PhysicsCollisionObject;
+ */
+JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_findInstance
+(JNIEnv *pEnv, jclass, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
+    const int internalType = pCollisionObject->getInternalType();
+    btAssert(internalType > 0);
+    btAssert(internalType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    const jmeUserPointer const
+            pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
+    NULL_CHK(pEnv, pUser, "The jmeUserInfo does not exist.", 0);
+
+    jobject result = pEnv->NewWeakGlobalRef(pUser->m_javaRef);
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    activate
  * Signature: (JZ)V
  */
@@ -98,7 +121,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     int state = pCollisionObject->getActivationState();
     return (jint) state;
@@ -160,7 +184,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     return pCollisionObject->getCcdSweptSphereRadius();
 }
@@ -174,7 +199,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
@@ -191,7 +217,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jint result = pCollisionObject->getCollisionFlags();
     return result;
@@ -206,7 +233,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
@@ -246,7 +274,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getContactDamping();
     return result;
@@ -261,7 +290,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getContactProcessingThreshold();
     return result;
@@ -276,7 +306,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getContactStiffness();
     return result;
@@ -291,7 +322,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getDeactivationTime();
     return result;
@@ -306,7 +338,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getFriction();
     return result;
@@ -321,7 +354,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jint result = pCollisionObject->getInternalType();
     return result;
@@ -353,7 +387,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     int result = pCollisionObject->getNumObjectsWithoutCollision();
     return jint(result);
@@ -457,7 +492,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getRollingFriction();
     return result;
@@ -490,7 +526,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 (JNIEnv *pEnv, jobject, jlong pcoId) {
     const btCollisionObject * const
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
-    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
+            0);
 
     jfloat result = pCollisionObject->getSpinningFriction();
     return result;

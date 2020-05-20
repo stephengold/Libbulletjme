@@ -143,7 +143,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, location.x, 0.2f);
         Assert.assertEquals(-0.8f, location.y, 0.04f);
         Assert.assertEquals(0f, location.z, 0.2f);
-        
+
         space = null;
         System.gc();
     }
@@ -199,7 +199,7 @@ public class TestLibbulletjme {
             compound.addChildShape(hullShape);
         }
         Assert.assertEquals(25, numHullVertices);
-        
+
         vhacdHulls = null;
         System.gc();
     }
@@ -586,7 +586,7 @@ public class TestLibbulletjme {
                 PhysicsSpace.BroadphaseType.DBVT);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
-                
+
         space = null;
         System.gc();
     }
@@ -784,7 +784,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countCollisionObjects());
         Assert.assertEquals(0, space.countMultiBodies());
         Assert.assertTrue(space.isEmpty());
-        
+
         space = null;
         System.gc();
     }
@@ -846,7 +846,7 @@ public class TestLibbulletjme {
         for (int i = 0; i < 50; ++i) {
             physicsSpace.update(0.02f, 0);
         }
-        
+
         physicsSpace = null;
         System.gc();
     }
@@ -1005,7 +1005,7 @@ public class TestLibbulletjme {
             space = new MultiBodySpace(min, max, broadphase, solver);
             performDropTest(dropShape, space);
         }
-            
+
         space = null;
         System.gc();
     }
@@ -1188,11 +1188,13 @@ public class TestLibbulletjme {
      * @param pco the object to test (not null, unaffected)
      */
     private static void testPco(PhysicsCollisionObject pco) {
-        Assert.assertNotEquals(0L, pco.nativeId());
+        long nativeId = pco.nativeId();
+        Assert.assertNotEquals(0L, nativeId);
+        Assert.assertEquals(pco, PhysicsCollisionObject.findInstance(nativeId));
+        Assert.assertEquals(0, pco.countIgnored());
         Assert.assertFalse(pco.isInWorld());
         Assert.assertNull(pco.getCollisionSpace());
         Assert.assertEquals(0L, pco.spaceId());
-        Assert.assertEquals(0, pco.listIgnoredIds().length);
 
         Assert.assertTrue(pco.isActive());
         assertEquals(1f, 1f, 1f, pco.getAnisotropicFriction(null), 0f);

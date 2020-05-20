@@ -250,6 +250,28 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
+     * Count the collision objects in this object's ignore list.
+     *
+     * @return the count (&ge;0)
+     * @see #addToIgnoreList(com.jme3.bullet.collision.PhysicsCollisionObject)
+     */
+    public int countIgnored() {
+        long objectId = nativeId();
+        int result = getNumObjectsWithoutCollision(objectId);
+
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Find the PhysicCollisionObject with the specified ID. Native method.
+     *
+     * @param pcoId the native identifier (not zero)
+     * @return the pre-existing instance, or null if it's been reclaimed
+     */
+    native public static PhysicsCollisionObject findInstance(long pcoId);
+
+    /**
      * Read this object's activation state (native field: m_activationState1).
      *
      * @return the state (1=active tag, 2=island sleeping, 3=wants deactivation,
@@ -671,6 +693,7 @@ abstract public class PhysicsCollisionObject
         long objectId = nativeId();
         int numIgnoredObjects = getNumObjectsWithoutCollision(objectId);
         long[] result = new long[numIgnoredObjects];
+
         for (int listIndex = 0; listIndex < numIgnoredObjects; ++listIndex) {
             long otherId = getObjectWithoutCollision(objectId, listIndex);
             result[listIndex] = otherId;
@@ -1062,11 +1085,13 @@ abstract public class PhysicsCollisionObject
         boolean result;
         if (otherObject == this) {
             result = true;
+
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
             long objectId = nativeId();
             long otherId = ((PhysicsCollisionObject) otherObject).nativeId();
             result = (objectId == otherId);
+
         } else {
             result = false;
         }

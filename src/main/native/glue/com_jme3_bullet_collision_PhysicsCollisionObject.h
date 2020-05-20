@@ -43,6 +43,14 @@ extern "C" {
 #define com_jme3_bullet_collision_PhysicsCollisionObject_COLLISION_GROUP_16 32768L
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    findInstance
+ * Signature: (J)Lcom/jme3/bullet/collision/PhysicsCollisionObject;
+ */
+JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_findInstance
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    attachCollisionShape
  * Signature: (JJ)V
  */
