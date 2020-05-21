@@ -1,5 +1,14 @@
 # release log for the Libbulletjme Project
 
+## Version 6.2.0 released on 21 May 2020
+
+ + Added `countIgnored()`, `findInstance()`, and `ignores()` methods
+   to the `PhysicsCollisionObject` class.
+ + Added `isWorldInfoProtected()` and `setWorldInfoProtected()` methods
+   to the `PhysicsSoftBody` class.
+ + Used ignore lists to implement the `collisionBetweenLinkedBodies` feature
+   of the `Constraint` class.
+
 ## Version 6.1.0 released on 18 May 2020
 
  + bugfix: crash caused by `ShortBuffer` containing index > 32767
@@ -18,7 +27,7 @@
    Formerly these lists were used only to implement
    `setCollisionBetweenLinkedBodies()` for constraints.
  + Added a `dumpMemoryLeaks()` method to the `NativeLibrary` class.
-   This feature requires a native library built 
+   This feature requires a native library built
    with `-DBT_DEBUG_MEMORY_ALLOCATIONS`.
  + Added the `toRotationMatrix()` method to the `Matrix4f` class.
  + Built using Gradle v6.4.1 .
