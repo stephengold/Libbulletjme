@@ -246,7 +246,6 @@ abstract public class PhysicsCollisionObject
             setAnisotropicFriction(old.getAnisotropicFriction(null),
                     AfMode.rolling);
         }
-        // TODO ignore list
     }
 
     /**
