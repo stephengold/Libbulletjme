@@ -300,8 +300,8 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults sorted by ascending hitFraction.
+     * Perform a ray-collision test and sort the results by ascending
+     * hitFraction.
      *
      * @param from the starting location (physics-space coordinates, not null,
      * unaffected)
@@ -317,8 +317,8 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults sorted by ascending hitFraction.
+     * Perform a ray-collision test and sort the results by ascending
+     * hitFraction.
      *
      * @param from the starting location (in physics-space coordinates, not
      * null, unaffected)
@@ -338,8 +338,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults in arbitrary order.
+     * Perform a ray-collision test and return the results in arbitrary order.
      *
      * @param from the starting location (in physics-space coordinates, not
      * null, unaffected)
