@@ -398,8 +398,7 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
     pEnv->SetObjectField(result, jmeClasses::PhysicsRay_collisionObject,
             pUser->m_javaRef);
 
-    pEnv->CallBooleanMethod(resultList, jmeClasses::PhysicsRay_addmethod,
-            result);
+    pEnv->CallBooleanMethod(resultList, jmeClasses::List_addmethod, result);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -427,8 +426,7 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
     pEnv->SetObjectField(result, jmeClasses::PhysicsSweep_collisionObject,
             pUser->m_javaRef);
 
-    pEnv->CallBooleanMethod(resultList, jmeClasses::PhysicsSweep_addmethod,
-            result);
+    pEnv->CallBooleanMethod(resultList, jmeClasses::List_addmethod, result);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

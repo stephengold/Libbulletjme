@@ -54,15 +54,14 @@ public:
 
     static jclass IllegalArgumentException;
 
-    static jclass CollisionSpace;
+    static jmethodID List_addmethod;
+
     static jmethodID CollisionSpace_notifyCollisionGroupListeners;
 
-    static jclass PhysicsSpace;
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;
     static jmethodID PhysicsSpace_addCollisionEvent;
 
-    static jclass PhysicsGhostObject;
     static jmethodID PhysicsGhostObject_addOverlappingObject;
 
     static jclass Vector3f;
@@ -70,13 +69,11 @@ public:
     static jfieldID Vector3f_y;
     static jfieldID Vector3f_z;
 
-    static jclass Quaternion;
     static jfieldID Quaternion_x;
     static jfieldID Quaternion_y;
     static jfieldID Quaternion_z;
     static jfieldID Quaternion_w;
 
-    static jclass Matrix3f;
     static jfieldID Matrix3f_m00;
     static jfieldID Matrix3f_m01;
     static jfieldID Matrix3f_m02;
@@ -101,9 +98,6 @@ public:
     static jfieldID PhysicsRay_partIndex;
     static jfieldID PhysicsRay_triangleIndex;
 
-    static jclass PhysicsRay_listresult;
-    static jmethodID PhysicsRay_addmethod;
-
     static jclass PhysicsSweep_Class;
     static jfieldID PhysicsSweep_collisionObject;
     static jfieldID PhysicsSweep_hitFraction;
@@ -111,10 +105,6 @@ public:
     static jfieldID PhysicsSweep_partIndex;
     static jfieldID PhysicsSweep_triangleIndex;
 
-    static jclass PhysicsSweep_listresult;
-    static jmethodID PhysicsSweep_addmethod;
-
-    static jclass Transform;
     static jmethodID Transform_rotation;
     static jmethodID Transform_translation;
     static jmethodID Transform_scale;
@@ -123,7 +113,6 @@ public:
     static jmethodID Vhacd_addHull;
     static jmethodID Vhacd_update;
 
-    static jclass DebugMeshCallback;
     static jmethodID DebugMeshCallback_addVector;
 
     static int printFlag;

@@ -42,15 +42,14 @@ JavaVM * jmeClasses::vm;
 
 jclass jmeClasses::IllegalArgumentException;
 
-jclass jmeClasses::CollisionSpace;
+jmethodID jmeClasses::List_addmethod;
+
 jmethodID jmeClasses::CollisionSpace_notifyCollisionGroupListeners;
 
-jclass jmeClasses::PhysicsSpace;
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
 jmethodID jmeClasses::PhysicsSpace_addCollisionEvent;
 
-jclass jmeClasses::PhysicsGhostObject;
 jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
 
 jclass jmeClasses::Vector3f;
@@ -58,13 +57,11 @@ jfieldID jmeClasses::Vector3f_x;
 jfieldID jmeClasses::Vector3f_y;
 jfieldID jmeClasses::Vector3f_z;
 
-jclass jmeClasses::Quaternion;
 jfieldID jmeClasses::Quaternion_x;
 jfieldID jmeClasses::Quaternion_y;
 jfieldID jmeClasses::Quaternion_z;
 jfieldID jmeClasses::Quaternion_w;
 
-jclass jmeClasses::Matrix3f;
 jfieldID jmeClasses::Matrix3f_m00;
 jfieldID jmeClasses::Matrix3f_m01;
 jfieldID jmeClasses::Matrix3f_m02;
@@ -77,7 +74,6 @@ jfieldID jmeClasses::Matrix3f_m22;
 
 jclass jmeClasses::NullPointerException;
 
-jclass jmeClasses::DebugMeshCallback;
 jmethodID jmeClasses::DebugMeshCallback_addVector;
 
 jclass jmeClasses::PhysicsCollisionEvent_Class;
@@ -92,9 +88,6 @@ jfieldID jmeClasses::PhysicsRay_normal;
 jfieldID jmeClasses::PhysicsRay_partIndex;
 jfieldID jmeClasses::PhysicsRay_triangleIndex;
 
-jclass jmeClasses::PhysicsRay_listresult; // TODO rename
-jmethodID jmeClasses::PhysicsRay_addmethod; // TODO rename
-
 jclass jmeClasses::PhysicsSweep_Class;
 jfieldID jmeClasses::PhysicsSweep_collisionObject;
 jfieldID jmeClasses::PhysicsSweep_hitFraction;
@@ -102,10 +95,6 @@ jfieldID jmeClasses::PhysicsSweep_normal;
 jfieldID jmeClasses::PhysicsSweep_partIndex;
 jfieldID jmeClasses::PhysicsSweep_triangleIndex;
 
-jclass jmeClasses::PhysicsSweep_listresult; // TODO rename
-jmethodID jmeClasses::PhysicsSweep_addmethod; // TODO rename
-
-jclass jmeClasses::Transform;
 jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
 jmethodID jmeClasses::Transform_scale;
@@ -148,7 +137,18 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    CollisionSpace = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/CollisionSpace"));
+    jclass List = pEnv->FindClass("java/util/List");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    List_addmethod = pEnv->GetMethodID(List, "add", "(Ljava/lang/Object;)Z");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    jclass CollisionSpace = pEnv->FindClass("com/jme3/bullet/CollisionSpace");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -161,12 +161,11 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    PhysicsSpace = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/PhysicsSpace"));
+    jclass PhysicsSpace = pEnv->FindClass("com/jme3/bullet/PhysicsSpace");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-
     PhysicsSpace_preTick = pEnv->GetMethodID(PhysicsSpace, "preTick_native", "(F)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
@@ -183,7 +182,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    PhysicsGhostObject = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/objects/PhysicsGhostObject"));
+    jclass PhysicsGhostObject
+            = pEnv->FindClass("com/jme3/bullet/objects/PhysicsGhostObject");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -215,7 +215,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Quaternion = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/math/Quaternion"));
+    jclass Quaternion = pEnv->FindClass("com/jme3/math/Quaternion");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -241,7 +241,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Matrix3f = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/math/Matrix3f"));
+    jclass Matrix3f = pEnv->FindClass("com/jme3/math/Matrix3f");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -299,7 +299,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    DebugMeshCallback = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/util/DebugMeshCallback"));
+    jclass DebugMeshCallback
+            = pEnv->FindClass("com/jme3/bullet/util/DebugMeshCallback");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -382,23 +383,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    PhysicsRay_listresult = pEnv->FindClass("java/util/List");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    PhysicsRay_listresult = (jclass) pEnv->NewGlobalRef(PhysicsRay_listresult);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
-    PhysicsRay_addmethod = pEnv->GetMethodID(PhysicsRay_listresult, "add", "(Ljava/lang/Object;)Z");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
     PhysicsSweep_Class = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/collision/PhysicsSweepTestResult"));
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
@@ -437,20 +421,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    PhysicsSweep_listresult = pEnv->FindClass("java/util/List");
-    PhysicsSweep_listresult = (jclass) pEnv->NewGlobalRef(PhysicsSweep_listresult);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
-    PhysicsSweep_addmethod = pEnv->GetMethodID(PhysicsSweep_listresult, "add", "(Ljava/lang/Object;)Z");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
-    Transform = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/math/Transform"));
+    jclass Transform = pEnv->FindClass("com/jme3/math/Transform");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
