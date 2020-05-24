@@ -2,8 +2,8 @@
 
 ## Version 6.3.0 released on 24 May 2020
 
- + Added a contactTest() method to the CollisionSpace class.
- + Added a CompoundCollisionShape constructor to specify initial capacity.
+ + Added a `contactTest()` method to the `CollisionSpace` class.
+ + Added a `CompoundCollisionShape` constructor to specify initial capacity.
 
 ## Version 6.2.0 released on 21 May 2020
 
