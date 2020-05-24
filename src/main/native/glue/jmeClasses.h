@@ -50,94 +50,94 @@
 
 class jmeClasses {
 public:
-	static void initJavaClasses(JNIEnv *);
+    static void initJavaClasses(JNIEnv *);
 
-	static jclass IllegalArgumentException;
+    static jclass IllegalArgumentException;
 
-	static jclass CollisionSpace;
-	static jmethodID CollisionSpace_notifyCollisionGroupListeners;
+    static jclass CollisionSpace;
+    static jmethodID CollisionSpace_notifyCollisionGroupListeners;
 
-	static jclass PhysicsSpace;
-	static jmethodID PhysicsSpace_preTick;
-	static jmethodID PhysicsSpace_postTick;
-	static jmethodID PhysicsSpace_addCollisionEvent;
+    static jclass PhysicsSpace;
+    static jmethodID PhysicsSpace_preTick;
+    static jmethodID PhysicsSpace_postTick;
+    static jmethodID PhysicsSpace_addCollisionEvent;
 
-	static jclass PhysicsGhostObject;
-	static jmethodID PhysicsGhostObject_addOverlappingObject;
+    static jclass PhysicsGhostObject;
+    static jmethodID PhysicsGhostObject_addOverlappingObject;
 
-	static jclass Vector3f;
-	static jfieldID Vector3f_x;
-	static jfieldID Vector3f_y;
-	static jfieldID Vector3f_z;
+    static jclass Vector3f;
+    static jfieldID Vector3f_x;
+    static jfieldID Vector3f_y;
+    static jfieldID Vector3f_z;
 
-	static jclass Quaternion;
-	static jfieldID Quaternion_x;
-	static jfieldID Quaternion_y;
-	static jfieldID Quaternion_z;
-	static jfieldID Quaternion_w;
+    static jclass Quaternion;
+    static jfieldID Quaternion_x;
+    static jfieldID Quaternion_y;
+    static jfieldID Quaternion_z;
+    static jfieldID Quaternion_w;
 
-	static jclass Matrix3f;
-	static jfieldID Matrix3f_m00;
-	static jfieldID Matrix3f_m01;
-	static jfieldID Matrix3f_m02;
-	static jfieldID Matrix3f_m10;
-	static jfieldID Matrix3f_m11;
-	static jfieldID Matrix3f_m12;
-	static jfieldID Matrix3f_m20;
-	static jfieldID Matrix3f_m21;
-	static jfieldID Matrix3f_m22;
+    static jclass Matrix3f;
+    static jfieldID Matrix3f_m00;
+    static jfieldID Matrix3f_m01;
+    static jfieldID Matrix3f_m02;
+    static jfieldID Matrix3f_m10;
+    static jfieldID Matrix3f_m11;
+    static jfieldID Matrix3f_m12;
+    static jfieldID Matrix3f_m20;
+    static jfieldID Matrix3f_m21;
+    static jfieldID Matrix3f_m22;
 
-	static jclass NullPointerException;
+    static jclass NullPointerException;
 
-	static jclass PhysicsCollisionEvent_Class;
-	static jmethodID PhysicsCollisionEvent_init;
+    static jclass PhysicsCollisionEvent_Class;
+    static jmethodID PhysicsCollisionEvent_init;
 
-	static jmethodID PhysicsCollisionListener_method;
+    static jmethodID PhysicsCollisionListener_method;
 
-	static jclass PhysicsRay_Class;
-	static jmethodID PhysicsRay_newSingleResult;
-	static jfieldID PhysicsRay_collisionObject;
-	static jfieldID PhysicsRay_hitFraction;
-	static jfieldID PhysicsRay_normal;
-	static jfieldID PhysicsRay_partIndex;
-	static jfieldID PhysicsRay_triangleIndex;
+    static jclass PhysicsRay_Class;
+    static jmethodID PhysicsRay_newSingleResult;
+    static jfieldID PhysicsRay_collisionObject;
+    static jfieldID PhysicsRay_hitFraction;
+    static jfieldID PhysicsRay_normal;
+    static jfieldID PhysicsRay_partIndex;
+    static jfieldID PhysicsRay_triangleIndex;
 
-	static jclass PhysicsRay_listresult;
-	static jmethodID PhysicsRay_addmethod;
+    static jclass PhysicsRay_listresult;
+    static jmethodID PhysicsRay_addmethod;
 
-	static jclass PhysicsSweep_Class;
-	static jmethodID PhysicsSweep_newSingleResult;
-	static jfieldID PhysicsSweep_collisionObject;
-	static jfieldID PhysicsSweep_hitFraction;
-	static jfieldID PhysicsSweep_normal;
-	static jfieldID PhysicsSweep_partIndex;
-	static jfieldID PhysicsSweep_triangleIndex;
+    static jclass PhysicsSweep_Class;
+    static jmethodID PhysicsSweep_newSingleResult;
+    static jfieldID PhysicsSweep_collisionObject;
+    static jfieldID PhysicsSweep_hitFraction;
+    static jfieldID PhysicsSweep_normal;
+    static jfieldID PhysicsSweep_partIndex;
+    static jfieldID PhysicsSweep_triangleIndex;
 
-	static jclass PhysicsSweep_listresult;
-	static jmethodID PhysicsSweep_addmethod;
+    static jclass PhysicsSweep_listresult;
+    static jmethodID PhysicsSweep_addmethod;
 
-	static jclass Transform;
-	static jmethodID Transform_rotation;
-	static jmethodID Transform_translation;
-	static jmethodID Transform_scale;
+    static jclass Transform;
+    static jmethodID Transform_rotation;
+    static jmethodID Transform_translation;
+    static jmethodID Transform_scale;
 
-	static jclass Vhacd;
-	static jmethodID Vhacd_addHull;
-	static jmethodID Vhacd_update;
+    static jclass Vhacd;
+    static jmethodID Vhacd_addHull;
+    static jmethodID Vhacd_update;
 
-	static jclass DebugMeshCallback;
-	static jmethodID DebugMeshCallback_addVector;
+    static jclass DebugMeshCallback;
+    static jmethodID DebugMeshCallback_addVector;
 
-	static int printFlag;
+    static int printFlag;
 
 private:
-	static JavaVM * vm;
+    static JavaVM * vm;
 
-	jmeClasses() {
-	};
+    jmeClasses() {
+    };
 
-	~jmeClasses() {
-	};
+    ~jmeClasses() {
+    };
 };
 
 #endif
