@@ -17,6 +17,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    contactTest
+ * Signature: (JJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
+  (JNIEnv *, jobject, jlong, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    createCollisionSpace
  * Signature: (FFFFFFI)J
  */

@@ -80,27 +80,32 @@ jclass jmeClasses::NullPointerException;
 jclass jmeClasses::DebugMeshCallback;
 jmethodID jmeClasses::DebugMeshCallback_addVector;
 
+jclass jmeClasses::PhysicsCollisionEvent_Class;
+jmethodID jmeClasses::PhysicsCollisionEvent_init;
+
+jmethodID jmeClasses::PhysicsCollisionListener_method;
+
 jclass jmeClasses::PhysicsRay_Class;
-jmethodID jmeClasses::PhysicsRay_newSingleResult;
+jmethodID jmeClasses::PhysicsRay_newSingleResult; // TODO delete
 jfieldID jmeClasses::PhysicsRay_collisionObject;
 jfieldID jmeClasses::PhysicsRay_hitFraction;
 jfieldID jmeClasses::PhysicsRay_normal;
 jfieldID jmeClasses::PhysicsRay_partIndex;
 jfieldID jmeClasses::PhysicsRay_triangleIndex;
 
-jclass jmeClasses::PhysicsRay_listresult;
-jmethodID jmeClasses::PhysicsRay_addmethod;
+jclass jmeClasses::PhysicsRay_listresult; // TODO rename
+jmethodID jmeClasses::PhysicsRay_addmethod; // TODO rename
 
 jclass jmeClasses::PhysicsSweep_Class;
-jmethodID jmeClasses::PhysicsSweep_newSingleResult;
+jmethodID jmeClasses::PhysicsSweep_newSingleResult; // TODO delete
 jfieldID jmeClasses::PhysicsSweep_collisionObject;
 jfieldID jmeClasses::PhysicsSweep_hitFraction;
 jfieldID jmeClasses::PhysicsSweep_normal;
 jfieldID jmeClasses::PhysicsSweep_partIndex;
 jfieldID jmeClasses::PhysicsSweep_triangleIndex;
 
-jclass jmeClasses::PhysicsSweep_listresult;
-jmethodID jmeClasses::PhysicsSweep_addmethod;
+jclass jmeClasses::PhysicsSweep_listresult; // TODO rename
+jmethodID jmeClasses::PhysicsSweep_addmethod; // TODO rename
 
 jclass jmeClasses::Transform;
 jmethodID jmeClasses::Transform_rotation;
@@ -303,6 +308,40 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     }
 
     DebugMeshCallback_addVector = pEnv->GetMethodID(DebugMeshCallback, "addVector", "(FFFII)V");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    PhysicsCollisionEvent_Class = pEnv->FindClass(
+            "com/jme3/bullet/collision/PhysicsCollisionEvent");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    PhysicsCollisionEvent_Class
+            = (jclass) pEnv->NewGlobalRef(PhysicsCollisionEvent_Class);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    PhysicsCollisionEvent_init = pEnv->GetMethodID(PhysicsCollisionEvent_Class,
+            "<init>",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    jclass physicsCollisionListener = pEnv->FindClass(
+            "com/jme3/bullet/collision/PhysicsCollisionListener");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    PhysicsCollisionListener_method = pEnv->GetMethodID(
+            physicsCollisionListener, "collision",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionEvent;)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

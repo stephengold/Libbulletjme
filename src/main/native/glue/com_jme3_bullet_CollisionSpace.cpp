@@ -66,6 +66,89 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
 }
 
 /*
+ * Callback used in contact tests.
+ */
+struct JmeContactResultCallback
+: public btCollisionWorld::ContactResultCallback {
+    jint m_invocationCount;
+    JNIEnv *m_pEnv;
+    jobject m_listener;
+
+    JmeContactResultCallback(JNIEnv *pEnv, jobject listener)
+    : m_invocationCount(0), m_pEnv(pEnv), m_listener(listener) {
+    }
+
+    btScalar addSingleResult(btManifoldPoint& manifoldPoint,
+            const btCollisionObjectWrapper* pWrap0, int part0, int tri0,
+            const btCollisionObjectWrapper* pWrap1, int part1, int tri1) {
+
+        const btCollisionObject * const pColObj0 = pWrap0->m_collisionObject;
+        jmeUserPointer pUser0 = (jmeUserPointer) pColObj0->getUserPointer();
+
+        const btCollisionObject * const pColObj1 = pWrap1->m_collisionObject;
+        jmeUserPointer pUser1 = (jmeUserPointer) pColObj1->getUserPointer();
+
+        bool collides = (pUser0->m_group & pUser1->m_groups) != 0x0
+                || (pUser1->m_group & pUser0->m_groups) != 0x0;
+        if (!collides) {
+            return (btScalar) 1;
+        }
+
+        ++m_invocationCount;
+        if (m_listener == NULL) {
+            return (btScalar) 1;
+        }
+
+        jobject const pcoA = pUser0->m_javaRef;
+        jobject const pcoB = pUser1->m_javaRef;
+        jlong const manifoldId = reinterpret_cast<jlong> (&manifoldPoint);
+        jobject const eventObject = m_pEnv->NewObject(
+                jmeClasses::PhysicsCollisionEvent_Class,
+                jmeClasses::PhysicsCollisionEvent_init, pcoA, pcoB, manifoldId);
+        if (m_pEnv->ExceptionCheck()) {
+            m_pEnv->Throw(m_pEnv->ExceptionOccurred());
+            return (btScalar) 1;
+        }
+
+        m_pEnv->CallVoidMethod(m_listener,
+                jmeClasses::PhysicsCollisionListener_method, eventObject);
+        if (m_pEnv->ExceptionCheck()) {
+            m_pEnv->Throw(m_pEnv->ExceptionOccurred());
+            return (btScalar) 1;
+        }
+
+        return (btScalar) 1;
+    }
+};
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    contactTest
+ * Signature: (JJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
+(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId, jobject listener) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
+    btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", 0);
+
+    btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The collision object does not exist.", 0);
+    const int internalType = pCollisionObject->getInternalType();
+    btAssert(internalType > 0);
+    btAssert(internalType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    JmeContactResultCallback callback(pEnv, listener);
+    pWorld->contactTest(pCollisionObject, callback);
+
+    jint result = callback.m_invocationCount;
+    return result;
+}
+
+/*
  * Class:     com_jme3_bullet_CollisionSpace
  * Method:    createCollisionSpace
  * Signature: (FFFFFFI)J
@@ -115,8 +198,11 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
     return (jint) count;
 }
 
+/*
+ * Callback used in raycasts. TODO rename
+ */
 struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
-    JNIEnv *m_pEnv;
+    JNIEnv *m_pEnv; // TODO set in constructor
     btVector3 m_rayFromWorld;
     btVector3 m_rayToWorld;
     jobject m_resultlist;
@@ -153,7 +239,7 @@ struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
                 &m_hitNormalWorld, rayResult.m_hitFraction,
                 rayResult.m_collisionObject, partIndex, triangleIndex);
 
-        return 1;
+        return (btScalar) 1;
     }
 };
 
@@ -213,8 +299,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
     pUser->m_jmeSpace = NULL;
 }
 
+/*
+ * Callback used in (convex) sweep tests. TODO rename
+ */
 struct AllConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
-    JNIEnv *m_pEnv;
+    JNIEnv *m_pEnv; // TODO set in constructor
     btTransform m_convexFromWorld;
     btTransform m_convexToWorld;
     jobject m_resultlist;
@@ -253,7 +342,7 @@ struct AllConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
                 convexResult.m_hitCollisionObject, partIndex,
                 triangleIndex);
 
-        return 1;
+        return (btScalar) 1;
     }
 };
 

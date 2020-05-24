@@ -48,9 +48,9 @@
 #define NULL_CHK(pEnv, pointer, message, retval)
 #endif
 
-class jmeClasses {
+class jmeClasses { // TODO reformat
 public:
-    static void initJavaClasses(JNIEnv *env);
+    static void initJavaClasses(JNIEnv *);
 
     static jclass IllegalArgumentException;
 
@@ -88,6 +88,11 @@ public:
     static jfieldID Matrix3f_m22;
 
     static jclass NullPointerException;
+
+	static jclass PhysicsCollisionEvent_Class;
+	static jmethodID PhysicsCollisionEvent_init;
+
+	static jmethodID PhysicsCollisionListener_method;
 
     static jclass PhysicsRay_Class;
     static jmethodID PhysicsRay_newSingleResult;
