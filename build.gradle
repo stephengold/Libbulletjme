@@ -322,10 +322,13 @@ publishing {
 }
 
 // cleanup tasks
-clean.dependsOn('cleanCxx', 'cleanDist')
+clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
 task cleanCxx(type: Delete) {
     delete '.cxx'
 }
 task cleanDist(type: Delete) {
     delete 'dist'
+}
+task cleanLogs(type: Delete) {
+    delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
