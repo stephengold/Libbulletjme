@@ -67,7 +67,7 @@ public class SimplexCollisionShape extends ConvexShape {
      */
     final private Vector3f[] locations;
     // *************************************************************************
-    // constructors - TODO Vector3f... constructor
+    // constructors
 
     /**
      * Instantiate a point shape based on the specified location.

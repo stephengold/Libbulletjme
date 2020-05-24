@@ -49,7 +49,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
         btCollisionObject * const pco1 = (btCollisionObject *) pProxy1->m_clientObject;
         jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
         jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
-        if (pUser0 != NULL && pUser1 != NULL) {
+        if (pUser0 != NULL && pUser1 != NULL) { // TODO is this necessary?
             collides = (pUser0->m_group & pUser1->m_groups) != 0
                     || (pUser1->m_group & pUser0->m_groups) != 0;
 
@@ -57,7 +57,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
                 jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
                 JNIEnv * const pEnv = pSpace->getEnv();
                 jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
-                jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef);
+                jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef); // TODO is this necessary?
                 jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
 
                 const jboolean notifyResult = pEnv->CallBooleanMethod(
