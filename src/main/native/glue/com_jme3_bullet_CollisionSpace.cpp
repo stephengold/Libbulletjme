@@ -202,16 +202,16 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
  * Callback used in raycasts.
  */
 struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {
-    JNIEnv *m_pEnv; // TODO set in constructor
     btVector3 m_rayFromWorld;
     btVector3 m_rayToWorld;
-    jobject m_resultlist;
+    JNIEnv *m_pEnv;
+    jobject m_resultList;
 
-    JmeRayResultCallback(const btVector3& rayFromWorld,
-            const btVector3& rayToWorld, jobject resultlist)
-    : m_rayFromWorld(rayFromWorld),
-    m_rayToWorld(rayToWorld),
-    m_resultlist(resultlist) {
+    JmeRayResultCallback(JNIEnv *pEnv, const btVector3& rayFromWorld,
+            const btVector3& rayToWorld, jobject resultList, int flags)
+    : m_rayFromWorld(rayFromWorld), m_rayToWorld(rayToWorld), m_pEnv(pEnv),
+    m_resultList(resultList) {
+        m_flags = flags;
     }
 
     btScalar addSingleResult(btCollisionWorld::LocalRayResult& rayResult,
@@ -235,7 +235,7 @@ struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {
             triangleIndex = pLsi->m_triangleIndex;
         }
 
-        jmeBulletUtil::addRayTestResult(m_pEnv, m_resultlist,
+        jmeBulletUtil::addRayTestResult(m_pEnv, m_resultList,
                 &m_hitNormalWorld, rayResult.m_hitFraction,
                 rayResult.m_collisionObject, partIndex, triangleIndex);
 
@@ -250,7 +250,7 @@ struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
 (JNIEnv *pEnv, jobject, jobject from, jobject to, jlong spaceId,
-        jobject resultlist, jint flags) {
+        jobject resultList, jint flags) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.",);
@@ -265,9 +265,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
     btVector3 native_from;
     jmeBulletUtil::convert(pEnv, from, &native_from);
 
-    JmeRayResultCallback resultCallback(native_from, native_to, resultlist);
-    resultCallback.m_pEnv = pEnv;
-    resultCallback.m_flags = flags;
+    NULL_CHK(pEnv, resultList, "The result list does not exist.",);
+
+    JmeRayResultCallback
+    resultCallback(pEnv, native_from, native_to, resultList, flags);
 
     pWorld->rayTest(native_from, native_to, resultCallback);
 }
@@ -303,15 +304,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
  * Callback used in (convex) sweep tests.
  */
 struct JmeConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
-    JNIEnv *m_pEnv; // TODO set in constructor
     btTransform m_convexFromWorld;
     btTransform m_convexToWorld;
-    jobject m_resultlist;
+    JNIEnv *m_pEnv;
+    jobject m_resultList;
 
-    JmeConvexResultCallback(const btTransform& convexFromWorld,
-            const btTransform & convexToWorld, jobject resultlist)
+    JmeConvexResultCallback(JNIEnv *pEnv, const btTransform& convexFromWorld,
+            const btTransform & convexToWorld, jobject resultList)
     : m_convexFromWorld(convexFromWorld), m_convexToWorld(convexToWorld),
-    m_resultlist(resultlist) {
+    m_pEnv(pEnv), m_resultList(resultList) {
     }
 
     btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult,
@@ -337,7 +338,7 @@ struct JmeConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
             triangleIndex = pLsi->m_triangleIndex;
         }
 
-        jmeBulletUtil::addSweepTestResult(m_pEnv, m_resultlist,
+        jmeBulletUtil::addSweepTestResult(m_pEnv, m_resultList,
                 &m_hitNormalWorld, convexResult.m_hitFraction,
                 convexResult.m_hitCollisionObject, partIndex,
                 triangleIndex);
@@ -353,7 +354,7 @@ struct JmeConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
 (JNIEnv *pEnv, jobject, jlong shapeId, jobject from, jobject to, jlong spaceId,
-        jobject resultlist, jfloat allowedCcdPenetration) {
+        jobject resultList, jfloat allowedCcdPenetration) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.",)
@@ -371,6 +372,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
     const btConvexShape * const
             pConvexShape = reinterpret_cast<btConvexShape *> (shapeId);
 
+    NULL_CHK(pEnv, resultList, "The result list does not exist.",);
+
     btVector3 scale; // scales are ignored
     btTransform native_to;
     jmeBulletUtil::convert(pEnv, to, &native_to, &scale);
@@ -378,8 +381,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
     btTransform native_from;
     jmeBulletUtil::convert(pEnv, from, &native_from, &scale);
 
-    JmeConvexResultCallback resultCallback(native_from, native_to, resultlist);
-    resultCallback.m_pEnv = pEnv;
+    JmeConvexResultCallback
+    resultCallback(pEnv, native_from, native_to, resultList);
 
     btScalar allowed_penetration = (btScalar) allowedCcdPenetration;
     pWorld->convexSweepTest(pConvexShape, native_from, native_to,
