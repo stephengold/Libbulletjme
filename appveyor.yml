@@ -1,4 +1,4 @@
-version: 6.2.0
+version: 6.3.0
 
 image: Visual Studio 2019
 
@@ -8,13 +8,13 @@ build_script:
   - cmd: gradlew.bat build --no-daemon
 
 artifacts:
-  - path: dist/Libbulletjme-6.2.0.jar
+  - path: dist/Libbulletjme-6.3.0.jar
     name: classJar
-  - path: dist/Libbulletjme-6.2.0-javadoc.jar
+  - path: dist/Libbulletjme-6.3.0-javadoc.jar
     name: javadocJar
-  - path: dist/Libbulletjme-6.2.0-sources.jar
+  - path: dist/Libbulletjme-6.3.0-sources.jar
     name: sourcesJar
-  - path: dist/Libbulletjme-6.2.0.pom
+  - path: dist/Libbulletjme-6.3.0.pom
     name: pom
   - path: dist/Windows32DebugDp_bulletjme.dll
     name: dll32DD
