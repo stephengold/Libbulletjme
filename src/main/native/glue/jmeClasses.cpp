@@ -86,7 +86,6 @@ jmethodID jmeClasses::PhysicsCollisionEvent_init;
 jmethodID jmeClasses::PhysicsCollisionListener_method;
 
 jclass jmeClasses::PhysicsRay_Class;
-jmethodID jmeClasses::PhysicsRay_newSingleResult; // TODO delete
 jfieldID jmeClasses::PhysicsRay_collisionObject;
 jfieldID jmeClasses::PhysicsRay_hitFraction;
 jfieldID jmeClasses::PhysicsRay_normal;
@@ -97,7 +96,6 @@ jclass jmeClasses::PhysicsRay_listresult; // TODO rename
 jmethodID jmeClasses::PhysicsRay_addmethod; // TODO rename
 
 jclass jmeClasses::PhysicsSweep_Class;
-jmethodID jmeClasses::PhysicsSweep_newSingleResult; // TODO delete
 jfieldID jmeClasses::PhysicsSweep_collisionObject;
 jfieldID jmeClasses::PhysicsSweep_hitFraction;
 jfieldID jmeClasses::PhysicsSweep_normal;
@@ -353,12 +351,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    PhysicsRay_newSingleResult = pEnv->GetMethodID(PhysicsRay_Class, "<init>", "()V");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
     PhysicsRay_collisionObject = pEnv->GetFieldID(PhysicsRay_Class,
             "collisionObject",
             "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
@@ -408,12 +400,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     }
 
     PhysicsSweep_Class = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/collision/PhysicsSweepTestResult"));
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
-    PhysicsSweep_newSingleResult = pEnv->GetMethodID(PhysicsSweep_Class, "<init>", "()V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

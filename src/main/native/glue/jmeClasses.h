@@ -95,7 +95,6 @@ public:
     static jmethodID PhysicsCollisionListener_method;
 
     static jclass PhysicsRay_Class;
-    static jmethodID PhysicsRay_newSingleResult;
     static jfieldID PhysicsRay_collisionObject;
     static jfieldID PhysicsRay_hitFraction;
     static jfieldID PhysicsRay_normal;
@@ -106,7 +105,6 @@ public:
     static jmethodID PhysicsRay_addmethod;
 
     static jclass PhysicsSweep_Class;
-    static jmethodID PhysicsSweep_newSingleResult;
     static jfieldID PhysicsSweep_collisionObject;
     static jfieldID PhysicsSweep_hitFraction;
     static jfieldID PhysicsSweep_normal;
