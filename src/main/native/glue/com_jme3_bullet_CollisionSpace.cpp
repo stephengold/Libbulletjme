@@ -199,15 +199,15 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
 }
 
 /*
- * Callback used in raycasts. TODO rename
+ * Callback used in raycasts.
  */
-struct AllRayResultCallback : public btCollisionWorld::RayResultCallback {
+struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {
     JNIEnv *m_pEnv; // TODO set in constructor
     btVector3 m_rayFromWorld;
     btVector3 m_rayToWorld;
     jobject m_resultlist;
 
-    AllRayResultCallback(const btVector3& rayFromWorld,
+    JmeRayResultCallback(const btVector3& rayFromWorld,
             const btVector3& rayToWorld, jobject resultlist)
     : m_rayFromWorld(rayFromWorld),
     m_rayToWorld(rayToWorld),
@@ -265,7 +265,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
     btVector3 native_from;
     jmeBulletUtil::convert(pEnv, from, &native_from);
 
-    AllRayResultCallback resultCallback(native_from, native_to, resultlist);
+    JmeRayResultCallback resultCallback(native_from, native_to, resultlist);
     resultCallback.m_pEnv = pEnv;
     resultCallback.m_flags = flags;
 
@@ -300,15 +300,15 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
 }
 
 /*
- * Callback used in (convex) sweep tests. TODO rename
+ * Callback used in (convex) sweep tests.
  */
-struct AllConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
+struct JmeConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
     JNIEnv *m_pEnv; // TODO set in constructor
     btTransform m_convexFromWorld;
     btTransform m_convexToWorld;
     jobject m_resultlist;
 
-    AllConvexResultCallback(const btTransform& convexFromWorld,
+    JmeConvexResultCallback(const btTransform& convexFromWorld,
             const btTransform & convexToWorld, jobject resultlist)
     : m_convexFromWorld(convexFromWorld), m_convexToWorld(convexToWorld),
     m_resultlist(resultlist) {
@@ -378,7 +378,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
     btTransform native_from;
     jmeBulletUtil::convert(pEnv, from, &native_from, &scale);
 
-    AllConvexResultCallback resultCallback(native_from, native_to, resultlist);
+    JmeConvexResultCallback resultCallback(native_from, native_to, resultlist);
     resultCallback.m_pEnv = pEnv;
 
     btScalar allowed_penetration = (btScalar) allowedCcdPenetration;
