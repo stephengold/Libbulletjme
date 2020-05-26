@@ -1,5 +1,10 @@
 # release log for the Libbulletjme Project
 
+## Version 6.4.0 released on 26 May 2020
+
+ + Added a `copyClusterVelocities()` method to the `PhysicsSoftBody` class.
+ + Added an `updatePinMesh()` native method to the `NativeSoftBodyUtil` class.
+
 ## Version 6.3.0 released on 24 May 2020
 
  + Added a `contactTest()` method to the `CollisionSpace` class.
