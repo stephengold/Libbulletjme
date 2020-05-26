@@ -897,6 +897,32 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getCluster
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getClustersLinearVelocities
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersLinearVelocities
+(JNIEnv *pEnv, jobject, jlong bodyId, jobject storeBuffer) {
+    btSoftBody * const pBody = reinterpret_cast<btSoftBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+
+    NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
+    jfloat * pBuffer = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
+    NULL_CHK(pEnv, pBuffer, "The store buffer is not direct.",);
+
+    int numClusters = pBody->clusterCount();
+    for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
+        const btSoftBody::Cluster * const
+                pCluster = pBody->m_clusters[clusterIndex];
+        pBuffer[0] = pCluster->m_lv.getX();
+        pBuffer[1] = pCluster->m_lv.getY();
+        pBuffer[2] = pCluster->m_lv.getZ();
+        pBuffer += 3;
+    }
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getClustersMasses
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
