@@ -223,4 +223,7 @@ public class NativeSoftBodyUtil {
     native private static void updateMesh(long softBodyId,
             FloatBuffer outPositionBuffer, FloatBuffer outNormalBuffer,
             boolean meshInLocalSpace, boolean updateNormals);
+
+    native private static void updatePinMesh(long softBodyId,
+            FloatBuffer outPositionBuffer, boolean meshInLocalSpace);
 }

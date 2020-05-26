@@ -37,6 +37,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__JLjava_nio_FloatBuffer_2Ljava_nio_FloatBuffer_2ZZ
   (JNIEnv *, jclass, jlong, jobject, jobject, jboolean, jboolean);
 
+/*
+ * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
+ * Method:    updatePinMesh
+ * Signature: (JLjava/nio/FloatBuffer;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updatePinMesh
+  (JNIEnv *, jclass, jlong, jobject, jboolean);
+
 #ifdef __cplusplus
 }
 #endif

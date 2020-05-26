@@ -172,3 +172,35 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
         }
     }
 }
+
+/*
+ * Class:     com_jme3_bullet_util_NativeSoftBodyUtil
+ * Method:    updatePinMesh
+ * Signature: (JLjava/nio/FloatBuffer;Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updatePinMesh
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject positionsBuffer,
+        jboolean meshInLocalSpace) {
+    const btSoftBody * const
+            pBody = reinterpret_cast<btSoftBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+
+    NULL_CHK(pEnv, positionsBuffer, "The positions buffer does not exist.",);
+    jfloat *pBuffer = (jfloat *) pEnv->GetDirectBufferAddress(positionsBuffer);
+    NULL_CHK(pEnv, pBuffer, "The positions buffer is not direct.",);
+
+    const btVector3 offset
+            = meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0);
+    const int numNodes = pBody->m_nodes.size();
+
+    for (int i = 0; i < numNodes; ++i) {
+        if (pBody->getMass(i) == 0) {
+            const btSoftBody::Node& n = pBody->m_nodes[i];
+            pBuffer[0] = n.m_x.getX() - offset.getX();
+            pBuffer[1] = n.m_x.getY() - offset.getY();
+            pBuffer[2] = n.m_x.getZ() - offset.getZ();
+            pBuffer += 3;
+        }
+    }
+}
