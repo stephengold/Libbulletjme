@@ -174,7 +174,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a contact test. This does not detect contacts with soft bodies.
+     * Perform a contact test. This will not detect contacts with soft bodies.
      *
      * @param pco the collision object to test (not null, unaffected)
      * @param listener the callback for reporting contacts (may be null)
@@ -320,7 +320,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and sort the results by ascending
+     * Perform a ray-collision test (raycast) and sort the results by ascending
      * hitFraction.
      *
      * @param from the starting location (physics-space coordinates, not null,
@@ -337,7 +337,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and sort the results by ascending
+     * Perform a ray-collision test (raycast) and sort the results by ascending
      * hitFraction.
      *
      * @param from the starting location (in physics-space coordinates, not
@@ -345,7 +345,7 @@ public class CollisionSpace extends NativePhysicsObject {
      * @param to the ending location (in physics-space coordinates, not null,
      * unaffected)
      * @param results the list to hold results (not null, modified)
-     * @return sorted results
+     * @return results (sorted)
      */
     public List<PhysicsRayTestResult> rayTest(Vector3f from, Vector3f to,
             List<PhysicsRayTestResult> results) {
@@ -358,7 +358,8 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and return the results in arbitrary order.
+     * Perform a ray-collision test (raycast) and return the results in
+     * arbitrary order.
      *
      * @param from the starting location (in physics-space coordinates, not
      * null, unaffected)
@@ -374,15 +375,15 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a ray-collision test and return the results as a list of
-     * PhysicsRayTestResults in arbitrary order.
+     * Perform a ray-collision test (raycast) and return the results in
+     * arbitrary order.
      *
      * @param from the starting location (in physics-space coordinates, not
      * null, unaffected)
      * @param to the ending location (in physics-space coordinates, not null,
      * unaffected)
      * @param results the list to hold results (not null, modified)
-     * @return unsorted results
+     * @return results (unsorted)
      */
     public List<PhysicsRayTestResult> rayTestRaw(Vector3f from, Vector3f to,
             List<PhysicsRayTestResult> results) {
@@ -455,7 +456,8 @@ public class CollisionSpace extends NativePhysicsObject {
      * units apart.
      * <p>
      * A sweep test will miss a collision if it starts inside an object and
-     * sweeps away from the object's center.
+     * sweeps away from the object's center. Also, sweep tests do not detect
+     * soft bodies.
      *
      * @param shape the shape to sweep (not null, convex, unaffected)
      * @param start the starting physics-space transform (not null, unaffected)
@@ -472,8 +474,8 @@ public class CollisionSpace extends NativePhysicsObject {
         Validate.nonNull(results, "results");
 
         long shapeId = shape.nativeId();
-        results.clear();
         long spaceId = nativeId();
+        results.clear();
         sweepTest_native(shapeId, start, end, spaceId, results,
                 allowedCcdPenetration);
 

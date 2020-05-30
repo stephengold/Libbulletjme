@@ -55,11 +55,11 @@ public class DebugShapeFactory {
     // constants and loggers
 
     /**
-     * specify high-res debug mesh for convex shapes (up to 256 vertices)
+     * specify high-res debug meshes for convex shapes (up to 256 vertices)
      */
     public static final int highResolution = 1;
     /**
-     * specify low-res debug mesh for convex shapes (up to 42 vertices)
+     * specify low-res debug meshes for convex shapes (up to 42 vertices)
      */
     public static final int lowResolution = 0;
     /**
