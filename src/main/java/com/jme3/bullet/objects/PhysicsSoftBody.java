@@ -1544,10 +1544,10 @@ public class PhysicsSoftBody extends PhysicsBody {
 
     native private float getClusterSelfImpulse(long bodyId, int clusterIndex);
 
-    native private void getClustersMasses(long bodyId, FloatBuffer storeBuffer);
-
     native private void getClustersLinearVelocities(long bodyId,
             FloatBuffer storeBuffer);
+
+    native private void getClustersMasses(long bodyId, FloatBuffer storeBuffer);
 
     native private void getClustersPositions(long bodyId,
             FloatBuffer storeBuffer);
