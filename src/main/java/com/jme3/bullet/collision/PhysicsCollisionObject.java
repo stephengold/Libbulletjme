@@ -1073,32 +1073,6 @@ abstract public class PhysicsCollisionObject
     // NativePhysicsObject methods
 
     /**
-     * Test for ID equality.
-     *
-     * @param otherObject the object to compare to (may be null, unaffected)
-     * @return true if the collision objects have the same native ID, otherwise
-     * false
-     */
-    @Override
-    public boolean equals(Object otherObject) {
-        boolean result;
-        if (otherObject == this) {
-            result = true;
-
-        } else if (otherObject != null
-                && otherObject.getClass() == getClass()) {
-            long objectId = nativeId();
-            long otherId = ((PhysicsCollisionObject) otherObject).nativeId();
-            result = (objectId == otherId);
-
-        } else {
-            result = false;
-        }
-
-        return result;
-    }
-
-    /**
      * Finalize this object just before it is destroyed. Should be invoked only
      * by a subclass or by the garbage collector.
      *
