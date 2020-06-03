@@ -331,18 +331,18 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getCluster
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getClustersMasses
- * Signature: (JLjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersMasses
-  (JNIEnv *, jobject, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getClustersLinearVelocities
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersLinearVelocities
+  (JNIEnv *, jobject, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    getClustersMasses
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersMasses
   (JNIEnv *, jobject, jlong, jobject);
 
 /*
