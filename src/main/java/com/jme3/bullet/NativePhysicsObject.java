@@ -131,8 +131,8 @@ abstract public class NativePhysicsObject {
             result = true;
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
-            NativePhysicsObject otherJoint = (NativePhysicsObject) otherObject;
-            long otherId = otherJoint.nativeId();
+            NativePhysicsObject otherNpo = (NativePhysicsObject) otherObject;
+            long otherId = otherNpo.nativeId();
             result = (id == otherId);
         } else {
             result = false;
