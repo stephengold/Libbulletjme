@@ -57,11 +57,11 @@ public class DebugShapeFactory {
     /**
      * specify high-res debug meshes for convex shapes (up to 256 vertices)
      */
-    public static final int highResolution = 1;
+    final public static int highResolution = 1;
     /**
      * specify low-res debug meshes for convex shapes (up to 42 vertices)
      */
-    public static final int lowResolution = 0;
+    final public static int lowResolution = 0;
     /**
      * number of axes
      */
@@ -182,6 +182,8 @@ public class DebugShapeFactory {
 
         return result;
     }
+    // *************************************************************************
+    // private methods
 
     /**
      * Generate vertex locations for triangles to visualize the specified

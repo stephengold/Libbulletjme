@@ -518,7 +518,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
         warp(characterId, location);
     }
     // *************************************************************************
-    // Object methods
+    // PhysicsCollisionObject methods
 
     /**
      * Finalize this physics character just before it is destroyed. Should be
