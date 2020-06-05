@@ -63,7 +63,7 @@ public class SoftBodyConfig {
     // constructors
 
     /**
-     * Instantiate a config with default properties.
+     * Instantiate a config with the default properties.
      *
      * @param body the corresponding soft body (not null)
      */
