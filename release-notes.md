@@ -1,6 +1,6 @@
 # release log for the Libbulletjme Project
 
-## Version 7.0.0 released on 5 June 2020
+## Version 7.0.1 released on 5 June 2020
 
  + Replaced inner class `PhysicsSoftBody.Material`
    with `SoftBodyMaterial`. (API changes)
