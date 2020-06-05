@@ -221,13 +221,13 @@ $(N)/glue/com_jme3_bullet_MultiBodyLink.cpp \
 $(N)/glue/com_jme3_bullet_MultiBodySpace.cpp \
 $(N)/glue/com_jme3_bullet_objects_infos_RigidBodyMotionState.cpp \
 $(N)/glue/com_jme3_bullet_objects_infos_SoftBodyConfig.cpp \
+$(N)/glue/com_jme3_bullet_objects_infos_SoftBodyMaterial.cpp \
 $(N)/glue/com_jme3_bullet_objects_infos_VehicleTuning.cpp \
 $(N)/glue/com_jme3_bullet_objects_MultiBodyCollider.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsCharacter.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsGhostObject.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsRigidBody.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsSoftBody.cpp \
-$(N)/glue/com_jme3_bullet_objects_PhysicsSoftBody_Material.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsVehicle.cpp \
 $(N)/glue/com_jme3_bullet_objects_VehicleWheel.cpp \
 $(N)/glue/com_jme3_bullet_PhysicsSoftSpace.cpp \
