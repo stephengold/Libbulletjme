@@ -50,7 +50,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:6.4.0
+            compile 'com.github.stephengold:Libbulletjme:7.0.1
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -232,7 +232,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 6.4.0`
+     + `git checkout -b latest 7.0.1`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -325,6 +325,7 @@ btSoftBody::Config                      .bullet.objects.infos.SoftBodyConfig
 btSoftBody::eAeroModel                  .bullet.objects.infos.Aero
 btSoftBody::Joint                       .bullet.joints.SoftPhysicsJoint
 btSoftBody::LJoint                      .bullet.joints.SoftLinearJoint
+btSoftBody::Material                    .bullet.objects.infos.SoftBodyMaterial
 btSoftBodyWorldInfo                     .bullet.SoftBodyWorldInfo
 btSoftRigidDynamicsWorld                .bullet.PhysicsSoftSpace
 btSolverMode                            .bullet.SolverMode
