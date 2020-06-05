@@ -451,17 +451,6 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Read the ID of the btCollisionObject. TODO delete
-     *
-     * @return the native identifier (not zero)
-     * @deprecated use nativeId()
-     */
-    @Deprecated
-    final public long getObjectId() {
-        return nativeId();
-    }
-
-    /**
      * Copy the location of this object's center.
      *
      * @param storeResult storage for the result (modified if not null)
