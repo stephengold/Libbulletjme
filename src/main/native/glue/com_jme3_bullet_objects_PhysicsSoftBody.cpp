@@ -596,37 +596,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmpty
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    createEmptySoftBody TODO delete
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_createEmptySoftBody
-(JNIEnv *pEnv, jobject) {
-    jmeClasses::initJavaClasses(pEnv);
-    /*
-     * Create a temporary btSoftBodyWorldInfo for this body,
-     * which will be replaced when the body gets added to a physics space.
-     */
-    btSoftBodyWorldInfo * const pInfo = new btSoftBodyWorldInfo();
-
-    btSoftBody * const pBody = new btSoftBody(pInfo); //dance014
-    pBody->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);
-    pBody->setUserPointer(NULL); // TODO unnecessary?
-
-    btSoftBody::Material *pMaterial = pBody->appendMaterial();
-    pMaterial->m_kLST = 1;
-    pMaterial->m_kAST = 1;
-    pMaterial->m_kVST = 1;
-    /*
-     * The only available flag for materials is DebugDraw (on by Default).
-     * Disable Bullet's debug draw because Minie has its own.
-     */
-    pMaterial->m_flags = 0x0;
-
-    return reinterpret_cast<jlong> (pBody);
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    cutLink
  * Signature: (JIIF)Z
  */
