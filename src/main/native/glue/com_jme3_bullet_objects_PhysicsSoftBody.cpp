@@ -1085,21 +1085,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMasses
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getMaterial
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMaterial
-(JNIEnv *pEnv, jobject, jlong bodyId) {
-    const btSoftBody * const pBody
-            = reinterpret_cast<btSoftBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.", 0)
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
-
-    return reinterpret_cast<jlong> (pBody->m_materials[0]);
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    getNbFaces
  * Signature: (J)I
  */

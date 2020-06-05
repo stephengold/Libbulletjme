@@ -51,14 +51,6 @@ extern "C" {
 #define com_jme3_bullet_objects_PhysicsSoftBody_vpt 3L
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
- * Method:    getMaterial
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMaterial
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    addForce
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */

@@ -60,6 +60,7 @@ import com.jme3.bullet.objects.PhysicsGhostObject;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsSoftBody;
 import com.jme3.bullet.objects.infos.SoftBodyConfig;
+import com.jme3.bullet.objects.infos.SoftBodyMaterial;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.bullet.util.NativeSoftBodyUtil;
@@ -830,7 +831,7 @@ public class TestLibbulletjme {
 
         // Make the cloth flexible by altering the angular stiffness
         // of its material.
-        PhysicsSoftBody.Material mat = cloth.getSoftMaterial();
+        SoftBodyMaterial mat = cloth.getSoftMaterial();
         mat.setAngularStiffness(0f); // default=1
 
         // Improve simulation accuracy by increasing
