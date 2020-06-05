@@ -1,5 +1,14 @@
 # release log for the Libbulletjme Project
 
+## Version 7.0.0 released on 5 June 2020
+
+ + Replaced inner class `PhysicsSoftBody.Material`
+   with `SoftBodyMaterial`. (API changes)
+ + Deleted the `PhysicsCollisionObject.getObjectId()` method. (API change)
+ + Deleted the `isUseSpaceGravity()` and `setUseSpaceGravity()` methods from
+   the `PhysicsRigidBody` class. (API changes)
+ + Deleted the `createEmptySoftBody()` native method. (API change)
+
 ## Version 6.4.0 released on 26 May 2020
 
  + Added a `copyClusterVelocities()` method to the `PhysicsSoftBody` class.
