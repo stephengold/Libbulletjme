@@ -87,4 +87,14 @@ public class NativeLibrary {
      * @return the version number (typically of the form Major.Minor.Patch)
      */
     native public static String versionNumber();
+    // *************************************************************************
+    // private Java methods
+
+    /**
+     * Callback invoked (from native code) upon successful initialization of the
+     * native library.
+     */
+    private static void postInitialization() {
+        // do nothing, for now
+    }
 }

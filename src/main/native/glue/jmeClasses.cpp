@@ -463,4 +463,25 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
+    /*
+     * Invoke NativeLibrary.postInitialization()
+     * in order to start the Physics Cleaner thread.
+     */
+    jclass nativeLibrary
+            = pEnv->FindClass("com/jme3/bullet/util/NativeLibrary");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    jmethodID postInitialization = pEnv->GetStaticMethodID(nativeLibrary,
+            "postInitialization", "()V");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->CallStaticVoidMethod(nativeLibrary, postInitialization);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
 }
