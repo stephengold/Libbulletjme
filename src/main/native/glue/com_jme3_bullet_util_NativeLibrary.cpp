@@ -93,3 +93,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setStartupMessage
 (JNIEnv *, jclass, jboolean enable) {
     jmeClasses::printFlag = (int) enable;
 }
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    versionNumber
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_jme3_bullet_util_NativeLibrary_versionNumber
+(JNIEnv *pEnv, jclass) {
+    jstring result = pEnv->NewStringUTF(LIBBULLETJME_VERSION);
+    return result;
+}

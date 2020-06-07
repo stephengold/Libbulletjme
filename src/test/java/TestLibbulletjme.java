@@ -963,6 +963,7 @@ public class TestLibbulletjme {
             Assert.assertTrue(NativeLibrary.isDoublePrecision());
         }
         Assert.assertTrue(NativeLibrary.isDebug());
+        Assert.assertFalse(NativeLibrary.versionNumber().isEmpty());
     }
 
     /**

@@ -39,6 +39,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
   (JNIEnv *, jclass, jboolean);
 
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    versionNumber
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_jme3_bullet_util_NativeLibrary_versionNumber
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

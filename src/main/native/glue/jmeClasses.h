@@ -38,6 +38,8 @@
 
 #include <jni.h>
 
+#define LIBBULLETJME_VERSION "7.0.1"
+
 #ifdef _DEBUG
 #define NULL_CHK(pEnv, pointer, message, retval) \
     if ((pointer) == NULL) { \

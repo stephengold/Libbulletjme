@@ -46,15 +46,15 @@ public class NativeLibrary {
     private NativeLibrary() {
     }
     // *************************************************************************
-    // native methods
+    // native methods exposed
 
     /**
      * Dump all native-memory allocation/free events to standard output. This
      * feature is enabled only in native libraries built with the
      * BT_DEBUG_MEMORY_ALLOCATIONS macro defined.
      *
-     * @return the number of bytes outstanding, or -1 if this feature is not
-     * enabled
+     * @return the number of bytes outstanding (&ge;0), or -1 if this feature is
+     * not enabled
      */
     native public static int dumpMemoryLeaks();
 
@@ -66,17 +66,25 @@ public class NativeLibrary {
     native public static boolean isDebug();
 
     /**
-     * Test whether the native library is using double-precision arithmetic.
+     * Test whether the native library uses double-precision arithmetic.
      *
      * @return true if double-precision, false if single-precision
      */
     native public static boolean isDoublePrecision();
 
     /**
-     * Alter whether the native library will print its startup message.
+     * Alter whether the native library will print its startup message during
+     * initialization.
      *
      * @param printFlag true &rarr; print message, false &rarr; no message
      * (default=true)
      */
     native public static void setStartupMessageEnabled(boolean printFlag);
+
+    /**
+     * Determine the native library's core version number.
+     *
+     * @return the version number (typically of the form Major.Minor.Patch)
+     */
+    native public static String versionNumber();
 }
