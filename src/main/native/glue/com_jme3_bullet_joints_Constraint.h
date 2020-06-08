@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -29,7 +29,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_enableFeedback
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_enableFeedback
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getAppliedImpulse
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -45,7 +45,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getAppliedImpuls
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpulseThreshold
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -53,7 +53,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpul
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterations
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -61,7 +61,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterati
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_isEnabled
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -69,7 +69,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_isEnabled
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_needsFeedback
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -77,7 +77,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_needsFeedback
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -85,7 +85,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setBreakingImpulseThreshold
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
@@ -93,7 +93,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setBreakingImpulse
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setEnabled
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 #ifdef __cplusplus
 }

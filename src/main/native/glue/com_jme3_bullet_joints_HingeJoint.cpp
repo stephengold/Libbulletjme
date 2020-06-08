@@ -42,7 +42,7 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
-(JNIEnv *pEnv, jobject, jlong bodyIdA, jlong bodyIdB, jobject pivotInA,
+(JNIEnv *pEnv, jclass, jlong bodyIdA, jlong bodyIdB, jobject pivotInA,
         jobject axisInA, jobject pivotInB, jobject axisInB) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -83,7 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
-(JNIEnv *pEnv, jobject, jlong bodyIdA, jobject pivotInA, jobject axisInA,
+(JNIEnv *pEnv, jclass, jlong bodyIdA, jobject pivotInA, jobject axisInA,
         jboolean useReferenceFrameA) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -111,7 +111,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
  * Signature: (JZFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
-(JNIEnv *pEnv, jobject, jlong jointId, jboolean enable, jfloat targetVelocity,
+(JNIEnv *pEnv, jclass, jlong jointId, jboolean enable, jfloat targetVelocity,
         jfloat maxMotorImpulse) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
@@ -127,7 +127,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngularMotor
-(JNIEnv *pEnv, jobject, jlong jointId) {
+(JNIEnv *pEnv, jclass, jlong jointId) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.", JNI_FALSE)
@@ -142,7 +142,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngul
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetA
-(JNIEnv *pEnv, jobject, jlong jointId, jobject storeTransform) {
+(JNIEnv *pEnv, jclass, jlong jointId, jobject storeTransform) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.",)
@@ -160,7 +160,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetB
-(JNIEnv *pEnv, jobject, jlong jointId, jobject storeTransform) {
+(JNIEnv *pEnv, jclass, jlong jointId, jobject storeTransform) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.",)
@@ -178,7 +178,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetB
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
-(JNIEnv *pEnv, jobject, jlong jointId) {
+(JNIEnv *pEnv, jclass, jlong jointId) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.", 0)
@@ -193,7 +193,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
-(JNIEnv *pEnv, jobject, jlong jointId) {
+(JNIEnv *pEnv, jclass, jlong jointId) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.", 0)
@@ -208,7 +208,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpulse
-(JNIEnv *pEnv, jobject, jlong jointId) {
+(JNIEnv *pEnv, jclass, jlong jointId) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.", 0)
@@ -223,7 +223,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpul
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVelocity
-(JNIEnv *pEnv, jobject, jlong jointId) {
+(JNIEnv *pEnv, jclass, jlong jointId) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.", 0)
@@ -238,7 +238,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVe
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
-(JNIEnv *pEnv, jobject, jlong jointId) {
+(JNIEnv *pEnv, jclass, jlong jointId) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.", 0)
@@ -253,7 +253,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
-(JNIEnv *pEnv, jobject, jlong jointId, jboolean angular) {
+(JNIEnv *pEnv, jclass, jlong jointId, jboolean angular) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btHingeConstraint does not exist.",)
@@ -268,7 +268,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
  * Signature: (JFFFFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit
-(JNIEnv *pEnv, jobject, jlong jointId, jfloat low, jfloat high,
+(JNIEnv *pEnv, jclass, jlong jointId, jfloat low, jfloat high,
         jfloat softness, jfloat biasFactor, jfloat relaxationFactor) {
     btHingeConstraint *pJoint
             = reinterpret_cast<btHingeConstraint *> (jointId);

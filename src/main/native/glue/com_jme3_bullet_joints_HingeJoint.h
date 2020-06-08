@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
-  (JNIEnv *, jobject, jlong, jlong, jobject, jobject, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jlong, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
-  (JNIEnv *, jobject, jlong, jobject, jobject, jboolean);
+  (JNIEnv *, jclass, jlong, jobject, jobject, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -29,7 +29,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
  * Signature: (JZFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
-  (JNIEnv *, jobject, jlong, jboolean, jfloat, jfloat);
+  (JNIEnv *, jclass, jlong, jboolean, jfloat, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_enableMotor
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngularMotor
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -45,7 +45,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_HingeJoint_getEnableAngul
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetA
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetB
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_getFrameOffsetB
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getHingeAngle
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -77,7 +77,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getLowerLimit
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpulse
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -85,7 +85,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMaxMotorImpul
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVelocity
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -93,7 +93,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getMotorTargetVe
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -101,7 +101,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_HingeJoint_getUpperLimit
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_HingeJoint
@@ -109,7 +109,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setAngularOnly
  * Signature: (JFFFFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_HingeJoint_setLimit
-  (JNIEnv *, jobject, jlong, jfloat, jfloat, jfloat, jfloat, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat, jfloat, jfloat, jfloat, jfloat);
 
 #ifdef __cplusplus
 }

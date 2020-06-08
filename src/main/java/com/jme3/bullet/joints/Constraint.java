@@ -395,7 +395,7 @@ abstract public class Constraint extends PhysicsJoint {
      *
      * @param constraintId identifier of the btTypedConstraint (not 0)
      */
-    native protected void finalizeNative(long constraintId);
+    native protected static void finalizeNative(long constraintId);
 
     /**
      * Read the constraint type.
@@ -403,7 +403,7 @@ abstract public class Constraint extends PhysicsJoint {
      * @param constraintId identifier of the btTypedConstraint (not 0)
      * @return a btTypedConstraintType ordinal value (&ge;3)
      */
-    final native protected int getConstraintType(long constraintId);
+    final native protected static int getConstraintType(long constraintId);
     // *************************************************************************
     // PhysicsJoint methods
 
@@ -475,23 +475,24 @@ abstract public class Constraint extends PhysicsJoint {
     // *************************************************************************
     // native private methods
 
-    native private void enableFeedback(long constraintId, boolean enable);
+    native private static void enableFeedback(long constraintId,
+            boolean enable);
 
-    native private float getAppliedImpulse(long constraintId);
+    native private static float getAppliedImpulse(long constraintId);
 
-    native private float getBreakingImpulseThreshold(long constraintId);
+    native private static float getBreakingImpulseThreshold(long constraintId);
 
-    native private int getOverrideIterations(long constraintId);
+    native private static int getOverrideIterations(long constraintId);
 
-    native private boolean isEnabled(long constraintId);
+    native private static boolean isEnabled(long constraintId);
 
-    native private boolean needsFeedback(long constraintId);
+    native private static boolean needsFeedback(long constraintId);
 
-    native private void overrideIterations(long constraintId,
+    native private static void overrideIterations(long constraintId,
             int numIterations);
 
-    native private void setBreakingImpulseThreshold(long constraintId,
+    native private static void setBreakingImpulseThreshold(long constraintId,
             float desiredThreshold);
 
-    native private void setEnabled(long constraintId, boolean enable);
+    native private static void setEnabled(long constraintId, boolean enable);
 }
