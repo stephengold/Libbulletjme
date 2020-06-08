@@ -63,8 +63,8 @@ public:
 private:
 
     jmeBulletUtil() {
-    };
+    }
 
     ~jmeBulletUtil() {
-    };
+    }
 };

@@ -113,7 +113,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
     btAlignedFree(pBuffer); //dance015
 
     return byteArray;
-};
+}
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -135,4 +135,4 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
     pShape->setOptimizedBvh(pBvh);
 
     return reinterpret_cast<jlong> (pBuffer);
-};
+}

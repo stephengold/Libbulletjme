@@ -123,10 +123,10 @@ private:
     static JavaVM * vm;
 
     jmeClasses() {
-    };
+    }
 
     ~jmeClasses() {
-    };
+    }
 };
 
 #endif

@@ -48,7 +48,7 @@ public:
 
     Callback(JNIEnv *pJNIEnv) {
         pEnv = pJNIEnv;
-    };
+    }
 
     void Update(const double overallPercent, const double stagePercent,
             const double operationPercent, const char* const stageName,
@@ -71,7 +71,7 @@ public:
         jfloat arg3 = operationPercent;
         pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
                 jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
-    };
+    }
 };
 
 class Logger : public IVHACD::IUserLogger {
@@ -79,13 +79,13 @@ public:
 
     Logger(bool b) {
         log = b;
-    };
+    }
 
     void Log(const char* const msg) {
 #ifndef NO_DEBUG
         if (log)std::cout << msg << std::endl;
 #endif
-    };
+    }
 
 private:
     bool log;
