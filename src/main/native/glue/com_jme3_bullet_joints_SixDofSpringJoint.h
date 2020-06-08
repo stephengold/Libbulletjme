@@ -31,7 +31,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_createJoin
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_enableSpring
-  (JNIEnv *, jobject, jlong, jint, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_enableSprin
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getDamping
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -47,7 +47,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getDampin
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getEquilibriumPoint
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -55,7 +55,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getEquili
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getStiffness
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -63,7 +63,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_getStiffn
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_isSpringEnabled
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -71,7 +71,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_isSprin
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setDamping
-  (JNIEnv *, jobject, jlong, jint, jfloat);
+  (JNIEnv *, jclass, jlong, jint, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -79,7 +79,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setDamping
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibriumPoint__J
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibr
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibriumPoint__JI
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_SixDofSpringJoint
@@ -95,7 +95,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setEquilibr
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofSpringJoint_setStiffness
-  (JNIEnv *, jobject, jlong, jint, jfloat);
+  (JNIEnv *, jclass, jlong, jint, jfloat);
 
 #ifdef __cplusplus
 }
