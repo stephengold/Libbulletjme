@@ -66,7 +66,7 @@ HeightfieldShape : public btHeightfieldTerrainShape {
  * Signature: (IILjava/nio/FloatBuffer;FFFIZZZZ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_createShape2
-(JNIEnv *pEnv, jobject, jint heightStickWidth, jint heightStickLength,
+(JNIEnv *pEnv, jclass, jint heightStickWidth, jint heightStickLength,
         jobject floatBuffer, jfloat heightScale, jfloat minHeight,
         jfloat maxHeight, jint upAxis, jboolean flipQuadEdges,
         jboolean flipTriangleWinding, jboolean useDiamond,
@@ -107,7 +107,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisi
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HeightfieldCollisionShape_finalizeNative
-(JNIEnv *, jobject, jlong shapeId) {
+(JNIEnv *, jclass, jlong shapeId) {
 #ifdef BT_USE_DOUBLE_PRECISION
     HeightfieldShape *pShape = reinterpret_cast<HeightfieldShape *> (shapeId);
     if (pShape != NULL) {

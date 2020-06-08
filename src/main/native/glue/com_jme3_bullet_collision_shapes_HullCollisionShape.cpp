@@ -43,7 +43,7 @@
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_countHullVertices
-(JNIEnv *pEnv, jobject, jlong shapeId) {
+(JNIEnv *pEnv, jclass, jlong shapeId) {
     btConvexHullShape * const pShape
             = reinterpret_cast<btConvexHullShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btConvexHullShape does not exist.", 0);
@@ -61,7 +61,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
  * buffer contains float values: x,y,z for each vertex
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_createShapeF
-(JNIEnv *pEnv, jobject, jobject buffer, jint numVertices) {
+(JNIEnv *pEnv, jclass, jobject buffer, jint numVertices) {
     jmeClasses::initJavaClasses(pEnv);
 
     int n = numVertices;
@@ -102,7 +102,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_getHullVerticesF
-(JNIEnv *pEnv, jobject, jlong shapeId, jobject storeBuffer) {
+(JNIEnv *pEnv, jclass, jlong shapeId, jobject storeBuffer) {
     const btConvexHullShape * const pShape
             = reinterpret_cast<btConvexHullShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btConvexHullShape does not exist.",)
@@ -136,7 +136,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_recalcAabb
-(JNIEnv *pEnv, jobject, jlong shapeId) {
+(JNIEnv *pEnv, jclass, jlong shapeId) {
     btConvexHullShape * const pShape
             = reinterpret_cast<btConvexHullShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btConvexHullShape does not exist.",);

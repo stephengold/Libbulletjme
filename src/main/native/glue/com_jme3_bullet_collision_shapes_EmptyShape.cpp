@@ -42,7 +42,7 @@
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_EmptyShape_createShapeNative
-(JNIEnv *pEnv, jobject) {
+(JNIEnv *pEnv, jclass) {
     jmeClasses::initJavaClasses(pEnv);
     btEmptyShape *pShape = new btEmptyShape(); //dance016
     return reinterpret_cast<jlong> (pShape);

@@ -43,7 +43,7 @@
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_Convex2dShape_createShape
-(JNIEnv *pEnv, jobject, jlong childShapeId) {
+(JNIEnv *pEnv, jclass, jlong childShapeId) {
     jmeClasses::initJavaClasses(pEnv);
 
     btCollisionShape *pChild

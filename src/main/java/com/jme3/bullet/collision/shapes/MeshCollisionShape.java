@@ -214,18 +214,18 @@ public class MeshCollisionShape extends CollisionShape {
     // *************************************************************************
     // native methods
 
-    native private long createShape(boolean useCompression, boolean buildBvh,
-            long meshId);
+    native private static long createShape(boolean useCompression,
+            boolean buildBvh, long meshId);
 
-    native private void finalizeBVH(long bufferId);
+    native private static void finalizeBVH(long bufferId);
 
-    native private void recalcAabb(long shapeId);
+    native private static void recalcAabb(long shapeId);
 
-    native private byte[] saveBVH(long objectId);
+    native private static byte[] saveBVH(long objectId);
 
     /**
      * Read the ID of the native buffer used by the in-place de-serialized
      * shape. The buffer should be explicitly freed when no longer needed.
      */
-    native private long setBVH(byte[] buffer, long objectid);
+    native private static long setBVH(byte[] buffer, long objectid);
 }

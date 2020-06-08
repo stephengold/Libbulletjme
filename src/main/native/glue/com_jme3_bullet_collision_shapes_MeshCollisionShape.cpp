@@ -45,7 +45,7 @@
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_createShape
-(JNIEnv *pEnv, jobject, jboolean isMemoryEfficient, jboolean buildBVH,
+(JNIEnv *pEnv, jclass, jboolean isMemoryEfficient, jboolean buildBVH,
         jlong meshId) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -65,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
-(JNIEnv *, jobject, jlong nativeBVHBufferId) {
+(JNIEnv *, jclass, jlong nativeBVHBufferId) {
     if (nativeBVHBufferId != 0) {
         void *pBuffer = reinterpret_cast<void *> (nativeBVHBufferId);
         btAlignedFree(pBuffer);
@@ -78,7 +78,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_recalcAabb
-(JNIEnv *pEnv, jobject, jlong shapeId) {
+(JNIEnv *pEnv, jclass, jlong shapeId) {
     btBvhTriangleMeshShape *pShape
             = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.",);
@@ -93,7 +93,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
  * Signature: (J)[B
  */
 JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_saveBVH
-(JNIEnv *pEnv, jobject, jlong meshobj) {
+(JNIEnv *pEnv, jclass, jlong meshobj) {
     btBvhTriangleMeshShape *pMesh
             = reinterpret_cast<btBvhTriangleMeshShape *> (meshobj);
     NULL_CHK(pEnv, pMesh, "The btBvhTriangleMeshShape does not exist.", 0);
@@ -121,7 +121,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
  * Signature: ([BJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setBVH
-(JNIEnv *pEnv, jobject, jbyteArray bytearray, jlong meshobj) {
+(JNIEnv *pEnv, jclass, jbyteArray bytearray, jlong meshobj) {
     int len = pEnv->GetArrayLength(bytearray);
     void *pBuffer = btAlignedAlloc(len, 16);
     pEnv->GetByteArrayRegion(bytearray, 0, len,

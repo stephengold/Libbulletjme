@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (ZZJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_createShape
-  (JNIEnv *, jobject, jboolean, jboolean, jlong);
+  (JNIEnv *, jclass, jboolean, jboolean, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_recalcAabb
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
  * Signature: (J)[B
  */
 JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_saveBVH
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -45,7 +45,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
  * Signature: ([BJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setBVH
-  (JNIEnv *, jobject, jbyteArray, jlong);
+  (JNIEnv *, jclass, jbyteArray, jlong);
 
 #ifdef __cplusplus
 }

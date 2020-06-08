@@ -97,5 +97,5 @@ public class EmptyShape extends CollisionShape {
     // *************************************************************************
     // native methods
 
-    native private long createShapeNative();
+    native private static long createShapeNative();
 }

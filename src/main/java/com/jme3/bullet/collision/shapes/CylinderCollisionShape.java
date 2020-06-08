@@ -274,5 +274,5 @@ public class CylinderCollisionShape extends ConvexShape {
     // *************************************************************************
     // native methods
 
-    native private long createShape(int axis, Vector3f halfExtents);
+    native private static long createShape(int axisIndex, Vector3f halfExtents);
 }
