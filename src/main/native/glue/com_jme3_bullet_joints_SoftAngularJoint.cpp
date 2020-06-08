@@ -43,7 +43,7 @@
  * Signature: (JIJFFFLcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftRigid
-(JNIEnv *pEnv, jobject, jlong softIdA, jint clusterIndexA, jlong rigidIdB,
+(JNIEnv *pEnv, jclass, jlong softIdA, jint clusterIndexA, jlong rigidIdB,
         jfloat erp, jfloat cfm, jfloat split, jobject axisVector) {
     btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
     NULL_CHK(pEnv, pSoftA, "Soft body A does not exist.", 0)
@@ -78,7 +78,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJoint
  * Signature: (JIJIFFFLcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJointSoftSoft
-(JNIEnv *pEnv, jobject, jlong softIdA, jint clusterIndexA, jlong softIdB,
+(JNIEnv *pEnv, jclass, jlong softIdA, jint clusterIndexA, jlong softIdB,
         jint clusterIndexB, jfloat erp, jfloat cfm, jfloat split,
         jobject axisVector) {
     btSoftBody *pSoftA = reinterpret_cast<btSoftBody *> (softIdA);
@@ -115,7 +115,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJoint
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_setAxis
-(JNIEnv *pEnv, jobject, jlong jointId, jobject axisVector) {
+(JNIEnv *pEnv, jclass, jlong jointId, jobject axisVector) {
     btSoftBody::Joint *pJoint
             = reinterpret_cast<btSoftBody::Joint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The joint does not exist.",)
