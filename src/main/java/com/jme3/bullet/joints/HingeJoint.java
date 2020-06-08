@@ -422,6 +422,8 @@ public class HingeJoint extends Constraint {
             long bId = b.nativeId();
             constraintId = createJoint(aId, bId, pivotA, axisA, pivotB, axisB);
         }
+
+        assert getConstraintType(constraintId) == 4;
         setNativeId(constraintId);
     }
     // *************************************************************************

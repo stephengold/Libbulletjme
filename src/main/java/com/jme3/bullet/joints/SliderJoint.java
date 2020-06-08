@@ -809,6 +809,8 @@ public class SliderJoint extends Constraint {
             constraintId = createJoint(aId, bId, pivotA, rotA, pivotB, rotB,
                     useLinearReferenceFrameA);
         }
+
+        assert getConstraintType(constraintId) == 7;
         setNativeId(constraintId);
     }
     // *************************************************************************

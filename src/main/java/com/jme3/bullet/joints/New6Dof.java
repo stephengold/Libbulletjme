@@ -570,6 +570,8 @@ public class New6Dof extends Constraint {
             constraintId = createDoubleEnded(aId, bId, pivotA, rotA, pivotB,
                     rotB, rotOrder);
         }
+
+        assert getConstraintType(constraintId) == 12;
         setNativeId(constraintId);
 
         gatherMotors();
