@@ -43,7 +43,7 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_copyAllParameters
-(JNIEnv *pEnv, jobject, jlong targetId, jlong sourceId) {
+(JNIEnv *pEnv, jclass, jlong targetId, jlong sourceId) {
     btContactSolverInfo * const
             pTarget = reinterpret_cast<btContactSolverInfo *> (targetId);
     NULL_CHK(pEnv, pTarget, "The target btContactSolverInfo does not exist.",);
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_copyAllParameters
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getGlobalCfm
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
@@ -78,7 +78,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getGlobalCfm
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getMinBatch
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
@@ -93,7 +93,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getMinBatch
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getMode
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
@@ -108,7 +108,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getMode
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getNumIterations
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
@@ -123,7 +123,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_SolverInfo_getNumIterations
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseErp
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
@@ -138,7 +138,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseErp
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseThreshold
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
@@ -153,7 +153,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getSplitImpulseThreshol
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_SolverInfo_isSplitImpulseEnabled
-(JNIEnv *pEnv, jobject, jlong infoId) {
+(JNIEnv *pEnv, jclass, jlong infoId) {
 
     const btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
@@ -169,7 +169,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_SolverInfo_isSplitImpulseEnabled
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setGlobalCfm
-(JNIEnv *pEnv, jobject, jlong infoId, jfloat cfm) {
+(JNIEnv *pEnv, jclass, jlong infoId, jfloat cfm) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
@@ -183,7 +183,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setGlobalCfm
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setMinBatch
-(JNIEnv *pEnv, jobject, jlong infoId, jint numConstraints) {
+(JNIEnv *pEnv, jclass, jlong infoId, jint numConstraints) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
@@ -197,7 +197,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setMinBatch
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setMode
-(JNIEnv *pEnv, jobject, jlong infoId, jint flags) {
+(JNIEnv *pEnv, jclass, jlong infoId, jint flags) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
@@ -211,7 +211,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setMode
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setNumIterations
-(JNIEnv *pEnv, jobject, jlong infoId, jint numIterations) {
+(JNIEnv *pEnv, jclass, jlong infoId, jint numIterations) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
@@ -225,7 +225,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setNumIterations
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseEnabled
-(JNIEnv *pEnv, jobject, jlong infoId, jboolean enable) {
+(JNIEnv *pEnv, jclass, jlong infoId, jboolean enable) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
@@ -239,7 +239,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseEnabled
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseErp
-(JNIEnv *pEnv, jobject, jlong infoId, jfloat erp) {
+(JNIEnv *pEnv, jclass, jlong infoId, jfloat erp) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
@@ -253,7 +253,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseErp
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setSplitImpulseThreshold
-(JNIEnv *pEnv, jobject, jlong infoId, jfloat penetration) {
+(JNIEnv *pEnv, jclass, jlong infoId, jfloat penetration) {
     btContactSolverInfo * const
             pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
