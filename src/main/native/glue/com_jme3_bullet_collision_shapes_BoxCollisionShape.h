@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_createShape
-  (JNIEnv *, jobject, jobject);
+  (JNIEnv *, jclass, jobject);
 
 #ifdef __cplusplus
 }

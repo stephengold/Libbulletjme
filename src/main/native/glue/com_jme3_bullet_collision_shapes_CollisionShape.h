@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getShapeType
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -21,7 +21,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getS
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_fina
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getAabb
-  (JNIEnv *, jobject, jlong, jobject, jobject, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getA
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getLocalScaling
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getL
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getMargin
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -53,7 +53,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_ge
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConcave
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -61,7 +61,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isConvex
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -69,7 +69,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isInfinite
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -77,7 +77,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isNonMoving
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -85,7 +85,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isPolyhedral
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -93,7 +93,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setLocalScaling
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
@@ -101,7 +101,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setL
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setMargin
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 #ifdef __cplusplus
 }

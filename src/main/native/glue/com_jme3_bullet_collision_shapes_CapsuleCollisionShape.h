@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (IFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CapsuleCollisionShape_createShape
-  (JNIEnv *, jobject, jint, jfloat, jfloat);
+  (JNIEnv *, jclass, jint, jfloat, jfloat);
 
 #ifdef __cplusplus
 }
