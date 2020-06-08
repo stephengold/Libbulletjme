@@ -734,42 +734,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    setJointPos
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setJointPos
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat position) {
-    btMultiBody * const
-            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
-
-    const int i = (int) linkIndex;
-    btAssert(i >= 0);
-    btScalar pos = (btScalar) position;
-
-    pMultiBody->setJointPos(i, pos);
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    setJointVel
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setJointVel
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat velocity) {
-    btMultiBody * const
-            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
-
-    const int i = (int) linkIndex;
-    btAssert(i >= 0);
-    btScalar vel = (btScalar) velocity;
-
-    pMultiBody->setJointVel(i, vel);
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBody
  * Method:    setupFixed
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
  */
