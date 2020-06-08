@@ -625,7 +625,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @param spaceId the Bullet identifier for this space (non-zero)
      * @return 2 (for a discrete world) or 4 (for a soft-rigid world)
      */
-    native protected int getWorldType(long spaceId);
+    native protected static int getWorldType(long spaceId);
 
     /**
      * Initialize the solverInfo field during create().
@@ -963,37 +963,40 @@ public class PhysicsSpace extends CollisionSpace {
     // *************************************************************************
     // native methods
 
-    native private void addAction(long spaceId, long actionId);
+    native private static void addAction(long spaceId, long actionId);
 
-    native private void addCharacterObject(long spaceId, long characterId);
+    native private static void addCharacterObject(long spaceId,
+            long characterId);
 
-    native private void addConstraintC(long spaceId, long constraintId,
+    native private static void addConstraintC(long spaceId, long constraintId,
             boolean disableCollisions);
 
-    native private void addRigidBody(long spaceId, long rigidBodyId,
+    native private static void addRigidBody(long spaceId, long rigidBodyId,
             int proxyGroup, int proxyMask);
 
     native private long createPhysicsSpace(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ, int broadphaseType);
 
-    native private void getGravity(long spaceId, Vector3f storeVector);
+    native private static void getGravity(long spaceId, Vector3f storeVector);
 
-    native private int getNumConstraints(long spaceId);
+    native private static int getNumConstraints(long spaceId);
 
-    native private long getSolverInfo(long spaceId);
+    native private static long getSolverInfo(long spaceId);
 
-    native private void removeAction(long spaceId, long actionId);
+    native private static void removeAction(long spaceId, long actionId);
 
-    native private void removeCharacterObject(long spaceId, long characterId);
+    native private static void removeCharacterObject(long spaceId,
+            long characterId);
 
-    native private void removeConstraint(long spaceId, long constraintId);
+    native private static void removeConstraint(long spaceId,
+            long constraintId);
 
-    native private void removeRigidBody(long spaceId, long rigidBodyId);
+    native private static void removeRigidBody(long spaceId, long rigidBodyId);
 
-    native private void setGravity(long spaceId, Vector3f gravityVector);
+    native private static void setGravity(long spaceId, Vector3f gravityVector);
 
-    native private void setSolverType(long spaceId, int solverType);
+    native private static void setSolverType(long spaceId, int solverType);
 
-    native private void stepSimulation(long spaceId, float timeInterval,
+    native private static void stepSimulation(long spaceId, float timeInterval,
             int maxSubSteps, float accuracy);
 }

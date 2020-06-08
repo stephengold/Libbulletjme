@@ -49,7 +49,7 @@
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
-(JNIEnv *pEnv, jobject, jlong spaceId) {
+(JNIEnv *pEnv, jclass, jlong spaceId) {
     const jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
@@ -66,7 +66,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getWorldType
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addAction
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong actionId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong actionId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -86,7 +86,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addAction
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong pcoId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -114,7 +114,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addCharacterObject
  * Signature: (JJZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong constraintId,
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong constraintId,
         jboolean disableCollisions) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
@@ -137,7 +137,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addConstraintC
  * Signature: (JJII)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong rigidBodyId, jint proxyGroup,
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong rigidBodyId, jint proxyGroup,
         jint proxyMask) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
@@ -182,7 +182,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
-(JNIEnv *pEnv, jobject, jlong spaceId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jobject storeVector) {
     const jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",);
@@ -201,7 +201,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
-(JNIEnv *pEnv, jobject, jlong spaceId) {
+(JNIEnv *pEnv, jclass, jlong spaceId) {
     const jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
@@ -218,7 +218,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_getNumConstraints
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
-(JNIEnv *pEnv, jobject, jlong spaceId) {
+(JNIEnv *pEnv, jclass, jlong spaceId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
@@ -235,7 +235,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeAction
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong actionId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong actionId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -255,7 +255,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeAction
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong pcoId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -281,7 +281,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeCharacterObject
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong constraintId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong constraintId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -303,7 +303,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong rigidBodyId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong rigidBodyId) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -328,7 +328,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
-(JNIEnv *pEnv, jobject, jlong spaceId, jobject gravityVector) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jobject gravityVector) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -349,7 +349,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
-(JNIEnv *pEnv, jobject, jlong spaceId, jint solverType) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jint solverType) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
@@ -394,7 +394,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
  * Signature: (JFIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_stepSimulation
-(JNIEnv *pEnv, jobject, jlong spaceId, jfloat tpf, jint maxSteps,
+(JNIEnv *pEnv, jclass, jlong spaceId, jfloat tpf, jint maxSteps,
         jfloat accuracy) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
