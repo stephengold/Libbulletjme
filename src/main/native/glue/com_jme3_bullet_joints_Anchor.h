@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JIJLcom/jme3/math/Vector3f;ZF)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
-  (JNIEnv *, jobject, jlong, jint, jlong, jobject, jboolean, jfloat);
+  (JNIEnv *, jclass, jlong, jint, jlong, jobject, jboolean, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_Anchor
@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Anchor_setInfluence
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 #ifdef __cplusplus
 }

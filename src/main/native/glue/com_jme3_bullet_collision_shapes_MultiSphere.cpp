@@ -42,7 +42,7 @@
  * Signature: (F)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
-(JNIEnv *pEnv, jobject, jobjectArray centers, jfloatArray radii,
+(JNIEnv *pEnv, jclass, jobjectArray centers, jfloatArray radii,
         jint numSpheres) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -84,7 +84,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
-(JNIEnv *pEnv, jobject, jlong shapeId) {
+(JNIEnv *pEnv, jclass, jlong shapeId) {
     btMultiSphereShape *pShape
             = reinterpret_cast<btMultiSphereShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btMultiSphereShape does not exist.",);

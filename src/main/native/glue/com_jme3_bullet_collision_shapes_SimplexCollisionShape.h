@@ -15,7 +15,7 @@ extern "C" {
  * Signature: (Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2
-  (JNIEnv *, jobject, jobject);
+  (JNIEnv *, jclass, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_SimplexCollisionShape
@@ -23,7 +23,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2
-  (JNIEnv *, jobject, jobject, jobject);
+  (JNIEnv *, jclass, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_SimplexCollisionShape
@@ -31,7 +31,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2
-  (JNIEnv *, jobject, jobject, jobject, jobject);
+  (JNIEnv *, jclass, jobject, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_SimplexCollisionShape
@@ -39,7 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2
-  (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
+  (JNIEnv *, jclass, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_SimplexCollisionShape
@@ -47,7 +47,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_recalcAabb
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus
 }

@@ -42,7 +42,7 @@
  * Signature: (Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2
-(JNIEnv *pEnv, jobject, jobject vector1) {
+(JNIEnv *pEnv, jclass, jobject vector1) {
     jmeClasses::initJavaClasses(pEnv);
 
     btVector3 vec1;
@@ -58,7 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2
-(JNIEnv *pEnv, jobject, jobject vector1, jobject vector2) {
+(JNIEnv *pEnv, jclass, jobject vector1, jobject vector2) {
     jmeClasses::initJavaClasses(pEnv);
 
     btVector3 vec1;
@@ -78,7 +78,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2
-(JNIEnv *pEnv, jobject, jobject vector1, jobject vector2, jobject vector3) {
+(JNIEnv *pEnv, jclass, jobject vector1, jobject vector2, jobject vector3) {
     jmeClasses::initJavaClasses(pEnv);
 
     btVector3 vec1;
@@ -101,7 +101,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_createShape__Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2Lcom_jme3_math_Vector3f_2
-(JNIEnv *pEnv, jobject, jobject vector1, jobject vector2, jobject vector3,
+(JNIEnv *pEnv, jclass, jobject vector1, jobject vector2, jobject vector3,
         jobject vector4) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -128,7 +128,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionShape_recalcAabb
-(JNIEnv *pEnv, jobject, jlong shapeId) {
+(JNIEnv *pEnv, jclass, jlong shapeId) {
     btBU_Simplex1to4 *pShape
             = reinterpret_cast<btBU_Simplex1to4 *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBU_Simplex1to4 does not exist.",);

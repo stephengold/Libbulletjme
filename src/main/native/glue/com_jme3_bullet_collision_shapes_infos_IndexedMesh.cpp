@@ -42,7 +42,7 @@
  * Signature: (Ljava/nio/ByteBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createByte
-(JNIEnv *pEnv, jobject, jobject byteBuffer, jobject floatBuffer,
+(JNIEnv *pEnv, jclass, jobject byteBuffer, jobject floatBuffer,
         jint numTriangles, jint numVertices, jint vertexStride,
         jint indexStride) {
     jmeClasses::initJavaClasses(pEnv);
@@ -76,7 +76,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (Ljava/nio/IntBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createInt
-(JNIEnv *pEnv, jobject, jobject intBuffer, jobject floatBuffer,
+(JNIEnv *pEnv, jclass, jobject intBuffer, jobject floatBuffer,
         jint numTriangles, jint numVertices, jint vertexStride,
         jint indexStride) {
     jmeClasses::initJavaClasses(pEnv);
@@ -110,7 +110,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (Ljava/nio/ShortBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createShort
-(JNIEnv *pEnv, jobject, jobject shortBuffer, jobject floatBuffer,
+(JNIEnv *pEnv, jclass, jobject shortBuffer, jobject floatBuffer,
         jint numTriangles, jint numVertices, jint vertexStride,
         jint indexStride) {
     jmeClasses::initJavaClasses(pEnv);
@@ -144,7 +144,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_finalizeNative
-(JNIEnv *pEnv, jobject, jlong meshId) {
+(JNIEnv *pEnv, jclass, jlong meshId) {
     btIndexedMesh * const pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
     NULL_CHK(pEnv, pMesh, "The btIndexedMesh does not exist.",);
 

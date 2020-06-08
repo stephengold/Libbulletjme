@@ -178,5 +178,5 @@ public class SphereCollisionShape extends ConvexShape {
     // *************************************************************************
     // native methods
 
-    native private long createShape(float radius);
+    native private static long createShape(float radius);
 }

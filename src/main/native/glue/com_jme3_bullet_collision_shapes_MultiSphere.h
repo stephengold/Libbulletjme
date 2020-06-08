@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ([Lcom/jme3/math/Vector3f;[FI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_createShape
-  (JNIEnv *, jobject, jobjectArray, jfloatArray, jint);
+  (JNIEnv *, jclass, jobjectArray, jfloatArray, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MultiSphere
@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcAabb
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus
 }

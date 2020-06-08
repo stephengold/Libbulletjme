@@ -21,7 +21,7 @@ extern "C" {
  * Signature: (Ljava/nio/ByteBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createByte
-  (JNIEnv *, jobject, jobject, jobject, jint, jint, jint, jint);
+  (JNIEnv *, jclass, jobject, jobject, jint, jint, jint, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
@@ -29,7 +29,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (Ljava/nio/IntBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createInt
-  (JNIEnv *, jobject, jobject, jobject, jint, jint, jint, jint);
+  (JNIEnv *, jclass, jobject, jobject, jint, jint, jint, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
@@ -37,7 +37,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (Ljava/nio/ShortBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createShort
-  (JNIEnv *, jobject, jobject, jobject, jint, jint, jint, jint);
+  (JNIEnv *, jclass, jobject, jobject, jint, jint, jint, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
@@ -45,7 +45,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus
 }

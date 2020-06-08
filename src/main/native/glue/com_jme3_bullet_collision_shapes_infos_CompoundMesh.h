@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_addIndexedMesh
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_createEmptyTiva
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
@@ -29,7 +29,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_getScaling
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_CompoundMesh
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_
  * Signature: (JFFF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_CompoundMesh_setScaling
-  (JNIEnv *, jobject, jlong, jfloat, jfloat, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat, jfloat, jfloat);
 
 #ifdef __cplusplus
 }
