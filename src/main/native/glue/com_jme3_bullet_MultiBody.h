@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseForce
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseForce
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseTorque
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseTorque
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearConstraintForces
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearConstraintForces
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearForcesAndTorques
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearForcesAndTorques
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearVelocities
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -61,7 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -69,7 +69,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -77,7 +77,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -85,7 +85,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -93,7 +93,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getBaseCollider
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -101,7 +101,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getBaseCollider
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseForce
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -109,7 +109,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseForce
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseInertia
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -117,7 +117,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseInertia
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getBaseMass
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -125,7 +125,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getBaseMass
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseOmega
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -133,7 +133,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseOmega
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBasePos
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -141,7 +141,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBasePos
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseTorque
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -149,7 +149,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseTorque
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseVel
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -157,7 +157,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseVel
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseWorldTransform
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseWorldTransform
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -173,7 +173,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -181,7 +181,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -189,7 +189,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -197,7 +197,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -205,7 +205,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -213,7 +213,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxAppliedImpulse
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -221,7 +221,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxAppliedImpulse
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxCoordinateVelocity
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -229,7 +229,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxCoordinateVelocity
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumDofs
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -237,7 +237,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumDofs
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -245,7 +245,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -253,7 +253,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -261,7 +261,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -269,7 +269,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getWorldToBaseRot
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -277,7 +277,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getWorldToBaseRot
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_hasFixedBase
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -285,7 +285,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_hasFixedBase
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingGlobalVelocities
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -293,7 +293,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingGlobalVelocitie
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -301,7 +301,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseCollider
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -309,7 +309,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseCollider
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseOmega
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -317,7 +317,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseOmega
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBasePos
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -325,7 +325,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBasePos
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -333,7 +333,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -341,7 +341,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollideWithGroups
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -349,7 +349,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollideWithGroups
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -357,7 +357,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
-  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -365,7 +365,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
-  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -373,7 +373,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
-  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jobject, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jobject, jboolean);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -381,7 +381,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
-  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jobject, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jobject, jboolean);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -389,7 +389,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
-  (JNIEnv *, jobject, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -397,7 +397,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setWorldToBaseRot
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -405,7 +405,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setWorldToBaseRot
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_useGlobalVelocities
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_MultiBody
@@ -413,7 +413,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_useGlobalVelocities
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_useRK4Integration
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 #ifdef __cplusplus
 }

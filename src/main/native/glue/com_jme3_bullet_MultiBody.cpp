@@ -44,7 +44,7 @@
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseForce
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject forceVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject forceVector) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -62,7 +62,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseForce
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseTorque
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject torqueVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject torqueVector) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -80,7 +80,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseTorque
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearConstraintForces
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -94,7 +94,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearConstraintForces
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearForcesAndTorques
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -108,7 +108,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearForcesAndTorques
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_clearVelocities
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -150,7 +150,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -164,7 +164,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
-(JNIEnv *, jobject, jlong multiBodyId) {
+(JNIEnv *, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
 
@@ -184,7 +184,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -199,7 +199,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -215,7 +215,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getBaseCollider
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -230,7 +230,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getBaseCollider
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseForce
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -246,7 +246,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseForce
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseInertia
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -262,7 +262,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseInertia
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getBaseMass
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -277,7 +277,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getBaseMass
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseOmega
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -293,7 +293,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseOmega
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBasePos
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -309,7 +309,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBasePos
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseTorque
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -325,7 +325,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseTorque
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseVel
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -341,7 +341,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseVel
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseWorldTransform
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeTransform) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeTransform) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -357,7 +357,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getBaseWorldTransform
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
@@ -372,7 +372,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanSleep
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
@@ -387,7 +387,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getCanWakeup
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -403,7 +403,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -419,7 +419,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -434,7 +434,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -449,7 +449,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getLinearDamping
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxAppliedImpulse
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -464,7 +464,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxAppliedImpulse
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxCoordinateVelocity
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -479,7 +479,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getMaxCoordinateVelocity
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumDofs
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -494,7 +494,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumDofs
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -509,7 +509,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumLinks
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -524,7 +524,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getNumPosVars
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
@@ -540,7 +540,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_getSpace
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
@@ -555,7 +555,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getWorldToBaseRot
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject storeQuaternion) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeQuaternion) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -571,7 +571,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getWorldToBaseRot
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_hasFixedBase
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
@@ -586,7 +586,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_hasFixedBase
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingGlobalVelocities
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
@@ -601,7 +601,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingGlobalVelocitie
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
-(JNIEnv *pEnv, jobject, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
@@ -616,7 +616,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_isUsingRK4Integration
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseCollider
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jlong colliderId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jlong colliderId) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -634,7 +634,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseCollider
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseOmega
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject angularVelocityVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject angularVelocityVector) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -653,7 +653,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseOmega
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBasePos
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject positionVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject positionVector) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -671,7 +671,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBasePos
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject velocityVector) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject velocityVector) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -689,7 +689,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject transform) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject transform) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",)
@@ -708,7 +708,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollideWithGroups
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint groups) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint groups) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -723,7 +723,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollideWithGroups
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint group) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint group) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -738,7 +738,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setCollisionGroup
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat mass,
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint linkIndex, jfloat mass,
         jobject inertiaVector, jint parentLinkIndex,
         jobject parent2LinkQuaternion, jobject parent2PivotVector,
         jobject pivot2LinkVector) {
@@ -782,7 +782,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat mass,
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint linkIndex, jfloat mass,
         jobject inertiaVector, jint parentLinkIndex,
         jobject parent2LinkQuaternion, jobject axisVector,
         jobject parent2LinkVector, jboolean disableParentCollision) {
@@ -827,7 +827,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat mass,
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint linkIndex, jfloat mass,
         jobject inertiaVector, jint parentLinkIndex,
         jobject parent2LinkQuaternion, jobject axisVector,
         jobject parent2PivotVector, jobject pivot2LinkVector,
@@ -877,7 +877,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat mass,
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint linkIndex, jfloat mass,
         jobject inertiaVector, jint parentLinkIndex,
         jobject parent2LinkQuaternion, jobject axisVector,
         jobject parent2PivotVector, jobject pivot2LinkVector,
@@ -927,7 +927,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
  * Signature: (JIFLcom/jme3/math/Vector3f;ILcom/jme3/math/Quaternion;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Z)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex, jfloat mass,
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint linkIndex, jfloat mass,
         jobject inertiaVector, jint parentLinkIndex,
         jobject parent2LinkQuaternion, jobject parent2PivotVector,
         jobject pivot2LinkVector, jboolean disableParentCollision) {
@@ -972,7 +972,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setWorldToBaseRot
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jobject quaternion) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject quaternion) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -990,7 +990,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setWorldToBaseRot
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_useGlobalVelocities
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jboolean use) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jboolean use) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
@@ -1004,7 +1004,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_useGlobalVelocities
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_useRK4Integration
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jboolean use) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jboolean use) {
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
