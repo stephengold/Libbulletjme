@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
  * Signature: (JJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
-  (JNIEnv *, jobject, jlong, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
@@ -37,7 +37,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObjects
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
@@ -53,7 +53,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
-  (JNIEnv *, jobject, jobject, jobject, jlong, jobject, jint);
+  (JNIEnv *, jclass, jobject, jobject, jlong, jobject, jint);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
@@ -69,7 +69,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
  * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
-  (JNIEnv *, jobject, jlong, jobject, jobject, jlong, jobject, jfloat);
+  (JNIEnv *, jclass, jlong, jobject, jobject, jlong, jobject, jfloat);
 
 #ifdef __cplusplus
 }

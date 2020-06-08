@@ -44,7 +44,7 @@
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong pcoId) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.",)
@@ -127,7 +127,7 @@ struct JmeContactResultCallback
  * Signature: (JJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId, jobject listener) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong pcoId, jobject listener) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
@@ -173,7 +173,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
-(JNIEnv *, jobject, jlong spaceId) {
+(JNIEnv *, jclass, jlong spaceId) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     if (pSpace != NULL) {
@@ -187,7 +187,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObjects
-(JNIEnv *pEnv, jobject, jlong spaceId) {
+(JNIEnv *pEnv, jclass, jlong spaceId) {
     const jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
@@ -245,11 +245,11 @@ struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
- * Method:    rayTest_1native
+ * Method:    rayTest_native
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
-(JNIEnv *pEnv, jobject, jobject from, jobject to, jlong spaceId,
+(JNIEnv *pEnv, jclass, jobject from, jobject to, jlong spaceId,
         jobject resultList, jint flags) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
@@ -279,7 +279,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
-(JNIEnv *pEnv, jobject, jlong spaceId, jlong pcoId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong pcoId) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.",)
@@ -353,7 +353,7 @@ struct JmeConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
  * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
-(JNIEnv *pEnv, jobject, jlong shapeId, jobject from, jobject to, jlong spaceId,
+(JNIEnv *pEnv, jclass, jlong shapeId, jobject from, jobject to, jlong spaceId,
         jobject resultList, jfloat allowedCcdPenetration) {
     jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
