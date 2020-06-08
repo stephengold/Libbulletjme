@@ -19,7 +19,7 @@ extern "C" {
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
@@ -27,7 +27,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstraint
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
@@ -51,7 +51,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstraints
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
@@ -59,7 +59,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstr
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstraint
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
@@ -75,7 +75,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstr
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 #ifdef __cplusplus
 }
