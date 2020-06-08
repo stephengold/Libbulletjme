@@ -38,6 +38,24 @@
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    getConstraintType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
+(JNIEnv *pEnv, jclass, jlong constraintId) {
+    const btTypedConstraint * const
+            pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
+    NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.", 0)
+
+    btTypedConstraintType constraintType = pConstraint->getConstraintType();
+    btAssert(constraintType >= POINT2POINT_CONSTRAINT_TYPE);
+    btAssert(constraintType <= MAX_CONSTRAINT_TYPE);
+
+    return constraintType;
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
  * Method:    enableFeedback
  * Signature: (JZ)V
  */
@@ -101,24 +119,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpul
 
     btScalar result = pConstraint->getBreakingImpulseThreshold();
     return result;
-}
-
-/*
- * Class:     com_jme3_bullet_joints_Constraint
- * Method:    getConstraintType
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
-(JNIEnv *pEnv, jclass, jlong constraintId) {
-    const btTypedConstraint * const
-            pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
-    NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.", 0)
-
-    btTypedConstraintType constraintType = pConstraint->getConstraintType();
-    btAssert(constraintType >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(constraintType <= MAX_CONSTRAINT_TYPE);
-
-    return constraintType;
 }
 
 /*

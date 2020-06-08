@@ -391,13 +391,6 @@ abstract public class Constraint extends PhysicsJoint {
     // new protected methods
 
     /**
-     * Finalize the btTypedConstraint.
-     *
-     * @param constraintId identifier of the btTypedConstraint (not 0)
-     */
-    native protected static void finalizeNative(long constraintId);
-
-    /**
      * Read the constraint type.
      *
      * @param constraintId identifier of the btTypedConstraint (not 0)
@@ -477,6 +470,8 @@ abstract public class Constraint extends PhysicsJoint {
 
     native private static void enableFeedback(long constraintId,
             boolean enable);
+
+    native private static void finalizeNative(long constraintId);
 
     native private static float getAppliedImpulse(long constraintId);
 

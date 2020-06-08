@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_joints_Constraint
- * Method:    finalizeNative
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_joints_Constraint
  * Method:    getConstraintType
  * Signature: (J)I
  */
@@ -30,6 +22,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_enableFeedback
   (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_joints_Constraint
+ * Method:    finalizeNative
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_Constraint
