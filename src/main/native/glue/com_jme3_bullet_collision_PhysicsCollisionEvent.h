@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getAppliedImpulse
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -21,7 +21,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getAppliedImpulseLateral1
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -29,7 +29,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getAppliedImpulseLateral2
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -37,7 +37,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedFriction
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -45,7 +45,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedRestitution
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -53,7 +53,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedRollingFriction
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -61,7 +61,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getCombinedSpinningFriction
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getDistance1
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -77,7 +77,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_ge
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getFlags
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -85,7 +85,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getF
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getIndex0
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -93,7 +93,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getI
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getIndex1
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -101,7 +101,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getI
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLateralFrictionDir1
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -109,7 +109,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLateralFrictionDir2
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -117,7 +117,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLifeTime
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -125,7 +125,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLocalPointA
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -133,7 +133,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getLocalPointB
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -141,7 +141,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getL
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getNormalWorldOnB
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -149,7 +149,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getN
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPartId0
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -157,7 +157,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPartId1
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -165,7 +165,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPositionWorldOnA
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
@@ -173,7 +173,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPositionWorldOnB
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 #ifdef __cplusplus
 }
