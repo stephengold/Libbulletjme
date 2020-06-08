@@ -15,7 +15,7 @@ extern "C" {
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;I)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
-  (JNIEnv *, jobject, jlong, jlong, jobject, jobject, jobject, jobject, jint);
+  (JNIEnv *, jclass, jlong, jlong, jobject, jobject, jobject, jobject, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -23,7 +23,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Matrix3f;I)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
-  (JNIEnv *, jobject, jlong, jobject, jobject, jint);
+  (JNIEnv *, jclass, jlong, jobject, jobject, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -31,7 +31,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
-  (JNIEnv *, jobject, jlong, jint, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_enableSpring
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -47,7 +47,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
  * Signature: (JILcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
-  (JNIEnv *, jobject, jlong, jint, jobject);
+  (JNIEnv *, jclass, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -71,7 +71,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getFrameOffsetB
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -79,7 +79,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getPivotOffset
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -87,7 +87,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationalMotor
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -95,7 +95,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_New6Dof_getRotationOrder
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getTranslationalMotor
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -103,7 +103,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_getTranslationalMoto
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setAllEquilibriumPointsToCurrent
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -111,7 +111,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setAllEquilibriumPoin
  * Signature: (JIFZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setDamping
-  (JNIEnv *, jobject, jlong, jint, jfloat, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -119,7 +119,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setDamping
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
-  (JNIEnv *, jobject, jlong, jint, jfloat);
+  (JNIEnv *, jclass, jlong, jint, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -127,7 +127,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPoint
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointToCurrent
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -135,7 +135,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointTo
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
@@ -143,7 +143,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setRotationOrder
  * Signature: (JIFZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setStiffness
-  (JNIEnv *, jobject, jlong, jint, jfloat, jboolean);
+  (JNIEnv *, jclass, jlong, jint, jfloat, jboolean);
 
 #ifdef __cplusplus
 }
