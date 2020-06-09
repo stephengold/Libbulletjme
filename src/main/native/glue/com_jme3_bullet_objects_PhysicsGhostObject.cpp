@@ -84,7 +84,7 @@ public:
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGhostObject
-(JNIEnv *pEnv, jobject) {
+(JNIEnv *pEnv, jclass) {
     jmeClasses::initJavaClasses(pEnv);
 
     btPairCachingGhostObject * const
@@ -98,7 +98,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_createGh
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverlappingCount
-(JNIEnv *pEnv, jobject, jlong ghostId) {
+(JNIEnv *pEnv, jclass, jlong ghostId) {
     const btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.", 0)
@@ -131,7 +131,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverla
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setGhostFlags
-(JNIEnv *pEnv, jobject, jlong ghostId) {
+(JNIEnv *pEnv, jclass, jlong ghostId) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
@@ -146,7 +146,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setGhostF
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsLocation
-(JNIEnv *pEnv, jobject, jlong ghostId, jobject locationVector) {
+(JNIEnv *pEnv, jclass, jlong ghostId, jobject locationVector) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
@@ -164,7 +164,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Matrix3f_2
-(JNIEnv *pEnv, jobject, jlong ghostId, jobject matrix) {
+(JNIEnv *pEnv, jclass, jlong ghostId, jobject matrix) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
@@ -182,7 +182,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Quaternion_2
-(JNIEnv *pEnv, jobject, jlong ghostId, jobject quaternion) {
+(JNIEnv *pEnv, jclass, jlong ghostId, jobject quaternion) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)

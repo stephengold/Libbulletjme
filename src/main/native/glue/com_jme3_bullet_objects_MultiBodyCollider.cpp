@@ -43,7 +43,7 @@
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCollider
-(JNIEnv *pEnv, jobject, jlong multiBodyId, jint linkIndex) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint linkIndex) {
     jmeClasses::initJavaClasses(pEnv);
 
     btMultiBody * const
@@ -62,7 +62,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_createCol
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsLocation
-(JNIEnv *pEnv, jobject, jlong colliderId, jobject locationVector) {
+(JNIEnv *pEnv, jclass, jlong colliderId, jobject locationVector) {
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
     NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
@@ -81,7 +81,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsRotation
-(JNIEnv *pEnv, jobject, jlong colliderId, jobject rotationMatrix) {
+(JNIEnv *pEnv, jclass, jlong colliderId, jobject rotationMatrix) {
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
     NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
