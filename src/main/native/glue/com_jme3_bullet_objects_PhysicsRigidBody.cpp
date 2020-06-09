@@ -368,64 +368,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getMass
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getPhysicsLocation
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsLocation
-(JNIEnv *pEnv, jobject, jlong bodyId, jobject storeVector) {
-    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
-
-    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",)
-    jmeBulletUtil::convert(pEnv, &pBody->getWorldTransform().getOrigin(),
-            storeVector);
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getPhysicsRotation
- * Signature: (JLcom/jme3/math/Quaternion;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotation
-(JNIEnv *pEnv, jobject, jlong bodyId, jobject storeQuaternion) {
-    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
-
-    NULL_CHK(pEnv, storeQuaternion, "The store quaternion does not exist.",)
-    jmeBulletUtil::convertQuat(pEnv, &pBody->getWorldTransform().getBasis(),
-            storeQuaternion);
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getPhysicsRotationMatrix
- * Signature: (JLcom/jme3/math/Matrix3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getPhysicsRotationMatrix
-(JNIEnv *pEnv, jobject, jlong bodyId, jobject storeMatrix) {
-    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
-
-    NULL_CHK(pEnv, storeMatrix, "The store matrix does not exist.",)
-    jmeBulletUtil::convert(pEnv, &pBody->getWorldTransform().getBasis(),
-            storeMatrix);
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    getRestitution
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getRestitution
-(JNIEnv *pEnv, jobject, jlong bodyId) {
-    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.", 0)
-
-    return pBody->getRestitution();
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    getSquaredSpeed
  * Signature: (J)F
  */
@@ -453,33 +395,6 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getUseS
     int flags = pBody->getFlags();
     bool result = (flags & BT_DISABLE_WORLD_GRAVITY) == 0x0;
     return jboolean(result);
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    isActive
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isActive
-(JNIEnv *pEnv, jobject, jlong bodyId) {
-    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.", JNI_FALSE)
-
-    return pBody->isActive();
-}
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsRigidBody
- * Method:    isInWorld
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_isInWorld
-(JNIEnv *pEnv, jobject, jlong bodyId) {
-    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
-    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.", JNI_FALSE);
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
-
-    return pBody->isInWorld();
 }
 
 /*
