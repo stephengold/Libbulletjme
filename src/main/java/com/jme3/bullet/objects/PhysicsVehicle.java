@@ -728,42 +728,46 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     // *************************************************************************
     // native methods
 
-    native private int addWheel(long vehicleId, Vector3f location,
+    native private static int addWheel(long vehicleId, Vector3f location,
             Vector3f direction, Vector3f axle, float restLength, float radius,
             long tuningId, boolean frontWheel);
 
-    native private void applyEngineForce(long vehicleId, int wheelIndex,
+    native private static void applyEngineForce(long vehicleId, int wheelIndex,
             float force);
 
-    native private void brake(long vehicleId, int wheelIndex, float impulse);
+    native private static void brake(long vehicleId, int wheelIndex,
+            float impulse);
 
-    native private long createRaycastVehicle(long bodyId, long rayCasterId);
+    native private static long createRaycastVehicle(long bodyId,
+            long rayCasterId);
 
-    native private long createVehicleRaycaster(long physicsSpaceId);
+    native private static long createVehicleRaycaster(long physicsSpaceId);
 
-    native private void finalizeNative(long rayCasterId, long vehicleId);
+    native private static void finalizeNative(long rayCasterId, long vehicleId);
 
-    native private float getCurrentVehicleSpeedKmHour(long vehicleId);
+    native private static float getCurrentVehicleSpeedKmHour(long vehicleId);
 
-    native private int getForwardAxisIndex(long vehicleId);
+    native private static int getForwardAxisIndex(long vehicleId);
 
-    native private void getForwardVector(long vehicleId, Vector3f storeResult);
+    native private static void getForwardVector(long vehicleId,
+            Vector3f storeResult);
 
-    native private int getRightAxisIndex(long vehicleId);
+    native private static int getRightAxisIndex(long vehicleId);
 
-    native private int getNumWheels(long vehicleId);
+    native private static int getNumWheels(long vehicleId);
 
-    native private int getUpAxisIndex(long vehicleId);
+    native private static int getUpAxisIndex(long vehicleId);
 
-    native private float rayCast(long vehicleId, int wheelIndex);
+    native private static float rayCast(long vehicleId, int wheelIndex);
 
-    native private void resetSuspension(long vehicleId);
+    native private static void resetSuspension(long vehicleId);
 
-    native private void setCoordinateSystem(long vehicleId, int rightAxisIndex,
-            int upAxisIndex, int forwardAxisIndex);
+    native private static void setCoordinateSystem(long vehicleId,
+            int rightAxisIndex, int upAxisIndex, int forwardAxisIndex);
 
-    native private void steer(long vehicleId, int wheelIndex, float angle);
+    native private static void steer(long vehicleId, int wheelIndex,
+            float angle);
 
-    native private void updateWheelTransform(long vehicleId, int wheelIndex,
-            boolean interpolated);
+    native private static void updateWheelTransform(long vehicleId,
+            int wheelIndex, boolean interpolated);
 }
