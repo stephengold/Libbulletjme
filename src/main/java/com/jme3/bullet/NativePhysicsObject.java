@@ -36,6 +36,8 @@ import jme3utilities.Validate;
 
 /**
  * An abstract class to represent a native (Bullet) physics object.
+ *
+ * @author Stephen Gold sgold@sonic.net
  */
 abstract public class NativePhysicsObject {
     // *************************************************************************
@@ -58,12 +60,12 @@ abstract public class NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Test whether a native object is assigned.
+     * Test whether a native object is assigned to this instance.
      *
      * @return true if one is assigned, otherwise false
      */
     final public boolean hasAssignedNativeObject() {
-        if (id == 0) {
+        if (id == 0L) {
             return false;
         } else {
             return true;
@@ -71,10 +73,9 @@ abstract public class NativePhysicsObject {
     }
 
     /**
-     * Read the identifier of the assigned native object, assuming that one is
-     * assigned.
+     * Read the ID of the assigned native object, assuming that one is assigned.
      *
-     * @return the identifier (not zero)
+     * @return the native identifier (not zero)
      */
     public long nativeId() {
         assert hasAssignedNativeObject();
@@ -84,22 +85,20 @@ abstract public class NativePhysicsObject {
     // new protected methods
 
     /**
-     * Reassign a native object, unassigning any previous-assigned one.
+     * Assign a native object to this instance, unassigning (but not freeing)
+     * any previously assigned one.
      *
-     * @param nativeId the identifier (address) of the native object to assign
-     * (not zero)
+     * @param nativeId the identifier of the native object to assign (not zero)
      */
-    protected void reassignNativeId(long nativeId) {
+    final protected void reassignNativeId(long nativeId) {
         Validate.nonZero(nativeId, "nativeId");
         id = nativeId;
     }
 
     /**
-     * Assign a native object, assuming that none is assigned. Typically invoked
-     * when instantiating a subclass.
+     * Assign a native object to this instance, assuming that none is assigned.
      *
-     * @param nativeId the identifier (address) of the native object to assign
-     * (not zero)
+     * @param nativeId the identifier of the native object to assign (not zero)
      */
     protected void setNativeId(long nativeId) {
         Validate.nonZero(nativeId, "nativeId");
@@ -109,9 +108,11 @@ abstract public class NativePhysicsObject {
     }
 
     /**
-     * Unassign the native object, assuming that one is assigned.
+     * Unassign (but don't free) the assigned native object, assuming that one
+     * is assigned. Typically invoked while cloning a subclass, followed by
+     * setNativeId().
      */
-    protected void unassignNativeObject() {
+    final protected void unassignNativeObject() {
         assert hasAssignedNativeObject();
         id = 0L;
     }
