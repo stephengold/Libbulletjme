@@ -672,7 +672,7 @@ public class VehicleWheel {
     // *************************************************************************
     // native methods
 
-    native private void applyInfo(long vehicleId, int wheelIndex,
+    native private static void applyInfo(long vehicleId, int wheelIndex,
             float suspensionStiffness,
             float wheelsDampingRelaxation,
             float wheelsDampingCompression,
@@ -684,43 +684,47 @@ public class VehicleWheel {
             boolean frontWheel,
             float suspensionRestLength);
 
-    native private float getBrake(long vehicleId, int wheelIndex);
+    native private static float getBrake(long vehicleId, int wheelIndex);
 
-    native private void getCollisionLocation(long vehicleId, int wheelIndex,
+    native private static void getCollisionLocation(long vehicleId,
+            int wheelIndex, Vector3f vector);
+
+    native private static void getCollisionNormal(long vehicleId,
+            int wheelIndex, Vector3f vector);
+
+    native private static float getDeltaRotation(long vehicleId,
+            int wheelIndex);
+
+    native private static float getEngineForce(long vehicleId, int wheelIndex);
+
+    native private static float getRadius(long vehicleId, int wheelIndex);
+
+    native private static float getRestLength(long vehicleId, int wheelIndex);
+
+    native private static float getRollInfluence(long vehicleId,
+            int wheelIndex);
+
+    native private static float getRotationAngle(long vehicleId,
+            int wheelIndex);
+
+    native private static float getSkidInfo(long vehicleId, int wheelIndex);
+
+    native private static float getSteerAngle(long vehicleId, int wheelIndex);
+
+    native private static float getSuspensionLength(long vehicleId,
+            int wheelIndex);
+
+    native private static void getWheelLocation(long vehicleId, int wheelIndex,
             Vector3f vector);
 
-    native private void getCollisionNormal(long vehicleId, int wheelIndex,
-            Vector3f vector);
-
-    native private float getDeltaRotation(long vehicleId, int wheelIndex);
-
-    native private float getEngineForce(long vehicleId, int wheelIndex);
-
-    native private float getRadius(long vehicleId, int wheelIndex);
-
-    native private float getRestLength(long vehicleId, int wheelIndex);
-
-    native private float getRollInfluence(long vehicleId, int wheelIndex);
-
-    native private float getRotationAngle(long vehicleId, int wheelIndex);
-
-    native private float getSkidInfo(long vehicleId, int wheelIndex);
-
-    native private float getSteerAngle(long vehicleId, int wheelIndex);
-
-    native private float getSuspensionLength(long vehicleId, int wheelIndex);
-
-    native private void getWheelLocation(long vehicleId, int wheelIndex,
-            Vector3f vector);
-
-    native private void getWheelRotation(long vehicleId, int wheelIndex,
+    native private static void getWheelRotation(long vehicleId, int wheelIndex,
             Matrix3f matrix);
 
-    native private boolean isFront(long vehicleId, int wheelIndex);
+    native private static boolean isFront(long vehicleId, int wheelIndex);
 
-    native private void setRotationAngle(long vehicleId, int wheelIndex,
+    native private static void setRotationAngle(long vehicleId, int wheelIndex,
             float angle);
 
-    native private void setSuspensionLength(long vehicleId, int wheelIndex,
-            float length);
+    native private static void setSuspensionLength(long vehicleId,
+            int wheelIndex, float length);
 }
