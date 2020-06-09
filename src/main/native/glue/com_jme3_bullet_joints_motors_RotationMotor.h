@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getBounce
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -21,7 +21,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getBou
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getDamping
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -29,7 +29,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getDam
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getEquilibrium
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -37,7 +37,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getEqu
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getLowerLimit
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -45,7 +45,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getLow
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getMaxMotorForce
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -53,7 +53,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getMax
  * Signature: (JI)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getParameter
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -61,7 +61,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getPar
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getServoTarget
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getSer
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getStiffness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -77,7 +77,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getSti
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getTargetVelocity
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -85,7 +85,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getTar
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getUpperLimit
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -93,7 +93,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getUpp
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isDampingLimited
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -101,7 +101,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isDa
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isMotorEnabled
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -109,7 +109,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isMo
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isServoEnabled
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -117,7 +117,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isSe
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isSpringEnabled
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -125,7 +125,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isSp
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isStiffnessLimited
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -133,7 +133,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_isSt
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setBounce
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -141,7 +141,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setBounc
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setDamping
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -149,7 +149,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setDampi
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setDampingLimited
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -157,7 +157,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setDampi
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setEquilibrium
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setEquil
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setLowerLimit
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -173,7 +173,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setLower
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setMaxMotorForce
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -181,7 +181,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setMaxMo
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setMotorEnabled
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -189,7 +189,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setMotor
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setParameter
-  (JNIEnv *, jobject, jlong, jint, jfloat);
+  (JNIEnv *, jclass, jlong, jint, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -197,7 +197,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setParam
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setServoEnabled
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -205,7 +205,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setServo
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setServoTarget
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -213,7 +213,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setServo
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setSpringEnabled
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -221,7 +221,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setSprin
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setStiffness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -229,7 +229,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setStiff
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setStiffnessLimited
-  (JNIEnv *, jobject, jlong, jboolean);
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -237,7 +237,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setStiff
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setTargetVelocity
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_joints_motors_RotationMotor
@@ -245,7 +245,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setTarge
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setUpperLimit
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 #ifdef __cplusplus
 }
