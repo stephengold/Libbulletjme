@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_copyValues
-  (JNIEnv *, jobject, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -21,7 +21,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_copyVal
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAeroModel
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -29,7 +29,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAero
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAnchorsHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -37,7 +37,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getAn
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterIterations
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -45,7 +45,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClus
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterKineticHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -53,7 +53,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCl
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterKineticImpulseSplitCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -61,7 +61,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCl
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterRigidHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -69,7 +69,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCl
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterRigidImpulseSplitCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -77,7 +77,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCl
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterSoftHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -85,7 +85,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCl
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getClusterSoftImpulseSplitCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -93,7 +93,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCl
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getCollisionsFlags
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -101,7 +101,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getColl
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDampingCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -109,7 +109,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDa
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDragCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -117,7 +117,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDr
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDriftIterations
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -125,7 +125,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDrif
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDynamicFrictionCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -133,7 +133,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getDy
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getKineticContactsHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -141,7 +141,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getKi
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getLiftCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -149,7 +149,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getLi
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getMaximumVolumeRatio
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -157,7 +157,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getMa
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPoseMatchingCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -165,7 +165,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPo
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPositionIterations
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -173,7 +173,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPosi
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPressureCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -181,7 +181,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getPr
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getRigidContactsHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -189,7 +189,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getRi
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getSoftContactsHardness
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -197,7 +197,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getSo
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getTimeScale
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -205,7 +205,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getTi
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVelocitiesCorrectionFactor
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -213,7 +213,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVe
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVelocitiesIterations
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -221,7 +221,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVelo
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVolumeConservationCoef
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -229,7 +229,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_getVo
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAeroModel
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -237,7 +237,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAero
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAnchorsHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -245,7 +245,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setAnch
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterIterations
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -253,7 +253,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterKineticHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -261,7 +261,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterKineticImpulseSplitCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -269,7 +269,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterRigidHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -277,7 +277,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterRigidImpulseSplitCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -285,7 +285,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterSoftHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -293,7 +293,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClusterSoftImpulseSplitCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -301,7 +301,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setClus
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setCollisionsFlags
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -309,7 +309,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setColl
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDampingCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -317,7 +317,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDamp
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDragCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -325,7 +325,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDrag
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDriftIterations
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -333,7 +333,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDrif
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDynamicFrictionCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -341,7 +341,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setDyna
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setKineticContactsHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -349,7 +349,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setKine
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setLiftCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -357,7 +357,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setLift
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setMaximumVolumeRatio
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -365,7 +365,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setMaxi
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPoseMatchingCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -373,7 +373,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPose
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPositionIterations
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -381,7 +381,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPosi
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPressureCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -389,7 +389,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setPres
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setRigidContactsHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -397,7 +397,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setRigi
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setSoftContactsHardness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -405,7 +405,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setSoft
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setTimeScale
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -413,7 +413,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setTime
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVelocitiesCorrectionFactor
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -421,7 +421,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVelo
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVelocitiesIterations
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyConfig
@@ -429,7 +429,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVelo
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyConfig_setVolumeConservationCoef
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 #ifdef __cplusplus
 }
