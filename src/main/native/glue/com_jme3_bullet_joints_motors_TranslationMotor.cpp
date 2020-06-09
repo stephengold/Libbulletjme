@@ -42,7 +42,7 @@
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getBounce
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -57,7 +57,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getBo
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getDamping
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -72,7 +72,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getDa
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getEquilibrium
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getEq
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getLowerLimit
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -102,7 +102,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getLo
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getMaxMotorForce
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -117,7 +117,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getMa
  * Signature: (JILcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getParameter
-(JNIEnv *pEnv, jobject, jlong motorId, jint parameterIndex,
+(JNIEnv *pEnv, jclass, jlong motorId, jint parameterIndex,
         jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
@@ -148,7 +148,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getPa
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getServoTarget
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -163,7 +163,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getSe
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getStiffness
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -178,7 +178,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getSt
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getTargetVelocity
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -193,7 +193,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getTa
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getUpperLimit
-(JNIEnv *pEnv, jobject, jlong motorId, jobject storeVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject storeVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -208,7 +208,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getUp
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_isDampingLimited
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
@@ -226,7 +226,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_isMotorEnabled
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
@@ -244,7 +244,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_isServoEnabled
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
@@ -262,7 +262,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_isSpringEnabled
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
@@ -280,7 +280,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_isStiffnessLimited
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
@@ -298,7 +298,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setBounce
-(JNIEnv *pEnv, jobject, jlong motorId, jobject bounceVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject bounceVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -313,7 +313,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setBo
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setDamping
-(JNIEnv *pEnv, jobject, jlong motorId, jobject dampingVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject dampingVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -328,7 +328,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setDa
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setDampingLimited
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex, jboolean limitFlag) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex, jboolean limitFlag) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
@@ -345,7 +345,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setDa
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setEquilibrium
-(JNIEnv *pEnv, jobject, jlong motorId, jobject offsetVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject offsetVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -360,7 +360,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setEq
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setLowerLimit
-(JNIEnv *pEnv, jobject, jlong motorId, jobject offsetVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject offsetVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -375,7 +375,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setLo
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setMaxMotorForce
-(JNIEnv *pEnv, jobject, jlong motorId, jobject forceVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject forceVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -390,7 +390,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setMa
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setMotorEnabled
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex, jboolean enableFlag) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex, jboolean enableFlag) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
@@ -407,7 +407,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setMo
  * Signature: (JILcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setParameter
-(JNIEnv *pEnv, jobject, jlong motorId, jint parameterIndex, jobject vector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint parameterIndex, jobject vector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -437,7 +437,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setPa
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setServoEnabled
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex, jboolean enableFlag) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex, jboolean enableFlag) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
@@ -454,7 +454,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSe
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setServoTarget
-(JNIEnv *pEnv, jobject, jlong motorId, jobject targetVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject targetVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -469,7 +469,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSe
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSpringEnabled
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex, jboolean enableFlag) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex, jboolean enableFlag) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
@@ -486,7 +486,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSp
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setStiffness
-(JNIEnv *pEnv, jobject, jlong motorId, jobject stiffnessVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject stiffnessVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -502,7 +502,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSt
  * Signature: (JIZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setStiffnessLimited
-(JNIEnv *pEnv, jobject, jlong motorId, jint axisIndex, jboolean limitFlag) {
+(JNIEnv *pEnv, jclass, jlong motorId, jint axisIndex, jboolean limitFlag) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
@@ -519,7 +519,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSt
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setTargetVelocity
-(JNIEnv *pEnv, jobject, jlong motorId, jobject velocityVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject velocityVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
@@ -534,7 +534,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setTa
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setUpperLimit
-(JNIEnv *pEnv, jobject, jlong motorId, jobject offsetVector) {
+(JNIEnv *pEnv, jclass, jlong motorId, jobject offsetVector) {
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",)
