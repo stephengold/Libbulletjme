@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
 (JNIEnv *, jclass, jlong nativeBVHBufferId) {
     if (nativeBVHBufferId != 0) {
         void *pBuffer = reinterpret_cast<void *> (nativeBVHBufferId);
-        btAlignedFree(pBuffer);
+        btAlignedFree(pBuffer); //dance035
     }
 }
 
@@ -123,7 +123,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setBVH
 (JNIEnv *pEnv, jclass, jbyteArray bytearray, jlong meshobj) {
     int len = pEnv->GetArrayLength(bytearray);
-    void *pBuffer = btAlignedAlloc(len, 16);
+    void *pBuffer = btAlignedAlloc(len, 16); //dance035
     pEnv->GetByteArrayRegion(bytearray, 0, len,
             reinterpret_cast<jbyte *> (pBuffer));
 

@@ -447,7 +447,7 @@ abstract public class Constraint extends PhysicsJoint {
         return result;
     }
     // *************************************************************************
-    // Object methods
+    // NativePhysicsObject methods
 
     /**
      * Finalize this Constraint just before it is destroyed. Should be invoked
