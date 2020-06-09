@@ -36,8 +36,6 @@
 #include "com_jme3_bullet_collision_shapes_MeshCollisionShape.h"
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
-#include "btBulletDynamicsCommon.h"
-#include "BulletCollision/Gimpact/btGImpactShape.h"
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -57,19 +55,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
             pShape = new btBvhTriangleMeshShape(pMesh, isMemoryEfficient,
             buildBVH); //dance016
     return reinterpret_cast<jlong> (pShape);
-}
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    finalizeBVH
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
-(JNIEnv *, jclass, jlong nativeBVHBufferId) {
-    if (nativeBVHBufferId != 0) {
-        void *pBuffer = reinterpret_cast<void *> (nativeBVHBufferId);
-        btAlignedFree(pBuffer); //dance035
-    }
 }
 
 /*
@@ -117,22 +102,18 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    setBVH
- * Signature: ([BJ)J
+ * Method:    setOptimizedBvh
+ * Signature: (JJ)V
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setBVH
-(JNIEnv *pEnv, jclass, jbyteArray bytearray, jlong meshobj) {
-    int len = pEnv->GetArrayLength(bytearray);
-    void *pBuffer = btAlignedAlloc(len, 16); //dance035
-    pEnv->GetByteArrayRegion(bytearray, 0, len,
-            reinterpret_cast<jbyte *> (pBuffer));
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setOptimizedBvh
+(JNIEnv *pEnv, jclass, jlong shapeId, jlong bvhId) {
+    btBvhTriangleMeshShape * const
+            pShape = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.",);
+    btAssert(pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
 
-    btOptimizedBvh *pBvh
-            = btOptimizedBvh::deSerializeInPlace(pBuffer, len, true);
-    btBvhTriangleMeshShape *pShape
-            = reinterpret_cast<btBvhTriangleMeshShape *> (meshobj);
-    NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.", 0);
+    btOptimizedBvh * const pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
+
     pShape->setOptimizedBvh(pBvh);
-
-    return reinterpret_cast<jlong> (pBuffer);
 }

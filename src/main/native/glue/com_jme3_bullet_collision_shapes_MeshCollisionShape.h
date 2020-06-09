@@ -17,14 +17,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    finalizeBVH
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_finalizeBVH
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    recalcAabb
  * Signature: (J)V
  */
@@ -33,19 +25,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    saveBVH
- * Signature: (J)[B
+ * Method:    setOptimizedBvh
+ * Signature: (JJ)V
  */
-JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_saveBVH
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    setBVH
- * Signature: ([BJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setBVH
-  (JNIEnv *, jclass, jbyteArray, jlong);
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setOptimizedBvh
+  (JNIEnv *, jclass, jlong, jlong);
 
 #ifdef __cplusplus
 }
