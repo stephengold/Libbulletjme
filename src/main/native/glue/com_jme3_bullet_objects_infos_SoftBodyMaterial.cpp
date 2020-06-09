@@ -43,7 +43,7 @@
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getAngularStiffnessFactor
-(JNIEnv *pEnv, jobject, jlong materialId) {
+(JNIEnv *pEnv, jclass, jlong materialId) {
     const btSoftBody::Material * const
             pMaterial = reinterpret_cast<btSoftBody::Material *> (materialId);
     NULL_CHK(pEnv, pMaterial, "The material does not exist.", 0);
@@ -57,7 +57,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_get
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getLinearStiffnessFactor
-(JNIEnv *pEnv, jobject, jlong materialId) {
+(JNIEnv *pEnv, jclass, jlong materialId) {
     const btSoftBody::Material * const
             pMaterial = reinterpret_cast<btSoftBody::Material *> (materialId);
     NULL_CHK(pEnv, pMaterial, "The material does not exist.", 0);
@@ -87,7 +87,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getM
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getVolumeStiffnessFactor
-(JNIEnv *pEnv, jobject, jlong materialId) {
+(JNIEnv *pEnv, jclass, jlong materialId) {
     const btSoftBody::Material * const
             pMaterial = reinterpret_cast<btSoftBody::Material *> (materialId);
     NULL_CHK(pEnv, pMaterial, "The material does not exist.", 0);
@@ -101,7 +101,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_get
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setAngularStiffnessFactor
-(JNIEnv *pEnv, jobject, jlong materialId, jfloat factor) {
+(JNIEnv *pEnv, jclass, jlong materialId, jfloat factor) {
     btSoftBody::Material * const
             pMaterial = reinterpret_cast<btSoftBody::Material *> (materialId);
     NULL_CHK(pEnv, pMaterial, "The material does not exist.",);
@@ -115,7 +115,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setAn
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setLinearStiffnessFactor
-(JNIEnv *pEnv, jobject, jlong materialId, jfloat factor) {
+(JNIEnv *pEnv, jclass, jlong materialId, jfloat factor) {
     btSoftBody::Material * const
             pMaterial = reinterpret_cast<btSoftBody::Material *> (materialId);
     NULL_CHK(pEnv, pMaterial, "The material does not exist.",);
@@ -129,7 +129,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setLi
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setVolumeStiffnessFactor
-(JNIEnv *pEnv, jobject, jlong materialId, jfloat factor) {
+(JNIEnv *pEnv, jclass, jlong materialId, jfloat factor) {
     btSoftBody::Material * const
             pMaterial = reinterpret_cast<btSoftBody::Material *> (materialId);
     NULL_CHK(pEnv, pMaterial, "The material does not exist.",);

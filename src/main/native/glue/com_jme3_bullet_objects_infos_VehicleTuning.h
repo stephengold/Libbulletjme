@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_createNative
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -21,7 +21,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_createN
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_finalize
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setFrictionSlip
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setFrict
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSuspensionForce
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSu
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSuspensionTravelCm
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setMaxSu
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionCompression
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspe
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionDamping
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning
@@ -69,7 +69,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspe
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleTuning_setSuspensionStiffness
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 #ifdef __cplusplus
 }

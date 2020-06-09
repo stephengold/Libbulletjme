@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Quaternion;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_applyTransform
-  (JNIEnv *, jobject, jlong, jobject, jobject);
+  (JNIEnv *, jclass, jlong, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
@@ -21,7 +21,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionSta
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_createMotionState
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
@@ -29,7 +29,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_finalizeNative
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_f
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldLocation
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldRotation
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldRotationQuat
-  (JNIEnv *, jobject, jlong, jobject);
+  (JNIEnv *, jclass, jlong, jobject);
 
 #ifdef __cplusplus
 }

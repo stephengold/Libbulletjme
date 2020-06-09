@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getAngularStiffnessFactor
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyMaterial
@@ -21,7 +21,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_get
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getLinearStiffnessFactor
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyMaterial
@@ -37,7 +37,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getM
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_getVolumeStiffnessFactor
-  (JNIEnv *, jobject, jlong);
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyMaterial
@@ -45,7 +45,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_get
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setAngularStiffnessFactor
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyMaterial
@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setAn
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setLinearStiffnessFactor
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_SoftBodyMaterial
@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setLi
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_SoftBodyMaterial_setVolumeStiffnessFactor
-  (JNIEnv *, jobject, jlong, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat);
 
 #ifdef __cplusplus
 }
