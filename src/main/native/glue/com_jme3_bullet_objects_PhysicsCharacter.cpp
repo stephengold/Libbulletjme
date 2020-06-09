@@ -96,7 +96,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createChar
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsCharacter_createGhostObject
-(JNIEnv *pEnv, jobject) {
+(JNIEnv *pEnv, jclass) {
     jmeClasses::initJavaClasses(pEnv);
 
     btPairCachingGhostObject * const
