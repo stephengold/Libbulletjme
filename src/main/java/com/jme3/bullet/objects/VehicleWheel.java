@@ -274,6 +274,15 @@ public class VehicleWheel {
     }
 
     /**
+     * Determine the index of this wheel, based on creation order.
+     *
+     * @return the zero-origin index (&ge;0)
+     */
+    public int getIndex() {
+        return wheelIndex;
+    }
+
+    /**
      * Copy the location where the suspension connects to the chassis.
      *
      * @param storeResult storage for the result (modified if not null)
