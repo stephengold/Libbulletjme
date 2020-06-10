@@ -74,7 +74,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     /**
      * list of wheels
      */
-    private ArrayList<VehicleWheel> wheels = new ArrayList<>(6);
+    final private ArrayList<VehicleWheel> wheels = new ArrayList<>(6);
     /**
      * Unique identifier of the ray caster. createVehicle() sets this to a
      * non-zero value. The ID will change if the object gets rebuilt.
@@ -87,7 +87,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     /**
      * tuning parameters applied when a wheel is created
      */
-    private VehicleTuning tuning = new VehicleTuning();
+    final private VehicleTuning tuning = new VehicleTuning();
     // *************************************************************************
     // constructors
 
