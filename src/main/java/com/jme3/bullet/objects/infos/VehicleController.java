@@ -162,15 +162,6 @@ public class VehicleController extends NativePhysicsObject {
     }
 
     /**
-     * Copy all parameter values from the specified controller.
-     *
-     * @param source the controller to copy from (not null, unaffected)
-     */
-    public void copyAll(VehicleController source) {
-        // TODO
-    }
-
-    /**
      * Determine the number of wheels in this controller.
      *
      * @return the count (&ge;0)
