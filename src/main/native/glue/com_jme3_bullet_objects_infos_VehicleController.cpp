@@ -113,25 +113,32 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_brak
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleController
  * Method:    createRaycastVehicle
- * Signature: (JJ)J
+ * Signature: (JJJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_createRaycastVehicle
-(JNIEnv *pEnv, jclass, jlong bodyId, jlong casterId) {
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong rigidBodyId, jlong tuningId) {
     jmeClasses::initJavaClasses(pEnv);
 
-    btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.", 0);
+
+    btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
     NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.", 0);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+
+    const btRaycastVehicle::btVehicleTuning * const
+            pTuning = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
+            tuningId);
 
     pBody->setActivationState(DISABLE_DEACTIVATION);
 
     btVehicleRaycaster * const
-            pCaster = reinterpret_cast<btDefaultVehicleRaycaster *> (casterId);
-    NULL_CHK(pEnv, pCaster, "The btVehicleRaycaster does not exist.", 0);
-
-    btRaycastVehicle::btVehicleTuning tuning;
-    btRaycastVehicle *
-            pController = new btRaycastVehicle(tuning, pBody, pCaster); //dance032
+            pCaster = new btDefaultVehicleRaycaster(pWorld); //dance033 TODO leak
+    btRaycastVehicle * const
+            pController = new btRaycastVehicle(*pTuning, pBody, pCaster); //dance032
 
     return reinterpret_cast<jlong> (pController);
 }

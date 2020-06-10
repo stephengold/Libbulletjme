@@ -34,10 +34,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_brak
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleController
  * Method:    createRaycastVehicle
- * Signature: (JJ)J
+ * Signature: (JJJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_createRaycastVehicle
-  (JNIEnv *, jclass, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong, jlong);
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleController

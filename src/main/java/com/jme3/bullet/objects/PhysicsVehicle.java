@@ -76,11 +76,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      */
     final private ArrayList<VehicleWheel> wheels = new ArrayList<>(6);
     /**
-     * Unique identifier of the ray caster. createVehicle() sets this to a
-     * non-zero value. The ID will change if the object gets rebuilt.
-     */
-    private long rayCasterId = 0L;
-    /**
      * controller or "action" for this vehicle
      */
     private VehicleController controller;
@@ -233,7 +228,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Used internally, creates the controller when vehicle is added to a
+     * Used internally, creates the controller when the vehicle is added to a
      * PhysicsSpace.
      *
      * @param space which PhysicsSpace (not zero)
@@ -242,18 +237,11 @@ public class PhysicsVehicle extends PhysicsRigidBody {
         if (space == null) {
             return;
         }
-        long spaceId = space.nativeId();
-        if (rayCasterId != 0L) {
-            logger3.log(Level.FINE, "Clearing RayCaster {0}",
-                    Long.toHexString(rayCasterId));
-            finalizeRaycaster(rayCasterId);
+        if (isInWorld()) {
+            assert getCollisionSpace() == space;
         }
 
-        rayCasterId = createVehicleRaycaster(spaceId);
-        logger3.log(Level.FINE, "Created RayCaster {0}",
-                Long.toHexString(rayCasterId));
-
-        controller = new VehicleController(this, rayCasterId);
+        controller = new VehicleController(this, space);
         logger3.log(Level.FINE, "Created {0}", controller);
 
         controller.setCoordinateSystem(PhysicsSpace.AXIS_X,
@@ -700,23 +688,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     // *************************************************************************
     // PhysicsRigidBody methods
 
-    /**
-     * Finalize this vehicle just before it is destroyed. Should be invoked only
-     * by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger3.log(Level.FINE, "Finalizing RayCaster {0}",
-                    Long.toHexString(rayCasterId));
-            finalizeRaycaster(rayCasterId);
-        } finally {
-            super.finalize();
-        }
-    }
-
     @Override
     protected void postRebuild() {
         super.postRebuild();
@@ -746,10 +717,4 @@ public class PhysicsVehicle extends PhysicsRigidBody {
 
         return result;
     }
-    // *************************************************************************
-    // native methods
-
-    native private static long createVehicleRaycaster(long physicsSpaceId);
-
-    native private static void finalizeRaycaster(long casterId);
 }

@@ -61,7 +61,7 @@ public class VehicleController extends NativePhysicsObject {
     // fields
 
     /**
-     * chassis collision object being controlled
+     * chassis collision object that's being controlled
      */
     final private PhysicsVehicle pco;
     // *************************************************************************
@@ -71,14 +71,23 @@ public class VehicleController extends NativePhysicsObject {
      * Instantiate a controller for the specified collision object.
      *
      * @param vehicle the collision object to control (not null)
-     * @param casterId the native ID of the raycaster (not zero)
+     * @param space the PhysicsSpace where the collision object is or will be
+     * added (not null)
      */
-    public VehicleController(PhysicsVehicle vehicle, long casterId) {
-        Validate.nonNull(vehicle, "collision object");
-        Validate.nonZero(casterId, "caster ID");
+    public VehicleController(PhysicsVehicle vehicle, PhysicsSpace space) {
+        Validate.nonNull(vehicle, "vehicle");
+        Validate.nonNull(space, "space");
 
         pco = vehicle;
-        createController(casterId);
+
+        long spaceId = space.nativeId();
+        long rigidBodyId = vehicle.nativeId();
+        VehicleTuning tuning = vehicle.getTuning();
+        long tuningId = tuning.nativeId();
+        long controllerId
+                = createRaycastVehicle(spaceId, rigidBodyId, tuningId);
+
+        super.setNativeId(controllerId);
     }
     // *************************************************************************
     // new methods exposed
@@ -334,17 +343,6 @@ public class VehicleController extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // private methods
-
-    /**
-     * Create a btRaycastVehicle.
-     */
-    private void createController(long casterId) {
-        long rigidBodyId = pco.nativeId();
-        long controllerId = createRaycastVehicle(rigidBodyId, casterId);
-        setNativeId(controllerId);
-    }
-    // *************************************************************************
     // native methods
 
     native private static int addWheel(long controllerId, Vector3f location,
@@ -357,8 +355,8 @@ public class VehicleController extends NativePhysicsObject {
     native private static void brake(long controllerId, int wheelIndex,
             float impulse);
 
-    native private static long createRaycastVehicle(long bodyId,
-            long rayCasterId);
+    native private static long createRaycastVehicle(long spaceId, long bodyId,
+            long tuningId);
 
     native private static void finalizeNative(long controllerId);
 
