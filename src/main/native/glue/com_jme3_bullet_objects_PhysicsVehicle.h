@@ -45,38 +45,6 @@ extern "C" {
 #define com_jme3_bullet_objects_PhysicsVehicle_massForStatic 0.0f
 /*
  * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    addWheel
- * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;FFJZ)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_addWheel
-  (JNIEnv *, jclass, jlong, jobject, jobject, jobject, jfloat, jfloat, jlong, jboolean);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    applyEngineForce
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_applyEngineForce
-  (JNIEnv *, jclass, jlong, jint, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    brake
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_brake
-  (JNIEnv *, jclass, jlong, jint, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    createRaycastVehicle
- * Signature: (JJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createRaycastVehicle
-  (JNIEnv *, jclass, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
  * Method:    createVehicleRaycaster
  * Signature: (J)J
  */
@@ -85,99 +53,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_createVehicl
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    finalizeNative
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_finalizeNative
-  (JNIEnv *, jclass, jlong, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getCurrentVehicleSpeedKmHour
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getCurrentVehicleSpeedKmHour
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getForwardAxisIndex
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getForwardAxisIndex
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getForwardVector
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getForwardVector
-  (JNIEnv *, jclass, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getRightAxisIndex
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getRightAxisIndex
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getNumWheels
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getNumWheels
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    getUpAxisIndex
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_getUpAxisIndex
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    rayCast
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_rayCast
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    resetSuspension
+ * Method:    finalizeRaycaster
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_resetSuspension
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_finalizeRaycaster
   (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    setCoordinateSystem
- * Signature: (JIII)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_setCoordinateSystem
-  (JNIEnv *, jclass, jlong, jint, jint, jint);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    steer
- * Signature: (JIF)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_steer
-  (JNIEnv *, jclass, jlong, jint, jfloat);
-
-/*
- * Class:     com_jme3_bullet_objects_PhysicsVehicle
- * Method:    updateWheelTransform
- * Signature: (JIZ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsVehicle_updateWheelTransform
-  (JNIEnv *, jclass, jlong, jint, jboolean);
 
 #ifdef __cplusplus
 }
