@@ -1,5 +1,25 @@
 # release log for the Libbulletjme Project
 
+## Version 8.0.0 released on 10 June 2020
+
+ + Added the `static` qualifier to 816 native methods. (API changes)
+ + Finalized 2 methods in the `NativePhysicsObject` class. (API changes)
+ + Split off `BoundingValueHierarchy`
+   from the `MeshCollisionShape` class. (API change)
+ + Split off `CharacterController`
+   from the `PhysicsCharacter` class. (API change)
+ + Split off `VehicleController` from the `PhysicsVehicle` class. (API change)
+ + Privatized the `finalizeNative()` method
+   in the `Constraint` class. (API change)
+ + Privatized 2 protected fields in the `PhysicsVehicle` class.
+ + Removed 4 unused methods from "PhysicsRigidBody.cpp". (API changes)
+ + Removed 2 unused methods from "MultiBody.cpp". (API changes)
+ + Added a native-code fix for JME issue #1351.
+ + Added `postInitialization()` and `versionNumber()` native methods to
+   the `NativeLibrary` class.
+ + Added `getIndex()` to the `VehicleWheel` class.
+ + Built using Gradle v6.5 .
+
 ## Version 7.0.1 released on 5 June 2020
 
  + Replaced inner class `PhysicsSoftBody.Material`
