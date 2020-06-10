@@ -154,6 +154,19 @@ void jmeCollisionSpace::createCollisionSpace(const btVector3& min,
 }
 
 jmeCollisionSpace::~jmeCollisionSpace() {
+    int numCollisionObjects = m_collisionWorld->getNumCollisionObjects();
+    if (numCollisionObjects > 0) {
+        /*
+         * To avoid JME issue #1351, remove all collision objects.
+         */
+        btCollisionObjectArray&
+                objects = m_collisionWorld->getCollisionObjectArray();
+        for (int i = numCollisionObjects - 1; i >= 0; --i) {
+            btCollisionObject *pObject = objects[i];
+            m_collisionWorld->removeCollisionObject(pObject);
+        }
+    }
+
     btBroadphaseInterface *pBroadphase = m_collisionWorld->getBroadphase();
     if (pBroadphase) {
         btOverlappingPairCache * const

@@ -93,8 +93,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_fin
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
     if (pUser != NULL) {
+        /*
+         * To avoid JME issue #1351, remove it from any collision space it's in.
+         */
+        jmeCollisionSpace * const pSpace = pUser->m_jmeSpace;
+        if (pSpace != NULL) {
+            btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+            if (pWorld != NULL) {
+                const btCollisionObjectArray&
+                        objects = pWorld->getCollisionObjectArray();
+                int find = objects.findLinearSearch(pCollisionObject);
+                if (find >= 0 && find < objects.size()) {
+                    pWorld->removeCollisionObject(pCollisionObject);
+                }
+            }
+        }
+
         delete pUser; //dance013
     }
+
     delete pCollisionObject; //dance014
 }
 
