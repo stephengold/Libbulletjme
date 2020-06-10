@@ -35,11 +35,12 @@ import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.math.Vector3f;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * The "action" portion of a PhysicsCharacter, based on Bullet's
+ * The "action" (controller) portion of a PhysicsCharacter, based on Bullet's
  * btKinematicCharacterController.
  *
  * @author Stephen Gold sgold@sonic.net
@@ -61,7 +62,7 @@ public class CharacterController extends NativePhysicsObject {
     /**
      * collision object being controlled
      */
-    private PhysicsCharacter pco;
+    final private PhysicsCharacter pco;
     // *************************************************************************
     // constructors
 
@@ -483,6 +484,7 @@ public class CharacterController extends NativePhysicsObject {
     @Override
     protected void finalize() throws Throwable {
         try {
+            logger.log(Level.FINE, "Finalizing {0}", this);
             long controllerId = nativeId();
             finalizeNative(controllerId);
         } finally {
