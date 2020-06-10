@@ -83,8 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_c
                 "The btCollisionShape isn't convex.");
         return 0;
     }
-    btConvexShape * const
-            pConvex = dynamic_cast<btConvexShape *> (pShape);
+    btConvexShape * const pConvex = (btConvexShape *) pShape;
 
     btScalar stepHeight = 0.5;
     jmeKcc * const
