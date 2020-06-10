@@ -72,9 +72,9 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     // fields
 
     /**
-     * list of wheels TODO privatize
+     * list of wheels
      */
-    protected ArrayList<VehicleWheel> wheels = new ArrayList<>(6);
+    private ArrayList<VehicleWheel> wheels = new ArrayList<>(6);
     /**
      * Unique identifier of the ray caster. createVehicle() sets this to a
      * non-zero value. The ID will change if the object gets rebuilt.
@@ -85,9 +85,9 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      */
     private VehicleController controller;
     /**
-     * tuning parameters applied when a wheel is created TODO privatize
+     * tuning parameters applied when a wheel is created
      */
-    protected VehicleTuning tuning = new VehicleTuning();
+    private VehicleTuning tuning = new VehicleTuning();
     // *************************************************************************
     // constructors
 
@@ -247,7 +247,6 @@ public class PhysicsVehicle extends PhysicsRigidBody {
             logger3.log(Level.FINE, "Clearing RayCaster {0}",
                     Long.toHexString(rayCasterId));
             finalizeRaycaster(rayCasterId);
-            logger3.log(Level.FINE, "Clearing {0}", controller);
         }
 
         rayCasterId = createVehicleRaycaster(spaceId);
@@ -269,8 +268,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the index of the vehicle's forward axis. The vehicle must be added
-     * to a PhysicsSpace.
+     * Determine the index of this vehicle's forward axis. The vehicle must be
+     * added to a PhysicsSpace.
      *
      * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
      */
@@ -281,7 +280,17 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the vehicle's speed in km/h. The vehicle must be added to a
+     * Access this vehicle's controller.
+     *
+     * @return the pre-existing instance, or null if never added to a
+     * PhysicsSpace
+     */
+    public VehicleController getController() {
+        return controller;
+    }
+
+    /**
+     * Determine this vehicle's speed in km/h. The vehicle must be added to a
      * PhysicsSpace.
      *
      * @return speed (in kilometers per hour, positive in the forward direction)
@@ -293,8 +302,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Copy the vehicle's forward direction. The vehicle must be added to a
-     * PhysicsSpace.
+     * Determine this vehicle's forward direction. The vehicle must be added to
+     * a PhysicsSpace.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a direction vector (in physics-space coordinates, either
@@ -306,7 +315,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the initial friction for new wheels.
+     * Determine the initial friction for new wheels.
      *
      * @return the coefficient of friction between tire and ground
      * (0.8&rarr;realistic car, 10000&rarr;kart racer)
@@ -317,7 +326,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the initial maximum suspension force for new wheels.
+     * Determine the initial maximum suspension force for new wheels.
      *
      * @return the maximum force per wheel
      */
@@ -327,7 +336,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the initial maximum suspension travel distance for new wheels.
+     * Determine the initial maximum suspension travel distance for new wheels.
      *
      * @return the maximum distance the suspension can be compressed (in
      * centimeters)
@@ -338,7 +347,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the number of wheels on this vehicle.
+     * Count the number of wheels on this vehicle.
      *
      * @return count (&ge;0)
      */
@@ -349,7 +358,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the initial damping (when the suspension is compressed) for new
+     * Determine the initial damping (when the suspension is compressed) for new
      * wheels.
      *
      * @return the damping coefficient
@@ -360,7 +369,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the initial damping (when the suspension is expanded) for new
+     * Determine the initial damping (when the suspension is expanded) for new
      * wheels.
      *
      * @return the damping coefficient
@@ -371,7 +380,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the initial suspension stiffness for new wheels.
+     * Determine the initial suspension stiffness for new wheels.
      *
      * @return the stiffness constant (10&rarr;off-road buggy, 50&rarr;sports
      * car, 200&rarr;Formula-1 race car)
@@ -379,6 +388,15 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     public float getSuspensionStiffness() {
         float result = tuning.getSuspensionStiffness();
         return result;
+    }
+
+    /**
+     * Access the tuning parameters applied when a wheel is created.
+     *
+     * @return the pre-existing instance (not null)
+     */
+    public VehicleTuning getTuning() {
+        return tuning;
     }
 
     /**
@@ -422,8 +440,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the index of the vehicle's right-side axis. The vehicle must be
-     * added to a PhysicsSpace.
+     * Determine the index of this vehicle's right-side axis. The vehicle must
+     * be added to a PhysicsSpace.
      *
      * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
      */
@@ -659,8 +677,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Read the index of the vehicle's up axis. The vehicle must be added to a
-     * PhysicsSpace.
+     * Determine the index of this vehicle's up axis. The vehicle must be added
+     * to a PhysicsSpace.
      *
      * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
      */
