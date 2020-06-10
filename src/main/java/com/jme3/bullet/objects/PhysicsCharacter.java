@@ -479,7 +479,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Alter which convexSweepTest is used.
+     * Alter which convex-sweep test is used.
      *
      * @param useGhostSweepTest true to use the ghost's test, false to use the
      * world's test (default=true)

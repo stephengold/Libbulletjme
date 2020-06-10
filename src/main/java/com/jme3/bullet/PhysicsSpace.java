@@ -150,7 +150,7 @@ public class PhysicsSpace extends CollisionSpace {
     final private Map<Long, PhysicsRigidBody> rigidMap
             = new ConcurrentHashMap<>(64);
     /**
-     * map vehicle IDs to added objects
+     * map vehicle-controller IDs to added objects
      */
     final private Map<Long, PhysicsVehicle> vehicleMap
             = new ConcurrentHashMap<>(64);
@@ -801,9 +801,10 @@ public class PhysicsSpace extends CollisionSpace {
 
         logger.log(Level.FINE, "Adding {0} to {1}.",
                 new Object[]{character, this});
-        long spaceId = nativeId();
         long characterId = character.nativeId();
         characterMap.put(characterId, character);
+
+        long spaceId = nativeId();
         addCharacterObject(spaceId, characterId);
 
         long actionId = character.getControllerId();
@@ -927,8 +928,11 @@ public class PhysicsSpace extends CollisionSpace {
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{character, this});
         characterMap.remove(characterId);
+
         long spaceId = nativeId();
-        removeAction(spaceId, character.getControllerId());
+        long actionId = character.getControllerId();
+        removeAction(spaceId, actionId);
+
         removeCharacterObject(spaceId, characterId);
     }
 
@@ -948,16 +952,19 @@ public class PhysicsSpace extends CollisionSpace {
         long spaceId = nativeId();
         if (rigidBody instanceof PhysicsVehicle) {
             PhysicsVehicle vehicle = (PhysicsVehicle) rigidBody;
-            long vehicleId = vehicle.getVehicleId();
             logger.log(Level.FINE, "Removing action for {0} from {1}.",
                     new Object[]{vehicle, this});
-            vehicleMap.remove(vehicleId);
-            removeAction(spaceId, vehicleId);
+
+            long actionId = vehicle.getVehicleId();
+            vehicleMap.remove(actionId);
+
+            removeAction(spaceId, actionId);
         }
 
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{rigidBody, this});
         rigidMap.remove(rigidBodyId);
+
         removeRigidBody(spaceId, rigidBodyId);
     }
     // *************************************************************************

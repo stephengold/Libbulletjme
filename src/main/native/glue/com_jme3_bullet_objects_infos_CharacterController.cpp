@@ -336,7 +336,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_re
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",);
 
     btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
-    NULL_CHK(pEnv, pWorld, "The btDynamicsWorld does not exist.",);
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.",);
 
     pController->reset(pWorld);
 }

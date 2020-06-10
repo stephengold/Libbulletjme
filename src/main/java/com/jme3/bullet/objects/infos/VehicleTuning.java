@@ -36,7 +36,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Tuning parameters for a PhysicsVehicle, based on btVehicleTuning.
+ * Tuning parameters for a PhysicsVehicle, based on Bullet's btVehicleTuning.
  *
  * @author normenhansen
  */
