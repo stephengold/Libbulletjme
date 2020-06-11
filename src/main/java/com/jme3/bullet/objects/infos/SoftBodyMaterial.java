@@ -33,12 +33,21 @@ package com.jme3.bullet.objects.infos;
 
 import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.objects.PhysicsSoftBody;
+import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
  * Provide access to 3 fields of the native btSoftBody::Material struct.
  */
 public class SoftBodyMaterial extends NativePhysicsObject {
+    // *********************************************************************
+    // constants and loggers
+
+    /**
+     * message logger for this class
+     */
+    final public static Logger logger
+            = Logger.getLogger(PhysicsSoftBody.class.getName());
     // *********************************************************************
     // constructors
 
