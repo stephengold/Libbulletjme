@@ -187,7 +187,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
         this.vehicle = vehicle;
     }
     // *************************************************************************
-    // Object methods
+    // NativePhysicsObject methods
 
     /**
      * Finalize this motion state just before it is destroyed. Should be invoked
