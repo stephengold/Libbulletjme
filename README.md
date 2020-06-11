@@ -40,6 +40,7 @@ standalone Maven artifacts are provided.
  + [History](#history)
  + [Acknowledgments](#acks)
 
+
 <a name="add"/>
 
 ## How to add Libbulletjme to an existing project
@@ -50,7 +51,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:7.0.1
+            compile 'com.github.stephengold:Libbulletjme:8.0.0
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -62,6 +63,7 @@ standalone Maven artifacts are provided.
 
         import com.jme3.system.NativeLibraryLoader;
         NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
+
 
 <a name="examples"/>
 
@@ -217,6 +219,7 @@ public class HelloVehicle {
     }
 ```
 
+
 <a name="build"/>
 
 ## How to build Libbulletjme from source
@@ -232,7 +235,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 7.0.1`
+     + `git checkout -b latest 8.0.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -259,6 +262,7 @@ in the `dist` directory/folder.
 You can also install the Maven artifacts to your local cache:
  + using Bash:  `./gradlew :Libbulletjme:publishToMavenLocal`
  + using Windows Command Prompt:  `.\gradlew :Libbulletjme:publishToMavenLocal`
+
 
 <a name="lexicon"/>
 
@@ -299,7 +303,7 @@ btGImpactMeshShape                      .bullet.collision.shapes.GImpactCollisio
 btHeightfieldTerrainShape               .bullet.collision.shapes.HeightfieldCollisionShape
 btHingeConstraint                       .bullet.joints.HingeJoint
 btIndexedMesh                           .bullet.collision.shapes.infos.IndexedMesh
-btKinematicCharacterController          .bullet.objects.PhysicsCharacter
+btKinematicCharacterController          .bullet.objects.infos.CharacterController
 btManifoldPoint                         .bullet.collision.PhysicsCollisionEvent
 btMatrix3x3                             .math.Matrix3f
 btMultiBody                             .bullet.MultiBody
@@ -308,10 +312,11 @@ btMultiBodyLink                         .bullet.MultiBodyLink
 btMultiBodyLink::eFeatherstoneJointType .bullet.MultiBodyJointType
 btMultiBodyDynamicsWorld                .bullet.MultiBodySpace
 btMultiSphereShape                      .bullet.collision.shapes.MultiSphere
+btOptimizedBvh                          .bullet.collision.shapes.infos.BoundingValueHierarchy
 btPairCachingGhostObject                .bullet.objects.PhysicsGhostObject
 btPoint2PointConstraint                 .bullet.joints.Point2PointJoint
 btQuaternion                            .math.Quaternion
-btRaycastVehicle                        .bullet.objects.PhysicsVehicle
+btRaycastVehicle                        .bullet.objects.infos.VehicleController
 btRaycastVehicle::btVehicleTuning       .bullet.objects.infos.VehicleTuning
 btRigidBody                             .bullet.objects.PhysicsRigidBody
 btRotationalLimitMotor                  .bullet.joints.motors.RotationalLimitMotor
@@ -350,10 +355,12 @@ IVHACD::ConvexHull  vhacd.VHACDHull
 IVHACD::Parameters  vhacd.VHACDParamters
 </pre>
 
+
 <a name="todo"/>
 
 ## What's missing
 
+ + support for iOS operating system
  + certain constraints:
    + `btFixedConstraint`
    + `btGearConstraint`
@@ -368,7 +375,6 @@ IVHACD::Parameters  vhacd.VHACDParamters
  + profiling
  + extras, examples, and tests
  + execution tracing
- + support for ARM architecture
  + `btAssert()` should perhaps throw a Java exception
 
 <a name="links"/>
@@ -383,6 +389,8 @@ IVHACD::Parameters  vhacd.VHACDParamters
  + The [Bullet Forum](https://pybullet.org/Bullet/phpBB3)
  + The [Bullet home page][bullet]
  + [JBullet], a known alternative to Libbulletjme
+ + [“Real-time Vehicle Simulation for Video Games Using the Bullet Physics Library” by Hammad Mazhar](https://sbel.wisc.edu/wp-content/uploads/sites/569/2018/05/Real-time-Vehicle-Simulation-for-Video-Games-Using-the-Bullet-Physics-Library.pdf)
+ + [“Vehicle Simulation With Bullet” by Kester Maddock](https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc)
 
 [Jump to table of contents](#toc)
 
@@ -435,6 +443,7 @@ and partly on [Minie].
 Minie is, in turn, based on `jme3-bullet`, another jMonkeyEngine library.
 
 [Jump to table of contents](#toc)
+
 
 <a name="acks"/>
 
