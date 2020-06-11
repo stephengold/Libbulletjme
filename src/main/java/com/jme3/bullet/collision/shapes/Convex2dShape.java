@@ -59,7 +59,7 @@ public class Convex2dShape extends ConvexShape {
      * shape on which this shape is based, must be convex and lie entirely in
      * the X-Y plane
      */
-    final private CollisionShape base;
+    final private ConvexShape base;
     // *************************************************************************
     // constructors
 
