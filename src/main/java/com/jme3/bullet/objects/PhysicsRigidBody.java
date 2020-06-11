@@ -966,6 +966,7 @@ public class PhysicsRigidBody extends PhysicsBody {
         if (mass != massForStatic) {
             validateDynamicShape(shape);
         }
+        assert hasAssignedNativeObject();
 
         if (mass == this.mass) {
             return;
