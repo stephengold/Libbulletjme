@@ -370,6 +370,7 @@ IVHACD::Parameters  vhacd.VHACDParamters
    + `btMinkowskiSumShape`
    + `btMultimaterialTriangleMeshShape`
    + `btScaledBvhTriangleMeshShape`
+ + `btSoftMultiBodyDynamicsWorld`
  + inverse dynamics
  + serialization (file loader)
  + profiling
