@@ -72,15 +72,15 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
      */
     private boolean added = false;
     /**
-     * local copy of the constraint force mixing parameter (default=1)
+     * local copy of the constraint force mixing parameter
      */
     private float cfm = 1f;
     /**
-     * local copy of the error-reduction parameter (default=1)
+     * local copy of the error-reduction parameter
      */
     private float erp = 1f;
     /**
-     * local copy of the split parameter (default=1)
+     * local copy of the split parameter
      */
     private float split = 1f;
     /**
@@ -386,7 +386,7 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
         return true;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static float getConstraintForceMixing(long jointId);
 

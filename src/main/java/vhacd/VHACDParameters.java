@@ -486,7 +486,7 @@ public class VHACDParameters
         }
     }
     // *************************************************************************
-    // private Java methods
+    // Java private methods
 
     /**
      * native field: m_convexhullApproximation
@@ -528,7 +528,7 @@ public class VHACDParameters
         setOclAcceleration(objectId, value);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long create();
 

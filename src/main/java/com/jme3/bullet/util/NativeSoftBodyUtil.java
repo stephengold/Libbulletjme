@@ -210,7 +210,7 @@ public class NativeSoftBodyUtil {
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void updateClusterMesh(long softBodyId,
             FloatBuffer outPositionBuffer, boolean meshInLocalSpace);

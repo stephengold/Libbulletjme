@@ -117,7 +117,7 @@ public class VHACD {
     /**
      * Add a hull to the result.
      * <p>
-     * This method is invoked from native code.
+     * This method is invoked by native code.
      */
     private static void addHull(long hullId) {
         VHACDHull hull = new VHACDHull(hullId);
@@ -127,7 +127,7 @@ public class VHACD {
     /**
      * Update all progress listeners.
      * <p>
-     * This method is invoked from native code.
+     * This method is invoked by native code.
      *
      * @param overallPercent an overall completion percentage (&ge;0, &le;100)
      * @param stagePercent a completion percentage for the current stage (&ge;0,
@@ -145,7 +145,7 @@ public class VHACD {
         }
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void compute(FloatBuffer positions, IntBuffer indices,
             long paramsId, boolean debugEnabled);

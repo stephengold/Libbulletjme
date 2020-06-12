@@ -174,7 +174,7 @@ public class MeshCollisionShape extends CollisionShape {
         recalcAabb(shapeId);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate the configured btBvhTriangleMeshShape.
@@ -196,7 +196,7 @@ public class MeshCollisionShape extends CollisionShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createShape(boolean useCompression,
             boolean buildBvh, long meshId);

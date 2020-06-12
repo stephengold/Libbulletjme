@@ -770,7 +770,7 @@ public class SliderJoint extends Constraint {
         setUpperLinLimit(constraintId, upperLinLimit);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create the configured joint in Bullet.
@@ -814,7 +814,7 @@ public class SliderJoint extends Constraint {
         setNativeId(constraintId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createJoint(long bodyIdA, long bodyIdB,
             Vector3f pivotInA, Matrix3f rotInA, Vector3f pivotInB,

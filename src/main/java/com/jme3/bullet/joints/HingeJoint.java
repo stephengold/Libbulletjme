@@ -372,7 +372,7 @@ public class HingeJoint extends Constraint {
         setLimit(constraintId, low, high, softness, bias, relaxation);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create the configured joint in Bullet.

@@ -171,7 +171,7 @@ public class ConeCollisionShape extends ConvexShape {
         return canScale;
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate the configured btCollisionShape.
@@ -190,7 +190,7 @@ public class ConeCollisionShape extends ConvexShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createShape(int axisIndex, float radius,
             float height);

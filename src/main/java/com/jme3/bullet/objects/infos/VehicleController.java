@@ -334,7 +334,7 @@ public class VehicleController extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static int addWheel(long controllerId, Vector3f location,
             Vector3f direction, Vector3f axle, float restLength, float radius,

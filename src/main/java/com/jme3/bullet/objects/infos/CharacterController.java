@@ -492,7 +492,7 @@ public class CharacterController extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create a btKinematicCharacterController.
@@ -503,7 +503,7 @@ public class CharacterController extends NativePhysicsObject {
         setNativeId(controllerId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long create(long ghostId);
 

@@ -446,7 +446,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static float getAppliedImpulse(long manifoldPointId);
 

@@ -177,7 +177,7 @@ public class Point2PointJoint extends Constraint {
         setTau(constraintId, value);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create the configured joint in Bullet.
@@ -230,7 +230,7 @@ public class Point2PointJoint extends Constraint {
         setNativeId(constraintId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createJoint(long bodyIdA, long bodyIdB,
             Vector3f pivotInA, Vector3f pivotInB);

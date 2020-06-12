@@ -200,7 +200,7 @@ public class IndexedMesh extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create a new btIndexedMesh using the current configuration.
@@ -216,7 +216,7 @@ public class IndexedMesh extends NativePhysicsObject {
         logger.log(Level.FINE, "Created {0}", this);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createByte(ByteBuffer indices,
             FloatBuffer vertexPositions, int numTriangles, int numVertices,

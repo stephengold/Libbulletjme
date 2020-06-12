@@ -136,7 +136,7 @@ public class SoftBodyMaterial extends NativePhysicsObject {
         return result;
     }
     // *********************************************************************
-    // native methods
+    // native private methods
 
     native private static float getAngularStiffnessFactor(long materialId);
 

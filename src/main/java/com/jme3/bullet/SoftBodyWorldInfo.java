@@ -266,7 +266,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createSoftBodyWorldInfo();
 

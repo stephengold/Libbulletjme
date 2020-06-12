@@ -164,7 +164,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
         setPhysicsRotation(objectId, rotation);
     }
     // *************************************************************************
-    // private Java methods
+    // Java private methods
 
     /**
      * Create the configured collider in Bullet.
@@ -180,7 +180,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
         super.initUserPointer();
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createCollider(long multiBodyId, int linkIndex);
 

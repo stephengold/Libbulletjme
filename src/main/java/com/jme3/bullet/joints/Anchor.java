@@ -62,7 +62,7 @@ public class Anchor extends PhysicsJoint {
     final private boolean allowCollisions;
     /**
      * how much influence the anchor has on the bodies (&ge;0, &le;1, 0&rarr;no
-     * influence, 1&rarr;strong influence, default=1)
+     * influence, 1&rarr;strong influence)
      */
     private float influence = 1f;
     /**
@@ -204,7 +204,7 @@ public class Anchor extends PhysicsJoint {
         return true;
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create the configured btSoftBody::Anchor.
@@ -223,7 +223,7 @@ public class Anchor extends PhysicsJoint {
         setNativeId(anchorId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createAnchor(long softBodyId, int nodeIndex,
             long rigidBodyId, Vector3f initialLocation, boolean allowCollisions,

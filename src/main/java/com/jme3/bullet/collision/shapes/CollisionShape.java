@@ -73,7 +73,7 @@ abstract public class CollisionShape
 
     /**
      * default margin for new non-sphere/non-capsule shapes (in physics-space
-     * units, &gt;0, default=0.04)
+     * units, &gt;0)
      */
     private static float defaultMargin = 0.04f;
     /**
@@ -81,7 +81,7 @@ abstract public class CollisionShape
      */
     protected float margin = defaultMargin;
     /**
-     * copy of the scale factors, one for each local axis (default=(1,1,1))
+     * copy of the scale factors, one for each local axis
      */
     protected Vector3f scale = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
@@ -445,7 +445,7 @@ abstract public class CollisionShape
         logger.log(Level.FINE, "Created {0}.", this);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Compare Bullet's scale factors to the local copies.

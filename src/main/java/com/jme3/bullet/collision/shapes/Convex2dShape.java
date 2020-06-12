@@ -137,7 +137,7 @@ public class Convex2dShape extends ConvexShape {
         base.updateScale();
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate an empty btConvex2dShape.
@@ -151,7 +151,7 @@ public class Convex2dShape extends ConvexShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createShape(long childId);
 }

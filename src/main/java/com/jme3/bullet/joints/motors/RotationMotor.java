@@ -286,7 +286,7 @@ public class RotationMotor extends NativePhysicsObject {
         setStiffnessLimited(motorId, limitStiffness);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static float getBounce(long motorId);
 

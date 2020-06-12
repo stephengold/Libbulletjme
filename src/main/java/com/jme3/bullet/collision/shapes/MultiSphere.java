@@ -250,7 +250,7 @@ public class MultiSphere extends ConvexShape {
         recalcAabb(shapeId);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate the configured shape in Bullet.
@@ -266,7 +266,7 @@ public class MultiSphere extends ConvexShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createShape(Vector3f[] centers, float[] radii,
             int numSpheres);

@@ -254,7 +254,7 @@ public class SolverInfo extends NativePhysicsObject {
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void copyAllParameters(long targetId, long sourceId);
 

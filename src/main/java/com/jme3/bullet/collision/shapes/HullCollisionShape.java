@@ -304,7 +304,7 @@ public class HullCollisionShape extends ConvexShape {
         recalcAabb(shapeId);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate the configured shape in Bullet.
@@ -332,7 +332,7 @@ public class HullCollisionShape extends ConvexShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static int countHullVertices(long shapeId);
 

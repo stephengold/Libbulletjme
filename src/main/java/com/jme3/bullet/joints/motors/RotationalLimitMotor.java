@@ -372,7 +372,7 @@ public class RotationalLimitMotor extends NativePhysicsObject {
         setHiLimit(motorId, upperLimit);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static float getAccumulatedImpulse(long motorId);
 

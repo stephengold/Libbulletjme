@@ -400,7 +400,7 @@ public class TranslationalLimitMotor extends NativePhysicsObject {
         setUpperLimit(motorId, upperLimit);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void getAccumulatedImpulse(long motorId,
             Vector3f vector);

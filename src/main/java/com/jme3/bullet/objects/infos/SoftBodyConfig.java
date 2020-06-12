@@ -385,7 +385,7 @@ public class SoftBodyConfig {
         return getVelocitiesIterations(bodyId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void copyValues(long destId, long sourceId);
 

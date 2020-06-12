@@ -141,7 +141,7 @@ public class Box2dShape extends ConvexShape {
         return result;
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate the configured btBox2dShape.
@@ -157,7 +157,7 @@ public class Box2dShape extends ConvexShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createShape(float x, float y, float margin);
 }

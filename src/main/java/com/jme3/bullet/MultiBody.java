@@ -947,7 +947,7 @@ public class MultiBody
         }
     }
     // *************************************************************************
-    // private Java methods
+    // Java private methods
 
     /**
      * Configure a new link that's just been set up.
@@ -967,7 +967,7 @@ public class MultiBody
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void addBaseForce(long multiBodyId,
             Vector3f forceVector);

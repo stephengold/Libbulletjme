@@ -207,7 +207,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static boolean applyTransform(long stateId,
             Vector3f location, Quaternion rotation);

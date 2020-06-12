@@ -127,7 +127,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long deSerialize(byte[] buffer);
 

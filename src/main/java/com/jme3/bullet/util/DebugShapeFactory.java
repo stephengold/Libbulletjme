@@ -361,7 +361,7 @@ public class DebugShapeFactory {
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void getTriangles(long shapeId, int meshResolution,
             DebugMeshCallback buffer);

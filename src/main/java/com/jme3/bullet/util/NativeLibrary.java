@@ -46,7 +46,7 @@ public class NativeLibrary {
     private NativeLibrary() {
     }
     // *************************************************************************
-    // native methods exposed
+    // new methods exposed
 
     /**
      * Dump all native-memory allocation/free events to standard output. This
@@ -88,10 +88,10 @@ public class NativeLibrary {
      */
     native public static String versionNumber();
     // *************************************************************************
-    // private Java methods
+    // Java private methods
 
     /**
-     * Callback invoked (from native code) upon successful initialization of the
+     * Callback invoked (by native code) upon successful initialization of the
      * native library.
      */
     private static void postInitialization() {

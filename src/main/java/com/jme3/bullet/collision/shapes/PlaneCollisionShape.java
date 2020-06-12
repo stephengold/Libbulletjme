@@ -92,7 +92,7 @@ public class PlaneCollisionShape extends CollisionShape {
         return Float.POSITIVE_INFINITY;
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Instantiate the configured btStaticPlaneShape.
@@ -105,7 +105,7 @@ public class PlaneCollisionShape extends CollisionShape {
         setMargin(margin);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createShape(Vector3f normal, float constant);
 }

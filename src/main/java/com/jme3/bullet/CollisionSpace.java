@@ -88,7 +88,7 @@ public class CollisionSpace extends NativePhysicsObject {
         }
     };
     /**
-     * flags used in ray tests (default=SubSimplexRaytest)
+     * flags used in ray tests
      */
     private int rayTestFlags = RayTestFlag.SubSimplexRaytest;
     /**
@@ -236,7 +236,7 @@ public class CollisionSpace extends NativePhysicsObject {
 
     /**
      * Access the CollisionSpace <b>running on this thread</b>. For parallel
-     * physics, this can be invoked from the OpenGL thread.
+     * physics, this may be invoked from the OpenGL thread.
      *
      * @return the pre-existing CollisionSpace running on this thread
      */
@@ -528,7 +528,7 @@ public class CollisionSpace extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // private Java methods
+    // Java private methods
 
     /**
      * Add the specified PhysicsGhostObject to this space.
@@ -554,7 +554,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * This method is invoked from native code.
+     * This method is invoked by native code.
      */
     private boolean notifyCollisionGroupListeners_native(
             PhysicsCollisionObject pcoA, PhysicsCollisionObject pcoB) {
@@ -583,7 +583,7 @@ public class CollisionSpace extends NativePhysicsObject {
         removeCollisionObject(spaceId, ghostId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void addCollisionObject(long spaceId, long pcoId);
 

@@ -590,7 +590,7 @@ public class MultiBodyLink extends NativePhysicsObject {
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void addConstraintForce(long linkId,
             Vector3f forceVector);

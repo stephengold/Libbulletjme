@@ -129,7 +129,7 @@ public class SoftLinearJoint extends SoftPhysicsJoint {
         setPosition(jointId, newLocation);
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Create the configured btSoftBody::LJoint.
@@ -164,7 +164,7 @@ public class SoftLinearJoint extends SoftPhysicsJoint {
         assert checkParameters();
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createJointSoftRigid(long softIdA,
             int clusterIndexA, long rigidIdB, float erp, float cfm, float split,

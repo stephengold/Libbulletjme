@@ -61,7 +61,7 @@ public class CompoundMesh extends NativePhysicsObject {
      */
     final private ArrayList<IndexedMesh> submeshes = new ArrayList<>(4);
     /**
-     * copy of scale factors: one for each local axis (default=(1,1,1))
+     * copy of scale factors: one for each local axis
      */
     final private Vector3f scale = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
@@ -168,7 +168,7 @@ public class CompoundMesh extends NativePhysicsObject {
         }
     }
     // *************************************************************************
-    // private methods
+    // Java private methods
 
     /**
      * Compare Bullet's scale factors to the local copy.
@@ -196,7 +196,7 @@ public class CompoundMesh extends NativePhysicsObject {
         logger.log(Level.FINE, "Created {0}", this);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static void addIndexedMesh(long compoundMeshId,
             long submeshId);
