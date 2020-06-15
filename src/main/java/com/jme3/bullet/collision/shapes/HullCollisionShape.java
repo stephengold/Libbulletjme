@@ -122,8 +122,7 @@ public class HullCollisionShape extends ConvexShape {
      * Instantiate a shape based on a VHACDHull. For best performance and
      * stability, the convex hull should have no more than 100 vertices.
      *
-     * @param vhacdHull (not null, not empty, length a multiple of 3,
-     * unaffected)
+     * @param vhacdHull (not null, unaffected)
      */
     public HullCollisionShape(VHACDHull vhacdHull) {
         Validate.nonNull(vhacdHull, "V-HACD hull");
@@ -138,13 +137,13 @@ public class HullCollisionShape extends ConvexShape {
      * 100 vertices.
      *
      * @param flippedBuffer the coordinates on which to base the shape (not
-     * null, not empty, limit a multiple of 3, unaffected)
+     * null, limit&gt;0, limit a multiple of 3, unaffected)
      */
     public HullCollisionShape(FloatBuffer flippedBuffer) {
         Validate.nonNull(flippedBuffer, "flipped buffer");
         int numFloats = flippedBuffer.limit();
-        assert numFloats > 0 : numFloats;
-        assert numFloats % numAxes == 0 : numFloats;
+        Validate.positive(numFloats, "limit");
+        Validate.require(numFloats % numAxes == 0, "limit a multiple of 3");
 
         points = new float[numFloats];
         for (int i = 0; i < numFloats; ++i) {
