@@ -1,4 +1,11 @@
-# release log for the Libbulletjme Project
+# Release log for the Libbulletjme project
+
+## Version 8.1.0 released on 18 June 2020
+
+ + Added accessors for the speculative contact restitution flag
+   of a `PhysicsSpace`.
+ + Deprecated one of the `VHACDHull` constructors.
+ + Tested using JUnit v4.13 .
 
 ## Version 8.0.0 released on 10 June 2020
 
