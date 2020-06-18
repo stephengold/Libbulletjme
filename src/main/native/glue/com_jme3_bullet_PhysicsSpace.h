@@ -87,6 +87,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    isSpeculativeContactRestitution
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_PhysicsSpace_isSpeculativeContactRestitution
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    removeAction
  * Signature: (JJ)V
  */
@@ -132,6 +140,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
   (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setSpeculativeContactRestitution
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSpeculativeContactRestitution
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

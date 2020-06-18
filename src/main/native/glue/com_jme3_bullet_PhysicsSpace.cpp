@@ -231,6 +231,23 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    isSpeculativeContactRestitution
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_PhysicsSpace_isSpeculativeContactRestitution
+(JNIEnv *pEnv, jclass, jlong spaceId) {
+    const jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", JNI_FALSE);
+    const btDiscreteDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.", JNI_FALSE);
+
+    bool result = pWorld->getApplySpeculativeContactRestitution();
+    return (jboolean) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    removeAction
  * Signature: (JJ)V
  */
@@ -386,6 +403,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
     btConstraintSolver *pOldSolver = pWorld->getConstraintSolver();
     pWorld->setConstraintSolver(pConstraintSolver);
     delete pOldSolver; //dance006
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setSpeculativeContactRestitution
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSpeculativeContactRestitution
+(JNIEnv *pEnv, jclass, jlong spaceId, jboolean setting) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",);
+    btDiscreteDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.",);
+
+    bool enable = (bool)setting;
+    pWorld->setApplySpeculativeContactRestitution(enable);
 }
 
 /*
