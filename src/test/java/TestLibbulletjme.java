@@ -102,6 +102,9 @@ public class TestLibbulletjme {
     // *************************************************************************
     // new methods exposed
 
+    /**
+     * Drop a dynamic box on a static plane.
+     */
     @Test
     public void test001() {
         loadNativeLibrary();
@@ -1262,6 +1265,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
         assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
+        Assert.assertFalse(space.isUsingScr());
         Assert.assertEquals(4, space.maxSubSteps());
         Assert.assertEquals(0.1f, space.maxTimeStep(), 0f);
 
