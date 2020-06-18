@@ -130,7 +130,7 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
 
     btOverlappingPairCache * const
             pPairCache = pBroadphase->getOverlappingPairCache();
-    pPairCache->setInternalGhostPairCallback(new btGhostPairCallback()); // TODO leak
+    pPairCache->setInternalGhostPairCallback(new btGhostPairCallback()); //dance036
     pPairCache->setOverlapFilterCallback(new jmeFilterCallback()); //dance011
 
     return pBroadphase;
@@ -172,6 +172,12 @@ jmeCollisionSpace::~jmeCollisionSpace() {
         btOverlappingPairCache * const
                 pPairCache = pBroadphase->getOverlappingPairCache();
         if (pPairCache) {
+            btOverlappingPairCallback * const
+                    pIGPCallback = pPairCache->getInternalGhostPairCallback();
+            if (pIGPCallback) {
+                delete pIGPCallback; //dance036
+            }
+
             btOverlapFilterCallback * const
                     pOFCallback = pPairCache->getOverlapFilterCallback();
             if (pOFCallback) {

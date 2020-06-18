@@ -78,6 +78,7 @@ public:
 
 	virtual bool hasDeferredRemoval() = 0;
 
+    virtual btOverlappingPairCallback* getInternalGhostPairCallback() = 0; // stephengold added 2020-06-18  
 	virtual void setInternalGhostPairCallback(btOverlappingPairCallback* ghostPairCallback) = 0;
 
 	virtual void sortOverlappingPairs(btDispatcher* dispatcher) = 0;
@@ -246,6 +247,11 @@ private:
 		return false;
 	}
 
+    virtual btOverlappingPairCallback* getInternalGhostPairCallback() // stephengold added 2020-06-18
+    { // stephengold added 2020-06-18
+        return m_ghostPairCallback; // stephengold added 2020-06-18
+    } // stephengold added 2020-06-18
+
 	virtual void setInternalGhostPairCallback(btOverlappingPairCallback * ghostPairCallback)
 	{
 		m_ghostPairCallback = ghostPairCallback;
@@ -342,6 +348,11 @@ public:
 		return m_hasDeferredRemoval;
 	}
 
+    virtual btOverlappingPairCallback* getInternalGhostPairCallback() // stephengold added 2020-06-18
+    { // stephengold added 2020-06-18
+        return m_ghostPairCallback; // stephengold added 2020-06-18
+    } // stephengold added 2020-06-18
+
 	virtual void setInternalGhostPairCallback(btOverlappingPairCallback* ghostPairCallback)
 	{
 		m_ghostPairCallback = ghostPairCallback;
@@ -386,6 +397,12 @@ public:
         { // stephengold added 2020-02-12
                 return true; // stephengold added 2020-02-12
         } // stephengold added 2020-02-12
+
+    btOverlappingPairCallback* getInternalGhostPairCallback() const // stephengold added 2020-06-18
+    { // stephengold added 2020-06-18
+        return 0; // stephengold added 2020-06-18
+    } // stephengold added 2020-06-18
+        
         btOverlapFilterCallback* getOverlapFilterCallback() // stephengold added 2020-02-12
 	{ // stephengold added 2020-02-12
 		return 0; // stephengold added 2020-02-12
@@ -407,6 +424,11 @@ public:
 	{
 		return true;
 	}
+
+    virtual btOverlappingPairCallback* getInternalGhostPairCallback() // stephengold added 2020-06-18
+    { // stephengold added 2020-06-18
+        return 0; // stephengold added 2020-06-18
+    } // stephengold added 2020-06-18
 
 	virtual void setInternalGhostPairCallback(btOverlappingPairCallback* /* ghostPairCallback */)
 	{
