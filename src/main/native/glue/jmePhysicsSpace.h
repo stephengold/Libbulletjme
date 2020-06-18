@@ -62,14 +62,14 @@ public:
     void
     createPhysicsSpace(const btVector3& min, const btVector3& max, int ordinal);
 
-    const btDynamicsWorld *
+    const btDiscreteDynamicsWorld *
     getDynamicsWorld() const {
-        return (btDynamicsWorld *) m_collisionWorld;
+        return (btDiscreteDynamicsWorld *) m_collisionWorld;
     }
 
-    btDynamicsWorld *
+    btDiscreteDynamicsWorld *
     getDynamicsWorld() {
-        return (btDynamicsWorld *) m_collisionWorld;
+        return (btDiscreteDynamicsWorld *) m_collisionWorld;
     }
 
     static void

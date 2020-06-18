@@ -294,7 +294,7 @@ btConvex2dShape                         .bullet.collision.shapes.Convex2dShape
 btConvexHullShape                       .bullet.collision.shapes.HullCollisionShape
 btConvexShape                           .bullet.collision.shapes.ConvexShape
 btCylinderShape                         .bullet.collision.shapes.CylinderCollisionShape
-btDynamicsWorld                         .bullet.PhysicsSpace
+btDiscreteDynamicsWorld                 .bullet.PhysicsSpace
 btEmptyShape                            .bullet.collision.shapes.EmptyShape
 btGeneric6DofConstraint                 .bullet.joints.SixDofJoint
 btGeneric6DofSpring2Constraint          .bullet.joints.New6Dof
