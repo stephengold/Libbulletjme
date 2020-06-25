@@ -652,6 +652,7 @@ public class PhysicsRigidBody extends PhysicsBody {
      * "sleeping" is synonym for "deactivation".
      *
      * @param setting true&rarr;enable sleeping, false&rarr;disable sleeping
+     * (default=true)
      */
     public void setEnableSleep(boolean setting) {
         long objectId = nativeId();
@@ -843,6 +844,41 @@ public class PhysicsRigidBody extends PhysicsBody {
         long objectId = nativeId();
         setSleepingThresholds(objectId, linear, angular);
     }
+
+    /**
+     * Determine the total force applied to this body (excluding contact forces,
+     * damping, and gravity).
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the total force (either storeResult or a new vector, mass times
+     * physics-space units per second squared in physics-space coordinates)
+     */
+    public Vector3f totalAppliedForce(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long objectId = nativeId();
+        getTotalForce(objectId, result);
+
+        return result;
+    }
+
+    /**
+     * Determine the total torque applied to this body (excluding contact forces
+     * and damping).
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the total torque (either storeResult or a new vector, mass times
+     * physics-space units squared per second squared in physics-space
+     * coordinates)
+     */
+    public Vector3f totalAppliedTorque(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long objectId = nativeId();
+        getTotalTorque(objectId, result);
+
+        return result;
+    }
     // *************************************************************************
     // new protected methods
 
@@ -939,7 +975,7 @@ public class PhysicsRigidBody extends PhysicsBody {
      * Adding a body to a PhysicsSpace may override its gravity.
      *
      * @param acceleration the desired acceleration vector (in physics-space
-     * coordinates, not null, unaffected)
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     @Override
     public void setGravity(Vector3f acceleration) {
@@ -1099,6 +1135,12 @@ public class PhysicsRigidBody extends PhysicsBody {
     native private static float getMass(long objectId);
 
     native private static float getSquaredSpeed(long objectId);
+
+    native private static void getTotalForce(long objectId,
+            Vector3f storeResult);
+
+    native private static void getTotalTorque(long objectId,
+            Vector3f storeResult);
 
     native private static boolean getUseSpaceGravity(long objectId);
 

@@ -383,6 +383,37 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getSquare
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getTotalForce
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getTotalForce
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject storeVector) {
+    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btVector3& force = pBody->getTotalForce();
+    jmeBulletUtil::convert(pEnv, &force, storeVector);
+
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getTotalTorque
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getTotalTorque
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject storeVector) {
+    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btVector3& torque = pBody->getTotalTorque();
+    jmeBulletUtil::convert(pEnv, &torque, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    getUseSpaceGravity
  * Signature: (J)Z
  */
