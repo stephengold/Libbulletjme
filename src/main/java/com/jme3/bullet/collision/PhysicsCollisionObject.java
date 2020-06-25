@@ -441,7 +441,7 @@ abstract public class PhysicsCollisionObject
     /**
      * Read this object's friction parameter (native field: m_friction).
      *
-     * @return the coefficient (&ge;0)
+     * @return the parameter value (&ge;0)
      */
     public float getFriction() {
         long objectId = nativeId();
