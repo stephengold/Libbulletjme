@@ -1226,6 +1226,30 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, pco.getRollingFriction(), 0f);
         Assert.assertEquals(0f, pco.getSpinningFriction(), 0f);
         Assert.assertNull(pco.getUserObject());
+
+        if (pco instanceof PhysicsRigidBody) {
+            PhysicsRigidBody body = (PhysicsRigidBody) pco;
+
+            Assert.assertEquals(0f, body.getAngularDamping(), 0f);
+            assertEquals(1f, 1f, 1f, body.getAngularFactor(null), 0f);
+            Assert.assertEquals(1f, body.getAngularSleepingThreshold(), 0f);
+            Assert.assertEquals(0f, body.getLinearDamping(), 0f);
+            assertEquals(1f, 1f, 1f, body.getLinearFactor(null), 0f);
+            Assert.assertEquals(0.8f, body.getLinearSleepingThreshold(), 0f);
+            assertEquals(0f, 0f, 0f, 1f, body.getPhysicsRotation(null), 0f);
+            Assert.assertTrue(body.isContactResponse());
+            Assert.assertFalse(body.isGravityProtected());
+            Assert.assertFalse(body.isKinematic());
+            assertEquals(0f, 0f, 0f, body.totalAppliedForce(null), 0f);
+            assertEquals(0f, 0f, 0f, body.totalAppliedTorque(null), 0f);
+            if (body.isDynamic()) {
+                assertEquals(0f, 0f, 0f, body.getAngularVelocity(null), 0f);
+                assertEquals(0f, 0f, 0f, body.getGravity(null), 0f);
+                assertEquals(0f, 0f, 0f, body.getLinearVelocity(null), 0f);
+                Assert.assertFalse(body.isStatic());
+                Assert.assertEquals(0f, body.kineticEnergy(), 0f);
+            }
+        }
     }
 
     /**
