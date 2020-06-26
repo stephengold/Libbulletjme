@@ -2,7 +2,7 @@
 
 ## Version 8.2.0 released on 25 June 2020
 
- + Added getters for the total force and torque on a rigid body.
+Added getters for the total force and torque on a rigid body.
 
 ## Version 8.1.0 released on 18 June 2020
 
