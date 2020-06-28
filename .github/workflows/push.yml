@@ -1,4 +1,6 @@
+---
 # GitHub workflow for commits pushed to the Libbulletjme repo
+
 name: CI at GitHub
 on: [push]
 

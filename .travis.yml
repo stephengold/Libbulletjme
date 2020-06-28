@@ -1,3 +1,4 @@
+---
 # configure deployment and continuous integration at travis-ci.com
 
 arch: amd64
