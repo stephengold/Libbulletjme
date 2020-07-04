@@ -1,5 +1,11 @@
 # Release log for the Libbulletjme project
 
+## Version 8.3.0 released on 3 July 2020
+
+ + Added collision listeners for ongoing contacts in a `PhysicsSpace`.
+ + Added a setter for `gContactCalcArea3Points`.
+ + Built using Gradle v6.5.1 .
+
 ## Version 8.2.0 released on 25 June 2020
 
 Added getters for the total force and torque on a rigid body.
