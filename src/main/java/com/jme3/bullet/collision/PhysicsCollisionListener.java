@@ -39,7 +39,7 @@ package com.jme3.bullet.collision;
  */
 public interface PhysicsCollisionListener {
     /**
-     * Callback to report collisions in a PhysicsSpace. Invoked during
+     * Callback to report collisions in a CollisionSpace. Invoked during
      * PhysicsSpace.distributeEvents().
      * <p>
      * Typically invoked 2x for each cached contact point, so expect many

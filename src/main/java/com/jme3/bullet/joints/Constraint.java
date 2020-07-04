@@ -194,7 +194,7 @@ abstract public class Constraint extends PhysicsJoint {
     // new methods exposed
 
     /**
-     * Read the magnitude of the applied impulse. Requires feedback.
+     * Determine the magnitude of the applied impulse. Requires feedback.
      *
      * @return impulse magnitude (&ge;0)
      * @throws IllegalStateException if feedback is not enabled
@@ -211,9 +211,9 @@ abstract public class Constraint extends PhysicsJoint {
     }
 
     /**
-     * Read the breaking impulse threshold.
+     * Determine the breaking impulse threshold.
      *
-     * @return the value
+     * @return the threshold value
      */
     public float getBreakingImpulseThreshold() {
         long constraintId = nativeId();
@@ -223,7 +223,7 @@ abstract public class Constraint extends PhysicsJoint {
     }
 
     /**
-     * Read the number of iterations used to solve this Constraint.
+     * Determine the number of iterations used to solve this Constraint.
      *
      * @return the number of iterations (&ge;0) or -1 if using the solver's
      * default
@@ -334,7 +334,7 @@ abstract public class Constraint extends PhysicsJoint {
     }
 
     /**
-     * Read the breaking impulse threshold.
+     * Alter the breaking impulse threshold.
      *
      * @param desiredThreshold the desired value (default=MAX_VALUE with SP
      * library or +Infinity with DP library)

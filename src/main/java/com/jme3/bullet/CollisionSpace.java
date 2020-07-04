@@ -97,7 +97,7 @@ public class CollisionSpace extends NativePhysicsObject {
     final private Map<Long, PhysicsGhostObject> ghostMap
             = new ConcurrentHashMap<>(64);
     /**
-     * physics-space reference for each thread
+     * physics-space reference for each thread TODO privatize
      */
     final protected static ThreadLocal<CollisionSpace> physicsSpaceTL
             = new ThreadLocal<CollisionSpace>();

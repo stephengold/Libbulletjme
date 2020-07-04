@@ -570,7 +570,7 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
-     * Access the scene object that's using this collision object.
+     * Access the "user" of this collision object.
      *
      * @return the pre-existing instance, or null if none
      * @see #setUserObject(java.lang.Object)

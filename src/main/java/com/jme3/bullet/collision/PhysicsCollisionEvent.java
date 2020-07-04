@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * Describe a collision between 2 collision objects in a PhysicsSpace.
+ * Describe a collision between 2 objects in a CollisionSpace.
  *
  * @author normenhansen
  */
@@ -143,7 +143,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the combined friction, which is the sum of the collision-object
+     * Read the combined friction, which is the product of the collision-object
      * frictions (native field: m_combinedFriction).
      *
      * @return the friction sum
