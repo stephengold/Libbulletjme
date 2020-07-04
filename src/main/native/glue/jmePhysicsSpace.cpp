@@ -59,6 +59,53 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
     modify(); // Make the standard modifications.
 }
 
+bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
+        void* pBody0, void* pBody1) {
+    //printf("contactProcessedCallback %x %x\n", pBody0, pBody1);
+    const btCollisionObject *pco0 = (btCollisionObject *) pBody0;
+    jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
+    const btCollisionObject *pco1 = (btCollisionObject *) pBody1;
+    jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
+    if (pUser0 == NULL || pUser1 == NULL) {
+        printf("null userPointer in contactProcessedCallback\n");
+        return true;
+    }
+
+    jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->m_jmeSpace;
+    if (pSpace == NULL) {
+        printf("null dynamicsWorld in contactProcessedCallback\n");
+        return true;
+    }
+
+    JNIEnv * const pEnv = pSpace->getEnv();
+    jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    if (javaPhysicsSpace == NULL) {
+        printf("null javaPhysicsSpace in contactProcessedCallback\n");
+        return true;
+    }
+
+    jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef);
+    jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
+    jlong manifoldPointId = reinterpret_cast<jlong> (&contactPoint);
+    pEnv->CallVoidMethod(javaPhysicsSpace,
+            jmeClasses::PhysicsSpace_addContactProcessed, javaCollisionObject0,
+            javaCollisionObject1, manifoldPointId);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return true;
+    }
+
+    pEnv->DeleteLocalRef(javaPhysicsSpace);
+    pEnv->DeleteLocalRef(javaCollisionObject0);
+    pEnv->DeleteLocalRef(javaCollisionObject1);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return true;
+    }
+
+    return true;
+}
+
 void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
@@ -118,6 +165,12 @@ void jmePhysicsSpace::modify() {
     pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback,
             static_cast<void *> (this));
     pWorld->setWorldUserInfo(this);
+    /*
+     * Ensure that both global callbacks are configured.
+     */
+    btAssert(gContactProcessedCallback == NULL
+            || gContactProcessedCallback == &contactProcessedCallback);
+    gContactProcessedCallback = &contactProcessedCallback;
 
     btAssert(gContactStartedCallback == NULL
             || gContactStartedCallback == &contactStartedCallback);
