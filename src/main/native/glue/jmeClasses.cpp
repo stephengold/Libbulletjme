@@ -166,17 +166,21 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_preTick = pEnv->GetMethodID(PhysicsSpace, "preTick_native", "(F)V");
+    PhysicsSpace_preTick = pEnv->GetMethodID(PhysicsSpace, "preTick_native",
+            "(F)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_postTick = pEnv->GetMethodID(PhysicsSpace, "postTick_native", "(F)V");
+    PhysicsSpace_postTick = pEnv->GetMethodID(PhysicsSpace, "postTick_native",
+            "(F)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_addCollisionEvent = pEnv->GetMethodID(PhysicsSpace, "addCollisionEvent_native", "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
+    PhysicsSpace_addCollisionEvent = pEnv->GetMethodID(PhysicsSpace,
+            "addCollisionEvent_native",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -188,7 +192,9 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsGhostObject_addOverlappingObject = pEnv->GetMethodID(PhysicsGhostObject, "addOverlappingObject_native", "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V");
+    PhysicsGhostObject_addOverlappingObject = pEnv->GetMethodID(PhysicsGhostObject,
+            "addOverlappingObject_native",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -306,7 +312,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    DebugMeshCallback_addVector = pEnv->GetMethodID(DebugMeshCallback, "addVector", "(FFFII)V");
+    DebugMeshCallback_addVector = pEnv->GetMethodID(DebugMeshCallback,
+            "addVector", "(FFFII)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -427,13 +434,15 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Transform_rotation = pEnv->GetMethodID(Transform, "getRotation", "()Lcom/jme3/math/Quaternion;");
+    Transform_rotation = pEnv->GetMethodID(Transform, "getRotation",
+            "()Lcom/jme3/math/Quaternion;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 
-    Transform_translation = pEnv->GetMethodID(Transform, "getTranslation", "()Lcom/jme3/math/Vector3f;");
+    Transform_translation = pEnv->GetMethodID(Transform, "getTranslation",
+            "()Lcom/jme3/math/Vector3f;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -458,7 +467,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Vhacd_update = pEnv->GetStaticMethodID(Vhacd, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
+    Vhacd_update = pEnv->GetStaticMethodID(Vhacd, "update",
+            "(DDDLjava/lang/String;Ljava/lang/String;)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
