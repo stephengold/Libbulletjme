@@ -112,9 +112,9 @@ public class PhysicsSpace extends CollisionSpace {
     // fields
 
     /**
-     * collision events not yet distributed to listeners
+     * contact-started events not yet distributed to listeners
      */
-    final private Deque<PhysicsCollisionEvent> collisionEvents
+    final private Deque<PhysicsCollisionEvent> contactStartedEvents
             = new ArrayDeque<>(20);
     /**
      * time step (in seconds, &gt;0) ignored when maxSubSteps=0
@@ -130,9 +130,9 @@ public class PhysicsSpace extends CollisionSpace {
      */
     private int maxSubSteps = 4;
     /**
-     * list of registered collision listeners
+     * list of registered listeners for new contacts
      */
-    final private List<PhysicsCollisionListener> collisionListeners
+    final private List<PhysicsCollisionListener> contactStartedListeners
             = new ArrayList<>(4);
     /**
      * map character IDs to added objects
@@ -140,7 +140,7 @@ public class PhysicsSpace extends CollisionSpace {
     final private Map<Long, PhysicsCharacter> characterMap
             = new ConcurrentHashMap<>(64);
     /**
-     * map joint IDs to added objects
+     * map joint IDs to added objects TODO privatize and rename
      */
     final protected Map<Long, PhysicsJoint> physicsJoints
             = new ConcurrentHashMap<>(64);
@@ -245,18 +245,18 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Register the specified collision listener.
+     * Register the specified listener for new contacts.
      * <p>
-     * During distributeEvents(), registered listeners are notified of all
-     * collisions since the previous distributeEvents().
+     * During distributeEvents(), registered listeners are notified of all new
+     * contacts since the previous distributeEvents().
      *
-     * @param listener the listener to register (not null, alias created)
+     * @param listener the listener object to register (not null, alias created)
      */
     public void addCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
-        assert !collisionListeners.contains(listener);
+        assert !contactStartedListeners.contains(listener);
 
-        collisionListeners.add(listener);
+        contactStartedListeners.add(listener);
     }
 
     /**
@@ -320,8 +320,8 @@ public class PhysicsSpace extends CollisionSpace {
      * @return the count (&ge;0)
      */
     public int countCollisionListeners() {
-        int count = collisionListeners.size();
-        return count;
+        int result = contactStartedListeners.size();
+        return result;
     }
 
     /**
@@ -348,12 +348,12 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Distribute each collision event to all listeners.
+     * Distribute each collision event to registered listeners.
      */
     public void distributeEvents() {
-        while (!collisionEvents.isEmpty()) {
-            PhysicsCollisionEvent event = collisionEvents.pop();
-            for (PhysicsCollisionListener listener : collisionListeners) {
+        while (!contactStartedEvents.isEmpty()) {
+            PhysicsCollisionEvent event = contactStartedEvents.pop();
+            for (PhysicsCollisionListener listener : contactStartedListeners) {
                 listener.collision(event);
             }
         }
@@ -492,16 +492,16 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * De-register the specified collision listener.
+     * De-register the specified listener for new contacts.
      *
      * @see
      * #addCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
-     * @param listener the listener to de-register (not null)
+     * @param listener the listener object to de-register (not null)
      */
     public void removeCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
 
-        boolean success = collisionListeners.remove(listener);
+        boolean success = contactStartedListeners.remove(listener);
         assert success;
     }
 
@@ -838,10 +838,10 @@ public class PhysicsSpace extends CollisionSpace {
      */
     private void addCollisionEvent_native(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
-        if (!collisionListeners.isEmpty()) {
+        if (!contactStartedListeners.isEmpty()) {
             PhysicsCollisionEvent event
                     = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
-            collisionEvents.add(event);
+            contactStartedEvents.add(event);
         }
     }
 
