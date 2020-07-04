@@ -642,6 +642,15 @@ public class PhysicsSpace extends CollisionSpace {
     // new protected methods
 
     /**
+     * Access the map from native IDs to physics joints.
+     *
+     * @return the pre-existing instance
+     */
+    protected Map<Long, PhysicsJoint> getJointMap() {
+        return physicsJoints;
+    }
+
+    /**
      * Determine the type of the underlying btDynamicsWorld.
      *
      * @param spaceId the Bullet identifier for this space (non-zero)
