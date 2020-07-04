@@ -62,7 +62,7 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
-    //printf("contactProcessedCallback %x %x\n", co0, co1);
+    //printf("contactStartedCallback %x %x\n", pco0, pco1);
     jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
     jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
     if (pUser0 != NULL && pUser1 != NULL) {
@@ -76,11 +76,13 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
                         = pEnv->NewLocalRef(pUser0->m_javaRef);
                 jobject javaCollisionObject1
                         = pEnv->NewLocalRef(pUser1->m_javaRef);
-                for (int i = 0; i < pm->getNumContacts(); i++) {
+                for (int i = 0; i < pm->getNumContacts(); ++i) {
+                    const btManifoldPoint& cp = pm->getContactPoint(i);
+                    jlong manifoldPointId = reinterpret_cast<jlong> (&cp);
                     pEnv->CallVoidMethod(javaPhysicsSpace,
                             jmeClasses::PhysicsSpace_addCollisionEvent,
                             javaCollisionObject0, javaCollisionObject1,
-                            (jlong) & pm->getContactPoint(i));
+                            manifoldPointId);
                     if (pEnv->ExceptionCheck()) {
                         pEnv->Throw(pEnv->ExceptionOccurred());
                         return;
@@ -94,13 +96,13 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
                     return;
                 }
             } else {
-                printf("null javaPhysicsSpace in contactProcessedCallback\n");
+                printf("null javaPhysicsSpace in contactStartedCallback\n");
             }
         } else {
-            printf("null dynamicsWorld in contactProcessedCallback\n");
+            printf("null dynamicsWorld in contactStartedCallback\n");
         }
     } else {
-        printf("null userPointer in contactProcessedCallback\n");
+        printf("null userPointer in contactStartedCallback\n");
     }
 }
 
