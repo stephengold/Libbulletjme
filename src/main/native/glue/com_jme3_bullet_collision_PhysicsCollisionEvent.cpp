@@ -34,6 +34,18 @@
 #include "BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
 #include "com_jme3_bullet_collision_PhysicsCollisionEvent.h"
 
+extern bool gContactCalcArea3Points;
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setContactCalcArea3Points
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setContactCalcArea3Points
+(JNIEnv *, jclass, jboolean setting) {
+    gContactCalcArea3Points = (bool) setting;
+}
+
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getAppliedImpulse

@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setContactCalcArea3Points
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setContactCalcArea3Points
+  (JNIEnv *, jclass, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
  * Method:    getAppliedImpulse
  * Signature: (J)F
  */
