@@ -360,7 +360,8 @@ IVHACD::Parameters  vhacd.VHACDParamters
 
 ## What's missing
 
- + support for iOS operating system
+ + support for the iOS operating system
+ + `btRigidBodyConstructionInfo`
  + certain constraints:
    + `btFixedConstraint`
    + `btGearConstraint`
