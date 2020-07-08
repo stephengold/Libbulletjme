@@ -8,7 +8,7 @@ plugins {
 
 ext {
     artifact = 'Libbulletjme'
-    version = '8.3.0'
+    version = '8.4.0'
     baseName = "${artifact}-${version}"
 }
 
@@ -322,6 +322,7 @@ publishing {
 }
 
 // cleanup tasks
+
 clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
 task cleanCxx(type: Delete) {
     delete '.cxx'

@@ -1,5 +1,14 @@
 # Release log for the Libbulletjme project
 
+## Version 8.4.0 released on 8 July 2020
+
+ + Bugfix: `PhysicsCharacter` behaves strangely until its location is set.
+ + Added 4 methods to the `NativeLibrary` class:
+   + crash()
+   + fail()
+   + reinitialization()
+   + setReinitializationCallbackEnabled()
+
 ## Version 8.3.0 released on 3 July 2020
 
  + Added collision listeners for ongoing contacts in a `PhysicsSpace`.
