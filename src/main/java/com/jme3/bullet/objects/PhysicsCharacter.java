@@ -112,6 +112,10 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
          */
         setGravity(defaultGravity);
         setUp(unitY);
+        /*
+         * Initialize the location.
+         */
+        warp(translateIdentity);
 
         assert isContactResponse();
     }
