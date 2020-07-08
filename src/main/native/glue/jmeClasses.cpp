@@ -73,6 +73,9 @@ jfieldID jmeClasses::Matrix3f_m20;
 jfieldID jmeClasses::Matrix3f_m21;
 jfieldID jmeClasses::Matrix3f_m22;
 
+jclass jmeClasses::NativeLibrary_Class;
+jmethodID jmeClasses::NativeLibrary_reinitialization;
+
 jclass jmeClasses::NullPointerException;
 
 jmethodID jmeClasses::DebugMeshCallback_addVector;
@@ -111,12 +114,33 @@ jmethodID jmeClasses::Vhacd_update;
  * to alter this flag.
  */
 int jmeClasses::printFlag = 1; // TRUE
+/*
+ * global flag to enable/disable the reinitialization callback
+ *
+ * Invoke Java_com_jme3_bullet_util_NativeLibrary_setReinitializationCallbackEnabled
+ * to alter this flag.
+ */
+int jmeClasses::reinitializationCallbackFlag = 0; // FALSE
 
 /*
  * Initialize this instance for the specified environment.
  */
 void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
-    if (vm != NULL) return; // already initialized
+    if (vm != NULL) { // already initialized
+        if (jmeClasses::reinitializationCallbackFlag) {
+            /*
+             * Invoke NativeLibrary.reinitialization()
+             * in order to perform incremental cleanup.
+             */
+            pEnv->CallStaticVoidMethod(NativeLibrary_Class,
+                    NativeLibrary_reinitialization);
+            if (pEnv->ExceptionCheck()) {
+                pEnv->Throw(pEnv->ExceptionOccurred());
+            }
+        }
+
+        return;
+    }
 
     if (printFlag) {
 #ifdef _DEBUG
@@ -481,23 +505,34 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    /*
-     * Invoke NativeLibrary.postInitialization()
-     * in order to start the Physics Cleaner thread.
-     */
-    jclass nativeLibrary
-            = pEnv->FindClass("com/jme3/bullet/util/NativeLibrary");
+
+    NativeLibrary_Class = pEnv->FindClass("com/jme3/bullet/util/NativeLibrary");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    jmethodID postInitialization = pEnv->GetStaticMethodID(nativeLibrary,
+    NativeLibrary_Class = (jclass) pEnv->NewGlobalRef(NativeLibrary_Class);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    NativeLibrary_reinitialization = pEnv->GetStaticMethodID(
+            NativeLibrary_Class, "reinitialization", "()V");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    /*
+     * Invoke NativeLibrary.postInitialization()
+     * in order to start the Physics Cleaner thread.
+     */
+    jmethodID postInitialization = pEnv->GetStaticMethodID(NativeLibrary_Class,
             "postInitialization", "()V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    pEnv->CallStaticVoidMethod(nativeLibrary, postInitialization);
+    pEnv->CallStaticVoidMethod(NativeLibrary_Class, postInitialization);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

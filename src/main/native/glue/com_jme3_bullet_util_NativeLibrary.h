@@ -9,10 +9,26 @@ extern "C" {
 #endif
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    crash
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_crash
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
  * Method:    dumpMemoryLeaks
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpMemoryLeaks
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    fail
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_fail
   (JNIEnv *, jclass);
 
 /*
@@ -30,6 +46,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDebug
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePrecision
   (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    setReinitializationCallbackEnabled
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setReinitializationCallbackEnabled
+  (JNIEnv *, jclass, jboolean);
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary

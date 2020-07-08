@@ -87,6 +87,9 @@ public:
     static jfieldID Matrix3f_m21;
     static jfieldID Matrix3f_m22;
 
+    static jclass NativeLibrary_Class;
+    static jmethodID NativeLibrary_reinitialization;
+    
     static jclass NullPointerException;
 
     static jclass PhysicsCollisionEvent_Class;
@@ -119,6 +122,7 @@ public:
     static jmethodID DebugMeshCallback_addVector;
 
     static int printFlag;
+    static int reinitializationCallbackFlag;
 
 private:
     static JavaVM * vm;

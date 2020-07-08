@@ -39,6 +39,17 @@
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    crash
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_crash
+(JNIEnv *, jclass) {
+    int *p = NULL;
+    *p = 42;
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
  * Method:    dumpMemoryLeaks
  * Signature: ()I
  */
@@ -54,6 +65,16 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpMemoryLeaks
     fflush(stdout);
 
     return jint(numBytes);
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    fail
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_fail
+(JNIEnv *, jclass) {
+    btAssert(0);
 }
 
 /*
@@ -82,6 +103,16 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
 #else
     return JNI_FALSE;
 #endif //BT_USE_DOUBLE_PRECISION
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    setReinitializationCallbackEnabled
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setReinitializationCallbackEnabled
+(JNIEnv *, jclass, jboolean enable) {
+    jmeClasses::reinitializationCallbackFlag = (int) enable;
 }
 
 /*
