@@ -1088,7 +1088,7 @@ public class TestLibbulletjme {
                     dropAndFloorHaveCollided = true;
                 }
             };
-            ((PhysicsSpace) space).addCollisionListener(listener);
+            space.addCollisionListener(listener);
         }
         /*
          * 50 iterations with a 20-msec timestep
@@ -1096,7 +1096,7 @@ public class TestLibbulletjme {
         for (int i = 0; i < 50; ++i) {
             space.update(0.02f, 0);
             if (space instanceof PhysicsSpace) {
-                ((PhysicsSpace) space).distributeEvents();
+                space.distributeEvents();
             }
             //System.out.printf("location = %s%n",
             //        dropBody.getPhysicsLocation(null));
