@@ -54,6 +54,28 @@ public class MyMath {
     // new methods exposed
 
     /**
+     * Clamp a double-precision value between 2 limits.
+     *
+     * @param dValue input value to be clamped
+     * @param min lower limit of the clamp
+     * @param max upper limit of the clamp
+     * @return the value between min and max inclusive that is closest to fValue
+     * @see com.jme3.math.FastMath#clamp(float,float,float)
+     */
+    public static double clamp(double dValue, double min, double max) {
+        double result;
+        if (dValue < min) {
+            result = min;
+        } else if (dValue > max) {
+            result = max;
+        } else {
+            result = dValue;
+        }
+
+        return result;
+    }
+
+    /**
      * Determine the root sum of squares of some single-precision values.
      * Double-precision arithmetic is used to reduce the risk of overflow.
      *
