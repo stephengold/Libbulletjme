@@ -148,6 +148,24 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * sets the data in a <code>Quaternion</code> object from the given list of
+     * parameters.
+     *
+     * @param x   the x value of the quaternion.
+     * @param y   the y value of the quaternion.
+     * @param z   the z value of the quaternion.
+     * @param w   the w value of the quaternion.
+     * @return this
+     */
+    public Quaternion set(float x, float y, float z, float w) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.w = w;
+        return this;
+    }
+
+    /**
      * Sets the data in this <code>Quaternion</code> object to be equal to the
      * passed <code>Quaternion</code> object. The values are copied producing
      * a new object.
@@ -446,6 +464,33 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>add</code> adds the values of this quaternion to those of the
+     * parameter quaternion. The result is stored in this Quaternion.
+     *
+     * @param q   the quaternion to add to this.
+     * @return This Quaternion after addition.
+     */
+    public Quaternion addLocal(Quaternion q) {
+        this.x += q.x;
+        this.y += q.y;
+        this.z += q.z;
+        this.w += q.w;
+        return this;
+    }
+
+    /**
+     * <code>mult</code> multiplies this quaternion by a parameter quaternion.
+     * The result is returned as a new quaternion. It should be noted that
+     * quaternion multiplication is not commutative so q * p != p * q.
+     *
+     * @param q   the quaternion to multiply this quaternion by.
+     * @return the new quaternion.
+     */
+    public Quaternion mult(Quaternion q) {
+        return mult(q, null);
+    }
+
+    /**
      * <code>mult</code> multiplies this quaternion by a parameter quaternion.
      * The result is returned as a new quaternion. It should be noted that
      * quaternion multiplication is not commutative so q * p != p * q.
@@ -510,6 +555,25 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Multiplies this Quaternion by the supplied quaternion. The result is
+     * stored in this Quaternion, which is also returned for chaining. Similar
+     * to this *= q.
+     *
+     * @param q   The Quaternion to multiply this one by.
+     * @return This Quaternion, after multiplication.
+     */
+    public Quaternion multLocal(Quaternion q) {
+        float x1 = x * q.w + y * q.z - z * q.y + w * q.x;
+        float y1 = -x * q.z + y * q.w + z * q.x + w * q.y;
+        float z1 = x * q.y - y * q.x + z * q.w + w * q.z;
+        w = -x * q.x - y * q.y - z * q.z + w * q.w;
+        x = x1;
+        y = y1;
+        z = z1;
+        return this;
+    }
+
+    /**
      * <code>mult</code> multiplies this quaternion by a parameter vector. The
      * result is returned as a new vector.
      *
@@ -539,6 +603,22 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
                     * w * vz;
         }
         return store;
+    }
+
+    /**
+     * <code>mult</code> multiplies this quaternion by a parameter scalar. The
+     * result is stored locally.
+     *
+     * @param scalar
+     *            the quaternion to multiply this quaternion by.
+     * @return this.
+     */
+    public Quaternion multLocal(float scalar) {
+        w *= scalar;
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        return this;
     }
 
     /**
@@ -589,8 +669,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * <code>equals</code> determines if two quaternions are logically equal,
      * that is, if the values of (x, y, z, w) are the same for both quaternions.
      *
-     * @param o
-     *            the object to compare for equality
+     * @param o   the object to compare for equality
      * @return true if they are equal, false otherwise.
      */
     @Override
