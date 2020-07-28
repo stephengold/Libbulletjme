@@ -5,16 +5,16 @@
  + Added the `MyQuaternion` class from the Heart library.
  + Added `set()`, `addLocal()`, `mult()`, and `multLocal()` methods
    to the `Quaternion` class.
- + Add a `clamp()` method for doubles to the `MyMath` class.
+ + Added a `clamp()` method for doubles to the `MyMath` class.
 
 ## Version 8.4.0 released on 8 July 2020
 
  + Bugfix: `PhysicsCharacter` behaves strangely until its location is set.
  + Added 4 methods to the `NativeLibrary` class:
-   + crash()
-   + fail()
-   + reinitialization()
-   + setReinitializationCallbackEnabled()
+   + `crash()`
+   + `fail()`
+   + `reinitialization()`
+   + `setReinitializationCallbackEnabled()`
 
 ## Version 8.3.0 released on 3 July 2020
 

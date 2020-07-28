@@ -51,7 +51,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:8.5.0
+            compile 'com.github.stephengold:Libbulletjme:8.5.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
