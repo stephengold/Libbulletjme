@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 8.5.0 released on 28 July 2020
+
+ + Added the `MyQuaternion` class from the Heart library.
+ + Added `set()`, `addLocal()`, `mult()`, and `multLocal()` methods
+   to the `Quaternion` class.
+ + Add a `clamp()` method for doubles to the `MyMath` class.
+
 ## Version 8.4.0 released on 8 July 2020
 
  + Bugfix: `PhysicsCharacter` behaves strangely until its location is set.
