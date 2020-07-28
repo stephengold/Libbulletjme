@@ -149,10 +149,8 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate the dot (scalar) product of 2 quaternions. Unlike
-     * {@link com.jme3.math.Quaternion#dot(com.jme3.math.Quaternion)}, this
-     * method returns a double-precision value for precise calculation of
-     * angles.
+     * Calculate the dot (scalar) product of 2 quaternions. This method returns
+     * a double-precision value for precise calculation of angles.
      *
      * @param q1 the first Quaternion (not null, unaffected)
      * @param q2 the 2nd Quaternion (not null, unaffected)
@@ -220,9 +218,7 @@ public class MyQuaternion {
 
     /**
      * Test whether the specified Quaternion represents an identity rotation.
-     * This test is weaker than that implemented by
-     * {@link com.jme3.math.Quaternion#isIdentity()} because it accepts any
-     * non-zero value for w.
+     * Accepts any non-zero value for w.
      *
      * @param q input value (not null, unaffected)
      * @return true for a rotation identity, otherwise false
@@ -329,9 +325,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Normalize the specified quaternion in place. This method is less
-     * vulnerable to overflow than
-     * {@link com.jme3.math.Quaternion#normalizeLocal()}.
+     * Normalize the specified quaternion in place.
      *
      * @param input (not null, modified)
      */
@@ -386,10 +380,9 @@ public class MyQuaternion {
 
     /**
      * Interpolate between 2 unit quaternions using spherical linear (Slerp)
-     * interpolation. This method is slower (but more accurate) than
-     * {@link com.jme3.math.Quaternion#slerp(com.jme3.math.Quaternion, float)},
-     * always produces a unit, and doesn't trash q1. The caller is responsible
-     * for flipping the sign of q0 or q1 when it's appropriate to do so.
+     * interpolation. This method always produces a unit, and doesn't trash q1.
+     * The caller is responsible for flipping the sign of q0 or q1 when it's
+     * appropriate to do so.
      *
      * @param t descaled parameter value (&ge;0, &le;1)
      * @param q0 function value at t=0 (not null, unaffected unless it's also
