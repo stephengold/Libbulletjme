@@ -48,6 +48,13 @@ public class SoftBodyMaterial extends NativePhysicsObject {
      */
     final public static Logger logger
             = Logger.getLogger(PhysicsSoftBody.class.getName());
+    // *************************************************************************
+    // fields
+
+    /**
+     * corresponding soft body
+     */
+    private PhysicsSoftBody body = null;
     // *********************************************************************
     // constructors
 
@@ -57,9 +64,12 @@ public class SoftBodyMaterial extends NativePhysicsObject {
      * @param body the body to which this material will apply (not null)
      */
     public SoftBodyMaterial(PhysicsSoftBody body) {
+        assert body != null;
+        this.body = body;
+
         long softBodyId = body.nativeId();
         long materialId = getMaterialId(softBodyId);
-        super.setNativeId(materialId);
+        super.setNativeIdNotTracked(materialId);
     }
     // *********************************************************************
     // new methods exposed

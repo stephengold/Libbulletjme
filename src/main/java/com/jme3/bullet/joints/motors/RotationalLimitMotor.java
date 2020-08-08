@@ -61,7 +61,7 @@ public class RotationalLimitMotor extends NativePhysicsObject {
      */
     public RotationalLimitMotor(long nativeId) {
         Validate.nonZero(nativeId, "native ID");
-        super.setNativeId(nativeId);
+        super.setNativeIdNotTracked(nativeId);
     }
     // *************************************************************************
     // new methods exposed

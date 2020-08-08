@@ -35,7 +35,6 @@ import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.math.Vector3f;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -473,25 +472,6 @@ public class CharacterController extends NativePhysicsObject {
         warp(controllerId, location);
     }
     // *************************************************************************
-    // NativePhysicsObject methods
-
-    /**
-     * Finalize this controller just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing {0}", this);
-            long controllerId = nativeId();
-            finalizeNative(controllerId);
-        } finally {
-            super.finalize();
-        }
-    }
-    // *************************************************************************
     // Java private methods
 
     /**
@@ -501,6 +481,16 @@ public class CharacterController extends NativePhysicsObject {
         long ghostId = pco.nativeId();
         long controllerId = create(ghostId);
         setNativeId(controllerId);
+    }
+
+    /**
+     * Free the identified tracked native object. Invoked by reflection.
+     *
+     * @param controllerId the native identifier (not zero)
+     */
+    private static void freeNativeObject(long controllerId) {
+        assert controllerId != 0L;
+        finalizeNative(controllerId);
     }
     // *************************************************************************
     // native private methods

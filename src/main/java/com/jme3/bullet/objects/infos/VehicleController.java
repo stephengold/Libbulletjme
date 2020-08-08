@@ -36,7 +36,6 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.objects.PhysicsVehicle;
 import com.jme3.bullet.objects.VehicleWheel;
 import com.jme3.math.Vector3f;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -315,23 +314,16 @@ public class VehicleController extends NativePhysicsObject {
         wheel.updatePhysicsState();
     }
     // *************************************************************************
-    // NativePhysicsObject methods
+    // Java private methods
 
     /**
-     * Finalize this controller just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
+     * Free the identified tracked native object. Invoked by reflection.
      *
-     * @throws Throwable ignored by the garbage collector
+     * @param controllerId the native identifier (not zero)
      */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing {0}", this);
-            long controllerId = nativeId();
-            finalizeNative(controllerId);
-        } finally {
-            super.finalize();
-        }
+    private static void freeNativeObject(long controllerId) {
+        assert controllerId != 0L;
+        finalizeNative(controllerId);
     }
     // *************************************************************************
     // native private methods

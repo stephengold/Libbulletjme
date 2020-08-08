@@ -33,7 +33,6 @@ package com.jme3.bullet.collision.shapes.infos;
 
 import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.collision.shapes.MeshCollisionShape;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -53,14 +52,6 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     final public static Logger logger
             = Logger.getLogger(BoundingValueHierarchy.class.getName());
     // *************************************************************************
-    // fields
-
-    /**
-     * true&rarr;refers to a new btOptimizedBvh, false&rarr;refers to a
-     * pre-existing one
-     */
-    final private boolean needsNativeFinalization;
-    // *************************************************************************
     // constructors
 
     /**
@@ -74,8 +65,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
         long shapeId = meshShape.nativeId();
         long bvhId = getOptimizedBvh(shapeId);
-        super.setNativeId(bvhId);
-        needsNativeFinalization = false;
+        super.setNativeIdNotTracked(bvhId);
     }
 
     /**
@@ -88,7 +78,6 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
         long bvhId = deSerialize(bytes);
         super.setNativeId(bvhId);
-        needsNativeFinalization = true;
     }
     // *************************************************************************
     // new methods exposed
@@ -106,25 +95,16 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         return result;
     }
     // *************************************************************************
-    // NativePhysicsObject methods
+    // Java private methods
 
     /**
-     * Finalize this hierarchy just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
+     * Free the identified tracked native object. Invoked by reflection.
      *
-     * @throws Throwable ignored by the garbage collector
+     * @param bvhId the native identifier (not zero)
      */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            if (needsNativeFinalization) {
-                logger.log(Level.FINE, "Finalizing {0}.", this);
-                long bvhId = nativeId();
-                finalizeNative(bvhId);
-            }
-        } finally {
-            super.finalize();
-        }
+    private static void freeNativeObject(long bvhId) {
+        assert bvhId != 0L;
+        finalizeNative(bvhId);
     }
     // *************************************************************************
     // native private methods

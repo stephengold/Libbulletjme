@@ -34,7 +34,6 @@ package com.jme3.bullet.joints;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsSoftBody;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -353,28 +352,6 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
     native protected static void finalizeNative(long jointId);
     // *************************************************************************
     // PhysicsJoint methods
-
-    /**
-     * Finalize this joint just before it is destroyed. Should be invoked only
-     * by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        if (added) {
-            // the joint is still attached to a softbody,
-            // assuming the joint is Garbage collected at the same time as his softbody
-            // (the softbody have a reference to this in his joint list)
-            // when deleted the softbody will delete all his joints as well.
-            logger2.log(Level.FINE,
-                    "{0} is still attached, it will be destroyed by the soft body",
-                    this);
-        } else {
-            // finalizeNative() will be invoked by the superclass finalize
-            super.finalize();
-        }
-    }
 
     /**
      * Test whether this joint is enabled.

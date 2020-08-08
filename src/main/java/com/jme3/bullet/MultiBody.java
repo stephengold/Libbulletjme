@@ -38,7 +38,6 @@ import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -928,25 +927,6 @@ public class MultiBody
         return result;
     }
     // *************************************************************************
-    // NativePhysicsObject methods
-
-    /**
-     * Finalize this MultiBody just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing {0}.", this);
-            long multiBodyId = nativeId();
-            finalizeNative(multiBodyId);
-        } finally {
-            super.finalize();
-        }
-    }
-    // *************************************************************************
     // Java private methods
 
     /**
@@ -965,6 +945,16 @@ public class MultiBody
         links[linkIndex] = result;
 
         return result;
+    }
+
+    /**
+     * Free the identified tracked native object. Invoked by reflection.
+     *
+     * @param multiBodyId the native identifier (not zero)
+     */
+    private static void freeNativeObject(long multiBodyId) {
+        assert multiBodyId != 0L;
+        finalizeNative(multiBodyId);
     }
     // *************************************************************************
     // native private methods

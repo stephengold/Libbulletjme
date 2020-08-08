@@ -34,7 +34,6 @@ package com.jme3.bullet.joints;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.math.Vector3f;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -447,23 +446,16 @@ abstract public class Constraint extends PhysicsJoint {
         return result;
     }
     // *************************************************************************
-    // NativePhysicsObject methods
+    // Java private methods
 
     /**
-     * Finalize this Constraint just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
+     * Free the identified tracked native object. Invoked by reflection.
      *
-     * @throws Throwable ignored by the garbage collector
+     * @param constraintId the native identifier (not zero)
      */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing {0}.", this);
-            long constraintId = nativeId();
-            finalizeNative(constraintId);
-        } finally {
-            super.finalize();
-        }
+    private static void freeNativeObject(long constraintId) {
+        assert constraintId != 0L;
+        finalizeNative(constraintId);
     }
     // *************************************************************************
     // native private methods

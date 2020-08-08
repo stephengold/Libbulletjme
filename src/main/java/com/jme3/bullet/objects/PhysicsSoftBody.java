@@ -1269,8 +1269,6 @@ public class PhysicsSoftBody extends PhysicsBody {
     protected void destroySoftBody() {
         if (hasAssignedNativeObject()) {
             logger2.log(Level.FINE, "Destroying {0}.", this);
-            long objectId = nativeId();
-            finalizeNative(objectId);
             unassignNativeObject();
         }
 
