@@ -64,19 +64,6 @@ public class VHACDHull {
             indexes[intIndex] = intBuffer.get(intIndex);
         }
     }
-
-    /**
-     * Instantiate a hull with the specfied vertex positions and indices. TODO
-     * delete
-     *
-     * @param positions (alias created)
-     * @param indexes (alias created)
-     */
-    @Deprecated
-    protected VHACDHull(float[] positions, int[] indexes) {
-        this.positions = positions;
-        this.indexes = indexes;
-    }
     // *************************************************************************
     // new methods exposed
 
