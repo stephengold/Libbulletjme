@@ -1,5 +1,23 @@
 # Release log for the Libbulletjme project
 
+## Version 9.0.0 released on 8 August 2020
+
+ + Changed the return type of `rayTestRaw()`
+   in the `CollisionSpace` class. (API change)
+ + Changed the semantics of the `countJoints()` and `listJoints()` methods
+   in the `PhysicsBody` class. (API change)
+ + Deleted the `getIndices()` and `getNumInts()` methods
+   in the `VHACDHull` class. (API change)
+ + Delete the deprecated constructor in the `VHACDHull` class. (API change)
+ + Privatized and renamed the `physicsJoints` field
+   in the `PhysicsSpace` class. (API change)
+ + Privatized the `physicsSpaceTL` field
+   in the `CollisionSpace` class. (API change)
+ + Bugfix: characters and ghosts ignore their own ignore lists!
+ + Added a `clearIgnoreList()` method to the `PhysicsCollisionObject` class.
+ + Added `findEnd()` and `findOtherBody()` methods to the `PhysicsJoint` class.
+ + Built using Gradle Android tools v4.0.1 .
+
 ## Version 8.5.0 released on 28 July 2020
 
  + Added the `MyQuaternion` class from the Heart library.
