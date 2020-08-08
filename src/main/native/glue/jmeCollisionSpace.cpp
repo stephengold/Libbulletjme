@@ -38,47 +38,61 @@
  */
 
 /*
- * Test whether the specified pair of proxies needs collision.
+ * During the broadphase, test whether the specified pair of proxies
+ * needs collision detection.
  */
 bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
         btBroadphaseProxy *pProxy1) const {
-    bool collides = (pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask) != 0
-            || (pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask) != 0;
-    if (collides) {
-        btCollisionObject * const pco0 = (btCollisionObject *) pProxy0->m_clientObject;
-        btCollisionObject * const pco1 = (btCollisionObject *) pProxy1->m_clientObject;
-        jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
-        jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
-        if (pUser0 != NULL && pUser1 != NULL) { // TODO is this necessary?
-            collides = (pUser0->m_group & pUser1->m_groups) != 0
-                    || (pUser1->m_group & pUser0->m_groups) != 0;
-
-            if (collides) {
-                jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
-                JNIEnv * const pEnv = pSpace->getEnv();
-                jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
-                jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef); // TODO is this necessary?
-                jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
-
-                const jboolean notifyResult = pEnv->CallBooleanMethod(
-                        javaPhysicsSpace,
-                        jmeClasses::CollisionSpace_notifyCollisionGroupListeners,
-                        javaCollisionObject0, javaCollisionObject1);
-
-                pEnv->DeleteLocalRef(javaPhysicsSpace);
-                pEnv->DeleteLocalRef(javaCollisionObject0);
-                pEnv->DeleteLocalRef(javaCollisionObject1);
-
-                if (pEnv->ExceptionCheck()) {
-                    pEnv->Throw(pEnv->ExceptionOccurred());
-                    return 0;
-                }
-
-                collides = (bool) notifyResult;
-            }
-        }
+    /*
+     * Test the Bullet collision-filter groups.
+     */
+    if (pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask == 0x0
+            && pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask == 0x0) {
+        return false;
     }
-    return collides;
+    /*
+     * Test the ignore lists.
+     */
+    btCollisionObject * const pco0 = (btCollisionObject *) pProxy0->m_clientObject;
+    btCollisionObject * const pco1 = (btCollisionObject *) pProxy1->m_clientObject;
+    if (!pco0->checkCollideWith(pco1)) {
+        return false;
+    } else if (!pco1->checkCollideWith(pco0)) {
+        return false;
+    }
+    /*
+     * Test the Minie collision-filter groups.
+     */
+    jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
+    jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
+    if (pUser0 == NULL || pUser1 == NULL) { // TODO is this necessary?
+        return true;
+    } else if (pUser0->m_group & pUser1->m_groups == 0x0
+            && pUser1->m_group & pUser0->m_groups == 0x0) {
+        return false;
+    }
+    /*
+     * As a final test, invoke the applicable collision-group listeners, if any.
+     */
+    jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
+    JNIEnv * const pEnv = pSpace->getEnv();
+    jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef); // TODO is this necessary?
+    jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
+
+    const jboolean result = pEnv->CallBooleanMethod(javaPhysicsSpace,
+            jmeClasses::CollisionSpace_notifyCollisionGroupListeners,
+            javaCollisionObject0, javaCollisionObject1);
+
+    pEnv->DeleteLocalRef(javaPhysicsSpace);
+    pEnv->DeleteLocalRef(javaCollisionObject0);
+    pEnv->DeleteLocalRef(javaCollisionObject1);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return false;
+    }
+
+    return (bool) result;
 }
 
 jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
