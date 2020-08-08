@@ -56,6 +56,7 @@ import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.objects.PhysicsBody;
+import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.bullet.objects.PhysicsGhostObject;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsSoftBody;
@@ -850,6 +851,137 @@ public class TestLibbulletjme {
         for (int i = 0; i < 50; ++i) {
             physicsSpace.update(0.02f, 0);
         }
+
+        physicsSpace = null;
+        System.gc();
+    }
+
+    /**
+     * Make sure ignore lists work for rigid bodies.
+     */
+    @Test
+    public void test008() {
+        loadNativeLibrary();
+
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
+                PhysicsSpace.BroadphaseType.DBVT);
+        /*
+         * Stack 2 rigid boxes.
+         */
+        float halfExtent = 1f;
+        BoxCollisionShape boxShape = new BoxCollisionShape(halfExtent);
+
+        float mass = 1f;
+        PhysicsRigidBody rigid1 = new PhysicsRigidBody(boxShape, mass);
+        testPco(rigid1);
+        rigid1.setPhysicsLocation(new Vector3f(0f, halfExtent, 0f));
+        physicsSpace.addCollisionObject(rigid1);
+
+        PhysicsRigidBody rigid2 = new PhysicsRigidBody(boxShape,
+                PhysicsBody.massForStatic);
+        testPco(rigid2);
+        rigid2.setPhysicsLocation(new Vector3f(0f, -halfExtent, 0f));
+        rigid2.addToIgnoreList(rigid1);
+        physicsSpace.addCollisionObject(rigid2);
+        Assert.assertTrue(rigid1.ignores(rigid2));
+        Assert.assertEquals(1, rigid2.countIgnored());
+        /*
+         * 50 iterations with a 20-msec timestep
+         */
+        for (int i = 0; i < 50; ++i) {
+            physicsSpace.update(0.02f, 0);
+        }
+        Vector3f location = rigid1.getPhysicsLocation(null);
+        assertEquals(0f, -4f, 0f, location, 0.1f);
+
+        physicsSpace = null;
+        System.gc();
+    }
+
+    /**
+     * Make sure ignore lists work for characters.
+     */
+    @Test
+    public void test009() {
+        loadNativeLibrary();
+
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
+                PhysicsSpace.BroadphaseType.DBVT);
+        /*
+         * Stack a spherical character on a box.
+         */
+        float radius = 0.5f;
+        SphereCollisionShape ballShape = new SphereCollisionShape(radius);
+
+        float stepHeight = 0.1f;
+        PhysicsCharacter character
+                = new PhysicsCharacter(ballShape, stepHeight);
+        testPco(character);
+        character.setPhysicsLocation(new Vector3f(0f, radius, 0f));
+        physicsSpace.addCollisionObject(character);
+
+        float halfExtent = 1f;
+        BoxCollisionShape boxShape = new BoxCollisionShape(halfExtent);
+
+        PhysicsRigidBody rigid2
+                = new PhysicsRigidBody(boxShape, PhysicsBody.massForStatic);
+        testPco(rigid2);
+        rigid2.setPhysicsLocation(new Vector3f(0f, -halfExtent, 0f));
+        rigid2.addToIgnoreList(character);
+        physicsSpace.addCollisionObject(rigid2);
+        Assert.assertTrue(character.ignores(rigid2));
+        Assert.assertEquals(1, rigid2.countIgnored());
+        /*
+         * 50 iterations with a 20-msec timestep
+         */
+        for (int i = 0; i < 50; ++i) {
+            physicsSpace.update(0.02f, 0);
+        }
+        Vector3f result = character.getPhysicsLocation(null);
+        assertEquals(0f, -14.5f, 0f, result, 0.1f);
+
+        physicsSpace = null;
+        System.gc();
+    }
+
+    /**
+     * Make sure ignore lists work for ghosts.
+     */
+    @Test
+    public void test010() {
+        loadNativeLibrary();
+
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
+                PhysicsSpace.BroadphaseType.DBVT);
+        /*
+         * A ghost sphere overlapping with a rigid box.
+         */
+        float radius = 0.5f;
+        SphereCollisionShape ballShape = new SphereCollisionShape(radius);
+
+        PhysicsGhostObject ghost = new PhysicsGhostObject(ballShape);
+        testPco(ghost);
+        physicsSpace.addCollisionObject(ghost);
+
+        float halfExtent = 1f;
+        BoxCollisionShape boxShape = new BoxCollisionShape(halfExtent);
+
+        PhysicsRigidBody rigid2 = new PhysicsRigidBody(boxShape,
+                PhysicsBody.massForStatic);
+        testPco(rigid2);
+        rigid2.setPhysicsLocation(new Vector3f(0f, -halfExtent, 0f));
+        rigid2.addToIgnoreList(ghost);
+        physicsSpace.addCollisionObject(rigid2);
+        Assert.assertTrue(ghost.ignores(rigid2));
+        Assert.assertEquals(1, rigid2.countIgnored());
+        int n = ghost.getOverlappingCount();
+        Assert.assertEquals(0, n);
 
         physicsSpace = null;
         System.gc();
