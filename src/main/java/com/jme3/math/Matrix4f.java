@@ -295,12 +295,9 @@ public final class Matrix4f implements Cloneable {
     /**
      * Sets the scale.
      *
-     * @param x
-     *            the X scale
-     * @param y
-     *            the Y scale
-     * @param z
-     *            the Z scale
+     * @param x   the X scale
+     * @param y   the Y scale
+     * @param z   the Z scale
      */
     public void setScale(float x, float y, float z) {
 
@@ -352,13 +349,17 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * <code>toString</code> returns the string representation of this object.
-     * It is in a format of a 4x4 matrix. For example, an identity matrix would
-     * be represented by the following string. com.jme.math.Matrix3f <br>[<br>
-     * 1.0  0.0  0.0  0.0 <br>
-     * 0.0  1.0  0.0  0.0 <br>
-     * 0.0  0.0  1.0  0.0 <br>
-     * 0.0  0.0  0.0  1.0 <br>]<br>
+     * <code>toString</code> returns a string representation of this matrix.
+     * For example, an identity matrix would be represented by:
+     * <pre>
+     * Matrix4f
+     * [
+     *  1.0  0.0  0.0  0.0
+     *  0.0  1.0  0.0  0.0
+     *  0.0  0.0  1.0  0.0
+     *  0.0  0.0  0.0  1.0
+     * ]
+     * </pre>
      *
      * @return the string representation of this object.
      */
@@ -441,8 +442,7 @@ public final class Matrix4f implements Cloneable {
     /**
      * are these two matrices the same? they are is they both have the same mXX values.
      *
-     * @param o
-     *            the object to compare for equality
+     * @param o   the object to compare for equality
      * @return true if they are equal
      */
     @Override

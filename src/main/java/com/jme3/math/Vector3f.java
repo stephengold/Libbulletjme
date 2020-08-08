@@ -50,11 +50,25 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
     private static final Logger logger = Logger.getLogger(Vector3f.class.getName());
-
+    /**
+     * shared instance of the all-zero vector (0,0,0) - Do not modify!
+     */
     public final static Vector3f ZERO = new Vector3f(0, 0, 0);
+    /**
+     * shared instance of the +X direction (1,0,0) - Do not modify!
+     */
     public final static Vector3f UNIT_X = new Vector3f(1, 0, 0);
+    /**
+     * shared instance of the +Y direction (0,1,0) - Do not modify!
+     */
     public final static Vector3f UNIT_Y = new Vector3f(0, 1, 0);
+    /**
+     * shared instance of the +Z direction (0,0,1) - Do not modify!
+     */
     public final static Vector3f UNIT_Z = new Vector3f(0, 0, 1);
+    /**
+     * shared instance of the all-ones vector (1,1,1) - Do not modify!
+     */
     public final static Vector3f UNIT_XYZ = new Vector3f(1, 1, 1);
     /**
      * the x value of the vector.
@@ -82,12 +96,9 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * Constructor instantiates a new <code>Vector3f</code> with provides
      * values.
      *
-     * @param x
-     *            the x value of the vector.
-     * @param y
-     *            the y value of the vector.
-     * @param z
-     *            the z value of the vector.
+     * @param x   the x value of the vector.
+     * @param y   the y value of the vector.
+     * @param z   the z value of the vector.
      */
     public Vector3f(float x, float y, float z) {
         this.x = x;
@@ -99,12 +110,9 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * <code>set</code> sets the x,y,z values of the vector based on passed
      * parameters.
      *
-     * @param x
-     *            the x value of the vector.
-     * @param y
-     *            the y value of the vector.
-     * @param z
-     *            the z value of the vector.
+     * @param x   the x value of the vector.
+     * @param y   the y value of the vector.
+     * @param z   the z value of the vector.
      * @return this vector
      */
     public Vector3f set(float x, float y, float z) {
@@ -206,8 +214,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * <code>cross</code> calculates the cross product of this vector with a
      * parameter vector v.
      *
-     * @param v
-     *            the vector to take the cross product of with this.
+     * @param v   the vector to take the cross product of with this.
      * @return the cross product vector.
      */
     public Vector3f cross(Vector3f v) {
@@ -218,8 +225,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * <code>cross</code> calculates the cross product of this vector with a
      * parameter vector v.  The result is stored in <code>result</code>
      *
-     * @param v
-     *            the vector to take the cross product of with this.
+     * @param v   the vector to take the cross product of with this.
      * @param result
      *            the vector to store the cross product result.
      * @return result, after receiving the cross product vector.
@@ -413,6 +419,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
     /**
      * <code>zero</code> resets this vector's data to zero internally.
+     *
      * @return this
      */
     public Vector3f zero() {
@@ -444,6 +451,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
         return true;
     }
 
+    /**
+     * Create a copy of this vector.
+     *
+     * @return a new instance, equivalent to this one
+     */
     @Override
     public Vector3f clone() {
         try {
@@ -457,8 +469,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * are these two vectors the same? they are is they both have the same x,y,
      * and z values.
      *
-     * @param o
-     *            the object to compare for equality
+     * @param o   the object to compare for equality
      * @return true if they are equal
      */
     @Override
@@ -501,10 +512,10 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>toString</code> returns the string representation of this vector.
+     * <code>toString</code> returns a string representation of this vector.
      * The format is:
      *
-     * org.jme.math.Vector3f [X=XX.XXXX, Y=YY.YYYY, Z=ZZ.ZZZZ]
+     * (XX.XXXX, YY.YYYY, ZZ.ZZZZ)
      *
      * @return the string representation of this vector.
      */
@@ -513,14 +524,18 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
         return "(" + x + ", " + y + ", " + z + ")";
     }
 
+    /**
+     * Determine the X component of this vector.
+     *
+     * @return x
+     */
     public float getX() {
         return x;
     }
 
     /**
-     * @param index  0, 1, or 2
-     * @return x value if index == 0, y value if index == 1 or z value if index ==
-     *         2
+     * @param index
+     * @return x value if index == 0, y value if index == 1 or z value if index == 2
      * @throws IllegalArgumentException
      *             if index is not one of 0, 1, 2.
      */

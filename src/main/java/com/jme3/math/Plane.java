@@ -104,11 +104,10 @@ public class Plane implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>toString</code> returns a string that represents the string
-     * representation of this plane. It represents the normal as a
-     * <code>Vector3f</code> object, so the format is the following:
-     * com.jme.math.Plane [Normal: org.jme.math.Vector3f [X=XX.XXXX, Y=YY.YYYY,
-     * Z=ZZ.ZZZZ] - Constant: CC.CCCCC]
+     * <code>toString</code> returns a string representation of this plane.
+     * It represents the normal as a <code>Vector3f</code>, so the format is:
+     *
+     * Plane [Normal: (X.XXXX, Y.YYYY, Z.ZZZZ) - Constant: C.CCCC]
      *
      * @return the string representation of this plane.
      */
