@@ -220,6 +220,18 @@ abstract public class PhysicsCollisionObject
     }
 
     /**
+     * Clear this object's ignore list.
+     */
+    public void clearIgnoreList() {
+        long thisId = nativeId();
+        long[] otherIds = listIgnoredIds();
+        for (long otherId : otherIds) {
+            boolean toIgnore = false;
+            setIgnoreCollisionCheck(thisId, otherId, toIgnore);
+        }
+    }
+
+    /**
      * Copy common properties from another PhysicsCollisionObject.
      *
      * @param old (not null, unaffected)
