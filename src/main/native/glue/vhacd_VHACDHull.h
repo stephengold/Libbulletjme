@@ -9,26 +9,10 @@ extern "C" {
 #endif
 /*
  * Class:     vhacd_VHACDHull
- * Method:    getIndices
- * Signature: (JLjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getIndices
-  (JNIEnv *, jclass, jlong, jobject);
-
-/*
- * Class:     vhacd_VHACDHull
  * Method:    getNumFloats
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDHull
- * Method:    getNumInts
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumInts
   (JNIEnv *, jclass, jlong);
 
 /*

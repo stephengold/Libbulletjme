@@ -16,7 +16,6 @@ package vhacd;
 
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import jme3utilities.math.MyVector3f;
 
 /**
@@ -73,11 +72,7 @@ public class VHACDHull {
     // *************************************************************************
     // native private methods
 
-    native private static void getIndices(long hullId, IntBuffer storeBuffer);
-
     native private static int getNumFloats(long hullId);
-
-    native private static int getNumInts(long hullId);
 
     native private static void getPositions(long hullId,
             FloatBuffer storeBuffer);

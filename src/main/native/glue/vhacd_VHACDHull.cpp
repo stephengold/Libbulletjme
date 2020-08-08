@@ -41,29 +41,6 @@ using namespace VHACD;
 
 /*
  * Class:     vhacd_VHACDHull
- * Method:    getIndices
- * Signature: (JLjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getIndices
-(JNIEnv *pEnv, jclass, jlong hullId, jobject storeBuffer) {
-    const IVHACD::ConvexHull * const pHull
-            = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
-    NULL_CHK(pEnv, pHull, "The hull does not exist.",)
-
-    NULL_CHK(pEnv, storeBuffer, "The indices buffer does not exist.",);
-    jint * const pIndices
-            = (jint *) pEnv->GetDirectBufferAddress(storeBuffer);
-    NULL_CHK(pEnv, pIndices, "The indices buffer is not direct.",);
-
-    const jlong capacity = pEnv->GetDirectBufferCapacity(storeBuffer);
-    const uint32_t numInts = 3 * pHull->m_nTriangles;
-    for (uint32_t i = 0; i < numInts && i < capacity; ++i) {
-        pIndices[i] = pHull->m_triangles[i];
-    }
-}
-
-/*
- * Class:     vhacd_VHACDHull
  * Method:    getNumFloats
  * Signature: (J)I
  */
@@ -76,22 +53,6 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
     uint32_t numFloats = 3 * pHull->m_nPoints;
 
     return (jint) numFloats;
-}
-
-/*
- * Class:     vhacd_VHACDHull
- * Method:    getNumInts
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumInts
-(JNIEnv *pEnv, jclass, jlong hullId) {
-    const IVHACD::ConvexHull * const pHull
-            = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
-    NULL_CHK(pEnv, pHull, "The hull does not exist.", 0);
-
-    uint32_t numInts = 3 * pHull->m_nTriangles;
-
-    return (jint) numInts;
 }
 
 /*
