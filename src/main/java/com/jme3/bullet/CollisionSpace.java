@@ -97,9 +97,9 @@ public class CollisionSpace extends NativePhysicsObject {
     final private Map<Long, PhysicsGhostObject> ghostMap
             = new ConcurrentHashMap<>(64);
     /**
-     * physics-space reference for each thread TODO privatize
+     * physics-space reference for each thread
      */
-    final protected static ThreadLocal<CollisionSpace> physicsSpaceTL
+    final private static ThreadLocal<CollisionSpace> physicsSpaceTL
             = new ThreadLocal<CollisionSpace>();
     /**
      * copy of maximum coordinate values when using AXIS_SWEEP broadphase
