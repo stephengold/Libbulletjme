@@ -427,7 +427,7 @@ public class HingeJoint extends Constraint {
         setNativeId(constraintId);
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static long createJoint(long objectIdA, long objectIdB,
             Vector3f pivotInA, Vector3f axisInA, Vector3f pivotInB,

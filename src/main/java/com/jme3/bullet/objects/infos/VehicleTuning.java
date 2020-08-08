@@ -62,7 +62,7 @@ public class VehicleTuning extends NativePhysicsObject {
      */
     private float maxSuspensionForce = 6000f;
     /**
-     * maximum suspension travel distance (in centimeters)
+     * maximum suspension travel distance (in hundredths of a PSU)
      */
     private float maxSuspensionTravelCm = 500f;
     /**
@@ -111,10 +111,14 @@ public class VehicleTuning extends NativePhysicsObject {
     }
 
     /**
-     * Read the travel distance for each wheel's suspension (native field:
-     * m_maxSuspensionTravelCm).
+     * Determine the maximum travel distance for each wheel's suspension (native
+     * field: m_maxSuspensionTravelCm).
      *
-     * @return the maximum travel distance (in centimeters)
+     * Note that the units are centimeters ONLY if the physics-space unit is
+     * exactly one meter.
+     *
+     * @return the maximum amount the suspension can be compressed or expanded,
+     * relative to its rest length (in hundredths of a physics-space unit)
      */
     public float getMaxSuspensionTravelCm() {
         return maxSuspensionTravelCm;
@@ -175,11 +179,15 @@ public class VehicleTuning extends NativePhysicsObject {
     }
 
     /**
-     * Alter the travel distance for the suspension (native field:
+     * Alter the maximum travel distance for the suspension (native field:
      * m_maxSuspensionTravelCm).
      *
-     * @param travelCm the desired maximum travel distance (in centimeters,
-     * default=500)
+     * Note that the units are centimeters ONLY if the physics-space unit is
+     * exactly one meter.
+     *
+     * @param travelCm the desired maximum amount the suspension can be
+     * compressed or expanded, relative to its rest length (in hundredths of a
+     * physics-space unit, default=500)
      */
     public void setMaxSuspensionTravelCm(float travelCm) {
         maxSuspensionTravelCm = travelCm;
