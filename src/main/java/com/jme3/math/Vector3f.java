@@ -534,7 +534,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * @param index
+     * @param index 0, 1, or 2
      * @return x value if index == 0, y value if index == 1 or z value if index == 2
      * @throws IllegalArgumentException
      *             if index is not one of 0, 1, 2.
