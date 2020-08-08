@@ -150,9 +150,9 @@ public class PhysicsSpace extends CollisionSpace {
     final private Map<Long, PhysicsCharacter> characterMap
             = new ConcurrentHashMap<>(64);
     /**
-     * map joint IDs to added objects TODO privatize and rename
+     * map joint IDs to added objects
      */
-    final protected Map<Long, PhysicsJoint> physicsJoints
+    final private Map<Long, PhysicsJoint> jointMap
             = new ConcurrentHashMap<>(64);
     /**
      * map rigid-body IDs to added objects (including vehicles)
@@ -301,7 +301,7 @@ public class PhysicsSpace extends CollisionSpace {
 
         logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{joint, this});
         long jointId = joint.nativeId();
-        physicsJoints.put(jointId, joint);
+        jointMap.put(jointId, joint);
         joint.setPhysicsSpace(this);
 
         if (joint instanceof Constraint) {
@@ -334,7 +334,7 @@ public class PhysicsSpace extends CollisionSpace {
      */
     public boolean contains(PhysicsJoint joint) {
         long jointId = joint.nativeId();
-        boolean result = physicsJoints.containsKey(jointId);
+        boolean result = jointMap.containsKey(jointId);
 
         return result;
     }
@@ -359,7 +359,7 @@ public class PhysicsSpace extends CollisionSpace {
         long spaceId = nativeId();
         int count = getNumConstraints(spaceId);
 
-        assert count == physicsJoints.size() : count;
+        assert count == jointMap.size() : count;
         return count;
     }
 
@@ -436,7 +436,7 @@ public class PhysicsSpace extends CollisionSpace {
      * null)
      */
     public Collection<PhysicsJoint> getJointList() {
-        Collection<PhysicsJoint> result = physicsJoints.values();
+        Collection<PhysicsJoint> result = jointMap.values();
         return Collections.unmodifiableCollection(result);
     }
 
@@ -546,7 +546,7 @@ public class PhysicsSpace extends CollisionSpace {
     public void removeJoint(PhysicsJoint joint) {
         Validate.nonNull(joint, "joint");
         long jointId = joint.nativeId();
-        if (!physicsJoints.containsKey(jointId)) {
+        if (!jointMap.containsKey(jointId)) {
             logger.log(Level.WARNING, "{0} does not exist in {1}.",
                     new Object[]{joint, this});
             return;
@@ -555,7 +555,7 @@ public class PhysicsSpace extends CollisionSpace {
 
         logger.log(Level.FINE, "Removing {0} from {1}.",
                 new Object[]{joint, this});
-        physicsJoints.remove(jointId);
+        jointMap.remove(jointId);
         joint.setPhysicsSpace(null);
 
         if (joint instanceof Constraint) {
@@ -694,7 +694,7 @@ public class PhysicsSpace extends CollisionSpace {
      * @return the pre-existing instance
      */
     protected Map<Long, PhysicsJoint> getJointMap() {
-        return physicsJoints;
+        return jointMap;
     }
 
     /**
@@ -825,7 +825,7 @@ public class PhysicsSpace extends CollisionSpace {
         boolean result = super.isEmpty()
                 && characterMap.isEmpty()
                 && rigidMap.isEmpty()
-                && physicsJoints.isEmpty();
+                && jointMap.isEmpty();
 
         return result;
     }
