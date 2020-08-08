@@ -30,10 +30,6 @@ public class VHACDHull {
      * vertex locations (not empty, length a multiple of 3)
      */
     final private float[] positions;
-    /**
-     * vertex indices for each triangular face (length a multiple of 3)
-     */
-    final private int[] indexes;
     // *************************************************************************
     // constructors
 
@@ -54,14 +50,6 @@ public class VHACDHull {
         positions = new float[numFloats];
         for (int floatIndex = 0; floatIndex < numFloats; ++floatIndex) {
             positions[floatIndex] = floatBuffer.get(floatIndex);
-        }
-
-        int numInts = getNumInts(hullId);
-        IntBuffer intBuffer = BufferUtils.createIntBuffer(numInts);
-        getIndices(hullId, intBuffer);
-        indexes = new int[numInts];
-        for (int intIndex = 0; intIndex < numInts; ++intIndex) {
-            indexes[intIndex] = intBuffer.get(intIndex);
         }
     }
     // *************************************************************************
