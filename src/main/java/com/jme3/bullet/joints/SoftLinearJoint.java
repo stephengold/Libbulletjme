@@ -160,7 +160,7 @@ public class SoftLinearJoint extends SoftPhysicsJoint {
             jointId = createJointSoftSoft(ida, cia, idb, cib, erp, cfm, split,
                     location);
         }
-        setNativeIdNotTracked(jointId);
+        setNativeId(jointId);
         assert checkParameters();
     }
     // *************************************************************************

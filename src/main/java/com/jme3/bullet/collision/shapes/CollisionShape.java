@@ -418,6 +418,23 @@ abstract public class CollisionShape
     // NativePhysicsObject methods
 
     /**
+     * Finalize this shape just before it is destroyed. Should be invoked only
+     * by a subclass or by the garbage collector.
+     *
+     * @throws Throwable ignored by the garbage collector
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            logger.log(Level.FINE, "Finalizing {0}.", this);
+            long shapeId = nativeId();
+            finalizeNative(shapeId);
+        } finally {
+            super.finalize();
+        }
+    }
+
+    /**
      * Initialize the native ID.
      *
      * @param shapeId the identifier of the btCollisionShape (not zero)
@@ -449,16 +466,6 @@ abstract public class CollisionShape
         }
 
         return result;
-    }
-
-    /**
-     * Free the identified tracked native object. Invoked by reflection.
-     *
-     * @param shapeId the native identifier (not zero)
-     */
-    private static void freeNativeObject(long shapeId) {
-        assert shapeId != 0L;
-        finalizeNative(shapeId);
     }
     // *************************************************************************
     // native private methods

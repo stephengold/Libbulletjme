@@ -79,7 +79,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
 
         this.pcoA = pcoA;
         this.pcoB = pcoB;
-        super.setNativeIdNotTracked(manifoldPointId);
+        super.setNativeId(manifoldPointId);
     }
     // *************************************************************************
     // new methods exposed

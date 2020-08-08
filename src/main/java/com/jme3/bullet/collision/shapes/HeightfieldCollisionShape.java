@@ -204,6 +204,24 @@ public class HeightfieldCollisionShape extends CollisionShape {
         return count;
     }
     // *************************************************************************
+    // CollisionShape methods
+
+    /**
+     * Finalize this shape just before it is destroyed. Should be invoked only
+     * by a subclass or by the garbage collector.
+     *
+     * @throws Throwable ignored by the garbage collector
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            long nativeId = nativeId();
+            finalizeNative(nativeId);
+        } finally {
+            super.finalize();
+        }
+    }
+    // *************************************************************************
     // Java private methods
 
     /**
@@ -278,16 +296,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
 
         setScale(scale);
         setMargin(margin);
-    }
-
-    /**
-     * Free the identified tracked native object. Invoked by reflection.
-     *
-     * @param shapeId the native identifier (not zero)
-     */
-    private static void freeNativeObject(long shapeId) {
-        assert shapeId != 0L;
-        finalizeNative(shapeId);
     }
     // *************************************************************************
     // native private methods

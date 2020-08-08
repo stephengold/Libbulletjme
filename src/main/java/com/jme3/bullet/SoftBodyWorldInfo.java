@@ -33,6 +33,7 @@ package com.jme3.bullet;
 
 import com.jme3.bullet.objects.PhysicsSoftBody;
 import com.jme3.math.Vector3f;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -56,6 +57,14 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     final public static Logger logger
             = Logger.getLogger(PhysicsSoftBody.class.getName());
     // *************************************************************************
+    // fields
+
+    /**
+     * true&rarr;refers to a new btSoftBodyWorldInfo, false&rarr;refers to a
+     * pre-existing one
+     */
+    final private boolean needsNativeFinalization;
+    // *************************************************************************
     // constructors
 
     /**
@@ -65,6 +74,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     public SoftBodyWorldInfo() {
         long infoId = createSoftBodyWorldInfo();
         super.setNativeId(infoId);
+        needsNativeFinalization = true;
     }
 
     /**
@@ -75,7 +85,8 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
      */
     public SoftBodyWorldInfo(long nativeId) {
         Validate.nonZero(nativeId, "native ID");
-        super.setNativeIdNotTracked(nativeId);
+        super.setNativeId(nativeId);
+        needsNativeFinalization = false;
     }
     // *************************************************************************
     // new methods exposed
@@ -234,16 +245,25 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
         return getWaterOffset(infoId);
     }
     // *************************************************************************
-    // Java private methods
+    // NativePhysicsObject methods
 
     /**
-     * Free the identified tracked native object. Invoked by reflection.
+     * Finalize this info just before it is destroyed. Should be invoked only by
+     * a subclass or by the garbage collector.
      *
-     * @param infoId the native identifier (not zero)
+     * @throws Throwable ignored by the garbage collector
      */
-    private static void freeNativeObject(long infoId) {
-        assert infoId != 0L;
-        finalizeNative(infoId);
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (needsNativeFinalization) {
+                logger.log(Level.FINE, "Finalizing {0}.", this);
+                long infoId = nativeId();
+                finalizeNative(infoId);
+            }
+        } finally {
+            super.finalize();
+        }
     }
     // *************************************************************************
     // native private methods

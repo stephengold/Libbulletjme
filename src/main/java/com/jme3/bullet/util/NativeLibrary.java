@@ -31,8 +31,6 @@
  */
 package com.jme3.bullet.util;
 
-import com.jme3.bullet.NativePhysicsObject;
-
 /**
  * Static interface to the Libbulletjme native library.
  *
@@ -116,17 +114,10 @@ public class NativeLibrary {
 
     /**
      * Callback invoked (by native code) upon successful initialization of the
-     * native library, to start the Physics Cleaner thread.
+     * native library.
      */
     private static void postInitialization() {
-        Thread physicsCleaner = new Thread("Physics Cleaner") {
-            @Override
-            public void run() {
-                NativePhysicsObject.freeUnusedObjects();
-            }
-        };
-        physicsCleaner.setDaemon(true);
-        physicsCleaner.start();
+        // do nothing, for now
     }
 
     /**

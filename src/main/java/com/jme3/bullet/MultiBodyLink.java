@@ -102,7 +102,7 @@ public class MultiBodyLink extends NativePhysicsObject {
         multiBodyId = multiBody.nativeId();
 
         long linkId = getLinkId(multiBodyId, index);
-        super.setNativeIdNotTracked(linkId);
+        super.setNativeId(linkId);
 
         numDofs = getDofCount(linkId);
 

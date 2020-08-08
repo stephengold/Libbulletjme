@@ -63,7 +63,7 @@ public class TranslationMotor extends NativePhysicsObject {
      */
     public TranslationMotor(long nativeId) {
         Validate.nonZero(nativeId, "native ID");
-        super.setNativeIdNotTracked(nativeId);
+        super.setNativeId(nativeId);
     }
     // *************************************************************************
     // new methods exposed
