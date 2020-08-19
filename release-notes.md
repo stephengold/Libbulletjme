@@ -1,10 +1,12 @@
 # Release log for the Libbulletjme project
 
-## Version 9.1.0 released on 18 August 2020
+## Version 9.1.1 released on 18 August 2020
 
- + Added the `fromAngles()` and `normalizeLocation()` methods
-   to the `Quaternion` class.
  + Added the `matrixToEuler()` method to the `RotationOrder` class.
+ + Added the `newInstance()` method to the `New6Dof` class.
+ + Added the `validateNonZero(Quaternion)` method to the `Validate` class.
+ + Added the `fromAngles()` and `normalizeLocal()` methods
+   to the `Quaternion` class.
  + Built using Gradle v6.6 .
 
 ## Version 9.0.0 released on 8 August 2020
