@@ -26,10 +26,12 @@
  */
 package jme3utilities;
 
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
 /**
@@ -433,6 +435,32 @@ final public class Validate {
             String what;
             if (description == null) {
                 what = "long argument";
+            } else {
+                what = description;
+            }
+            String message = what + " must not be zero.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
+     * Validate a non-zero Quaternion as a method argument.
+     *
+     * @param quaternion the Quaternion to validate (unaffected)
+     * @param description a description of the argument
+     * @return true
+     * @throws IllegalArgumentException if the Quaternion equals (0,0,0,0)
+     * @throws NullPointerException if the Quaternion is null
+     */
+    public static boolean nonZero(Quaternion quaternion, String description) {
+        nonNull(quaternion, description);
+
+        if (MyQuaternion.isZero(quaternion)) {
+            String what;
+            if (description == null) {
+                what = "Quaternion argument";
             } else {
                 what = description;
             }
