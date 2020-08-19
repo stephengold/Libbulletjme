@@ -190,7 +190,53 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>fromAngles</code> builds a Quaternion from the Euler rotation
+     * angles (x,y,z) aka (pitch, yaw, roll)).
+     * Note that we are applying in order: (y, x, z) aka (yaw, pitch, roll)
+     * but we've ordered them in x, y, and z for convenience.
      *
+     * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
+     *
+     * @param xAngle
+     *            the Euler pitch of rotation (in radians). (aka Attitude, often rot
+     *            around x)
+     * @param yAngle
+     *            the Euler yaw of rotation (in radians). (aka Heading, often
+     *            rot around y)
+     * @param zAngle
+     *            the Euler roll of rotation (in radians). (aka Bank, often
+     *            rot around z)
+     * @return this
+     */
+    public Quaternion fromAngles(float xAngle, float yAngle, float zAngle) {
+        float angle;
+        float sinY, sinZ, sinX, cosY, cosZ, cosX;
+        angle = zAngle * 0.5f;
+        sinZ = FastMath.sin(angle);
+        cosZ = FastMath.cos(angle);
+        angle = yAngle * 0.5f;
+        sinY = FastMath.sin(angle);
+        cosY = FastMath.cos(angle);
+        angle = xAngle * 0.5f;
+        sinX = FastMath.sin(angle);
+        cosX = FastMath.cos(angle);
+
+        // variables used to reduce multiplication calls.
+        float cosYXcosZ = cosY * cosZ;
+        float sinYXsinZ = sinY * sinZ;
+        float cosYXsinZ = cosY * sinZ;
+        float sinYXcosZ = sinY * cosZ;
+
+        w = (cosYXcosZ * cosX - sinYXsinZ * sinX);
+        x = (cosYXcosZ * sinX + sinYXsinZ * cosX);
+        y = (sinYXcosZ * cosX + cosYXsinZ * sinX);
+        z = (cosYXsinZ * cosX - sinYXcosZ * sinX);
+
+        normalizeLocal();
+        return this;
+    }
+
+    /**
      * <code>fromRotationMatrix</code> generates a quaternion from a supplied
      * matrix. This matrix is assumed to be a rotational matrix.
      *
@@ -629,6 +675,21 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      */
     public float norm() {
         return w * w + x * x + y * y + z * z;
+    }
+
+    /**
+     * <code>normalize</code> normalizes the current <code>Quaternion</code>.
+     * The result is stored internally.
+     *
+     * @return this
+     */
+    public Quaternion normalizeLocal() {
+        float n = 1f / FastMath.sqrt(norm());
+        x *= n;
+        y *= n;
+        z *= n;
+        w *= n;
+        return this;
     }
 
     /**
