@@ -234,6 +234,7 @@ $(N)/glue/com_jme3_bullet_objects_PhysicsSoftBody.cpp \
 $(N)/glue/com_jme3_bullet_objects_VehicleWheel.cpp \
 $(N)/glue/com_jme3_bullet_PhysicsSoftSpace.cpp \
 $(N)/glue/com_jme3_bullet_PhysicsSpace.cpp \
+$(N)/glue/com_jme3_bullet_RotationOrder.cpp \
 $(N)/glue/com_jme3_bullet_SoftBodyWorldInfo.cpp \
 $(N)/glue/com_jme3_bullet_SolverInfo.cpp \
 $(N)/glue/com_jme3_bullet_util_DebugShapeFactory.cpp \
