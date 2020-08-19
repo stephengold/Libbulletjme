@@ -1,5 +1,5 @@
 ---
-# GitHub workflow for commits pushed to the Libbulletjme repo
+# GitHub workflow for commits pushed to the Libbulletjme repo - all branches
 
 name: CI at GitHub
 on: [push]
