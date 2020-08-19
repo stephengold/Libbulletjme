@@ -51,7 +51,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:9.0.0'
+            compile 'com.github.stephengold:Libbulletjme:9.1.1'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -235,7 +235,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 9.0.0`
+     + `git checkout -b latest 9.1.1`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -260,8 +260,8 @@ After a successful build, Maven artifacts and native libraries will be found
 in the `dist` directory/folder.
 
 You can also install the Maven artifacts to your local cache:
- + using Bash:  `./gradlew :Libbulletjme:publishToMavenLocal`
- + using Windows Command Prompt:  `.\gradlew :Libbulletjme:publishToMavenLocal`
+ + using Bash:  `./gradlew publishToMavenLocal`
+ + using Windows Command Prompt:  `.\gradlew publishToMavenLocal`
 
 
 <a name="lexicon"/>
