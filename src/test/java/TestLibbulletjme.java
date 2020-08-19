@@ -33,6 +33,7 @@ import com.jme3.bullet.MultiBodySpace;
 import com.jme3.bullet.PhysicsSoftSpace;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.RayTestFlag;
+import com.jme3.bullet.RotationOrder;
 import com.jme3.bullet.SolverInfo;
 import com.jme3.bullet.SolverType;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
@@ -65,6 +66,7 @@ import com.jme3.bullet.objects.infos.SoftBodyMaterial;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.bullet.util.NativeSoftBodyUtil;
+import com.jme3.math.Matrix3f;
 import com.jme3.math.Plane;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -984,6 +986,28 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, n);
 
         physicsSpace = null;
+        System.gc();
+    }
+
+    /**
+     * Test the matrixToEuler() method.
+     */
+    @Test
+    public void test011() {
+        loadNativeLibrary();
+
+        Quaternion q = new Quaternion();
+        q.fromAngles(0.3f, 0.7f, 1f);
+
+        Matrix3f rotMatrix = new Matrix3f();
+        rotMatrix.set(q);
+
+        Vector3f euler = RotationOrder.XZY.matrixToEuler(rotMatrix, null);
+        assertEquals(-0.3f, -0.7f, -1f, euler, 1e-5f);
+
+        q = null;
+        rotMatrix = null;
+        euler = null;
         System.gc();
     }
     // *************************************************************************
