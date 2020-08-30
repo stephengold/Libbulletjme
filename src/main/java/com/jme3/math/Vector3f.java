@@ -365,6 +365,22 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
 
     /**
+     * <code>divideLocal</code> divides this vector by a scalar internally,
+     * and returns a handle to this vector for easy chaining of calls. Dividing
+     * by zero will result in an exception.
+     *
+     * @param scalar
+     *            the value to divides this vector by.
+     * @return this
+     */
+    public Vector3f divideLocal(Vector3f scalar) {
+        x /= scalar.x;
+        y /= scalar.y;
+        z /= scalar.z;
+        return this;
+    }
+
+    /**
      * <code>subtract</code> subtracts the values of a given vector from those
      * of this vector creating a new vector object. If the provided vector is
      * null, null is returned.
@@ -375,6 +391,25 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      */
     public Vector3f subtract(Vector3f vec) {
         return new Vector3f(x - vec.x, y - vec.y, z - vec.z);
+    }
+
+    /**
+     * <code>subtract</code>
+     *
+     * @param vec
+     *            the vector to subtract from this
+     * @param result
+     *            the vector to store the result in
+     * @return result
+     */
+    public Vector3f subtract(Vector3f vec, Vector3f result) {
+        if (result == null) {
+            result = new Vector3f();
+        }
+        result.x = x - vec.x;
+        result.y = y - vec.y;
+        result.z = z - vec.z;
+        return result;
     }
 
     /**
