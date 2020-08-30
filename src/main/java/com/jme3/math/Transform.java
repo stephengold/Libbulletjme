@@ -146,6 +146,22 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return rot.mult(store.set(in).multLocal(scale), store).addLocal(translation);
     }
 
+    public Vector3f transformInverseVector(final Vector3f in, Vector3f store) {
+        if (store == null) {
+            store = new Vector3f();
+        }
+
+        // The author of this code should look above and take the inverse of that
+        // But for some reason, they didn't ..
+//        in.subtract(translation, store).divideLocal(scale);
+//        rot.inverse().mult(store, store);
+        in.subtract(translation, store);
+        rot.inverse().mult(store, store);
+        store.divideLocal(scale);
+
+        return store;
+    }
+
     public Matrix4f toTransformMatrix() {
         return toTransformMatrix(null);
     }
