@@ -51,7 +51,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:9.1.1'
+            compile 'com.github.stephengold:Libbulletjme:9.2.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -235,7 +235,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 9.1.1`
+     + `git checkout -b latest 9.2.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -301,6 +301,7 @@ btGeneric6DofSpring2Constraint          .bullet.joints.New6Dof
 btGeneric6DofSpringConstraint           .bullet.joints.SixDofSpringJoint
 btGImpactMeshShape                      .bullet.collision.shapes.GImpactCollisionShape
 btHeightfieldTerrainShape               .bullet.collision.shapes.HeightfieldCollisionShape
+btHinge2Constraint                      .bullet.joints.NewHinge
 btHingeConstraint                       .bullet.joints.HingeJoint
 btIndexedMesh                           .bullet.collision.shapes.infos.IndexedMesh
 btKinematicCharacterController          .bullet.objects.infos.CharacterController
@@ -365,7 +366,6 @@ IVHACD::Parameters  vhacd.VHACDParamters
  + certain constraints:
    + `btFixedConstraint`
    + `btGearConstraint`
-   + `btHinge2Constraint`
    + `btUniversalConstraint`
  + certain collision shapes:
    + `btMinkowskiSumShape`
