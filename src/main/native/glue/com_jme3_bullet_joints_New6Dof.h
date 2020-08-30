@@ -7,8 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef com_jme3_bullet_joints_New6Dof_numAxes
-#define com_jme3_bullet_joints_New6Dof_numAxes 3L
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
  * Method:    createDoubleEnded
@@ -48,6 +46,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAngles
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
   (JNIEnv *, jclass, jlong, jint, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedOriginA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedOriginA
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedOriginB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedOriginB
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof

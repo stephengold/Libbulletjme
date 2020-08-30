@@ -175,6 +175,46 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedOriginA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedOriginA
+(JNIEnv *pEnv, jclass, jlong constraintId, jobject storeVector) {
+    const btGeneric6DofSpring2Constraint * const pConstraint
+            = reinterpret_cast<btGeneric6DofSpring2Constraint *> (constraintId);
+    NULL_CHK(pEnv, pConstraint,
+            "The btGeneric6DofSpring2Constraint does not exist.",);
+    btTypedConstraintType type = pConstraint->getConstraintType();
+    btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btTransform& cta = pConstraint->getCalculatedTransformA();
+    const btVector3 * const pOrigin = &cta.getOrigin();
+    jmeBulletUtil::convert(pEnv, pOrigin, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedOriginB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedOriginB
+(JNIEnv *pEnv, jclass, jlong constraintId, jobject storeVector) {
+    const btGeneric6DofSpring2Constraint * const pConstraint
+            = reinterpret_cast<btGeneric6DofSpring2Constraint *> (constraintId);
+    NULL_CHK(pEnv, pConstraint,
+            "The btGeneric6DofSpring2Constraint does not exist.",);
+    btTypedConstraintType type = pConstraint->getConstraintType();
+    btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btTransform& ctb = pConstraint->getCalculatedTransformB();
+    const btVector3 * const pOrigin = &ctb.getOrigin();
+    jmeBulletUtil::convert(pEnv, pOrigin, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
  * Method:    getFrameOffsetA
  * Signature: (JLcom/jme3/math/Transform;)V
  */
