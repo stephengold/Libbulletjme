@@ -197,6 +197,27 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Recreate Matrix using the provided axis.
+     *
+     * @param uAxis Vector3f
+     * @param vAxis Vector3f
+     * @param wAxis Vector3f
+     */
+    public void fromAxes(Vector3f uAxis, Vector3f vAxis, Vector3f wAxis) {
+        m00 = uAxis.x;
+        m10 = uAxis.y;
+        m20 = uAxis.z;
+
+        m01 = vAxis.x;
+        m11 = vAxis.y;
+        m21 = vAxis.z;
+
+        m02 = wAxis.x;
+        m12 = wAxis.y;
+        m22 = wAxis.z;
+    }
+
+    /**
      * <code>set</code> defines the values of the matrix based on a supplied
      * <code>Quaternion</code>. It should be noted that all previous values
      * will be overridden.
@@ -293,6 +314,79 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
         product.y = m10 * x + m11 * y + m12 * z;
         product.z = m20 * x + m21 * y + m22 * z;
         return product;
+    }
+
+    /**
+     * <code>multLocal</code> multiplies this matrix internally by a given float
+     * scale factor.
+     *
+     * @param scale the value to scale by.
+     * @return this Matrix3f
+     */
+    public Matrix3f multLocal(float scale) {
+        m00 *= scale;
+        m01 *= scale;
+        m02 *= scale;
+        m10 *= scale;
+        m11 *= scale;
+        m12 *= scale;
+        m20 *= scale;
+        m21 *= scale;
+        m22 *= scale;
+        return this;
+    }
+
+    /**
+     * Inverts this matrix and stores it in the given store.
+     *
+     * @param store storage for the result (modified if not null)
+     * @return The store
+     */
+    public Matrix3f invert(Matrix3f store) {
+        if (store == null) {
+            store = new Matrix3f();
+        }
+
+        float det = determinant();
+        if (FastMath.abs(det) <= FastMath.FLT_EPSILON) {
+            return store.zero();
+        }
+
+        store.m00 = m11 * m22 - m12 * m21;
+        store.m01 = m02 * m21 - m01 * m22;
+        store.m02 = m01 * m12 - m02 * m11;
+        store.m10 = m12 * m20 - m10 * m22;
+        store.m11 = m00 * m22 - m02 * m20;
+        store.m12 = m02 * m10 - m00 * m12;
+        store.m20 = m10 * m21 - m11 * m20;
+        store.m21 = m01 * m20 - m00 * m21;
+        store.m22 = m00 * m11 - m01 * m10;
+
+        store.multLocal(1f / det);
+        return store;
+    }
+
+    /**
+     * <code>determinant</code> generates the determinant of this matrix.
+     *
+     * @return the determinant
+     */
+    public float determinant() {
+        float fCo00 = m11 * m22 - m12 * m21;
+        float fCo10 = m12 * m20 - m10 * m22;
+        float fCo20 = m10 * m21 - m11 * m20;
+        float fDet = m00 * fCo00 + m01 * fCo10 + m02 * fCo20;
+        return fDet;
+    }
+
+    /**
+     * Sets all of the values in this matrix to zero.
+     *
+     * @return this matrix
+     */
+    public Matrix3f zero() {
+        m00 = m01 = m02 = m10 = m11 = m12 = m20 = m21 = m22 = 0.0f;
+        return this;
     }
 
     /**
