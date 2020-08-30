@@ -1,5 +1,17 @@
 # Release log for the Libbulletjme project
 
+## Version 9.2.0 released on 30 August 2020
+
+ + Bugfix: RotationOrder.cpp missing from the Android builds
+ + Bugfix: JVM crash while reading collision flags of a static rigid body
+ + Added the `NewHinge` class.
+ + Added methods to the `New6Dof` class:
+   + `newInstance()` factory method
+   + `calculatedOriginA()`
+   + `calculatedOriginB()`
+ + Added 8 methods to the com.jme3.math package.
+ + Built using Gradle v6.6.1 .
+
 ## Version 9.1.1 released on 18 August 2020
 
  + Added the `matrixToEuler()` method to the `RotationOrder` class.
