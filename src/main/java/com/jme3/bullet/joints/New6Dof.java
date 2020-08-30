@@ -43,6 +43,7 @@ import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyVector3f;
 
 /**
  * A 6 degree-of-freedom Constraint based on Bullet's
@@ -67,10 +68,6 @@ public class New6Dof extends Constraint {
     // *************************************************************************
     // constants and loggers
 
-    /**
-     * number of axes in a vector
-     */
-    final private static int numAxes = 3;
     /**
      * message logger for this class
      */
@@ -634,9 +631,9 @@ public class New6Dof extends Constraint {
         assert translationMotor == null;
 
         long constraintId = nativeId();
-        rotationMotor = new RotationMotor[numAxes];
+        rotationMotor = new RotationMotor[MyVector3f.numAxes];
 
-        for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {
+        for (int axisIndex = 0; axisIndex < MyVector3f.numAxes; ++axisIndex) {
             long motorId = getRotationalMotor(constraintId, axisIndex);
             rotationMotor[axisIndex] = new RotationMotor(motorId);
         }
