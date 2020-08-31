@@ -639,9 +639,8 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Update this space. Invoked (by the BulletAppState) once per frame while
-     * the app state is attached and enabled. Can also be used to single-step
-     * the physics simulation, if maxSubSteps is set to 0 or 1.
+     * Update this space. Can used to single-step the physics simulation, if
+     * maxSubSteps is set to 0 or 1.
      *
      * @see #setMaxSubSteps(int)
      * @param timeInterval time-per-frame multiplied by speed (in seconds,
