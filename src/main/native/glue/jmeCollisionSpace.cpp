@@ -46,8 +46,8 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     /*
      * Test the Bullet collision-filter groups.
      */
-    if (pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask == 0x0
-            && pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask == 0x0) {
+    if ((pProxy0->m_collisionFilterGroup & pProxy1->m_collisionFilterMask) == 0x0
+            && (pProxy1->m_collisionFilterGroup & pProxy0->m_collisionFilterMask) == 0x0) {
         return false;
     }
     /*
@@ -67,8 +67,8 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
     if (pUser0 == NULL || pUser1 == NULL) { // TODO is this necessary?
         return true;
-    } else if (pUser0->m_group & pUser1->m_groups == 0x0
-            && pUser1->m_group & pUser0->m_groups == 0x0) {
+    } else if ((pUser0->m_group & pUser1->m_groups) == 0x0
+            && (pUser1->m_group & pUser0->m_groups) == 0x0) {
         return false;
     }
     /*
