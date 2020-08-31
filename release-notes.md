@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 9.2.2 released on 31 August 2020
+
+Bugfix: collision-group checks are ineffective due to missing parentheses
+
 ## Version 9.2.1 released on 31 August 2020
 
 Bugfix: logic error in NewHinge.setLowerLimit()
