@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 9.2.1 released on 31 August 2020
+
+Bugfix: logic error in NewHinge.setLowerLimit()
+
 ## Version 9.2.0 released on 30 August 2020
 
  + Bugfix: RotationOrder.cpp missing from the Android builds
