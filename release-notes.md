@@ -14,7 +14,6 @@ Bugfix: logic error in NewHinge.setLowerLimit()
  + Bugfix: JVM crash while reading collision flags of a static rigid body
  + Added the `NewHinge` class.
  + Added methods to the `New6Dof` class:
-   + `newInstance()` factory method
    + `calculatedOriginA()`
    + `calculatedOriginB()`
  + Added 8 methods to the com.jme3.math package.
