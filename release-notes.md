@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 9.2.3 released on 13 November 2020
+
+Built using Gradle v6.7 and Android SDK v30.
+
 ## Version 9.2.2 released on 31 August 2020
 
 Bugfix: collision-group checks are ineffective due to missing parentheses
