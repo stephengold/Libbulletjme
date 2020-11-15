@@ -1,5 +1,10 @@
 # Release log for the Libbulletjme project
 
+## Version 9.2.4 released on 14 November 2020
+
+Built using NDK v21.3.6528147 and Gradle plugin v4.1.1, with minSdkVersion=22.
+Test using JUnit v4.13.1 .
+
 ## Version 9.2.3 released on 13 November 2020
 
 Built using Gradle v6.7 and Android SDK v30.
