@@ -225,12 +225,11 @@ public class HelloVehicle {
 ## How to build Libbulletjme from source
 
  1. Install build software:
+   + A Java Development Kit and
    + one of the supported C++ compilers:
      + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
      + for Windows:  Microsoft Visual Studio
      + for macOS:  Xcode
-   + a Java Development Kit, and
-   + [Gradle]
  2. Download and extract the source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
