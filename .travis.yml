@@ -24,7 +24,7 @@ jobs:
       env:
         - FLAVOR=Sp
       script:
-        - sudo apt-get install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi
+        - sudo apt-get install g++-6-arm-linux-gnueabi libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi
         - which g++
         - g++ --version
         - which arm-linux-gnueabi-g++
