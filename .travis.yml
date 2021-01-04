@@ -25,12 +25,22 @@ jobs:
         apt:
           packages:
             - g++-5-arm-linux-gnueabi
-            - binutils-arm-linux-gnueabi
       env:
         - FLAVOR=Sp
       script:
         - arm-linux-gnueabi-g++-5 --version
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
+    - arch: arm64
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+            - g++-5-arm-linux-gnueabi
+      env:
+        - FLAVOR=Dp
+      script:
+        - arm-linux-gnueabi-g++-5 --version
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
 
 addons:
   apt:
@@ -68,6 +78,10 @@ deploy:
     - dist/Linux64DebugSp_libbulletjme.so
     - dist/Linux64ReleaseDp_libbulletjme.so
     - dist/Linux64ReleaseSp_libbulletjme.so
+    - dist/Linux_ARM32DebugDp_libbulletjme.so
+    - dist/Linux_ARM32DebugSp_libbulletjme.so
+    - dist/Linux_ARM32ReleaseDp_libbulletjme.so
+    - dist/Linux_ARM32ReleaseSp_libbulletjme.so
     - dist/Linux_ARM64DebugDp_libbulletjme.so
     - dist/Linux_ARM64DebugSp_libbulletjme.so
     - dist/Linux_ARM64ReleaseDp_libbulletjme.so
