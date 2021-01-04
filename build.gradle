@@ -78,10 +78,10 @@ model {
         //clang(Clang)
         gcc(Gcc)
         clang(Clang)
-        gccArm32(Gcc) {
+        gcc5Arm32(Gcc) {
             target('Linux_ARM32') {
-                cppCompiler.executable = 'g++-5-arm-linux-gnueabi'
-                linker.executable = 'g++-5-arm-linux-gnueabi'
+                cppCompiler.executable = 'arm-linux-gnueabi-g++-5'
+                linker.executable = 'arm-linux-gnueabi-g++-5'
             }
         }
         gccArm(Gcc) {
