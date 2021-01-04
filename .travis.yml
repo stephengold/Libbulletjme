@@ -25,11 +25,11 @@ jobs:
         - FLAVOR=Sp
       script:
         - sudo apt-get install g++-5-arm-linux-gnueabi
-        - sudo apt-get libc5-armel-cross libc5-dev-armel-cross binutils-arm-linux-gnueabi
+        - sudo apt-get install libc5-armel-cross libc5-dev-armel-cross binutils-arm-linux-gnueabi
         - which g++
         - g++ --version
-        - which arm-linux-gnueabi-g++
-        - arm-linux-gnueabi-g++ --version
+        - which arm-linux-gnueabi-g++-5
+        - arm-linux-gnueabi-g++-5 --version
         - ls -l /usr/bin
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
