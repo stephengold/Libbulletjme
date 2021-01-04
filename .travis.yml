@@ -21,11 +21,14 @@ jobs:
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
     - arch: arm64
       compiler: gcc
+      addons:
+        apt:
+          packages:
+            - g++-5-arm-linux-gnueabi
+            - binutils-arm-linux-gnueabi
       env:
         - FLAVOR=Sp
       script:
-        - sudo apt-get install g++-5-arm-linux-gnueabi
-        - sudo apt-get install libc5-armel-cross libc5-dev-armel-cross binutils-arm-linux-gnueabi
         - which g++
         - g++ --version
         - which arm-linux-gnueabi-g++-5
