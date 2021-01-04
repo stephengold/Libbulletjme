@@ -84,13 +84,13 @@ model {
                 linker.executable = 'arm-linux-gnueabi-g++-5'
             }
         }
-        gccArm(Gcc) {
+        gccArm64(Gcc) {
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++'
                 linker.executable = 'aarch64-linux-gnu-g++'
             }
         }
-        gcc8Arm(Gcc) {
+        gcc8Arm64(Gcc) {
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-8'
                 linker.executable = 'aarch64-linux-gnu-gcc-8'
