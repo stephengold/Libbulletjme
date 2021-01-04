@@ -24,8 +24,11 @@ jobs:
       env:
         - FLAVOR=Sp
       script:
-        - g++ --version
+        - sudo apt-get install libc6-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi
         - which g++
+        - g++ --version
+        - which arm-linux-gnueabi-g++
+        - arm-linux-gnueabi-g++ --version
         - ls -l /usr/bin
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
