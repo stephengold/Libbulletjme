@@ -8,10 +8,6 @@ os: linux
 
 jobs:
   include:
-    - os: osx
-      osx_image: xcode9.3
-      script:
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx
     - dist: trusty
       compiler: gcc-4.7
       addons:
@@ -26,24 +22,12 @@ jobs:
     - arch: arm64
       compiler: gcc
       env:
-        - FLAVOR=Dp
-      script:
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
-    - arch: arm64
-      compiler: gcc
-      env:
         - FLAVOR=Sp
       script:
+        - g++ --version
+        - which g++
+        - ls -l /usr/bin
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
-    - dist: trusty
-      language: android
-      android:
-        components:
-          - tools
-      script:
-        - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
-        - echo y | sdkmanager "patcher;v4" > /dev/null
-        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 addons:
   apt:
