@@ -48,7 +48,7 @@ model {
             operatingSystem 'linux'
         }
         Linux_ARM32 {
-            architecture 'arm'
+            architecture 'armel'
             operatingSystem 'linux'
         }
         Linux_ARM64 {
@@ -78,6 +78,12 @@ model {
         //clang(Clang)
         gcc(Gcc)
         clang(Clang)
+        gccArm32(Gcc) {
+            target('Linux_ARM32') {
+                cppCompiler.executable = 'g++-5-arm-linux-gnueabi'
+                linker.executable = 'g++-5-arm-linux-gnueabi'
+            }
+        }
         gccArm(Gcc) {
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++'
@@ -96,6 +102,7 @@ model {
         bulletjme(NativeLibrarySpec) {
             targetPlatform 'Linux32'
             targetPlatform 'Linux64'
+            targetPlatform 'Linux_ARM32'
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX32'
             targetPlatform 'MacOSX64'
@@ -125,8 +132,10 @@ model {
                     String travis = gradle.rootProject.ext.travis
                     if (travis.equals('amd64')) {
                         buildable = !targetPlatform.name.startsWith('Linux_ARM')
+                    } else if (travis.equals('arm32')) {
+                        buildable = targetPlatform.name.startsWith('Linux_ARM32')
                     } else if (travis.equals('arm64')) {
-                        buildable = targetPlatform.name.startsWith('Linux_ARM')
+                        buildable = targetPlatform.name.startsWith('Linux_ARM64')
                     } else if (travis.equals('osx')) {
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }
