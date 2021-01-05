@@ -24,15 +24,37 @@ jobs:
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
     - arch: arm64
+      compiler: gcc-5.4
+      addons:
+        apt:
+          packages:
+            - g++-5-arm-linux-gnueabi
+      env:
+        - FLAVOR=Dp32
+      script:
+        - arm-linux-gnueabi-g++-5 --version
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
+    - arch: arm64
+      compiler: gcc-5.4
+      addons:
+        apt:
+          packages:
+            - g++-5-arm-linux-gnueabi
+      env:
+        - FLAVOR=Sp32
+      script:
+        - arm-linux-gnueabi-g++-5 --version
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
+    - arch: arm64
       compiler: gcc
       env:
-        - FLAVOR=Dp
+        - FLAVOR=Dp64
       script:
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
     - arch: arm64
       compiler: gcc
       env:
-        - FLAVOR=Sp
+        - FLAVOR=Sp64
       script:
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
     - dist: trusty
@@ -44,6 +66,7 @@ jobs:
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - echo y | sdkmanager "patcher;v4" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
+
 
 addons:
   apt:
@@ -81,6 +104,10 @@ deploy:
     - dist/Linux64DebugSp_libbulletjme.so
     - dist/Linux64ReleaseDp_libbulletjme.so
     - dist/Linux64ReleaseSp_libbulletjme.so
+    - dist/Linux_ARM32DebugDp_libbulletjme.so
+    - dist/Linux_ARM32DebugSp_libbulletjme.so
+    - dist/Linux_ARM32ReleaseDp_libbulletjme.so
+    - dist/Linux_ARM32ReleaseSp_libbulletjme.so
     - dist/Linux_ARM64DebugDp_libbulletjme.so
     - dist/Linux_ARM64DebugSp_libbulletjme.so
     - dist/Linux_ARM64ReleaseDp_libbulletjme.so
