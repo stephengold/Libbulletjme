@@ -38,7 +38,7 @@
 
 #include <jni.h>
 
-#define LIBBULLETJME_VERSION "9.2.4"
+#define LIBBULLETJME_VERSION "9.3.0"
 
 #ifdef _DEBUG
 #define NULL_CHK(pEnv, pointer, message, retval) \
@@ -89,7 +89,7 @@ public:
 
     static jclass NativeLibrary_Class;
     static jmethodID NativeLibrary_reinitialization;
-    
+
     static jclass NullPointerException;
 
     static jclass PhysicsCollisionEvent_Class;

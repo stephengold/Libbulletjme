@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 9.3.0 released on 5 January 2021
+
+ + Build Linux_ARM32 libraries at Travis-CI.
+ + Publicized 2 methods `MultiBodySpace`.
+ + Bugfix: off-by-one in validation of wheel indices
+ + Built using Gradle v6.7.1 .
+
 ## Version 9.2.4 released on 14 November 2020
 
 Built using NDK v21.3.6528147 and Gradle plugin v4.1.1, with minSdkVersion=22.
