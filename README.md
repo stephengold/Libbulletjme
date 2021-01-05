@@ -11,10 +11,10 @@ Complete source code (in C++ and Java) is provided under
 The project supports the 3 major desktop operating systems:
 Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
 are supported for each operating system.
-It also supports Linux on the 64-bit ARM architecture (aarch64)
+It also supports Linux on ARM (armel and aarch64)
 and provides native libraries for the 4 supported Android ABIs
 (armeabi-v7a, arm64-v8a, x86, and x86_64)
-making a total of 11 platforms.
+making a total of 12 platforms.
 
 For each desktop platform, 4 native libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
@@ -51,11 +51,11 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:9.2.4'
+            compile 'com.github.stephengold:Libbulletjme:9.3.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 36 native libraries.
+    You probably don't need all 40 native libraries.
     Start with the ReleaseSp library for your development environment
     (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
@@ -234,7 +234,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 9.2.4`
+     + `git checkout -b latest 9.3.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
