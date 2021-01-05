@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -127,6 +127,8 @@ public class VehicleController extends NativePhysicsObject {
         long controllerId = nativeId();
         int wheelIndex = wheel.getIndex();
         applyEngineForce(controllerId, wheelIndex, force);
+
+        assert wheel.getEngineForce() == force : wheel.getEngineForce();
     }
 
     /**
@@ -142,6 +144,8 @@ public class VehicleController extends NativePhysicsObject {
         long controllerId = nativeId();
         int wheelIndex = wheel.getIndex();
         brake(controllerId, wheelIndex, impulse);
+
+        assert wheel.getBrake() == impulse : wheel.getBrake();
     }
 
     /**
@@ -251,11 +255,11 @@ public class VehicleController extends NativePhysicsObject {
      * Alter the coordinate system of the vehicle.
      *
      * @param rightAxisIndex the desired local axis index (0&rarr;X, 1&rarr;Y,
-     * 2&rarr;Z)
+     * 2&rarr;Z, default=0)
      * @param upAxisIndex the desired local axis index (0&rarr;X, 1&rarr;Y,
-     * 2&rarr;Z)
+     * 2&rarr;Z, default=1)
      * @param forwardAxisIndex the desired local axis index (0&rarr;X, 1&rarr;Y,
-     * 2&rarr;Z)
+     * 2&rarr;Z, default=2)
      */
     public void setCoordinateSystem(int rightAxisIndex, int upAxisIndex,
             int forwardAxisIndex) {
