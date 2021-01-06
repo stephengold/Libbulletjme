@@ -51,6 +51,10 @@ model {
             architecture 'armel'
             operatingSystem 'linux'
         }
+        Linux_ARM32hf {
+            architecture 'armhf'
+            operatingSystem 'linux'
+        }
         Linux_ARM64 {
             architecture 'aarch64'
             operatingSystem 'linux'
@@ -84,6 +88,12 @@ model {
                 linker.executable = 'arm-linux-gnueabi-g++-5'
             }
         }
+        gcc5Arm32hf(Gcc) {
+            target('Linux_ARM32hf') {
+                cppCompiler.executable = 'arm-linux-gnueabihf-g++-5'
+                linker.executable = 'arm-linux-gnueabihf-g++-5'
+            }
+        }
         gccArm64(Gcc) {
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++'
@@ -103,6 +113,7 @@ model {
             targetPlatform 'Linux32'
             targetPlatform 'Linux64'
             targetPlatform 'Linux_ARM32'
+            targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX32'
             targetPlatform 'MacOSX64'
@@ -133,9 +144,11 @@ model {
                     if (travis.equals('amd64')) {
                         buildable = !targetPlatform.name.startsWith('Linux_ARM')
                     } else if (travis.equals('arm32')) {
-                        buildable = targetPlatform.name.startsWith('Linux_ARM32')
+                        buildable = targetPlatform.name.equals('Linux_ARM32hf')
+                    } else if (travis.equals('arm32hf')) {
+                        buildable = targetPlatform.name.equals('Linux_ARM32')
                     } else if (travis.equals('arm64')) {
-                        buildable = targetPlatform.name.startsWith('Linux_ARM64')
+                        buildable = targetPlatform.name.equals('Linux_ARM64')
                     } else if (travis.equals('osx')) {
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }

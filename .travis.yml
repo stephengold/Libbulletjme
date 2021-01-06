@@ -46,6 +46,28 @@ jobs:
         - arm-linux-gnueabi-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
     - arch: arm64
+      compiler: arm-linux-gnueabihf-g++-5
+      addons:
+        apt:
+          packages:
+            - g++-5-arm-linux-gnueabihf
+      env:
+        - FLAVOR=Dp32
+      script:
+        - arm-linux-gnueabihf-g++-5 -E -v
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
+    - arch: arm64
+      compiler: arm-linux-gnueabihf-g++-5
+      addons:
+        apt:
+          packages:
+            - g++-5-arm-linux-gnueabihf
+      env:
+        - FLAVOR=Sp32
+      script:
+        - arm-linux-gnueabihf-g++-5 -E -v
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
+    - arch: arm64
       compiler: gcc
       env:
         - FLAVOR=Dp64
