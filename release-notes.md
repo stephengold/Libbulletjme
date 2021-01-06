@@ -1,5 +1,10 @@
 # Release log for the Libbulletjme project
 
+## Version 9.3.1 released on 6 January 2021
+
+ + Build Linux_ARM32hf libraries at Travis-CI.
+ + Added a NULL check to `btAlignedObjectArray::findLinearSearch()`.
+
 ## Version 9.3.0 released on 5 January 2021
 
  + Build Linux_ARM32 libraries at Travis-CI.
@@ -9,8 +14,8 @@
 
 ## Version 9.2.4 released on 14 November 2020
 
-Built using NDK v21.3.6528147 and Gradle plugin v4.1.1, with minSdkVersion=22.
-Test using JUnit v4.13.1 .
+ + Built using NDK v21.3.6528147 and Gradle plugin v4.1.1, with minSdkVersion=22.
+ + Test using JUnit v4.13.1 .
 
 ## Version 9.2.3 released on 13 November 2020
 
