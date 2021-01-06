@@ -130,6 +130,10 @@ deploy:
     - dist/Linux_ARM32DebugSp_libbulletjme.so
     - dist/Linux_ARM32ReleaseDp_libbulletjme.so
     - dist/Linux_ARM32ReleaseSp_libbulletjme.so
+    - dist/Linux_ARM32hfDebugDp_libbulletjme.so
+    - dist/Linux_ARM32hfDebugSp_libbulletjme.so
+    - dist/Linux_ARM32hfReleaseDp_libbulletjme.so
+    - dist/Linux_ARM32hfReleaseSp_libbulletjme.so
     - dist/Linux_ARM64DebugDp_libbulletjme.so
     - dist/Linux_ARM64DebugSp_libbulletjme.so
     - dist/Linux_ARM64ReleaseDp_libbulletjme.so
