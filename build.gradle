@@ -144,9 +144,9 @@ model {
                     if (travis.equals('amd64')) {
                         buildable = !targetPlatform.name.startsWith('Linux_ARM')
                     } else if (travis.equals('arm32')) {
-                        buildable = targetPlatform.name.equals('Linux_ARM32hf')
-                    } else if (travis.equals('arm32hf')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32')
+                    } else if (travis.equals('arm32hf')) {
+                        buildable = targetPlatform.name.equals('Linux_ARM32hf')
                     } else if (travis.equals('arm64')) {
                         buildable = targetPlatform.name.equals('Linux_ARM64')
                     } else if (travis.equals('osx')) {
