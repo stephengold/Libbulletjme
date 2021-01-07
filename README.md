@@ -250,7 +250,7 @@ public class HelloVehicle {
  5. Building Android native libraries requires additional software:
    + the Android SDK Tools
    + the Android SDK Patch Applier (patcher)
-   + version 21.0.6113669 of the Android Native Development Kit (NDK)
+   + version 21.3.6528147 of the Android Native Development Kit (NDK)
  6. Run the Gradle wrapper on the Android build script:
    + using Bash:  `./gradlew copyToDist --build-file=android.gradle`
    + using Windows Command Prompt:  `.\gradlew copyToDist --build-file=android.gradle`
