@@ -178,8 +178,16 @@ jmeCollisionSpace::~jmeCollisionSpace() {
         for (int i = numCollisionObjects - 1; i >= 0; --i) {
             btCollisionObject *pObject = objects[i];
             m_collisionWorld->removeCollisionObject(pObject);
+
+            jmeUserPointer const
+                    pUser = (jmeUserPointer) pObject->getUserPointer();
+            if (pUser != NULL) {
+                delete pUser; //dance013
+                pObject->setUserPointer(NULL);
+            }
         }
     }
+    btAssert(m_collisionWorld->getNumCollisionObjects() == 0);
 
     btBroadphaseInterface *pBroadphase = m_collisionWorld->getBroadphase();
     if (pBroadphase) {
