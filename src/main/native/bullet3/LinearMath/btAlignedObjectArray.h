@@ -438,7 +438,6 @@ public:
 	int findLinearSearch(const T& key) const
 	{
 		int index = size();
-        if (m_data == NULL) return index; // stephengold added 2021-01-06
 		int i;
 
 		for (i = 0; i < size(); i++)
