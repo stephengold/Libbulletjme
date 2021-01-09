@@ -1,5 +1,13 @@
 # Release log for the Libbulletjme project
 
+## Version 9.3.2 released on 8 January 2021
+
+ + Bugfix: a vehicle's acceleration depends on its location (Minie issue #13).
+ + Cleared the user pointer of each PCO removed
+   during `jmeCollisionSpace` destruction.
+ + Reverted the NULL check added to `btAlignedObjectArray::findLinearSearch()`.
+ + Built using Gradle v6.8 .
+
 ## Version 9.3.1 released on 6 January 2021
 
  + Build Linux_ARM32hf libraries at Travis-CI.
