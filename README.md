@@ -51,7 +51,7 @@ standalone Maven artifacts are provided.
             jcenter()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:9.3.1'
+            compile 'com.github.stephengold:Libbulletjme:9.3.2'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -234,7 +234,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 9.3.1`
+     + `git checkout -b latest 9.3.2`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -456,7 +456,8 @@ The Libbulletjme Project is based on open-source software:
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
-  + Riccardo's [V-hacd-java-bindings]
+  + Riccardo Balbo's [V-hacd-java-bindings]
+  + Stephen Gold's [Heart]
 
 This project also made use of the following software tools:
 
@@ -480,6 +481,10 @@ V-HACD to my attention.
 I am grateful to [Github], [JFrog], [AppVeyor], [Travis], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
+
+I am grateful to ndebruyn for helping me test the Android native libraries.
+
+I am grateful to Pavly Gerges for helping me test the armhf native library.
 
 I am grateful to Yanis Boudiaf for many helpful suggestions.
 

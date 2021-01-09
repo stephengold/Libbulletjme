@@ -3,9 +3,9 @@
 ## Version 9.3.2 released on 8 January 2021
 
  + Bugfix: a vehicle's acceleration depends on its location (Minie issue #13).
- + Cleared the user pointer of each PCO removed
+ + Cleared the user pointer of each `PhysicsCollisionObject` removed
    during `jmeCollisionSpace` destruction.
- + Reverted the NULL check added to `btAlignedObjectArray::findLinearSearch()`.
+ + Reverted the null check added to `btAlignedObjectArray::findLinearSearch()`.
  + Built using Gradle v6.8 .
 
 ## Version 9.3.1 released on 6 January 2021
@@ -16,13 +16,14 @@
 ## Version 9.3.0 released on 5 January 2021
 
  + Build Linux_ARM32 libraries at Travis-CI.
- + Publicized 2 methods `MultiBodySpace`.
+ + Publicized 2 methods in `MultiBodySpace`.
  + Bugfix: off-by-one in validation of wheel indices
  + Built using Gradle v6.7.1 .
 
 ## Version 9.2.4 released on 14 November 2020
 
- + Built using NDK v21.3.6528147 and Gradle plugin v4.1.1, with minSdkVersion=22.
+ + Built using NDK v21.3.6528147 and Gradle plugin v4.1.1,
+   with minSdkVersion=22.
  + Test using JUnit v4.13.1 .
 
 ## Version 9.2.3 released on 13 November 2020
