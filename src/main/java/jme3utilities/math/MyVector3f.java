@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2020, Stephen Gold
+ Copyright (c) 2013-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -58,7 +58,7 @@ public class MyVector3f {
     /**
      * message logger for this class
      */
-    final private static Logger logger
+    final public static Logger logger
             = Logger.getLogger(MyVector3f.class.getName());
     // *************************************************************************
     // constructors
@@ -110,7 +110,7 @@ public class MyVector3f {
     }
 
     /**
-     * Calculate the dot (scalar) product of 2 vectors. Unlike
+     * Determine the dot (scalar) product of 2 vectors. Unlike
      * {@link com.jme3.math.Vector3f#dot(Vector3f)}, this method returns a
      * double-precision value for precise calculation of angles.
      *
@@ -140,9 +140,9 @@ public class MyVector3f {
      */
     public static void generateBasis(Vector3f in1, Vector3f store2,
             Vector3f store3) {
-        Validate.nonZero(in1, "starting direction");
-        Validate.nonNull(store2, "2nd basis vector");
-        Validate.nonNull(store3, "3nd basis vector");
+        assert Validate.nonZero(in1, "starting direction");
+        assert Validate.nonNull(store2, "2nd basis vector");
+        assert Validate.nonNull(store3, "3nd basis vector");
 
         normalizeLocal(in1);
         /*
@@ -243,7 +243,7 @@ public class MyVector3f {
     }
 
     /**
-     * Calculate the squared length of a vector. Unlike
+     * Determine the squared length of a vector. Unlike
      * {@link com.jme3.math.Vector3f#lengthSquared()}, this method returns a
      * double-precision value for precise comparison of lengths.
      *
@@ -263,8 +263,8 @@ public class MyVector3f {
      * @return true if distinct, otherwise false
      */
     public static boolean ne(Vector3f v1, Vector3f v2) {
-        Validate.nonNull(v1, "first input vector");
-        Validate.nonNull(v2, "2nd input vector");
+        assert Validate.nonNull(v1, "first input vector");
+        assert Validate.nonNull(v2, "2nd input vector");
 
         boolean result = v1.x != v2.x || v1.y != v2.y || v1.z != v2.z;
         return result;
@@ -276,7 +276,7 @@ public class MyVector3f {
      * @param input (not null, modified)
      */
     public static void normalizeLocal(Vector3f input) {
-        Validate.nonNull(input, "input");
+        assert Validate.nonNull(input, "input");
 
         double lengthSquared = lengthSquared(input);
         double dScale = Math.sqrt(lengthSquared);
@@ -296,7 +296,7 @@ public class MyVector3f {
      * storeResult or a new instance)
      */
     public static Vector3f standardize(Vector3f input, Vector3f storeResult) {
-        Validate.nonNull(input, "input vector");
+        assert Validate.nonNull(input, "input vector");
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         result.x = MyMath.standardize(input.x);
