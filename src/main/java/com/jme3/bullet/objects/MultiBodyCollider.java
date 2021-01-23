@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -102,7 +102,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
 
         long objectId = nativeId();
         long shapeId = shape.nativeId();
-        super.attachCollisionShape(objectId, shapeId);
+        attachCollisionShape(objectId, shapeId);
     }
 
     /**
