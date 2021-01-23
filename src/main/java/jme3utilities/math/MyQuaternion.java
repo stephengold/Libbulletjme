@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2020, Stephen Gold
+ Copyright (c) 2017-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,7 @@ public class MyQuaternion {
     /**
      * message logger for this class
      */
-    final private static Logger logger
+    final public static Logger logger
             = Logger.getLogger(MyQuaternion.class.getName());
     /**
      * array of cardinal axes
@@ -77,8 +77,8 @@ public class MyQuaternion {
      */
     public static void accumulateScaled(Quaternion total, Quaternion input,
             float scale) {
-        Validate.nonNull(total, "total");
-        Validate.nonNull(input, "input");
+        assert Validate.nonNull(total, "total");
+        assert Validate.nonNull(input, "input");
 
         float x = total.getX() + input.getX() * scale;
         float y = total.getY() + input.getY() * scale;
@@ -95,7 +95,7 @@ public class MyQuaternion {
      * @param input (not null, modified)
      */
     public static void cardinalizeLocal(Quaternion input) {
-        Validate.nonNull(input, "input");
+        assert Validate.nonNull(input, "input");
 
         normalizeLocal(input);
         /*
@@ -128,7 +128,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate the conjugate of a Quaternion. For unit quaternions, the
+     * Determine the conjugate of a Quaternion. For unit quaternions, the
      * conjugate is a faster way to calculate the inverse.
      *
      * @param q input value (not null, unaffected)
@@ -149,7 +149,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate the dot (scalar) product of 2 quaternions. This method returns
+     * Determine the dot (scalar) product of 2 quaternions. This method returns
      * a double-precision value for precise calculation of angles.
      *
      * @param q1 the first Quaternion (not null, unaffected)
@@ -171,14 +171,14 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate the exponential of a pure Quaternion.
+     * Determine the exponential of a pure Quaternion.
      *
      * @param q input value (not null, unaffected, w=0)
      * @param storeResult storage for the result (modified if not null)
      * @return a unit quaternion (either storeResult or a new instance)
      */
     public static Quaternion exp(Quaternion q, Quaternion storeResult) {
-        Validate.require(isPure(q), "a pure quaternion");
+        assert Validate.require(isPure(q), "a pure quaternion");
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
@@ -252,7 +252,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate the squared length of a quaternion. Unlike
+     * Determine the squared length of a quaternion. Unlike
      * {@link com.jme3.math.Quaternion#norm()}, this method returns a
      * double-precision value for precise comparison of lengths.
      *
@@ -270,7 +270,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate the natural logarithm of a unit quaternion. Generally the
+     * Determine the natural logarithm of a unit quaternion. Generally the
      * logarithm isn't itself a unit.
      *
      * @param q input value (not null, unaffected, norm=1)
@@ -314,8 +314,8 @@ public class MyQuaternion {
      * @return true if distinct, otherwise false
      */
     public static boolean ne(Quaternion a, Quaternion b) {
-        Validate.nonNull(a, "first input quaternion");
-        Validate.nonNull(b, "2nd input quaternion");
+        assert Validate.nonNull(a, "first input quaternion");
+        assert Validate.nonNull(b, "2nd input quaternion");
 
         boolean result = a.getW() != b.getW()
                 || a.getX() != b.getX()
@@ -325,12 +325,12 @@ public class MyQuaternion {
     }
 
     /**
-     * Normalize the specified quaternion in place.
+     * Normalize the specified Quaternion in place.
      *
      * @param input (not null, modified)
      */
     public static void normalizeLocal(Quaternion input) {
-        Validate.nonNull(input, "input");
+        assert Validate.nonNull(input, "input");
 
         double lengthSquared = lengthSquared(input);
         double dScale = Math.sqrt(lengthSquared);
@@ -396,9 +396,9 @@ public class MyQuaternion {
      */
     public static Quaternion slerp(float t, Quaternion q0, Quaternion q1,
             Quaternion storeResult) {
-        Validate.inRange(t, "t", 0f, 1f);
-        validateUnit(q0, "q0", 0.0001f);
-        validateUnit(q1, "q1", 0.0001f);
+        assert Validate.inRange(t, "t", 0f, 1f);
+        assert validateUnit(q0, "q0", 0.0001f);
+        assert validateUnit(q1, "q1", 0.0001f);
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
@@ -426,11 +426,11 @@ public class MyQuaternion {
      */
     public static Quaternion squad(float t, Quaternion p, Quaternion a,
             Quaternion b, Quaternion q, Quaternion storeResult) {
-        Validate.inRange(t, "t", 0f, 1f);
-        validateUnit(p, "p", 0.0001f);
-        validateUnit(a, "a", 0.0001f);
-        validateUnit(b, "b", 0.0001f);
-        validateUnit(q, "q", 0.0001f);
+        assert Validate.inRange(t, "t", 0f, 1f);
+        assert validateUnit(p, "p", 0.0001f);
+        assert validateUnit(a, "a", 0.0001f);
+        assert validateUnit(b, "b", 0.0001f);
+        assert validateUnit(q, "q", 0.0001f);
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
@@ -442,7 +442,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Calculate Squad parameter "a" for a continuous first derivative at the
+     * Determine Squad parameter "a" for a continuous first derivative at the
      * middle point of 3 specified control points.
      *
      * @param q0 previous control point (not null, unaffected, norm=1)
@@ -454,9 +454,9 @@ public class MyQuaternion {
      */
     public static Quaternion squadA(Quaternion q0, Quaternion q1,
             Quaternion q2, Quaternion storeResult) {
-        validateUnit(q0, "q0", 0.0001f);
-        validateUnit(q1, "q1", 0.0001f);
-        validateUnit(q2, "q2", 0.0001f);
+        assert validateUnit(q0, "q0", 0.0001f);
+        assert validateUnit(q1, "q1", 0.0001f);
+        assert validateUnit(q2, "q2", 0.0001f);
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
@@ -484,7 +484,7 @@ public class MyQuaternion {
      */
     public static Quaternion standardize(Quaternion input,
             Quaternion storeResult) {
-        Validate.nonNull(input, "input quaternion");
+        assert Validate.nonNull(input, "input quaternion");
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
@@ -502,18 +502,18 @@ public class MyQuaternion {
     }
 
     /**
-     * Validate a unit quaternion as a method argument. TODO should return a
-     * boolean
+     * Validate a unit quaternion as a method argument.
      *
      * @param q quaternion to validate (not null, unaffected)
      * @param description description of the quaternion
      * @param tolerance for the norm (&ge;0)
+     * @return true
      * @throws IllegalArgumentException if the norm is out of tolerance
      * @throws NullPointerException if the quaternion is null
      */
-    public static void validateUnit(Quaternion q, String description,
+    public static boolean validateUnit(Quaternion q, String description,
             float tolerance) {
-        Validate.nonNull(q, description);
+        assert Validate.nonNull(q, description);
 
         double norm = lengthSquared(q);
         double delta = Math.abs(1.0 - norm);
@@ -529,5 +529,7 @@ public class MyQuaternion {
                     "norm(%s) must be within %f of 1.", what, tolerance);
             throw new IllegalArgumentException(message);
         }
+
+        return true;
     }
 }
