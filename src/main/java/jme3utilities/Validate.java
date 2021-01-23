@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2014-2020, Stephen Gold
+ Copyright (c) 2014-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -50,8 +50,16 @@ final public class Validate {
     /**
      * message logger for this class
      */
-    final private static Logger logger
+    final public static Logger logger
             = Logger.getLogger(Validate.class.getName());
+    // *************************************************************************
+    // fields
+
+    /**
+     * If true, throw NullPointerException for null arguments. Otherwise, throw
+     * IllegalArgumentException.
+     */
+    public static boolean throwNpe = true;
     // *************************************************************************
     // constructors
 
@@ -71,7 +79,8 @@ final public class Validate {
      * @return true
      * @throws IllegalArgumentException if the vector has a NaN or infinite
      * component
-     * @throws NullPointerException if the vector is null
+     * @throws NullPointerException or IllegalArgumentException if the vector is
+     * null
      */
     public static boolean finite(Vector3f vector, String description) {
         nonNull(vector, description);
@@ -246,7 +255,8 @@ final public class Validate {
      * @param collection the collection to validate (unaffected)
      * @param description a description of the argument
      * @return true
-     * @throws NullPointerException if the collection is null
+     * @throws NullPointerException or IllegalArgumentException if the
+     * collection is null
      * @throws IllegalArgumentException if the collection is empty
      */
     public static boolean nonEmpty(Collection collection, String description) {
@@ -272,7 +282,8 @@ final public class Validate {
      * @param array the array to validate (unaffected)
      * @param description a description of the argument
      * @return true
-     * @throws NullPointerException if the array is null
+     * @throws NullPointerException or IllegalArgumentException if the array is
+     * null
      * @throws IllegalArgumentException if the array has zero length
      */
     public static boolean nonEmpty(float[] array, String description) {
@@ -298,7 +309,8 @@ final public class Validate {
      * @param array the array to validate (unaffected)
      * @param description a description of the argument
      * @return true
-     * @throws NullPointerException if the array is null
+     * @throws NullPointerException or IllegalArgumentException if the array is
+     * null
      * @throws IllegalArgumentException if the array has zero length
      */
     public static boolean nonEmpty(Object[] array, String description) {
@@ -374,7 +386,8 @@ final public class Validate {
      * @return true
      * @throws IllegalArgumentException if the vector has a negative or NaN
      * component
-     * @throws NullPointerException if the vector is null
+     * @throws NullPointerException or IllegalArgumentException if the vector is
+     * null
      */
     public static boolean nonNegative(Vector3f vector, String description) {
         nonNull(vector, description);
@@ -400,12 +413,14 @@ final public class Validate {
      * While it might seem more logical to throw an IllegalArgumentException in
      * the case of a method argument, the javadoc for NullPointerException says,
      * "Applications should throw instances of this class to indicate other
-     * illegal uses of the null object."
+     * illegal uses of the null object." To throw an IllegalArgumentException
+     * instead, set {@link #throwNpe} to false.
      *
      * @param object the reference to validate
      * @param description a description of the argument
      * @return true
-     * @throws NullPointerException if the reference is null
+     * @throws NullPointerException or IllegalArgumentException if the reference
+     * is null
      */
     public static boolean nonNull(Object object, String description) {
         if (object == null) {
@@ -416,7 +431,11 @@ final public class Validate {
                 what = description;
             }
             String message = what + " must not be null.";
-            throw new NullPointerException(message);
+            if (throwNpe) {
+                throw new NullPointerException(message);
+            } else {
+                throw new IllegalArgumentException(message);
+            }
         }
 
         return true;
@@ -452,7 +471,8 @@ final public class Validate {
      * @param description a description of the argument
      * @return true
      * @throws IllegalArgumentException if the Quaternion equals (0,0,0,0)
-     * @throws NullPointerException if the Quaternion is null
+     * @throws NullPointerException or IllegalArgumentException if the
+     * Quaternion is null
      */
     public static boolean nonZero(Quaternion quaternion, String description) {
         nonNull(quaternion, description);
@@ -478,7 +498,8 @@ final public class Validate {
      * @param description a description of the argument
      * @return true
      * @throws IllegalArgumentException if the vector equals (0,0,0)
-     * @throws NullPointerException if the vector is null
+     * @throws NullPointerException or IllegalArgumentException if the vector is
+     * null
      */
     public static boolean nonZero(Vector3f vector, String description) {
         nonNull(vector, description);
@@ -552,7 +573,8 @@ final public class Validate {
      * @param description a description of the argument
      * @return true
      * @throws IllegalArgumentException if any component is not positive
-     * @throws NullPointerException if the vector is null
+     * @throws NullPointerException or IllegalArgumentException if the vector is
+     * null
      */
     public static boolean positive(Vector3f vector, String description) {
         nonNull(vector, description);
