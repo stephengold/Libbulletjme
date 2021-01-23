@@ -104,7 +104,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      * mass.
      *
      * @param shape the desired shape (not null, alias created)
-     * @param mass (&gt;0)
+     * @param mass the desired mass for the chassis (&gt;0)
      */
     public PhysicsVehicle(CollisionShape shape, float mass) {
         super(shape, mass);
@@ -113,7 +113,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     // new methods exposed
 
     /**
-     * Apply the specified engine force to all wheels. Works continuously. The
+     * Apply the specified engine force to each wheel. Works continuously. The
      * vehicle must be added to a PhysicsSpace.
      *
      * @param force the desired amount of force (may be negative)
@@ -127,8 +127,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Apply the given engine force to the indexed wheel. Works continuously.
-     * The vehicle must be added to a PhysicsSpace.
+     * Apply the specified engine force to the indexed wheel. Works
+     * continuously. The vehicle must be added to a PhysicsSpace.
      *
      * @param wheelIndex the index of the wheel to apply the force to (&ge;0,
      * &lt;count)
@@ -185,7 +185,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Apply the given brake impulse to all wheels. Works continuously. The
+     * Apply the specified brake impulse to all wheels. Works continuously. The
      * vehicle must be added to a PhysicsSpace.
      *
      * @param impulse the desired impulse

@@ -199,9 +199,9 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     /**
      * Recreate Matrix using the provided axis.
      *
-     * @param uAxis Vector3f
-     * @param vAxis Vector3f
-     * @param wAxis Vector3f
+     * @param uAxis  Vector3f
+     * @param vAxis  Vector3f
+     * @param wAxis  Vector3f
      */
     public void fromAxes(Vector3f uAxis, Vector3f vAxis, Vector3f wAxis) {
         m00 = uAxis.x;
@@ -317,10 +317,11 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>multLocal</code> multiplies this matrix internally by a given float
-     * scale factor.
+     * <code>multLocal</code> multiplies this matrix internally by
+     * a given float scale factor.
      *
-     * @param scale the value to scale by.
+     * @param scale
+     *            the value to scale by.
      * @return this Matrix3f
      */
     public Matrix3f multLocal(float scale) {
