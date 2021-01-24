@@ -1,5 +1,18 @@
 # Release log for the Libbulletjme project
 
+## Version 10.0.0 released on 24 January 2021
+
+ + Removed the `angularMomentum()` and `kineticEnergy()` methods
+   from the `MultiBody` class. (API change)
+ + Upgraded the Bullet sources to match SHA1 ID=537ccb220
+   of the bullet3 project.
+ + Added a return value to `MyQuaternion.validateUnit()`.
+ + Reduced argument validation when assertions are disabled.
+ + Added an option to `Validate` to configure the type of exception
+   thrown for a null argument.
+ + Publicized some loggers.
+ + Built using Gradle v6.8.1 .
+
 ## Version 9.3.2 released on 8 January 2021
 
  + Bugfix: a vehicle's acceleration depends on its location (Minie issue #13).
