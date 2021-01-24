@@ -138,7 +138,7 @@ struct btDebugPtrMagic
 	};
 };
 
-void *btAlignedAllocInternal(size_t size, int alignment, int line, const char *filename) //stephengold added const 2020-05-17
+void *btAlignedAllocInternal(size_t size, int alignment, int line, const char *filename)
 {
 	if (size == 0)
 	{
@@ -195,7 +195,7 @@ void *btAlignedAllocInternal(size_t size, int alignment, int line, const char *f
 	return (ret);
 }
 
-void btAlignedFreeInternal(void *ptr, int line, const char *filename) //stephengold added const 2020-05-17
+void btAlignedFreeInternal(void *ptr, int line, const char *filename)
 {
 	void *real;
 

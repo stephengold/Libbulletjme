@@ -1,5 +1,5 @@
 /*! \file btGImpactShape.h
-\author Francisco Len Nï¿½jera
+\author Francisco Len Nßjera
 */
 /*
 This source file is part of GIMPACT Library.
@@ -623,20 +623,21 @@ public:
 				i1 = s_indices[1];
 				i2 = s_indices[2];
 			}
-			else if (indicestype == PHY_INTEGER) // stephengold 2020-04-11
+			else if (indicestype == PHY_INTEGER)
 			{
 				unsigned int* i_indices = (unsigned int*)(indexbase + face_index * indexstride);
 				i0 = i_indices[0];
 				i1 = i_indices[1];
 				i2 = i_indices[2];
 			}
-                        else { // stephengold 2020-04-11
-                        	btAssert(indicestype == PHY_UCHAR); // stephengold 2020-04-11
-				unsigned char* i_indices = (unsigned char*)(indexbase + face_index * indexstride); // stephengold 2020-04-11
-				i0 = i_indices[0]; // stephengold 2020-04-11
-				i1 = i_indices[1]; // stephengold 2020-04-11
-				i2 = i_indices[2]; // stephengold 2020-04-11
-                        } // stephengold 2020-04-11
+			else
+			{
+				btAssert(indicestype == PHY_UCHAR);
+				unsigned char* i_indices = (unsigned char*)(indexbase + face_index * indexstride);
+				i0 = i_indices[0];
+				i1 = i_indices[1];
+				i2 = i_indices[2];
+			}
 		}
 
 		SIMD_FORCE_INLINE void get_vertex(unsigned int vertex_index, btVector3& vertex) const

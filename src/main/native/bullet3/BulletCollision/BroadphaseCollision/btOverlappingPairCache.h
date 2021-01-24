@@ -61,11 +61,10 @@ public:
 	virtual void cleanOverlappingPair(btBroadphasePair& pair, btDispatcher* dispatcher) = 0;
 
 	virtual int getNumOverlappingPairs() const = 0;
-
+	virtual bool needsBroadphaseCollision(btBroadphaseProxy * proxy0, btBroadphaseProxy * proxy1) const = 0;
+	virtual btOverlapFilterCallback* getOverlapFilterCallback() = 0;
 	virtual void cleanProxyFromPairs(btBroadphaseProxy* proxy, btDispatcher* dispatcher) = 0;
 
-        virtual bool needsBroadphaseCollision(btBroadphaseProxy * proxy0, btBroadphaseProxy * proxy1) const = 0; // stephengold added 2020-02-12
-        virtual btOverlapFilterCallback* getOverlapFilterCallback() = 0; // stephengold added 2020-02-12
 	virtual void setOverlapFilterCallback(btOverlapFilterCallback* callback) = 0;
 
 	virtual void processAllOverlappingPairs(btOverlapCallback*, btDispatcher* dispatcher) = 0;
@@ -393,20 +392,18 @@ public:
 	{
 	}
 
-        bool needsBroadphaseCollision(btBroadphaseProxy*, btBroadphaseProxy*) const // stephengold added 2020-02-12
-        { // stephengold added 2020-02-12
-                return true; // stephengold added 2020-02-12
-        } // stephengold added 2020-02-12
-
+	bool needsBroadphaseCollision(btBroadphaseProxy*, btBroadphaseProxy*) const
+	{
+		return true;
+	}
     btOverlappingPairCallback* getInternalGhostPairCallback() const // stephengold added 2020-06-18
     { // stephengold added 2020-06-18
         return 0; // stephengold added 2020-06-18
     } // stephengold added 2020-06-18
-        
-        btOverlapFilterCallback* getOverlapFilterCallback() // stephengold added 2020-02-12
-	{ // stephengold added 2020-02-12
-		return 0; // stephengold added 2020-02-12
-	} // stephengold added 2020-02-12
+	btOverlapFilterCallback* getOverlapFilterCallback()
+	{
+		return 0;
+	}
 	virtual void setOverlapFilterCallback(btOverlapFilterCallback* /*callback*/)
 	{
 	}
