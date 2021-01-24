@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020, Stephen Gold
+ Copyright (c) 2020-2021, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -632,7 +632,6 @@ public class TestLibbulletjme {
                 fixedBase, canSleep);
 
         Assert.assertEquals(0.04f, multiBody.angularDamping(), 0f);
-        assertEquals(0f, 0f, 0f, multiBody.angularMomentum(null), 0f);
         assertEquals(0f, 0f, 0f, multiBody.baseForce(null), 0f);
         assertEquals(0f, 0f, 0f, multiBody.baseLocation(null), 0f);
         assertEquals(0f, 0f, 0f, 1f, multiBody.baseOrientation(null), 0f);
@@ -652,7 +651,6 @@ public class TestLibbulletjme {
         Assert.assertFalse(multiBody.isUsingGlobalVelocities());
         Assert.assertTrue(multiBody.isUsingGyroTerm());
         Assert.assertFalse(multiBody.isUsingRK4());
-        Assert.assertEquals(0f, multiBody.kineticEnergy(), 0f);
         Assert.assertEquals(0.04f, multiBody.linearDamping(), 0f);
         Assert.assertEquals(1000f, multiBody.maxAppliedImpulse(), 0f);
         Assert.assertEquals(100f, multiBody.maxCoordinateVelocity(), 0f);

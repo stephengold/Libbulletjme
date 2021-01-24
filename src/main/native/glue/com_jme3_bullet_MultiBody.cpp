@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -191,22 +191,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
 
     btScalar angularDamping = pMultiBody->getAngularDamping();
     return (jfloat) angularDamping;
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    getAngularMomentum
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
-(JNIEnv *pEnv, jclass, jlong multiBodyId, jobject storeVector) {
-    const btMultiBody * const
-            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
-    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
-
-    const btVector3& angularMomentum = pMultiBody->getAngularMomentum();
-    jmeBulletUtil::convert(pEnv, &angularMomentum, storeVector);
 }
 
 /*
@@ -411,21 +395,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
     jmeUserPointer const pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     jint group = pUser->m_group;
     return group;
-}
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    getKineticEnergy
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
-(JNIEnv *pEnv, jclass, jlong multiBodyId) {
-    const btMultiBody * const
-            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
-    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
-
-    btScalar kineticEnergy = pMultiBody->getKineticEnergy();
-    return (jfloat) kineticEnergy;
 }
 
 /*

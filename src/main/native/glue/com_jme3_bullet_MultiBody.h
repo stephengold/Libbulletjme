@@ -81,14 +81,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getAngularDamping
 
 /*
  * Class:     com_jme3_bullet_MultiBody
- * Method:    getAngularMomentum
- * Signature: (JLcom/jme3/math/Vector3f;)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_getAngularMomentum
-  (JNIEnv *, jclass, jlong, jobject);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
  * Method:    getBaseCollider
  * Signature: (J)J
  */
@@ -189,14 +181,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollideWithGroups
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getCollisionGroup
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_MultiBody
- * Method:    getKineticEnergy
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBody_getKineticEnergy
   (JNIEnv *, jclass, jlong);
 
 /*
