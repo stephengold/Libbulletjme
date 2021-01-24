@@ -9,7 +9,7 @@
  + Added a return value to `MyQuaternion.validateUnit()`.
  + Reduced argument validation when assertions are disabled.
  + Added an option to `Validate` to configure the type of exception
-   thrown for a null argument.
+   thrown for a `null` argument.
  + Publicized some loggers.
  + Built using Gradle v6.8.1 .
 
