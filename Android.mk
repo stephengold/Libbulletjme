@@ -168,6 +168,7 @@ $(N)/bullet3/BulletSoftBody/btSoftMultiBodyDynamicsWorld.cpp \
 $(N)/bullet3/BulletSoftBody/btSoftRigidCollisionAlgorithm.cpp \
 $(N)/bullet3/BulletSoftBody/btSoftRigidDynamicsWorld.cpp \
 $(N)/bullet3/BulletSoftBody/btSoftSoftCollisionAlgorithm.cpp \
+$(N)/bullet3/BulletSoftBody/poly34.cpp \
 $(N)/bullet3/LinearMath/btAlignedAllocator.cpp \
 $(N)/bullet3/LinearMath/btConvexHullComputer.cpp \
 $(N)/bullet3/LinearMath/btConvexHull.cpp \
@@ -178,6 +179,7 @@ $(N)/bullet3/LinearMath/btSerializer64.cpp \
 $(N)/bullet3/LinearMath/btSerializer.cpp \
 $(N)/bullet3/LinearMath/btThreads.cpp \
 $(N)/bullet3/LinearMath/btVector3.cpp \
+$(N)/bullet3/LinearMath/btReducedVector.cpp \
 $(N)/glue/com_jme3_bullet_collision_PhysicsCollisionEvent.cpp \
 $(N)/glue/com_jme3_bullet_collision_PhysicsCollisionObject.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_Box2dShape.cpp \
