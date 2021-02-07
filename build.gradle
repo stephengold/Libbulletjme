@@ -4,6 +4,7 @@ plugins {
     id 'cpp'
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
 }
 
 ext {
@@ -288,9 +289,9 @@ tasks.withType(JavaCompile) { // compile-time options:
 test.dependsOn('assemble')
 assemble.dependsOn('copyToDistJars')
 task copyToDistJars (type: Copy) {
-    dependsOn 'jar', 'javadocJar', 'sourcesJar'
+    dependsOn 'jar', 'javadocJar', 'signArchives', 'sourcesJar'
     from 'build/libs'
-    include '*.jar'
+    include '*.jar', '*.jar.asc'
     into 'dist'
 }
 
@@ -315,12 +316,23 @@ task sourcesJar(type: Jar) {
     from 'src/main/java'
 }
 
-build.dependsOn('pom')
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives jar, javadocJar, sourcesJar
+}
+
+build.dependsOn('pom', 'pomAsc')
 task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
     from "${buildDir}/publications/maven/pom-default.xml"
     into 'dist'
-    rename '.*', baseName + '.pom'
+    rename 'pom-default.xml', baseName + '.pom'
+}
+task('pomAsc', type: Copy) {
+    dependsOn 'signMavenPublication'
+    from "${buildDir}/publications/maven/pom-default.xml.asc"
+    into 'dist'
+    rename 'pom-default.xml.asc', baseName + '.pom.asc'
 }
 
 publishing {
@@ -341,6 +353,14 @@ publishing {
             version project.ext.version
         }
     }
+}
+
+signing {
+    sign configurations.archives
+    sign publishing.publications.maven
+}
+tasks.withType(Sign) {
+    onlyIf { gradle.rootProject.hasProperty('signing.keyId') }
 }
 
 // cleanup tasks
