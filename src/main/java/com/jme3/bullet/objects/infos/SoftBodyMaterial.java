@@ -59,7 +59,7 @@ public class SoftBodyMaterial extends NativePhysicsObject {
     public SoftBodyMaterial(PhysicsSoftBody body) {
         long softBodyId = body.nativeId();
         long materialId = getMaterialId(softBodyId);
-        super.setNativeId(materialId);
+        super.setNativeIdNotTracked(materialId);
     }
     // *********************************************************************
     // new methods exposed

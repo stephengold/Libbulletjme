@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,7 +63,7 @@ public class TranslationMotor extends NativePhysicsObject {
      */
     public TranslationMotor(long nativeId) {
         Validate.nonZero(nativeId, "native ID");
-        super.setNativeId(nativeId);
+        super.setNativeIdNotTracked(nativeId);
     }
     // *************************************************************************
     // new methods exposed

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -220,7 +220,7 @@ public class Anchor extends PhysicsJoint {
 
         long anchorId = createAnchor(aId, nodeIndexA, bId, pivotInB,
                 allowCollisions, influence);
-        setNativeId(anchorId);
+        setNativeIdNotTracked(anchorId);
     }
     // *************************************************************************
     // native private methods

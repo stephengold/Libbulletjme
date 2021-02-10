@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -506,28 +506,6 @@ public class CollisionSpace extends NativePhysicsObject {
         physicsSpaceTL.set(this);
     }
     // *************************************************************************
-    // NativePhysicsObject methods
-
-    /**
-     * Finalize this space just before it is destroyed. Should be invoked only
-     * by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            loggerC.log(Level.FINE, "Finalizing {0}.", this);
-            for (PhysicsCollisionObject pco : getPcoList()) {
-                removeCollisionObject(pco);
-            }
-            long spaceId = nativeId();
-            finalizeNative(spaceId);
-        } finally {
-            super.finalize();
-        }
-    }
-    // *************************************************************************
     // Java private methods
 
     /**
@@ -551,6 +529,16 @@ public class CollisionSpace extends NativePhysicsObject {
 
         long spaceId = nativeId();
         addCollisionObject(spaceId, ghostId);
+    }
+
+    /**
+     * Free the identified tracked native object. Invoked by reflection.
+     *
+     * @param spaceId the native identifier (not zero)
+     */
+    private static void freeNativeObject(long spaceId) {
+        Validate.nonZero(spaceId, "space ID");
+        finalizeNative(spaceId);
     }
 
     /**

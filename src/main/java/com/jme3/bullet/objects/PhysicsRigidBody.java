@@ -915,8 +915,6 @@ public class PhysicsRigidBody extends PhysicsBody {
                 removedFrom.removeCollisionObject(this);
             }
             logger2.log(Level.FINE, "Clearing {0}.", this);
-            long objectId = nativeId();
-            finalizeNative(objectId);
             unassignNativeObject();
         }
 

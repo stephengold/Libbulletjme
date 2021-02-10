@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -102,7 +102,7 @@ public class MultiBodyLink extends NativePhysicsObject {
         multiBodyId = multiBody.nativeId();
 
         long linkId = getLinkId(multiBodyId, index);
-        super.setNativeId(linkId);
+        super.setNativeIdNotTracked(linkId);
 
         numDofs = getDofCount(linkId);
 

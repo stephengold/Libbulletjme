@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -181,25 +181,6 @@ public class IndexedMesh extends NativePhysicsObject {
         return numVertices;
     }
     // *************************************************************************
-    // NativePhysicsObject methods
-
-    /**
-     * Finalize this mesh just before it is destroyed. Should be invoked only by
-     * a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing IndexedMesh {0}", this);
-            long meshId = nativeId();
-            finalizeNative(meshId);
-        } finally {
-            super.finalize();
-        }
-    }
-    // *************************************************************************
     // Java private methods
 
     /**
@@ -214,6 +195,16 @@ public class IndexedMesh extends NativePhysicsObject {
         setNativeId(meshId);
 
         logger.log(Level.FINE, "Created {0}", this);
+    }
+
+    /**
+     * Free the identified tracked native object. Invoked by reflection.
+     *
+     * @param meshId the native identifier (not zero)
+     */
+    private static void freeNativeObject(long meshId) {
+        assert meshId != 0L;
+        finalizeNative(meshId);
     }
     // *************************************************************************
     // native private methods

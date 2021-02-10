@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,7 +60,7 @@ public class SolverInfo extends NativePhysicsObject {
      */
     SolverInfo(long nativeId) {
         Validate.nonZero(nativeId, "native ID");
-        super.setNativeId(nativeId);
+        super.setNativeIdNotTracked(nativeId);
     }
     // *************************************************************************
     // new methods exposed

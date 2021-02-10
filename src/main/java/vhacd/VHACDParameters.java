@@ -20,7 +20,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -468,25 +467,18 @@ public class VHACDParameters
 
         return hash;
     }
-
-    /**
-     * Finalize this instance just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
-     *
-     * @throws Throwable ignored by the garbage collector
-     */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing {0}.", this);
-            long nativeId = nativeId();
-            finalizeNative(nativeId);
-        } finally {
-            super.finalize();
-        }
-    }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Free the identified tracked native object. Invoked by reflection.
+     *
+     * @param objectId the native identifier (not zero)
+     */
+    private static void freeNativeObject(long objectId) {
+        assert objectId != 0L;
+        finalizeNative(objectId);
+    }
 
     /**
      * native field: m_convexhullApproximation

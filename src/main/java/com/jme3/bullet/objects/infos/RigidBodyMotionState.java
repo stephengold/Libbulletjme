@@ -187,24 +187,16 @@ public class RigidBodyMotionState extends NativePhysicsObject {
         this.vehicle = vehicle;
     }
     // *************************************************************************
-    // NativePhysicsObject methods
+    // Java private methods
 
     /**
-     * Finalize this motion state just before it is destroyed. Should be invoked
-     * only by a subclass or by the garbage collector.
+     * Free the identified tracked native object. Invoked by reflection.
      *
-     * @throws Throwable ignored by the garbage collector
+     * @param stateId the native identifier (not zero)
      */
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            logger.log(Level.FINE, "Finalizing {0}", this);
-
-            long motionStateId = nativeId();
-            finalizeNative(motionStateId);
-        } finally {
-            super.finalize();
-        }
+    private static void freeNativeObject(long stateId) {
+        assert stateId != 0L;
+        finalizeNative(stateId);
     }
     // *************************************************************************
     // native private methods
