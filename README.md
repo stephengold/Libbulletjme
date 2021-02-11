@@ -48,10 +48,10 @@ standalone Maven artifacts are provided.
  1. For projects built using Gradle, add the following dependency:
 
         repositories {
-            jcenter()
+            mavenCentral()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:10.0.0'
+            compile 'com.github.stephengold:Libbulletjme:10.1.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -234,7 +234,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 10.0.0`
+     + `git checkout -b latest 10.1.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -422,6 +422,7 @@ IVHACD::Parameters  vhacd.VHACDParamters
 [minie]: https://github.com/stephengold/Minie "Minie Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
+[sonatype]: https://www.sonatype.com "Sonatype"
 [travis]: https://travis-ci.org "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
 [v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
@@ -478,7 +479,7 @@ This project also made use of the following software tools:
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
 
-I am grateful to [Github], [JFrog], [AppVeyor], [Travis], and [Imgur]
+I am grateful to [Github], [Sonatype], [JFrog], [AppVeyor], [Travis], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 

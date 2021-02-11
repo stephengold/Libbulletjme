@@ -4,7 +4,7 @@
 
  + Bugfix: suspension lengths of a `PhysicsVehicle` are not initialized.
  + Eliminate all `finalize()` methods by implementing a cleaner thread and
-   adding an `NpoTracker` thread.
+   adding an `NpoTracker` class.
  + Publish to MavenLocal instead of JCenter.
  + Build using Gradle v6.8.2 .
 
