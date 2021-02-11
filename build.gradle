@@ -7,6 +7,7 @@ plugins {
     id 'signing'
 }
 
+description = 'a JNI interface for Bullet Physics and V-HACD'
 ext {
     artifact = 'Libbulletjme'
     version = '10.0.0'
@@ -342,6 +343,13 @@ publishing {
             from components.java
             groupId 'com.github.stephengold'
             pom {
+                description = project.description
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        name = 'Stephen Gold'
+                    }
+                }
                 licenses {
                     license {
                         distribution = 'repo'
@@ -349,6 +357,13 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
+                name = 'com.github.stephengold:' + artifact
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/Libbulletjme.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/Libbulletjme.git'
+                    url = 'https://github.com/stephengold/Libbulletjme/tree/master'
+                }
+                url = 'https://github.com/stephengold/Libbulletjme'
             }
             version project.ext.version
         }
