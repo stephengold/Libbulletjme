@@ -1,5 +1,13 @@
 # Release log for the Libbulletjme project
 
+## Version 10.1.0 released on 10 February 2021
+
+ + Bugfix: suspension lengths of a `PhysicsVehicle` are not initialized.
+ + Eliminate all `finalize()` methods by implementing a cleaner thread and
+   adding an `NpoTracker` thread.
+ + Publish to MavenLocal instead of JCenter.
+ + Build using Gradle v6.8.2 .
+
 ## Version 10.0.0 released on 24 January 2021
 
  + Removed the `angularMomentum()` and `kineticEnergy()` methods
