@@ -1,9 +1,9 @@
 # Release log for the Libbulletjme project
 
-## Version 10.2.0 released on 19 February 2021
+## Version 10.2.0 released on 20 February 2021
 
  + Added getters and setters for the pivot locations of a `Point2PointJoint`.
- + Test using JUnit v4.13.2 .
+ + Tested using JUnit v4.13.2 .
 
 ## Version 10.1.0 released on 10 February 2021
 
