@@ -41,6 +41,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getImpulse
 
 /*
  * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    getPivotInA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getPivotInA
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    getPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getPivotInB
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
  * Method:    getTau
  * Signature: (J)F
  */
@@ -62,6 +78,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setDamping
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setImpulseClamp
   (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    setPivotInA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInA
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    setPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInB
+  (JNIEnv *, jclass, jlong, jobject);
 
 /*
  * Class:     com_jme3_bullet_joints_Point2PointJoint

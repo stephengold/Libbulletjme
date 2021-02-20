@@ -124,6 +124,40 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getImpulse
 
 /*
  * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    getPivotInA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getPivotInA
+(JNIEnv *pEnv, jclass, jlong jointId, jobject storeVector) {
+    btPoint2PointConstraint *pJoint
+            = reinterpret_cast<btPoint2PointConstraint *> (jointId);
+    NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
+    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btVector3& location = pJoint->getPivotInA();
+    jmeBulletUtil::convert(pEnv, &location, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    getPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getPivotInB
+(JNIEnv *pEnv, jclass, jlong jointId, jobject storeVector) {
+    btPoint2PointConstraint *pJoint
+            = reinterpret_cast<btPoint2PointConstraint *> (jointId);
+    NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
+    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btVector3& location = pJoint->getPivotInB();
+    jmeBulletUtil::convert(pEnv, &location, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
  * Method:    getTau
  * Signature: (J)F
  */
@@ -165,6 +199,42 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setImpulseCl
     btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
 
     pJoint->m_setting.m_impulseClamp = clamp;
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    setPivotInA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInA
+(JNIEnv *pEnv, jclass, jlong jointId, jobject locationVector) {
+    btPoint2PointConstraint *pJoint
+            = reinterpret_cast<btPoint2PointConstraint *> (jointId);
+    NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
+    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
+
+    btVector3 pivot;
+    jmeBulletUtil::convert(pEnv, locationVector, &pivot);
+    pJoint->setPivotA(pivot);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_Point2PointJoint
+ * Method:    setPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInB
+(JNIEnv *pEnv, jclass, jlong jointId, jobject locationVector) {
+    btPoint2PointConstraint *pJoint
+            = reinterpret_cast<btPoint2PointConstraint *> (jointId);
+    NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
+    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
+
+    btVector3 pivot;
+    jmeBulletUtil::convert(pEnv, locationVector, &pivot);
+    pJoint->setPivotB(pivot);
 }
 
 /*

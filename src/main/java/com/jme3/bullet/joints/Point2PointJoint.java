@@ -35,6 +35,7 @@ import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
+import jme3utilities.Validate;
 
 /**
  * A 3 degree-of-freedom joint based on Bullet's btPoint2PointConstraint.
@@ -137,6 +138,34 @@ public class Point2PointJoint extends Constraint {
     }
 
     /**
+     * Locate the pivot in A's scaled local coordinates.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the pivot location (either storeResult or a new vector, not null)
+     */
+    public Vector3f getPivotInA(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        long constraintId = nativeId();
+        getPivotInA(constraintId, result);
+
+        return result;
+    }
+
+    /**
+     * Locate the pivot in B's scaled local coordinates.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the pivot location (either storeResult or a new vector, not null)
+     */
+    public Vector3f getPivotInB(Vector3f storeResult) {
+        Vector3f result = storeResult == null ? new Vector3f() : storeResult;
+        long constraintId = nativeId();
+        getPivotInB(constraintId, result);
+
+        return result;
+    }
+
+    /**
      * Read the joint's tau value.
      *
      * @return the tau value
@@ -165,6 +194,30 @@ public class Point2PointJoint extends Constraint {
     public void setImpulseClamp(float value) {
         long constraintId = nativeId();
         setImpulseClamp(constraintId, value);
+    }
+
+    /**
+     * Alter the pivot location in A's scaled local coordinates.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    public void setPivotInA(Vector3f location) {
+        Validate.nonNull(location, "location");
+
+        long constraintId = nativeId();
+        setPivotInA(constraintId, location);
+    }
+
+    /**
+     * Alter the pivot location in B's scaled local coordinates.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    public void setPivotInB(Vector3f location) {
+        Validate.nonNull(location, "location");
+
+        long constraintId = nativeId();
+        setPivotInB(constraintId, location);
     }
 
     /**
@@ -241,12 +294,20 @@ public class Point2PointJoint extends Constraint {
 
     native private static float getImpulseClamp(long jointId);
 
+    native private static void getPivotInA(long jointId, Vector3f storeVector);
+
+    native private static void getPivotInB(long jointId, Vector3f storeVector);
+
     native private static float getTau(long jointId);
 
     native private static void setDamping(long jointId, float desiredDamping);
 
     native private static void setImpulseClamp(long jointId,
             float desiredClamp);
+
+    native private static void setPivotInA(long jointId, Vector3f pivotInA);
+
+    native private static void setPivotInB(long jointId, Vector3f pivotInB);
 
     native private static void setTau(long jointId, float desiredTau);
 }
