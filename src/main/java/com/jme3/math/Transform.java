@@ -65,6 +65,17 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Sets this rotation to the given Quaternion value.
+     *
+     * @param rot The new rotation for this Transform.
+     * @return this
+     */
+    public Transform setRotation(Quaternion rot) {
+        this.rot.set(rot);
+        return this;
+    }
+
+    /**
      * Sets this translation to the given value.
      *
      * @param trans The new translation for this Transform.
