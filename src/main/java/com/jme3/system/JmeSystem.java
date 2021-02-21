@@ -32,6 +32,15 @@
 package com.jme3.system;
 
 public class JmeSystem {
+    // *************************************************************************
+    // constructors
+
+    /**
+     * A private constructor to inhibit instantiation of this class.
+     */
+    private JmeSystem() {
+    }
+    // *************************************************************************
 
     private static boolean is64Bit(String arch) {
         if (arch.equals("x86")) {
