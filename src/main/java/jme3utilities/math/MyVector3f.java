@@ -256,6 +256,32 @@ public class MyVector3f {
     }
 
     /**
+     * Interpolate between (or extrapolate from) 2 vectors using linear (Lerp)
+     * *polation. No rounding error is introduced when v1==v2.
+     *
+     * @param t descaled parameter value (0&rarr;v0, 1&rarr;v1)
+     * @param v0 function value at t=0 (not null, unaffected unless it's also
+     * storeResult)
+     * @param v1 function value at t=1 (not null, unaffected unless it's also
+     * storeResult)
+     * @param storeResult storage for the result (modified if not null, may be
+     * v0 or v1)
+     * @return an interpolated vector (either storeResult or a new instance)
+     */
+    public static Vector3f lerp(float t, Vector3f v0, Vector3f v1,
+            Vector3f storeResult) {
+        assert Validate.nonNull(v0, "v0");
+        assert Validate.nonNull(v1, "v1");
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        result.x = MyMath.lerp(t, v0.x, v1.x);
+        result.y = MyMath.lerp(t, v0.y, v1.y);
+        result.z = MyMath.lerp(t, v0.z, v1.z);
+
+        return result;
+    }
+
+    /**
      * Test whether 2 vectors are distinct, without distinguishing 0 from -0.
      *
      * @param v1 the first input vector (not null, unaffected)
