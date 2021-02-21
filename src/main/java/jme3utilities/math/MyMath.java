@@ -83,12 +83,13 @@ public class MyMath {
      */
     public static float hypotenuse(float... fValues) {
         double sum = 0.0;
-        for (float value : fValues) {
+        for (float fValue : fValues) {
+            double value = fValue;
             sum += value * value;
         }
 
         float result = (float) Math.sqrt(sum);
-        assert result >= 0.0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -111,7 +112,7 @@ public class MyMath {
 
     /**
      * Interpolate between (or extrapolate from) 2 single-precision values using
-     * linear (Lerp) *polation. No  rounding error is introduced when y1==y2.
+     * linear (Lerp) *polation. No rounding error is introduced when y1==y2.
      *
      * @param t descaled parameter value (0&rarr;v0, 1&rarr;v1)
      * @param y1 function value at t=0
