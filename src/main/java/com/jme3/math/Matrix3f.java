@@ -197,6 +197,62 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>set</code> places a given value into the matrix at the given
+     * position.
+     *
+     * @param i   the row index.
+     * @param j   the column index.
+     * @param value
+     *            the value for (i, j).
+     * @return this
+     * @throws IllegalArgumentException if either index is invalid
+     */
+    @SuppressWarnings("fallthrough")
+    public Matrix3f set(int i, int j, float value) {
+        switch (i) {
+            case 0:
+                switch (j) {
+                    case 0:
+                        m00 = value;
+                        return this;
+                    case 1:
+                        m01 = value;
+                        return this;
+                    case 2:
+                        m02 = value;
+                        return this;
+                }
+            case 1:
+                switch (j) {
+                    case 0:
+                        m10 = value;
+                        return this;
+                    case 1:
+                        m11 = value;
+                        return this;
+                    case 2:
+                        m12 = value;
+                        return this;
+                }
+            case 2:
+                switch (j) {
+                    case 0:
+                        m20 = value;
+                        return this;
+                    case 1:
+                        m21 = value;
+                        return this;
+                    case 2:
+                        m22 = value;
+                        return this;
+                }
+        }
+
+        logger.warning("Invalid matrix index.");
+        throw new IllegalArgumentException("Invalid indices into matrix.");
+    }
+
+    /**
      * Recreate Matrix using the provided axis.
      *
      * @param uAxis  Vector3f
