@@ -120,15 +120,15 @@ public class MyMath {
      * @return an interpolated function value
      */
     public static float lerp(float t, float y1, float y2) {
-        float lerp;
+        float result;
         if (y1 == y2) {
-            lerp = y1;
+            result = y1;
         } else {
             float u = 1f - t;
-            lerp = u * y1 + t * y2;
+            result = u * y1 + t * y2;
         }
 
-        return lerp;
+        return result;
     }
 
     /**
