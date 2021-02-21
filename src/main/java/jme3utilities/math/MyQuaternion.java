@@ -72,7 +72,7 @@ public class MyQuaternion {
      * Accumulate a linear combination of quaternions.
      *
      * @param total sum of the scaled inputs so far (not null, modified)
-     * @param input the quaternion to scale and add (not null, unaffected)
+     * @param input the Quaternion to scale and add (not null, unaffected)
      * @param scale scale factor to apply to the input
      */
     public static void accumulateScaled(Quaternion total, Quaternion input,
@@ -252,7 +252,7 @@ public class MyQuaternion {
     }
 
     /**
-     * Determine the squared length of a quaternion. Unlike
+     * Determine the squared length of a Quaternion. Unlike
      * {@link com.jme3.math.Quaternion#norm()}, this method returns a
      * double-precision value for precise comparison of lengths.
      *
@@ -275,7 +275,7 @@ public class MyQuaternion {
      *
      * @param q input value (not null, unaffected, norm=1)
      * @param storeResult storage for the result (modified if not null)
-     * @return a pure quaternion (either storeResult or a new instance)
+     * @return a pure Quaternion (either storeResult or a new instance)
      */
     public static Quaternion log(Quaternion q, Quaternion storeResult) {
         Quaternion result
@@ -475,11 +475,11 @@ public class MyQuaternion {
     }
 
     /**
-     * Standardize a quaternion in preparation for hashing.
+     * Standardize a Quaternion in preparation for hashing.
      *
      * @param input (not null, unaffected)
      * @param storeResult storage for the result (modified if not null)
-     * @return an equivalent quaternion without negative zeros (either
+     * @return an equivalent Quaternion without negative zeros (either
      * storeResult or a new instance)
      */
     public static Quaternion standardize(Quaternion input,
@@ -504,12 +504,12 @@ public class MyQuaternion {
     /**
      * Validate a unit quaternion as a method argument.
      *
-     * @param q quaternion to validate (not null, unaffected)
-     * @param description description of the quaternion
+     * @param q Quaternion to validate (not null, unaffected)
+     * @param description description of the Quaternion
      * @param tolerance for the norm (&ge;0)
      * @return true
      * @throws IllegalArgumentException if the norm is out of tolerance
-     * @throws NullPointerException if the quaternion is null
+     * @throws NullPointerException if the Quaternion is null
      */
     public static boolean validateUnit(Quaternion q, String description,
             float tolerance) {
