@@ -133,7 +133,8 @@ public class MyMath {
      */
     public static double sumOfSquares(float... fValues) {
         double result = 0.0;
-        for (float value : fValues) {
+        for (float fValue : fValues) {
+            double value = fValue;
             result += value * value;
         }
 
