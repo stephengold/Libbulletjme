@@ -110,6 +110,27 @@ public class MyMath {
     }
 
     /**
+     * Interpolate between (or extrapolate from) 2 single-precision values using
+     * linear (Lerp) *polation. No  rounding error is introduced when y1==y2.
+     *
+     * @param t descaled parameter value (0&rarr;v0, 1&rarr;v1)
+     * @param y1 function value at t=0
+     * @param y2 function value at t=1
+     * @return an interpolated function value
+     */
+    public static float lerp(float t, float y1, float y2) {
+        float lerp;
+        if (y1 == y2) {
+            lerp = y1;
+        } else {
+            float u = 1f - t;
+            lerp = u * y1 + t * y2;
+        }
+
+        return lerp;
+    }
+
+    /**
      * Standardize a single-precision value in preparation for hashing.
      *
      * @param fValue input value
