@@ -158,7 +158,7 @@ public class Point2PointJoint extends Constraint {
      * @return the pivot location (either storeResult or a new vector, not null)
      */
     public Vector3f getPivotInB(Vector3f storeResult) {
-        Vector3f result = storeResult == null ? new Vector3f() : storeResult;
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         long constraintId = nativeId();
         getPivotInB(constraintId, result);
 
@@ -201,11 +201,13 @@ public class Point2PointJoint extends Constraint {
      *
      * @param location the desired location (not null, unaffected)
      */
+    @Override
     public void setPivotInA(Vector3f location) {
         Validate.nonNull(location, "location");
 
         long constraintId = nativeId();
         setPivotInA(constraintId, location);
+        super.setPivotInA(location);
     }
 
     /**
@@ -213,11 +215,13 @@ public class Point2PointJoint extends Constraint {
      *
      * @param location the desired location (not null, unaffected)
      */
+    @Override
     public void setPivotInB(Vector3f location) {
         Validate.nonNull(location, "location");
 
         long constraintId = nativeId();
         setPivotInB(constraintId, location);
+        super.setPivotInB(location);
     }
 
     /**

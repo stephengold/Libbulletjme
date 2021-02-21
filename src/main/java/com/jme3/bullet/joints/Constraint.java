@@ -396,6 +396,28 @@ abstract public class Constraint extends PhysicsJoint {
      * @return a btTypedConstraintType ordinal value (&ge;3)
      */
     final native protected static int getConstraintType(long constraintId);
+
+    /**
+     * Alter the pivot location in A's scaled local coordinates. The subclass is
+     * responsible for updating the native object.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    protected void setPivotInA(Vector3f location) {
+        Validate.nonNull(location, "location");
+        pivotA.set(location);
+    }
+
+    /**
+     * Alter the pivot location in B's scaled local coordinates. The subclass is
+     * responsible for updating the native object.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    protected void setPivotInB(Vector3f location) {
+        Validate.nonNull(location, "location");
+        pivotB.set(location);
+    }
     // *************************************************************************
     // PhysicsJoint methods
 
