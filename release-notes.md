@@ -1,5 +1,16 @@
 # Release log for the Libbulletjme project
 
+## Version 10.3.0 released on 24 February 2021
+
+ + Bugfix: Java copies of `Point2PointJoint` pivot locations
+   not updated by setters
+ + Bugfix: overflow/underflow in `Vector3f.length()`
+ + Added the `setRotation()` method to the `Transform` class.
+ + Added the `set(int, int, float)` method to the `Matrix3f` class.
+ + Added `lerp()` methods to the `MyMath` and `MyVector3f` classes.
+ + Increased use of double-precision arithmetic in the `MyMath` class.
+ + Built using Gradle v6.8.3 .
+
 ## Version 10.2.0 released on 20 February 2021
 
  + Added getters and setters for the pivot locations of a `Point2PointJoint`.
@@ -8,10 +19,10 @@
 ## Version 10.1.0 released on 10 February 2021
 
  + Bugfix: suspension lengths of a `PhysicsVehicle` are not initialized.
- + Eliminate all `finalize()` methods by implementing a cleaner thread and
+ + Eliminated all `finalize()` methods by implementing a cleaner thread and
    adding an `NpoTracker` class.
- + Publish to MavenCentral instead of JCenter.
- + Build using Gradle v6.8.2 .
+ + Published to MavenCentral instead of JCenter.
+ + Built using Gradle v6.8.2 .
 
 ## Version 10.0.0 released on 24 January 2021
 
