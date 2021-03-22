@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -190,22 +190,15 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>fromAngles</code> builds a Quaternion from the Euler rotation
-     * angles (x,y,z) aka (pitch, yaw, roll)).
-     * Note that we are applying in order: (y, x, z) aka (yaw, pitch, roll)
-     * but we've ordered them in x, y, and z for convenience.
+     * Reconfigure this Quaternion based on Tait-Bryan rotations, applying the
+     * rotations in x-z-y extrinsic order or y-z'-x" intrinsic order.
      *
-     * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
+     * @see
+     * <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
      *
-     * @param xAngle
-     *            the Euler pitch of rotation (in radians). (aka Attitude, often rot
-     *            around x)
-     * @param yAngle
-     *            the Euler yaw of rotation (in radians). (aka Heading, often
-     *            rot around y)
-     * @param zAngle
-     *            the Euler roll of rotation (in radians). (aka Bank, often
-     *            rot around z)
+     * @param xAngle the X angle (in radians)
+     * @param yAngle the Y angle (in radians)
+     * @param zAngle the Z angle (in radians)
      * @return this
      */
     public Quaternion fromAngles(float xAngle, float yAngle, float zAngle) {
