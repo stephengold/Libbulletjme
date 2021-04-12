@@ -195,9 +195,9 @@ public class PhysicsSpace extends CollisionSpace {
      * Instantiate a PhysicsSpace with an AXIS_SWEEP_3 broadphase accelerator.
      * Must be invoked on the designated physics thread.
      *
-     * @param worldMin the desired minimum coordinates values (not null,
+     * @param worldMin the desired minimum coordinate values (not null,
      * unaffected)
-     * @param worldMax the desired minimum coordinates values (not null,
+     * @param worldMax the desired maximum coordinate values (not null,
      * unaffected)
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax) {
@@ -208,10 +208,10 @@ public class PhysicsSpace extends CollisionSpace {
      * Instantiate a PhysicsSpace. Must be invoked on the designated physics
      * thread.
      *
-     * @param worldMin the desired minimum coordinates values (not null,
-     * unaffected, default=-10k,-10k,-10k)
-     * @param worldMax the desired minimum coordinates values (not null,
-     * unaffected, default=10k,10k,10k)
+     * @param worldMin the desired minimum coordinate values (not null,
+     * unaffected, default=(-10k,-10k,-10k))
+     * @param worldMax the desired maximum coordinate values (not null,
+     * unaffected, default=(10k,10k,10k))
      * @param broadphaseType which broadphase accelerator to use (not null)
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
@@ -223,9 +223,9 @@ public class PhysicsSpace extends CollisionSpace {
      * Instantiate a PhysicsSpace. Must be invoked on the designated physics
      * thread.
      *
-     * @param worldMin the desired minimum coordinates values (not null,
+     * @param worldMin the desired minimum coordinate values (not null,
      * unaffected, default=-10k,-10k,-10k)
-     * @param worldMax the desired minimum coordinates values (not null,
+     * @param worldMax the desired maximum coordinate values (not null,
      * unaffected, default=10k,10k,10k)
      * @param broadphaseType which broadphase accelerator to use (not null)
      * @param solverType the desired constraint solver (not null)
@@ -260,7 +260,7 @@ public class PhysicsSpace extends CollisionSpace {
      * During distributeEvents(), registered listeners are notified of all new
      * contacts since the previous distributeEvents().
      *
-     * @param listener the listener object to register (not null, alias created)
+     * @param listener the listener to register (not null, alias created)
      */
     public void addCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
@@ -317,7 +317,7 @@ public class PhysicsSpace extends CollisionSpace {
      * During distributeEvents(), registered listeners are notified of all
      * ongoing contacts EXCEPT Sphere-Sphere contacts.
      *
-     * @param listener the listener object to register (not null, alias created)
+     * @param listener the listener to register (not null, alias created)
      */
     public void addOngoingCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
@@ -529,7 +529,7 @@ public class PhysicsSpace extends CollisionSpace {
      *
      * @see
      * #addCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
-     * @param listener the listener object to de-register (not null)
+     * @param listener the listener to de-register (not null)
      */
     public void removeCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
@@ -569,7 +569,7 @@ public class PhysicsSpace extends CollisionSpace {
      *
      * @see
      * #addOngoingCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
-     * @param listener the listener object to de-register (not null)
+     * @param listener the listener to de-register (not null)
      */
     public void removeOngoingCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
@@ -598,8 +598,8 @@ public class PhysicsSpace extends CollisionSpace {
      * to that of the space. Thus it is preferable to set the space's gravity
      * before adding any bodies to the space.
      *
-     * @param gravity the desired acceleration vector (not null, unaffected,
-     * default=0,-9.81,0)
+     * @param gravity the desired acceleration vector (in physics-space
+     * coordinates, not null, unaffected, default=(0,-9.81,0))
      */
     public void setGravity(Vector3f gravity) {
         this.gravity.set(gravity);

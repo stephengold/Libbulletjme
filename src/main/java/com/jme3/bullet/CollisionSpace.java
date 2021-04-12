@@ -118,10 +118,10 @@ public class CollisionSpace extends NativePhysicsObject {
      * Instantiate a CollisionSpace. Must be invoked on the designated physics
      * thread.
      *
-     * @param worldMin the desired minimum coordinates values (not null,
-     * unaffected, default=-10k,-10k,-10k)
-     * @param worldMax the desired minimum coordinates values (not null,
-     * unaffected, default=10k,10k,10k)
+     * @param worldMin the desired minimum coordinate values (not null,
+     * unaffected, default=(-10k,-10k,-10k))
+     * @param worldMax the desired maximum coordinate values (not null,
+     * unaffected, default=(10k,10k,10k))
      * @param broadphaseType which broadphase collision-detection algorithm to
      * use (not null)
      */

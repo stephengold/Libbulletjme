@@ -169,7 +169,7 @@ abstract public class PhysicsCollisionObject
      * Two objects can collide only if one of them has the collisionGroup of the
      * other in its collideWithGroups set.
      *
-     * @param collisionGroup the groups to add (bitmask)
+     * @param collisionGroup the groups to add, ORed together (bitmask)
      */
     public void addCollideWithGroup(int collisionGroup) {
         collideWithGroups |= collisionGroup;
