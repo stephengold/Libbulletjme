@@ -163,25 +163,25 @@ public class PhysicsVehicle extends PhysicsRigidBody {
             float wheelRadius, boolean isFrontWheel) {
         Validate.positive(wheelRadius, "wheel radius");
 
-        VehicleWheel wheel = new VehicleWheel(connectionPoint, direction,
+        VehicleWheel result = new VehicleWheel(connectionPoint, direction,
                 axle, suspensionRestLength, wheelRadius, isFrontWheel);
 
-        wheel.setFrictionSlip(tuning.getFrictionSlip());
-        wheel.setMaxSuspensionTravelCm(tuning.getMaxSuspensionTravelCm());
-        wheel.setSuspensionStiffness(tuning.getSuspensionStiffness());
-        wheel.setWheelsDampingCompression(tuning.getSuspensionCompression());
-        wheel.setWheelsDampingRelaxation(tuning.getSuspensionDamping());
-        wheel.setMaxSuspensionForce(tuning.getMaxSuspensionForce());
-        wheels.add(wheel);
+        result.setFrictionSlip(tuning.getFrictionSlip());
+        result.setMaxSuspensionTravelCm(tuning.getMaxSuspensionTravelCm());
+        result.setSuspensionStiffness(tuning.getSuspensionStiffness());
+        result.setWheelsDampingCompression(tuning.getSuspensionCompression());
+        result.setWheelsDampingRelaxation(tuning.getSuspensionDamping());
+        result.setMaxSuspensionForce(tuning.getMaxSuspensionForce());
+        wheels.add(result);
 
         if (controller != null) {
             long controllerId = controller.nativeId();
-            int wheelIndex = controller.addWheel(wheel, tuning);
-            wheel.setVehicleId(controllerId, wheelIndex);
-            assert wheel.checkCopies();
+            int wheelIndex = controller.addWheel(result, tuning);
+            result.setVehicleId(controllerId, wheelIndex);
+            assert result.checkCopies();
         }
 
-        return wheel;
+        return result;
     }
 
     /**
@@ -235,7 +235,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      * Used internally, creates the controller when the vehicle is added to a
      * PhysicsSpace.
      *
-     * @param space which PhysicsSpace (not zero)
+     * @param space the PhysicsSpace to use, or null for none
      */
     public void createVehicle(PhysicsSpace space) {
         if (space == null) {
