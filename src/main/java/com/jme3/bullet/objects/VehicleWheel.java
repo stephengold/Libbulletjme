@@ -91,10 +91,6 @@ public class VehicleWheel {
      */
     final private Matrix3f tmp_Matrix = new Matrix3f();
     /**
-     * temporary storage during calculations
-     */
-    final private Quaternion tmp_inverseWorldRotation = new Quaternion();
-    /**
      * wheel orientation in physics-space coordinates
      */
     final private Quaternion wheelWorldRotation = new Quaternion();
