@@ -56,7 +56,13 @@ HeightfieldShape : public btHeightfieldTerrainShape {
     }
 
     const btScalar * getHeightData() {
+#ifdef BT_USE_DOUBLE_PRECISION
+        btAssert(m_heightDataType == PHY_DOUBLE);
+        return m_heightfieldDataDouble;
+#else
+        btAssert(m_heightDataType == PHY_FLOAT);
         return m_heightfieldDataFloat;
+#endif
     }
 };
 
