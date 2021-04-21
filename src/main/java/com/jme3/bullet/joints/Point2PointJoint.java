@@ -211,21 +211,22 @@ public class Point2PointJoint extends Constraint {
     }
 
     /**
-     * Alter the pivot location in B's scaled local coordinates.
+     * Alter the pivot location in B's scaled local coordinates. Unlike Minie,
+     * Libbulletjme implements this method for both single-ended and
+     * double-ended joints.
      *
      * @param location the desired location (not null, unaffected)
      */
     @Override
     public void setPivotInB(Vector3f location) {
         Validate.nonNull(location, "location");
-        if (pivotB == null) {
-            throw new IllegalStateException(
-                    "The Point2PointJoint doesn't have a B end.");
-        }
 
         long constraintId = nativeId();
         setPivotInB(constraintId, location);
-        super.setPivotInB(location);
+
+        if (pivotB != null) {
+            super.setPivotInB(location);
+        }
     }
 
     /**
