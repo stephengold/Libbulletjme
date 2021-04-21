@@ -1,5 +1,11 @@
 # Release log for the Libbulletjme project
 
+## Version 10.3.1 released on 21 April 2021
+
+ + Bugfix: `NullPointerException` in `Point2PointJoint.setPivotInB()`
+ + Upgraded the Bullet sources to match SHA1 ID=00dcc7788
+   of the bullet3 project.
+
 ## Version 10.3.0 released on 24 February 2021
 
  + Bugfix: Java copies of `Point2PointJoint` pivot locations
