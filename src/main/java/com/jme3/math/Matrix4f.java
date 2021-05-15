@@ -32,16 +32,15 @@
 package com.jme3.math;
 
 /**
- * <code>Matrix4f</code> defines and maintains a 4x4 matrix in row major order.
- * This matrix is intended for use in a translation and rotational capacity.
- * It provides convenience methods for creating the matrix from a multitude
- * of sources.
+ * <code>Matrix4f</code> represents a single-precision 4x4 matrix for use as a
+ * 3-D coordinate transform or perspective transform. It provides convenience
+ * methods for loading data from many sources.
  *
- * Matrices are stored assuming column vectors on the right, with the translation
- * in the rightmost column. Element numbering is row,column, so m03 is the zeroth
- * row, third column, which is the "x" translation part. This means that the implicit
- * storage order is column major. However, the get() and set() functions on float
- * arrays default to row major order!
+ * The rightmost column (column 3) stores the translation vector. Element
+ * numbering is (row,column), so m03 is the row 0, column 3, which is the X
+ * translation. This means that the implicit storage order is column-major.
+ * However, the get() and set() functions on float arrays default to row-major
+ * order!
  *
  * @author Mark Powell
  * @author Joshua Slack
@@ -61,7 +60,7 @@ public final class Matrix4f implements Cloneable {
      */
     public float m02;
     /**
-     * the element in row 0, column 3
+     * the element in row 0, column 3 (the X translation)
      */
     public float m03;
     /**
@@ -77,7 +76,7 @@ public final class Matrix4f implements Cloneable {
      */
     public float m12;
     /**
-     * the element in row 1, column 3
+     * the element in row 1, column 3 (the Y translation)
      */
     public float m13;
     /**
@@ -93,7 +92,7 @@ public final class Matrix4f implements Cloneable {
      */
     public float m22;
     /**
-     * the element in row 2, column 3
+     * the element in row 2, column 3 (the Z translation)
      */
     public float m23;
     /**
@@ -105,7 +104,7 @@ public final class Matrix4f implements Cloneable {
      */
     public float m31;
     /**
-     * the element in row 0, column 2
+     * the element in row 3, column 2
      */
     public float m32;
     /**
@@ -114,16 +113,15 @@ public final class Matrix4f implements Cloneable {
     public float m33;
 
     /**
-     * Constructor instantiates a new <code>Matrix</code> that is set to the
-     * identity matrix.
+     * Create a <code>Matrix4f</code> initialized to identity (diagonals = 1,
+     * other elements = 0).
      */
     public Matrix4f() {
         loadIdentity();
     }
 
     /**
-     * <code>loadIdentity</code> sets this matrix to the identity matrix,
-     * namely all zeros with ones along the diagonal.
+     * Load identity (diagonals = 1, other elements = 0).
      */
     public void loadIdentity() {
         m01 = m02 = m03 = 0.0f;
@@ -134,10 +132,9 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * <code>mult</code> multiplies this matrix by a scalar.
+     * Multiply in place, by the specified scalar.
      *
-     * @param scalar
-     *            the scalar to multiply this matrix by.
+     * @param scalar the scale factor to apply to all elements
      */
     public void multLocal(float scalar) {
         m00 *= scalar;
@@ -159,9 +156,9 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Inverts this matrix locally.
+     * Invert in place.
      *
-     * @return this
+     * @return this matrix (inverted)
      */
     public Matrix4f invertLocal() {
 
@@ -224,9 +221,9 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Sets all of the values in this matrix to zero.
+     * Set all elements to zero.
      *
-     * @return this matrix
+     * @return this (zeroed)
      */
     public Matrix4f zero() {
         m00 = m01 = m02 = m03 = 0.0f;
@@ -237,22 +234,20 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Interpret this matrix as a 3-D coordinate transform and determine its
-     * translation component.
+     * Determine the translation component of this 3-D coordinate transform.
      *
      * @param vector storage for the result (not null, modified)
-     * @return the translation vector (vector)
+     * @return vector
      */
     public Vector3f toTranslationVector(Vector3f vector) {
         return vector.set(m03, m13, m23);
     }
 
     /**
-     * Interpret this matrix as a 3-D coordinate transform and determine its
-     * rotation component.
+     * Determine the rotation component of this 3-D coordinate transform.
      *
      * @param q storage for the result (not null, modified)
-     * @return the rotation Quaternion (q)
+     * @return q
      */
     public Quaternion toRotationQuat(Quaternion q) {
         return q.fromRotationMatrix(m00, m01, m02, m10,
@@ -260,8 +255,7 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Interpret this matrix as a 3-D coordinate transform and determine its
-     * rotation component.
+     * Determine the rotation component of this 3-D coordinate transform.
      *
      * @param mat storage for the result (not null, modified)
      */
@@ -278,11 +272,10 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Retrieves the scale vector from the matrix and stores it into a given
-     * vector.
+     * Determine the scale component of this 3-D coordinate transform.
      *
-     * @param store the vector where the scale will be stored
-     * @return the store vector
+     * @param store storage for the result (not null, modified)
+     * @return store
      */
     public Vector3f toScaleVector(Vector3f store) {
         float scaleX = (float) Math.sqrt(m00 * m00 + m10 * m10 + m20 * m20);
@@ -293,11 +286,11 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Sets the scale.
+     * Alter the scale component of this 3-D coordinate transform.
      *
-     * @param x   the X scale
-     * @param y   the Y scale
-     * @param z   the Z scale
+     * @param x the desired scale factor for the X axis
+     * @param y the desired scale factor for the Y axis
+     * @param z the desired scale factor for the Z axis
      */
     public void setScale(float x, float y, float z) {
 
@@ -327,20 +320,18 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Sets the scale.
+     * Alter the scale component of this 3-D coordinate transform.
      *
-     * @param scale
-     *            the scale vector to set
+     * @param scale the desired scale factors (not null, unaffected)
      */
     public void setScale(Vector3f scale) {
         this.setScale(scale.x, scale.y, scale.z);
     }
 
     /**
-     * <code>setTranslation</code> will set the matrix's translation values.
+     * Alter the translation component of this 3-D coordinate transform.
      *
-     * @param translation
-     *            the new values for the translation.
+     * @param translation the desired translation (not null, unaffected)
      */
     public void setTranslation(Vector3f translation) {
         m03 = translation.x;
@@ -349,8 +340,7 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * <code>toString</code> returns a string representation of this matrix.
-     * For example, an identity matrix would be represented by:
+     * Represent as a String. For example, identity would be represented by:
      * <pre>
      * Matrix4f
      * [
@@ -440,10 +430,10 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * are these two matrices the same? they are is they both have the same mXX values.
+     * Test for equality with the specified object.
      *
-     * @param o   the object to compare for equality
-     * @return true if they are equal
+     * @param o the object to compare, or null
+     * @return true if this and o are equal, otherwise false
      */
     @Override
     public boolean equals(Object o) {
@@ -512,9 +502,9 @@ public final class Matrix4f implements Cloneable {
     }
 
     /**
-     * Create a copy of this matrix.
+     * Create a copy.
      *
-     * @return a new instance, equivalent to this one
+     * @return a new instance with the same element values
      */
     @Override
     public Matrix4f clone() {
