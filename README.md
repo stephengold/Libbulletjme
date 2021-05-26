@@ -423,7 +423,7 @@ IVHACD::Parameters  vhacd.VHACDParamters
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
-[travis]: https://travis-ci.org "Travis CI"
+[travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
 [v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
 
