@@ -145,6 +145,11 @@ public class PhysicsSpace extends CollisionSpace {
     final private List<PhysicsCollisionListener> contactStartedListeners
             = new ArrayList<>(4);
     /**
+     * list of registered tick listeners
+     */
+    final private List<PhysicsTickListener> tickListeners
+            = new ArrayList<>(4);
+    /**
      * map character IDs to added objects
      */
     final private Map<Long, PhysicsCharacter> characterMap
@@ -312,6 +317,24 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
+     * Register the specified tick listener with this space.
+     * <p>
+     * Tick listeners are notified before and after each physics step. A physics
+     * step is not necessarily the same as a frame; it is more influenced by the
+     * accuracy of the PhysicsSpace.
+     *
+     * @see #setAccuracy(float)
+     *
+     * @param listener the listener to register (not null, alias created)
+     */
+    public void addTickListener(PhysicsTickListener listener) {
+        Validate.nonNull(listener, "listener");
+        assert !tickListeners.contains(listener);
+
+        tickListeners.add(listener);
+    }
+
+    /**
      * Register the specified listener for ongoing contacts.
      * <p>
      * During distributeEvents(), registered listeners are notified of all
@@ -370,6 +393,16 @@ public class PhysicsSpace extends CollisionSpace {
      */
     public int countRigidBodies() {
         int count = rigidMap.size();
+        return count;
+    }
+
+    /**
+     * Count how many tick listeners are registered with this space.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countTickListeners() {
+        int count = tickListeners.size();
         return count;
     }
 
@@ -575,6 +608,19 @@ public class PhysicsSpace extends CollisionSpace {
         Validate.nonNull(listener, "listener");
 
         boolean success = contactProcessedListeners.remove(listener);
+        assert success;
+    }
+
+    /**
+     * De-register the specified tick listener.
+     *
+     * @see #addTickListener(com.jme3.bullet.PhysicsTickListener)
+     * @param listener the listener to de-register (not null, unaffected)
+     */
+    public void removeTickListener(PhysicsTickListener listener) {
+        Validate.nonNull(listener, "listener");
+
+        boolean success = tickListeners.remove(listener);
         assert success;
     }
 
@@ -987,6 +1033,9 @@ public class PhysicsSpace extends CollisionSpace {
      * @param timeStep the time per physics step (in seconds, &ge;0)
      */
     private void postTick_native(float timeStep) {
+        for (PhysicsTickListener listener : tickListeners) {
+            listener.physicsTick(this, timeStep);
+        }
     }
 
     /**
@@ -995,6 +1044,9 @@ public class PhysicsSpace extends CollisionSpace {
      * @param timeStep the time per physics step (in seconds, &ge;0)
      */
     private void preTick_native(float timeStep) {
+        for (PhysicsTickListener listener : tickListeners) {
+            listener.prePhysicsTick(this, timeStep);
+        }
     }
 
     /**
