@@ -1,5 +1,13 @@
 # Release log for the Libbulletjme project
 
+## Version 10.4.0 released on 9 June 2021
+
+ + Implemented tick listeners for the `PhysicsSpace` class.
+ + Distinguished ARM macOS/Windows from other platforms.
+ + Eliminated all build dependencies on JCenter.
+ + Upgraded the Bullet sources to match SHA1 ID=0e124cb2
+   of the bullet3 project.
+
 ## Version 10.3.1 released on 21 April 2021
 
  + Bugfix: `NullPointerException` in `Point2PointJoint.setPivotInB()`
