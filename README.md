@@ -51,7 +51,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:10.3.1'
+            compile 'com.github.stephengold:Libbulletjme:10.4.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
@@ -234,7 +234,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 10.3.1`
+     + `git checkout -b latest 10.4.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
