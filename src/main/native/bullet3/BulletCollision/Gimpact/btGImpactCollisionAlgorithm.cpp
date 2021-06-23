@@ -857,10 +857,12 @@ void btGImpactCollisionAlgorithm::registerAlgorithm(btCollisionDispatcher* dispa
 	for (i = 0; i < MAX_BROADPHASE_COLLISION_TYPES; i++)
 	{
 		dispatcher->registerCollisionCreateFunc(GIMPACT_SHAPE_PROXYTYPE, i, &s_gimpact_cf);
+		dispatcher->registerClosestPointsCreateFunc(GIMPACT_SHAPE_PROXYTYPE, i, &s_gimpact_cf); // stephengold added 2021-06-23
 	}
 
 	for (i = 0; i < MAX_BROADPHASE_COLLISION_TYPES; i++)
 	{
 		dispatcher->registerCollisionCreateFunc(i, GIMPACT_SHAPE_PROXYTYPE, &s_gimpact_cf);
+		dispatcher->registerClosestPointsCreateFunc(i, GIMPACT_SHAPE_PROXYTYPE, &s_gimpact_cf); // stephengold added 2021-06-23
 	}
 }
