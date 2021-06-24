@@ -199,6 +199,54 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
 }
 
 /*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    hasClosest
+ * Signature: (JII)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasClosest
+(JNIEnv *pEnv, jclass, jlong spaceId, jint shape0Type, jint shape1Type) {
+    const jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", JNI_FALSE);
+    const btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", JNI_FALSE);
+    const btCollisionDispatcher * const pDispatcher
+            = (const btCollisionDispatcher *) pWorld->getDispatcher();
+    NULL_CHK(pEnv, pDispatcher, "The dispatcher does not exist.", JNI_FALSE);
+    btAssert(shape0Type >= 0);
+    btAssert(shape0Type < MAX_BROADPHASE_COLLISION_TYPES);
+    btAssert(shape1Type >= 0);
+    btAssert(shape1Type < MAX_BROADPHASE_COLLISION_TYPES);
+
+    bool result = pDispatcher->hasClosestFunction(shape0Type, shape1Type);
+    return (jboolean) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    hasContact
+ * Signature: (JII)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasContact
+(JNIEnv *pEnv, jclass, jlong spaceId, jint shape0Type, jint shape1Type) {
+    const jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", JNI_FALSE);
+    const btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", JNI_FALSE);
+    const btCollisionDispatcher * const pDispatcher
+            = (const btCollisionDispatcher *) pWorld->getDispatcher();
+    NULL_CHK(pEnv, pDispatcher, "The dispatcher does not exist.", JNI_FALSE);
+    btAssert(shape0Type >= 0);
+    btAssert(shape0Type < MAX_BROADPHASE_COLLISION_TYPES);
+    btAssert(shape1Type >= 0);
+    btAssert(shape1Type < MAX_BROADPHASE_COLLISION_TYPES);
+
+    bool result = pDispatcher->hasContactFunction(shape0Type, shape1Type);
+    return (jboolean) result;
+}
+
+/*
  * Callback used in raycasts.
  */
 struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {

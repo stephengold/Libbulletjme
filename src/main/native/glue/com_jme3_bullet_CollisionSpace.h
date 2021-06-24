@@ -49,6 +49,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_getNumCollisionObject
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    hasClosest
+ * Signature: (JII)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasClosest
+  (JNIEnv *, jclass, jlong, jint, jint);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    hasContact
+ * Signature: (JII)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasContact
+  (JNIEnv *, jclass, jlong, jint, jint);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    rayTest_native
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
