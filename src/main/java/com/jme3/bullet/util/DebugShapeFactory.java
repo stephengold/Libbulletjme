@@ -287,14 +287,14 @@ public class DebugShapeFactory {
         /*
          * Generate vertex locations for a large square in the Y-Z plane.
          */
-        FloatBuffer result = BufferUtils.createFloatBuffer(new float[]{
-            0f, 0f, -1f,
-            0f, 1f, 0f,
-            0f, 0f, 1f,
-            0f, -1f, 0f,
-            0f, 0f, -1f,
-            0f, 0f, 1f
-        });
+        FloatBuffer result = BufferUtils.createFloatBuffer(
+                0f, 0f, -1f,
+                0f, 1f, 0f,
+                0f, 0f, 1f,
+                0f, -1f, 0f,
+                0f, 0f, -1f,
+                0f, 0f, 1f
+        );
         int numFloats = result.capacity();
         /*
          * Transform vertex locations to the surface of the shape.
@@ -322,12 +322,12 @@ public class DebugShapeFactory {
         /*
          * Generate vertex locations for a large square in the Y-Z plane.
          */
-        FloatBuffer result = BufferUtils.createFloatBuffer(new float[]{
-            0f, 0f, -1f,
-            0f, 1f, 0f,
-            0f, 0f, 1f,
-            0f, -1f, 0f
-        });
+        FloatBuffer result = BufferUtils.createFloatBuffer(
+                0f, 0f, -1f,
+                0f, 1f, 0f,
+                0f, 0f, 1f,
+                0f, -1f, 0f
+        );
         int numFloats = result.capacity();
         /*
          * Transform vertex locations to the surface of the shape.
