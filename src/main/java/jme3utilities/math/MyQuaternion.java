@@ -49,7 +49,7 @@ public class MyQuaternion {
     /**
      * array of cardinal axes
      */
-    final private static Vector3f cardinalAxes[] = {
+    final private static Vector3f[] cardinalAxes = {
         new Vector3f(1f, 0f, 0f),
         new Vector3f(0f, 1f, 0f),
         new Vector3f(0f, 0f, 1f),
