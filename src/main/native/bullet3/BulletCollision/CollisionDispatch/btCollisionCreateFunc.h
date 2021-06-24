@@ -39,5 +39,6 @@ struct btCollisionAlgorithmCreateFunc
 		(void)body1Wrap;
 		return 0;
 	}
+    virtual bool isNonEmpty() { return true; } // stephengold added 2021-06-23
 };
 #endif  //BT_COLLISION_CREATE_FUNC

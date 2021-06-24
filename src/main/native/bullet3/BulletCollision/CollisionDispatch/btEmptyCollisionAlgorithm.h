@@ -45,6 +45,7 @@ public:
 			void* mem = ci.m_dispatcher1->allocateCollisionAlgorithm(sizeof(btEmptyAlgorithm));
 			return new (mem) btEmptyAlgorithm(ci);
 		}
+        virtual bool isNonEmpty() {return false;} // stephengold added 2021-06-23
 	};
 
 } ATTRIBUTE_ALIGNED(16);
