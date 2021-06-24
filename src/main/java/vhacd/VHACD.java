@@ -47,7 +47,7 @@ public class VHACD {
      * list of registered progress listeners
      */
     final private static List<VHACDProgressListener> progressListeners
-            = new ArrayList<VHACDProgressListener>(4);
+            = new ArrayList<>(4);
     /**
      * list of hulls computed during the latest decomposition
      */
