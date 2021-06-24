@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 10.5.0 released on 23 June 2021
+
+ + Bugfix: GImpact contact tests always fail (issue #7).
+ + Added `hasClosest()` and `hasContact()` methods
+   to the `CollisionSpace` class.
+ + Added a public `getShapeType()` method to the `CollisionShape` class.
+
 ## Version 10.4.0 released on 9 June 2021
 
  + Implemented tick listeners for the `PhysicsSpace` class.

@@ -10,7 +10,7 @@ plugins {
 description = 'a JNI interface for Bullet Physics and V-HACD'
 ext {
     artifact = 'Libbulletjme'
-    version = '10.4.0'
+    version = '10.5.0'
     baseName = "${artifact}-${version}"
 }
 
