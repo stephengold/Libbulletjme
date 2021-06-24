@@ -49,8 +49,10 @@ import com.jme3.bullet.collision.shapes.ConeCollisionShape;
 import com.jme3.bullet.collision.shapes.Convex2dShape;
 import com.jme3.bullet.collision.shapes.CylinderCollisionShape;
 import com.jme3.bullet.collision.shapes.EmptyShape;
+import com.jme3.bullet.collision.shapes.GImpactCollisionShape;
 import com.jme3.bullet.collision.shapes.HeightfieldCollisionShape;
 import com.jme3.bullet.collision.shapes.HullCollisionShape;
+import com.jme3.bullet.collision.shapes.MeshCollisionShape;
 import com.jme3.bullet.collision.shapes.MultiSphere;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
@@ -1007,6 +1009,104 @@ public class TestLibbulletjme {
         rotMatrix = null;
         euler = null;
         System.gc();
+    }
+
+    /**
+     * Verify the dispatch matrix.
+     */
+    @Test
+    public void test012() {
+        loadNativeLibrary();
+
+        Vector3f min = new Vector3f(-10f, -10f, -10f);
+        Vector3f max = new Vector3f(10f, 10f, 10f);
+        CollisionSpace space = new CollisionSpace(min, max,
+                PhysicsSpace.BroadphaseType.DBVT);
+
+        CollisionShape box = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
+        CollisionShape compound = new CompoundCollisionShape();
+        CollisionShape gimpact = new GImpactCollisionShape();
+
+        float[] hf = new float[]{0f, 0f, 0f, 0f};
+        CollisionShape heightfield = new HeightfieldCollisionShape(hf);
+
+        int[] indexArray = new int[]{0, 0, 0};
+        Vector3f[] positionArray = new Vector3f[]{new Vector3f(0f, 0f, 0f)};
+        IndexedMesh indexedMesh = new IndexedMesh(positionArray, indexArray);
+        CollisionShape mesh = new MeshCollisionShape(true, indexedMesh);
+
+        Plane pl = new Plane(Vector3f.UNIT_Y, 0f);
+        CollisionShape plane = new PlaneCollisionShape(pl);
+
+        Assert.assertTrue(space.hasClosest(box, box));
+        Assert.assertTrue(space.hasClosest(box, compound));
+        Assert.assertTrue(space.hasClosest(box, gimpact));
+        Assert.assertTrue(space.hasClosest(box, heightfield));
+        Assert.assertTrue(space.hasClosest(box, mesh));
+        Assert.assertTrue(space.hasClosest(box, plane));
+
+        Assert.assertTrue(space.hasClosest(gimpact, box));
+        Assert.assertTrue(space.hasClosest(gimpact, compound));
+        Assert.assertTrue(space.hasClosest(gimpact, gimpact));
+        Assert.assertTrue(space.hasClosest(gimpact, heightfield));
+        Assert.assertTrue(space.hasClosest(gimpact, mesh));
+        Assert.assertTrue(space.hasClosest(gimpact, plane));
+
+        Assert.assertTrue(space.hasClosest(heightfield, box));
+        Assert.assertTrue(space.hasClosest(heightfield, compound));
+        Assert.assertTrue(space.hasClosest(heightfield, gimpact));
+        Assert.assertFalse(space.hasClosest(heightfield, heightfield));
+        Assert.assertFalse(space.hasClosest(heightfield, mesh));
+        Assert.assertFalse(space.hasClosest(heightfield, plane));
+
+        Assert.assertTrue(space.hasClosest(mesh, box));
+        Assert.assertTrue(space.hasClosest(mesh, compound));
+        Assert.assertTrue(space.hasClosest(mesh, gimpact));
+        Assert.assertFalse(space.hasClosest(mesh, heightfield));
+        Assert.assertFalse(space.hasClosest(mesh, mesh));
+        Assert.assertFalse(space.hasClosest(mesh, plane));
+
+        Assert.assertTrue(space.hasClosest(plane, box));
+        Assert.assertTrue(space.hasClosest(plane, compound));
+        Assert.assertTrue(space.hasClosest(plane, gimpact));
+        Assert.assertFalse(space.hasClosest(plane, heightfield));
+        Assert.assertFalse(space.hasClosest(plane, mesh));
+        Assert.assertFalse(space.hasClosest(plane, plane));
+
+        Assert.assertTrue(space.hasContact(box, box));
+        Assert.assertTrue(space.hasContact(box, compound));
+        Assert.assertTrue(space.hasContact(box, gimpact));
+        Assert.assertTrue(space.hasContact(box, heightfield));
+        Assert.assertTrue(space.hasContact(box, mesh));
+        Assert.assertTrue(space.hasContact(box, plane));
+
+        Assert.assertTrue(space.hasContact(gimpact, box));
+        Assert.assertTrue(space.hasContact(gimpact, compound));
+        Assert.assertTrue(space.hasContact(gimpact, gimpact));
+        Assert.assertTrue(space.hasContact(gimpact, heightfield));
+        Assert.assertTrue(space.hasContact(gimpact, mesh));
+        Assert.assertTrue(space.hasContact(gimpact, plane));
+
+        Assert.assertTrue(space.hasContact(heightfield, box));
+        Assert.assertTrue(space.hasContact(heightfield, compound));
+        Assert.assertTrue(space.hasContact(heightfield, gimpact));
+        Assert.assertFalse(space.hasContact(heightfield, heightfield));
+        Assert.assertFalse(space.hasContact(heightfield, mesh));
+        Assert.assertFalse(space.hasContact(heightfield, plane));
+
+        Assert.assertTrue(space.hasContact(mesh, box));
+        Assert.assertTrue(space.hasContact(mesh, compound));
+        Assert.assertTrue(space.hasContact(mesh, gimpact));
+        Assert.assertFalse(space.hasContact(mesh, heightfield));
+        Assert.assertFalse(space.hasContact(mesh, mesh));
+        Assert.assertFalse(space.hasContact(mesh, plane));
+
+        Assert.assertTrue(space.hasContact(plane, box));
+        Assert.assertTrue(space.hasContact(plane, compound));
+        Assert.assertTrue(space.hasContact(plane, gimpact));
+        Assert.assertFalse(space.hasContact(plane, heightfield));
+        Assert.assertFalse(space.hasContact(plane, mesh));
+        Assert.assertFalse(space.hasContact(plane, plane));
     }
     // *************************************************************************
     // private methods
