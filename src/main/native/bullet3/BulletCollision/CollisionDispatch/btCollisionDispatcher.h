@@ -116,6 +116,14 @@ public:
 	virtual void clearManifold(btPersistentManifold* manifold);
 
 	btCollisionAlgorithm* findAlgorithm(const btCollisionObjectWrapper* body0Wrap, const btCollisionObjectWrapper* body1Wrap, btPersistentManifold* sharedManifold, ebtDispatcherQueryType queryType);
+    bool hasClosestFunction(int type0, int type1) const { // stephengold added 2021-06-23
+        btCollisionAlgorithmCreateFunc* pFunc = m_doubleDispatchClosestPoints[type0][type1]; // stephengold added 2021-06-23
+        return pFunc->isNonEmpty(); // stephengold added 2021-06-23
+    } // stephengold added 2021-06-23
+    bool hasContactFunction(int type0, int type1) const { // stephengold added 2021-06-23
+        btCollisionAlgorithmCreateFunc* pFunc = m_doubleDispatchContactPoints[type0][type1]; // stephengold added 2021-06-23
+        return pFunc->isNonEmpty(); // stephengold added 2021-06-23
+    } // stephengold added 2021-06-23
 
 	virtual bool needsCollision(const btCollisionObject* body0, const btCollisionObject* body1);
 
