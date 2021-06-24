@@ -217,6 +217,7 @@ public class HelloVehicle {
             System.out.println(location);
         }
     }
+}
 ```
 
 
@@ -352,7 +353,7 @@ V-HACD C++ type:    corresponding Java class:
 ================    =========================
 IVHACD              vhacd.VHACD
 IVHACD::ConvexHull  vhacd.VHACDHull
-IVHACD::Parameters  vhacd.VHACDParamters
+IVHACD::Parameters  vhacd.VHACDParameters
 </pre>
 
 

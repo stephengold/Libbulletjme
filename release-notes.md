@@ -540,7 +540,7 @@ Added V-HACD sources from March 2016 (SHA1 ID=ded1fe4) plus new JNI glue code.
 
 ## Version 2.0.20 released on 10 January 2020
 
- + Fixed a `btAssert()` that occured (in Debug builds) while rescaling
+ + Fixed a `btAssert()` that occurred (in Debug builds) while rescaling
    a rigid body with a `MeshCollisionShape`.
  + Upgraded the Bullet sources to match version 2.89 (SHA1 ID=830f0a956)
    of the bullet3 project.

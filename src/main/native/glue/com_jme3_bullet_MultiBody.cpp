@@ -126,7 +126,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
         jobject inertiaVector, jboolean fixedBase, jboolean canSleep) {
     jmeClasses::initJavaClasses(pEnv);
 
-    NULL_CHK(pEnv, inertiaVector, "The intertia vector does not exist.", 0)
+    NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.", 0)
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 

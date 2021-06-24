@@ -63,7 +63,7 @@ public class MultiBodyLink extends NativePhysicsObject {
      */
     final private int linkIndex;
     /**
-     * copy of the number of degress of freedom in this link's joint
+     * copy of the number of degrees of freedom in this link's joint
      */
     final private int numDofs;
     /**
@@ -485,7 +485,7 @@ public class MultiBodyLink extends NativePhysicsObject {
      * Determine the orientation of the link relative to its parent when Q=0.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return the orientation (either storeResult or a new Quaterion)
+     * @return the orientation (either storeResult or a new Quaternion)
      */
     public Quaternion orientation(Quaternion storeResult) {
         Quaternion result
@@ -595,7 +595,7 @@ public class MultiBodyLink extends NativePhysicsObject {
     native private static void addConstraintForce(long linkId,
             Vector3f forceVector);
 
-    native private static void addContraintTorque(long linkId,
+    native private static void addContraintTorque(long linkId, // TODO rename
             Vector3f torqueVector);
 
     native private static void addForce(long linkId, Vector3f forceVector);

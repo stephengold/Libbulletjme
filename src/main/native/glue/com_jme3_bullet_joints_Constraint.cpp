@@ -187,8 +187,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
     btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
     btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
 
-    int overideNumIterations = numIterations;
-    pConstraint->setOverrideNumSolverIterations(overideNumIterations);
+    int overrideNumIterations = numIterations;
+    pConstraint->setOverrideNumSolverIterations(overrideNumIterations);
 }
 
 /*
