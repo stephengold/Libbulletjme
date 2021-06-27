@@ -32,8 +32,7 @@
 package com.jme3.bullet.collision;
 
 /**
- * Interface to receive notifications whenever an object in a particular physics
- * space collides.
+ * Interface to receive notifications when 2 collision objects collide.
  *
  * @author normenhansen
  */
