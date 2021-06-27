@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -81,6 +81,10 @@ struct JmeContactResultCallback
     btScalar addSingleResult(btManifoldPoint& manifoldPoint,
             const btCollisionObjectWrapper* pWrap0, int part0, int tri0,
             const btCollisionObjectWrapper* pWrap1, int part1, int tri1) {
+
+        if (manifoldPoint.getDistance() > 0) { // no penetration, so ignore it
+            return (btScalar) 1;
+        }
 
         const btCollisionObject * const pColObj0 = pWrap0->m_collisionObject;
         jmeUserPointer pUser0 = (jmeUserPointer) pColObj0->getUserPointer();
