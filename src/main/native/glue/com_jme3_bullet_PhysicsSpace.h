@@ -56,10 +56,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    createPhysicsSpace
- * Signature: (FFFFFFI)J
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;II)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
-  (JNIEnv *, jobject, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jint);
+  (JNIEnv *, jobject, jobject, jobject, jint, jint);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

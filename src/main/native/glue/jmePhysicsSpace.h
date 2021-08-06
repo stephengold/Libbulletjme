@@ -62,9 +62,21 @@ public:
     static void
     contactStartedCallback(btPersistentManifold * const &);
 
+    /*
+     * configuration:
+     */
     void
-    createPhysicsSpace(const btVector3& min, const btVector3& max, int ordinal);
+#if BT_THREADSAFE
+    createMultiThreadedSpace(const btVector3& min, const btVector3& max,
+            int broadphaseType, int numSolvers);
+#else
+    createPhysicsSpace(const btVector3& min, const btVector3& max,
+            int broadphaseType);
+#endif // BT_THREADSAFE
 
+    /*
+     * getters:
+     */
     const btDiscreteDynamicsWorld *
     getDynamicsWorld() const {
         return (btDiscreteDynamicsWorld *) m_collisionWorld;

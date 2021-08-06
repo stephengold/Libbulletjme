@@ -186,8 +186,8 @@ public class PhysicsSpace extends CollisionSpace {
     // constructors
 
     /**
-     * Instantiate a PhysicsSpace with the specified broadphase accelerator.
-     * Must be invoked on the designated physics thread.
+     * Instantiate a PhysicsSpace with a single sequential-impulse solver. Must
+     * be invoked on the designated physics thread.
      *
      * @param broadphaseType which broadphase accelerator to use (not null)
      */
@@ -197,8 +197,9 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Instantiate a PhysicsSpace with an AXIS_SWEEP_3 broadphase accelerator.
-     * Must be invoked on the designated physics thread.
+     * Instantiate a PhysicsSpace with an AXIS_SWEEP_3 broadphase accelerator
+     * and a single sequential-impulse solver. Must be invoked on the designated
+     * physics thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected)
@@ -210,8 +211,8 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Instantiate a PhysicsSpace. Must be invoked on the designated physics
-     * thread.
+     * Instantiate a PhysicsSpace with a single sequential-impulse solver. Must
+     * be invoked on the designated physics thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected, default=(-10k,-10k,-10k))
@@ -225,15 +226,33 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Instantiate a PhysicsSpace. Must be invoked on the designated physics
+     * Instantiate a PhysicsSpace with the specified number of
+     * sequential-impulse solvers. Must be invoked on the designated physics
      * thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
-     * unaffected, default=-10k,-10k,-10k)
+     * unaffected, default=(-10k,-10k,-10k))
      * @param worldMax the desired maximum coordinate values (not null,
-     * unaffected, default=10k,10k,10k)
+     * unaffected, default=(10k,10k,10k))
      * @param broadphaseType which broadphase accelerator to use (not null)
-     * @param solverType the desired constraint solver (not null)
+     * @param numSolvers the desired number of solvers in the thread-safe pool
+     * (&ge;1, &le;64, default=1)
+     */
+    public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
+            BroadphaseType broadphaseType, int numSolvers) {
+        super(worldMin, worldMax, broadphaseType, numSolvers);
+    }
+
+    /**
+     * Instantiate a PhysicsSpace the specified contact-and-constraint solver.
+     * Must be invoked on the designated physics thread.
+     *
+     * @param worldMin the desired minimum coordinate values (not null,
+     * unaffected, default=(-10k,-10k,-10k))
+     * @param worldMax the desired maximum coordinate values (not null,
+     * unaffected, default=(10k,10k,10k))
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     * @param solverType the desired contact-and-constraint solver (not null)
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType, SolverType solverType) {
@@ -834,8 +853,9 @@ public class PhysicsSpace extends CollisionSpace {
         int broadphase = getBroadphaseType().ordinal();
         Vector3f max = getWorldMax(null);
         Vector3f min = getWorldMin(null);
-        long nativeId = createPhysicsSpace(min.x, min.y, min.z,
-                max.x, max.y, max.z, broadphase);
+        int numSolvers = countSolvers();
+        long nativeId
+                = createPhysicsSpace(min, max, broadphase, numSolvers);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId) == 2 // BT_DISCRETE_DYNAMICS_WORLD
@@ -1118,8 +1138,8 @@ public class PhysicsSpace extends CollisionSpace {
     native private static void addRigidBody(long spaceId, long rigidBodyId,
             int proxyGroup, int proxyMask);
 
-    native private long createPhysicsSpace(float minX, float minY, float minZ,
-            float maxX, float maxY, float maxZ, int broadphaseType);
+    native private long createPhysicsSpace(Vector3f minVector,
+            Vector3f maxVector, int broadphaseType, int numSolvers);
 
     native private static void getGravity(long spaceId, Vector3f storeVector);
 

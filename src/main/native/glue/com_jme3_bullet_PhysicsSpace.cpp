@@ -160,18 +160,32 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    createPhysicsSpace
- * Signature: (FFFFFFI)J
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;II)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
-(JNIEnv *pEnv, jobject object, jfloat minX, jfloat minY, jfloat minZ,
-        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase) {
+(JNIEnv *pEnv, jobject object, jobject minVector, jobject maxVector,
+        jint broadphaseType, jint numSolvers) {
     jmeClasses::initJavaClasses(pEnv);
+
+    NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
+    btVector3 min;
+    jmeBulletUtil::convert(pEnv, minVector, &min);
+
+    NULL_CHK(pEnv, maxVector, "The max vector does not exist.", 0)
+    btVector3 max;
+    jmeBulletUtil::convert(pEnv, maxVector, &max);
 
     jmePhysicsSpace * const
             pSpace = new jmePhysicsSpace(pEnv, object); //dance003
-    btVector3 min(minX, minY, minZ);
-    btVector3 max(maxX, maxY, maxZ);
-    pSpace->createPhysicsSpace(min, max, (int) broadphase);
+#if BT_THREADSAFE
+    btAssert(numSolvers >= 1);
+    btAssert(numSolvers <= BT_MAX_THREAD_COUNT);
+    pSpace->createMultiThreadedSpace(min, max, (int) broadphaseType,
+            (int) numSolvers);
+#else
+    btAssert(numSolvers == 1);
+    pSpace->createPhysicsSpace(min, max, (int) broadphaseType);
+#endif // BT_THREADSAFE
 
     return reinterpret_cast<jlong> (pSpace);
 }

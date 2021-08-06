@@ -29,6 +29,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
 #include "jmePhysicsSpace.h"
 #include "jmeBulletUtil.h"
 #include "jmeUserInfo.h"
@@ -36,8 +37,41 @@
 /*
  * Author: Normen Hansen
  */
+
+#if BT_THREADSAFE
+
+void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
+        const btVector3& max, int broadphaseType, int numSolvers) {
+    // Create the pair cache for broadphase collision detection.
+    btBroadphaseInterface * const
+            pBroadphase = createBroadphase(min, max, broadphaseType);
+
+    // Use the default collision dispatcher plus GImpact.
+    btCollisionConfiguration * const
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(); //dance010
+    btCollisionDispatcher * const
+            pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
+    btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
+
+    // For now, use sequential-impulse solvers.
+    btConstraintSolver * const
+            pConstraintSolver = new btSequentialImpulseConstraintSolver(); //dance006
+
+    btConstraintSolverPoolMt * const
+            pSolverPool = new btConstraintSolverPoolMt(numSolvers); // TODO leak
+
+    // Create the multithreaded dynamics world.
+    m_collisionWorld = new btDiscreteDynamicsWorldMt(pDispatcher, pBroadphase,
+            pSolverPool, pConstraintSolver, pCollisionConfiguration); //dance007
+
+    modify(); // Make the standard modifications.
+}
+
+#else
+
 void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
         const btVector3& max, int broadphaseId) {
+    // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseId);
 
@@ -58,6 +92,8 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 
     modify(); // Make the standard modifications.
 }
+
+#endif // BT_THREADSAFE
 
 bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
         void* pBody0, void* pBody1) {
