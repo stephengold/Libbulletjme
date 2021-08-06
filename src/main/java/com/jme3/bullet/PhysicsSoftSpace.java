@@ -199,6 +199,9 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      */
     @Override
     protected void create() {
+        int numSolvers = countSolvers();
+        assert numSolvers == 1 : numSolvers;
+
         int broadphase = getBroadphaseType().ordinal();
         Vector3f max = getWorldMax(null);
         Vector3f min = getWorldMin(null);
