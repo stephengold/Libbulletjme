@@ -199,8 +199,10 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      */
     @Override
     protected void create() {
-        long nativeId = createPhysicsSoftSpace(getWorldMin(null),
-                getWorldMax(null), getBroadphaseType().ordinal(), false);
+        int broadphase = getBroadphaseType().ordinal();
+        Vector3f max = getWorldMax(null);
+        Vector3f min = getWorldMin(null);
+        long nativeId = createPhysicsSoftSpace(min, max, broadphase, false);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId) == 4 // BT_SOFT_RIGID_DYNAMICS_WORLD

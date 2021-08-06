@@ -243,8 +243,9 @@ public class MultiBodySpace extends PhysicsSpace {
     @Override
     protected void create() {
         int broadphase = getBroadphaseType().ordinal();
-        long nativeId = createMultiBodySpace(getWorldMin(null),
-                getWorldMax(null), broadphase);
+        Vector3f max = getWorldMax(null);
+        Vector3f min = getWorldMin(null);
+        long nativeId = createMultiBodySpace(min, max, broadphase);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId) == 2 // BT_DISCRETE_DYNAMICS_WORLD (!)

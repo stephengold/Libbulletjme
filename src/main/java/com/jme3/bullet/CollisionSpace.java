@@ -528,8 +528,9 @@ public class CollisionSpace extends NativePhysicsObject {
      * Must be invoked on the designated physics thread.
      */
     protected void create() {
+        int broadphase = getBroadphaseType().ordinal();
         long spaceId = createCollisionSpace(worldMin.x, worldMin.y, worldMin.z,
-                worldMax.x, worldMax.y, worldMax.z, broadphaseType.ordinal());
+                worldMax.x, worldMax.y, worldMax.z, broadphase);
         assert spaceId != 0L;
 
         initThread(spaceId);

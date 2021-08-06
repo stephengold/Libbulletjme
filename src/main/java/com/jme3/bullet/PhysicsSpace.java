@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -831,16 +831,16 @@ public class PhysicsSpace extends CollisionSpace {
      */
     @Override
     protected void create() {
-        BroadphaseType type = super.getBroadphaseType();
-        Vector3f max = super.getWorldMax(null);
-        Vector3f min = super.getWorldMin(null);
-        long spaceId = createPhysicsSpace(min.x, min.y, min.z,
-                max.x, max.y, max.z, type.ordinal());
-        assert spaceId != 0L;
+        int broadphase = getBroadphaseType().ordinal();
+        Vector3f max = getWorldMax(null);
+        Vector3f min = getWorldMin(null);
+        long nativeId = createPhysicsSpace(min.x, min.y, min.z,
+                max.x, max.y, max.z, broadphase);
+        assert nativeId != 0L;
 
-        assert getWorldType(spaceId) == 2 // BT_DISCRETE_DYNAMICS_WORLD
-                : getWorldType(spaceId);
-        initThread(spaceId);
+        assert getWorldType(nativeId) == 2 // BT_DISCRETE_DYNAMICS_WORLD
+                : getWorldType(nativeId);
+        initThread(nativeId);
         initSolverInfo();
         logger.log(Level.FINE, "Created {0}.", this);
     }
