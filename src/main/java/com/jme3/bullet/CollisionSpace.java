@@ -123,8 +123,7 @@ public class CollisionSpace extends NativePhysicsObject {
      * unaffected, default=(-10k,-10k,-10k))
      * @param worldMax the desired maximum coordinate values (not null,
      * unaffected, default=(10k,10k,10k))
-     * @param broadphaseType which broadphase collision-detection algorithm to
-     * use (not null)
+     * @param broadphaseType which broadphase accelerator to use (not null)
      */
     public CollisionSpace(Vector3f worldMin, Vector3f worldMax,
             PhysicsSpace.BroadphaseType broadphaseType) {
