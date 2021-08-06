@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,28 @@
  */
 #include "com_jme3_bullet_util_NativeLibrary.h"
 #include "jmeClasses.h"
-#include "btAlignedAllocator.h"
+#include "LinearMath/btAlignedAllocator.h"
+#include "LinearMath/btThreads.h"
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    countThreads
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_countThreads
+(JNIEnv *pEnv, jclass) {
+    int numThreads;
+
+#if BT_THREADSAFE
+    jmeClasses::initJavaClasses(pEnv);
+    btITaskScheduler *pScheduler = btGetTaskScheduler();
+    numThreads = pScheduler->getNumThreads();
+#else
+    numThreads = 1;
+#endif // BT_THREADSAFE
+
+    return jint(numThreads);
+}
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
@@ -103,6 +124,20 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
 #else
     return JNI_FALSE;
 #endif //BT_USE_DOUBLE_PRECISION
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    isThreadSafe
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
+(JNIEnv *, jclass) {
+#if BT_THREADSAFE
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif // BT_THREADSAFE
 }
 
 /*
