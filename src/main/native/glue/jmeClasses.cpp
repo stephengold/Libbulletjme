@@ -31,6 +31,7 @@
  */
 #include "jmeClasses.h"
 #include <stdio.h>
+#include "LinearMath/btThreads.h"
 
 /*
  * Author: Normen Hansen, Empire Phoenix, Lutherion
@@ -149,9 +150,19 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 #ifdef BT_USE_DOUBLE_PRECISION
         printf("Dp_");
 #endif
+#if BT_THREADSAFE
+        printf("Mt_");
+#endif
         printf("Libbulletjme version %s initializing\n", LIBBULLETJME_VERSION);
         fflush(stdout);
     }
+
+#if BT_THREADSAFE
+    btITaskScheduler* pScheduler = btGetOpenMPTaskScheduler();
+    int maxThreads = pScheduler->getMaxNumThreads();
+    pScheduler->setNumThreads(maxThreads);
+    btSetTaskScheduler(pScheduler);
+#endif // BT_THREADSAFE
 
     pEnv->GetJavaVM(&vm);
 
