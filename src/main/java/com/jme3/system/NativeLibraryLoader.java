@@ -60,8 +60,9 @@ public final class NativeLibraryLoader {
      */
     public static boolean loadLibbulletjme(boolean dist, File directory,
             String buildType, String flavor) {
-        assert buildType.equals("Debug") || buildType.equals("Release");
-        assert flavor.equals("Sp") || flavor.equals("Dp");
+        assert buildType.equals("Debug") || buildType.equals("Release") :
+                buildType;
+        assert flavor.equals("Sp") || flavor.equals("Dp") : flavor;
 
         Platform platform = JmeSystem.getPlatform();
 
@@ -69,16 +70,21 @@ public final class NativeLibraryLoader {
         switch (platform) {
             case Windows32:
             case Windows64:
+            case Windows_ARM32:
+            case Windows_ARM64:
                 name = "bulletjme.dll";
                 break;
-            case Linux_ARM32:
-            case Linux_ARM64:
+            case Android_ARM7:
+            case Android_ARM8:
             case Linux32:
             case Linux64:
+            case Linux_ARM32:
+            case Linux_ARM64:
                 name = "libbulletjme.so";
                 break;
             case MacOSX32:
             case MacOSX64:
+            case MacOSX_ARM64:
                 name = "libbulletjme.dylib";
                 break;
             default:
