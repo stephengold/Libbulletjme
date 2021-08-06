@@ -32,9 +32,9 @@
 package com.jme3.system;
 
 import java.io.File;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.MyString;
 
 /**
  * Utility class to load native libraries.
@@ -91,7 +91,7 @@ public final class NativeLibraryLoader {
             file = directory;
 
         } else {
-            String subdirectory = firstToLower(platform.toString());
+            String subdirectory = MyString.firstToLower(platform.toString());
             file = new File(directory, subdirectory);
 
             String bt = buildType.toLowerCase();
@@ -114,23 +114,5 @@ public final class NativeLibraryLoader {
         }
 
         return success;
-    }
-
-    /**
-     * Convert the first character of the specified String to lower case.
-     *
-     * @param input the input string (not null)
-     * @return the converted String (not null)
-     */
-    private static String firstToLower(String input) {
-        String result = input;
-        if (!input.isEmpty()) {
-            String first = input.substring(0, 1);
-            first = first.toLowerCase(Locale.ROOT);
-            String rest = input.substring(1);
-            result = first + rest;
-        }
-
-        return result;
     }
 }
