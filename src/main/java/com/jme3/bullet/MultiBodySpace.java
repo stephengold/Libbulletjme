@@ -69,8 +69,8 @@ public class MultiBodySpace extends PhysicsSpace {
     // constructors
 
     /**
-     * Instantiate a MultiBodySpace. Must be invoked on the designated physics
-     * thread.
+     * Instantiate a MultiBodySpace with a sequential-impulse solver. Must be
+     * invoked on the designated physics thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected, default=(-10k,-10k,-10k))
@@ -80,12 +80,12 @@ public class MultiBodySpace extends PhysicsSpace {
      */
     public MultiBodySpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
-        super(worldMin, worldMax, broadphaseType);
+        super(worldMin, worldMax, broadphaseType, 1);
     }
 
     /**
-     * Instantiate a MultiBodySpace. Must be invoked on the designated physics
-     * thread.
+     * Instantiate a MultiBodySpace with the specified contact-and-constraint
+     * solver. Must be invoked on the designated physics thread.
      *
      * @param worldMin the desired minimum coordinate value for each axis (not
      * null, unaffected, default=(-10k,-10k,-10k))

@@ -73,8 +73,8 @@ public class PhysicsSoftSpace extends PhysicsSpace {
     // constructors
 
     /**
-     * Instantiate a PhysicsSoftSpace. Must be invoked on the designated physics
-     * thread.
+     * Instantiate a PhysicsSoftSpace with a sequential-impulse solver. Must be
+     * invoked on the designated physics thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected, default=(-10k,-10k,-10k))
@@ -84,7 +84,7 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      */
     public PhysicsSoftSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
-        super(worldMin, worldMax, broadphaseType);
+        super(worldMin, worldMax, broadphaseType, 1);
 
         long spaceId = super.nativeId();
         long worldInfoId = getWorldInfo(spaceId);

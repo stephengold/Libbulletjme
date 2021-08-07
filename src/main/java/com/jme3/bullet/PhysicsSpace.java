@@ -40,6 +40,7 @@ import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsVehicle;
+import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Vector3f;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -186,8 +187,8 @@ public class PhysicsSpace extends CollisionSpace {
     // constructors
 
     /**
-     * Instantiate a PhysicsSpace with a single sequential-impulse solver. Must
-     * be invoked on the designated physics thread.
+     * Instantiate a PhysicsSpace with sequential-impulse solvers. Must be
+     * invoked on the designated physics thread.
      *
      * @param broadphaseType which broadphase accelerator to use (not null)
      */
@@ -198,8 +199,8 @@ public class PhysicsSpace extends CollisionSpace {
 
     /**
      * Instantiate a PhysicsSpace with an AXIS_SWEEP_3 broadphase accelerator
-     * and a single sequential-impulse solver. Must be invoked on the designated
-     * physics thread.
+     * and sequential-impulse solvers. Must be invoked on the designated physics
+     * thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected)
@@ -211,8 +212,8 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Instantiate a PhysicsSpace with a single sequential-impulse solver. Must
-     * be invoked on the designated physics thread.
+     * Instantiate a PhysicsSpace with sequential-impulse solvers. Must be
+     * invoked on the designated physics thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected, default=(-10k,-10k,-10k))
@@ -222,7 +223,7 @@ public class PhysicsSpace extends CollisionSpace {
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
-        super(worldMin, worldMax, broadphaseType);
+        super(worldMin, worldMax, broadphaseType, NativeLibrary.countThreads());
     }
 
     /**
@@ -236,7 +237,7 @@ public class PhysicsSpace extends CollisionSpace {
      * unaffected, default=(10k,10k,10k))
      * @param broadphaseType which broadphase accelerator to use (not null)
      * @param numSolvers the desired number of solvers in the thread-safe pool
-     * (&ge;1, &le;64, default=1)
+     * (&ge;1, &le;64, default=numThreads)
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType, int numSolvers) {
@@ -244,8 +245,8 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Instantiate a PhysicsSpace the specified contact-and-constraint solver.
-     * Must be invoked on the designated physics thread.
+     * Instantiate a PhysicsSpace with the specified contact-and-constraint
+     * solver. Must be invoked on the designated physics thread.
      *
      * @param worldMin the desired minimum coordinate values (not null,
      * unaffected, default=(-10k,-10k,-10k))
