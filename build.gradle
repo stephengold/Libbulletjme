@@ -36,8 +36,10 @@ model {
     }
 
     flavors {
-        Sp // single-precision arithmetic
-        Dp // double-precision arithmetic
+        Sp   // single-precision arithmetic
+        SpMt // thread-safe, single-precision arithmetic
+        Dp   // double-precision arithmetic
+        DpMt // thread-safe, double-precision arithmetic
     }
 
     platforms {
@@ -159,25 +161,32 @@ model {
                     //buildable = targetPlatform.name.equals('Linux64')
                 }
 
-                if (buildType == buildTypes.Debug) {
-                    cppCompiler.define '_DEBUG'
-
-                    //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
-                    //cppCompiler.define 'DEBUG_PERSISTENCY'
-                }
-
-                // Decide whether to build the current flavor:
-                if (buildable && gradle.rootProject.hasProperty('flavor')) {
-                    // -Pflavor= specified on the command line
-                    String flavorArg = gradle.rootProject.ext.flavor
-                    buildable = flavor.name.equals(flavorArg)
-                }
-                if (flavor == flavors.Dp) {
-                    cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
-                    //buildable = false
+                if (buildable) {
+                    // Decide whether to build the current flavor:
+                    if (gradle.rootProject.hasProperty('flavor')) {
+                        // -Pflavor= specified on the command line
+                        String flavorArg = gradle.rootProject.ext.flavor
+                        buildable = flavor.name.equals(flavorArg)
+                    } else if (flavor == flavors.SpMt) {
+                        buildable = targetPlatform.name.contains('64')
+                    } else if (flavor == flavors.DpMt) {
+                        buildable = false
+                    }
                 }
 
                 cppCompiler.define 'BT_NO_PROFILE'
+                if (buildType == buildTypes.Debug) {
+                    cppCompiler.define '_DEBUG'
+                    //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
+                    //cppCompiler.define 'DEBUG_PERSISTENCY'
+                }
+                if (flavor == flavors.Dp || flavor == flavors.DpMt) {
+                    cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
+                }
+                if (flavor == flavors.SpMt || flavor == flavors.DpMt) {
+                    cppCompiler.define 'BT_THREADSAFE'
+                    cppCompiler.define 'BT_USE_OPENMP'
+                }
 
                 String q = targetPlatform.name + buildType.name + flavor.name
                 if (toolChain in VisualCpp) {
@@ -224,6 +233,9 @@ model {
                         cppCompiler.args '-O0', '-g3'
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-O3'
+                    }
+                    if (flavor == flavors.SpMt || flavor == flavors.DpMt) {
+                        linker.args '-lgomp'
                     }
 
                     String os = targetPlatform.operatingSystem.name
