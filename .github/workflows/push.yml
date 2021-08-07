@@ -15,7 +15,7 @@ jobs:
           java-version: 8
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 8
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt
         shell: bash
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
@@ -70,7 +70,7 @@ jobs:
           java-version: 15
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt
       - if: failure()
         uses: actions/upload-artifact@v2
         with:
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 15
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=xcode11
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=xcode11
       - if: failure()
         uses: actions/upload-artifact@v2
         with:
@@ -100,7 +100,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 15
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt
         shell: bash
       - if: failure()
         uses: actions/upload-artifact@v2
