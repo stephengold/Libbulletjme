@@ -135,27 +135,27 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
-                // Decide whether to build the target platform:
+                // Decide whether to build for the target platform:
                 if (gradle.rootProject.hasProperty('github')) {
                     // -Pgithub= specified on the command line
                     String github = gradle.rootProject.ext.github
                     if (github.equals('xcode11')) {
-                        buildable = targetPlatform.name.equals('MacOSX64')
+                        buildable = (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
                     }
                 } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
                     String travis = gradle.rootProject.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
                         buildable = (flavor == flavors.Sp || flavor == flavors.Dp) && !targetPlatform.name.startsWith('Linux_ARM')
-                    } else if (travis.equals('amd64mt')) {
-                        buildable = flavor == flavors.SpMt && targetPlatform.name.equals('Linux64')
+                    } else if (travis.equals('amd64mt')) { // using g++-5 for SpMt flavor
+                        buildable = (flavor == flavors.SpMt) && targetPlatform.name.equals('Linux64')
                     } else if (travis.equals('arm32')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32')
                     } else if (travis.equals('arm32hf')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32hf')
                     } else if (travis.equals('arm64')) {
                         buildable = targetPlatform.name.equals('Linux_ARM64')
-                    } else if (travis.equals('osx')) {
+                    } else if (travis.equals('osx')) { // using xcode9.3 for 32-bit support
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }
                 } else { // neither -Pgithub= nor -Ptravis= specified
@@ -170,7 +170,7 @@ model {
                         String flavorArg = gradle.rootProject.ext.flavor
                         buildable = flavor.name.equals(flavorArg)
                     } else if (flavor == flavors.SpMt) {
-                        buildable = targetPlatform.name.contains('64')
+                        buildable = targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('MacOSX')
                     } else if (flavor == flavors.DpMt) {
                         buildable = false
                     }
