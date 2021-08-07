@@ -139,8 +139,8 @@ model {
                 if (gradle.rootProject.hasProperty('github')) {
                     // -Pgithub= specified on the command line
                     String github = gradle.rootProject.ext.github
-                    if (github.equals('xcode11')) {
-                        buildable = (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
+                    if (github.equals('xcode11')) { // typically Xcode_12.4
+                        buildable = (buildType == buildTypes.Debug) && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
                     }
                 } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
@@ -243,7 +243,6 @@ model {
                     String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
-                        cppCompiler.args '-I', '/usr/local/opt/llvm/lib/clang/9.1.0/include'
                     } else if (os == 'linux') {
                         cppCompiler.args '-I', "$javaHome/include/linux"
                         cppCompiler.args '-fPIC'
