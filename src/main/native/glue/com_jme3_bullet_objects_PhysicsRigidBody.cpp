@@ -570,14 +570,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinemati
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
     btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    btAssert(!pBody->isStaticObject());
 
     int flags = pBody->getCollisionFlags();
-    int bitmask = btCollisionObject::CF_KINEMATIC_OBJECT;
-    if (value) {
-        pBody->setCollisionFlags(flags | bitmask);
+    bool oldValue = pBody->isKinematicObject();
+
+    if (value && !oldValue) { // dynamic -> kinematic
+        flags = flags | btCollisionObject::CF_KINEMATIC_OBJECT;
+        pBody->setCollisionFlags(flags);
         pBody->setActivationState(DISABLE_DEACTIVATION);
-    } else {
-        pBody->setCollisionFlags(flags & ~bitmask);
+
+    } else if (oldValue && !value) { // kinematic -> dynamic
+        flags = flags & ~btCollisionObject::CF_KINEMATIC_OBJECT;
+        pBody->setCollisionFlags(flags);
         pBody->activate(true);
         pBody->forceActivationState(ACTIVE_TAG);
     }
