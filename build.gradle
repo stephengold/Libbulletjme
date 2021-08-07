@@ -145,8 +145,10 @@ model {
                 } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
                     String travis = gradle.rootProject.ext.travis
-                    if (travis.equals('amd64')) {
-                        buildable = !targetPlatform.name.startsWith('Linux_ARM')
+                    if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
+                        buildable = (flavor == flavors.Sp || flavor == flavors.Dp) && !targetPlatform.name.startsWith('Linux_ARM')
+                    } else if (travis.equals('amd64mt')) {
+                        buildable = flavor == flavors.SpMt && targetPlatform.name.equals('Linux64')
                     } else if (travis.equals('arm32')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32')
                     } else if (travis.equals('arm32hf')) {
@@ -228,7 +230,7 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
-                    cppCompiler.args '-std=c++11'
+                    cppCompiler.args '-std=c++11' // ignored by g++-4.7
                     if (buildType == buildTypes.Debug) {
                         cppCompiler.args '-O0', '-g3'
                     } else if (buildType == buildTypes.Release) {

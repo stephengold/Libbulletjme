@@ -23,6 +23,10 @@ jobs:
         - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
+    - compiler: gcc-5
+      script:
+        - g++ --version
+        - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
     - arch: arm64
       compiler: arm-linux-gnueabi-g++-5
       addons:
