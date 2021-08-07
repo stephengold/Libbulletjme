@@ -55,14 +55,15 @@ public final class NativeLibraryLoader {
      * @param dist true&rarr;distributed files, false&rarr;as-built files
      * @param directory (not null, readable, unaffected)
      * @param buildType "Debug" or "Release"
-     * @param flavor "Sp" or "Dp"
+     * @param flavor "Sp", "SpMt", "Dp", or "DpMt"
      * @return true after successful load, otherwise false
      */
     public static boolean loadLibbulletjme(boolean dist, File directory,
             String buildType, String flavor) {
         assert buildType.equals("Debug") || buildType.equals("Release") :
                 buildType;
-        assert flavor.equals("Sp") || flavor.equals("Dp") : flavor;
+        assert flavor.equals("Sp") || flavor.equals("SpMt")
+                || flavor.equals("Dp") || flavor.equals("DpMt") : flavor;
 
         Platform platform = JmeSystem.getPlatform();
 
@@ -100,10 +101,10 @@ public final class NativeLibraryLoader {
             String subdirectory = MyString.firstToLower(platform.toString());
             file = new File(directory, subdirectory);
 
-            String bt = buildType.toLowerCase();
+            String bt = MyString.firstToLower(buildType);
             file = new File(file, bt);
 
-            String f = flavor.toLowerCase();
+            String f = MyString.firstToLower(flavor);
             file = new File(file, f);
         }
 
