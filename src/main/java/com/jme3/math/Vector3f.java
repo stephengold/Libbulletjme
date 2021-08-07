@@ -175,6 +175,22 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>add</code> adds the provided values to this vector, creating a
+     * new vector that is then returned.
+     *
+     * @param addX
+     *            the x value to add.
+     * @param addY
+     *            the y value to add.
+     * @param addZ
+     *            the z value to add.
+     * @return the result vector.
+     */
+    public Vector3f add(float addX, float addY, float addZ) {
+        return new Vector3f(x + addX, y + addY, z + addZ);
+    }
+
+    /**
      * <code>addLocal</code> adds the provided values to this vector
      * internally, and returns a handle to this vector for easy chaining of
      * calls.
@@ -421,6 +437,22 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
         result.y = y - vec.y;
         result.z = z - vec.z;
         return result;
+    }
+
+    /**
+     * <code>subtract</code> subtracts the provided values from this vector,
+     * creating a new vector that is then returned.
+     *
+     * @param subtractX
+     *            the x value to subtract.
+     * @param subtractY
+     *            the y value to subtract.
+     * @param subtractZ
+     *            the z value to subtract.
+     * @return the result vector.
+     */
+    public Vector3f subtract(float subtractX, float subtractY, float subtractZ) {
+        return new Vector3f(x - subtractX, y - subtractY, z - subtractZ);
     }
 
     /**
