@@ -147,15 +147,15 @@ model {
                     String travis = gradle.rootProject.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
                         buildable = (flavor == flavors.Sp || flavor == flavors.Dp) && !targetPlatform.name.startsWith('Linux_ARM')
-                    } else if (travis.equals('amd64mt')) { // using g++-5 for SpMt flavor
-                        buildable = (flavor == flavors.SpMt) && targetPlatform.name.equals('Linux64')
+                    } else if (travis.equals('amd64mt')) { // use g++-5 to build Mt flavors
+                        buildable = (flavor == flavors.SpMt || flavor == flavors.DpMt) && targetPlatform.name.equals('Linux64')
                     } else if (travis.equals('arm32')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32')
                     } else if (travis.equals('arm32hf')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32hf')
                     } else if (travis.equals('arm64')) {
                         buildable = targetPlatform.name.equals('Linux_ARM64')
-                    } else if (travis.equals('osx')) { // using xcode9.3 for 32-bit support
+                    } else if (travis.equals('osx')) { // using xcode9.3 for its 32-bit support
                         buildable = targetPlatform.name.startsWith('MacOSX')
                     }
                 } else { // neither -Pgithub= nor -Ptravis= specified
@@ -169,10 +169,9 @@ model {
                         // -Pflavor= specified on the command line
                         String flavorArg = gradle.rootProject.ext.flavor
                         buildable = flavor.name.equals(flavorArg)
-                    } else if (flavor == flavors.SpMt) {
+                    } else if (flavor == flavors.SpMt || flavor == flavors.DpMt) {
+                        // skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
                         buildable = targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('MacOSX')
-                    } else if (flavor == flavors.DpMt) {
-                        buildable = false
                     }
                 }
 
