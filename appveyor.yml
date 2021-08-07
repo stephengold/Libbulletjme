@@ -31,10 +31,14 @@ artifacts:
     name: dll64DD
   - path: dist/Windows64DebugSp_bulletjme.dll
     name: dll64DS
+  - path: dist/Windows64DebugSpMt_bulletjme.dll
+    name: dll64DSM
   - path: dist/Windows64ReleaseDp_bulletjme.dll
     name: dll64RD
   - path: dist/Windows64ReleaseSp_bulletjme.dll
     name: dll64RS
+  - path: dist/Windows64ReleaseSpMt_bulletjme.dll
+    name: dll64RSM
   - path: dist/Windows32DebugDp_bulletjme.pdb
     name: pdb32DD
   - path: dist/Windows32DebugSp_bulletjme.pdb
@@ -43,10 +47,12 @@ artifacts:
     name: pdb64DD
   - path: dist/Windows64DebugSp_bulletjme.pdb
     name: pdb64DS
+  - path: dist/Windows64DebugSpMt_bulletjme.pdb
+    name: pdb64DSM
 
 deploy:
   description: release description goes here
-  artifact: classJar,javadocJar,sourcesJar,pom,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DS,dll64RD,dll64RS,pdb32DD,pdb32DS,pdb64DD,pdb64DS
+  artifact: classJar,javadocJar,sourcesJar,pom,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DS,dll64DSM,dll64RD,dll64RS,dll64RSM,pdb32DD,pdb32DS,pdb64DD,pdb64DS,pdb64DSM
   provider: GitHub
   auth_token:
     secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz
