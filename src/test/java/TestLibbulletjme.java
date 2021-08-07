@@ -1210,15 +1210,31 @@ public class TestLibbulletjme {
         }
 
         boolean success = NativeLibraryLoader.loadLibbulletjme(fromDist,
-                directory, "Debug", "Sp");
+                directory, "Debug", "SpMt");
         if (success) {
             Assert.assertFalse(NativeLibrary.isDoublePrecision());
-        } else { // fallback to Dp-flavored library
+            Assert.assertTrue(NativeLibrary.isThreadSafe());
+
+        } else { // fallback to Sp-flavored library
+            success = NativeLibraryLoader.loadLibbulletjme(fromDist,
+                    directory, "Debug", "Sp");
+            if (success) {
+                Assert.assertFalse(NativeLibrary.isDoublePrecision());
+                Assert.assertFalse(NativeLibrary.isThreadSafe());
+            }
+        }
+
+        if (!success) { // fallback to Dp-flavored library
             success = NativeLibraryLoader.loadLibbulletjme(fromDist,
                     directory, "Debug", "Dp");
-            Assert.assertTrue(success);
-            Assert.assertTrue(NativeLibrary.isDoublePrecision());
+            if (success) {
+                Assert.assertTrue(NativeLibrary.isDoublePrecision());
+                Assert.assertFalse(NativeLibrary.isThreadSafe());
+            }
         }
+
+        Assert.assertTrue(success);
+        Assert.assertTrue(NativeLibrary.countThreads() > 0);
         Assert.assertTrue(NativeLibrary.isDebug());
         Assert.assertFalse(NativeLibrary.versionNumber().isEmpty());
     }
