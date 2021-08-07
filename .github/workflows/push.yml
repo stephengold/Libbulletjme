@@ -85,7 +85,8 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 15
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=xcode11
+      - run: clang --version
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=xcode11
       - if: failure()
         uses: actions/upload-artifact@v2
         with:
