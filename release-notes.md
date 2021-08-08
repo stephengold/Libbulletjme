@@ -1,5 +1,21 @@
 # Release log for the Libbulletjme project
 
+## Version 11.0.0 released on 8 August 2021.
+
+ + Bugfix: contact tests report events with positive separation distance.
+ + Tweaked the behavior of `PhysicsRigidBody.setKinematic()`.
+ + Added OpenMP-based multithreading for Linux64 and Windows64 platforms:
+   + Added the `countThreads()` and `isThreadSafe()` methods
+     to the `NativeLibrary` class.
+   + Added 2 build flavors: "SpMt" and "DpMt".
+   + In Mt builds, added a pool of contract-and-constraint solvers
+     to every `PhysicsSpace`.
+ + Added the `destroy()` method to all physics spaces.
+ + Added the `add(float, float, float)` and `subtract(float, float, float)`
+   methods to the `Vector3f` class.
+ + Added the `MyString` utility class.
+ + Built using Gradle v6.9 .
+
 ## Version 10.5.0 released on 23 June 2021
 
  + Bugfix: GImpact contact tests always fail (issue #7).
