@@ -364,7 +364,10 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 ## What's missing
 
- + support for the iOS operating system
+ + native libraries for:
+   + the FreeBSD and iOS operating systems
+   + macOS and Windows on ARM architectures
+   + PowerPC architectures
  + `btRigidBodyConstructionInfo`
  + certain constraints:
    + `btFixedConstraint`
