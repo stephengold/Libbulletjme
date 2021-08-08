@@ -142,7 +142,7 @@ model {
                     if (github.equals('xcode11')) { // typically Xcode_12.4
                         buildable = (buildType == buildTypes.Debug) && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
                     } else if (github.equals('debug64')) {
-                        buildable = (buildType == buildTypes.Debug) && targetPlatform.name.contains('64')                       
+                        buildable = (buildType == buildTypes.Debug) && targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('Linux_ARM')
                     }
                 } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
