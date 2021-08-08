@@ -259,6 +259,18 @@ public class MultiBodySpace extends PhysicsSpace {
     }
 
     /**
+     * Remove all multibodies, collision objects, and physics joints.
+     */
+    @Override
+    public void destroy() {
+        super.destroy();
+
+        for (MultiBody multibody : multiBodyMap.values()) {
+            removeMultiBody(multibody);
+        }
+    }
+
+    /**
      * Enumerate collision objects that have been added to this space and not
      * yet removed.
      *

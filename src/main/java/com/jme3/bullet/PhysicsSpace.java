@@ -867,6 +867,24 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
+     * Remove all collision objects and physics joints.
+     */
+    @Override
+    public void destroy() {
+        super.destroy();
+
+        for (PhysicsCharacter character : characterMap.values()) {
+            removeCharacter(character);
+        }
+        for (PhysicsJoint joint : jointMap.values()) {
+            removeJoint(joint);
+        }
+        for (PhysicsRigidBody rigidBody : rigidMap.values()) {
+            removeRigidBody(rigidBody);
+        }
+    }
+
+    /**
      * Enumerate collision objects that have been added to this space and not
      * yet removed.
      *

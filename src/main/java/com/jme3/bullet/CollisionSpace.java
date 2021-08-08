@@ -256,6 +256,15 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
+     * Remove all collision objects and physics joints.
+     */
+    public void destroy() {
+        for (PhysicsGhostObject character : ghostMap.values()) {
+            removeGhostObject(character);
+        }
+    }
+
+    /**
      * Read the type of acceleration structure used for broadphase collision
      * detection.
      *
