@@ -107,6 +107,16 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Constructor instantiates a new <code>Vector3f</code> that is a copy
+     * of the provided vector
+     *
+     * @param copy The Vector3f to copy
+     */
+    public Vector3f(Vector3f copy) {
+        this.set(copy);
+    }
+
+    /**
      * <code>set</code> sets the x,y,z values of the vector based on passed
      * parameters.
      *
@@ -349,6 +359,23 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
         x *= vec.x;
         y *= vec.y;
         z *= vec.z;
+        return this;
+    }
+
+    /**
+     * <code>multLocal</code> multiplies this vector by 3 scalars
+     * internally, and returns a handle to this vector for easy chaining of
+     * calls.
+     *
+     * @param x the scale factor for the X component
+     * @param y the scale factor for the Y component
+     * @param z the scale factor for the Z component
+     * @return this
+     */
+    public Vector3f multLocal(float x, float y, float z) {
+        this.x *= x;
+        this.y *= y;
+        this.z *= z;
         return this;
     }
 
