@@ -22,6 +22,9 @@ For each desktop platform, 4 native libraries are distributed:
  + a debug build using single-precision arithmetic
  + a debug build using double-precision arithmetic
 
+In addition, multi-threaded native libraries
+are provided for x86-64 architectures running Windows or Linux.
+
 Libbulletjme's native libraries are used in [Minie],
 which integrates Libbulletjme into [the jMonkeyEngine game engine][jme].
 For applications that don't use jMonkeyEngine,
@@ -51,11 +54,11 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:10.5.0'
+            compile 'com.github.stephengold:Libbulletjme:11.0.0'
         }
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 44 native libraries.
+    You probably don't need all 52 native libraries.
     Start with the ReleaseSp library for your development environment
     (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
@@ -235,7 +238,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 10.5.0`
+     + `git checkout -b latest 11.0.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link

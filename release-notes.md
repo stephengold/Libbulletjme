@@ -8,7 +8,7 @@
    + Added the `countThreads()` and `isThreadSafe()` methods
      to the `NativeLibrary` class.
    + Added 2 build flavors: "SpMt" and "DpMt".
-   + In Mt builds, added a pool of contract-and-constraint solvers
+   + In Mt builds, added a pool of contact-and-constraint solvers
      to every `PhysicsSpace`.
  + Added the `destroy()` method to all physics spaces.
  + Added the `add(float, float, float)` and `subtract(float, float, float)`
