@@ -182,6 +182,19 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Constructor instantiates a new <code>Quaternion</code> object from an
+     * existing quaternion, creating a copy.
+     *
+     * @param q   the quaternion to copy.
+     */
+    public Quaternion(Quaternion q) {
+        this.x = q.x;
+        this.y = q.y;
+        this.z = q.z;
+        this.w = q.w;
+    }
+
+    /**
      * Sets this Quaternion to {0, 0, 0, 1}. Same as calling set(0,0,0,1).
      */
     public void loadIdentity() {
@@ -606,6 +619,29 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
         float y1 = -x * q.z + y * q.w + z * q.x + w * q.y;
         float z1 = x * q.y - y * q.x + z * q.w + w * q.z;
         w = -x * q.x - y * q.y - z * q.z + w * q.w;
+        x = x1;
+        y = y1;
+        z = z1;
+        return this;
+    }
+
+    /**
+     * Multiplies this Quaternion by the supplied quaternion. The result is
+     * stored in this Quaternion, which is also returned for chaining. Similar
+     * to this *= q.
+     *
+     * @param qx   quat x value
+     * @param qy   quat y value
+     * @param qz   quat z value
+     * @param qw   quat w value
+     *
+     * @return This Quaternion, after multiplication.
+     */
+    public Quaternion multLocal(float qx, float qy, float qz, float qw) {
+        float x1 = x * qw + y * qz - z * qy + w * qx;
+        float y1 = -x * qz + y * qw + z * qx + w * qy;
+        float z1 = x * qy - y * qx + z * qw + w * qz;
+        w = -x * qx - y * qy - z * qz + w * qw;
         x = x1;
         y = y1;
         z = z1;
