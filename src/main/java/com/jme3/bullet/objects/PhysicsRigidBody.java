@@ -256,12 +256,14 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
-     * Read this body's angular factor for the X axis.
+     * Read this body's angular factor for the X axis. TODO remove this
      *
      * @return the angular factor
+     * @deprecated use {@link #getAngularFactor(com.jme3.math.Vector3f)}
      */
+    @Deprecated
     public float getAngularFactor() {
-        return getAngularFactor(null).getX();
+        return getAngularFactor(null).x;
     }
 
     /**

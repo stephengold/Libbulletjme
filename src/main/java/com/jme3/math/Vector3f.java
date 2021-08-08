@@ -630,10 +630,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Determine the X component of this vector.
+     * Determine the X component of this vector. TODO remove this
      *
      * @return x
+     * @deprecated use the public field
      */
+    @Deprecated
     public float getX() {
         return x;
     }
