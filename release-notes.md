@@ -2,17 +2,17 @@
 
 ## Version 11.1.0 released on 9 August 2021.
 
- + Bugfix: missing the cppCompiler args to activate OpenMP extensions
- + Added copy constructor and `multLocal(x,y,z,w)` methods
+ + Bugfix: missing the cppCompiler arguments to activate OpenMP extensions
+ + Added the copy constructor and `multLocal(x,y,z,w)` method
    to the `Quaternion` class.
- + Added copy constructor and `multLocal(x,y,z)` methods
+ + Added the copy constructor and `multLocal(x,y,z)` method
    to the `Vector3f` class.
  + Deprecated the `Vector3f.getX()` and `PhysicsRigidBody.getAngularFactor()`
    methods.
 
 ## Version 11.0.0 released on 8 August 2021.
 
- + Bugfix: contact tests report events with positive separation distance.
+ + Bugfix: contact tests report events with positive separation distance
  + Tweaked the behavior of `PhysicsRigidBody.setKinematic()`.
  + Added OpenMP-based multithreading for Linux64 and Windows64 platforms:
    + Added the `countThreads()` and `isThreadSafe()` methods
@@ -28,7 +28,7 @@
 
 ## Version 10.5.0 released on 23 June 2021
 
- + Bugfix: GImpact contact tests always fail (issue #7).
+ + Bugfix: GImpact contact tests always fail (issue #7)
  + Added `hasClosest()` and `hasContact()` methods
    to the `CollisionSpace` class.
  + Added a public `getShapeType()` method to the `CollisionShape` class.
