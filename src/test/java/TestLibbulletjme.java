@@ -36,6 +36,7 @@ import com.jme3.bullet.RayTestFlag;
 import com.jme3.bullet.RotationOrder;
 import com.jme3.bullet.SolverInfo;
 import com.jme3.bullet.SolverType;
+import com.jme3.bullet.collision.Activation;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
@@ -1467,8 +1468,8 @@ public class TestLibbulletjme {
         Assert.assertNotEquals(0L, nativeId);
         Assert.assertEquals(pco, PhysicsCollisionObject.findInstance(nativeId));
         Assert.assertEquals(0, pco.countIgnored());
-        Assert.assertFalse(pco.isInWorld());
         Assert.assertNull(pco.getCollisionSpace());
+        Assert.assertFalse(pco.isInWorld());
         Assert.assertEquals(0L, pco.spaceId());
 
         Assert.assertTrue(pco.isActive());
@@ -1500,9 +1501,12 @@ public class TestLibbulletjme {
         if (pco instanceof PhysicsRigidBody) {
             PhysicsRigidBody body = (PhysicsRigidBody) pco;
 
+            Assert.assertEquals(0, body.countJoints());
+            Assert.assertEquals(Activation.active, body.getActivationState());
             Assert.assertEquals(0f, body.getAngularDamping(), 0f);
             assertEquals(1f, 1f, 1f, body.getAngularFactor(null), 0f);
             Assert.assertEquals(1f, body.getAngularSleepingThreshold(), 0f);
+            assertEquals(0f, 0f, 0f, body.getGravity(null), 0f);
             Assert.assertEquals(0f, body.getLinearDamping(), 0f);
             assertEquals(1f, 1f, 1f, body.getLinearFactor(null), 0f);
             Assert.assertEquals(0.8f, body.getLinearSleepingThreshold(), 0f);
@@ -1510,14 +1514,21 @@ public class TestLibbulletjme {
             Assert.assertTrue(body.isContactResponse());
             Assert.assertFalse(body.isGravityProtected());
             Assert.assertFalse(body.isKinematic());
+            Assert.assertEquals(0, body.listJoints().length);
             assertEquals(0f, 0f, 0f, body.totalAppliedForce(null), 0f);
             assertEquals(0f, 0f, 0f, body.totalAppliedTorque(null), 0f);
             if (body.isDynamic()) {
                 assertEquals(0f, 0f, 0f, body.getAngularVelocity(null), 0f);
-                assertEquals(0f, 0f, 0f, body.getGravity(null), 0f);
+                assertEquals(0f, 0f, 0f,
+                        body.getAngularVelocityLocal(null), 0f);
                 assertEquals(0f, 0f, 0f, body.getLinearVelocity(null), 0f);
+                Assert.assertEquals(0f, body.getSquaredSpeed(), 0f);
                 Assert.assertFalse(body.isStatic());
                 Assert.assertEquals(0f, body.kineticEnergy(), 0f);
+                Assert.assertEquals(0f, body.mechanicalEnergy(), 0f);
+            } else {
+                Assert.assertEquals(0f, body.getMass(), 0f);
+                Assert.assertTrue(body.isStatic());
             }
         }
     }
