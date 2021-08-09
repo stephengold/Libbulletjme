@@ -31,6 +31,9 @@
  */
 package com.jme3.system;
 
+/**
+ * Utility class to access platform-dependant features.
+ */
 public class JmeSystem {
     // *************************************************************************
     // constructors
@@ -70,6 +73,12 @@ public class JmeSystem {
         }
     }
 
+    /**
+     * Determine which Platform (operating system and architecture) the
+     * application is running on.
+     *
+     * @return an enum value (not null)
+     */
     public static Platform getPlatform() {
         String os = System.getProperty("os.name").toLowerCase();
         String arch = System.getProperty("os.arch").toLowerCase();

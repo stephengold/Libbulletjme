@@ -43,9 +43,15 @@ import jme3utilities.MyString;
  */
 public final class NativeLibraryLoader {
 
+    /**
+     * message logger for this class
+     */
     final public static Logger logger
             = Logger.getLogger(NativeLibraryLoader.class.getName());
 
+    /**
+     * A private constructor to inhibit instantiation of this class.
+     */
     private NativeLibraryLoader() {
     }
 

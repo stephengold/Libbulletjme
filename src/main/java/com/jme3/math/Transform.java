@@ -43,23 +43,41 @@ import com.jme3.util.TempVars;
 public final class Transform implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
-
+    /**
+     * shared instance of the identity transform - Do not modify!
+     */
     public static final Transform IDENTITY = new Transform();
 
     private Quaternion rot = new Quaternion();
     private Vector3f translation = new Vector3f();
     private Vector3f scale = new Vector3f(1, 1, 1);
 
+    /**
+     * Instantiate a coordinate transform without any scaling.
+     *
+     * @param translation the desired translation (not null, unaffected)
+     * @param rot the desired rotation (not null, unaffected)
+     */
     public Transform(Vector3f translation, Quaternion rot) {
         this.translation.set(translation);
         this.rot.set(rot);
     }
 
+    /**
+     * Instantiate a coordinate transform with scaling.
+     *
+     * @param translation the desired translation (not null, unaffected)
+     * @param rot the desired rotation (not null, unaffected)
+     * @param scale the desired scale factor (not null, unaffected)
+     */
     public Transform(Vector3f translation, Quaternion rot, Vector3f scale) {
         this(translation, rot);
         this.scale.set(scale);
     }
 
+    /**
+     * Instantiate an identity transform.
+     */
     public Transform() {
         this(Vector3f.ZERO, Quaternion.IDENTITY);
     }
@@ -147,6 +165,13 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return this;
     }
 
+    /**
+     * Transform the specified coordinates.
+     *
+     * @param in the coordinates to transform (not null, unaffected)
+     * @param store storage for the result (modified if not null)
+     * @return the transformed coordinates (either store or a new vector)
+     */
     public Vector3f transformVector(final Vector3f in, Vector3f store) {
         if (store == null) {
             store = new Vector3f();
@@ -157,6 +182,13 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return rot.mult(store.set(in).multLocal(scale), store).addLocal(translation);
     }
 
+    /**
+     * Apply the inverse transform to the specified coordinates.
+     *
+     * @param in the coordinates to transform (not null, unaffected)
+     * @param store storage for the result (modified if not null)
+     * @return the transformed coordinates (either store or a new vector)
+     */
     public Vector3f transformInverseVector(final Vector3f in, Vector3f store) {
         if (store == null) {
             store = new Vector3f();
@@ -173,10 +205,21 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return store;
     }
 
+    /**
+     * Create an equivalent transform matrix.
+     *
+     * @return a new 4x4 matrix
+     */
     public Matrix4f toTransformMatrix() {
         return toTransformMatrix(null);
     }
 
+    /**
+     * Convert to an equivalent transform matrix.
+     *
+     * @param store storage for the result (modified if not null)
+     * @return a 4x4 matrix (either store or a new vector)
+     */
     public Matrix4f toTransformMatrix(Matrix4f store) {
         if (store == null) {
             store = new Matrix4f();
@@ -187,6 +230,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return store;
     }
 
+    /**
+     * Configure based on a transform matrix.
+     *
+     * @param mat the input matrix (not null, unaffected)
+     */
     public void fromTransformMatrix(Matrix4f mat) {
         TempVars vars = TempVars.get();
         translation.set(mat.toTranslationVector(vars.vect1));
@@ -195,12 +243,22 @@ public final class Transform implements Cloneable, java.io.Serializable {
         vars.release();
     }
 
+    /**
+     * Create an inverse of this Transform.
+     *
+     * @return a new instance
+     */
     public Transform invert() {
         Transform t = new Transform();
         t.fromTransformMatrix(toTransformMatrix().invertLocal());
         return t;
     }
 
+    /**
+     * Generate the hash code for this instance.
+     *
+     * @return a 32-bit value for use in hashing
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -210,6 +268,12 @@ public final class Transform implements Cloneable, java.io.Serializable {
         return hash;
     }
 
+    /**
+     * Test for exact equality with another object.
+     *
+     * @param obj the object to compare to (may be null, unaffected)
+     * @return true if the objects are exactly equal, otherwise false
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -224,6 +288,15 @@ public final class Transform implements Cloneable, java.io.Serializable {
                 && this.rot.equals(other.rot);
     }
 
+    /**
+     * Represent this Transform as a String. The format is:
+     *
+     * [TX.XXXX, TY.YYYY, TZ.ZZZZ]
+     * [RX.XXXX, RY.YYYY, RZ.ZZZZ, RW.WWWW]
+     * [SX.XXXX, SY.YYYY, SZ.ZZZZ]
+     *
+     * @return a descriptive string of text (not null, not empty)
+     */
     @Override
     public String toString() {
         return getClass().getSimpleName()
@@ -232,6 +305,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
                 + "[ " + scale.x + " , " + scale.y + ", " + scale.z + "]";
     }
 
+    /**
+     * Create a copy of this vector.
+     *
+     * @return a new instance equivalent to this one
+     */
     @Override
     public Transform clone() {
         try {

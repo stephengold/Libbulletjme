@@ -137,6 +137,9 @@ public class TempVars {
      * General vectors.
      */
     public final Vector3f vect1 = new Vector3f();
+    /**
+     * auxiliary Vector3f
+     */
     public final Vector3f vect2 = new Vector3f();
     /**
      * General quaternions.

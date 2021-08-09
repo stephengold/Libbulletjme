@@ -34,10 +34,10 @@ package com.jme3.math;
 import java.util.logging.Logger;
 
 /**
- * <code>Plane</code> defines a plane where Normal dot (x,y,z) = Constant.
- * This provides methods for calculating a "distance" of a point from this
- * plane. The distance is pseudo due to the fact that it can be negative if the
- * point is on the non-normal side of the plane.
+ * <code>Plane</code> defines a plane where Normal dot (x,y,z) = Constant. This
+ * provides methods for calculating a "distance" of a point from this plane. The
+ * distance is pseudo due to the fact that it can be negative if the point is on
+ * the non-normal side of the plane.
  *
  * @author Mark Powell
  * @author Joshua Slack
@@ -96,6 +96,13 @@ public class Plane implements Cloneable, java.io.Serializable {
         return constant;
     }
 
+    /**
+     * Find the point on the Plane that's nearest to the specified point.
+     *
+     * @param point (not null, unaffected)
+     * @param store storage for the result (modified if not null)
+     * @return the location of the nearest point (either store or a new vector)
+     */
     public Vector3f getClosestPoint(Vector3f point, Vector3f store) {
 //        float t = constant - normal.dot(point);
 //        return store.set(normal).multLocal(t).addLocal(point);
