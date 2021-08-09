@@ -1,5 +1,15 @@
 # Release log for the Libbulletjme project
 
+## Version 11.1.0 released on 9 August 2021.
+
+ + Bugfix: missing the cppCompiler args to activate OpenMP extensions
+ + Added copy constructor and `multLocal(x,y,z,w)` methods
+   to the `Quaternion` class.
+ + Added copy constructor and `multLocal(x,y,z)` methods
+   to the `Vector3f` class.
+ + Deprecated the `Vector3f.getX()` and `PhysicsRigidBody.getAngularFactor()`
+   methods.
+
 ## Version 11.0.0 released on 8 August 2021.
 
  + Bugfix: contact tests report events with positive separation distance.
