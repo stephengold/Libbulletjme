@@ -34,8 +34,10 @@ package com.jme3.math;
 import com.jme3.util.TempVars;
 
 /**
+ * A 3-D coordinate transform composed of translation, rotation, and scaling.
+ * The order of application is: scale then rotate then translate.
+ *
  * Started Date: Jul 16, 2004<br><br>
- * Represents a translation, rotation and scale in one object.
  *
  * @author Jack Lindamood
  * @author Joshua Slack
@@ -47,9 +49,17 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * shared instance of the identity transform - Do not modify!
      */
     public static final Transform IDENTITY = new Transform();
-
+    /**
+     * rotation component
+     */
     private Quaternion rot = new Quaternion();
+    /**
+     * translation offsets for each axis
+     */
     private Vector3f translation = new Vector3f();
+    /**
+     * scale factors for each axis
+     */
     private Vector3f scale = new Vector3f(1, 1, 1);
 
     /**
@@ -306,7 +316,7 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Create a copy of this vector.
+     * Create a copy of this Transform.
      *
      * @return a new instance equivalent to this one
      */
