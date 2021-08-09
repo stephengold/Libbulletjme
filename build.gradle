@@ -165,13 +165,15 @@ model {
                     //buildable = targetPlatform.name.equals('Linux64')
                 }
 
+                Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
+                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.DpMt)
                 if (buildable) {
                     // Decide whether to build the current flavor:
                     if (gradle.rootProject.hasProperty('flavor')) {
                         // -Pflavor= specified on the command line
                         String flavorArg = gradle.rootProject.ext.flavor
                         buildable = flavor.name.equals(flavorArg)
-                    } else if (flavor == flavors.SpMt || flavor == flavors.DpMt) {
+                    } else if (isMt) {
                         // skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
                         buildable = targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('MacOSX')
                     }
@@ -183,10 +185,11 @@ model {
                     //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
                 }
-                if (flavor == flavors.Dp || flavor == flavors.DpMt) {
+                if (isDp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
+                    //buildable = false
                 }
-                if (flavor == flavors.SpMt || flavor == flavors.DpMt) {
+                if (isMt) {
                     cppCompiler.define 'BT_THREADSAFE'
                     cppCompiler.define 'BT_USE_OPENMP'
                 }
@@ -223,6 +226,9 @@ model {
                             jar.dependsOn("copyPdbToDist$q")
                         }
                     }
+                    if (isMt) {
+                        cppCompiler.args '/openmp'
+                    }
 
                 } else { // toolChain in Clang or Gcc
                     cppCompiler.args '-I', "$javaHome/include"
@@ -237,7 +243,8 @@ model {
                     } else if (buildType == buildTypes.Release) {
                         cppCompiler.args '-O3'
                     }
-                    if (flavor == flavors.SpMt || flavor == flavors.DpMt) {
+                    if (isMt) {
+                        cppCompiler.args '-fopenmp'
                         linker.args '-lgomp'
                     }
 
