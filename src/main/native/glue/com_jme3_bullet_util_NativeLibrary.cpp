@@ -147,7 +147,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setReinitializationCallbackEnabled
 (JNIEnv *, jclass, jboolean enable) {
-    jmeClasses::reinitializationCallbackFlag = (int) enable;
+    jmeClasses::reinitializationCallbackFlag = (bool) enable;
 }
 
 /*
@@ -157,7 +157,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setReinitializati
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
 (JNIEnv *, jclass, jboolean enable) {
-    jmeClasses::printFlag = (int) enable;
+    jmeClasses::printFlag = (bool) enable;
 }
 
 /*

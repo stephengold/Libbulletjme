@@ -109,19 +109,19 @@ jmethodID jmeClasses::Vhacd_addHull;
 jmethodID jmeClasses::Vhacd_update;
 
 /*
- * global flag to enable/disable the init message
+ * global flag to enable/disable the initialization message
  *
  * Invoke Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
  * to alter this flag.
  */
-int jmeClasses::printFlag = 1; // TRUE
+bool jmeClasses::printFlag = true;
 /*
  * global flag to enable/disable the reinitialization callback
  *
  * Invoke Java_com_jme3_bullet_util_NativeLibrary_setReinitializationCallbackEnabled
  * to alter this flag.
  */
-int jmeClasses::reinitializationCallbackFlag = 0; // FALSE
+bool jmeClasses::reinitializationCallbackFlag = false;
 
 /*
  * Initialize this instance for the specified environment.

@@ -121,8 +121,8 @@ public:
 
     static jmethodID DebugMeshCallback_addVector;
 
-    static int printFlag; // TODO these should be bools not ints
-    static int reinitializationCallbackFlag;
+    static bool printFlag;
+    static bool reinitializationCallbackFlag;
 
 private:
     static JavaVM * vm;
