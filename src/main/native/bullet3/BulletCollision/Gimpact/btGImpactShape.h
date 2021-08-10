@@ -1,5 +1,5 @@
 /*! \file btGImpactShape.h
-\author Francisco Len Nßjera
+\author Francisco Len Nï¿½jera
 */
 /*
 This source file is part of GIMPACT Library.
@@ -594,7 +594,7 @@ public:
 				--m_lock_count;
 				return;
 			}
-			m_meshInterface->unLockReadOnlyVertexBase(m_part);
+//			m_meshInterface->unLockReadOnlyVertexBase(m_part); stephengold commented out 2021-08-09
 			vertexbase = NULL;
 			m_lock_count = 0;
 		}

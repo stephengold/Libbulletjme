@@ -152,7 +152,7 @@ void btBvhTriangleMeshShape::performRaycast(btTriangleCallback* callback, const 
 
 			/* Perform ray vs. triangle collision here */
 			m_callback->processTriangle(m_triangle, nodeSubPart, nodeTriangleIndex);
-			m_meshInterface->unLockReadOnlyVertexBase(nodeSubPart);
+//			m_meshInterface->unLockReadOnlyVertexBase(nodeSubPart); stephengold commented out 2021-08-09
 		}
 	};
 
@@ -226,7 +226,7 @@ void btBvhTriangleMeshShape::performConvexcast(btTriangleCallback* callback, con
 
 			/* Perform ray vs. triangle collision here */
 			m_callback->processTriangle(m_triangle, nodeSubPart, nodeTriangleIndex);
-			m_meshInterface->unLockReadOnlyVertexBase(nodeSubPart);
+//			m_meshInterface->unLockReadOnlyVertexBase(nodeSubPart); stephengold commented out 2021-08-09
 		}
 	};
 
@@ -317,7 +317,7 @@ void btBvhTriangleMeshShape::processAllTriangles(btTriangleCallback* callback, c
 			}
 
 			m_callback->processTriangle(m_triangle, nodeSubPart, nodeTriangleIndex);
-			m_meshInterface->unLockReadOnlyVertexBase(nodeSubPart);
+//			m_meshInterface->unLockReadOnlyVertexBase(nodeSubPart); stephengold commented out 2021-08-09
 		}
 	};
 

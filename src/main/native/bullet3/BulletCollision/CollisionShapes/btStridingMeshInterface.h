@@ -56,7 +56,7 @@ public:
 	/// make a call to unLockVertexBase when the read and write access (using getLockedVertexIndexBase) is finished
 	virtual void unLockVertexBase(int subpart) = 0;
 
-	virtual void unLockReadOnlyVertexBase(int subpart) const = 0;
+//	virtual void unLockReadOnlyVertexBase(int subpart) const = 0; stephengold commented out 2021-08-09
 
 	/// getNumSubParts returns the number of separate subparts
 	/// each subpart has a continuous array of vertices and indices

@@ -281,8 +281,8 @@ void btOptimizedBvh::updateBvhNodes(btStridingMeshInterface* meshInterface, int 
 			int nodeTriangleIndex = curNode.getTriangleIndex();
 			if (nodeSubPart != curNodeSubPart)
 			{
-				if (curNodeSubPart >= 0)
-					meshInterface->unLockReadOnlyVertexBase(curNodeSubPart);
+//				if (curNodeSubPart >= 0) stephengold commented out 2021-08-09
+//					meshInterface->unLockReadOnlyVertexBase(curNodeSubPart); stephengold commented out 2021-08-09
 				meshInterface->getLockedReadOnlyVertexIndexBase(&vertexbase, numverts, type, stride, &indexbase, indexstride, numfaces, indicestype, nodeSubPart);
 
 				curNodeSubPart = nodeSubPart;
@@ -350,8 +350,8 @@ void btOptimizedBvh::updateBvhNodes(btStridingMeshInterface* meshInterface, int 
 		}
 	}
 
-	if (curNodeSubPart >= 0)
-		meshInterface->unLockReadOnlyVertexBase(curNodeSubPart);
+//	if (curNodeSubPart >= 0) stephengold commented out 2021-08-09
+//		meshInterface->unLockReadOnlyVertexBase(curNodeSubPart); stephengold commented out 2021-08-09
 }
 
 ///deSerializeInPlace loads and initializes a BVH from a buffer in memory 'in place'

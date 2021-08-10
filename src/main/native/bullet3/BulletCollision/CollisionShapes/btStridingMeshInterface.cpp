@@ -166,7 +166,7 @@ void btStridingMeshInterface::InternalProcessAllTriangles(btInternalTriangleInde
 				btAssert((type == PHY_FLOAT) || (type == PHY_DOUBLE));
 		}
 
-		unLockReadOnlyVertexBase(part);
+//		unLockReadOnlyVertexBase(part); stephengold commented out 2021-08-09
 	}
 }
 
@@ -366,7 +366,7 @@ const char* btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 					btAssert((type == PHY_FLOAT) || (type == PHY_DOUBLE));
 			}
 
-			unLockReadOnlyVertexBase(part);
+//			unLockReadOnlyVertexBase(part); stephengold commented out 2021-08-09
 		}
 
 		serializer->finalizeChunk(chunk, "btMeshPartData", BT_ARRAY_CODE, chunk->m_oldPtr);
