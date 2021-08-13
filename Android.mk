@@ -11,7 +11,7 @@ $(N)/glue \
 $(N)/v-hacd/inc \
 $(N)/v-hacd/public
 
-LOCAL_CFLAGS := -DBT_NO_PROFILE -std=c++11
+LOCAL_CFLAGS := -std=c++11
 LOCAL_MODULE := bulletjme
 
 LOCAL_SRC_FILES := \

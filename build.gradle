@@ -179,7 +179,6 @@ model {
                     }
                 }
 
-                cppCompiler.define 'BT_NO_PROFILE'
                 if (buildType == buildTypes.Debug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
