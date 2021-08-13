@@ -697,9 +697,11 @@ void CProfileManager::dumpAll()
 
 void btEnterProfileZoneDefault(const char* name)
 {
+    CProfileManager::Start_Profile(name); // stephengold added 2021-08-13
 }
 void btLeaveProfileZoneDefault()
 {
+    CProfileManager::Stop_Profile(); // stephengold added 2021-08-13
 }
 
 #else
