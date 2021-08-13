@@ -10,7 +10,7 @@ plugins {
 description = 'a JNI interface for Bullet Physics and V-HACD'
 ext {
     artifact = 'Libbulletjme'
-    version = '11.1.0'
+    version = '11.2.0'
     baseName = "${artifact}-${version}"
 }
 
@@ -182,7 +182,7 @@ model {
                     }
                     //if (isDp) buildable = false // to skip all double-precision flavors
                     //if (isMt) buildable = false // to skip all multithreaded flavors
-                    if (isQuickProf) buildable = false // to skip all Quickprof flavors
+                    if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
                 if (buildType == buildTypes.Debug) {

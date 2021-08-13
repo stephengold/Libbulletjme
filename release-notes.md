@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 11.2.0 released on 13 August 2021.
+
+ + Bugfix: pure virtual call by btGImpactMeshShape destructor (Minie issue #17)
+ + Bugfix: Quickprof reset at the start of every timestep
+ + Bugfix: BT_PROFILE() macro never invokes CProfileManager
+ + Added access to Quickprof profiling.
+
 ## Version 11.1.0 released on 9 August 2021.
 
  + Bugfix: missing the cppCompiler arguments to activate OpenMP extensions
