@@ -38,6 +38,8 @@ model {
     flavors {
         Sp            // single-precision arithmetic
         SpMt          // single-precision arithmetic, multithreaded
+        SpMtQuickprof // single-precision arithmetic, multithreaded, Quickprof profiling
+        SpQuickprof   // single-precision arithmetic, Quickprof profiling
         Dp   // double-precision arithmetic
         DpMt // double-precision arithmetic, multithreaded
     }
@@ -166,7 +168,8 @@ model {
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
-                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.DpMt)
+                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
+                Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
                 if (buildable) {
                     // Decide whether to build the current flavor:
                     if (gradle.rootProject.hasProperty('flavor')) {
@@ -179,6 +182,7 @@ model {
                     }
                     //if (isDp) buildable = false // to skip all double-precision flavors
                     //if (isMt) buildable = false // to skip all multithreaded flavors
+                    if (isQuickProf) buildable = false // to skip all Quickprof flavors
                 }
 
                 if (buildType == buildTypes.Debug) {
@@ -192,6 +196,10 @@ model {
                 if (isMt) {
                     cppCompiler.define 'BT_THREADSAFE'
                     cppCompiler.define 'BT_USE_OPENMP'
+                }
+                if (isQuickprof) {
+                    cppCompiler.define 'BT_ENABLE_PROFILE'
+                    //cppCompiler.define 'BT_LINUX_REALTIME'
                 }
 
                 String q = targetPlatform.name + buildType.name + flavor.name

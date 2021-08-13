@@ -61,7 +61,8 @@ public final class NativeLibraryLoader {
      * @param dist true&rarr;distributed files, false&rarr;as-built files
      * @param directory (not null, readable, unaffected)
      * @param buildType "Debug" or "Release"
-     * @param flavor "Sp", "SpMt", "Dp", or "DpMt"
+     * @param flavor "Sp", "SpMt", "SpMtQuickprof", "SpQuickprof", "Dp", or
+     * "DpMt"
      * @return true after successful load, otherwise false
      */
     public static boolean loadLibbulletjme(boolean dist, File directory,
@@ -69,6 +70,8 @@ public final class NativeLibraryLoader {
         assert buildType.equals("Debug") || buildType.equals("Release") :
                 buildType;
         assert flavor.equals("Sp") || flavor.equals("SpMt")
+                || flavor.equals("SpMtQuickprof")
+                || flavor.equals("SpQuickProf")
                 || flavor.equals("Dp") || flavor.equals("DpMt") : flavor;
 
         Platform platform = JmeSystem.getPlatform();
