@@ -646,10 +646,13 @@ void CProfileManager::dumpRecursive(CProfileIterator* profileIterator, int spaci
 	float accumulated_time = 0, parent_time = profileIterator->Is_Root() ? CProfileManager::Get_Time_Since_Reset() : profileIterator->Get_Current_Parent_Total_Time();
 	int i;
 	int frames_since_reset = CProfileManager::Get_Frame_Count_Since_Reset();
-	for (i = 0; i < spacing; i++) printf(".");
+	for (i = 0; i < spacing; i++) printf(" ");// stephengold changed 2021-08-13
 	printf("----------------------------------\n");
-	for (i = 0; i < spacing; i++) printf(".");
-	printf("Profiling: %s (total running time: %.3f ms) ---\n", profileIterator->Get_Current_Parent_Name(), parent_time);
+	for (i = 0; i < spacing; i++) printf(" ");// stephengold changed 2021-08-13
+	printf("Profile of %s:  %.2f ms, %.4f ms/step\n",// stephengold changed 2021-08-13
+                profileIterator->Get_Current_Parent_Name(),// stephengold changed 2021-08-13
+                parent_time,// stephengold changed 2021-08-13
+                parent_time / (float)frames_since_reset );// stephengold changed 2021-08-13
 	float totalTime = 0.f;
 
 	int numChildren = 0;
@@ -660,21 +663,25 @@ void CProfileManager::dumpRecursive(CProfileIterator* profileIterator, int spaci
 		float current_total_time = profileIterator->Get_Current_Total_Time();
 		accumulated_time += current_total_time;
 		float fraction = parent_time > SIMD_EPSILON ? (current_total_time / parent_time) * 100 : 0.f;
-		{
-			int i;
-			for (i = 0; i < spacing; i++) printf(".");
-		}
-		printf("%d -- %s (%.2f %%) :: %.3f ms / frame (%d calls)\n", i, profileIterator->Get_Current_Name(), fraction, (current_total_time / (double)frames_since_reset), profileIterator->Get_Current_Total_Calls());
+		int j;// stephengold changed 2021-08-13
+		for (j = 0; j < spacing; j++) printf(" ");// stephengold changed 2021-08-13
+		printf(" %5.1f%% %s  %d calls, %.2f ms, %.4f ms/step\n",// stephengold changed 2021-08-13
+                        fraction,// stephengold changed 2021-08-13
+                        profileIterator->Get_Current_Name(),// stephengold changed 2021-08-13
+                        profileIterator->Get_Current_Total_Calls(),// stephengold changed 2021-08-13
+                        current_total_time,// stephengold changed 2021-08-13
+                        current_total_time / (float)frames_since_reset );// stephengold changed 2021-08-13
 		totalTime += current_total_time;
 		//recurse into children
 	}
 
-	if (parent_time < accumulated_time)
-	{
-		//printf("what's wrong\n");
-	}
-	for (i = 0; i < spacing; i++) printf(".");
-	printf("%s (%.3f %%) :: %.3f ms\n", "Unaccounted:", parent_time > SIMD_EPSILON ? ((parent_time - accumulated_time) / parent_time) * 100 : 0.f, parent_time - accumulated_time);
+	for (i = 0; i < spacing; i++) printf(" ");// stephengold changed 2021-08-13
+        float unaccounted_time = parent_time - accumulated_time;// stephengold changed 2021-08-13
+        float percent = parent_time > SIMD_EPSILON ? (unaccounted_time / parent_time) * 100 : 0;// stephengold changed 2021-08-13
+	printf(" %5.1f%% Unaccounted  %.2f ms, %.4f ms/step\n",// stephengold changed 2021-08-13
+                percent,// stephengold changed 2021-08-13
+                unaccounted_time,// stephengold changed 2021-08-13
+                unaccounted_time / (float)frames_since_reset );// stephengold changed 2021-08-13
 
 	for (i = 0; i < numChildren; i++)
 	{
