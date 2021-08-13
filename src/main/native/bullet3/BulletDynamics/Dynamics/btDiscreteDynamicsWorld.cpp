@@ -381,7 +381,7 @@ void btDiscreteDynamicsWorld::synchronizeMotionStates()
 
 int btDiscreteDynamicsWorld::stepSimulation(btScalar timeStep, int maxSubSteps, btScalar fixedTimeStep)
 {
-	startProfiling(timeStep);
+//	startProfiling(timeStep); stephengold commented out 2021-08-12
 
 	int numSimulationSubSteps = 0;
 
