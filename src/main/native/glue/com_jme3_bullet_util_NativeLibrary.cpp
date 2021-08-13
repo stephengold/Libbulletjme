@@ -81,7 +81,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpMemoryLeaks
 #ifdef BT_DEBUG_MEMORY_ALLOCATIONS
     numBytes = btDumpMemoryLeaks();
 #else
-    printf("Warning: can't invoke btDumpMemoryLeaks()!\n");
+    printf("Warning: NativeLibrary.dumpMemoryLeaks() can't invoke btDumpMemoryLeaks()!\n");
     numBytes = -1;
 #endif //BT_DEBUG_MEMORY_ALLOCATIONS
     fflush(stdout);
@@ -98,7 +98,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpQuickprof
 (JNIEnv *, jclass) {
     int numFrames;
 #ifdef BT_NO_PROFILE
-    printf("Warning: can't access CProfileManager!\n");
+    printf("Warning: NativeLibrary.dumpQuickprof() can't access CProfileManager!\n");
     numFrames = -1;
 #else
     numFrames = CProfileManager::Get_Frame_Count_Since_Reset();
