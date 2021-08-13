@@ -153,6 +153,9 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 #if BT_THREADSAFE
         printf("Mt_");
 #endif
+#ifdef BT_ENABLE_PROFILE
+        printf("Quickprof_");
+#endif
         printf("Libbulletjme version %s initializing\n", LIBBULLETJME_VERSION);
         fflush(stdout);
     }
