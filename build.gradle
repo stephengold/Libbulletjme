@@ -36,10 +36,10 @@ model {
     }
 
     flavors {
-        Sp   // single-precision arithmetic
-        SpMt // thread-safe, single-precision arithmetic
+        Sp            // single-precision arithmetic
+        SpMt          // single-precision arithmetic, multithreaded
         Dp   // double-precision arithmetic
-        DpMt // thread-safe, double-precision arithmetic
+        DpMt // double-precision arithmetic, multithreaded
     }
 
     platforms {
@@ -162,7 +162,7 @@ model {
                     }
                 } else { // neither -Pgithub= nor -Ptravis= specified
                     buildable = !targetPlatform.name.startsWith('Linux_ARM')
-                    //buildable = targetPlatform.name.equals('Linux64')
+                    //buildable = targetPlatform.name.equals('Linux64') // to skip all except Linux64
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
@@ -174,9 +174,11 @@ model {
                         String flavorArg = gradle.rootProject.ext.flavor
                         buildable = flavor.name.equals(flavorArg)
                     } else if (isMt) {
-                        // skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
+                        // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
                         buildable = targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('MacOSX')
                     }
+                    //if (isDp) buildable = false // to skip all double-precision flavors
+                    //if (isMt) buildable = false // to skip all multithreaded flavors
                 }
 
                 if (buildType == buildTypes.Debug) {
@@ -186,7 +188,6 @@ model {
                 }
                 if (isDp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
-                    //buildable = false
                 }
                 if (isMt) {
                     cppCompiler.define 'BT_THREADSAFE'
