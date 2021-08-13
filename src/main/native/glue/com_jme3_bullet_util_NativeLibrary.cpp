@@ -36,6 +36,7 @@
 #include "com_jme3_bullet_util_NativeLibrary.h"
 #include "jmeClasses.h"
 #include "LinearMath/btAlignedAllocator.h"
+#include "LinearMath/btQuickprof.h"
 #include "LinearMath/btThreads.h"
 
 /*
@@ -53,7 +54,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_countThreads
     numThreads = pScheduler->getNumThreads();
 #else
     numThreads = 1;
-#endif // BT_THREADSAFE
+#endif //BT_THREADSAFE
 
     return jint(numThreads);
 }
@@ -86,6 +87,26 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpMemoryLeaks
     fflush(stdout);
 
     return jint(numBytes);
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    dumpQuickprof
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpQuickprof
+(JNIEnv *, jclass) {
+    int numFrames;
+#ifdef BT_NO_PROFILE
+    printf("Warning: can't access CProfileManager!\n");
+    numFrames = -1;
+#else
+    numFrames = CProfileManager::Get_Frame_Count_Since_Reset();
+    CProfileManager::dumpAll();
+#endif //BT_NO_PROFILE
+    fflush(stdout);
+
+    return jint(numFrames);
 }
 
 /*
@@ -128,6 +149,20 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    isQuickprof
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isQuickprof
+(JNIEnv *, jclass) {
+#ifdef BT_NO_PROFILE
+    return JNI_FALSE;
+#else
+    return JNI_TRUE;
+#endif //BT_NO_PROFILE
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
  * Method:    isThreadSafe
  * Signature: ()Z
  */
@@ -137,7 +172,19 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
     return JNI_TRUE;
 #else
     return JNI_FALSE;
-#endif // BT_THREADSAFE
+#endif //BT_THREADSAFE
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    resetQuickprof
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_resetQuickprof
+(JNIEnv *, jclass) {
+#ifndef BT_NO_PROFILE
+    CProfileManager::Reset();
+#endif
 }
 
 /*

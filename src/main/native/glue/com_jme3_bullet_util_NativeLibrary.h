@@ -33,6 +33,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpMemoryLeaks
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    dumpQuickprof
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_dumpQuickprof
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
  * Method:    fail
  * Signature: ()V
  */
@@ -57,10 +65,26 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    isQuickprof
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isQuickprof
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
  * Method:    isThreadSafe
  * Signature: ()Z
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    resetQuickprof
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeLibrary_resetQuickprof
   (JNIEnv *, jclass);
 
 /*
