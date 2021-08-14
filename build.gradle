@@ -165,6 +165,7 @@ model {
                 } else { // neither -Pgithub= nor -Ptravis= specified
                     buildable = !targetPlatform.name.startsWith('Linux_ARM')
                     //buildable = targetPlatform.name.equals('Linux64') // to skip all except Linux64
+                    //buildable = targetPlatform.name.equals('Windows64') // to skip all except Windows64
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
@@ -233,6 +234,9 @@ model {
                             }
                             jar.dependsOn("copyPdbToDist$q")
                         }
+                    } else { // buildType == Release
+                        cppCompiler.args '/O2'
+                        cppCompiler.args '/Ob3'
                     }
                     if (isMt) {
                         cppCompiler.args '/openmp'
