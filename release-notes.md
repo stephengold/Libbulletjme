@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 11.2.1 released on 14 August 2021.
+
+Optimized Release-type builds that use Microsoft's Visual C++ compiler.
+
 ## Version 11.2.0 released on 13 August 2021.
 
  + Bugfix: pure virtual call by btGImpactMeshShape destructor (Minie issue #17)
