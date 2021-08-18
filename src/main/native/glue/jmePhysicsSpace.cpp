@@ -29,7 +29,9 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#if BT_THREADSAFE
 #include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
+#endif
 #include "jmePhysicsSpace.h"
 #include "jmeBulletUtil.h"
 #include "jmeUserInfo.h"
@@ -64,7 +66,7 @@ void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
     m_collisionWorld = new btDiscreteDynamicsWorldMt(pDispatcher, pBroadphase,
             pSolverPool, pConstraintSolver, pCollisionConfiguration); //dance007
 
-    modify(); // Make the standard modifications.
+    modify(); // Apply the standard modifications.
 }
 
 #else
@@ -90,7 +92,7 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
     m_collisionWorld = new btDiscreteDynamicsWorld(pDispatcher, pBroadphase,
             pConstraintSolver, pCollisionConfiguration); //dance007
 
-    modify(); // Make the standard modifications.
+    modify(); // Apply the standard modifications.
 }
 
 #endif // BT_THREADSAFE
