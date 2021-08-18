@@ -137,22 +137,24 @@ model {
                 buildable = false
             }
             binaries.withType(SharedLibraryBinarySpec) {
+                Boolean isDebug = (buildType == buildTypes.Debug)
+                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 // Decide whether to build for the target platform:
                 if (gradle.rootProject.hasProperty('github')) {
                     // -Pgithub= specified on the command line
                     String github = gradle.rootProject.ext.github
                     if (github.equals('xcode11')) { // typically Xcode_12.4
-                        buildable = (buildType == buildTypes.Debug) && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
+                        buildable = isDebug && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
                     } else if (github.equals('debug64')) {
-                        buildable = (buildType == buildTypes.Debug) && targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('Linux_ARM')
+                        buildable = isDebug && targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('Linux_ARM')
                     }
                 } else if (gradle.rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
                     String travis = gradle.rootProject.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
-                        buildable = (flavor == flavors.Sp || flavor == flavors.Dp) && !targetPlatform.name.startsWith('Linux_ARM')
+                        buildable = (!isMt) && !targetPlatform.name.startsWith('Linux_ARM')
                     } else if (travis.equals('amd64mt')) { // use g++-5 to build Mt flavors
-                        buildable = (flavor == flavors.SpMt || flavor == flavors.DpMt) && targetPlatform.name.equals('Linux64')
+                        buildable = isMt && targetPlatform.name.equals('Linux64')
                     } else if (travis.equals('arm32')) {
                         buildable = targetPlatform.name.equals('Linux_ARM32')
                     } else if (travis.equals('arm32hf')) {
@@ -169,7 +171,6 @@ model {
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
-                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
                 if (buildable) {
                     // Decide whether to build the current flavor:
@@ -186,7 +187,7 @@ model {
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
-                if (buildType == buildTypes.Debug) {
+                if (isDebug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
@@ -214,7 +215,7 @@ model {
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/public"
-                    if (buildType == buildTypes.Debug) {
+                    if (isDebug) {
                         cppCompiler.args '/FS' // serialize PDB writes
                         cppCompiler.args '/MTd' // use LIBCMTD
                         cppCompiler.args '/Zi' // produce PDB file
@@ -250,9 +251,9 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
                     cppCompiler.args '-std=c++11' // ignored by g++-4.7
-                    if (buildType == buildTypes.Debug) {
+                    if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
-                    } else if (buildType == buildTypes.Release) {
+                    } else { // buildType == Release
                         cppCompiler.args '-O3'
                     }
                     if (isMt) {
