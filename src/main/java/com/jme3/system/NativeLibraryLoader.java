@@ -71,7 +71,7 @@ public final class NativeLibraryLoader {
                 buildType;
         assert flavor.equals("Sp") || flavor.equals("SpMt")
                 || flavor.equals("SpMtQuickprof")
-                || flavor.equals("SpQuickProf")
+                || flavor.equals("SpQuickprof")
                 || flavor.equals("Dp") || flavor.equals("DpMt") : flavor;
 
         Platform platform = JmeSystem.getPlatform();
