@@ -29,6 +29,9 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JME_PHYSICS_SOFT_SPACE_H
+#define JME_PHYSICS_SOFT_SPACE_H
+
 #include "jmePhysicsSpace.h"
 #include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
@@ -57,3 +60,5 @@ public:
         return (btSoftRigidDynamicsWorld *) m_collisionWorld;
     }
 };
+
+#endif // JME_PHYSICS_SOFT_SPACE_H

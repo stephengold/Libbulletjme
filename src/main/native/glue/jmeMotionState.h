@@ -29,15 +29,15 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JME_MOTION_STATE_H
+#define JME_MOTION_STATE_H
+
 #include <jni.h>
+#include "btBulletDynamicsCommon.h"
 
 /*
  * Author: Normen Hansen
  */
-
-#include "btBulletDynamicsCommon.h"
-//#include "btBulletCollisionCommon.h"
-
 class jmeMotionState : public btMotionState {
 private:
     bool dirty;
@@ -55,3 +55,5 @@ public:
     void setKinematicRotationQuat(JNIEnv *, jobject);
     bool applyTransform(JNIEnv *env, jobject location, jobject rotation);
 };
+
+#endif // JME_MOTION_STATE_H

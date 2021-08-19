@@ -29,6 +29,9 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JME_PHYSICS_SPACE_H
+#define JME_PHYSICS_SPACE_H
+
 #include "jmeCollisionSpace.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
@@ -52,12 +55,12 @@ public:
      */
     jmePhysicsSpace(JNIEnv *pEnv, jobject javaSpace)
     : jmeCollisionSpace(pEnv, javaSpace) {
-    }
+        }
 
     virtual ~jmePhysicsSpace();
 
     static bool
-    contactProcessedCallback(btManifoldPoint&, void* body0, void* body1);
+    contactProcessedCallback(btManifoldPoint&, void* pBody0, void* pBody1);
 
     static void
     contactStartedCallback(btPersistentManifold * const &);
@@ -96,3 +99,5 @@ public:
     void
     stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy);
 };
+
+#endif // JME_PHYSICS_SPACE_H

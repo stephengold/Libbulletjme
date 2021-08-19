@@ -29,6 +29,9 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JME_BULLET_UTIL_H
+#define JME_BULLET_UTIL_H
+
 #include "jmeClasses.h"
 #include "btBulletDynamicsCommon.h"
 #include "LinearMath/btVector3.h"
@@ -68,3 +71,5 @@ private:
     ~jmeBulletUtil() {
     }
 };
+
+#endif // JME_BULLET_UTIL_H

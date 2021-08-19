@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,6 +29,9 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef JME_MULTI_BODY_SPACE_H
+#define JME_MULTI_BODY_SPACE_H
+
 #include "jmePhysicsSpace.h"
 #include "btMultiBodyDynamicsWorld.h"
 
@@ -65,3 +68,5 @@ public:
         return (btMultiBodyDynamicsWorld *) m_collisionWorld;
     }
 };
+
+#endif // JME_MULTI_BODY_SPACE_H
