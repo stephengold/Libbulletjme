@@ -100,18 +100,21 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
         void* pBody0, void* pBody1) {
     //printf("contactProcessedCallback %x %x\n", pBody0, pBody1);
+
     const btCollisionObject *pco0 = (btCollisionObject *) pBody0;
     jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
     const btCollisionObject *pco1 = (btCollisionObject *) pBody1;
     jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
     if (pUser0 == NULL || pUser1 == NULL) {
         printf("null userPointer in contactProcessedCallback\n");
+        fflush(stdout);
         return true;
     }
 
     jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->m_jmeSpace;
     if (pSpace == NULL) {
-        printf("null dynamicsWorld in contactProcessedCallback\n");
+        printf("null jmePhysicsSpace in contactProcessedCallback\n");
+        fflush(stdout);
         return true;
     }
 
@@ -119,6 +122,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace == NULL) {
         printf("null javaPhysicsSpace in contactProcessedCallback\n");
+        fflush(stdout);
         return true;
     }
 
@@ -129,7 +133,8 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
             jmeClasses::PhysicsSpace_addContactProcessed, javaCollisionObject0,
             javaCollisionObject1, manifoldPointId);
     if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
+        printf("exception in contactProcessedCallback CallVoidMethod\n");
+        fflush(stdout);
         return true;
     }
 
@@ -137,8 +142,8 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
     pEnv->DeleteLocalRef(javaCollisionObject0);
     pEnv->DeleteLocalRef(javaCollisionObject1);
     if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return true;
+        printf("exception in contactProcessedCallback DeleteLocalRef\n");
+        fflush(stdout);
     }
 
     return true;
@@ -148,6 +153,7 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
     //printf("contactStartedCallback %x %x\n", pco0, pco1);
+
     jmeUserPointer const pUser0 = (jmeUserPointer) pco0->getUserPointer();
     jmeUserPointer const pUser1 = (jmeUserPointer) pco1->getUserPointer();
     if (pUser0 != NULL && pUser1 != NULL) {
@@ -169,7 +175,8 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
                             javaCollisionObject0, javaCollisionObject1,
                             manifoldPointId);
                     if (pEnv->ExceptionCheck()) {
-                        pEnv->Throw(pEnv->ExceptionOccurred());
+                        printf("exception in contactStartedCallback CallVoidMethod\n");
+                        fflush(stdout);
                         return;
                     }
                 }
@@ -177,17 +184,20 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
                 pEnv->DeleteLocalRef(javaCollisionObject0);
                 pEnv->DeleteLocalRef(javaCollisionObject1);
                 if (pEnv->ExceptionCheck()) {
-                    pEnv->Throw(pEnv->ExceptionOccurred());
-                    return;
+                    printf("exception in contactStartedCallback DeleteLocalRef\n");
+                    fflush(stdout);
                 }
             } else {
                 printf("null javaPhysicsSpace in contactStartedCallback\n");
+                fflush(stdout);
             }
         } else {
-            printf("null dynamicsWorld in contactStartedCallback\n");
+            printf("null jmePhysicsSpace in contactStartedCallback\n");
+            fflush(stdout);
         }
     } else {
         printf("null userPointer in contactStartedCallback\n");
+        fflush(stdout);
     }
 }
 
