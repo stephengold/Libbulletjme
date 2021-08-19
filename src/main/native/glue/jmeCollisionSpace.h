@@ -37,6 +37,7 @@
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
+#include "LinearMath/btThreads.h"
 
 /*
  * Author: Normen Hansen
@@ -55,6 +56,10 @@ protected:
     JNIEnv *pEnv;
     jobject m_javaSpace;
     JavaVM * vm;
+    /*
+     * exclusive access to the JavaVM and JNIEnv during parallel for loops:
+     */
+    btSpinMutex m_mutex;
 
     void attachThread();
     btBroadphaseInterface * createBroadphase(const btVector3 & min,
