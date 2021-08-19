@@ -152,10 +152,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSpeculativeContactRe
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    stepSimulation
- * Signature: (JFIF)V
+ * Signature: (JFIFZZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_stepSimulation
-  (JNIEnv *, jclass, jlong, jfloat, jint, jfloat);
+  (JNIEnv *, jclass, jlong, jfloat, jint, jfloat, jboolean, jboolean);
 
 #ifdef __cplusplus
 }

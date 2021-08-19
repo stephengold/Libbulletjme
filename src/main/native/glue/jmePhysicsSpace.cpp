@@ -203,16 +203,6 @@ void jmePhysicsSpace::modify() {
     pWorld->setInternalTickCallback(&jmePhysicsSpace::postTickCallback,
             static_cast<void *> (this));
     pWorld->setWorldUserInfo(this);
-    /*
-     * Ensure that both global callbacks are configured.
-     */
-    btAssert(gContactProcessedCallback == NULL
-            || gContactProcessedCallback == &contactProcessedCallback);
-    gContactProcessedCallback = &contactProcessedCallback;
-
-    btAssert(gContactStartedCallback == NULL
-            || gContactStartedCallback == &contactStartedCallback);
-    gContactStartedCallback = &contactStartedCallback;
 }
 
 void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
@@ -250,7 +240,20 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 }
 
 void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
-        jfloat accuracy) {
+        jfloat accuracy, jboolean enableContactProcessedCallback,
+        jboolean enableContactStartedCallback) {
+    if ((bool) enableContactProcessedCallback) {
+        gContactProcessedCallback = &contactProcessedCallback;
+    } else {
+        gContactProcessedCallback = NULL;
+    }
+
+    if ((bool) enableContactStartedCallback) {
+        gContactStartedCallback = &contactStartedCallback;
+    } else {
+        gContactStartedCallback = NULL;
+    }
+
     btDynamicsWorld * const pWorld = getDynamicsWorld();
     pWorld->stepSimulation((btScalar) timeInterval, (int) maxSteps,
             (btScalar) accuracy);

@@ -55,7 +55,7 @@ public:
      */
     jmePhysicsSpace(JNIEnv *pEnv, jobject javaSpace)
     : jmeCollisionSpace(pEnv, javaSpace) {
-        }
+    }
 
     virtual ~jmePhysicsSpace();
 
@@ -97,7 +97,9 @@ public:
     preTickCallback(btDynamicsWorld *, btScalar);
 
     void
-    stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy);
+    stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy,
+            jboolean enableContactProcessedCallback,
+            jboolean enableContactStartedCallback);
 };
 
 #endif // JME_PHYSICS_SPACE_H
