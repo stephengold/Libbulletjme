@@ -1,5 +1,17 @@
 # Release log for the Libbulletjme project
 
+## Version 12.0.0 released on 20 August 2021
+
+ + Removed the `getX()` method from the `Vector3f` class. (API change)
+ + Removed the deprecated `getAngularFactor()` method
+   from the `PhysicsRigidBody` class. (API change)
+ + Renamed the `addContraintTorque()` native method
+   in the `MultiBodyLink` class. (API change)
+ + Bugfix: "SpQuickprof" not recognized as a valid build flavor
+ + Disabled contact callbacks when the space has no listeners. (API change)
+ + In Mt builds, allocated 2 worker threads instead of the maximum number.
+ + Added profiling points to the `jmePhysicsSpace` class.
+
 ## Version 11.2.1 released on 14 August 2021.
 
 Optimized Release-type builds that use Microsoft's Visual C++ compiler.
