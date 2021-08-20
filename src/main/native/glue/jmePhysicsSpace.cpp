@@ -99,6 +99,7 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 
 bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
         void* pBody0, void* pBody1) {
+    BT_PROFILE("contactProcessedCallback");
     //printf("contactProcessedCallback %x %x\n", pBody0, pBody1);
 
     const btCollisionObject *pco0 = (btCollisionObject *) pBody0;
@@ -162,6 +163,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
 }
 
 void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
+    BT_PROFILE("contactStartedCallback");
     const btCollisionObject *pco0 = pm->getBody0();
     const btCollisionObject *pco1 = pm->getBody1();
     //printf("contactStartedCallback %x %x\n", pco0, pco1);
@@ -240,6 +242,8 @@ void jmePhysicsSpace::modify() {
 
 void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
         btScalar timeStep) {
+    BT_PROFILE("postTickCallback");
+
     jmePhysicsSpace * const
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
     JNIEnv * const pEnv = pSpace->getEnv();
@@ -257,6 +261,8 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
 
 void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
         btScalar timeStep) {
+    BT_PROFILE("preTickCallback");
+
     jmePhysicsSpace * const
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
     JNIEnv * const pEnv = pSpace->getEnv();
