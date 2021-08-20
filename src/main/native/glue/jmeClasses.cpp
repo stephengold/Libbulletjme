@@ -161,9 +161,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     }
 
 #if BT_THREADSAFE
-    btITaskScheduler* pScheduler = btGetOpenMPTaskScheduler();
-    int maxThreads = pScheduler->getMaxNumThreads();
-    pScheduler->setNumThreads(maxThreads);
+    btITaskScheduler *pScheduler = btGetOpenMPTaskScheduler();
+    pScheduler->setNumThreads(2);
     btSetTaskScheduler(pScheduler);
 #endif // BT_THREADSAFE
 
