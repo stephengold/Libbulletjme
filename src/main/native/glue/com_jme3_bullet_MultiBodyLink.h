@@ -17,10 +17,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addConstraintForce
 
 /*
  * Class:     com_jme3_bullet_MultiBodyLink
- * Method:    addContraintTorque
+ * Method:    addConstraintTorque
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addContraintTorque
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addConstraintTorque
   (JNIEnv *, jclass, jlong, jobject);
 
 /*

@@ -158,7 +158,7 @@ public class MultiBodyLink extends NativePhysicsObject {
         Validate.finite(torque, "torque");
 
         long linkId = nativeId();
-        addContraintTorque(linkId, torque);
+        addConstraintTorque(linkId, torque);
     }
 
     /**
@@ -595,7 +595,7 @@ public class MultiBodyLink extends NativePhysicsObject {
     native private static void addConstraintForce(long linkId,
             Vector3f forceVector);
 
-    native private static void addContraintTorque(long linkId, // TODO rename
+    native private static void addConstraintTorque(long linkId,
             Vector3f torqueVector);
 
     native private static void addForce(long linkId, Vector3f forceVector);
