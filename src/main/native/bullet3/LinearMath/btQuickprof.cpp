@@ -649,7 +649,7 @@ void CProfileManager::dumpRecursive(CProfileIterator* profileIterator, int spaci
 	for (i = 0; i < spacing; i++) printf(" ");// stephengold changed 2021-08-13
 	printf("----------------------------------\n");
 	for (i = 0; i < spacing; i++) printf(" ");// stephengold changed 2021-08-13
-	printf("Profile of %s:  %.2f ms, %.4f ms/step\n",// stephengold changed 2021-08-13
+	printf("Profile of %s:  %.2f ms, %.4f ms/frame\n",// stephengold changed 2021-08-19
                 profileIterator->Get_Current_Parent_Name(),// stephengold changed 2021-08-13
                 parent_time,// stephengold changed 2021-08-13
                 parent_time / (float)frames_since_reset );// stephengold changed 2021-08-13
@@ -665,7 +665,7 @@ void CProfileManager::dumpRecursive(CProfileIterator* profileIterator, int spaci
 		float fraction = parent_time > SIMD_EPSILON ? (current_total_time / parent_time) * 100 : 0.f;
 		int j;// stephengold changed 2021-08-13
 		for (j = 0; j < spacing; j++) printf(" ");// stephengold changed 2021-08-13
-		printf(" %5.1f%% %s  %d calls, %.2f ms, %.4f ms/step\n",// stephengold changed 2021-08-13
+		printf(" %5.1f%% %s  %d calls, %.2f ms, %.4f ms/frame\n",// stephengold changed 2021-08-19
                         fraction,// stephengold changed 2021-08-13
                         profileIterator->Get_Current_Name(),// stephengold changed 2021-08-13
                         profileIterator->Get_Current_Total_Calls(),// stephengold changed 2021-08-13
@@ -678,7 +678,7 @@ void CProfileManager::dumpRecursive(CProfileIterator* profileIterator, int spaci
 	for (i = 0; i < spacing; i++) printf(" ");// stephengold changed 2021-08-13
         float unaccounted_time = parent_time - accumulated_time;// stephengold changed 2021-08-13
         float percent = parent_time > SIMD_EPSILON ? (unaccounted_time / parent_time) * 100 : 0;// stephengold changed 2021-08-13
-	printf(" %5.1f%% Unaccounted  %.2f ms, %.4f ms/step\n",// stephengold changed 2021-08-13
+	printf(" %5.1f%% Unaccounted  %.2f ms, %.4f ms/frame\n",// stephengold changed 2021-08-19
                 percent,// stephengold changed 2021-08-13
                 unaccounted_time,// stephengold changed 2021-08-13
                 unaccounted_time / (float)frames_since_reset );// stephengold changed 2021-08-13
