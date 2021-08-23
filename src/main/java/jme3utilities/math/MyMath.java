@@ -111,6 +111,23 @@ public class MyMath {
     }
 
     /**
+     * Test whether the specified floating-point value is finite. Note that Java
+     * 8 provides {@link java.lang.Float#isFinite(float)}.
+     *
+     * @param value the value to test
+     * @return true if finite, false if NaN or infinity
+     */
+    public static boolean isFinite(float value) {
+        if (Float.isInfinite(value)) {
+            return false;
+        } else if (Float.isNaN(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Interpolate between (or extrapolate from) 2 single-precision values using
      * linear (Lerp) *polation. No rounding error is introduced when y0==y1.
      *
