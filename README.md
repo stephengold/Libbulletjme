@@ -34,14 +34,14 @@ standalone Maven artifacts are provided.
 
 ## Contents of this document
 
- + [How to add Libbulletjme to an existing project](#add)
- + [Example applications](#examples)
- + [How to build Libbulletjme from source](#build)
- + [Lexicon of class/enum/struct names](#lexicon)
- + [What's missing](#todo)
- + [External links](#links)
- + [History](#history)
- + [Acknowledgments](#acks)
++ [How to add Libbulletjme to an existing project](#add)
++ [Example applications](#examples)
++ [How to build Libbulletjme from source](#build)
++ [Lexicon of class/enum/struct names](#lexicon)
++ [What's missing](#todo)
++ [External links](#links)
++ [History](#history)
++ [Acknowledgments](#acks)
 
 
 <a name="add"/>
@@ -66,6 +66,8 @@ standalone Maven artifacts are provided.
 
         import com.jme3.system.NativeLibraryLoader;
         NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
+
+[Jump to table of contents](#toc)
 
 
 <a name="examples"/>
@@ -223,18 +225,21 @@ public class HelloVehicle {
 }
 ```
 
+[Jump to table of contents](#toc)
+
 
 <a name="build"/>
 
 ## How to build Libbulletjme from source
 
  1. Install build software:
-   + A Java Development Kit and
+   + A [Java Development Kit (JDK)][openJDK],
+    if you don't already have one, and
    + one of the supported C++ compilers:
      + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
      + for Windows:  Microsoft Visual Studio
      + for macOS:  Xcode
- 2. Download and extract the source code from GitHub:
+ 2. Download and extract the Libbulletjme source code from GitHub:
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
@@ -243,28 +248,32 @@ public class HelloVehicle {
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
      + save the ZIP file
-     + unzip the saved ZIP file
+     + extract the contents of the saved ZIP file
      + `cd` to the extracted directory/folder
  3. Set the `JAVA_HOME` environment variable:
    + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
    + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
- 4. Run the Gradle wrapper on the desktop build script:
-   + using Bash:  `./gradlew build`
+   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
+ 4. Run the [Gradle] wrapper on the desktop build script:
+   + using Bash or PowerShell:  `./gradlew build`
    + using Windows Command Prompt:  `.\gradlew build`
  5. Building Android native libraries requires additional software:
    + the Android SDK Tools
    + the Android SDK Patch Applier (patcher)
    + version 21.3.6528147 of the Android Native Development Kit (NDK)
  6. Run the Gradle wrapper on the Android build script:
-   + using Bash:  `./gradlew copyToDist --build-file=android.gradle`
+   + using Bash or PowerShell:  `./gradlew copyToDist --build-file=android.gradle`
    + using Windows Command Prompt:  `.\gradlew copyToDist --build-file=android.gradle`
 
-After a successful build, Maven artifacts and native libraries will be found
+After a successful build,
+Maven artifacts and native libraries will be found
 in the `dist` directory/folder.
 
-You can also install the Maven artifacts to your local cache:
- + using Bash:  `./gradlew publishToMavenLocal`
+You can also install the Maven artifacts to your local Maven repository:
+ + using Bash or PowerShell:  `./gradlew publishToMavenLocal`
  + using Windows Command Prompt:  `.\gradlew publishToMavenLocal`
+
+[Jump to table of contents](#toc)
 
 
 <a name="lexicon"/>
@@ -359,6 +368,8 @@ IVHACD::ConvexHull  vhacd.VHACDHull
 IVHACD::Parameters  vhacd.VHACDParameters
 </pre>
 
+[Jump to table of contents](#toc)
+
 
 <a name="todo"/>
 
@@ -384,6 +395,9 @@ IVHACD::Parameters  vhacd.VHACDParameters
  + extras, examples, and tests
  + execution tracing
  + `btAssert()` should perhaps throw a Java exception
+
+[Jump to table of contents](#toc)
+
 
 <a name="links"/>
 
@@ -429,6 +443,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
 [minie]: https://github.com/stephengold/Minie "Minie Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
+[openJDK]: https://openjdk.java.net "OpenJDK Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
@@ -439,7 +454,8 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 ## History
 
-The evolution of the project is chronicled in [its release log][log].
+The evolution of this project is chronicled in
+[its release log][log].
 
 The C++ glue code for Bullet was originally copied from `jme3-bullet-native`,
 a library of [jMonkeyEngine][jme].
