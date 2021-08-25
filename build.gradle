@@ -338,7 +338,7 @@ jar {
 
 task javadocJar(type: Jar) {
     archiveBaseName = project.ext.baseName
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Creates a JAR of javadoc.'
     from javadoc.destinationDir
@@ -346,7 +346,7 @@ task javadocJar(type: Jar) {
 
 task sourcesJar(type: Jar) {
     archiveBaseName = project.ext.baseName
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     dependsOn 'classes'
     description 'Creates a JAR of Java sourcecode.'
     from 'src/main/java'
