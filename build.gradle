@@ -340,7 +340,7 @@ task javadocJar(type: Jar) {
     archiveBaseName = project.ext.baseName
     classifier = 'javadoc'
     dependsOn 'javadoc'
-    description 'Create a JAR of javadoc.'
+    description 'Creates a JAR of javadoc.'
     from javadoc.destinationDir
 }
 
@@ -348,7 +348,7 @@ task sourcesJar(type: Jar) {
     archiveBaseName = project.ext.baseName
     classifier = 'sources'
     dependsOn 'classes'
-    description 'Create a JAR of Java sourcecode.'
+    description 'Creates a JAR of Java sourcecode.'
     from 'src/main/java'
 }
 
@@ -360,12 +360,14 @@ artifacts {
 build.dependsOn('pom', 'pomAsc')
 task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
+    description 'Copies the Maven POM to build/libs.'
     from "${buildDir}/publications/maven/pom-default.xml"
     into 'dist'
     rename 'pom-default.xml', baseName + '.pom'
 }
 task('pomAsc', type: Copy) {
     dependsOn 'signMavenPublication'
+    description 'Copies the signature of the Maven POM to build/libs.'
     from "${buildDir}/publications/maven/pom-default.xml.asc"
     into 'dist'
     rename 'pom-default.xml.asc', baseName + '.pom.asc'
@@ -405,12 +407,14 @@ publishing {
     }
 }
 
+// signing tasks
+
 signing {
     sign configurations.archives
     sign publishing.publications.maven
 }
 tasks.withType(Sign) {
-    onlyIf { gradle.rootProject.hasProperty('signing.keyId') }
+    onlyIf { rootProject.hasProperty('signing.keyId') }
 }
 
 // cleanup tasks
