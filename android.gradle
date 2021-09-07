@@ -12,8 +12,8 @@ buildscript {
 apply plugin: 'com.android.library'
 
 String flavor = 'Sp'
-if (gradle.rootProject.hasProperty('flavor')) {
-    flavor = gradle.rootProject.ext.flavor
+if (rootProject.hasProperty('flavor')) {
+    flavor = rootProject.ext.flavor
 }
 
 android {

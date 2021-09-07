@@ -140,17 +140,17 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 // Decide whether to build for the target platform:
-                if (gradle.rootProject.hasProperty('github')) {
+                if (rootProject.hasProperty('github')) {
                     // -Pgithub= specified on the command line
-                    String github = gradle.rootProject.ext.github
+                    String github = rootProject.ext.github
                     if (github.equals('xcode11')) { // typically Xcode_12.4
                         buildable = isDebug && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
                     } else if (github.equals('debug64')) {
                         buildable = isDebug && targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('Linux_ARM')
                     }
-                } else if (gradle.rootProject.hasProperty('travis')) {
+                } else if (rootProject.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
-                    String travis = gradle.rootProject.ext.travis
+                    String travis = rootProject.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
                         buildable = (!isMt) && !targetPlatform.name.startsWith('Linux_ARM')
                     } else if (travis.equals('amd64mt')) { // use g++-5 to build Mt flavors
@@ -174,9 +174,9 @@ model {
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
                 if (buildable) {
                     // Decide whether to build the current flavor:
-                    if (gradle.rootProject.hasProperty('flavor')) {
+                    if (rootProject.hasProperty('flavor')) {
                         // -Pflavor= specified on the command line
-                        String flavorArg = gradle.rootProject.ext.flavor
+                        String flavorArg = rootProject.ext.flavor
                         buildable = flavor.name.equals(flavorArg)
                     } else if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
@@ -414,7 +414,7 @@ signing {
     sign publishing.publications.maven
 }
 tasks.withType(Sign) {
-    onlyIf { rootProject.hasProperty('signing.keyId') }
+    onlyIf { hasProperty('signing.keyId') }
 }
 
 // cleanup tasks
