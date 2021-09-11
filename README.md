@@ -54,8 +54,11 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            compile 'com.github.stephengold:Libbulletjme:12.0.0'
+            implementation 'com.github.stephengold:Libbulletjme:12.0.0'
         }
+
+    For some older versions of Gradle,
+    it's necessary to replace `implementation` with `compile`.
 
  2. Download appropriate native libraries from [GitHub][latest].
     You probably don't need all 52 native libraries.
