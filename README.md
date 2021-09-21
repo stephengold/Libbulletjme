@@ -383,6 +383,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
    + macOS and Windows on ARM architectures
    + PowerPC architectures
  + `btRigidBodyConstructionInfo`
+ + debug drawer
  + serialization (file loader)
  + certain constraints:
    + `btFixedConstraint`
