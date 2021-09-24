@@ -143,17 +143,17 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 // Decide whether to build for the target platform:
-                if (rootProject.hasProperty('github')) {
+                if (project.hasProperty('github')) {
                     // -Pgithub= specified on the command line
-                    String github = rootProject.ext.github
+                    String github = project.ext.github
                     if (github.equals('xcode11')) { // typically Xcode_12.4
                         buildable = isDebug && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
                     } else if (github.equals('debug64')) {
                         buildable = isDebug && targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('Linux_ARM')
                     }
-                } else if (rootProject.hasProperty('travis')) {
+                } else if (project.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
-                    String travis = rootProject.ext.travis
+                    String travis = project.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
                         buildable = (!isMt) && !targetPlatform.name.startsWith('Linux_ARM')
                     } else if (travis.equals('amd64mt')) { // use g++-5 to build Mt flavors
@@ -177,9 +177,9 @@ model {
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
                 if (buildable) {
                     // Decide whether to build the current flavor:
-                    if (rootProject.hasProperty('flavor')) {
+                    if (project.hasProperty('flavor')) {
                         // -Pflavor= specified on the command line
-                        String flavorArg = rootProject.ext.flavor
+                        String flavorArg = project.ext.flavor
                         buildable = flavor.name.equals(flavorArg)
                     } else if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
