@@ -7,12 +7,15 @@ plugins {
     id 'signing'
 }
 
-description = 'a JNI interface for Bullet Physics and V-HACD'
 ext {
+    group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
     version = '12.0.0'
     baseName = "${artifact}-${version}"
+    websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
+
+description = 'a JNI interface for Bullet Physics and V-HACD'
 
 sourceSets.main.java {
     srcDir 'src/main/java'
@@ -305,13 +308,12 @@ description = 'JNI interface to Bullet Physics and V-HACD'
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
 
-dependencies {
-    testImplementation 'junit:junit:4.13.2'
+repositories {
+    mavenCentral()
 }
 
-repositories {
-    //mavenLocal()
-    mavenCentral()
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
 }
 
 tasks.withType(JavaCompile) { // compile-time options:
@@ -378,7 +380,7 @@ publishing {
         maven(MavenPublication) {
             artifactId artifact
             from components.java
-            groupId 'com.github.stephengold'
+            groupId project.ext.group
             pom {
                 description = project.description
                 developers {
@@ -394,13 +396,13 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
-                name = 'com.github.stephengold:' + artifact
+                name = project.ext.group + ':' + artifact
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/Libbulletjme.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Libbulletjme.git'
-                    url = 'https://github.com/stephengold/Libbulletjme/tree/master'
+                    url = project.ext.websiteUrl + '/tree/master'
                 }
-                url = 'https://github.com/stephengold/Libbulletjme'
+                url = project.ext.websiteUrl
             }
             version project.ext.version
         }
