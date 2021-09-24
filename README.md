@@ -446,6 +446,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [openJDK]: https://openjdk.java.net "OpenJDK Project"
+[simmath]: https://github.com/Simsilica/SimMath "SimMath Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
@@ -484,6 +485,7 @@ The Libbulletjme Project is based on open-source software:
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
   + Riccardo Balbo's [V-hacd-java-bindings]
   + Stephen Gold's [Heart]
+  + Paul Speed's [SimMath]
 
 This project also made use of the following software tools:
 
