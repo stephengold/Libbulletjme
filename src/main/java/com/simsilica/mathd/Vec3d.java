@@ -120,6 +120,46 @@ public class Vec3d implements Cloneable {
     public Vector3f toVector3f() {
         return new Vector3f((float)x, (float)y, (float)z);
     }
+    
+    /**
+     * Generate the hash code for this vector.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        long bits = Double.doubleToLongBits(x);
+        bits ^= Double.doubleToLongBits(y) * 31;
+        bits ^= Double.doubleToLongBits(z) * 31;
+        
+        return ((int)bits) ^ ((int)(bits >> 32));
+    }
+    
+    /**
+     * Test for strict equality with another object.
+     *
+     * @param o the object to compare to (may be null, unaffected)
+     * @return true if the objects have the same value, otherwise false
+     */
+    @Override
+    public boolean equals( Object o ) {
+        if( o == this )
+            return true;
+        if( o == null || o.getClass() != getClass() )
+            return false;
+        Vec3d other = (Vec3d)o;
+        if (Double.compare(x, other.x) != 0) {
+            return false;
+        }
+        if (Double.compare(y, other.y) != 0) {
+            return false;
+        }
+        if (Double.compare(z, other.z) != 0) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Set all components of this vector to the specified values.
@@ -177,7 +217,7 @@ public class Vec3d implements Cloneable {
      *
      * The format is:
      *
-     * (XX.XXXXXXXXXXXXX, YY.YYYYYYYYYYYYY, ZZ.ZZZZZZZZZZZZZ)
+     * Vec3d[XX.XXXXXXXXXXXXX, YY.YYYYYYYYYYYYY, ZZ.ZZZZZZZZZZZZZ]
      *
      * @return a descriptive string of text (not null, not empty)
      */
