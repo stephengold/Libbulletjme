@@ -140,6 +140,34 @@ public final class Quatd implements Cloneable {
     }
     
     /**
+     * Test for strict equality with another object.
+     *
+     * @param o the object to compare to (may be null, unaffected)
+     * @return true if the objects have the same value, otherwise false
+     */
+    @Override
+    public boolean equals( Object o ) {
+        if( o == this )
+            return true;
+        if( o == null || o.getClass() != getClass() )
+            return false;
+        Quatd other = (Quatd)o;
+        if (Double.compare(x, other.x) != 0) {
+            return false;
+        }
+        if (Double.compare(y, other.y) != 0) {
+            return false;
+        }
+        if (Double.compare(z, other.z) != 0) {
+            return false;
+        }
+        if (Double.compare(w, other.w) != 0) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Set all components of this Quatd to the specified values.
      *
      * @param x the desired X component
