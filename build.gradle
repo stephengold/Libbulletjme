@@ -349,7 +349,6 @@ task javadocJar(type: Jar) {
 task sourcesJar(type: Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
-    dependsOn 'classes'
     description 'Creates a JAR of Java sourcecode.'
     from 'src/main/java'
 }
