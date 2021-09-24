@@ -46,6 +46,7 @@ public:
     static void convert(JNIEnv *, const btQuaternion * in, jobject outQuat);
     static void convert(JNIEnv *, const btTransform * in, jobject outTransform);
     static void convert(JNIEnv *, const btVector3 * in, jobject outVector);
+    static void convertDp(JNIEnv *, const btVector3 * in, jobject outVector);
     static void convertQuat(JNIEnv *, const btMatrix3x3 * in, jobject outQuat);
 
     // convert jMonkeyEngine math objects to Bullet:
@@ -54,6 +55,7 @@ public:
     static void convert(JNIEnv *, jobject inTransform,
             btTransform * outTransform, btVector3 * outScale);
     static void convert(JNIEnv *, jobject inVector, btVector3 * out);
+    static void convertDp(JNIEnv *, jobject inVector, btVector3 * out);
     static void convertQuat(JNIEnv *, jobject inQuat, btMatrix3x3 * out);
 
     static void addRayTestResult(JNIEnv *, jobject resultList,

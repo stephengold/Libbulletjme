@@ -54,6 +54,11 @@ jmethodID jmeClasses::PhysicsSpace_addContactProcessed;
 
 jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
 
+jclass jmeClasses::Vec3d;
+jfieldID jmeClasses::Vec3d_x;
+jfieldID jmeClasses::Vec3d_y;
+jfieldID jmeClasses::Vec3d_z;
+
 jclass jmeClasses::Vector3f;
 jfieldID jmeClasses::Vector3f_x;
 jfieldID jmeClasses::Vector3f_y;
@@ -240,6 +245,27 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     PhysicsGhostObject_addOverlappingObject = pEnv->GetMethodID(PhysicsGhostObject,
             "addOverlappingObject_native",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    Vec3d = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/simsilica/mathd/Vec3d"));
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Vec3d_x = pEnv->GetFieldID(Vec3d, "x", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Vec3d_y = pEnv->GetFieldID(Vec3d, "y", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Vec3d_z = pEnv->GetFieldID(Vec3d, "z", "D");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

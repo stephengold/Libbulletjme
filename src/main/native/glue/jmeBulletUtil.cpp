@@ -36,6 +36,7 @@
 /*
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
+
 void jmeBulletUtil::convert(JNIEnv *pEnv, jobject in, btVector3 *pvOut) {
     NULL_CHK(pEnv, in, "The input Vector3f does not exist.",)
     NULL_CHK(pEnv, pvOut, "The output btVector3 does not exist.",);
@@ -51,6 +52,33 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, jobject in, btVector3 *pvOut) {
         return;
     }
     float z = pEnv->GetFloatField(in, jmeClasses::Vector3f_z);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    pvOut->setX(x);
+    pvOut->setY(y);
+    pvOut->setZ(z);
+}
+
+// Copy a SimMath Vec3d to a btVector3
+
+void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject in, btVector3 *pvOut) {
+    NULL_CHK(pEnv, in, "The input Vec3d does not exist.",)
+    NULL_CHK(pEnv, pvOut, "The output btVector3 does not exist.",);
+
+    double x = pEnv->GetDoubleField(in, jmeClasses::Vec3d_x);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double y = pEnv->GetDoubleField(in, jmeClasses::Vec3d_y);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double z = pEnv->GetDoubleField(in, jmeClasses::Vec3d_z);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -111,6 +139,33 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, const btVector3 *pvIn, jobject out) {
         return;
     }
     pEnv->SetFloatField(out, jmeClasses::Vector3f_z, z);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+}
+
+// Copy a btVector3 to a SimMath Vec3d
+
+void jmeBulletUtil::convertDp(JNIEnv *pEnv, const btVector3 *pvIn, jobject out) {
+    NULL_CHK(pEnv, pvIn, "The input btVector3 does not exist.",)
+    NULL_CHK(pEnv, out, "The output Vec3d does not exist.",);
+
+    double x = pvIn->getX();
+    double y = pvIn->getY();
+    double z = pvIn->getZ();
+
+    pEnv->SetDoubleField(out, jmeClasses::Vec3d_x, x);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(out, jmeClasses::Vec3d_y, y);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(out, jmeClasses::Vec3d_z, z);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
