@@ -101,12 +101,10 @@ public class HelloLibbulletjme {
         File downloadDirectory = new File(homePath, "Downloads");
         NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
         /*
-         * Create a 20x20x20 PhysicsSpace using DBVT for broadphase.
+         * Create a PhysicsSpace using DBVT for broadphase.
          */
-        Vector3f min = new Vector3f(-10f, -10f, -10f);
-        Vector3f max = new Vector3f(10f, 10f, 10f);
         PhysicsSpace.BroadphaseType bPhase = PhysicsSpace.BroadphaseType.DBVT;
-        PhysicsSpace space = new PhysicsSpace(min, max, bPhase);
+        PhysicsSpace space = new PhysicsSpace(bPhase);
         /*
          * Add a static horizontal plane at y=-1.
          */
@@ -128,9 +126,10 @@ public class HelloLibbulletjme {
          * 50 iterations with a 20-msec timestep
          */
         float timeStep = 0.02f;
+        Vector3f location = new Vector3f();
         for (int i = 0; i < 50; ++i) {
             space.update(timeStep, 0);
-            Vector3f location = ball.getPhysicsLocation();
+            ball.getPhysicsLocation(location);
             System.out.println(location);
         }
     }
@@ -163,12 +162,10 @@ public class HelloVehicle {
         File downloadDirectory = new File(homePath, "Downloads");
         NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
         /*
-         * Create a 20x20x200 PhysicsSpace using DBVT for broadphase.
+         * Create a PhysicsSpace using DBVT for broadphase.
          */
-        Vector3f min = new Vector3f(-10f, -10f, -100f);
-        Vector3f max = new Vector3f(10f, 10f, 100f);
         PhysicsSpace.BroadphaseType bPhase = PhysicsSpace.BroadphaseType.DBVT;
-        PhysicsSpace space = new PhysicsSpace(min, max, bPhase);
+        PhysicsSpace space = new PhysicsSpace(bPhase);
         /*
          * Add a static horizontal plane at y=-1.
          */
@@ -219,9 +216,10 @@ public class HelloVehicle {
          * 150 iterations with a 20-msec timestep
          */
         float timeStep = 0.02f;
+        Vector3f location = new Vector3f();
         for (int i = 0; i < 150; ++i) {
             space.update(timeStep, 0);
-            Vector3f location = vehicle.getPhysicsLocation();
+            vehicle.getPhysicsLocation(location);
             System.out.println(location);
         }
     }
