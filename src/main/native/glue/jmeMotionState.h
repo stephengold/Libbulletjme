@@ -47,13 +47,15 @@ public:
     virtual ~jmeMotionState();
 
     btTransform worldTransform;
-    virtual void getWorldTransform(btTransform& worldTrans) const;
-    virtual void setWorldTransform(const btTransform& worldTrans);
-    void setKinematicTransform(const btTransform& worldTrans);
-    void setKinematicLocation(JNIEnv *, jobject);
-    void setKinematicRotation(JNIEnv *, jobject);
-    void setKinematicRotationQuat(JNIEnv *, jobject);
-    bool applyTransform(JNIEnv *env, jobject location, jobject rotation);
+
+    bool applyTransform(JNIEnv *,
+            jobject locationVector3fIn, jobject rotationQuaternionIn);
+    virtual void getWorldTransform(btTransform& worldTransformOut) const;
+    void setKinematicLocation(JNIEnv *, jobject locationVector3fIn);
+    void setKinematicRotation(JNIEnv *, jobject rotationMatrix3fIn);
+    void setKinematicRotationQuat(JNIEnv *, jobject rotationQuaternionIn);
+    void setKinematicTransform(const btTransform& worldTransformIn);
+    virtual void setWorldTransform(const btTransform& worldTransformIn);
 };
 
 #endif // JME_MOTION_STATE_H
