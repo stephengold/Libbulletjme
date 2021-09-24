@@ -428,6 +428,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getLocationDp
+(JNIEnv *pEnv, jclass, jlong pcoId, jobject storeVectorDp) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
+    NULL_CHK(pEnv, storeVectorDp, "The storeVector does not exist.",);
+
+    const btVector3&
+            location = pCollisionObject->getWorldTransform().getOrigin();
+    jmeBulletUtil::convertDp(pEnv, &location, storeVectorDp);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getNumObjectsWithoutCollision
  * Signature: (J)I
  */

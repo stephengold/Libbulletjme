@@ -74,6 +74,7 @@ import com.jme3.math.Plane;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.system.NativeLibraryLoader;
+import com.simsilica.mathd.Vec3d;
 import java.io.File;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -1120,6 +1121,13 @@ public class TestLibbulletjme {
         Assert.assertEquals(w, q.getW(), tolerance);
     }
 
+    private static void assertEquals(double x, double y, double z, Vec3d vector,
+            double tolerance) {
+        Assert.assertEquals(x, vector.x, tolerance);
+        Assert.assertEquals(y, vector.y, tolerance);
+        Assert.assertEquals(z, vector.z, tolerance);
+    }
+
     private static void assertEquals(float x, float y, float z, Vector3f vector,
             float tolerance) {
         Assert.assertEquals(x, vector.x, tolerance);
@@ -1491,6 +1499,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, pco.getDeactivationTime(), 0f);
         Assert.assertEquals(0.5f, pco.getFriction(), 0f);
         assertEquals(0f, 0f, 0f, pco.getPhysicsLocation(null), 0f);
+        assertEquals(0.0, 0.0, 0.0, pco.getPhysicsLocationDp(null), 0.0);
         Assert.assertNull(pco.proxyGroup());
         Assert.assertNull(pco.proxyMask());
         Assert.assertEquals(0f, pco.getRestitution(), 0f);

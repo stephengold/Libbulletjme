@@ -39,6 +39,7 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -478,6 +479,22 @@ abstract public class PhysicsCollisionObject
         getLocation(objectId, result);
 
         assert Vector3f.isValidVector(result);
+        return result;
+    }
+
+    /**
+     * Copy the location of this object's center.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a location vector (in physics-space coordinates, either
+     * storeResult or a new vector, not null)
+     */
+    public Vec3d getPhysicsLocationDp(Vec3d storeResult) {
+        Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
+
+        long objectId = nativeId();
+        getLocationDp(objectId, result);
+
         return result;
     }
 
@@ -1137,6 +1154,8 @@ abstract public class PhysicsCollisionObject
     native private static float getFriction(long objectId);
 
     native private static void getLocation(long objectId, Vector3f storeResult);
+
+    native private static void getLocationDp(long objectId, Vec3d storeResult);
 
     native private static int getNumObjectsWithoutCollision(long objectId);
 
