@@ -1024,7 +1024,7 @@ public class TestLibbulletjme {
         Vector3f min = new Vector3f(-10f, -10f, -10f);
         Vector3f max = new Vector3f(10f, 10f, 10f);
         CollisionSpace space = new CollisionSpace(min, max,
-                PhysicsSpace.BroadphaseType.DBVT); // TODO simplify
+                PhysicsSpace.BroadphaseType.DBVT);
 
         CollisionShape box = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
         CollisionShape compound = new CompoundCollisionShape();
