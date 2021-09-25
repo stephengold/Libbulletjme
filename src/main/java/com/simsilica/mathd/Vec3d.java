@@ -120,7 +120,7 @@ public class Vec3d implements Cloneable {
     public Vector3f toVector3f() {
         return new Vector3f((float)x, (float)y, (float)z);
     }
-    
+ 
     /**
      * Generate the hash code for this vector.
      *
@@ -210,6 +210,46 @@ public class Vec3d implements Cloneable {
     @Override
     public final Vec3d clone() {
         return new Vec3d(x,y,z);
+    }
+
+    /**
+     * Uniformly scale this vector in place.
+     * 
+     * @param s the scale factor
+     * @return this
+     */
+    public final Vec3d multLocal( double s ) {
+        x *= s;
+        y *= s;
+        z *= s;
+        return this;
+    }
+
+    /**
+     * Determine the squared length of this vector.
+     *
+     * @return the squared length (&ge;0)
+     */
+    public final double lengthSq() {
+        return x * x + y * y + z * z;
+    }
+    
+    /**
+     * Determine the length of this vector.
+     *
+     * @return the length (&ge;0)
+     */
+    public final double length() {
+        return Math.sqrt(lengthSq());                
+    }
+
+    /**
+     * Normalize this vector in place.
+     *
+     * @return this
+     */
+    public final Vec3d normalizeLocal() {
+        return multLocal(1.0 / length());
     }
 
     /**
