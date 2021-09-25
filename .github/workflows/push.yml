@@ -15,7 +15,7 @@ jobs:
           java-version: 8
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
@@ -101,7 +101,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 15
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
       - if: failure()
         uses: actions/upload-artifact@v2
