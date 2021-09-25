@@ -213,6 +213,36 @@ public final class Quatd implements Cloneable {
     }
 
     /**
+     * Determine the squared length of this Quatd.
+     *
+     * @return the squared length (&ge;0)
+     */
+    public final double lengthSq() {
+        return (x * x) + (y * y) + (z * z) + (w * w);
+    }
+
+    /**
+     * Normalize this Quatd in place.
+     *
+     * @return this
+     */
+    public final Quatd normalizeLocal() {
+        double d = lengthSq();
+        if( d == 0 ) {
+            w = 1;
+            return this;
+        }
+            
+        double s = 1.0 / Math.sqrt(d);
+        x *= s;
+        y *= s;
+        z *= s;
+        w *= s;
+        
+        return this;
+    }
+
+    /**
      * Represent this Quatd as a String.
      *
      * The format is:
