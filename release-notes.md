@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 12.1.0 released on 25 September 2021
+## Version 12.1.1 released on 25 September 2021
 
  + Added double-precision getters for the locations and orientations
    of collision objects.
@@ -22,18 +22,18 @@
  + In Mt builds, allocated 2 worker threads instead of the maximum number.
  + Added profiling points to the `jmePhysicsSpace` class.
 
-## Version 11.2.1 released on 14 August 2021.
+## Version 11.2.1 released on 14 August 2021
 
 Optimized Release-type builds that use Microsoft's Visual C++ compiler.
 
-## Version 11.2.0 released on 13 August 2021.
+## Version 11.2.0 released on 13 August 2021
 
  + Bugfix: pure virtual call by btGImpactMeshShape destructor (Minie issue #17)
  + Bugfix: Quickprof reset at the start of every timestep
  + Bugfix: BT_PROFILE() macro never invokes CProfileManager
  + Added access to Quickprof profiling.
 
-## Version 11.1.0 released on 9 August 2021.
+## Version 11.1.0 released on 9 August 2021
 
  + Bugfix: missing the cppCompiler arguments to activate OpenMP extensions
  + Added the copy constructor and `multLocal(x,y,z,w)` method
@@ -43,7 +43,7 @@ Optimized Release-type builds that use Microsoft's Visual C++ compiler.
  + Deprecated the `Vector3f.getX()` and `PhysicsRigidBody.getAngularFactor()`
    methods.
 
-## Version 11.0.0 released on 8 August 2021.
+## Version 11.0.0 released on 8 August 2021
 
  + Bugfix: contact tests report events with positive separation distance
  + Tweaked the behavior of `PhysicsRigidBody.setKinematic()`.
