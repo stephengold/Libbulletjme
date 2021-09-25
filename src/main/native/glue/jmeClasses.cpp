@@ -256,23 +256,61 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass Vec3d = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/simsilica/mathd/Vec3d"));
     if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Vec3d_x = pEnv->GetFieldID(Vec3d, "x", "D");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Vec3d_y = pEnv->GetFieldID(Vec3d, "y", "D");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Vec3d_z = pEnv->GetFieldID(Vec3d, "z", "D");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
+        pEnv->ExceptionClear();
+
+        printf("WARNING: Libbulletjme didn't find the SimMath library.\n");
+        fflush(stdout);
+
+        Vec3d_x = NULL;
+        Vec3d_y = NULL;
+        Vec3d_z = NULL;
+        Quatd_x = NULL;
+        Quatd_y = NULL;
+        Quatd_z = NULL;
+        Quatd_w = NULL;
+
+    } else {
+        Vec3d_x = pEnv->GetFieldID(Vec3d, "x", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Vec3d_y = pEnv->GetFieldID(Vec3d, "y", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Vec3d_z = pEnv->GetFieldID(Vec3d, "z", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+
+        jclass Quatd = pEnv->FindClass("com/simsilica/mathd/Quatd");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Quatd_x = pEnv->GetFieldID(Quatd, "x", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Quatd_y = pEnv->GetFieldID(Quatd, "y", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Quatd_z = pEnv->GetFieldID(Quatd, "z", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Quatd_w = pEnv->GetFieldID(Quatd, "w", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
     }
 
     Vector3f = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/math/Vector3f"));
@@ -291,32 +329,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
     Vector3f_z = pEnv->GetFieldID(Vector3f, "z", "F");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-
-    jclass Quatd = pEnv->FindClass("com/simsilica/mathd/Quatd");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Quatd_x = pEnv->GetFieldID(Quatd, "x", "D");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Quatd_y = pEnv->GetFieldID(Quatd, "y", "D");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Quatd_z = pEnv->GetFieldID(Quatd, "z", "D");
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    Quatd_w = pEnv->GetFieldID(Quatd, "w", "D");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
