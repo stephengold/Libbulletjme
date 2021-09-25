@@ -39,6 +39,7 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -511,6 +512,22 @@ abstract public class PhysicsCollisionObject
 
         long objectId = nativeId();
         getOrientation(objectId, result);
+
+        return result;
+    }
+
+    /**
+     * Copy the orientation (rotation) of this object to a Quatd.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a rotation Quatd (in physics-space coordinates, either
+     * storeResult or a new instance, not null)
+     */
+    public Quatd getPhysicsRotationDp(Quatd storeResult) {
+        Quatd result = (storeResult == null) ? new Quatd() : storeResult;
+
+        long objectId = nativeId();
+        getOrientationDp(objectId, result);
 
         return result;
     }
@@ -1164,6 +1181,9 @@ abstract public class PhysicsCollisionObject
 
     native private static void getOrientation(long objectId,
             Quaternion storeResult);
+
+    native private static void getOrientationDp(long objectId,
+            Quatd storeResult);
 
     native private static int getProxyFilterGroup(long objectId);
 

@@ -495,6 +495,26 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getOrientationDp
+ * Signature: (JLcom/simsilica/mathd/Quatd;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getOrientationDp
+(JNIEnv *pEnv, jclass, jlong pcoId, jobject storeQuatDp) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
+    NULL_CHK(pEnv, storeQuatDp, "The storeQuatDp does not exist.",);
+
+    const btMatrix3x3& basis = pCollisionObject->getWorldTransform().getBasis();
+
+    btQuaternion btq;
+    basis.getRotation(btq);
+
+    jmeBulletUtil::convertDp(pEnv, &btq, storeQuatDp);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getProxyFilterGroup
  * Signature: (J)I
  */
