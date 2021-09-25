@@ -242,9 +242,25 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, const btQuaternion *pqIn,
     NULL_CHK(pEnv, outQuaternion, "The output Quaternion does not exist.",);
 
     pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_w, pqIn->w());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_x, pqIn->x());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_y, pqIn->y());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_z, pqIn->z());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
 }
 
 // Copy a btTransform to a JME Transform
@@ -266,8 +282,20 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
 
     jobject scale_out = pEnv->CallObjectMethod(outTransform, jmeClasses::Transform_scale);
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_x, 1);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_y, 1);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_z, 1);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
 }
 
 void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inMatrix3f, btMatrix3x3 *pmOut) {
@@ -513,12 +541,32 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
     jmeUserPointer const pUser = (jmeUserPointer) pHitObject->getUserPointer();
 
     pEnv->SetObjectField(result, jmeClasses::PhysicsRay_normal, normalvec);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(result, jmeClasses::PhysicsRay_hitFraction, hitFraction);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetIntField(result, jmeClasses::PhysicsRay_partIndex, partIndex);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetIntField(result, jmeClasses::PhysicsRay_triangleIndex,
             triangleIndex);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetObjectField(result, jmeClasses::PhysicsRay_collisionObject,
             pUser->m_javaRef);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addmethod, result);
     if (pEnv->ExceptionCheck()) {
@@ -540,13 +588,33 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
     jmeUserPointer pUser = (jmeUserPointer) pHitObject->getUserPointer();
 
     pEnv->SetObjectField(result, jmeClasses::PhysicsSweep_normal, normalvec);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetFloatField(result, jmeClasses::PhysicsSweep_hitFraction,
             hitFraction);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetIntField(result, jmeClasses::PhysicsSweep_partIndex, partIndex);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetIntField(result, jmeClasses::PhysicsSweep_triangleIndex,
             triangleIndex);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
     pEnv->SetObjectField(result, jmeClasses::PhysicsSweep_collisionObject,
             pUser->m_javaRef);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addmethod, result);
     if (pEnv->ExceptionCheck()) {
