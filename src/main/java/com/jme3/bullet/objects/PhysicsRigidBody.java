@@ -43,6 +43,8 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Quatd;
+import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -302,6 +304,23 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
+     * Copy this body's angular velocity. The body must be in dynamic mode.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a velocity vector (radians per second in physics-space
+     * coordinates, either storeResult or a new vector, not null))
+     */
+    public Vec3d getAngularVelocityDp(Vec3d storeResult) {
+        assert isDynamic();
+        Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
+
+        long objectId = nativeId();
+        getAngularVelocityDp(objectId, result);
+
+        return result;
+    }
+
+    /**
      * Calculate this body's angular velocity in its local coordinates. The body
      * must be in dynamic mode.
      *
@@ -411,6 +430,24 @@ public class PhysicsRigidBody extends PhysicsBody {
 
         long objectId = nativeId();
         getLinearVelocity(objectId, result);
+
+        return result;
+    }
+
+    /**
+     * Copy the linear velocity of this body's center of mass. The body must be
+     * in dynamic mode.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a velocity vector (physics-space units per second in
+     * physics-space coordinates, either storeResult or a new vector, not null)
+     */
+    public Vec3d getLinearVelocityDp(Vec3d storeResult) {
+        assert isDynamic();
+        Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
+
+        long objectId = nativeId();
+        getLinearVelocityDp(objectId, result);
 
         return result;
     }
@@ -575,6 +612,18 @@ public class PhysicsRigidBody extends PhysicsBody {
 
         long objectId = nativeId();
         setAngularVelocity(objectId, omega);
+        activate();
+    }
+
+    /**
+     * Alter this body's angular velocity.
+     *
+     * @param omega the desired angular velocity (in physics-space coordinates,
+     * not null, unaffected)
+     */
+    public void setAngularVelocityDp(Vec3d omega) {
+        long objectId = nativeId();
+        setAngularVelocityDp(objectId, omega);
         activate();
     }
 
@@ -744,6 +793,29 @@ public class PhysicsRigidBody extends PhysicsBody {
     }
 
     /**
+     * Alter the linear velocity of this body's center of mass.
+     *
+     * @param velocity the desired velocity (physics-space units per second in
+     * physics-space coordinates, not null, unaffected)
+     */
+    public void setLinearVelocityDp(Vec3d velocity) {
+        long objectId = nativeId();
+        setLinearVelocityDp(objectId, velocity);
+        activate();
+    }
+
+    /**
+     * Directly relocate this body's center of mass.
+     *
+     * @param location the desired location (in physics-space coordinates, not
+     * null, unaffected)
+     */
+    public void setPhysicsLocationDp(Vec3d location) {
+        long objectId = nativeId();
+        setPhysicsLocationDp(objectId, location);
+    }
+
+    /**
      * Directly alter this body's orientation.
      *
      * @param orientation the desired orientation (rotation matrix relative to
@@ -771,6 +843,19 @@ public class PhysicsRigidBody extends PhysicsBody {
 
         long objectId = nativeId();
         setPhysicsRotation(objectId, orientation);
+    }
+
+    /**
+     * Directly reorient this body.
+     *
+     * @param orientation the desired orientation (relative to physics-space
+     * coordinates, not null, unaffected)
+     */
+    public void setPhysicsRotationDp(Quatd orientation) {
+        Validate.nonNull(orientation, "orientation");
+
+        long objectId = nativeId();
+        setPhysicsRotationDp(objectId, orientation);
     }
 
     /**
@@ -1106,6 +1191,9 @@ public class PhysicsRigidBody extends PhysicsBody {
     native private static void getAngularVelocity(long objectId,
             Vector3f storeResult);
 
+    native private static void getAngularVelocityDp(long objectId,
+            Vec3d storeResult);
+
     native private static void getGravity(long objectId, Vector3f storeResult);
 
     native private static void getInverseInertiaLocal(long objectId,
@@ -1123,6 +1211,9 @@ public class PhysicsRigidBody extends PhysicsBody {
 
     native private static void getLinearVelocity(long objectId,
             Vector3f storeResult);
+
+    native private static void getLinearVelocityDp(long objectId,
+            Vec3d storeResult);
 
     native private static float getMass(long objectId);
 
@@ -1146,6 +1237,8 @@ public class PhysicsRigidBody extends PhysicsBody {
 
     native private static void setAngularVelocity(long objectId, Vector3f vec);
 
+    native private static void setAngularVelocityDp(long objectId, Vec3d vec);
+
     native private static void setCollisionShape(long objectId,
             long collisionShapeId);
 
@@ -1166,14 +1259,22 @@ public class PhysicsRigidBody extends PhysicsBody {
 
     native private static void setLinearVelocity(long objectId, Vector3f vec);
 
+    native private static void setLinearVelocityDp(long objectId, Vec3d vec);
+
     native private static void setPhysicsLocation(long objectId,
             Vector3f location);
+
+    native private static void setPhysicsLocationDp(long objectId,
+            Vec3d location);
 
     native private static void setPhysicsRotation(long objectId,
             Matrix3f rotation);
 
     native private static void setPhysicsRotation(long objectId,
             Quaternion rotation);
+
+    native private static void setPhysicsRotationDp(long objectId,
+            Quatd rotation);
 
     native private static void setSleepingThresholds(long objectId,
             float linear, float angular);

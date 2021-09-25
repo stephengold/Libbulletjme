@@ -253,6 +253,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularV
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getAngularVelocityDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getAngularVelocityDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject storeVectorDp) {
+    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
+
+    NULL_CHK(pEnv, storeVectorDp, "The store vector does not exist.",)
+    jmeBulletUtil::convertDp(pEnv, &pBody->getAngularVelocity(), storeVectorDp);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    getGravity
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -349,6 +363,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVe
 
     NULL_CHK(pEnv, storeVector, "The store vector does not exist.",)
     jmeBulletUtil::convert(pEnv, &pBody->getLinearVelocity(), storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getLinearVelocityDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getLinearVelocityDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject storeVectorDp) {
+    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
+
+    NULL_CHK(pEnv, storeVectorDp, "The store vector does not exist.",)
+    jmeBulletUtil::convertDp(pEnv, &pBody->getLinearVelocity(), storeVectorDp);
 }
 
 /*
@@ -488,6 +516,24 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularV
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, velocityVector, &vec);
+
+    pBody->setAngularVelocity(vec);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setAngularVelocityDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularVelocityDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject velocityVectorDp) {
+    btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+
+    NULL_CHK(pEnv, velocityVectorDp, "The velocity vector does not exist.",)
+    btVector3 vec;
+    jmeBulletUtil::convertDp(pEnv, velocityVectorDp, &vec);
 
     pBody->setAngularVelocity(vec);
 }
@@ -641,6 +687,24 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVe
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setLinearVelocityDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVelocityDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject velocityVectorDp) {
+    btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+
+    NULL_CHK(pEnv, velocityVectorDp, "The velocity vector does not exist.",)
+    btVector3 vec;
+    jmeBulletUtil::convertDp(pEnv, velocityVectorDp, &vec);
+
+    pBody->setLinearVelocity(vec);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    setPhysicsLocation
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -653,6 +717,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsL
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
     pMotionState->setKinematicLocation(pEnv, locationVector);
+
+    pBody->setCenterOfMassTransform(pMotionState->worldTransform);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setPhysicsLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsLocationDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject locationVectorDp) {
+    btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    jmeMotionState *pMotionState = (jmeMotionState *) pBody->getMotionState();
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",);
+
+    NULL_CHK(pEnv, locationVectorDp, "The location vector does not exist.",);
+    pMotionState->setKinematicLocationDp(pEnv, locationVectorDp);
 
     pBody->setCenterOfMassTransform(pMotionState->worldTransform);
 }
@@ -693,6 +776,24 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsR
             "The rotation quaternion does not exist.",);
 
     pMotionState->setKinematicRotationQuat(pEnv, rotationQuaternion);
+    pBody->setCenterOfMassTransform(pMotionState->worldTransform);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setPhysicsRotationDp
+ * Signature: (JLcom/simsilica/mathd/Quatd;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotationDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject rotationQuatd) {
+    btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    jmeMotionState *pMotionState = (jmeMotionState *) pBody->getMotionState();
+
+    NULL_CHK(pEnv, rotationQuatd, "The rotation Quatd does not exist.",);
+
+    pMotionState->setKinematicRotationQuatd(pEnv, rotationQuatd);
     pBody->setCenterOfMassTransform(pMotionState->worldTransform);
 }
 
