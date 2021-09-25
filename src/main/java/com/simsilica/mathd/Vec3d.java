@@ -74,13 +74,13 @@ public class Vec3d implements Cloneable {
      * Z component of the vector
      */
     public double z;
-
+ 
     /**
      * Instantiate a vector with the value (0,0,0).
      */
     public Vec3d() {
     }
-
+    
     /**
      * Instantiate a vector with the specified components.
      *
@@ -111,7 +111,7 @@ public class Vec3d implements Cloneable {
     public Vec3d( Vector3f v ) {
         this(v.x, v.y, v.z);
     }
-
+ 
     /**
      * Instantiate a Vector3f based on this vector.
      *
@@ -175,7 +175,7 @@ public class Vec3d implements Cloneable {
         this.z = z;
         return this;
     }
-
+    
     /**
      * Copy all components of the specified vector to this vector.
      *
@@ -211,6 +211,126 @@ public class Vec3d implements Cloneable {
     public final Vec3d clone() {
         return new Vec3d(x,y,z);
     }
+ 
+    /**
+     * Determine the indexed component of this vector.
+     *
+     * @param i 0 for the X component, 1 for the Y component, or 2 for the Z
+     * component
+     * @return the component value
+     * @throws IndexOutOfBoundsException if index is not 0, 1, or 2
+     */
+    public double get( int i ) {
+        switch( i ) {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                throw new IndexOutOfBoundsException( "Index:" + i );
+        }
+    }
+    
+    /**
+     * Alter the indexed component of this vector.
+     *
+     * @param i 0 for the X component, 1 for the Y component, or 2 for the Z
+     * component
+     * @param d the desired value for the component
+     * @return this vector
+     * @throws IndexOutOfBoundsException if index is not 0, 1, or 2
+     */
+    public Vec3d set( int i, double d ) {
+        switch( i ) {
+            case 0:
+                this.x = d;
+                break;
+            case 1:
+                this.y = d;
+                break;
+            case 2:
+                this.z = d;
+                break;
+            default:
+                throw new IndexOutOfBoundsException( "Index:" + i );
+        }
+        return this;
+    }
+ 
+    /**
+     * Sum this vector with the specified vector to yield a new vector.
+     *
+     * @param v the vector to add (not null, unaffected)
+     * @return a new instance
+     */
+    public final Vec3d add( Vec3d v ) {
+        return new Vec3d(x + v.x, y + v.y, z + v.z);
+    }
+
+    /**
+     * Sum this vector with the specified components to yield a new vector.
+     *
+     * @param vx the amount to increase the X component
+     * @param vy the amount to increase the Y component
+     * @param vz the amount to increase the Z component
+     * @return a new instance
+     */
+    public final Vec3d add( double vx, double vy, double vz ) {
+        return new Vec3d(x + vx, y + vy, z + vz);
+    }
+
+    /**
+     * Subtract the specified vector to yield a new vector.
+     *
+     * @param v the vector to subtract (not null, unaffected)
+     * @return a new instance
+     */
+    public final Vec3d subtract( Vec3d v ) {
+        return new Vec3d(x - v.x, y - v.y, z - v.z);
+    }
+
+    /**
+     * Add the specified vector to this vector in place.
+     *
+     * @param v the vector to add (not null, unaffected)
+     * @return this vector
+     */
+    public final Vec3d addLocal( Vec3d v ) {
+        x += v.x;
+        y += v.y;
+        z += v.z;
+        return this;
+    }
+
+    /**
+     * Add the specified components to this vector in place.
+     *
+     * @param vx the amount to increase the X component
+     * @param vy the amount to increase the Y component
+     * @param vz the amount to increase the Z component
+     * @return this vector
+     */
+    public final Vec3d addLocal( double vx, double vy, double vz ) {
+        x += vx;
+        y += vy;
+        z += vz;
+        return this;
+    }
+
+    /**
+     * Subtract the specified vector from this vector in place.
+     *
+     * @param v the vector to subtract (not null, unaffected)
+     * @return this vector
+     */
+    public final Vec3d subtractLocal( Vec3d v ) {
+        x -= v.x;
+        y -= v.y;
+        z -= v.z;
+        return this;
+    }
 
     /**
      * Uniformly scale this vector in place.
@@ -222,6 +342,20 @@ public class Vec3d implements Cloneable {
         x *= s;
         y *= s;
         z *= s;
+        return this;
+    }
+
+    /**
+     * Scale this vector by the specified vector component-by-component, in
+     * place.
+     *
+     * @param v the vector to multiply (not null, unaffected)
+     * @return this vector
+     */
+    public final Vec3d multLocal( Vec3d v ) {
+        x *= v.x;
+        y *= v.y;
+        z *= v.z;
         return this;
     }
 
@@ -250,6 +384,30 @@ public class Vec3d implements Cloneable {
      */
     public final Vec3d normalizeLocal() {
         return multLocal(1.0 / length());
+    }
+ 
+    /**
+     * Determine the dot product of the specified vector with this vector.
+     *
+     * @param v the vector to multiply (not null, unaffected)
+     * @return the dot product
+     */
+    public final double dot( Vec3d v ) {
+        return x * v.x + y * v.y + z * v.z;
+    }
+ 
+    /**
+     * Take the cross product of this vector times the specified vector to yield
+     * a new vector.
+     *
+     * @param v the right factor (not null, unaffected)
+     * @return a new instance
+     */
+    public final Vec3d cross( Vec3d v ) {
+        double xNew = (y * v.z) - (z * v.y);
+        double yNew = (z * v.x) - (x * v.z);
+        double zNew = (x * v.y) - (y * v.x);
+        return new Vec3d(xNew, yNew, zNew);         
     }
 
     /**
