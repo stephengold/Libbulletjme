@@ -1,5 +1,15 @@
 # Release log for the Libbulletjme project
 
+## Version 12.1.0 released on 25 September 2021
+
+ + Added double-precision getters for the locations and orientations
+   of collision objects.
+ + Added double-precision accessors for the locations, orientations,
+   and velocities of rigid bodies.
+ + Added the `Quatd` and `Vec3d` classes from SimMath.
+ + Added the `isFinite()` method to the `MyMath` class.
+ + Built using Gradle v6.9.1 .
+
 ## Version 12.0.0 released on 20 August 2021
 
  + Removed the `getX()` method from the `Vector3f` class. (API change)
