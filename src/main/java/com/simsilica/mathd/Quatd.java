@@ -238,7 +238,9 @@ public final class Quatd implements Cloneable {
      * Take the Hamilton product of this Quatd times the specified Quatd in
      * place.
      *
-     * @param q the right factor (not null, unaffected)
+     * It IS safe for q and this to be the same object.
+     *
+     * @param q the right factor (not null, unaffected unless it's this)
      * @return this Quatd
      */
     public final Quatd multLocal( Quatd q ) {
@@ -290,7 +292,9 @@ public final class Quatd implements Cloneable {
      * Rotate the specified vector by this Quatd and store the result in another
      * vector.
      *
-     * @param v the input vector (not null, unaffected)
+     * It IS safe for v and result to be the same object.
+     *
+     * @param v the input vector (not null, unaffected unless it's result)
      * @param result storage for the result (not null)
      * @return result
      */

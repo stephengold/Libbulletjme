@@ -294,7 +294,9 @@ public class Vec3d implements Cloneable {
     /**
      * Add the specified vector to this vector in place.
      *
-     * @param v the vector to add (not null, unaffected)
+     * It IS safe for v and this to be the same object.
+     *
+     * @param v the vector to add (not null, unaffected unless it's this)
      * @return this vector
      */
     public final Vec3d addLocal( Vec3d v ) {
@@ -322,7 +324,9 @@ public class Vec3d implements Cloneable {
     /**
      * Subtract the specified vector from this vector in place.
      *
-     * @param v the vector to subtract (not null, unaffected)
+     * It IS safe for v and this to be the same object.
+     *
+     * @param v the vector to subtract (not null, unaffected unless it's this)
      * @return this vector
      */
     public final Vec3d subtractLocal( Vec3d v ) {
@@ -349,7 +353,9 @@ public class Vec3d implements Cloneable {
      * Scale this vector by the specified vector component-by-component, in
      * place.
      *
-     * @param v the vector to multiply (not null, unaffected)
+     * It IS safe for v and this to be the same object.
+     *
+     * @param v the vector to multiply (not null, unaffected unless it's this)
      * @return this vector
      */
     public final Vec3d multLocal( Vec3d v ) {
