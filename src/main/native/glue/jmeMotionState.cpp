@@ -69,6 +69,11 @@ void jmeMotionState::setKinematicLocation(JNIEnv *pEnv, jobject locationVector3f
     dirty = true;
 }
 
+void jmeMotionState::setKinematicLocationDp(JNIEnv *pEnv, jobject locationVec3dIn) {
+    jmeBulletUtil::convertDp(pEnv, locationVec3dIn, &worldTransform.getOrigin());
+    dirty = true;
+}
+
 void jmeMotionState::setKinematicRotation(JNIEnv *pEnv, jobject rotationMatrix3fIn) {
     jmeBulletUtil::convert(pEnv, rotationMatrix3fIn, &worldTransform.getBasis());
     dirty = true;
@@ -76,6 +81,14 @@ void jmeMotionState::setKinematicRotation(JNIEnv *pEnv, jobject rotationMatrix3f
 
 void jmeMotionState::setKinematicRotationQuat(JNIEnv *pEnv, jobject rotationQuaternionIn) {
     jmeBulletUtil::convertQuat(pEnv, rotationQuaternionIn, &worldTransform.getBasis());
+    dirty = true;
+}
+
+void jmeMotionState::setKinematicRotationQuatd(JNIEnv *pEnv, jobject rotationQuatdIn) {
+    btQuaternion q;
+    jmeBulletUtil::convertDp(pEnv, rotationQuatdIn, &q);
+    btMatrix3x3 & worldBasis = worldTransform.getBasis();
+    worldBasis.setRotation(q);
     dirty = true;
 }
 
