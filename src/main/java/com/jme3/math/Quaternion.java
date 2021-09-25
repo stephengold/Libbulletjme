@@ -685,7 +685,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * result is stored locally.
      *
      * @param scalar
-     *            the quaternion to multiply this quaternion by.
+     *            the scalar to multiply this quaternion by.
      * @return this.
      */
     public Quaternion multLocal(float scalar) {
