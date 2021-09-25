@@ -74,6 +74,7 @@ import com.jme3.math.Plane;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.system.NativeLibraryLoader;
+import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.io.File;
 import java.nio.FloatBuffer;
@@ -1023,7 +1024,7 @@ public class TestLibbulletjme {
         Vector3f min = new Vector3f(-10f, -10f, -10f);
         Vector3f max = new Vector3f(10f, 10f, 10f);
         CollisionSpace space = new CollisionSpace(min, max,
-                PhysicsSpace.BroadphaseType.DBVT);
+                PhysicsSpace.BroadphaseType.DBVT); // TODO simplify
 
         CollisionShape box = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
         CollisionShape compound = new CompoundCollisionShape();
@@ -1110,8 +1111,55 @@ public class TestLibbulletjme {
         Assert.assertFalse(space.hasContact(plane, mesh));
         Assert.assertFalse(space.hasContact(plane, plane));
     }
+
+    /**
+     * Test double-precision accessors.
+     */
+    @Test
+    public void test013() {
+        loadNativeLibrary();
+        /*
+         * Create a sphere-shaped dynamic rigid body.
+         */
+        CollisionShape shape = new SphereCollisionShape(0.1f);
+        PhysicsRigidBody body = new PhysicsRigidBody(shape, 1f);
+        Quatd qIn = new Quatd(7.01234567, 8.01234567, -1.01234567, -2.01234567);
+        qIn.normalizeLocal();
+        Vec3d vIn = new Vec3d(4.01234567, 2.01234567, 3.01234567);
+        Vec3d wIn = new Vec3d(5.01234567, 1.01234567, 8.01234567);
+        Vec3d xIn = new Vec3d(7.01234567, 6.01234567, 0.01234567);
+        body.setPhysicsRotationDp(qIn);
+        body.setLinearVelocityDp(vIn);
+        body.setAngularVelocityDp(wIn);
+        body.setPhysicsLocationDp(xIn);
+
+        Quatd qOut = body.getPhysicsRotationDp(null);
+        Vec3d vOut = body.getLinearVelocityDp(null);
+        Vec3d wOut = body.getAngularVelocityDp(null);
+        Vec3d xOut = body.getPhysicsLocationDp(null);
+
+        if (NativeLibrary.isDoublePrecision()) {
+            assertEquals(qIn.x, qIn.y, qIn.z, qIn.w, qOut, 1e-16);
+            Assert.assertEquals(vIn, vOut);
+            Assert.assertEquals(wIn, wOut);
+            Assert.assertEquals(xIn, xOut);
+        } else {
+            assertEquals(qIn.x, qIn.y, qIn.z, qIn.w, qOut, 1e-6);
+            assertEquals(vIn.x, vIn.y, vIn.z, vOut, 1e-6);
+            assertEquals(wIn.x, wIn.y, wIn.z, wOut, 1e-6);
+            assertEquals(xIn.x, xIn.y, xIn.z, xOut, 1e-6);
+        }
+    }
     // *************************************************************************
     // private methods
+
+    private static void assertEquals(double x, double y, double z, double w,
+            Quatd q, double tolerance) {
+        Assert.assertEquals(x, q.x, tolerance);
+        Assert.assertEquals(y, q.y, tolerance);
+        Assert.assertEquals(z, q.z, tolerance);
+        Assert.assertEquals(w, q.w, tolerance);
+    }
 
     private static void assertEquals(float x, float y, float z, float w,
             Quaternion q, float tolerance) {
@@ -1520,6 +1568,8 @@ public class TestLibbulletjme {
             assertEquals(1f, 1f, 1f, body.getLinearFactor(null), 0f);
             Assert.assertEquals(0.8f, body.getLinearSleepingThreshold(), 0f);
             assertEquals(0f, 0f, 0f, 1f, body.getPhysicsRotation(null), 0f);
+            assertEquals(0.0, 0.0, 0.0, 1.0,
+                    body.getPhysicsRotationDp(null), 0.0);
             Assert.assertTrue(body.isContactResponse());
             Assert.assertFalse(body.isGravityProtected());
             Assert.assertFalse(body.isKinematic());
@@ -1528,9 +1578,13 @@ public class TestLibbulletjme {
             assertEquals(0f, 0f, 0f, body.totalAppliedTorque(null), 0f);
             if (body.isDynamic()) {
                 assertEquals(0f, 0f, 0f, body.getAngularVelocity(null), 0f);
+                assertEquals(0.0, 0.0, 0.0,
+                        body.getAngularVelocityDp(null), 0.0);
                 assertEquals(0f, 0f, 0f,
                         body.getAngularVelocityLocal(null), 0f);
                 assertEquals(0f, 0f, 0f, body.getLinearVelocity(null), 0f);
+                assertEquals(0.0, 0.0, 0.0,
+                        body.getLinearVelocityDp(null), 0.0);
                 Assert.assertEquals(0f, body.getSquaredSpeed(), 0f);
                 Assert.assertFalse(body.isStatic());
                 Assert.assertEquals(0f, body.kineticEnergy(), 0f);
