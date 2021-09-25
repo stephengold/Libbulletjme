@@ -45,6 +45,7 @@ import com.jme3.math.Quaternion;
  *  @author    Paul Speed
  */
 public final class Quatd implements Cloneable {
+
     /**
      * X component of the Quatd
      */
@@ -68,7 +69,7 @@ public final class Quatd implements Cloneable {
     public Quatd() {
         this( 0, 0, 0, 1 );
     }
-
+    
     /**
      * Instantiate a Quatd with the specified components.
      *
@@ -174,7 +175,7 @@ public final class Quatd implements Cloneable {
      * @param y the desired Y component
      * @param z the desired Z component
      * @param w the desired W component
-     * @return this vector
+     * @return this Quatd
      */
     public final Quatd set( double x, double y, double z, double w ) {
         this.x = x;
@@ -202,7 +203,7 @@ public final class Quatd implements Cloneable {
      * Copy all components of the specified Quaternion to this Quatd.
      *
      * @param quat the input Quaternion (not null, unaffected)
-     * @return this vector
+     * @return this Quatd
      */
     public final Quatd set( Quaternion quat ) {
         this.x = quat.getX();
@@ -210,6 +211,112 @@ public final class Quatd implements Cloneable {
         this.z = quat.getZ();
         this.w = quat.getW();
         return this;
+    }
+
+    /**
+     * Take the Hamilton product of this Quatd times the specified Quatd to
+     * yield a new Quatd.
+     *
+     * @param q the right factor (not null, unaffected)
+     * @return a new instance
+     */
+    public final Quatd mult( Quatd q ) {
+        double qx = q.x;
+        double qy = q.y;
+        double qz = q.z;
+        double qw = q.w;
+        
+        double xr = x * qw + y * qz - z * qy + w * qx;
+        double yr = -x * qz + y * qw + z * qx + w * qy;
+        double zr = x * qy - y * qx + z * qw + w * qz;
+        double wr = -x * qx - y * qy - z * qz + w * qw;
+        
+        return new Quatd(xr, yr, zr, wr);
+    }
+    
+    /**
+     * Take the Hamilton product of this Quatd times the specified Quatd in
+     * place.
+     *
+     * @param q the right factor (not null, unaffected)
+     * @return this Quatd
+     */
+    public final Quatd multLocal( Quatd q ) {
+        double qx = q.x;
+        double qy = q.y;
+        double qz = q.z;
+        double qw = q.w;
+        
+        double xr = x * qw + y * qz - z * qy + w * qx;
+        double yr = -x * qz + y * qw + z * qx + w * qy;
+        double zr = x * qy - y * qx + z * qw + w * qz;
+        double wr = -x * qx - y * qy - z * qz + w * qw;
+ 
+        x = xr;
+        y = yr;
+        z = zr;
+        w = wr;       
+        return this;
+    }
+
+    /**
+     * Rotate the specified vector by this Quatd to produce a new vector.
+     *
+     * @param v the input vector (not null, unaffected)
+     * @return a new instance
+     */
+    public Vec3d mult( Vec3d v ) {
+        if( v.x == 0 && v.y == 0 && v.z == 0 )
+            return new Vec3d();
+        
+        double vx = v.x;
+        double vy = v.y;
+        double vz = v.z;
+        
+        double rx = w * w * vx + 2 * y * w * vz - 2 * z * w * vy + x * x
+                    * vx + 2 * y * x * vy + 2 * z * x * vz - z * z * vx - y
+                    * y * vx; 
+        double ry = 2 * x * y * vx + y * y * vy + 2 * z * y * vz + 2 * w
+                    * z * vx - z * z * vy + w * w * vy - 2 * x * w * vz - x
+                    * x * vy;
+        double rz = 2 * x * z * vx + 2 * y * z * vy + z * z * vz - 2 * w
+                    * y * vx - y * y * vz + 2 * w * x * vy - x * x * vz + w
+                    * w * vz;
+
+        return new Vec3d(rx, ry, rz);                    
+    }
+
+    /**
+     * Rotate the specified vector by this Quatd and store the result in another
+     * vector.
+     *
+     * @param v the input vector (not null, unaffected)
+     * @param result storage for the result (not null)
+     * @return result
+     */
+    public Vec3d mult( Vec3d v, Vec3d result ) {
+        if( v.x == 0 && v.y == 0 && v.z == 0 ) {
+            if( v != result )
+                result.set(0,0,0);
+            return result;
+        }
+        
+        double vx = v.x;
+        double vy = v.y;
+        double vz = v.z;
+        
+        double rx = w * w * vx + 2 * y * w * vz - 2 * z * w * vy + x * x
+                    * vx + 2 * y * x * vy + 2 * z * x * vz - z * z * vx - y
+                    * y * vx; 
+        double ry = 2 * x * y * vx + y * y * vy + 2 * z * y * vz + 2 * w
+                    * z * vx - z * z * vy + w * w * vy - 2 * x * w * vz - x
+                    * x * vy;
+        double rz = 2 * x * z * vx + 2 * y * z * vy + z * z * vz - 2 * w
+                    * y * vx - y * y * vz + 2 * w * x * vy - x * x * vz + w
+                    * w * vz;
+
+        result.set(rx, ry, rz);                    
+        return result;
     }
 
     /**
@@ -224,7 +331,7 @@ public final class Quatd implements Cloneable {
     /**
      * Normalize this Quatd in place.
      *
-     * @return this
+     * @return this Quatd
      */
     public final Quatd normalizeLocal() {
         double d = lengthSq();
@@ -239,6 +346,59 @@ public final class Quatd implements Cloneable {
         z *= s;
         w *= s;
         
+        return this;
+    }
+
+    /**
+     * Invert this Quatd to produce a new Quatd.
+     *
+     * @return a new instance
+     */
+    public Quatd inverse() {
+        double norm = lengthSq();
+        if( norm <= 0 )
+            return null;
+       
+        double inv = 1 / norm;
+        return new Quatd(-x * inv, -y * inv, -z * inv, w * inv); 
+    }
+
+    /**
+     * Builds a Quaternion from the Euler rotation angles (x,y,z) aka 
+     * (pitch, yaw, roll)).  They are applyed in order: (y, z, x) aka (yaw, roll, pitch).
+     * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
+     *
+     * @param xAngle the desired rotation about the +X axis (in radians)
+     * @param yAngle the desired rotation about the +Y axis (in radians)
+     * @param zAngle the desired rotation about the +Z axis (in radians)
+     * @return this Quatd
+     */
+    public Quatd fromAngles( double xAngle, double yAngle, double zAngle ) {
+        double a;       
+        double sinY, sinZ, sinX, cosY, cosZ, cosX;
+        
+        a = zAngle * 0.5f;
+        sinZ = Math.sin(a);
+        cosZ = Math.cos(a);
+        a = yAngle * 0.5f;
+        sinY = Math.sin(a);
+        cosY = Math.cos(a);
+        a = xAngle * 0.5f;
+        sinX = Math.sin(a);
+        cosX = Math.cos(a);
+
+        // premultiply some reused stuff
+        double cosYXcosZ = cosY * cosZ;
+        double sinYXsinZ = sinY * sinZ;
+        double cosYXsinZ = cosY * sinZ;
+        double sinYXcosZ = sinY * cosZ;
+
+        w = (cosYXcosZ * cosX - sinYXsinZ * sinX);
+        x = (cosYXcosZ * sinX + sinYXsinZ * cosX);
+        y = (sinYXcosZ * cosX + cosYXsinZ * sinX);
+        z = (cosYXsinZ * cosX - sinYXcosZ * sinX);
+
+        normalizeLocal();
         return this;
     }
 
