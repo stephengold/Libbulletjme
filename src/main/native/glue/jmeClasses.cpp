@@ -64,6 +64,11 @@ jfieldID jmeClasses::Vector3f_x;
 jfieldID jmeClasses::Vector3f_y;
 jfieldID jmeClasses::Vector3f_z;
 
+jfieldID jmeClasses::Quatd_x;
+jfieldID jmeClasses::Quatd_y;
+jfieldID jmeClasses::Quatd_z;
+jfieldID jmeClasses::Quatd_w;
+
 jfieldID jmeClasses::Quaternion_x;
 jfieldID jmeClasses::Quaternion_y;
 jfieldID jmeClasses::Quaternion_z;
@@ -287,6 +292,32 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
     Vector3f_z = pEnv->GetFieldID(Vector3f, "z", "F");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    jclass Quatd = pEnv->FindClass("com/simsilica/mathd/Quatd");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Quatd_x = pEnv->GetFieldID(Quatd, "x", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Quatd_y = pEnv->GetFieldID(Quatd, "y", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Quatd_z = pEnv->GetFieldID(Quatd, "z", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Quatd_w = pEnv->GetFieldID(Quatd, "w", "D");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

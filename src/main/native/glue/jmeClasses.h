@@ -67,15 +67,20 @@ public:
 
     static jmethodID PhysicsGhostObject_addOverlappingObject;
 
-    static jclass Vec3d;
+    static jclass Vec3d; // TODO necessary?
     static jfieldID Vec3d_x;
     static jfieldID Vec3d_y;
     static jfieldID Vec3d_z;
 
-    static jclass Vector3f;
+    static jclass Vector3f; // TODO necessary?
     static jfieldID Vector3f_x;
     static jfieldID Vector3f_y;
     static jfieldID Vector3f_z;
+
+    static jfieldID Quatd_x;
+    static jfieldID Quatd_y;
+    static jfieldID Quatd_z;
+    static jfieldID Quatd_w;
 
     static jfieldID Quaternion_x;
     static jfieldID Quaternion_y;

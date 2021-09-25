@@ -62,6 +62,39 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inVector3f, btVector3 *pvOut) 
     pvOut->setZ(z);
 }
 
+// Copy a SimMath Quatd to a btQuaternion
+
+void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inQuatd, btQuaternion *pqOut) {
+    NULL_CHK(pEnv, inQuatd, "The input Quatd does not exist.",)
+    NULL_CHK(pEnv, pqOut, "The output btQuaternion does not exist.",);
+
+    double x = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_x);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double y = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_y);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double z = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_z);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double w = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_w);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    pqOut->setX(x);
+    pqOut->setY(y);
+    pqOut->setZ(z);
+    pqOut->setW(w);
+}
+
 // Copy a SimMath Vec3d to a btVector3
 
 void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inVec3d, btVector3 *pvOut) {
@@ -139,6 +172,35 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, const btVector3 *pvIn, jobject outVect
         return;
     }
     pEnv->SetFloatField(outVector3f, jmeClasses::Vector3f_z, z);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+}
+
+// Copy a btQuaternion to a SimMath Quatd
+
+void jmeBulletUtil::convertDp(JNIEnv *pEnv, const btQuaternion *pqIn,
+        jobject outQuatd) {
+    NULL_CHK(pEnv, pqIn, "The input btQuaternion does not exist.",)
+    NULL_CHK(pEnv, outQuatd, "The output Quatd does not exist.",);
+
+    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_w, pqIn->w());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_x, pqIn->x());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_y, pqIn->y());
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_z, pqIn->z());
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -348,6 +410,7 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv,
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
+    // TODO use btMatrix3x3 constructor from btQuaternion
 
     float norm = w * w + x * x + y * y + z * z;
     float s = (norm == 1.0) ? 2.0 : (norm > 0.1) ? 2.0 / norm : 0.0;
@@ -377,6 +440,7 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv, const btMatrix3x3 *pmIn,
         jobject outQuaternion) {
     NULL_CHK(pEnv, pmIn, "The input btMatrix3x3 does not exist.",)
     NULL_CHK(pEnv, outQuaternion, "The output Quaternion does not exist.",);
+    // TODO use btMatrix3x3 getRotation() method
 
     // the trace is the sum of the diagonal elements; see
     // http://mathworld.wolfram.com/MatrixTrace.html
