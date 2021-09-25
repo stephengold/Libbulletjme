@@ -54,7 +54,6 @@ jmethodID jmeClasses::PhysicsSpace_addContactProcessed;
 
 jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
 
-jclass jmeClasses::Vec3d;
 jfieldID jmeClasses::Vec3d_x;
 jfieldID jmeClasses::Vec3d_y;
 jfieldID jmeClasses::Vec3d_z;
@@ -255,7 +254,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Vec3d = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/simsilica/mathd/Vec3d"));
+    jclass Vec3d = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/simsilica/mathd/Vec3d"));
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
