@@ -356,7 +356,7 @@ public final class Quatd implements Cloneable {
     /**
      * Invert this Quatd to produce a new Quatd.
      *
-     * @return a new instance
+     * @return a new instance, or null if not invertible
      */
     public Quatd inverse() {
         double norm = lengthSq();
