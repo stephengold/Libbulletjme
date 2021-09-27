@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class IntPair {
+public class IntPair implements Comparable<IntPair> {
     // *************************************************************************
     // constants and loggers
 
@@ -98,6 +98,27 @@ public class IntPair {
      */
     public int smaller() {
         return smaller;
+    }
+    // *************************************************************************
+    // Comparable methods
+
+    /**
+     * Compare to another IntPair, with the smaller elements having priority.
+     *
+     * @param otherPair (not null)
+     * @return 0 if this equals otherPair; negative if this comes before
+     * otherPair; positive if this comes after otherPair
+     */
+    @Override
+    public int compareTo(IntPair otherPair) {
+        float otherSmaller = otherPair.smaller();
+        int result = Float.compare(smaller, otherSmaller);
+        if (result == 0) {
+            float otherLarger = otherPair.larger();
+            result = Float.compare(larger, otherLarger);
+        }
+
+        return result;
     }
     // *************************************************************************
     // Object methods
