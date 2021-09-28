@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -299,6 +299,33 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_setC
     btAssert(forward <= 2);
 
     pController->setCoordinateSystem(right, up, forward);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleController
+ * Method:    setupCoordinateSystem
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_setupCoordinateSystem
+(JNIEnv *pEnv, jclass, jlong controllerId, jobject rightVector,
+        jobject upVector, jobject forwardVector) {
+    btRaycastVehicle * const
+            pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
+    NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.",);
+
+    NULL_CHK(pEnv, rightVector, "The right vector does not exist.",);
+    btVector3 right;
+    jmeBulletUtil::convert(pEnv, rightVector, &right);
+
+    NULL_CHK(pEnv, upVector, "The up vector does not exist.",);
+    btVector3 up;
+    jmeBulletUtil::convert(pEnv, upVector, &up);
+
+    NULL_CHK(pEnv, forwardVector, "The forward vector does not exist.",);
+    btVector3 forward;
+    jmeBulletUtil::convert(pEnv, forwardVector, &forward);
+
+    pController->setupCoordinateSystem(right, up, forward);
 }
 
 /*

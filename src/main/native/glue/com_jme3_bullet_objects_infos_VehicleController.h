@@ -121,6 +121,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_setC
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleController
+ * Method:    setupCoordinateSystem
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_setupCoordinateSystem
+  (JNIEnv *, jclass, jlong, jobject, jobject, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_VehicleController
  * Method:    steer
  * Signature: (JIF)V
  */
