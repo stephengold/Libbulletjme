@@ -65,6 +65,7 @@ private:
 	int m_indexRightAxis;
 	int m_indexUpAxis;
 	int m_indexForwardAxis;
+	btMatrix3x3 m_rfu2Local; // stephengold added 2021-09-28
 
 	void defaultInit(const btVehicleTuning& tuning);
 
@@ -159,10 +160,8 @@ public:
 	{
 		const btTransform& chassisTrans = getChassisWorldTransform();
 
-		btVector3 forwardW(
-			chassisTrans.getBasis()[0][m_indexForwardAxis],
-			chassisTrans.getBasis()[1][m_indexForwardAxis],
-			chassisTrans.getBasis()[2][m_indexForwardAxis]);
+        btVector3 forward = m_rfu2Local.getColumn(1);// stephengold changed 2021-09-28
+        btVector3 forwardW = chassisTrans.getBasis() * forward;// stephengold changed 2021-09-28
 
 		return forwardW;
 	}
@@ -175,11 +174,37 @@ public:
 
 	virtual void setCoordinateSystem(int rightIndex, int upIndex, int forwardIndex)
 	{
+        btVector3 right, up, forward;// stephengold added 2021-09-28
+        switch (rightIndex) {// stephengold added 2021-09-28
+            case 0: right.setValue(1,0,0); break;// stephengold added 2021-09-28
+            case 1: right.setValue(0,1,0); break;// stephengold added 2021-09-28
+            case 2: right.setValue(0,0,1); break;// stephengold added 2021-09-28
+        }// stephengold added 2021-09-28
+        switch (upIndex) {// stephengold added 2021-09-28
+            case 0: up.setValue(1,0,0); break;// stephengold added 2021-09-28
+            case 1: up.setValue(0,1,0); break;// stephengold added 2021-09-28
+            case 2: up.setValue(0,0,1); break;// stephengold added 2021-09-28
+        }// stephengold added 2021-09-28
+        switch (forwardIndex) {// stephengold added 2021-09-28
+            case 0: forward.setValue(1,0,0); break;// stephengold added 2021-09-28
+            case 1: forward.setValue(0,1,0); break;// stephengold added 2021-09-28
+            case 2: forward.setValue(0,0,1); break;// stephengold added 2021-09-28
+        }// stephengold added 2021-09-28
+        setupCoordinateSystem(right, up, forward);// stephengold added 2021-09-28
 		m_indexRightAxis = rightIndex;
 		m_indexUpAxis = upIndex;
 		m_indexForwardAxis = forwardIndex;
 	}
 
+	virtual void setupCoordinateSystem(btVector3 right, btVector3 up, btVector3 forward) // stephengold added 2021-09-28
+    { // stephengold added 2021-09-28
+        btMatrix3x3 rfu = btMatrix3x3(right, forward, up); // stephengold added 2021-09-28
+        m_rfu2Local = rfu.transpose(); // stephengold added 2021-09-28
+		m_indexRightAxis = -1; // stephengold added 2021-09-28
+		m_indexUpAxis = -1; // stephengold added 2021-09-28
+		m_indexForwardAxis = -1; // stephengold added 2021-09-28
+    } // stephengold added 2021-09-28
+    
 	///backwards compatibility
 	int getUserConstraintType() const
 	{

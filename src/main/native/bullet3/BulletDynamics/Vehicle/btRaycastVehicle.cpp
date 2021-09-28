@@ -109,18 +109,19 @@ void btRaycastVehicle::updateWheelTransform(int wheelIndex, bool interpolatedTra
 	btQuaternion rotatingOrn(right, -wheel.m_rotation);
 	btMatrix3x3 rotatingMat(rotatingOrn);
 
-	btMatrix3x3 basis2;
-	basis2[0][m_indexRightAxis] = -right[0];
-	basis2[1][m_indexRightAxis] = -right[1];
-	basis2[2][m_indexRightAxis] = -right[2];
+	btMatrix3x3 basis;// stephengold changed 2021-09-28
+	basis[0][0] = -right[0];// stephengold changed 2021-09-28
+	basis[1][0] = -right[1];// stephengold changed 2021-09-28
+	basis[2][0] = -right[2];// stephengold changed 2021-09-28
 
-	basis2[0][m_indexUpAxis] = up[0];
-	basis2[1][m_indexUpAxis] = up[1];
-	basis2[2][m_indexUpAxis] = up[2];
+	basis[0][2] = up[0];// stephengold changed 2021-09-28
+	basis[1][2] = up[1];// stephengold changed 2021-09-28
+	basis[2][2] = up[2];// stephengold changed 2021-09-28
 
-	basis2[0][m_indexForwardAxis] = fwd[0];
-	basis2[1][m_indexForwardAxis] = fwd[1];
-	basis2[2][m_indexForwardAxis] = fwd[2];
+	basis[0][1] = fwd[0];// stephengold changed 2021-09-28
+	basis[1][1] = fwd[1];// stephengold changed 2021-09-28
+	basis[2][1] = fwd[2];// stephengold changed 2021-09-28
+        btMatrix3x3 basis2 = basis * m_rfu2Local.inverse();// stephengold changed 2021-09-28
 
 	wheel.m_worldTransform.setBasis(steeringMat * rotatingMat * basis2);
 	wheel.m_worldTransform.setOrigin(
@@ -266,10 +267,7 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 
 	const btTransform& chassisTrans = getChassisWorldTransform();
 
-	btVector3 forwardW(
-		chassisTrans.getBasis()[0][m_indexForwardAxis],
-		chassisTrans.getBasis()[1][m_indexForwardAxis],
-		chassisTrans.getBasis()[2][m_indexForwardAxis]);
+	btVector3 forwardW = getForwardVector();// stephengold changed 2021-09-28
 
 	if (forwardW.dot(getRigidBody()->getLinearVelocity()) < btScalar(0.))
 	{
@@ -319,10 +317,7 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 		{
 			const btTransform& chassisWorldTransform = getChassisWorldTransform();
 
-			btVector3 fwd(
-				chassisWorldTransform.getBasis()[0][m_indexForwardAxis],
-				chassisWorldTransform.getBasis()[1][m_indexForwardAxis],
-				chassisWorldTransform.getBasis()[2][m_indexForwardAxis]);
+			btVector3 fwd = getForwardVector();// stephengold changed 2021-09-28
 
 			btScalar proj = fwd.dot(wheel.m_raycastInfo.m_contactNormalWS);
 			fwd -= wheel.m_raycastInfo.m_contactNormalWS * proj;
@@ -522,10 +517,8 @@ void btRaycastVehicle::updateFriction(btScalar timeStep)
 				const btTransform& wheelTrans = getWheelTransformWS(i);
 
 				btMatrix3x3 wheelBasis0 = wheelTrans.getBasis();
-				m_axle[i] = -btVector3(
-					wheelBasis0[0][m_indexRightAxis],
-					wheelBasis0[1][m_indexRightAxis],
-					wheelBasis0[2][m_indexRightAxis]);
+                                btVector3 left = -m_rfu2Local.getColumn(0);// stephengold changed 2021-09-28
+				m_axle[i] = wheelBasis0 * left;// stephengold changed 2021-09-28
 
 				const btVector3& surfNormalWS = wheelInfo.m_raycastInfo.m_contactNormalWS;
 				btScalar proj = m_axle[i].dot(surfNormalWS);
@@ -642,12 +635,12 @@ void btRaycastVehicle::updateFriction(btScalar timeStep)
 
 				btVector3 sideImp = m_axle[wheel] * m_sideImpulse[wheel];
 
-#if defined ROLLING_INFLUENCE_FIX  // fix. It only worked if car's up was along Y - VT.
-				btVector3 vChassisWorldUp = getRigidBody()->getCenterOfMassTransform().getBasis().getColumn(m_indexUpAxis);
+                                btVector3 up = m_rfu2Local.getColumn(2);// stephengold changed 2021-09-28
+				btVector3 vChassisWorldUp = getRigidBody()->getCenterOfMassTransform().getBasis() * up;// stephengold changed 2021-09-28
 				rel_pos -= vChassisWorldUp * (vChassisWorldUp.dot(rel_pos) * (1.f - wheelInfo.m_rollInfluence));
-#else
-				rel_pos[m_indexUpAxis] *= wheelInfo.m_rollInfluence;
-#endif
+//#else stephengold commented out 2021-09-28
+//				rel_pos[m_indexUpAxis] *= wheelInfo.m_rollInfluence; stephengold commented out 2021-09-28
+//#endif stephengold commented out 2021-09-28
 				m_chassisBody->applyImpulse(sideImp, rel_pos);
 
 				//apply friction impulse on the ground
@@ -673,10 +666,8 @@ void btRaycastVehicle::debugDraw(btIDebugDraw* debugDrawer)
 
 		btVector3 wheelPosWS = getWheelInfo(v).m_worldTransform.getOrigin();
 
-		btVector3 axle = btVector3(
-			getWheelInfo(v).m_worldTransform.getBasis()[0][getRightAxis()],
-			getWheelInfo(v).m_worldTransform.getBasis()[1][getRightAxis()],
-			getWheelInfo(v).m_worldTransform.getBasis()[2][getRightAxis()]);
+                btVector3 right = m_rfu2Local.getColumn(0);// stephengold changed 2021-09-28
+		btVector3 axle = getWheelInfo(v).m_worldTransform.getBasis() * right;// stephengold changed 2021-09-28
 
 		//debug wheels (cylinders)
 		debugDrawer->drawLine(wheelPosWS, wheelPosWS + axle, wheelColor);
