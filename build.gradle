@@ -361,14 +361,14 @@ artifacts {
 build.dependsOn('pom', 'pomAsc')
 task('pom', type: Copy) {
     dependsOn 'generatePomFileForMavenPublication'
-    description 'Copies the Maven POM to build/libs.'
+    description 'Copies the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml"
     into 'dist'
     rename 'pom-default.xml', project.ext.baseName + '.pom'
 }
 task('pomAsc', type: Copy) {
     dependsOn 'signMavenPublication'
-    description 'Copies the signature of the Maven POM to build/libs.'
+    description 'Copies the signature of the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml.asc"
     into 'dist'
     rename 'pom-default.xml.asc', project.ext.baseName + '.pom.asc'
