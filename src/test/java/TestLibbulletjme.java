@@ -1123,27 +1123,32 @@ public class TestLibbulletjme {
          */
         CollisionShape shape = new SphereCollisionShape(0.1f);
         PhysicsRigidBody body = new PhysicsRigidBody(shape, 1f);
+        Vec3d gIn = new Vec3d(9.01234567, 0.98765433, -0.01234567);
         Quatd qIn = new Quatd(7.01234567, 8.01234567, -1.01234567, -2.01234567);
         qIn.normalizeLocal();
         Vec3d vIn = new Vec3d(4.01234567, 2.01234567, 3.01234567);
         Vec3d wIn = new Vec3d(5.01234567, 1.01234567, 8.01234567);
         Vec3d xIn = new Vec3d(7.01234567, 6.01234567, 0.01234567);
+        body.setGravityDp(gIn);
         body.setPhysicsRotationDp(qIn);
         body.setLinearVelocityDp(vIn);
         body.setAngularVelocityDp(wIn);
         body.setPhysicsLocationDp(xIn);
 
+        Vec3d gOut = body.getGravityDp(null);
         Quatd qOut = body.getPhysicsRotationDp(null);
         Vec3d vOut = body.getLinearVelocityDp(null);
         Vec3d wOut = body.getAngularVelocityDp(null);
         Vec3d xOut = body.getPhysicsLocationDp(null);
 
         if (NativeLibrary.isDoublePrecision()) {
+            Assert.assertEquals(gIn, gOut);
             assertEquals(qIn.x, qIn.y, qIn.z, qIn.w, qOut, 1e-16);
             Assert.assertEquals(vIn, vOut);
             Assert.assertEquals(wIn, wOut);
             Assert.assertEquals(xIn, xOut);
         } else {
+            assertEquals(gIn.x, gIn.y, gIn.z, gOut, 1e-6);
             assertEquals(qIn.x, qIn.y, qIn.z, qIn.w, qOut, 1e-6);
             assertEquals(vIn.x, vIn.y, vIn.z, vOut, 1e-6);
             assertEquals(wIn.x, wIn.y, wIn.z, wOut, 1e-6);
@@ -1564,6 +1569,7 @@ public class TestLibbulletjme {
             assertEquals(1f, 1f, 1f, body.getAngularFactor(null), 0f);
             Assert.assertEquals(1f, body.getAngularSleepingThreshold(), 0f);
             assertEquals(0f, 0f, 0f, body.getGravity(null), 0f);
+            assertEquals(0.0, 0.0, 0.0, body.getGravityDp(null), 0.0);
             Assert.assertEquals(0f, body.getLinearDamping(), 0f);
             assertEquals(1f, 1f, 1f, body.getLinearFactor(null), 0f);
             Assert.assertEquals(0.8f, body.getLinearSleepingThreshold(), 0f);

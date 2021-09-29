@@ -281,6 +281,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getGravity
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    getGravityDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_getGravityDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject storeVectorDp) {
+    const btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
+
+    NULL_CHK(pEnv, storeVectorDp, "The store vector does not exist.",)
+    jmeBulletUtil::convertDp(pEnv, &pBody->getGravity(), storeVectorDp);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    getInverseInertiaLocal
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -584,6 +598,24 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity
     NULL_CHK(pEnv, gravityVector, "The gravity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, gravityVector, &vec);
+
+    pBody->setGravity(vec);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setGravityDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravityDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject gravityVectorDp) {
+    btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",)
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+
+    NULL_CHK(pEnv, gravityVectorDp, "The gravity vector does not exist.",)
+    btVector3 vec;
+    jmeBulletUtil::convertDp(pEnv, gravityVectorDp, &vec);
 
     pBody->setGravity(vec);
 }
