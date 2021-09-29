@@ -264,11 +264,7 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 	}
 
 	m_currentVehicleSpeedKmHour = btScalar(3.6) * getRigidBody()->getLinearVelocity().length();
-
-	const btTransform& chassisTrans = getChassisWorldTransform();
-
-	btVector3 forwardW = getForwardVector();// stephengold changed 2021-09-28
-
+	btVector3 forwardW = getForwardVector();// stephengold changed 2021-09-29
 	if (forwardW.dot(getRigidBody()->getLinearVelocity()) < btScalar(0.))
 	{
 		m_currentVehicleSpeedKmHour *= btScalar(-1.);
@@ -315,10 +311,7 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 
 		if (wheel.m_raycastInfo.m_isInContact)
 		{
-			const btTransform& chassisWorldTransform = getChassisWorldTransform();
-
-			btVector3 fwd = getForwardVector();// stephengold changed 2021-09-28
-
+			btVector3 fwd = forwardW;// stephengold changed 2021-09-29
 			btScalar proj = fwd.dot(wheel.m_raycastInfo.m_contactNormalWS);
 			fwd -= wheel.m_raycastInfo.m_contactNormalWS * proj;
 
