@@ -2,7 +2,7 @@
 
 ## Version 12.2.2 released on 30 September 2021
 
- + Bugfix: vehicle wheels don't rotate
+Bugfix: vehicle wheels don't rotate in v12.2.1
 
 ## Version 12.2.1 released on 30 September 2021
 
