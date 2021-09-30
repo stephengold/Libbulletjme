@@ -308,7 +308,6 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 	{
 		btWheelInfo& wheel = m_wheelInfo[i];
                 btVector3 location = wheel.m_worldTransform.getOrigin();// stephengold changed 2021-09-30
-                wheel.m_prevWorldLocation = location;// stephengold changed 2021-09-30
 
 		if (wheel.m_raycastInfo.m_isInContact)
 		{
@@ -325,6 +324,7 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 		}
                 wheel.m_rotation += wheel.m_deltaRotation;// stephengold changed 2021-09-30
                 wheel.m_rotation = btNormalizeAngle(wheel.m_rotation);// stephengold changed 2021-09-30
+                wheel.m_prevWorldLocation = location;// stephengold changed 2021-09-30
 	}
 }
 
