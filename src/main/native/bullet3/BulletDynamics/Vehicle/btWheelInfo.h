@@ -52,6 +52,7 @@ struct btWheelInfo
 	RaycastInfo m_raycastInfo;
 
 	btTransform m_worldTransform;
+    btVector3 m_prevWorldLocation;// stephengold added 2021-09-30
 
 	btVector3 m_chassisConnectionPointCS;  //const
 	btVector3 m_wheelDirectionCS;          //const

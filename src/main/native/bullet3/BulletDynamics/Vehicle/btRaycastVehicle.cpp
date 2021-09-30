@@ -78,6 +78,7 @@ btWheelInfo& btRaycastVehicle::addWheel(const btVector3& connectionPointCS, cons
 	btWheelInfo& wheel = m_wheelInfo[getNumWheels() - 1];
 
 	updateWheelTransformsWS(wheel, false);
+        wheel.m_prevWorldLocation = wheel.m_worldTransform.getOrigin();// stephengold added 2021-09-30
 	updateWheelTransform(getNumWheels() - 1, false);
 	return wheel;
 }
@@ -306,8 +307,8 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 	for (i = 0; i < m_wheelInfo.size(); i++)
 	{
 		btWheelInfo& wheel = m_wheelInfo[i];
-		btVector3 relpos = wheel.m_raycastInfo.m_hardPointWS - getRigidBody()->getCenterOfMassPosition();
-		btVector3 vel = getRigidBody()->getVelocityInLocalPoint(relpos);
+                btVector3 location = wheel.m_worldTransform.getOrigin();// stephengold changed 2021-09-30
+                wheel.m_prevWorldLocation = worldLocation;// stephengold changed 2021-09-30
 
 		if (wheel.m_raycastInfo.m_isInContact)
 		{
@@ -315,17 +316,15 @@ void btRaycastVehicle::updateVehicle(btScalar step)
 			btScalar proj = fwd.dot(wheel.m_raycastInfo.m_contactNormalWS);
 			fwd -= wheel.m_raycastInfo.m_contactNormalWS * proj;
 
-			btScalar proj2 = fwd.dot(vel);
-
-			wheel.m_deltaRotation = (proj2 * step) / (wheel.m_wheelsRadius);
-			wheel.m_rotation += wheel.m_deltaRotation;
+                        btVector3 offset = location - wheel.m_prevWorldLocation;// stephengold changed 2021-09-30
+                        wheel.m_deltaRotation = fwd.dot(offset) / wheel.m_wheelsRadius;// stephengold changed 2021-09-30
 		}
 		else
 		{
-			wheel.m_rotation += wheel.m_deltaRotation;
+                    wheel.m_deltaRotation *= btScalar(0.99);// stephengold changed 2021-09-30
 		}
-
-		wheel.m_deltaRotation *= btScalar(0.99);  //damping of rotation when not in contact
+                wheel.m_rotation += wheel.m_deltaRotation;// stephengold changed 2021-09-30
+                wheel.m_rotation = btNormalizeAngle(wheel.m_rotation);// stephengold changed 2021-09-30
 	}
 }
 
