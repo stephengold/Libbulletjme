@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 12.2.0 released on 30 September 2021
+## Version 12.2.1 released on 30 September 2021
 
  + Bugfix: the velocities used to calculate `deltaRotation` are inaccurate
  + Bugfix: wheel rotation grows without bound, leading to roundoff errors
