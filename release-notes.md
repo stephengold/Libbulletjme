@@ -1,5 +1,16 @@
 # Release log for the Libbulletjme project
 
+## Version 12.2.0 released on 30 September 2021
+
+ + Bugfix: the velocities used to calculate `deltaRotation` are inaccurate
+ + Bugfix: wheel rotation grows without bound, leading to roundoff errors
+ + Bugfix: damping is applied incorrectly to `deltaRotation`
+ + Increased customization of the right/forward/up axes of a vehicle chassis.
+ + Added double-precision accessors for the gravity vectors of rigid bodies.
+ + Added the `Comparable` interface to the `IntPair` class.
+ + Upgraded the Bullet sources to match SHA1 ID=ce2627192
+   of the bullet3 project.
+
 ## Version 12.1.1 released on 25 September 2021
 
  + Added double-precision getters for the locations and orientations
