@@ -97,7 +97,7 @@ void btRaycastVehicle::updateWheelTransform(int wheelIndex, bool interpolatedTra
 	btVector3 up = -wheel.m_raycastInfo.m_wheelDirectionWS;
 	const btVector3& right = wheel.m_raycastInfo.m_wheelAxleWS;
 	btVector3 fwd = up.cross(right);
-	fwd = fwd.normalize();
+	fwd = fwd.safeNormalize();// stephengold changed 2021-10-06
 	//	up = right.cross(fwd);
 	//	up.normalize();
 
@@ -515,10 +515,10 @@ void btRaycastVehicle::updateFriction(btScalar timeStep)
 				const btVector3& surfNormalWS = wheelInfo.m_raycastInfo.m_contactNormalWS;
 				btScalar proj = m_axle[i].dot(surfNormalWS);
 				m_axle[i] -= surfNormalWS * proj;
-				m_axle[i] = m_axle[i].normalize();
+				m_axle[i] = m_axle[i].safeNormalize();// stephengold changed 2021-10-06
 
 				m_forwardWS[i] = surfNormalWS.cross(m_axle[i]);
-				m_forwardWS[i].normalize();
+				m_forwardWS[i].safeNormalize();// stephengold changed 2021-10-06
 
 				resolveSingleBilateral(*m_chassisBody, wheelInfo.m_raycastInfo.m_contactPointWS,
 									   *groundObject, wheelInfo.m_raycastInfo.m_contactPointWS,
@@ -682,7 +682,7 @@ void* btDefaultVehicleRaycaster::castRay(const btVector3& from, const btVector3&
 		{
 			result.m_hitPointInWorld = rayCallback.m_hitPointWorld;
 			result.m_hitNormalInWorld = rayCallback.m_hitNormalWorld;
-			result.m_hitNormalInWorld.normalize();
+			result.m_hitNormalInWorld.safeNormalize();// stephengold changed 2021-10-06
 			result.m_distFraction = rayCallback.m_closestHitFraction;
 			return (void*)body;
 		}
