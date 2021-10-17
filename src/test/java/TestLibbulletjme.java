@@ -1624,6 +1624,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countCollisionObjects());
         Assert.assertEquals(RayTestFlag.SubSimplexRaytest,
                 space.getRayTestFlags());
+        Assert.assertFalse(space.isUsingDeterministicDispatch());
     }
 
     /**

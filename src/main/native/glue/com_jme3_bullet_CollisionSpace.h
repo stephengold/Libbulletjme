@@ -41,6 +41,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    getDeterministicOverlappingPairs
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_getDeterministicOverlappingPairs
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    getNumCollisionObjects
  * Signature: (J)I
  */
@@ -78,6 +86,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
   (JNIEnv *, jclass, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    setDeterministicOverlappingPairs
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setDeterministicOverlappingPairs
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace

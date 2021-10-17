@@ -187,6 +187,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_finalizeNative
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    getDeterministicOverlappingPairs
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_getDeterministicOverlappingPairs
+(JNIEnv *pEnv, jclass, jlong spaceId) {
+    const jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
+    const btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", 0);
+
+    const btDispatcherInfo& dispatchInfo = pWorld->getDispatchInfo();
+    bool result = dispatchInfo.m_deterministicOverlappingPairs;
+
+    return (jboolean) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    getNumCollisionObjects
  * Signature: (J)I
  */
@@ -350,6 +369,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
     pUser->m_jmeSpace = NULL;
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    setDeterministicOverlappingPairs
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setDeterministicOverlappingPairs
+(JNIEnv *pEnv, jclass, jlong spaceId, jboolean desiredSetting) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.",);
+    btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.",);
+
+    btDispatcherInfo& dispatchInfo = pWorld->getDispatchInfo();
+    dispatchInfo.m_deterministicOverlappingPairs = (bool)desiredSetting;
 }
 
 /*
