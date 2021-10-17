@@ -156,6 +156,11 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 #ifdef _DEBUG
         printf("Debug_");
 #endif
+
+#ifdef DEBUG_PERSISTENCY
+        printf("DebugPersistency_");
+#endif // DEBUG_PERSISTENCY
+
 #ifdef BT_USE_DOUBLE_PRECISION
         printf("Dp_");
 #endif
