@@ -388,14 +388,21 @@ IVHACD::Parameters  vhacd.VHACDParameters
    + `btGearConstraint`
    + `btUniversalConstraint`
  + certain collision shapes:
+   + `btCompoundFromGimpactShape`
+   + `btConvexPointCloudShape`
+   + `btConvexTriangleMeshShape`
+   + `btGImpactCompoundShape`
    + `btMinkowskiSumShape`
    + `btMultimaterialTriangleMeshShape`
    + `btScaledBvhTriangleMeshShape`
+   + `btSdfCollisionShape`
+   + `btTriangleShape`
+   + `btUniformScalingShape`
  + `btSoftMultiBodyDynamicsWorld`
  + inverse dynamics
  + Bullet v3
  + extras, examples, and tests
- + execution tracing
+ + execution logging/tracing
  + `btAssert()` should perhaps throw a Java exception
 
 [Jump to table of contents](#toc)
