@@ -119,7 +119,10 @@ public:
 	}
 	virtual void setMargin(btScalar margin) = 0;
 	virtual btScalar getMargin() const = 0;
-	virtual bool isValidContact(const btVector3& local, int partId, int triangleIndex) const;// stephengold added 2021-10-22
+	virtual bool isValidContact(const btVector3& local, int partId, int triangleIndex) const// stephengold added 2021-10-22
+	{// stephengold added 2021-10-22
+		return true;// stephengold added 2021-10-22
+	}// stephengold added 2021-10-22
 	void setContactFilterEnabled(bool setting)// stephengold added 2021-10-22
 	{// stephengold added 2021-10-22
 		m_contactFilterEnabled = setting;// stephengold added 2021-10-22

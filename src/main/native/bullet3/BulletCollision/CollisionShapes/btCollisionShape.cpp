@@ -92,10 +92,6 @@ void btCollisionShape::calculateTemporalAabb(const btTransform& curTrans, const 
 	temporalAabbMax += angularMotion3d;
 }
 
-bool btCollisionShape::isValidContact(const btVector3& local, int partId, int triangleIndex) const// stephengold added 2021-10-22
-{// stephengold added 2021-10-22
-	return true;// stephengold added 2021-10-22
-}// stephengold added 2021-10-22
 ///fills the dataBuffer and returns the struct name (and 0 on failure)
 const char* btCollisionShape::serialize(void* dataBuffer, btSerializer* serializer) const
 {
