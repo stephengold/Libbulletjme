@@ -17,6 +17,7 @@ subject to the following restrictions:
 #include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h"
+#include "BulletCollision/CollisionShapes/btCollisionShape.h"// stephengold added 2021-10-22
 
 ///This is to allow MaterialCombiner/Custom Friction/Restitution values
 ContactAddedCallback gContactAddedCallback = 0;
@@ -117,17 +118,36 @@ void btManifoldResult::addContactPoint(const btVector3& normalOnBInWorld, const 
 	btVector3 localA;
 	btVector3 localB;
 
+	const btCollisionObject* pcoA;// stephengold added 2021-10-22
+	const btCollisionObject* pcoB;// stephengold added 2021-10-22
 	if (isSwapped)
 	{
-		localA = m_body1Wrap->getCollisionObject()->getWorldTransform().invXform(pointA);
-		localB = m_body0Wrap->getCollisionObject()->getWorldTransform().invXform(pointInWorld);
+		pcoA = m_body1Wrap->getCollisionObject();// stephengold changed 2021-10-22
+		pcoB = m_body0Wrap->getCollisionObject();// stephengold changed 2021-10-22
 	}
 	else
 	{
-		localA = m_body0Wrap->getCollisionObject()->getWorldTransform().invXform(pointA);
-		localB = m_body1Wrap->getCollisionObject()->getWorldTransform().invXform(pointInWorld);
+		pcoA = m_body0Wrap->getCollisionObject();// stephengold changed 2021-10-22
+		pcoB = m_body1Wrap->getCollisionObject();// stephengold changed 2021-10-22
 	}
+	localA = pcoA->getWorldTransform().invXform(pointA);// stephengold added 2021-10-22
+	localB = pcoB->getWorldTransform().invXform(pointInWorld);// stephengold added 2021-10-22
 
+	bool valid;// stephengold added 2021-10-22
+	const btCollisionShape* pShape = pcoA->getCollisionShape();// stephengold added 2021-10-22
+	if (isSwapped) {// stephengold added 2021-10-22
+		valid = pShape->isValidContact(localA, m_partId1, m_index1);// stephengold added 2021-10-22
+	} else {// stephengold added 2021-10-22
+		valid = pShape->isValidContact(localA, m_partId0, m_index0);// stephengold added 2021-10-22
+	}// stephengold added 2021-10-22
+	if (!valid) return;// stephengold added 2021-10-22
+	pShape = pcoB->getCollisionShape();// stephengold added 2021-10-22
+	if (isSwapped) {// stephengold added 2021-10-22
+		valid = pShape->isValidContact(localB, m_partId0, m_index0);// stephengold added 2021-10-22
+	} else {// stephengold added 2021-10-22
+		valid = pShape->isValidContact(localB, m_partId1, m_index1);// stephengold added 2021-10-22
+	}// stephengold added 2021-10-22
+	if (!valid) return;// stephengold added 2021-10-22
 	btManifoldPoint newPt(localA, localB, normalOnBInWorld, depth);
 	newPt.m_positionWorldOnA = pointA;
 	newPt.m_positionWorldOnB = pointInWorld;

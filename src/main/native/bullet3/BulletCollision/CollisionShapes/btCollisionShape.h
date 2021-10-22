@@ -117,6 +117,7 @@ public:
 	}
 	virtual void setMargin(btScalar margin) = 0;
 	virtual btScalar getMargin() const = 0;
+	virtual bool isValidContact(const btVector3& local, int partId, int triangleIndex) const;// stephengold added 2021-10-22
 
 	///optional user data pointer
 	void setUserPointer(void* userPtr)
