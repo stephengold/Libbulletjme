@@ -75,6 +75,7 @@ public:
 		return m_localAabbMax;
 	}
 
+	virtual bool isValidContact(const btVector3& local, int partId, int index) const;// stephengold added 2021-10-22
 	//debugging
 	virtual const char* getName() const { return "TRIANGLEMESH"; }
 };

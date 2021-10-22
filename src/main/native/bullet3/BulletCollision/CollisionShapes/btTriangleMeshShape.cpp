@@ -14,6 +14,7 @@ subject to the following restrictions:
 */
 
 #include "btTriangleMeshShape.h"
+#include "btTriangleShape.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btQuaternion.h"
 #include "btStridingMeshInterface.h"
@@ -177,3 +178,34 @@ btVector3 btTriangleMeshShape::localGetSupportingVertex(const btVector3& vec) co
 
 	return supportVertex;
 }
+struct FilteredInteriorCountCallback : public btTriangleCallback// stephengold added 2021-10-22
+{// stephengold added 2021-10-22
+    const btVector3& m_local;// stephengold added 2021-10-22
+    btScalar m_margin;// stephengold added 2021-10-22
+    int m_partId, m_triangleIndex;// stephengold added 2021-10-22
+public:// stephengold added 2021-10-22
+    int m_interiorCount;// stephengold added 2021-10-22
+    FilteredInteriorCountCallback(const btVector3& local, int partId, int triangleIndex, btScalar margin)// stephengold added 2021-10-22
+    : m_local(local), m_partId(partId), m_triangleIndex(triangleIndex), m_margin(margin)// stephengold added 2021-10-22
+    {// stephengold added 2021-10-22
+        m_interiorCount = 0;// stephengold added 2021-10-22
+    }// stephengold added 2021-10-22
+    virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex)// stephengold added 2021-10-22
+    {// stephengold added 2021-10-22
+        if (partId == m_partId && triangleIndex == m_triangleIndex) return;// stephengold added 2021-10-22
+	btTriangleShape triangleShape(triangle[0], triangle[1], triangle[2]);// stephengold added 2021-10-22
+        bool isInside = triangleShape.isInside(m_local, m_margin);// stephengold added 2021-10-22
+        if (isInside) ++m_interiorCount;// stephengold added 2021-10-22
+    }// stephengold added 2021-10-22
+};// stephengold added 2021-10-22
+bool btTriangleMeshShape::isValidContact(const btVector3& local, int partId, int triangleIndex) const// stephengold added 2021-10-22
+{// stephengold added 2021-10-22
+    btScalar margin = getMargin();// stephengold added 2021-10-22
+    const btVector3 halfExtent(margin, margin, margin);// stephengold added 2021-10-22
+    const btVector3 aabbMin = local - halfExtent;// stephengold added 2021-10-22
+    const btVector3 aabbMax = local + halfExtent;// stephengold added 2021-10-22
+    FilteredInteriorCountCallback callback(local, partId, triangleIndex, margin);// stephengold added 2021-10-22
+    processAllTriangles(&callback, aabbMin, aabbMax);// stephengold added 2021-10-22
+    bool valid = (callback.m_interiorCount == 0);// stephengold added 2021-10-22
+    return valid;// stephengold added 2021-10-22
+}// stephengold added 2021-10-22
