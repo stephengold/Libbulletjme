@@ -1611,6 +1611,7 @@ public class TestLibbulletjme {
         Assert.assertNotNull(shape);
         Assert.assertNotEquals(0L, shape.nativeId());
         assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
+        Assert.assertTrue(shape.isContactFilterEnabled());
     }
 
     /**

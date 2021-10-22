@@ -57,6 +57,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isContactFilterEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isContactFilterEnabled
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    isConvex
  * Signature: (J)Z
  */
@@ -86,6 +94,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isPolyhedral
   (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    setContactFilterEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setContactFilterEnabled
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape

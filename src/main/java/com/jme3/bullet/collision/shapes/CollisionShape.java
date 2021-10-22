@@ -233,6 +233,20 @@ abstract public class CollisionShape
     }
 
     /**
+     * Test whether contact filtering is enabled for this shape. Contact
+     * filtering is implemented only for HeightfieldCollisionShape and
+     * MeshCollisionShapes.
+     *
+     * @return true if enabled, otherwise false
+     */
+    public boolean isContactFilterEnabled() {
+        long shapeId = nativeId();
+        boolean result = isContactFilterEnabled(shapeId);
+
+        return result;
+    }
+
+    /**
      * Test whether this shape has convex type. In Bullet, "convex" is a
      * property of <em>types</em> of shapes. Specific <em>instances</em> of
      * non-convex types might still be "convex" in the mathematical sense of the
@@ -300,6 +314,16 @@ abstract public class CollisionShape
         float result = DebugShapeFactory.maxDistance(this, transformIdentity,
                 DebugShapeFactory.lowResolution);
         return result;
+    }
+
+    /**
+     * Enable/disable contact filtering for this shape.
+     *
+     * @param setting the desired setting (default=true)
+     */
+    public void setContactFilterEnabled(boolean setting) {
+        long shapeId = nativeId();
+        setContactFilterEnabled(shapeId, setting);
     }
 
     /**
@@ -487,6 +511,8 @@ abstract public class CollisionShape
 
     native private static boolean isConcave(long shapeId);
 
+    native private static boolean isContactFilterEnabled(long shapeId);
+
     native private static boolean isConvex(long shapeId);
 
     native private static boolean isInfinite(long shapeId);
@@ -494,6 +520,9 @@ abstract public class CollisionShape
     native private static boolean isNonMoving(long shapeId);
 
     native private static boolean isPolyhedral(long shapeId);
+
+    native private static void setContactFilterEnabled(long shapeId,
+            boolean setting);
 
     native private static void setLocalScaling(long shapeId, Vector3f scale);
 

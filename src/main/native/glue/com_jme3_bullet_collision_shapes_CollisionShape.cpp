@@ -134,6 +134,21 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    isContactFilterEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_isContactFilterEnabled
+(JNIEnv *pEnv, jclass, jlong shapeId) {
+    const btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+
+    bool result = pShape->isContactFilterEnabled();
+    return (jboolean) result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    isConvex
  * Signature: (J)Z
  */
@@ -186,6 +201,21 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     return pShape->isPolyhedral();
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    setContactFilterEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setContactFilterEnabled
+(JNIEnv *pEnv, jclass, jlong shapeId, jboolean setting) {
+    btCollisionShape *pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+
+    bool enable = (bool)setting;
+    pShape->setContactFilterEnabled(enable);
 }
 
 /*

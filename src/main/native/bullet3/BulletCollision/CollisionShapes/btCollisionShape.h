@@ -31,12 +31,14 @@ protected:
 	void* m_userPointer;
 	int m_userIndex;
 	int m_userIndex2;
+	bool m_contactFilterEnabled;// stephengold added 2021-10-22
 
 public:
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	btCollisionShape() : m_shapeType(INVALID_SHAPE_PROXYTYPE), m_userPointer(0), m_userIndex(-1), m_userIndex2(-1)
 	{
+		m_contactFilterEnabled = true;// stephengold added 2021-10-22
 	}
 
 	virtual ~btCollisionShape()
@@ -118,6 +120,13 @@ public:
 	virtual void setMargin(btScalar margin) = 0;
 	virtual btScalar getMargin() const = 0;
 	virtual bool isValidContact(const btVector3& local, int partId, int triangleIndex) const;// stephengold added 2021-10-22
+	void setContactFilterEnabled(bool setting)// stephengold added 2021-10-22
+	{// stephengold added 2021-10-22
+		m_contactFilterEnabled = setting;// stephengold added 2021-10-22
+	}// stephengold added 2021-10-22
+	bool isContactFilterEnabled() const {// stephengold added 2021-10-22
+		return m_contactFilterEnabled;// stephengold added 2021-10-22
+	}// stephengold added 2021-10-22
 
 	///optional user data pointer
 	void setUserPointer(void* userPtr)

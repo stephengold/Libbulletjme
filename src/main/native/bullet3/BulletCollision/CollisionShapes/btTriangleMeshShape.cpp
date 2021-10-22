@@ -200,6 +200,7 @@ public:// stephengold added 2021-10-22
 };// stephengold added 2021-10-22
 bool btTriangleMeshShape::isValidContact(const btVector3& local, int partId, int triangleIndex) const// stephengold added 2021-10-22
 {// stephengold added 2021-10-22
+    if (!isContactFilterEnabled()) return true;// stephengold added 2021-10-22
     btScalar margin = getMargin();// stephengold added 2021-10-22
     const btVector3 halfExtent(margin, margin, margin);// stephengold added 2021-10-22
     const btVector3 aabbMin = local - halfExtent;// stephengold added 2021-10-22
