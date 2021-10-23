@@ -1,4 +1,4 @@
-<img height="150" src="https://i.imgur.com/YEPFEcx.png">
+<img height="150" src="https://i.imgur.com/YEPFEcx.png" alt="Libbulletjme Project logo">
 
 The [Libbulletjme Project][libbulletjme] adds JNI "glue code"
 to portions of [Bullet Physics][bullet]
