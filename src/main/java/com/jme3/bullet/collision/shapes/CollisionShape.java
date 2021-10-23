@@ -72,6 +72,10 @@ abstract public class CollisionShape
     // fields
 
     /**
+     * copy of the contact-filter enable flag
+     */
+    protected boolean enableContactFilter = true;
+    /**
      * default margin for new non-sphere/non-capsule shapes (in physics-space
      * units, &gt;0)
      */
@@ -240,10 +244,8 @@ abstract public class CollisionShape
      * @return true if enabled, otherwise false
      */
     public boolean isContactFilterEnabled() {
-        long shapeId = nativeId();
-        boolean result = isContactFilterEnabled(shapeId);
-
-        return result;
+        assert enableContactFilter == isContactFilterEnabled(nativeId()) : enableContactFilter;
+        return enableContactFilter;
     }
 
     /**
@@ -324,6 +326,7 @@ abstract public class CollisionShape
     public void setContactFilterEnabled(boolean setting) {
         long shapeId = nativeId();
         setContactFilterEnabled(shapeId, setting);
+        this.enableContactFilter = setting;
     }
 
     /**

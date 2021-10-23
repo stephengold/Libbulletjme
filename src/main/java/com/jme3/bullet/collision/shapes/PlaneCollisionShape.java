@@ -103,6 +103,7 @@ public class PlaneCollisionShape extends CollisionShape {
         long shapeId = createShape(plane.getNormal(), plane.getConstant());
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
     }

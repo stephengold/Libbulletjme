@@ -327,6 +327,7 @@ public class HullCollisionShape extends ConvexShape {
         long shapeId = createShapeF(directBuffer, numVertices);
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
     }

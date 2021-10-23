@@ -210,6 +210,7 @@ public class CapsuleCollisionShape extends ConvexShape {
         long shapeId = createShape(axis, radius, height);
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         margin = 0f;
     }

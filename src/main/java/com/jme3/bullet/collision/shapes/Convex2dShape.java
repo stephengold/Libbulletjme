@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -147,6 +147,7 @@ public class Convex2dShape extends ConvexShape {
         long shapeId = createShape(childId);
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
     }

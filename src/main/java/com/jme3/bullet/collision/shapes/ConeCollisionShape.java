@@ -186,6 +186,7 @@ public class ConeCollisionShape extends ConvexShape {
         long shapeId = createShape(axis, radius, height);
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
     }

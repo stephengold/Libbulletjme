@@ -262,6 +262,7 @@ public class MultiSphere extends ConvexShape {
         long shapeId = createShape(centers, radii, numSpheres);
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
     }

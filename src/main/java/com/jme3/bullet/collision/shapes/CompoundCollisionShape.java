@@ -473,6 +473,7 @@ public class CompoundCollisionShape extends CollisionShape {
         long shapeId = createShape2(enableAabbTree, initialCapacity);
         setNativeId(shapeId);
 
+        setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
     }
