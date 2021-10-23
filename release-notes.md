@@ -1,14 +1,18 @@
 # Release log for the Libbulletjme project
 
+## Version 12.3.1 released on 23 October 2021
+
+Bugfix: contact filtering is too agressive
+
 ## Version 12.3.0 released on 22 October 2021
 
  + Bugfix: invalid contact points for heightfield/mesh shapes (Minie issue #18)
  + Bugfix: unsafe `normalize()` is used in `btRaycastVehicle`
  + Bugfix: logic errors in `btTriangleShape::isInside()`
- + add a to the `CollisionShape` class to disable contact filtering
- + identify native libraries built with `DEBUG_PERSISTENCY` defined
- + add accessors to the `CollisionSpace` class
-   for deterministic overlapping pairs
+ + Added a flag to the `CollisionShape` class to disable contact filtering.
+ + Identified native libraries built with `DEBUG_PERSISTENCY` defined.
+ + Added accessors to the `CollisionSpace` class
+   for deterministic overlapping pairs.
 
 ## Version 12.2.2 released on 30 September 2021
 
