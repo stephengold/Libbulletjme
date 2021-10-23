@@ -425,41 +425,6 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 [Jump to table of contents](#toc)
 
-
-[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
-[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
-[bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
-[chrome]: https://www.google.com/chrome "Chrome"
-[findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
-[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
-[gcc]: https://gcc.gnu.org "GNU Compiler Collection"
-[gdb]: https://www.gnu.org/software/gdb/ "GNU Project Debugger"
-[git]: https://git-scm.com "Git"
-[github]: https://github.com "GitHub"
-[gradle]: https://gradle.org "Gradle Project"
-[heart]: https://github.com/stephengold/Heart "Heart Project"
-[imgur]: https://imgur.com/ "Imgur"
-[jbullet]: http://jbullet.advel.cz "JBullet"
-[jfrog]: https://www.jfrog.com "JFrog"
-[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
-[latest]: https://github.com/stephengold/Libbulletjme/releases/latest "latest release"
-[libbulletjme]: https://github.com/stephengold/Libbulletjme "Libbulletjme Project"
-[license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
-[llvm]: https://www.llvm.org "LLVM Compiler"
-[log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
-[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
-[meld]: https://meldmerge.org "Meld Project"
-[minie]: https://github.com/stephengold/Minie "Minie Project"
-[mint]: https://linuxmint.com "Linux Mint Project"
-[netbeans]: https://netbeans.org "NetBeans Project"
-[openJDK]: https://openjdk.java.net "OpenJDK Project"
-[simmath]: https://github.com/Simsilica/SimMath "SimMath Project"
-[sonatype]: https://www.sonatype.com "Sonatype"
-[travis]: https://travis-ci.com "Travis CI"
-[vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
-[v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
-
-
 <a name="history"/>
 
 ## History
@@ -529,3 +494,37 @@ If I've misattributed anything or left anyone out, please let me know so I can
 correct the situation: sgold@sonic.net
 
 [Jump to table of contents](#toc)
+
+
+[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
+[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
+[bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
+[chrome]: https://www.google.com/chrome "Chrome"
+[findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
+[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
+[gcc]: https://gcc.gnu.org "GNU Compiler Collection"
+[gdb]: https://www.gnu.org/software/gdb/ "GNU Project Debugger"
+[git]: https://git-scm.com "Git"
+[github]: https://github.com "GitHub"
+[gradle]: https://gradle.org "Gradle Project"
+[heart]: https://github.com/stephengold/Heart "Heart Project"
+[imgur]: https://imgur.com/ "Imgur"
+[jbullet]: http://jbullet.advel.cz "JBullet"
+[jfrog]: https://www.jfrog.com "JFrog"
+[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
+[latest]: https://github.com/stephengold/Libbulletjme/releases/latest "latest release"
+[libbulletjme]: https://github.com/stephengold/Libbulletjme "Libbulletjme Project"
+[license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
+[llvm]: https://www.llvm.org "LLVM Compiler"
+[log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
+[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
+[meld]: https://meldmerge.org "Meld Project"
+[minie]: https://github.com/stephengold/Minie "Minie Project"
+[mint]: https://linuxmint.com "Linux Mint Project"
+[netbeans]: https://netbeans.org "NetBeans Project"
+[openJDK]: https://openjdk.java.net "OpenJDK Project"
+[simmath]: https://github.com/Simsilica/SimMath "SimMath Project"
+[sonatype]: https://www.sonatype.com "Sonatype"
+[travis]: https://travis-ci.com "Travis CI"
+[vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
+[v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
