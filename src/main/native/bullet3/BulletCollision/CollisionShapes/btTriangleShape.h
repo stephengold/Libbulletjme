@@ -144,9 +144,10 @@ public:
 				btScalar dist = pt.dot(edgeNormal);
 				btScalar edgeConst = pa.dot(edgeNormal);
 				dist -= edgeConst;
+                if (dist > tolerance) return false;// stephengold added 2021-10-24
 				if (dist > btScalar(0.)) {//it's outside the edge-plane   stephengold changed 2021-10-22
                     btVector3 offset = pt - pa;// stephengold changed 2021-10-22
-                    btVector3 projection = ((pt - pa).dot(edge) / edge.length2()) * edge;// stephengold changed 2021-10-22
+                    btVector3 projection = (offset.dot(edge) / edge.length2()) * edge;// stephengold changed 2021-10-22
                     if (offset.distance(projection) > tolerance * tolerance) return false;// stephengold changed 2021-10-22
 				}// stephengold changed 2021-10-22
 			}
