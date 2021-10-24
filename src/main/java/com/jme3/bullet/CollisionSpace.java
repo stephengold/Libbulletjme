@@ -401,7 +401,7 @@ public class CollisionSpace extends NativePhysicsObject {
 
     /**
      * Test whether the "deterministic overlapping pairs" option is enabled in
-     * the collision dispatcher. (native field: m_deterministicOverlappingPairs)
+     * the collision dispatcher (native field: m_deterministicOverlappingPairs).
      *
      * @return true if using sorted/deterministic order, otherwise false
      */
@@ -533,7 +533,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Alter the m_flags used in ray tests.
+     * Alter the flags used in ray tests (native field: m_flags).
      *
      * @param flags the desired flags, ORed together (default=SubSimplexRaytest)
      * @see com.jme3.bullet.RayTestFlag
@@ -577,7 +577,7 @@ public class CollisionSpace extends NativePhysicsObject {
 
     /**
      * Enable or disable the "deterministic overlapping pairs" option in the
-     * collision dispatcher. (native field: m_deterministicOverlappingPairs)
+     * collision dispatcher (native field: m_deterministicOverlappingPairs).
      *
      * @param desiredSetting true &rarr; sorted/deterministic order, false
      * &rarr; hashed/arbitrary order (default=false)

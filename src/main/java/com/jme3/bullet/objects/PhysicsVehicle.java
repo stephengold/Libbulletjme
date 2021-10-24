@@ -264,7 +264,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      * Determine the index of this vehicle's forward axis. The vehicle must be
      * added to a PhysicsSpace.
      *
-     * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
+     * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z,
+     * -1&rarr;custom axes
      */
     public int forwardAxisIndex() {
         assert isInWorld();
@@ -443,7 +444,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      * Determine the index of this vehicle's right-side axis. The vehicle must
      * be added to a PhysicsSpace.
      *
-     * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
+     * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z,
+     * -1&rarr;custom axes
      */
     public int rightAxisIndex() {
         int result = controller.rightAxisIndex();
@@ -688,7 +690,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
      * Determine the index of this vehicle's up axis. The vehicle must be added
      * to a PhysicsSpace.
      *
-     * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
+     * @return the index of the local axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z,
+     * -1&rarr;custom axes
      */
     public int upAxisIndex() {
         int result = controller.upAxisIndex();

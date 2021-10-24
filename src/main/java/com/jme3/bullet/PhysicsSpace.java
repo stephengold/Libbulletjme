@@ -546,7 +546,8 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Test whether this space uses Speculative Contact Restitution.
+     * Test whether this space uses Speculative Contact Restitution (native
+     * field: m_applySpeculativeContactRestitution).
      *
      * @return true if using SCR, otherwise false
      */
@@ -705,7 +706,7 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Update this space. Can used to single-step the physics simulation, if
+     * Update this space. Can be used to single-step the physics simulation, if
      * maxSubSteps is set to 0 or 1.
      *
      * @see #setMaxSubSteps(int)
@@ -748,7 +749,8 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Alter whether this space uses Speculative Contact Restitution.
+     * Alter whether this space uses Speculative Contact Restitution (native
+     * field: m_applySpeculativeContactRestitution).
      *
      * @param setting true to enable SCR, false to disable it (default=false)
      */
