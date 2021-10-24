@@ -44,9 +44,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-abstract public class PhysicsJoint
-        extends NativePhysicsObject
-        implements Comparable<PhysicsJoint> {
+abstract public class PhysicsJoint extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -226,24 +224,6 @@ abstract public class PhysicsJoint
         assert body != null;
         assert bodyB == null : bodyB;
         bodyB = body;
-    }
-    // *************************************************************************
-    // Comparable methods
-
-    /**
-     * Compare (by ID) with another joint.
-     *
-     * @param otherJoint (not null, unaffected)
-     * @return 0 if this joint equals other joint; negative if this comes before
-     * otherJoint; positive if this comes after otherJoint
-     */
-    @Override
-    public int compareTo(PhysicsJoint otherJoint) {
-        long thisId = nativeId();
-        long otherId = otherJoint.nativeId();
-        int result = Long.compare(thisId, otherId);
-
-        return result;
     }
     // *************************************************************************
     // NativePhysicsObject methods

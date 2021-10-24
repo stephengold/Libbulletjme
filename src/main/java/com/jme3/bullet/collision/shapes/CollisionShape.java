@@ -53,9 +53,7 @@ import jme3utilities.math.MyVector3f;
  *
  * @author normenhansen
  */
-abstract public class CollisionShape
-        extends NativePhysicsObject
-        implements Comparable<CollisionShape> {
+abstract public class CollisionShape extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -434,24 +432,6 @@ abstract public class CollisionShape
     protected void updateScale() {
         long shapeId = nativeId();
         getLocalScaling(shapeId, scale);
-    }
-    // *************************************************************************
-    // Comparable methods
-
-    /**
-     * Compare (by ID) with the specified collision shape.
-     *
-     * @param other the other shape (not null, unaffected)
-     * @return 0 if the shapes have the same ID; negative if this comes before
-     * other; positive if this comes after other
-     */
-    @Override
-    public int compareTo(CollisionShape other) {
-        long thisId = nativeId();
-        long otherId = other.nativeId();
-        int result = Long.compare(thisId, otherId);
-
-        return result;
     }
     // *************************************************************************
     // NativePhysicsObject methods

@@ -42,7 +42,8 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class NativePhysicsObject {
+abstract public class NativePhysicsObject
+        implements Comparable<NativePhysicsObject> {
     // *************************************************************************
     // constants and loggers
 
@@ -199,6 +200,24 @@ abstract public class NativePhysicsObject {
     final protected void unassignNativeObject() {
         assert hasAssignedNativeObject();
         id = 0L;
+    }
+    // *************************************************************************
+    // Comparable methods
+
+    /**
+     * Compare (by ID) with another native object.
+     *
+     * @param other (not null, unaffected)
+     * @return 0 if the objects have the same native ID; negative if this comes
+     * before other; positive if this comes after other
+     */
+    @Override
+    public int compareTo(NativePhysicsObject other) {
+        long objectId = nativeId();
+        long otherId = other.nativeId();
+        int result = Long.compare(objectId, otherId);
+
+        return result;
     }
     // *************************************************************************
     // Object methods

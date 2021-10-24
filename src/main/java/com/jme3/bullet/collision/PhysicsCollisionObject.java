@@ -54,9 +54,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-abstract public class PhysicsCollisionObject
-        extends NativePhysicsObject
-        implements Comparable<PhysicsCollisionObject> {
+abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     // *************************************************************************
     // constants and loggers
 
@@ -1089,24 +1087,6 @@ abstract public class PhysicsCollisionObject
 
         long objectId = nativeId();
         setLocationAndBasis(objectId, centerLocation, orientation);
-    }
-    // *************************************************************************
-    // Comparable methods
-
-    /**
-     * Compare (by ID) with another collision object.
-     *
-     * @param other (not null, unaffected)
-     * @return 0 if the objects have the same native ID; negative if this comes
-     * before other; positive if this comes after other
-     */
-    @Override
-    public int compareTo(PhysicsCollisionObject other) {
-        long objectId = nativeId();
-        long otherId = other.nativeId();
-        int result = Long.compare(objectId, otherId);
-
-        return result;
     }
     // *************************************************************************
     // NativePhysicsObject methods
