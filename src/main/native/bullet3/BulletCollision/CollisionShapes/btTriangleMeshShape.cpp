@@ -178,14 +178,14 @@ btVector3 btTriangleMeshShape::localGetSupportingVertex(const btVector3& vec) co
 
 	return supportVertex;
 }
-struct FilteredInteriorCountCallback : public btTriangleCallback// stephengold added 2021-10-22
+struct MeshFilteredInteriorCountCallback : public btTriangleCallback// stephengold added 2021-10-22
 {// stephengold added 2021-10-22
     const btVector3& m_local;// stephengold added 2021-10-22
     btScalar m_margin;// stephengold added 2021-10-22
     int m_partId, m_triangleIndex;// stephengold added 2021-10-22
 public:// stephengold added 2021-10-22
     int m_interiorCount;// stephengold added 2021-10-22
-    FilteredInteriorCountCallback(const btVector3& local, int partId, int triangleIndex, btScalar margin)// stephengold added 2021-10-22
+    MeshFilteredInteriorCountCallback(const btVector3& local, int partId, int triangleIndex, btScalar margin)// stephengold added 2021-10-22
     : m_local(local), m_partId(partId), m_triangleIndex(triangleIndex), m_margin(margin)// stephengold added 2021-10-22
     {// stephengold added 2021-10-22
         m_interiorCount = 0;// stephengold added 2021-10-22
@@ -205,7 +205,7 @@ bool btTriangleMeshShape::isValidContact(const btVector3& local, int partId, int
     const btVector3 halfExtent(margin, margin, margin);// stephengold added 2021-10-22
     const btVector3 aabbMin = local - halfExtent;// stephengold added 2021-10-22
     const btVector3 aabbMax = local + halfExtent;// stephengold added 2021-10-22
-    FilteredInteriorCountCallback callback(local, partId, triangleIndex, margin);// stephengold added 2021-10-22
+    MeshFilteredInteriorCountCallback callback(local, partId, triangleIndex, margin);// stephengold added 2021-10-22
     processAllTriangles(&callback, aabbMin, aabbMax);// stephengold added 2021-10-22
     bool valid = (callback.m_interiorCount == 0);// stephengold added 2021-10-22
     return valid;// stephengold added 2021-10-22
