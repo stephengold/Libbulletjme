@@ -98,7 +98,8 @@ bool SphereTriangleDetector::collide(const btVector3& sphereCenter, btVector3& p
 	const btVector3* vertices = &m_triangle->getVertexPtr(0);
 
 	btScalar radius = m_sphere->getRadius();
-	btScalar radiusWithThreshold = radius + contactBreakingThreshold;
+        btScalar triangleMargin = m_triangle->getMargin();// stephengold changed 2021-10-24
+	btScalar radiusWithThreshold = radius + contactBreakingThreshold + triangleMargin;// stephengold changed 2021-10-24
 
 	btVector3 normal = (vertices[1] - vertices[0]).cross(vertices[2] - vertices[0]);
 
@@ -170,14 +171,14 @@ bool SphereTriangleDetector::collide(const btVector3& sphereCenter, btVector3& p
 				btScalar distance = btSqrt(distanceSqr);
 				resultNormal = contactToCentre;
 				resultNormal.normalize();
-				point = contactPoint;
-				depth = -(radius - distance);
+				point = contactPoint + triangleMargin * resultNormal;// stephengold changed 2021-10-24
+				depth = distance - (radius + triangleMargin);// stephengold changed 2021-10-24
 			}
 			else
 			{
 				resultNormal = normal;
 				point = contactPoint;
-				depth = -radius;
+				depth = -(radius + triangleMargin);// stephengold changed 2021-10-24
 			}
 			return true;
 		}
