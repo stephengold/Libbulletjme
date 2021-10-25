@@ -54,7 +54,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:12.3.1'
+            implementation 'com.github.stephengold:Libbulletjme:12.4.1'
         }
 
     For some older versions of Gradle,
@@ -244,7 +244,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 12.3.1`
+     + `git checkout -b latest 12.4.1`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
@@ -381,6 +381,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
    + macOS and Windows on ARM architectures
    + PowerPC architectures
  + `btRigidBodyConstructionInfo`
+ + "additional damping" for rigid bodies
  + debug drawer
  + serialization (file loader)
  + certain constraints:

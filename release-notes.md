@@ -17,7 +17,7 @@ Bugfix: contact filtering is too agressive
  + Added a flag to the `CollisionShape` class to disable contact filtering.
  + Identified native libraries built with `DEBUG_PERSISTENCY` defined.
  + Added accessors to the `CollisionSpace` class
-   for deterministic overlapping pairs.
+   for deterministic overlapping pairs mode bit.
 
 ## Version 12.2.2 released on 30 September 2021
 
