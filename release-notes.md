@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 12.4.0 released on 24 October 2021
+## Version 12.4.1 released on 25 October 2021
 
  + Bugfix: `SphereTriangleDetector` doesn't account for the triangle's margin
  + NativePhysicsObject:  make all NPOs comparable (for use in collections)
