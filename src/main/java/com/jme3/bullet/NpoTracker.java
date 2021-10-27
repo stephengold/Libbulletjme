@@ -89,30 +89,16 @@ class NpoTracker extends WeakReference<NativePhysicsObject> {
          * Remove this tracker from the map BEFORE freeing the native object.
          */
         NativePhysicsObject.removeTracker(id);
-
-        Class<?> c;
-        for (c = referentClass; c != Object.class; c = c.getSuperclass()) {
-            Method method;
+        Method[] methods = FreeingMethods.of(referentClass);
+        // Avoid re-boxing if there is more than one method to call.
+        Long boxedId = Long.valueOf(id);
+        for (int i = 0; i < methods.length; ++i) {
+            Method method = methods[i];
             try {
-                method = c.getDeclaredMethod("freeNativeObject", long.class);
-
-            } catch (IllegalArgumentException
-                    | NoClassDefFoundError exception) {
-                System.out.println("c = " + c.getName());
-                throw new RuntimeException(exception);
-
-            } catch (NoSuchMethodException exception) {
-                continue;
-            }
-
-            try {
-                method.setAccessible(true);
-                method.invoke(null, id);
-
+                method.invoke(null, boxedId);
                 ++invocationCount;
-            } catch (IllegalAccessException | IllegalArgumentException
-                    | SecurityException | InvocationTargetException exception) {
-                throw new RuntimeException(exception);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw new RuntimeException(e);
             }
         }
 
@@ -132,5 +118,40 @@ class NpoTracker extends WeakReference<NativePhysicsObject> {
         result += "_" + Long.toHexString(id);
 
         return result;
+    }	
+    // *************************************************************************
+    // Freeing methods cache
+
+    /**
+     * Simple cache so we don't have to traverse the class hierarchy and reflect
+     * each time.
+     */
+    private static final class FreeingMethods {
+        private static final ConcurrentHashMap<Class<?>, Method[]> methodsByClass = new ConcurrentHashMap<>();
+
+        private static final Method[] generate(Class<?> clazz) {
+            ArrayList<Method> methods = new ArrayList<>();
+            for (Class<?> c = clazz; c != Object.class; c = c.getSuperclass()) {
+                try {
+                    Method method = c.getDeclaredMethod("freeNativeObject", long.class);
+                    method.setAccessible(true);
+                    methods.add(method);
+                } catch (IllegalArgumentException | NoClassDefFoundError | SecurityException e) {
+                    System.out.println("c = " + c.getName());
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    continue;
+                }
+            }
+            return methods.toArray(new Method[methods.size()]);
+        }
+
+        public static final Method[] of(Class<?> clazz) {
+            Method[] methods = methodsByClass.get(clazz);
+            if (methods == null) {
+                methodsByClass.put(clazz, methods = generate(clazz));
+            }
+            return methods;
+        }
     }
 }
