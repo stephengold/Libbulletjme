@@ -93,7 +93,7 @@ class NpoTracker extends WeakReference<NativePhysicsObject> {
         NativePhysicsObject.removeTracker(id);
         Method[] methods = FreeingMethods.of(referentClass);
         // Avoid re-boxing if there is more than one method to call.
-        Long boxedId = Long.valueOf(id);
+        Object[] boxedId = new Object[]{ Long.valueOf(id) };
         for (int i = 0; i < methods.length; ++i) {
             Method method = methods[i];
             try {
