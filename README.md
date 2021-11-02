@@ -480,6 +480,9 @@ This project also made use of the following software tools:
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
 
+I am grateful to ["dustContributor"](https://github.com/dustContributor)
+for [optimizing the cleaner thread](https://github.com/stephengold/Libbulletjme/pull/13).
+
 I am grateful to [Github], [Sonatype], [JFrog], [AppVeyor], [Travis], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
