@@ -949,26 +949,6 @@ void btHeightfieldTerrainShape::clearAccelerator()
 {
 	m_vboundsGrid.clear();
 }
-struct FilteredInteriorCountCallback : public btTriangleCallback// stephengold added 2021-10-22
-{// stephengold added 2021-10-22
-    const btVector3& m_local;// stephengold added 2021-10-22
-    btScalar m_margin;// stephengold added 2021-10-22
-    int m_partId, m_triangleIndex;// stephengold added 2021-10-22
-public:// stephengold added 2021-10-22
-    int m_interiorCount;// stephengold added 2021-10-22
-    FilteredInteriorCountCallback(const btVector3& local, int partId, int triangleIndex, btScalar margin)// stephengold added 2021-10-22
-    : m_local(local), m_partId(partId), m_triangleIndex(triangleIndex), m_margin(margin)// stephengold added 2021-10-22
-    {// stephengold added 2021-10-22
-        m_interiorCount = 0;// stephengold added 2021-10-22
-    }// stephengold added 2021-10-22
-    virtual void processTriangle(btVector3* triangle, int partId, int triangleIndex)// stephengold added 2021-10-22
-    {// stephengold added 2021-10-22
-        if (partId == m_partId && triangleIndex == m_triangleIndex) return;// stephengold added 2021-10-22
-	btTriangleShape triangleShape(triangle[0], triangle[1], triangle[2]);// stephengold added 2021-10-22
-        bool isInside = triangleShape.isInside(m_local, m_margin);// stephengold added 2021-10-22
-        if (isInside) ++m_interiorCount;// stephengold added 2021-10-22
-    }// stephengold added 2021-10-22
-};// stephengold added 2021-10-22
 bool btHeightfieldTerrainShape::isValidContact(const btVector3& local, int partId, int triangleIndex) const// stephengold added 2021-10-22
 {// stephengold added 2021-10-22
     if (!isContactFilterEnabled()) return true;// stephengold added 2021-10-22
