@@ -277,3 +277,15 @@ const char* btGImpactMeshShape::serialize(void* dataBuffer, btSerializer* serial
 
 	return "btGImpactMeshShapeData";
 }
+bool btGImpactMeshShape::isValidContact(const btVector3& local, int partId, int triangleIndex) const// stephengold added 2021-11-04
+{// stephengold added 2021-11-04
+    if (!isContactFilterEnabled()) return true;// stephengold added 2021-11-04
+    btScalar margin = btScalar(0.999) * getMargin();// stephengold added 2021-11-04
+    const btVector3 halfExtent(margin, margin, margin);// stephengold added 2021-11-04
+    const btVector3 aabbMin = local - halfExtent;// stephengold added 2021-11-04
+    const btVector3 aabbMax = local + halfExtent;// stephengold added 2021-11-04
+    FilteredInteriorCountCallback callback(local, partId, triangleIndex, margin);// stephengold added 2021-11-04
+    processAllTriangles(&callback, aabbMin, aabbMax);// stephengold added 2021-11-04
+    bool valid = (callback.m_interiorCount == 0);// stephengold added 2021-11-04
+    return valid;// stephengold added 2021-11-04
+}// stephengold added 2021-11-04

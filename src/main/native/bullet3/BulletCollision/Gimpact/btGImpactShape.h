@@ -931,6 +931,7 @@ public:
 		m_needs_update = true;
 	}
 
+	virtual bool isValidContact(const btVector3& local, int partId, int triangleIndex) const;// stephengold added 2021-11-04
 	virtual void setMargin(btScalar margin)
 	{
 		m_collisionMargin = margin;
