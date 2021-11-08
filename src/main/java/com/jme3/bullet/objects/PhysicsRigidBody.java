@@ -291,7 +291,7 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a velocity vector (radians per second in physics-space
-     * coordinates, either storeResult or a new vector, not null))
+     * coordinates, either storeResult or a new vector, not null)
      */
     public Vector3f getAngularVelocity(Vector3f storeResult) {
         assert isDynamic();
@@ -308,7 +308,7 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a velocity vector (radians per second in physics-space
-     * coordinates, either storeResult or a new vector, not null))
+     * coordinates, either storeResult or a new vector, not null)
      */
     public Vec3d getAngularVelocityDp(Vec3d storeResult) {
         assert isDynamic();
@@ -326,7 +326,7 @@ public class PhysicsRigidBody extends PhysicsBody {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a velocity vector (radians per second in local coordinates,
-     * either storeResult or a new vector, not null))
+     * either storeResult or a new vector, not null)
      */
     public Vector3f getAngularVelocityLocal(Vector3f storeResult) {
         assert isDynamic();
@@ -672,7 +672,7 @@ public class PhysicsRigidBody extends PhysicsBody {
     /**
      * Enable/disable this body's contact response.
      *
-     * @param newState true to respond to contacts, false to ignore it
+     * @param newState true to respond to contacts, false to ignore them
      * (default=true)
      */
     public void setContactResponse(boolean newState) {
