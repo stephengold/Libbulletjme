@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -81,4 +81,19 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Anchor_setInfluence
     NULL_CHK(pEnv, pAnchor, "The btSoftBody::Anchor does not exist.",)
 
     pAnchor->m_influence = (btScalar) influence;
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_Anchor
+ * Method:    setPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Anchor_setPivotInB
+(JNIEnv *pEnv, jclass, jlong anchorId, jobject locationVector) {
+    btSoftBody::Anchor *pAnchor
+            = reinterpret_cast<btSoftBody::Anchor *> (anchorId);
+    NULL_CHK(pEnv, pAnchor, "The btSoftBody::Anchor does not exist.",)
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
+
+    jmeBulletUtil::convert(pEnv, locationVector, &pAnchor->m_local);
 }

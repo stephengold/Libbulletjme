@@ -187,9 +187,22 @@ public class Anchor extends PhysicsJoint {
     public void setInfluence(float amount) {
         Validate.fraction(amount, "amount");
 
-        long anchorId = nativeId();
         this.influence = amount;
+        long anchorId = nativeId();
         setInfluence(anchorId, amount);
+    }
+
+    /**
+     * Alter the pivot location in B's local coordinates.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    public void setPivotInB(Vector3f location) {
+        Validate.nonNull(location, "location");
+
+        pivotInB.set(location);
+        long archorId = nativeId();
+        setPivotInB(archorId, location);
     }
     // *************************************************************************
     // PhysicsJoint methods
@@ -230,4 +243,6 @@ public class Anchor extends PhysicsJoint {
             float influence);
 
     native private static void setInfluence(long anchorId, float influence);
+
+    native private static void setPivotInB(long anchorId, Vector3f location);
 }
