@@ -159,4 +159,15 @@ public class IntPair implements Comparable<IntPair> {
 
         return result;
     }
+
+    /**
+     * Represent this pair as a text string. The format is: {smaller,larger}
+     *
+     * @return a descriptive string of text (not null)
+     */
+    @Override
+    public String toString() {
+        String result = String.format("{%d,%d}", smaller, larger);
+        return result;
+    }
 }
