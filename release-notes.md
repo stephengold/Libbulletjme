@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 12.5.0 released on 8 November 2021
+
+ + Cached the methods that free native objects, to improve performance.
+ + Implemented contact filtering for GImpact collision shapes.
+ + Added the `setPivotInB()` method to the `Anchor` class.
+ + Overrode the `toString()` method in the `IntPair` class.
+
 ## Version 12.4.1 released on 25 October 2021
 
  + Bugfix: `SphereTriangleDetector` doesn't account for the triangle's margin
