@@ -1155,6 +1155,62 @@ public class TestLibbulletjme {
             assertEquals(xIn.x, xIn.y, xIn.z, xOut, 1e-6);
         }
     }
+
+    /**
+     * Test btTriangleShape::isInside().
+     */
+    @Test
+    public void test014() {
+        loadNativeLibrary();
+
+        // near p0 (isosceles triangle)
+        boolean isInside0 = NativeLibrary.isInsideTriangle(
+                new Vector3f(10f, 0.1f, 0.1f), 0.2f,
+                new Vector3f(10f, 0f, 0f),
+                new Vector3f(-10f, 0f, -10f),
+                new Vector3f(-10f, 0f, 10f));
+        Assert.assertTrue(isInside0);
+
+        // outside an acute corner p0 (isosceles triangle)
+        boolean isInside1 = NativeLibrary.isInsideTriangle(
+                new Vector3f(12.1f, 10f, 0f), 2f,
+                new Vector3f(10f, 10f, 0f),
+                new Vector3f(-10f, 10f, -5f),
+                new Vector3f(-10f, 10f, 5f));
+        Assert.assertFalse(isInside1);
+
+        // near an interior point (isosceles triangle)
+        boolean isInside2 = NativeLibrary.isInsideTriangle(
+                new Vector3f(0f, 3.05f, 0f), 0.1f,
+                new Vector3f(10f, 3f, 0f),
+                new Vector3f(-10f, 3f, -10f),
+                new Vector3f(-10f, 3f, 10f));
+        Assert.assertTrue(isInside2);
+
+        // near the hypotenuse (right triangle)
+        boolean isInside3 = NativeLibrary.isInsideTriangle(
+                new Vector3f(1f, 7f, -1f), 1.5f,
+                new Vector3f(10f, 7f, 10f),
+                new Vector3f(-10f, 7f, -10f),
+                new Vector3f(-10f, 7f, 10f));
+        Assert.assertTrue(isInside3);
+
+        // outside the hypotenuse (right triangle)
+        boolean isInside4 = NativeLibrary.isInsideTriangle(
+                new Vector3f(1f, 4f, -1f), 1.4f,
+                new Vector3f(10f, 4f, 10f),
+                new Vector3f(-10f, 4f, -10f),
+                new Vector3f(-10f, 4f, 10f));
+        Assert.assertFalse(isInside4);
+
+        // (degenerate triangle)
+        boolean isInside5 = NativeLibrary.isInsideTriangle(
+                new Vector3f(1f, 5f, -1f), 1.5f,
+                new Vector3f(10f, 5f, 10f),
+                new Vector3f(-10f, 5f, -10f),
+                new Vector3f(-10f, 5f, -10f));
+        Assert.assertTrue(isInside5);
+    }
     // *************************************************************************
     // private methods
 
