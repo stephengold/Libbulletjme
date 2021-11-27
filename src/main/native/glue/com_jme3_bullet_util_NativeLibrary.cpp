@@ -34,7 +34,9 @@
  * Author: Stephen Gold
  */
 #include "com_jme3_bullet_util_NativeLibrary.h"
+#include "jmeBulletUtil.h"
 #include "jmeClasses.h"
+#include "BulletCollision/CollisionShapes/btTriangleShape.h"
 #include "LinearMath/btAlignedAllocator.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btThreads.h"
@@ -145,6 +147,32 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isDoublePreci
 #else
     return JNI_FALSE;
 #endif //BT_USE_DOUBLE_PRECISION
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    isInsideTriangle
+ * Signature: (Lcom/jme3/math/Vector3f;FLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isInsideTriangle
+(JNIEnv *pEnv, jclass, jobject testVector, jfloat maxSeparation,
+        jobject v0Vector, jobject v1Vector, jobject v2Vector) {
+    jmeClasses::initJavaClasses(pEnv);
+
+    btVector3 pt;
+    jmeBulletUtil::convert(pEnv, testVector, &pt);
+    btVector3 p0;
+    jmeBulletUtil::convert(pEnv, v0Vector, &p0);
+    btVector3 p1;
+    jmeBulletUtil::convert(pEnv, v1Vector, &p1);
+    btVector3 p2;
+    jmeBulletUtil::convert(pEnv, v2Vector, &p2);
+
+    btTriangleShape triangleShape(p0, p1, p2);
+    btScalar margin = (btScalar) maxSeparation;
+    bool result = triangleShape.isInside(pt, margin);
+
+    return (jboolean) result;
 }
 
 /*
