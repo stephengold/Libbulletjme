@@ -105,7 +105,7 @@ public:
 	void calcNormal(btVector3 & normal) const
 	{
 		normal = (m_vertices1[1] - m_vertices1[0]).cross(m_vertices1[2] - m_vertices1[0]);
-		normal.normalize();
+		normal.safeNormalize();// stephengold changed 2021-11-26
 	}
 
 	virtual void getPlaneEquation(int i, btVector3& planeNormal, btVector3& planeSupport) const
@@ -140,7 +140,7 @@ public:
 				getEdge(i, pa, pb);
 				btVector3 edge = pb - pa;
 				btVector3 edgeNormal = edge.cross(normal);
-				edgeNormal.normalize();
+				edgeNormal.safeNormalize();// stephengold changed 2021-11-26
 				btScalar dist = pt.dot(edgeNormal);
 				btScalar edgeConst = pa.dot(edgeNormal);
 				dist -= edgeConst;
