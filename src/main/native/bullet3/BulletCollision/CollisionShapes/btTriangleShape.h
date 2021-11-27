@@ -124,38 +124,46 @@ public:
 
 	virtual bool isInside(const btVector3& pt, btScalar tolerance) const
 	{
-		btVector3 normal;
-		calcNormal(normal);
-		//distance to plane
-		btScalar dist = pt.dot(normal);
-		btScalar planeconst = m_vertices1[0].dot(normal);
-		dist -= planeconst;
-		if (dist >= -tolerance && dist <= tolerance)
+		btVector3 p0 = m_vertices1[0];// stephengold changed 2021-11-27
+		btVector3 p1 = m_vertices1[1];// stephengold changed 2021-11-27
+		btVector3 p2 = m_vertices1[2];// stephengold changed 2021-11-27
+		btVector3 normal = (p1 - p0).cross(p2 - p0);// stephengold changed 2021-11-27
+		btScalar l2 = normal.length2();// stephengold changed 2021-11-27
+		bool haveNormal = (l2 >= SIMD_EPSILON * SIMD_EPSILON);// stephengold changed 2021-11-27
+		if (haveNormal) {// stephengold changed 2021-11-27
+			normal /= btSqrt(l2);// stephengold changed 2021-11-27
+			btScalar dist = (pt - p0).dot(normal);// stephengold changed 2021-11-27
+			if (dist < -tolerance || dist > tolerance) return false;// stephengold changed 2021-11-27
+		}// stephengold changed 2021-11-27
+		btScalar tol2 = tolerance * tolerance;// stephengold changed 2021-11-27
+		if (pt.distance2(p0) <= tol2) return true;// stephengold changed 2021-11-27
+		if (pt.distance2(p1) <= tol2) return true;// stephengold changed 2021-11-27
+		if (pt.distance2(p2) <= tol2) return true;// stephengold changed 2021-11-27
+		for (int i = 0; i < 3; ++i)// stephengold changed 2021-11-27
 		{
-			//inside check on edge-planes
-			int i;
-			for (i = 0; i < 3; i++)
-			{
-				btVector3 pa, pb;
-				getEdge(i, pa, pb);
-				btVector3 edge = pb - pa;
-				btVector3 edgeNormal = edge.cross(normal);
-				edgeNormal.safeNormalize();// stephengold changed 2021-11-26
-				btScalar dist = pt.dot(edgeNormal);
-				btScalar edgeConst = pa.dot(edgeNormal);
-				dist -= edgeConst;
-                if (dist > tolerance) return false;// stephengold added 2021-10-24
-				if (dist > btScalar(0.)) {//it's outside the edge-plane   stephengold changed 2021-10-22
-                    btVector3 offset = pt - pa;// stephengold changed 2021-10-22
-                    btVector3 projection = (offset.dot(edge) / edge.length2()) * edge;// stephengold changed 2021-10-22
-                    if (offset.distance(projection) > tolerance * tolerance) return false;// stephengold changed 2021-10-22
-				}// stephengold changed 2021-10-22
+			btVector3 pa, pb;// stephengold changed 2021-11-27
+			getEdge(i, pa, pb);// stephengold changed 2021-11-27
+			btVector3 edge = pb - pa;// stephengold changed 2021-11-27
+			btVector3 offset = pt - pa;// stephengold changed 2021-11-27
+			if (haveNormal) {// stephengold changed 2021-11-27
+				btVector3 edgeNormal = edge.cross(normal);// stephengold changed 2021-11-27
+				l2 = edgeNormal.length2();// stephengold changed 2021-11-27
+				if (l2 >= SIMD_EPSILON * SIMD_EPSILON) {// stephengold changed 2021-11-27
+					edgeNormal /= btSqrt(l2);// stephengold changed 2021-11-27
+					btScalar dist = offset.dot(edgeNormal);// stephengold changed 2021-11-27
+					if (dist > tolerance) return false;// stephengold changed 2021-11-27
+					if (dist <= btScalar(0.)) continue;// stephengold changed 2021-11-27
+				}// stephengold changed 2021-11-27
 			}
-
-			return true;
+			l2 = edge.length2();// stephengold changed 2021-11-27
+			if (l2 >= SIMD_EPSILON * SIMD_EPSILON) {// stephengold changed 2021-11-27
+				btScalar dot = offset.dot(edge);// stephengold changed 2021-11-27
+				if (dot < btScalar(0.) || dot > l2) return false;// stephengold changed 2021-11-27
+				btVector3 projection = (dot / l2) * edge;// stephengold changed 2021-11-27
+				if (offset.distance2(projection) > tol2) return false;// stephengold changed 2021-11-27
+			}// stephengold changed 2021-11-27
 		}
-
-		return false;
+		return true;// stephengold changed 2021-11-27
 	}
 	//debugging
 	virtual const char* getName() const
