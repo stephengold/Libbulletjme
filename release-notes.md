@@ -3,11 +3,11 @@
 ## Version 12.6.0 released on 4 December 2021
 
  + Bugfix: `btTriangleShape::isInside()` relies on the plane normal, which is
-   invalid for a degenerate triangles
+   invalid for a degenerate triangle
  + Bugfix: unsafe `normalize()` is used in `btTriangleShape`
  + Bugfix: typo in `btTriangleShape::isInside()` ("distance" for "distance2")
  + Pending resolution of Travis CI ticket #34567:
-   + Upgraded MacOS64 build tools from Xcode 9.3 to Xcode 12.4.
+   + Upgraded MacOS64 build tools from Xcode 9.3 to Xcode 12.4 .
    + Dropped support for the MacOSX32 platform.
  + Added the `isInsideTriangle()` method to the `NativeLibrary` class.
  + Upgraded the Bullet sources to match SHA1 ID=10f72b9b5
