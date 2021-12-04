@@ -1,5 +1,18 @@
 # Release log for the Libbulletjme project
 
+## Version 12.6.0 released on 4 December 2021
+
+ + Bugfix: `btTriangleShape::isInside()` relies on the plane normal, which is
+   invalid for a degenerate triangles
+ + Bugfix: unsafe `normalize()` is used in `btTriangleShape`
+ + Bugfix: typo in `btTriangleShape::isInside()` ("distance" for "distance2")
+ + Pending resolution of Travis CI ticket #34567:
+   + Upgraded MacOS64 build tools from Xcode 9.3 to Xcode 12.4.
+   + Dropped support for the MacOSX32 platform.
+ + Added the `isInsideTriangle()` method to the `NativeLibrary` class.
+ + Upgraded the Bullet sources to match SHA1 ID=10f72b9b5
+   of the bullet3 project.
+
 ## Version 12.5.0 released on 8 November 2021
 
  + Cached the methods that free native objects, to improve performance.
@@ -24,7 +37,7 @@ Bugfix: contact filtering is too agressive
  + Added a flag to the `CollisionShape` class to disable contact filtering.
  + Identified native libraries built with `DEBUG_PERSISTENCY` defined.
  + Added accessors to the `CollisionSpace` class
-   for deterministic overlapping pairs mode bit.
+   for the "deterministic overlapping pairs" mode bit.
 
 ## Version 12.2.2 released on 30 September 2021
 
