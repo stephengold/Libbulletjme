@@ -68,10 +68,6 @@ model {
             architecture 'aarch64'
             operatingSystem 'linux'
         }
-        MacOSX32 {
-            architecture 'x86'
-            operatingSystem 'osx'
-        }
         MacOSX64 {
             architecture 'x86_64'
             operatingSystem 'osx'
@@ -124,7 +120,6 @@ model {
             targetPlatform 'Linux_ARM32'
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
-            targetPlatform 'MacOSX32'
             targetPlatform 'MacOSX64'
             targetPlatform 'Windows32'
             targetPlatform 'Windows64'
