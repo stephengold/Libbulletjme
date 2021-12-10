@@ -33,15 +33,12 @@ package com.jme3.math;
 
 import java.util.logging.Logger;
 
-/*
- * -- Added *Local methods to cut down on object creation - JS
- */
-
 /**
- * <code>Vector3f</code> defines a Vector for a three float value tuple.
- * <code>Vector3f</code> can represent any three dimensional value, such as a
- * vertex, a normal, etc. Utility methods are also included to aid in
- * mathematical calculations.
+ * A vector composed of 3 single-precision components, used to represent
+ * locations, offsets, and directions in 3-dimensional space.
+ *
+ * <p>Methods with names ending in "Local" modify the current instance. They are
+ * used to cut down on the creation of new instances.
  *
  * @author Mark Powell
  * @author Joshua Slack
@@ -51,54 +48,51 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     static final long serialVersionUID = 1;
     private static final Logger logger = Logger.getLogger(Vector3f.class.getName());
     /**
-     * shared instance of the all-zero vector (0,0,0) - Do not modify!
+     * Shared instance of the all-zero vector (0,0,0). Do not modify!
      */
     public final static Vector3f ZERO = new Vector3f(0, 0, 0);
     /**
-     * shared instance of the +X direction (1,0,0) - Do not modify!
+     * Shared instance of the +X direction (1,0,0). Do not modify!
      */
     public final static Vector3f UNIT_X = new Vector3f(1, 0, 0);
     /**
-     * shared instance of the +Y direction (0,1,0) - Do not modify!
+     * Shared instance of the +Y direction (0,1,0). Do not modify!
      */
     public final static Vector3f UNIT_Y = new Vector3f(0, 1, 0);
     /**
-     * shared instance of the +Z direction (0,0,1) - Do not modify!
+     * Shared instance of the +Z direction (0,0,1). Do not modify!
      */
     public final static Vector3f UNIT_Z = new Vector3f(0, 0, 1);
     /**
-     * shared instance of the all-ones vector (1,1,1) - Do not modify!
+     * Shared instance of the all-ones vector (1,1,1). Do not modify!
      */
     public final static Vector3f UNIT_XYZ = new Vector3f(1, 1, 1);
     /**
-     * the x value of the vector.
+     * The first (X) component.
      */
     public float x;
     /**
-     * the y value of the vector.
+     * The 2nd (Y) component.
      */
     public float y;
     /**
-     * the z value of the vector.
+     * The 3rd (Z) component.
      */
     public float z;
 
     /**
-     * Constructor instantiates a new <code>Vector3f</code> with default
-     * values of (0,0,0).
-     *
+     * Instantiates an all-zero vector (0,0,0).
      */
     public Vector3f() {
         x = y = z = 0;
     }
 
     /**
-     * Constructor instantiates a new <code>Vector3f</code> with provides
-     * values.
+     * Instantiates a vector with specified components.
      *
-     * @param x   the x value of the vector.
-     * @param y   the y value of the vector.
-     * @param z   the z value of the vector.
+     * @param x the desired X component
+     * @param y the desired Y component
+     * @param z the desired Z component
      */
     public Vector3f(float x, float y, float z) {
         this.x = x;
@@ -107,23 +101,21 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Constructor instantiates a new <code>Vector3f</code> that is a copy
-     * of the provided vector
+     * Instantiates a copy of the argument.
      *
-     * @param copy The Vector3f to copy
+     * @param copy the vector to copy (not null, unaffected)
      */
     public Vector3f(Vector3f copy) {
         this.set(copy);
     }
 
     /**
-     * <code>set</code> sets the x,y,z values of the vector based on passed
-     * parameters.
+     * Sets all 3 components to specified values.
      *
-     * @param x   the x value of the vector.
-     * @param y   the y value of the vector.
-     * @param z   the z value of the vector.
-     * @return this vector
+     * @param x the desired X component
+     * @param y the desired Y component
+     * @param z the desired Z component
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f set(float x, float y, float z) {
         this.x = x;
@@ -133,12 +125,10 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>set</code> sets the x,y,z values of the vector by copying the
-     * supplied vector.
+     * Copies all 3 components from the argument.
      *
-     * @param vect
-     *            the vector to copy.
-     * @return this vector
+     * @param vect the Vector3f to copy (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f set(Vector3f vect) {
         this.x = vect.x;
@@ -148,13 +138,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>add</code> adds a provided vector to this vector creating a
-     * resultant vector which is returned. If the provided vector is null, null
-     * is returned.
+     * Adds the argument and returns the sum as a new instance. If the argument
+     * is null, null is returned. Either way, the current instance is
+     * unaffected.
      *
-     * @param vec
-     *            the vector to add to this.
-     * @return the resultant vector.
+     * @param vec the vector to add (unaffected) or null for none
+     * @return a new Vector3f or null
      */
     public Vector3f add(Vector3f vec) {
         if (null == vec) {
@@ -165,13 +154,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>addLocal</code> adds a provided vector to this vector internally,
-     * and returns a handle to this vector for easy chaining of calls. If the
-     * provided vector is null, null is returned.
+     * Adds the argument and returns the (modified) current instance. If the
+     * argument is null, null is returned.
      *
-     * @param vec
-     *            the vector to add to this vector.
-     * @return this
+     * @param vec the vector to add (unaffected unless it's <code>this</code>)
+     *     or null for none
+     * @return the (modified) current instance or null
      */
     public Vector3f addLocal(Vector3f vec) {
         if (null == vec) {
@@ -185,33 +173,26 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>add</code> adds the provided values to this vector, creating a
-     * new vector that is then returned.
+     * Adds specified amounts to the vector's components and returns the sum as
+     * a new instance. The current instance is unaffected.
      *
-     * @param addX
-     *            the x value to add.
-     * @param addY
-     *            the y value to add.
-     * @param addZ
-     *            the z value to add.
-     * @return the result vector.
+     * @param addX the amount to add to the X component
+     * @param addY the amount to add to the Y component
+     * @param addZ the amount to add to the Z component
+     * @return a new Vector3f
      */
     public Vector3f add(float addX, float addY, float addZ) {
         return new Vector3f(x + addX, y + addY, z + addZ);
     }
 
     /**
-     * <code>addLocal</code> adds the provided values to this vector
-     * internally, and returns a handle to this vector for easy chaining of
-     * calls.
+     * Adds specified amounts to the vector's components and returns the
+     * (modified) current instance.
      *
-     * @param addX
-     *            value to add to x
-     * @param addY
-     *            value to add to y
-     * @param addZ
-     *            value to add to z
-     * @return this
+     * @param addX the amount to add to the X component
+     * @param addY the amount to add to the Y component
+     * @param addZ the amount to add to the Z component
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f addLocal(float addX, float addY, float addZ) {
         x += addX;
@@ -221,12 +202,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>dot</code> calculates the dot product of this vector with a
-     * provided vector. If the provided vector is null, 0 is returned.
+     * Returns the dot (or inner) product with the argument. If the argument is
+     * null, 0 is returned. Either way, the current instance is unaffected.
      *
-     * @param vec
-     *            the vector to dot with this vector.
-     * @return the resultant dot product of this vector and a given vector.
+     * @param vec the vector to multiply (unaffected) or null for none
+     * @return the product
      */
     public float dot(Vector3f vec) {
         if (null == vec) {
@@ -237,42 +217,42 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>cross</code> calculates the cross product of this vector with a
-     * parameter vector v.
+     * Calculates a cross product with the argument and returns the product as a
+     * new instance. The current instance is unaffected.
      *
-     * @param v   the vector to take the cross product of with this.
-     * @return the cross product vector.
+     * @param v the right factor (not null, unaffected)
+     * @return <code>this</code> cross <code>v</code> (a new Vector3f)
      */
     public Vector3f cross(Vector3f v) {
         return cross(v, null);
     }
 
     /**
-     * <code>cross</code> calculates the cross product of this vector with a
-     * parameter vector v.  The result is stored in <code>result</code>
+     * Calculates a cross product with a specified vector and returns the
+     * product in a 3rd vector. The current instance is unaffected unless it's
+     * <code>result</code>.
      *
-     * @param v   the vector to take the cross product of with this.
-     * @param result
-     *            the vector to store the cross product result.
-     * @return result, after receiving the cross product vector.
+     * @param v the right factor (not null, unaffected unless it's
+     *     <code>result</code>)
+     * @param result storage for the product, or null for a new Vector3f
+     * @return <code>this</code> cross <code>v</code> (either
+     *     <code>result</code> or a new Vector3f)
      */
     public Vector3f cross(Vector3f v, Vector3f result) {
         return cross(v.x, v.y, v.z, result);
     }
 
     /**
-     * <code>cross</code> calculates the cross product of this vector with a
-     * parameter vector v.  The result is stored in <code>result</code>
+     * Calculates a cross product with specified components and returns the
+     * product in the specified vector. The current instance is unaffected
+     * unless it's <code>result</code>.
      *
-     * @param otherX
-     *            x component of the vector to take the cross product of with this.
-     * @param otherY
-     *            y component of the vector to take the cross product of with this.
-     * @param otherZ
-     *            z component of the vector to take the cross product of with this.
-     * @param result
-     *            the vector to store the cross product result.
-     * @return result, after receiving the cross product vector.
+     * @param otherX the X component of the right factor
+     * @param otherY the Y component of the right factor
+     * @param otherZ the Z component of the right factor
+     * @param result storage for the product, or null for a new Vector3f
+     * @return <code>this</code> cross <code>v</code> (either
+     *     <code>result</code> or a new Vector3f)
      */
     public Vector3f cross(float otherX, float otherY, float otherZ, Vector3f result) {
         if (result == null) {
@@ -286,11 +266,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns true if this vector is a unit vector (length() ~= 1),
-     * returns false otherwise.
+     * Tests for a unit vector, with 1% tolerance. The current instance is
+     * unaffected.
      *
-     * @return true if this vector is a unit vector (length() ~= 1),
-     * or false otherwise.
+     * @return true if the current vector's length is between 0.99 and 1.01
+     *     inclusive, otherwise false
      */
     public boolean isUnitVector() {
         float len = length();
@@ -298,9 +278,9 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>length</code> calculates the magnitude of this vector.
+     * Returns the length (or magnitude). The current instance is unaffected.
      *
-     * @return the length or magnitude of the vector.
+     * @return the root-sum of the squared components (not negative)
      */
     public float length() {
         /*
@@ -318,22 +298,19 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>lengthSquared</code> calculates the squared value of the
-     * magnitude of the vector.
+     * Returns the square of the length. The current instance is unaffected.
      *
-     * @return the magnitude squared of the vector.
+     * @return the sum of the squared components (not negative)
      */
     public float lengthSquared() {
         return x * x + y * y + z * z;
     }
 
     /**
-     * <code>multLocal</code> multiplies this vector by a scalar internally,
-     * and returns a handle to this vector for easy chaining of calls.
+     * Multiplies by the argument and returns the (modified) current instance.
      *
-     * @param scalar
-     *            the value to multiply this vector by.
-     * @return this
+     * @param scalar the scaling factor
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f multLocal(float scalar) {
         x *= scalar;
@@ -343,13 +320,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>multLocal</code> multiplies a provided vector to this vector
-     * internally, and returns a handle to this vector for easy chaining of
-     * calls. If the provided vector is null, null is returned.
+     * Multiplies component-wise by the argument and returns the (modified)
+     * current instance. If the argument is null, null is returned.
      *
-     * @param vec
-     *            the vector to mult to this vector.
-     * @return this
+     * @param vec the scale vector (unaffected unless it's <code>this</code>) or
+     *     null for none
+     * @return the (modified) current instance (for chaining) or null
      */
     public Vector3f multLocal(Vector3f vec) {
         if (null == vec) {
@@ -363,14 +339,13 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>multLocal</code> multiplies this vector by 3 scalars
-     * internally, and returns a handle to this vector for easy chaining of
-     * calls.
+     * Multiplies component-wise by the specified components and returns the
+     * (modified) current instance.
      *
      * @param x the scale factor for the X component
      * @param y the scale factor for the Y component
      * @param z the scale factor for the Z component
-     * @return this
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f multLocal(float x, float y, float z) {
         this.x *= x;
@@ -380,14 +355,15 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>multLocal</code> multiplies a provided vector to this vector
-     * internally, and returns a handle to this vector for easy chaining of
-     * calls. If the provided vector is null, null is returned.
+     * Multiplies component-wise with the specified vector and returns the
+     * product in a 3rd vector. If the argument is null, null is returned.
+     * Either way, the current instance is unaffected, unless it's
+     * <code>store</code>.
      *
-     * @param vec
-     *            the vector to mult to this vector.
-     * @param store result vector (null to create a new vector)
-     * @return this
+     * @param vec the scale vector (unaffected unless it's <code>store</code>)
+     *     or null for none
+     * @param store storage for the product, or null for a new Vector3f
+     * @return either <code>store</code> or a new Vector3f or null
      */
     public Vector3f mult(Vector3f vec, Vector3f store) {
         if (null == vec) {
@@ -401,13 +377,10 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>divideLocal</code> divides this vector by a scalar internally,
-     * and returns a handle to this vector for easy chaining of calls. Dividing
-     * by zero will result in an exception.
+     * Divides by the argument and returns the (modified) current instance.
      *
-     * @param scalar
-     *            the value to divides this vector by.
-     * @return this
+     * @param scalar the divisor
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f divideLocal(float scalar) {
         scalar = 1f / scalar;
@@ -419,13 +392,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
 
 
     /**
-     * <code>divideLocal</code> divides this vector by a scalar internally,
-     * and returns a handle to this vector for easy chaining of calls. Dividing
-     * by zero will result in an exception.
+     * Divides component-wise by the argument and returns the (modified) current
+     * instance.
      *
-     * @param scalar
-     *            the value to divides this vector by.
-     * @return this
+     * @param scalar the divisor (not null, unaffected) TODO rename argument!
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f divideLocal(Vector3f scalar) {
         x /= scalar.x;
@@ -435,26 +406,25 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>subtract</code> subtracts the values of a given vector from those
-     * of this vector creating a new vector object. If the provided vector is
-     * null, null is returned.
+     * Subtracts the argument and returns the difference as a new instance. The
+     * current instance is unaffected.
      *
-     * @param vec
-     *            the vector to subtract from this vector.
-     * @return the result vector.
+     * @param vec the vector to subtract (not null, unaffected)
+     * @return a new Vector3f
      */
     public Vector3f subtract(Vector3f vec) {
         return new Vector3f(x - vec.x, y - vec.y, z - vec.z);
     }
 
     /**
-     * <code>subtract</code>
+     * Subtracts the specified vector and returns the difference in a 3rd
+     * vector. The current instance is unaffected unless it's
+     * <code>result</code>.
      *
-     * @param vec
-     *            the vector to subtract from this
-     * @param result
-     *            the vector to store the result in
-     * @return result
+     * @param vec the vector to subtract (not null, unaffected unless it's
+     *     <code>result</code>)
+     * @param result storage for the difference, or null for a new Vector3f
+     * @return either <code>result</code> or a new Vector3f
      */
     public Vector3f subtract(Vector3f vec, Vector3f result) {
         if (result == null) {
@@ -467,33 +437,26 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>subtract</code> subtracts the provided values from this vector,
-     * creating a new vector that is then returned.
+     * Subtracts the specified amounts from the vector's components and returns
+     * the difference as a new instance. The current instance is unaffected.
      *
-     * @param subtractX
-     *            the x value to subtract.
-     * @param subtractY
-     *            the y value to subtract.
-     * @param subtractZ
-     *            the z value to subtract.
-     * @return the result vector.
+     * @param subtractX the amount to subtract from the X component
+     * @param subtractY the amount to subtract from the Y component
+     * @param subtractZ the amount to subtract from the Z component
+     * @return a new Vector3f
      */
     public Vector3f subtract(float subtractX, float subtractY, float subtractZ) {
         return new Vector3f(x - subtractX, y - subtractY, z - subtractZ);
     }
 
     /**
-     * <code>subtractLocal</code> subtracts the provided values from this vector
-     * internally, and returns a handle to this vector for easy chaining of
-     * calls.
+     * Subtracts the specified amounts from the vector's components and returns
+     * the (modified) current instance.
      *
-     * @param subtractX
-     *            the x value to subtract.
-     * @param subtractY
-     *            the y value to subtract.
-     * @param subtractZ
-     *            the z value to subtract.
-     * @return this
+     * @param subtractX the amount to subtract from the X component
+     * @param subtractY the amount to subtract from the Y component
+     * @param subtractZ the amount to subtract from the Z component
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f subtractLocal(float subtractX, float subtractY, float subtractZ) {
         x -= subtractX;
@@ -503,9 +466,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>normalize</code> returns the unit vector of this vector.
+     * Normalizes the vector to length=1 and returns the result as a new
+     * instance. If the vector has length=0, a clone is returned. Either way,
+     * the current instance is unaffected.
      *
-     * @return unit vector of this vector.
+     * @return a new Vector3f
      */
     public Vector3f normalize() {
 //        float length = length();
@@ -523,9 +488,9 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>zero</code> resets this vector's data to zero internally.
+     * Sets all 3 components to zero.
      *
-     * @return this
+     * @return the (modified) current instance (for chaining)
      */
     public Vector3f zero() {
         x = y = z = 0;
@@ -533,11 +498,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Check a vector... if it is null or its floats are NaN or infinite,
-     * return false.  Else return true.
+     * Tests whether the argument is a valid vector, returning false if it's
+     * null or if any component is NaN or infinite.
      *
-     * @param vector the vector to check
-     * @return true or false as stated above.
+     * @param vector the vector to test (unaffected)
+     * @return true if non-null and finite, otherwise false
      */
     public static boolean isValidVector(Vector3f vector) {
         if (vector == null) {
@@ -557,9 +522,9 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Create a copy of this vector.
+     * Creates a copy. The current instance is unaffected.
      *
-     * @return a new instance, equivalent to this one
+     * @return a new instance, equivalent to the current one
      */
     @Override
     public Vector3f clone() {
@@ -571,11 +536,11 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * are these two vectors the same? they are is they both have the same x,y,
-     * and z values.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. The
+     * current instance is unaffected.
      *
-     * @param o   the object to compare for equality
-     * @return true if they are equal
+     * @param o the object to compare (may be null, unaffected)
+     * @return true if equal, otherwise false
      */
     @Override
     public boolean equals(Object o) {
@@ -601,11 +566,10 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>hashCode</code> returns a unique code for this vector object based
-     * on its values. If two vectors are logically equivalent, they will return
-     * the same hash code value.
+     * Returns a hash code. If two vectors are logically equivalent, they will
+     * return the same hash code. The current instance is unaffected.
      *
-     * @return the hash code value of this vector.
+     * @return the hash code value
      */
     @Override
     public int hashCode() {
@@ -617,12 +581,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>toString</code> returns a string representation of this vector.
-     * The format is:
+     * Returns a string representation. The current instance is unaffected. The
+     * format is:
      *
-     * (XX.XXXX, YY.YYYY, ZZ.ZZZZ)
+     * <p>(XX.XXXX, YY.YYYY, ZZ.ZZZZ)
      *
-     * @return the string representation of this vector.
+     * @return the string representation
      */
     @Override
     public String toString() {
@@ -630,10 +594,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Returns the indexed component. The vector is unaffected.
+     *
      * @param index 0, 1, or 2
-     * @return x value if index == 0, y value if index == 1 or z value if index == 2
-     * @throws IllegalArgumentException
-     *             if index is not one of 0, 1, 2.
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     *     component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
      */
     public float get(int index) {
         switch (index) {
@@ -648,12 +614,12 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * @param index
-     *            which field index in this vector to set.
-     * @param value
-     *            to set to one of x, y or z.
-     * @throws IllegalArgumentException
-     *             if index is not one of 0, 1, 2.
+     * Sets the indexed component.
+     *
+     * @param index which component to set: 0 &rarr; the X component, 1 &rarr;
+     *     the Y component, 2 &rarr; the Z component
+     * @param value the desired component value
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
      */
     public void set(int index, float value) {
         switch (index) {
