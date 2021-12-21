@@ -543,41 +543,40 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * <code>mult</code> multiplies this quaternion by a parameter quaternion.
+     * Multiplies this quaternion by a parameter quaternion.
      * The result is returned as a new quaternion. It should be noted that
-     * quaternion multiplication is not commutative so q * p != p * q.
+     * quaternion multiplication is not commutative, so q * p != p * q.
      *
-     * It IS safe for q and res to be the same object.
-     * It IS NOT safe for this and res to be the same object.
+     * It IS safe for q and {@code storeResult} to be the same object.
+     * It IS NOT safe for this and {@code storeResult} to be the same object.
      *
      * @param q   the quaternion to multiply this quaternion by.
-     * @param res
+     * @param storeResult
      *            the quaternion to store the result in.
      * @return the new quaternion.
      */
-    public Quaternion mult(Quaternion q, Quaternion res) {
-        if (res == null) {
-            res = new Quaternion();
+    public Quaternion mult(Quaternion q, Quaternion storeResult) {
+        if (storeResult == null) {
+            storeResult = new Quaternion();
         }
         float qw = q.w, qx = q.x, qy = q.y, qz = q.z;
-        res.x = x * qw + y * qz - z * qy + w * qx;
-        res.y = -x * qz + y * qw + z * qx + w * qy;
-        res.z = x * qy - y * qx + z * qw + w * qz;
-        res.w = -x * qx - y * qy - z * qz + w * qw;
-        return res;
+        storeResult.x = x * qw + y * qz - z * qy + w * qx;
+        storeResult.y = -x * qz + y * qw + z * qx + w * qy;
+        storeResult.z = x * qy - y * qx + z * qw + w * qz;
+        storeResult.w = -x * qx - y * qy - z * qz + w * qw;
+        return storeResult;
     }
 
     /**
+     * Configures the current instance to
+     * represent the coordinate system defined by three axes. These axes are
+     * assumed to be orthogonal, and no error checking is applied, so the user
+     * must ensure that the 3 axes provided represent a proper
+     * right-handed coordinate system.
      *
-     * <code>fromAxes</code> creates a <code>Quaternion</code> that
-     * represents the coordinate system defined by three axes. These axes are
-     * assumed to be orthogonal and no error checking is applied. Thus, the user
-     * must insure that the three axes being provided indeed represents a proper
-     * right handed coordinate system.
-     *
-     * @param xAxis vector representing the x-axis of the coordinate system.
-     * @param yAxis vector representing the y-axis of the coordinate system.
-     * @param zAxis vector representing the z-axis of the coordinate system.
+     * @param xAxis the X axis of the coordinate system
+     * @param yAxis the Y axis of the coordinate system
+     * @param zAxis the Z axis of the coordinate system
      * @return this
      */
     public Quaternion fromAxes(Vector3f xAxis, Vector3f yAxis, Vector3f zAxis) {
