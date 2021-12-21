@@ -14,7 +14,6 @@ subject to the following restrictions:
 */
 
 #include "btTriangleMeshShape.h"
-#include "btTriangleShape.h"
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btQuaternion.h"
 #include "btStridingMeshInterface.h"
