@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@ import com.jme3.util.TempVars;
  * A 3-D coordinate transform composed of translation, rotation, and scaling.
  * The order of application is: scale then rotate then translate.
  *
- * Started Date: Jul 16, 2004<br><br>
+ * <p>Started July 16, 2004
  *
  * @author Jack Lindamood
  * @author Joshua Slack
@@ -46,24 +46,24 @@ public final class Transform implements Cloneable, java.io.Serializable {
 
     static final long serialVersionUID = 1;
     /**
-     * shared instance of the identity transform - Do not modify!
+     * Shared instance of the identity transform. Do not modify!
      */
     public static final Transform IDENTITY = new Transform();
     /**
-     * rotation component
+     * Rotation component.
      */
     private Quaternion rot = new Quaternion();
     /**
-     * translation offsets for each axis
+     * Translation component: an offset for each local axis.
      */
     private Vector3f translation = new Vector3f();
     /**
-     * scale factors for each axis
+     * Scaling component: a scale factor for each local axis.
      */
     private Vector3f scale = new Vector3f(1, 1, 1);
 
     /**
-     * Instantiate a coordinate transform without any scaling.
+     * Instantiates a coordinate transform without scaling.
      *
      * @param translation the desired translation (not null, unaffected)
      * @param rot the desired rotation (not null, unaffected)
@@ -74,11 +74,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Instantiate a coordinate transform with scaling.
+     * Instantiates a coordinate transform with scaling.
      *
      * @param translation the desired translation (not null, unaffected)
      * @param rot the desired rotation (not null, unaffected)
-     * @param scale the desired scale factor (not null, unaffected)
+     * @param scale the desired scaling (not null, unaffected)
      */
     public Transform(Vector3f translation, Quaternion rot, Vector3f scale) {
         this(translation, rot);
@@ -86,17 +86,18 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Instantiate an identity transform.
+     * Instantiates an identity transform: no translation, no rotation, and no
+     * scaling.
      */
     public Transform() {
         this(Vector3f.ZERO, Quaternion.IDENTITY);
     }
 
     /**
-     * Sets this rotation to the given Quaternion value.
+     * Sets the rotation component to the argument.
      *
-     * @param rot The new rotation for this Transform.
-     * @return this
+     * @param rot the desired rotation value (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public Transform setRotation(Quaternion rot) {
         this.rot.set(rot);
@@ -104,10 +105,10 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Sets this translation to the given value.
+     * Sets the translation component to the argument.
      *
-     * @param trans The new translation for this Transform.
-     * @return this
+     * @param trans the desired offsets (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public Transform setTranslation(Vector3f trans) {
         this.translation.set(trans);
@@ -115,19 +116,19 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Return the translation vector in this Transform.
+     * Returns the translation component.
      *
-     * @return translation vector.
+     * @return the pre-existing instance (not null)
      */
     public Vector3f getTranslation() {
         return translation;
     }
 
     /**
-     * Sets this scale to the given value.
+     * Sets the scaling component to the argument.
      *
-     * @param scale The new scale for this Transform.
-     * @return this
+     * @param scale the desired scale factors (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public Transform setScale(float scale) {
         this.scale.set(scale, scale, scale);
@@ -135,29 +136,29 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Return the scale vector in this Transform.
+     * Returns the scaling component.
      *
-     * @return scale vector.
+     * @return the pre-existing instance (not null)
      */
     public Vector3f getScale() {
         return scale;
     }
 
     /**
-     * Return the rotation quaternion in this Transform.
+     * Returns the rotation component.
      *
-     * @return rotation quaternion.
+     * @return the pre-existing instance (not null)
      */
     public Quaternion getRotation() {
         return rot;
     }
 
     /**
-     * Changes the values of this Transform according to its parent. Very similar
-     * to the concept of Node/Spatial transforms.
+     * Combines with the argument and returns the (modified) current instance.
      *
-     * @param parent The parent Transform.
-     * @return This Transform, after combining.
+     * @param parent the parent transform (not null, unaffected unless it's
+     *     <code>this</code>)
+     * @return the (modified) current instance (for chaining)
      */
     public Transform combineWithParent(Transform parent) {
         //applying parent scale to local scale
@@ -176,11 +177,15 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Transform the specified coordinates.
+     * Transforms the specified coordinates and returns the result in
+     * <code>store</code>. If the <code>store</code> is null, a new Vector3f is
+     * created to hold the value. Either way, the current instance is
+     * unaffected, unless <code>store</code> is its translation or scaling.
      *
      * @param in the coordinates to transform (not null, unaffected)
      * @param store storage for the result (modified if not null)
-     * @return the transformed coordinates (either store or a new vector)
+     * @return the transformed coordinates (either <code>store</code> or a new
+     *     Vector3f)
      */
     public Vector3f transformVector(final Vector3f in, Vector3f store) {
         if (store == null) {
@@ -193,19 +198,25 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Apply the inverse transform to the specified coordinates.
+     * Applies the inverse transform to the specified coordinates and returns
+     * the result in <code>store</code>. If the <code>store</code> is null, a
+     * new Vector3f is created to hold the value. Either way, the current
+     * instance is unaffected, unless <code>store</code> is its translation or
+     * scaling.
      *
-     * @param in the coordinates to transform (not null, unaffected)
+     * @param in the coordinates to transform (not null, unaffected unless it's
+     *     <code>store</code>)
      * @param store storage for the result (modified if not null)
-     * @return the transformed coordinates (either store or a new vector)
+     * @return the transformed coordinates (either <code>store</code> or a new
+     *     Vector3f)
      */
     public Vector3f transformInverseVector(final Vector3f in, Vector3f store) {
         if (store == null) {
             store = new Vector3f();
         }
 
-        // The author of this code should look above and take the inverse of that
-        // But for some reason, they didn't ..
+        // The author of this code should've looked above and taken the inverse of that,
+        // but for some reason, they didn't.
 //        in.subtract(translation, store).divideLocal(scale);
 //        rot.inverse().mult(store, store);
         in.subtract(translation, store);
@@ -216,19 +227,21 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Create an equivalent transform matrix.
+     * Creates an equivalent transform matrix. The current instance is
+     * unaffected.
      *
-     * @return a new 4x4 matrix
+     * @return a new Matrix4f
      */
     public Matrix4f toTransformMatrix() {
         return toTransformMatrix(null);
     }
 
     /**
-     * Convert to an equivalent transform matrix.
+     * Converts to an equivalent transform matrix. The current instance is
+     * unaffected.
      *
      * @param store storage for the result (modified if not null)
-     * @return a 4x4 matrix (either store or a new vector)
+     * @return a transform matrix (either <code>store</code> or a new Matrix4f)
      */
     public Matrix4f toTransformMatrix(Matrix4f store) {
         if (store == null) {
@@ -241,7 +254,9 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Configure based on a transform matrix.
+     * Sets the current instance from a transform matrix. Any shear in the
+     * matrix is lost -- in other words, it may not be possible to recreate the
+     * original matrix from the result.
      *
      * @param mat the input matrix (not null, unaffected)
      */
@@ -254,9 +269,9 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Create an inverse of this Transform.
+     * Returns the inverse. The current instance is unaffected.
      *
-     * @return a new instance
+     * @return a new Transform
      */
     public Transform invert() {
         Transform t = new Transform();
@@ -265,7 +280,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Generate the hash code for this instance.
+     * Returns a hash code. If two transforms are logically equivalent, they
+     * will return the same hash code. The current instance is unaffected.
      *
      * @return a 32-bit value for use in hashing
      */
@@ -279,7 +295,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Test for exact equality with another object.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. The
+     * current instance is unaffected.
      *
      * @param obj the object to compare to (may be null, unaffected)
      * @return true if the objects are exactly equal, otherwise false
@@ -299,13 +316,15 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Represent this Transform as a String. The format is:
+     * Returns a string representation. The current instance is unaffected. The
+     * format is:
+     * <pre>
+     * Transform[ TX.XXXX, TY.YYYY, TZ.ZZZZ]
+     * [ R.XXXX, R.YYYY, R.ZZZZ, R.WWWW]
+     * [ S.XXXX , S.YYYY, S.ZZZZ]
+     * </pre>
      *
-     * [TX.XXXX, TY.YYYY, TZ.ZZZZ]
-     * [RX.XXXX, RY.YYYY, RZ.ZZZZ, RW.WWWW]
-     * [SX.XXXX, SY.YYYY, SZ.ZZZZ]
-     *
-     * @return a descriptive string of text (not null, not empty)
+     * @return the string representation (not null, not empty)
      */
     @Override
     public String toString() {
@@ -316,9 +335,9 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Create a copy of this Transform.
+     * Creates a copy. The current instance is unaffected.
      *
-     * @return a new instance equivalent to this one
+     * @return a new instance, equivalent to the current one
      */
     @Override
     public Transform clone() {
