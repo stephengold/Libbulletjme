@@ -28,7 +28,7 @@ sourceSets.test.java {
 
 // Regenerate all JNI header files before compiling any C++ source code.
 tasks.withType(CppCompile) {
-    dependsOn('classes')
+    dependsOn('classes', 'compileTestJava')
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
