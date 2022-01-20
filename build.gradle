@@ -174,8 +174,8 @@ model {
                         // xcode9.4.1 for its 32-bit support
                         buildable = pName.equals('MacOSX32')
                     } else if (travis.equals('osx64')) {
-                        // xcode13.2 for its ARM & Java 17 support
-                        buildable = pName.startsWith('MacOSX') && pName.contains('64')
+                        // xcode13.2 for its ARM support
+                        buildable = pName.contains('64')
                     }
                 } else { // neither -Pgithub= nor -Ptravis= specified
                     buildable = !pName.startsWith('Linux_ARM')
