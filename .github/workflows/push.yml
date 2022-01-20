@@ -60,14 +60,14 @@ jobs:
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-  Java15-Linux:
+  Java17-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: 15
+          java-version: 17
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
@@ -77,14 +77,14 @@ jobs:
           name: crash-log
           path: '*.log'
 
-  Java15-MacOS:
+  Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: 15
+          java-version: 17
       - run: clang --version
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=xcode11
       - if: failure()
@@ -93,14 +93,14 @@ jobs:
           name: crash-log
           path: '*.log'
 
-  Java15-Windows:
+  Java17-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: 15
+          java-version: 17
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
       - if: failure()
