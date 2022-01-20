@@ -76,6 +76,10 @@ model {
             architecture 'x86_64'
             operatingSystem 'osx'
         }
+        MacOSX_ARM64 {
+            architecture 'aarch64'
+            operatingSystem 'osx'
+        }
         Windows32 {
             architecture 'x86'
             operatingSystem 'windows'
@@ -126,6 +130,7 @@ model {
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX32'
             targetPlatform 'MacOSX64'
+            targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows32'
             targetPlatform 'Windows64'
 
@@ -143,7 +148,6 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 String pName = targetPlatform.name
-
                 // Decide whether to build for the target platform:
                 if (project.hasProperty('github')) {
                     // -Pgithub= specified on the command line
@@ -166,8 +170,12 @@ model {
                         buildable = pName.equals('Linux_ARM32hf')
                     } else if (travis.equals('arm64')) {
                         buildable = pName.equals('Linux_ARM64')
-                    } else if (travis.equals('osx')) { // using xcode9.3 for its 32-bit support
-                        buildable = pName.startsWith('MacOSX')
+                    } else if (travis.equals('osx32')) {
+                        // xcode9.4.1 for its 32-bit support
+                        buildable = pName.equals('MacOSX32')
+                    } else if (travis.equals('osx64')) {
+                        // xcode13.2 for its ARM & Java 17 support
+                        buildable = pName.startsWith('MacOSX') && pName.contains('64')
                     }
                 } else { // neither -Pgithub= nor -Ptravis= specified
                     buildable = !pName.startsWith('Linux_ARM')
