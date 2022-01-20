@@ -158,6 +158,10 @@ deploy:
     - dist/MacOSX64DebugSp_libbulletjme.dylib
     - dist/MacOSX64ReleaseDp_libbulletjme.dylib
     - dist/MacOSX64ReleaseSp_libbulletjme.dylib
+    - dist/MacOSX_ARM64DebugDp_libbulletjme.dylib
+    - dist/MacOSX_ARM64DebugSp_libbulletjme.dylib
+    - dist/MacOSX_ARM64ReleaseDp_libbulletjme.dylib
+    - dist/MacOSX_ARM64ReleaseSp_libbulletjme.dylib
   on:
     repo: stephengold/Libbulletjme
     tags: true   # deploy on tag push only
