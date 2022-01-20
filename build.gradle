@@ -142,35 +142,37 @@ model {
             binaries.withType(SharedLibraryBinarySpec) {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
+                String pName = targetPlatform.name
+
                 // Decide whether to build for the target platform:
                 if (project.hasProperty('github')) {
                     // -Pgithub= specified on the command line
                     String github = project.ext.github
                     if (github.equals('xcode11')) { // typically Xcode_12.4
-                        buildable = isDebug && (flavor == flavors.Sp) && targetPlatform.name.equals('MacOSX64')
+                        buildable = isDebug && (flavor == flavors.Sp) && pName.equals('MacOSX64')
                     } else if (github.equals('debug64')) {
-                        buildable = isDebug && targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('Linux_ARM')
+                        buildable = isDebug && pName.contains('64') && !pName.startsWith('Linux_ARM')
                     }
                 } else if (project.hasProperty('travis')) {
                     // -Ptravis= specified on the command line
                     String travis = project.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
-                        buildable = (!isMt) && !targetPlatform.name.startsWith('Linux_ARM')
+                        buildable = (!isMt) && !pName.startsWith('Linux_ARM')
                     } else if (travis.equals('amd64mt')) { // use g++-5 to build Mt flavors
-                        buildable = isMt && targetPlatform.name.equals('Linux64')
+                        buildable = isMt && pName.equals('Linux64')
                     } else if (travis.equals('arm32')) {
-                        buildable = targetPlatform.name.equals('Linux_ARM32')
+                        buildable = pName.equals('Linux_ARM32')
                     } else if (travis.equals('arm32hf')) {
-                        buildable = targetPlatform.name.equals('Linux_ARM32hf')
+                        buildable = pName.equals('Linux_ARM32hf')
                     } else if (travis.equals('arm64')) {
-                        buildable = targetPlatform.name.equals('Linux_ARM64')
+                        buildable = pName.equals('Linux_ARM64')
                     } else if (travis.equals('osx')) { // using xcode9.3 for its 32-bit support
-                        buildable = targetPlatform.name.startsWith('MacOSX')
+                        buildable = pName.startsWith('MacOSX')
                     }
                 } else { // neither -Pgithub= nor -Ptravis= specified
-                    buildable = !targetPlatform.name.startsWith('Linux_ARM')
-                    //buildable = targetPlatform.name.equals('Linux64') // to skip all except Linux64
-                    //buildable = targetPlatform.name.equals('Windows64') // to skip all except Windows64
+                    buildable = !pName.startsWith('Linux_ARM')
+                    //buildable = pName.equals('Linux64') // to skip all except Linux64
+                    //buildable = pName.equals('Windows64') // to skip all except Windows64
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
@@ -183,7 +185,7 @@ model {
                         buildable = flavor.name.equals(flavorArg)
                     } else if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
-                        buildable = targetPlatform.name.contains('64') && !targetPlatform.name.startsWith('MacOSX')
+                        buildable = pName.contains('64') && !pName.startsWith('MacOSX')
                     }
                     //if (isDp) buildable = false // to skip all double-precision flavors
                     //if (isMt) buildable = false // to skip all multithreaded flavors
@@ -207,7 +209,7 @@ model {
                     //cppCompiler.define 'BT_LINUX_REALTIME'
                 }
 
-                String q = targetPlatform.name + buildType.name + flavor.name
+                String q = pName + buildType.name + flavor.name
                 if (toolChain in VisualCpp) {
                     cppCompiler.define 'WIN32'
                     cppCompiler.args '/EHsc' // synchronous exceptions only
@@ -225,7 +227,7 @@ model {
                         linker.args '/DEBUG'
                         if (buildable) {
                             String pdbFile = 'build/libs/bulletjme/shared/'
-                            pdbFile += targetPlatform.name + '/debug/'
+                            pdbFile += pName + '/debug/'
                             pdbFile += flavor.name + '/bulletjme.pdb'
 
                             task "copyPdbToDist$q" (type: Copy, dependsOn:
