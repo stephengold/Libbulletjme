@@ -327,7 +327,7 @@ tasks.withType(JavaCompile) { // compile-time options:
 test.dependsOn('assemble')
 assemble.dependsOn('copyToDistJars')
 task copyToDistJars (type: Copy) {
-    dependsOn 'jar', 'javadocJar', 'signArchives', 'sourcesJar'
+    dependsOn 'jar', 'javadocJar', 'signArchives', 'signMavenPublication', 'sourcesJar'
     from 'build/libs'
     include '*.jar', '*.jar.asc'
     into 'dist'
@@ -357,6 +357,7 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives jar, javadocJar, sourcesJar
 }
+javadoc.dependsOn('compileTestJava')
 
 build.dependsOn('pom', 'pomAsc')
 task('pom', type: Copy) {
