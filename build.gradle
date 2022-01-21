@@ -97,9 +97,7 @@ model {
         clang(Clang)
         clangArm64(Clang) {
             target('MacOS_ARM64') {
-                cppCompiler.executable = 'clang++'
                 cppCompiler.arguments('-arch arm64')
-                linker.executable = 'clang++'
                 linker.arguments('-arch arm64')
             }
         }
@@ -156,6 +154,8 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 String pName = targetPlatform.name
+                println " - $pName  $buildType  $flavor"
+
                 // Decide whether to build for the target platform:
                 if (project.hasProperty('github')) {
                     // -Pgithub= specified on the command line
