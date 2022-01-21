@@ -12,8 +12,6 @@ jobs:
       osx_image: xcode13.2
       script:
         - echo $PATH
-        - brew install gcc@9
-        - brew install crosstool-ng
         - which clang
         - which clang++
         - which g++
@@ -26,10 +24,9 @@ jobs:
         - g++-9 --version
         - gcc --version
         - gcc-9 --version
-        - ls -l /usr/local/bin/*clang*
         - ls -l /usr/local/bin/*g++*
         - ls -l /usr/local/bin/*gcc*
-        - ls -l /usr/local/bin/*g++*
+        - ls -l /usr/bin/*clang*
         - ls -l /usr/bin/*gcc*
         - ls -l /usr/bin/*g++*
         - ls -l /usr/local/Cellar/gcc@9/9.4.0/bin/*gcc*
