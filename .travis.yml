@@ -12,26 +12,10 @@ jobs:
       osx_image: xcode13.2
       script:
         - echo $PATH
-        - which clang
         - which clang++
-        - which g++
-        - which g++-9
-        - which gcc
-        - which gcc-9
-        - clang --version
         - clang++ --version
-        - g++ --version
-        - g++-9 --version
-        - gcc --version
-        - gcc-9 --version
-        - ls -l /usr/local/bin/*g++*
-        - ls -l /usr/local/bin/*gcc*
-        - ls -l /usr/bin/*clang*
-        - ls -l /usr/bin/*gcc*
-        - ls -l /usr/bin/*g++*
-        - ls -l /usr/local/Cellar/gcc@9/9.4.0/bin/*gcc*
-        - ls -l /usr/local/Cellar/gcc@9/9.4.0/bin/*g++*
-#        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
+        - ls -ld /Applications/Xcode-13.2.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
 
 
 addons:
