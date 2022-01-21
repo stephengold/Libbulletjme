@@ -11,6 +11,7 @@ jobs:
     - os: osx
       osx_image: xcode13.2
       script:
+        - brew install gcc@8
         - which gcc
         - ls -l /usr/bin/*gcc*
 #        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
@@ -19,6 +20,9 @@ jobs:
 addons:
   apt:
     update: true
+  homebrew:
+    packages:
+      gcc@8
 after_failure:
   - cat build/reports/tests/test/classes/TestLibbulletjme.html
 before_cache:
