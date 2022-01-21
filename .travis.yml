@@ -13,7 +13,7 @@ jobs:
       script:
         - echo $PATH
         - brew install gcc@9
-        - brew install llvm
+        - brew install crosstool-ng
         - which clang
         - which clang++
         - which g++
