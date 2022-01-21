@@ -13,6 +13,7 @@ jobs:
       script:
         - brew install gcc@9
         - which gcc
+        - echo $PATH
         - ls -l /usr/bin/*gcc*
         - which g++
         - ls -l /usr/bin/*g++*
