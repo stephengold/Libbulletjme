@@ -32,6 +32,7 @@ tasks.withType(CppCompile) {
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
+
 model {
     buildTypes {
         Debug
@@ -307,8 +308,8 @@ model {
 
 description = 'JNI interface to Bullet Physics and V-HACD'
 
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
 
 repositories {
     mavenCentral()
