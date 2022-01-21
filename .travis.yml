@@ -16,7 +16,7 @@ jobs:
         - clang++ --version
         - ls -l /Applications/Xcode-13.2.1.app/Contents/Developer/Toolchains
         - ls -l /Applications/Xcode-13.2.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-        - ./gradlew build clean --console=plain --no-daemon -Ptravis=osx64
+        - ./gradlew clean --console=plain --no-daemon -Ptravis=osx64
 
 
 addons:
