@@ -11,7 +11,7 @@ jobs:
     - os: osx
       osx_image: xcode13.2
       script:
-        - brew install gcc@8
+        - brew install gcc@9
         - which gcc
         - ls -l /usr/bin/*gcc*
         - which g++
