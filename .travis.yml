@@ -12,6 +12,7 @@ jobs:
       osx_image: xcode13.2
       script:
         - which gcc
+        - ls -l /usr/bin/*gcc*
 #        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
 
 
