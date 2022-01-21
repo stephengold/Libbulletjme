@@ -14,6 +14,8 @@ jobs:
         - brew install gcc@8
         - which gcc
         - ls -l /usr/bin/*gcc*
+        - which g++
+        - ls -l /usr/bin/*g++*
 #        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
 
 
