@@ -14,6 +14,7 @@ jobs:
         - echo $PATH
         - which clang++
         - clang++ --version
+        - ls -l /Applications/Xcode-13.2.1.app/Contents/Developer/Toolchains
         - ls -l /Applications/Xcode-13.2.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
         - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
 
@@ -21,9 +22,6 @@ jobs:
 addons:
   apt:
     update: true
-  homebrew:
-    packages:
-      gcc@8
 after_failure:
   - cat build/reports/tests/test/classes/TestLibbulletjme.html
 before_cache:
