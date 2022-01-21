@@ -13,23 +13,18 @@ jobs:
       script:
         - brew install gcc@9
         - which gcc
-        - echo $PATH
-        - ls -l /Users/travis/.rvm/gems/ruby-2.6.6/bin/*gcc*
-        - ls -l /Users/travis/.rvm/gems/ruby-2.6.6@global/bin/*gcc*
-        - ls -l /Users/travis/.rvm/rubies/ruby-2.6.6/bin/*gcc*
-        - ls -l /Users/travis/.rvm/bin/*gcc*
-        - ls -l /Users/travis/bin/*gcc*
-        - ls -l /Users/travis/.local/bin/*gcc*
-        - ls -l /Users/travis/.nvm/versions/node/v17.2.0/bin/*gcc*
-        - ls -l /usr/local/bin/*gcc*
-        - ls -l /usr/bin/*gcc*
-        - ls -l /bin/*gcc*
-        - ls -l /usr/sbin/*gcc*
-        - ls -l /sbin/*gcc*
-        - ls -l /opt/X11/bin/*gcc*
-        - ls -l /Library/Apple/usr/bin/*gcc*
+        - which gcc-9
         - which g++
+        - which g++-9
+        - echo $PATH
+        - ls -l /usr/local/bin/*gcc*
+        - ls -l /usr/local/bin/*g++*
+        - ls -l /usr/bin/*gcc*
         - ls -l /usr/bin/*g++*
+        - gcc-9 --version
+        - g++-9 --version
+        - ls -l /usr/local/Cellar/gcc@9/9.4.0/bin/gcc-9
+        - ls -l /usr/local/Cellar/gcc@9/9.4.0/bin/++-9
 #        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
 
 
