@@ -95,6 +95,14 @@ model {
         //clang(Clang)
         gcc(Gcc)
         clang(Clang)
+        clangArm64(Clang) {
+            target('MacOS_ARM64') {
+                cppCompiler.executable = 'clang++'
+                cppCompiler.arguments('-arch arm64')
+                linker.executable = 'clang++'
+                linker.arguments('-arch arm64')
+            }
+        }
         gcc5Arm32(Gcc) {
             target('Linux_ARM32') {
                 cppCompiler.executable = 'arm-linux-gnueabi-g++-5'
