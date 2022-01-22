@@ -173,7 +173,7 @@ model {
                         buildable = pName.equals('Linux_ARM32hf')
                     } else if (travis.equals('arm64')) {
                         buildable = pName.equals('Linux_ARM64')
-                    } else if (travis.equals('osx')) { // using xcode9.3 for its 32-bit support
+                    } else if (travis.equals('osx')) {
                         buildable = pName.startsWith('MacOSX')
                     }
                 } else {
@@ -277,6 +277,10 @@ model {
                     String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
+                        if (pName == 'MacOSX_ARM64') {
+                            cppCompiler.args '-arch', 'arm64'
+                            linker.args '-arch', 'arm64'
+                        }
                     } else if (os == 'linux') {
                         cppCompiler.args '-I', "$javaHome/include/linux"
                         cppCompiler.args '-fPIC'
