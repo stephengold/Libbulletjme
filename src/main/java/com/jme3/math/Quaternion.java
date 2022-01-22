@@ -51,18 +51,18 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
 
     private static final Logger logger = Logger.getLogger(Quaternion.class.getName());
     /**
-     * Shared instance of the identity quaternion (0,0,0,1). Do not modify!
+     * Shared instance of the identity quaternion (0, 0, 0, 1). Do not modify!
      *
      * <p>This is the usual representation for a null rotation.
      */
     public static final Quaternion IDENTITY = new Quaternion();
     /**
-     * Another shared instance of the identity quaternion (0,0,0,1). Do not
+     * Another shared instance of the identity quaternion (0, 0, 0, 1). Do not
      * modify!
      */
     public static final Quaternion DIRECTION_Z = new Quaternion();
     /**
-     * Shared instance of the zero quaternion (0,0,0,0). Do not modify!
+     * Shared instance of the zero quaternion (0, 0, 0, 0). Do not modify!
      *
      * <p>The zero quaternion doesn't represent any valid rotation.
      */
@@ -89,8 +89,8 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     protected float w;
 
     /**
-     * Instantiates an identity quaternion: all components zero except
-     * {@code w}, which is one.
+     * Instantiates an identity quaternion: all components zeroed except
+     * {@code w}, which is set to 1.
      */
     public Quaternion() {
         x = 0;

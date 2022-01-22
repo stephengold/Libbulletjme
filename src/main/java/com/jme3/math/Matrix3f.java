@@ -34,9 +34,12 @@ package com.jme3.math;
 import java.util.logging.Logger;
 
 /**
- * A matrix composed of 9 single-precision elements, used to represent linear
- * transformations of 3-D coordinates, such as rotations, reflections, and
- * scaling.
+ * A 3x3 matrix composed of 9 single-precision elements, used to represent
+ * linear transformations of 3-D coordinates, such as rotations, reflections,
+ * and scaling.
+ *
+ * <p>Element numbering is (row, column), so m01 is the element in row 0,
+ * column 1.
  *
  * <p>For pure rotations, the {@link com.jme3.math.Quaternion} class provides a
  * more efficient representation.
@@ -135,7 +138,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      * Copies the matrix argument. If the argument is null, the current instance
      * is set to identity (diagonals = 1, other elements = 0).
      *
-     * @param matrix the matrix to copy (unaffected) or null for none
+     * @param matrix the matrix to copy (unaffected) or null for identity
      * @return the (modified) current instance (for chaining)
      */
     public Matrix3f set(Matrix3f matrix) {
@@ -156,7 +159,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns the specified element. The matrix is unaffected.
+     * Returns the element at the specified position. The matrix is unaffected.
      *
      * @param i the row index (0, 1, or 2)
      * @param j the column index (0, 1, or 2)
@@ -279,7 +282,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      * Configures as a rotation matrix equivalent to the argument.
      *
      * @param quaternion the input quaternion (not null, unaffected)
-     * @return the current instance (for chaining)
+     * @return the (modified) current instance (for chaining)
      */
     public Matrix3f set(Quaternion quaternion) {
         return quaternion.toRotationMatrix(this);
@@ -458,7 +461,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns a string representation. The current instance is unaffected. For
+     * Returns a string representation of the matrix, which is unaffected. For
      * example, an identity matrix would be represented by:
      * <pre>
      * Matrix3f
@@ -469,7 +472,7 @@ public final class Matrix3f implements Cloneable, java.io.Serializable {
      * ]
      * </pre>
      *
-     * @return the string representation of this object.
+     * @return the string representation
      */
     @Override
     public String toString() {

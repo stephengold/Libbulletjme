@@ -206,7 +206,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * null, 0 is returned. Either way, the current instance is unaffected.
      *
      * @param vec the vector to multiply (unaffected) or null for none
-     * @return the product
+     * @return the product or 0
      */
     public float dot(Vector3f vec) {
         if (null == vec) {
@@ -536,8 +536,9 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Tests for exact equality with the argument, distinguishing -0 from 0. The
-     * current instance is unaffected.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code o} is null, false is returned. Either way, the current instance is
+     * unaffected.
      *
      * @param o the object to compare (may be null, unaffected)
      * @return true if equal, otherwise false
