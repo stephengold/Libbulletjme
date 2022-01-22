@@ -93,7 +93,7 @@ model {
 
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
-        //clang(Clang)
+        //clang(Clang) // to favor Clang over Gcc
         gcc(Gcc)
         clang(Clang)
         gcc5Arm32(Gcc) {
@@ -149,11 +149,11 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 String pName = targetPlatform.name
-                //println " - $pName  $buildType  $flavor"
+                //println " - $pName  $buildType  $flavor" // to debug this script
 
                 // Decide whether to build for the target platform:
                 if (project.hasProperty('github')) {
-                    // -Pgithub= specified on the command line
+                    // CI build with -Pgithub= specified on the command line
                     String github = project.ext.github
                     if (github.equals('xcode11')) { // typically Xcode_12.4
                         buildable = isDebug && (flavor == flavors.Sp) && pName.equals('MacOSX64')
@@ -161,11 +161,11 @@ model {
                         buildable = isDebug && pName.contains('64') && !pName.startsWith('Linux_ARM')
                     }
                 } else if (project.hasProperty('travis')) {
-                    // -Ptravis= specified on the command line
+                    // CI build with -Ptravis= specified on the command line
                     String travis = project.ext.travis
                     if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
                         buildable = (!isMt) && !pName.startsWith('Linux_ARM')
-                    } else if (travis.equals('amd64mt')) { // use g++-5 to build Mt flavors
+                    } else if (travis.equals('amd64mt')) { // using g++-5 to build Mt flavors
                         buildable = isMt && pName.equals('Linux64')
                     } else if (travis.equals('arm32')) {
                         buildable = pName.equals('Linux_ARM32')
@@ -176,7 +176,8 @@ model {
                     } else if (travis.equals('osx')) { // using xcode9.3 for its 32-bit support
                         buildable = pName.startsWith('MacOSX')
                     }
-                } else { // neither -Pgithub= nor -Ptravis= specified
+                } else {
+                    // non-CI build (neither -Pgithub= nor -Ptravis= specified)
                     buildable = !pName.startsWith('Linux_ARM')
                     //buildable = pName.equals('Linux64') // to skip all except Linux64
                     //buildable = pName.equals('Windows64') // to skip all except Windows64
@@ -305,7 +306,7 @@ model {
                     }
                     jar.dependsOn('copyToDist' + q)
                 } else {
-                    //println 'Do not build ' + q
+                    //println 'Do not build ' + q // to debug this script
                 }
             }
         }
