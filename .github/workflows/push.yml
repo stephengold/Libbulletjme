@@ -86,7 +86,7 @@ jobs:
         with:
           java-version: 17
       - run: clang --version
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=xcode11
+      - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=debug64
       - if: failure()
         uses: actions/upload-artifact@v2
         with:
