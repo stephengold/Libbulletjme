@@ -155,32 +155,32 @@ model {
                 if (project.hasProperty('github')) {
                     // CI build with -Pgithub= specified on the command line
                     String github = project.ext.github
-                    if (github.equals('xcode11')) { // typically Xcode_12.4
-                        buildable = isDebug && (flavor == flavors.Sp) && pName.equals('MacOSX64')
-                    } else if (github.equals('debug64')) {
+                    if (github == 'xcode11') { // typically Xcode_12.4
+                        buildable = isDebug && (flavor == flavors.Sp) && (pName == 'MacOSX64')
+                    } else if (github == 'debug64') {
                         buildable = isDebug && pName.contains('64') && !pName.startsWith('Linux_ARM')
                     }
                 } else if (project.hasProperty('travis')) {
                     // CI build with -Ptravis= specified on the command line
                     String travis = project.ext.travis
-                    if (travis.equals('amd64')) { // using g++-4.7, so skip Mt flavors
+                    if (travis == 'amd64') { // using g++-4.7, so skip Mt flavors
                         buildable = (!isMt) && !pName.startsWith('Linux_ARM')
-                    } else if (travis.equals('amd64mt')) { // using g++-5 to build Mt flavors
-                        buildable = isMt && pName.equals('Linux64')
-                    } else if (travis.equals('arm32')) {
-                        buildable = pName.equals('Linux_ARM32')
-                    } else if (travis.equals('arm32hf')) {
-                        buildable = pName.equals('Linux_ARM32hf')
-                    } else if (travis.equals('arm64')) {
-                        buildable = pName.equals('Linux_ARM64')
-                    } else if (travis.equals('osx')) { // using xcode9.3 for its 32-bit support
+                    } else if (travis == 'amd64mt') { // using g++-5 to build Mt flavors
+                        buildable = isMt && (pName == 'Linux64')
+                    } else if (travis == 'arm32') {
+                        buildable = (pName == 'Linux_ARM32')
+                    } else if (travis == 'arm32hf') {
+                        buildable = (pName == 'Linux_ARM32hf')
+                    } else if (travis == 'arm64') {
+                        buildable = (pName == 'Linux_ARM64')
+                    } else if (travis == 'osx') { // using xcode9.3 for its 32-bit support
                         buildable = pName.startsWith('MacOSX')
                     }
                 } else {
                     // non-CI build (neither -Pgithub= nor -Ptravis= specified)
                     buildable = !pName.startsWith('Linux_ARM')
-                    //buildable = pName.equals('Linux64') // to skip all except Linux64
-                    //buildable = pName.equals('Windows64') // to skip all except Windows64
+                    //buildable = (pName == 'Linux64') // to skip all except Linux64
+                    //buildable = (pName == 'Windows64') // to skip all except Windows64
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
@@ -190,7 +190,7 @@ model {
                     if (project.hasProperty('flavor')) {
                         // -Pflavor= specified on the command line
                         String flavorArg = project.ext.flavor
-                        buildable = flavor.name.equals(flavorArg)
+                        buildable = (flavor.name == flavorArg)
                     } else if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
                         buildable = pName.contains('64') && !pName.startsWith('MacOSX')
