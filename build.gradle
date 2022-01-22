@@ -77,6 +77,10 @@ model {
             architecture 'x86_64'
             operatingSystem 'osx'
         }
+        MacOSX_ARM64 {
+            architecture 'aarch64'
+            operatingSystem 'osx'
+        }
         Windows32 {
             architecture 'x86'
             operatingSystem 'windows'
@@ -127,6 +131,7 @@ model {
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX32'
             targetPlatform 'MacOSX64'
+            targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows32'
             targetPlatform 'Windows64'
 
@@ -144,6 +149,7 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 String pName = targetPlatform.name
+                //println " - $pName  $buildType  $flavor"
 
                 // Decide whether to build for the target platform:
                 if (project.hasProperty('github')) {
