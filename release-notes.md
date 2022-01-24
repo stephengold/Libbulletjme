@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 12.7.0 released on 24 January 2022
+## Version 12.7.1 released on 24 January 2022
 
  + Bugfix: continuous collision detection causes memory corruption in a
    multithreaded world (bullet3 issue 4117)
