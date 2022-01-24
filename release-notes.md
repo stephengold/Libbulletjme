@@ -1,5 +1,14 @@
 # Release log for the Libbulletjme project
 
+## Version 12.7.0 released on 24 January 2022
+
+ + Bugfix: continuous collision detection causes memory corruption in a
+   multithreaded world (bullet3 issue 4117)
+ + Restored support for the MacOSX32 platform.
+ + Added `divide(float, float, float)`, `divideLocal(float, float, float)`, and
+   `mult(float, float, float)` methods to the `Vector3f` class.
+ + Updated the Bullet sourcecode.
+
 ## Version 12.6.0 released on 4 December 2021
 
  + Bugfix: `btTriangleShape::isInside()` relies on the plane normal, which is
@@ -10,7 +19,7 @@
    + Upgraded MacOS64 build tools from Xcode 9.3 to Xcode 12.4 .
    + Dropped support for the MacOSX32 platform.
  + Added the `isInsideTriangle()` method to the `NativeLibrary` class.
- + Upgraded the Bullet sources to match SHA1 ID=10f72b9b5
+ + Updated the Bullet sourcecode to match SHA1 ID=10f72b9b5
    of the bullet3 project.
 
 ## Version 12.5.0 released on 8 November 2021

@@ -38,7 +38,7 @@
 
 #include <jni.h>
 
-#define LIBBULLETJME_VERSION "12.6.0"
+#define LIBBULLETJME_VERSION "12.7.0"
 
 #ifdef _DEBUG
 #define NULL_CHK(pEnv, pointer, message, retval) \
