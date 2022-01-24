@@ -9,12 +9,12 @@ Complete source code (in C++ and Java) is provided under
 [a mixed open-source license][license].
 
 The project supports the 3 major desktop operating systems:
-Windows, Linux, and macOS.
-For Windows and Linux, both the x86 and x86_64 architectures are supported.
+Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
+-are supported for each operating system.
 It also supports Linux on ARM (armel, armhf, and aarch64)
 and provides native libraries for the 4 supported Android ABIs
-(armeabi-v7a, arm64-v8a, x86, and x86_64)
-making a total of 12 platforms.
+(armeabi-v7a, arm64-v8a, x86, and x86_64),
+making a total of 13 platforms.
 
 For each desktop platform, 4 native libraries are distributed:
  + a release build using single-precision arithmetic (the default library)
@@ -54,14 +54,14 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:12.6.0'
+            implementation 'com.github.stephengold:Libbulletjme:12.7.1'
         }
 
     For some older versions of Gradle,
     it's necessary to replace `implementation` with `compile`.
 
  2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 48 native libraries.
+    You probably don't need all 52 native libraries.
     Start with the ReleaseSp library for your development environment
     (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
 
@@ -244,7 +244,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 12.6.0`
+     + `git checkout -b latest 12.7.1`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
