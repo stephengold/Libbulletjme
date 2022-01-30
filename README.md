@@ -30,7 +30,8 @@ which integrates Libbulletjme into [the jMonkeyEngine game engine][jme].
 For applications that don't use jMonkeyEngine,
 standalone Maven artifacts are provided.
 
-<a name="toc"/>
+
+<a name="toc"></a>
 
 ## Contents of this document
 
@@ -44,7 +45,7 @@ standalone Maven artifacts are provided.
 + [Acknowledgments](#acks)
 
 
-<a name="add"/>
+<a name="add"></a>
 
 ## How to add Libbulletjme to an existing project
 
@@ -73,7 +74,7 @@ standalone Maven artifacts are provided.
 [Jump to table of contents](#toc)
 
 
-<a name="examples"/>
+<a name="examples"></a>
 
 ## Example applications
 
@@ -229,7 +230,7 @@ public class HelloVehicle {
 [Jump to table of contents](#toc)
 
 
-<a name="build"/>
+<a name="build"></a>
 
 ## How to build Libbulletjme from source
 
@@ -277,7 +278,7 @@ You can also install the Maven artifacts to your local Maven repository:
 [Jump to table of contents](#toc)
 
 
-<a name="lexicon"/>
+<a name="lexicon"></a>
 
 ## Lexicon of class/enum/struct names
 
@@ -372,7 +373,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
 [Jump to table of contents](#toc)
 
 
-<a name="todo"/>
+<a name="todo"></a>
 
 ## What's missing
 
@@ -409,7 +410,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
 [Jump to table of contents](#toc)
 
 
-<a name="links"/>
+<a name="links"></a>
 
 ## External links
 
@@ -427,7 +428,8 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 [Jump to table of contents](#toc)
 
-<a name="history"/>
+
+<a name="history"></a>
 
 ## History
 
@@ -447,7 +449,7 @@ Minie is, in turn, based on `jme3-bullet`, another jMonkeyEngine library.
 [Jump to table of contents](#toc)
 
 
-<a name="acks"/>
+<a name="acks"></a>
 
 ## Acknowledgments
 
