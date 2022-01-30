@@ -414,17 +414,17 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 ## External links
 
- + [The Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
- + [The Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
- + [The Minie project][minie] at [GitHub]
- + [The V-HACD Library][vhacd] at [GitHub]
- + [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
- + [The Bullet Forum](https://pybullet.org/Bullet/phpBB3)
- + [The Bullet home page][bullet]
- + [JBullet], a known alternative to Libbulletjme
- + [Alan Chou's game-physics tutorials](http://allenchou.net/game-physics-series/)
- + [“Real-time Vehicle Simulation for Video Games Using the Bullet Physics Library” by Hammad Mazhar](https://sbel.wisc.edu/wp-content/uploads/sites/569/2018/05/Real-time-Vehicle-Simulation-for-Video-Games-Using-the-Bullet-Physics-Library.pdf)
- + [“Vehicle Simulation With Bullet” by Kester Maddock](https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc)
++ [The Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
++ [The Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
++ [The Minie project][minie] at [GitHub]
++ [The V-HACD Library][vhacd] at [GitHub]
++ [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
++ [The Bullet Forum](https://pybullet.org/Bullet/phpBB3)
++ [The Bullet home page][bullet]
++ [JBullet], a known alternative to Libbulletjme
++ [Alan Chou's game-physics tutorials](http://allenchou.net/game-physics-series/)
++ [“Real-time Vehicle Simulation for Video Games Using the Bullet Physics Library” by Hammad Mazhar](https://sbel.wisc.edu/wp-content/uploads/sites/569/2018/05/Real-time-Vehicle-Simulation-for-Video-Games-Using-the-Bullet-Physics-Library.pdf)
++ [“Vehicle Simulation With Bullet” by Kester Maddock](https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc)
 
 [Jump to table of contents](#toc)
 
@@ -497,7 +497,7 @@ I am grateful to Yanis Boudiaf for many helpful suggestions.
 
 I'm also grateful to my dear Holly, for keeping me sane.
 
-If I've misattributed anything or left anyone out, please let me know so I can
+If I've misattributed anything or left anyone out, please let me know, so I can
 correct the situation: sgold@sonic.net
 
 [Jump to table of contents](#toc)
