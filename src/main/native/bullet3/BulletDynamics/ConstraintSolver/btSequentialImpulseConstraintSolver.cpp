@@ -1262,7 +1262,7 @@ void btSequentialImpulseConstraintSolver::convertJoint(btSolverConstraint* curre
 			sum += iMJlB.dot(solverConstraint.m_contactNormal2);
 			sum += iMJaB.dot(solverConstraint.m_relpos2CrossNormal);
 			btScalar fsum = btFabs(sum);
-			btAssert(fsum > SIMD_EPSILON);
+			//btAssert(fsum > SIMD_EPSILON);  stephengold commented out 2022-02-04
 			btScalar sorRelaxation = 1.f;  //todo: get from globalInfo?
 			solverConstraint.m_jacDiagABInv = fsum > SIMD_EPSILON ? sorRelaxation / sum : 0.f;
 		}
