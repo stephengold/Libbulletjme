@@ -200,8 +200,10 @@ model {
 
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
+                    //cppCompiler.define 'BT_ADDITIONAL_DEBUG'
                     //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
+                    //cppCompiler.define 'VERBOSE_RESIDUAL_PRINTF'
                 }
                 if (isDp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
