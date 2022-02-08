@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2021, Stephen Gold
+ Copyright (c) 2013-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -136,7 +136,7 @@ public class MyVector3f {
      * @param in1 input direction for the first basis vector (not null, not
      * zero, modified)
      * @param store2 storage for the 2nd basis vector (not null, modified)
-     * @param store3 storage for the 3nd basis vector (not null, modified)
+     * @param store3 storage for the 3rd basis vector (not null, modified)
      */
     public static void generateBasis(Vector3f in1, Vector3f store2,
             Vector3f store3) {
