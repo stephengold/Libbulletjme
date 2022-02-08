@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2021, Stephen Gold
+ Copyright (c) 2017-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -243,8 +243,12 @@ public class MyQuaternion {
      * @return true if the Quaternion equals (0,0,0,0), false otherwise
      */
     public static boolean isZero(Quaternion q) {
-        if (q.getX() == 0f && q.getY() == 0f && q.getZ() == 0f
-                && q.getW() == 0f) {
+        float qx = q.getX();
+        float qy = q.getY();
+        float qz = q.getZ();
+        float qw = q.getW();
+
+        if (qx == 0f && qy == 0f && qz == 0f && qw == 0f) {
             return true;
         } else {
             return false;
