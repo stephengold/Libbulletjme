@@ -19,6 +19,8 @@ artifacts:
     name: sourcesJar
   - path: dist/Libbulletjme-12.7.1.pom
     name: pom
+  - path: dist/Libbulletjme-12.7.1.module
+    name: module
   - path: dist/Windows32DebugDp_bulletjme.dll
     name: dll32DD
   - path: dist/Windows32DebugSp_bulletjme.dll
@@ -58,7 +60,7 @@ artifacts:
 
 deploy:
   description: release description goes here
-  artifact: classJar,javadocJar,sourcesJar,pom,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DDM,dll64DS,dll64DSM,dll64RD,dll64RDM,dll64RS,dll64RSM,pdb32DD,pdb32DS,pdb64DD,pdb64DDM,pdb64DS,pdb64DSM
+  artifact: classJar,javadocJar,sourcesJar,pom,module,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DDM,dll64DS,dll64DSM,dll64RD,dll64RDM,dll64RS,dll64RSM,pdb32DD,pdb32DS,pdb64DD,pdb64DDM,pdb64DS,pdb64DSM
   provider: GitHub
   auth_token:
     secure: AGOCsqnFqIivT8FfeACSkh9kxn8gnIUE/w4rc5M4zyN/Jfa25MsX82pYcU7tmpHz
