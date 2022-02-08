@@ -7,6 +7,7 @@ plugins {
     id 'signing'
 }
 
+description = 'a JNI interface for Bullet Physics and V-HACD'
 ext {
     group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
@@ -14,8 +15,6 @@ ext {
     baseName = "${artifact}-${version}"
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
-
-description = 'a JNI interface for Bullet Physics and V-HACD'
 
 sourceSets.main.java {
     srcDir 'src/main/java'
@@ -318,20 +317,20 @@ description = 'JNI interface to Bullet Physics and V-HACD'
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
-tasks.withType(JavaCompile) { // compile-time options:
+tasks.withType(JavaCompile) { // Java compile-time options:
     options.compilerArgs << '-Xdiags:verbose'
     options.compilerArgs << '-Xlint:unchecked'
     options.deprecation = true
     options.encoding = 'UTF-8'
     options.headerOutputDirectory = new File('src/main/native/glue')
+}
+
+repositories {
+    mavenCentral()
 }
 
 test.dependsOn('assemble')
