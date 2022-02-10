@@ -35,20 +35,17 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 /**
- * This class contains a primitive allocator with no special logic, should work
- * on any jvm
+ * Allocate direct buffers without special logic. This should work on any JVM.
  */
 public final class PrimitiveAllocator implements BufferAllocator {
     /**
-     * De-allocate a direct buffer.
+     * De-allocate a direct buffer.  Not supported!
      *
      * @param toBeDestroyed ignored
      */
     @Override
     public void destroyDirectBuffer(Buffer toBeDestroyed) {
-        // no exception by intent, as this way naively written java7/8
-        // applications won't crash on 9 assuming they can dispose buffers
-        System.err.println("Warning destroyBuffer not supported");
+        throw new UnsupportedOperationException();
     }
 
     /**
