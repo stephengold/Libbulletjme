@@ -7,7 +7,6 @@ plugins {
     id 'signing'
 }
 
-description = 'a JNI interface for Bullet Physics and V-HACD'
 ext {
     group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
