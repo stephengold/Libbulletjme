@@ -311,8 +311,6 @@ model {
     }
 }
 
-description = 'JNI interface to Bullet Physics and V-HACD'
-
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
