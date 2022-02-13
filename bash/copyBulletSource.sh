@@ -5,8 +5,10 @@
 
 set -e
 
-SRC=/home/sgold/Git/ext/bullet3/src
-DST=/home/sgold/Git/Libbulletjme/src/main/native/bullet3
+GitDir=~/NetBeansProjects
+
+SRC=$GitDir/ext/bullet3/src
+DST=$GitDir/Libbulletjme/src/main/native/bullet3
 
 cd $SRC
 cp --recursive btBulletCollisionCommon.h btBulletDynamicsCommon.h \

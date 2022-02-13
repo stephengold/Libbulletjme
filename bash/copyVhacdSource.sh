@@ -5,8 +5,10 @@
 
 set -e
 
-SRC=/home/sgold/Git/ext/v-hacd/src/VHACD_Lib
-DST=/home/sgold/Git/Libbulletjme/src/main/native/v-hacd
+GitDir=~/NetBeansProjects
+
+SRC=$GitDir/ext/v-hacd/src/VHACD_Lib
+DST=$GitDir/Libbulletjme/src/main/native/v-hacd
 
 cd $SRC
 cp --recursive inc public src $DST
