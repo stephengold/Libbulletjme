@@ -147,6 +147,7 @@ $(N)/bullet3/BulletDynamics/Featherstone/btMultiBodyJointMotor.cpp \
 $(N)/bullet3/BulletDynamics/Featherstone/btMultiBodyMLCPConstraintSolver.cpp \
 $(N)/bullet3/BulletDynamics/Featherstone/btMultiBodyPoint2Point.cpp \
 $(N)/bullet3/BulletDynamics/Featherstone/btMultiBodySliderConstraint.cpp \
+$(N)/bullet3/BulletDynamics/Featherstone/btMultiBodySphericalJointLimit.cpp \
 $(N)/bullet3/BulletDynamics/Featherstone/btMultiBodySphericalJointMotor.cpp \
 $(N)/bullet3/BulletDynamics/MLCPSolvers/btDantzigLCP.cpp \
 $(N)/bullet3/BulletDynamics/MLCPSolvers/btLemkeAlgorithm.cpp \
