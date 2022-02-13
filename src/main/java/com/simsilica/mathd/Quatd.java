@@ -1,36 +1,36 @@
 /*
  * $Id$
- * 
+ *
  * Copyright (c) 2015, Simsilica, LLC
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions 
+ * modification, are permitted provided that the following conditions
  * are met:
- * 
- * 1. Redistributions of source code must retain the above copyright 
+ *
+ * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright 
- *    notice, this list of conditions and the following disclaimer in 
- *    the documentation and/or other materials provided with the 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
  *    distribution.
- * 
- * 3. Neither the name of the copyright holder nor the names of its 
- *    contributors may be used to endorse or promote products derived 
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived
  *    from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
- * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -69,7 +69,7 @@ public final class Quatd implements Cloneable {
     public Quatd() {
         this( 0, 0, 0, 1 );
     }
-    
+
     /**
      * Instantiate a Quatd with the specified components.
      *
@@ -82,7 +82,7 @@ public final class Quatd implements Cloneable {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.w = w;        
+        this.w = w;
     }
 
     /**
@@ -136,10 +136,10 @@ public final class Quatd implements Cloneable {
         bits ^= Double.doubleToLongBits(y) * 31;
         bits ^= Double.doubleToLongBits(z) * 31;
         bits ^= Double.doubleToLongBits(w) * 31;
-        
+
         return ((int)bits) ^ ((int)(bits >> 32));
     }
-    
+
     /**
      * Test for strict equality with another object.
      *
@@ -167,7 +167,7 @@ public final class Quatd implements Cloneable {
         }
         return true;
     }
-    
+
     /**
      * Set all components of this Quatd to the specified values.
      *
@@ -182,8 +182,8 @@ public final class Quatd implements Cloneable {
         this.y = y;
         this.z = z;
         this.w = w;
-        return this;        
-    } 
+        return this;
+    }
 
     /**
      * Copy all components of the specified Quatd to this Quatd.
@@ -196,9 +196,9 @@ public final class Quatd implements Cloneable {
         this.y = q.y;
         this.z = q.z;
         this.w = q.w;
-        return this;        
-    } 
-    
+        return this;
+    }
+
     /**
      * Copy all components of the specified Quaternion to this Quatd.
      *
@@ -225,15 +225,15 @@ public final class Quatd implements Cloneable {
         double qy = q.y;
         double qz = q.z;
         double qw = q.w;
-        
+
         double xr = x * qw + y * qz - z * qy + w * qx;
         double yr = -x * qz + y * qw + z * qx + w * qy;
         double zr = x * qy - y * qx + z * qw + w * qz;
         double wr = -x * qx - y * qy - z * qz + w * qw;
-        
+
         return new Quatd(xr, yr, zr, wr);
     }
-    
+
     /**
      * Take the Hamilton product of this Quatd times the specified Quatd in
      * place.
@@ -248,16 +248,16 @@ public final class Quatd implements Cloneable {
         double qy = q.y;
         double qz = q.z;
         double qw = q.w;
-        
+
         double xr = x * qw + y * qz - z * qy + w * qx;
         double yr = -x * qz + y * qw + z * qx + w * qy;
         double zr = x * qy - y * qx + z * qw + w * qz;
         double wr = -x * qx - y * qy - z * qz + w * qw;
- 
+
         x = xr;
         y = yr;
         z = zr;
-        w = wr;       
+        w = wr;
         return this;
     }
 
@@ -270,14 +270,14 @@ public final class Quatd implements Cloneable {
     public Vec3d mult( Vec3d v ) {
         if( v.x == 0 && v.y == 0 && v.z == 0 )
             return new Vec3d();
-        
+
         double vx = v.x;
         double vy = v.y;
         double vz = v.z;
-        
+
         double rx = w * w * vx + 2 * y * w * vz - 2 * z * w * vy + x * x
                     * vx + 2 * y * x * vy + 2 * z * x * vz - z * z * vx - y
-                    * y * vx; 
+                    * y * vx;
         double ry = 2 * x * y * vx + y * y * vy + 2 * z * y * vz + 2 * w
                     * z * vx - z * z * vy + w * w * vy - 2 * x * w * vz - x
                     * x * vy;
@@ -285,7 +285,7 @@ public final class Quatd implements Cloneable {
                     * y * vx - y * y * vz + 2 * w * x * vy - x * x * vz + w
                     * w * vz;
 
-        return new Vec3d(rx, ry, rz);                    
+        return new Vec3d(rx, ry, rz);
     }
 
     /**
@@ -304,14 +304,14 @@ public final class Quatd implements Cloneable {
                 result.set(0,0,0);
             return result;
         }
-        
+
         double vx = v.x;
         double vy = v.y;
         double vz = v.z;
-        
+
         double rx = w * w * vx + 2 * y * w * vz - 2 * z * w * vy + x * x
                     * vx + 2 * y * x * vy + 2 * z * x * vz - z * z * vx - y
-                    * y * vx; 
+                    * y * vx;
         double ry = 2 * x * y * vx + y * y * vy + 2 * z * y * vz + 2 * w
                     * z * vx - z * z * vy + w * w * vy - 2 * x * w * vz - x
                     * x * vy;
@@ -319,7 +319,7 @@ public final class Quatd implements Cloneable {
                     * y * vx - y * y * vz + 2 * w * x * vy - x * x * vz + w
                     * w * vz;
 
-        result.set(rx, ry, rz);                    
+        result.set(rx, ry, rz);
         return result;
     }
 
@@ -343,13 +343,13 @@ public final class Quatd implements Cloneable {
             w = 1;
             return this;
         }
-            
+
         double s = 1.0 / Math.sqrt(d);
         x *= s;
         y *= s;
         z *= s;
         w *= s;
-        
+
         return this;
     }
 
@@ -362,13 +362,13 @@ public final class Quatd implements Cloneable {
         double norm = lengthSq();
         if( norm <= 0 )
             return null;
-       
+
         double inv = 1 / norm;
-        return new Quatd(-x * inv, -y * inv, -z * inv, w * inv); 
+        return new Quatd(-x * inv, -y * inv, -z * inv, w * inv);
     }
 
     /**
-     * Builds a Quaternion from the Euler rotation angles (x,y,z) aka 
+     * Builds a Quaternion from the Euler rotation angles (x,y,z) aka
      * (pitch, yaw, roll)).  They are applyed in order: (y, z, x) aka (yaw, roll, pitch).
      * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
      *
@@ -378,9 +378,9 @@ public final class Quatd implements Cloneable {
      * @return this Quatd
      */
     public Quatd fromAngles( double xAngle, double yAngle, double zAngle ) {
-        double a;       
+        double a;
         double sinY, sinZ, sinX, cosY, cosZ, cosX;
-        
+
         a = zAngle * 0.5f;
         sinZ = Math.sin(a);
         cosZ = Math.cos(a);
