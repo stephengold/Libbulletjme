@@ -489,6 +489,10 @@ I am grateful to [Github], [Sonatype], [JFrog], [AppVeyor], [Travis], and [Imgur
 for providing free hosting for this project
 and many other open-source projects.
 
+<img height="100"
+ src="https://uploads-ssl.webflow.com/5ac3c046c82724970fc60918/5c019d917bba312af7553b49_MacStadium-developerlogo.png"
+ alt="Powered By MacStadium logo">
+
 I am grateful to ndebruyn for helping me test the Android native libraries.
 
 I am grateful to Pavly Gerges for helping me test the armhf native library.
