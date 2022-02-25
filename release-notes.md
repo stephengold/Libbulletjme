@@ -1,5 +1,17 @@
 # Release log for the Libbulletjme project
 
+## Version 12.8.0 released on 25 February 2022
+
+ + Bugfix:  btAssert from `HingeJoint.setAngularOnly(true)` (Minie issue 20)
+ + Added a dynamic collision-filtering hook to the `CollisionSpace` class.
+ + Added an immediate ongoing-contact handler to the `PhysicsSpace` class.
+ + Added 4 native setters to the `PhysicsCollisionEvent` class.
+ + Changed `PrimitiveAllocator` to throw an exception
+   on any destruction attempt.
+ + Added a `Platform` mechanism to determine the generic name
+   of the operating system.
+ + Built using Gradle v7.4 .
+
 ## Version 12.7.1 released on 24 January 2022
 
  + Bugfix: continuous collision detection causes memory corruption in a
