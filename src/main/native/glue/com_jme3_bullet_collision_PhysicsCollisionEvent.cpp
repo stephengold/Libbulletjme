@@ -340,3 +340,61 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
 
     jmeBulletUtil::convert(pEnv, &pPoint->m_positionWorldOnB, storeVector);
 }
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setContactMotion1
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setContactMotion1
+(JNIEnv *pEnv, jclass, jlong pointId, jfloat motion) {
+    btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
+
+    pPoint->m_contactMotion1 = (btScalar) motion;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setContactMotion2
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setContactMotion2
+(JNIEnv *pEnv, jclass, jlong pointId, jfloat motion) {
+    btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
+
+    pPoint->m_contactMotion2 = (btScalar) motion;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setLateralFrictionDir1
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setLateralFrictionDir1
+(JNIEnv *pEnv, jclass, jlong pointId, jobject directionVector) {
+    btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
+
+    jmeBulletUtil::convert(pEnv, directionVector,
+            &pPoint->m_lateralFrictionDir1);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setLateralFrictionDir2
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setLateralFrictionDir2
+(JNIEnv *pEnv, jclass, jlong pointId, jobject directionVector) {
+    btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
+
+    jmeBulletUtil::convert(pEnv, directionVector,
+            &pPoint->m_lateralFrictionDir2);
+}

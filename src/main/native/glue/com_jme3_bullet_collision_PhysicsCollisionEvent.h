@@ -183,6 +183,38 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getP
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_getPositionWorldOnB
   (JNIEnv *, jclass, jlong, jobject);
 
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setContactMotion1
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setContactMotion1
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setContactMotion2
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setContactMotion2
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setLateralFrictionDir1
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setLateralFrictionDir1
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionEvent
+ * Method:    setLateralFrictionDir2
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionEvent_setLateralFrictionDir2
+  (JNIEnv *, jclass, jlong, jobject);
+
 #ifdef __cplusplus
 }
 #endif
