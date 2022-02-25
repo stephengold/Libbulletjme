@@ -400,7 +400,7 @@ publishing {
             from components.java
             groupId project.ext.group
             pom {
-                description = project.description
+                description = 'a JNI interface for Bullet Physics and V-HACD'
                 developers {
                     developer {
                         email = 'sgold@sonic.net'
