@@ -324,7 +324,10 @@ public class PhysicsSpace extends CollisionSpace {
         }
         assert a != b : a;
 
-        logger.log(Level.FINE, "Adding {0} to {1}.", new Object[]{joint, this});
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Adding {0} to {1}.",
+                    new Object[]{joint, this});
+        }
         long jointId = joint.nativeId();
         jointMap.put(jointId, joint);
         joint.setPhysicsSpace(this);
@@ -607,8 +610,10 @@ public class PhysicsSpace extends CollisionSpace {
         }
         assert joint.getPhysicsSpace() == this;
 
-        logger.log(Level.FINE, "Removing {0} from {1}.",
-                new Object[]{joint, this});
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Removing {0} from {1}.",
+                    new Object[]{joint, this});
+        }
         jointMap.remove(jointId);
         joint.setPhysicsSpace(null);
 
@@ -969,8 +974,10 @@ public class PhysicsSpace extends CollisionSpace {
         }
         assert !character.isInWorld();
 
-        logger.log(Level.FINE, "Adding {0} to {1}.",
-                new Object[]{character, this});
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Adding {0} to {1}.",
+                    new Object[]{character, this});
+        }
         long characterId = character.nativeId();
         characterMap.put(characterId, character);
 
@@ -1021,8 +1028,10 @@ public class PhysicsSpace extends CollisionSpace {
         }
         assert !rigidBody.isInWorld();
 
-        logger.log(Level.FINE, "Adding {0} to {1}.",
-                new Object[]{rigidBody, this});
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Adding {0} to {1}.",
+                    new Object[]{rigidBody, this});
+        }
         long rigidBodyId = rigidBody.nativeId();
         rigidMap.put(rigidBodyId, rigidBody);
 
@@ -1048,8 +1057,10 @@ public class PhysicsSpace extends CollisionSpace {
 
         if (rigidBody instanceof PhysicsVehicle) {
             PhysicsVehicle vehicle = (PhysicsVehicle) rigidBody;
-            logger.log(Level.FINE, "Adding action for {0} to {1}.",
-                    new Object[]{vehicle, this});
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "Adding action for {0} to {1}.",
+                        new Object[]{vehicle, this});
+            }
 
             vehicle.createVehicle(this);
             long actionId = vehicle.getVehicleId();
@@ -1109,8 +1120,10 @@ public class PhysicsSpace extends CollisionSpace {
             return;
         }
 
-        logger.log(Level.FINE, "Removing {0} from {1}.",
-                new Object[]{character, this});
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Removing {0} from {1}.",
+                    new Object[]{character, this});
+        }
         characterMap.remove(characterId);
 
         long spaceId = nativeId();
@@ -1136,8 +1149,10 @@ public class PhysicsSpace extends CollisionSpace {
         long spaceId = nativeId();
         if (rigidBody instanceof PhysicsVehicle) {
             PhysicsVehicle vehicle = (PhysicsVehicle) rigidBody;
-            logger.log(Level.FINE, "Removing action for {0} from {1}.",
-                    new Object[]{vehicle, this});
+            if (logger.isLoggable(Level.FINE)) {
+                logger.log(Level.FINE, "Removing action for {0} from {1}.",
+                        new Object[]{vehicle, this});
+            }
 
             long actionId = vehicle.getVehicleId();
             vehicleMap.remove(actionId);
@@ -1145,8 +1160,10 @@ public class PhysicsSpace extends CollisionSpace {
             removeAction(spaceId, actionId);
         }
 
-        logger.log(Level.FINE, "Removing {0} from {1}.",
-                new Object[]{rigidBody, this});
+        if (logger.isLoggable(Level.FINE)) {
+            logger.log(Level.FINE, "Removing {0} from {1}.",
+                    new Object[]{rigidBody, this});
+        }
         rigidMap.remove(rigidBodyId);
 
         removeRigidBody(spaceId, rigidBodyId);
