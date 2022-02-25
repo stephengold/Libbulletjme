@@ -55,7 +55,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:12.7.1'
+            implementation 'com.github.stephengold:Libbulletjme:12.8.0'
         }
 
     For some older versions of Gradle,
@@ -245,7 +245,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 12.7.1`
+     + `git checkout -b latest 12.8.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
