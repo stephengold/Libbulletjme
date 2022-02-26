@@ -200,7 +200,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Return the contact point's separation distance (native field:
+     * Return the contact point's signed separation distance (native field:
      * m_distance1). This value is the negative of the penetration depth.
      *
      * @return the distance (in physics-space units)
@@ -450,15 +450,6 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
 
         return result;
     }
-
-    /**
-     * Alter how many points should be used to calculate the area of the convex
-     * hull of a contact point.
-     *
-     * @param setting true to use 3 points (faster), false to use 4 points (more
-     * accurate) (default=true)
-     */
-    native public static void setContactCalcArea3Points(boolean setting);
     // *************************************************************************
     // native private methods
 
