@@ -715,8 +715,7 @@ public class PhysicsSpace extends CollisionSpace {
      * maxSubSteps is set to 0 or 1.
      *
      * @see #setMaxSubSteps(int)
-     * @param timeInterval time-per-frame multiplied by speed (in seconds,
-     * &ge;0)
+     * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      */
     public void update(float timeInterval) {
         Validate.nonNegative(timeInterval, "time interval");
@@ -738,8 +737,8 @@ public class PhysicsSpace extends CollisionSpace {
      * Update this space.
      *
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
-     * @param maxSteps the maximum number of steps of size accuracy (&ge;1) or 0
-     * for a single step of size timeInterval
+     * @param maxSteps the maximum number of steps of size {@code accuracy}
+     * (&ge;1) or 0 for a single step of size {@code timeInterval}
      */
     public void update(float timeInterval, int maxSteps) {
         Validate.nonNegative(timeInterval, "time interval");
