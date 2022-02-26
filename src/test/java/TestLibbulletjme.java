@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2021, Stephen Gold
+ Copyright (c) 2020-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -37,6 +37,7 @@ import com.jme3.bullet.RotationOrder;
 import com.jme3.bullet.SolverInfo;
 import com.jme3.bullet.SolverType;
 import com.jme3.bullet.collision.Activation;
+import com.jme3.bullet.collision.ManifoldPoints;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
@@ -1210,6 +1211,107 @@ public class TestLibbulletjme {
                 new Vector3f(-10f, 5f, -10f),
                 new Vector3f(-10f, 5f, -10f));
         Assert.assertTrue(isInside5);
+    }
+
+    /**
+     * Test ManifoldPoints.
+     */
+    @Test
+    public void test015() {
+        loadNativeLibrary();
+
+        Assert.assertTrue(ManifoldPoints.isContactCalcArea3Points());
+        ManifoldPoints.setContactCalcArea3Points(false);
+        Assert.assertFalse(ManifoldPoints.isContactCalcArea3Points());
+        ManifoldPoints.setContactCalcArea3Points(true);
+
+        long nativeId = ManifoldPoints.createTestPoint();
+        Vector3f tmpVector = new Vector3f();
+        /*
+         * Verify that the test point is sufficiently zeroed.
+         */
+        Assert.assertEquals(0, ManifoldPoints.getFlags(nativeId));
+        Assert.assertEquals(0, ManifoldPoints.getLifeTime(nativeId));
+
+        Assert.assertEquals(0f,
+                ManifoldPoints.getAppliedImpulse(nativeId), 0f);
+        Assert.assertEquals(0f,
+                ManifoldPoints.getAppliedImpulseLateral1(nativeId), 0f);
+        Assert.assertEquals(0f,
+                ManifoldPoints.getAppliedImpulseLateral2(nativeId), 0f);
+        Assert.assertEquals(0f,
+                ManifoldPoints.getContactMotion1(nativeId), 0f);
+        Assert.assertEquals(0f,
+                ManifoldPoints.getContactMotion2(nativeId), 0f);
+
+        ManifoldPoints.getLocalPointA(nativeId, tmpVector);
+        assertEquals(0f, 0f, 0f, tmpVector, 0f);
+        /*
+         * Invoke all the setters.
+         */
+        ManifoldPoints.setAppliedImpulse(nativeId, 1f);
+        ManifoldPoints.setAppliedImpulseLateral1(nativeId, 2f);
+        ManifoldPoints.setAppliedImpulseLateral2(nativeId, 3f);
+        ManifoldPoints.setCombinedFriction(nativeId, 4f);
+        ManifoldPoints.setCombinedRestitution(nativeId, 5f);
+        ManifoldPoints.setCombinedRollingFriction(nativeId, 6f);
+        ManifoldPoints.setCombinedSpinningFriction(nativeId, 7f);
+        ManifoldPoints.setContactMotion1(nativeId, 8f);
+        ManifoldPoints.setContactMotion2(nativeId, 9f);
+        ManifoldPoints.setDistance1(nativeId, 10f);
+        ManifoldPoints.setFlags(nativeId, 11);
+        ManifoldPoints.setLateralFrictionDir1(nativeId,
+                new Vector3f(12f, 13f, 14f));
+        ManifoldPoints.setLateralFrictionDir2(nativeId,
+                new Vector3f(15f, 16f, 17f));
+        ManifoldPoints.setLocalPointA(nativeId, new Vector3f(18f, 19f, 20f));
+        ManifoldPoints.setLocalPointB(nativeId, new Vector3f(21f, 22f, 23f));
+        ManifoldPoints.setNormalWorldOnB(nativeId, new Vector3f(24f, 25f, 26f));
+        ManifoldPoints.setPositionWorldOnA(nativeId,
+                new Vector3f(27f, 28f, 29f));
+        ManifoldPoints.setPositionWorldOnB(nativeId,
+                new Vector3f(30f, 31f, 32f));
+        /*
+         * Verify the resulting point.
+         */
+        Assert.assertEquals(11, ManifoldPoints.getFlags(nativeId));
+        Assert.assertEquals(0, ManifoldPoints.getLifeTime(nativeId));
+
+        Assert.assertEquals(1f,
+                ManifoldPoints.getAppliedImpulse(nativeId), 0f);
+        Assert.assertEquals(2f,
+                ManifoldPoints.getAppliedImpulseLateral1(nativeId), 0f);
+        Assert.assertEquals(3f,
+                ManifoldPoints.getAppliedImpulseLateral2(nativeId), 0f);
+        Assert.assertEquals(4f,
+                ManifoldPoints.getCombinedFriction(nativeId), 0f);
+        Assert.assertEquals(5f,
+                ManifoldPoints.getCombinedRestitution(nativeId), 0f);
+        Assert.assertEquals(6f,
+                ManifoldPoints.getCombinedRollingFriction(nativeId), 0f);
+        Assert.assertEquals(7f,
+                ManifoldPoints.getCombinedSpinningFriction(nativeId), 0f);
+        Assert.assertEquals(8f,
+                ManifoldPoints.getContactMotion1(nativeId), 0f);
+        Assert.assertEquals(9f,
+                ManifoldPoints.getContactMotion2(nativeId), 0f);
+        Assert.assertEquals(10f,
+                ManifoldPoints.getDistance1(nativeId), 0f);
+
+        ManifoldPoints.getLateralFrictionDir1(nativeId, tmpVector);
+        assertEquals(12f, 13f, 14f, tmpVector, 0f);
+        ManifoldPoints.getLateralFrictionDir2(nativeId, tmpVector);
+        assertEquals(15f, 16f, 17f, tmpVector, 0f);
+        ManifoldPoints.getLocalPointA(nativeId, tmpVector);
+        assertEquals(18f, 19f, 20f, tmpVector, 0f);
+        ManifoldPoints.getLocalPointB(nativeId, tmpVector);
+        assertEquals(21f, 22f, 23f, tmpVector, 0f);
+        ManifoldPoints.getNormalWorldOnB(nativeId, tmpVector);
+        assertEquals(24f, 25f, 26f, tmpVector, 0f);
+        ManifoldPoints.getPositionWorldOnA(nativeId, tmpVector);
+        assertEquals(27f, 28f, 29f, tmpVector, 0f);
+        ManifoldPoints.getPositionWorldOnB(nativeId, tmpVector);
+        assertEquals(30f, 31f, 32f, tmpVector, 0f);
     }
     // *************************************************************************
     // private methods
