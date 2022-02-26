@@ -182,7 +182,6 @@ $(N)/bullet3/LinearMath/btThreads.cpp \
 $(N)/bullet3/LinearMath/btVector3.cpp \
 $(N)/bullet3/LinearMath/btReducedVector.cpp \
 $(N)/glue/com_jme3_bullet_collision_ManifoldPoints.cpp \
-$(N)/glue/com_jme3_bullet_collision_PhysicsCollisionEvent.cpp \
 $(N)/glue/com_jme3_bullet_collision_PhysicsCollisionObject.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_Box2dShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_BoxCollisionShape.cpp \
