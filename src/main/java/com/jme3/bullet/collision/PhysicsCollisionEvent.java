@@ -114,7 +114,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getAppliedImpulse() {
         long nativeId = nativeId();
-        float result = getAppliedImpulse(nativeId);
+        float result = ManifoldPoints.getAppliedImpulse(nativeId);
 
         return result;
     }
@@ -127,7 +127,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getAppliedImpulseLateral1() {
         long nativeId = nativeId();
-        float result = getAppliedImpulseLateral1(nativeId);
+        float result = ManifoldPoints.getAppliedImpulseLateral1(nativeId);
 
         return result;
     }
@@ -140,7 +140,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getAppliedImpulseLateral2() {
         long nativeId = nativeId();
-        float result = getAppliedImpulseLateral2(nativeId);
+        float result = ManifoldPoints.getAppliedImpulseLateral2(nativeId);
 
         return result;
     }
@@ -154,7 +154,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getCombinedFriction() {
         long nativeId = nativeId();
-        float result = getCombinedFriction(nativeId);
+        float result = ManifoldPoints.getCombinedFriction(nativeId);
 
         return result;
     }
@@ -168,7 +168,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getCombinedRestitution() {
         long nativeId = nativeId();
-        float result = getCombinedRestitution(nativeId);
+        float result = ManifoldPoints.getCombinedRestitution(nativeId);
 
         return result;
     }
@@ -181,7 +181,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getCombinedRollingFriction() {
         long nativeId = nativeId();
-        float result = getCombinedRollingFriction(nativeId);
+        float result = ManifoldPoints.getCombinedRollingFriction(nativeId);
 
         return result;
     }
@@ -194,7 +194,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getCombinedSpinningFriction() {
         long nativeId = nativeId();
-        float result = getCombinedSpinningFriction(nativeId);
+        float result = ManifoldPoints.getCombinedSpinningFriction(nativeId);
 
         return result;
     }
@@ -207,7 +207,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public float getDistance1() {
         long nativeId = nativeId();
-        float result = getDistance1(nativeId);
+        float result = ManifoldPoints.getDistance1(nativeId);
 
         return result;
     }
@@ -220,7 +220,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public int getFlags() {
         long nativeId = nativeId();
-        int result = getFlags(nativeId);
+        int result = ManifoldPoints.getFlags(nativeId);
 
         return result;
     }
@@ -244,7 +244,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public int getIndex0() {
         long nativeId = nativeId();
-        int result = getIndex0(nativeId);
+        int result = ManifoldPoints.getIndex0(nativeId);
 
         return result;
     }
@@ -268,7 +268,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public int getIndex1() {
         long nativeId = nativeId();
-        int result = getIndex1(nativeId);
+        int result = ManifoldPoints.getIndex1(nativeId);
 
         return result;
     }
@@ -284,7 +284,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getLateralFrictionDir1(nativeId, result);
+        ManifoldPoints.getLateralFrictionDir1(nativeId, result);
 
         return result;
     }
@@ -300,7 +300,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getLateralFrictionDir2(nativeId, result);
+        ManifoldPoints.getLateralFrictionDir2(nativeId, result);
 
         return result;
     }
@@ -312,7 +312,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public int getLifeTime() {
         long nativeId = nativeId();
-        int result = getLifeTime(nativeId);
+        int result = ManifoldPoints.getLifeTime(nativeId);
 
         return result;
     }
@@ -328,7 +328,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getLocalPointA(nativeId, result);
+        ManifoldPoints.getLocalPointA(nativeId, result);
 
         return result;
     }
@@ -344,7 +344,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getLocalPointB(nativeId, result);
+        ManifoldPoints.getLocalPointB(nativeId, result);
 
         return result;
     }
@@ -360,7 +360,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getNormalWorldOnB(nativeId, result);
+        ManifoldPoints.getNormalWorldOnB(nativeId, result);
 
         return result;
     }
@@ -381,7 +381,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public int getPartId0() {
         long nativeId = nativeId();
-        int result = getPartId0(nativeId);
+        int result = ManifoldPoints.getPartId0(nativeId);
 
         return result;
     }
@@ -402,7 +402,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      */
     public int getPartId1() {
         long nativeId = nativeId();
-        int result = getPartId1(nativeId);
+        int result = ManifoldPoints.getPartId1(nativeId);
 
         return result;
     }
@@ -418,7 +418,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getPositionWorldOnA(nativeId, result);
+        ManifoldPoints.getPositionWorldOnA(nativeId, result);
 
         return result;
     }
@@ -434,7 +434,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
         long nativeId = nativeId();
-        getPositionWorldOnB(nativeId, result);
+        ManifoldPoints.getPositionWorldOnB(nativeId, result);
 
         return result;
     }
