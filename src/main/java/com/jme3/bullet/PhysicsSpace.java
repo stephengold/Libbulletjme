@@ -727,10 +727,11 @@ public class PhysicsSpace extends CollisionSpace {
         if (maxSubSteps == 0) {
             interval = Math.min(interval, maxTimeStep);
         }
+        boolean doEnded = false;
         boolean doProcessed = !contactProcessedListeners.isEmpty();
         boolean doStarted = !contactStartedListeners.isEmpty();
-        stepSimulation(spaceId, interval, maxSubSteps, accuracy, doProcessed,
-                doStarted);
+        stepSimulation(spaceId, interval, maxSubSteps, accuracy, doEnded,
+                doProcessed, doStarted);
     }
 
     /**
@@ -746,10 +747,11 @@ public class PhysicsSpace extends CollisionSpace {
 
         long spaceId = nativeId();
         assert accuracy > 0f : accuracy;
+        boolean doEnded = false;
         boolean doProcessed = !contactProcessedListeners.isEmpty();
         boolean doStarted = !contactStartedListeners.isEmpty();
-        stepSimulation(spaceId, timeInterval, maxSteps, accuracy, doProcessed,
-                doStarted);
+        stepSimulation(spaceId, timeInterval, maxSteps, accuracy, doEnded, 
+                doProcessed, doStarted);
     }
 
     /**
@@ -1207,6 +1209,7 @@ public class PhysicsSpace extends CollisionSpace {
             boolean apply);
 
     native private static void stepSimulation(long spaceId, float timeInterval,
-            int maxSubSteps, float accuracy, boolean doProcessed,
-            boolean doStarted);
+            int maxSubSteps, float accuracy, boolean enableContactEndedCallback,
+            boolean enableContactProcessedCallback,
+            boolean enableContactStartedCallback);
 }

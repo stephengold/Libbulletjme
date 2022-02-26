@@ -69,7 +69,7 @@ void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
     modify(); // Apply the standard modifications.
 }
 
-#else
+#else // BT_THREADSAFE
 
 void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
         const btVector3& max, int broadphaseId) {
@@ -279,8 +279,10 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 }
 
 void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
-        jfloat accuracy, jboolean enableContactProcessedCallback,
+        jfloat accuracy, jboolean enableContactEndedCallback,
+        jboolean enableContactProcessedCallback,
         jboolean enableContactStartedCallback) {
+
     if ((bool) enableContactProcessedCallback) {
         gContactProcessedCallback = &contactProcessedCallback;
     } else {

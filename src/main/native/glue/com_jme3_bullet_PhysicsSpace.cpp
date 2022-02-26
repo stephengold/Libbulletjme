@@ -439,16 +439,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSpeculativeContactRe
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    stepSimulation
- * Signature: (JFIFZZ)V
+ * Signature: (JFIFZZZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_stepSimulation
 (JNIEnv *pEnv, jclass, jlong spaceId, jfloat tpf, jint maxSteps,
-        jfloat accuracy, jboolean enableContactProcessedCallback,
+        jfloat accuracy, jboolean enableContactEndedCallback,
+        jboolean enableContactProcessedCallback,
         jboolean enableContactStartedCallback) {
     jmePhysicsSpace * const
             pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
 
-    pSpace->stepSimulation(tpf, maxSteps, accuracy,
+    pSpace->stepSimulation(tpf, maxSteps, accuracy, enableContactEndedCallback,
             enableContactProcessedCallback, enableContactStartedCallback);
 }
