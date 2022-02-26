@@ -55,18 +55,18 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     // fields
 
     /**
-     * first collision object involved
+     * first object involved in the collision (typically a PhysicsRigidBody)
      */
     final private PhysicsCollisionObject pcoA;
     /**
-     * 2nd collision object involved
+     * 2nd object involved in the collision (typically a PhysicsRigidBody)
      */
     final private PhysicsCollisionObject pcoB;
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a collision event. For internal use only.
+     * Instantiate an event.
      *
      * @param pcoA the first involved object (not null, alias created)
      * @param pcoB the 2nd involved object (not null, alias created)
@@ -106,10 +106,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the collision's applied impulse (native field: m_appliedImpulse).
+     * Return the contact point's applied impulse (native field:
+     * m_appliedImpulse).
      *
-     * @return impulse calculated during the previous timestep, or zero if the
-     * WarmStart bit is cleared in the solver mode
+     * @return the calculated impulse, or zero if the WarmStart bit is cleared
+     * in the solver mode
      */
     public float getAppliedImpulse() {
         long nativeId = nativeId();
@@ -119,10 +120,10 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the collision's applied lateral impulse #1 (native field:
+     * Return the contact point's applied lateral impulse #1 (native field:
      * m_appliedImpulseLateral1).
      *
-     * @return impulse
+     * @return the calculated impulse component
      */
     public float getAppliedImpulseLateral1() {
         long nativeId = nativeId();
@@ -132,10 +133,10 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the collision's applied lateral impulse #2 (native field:
+     * Return the contact point's applied lateral impulse #2 (native field:
      * m_appliedImpulseLateral2).
      *
-     * @return impulse
+     * @return the calculate impulse component
      */
     public float getAppliedImpulseLateral2() {
         long nativeId = nativeId();
@@ -145,10 +146,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the combined friction, which is the product of the collision-object
-     * frictions (native field: m_combinedFriction).
+     * Return the contact point's combined friction, which is usually the
+     * product of the collision-object frictions (native field:
+     * m_combinedFriction).
      *
-     * @return the friction sum
+     * @return the friction product
      */
     public float getCombinedFriction() {
         long nativeId = nativeId();
@@ -158,8 +160,9 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the combined restitution, which is the product of the
-     * collision-object restitutions (native field: m_combinedRestitution).
+     * Return the contact point's combined restitution, which is usually the
+     * product of the collision-object restitutions (native field:
+     * m_combinedRestitution).
      *
      * @return the restitution product
      */
@@ -171,7 +174,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the combined rolling friction (native field:
+     * Return the contact point's combined rolling friction (native field:
      * m_combinedRollingFriction).
      *
      * @return the combined friction
@@ -184,7 +187,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the combined spinning friction (native field:
+     * Return the contact point's combined spinning friction (native field:
      * m_combinedSpinningFriction).
      *
      * @return the combined friction
@@ -197,8 +200,8 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the collision's separation distance (native field: m_distance1).
-     * This is the negative of the penetration depth.
+     * Return the contact point's separation distance (native field:
+     * m_distance1). This value is the negative of the penetration depth.
      *
      * @return the distance (in physics-space units)
      */
@@ -210,9 +213,10 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the contact-point flags (native field: m_contactPointFlags).
+     * Return the contact-point flags (native field: m_contactPointFlags).
      *
      * @return a bitmask
+     * @see com.jme3.bullet.collision.ContactPointFlag
      */
     public int getFlags() {
         long nativeId = nativeId();
@@ -222,8 +226,8 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the triangle index from the shape of collision object A at the point
-     * of contact (native field: m_index0).
+     * Return the triangle index in the shape of object A at the point of
+     * contact (native field: m_index0).
      * <p>
      * If shape is convex, the index is undefined.
      * <p>
@@ -246,8 +250,8 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the triangle index from the shape of collision object B at the point
-     * of contact (native field: m_index1).
+     * Return the triangle index in the shape of object B at the point of
+     * contact (native field: m_index1).
      * <p>
      * If shape is convex, the index is undefined.
      * <p>
@@ -270,7 +274,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's lateral friction direction #1 (native field:
+     * Return the contact point's lateral friction direction #1 (native field:
      * m_lateralFrictionDir1).
      *
      * @param storeResult storage for the result (modified if not null)
@@ -286,7 +290,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's lateral friction direction #2 (native field:
+     * Return the contact point's lateral friction direction #2 (native field:
      * m_lateralFrictionDir2).
      *
      * @param storeResult storage for the result (modified if not null)
@@ -302,9 +306,9 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the collision's lifetime (native name: m_lifeTime).
+     * Return the contact point's lifetime (native name: m_lifeTime).
      *
-     * @return the duration (in ticks, &ge;0)
+     * @return the duration (in timesteps, &ge;0)
      */
     public int getLifeTime() {
         long nativeId = nativeId();
@@ -314,12 +318,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's location in the local coordinates of object A
+     * Return the contact point's location in the local coordinates of object A
      * (native name: m_localPointA).
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a location vector (in local coordinates, either storeResult or a
-     * new instance)
+     * @return a location vector (either storeResult or a new instance)
      */
     public Vector3f getLocalPointA(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -331,12 +334,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's location in the local coordinates of object B
+     * Return the contact point's location in the local coordinates of object B
      * (native name: m_localPointB).
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a location vector (in local coordinates, either storeResult or a
-     * new instance)
+     * @return a location vector (either storeResult or a new instance)
      */
     public Vector3f getLocalPointB(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -348,11 +350,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's normal on object B (native name: m_normalWorldOnB).
+     * Return the contact point's normal on object B in physics-space
+     * coordinates (native name: m_normalWorldOnB).
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a normal vector (in physics-space coordinates, either storeResult
-     * or a new instance)
+     * @return a direction vector (either storeResult or a new instance)
      */
     public Vector3f getNormalWorldOnB(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -364,8 +366,8 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the part index from the shape of collision object A at the point of
-     * contact (native field: m_partId0).
+     * Return the part index in the shape of object A at the point of contact
+     * (native field: m_partId0).
      * <p>
      * If the shape is compound or convex, the index is undefined.
      * <p>
@@ -385,8 +387,8 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Read the part index from the shape of collision object B at the point of
-     * contact (native field: m_partId1).
+     * Return the part index in the shape of object B at the point of contact
+     * (native field: m_partId1).
      * <p>
      * If the shape is compound or convex, the index is undefined.
      * <p>
@@ -406,11 +408,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's location (native field: m_positionWorldOnA).
+     * Return the contact point's location on object A in physics-space
+     * coordinates (native field: m_positionWorldOnA).
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a location vector (in physics-space coordinates, either
-     * storeResult or a new instance)
+     * @return a location vector (either storeResult or a new instance)
      */
     public Vector3f getPositionWorldOnA(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -422,11 +424,11 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Copy the collision's location (native field: m_positionWorldOnB).
+     * Return the contact point's location on object B in physics-space
+     * coordinates (native field: m_positionWorldOnB).
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a location vector (in physics-space coordinates, either
-     * storeResult or a new instance)
+     * @return a location vector (either storeResult or a new instance)
      */
     public Vector3f getPositionWorldOnB(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -438,7 +440,7 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
     }
 
     /**
-     * Test whether the collision's lateral friction is initialized.
+     * Test whether the contact point's lateral friction is initialized.
      *
      * @return true if initialized, otherwise false
      */
@@ -453,8 +455,8 @@ public class PhysicsCollisionEvent extends NativePhysicsObject {
      * Alter how many points should be used to calculate the area of the convex
      * hull of a contact point.
      *
-     * @param setting true&rarr;use 3 points (faster), false&rarr;use 4 points
-     * (more accurate) (default=true)
+     * @param setting true to use 3 points (faster), false to use 4 points (more
+     * accurate) (default=true)
      */
     native public static void setContactCalcArea3Points(boolean setting);
 
