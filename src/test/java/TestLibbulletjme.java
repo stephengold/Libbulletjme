@@ -1243,9 +1243,6 @@ public class TestLibbulletjme {
                 ManifoldPoints.getContactMotion1(nativeId), 0f);
         Assert.assertEquals(0f,
                 ManifoldPoints.getContactMotion2(nativeId), 0f);
-
-        ManifoldPoints.getLocalPointA(nativeId, tmpVector);
-        assertEquals(0f, 0f, 0f, tmpVector, 0f);
         /*
          * Invoke all the setters.
          */
