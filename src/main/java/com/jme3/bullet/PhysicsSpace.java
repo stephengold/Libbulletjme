@@ -582,22 +582,6 @@ public class PhysicsSpace extends CollisionSpace {
     }
 
     /**
-     * Callback invoked immediately after a contact point is refreshed without
-     * being removed. Skipped for Sphere-Sphere contacts. Skipped if no
-     * ongoing-collision listeners are registered.
-     * <p>
-     * Override this method to customize how contacts are handled.
-     *
-     * @param event information about the refreshed contact point (not null)
-     * @see
-     * #addOngoingCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
-     */
-    public void onContactProcessed(PhysicsCollisionEvent event) {
-        // Queue the event to be handled later by distributeEvents().
-        contactProcessedEvents.add(event);
-    }
-
-    /**
      * De-register the specified listener for new contacts.
      *
      * @see
@@ -1023,9 +1007,6 @@ public class PhysicsSpace extends CollisionSpace {
      */
     private void addContactProcessed(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
-        PhysicsCollisionEvent event
-                = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
-        onContactProcessed(event);
     }
 
     /**
