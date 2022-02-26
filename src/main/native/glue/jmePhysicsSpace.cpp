@@ -137,7 +137,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
     jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
     jlong manifoldPointId = reinterpret_cast<jlong> (&contactPoint);
     pEnv->CallVoidMethod(javaPhysicsSpace,
-            jmeClasses::PhysicsSpace_addContactProcessed, javaCollisionObject0,
+            jmeClasses::PhysicsSpace_onContactProcessed, javaCollisionObject0,
             javaCollisionObject1, manifoldPointId);
     if (pEnv->ExceptionCheck()) {
         printf("exception in contactProcessedCallback CallVoidMethod\n");
@@ -189,7 +189,7 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
                     const btManifoldPoint& cp = pm->getContactPoint(i);
                     jlong manifoldPointId = reinterpret_cast<jlong> (&cp);
                     pEnv->CallVoidMethod(javaPhysicsSpace,
-                            jmeClasses::PhysicsSpace_addCollisionEvent,
+                            jmeClasses::PhysicsSpace_onContactStarted,
                             javaCollisionObject0, javaCollisionObject1,
                             manifoldPointId);
                     if (pEnv->ExceptionCheck()) {

@@ -62,8 +62,8 @@ public:
 
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;
-    static jmethodID PhysicsSpace_addCollisionEvent;
-    static jmethodID PhysicsSpace_addContactProcessed;
+    static jmethodID PhysicsSpace_onContactProcessed;
+    static jmethodID PhysicsSpace_onContactStarted;
 
     static jmethodID PhysicsGhostObject_addOverlappingObject;
 

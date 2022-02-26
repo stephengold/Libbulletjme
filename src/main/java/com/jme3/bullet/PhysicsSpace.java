@@ -994,7 +994,7 @@ public class PhysicsSpace extends CollisionSpace {
      * point is added to a manifold. Skipped if stepSimulation() was invoked
      * with doStarted=false.
      */
-    private void addCollisionEvent_native(PhysicsCollisionObject pcoA,
+    private void onContactStarted(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
         PhysicsCollisionEvent event
                 = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
@@ -1006,7 +1006,7 @@ public class PhysicsSpace extends CollisionSpace {
      * is refreshed without being removed. Skipped for Sphere-Sphere contacts.
      * Skipped if stepSimulation() was invoked with doProcessed=false.
      */
-    private void addContactProcessed(PhysicsCollisionObject pcoA,
+    private void onContactProcessed(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
     }
 

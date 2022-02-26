@@ -49,8 +49,8 @@ jmethodID jmeClasses::CollisionSpace_notifyCollisionGroupListeners;
 
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
-jmethodID jmeClasses::PhysicsSpace_addCollisionEvent;
-jmethodID jmeClasses::PhysicsSpace_addContactProcessed;
+jmethodID jmeClasses::PhysicsSpace_onContactProcessed;
+jmethodID jmeClasses::PhysicsSpace_onContactStarted;
 
 jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
 
@@ -230,15 +230,15 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_addCollisionEvent = pEnv->GetMethodID(PhysicsSpace,
-            "addCollisionEvent_native",
+    PhysicsSpace_onContactProcessed = pEnv->GetMethodID(PhysicsSpace,
+            "onContactProcessed",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_addContactProcessed = pEnv->GetMethodID(PhysicsSpace,
-            "addContactProcessed",
+    PhysicsSpace_onContactStarted = pEnv->GetMethodID(PhysicsSpace,
+            "onContactStarted",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
