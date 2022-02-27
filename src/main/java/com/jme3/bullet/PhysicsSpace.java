@@ -289,7 +289,9 @@ public class PhysicsSpace
      * contacts since the previous distributeEvents().
      *
      * @param listener the listener to register (not null, alias created)
+     * @deprecated Override the ContactListener methods instead.
      */
+    @Deprecated
     public void addCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
         assert !contactStartedListeners.contains(listener);
@@ -349,7 +351,9 @@ public class PhysicsSpace
      * ongoing contacts EXCEPT Sphere-Sphere contacts.
      *
      * @param listener the listener to register (not null, alias created)
+     * @deprecated Override the ContactListener methods instead.
      */
+    @Deprecated
     public void addOngoingCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
         assert !contactProcessedListeners.contains(listener);
@@ -434,7 +438,10 @@ public class PhysicsSpace
 
     /**
      * Distribute each collision event to registered listeners.
+     *
+     * @deprecated Override the ContactListener methods instead.
      */
+    @Deprecated
     public void distributeEvents() {
         while (!contactStartedEvents.isEmpty()) {
             PhysicsCollisionEvent event = contactStartedEvents.pop();
@@ -590,7 +597,9 @@ public class PhysicsSpace
      * @see
      * #addCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
      * @param listener the listener to de-register (not null)
+     * @deprecated Override the ContactListener methods instead.
      */
+    @Deprecated
     public void removeCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
 
@@ -632,7 +641,9 @@ public class PhysicsSpace
      * @see
      * #addOngoingCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
      * @param listener the listener to de-register (not null)
+     * @deprecated Override the ContactListener methods instead.
      */
+    @Deprecated
     public void removeOngoingCollisionListener(PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
 
