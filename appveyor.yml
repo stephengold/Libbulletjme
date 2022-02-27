@@ -1,7 +1,7 @@
 ---
 # configure deployment by AppVeyor.com
 
-version: 12.8.0
+version: 13.0.0
 
 image: Visual Studio 2019
 
@@ -11,15 +11,15 @@ build_script:
   - cmd: gradlew.bat build --console=plain --no-daemon
 
 artifacts:
-  - path: dist/Libbulletjme-12.8.0.jar
+  - path: dist/Libbulletjme-13.0.0.jar
     name: classJar
-  - path: dist/Libbulletjme-12.8.0-javadoc.jar
+  - path: dist/Libbulletjme-13.0.0-javadoc.jar
     name: javadocJar
-  - path: dist/Libbulletjme-12.8.0-sources.jar
+  - path: dist/Libbulletjme-13.0.0-sources.jar
     name: sourcesJar
-  - path: dist/Libbulletjme-12.8.0.pom
+  - path: dist/Libbulletjme-13.0.0.pom
     name: pom
-  - path: dist/Libbulletjme-12.8.0.module
+  - path: dist/Libbulletjme-13.0.0.module
     name: module
   - path: dist/Windows32DebugDp_bulletjme.dll
     name: dll32DD

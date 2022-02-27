@@ -10,7 +10,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
-    version = '12.8.0'
+    version = '13.0.0'
     baseName = "${artifact}-${version}"
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
@@ -175,8 +175,8 @@ model {
                 } else {
                     // non-CI build (neither -Pgithub= nor -Ptravis= specified)
                     buildable = !pName.startsWith('Linux_ARM')
-                    //buildable = (pName == 'Linux64') // to skip all except Linux64
-                    //buildable = (pName == 'Windows64') // to skip all except Windows64
+                    //buildable = (pName == 'Linux64') // to build Linux64 only
+                    //buildable = (pName == 'Windows64') // to build Windows64 only
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)

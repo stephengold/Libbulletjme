@@ -1,5 +1,29 @@
 # Release log for the Libbulletjme project
 
+## Version 13.0.0 released on 26 February 2022
+
+ + Added the `ManifoldPoints` utility class, which provides getters and setters
+   for `btManifoldPoint` without the need to instantiate
+   a `PhysicsCollisionEvent`.
+ + The `PhysicsCollisionEvent.setContactCalcArea3Points()` method was moved
+   to the `ManifoldPoints` class. (API change)
+ + The 4 setters added to `PhysicsCollisionEvent` in v12.8.0
+   were deleted. (API change)
+ + The `PhysicsSpace.onContactProcessed()` method (added in v12.8.0)
+   was deleted. (API change)
+ + Defined the `ContactListener` interface for immediate processing
+   of rigid-body contacts.
+   Overriding this interface of `PhysicsSpace` is now the recommended way
+   to process rigid-body contacts.
+ + Added a new `update()` method to `PhysicsSpace` to enable callbacks
+   to specific `ContactListener` methods.
+ + Deprecated 5 `PhysicsSpace` methods associated with event queueing:
+   + `addCollisionListener()`
+   + `addOngoingCollisionListener()`
+   + `distributeEvents()`
+   + `removeCollisionListener()`
+   + `removeOngoingCollisionListener()`
+
 ## Version 12.8.0 released on 25 February 2022
 
  + Bugfix:  btAssert from `HingeJoint.setAngularOnly(true)` (Minie issue 20)
