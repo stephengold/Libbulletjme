@@ -59,6 +59,9 @@ public:
 
     virtual ~jmePhysicsSpace();
 
+    static void
+    contactEndedCallback(btPersistentManifold * const &);
+
     static bool
     contactProcessedCallback(btManifoldPoint&, void* pBody0, void* pBody1);
 
