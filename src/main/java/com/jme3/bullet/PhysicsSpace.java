@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet;
 
+import com.jme3.bullet.collision.ContactListener;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
@@ -60,7 +61,9 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-public class PhysicsSpace extends CollisionSpace {
+public class PhysicsSpace
+        extends CollisionSpace
+        implements ContactListener {
     // *************************************************************************
     // enums
 
@@ -959,6 +962,8 @@ public class PhysicsSpace extends CollisionSpace {
             super.removeCollisionObject(pco);
         }
     }
+    // *************************************************************************
+    // ContactListener methods
 
     /**
      * This method is invoked by native code immediately after a contact
@@ -975,15 +980,19 @@ public class PhysicsSpace extends CollisionSpace {
             PhysicsCollisionObject pcoB, long manifoldPointId) {
         // do nothing
     }
-    // *************************************************************************
-    // Java private methods
 
     /**
      * This method is invoked by native code immediately after a contact point
      * is refreshed without being removed. Skipped for Sphere-Sphere contacts.
      * Skipped if stepSimulation() was invoked with doProcessed=false.
+     * <p>
+     * Override this method to customize how contacts are handled.
+     *
+     * @param pcoA the first involved object (not null)
+     * @param pcoB the 2nd involved object (not null)
+     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
      */
-    private void onContactProcessed(PhysicsCollisionObject pcoA,
+    public void onContactProcessed(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
         PhysicsCollisionEvent event
                 = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
@@ -996,14 +1005,22 @@ public class PhysicsSpace extends CollisionSpace {
      * manifold is created. Invoked once for each contact point, up to 4 times
      * per manifold. Skipped if stepSimulation() was invoked with
      * doStarted=false.
+     * <p>
+     * Override this method to customize how contacts are handled.
+     *
+     * @param pcoA the first involved object (not null)
+     * @param pcoB the 2nd involved object (not null)
+     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
      */
-    private void onContactStarted(PhysicsCollisionObject pcoA,
+    public void onContactStarted(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long manifoldPointId) {
         PhysicsCollisionEvent event
                 = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
         // Queue the event to be handled later by distributeEvents().
         contactStartedEvents.add(event);
     }
+    // *************************************************************************
+    // Java private methods
 
     /**
      * Add the specified PhysicsCharacter to this space.
