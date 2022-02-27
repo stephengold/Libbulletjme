@@ -721,7 +721,7 @@ public class PhysicsSpace
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      */
     public void update(float timeInterval) {
-        Validate.nonNegative(timeInterval, "time interval");
+        assert Validate.nonNegative(timeInterval, "time interval");
 
         float interval;
         if (maxSubSteps == 0) {
@@ -741,8 +741,8 @@ public class PhysicsSpace
      * (&ge;1) or 0 for a single step of size {@code timeInterval}
      */
     public void update(float timeInterval, int maxSteps) {
-        Validate.nonNegative(timeInterval, "time interval");
-        Validate.nonNegative(maxSteps, "max steps");
+        assert Validate.nonNegative(timeInterval, "time interval");
+        assert Validate.nonNegative(maxSteps, "max steps");
 
         boolean doEnded = false;
         boolean doProcessed = !contactProcessedListeners.isEmpty();
@@ -765,8 +765,8 @@ public class PhysicsSpace
      */
     public void update(float timeInterval, int maxSteps, boolean doEnded,
             boolean doProcessed, boolean doStarted) {
-        Validate.nonNegative(timeInterval, "time interval");
-        Validate.nonNegative(maxSteps, "max steps");
+        assert Validate.nonNegative(timeInterval, "time interval");
+        assert Validate.nonNegative(maxSteps, "max steps");
 
         long spaceId = nativeId();
         assert accuracy > 0f : accuracy;
