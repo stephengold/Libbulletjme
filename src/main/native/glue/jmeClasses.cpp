@@ -49,6 +49,7 @@ jmethodID jmeClasses::CollisionSpace_notifyCollisionGroupListeners;
 
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
+jmethodID jmeClasses::PhysicsSpace_onContactEnded;
 jmethodID jmeClasses::PhysicsSpace_onContactProcessed;
 jmethodID jmeClasses::PhysicsSpace_onContactStarted;
 
@@ -226,6 +227,13 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     }
     PhysicsSpace_postTick = pEnv->GetMethodID(PhysicsSpace, "postTick_native",
             "(F)V");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    PhysicsSpace_onContactEnded = pEnv->GetMethodID(PhysicsSpace,
+            "onContactEnded",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
