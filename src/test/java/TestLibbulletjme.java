@@ -38,8 +38,6 @@ import com.jme3.bullet.SolverInfo;
 import com.jme3.bullet.SolverType;
 import com.jme3.bullet.collision.Activation;
 import com.jme3.bullet.collision.ManifoldPoints;
-import com.jme3.bullet.collision.PhysicsCollisionEvent;
-import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.PhysicsRayTestResult;
 import com.jme3.bullet.collision.shapes.Box2dShape;
@@ -104,10 +102,18 @@ public class TestLibbulletjme {
     // *************************************************************************
     // fields
 
-    /*
+    /**
      * true if the expected collision in performDropTest() has been detected
      */
     private static boolean dropAndFloorHaveCollided = false;
+    /**
+     * dynamic rigid body in performDropTest()
+     */
+    private static PhysicsRigidBody drop;
+    /**
+     * static rigid body in performDropTest()
+     */
+    private static PhysicsRigidBody floor;
     // *************************************************************************
     // new methods exposed
 
@@ -1485,16 +1491,40 @@ public class TestLibbulletjme {
         Vector3f max = new Vector3f(10f, 10f, 10f);
         PhysicsSpace space;
 
-        space = new PhysicsSpace(min, max, broadphase, solver);
+        space = new PhysicsSpace(min, max, broadphase, solver) {
+            @Override
+            public void onContactProcessed(PhysicsCollisionObject a,
+                    PhysicsCollisionObject b, long manifoldPointId) {
+                Assert.assertTrue(a == floor && b == drop
+                        || a == drop && b == floor);
+                dropAndFloorHaveCollided = true;
+            }
+        };
         performDropTest(dropShape, space);
 
         if (solver == SolverType.SI) {
-            space = new PhysicsSoftSpace(min, max, broadphase);
+            space = new PhysicsSoftSpace(min, max, broadphase) {
+                @Override
+                public void onContactProcessed(PhysicsCollisionObject a,
+                        PhysicsCollisionObject b, long manifoldPointId) {
+                    Assert.assertTrue(a == floor && b == drop
+                            || a == drop && b == floor);
+                    dropAndFloorHaveCollided = true;
+                }
+            };
             performDropTest(dropShape, space);
         }
 
         if (solver != SolverType.NNCG) {
-            space = new MultiBodySpace(min, max, broadphase, solver);
+            space = new MultiBodySpace(min, max, broadphase, solver) {
+                @Override
+                public void onContactProcessed(PhysicsCollisionObject a,
+                        PhysicsCollisionObject b, long manifoldPointId) {
+                    Assert.assertTrue(a == floor && b == drop
+                            || a == drop && b == floor);
+                    dropAndFloorHaveCollided = true;
+                }
+            };
             performDropTest(dropShape, space);
         }
 
@@ -1565,26 +1595,14 @@ public class TestLibbulletjme {
 
         if (space instanceof PhysicsSpace) {
             dropAndFloorHaveCollided = false;
-            PhysicsCollisionListener listener = new PhysicsCollisionListener() {
-                @Override
-                public void collision(PhysicsCollisionEvent event) {
-                    PhysicsCollisionObject a = event.getObjectA();
-                    PhysicsCollisionObject b = event.getObjectB();
-                    Assert.assertTrue(a == floorBody && b == dropBody
-                            || a == dropBody && b == floorBody);
-                    dropAndFloorHaveCollided = true;
-                }
-            };
-            space.addCollisionListener(listener);
+            drop = dropBody;
+            floor = floorBody;
         }
         /*
          * 50 iterations with a 20-msec timestep
          */
         for (int i = 0; i < 50; ++i) {
-            space.update(0.02f, 0);
-            if (space instanceof PhysicsSpace) {
-                space.distributeEvents();
-            }
+            space.update(0.02f, 0, false, true, false);
             //System.out.printf("location = %s%n",
             //        dropBody.getPhysicsLocation(null));
         }
@@ -1806,8 +1824,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0f, info.globalCfm(), 0f);
         Assert.assertEquals(128, info.minBatch());
 
-        String className = space.getClass().getSimpleName();
-        int expectedMode = (className.equals("MultiBodySpace")) ? 0x114 : 0x104;
+        int expectedMode = (space instanceof MultiBodySpace) ? 0x114 : 0x104;
         Assert.assertEquals(expectedMode, info.mode());
 
         Assert.assertEquals(10, info.numIterations());
