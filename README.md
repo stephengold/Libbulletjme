@@ -25,6 +25,9 @@ For each desktop platform, 4 native libraries are distributed:
 In addition, multi-threaded native libraries
 are provided for x86_64 architectures running Windows or Linux.
 
+Libbulletjme is used in
+[the DynamX Physics Mod for Minecraft](https://dynamx.fr).
+
 Libbulletjme's native libraries are used in [Minie],
 which integrates Libbulletjme into [the jMonkeyEngine game engine][jme].
 For applications that don't use jMonkeyEngine,
@@ -55,7 +58,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:12.8.0'
+            implementation 'com.github.stephengold:Libbulletjme:13.0.0'
         }
 
     For some older versions of Gradle,
@@ -245,7 +248,7 @@ public class HelloVehicle {
    + using Git:
      + `git clone https://github.com/stephengold/Libbulletjme.git`
      + `cd Libbulletjme`
-     + `git checkout -b latest 12.8.0`
+     + `git checkout -b latest 13.0.0`
    + using a web browser:
      + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
      + follow the "Source code (zip)" link
