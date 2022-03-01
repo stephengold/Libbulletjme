@@ -141,17 +141,17 @@ public class PhysicsSpace
     /**
      * list of registered listeners for ongoing contacts
      */
-    final private List<PhysicsCollisionListener> contactProcessedListeners
+    final private Collection<PhysicsCollisionListener> contactProcessedListeners
             = new ArrayList<>(4);
     /**
      * list of registered listeners for new contacts
      */
-    final private List<PhysicsCollisionListener> contactStartedListeners
+    final private Collection<PhysicsCollisionListener> contactStartedListeners
             = new ArrayList<>(4);
     /**
      * list of registered tick listeners
      */
-    final private List<PhysicsTickListener> tickListeners
+    final private Collection<PhysicsTickListener> tickListeners
             = new ArrayList<>(4);
     /**
      * map character IDs to added objects

@@ -18,6 +18,7 @@ import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -46,7 +47,7 @@ public class VHACD {
     /**
      * list of registered progress listeners
      */
-    final private static List<VHACDProgressListener> progressListeners
+    final private static Collection<VHACDProgressListener> progressListeners
             = new ArrayList<>(4);
     /**
      * list of hulls computed during the latest decomposition
