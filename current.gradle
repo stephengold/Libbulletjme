@@ -31,15 +31,30 @@ model {
         DpMt // double-precision arithmetic, multithreaded
     }
 
+    platforms {
+        Linux_ARM64 {
+            architecture 'aarch64'
+            operatingSystem 'linux'
+        }
+        MacOSX_ARM64 {
+            architecture 'arm-v8'
+            operatingSystem 'osx'
+        }
+    }
+
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
         //clang(Clang) // to favor Clang over Gcc
         gcc(Gcc)
-        clang(Clang)
+        clang(Clang) {
+            target('MacOSX_ARM64')
+        }
     }
 
     components {
         bulletjme(NativeLibrarySpec) {
+            targetPlatform 'MacOSX_ARM64' // to build on Apple Silicon
+
             sources.cpp.source {
                 srcDir 'src/main/native/bullet3'
                 srcDir 'src/main/native/glue'
@@ -58,6 +73,7 @@ model {
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
+                String os = targetPlatform.operatingSystem.name
                 if (buildable) {
                     // Decide whether to build the current flavor:
                     if (project.hasProperty('flavor')) {
@@ -66,7 +82,7 @@ model {
                         buildable = (flavor.name == flavorArg)
                     } else if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP)
-                        buildable = !pName.startsWith('osx')
+                        buildable = (os != 'osx')
                     }
                     //if (isDp) buildable = false // to skip all double-precision flavors
                     //if (isMt) buildable = false // to skip all multithreaded flavors
@@ -134,7 +150,6 @@ model {
                         linker.args '-lgomp'
                     }
 
-                    String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {
