@@ -488,11 +488,13 @@ V-HACD to my attention.
 I am grateful to ["dustContributor"](https://github.com/dustContributor)
 for [optimizing the cleaner thread](https://github.com/stephengold/Libbulletjme/pull/13).
 
-I am grateful to [Github], [Sonatype], [JFrog], [AppVeyor], [Travis], and [Imgur]
+I am grateful to [Github], [Sonatype], [AppVeyor], [Travis], [MacStadium], [JFrog], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 
+<a href="https://www.macstadium.com/opensource/members">
 <img height="100" src="https://i.imgur.com/N6J0UBG.png" alt="Powered By MacStadium logo">
+</a>
 
 I am grateful to ndebruyn for helping me test the Android native libraries.
 
@@ -529,6 +531,7 @@ correct the situation: sgold@sonic.net
 [license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
+[macstadium]: https://www.macstadium.com/ "MacStadium"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [meld]: https://meldmerge.org "Meld Project"
 [minie]: https://github.com/stephengold/Minie "Minie Project"
