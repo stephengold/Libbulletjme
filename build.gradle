@@ -1,4 +1,4 @@
-// Gradle build script for Maven artifacts and non-Android native libraries
+// Gradle script to build Maven artifacts and desktop native libraries
 
 plugins {
     id 'cpp'
@@ -76,7 +76,7 @@ model {
             operatingSystem 'osx'
         }
         MacOSX_ARM64 {
-            architecture 'aarch64'
+            architecture 'arm-v8'
             operatingSystem 'osx'
         }
         Windows32 {
@@ -181,6 +181,7 @@ model {
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
+                String os = targetPlatform.operatingSystem.name
                 if (buildable) {
                     // Decide whether to build the current flavor:
                     if (project.hasProperty('flavor')) {
@@ -189,7 +190,7 @@ model {
                         buildable = (flavor.name == flavorArg)
                     } else if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
-                        buildable = pName.contains('64') && !pName.startsWith('MacOSX')
+                        buildable = (os != 'osx') && pName.contains('64')
                     }
                     //if (isDp) buildable = false // to skip all double-precision flavors
                     //if (isMt) buildable = false // to skip all multithreaded flavors
@@ -272,7 +273,6 @@ model {
                         linker.args '-lgomp'
                     }
 
-                    String os = targetPlatform.operatingSystem.name
                     if (os == 'osx') {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {

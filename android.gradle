@@ -1,4 +1,4 @@
-// Gradle build script for Android native libraries
+// Gradle script to build Android native libraries
 
 buildscript {
     repositories {
@@ -9,11 +9,13 @@ buildscript {
         classpath 'com.android.tools.build:gradle:4.1.1'
     }
 }
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
 
 String flavor = 'Sp'
-if (rootProject.hasProperty('flavor')) {
-    flavor = rootProject.ext.flavor
+if (project.hasProperty('flavor')) {
+    flavor = project.ext.flavor
 }
 
 android {
@@ -32,11 +34,6 @@ android {
         path 'Android.mk'
     }
     ndkVersion '21.3.6528147'
-}
-
-repositories {
-    google()
-    mavenCentral()
 }
 
 task copyToDist() {}
@@ -60,7 +57,13 @@ archmap.each { arch ->
     }
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 // cleanup tasks
+
 clean.dependsOn('cleanCxx', 'cleanDist')
 task cleanCxx(type: Delete) {
     delete '.cxx'
