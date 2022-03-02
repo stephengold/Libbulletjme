@@ -34,21 +34,21 @@ package com.jme3.bullet.collision;
 /**
  * Interface to receive immediate notifications when 2 collision objects come
  * into contact. Note that Bullet implements persistent contacts, so
- * btManifoldPoint instances are reused from step to step.
+ * btPersistentManifold instances and btManifoldPoint instances are reused from
+ * step to step.
  *
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ContactListener {
     /**
-     * Invoked immediately after a contact manifold is removed. Invoked once for
-     * each contact point, up to 4 times per manifold.
+     * Invoked immediately after a contact manifold is removed.
      *
      * @param objectA the first involved object (not null)
      * @param objectB the 2nd involved object (not null)
-     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
+     * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
     void onContactEnded(PhysicsCollisionObject objectA,
-            PhysicsCollisionObject objectB, long manifoldPointId);
+            PhysicsCollisionObject objectB, long manifoldId);
 
     /**
      * Invoked immediately after a contact point is refreshed without being
@@ -62,13 +62,12 @@ public interface ContactListener {
             PhysicsCollisionObject objectB, long manifoldPointId);
 
     /**
-     * Invoked immediately after a new contact manifold is created. Invoked once
-     * for each contact point, up to 4 times per manifold.
+     * Invoked immediately after a new contact manifold is created.
      *
      * @param objectA the first involved object (not null)
      * @param objectB the 2nd involved object (not null)
-     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
+     * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
     void onContactStarted(PhysicsCollisionObject objectA,
-            PhysicsCollisionObject objectB, long manifoldPointId);
+            PhysicsCollisionObject objectB, long manifoldId);
 }

@@ -32,6 +32,7 @@
 package com.jme3.bullet;
 
 import com.jme3.bullet.collision.ContactListener;
+import com.jme3.bullet.collision.PersistentManifolds;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
@@ -48,7 +49,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -995,17 +995,18 @@ public class PhysicsSpace
 
     /**
      * This method is invoked by native code immediately after a contact
-     * manifold is removed. Invoked once for each contact point, up to 4 times
-     * per manifold. Skipped if stepSimulation() was invoked with doEnded=false.
+     * manifold is removed. Skipped if stepSimulation() was invoked with
+     * doEnded=false.
      * <p>
      * Override this method to customize how contacts are handled.
      *
      * @param pcoA the first involved object (not null)
      * @param pcoB the 2nd involved object (not null)
-     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
+     * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
+    @Override
     public void onContactEnded(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long manifoldPointId) {
+            PhysicsCollisionObject pcoB, long manifoldId) {
         // do nothing
     }
 
@@ -1018,34 +1019,39 @@ public class PhysicsSpace
      *
      * @param pcoA the first involved object (not null)
      * @param pcoB the 2nd involved object (not null)
-     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
+     * @param pointId the native ID of the btManifoldPoint (not 0)
      */
+    @Override
     public void onContactProcessed(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long manifoldPointId) {
+            PhysicsCollisionObject pcoB, long pointId) {
         PhysicsCollisionEvent event
-                = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
+                = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
         // Queue the event to be handled later by distributeEvents().
         contactProcessedEvents.add(event);
     }
 
     /**
      * This method is invoked by native code immediately after a new contact
-     * manifold is created. Invoked once for each contact point, up to 4 times
-     * per manifold. Skipped if stepSimulation() was invoked with
+     * manifold is created. Skipped if stepSimulation() was invoked with
      * doStarted=false.
      * <p>
      * Override this method to customize how contacts are handled.
      *
      * @param pcoA the first involved object (not null)
      * @param pcoB the 2nd involved object (not null)
-     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
+     * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
+    @Override
     public void onContactStarted(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long manifoldPointId) {
-        PhysicsCollisionEvent event
-                = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
-        // Queue the event to be handled later by distributeEvents().
-        contactStartedEvents.add(event);
+            PhysicsCollisionObject pcoB, long manifoldId) {
+        int numPoints = PersistentManifolds.countPoints(manifoldId);
+        for (int pointIndex = 0; pointIndex < numPoints; ++pointIndex) {
+            long pointId = PersistentManifolds.getPoint(manifoldId, pointIndex);
+            PhysicsCollisionEvent event
+                    = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
+            // Queue the event to be handled later by distributeEvents().
+            contactStartedEvents.add(event);
+        }
     }
     // *************************************************************************
     // Java private methods

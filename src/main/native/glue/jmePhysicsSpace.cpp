@@ -120,21 +120,18 @@ void jmePhysicsSpace::contactEndedCallback(btPersistentManifold * const &pm) {
                         = pEnv->NewLocalRef(pUser0->m_javaRef);
                 jobject javaCollisionObject1
                         = pEnv->NewLocalRef(pUser1->m_javaRef);
-                for (int i = 0; i < pm->getNumContacts(); ++i) {
-                    const btManifoldPoint& cp = pm->getContactPoint(i);
-                    jlong manifoldPointId = reinterpret_cast<jlong> (&cp);
-                    pEnv->CallVoidMethod(javaPhysicsSpace,
-                            jmeClasses::PhysicsSpace_onContactEnded,
-                            javaCollisionObject0, javaCollisionObject1,
-                            manifoldPointId);
-                    if (pEnv->ExceptionCheck()) {
-                        printf("exception in contactEndedCallback CallVoidMethod\n");
-                        fflush(stdout);
+                jlong manifoldId = reinterpret_cast<jlong> (&pm);
+                pEnv->CallVoidMethod(javaPhysicsSpace,
+                        jmeClasses::PhysicsSpace_onContactEnded,
+                        javaCollisionObject0, javaCollisionObject1,
+                        manifoldId);
+                if (pEnv->ExceptionCheck()) {
+                    printf("exception in contactEndedCallback CallVoidMethod\n");
+                    fflush(stdout);
 #if BT_THREADSAFE
-                        pSpace->m_mutex.unlock();
+                    pSpace->m_mutex.unlock();
 #endif
-                        return;
-                    }
+                    return;
                 }
                 pEnv->DeleteLocalRef(javaPhysicsSpace);
                 pEnv->DeleteLocalRef(javaCollisionObject0);
@@ -249,21 +246,18 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
                         = pEnv->NewLocalRef(pUser0->m_javaRef);
                 jobject javaCollisionObject1
                         = pEnv->NewLocalRef(pUser1->m_javaRef);
-                for (int i = 0; i < pm->getNumContacts(); ++i) {
-                    const btManifoldPoint& cp = pm->getContactPoint(i);
-                    jlong manifoldPointId = reinterpret_cast<jlong> (&cp);
-                    pEnv->CallVoidMethod(javaPhysicsSpace,
-                            jmeClasses::PhysicsSpace_onContactStarted,
-                            javaCollisionObject0, javaCollisionObject1,
-                            manifoldPointId);
-                    if (pEnv->ExceptionCheck()) {
-                        printf("exception in contactStartedCallback CallVoidMethod\n");
-                        fflush(stdout);
+                jlong manifoldId = reinterpret_cast<jlong> (&pm);
+                pEnv->CallVoidMethod(javaPhysicsSpace,
+                        jmeClasses::PhysicsSpace_onContactStarted,
+                        javaCollisionObject0, javaCollisionObject1,
+                        manifoldId);
+                if (pEnv->ExceptionCheck()) {
+                    printf("exception in contactStartedCallback CallVoidMethod\n");
+                    fflush(stdout);
 #if BT_THREADSAFE
-                        pSpace->m_mutex.unlock();
+                    pSpace->m_mutex.unlock();
 #endif
-                        return;
-                    }
+                    return;
                 }
                 pEnv->DeleteLocalRef(javaPhysicsSpace);
                 pEnv->DeleteLocalRef(javaCollisionObject0);
