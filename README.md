@@ -419,6 +419,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 + [The Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
 + [The Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
++ [The LbjExamples project][examples] at [GitHub]
 + [The Minie project][minie] at [GitHub]
 + [The V-HACD Library][vhacd] at [GitHub]
 + [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
@@ -514,6 +515,7 @@ correct the situation: sgold@sonic.net
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [chrome]: https://www.google.com/chrome "Chrome"
+[examples]: https://github.com/stephengold/LbjExamples "LbjExamples Project"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [gcc]: https://gcc.gnu.org "GNU Compiler Collection"
