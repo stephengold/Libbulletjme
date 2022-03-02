@@ -57,7 +57,8 @@ final public class PersistentManifolds {
     // new methods exposed
 
     /**
-     * Return the number of points in the specified manifold.
+     * Return the number of points in the specified manifold (native field:
+     * m_cachedPoints).
      *
      * @param persistentManifoldId the native ID of a btPersistentManifold (not
      * 0)
@@ -65,6 +66,27 @@ final public class PersistentManifolds {
      * (&ge;0, &le;4)
      */
     native public static int countPoints(long persistentManifoldId);
+
+    /**
+     * Return the native ID of the first collision object (native field:
+     * m_body0).
+     *
+     * @param persistentManifoldId the native ID of a btPersistentManifold (not
+     * 0)
+     * @return the native ID of the btCollisionObject (not 0)
+     * @see PhysicsCollisionObject#findInstance(long)
+     */
+    native public static long getBodyAId(long persistentManifoldId);
+
+    /**
+     * Return the native ID of the 2nd collision object (native field: m_body1).
+     *
+     * @param persistentManifoldId the native ID of a btPersistentManifold (not
+     * 0)
+     * @return the native ID of the btCollisionObject (not 0)
+     * @see PhysicsCollisionObject#findInstance(long)
+     */
+    native public static long getBodyBId(long persistentManifoldId);
 
     /**
      * Return the indexed btManifoldPoint in the specified manifold.

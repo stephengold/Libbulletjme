@@ -17,6 +17,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_countP
 
 /*
  * Class:     com_jme3_bullet_collision_PersistentManifolds
+ * Method:    getBodyAId
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBodyAId
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PersistentManifolds
+ * Method:    getBodyBId
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBodyBId
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PersistentManifolds
  * Method:    getPoint
  * Signature: (JI)J
  */
