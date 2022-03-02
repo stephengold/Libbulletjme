@@ -232,22 +232,19 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
     PhysicsSpace_onContactEnded = pEnv->GetMethodID(PhysicsSpace,
-            "onContactEnded",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
+            "onContactEnded", "(J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
     PhysicsSpace_onContactProcessed = pEnv->GetMethodID(PhysicsSpace,
-            "onContactProcessed",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
+            "onContactProcessed", "(J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
     PhysicsSpace_onContactStarted = pEnv->GetMethodID(PhysicsSpace,
-            "onContactStarted",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
+            "onContactStarted", "(J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

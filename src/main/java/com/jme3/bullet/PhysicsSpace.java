@@ -1031,13 +1031,10 @@ public class PhysicsSpace
      * <p>
      * Override this method to customize how contacts are handled.
      *
-     * @param pcoA the first involved object (not null)
-     * @param pcoB the 2nd involved object (not null)
      * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
     @Override
-    public void onContactEnded(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long manifoldId) {
+    public void onContactEnded(long manifoldId) {
         // do nothing
     }
 
@@ -1068,19 +1065,25 @@ public class PhysicsSpace
      * <p>
      * Override this method to customize how contacts are handled.
      *
-     * @param pcoA the first involved object (not null)
-     * @param pcoB the 2nd involved object (not null)
      * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
     @Override
-    public void onContactStarted(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long manifoldId) {
+    public void onContactStarted(long manifoldId) {
         int numPoints = PersistentManifolds.countPoints(manifoldId);
-        for (int pointIndex = 0; pointIndex < numPoints; ++pointIndex) {
-            long pointId
-                    = PersistentManifolds.getPointId(manifoldId, pointIndex);
+        if (numPoints == 0) {
+            return;
+        }
+
+        long bodyAId = PersistentManifolds.getBodyAId(manifoldId);
+        PhysicsCollisionObject a = PhysicsCollisionObject.findInstance(bodyAId);
+        long bodyBId = PersistentManifolds.getBodyBId(manifoldId);
+        PhysicsCollisionObject b = PhysicsCollisionObject.findInstance(bodyBId);
+
+        for (int i = 0; i < numPoints; ++i) {
+            long pointId = PersistentManifolds.getPointId(manifoldId, i);
             PhysicsCollisionEvent event
-                    = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
+                    = new PhysicsCollisionEvent(a, b, pointId);
+
             // Queue the event to be handled later by distributeEvents().
             contactStartedEvents.add(event);
         }
