@@ -54,7 +54,7 @@ final public class PersistentManifolds {
     private PersistentManifolds() {
     }
     // *************************************************************************
-    // new native methods exposed
+    // new methods exposed
 
     /**
      * Return the number of points in the specified manifold.
@@ -76,4 +76,24 @@ final public class PersistentManifolds {
      */
     native public static long getPoint(long persistentManifoldId,
             int pointIndex);
+
+    /**
+     * Enumerate the native IDs of all points in the specified manifold.
+     *
+     * @param persistentManifoldId the native ID of a btPersistentManifold (not
+     * 0)
+     * @return a new array of btManifoldPoint IDs (not null, may be empty)
+     * @see com.jme3.bullet.collision.ManifoldPoints
+     */
+    public long[] listPointIds(long persistentManifoldId) {
+        int numPoints = countPoints(persistentManifoldId);
+        long[] result = new long[numPoints];
+
+        for (int pointIndex = 0; pointIndex < numPoints; ++pointIndex) {
+            long manifoldId = getPoint(persistentManifoldId, pointIndex);
+            result[pointIndex] = manifoldId;
+        }
+
+        return result;
+    }
 }
