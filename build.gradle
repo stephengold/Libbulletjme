@@ -335,6 +335,14 @@ repositories {
 }
 
 test.dependsOn('assemble')
+
+// publishing tasks
+
+task install {
+    dependsOn 'publishMavenPublicationToMavenLocal'
+    description 'Installs Maven artifacts to the local repository.'
+}
+
 assemble.dependsOn('copyToDistJars')
 task copyToDistJars (type: Copy) {
     dependsOn 'jar', 'javadocJar', 'signArchives', 'signMavenPublication', 'sourcesJar'
@@ -343,7 +351,6 @@ task copyToDistJars (type: Copy) {
     into 'dist'
 }
 
-// custom tasks for creating source/javadoc JARs
 jar {
     archiveBaseName = project.ext.baseName
 }
@@ -430,8 +437,15 @@ publishing {
         }
     }
 }
+publishMavenPublicationToMavenLocal.doLast {
+    println 'installed locally as ' + project.ext.baseName
+}
 
 // signing tasks
+
+// Signing relies on the existence of 3 properties
+// (signing.keyId, signing.password, and signing.secretKeyRingFile)
+// which should be stored in ~/.gradle/gradle.properties
 
 signing {
     sign configurations.archives
