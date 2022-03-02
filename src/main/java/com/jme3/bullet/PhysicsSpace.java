@@ -417,6 +417,18 @@ public class PhysicsSpace
     }
 
     /**
+     * Count the collision manifolds in this space.
+     *
+     * @return the current number of btPersistentManifolds (&ge;0)
+     */
+    public int countManifolds() {
+        long spaceId = nativeId();
+        int result = countManifolds(spaceId);
+
+        return result;
+    }
+
+    /**
      * Count the rigid bodies in this space, including vehicles.
      *
      * @return count (&ge;0)
@@ -504,6 +516,20 @@ public class PhysicsSpace
     public Collection<PhysicsJoint> getJointList() {
         Collection<PhysicsJoint> result = jointMap.values();
         return Collections.unmodifiableCollection(result);
+    }
+
+    /**
+     * Determine the native ID of the indexed collision manifold.
+     *
+     * @param index which manifold (&ge;0)
+     * @return the native ID of the btPersistentManifold (not 0)
+     * @see #countManifolds()
+     */
+    public long getManifoldByIndex(int index) {
+        long spaceId = nativeId();
+        long result = getManifoldByIndex(spaceId, index);
+
+        return result;
     }
 
     /**
@@ -1253,10 +1279,15 @@ public class PhysicsSpace
     native private static void addRigidBody(long spaceId, long rigidBodyId,
             int proxyGroup, int proxyMask);
 
+    native private static int countManifolds(long spaceId);
+
     native private long createPhysicsSpace(Vector3f minVector,
             Vector3f maxVector, int broadphaseType, int numSolvers);
 
     native private static void getGravity(long spaceId, Vector3f storeVector);
+
+    native private static long
+            getManifoldByIndex(long spaceId, int manifoldIndex);
 
     native private static int getNumConstraints(long spaceId);
 

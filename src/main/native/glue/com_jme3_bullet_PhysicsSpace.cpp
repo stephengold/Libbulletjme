@@ -159,6 +159,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    countManifolds
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_countManifolds
+(JNIEnv *pEnv, jclass, jlong spaceId) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0)
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.", 0);
+    const btDispatcher * const pDispatcher = pWorld->getDispatcher();
+    NULL_CHK(pEnv, pDispatcher, "The dispatcher does not exist.", 0);
+
+    int result = pDispatcher->getNumManifolds();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    createPhysicsSpace
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;II)J
  */
@@ -207,6 +226,27 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_getGravity
 
     const btVector3& gravity = pWorld->getGravity();
     jmeBulletUtil::convert(pEnv, &gravity, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    getManifoldByIndex
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getManifoldByIndex
+(JNIEnv *pEnv, jclass, jlong spaceId, jint manifoldIndex) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0)
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.", 0);
+    btDispatcher * const pDispatcher = pWorld->getDispatcher();
+    NULL_CHK(pEnv, pDispatcher, "The dispatcher does not exist.", 0);
+    int index = int(manifoldIndex);
+
+    const btPersistentManifold * const
+            pManifold = pDispatcher->getManifoldByIndexInternal(index);
+    return reinterpret_cast<long> (pManifold);
 }
 
 /*
