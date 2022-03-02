@@ -88,10 +88,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getB
 
 /*
  * Class:     com_jme3_bullet_collision_PersistentManifolds
- * Method:    getPoint
+ * Method:    getPointId
  * Signature: (JI)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getPoint
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getPointId
 (JNIEnv *pEnv, jclass, jlong manifoldId, jint pointIndex) {
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);

@@ -1077,7 +1077,8 @@ public class PhysicsSpace
             PhysicsCollisionObject pcoB, long manifoldId) {
         int numPoints = PersistentManifolds.countPoints(manifoldId);
         for (int pointIndex = 0; pointIndex < numPoints; ++pointIndex) {
-            long pointId = PersistentManifolds.getPoint(manifoldId, pointIndex);
+            long pointId
+                    = PersistentManifolds.getPointId(manifoldId, pointIndex);
             PhysicsCollisionEvent event
                     = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
             // Queue the event to be handled later by distributeEvents().

@@ -96,7 +96,7 @@ final public class PersistentManifolds {
      * @param pointIndex the index of the point (&ge;0, &lt;4)
      * @return the native ID of the btManifoldPoint (not 0)
      */
-    native public static long getPoint(long persistentManifoldId,
+    native public static long getPointId(long persistentManifoldId,
             int pointIndex);
 
     /**
@@ -112,7 +112,7 @@ final public class PersistentManifolds {
         long[] result = new long[numPoints];
 
         for (int pointIndex = 0; pointIndex < numPoints; ++pointIndex) {
-            long manifoldId = getPoint(persistentManifoldId, pointIndex);
+            long manifoldId = getPointId(persistentManifoldId, pointIndex);
             result[pointIndex] = manifoldId;
         }
 
