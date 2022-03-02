@@ -44,7 +44,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_countP
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
     NULL_CHK(pEnv, pManifold, "The btPersistentManifold does not exist.", 0);
-    assert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
 
     int result = pManifold->getNumContacts();
     btAssert(result >= 0);
@@ -62,7 +62,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getPo
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
     NULL_CHK(pEnv, pManifold, "The btPersistentManifold does not exist.", 0);
-    assert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
 
     int index = int(pointIndex);
     const btManifoldPoint * const result = &pManifold->getContactPoint(index);
