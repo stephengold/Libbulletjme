@@ -519,20 +519,6 @@ public class PhysicsSpace
     }
 
     /**
-     * Determine the native ID of the indexed collision manifold.
-     *
-     * @param index which manifold (&ge;0)
-     * @return the native ID of the btPersistentManifold (not 0)
-     * @see #countManifolds()
-     */
-    public long getManifoldByIndex(int index) {
-        long spaceId = nativeId();
-        long result = getManifoldByIndex(spaceId, index);
-
-        return result;
-    }
-
-    /**
      * Access the PhysicsSpace <b>running on this thread</b>. For parallel
      * physics, this may be invoked from the OpenGL thread.
      *
@@ -593,6 +579,25 @@ public class PhysicsSpace
     public boolean isUsingScr() {
         long spaceId = nativeId();
         boolean result = isSpeculativeContactRestitution(spaceId);
+
+        return result;
+    }
+
+    /**
+     * Enumerate the native IDs of all collision manifolds in this space.
+     *
+     * @return a new array (not null, may be empty)
+     * @see com.jme3.bullet.collision.PersistentManifolds
+     */
+    public long[] listManifoldIds() {
+        long spaceId = nativeId();
+        int numManifolds = countManifolds(spaceId);
+        long[] result = new long[numManifolds];
+
+        for (int index = 0; index < numManifolds; ++index) {
+            long manifoldId = getManifoldByIndex(spaceId, index);
+            result[index] = manifoldId;
+        }
 
         return result;
     }
