@@ -1025,9 +1025,8 @@ public class PhysicsSpace
     // ContactListener methods
 
     /**
-     * This method is invoked by native code immediately after a contact
-     * manifold is removed. Skipped if stepSimulation() was invoked with
-     * doEnded=false.
+     * Invoked by native code immediately after a contact manifold is removed.
+     * Skipped if stepSimulation() was invoked with doEnded=false.
      * <p>
      * Override this method to customize how contacts are handled.
      *
@@ -1039,29 +1038,28 @@ public class PhysicsSpace
     }
 
     /**
-     * This method is invoked by native code immediately after a contact point
-     * is refreshed without being removed. Skipped for Sphere-Sphere contacts.
-     * Skipped if stepSimulation() was invoked with doProcessed=false.
+     * Invoked by native code immediately after a contact point is refreshed
+     * without being removed. Skipped for Sphere-Sphere contacts. Skipped if
+     * stepSimulation() was invoked with doProcessed=false.
      * <p>
      * Override this method to customize how contacts are handled.
      *
      * @param pcoA the first involved object (not null)
      * @param pcoB the 2nd involved object (not null)
-     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
+     * @param pointId the native ID of the btManifoldPoint (not 0)
      */
     @Override
     public void onContactProcessed(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long manifoldPointId) {
+            PhysicsCollisionObject pcoB, long pointId) {
         PhysicsCollisionEvent event
-                = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
+                = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
         // Queue the event to be handled later by distributeEvents().
         contactProcessedEvents.add(event);
     }
 
     /**
-     * This method is invoked by native code immediately after a new contact
-     * manifold is created. Skipped if stepSimulation() was invoked with
-     * doStarted=false.
+     * Invoked by native code immediately after a contact manifold is created.
+     * Skipped if stepSimulation() was invoked with doStarted=false.
      * <p>
      * Override this method to customize how contacts are handled.
      *
