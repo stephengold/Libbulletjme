@@ -57,7 +57,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_countP
  * Method:    getBodyAId
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getA
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBodyAId
 (JNIEnv *pEnv, jclass, jlong manifoldId) {
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
@@ -74,7 +74,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getA
  * Method:    getBodyBId
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getB
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBodyBId
 (JNIEnv *pEnv, jclass, jlong manifoldId) {
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
