@@ -238,7 +238,9 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
     PhysicsSpace_onContactProcessed = pEnv->GetMethodID(PhysicsSpace,
-            "onContactProcessed", "(J)V");
+            "onContactProcessed",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V"
+    );
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
