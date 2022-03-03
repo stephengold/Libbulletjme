@@ -1047,13 +1047,13 @@ public class PhysicsSpace
      *
      * @param pcoA the first involved object (not null)
      * @param pcoB the 2nd involved object (not null)
-     * @param pointId the native ID of the btManifoldPoint (not 0)
+     * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
      */
     @Override
     public void onContactProcessed(PhysicsCollisionObject pcoA,
-            PhysicsCollisionObject pcoB, long pointId) {
+            PhysicsCollisionObject pcoB, long manifoldPointId) {
         PhysicsCollisionEvent event
-                = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
+                = new PhysicsCollisionEvent(pcoA, pcoB, manifoldPointId);
         // Queue the event to be handled later by distributeEvents().
         contactProcessedEvents.add(event);
     }
@@ -1075,14 +1075,14 @@ public class PhysicsSpace
         }
 
         long bodyAId = PersistentManifolds.getBodyAId(manifoldId);
-        PhysicsCollisionObject a = PhysicsCollisionObject.findInstance(bodyAId);
+        PhysicsCollisionObject pcoA = PhysicsCollisionObject.findInstance(bodyAId);
         long bodyBId = PersistentManifolds.getBodyBId(manifoldId);
-        PhysicsCollisionObject b = PhysicsCollisionObject.findInstance(bodyBId);
+        PhysicsCollisionObject pcoB = PhysicsCollisionObject.findInstance(bodyBId);
 
         for (int i = 0; i < numPoints; ++i) {
             long pointId = PersistentManifolds.getPointId(manifoldId, i);
             PhysicsCollisionEvent event
-                    = new PhysicsCollisionEvent(a, b, pointId);
+                    = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
 
             // Queue the event to be handled later by distributeEvents().
             contactStartedEvents.add(event);
