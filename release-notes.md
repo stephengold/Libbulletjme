@@ -1,5 +1,15 @@
 # Release log for the Libbulletjme project
 
+## Version 14.0.0 released on 2 March 2022
+
+ + Redesigned the `ContactListener` interface for utility and efficiency.
+   (API changes)
+ + Added the `PersistentManifolds` utility class.
+ + Added the `countManifolds()` and `listManifolds()` methods
+   to the `PhysicsSpace` class.
+ + Added a script to build native libraries for/on Apple Silicon.
+ + Handle missing platform subdirectories in `NativeLibraryLoader`.
+
 ## Version 13.0.0 released on 26 February 2022
 
  + Added the `ManifoldPoints` utility class, which provides getters and setters
