@@ -98,6 +98,7 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 #endif // BT_THREADSAFE
 
 void jmePhysicsSpace::contactEndedCallback(btPersistentManifold * const &pm) {
+    btAssert(pm->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
     BT_PROFILE("contactEndedCallback");
 
     const btCollisionObject * const pBody0 = pm->getBody0();
@@ -137,7 +138,7 @@ void jmePhysicsSpace::contactEndedCallback(btPersistentManifold * const &pm) {
         return;
     }
 
-    jlong manifoldId = reinterpret_cast<jlong> (&pm);
+    jlong manifoldId = reinterpret_cast<jlong> (pm);
     pEnv->CallVoidMethod(javaPhysicsSpace,
             jmeClasses::PhysicsSpace_onContactEnded, manifoldId);
     if (pEnv->ExceptionCheck()) {
@@ -231,6 +232,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
 }
 
 void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
+    btAssert(pm->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
     BT_PROFILE("contactStartedCallback");
 
     const btCollisionObject * const pBody0 = pm->getBody0();
@@ -270,7 +272,7 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
         return;
     }
 
-    jlong manifoldId = reinterpret_cast<jlong> (&pm);
+    jlong manifoldId = reinterpret_cast<jlong> (pm);
     pEnv->CallVoidMethod(javaPhysicsSpace,
         jmeClasses::PhysicsSpace_onContactStarted, manifoldId);
     if (pEnv->ExceptionCheck()) {
