@@ -17,10 +17,10 @@ and provides native libraries for the 4 supported Android ABIs
 making a total of 14 platforms.
 
 For each desktop platform, 4 native libraries are distributed:
- + a release build using single-precision arithmetic (the default library)
- + a release build using double-precision arithmetic
- + a debug build using single-precision arithmetic
- + a debug build using double-precision arithmetic
++ a release build using single-precision arithmetic (the default library)
++ a release build using double-precision arithmetic
++ a debug build using single-precision arithmetic
++ a debug build using double-precision arithmetic
 
 In addition, multi-threaded native libraries
 are provided for x86_64 architectures running Windows or Linux.
@@ -237,46 +237,46 @@ public class HelloVehicle {
 
 ## How to build Libbulletjme from source
 
- 1. Install build software:
-   + A [Java Development Kit (JDK)][openJDK],
-    if you don't already have one, and
-   + one of the supported C++ compilers:
-     + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
-     + for Windows:  Microsoft Visual Studio
-     + for macOS:  Xcode
- 2. Download and extract the Libbulletjme source code from GitHub:
-   + using Git:
-     + `git clone https://github.com/stephengold/Libbulletjme.git`
-     + `cd Libbulletjme`
-     + `git checkout -b latest 14.0.0`
-   + using a web browser:
-     + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
-     + follow the "Source code (zip)" link
-     + save the ZIP file
-     + extract the contents of the saved ZIP file
-     + `cd` to the extracted directory/folder
- 3. Set the `JAVA_HOME` environment variable:
-   + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
-   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
-   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
- 4. Run the [Gradle] wrapper on the desktop build script:
-   + using Bash or PowerShell:  `./gradlew build`
-   + using Windows Command Prompt:  `.\gradlew build`
- 5. Building Android native libraries requires additional software:
-   + the Android SDK Tools
-   + the Android SDK Patch Applier (patcher)
-   + version 21.3.6528147 of the Android Native Development Kit (NDK)
- 6. Run the Gradle wrapper on the Android build script:
-   + using Bash or PowerShell:  `./gradlew copyToDist --build-file=android.gradle`
-   + using Windows Command Prompt:  `.\gradlew copyToDist --build-file=android.gradle`
+1. Install build software:
+  + A [Java Development Kit (JDK)][openJDK],
+   if you don't already have one, and
+  + one of the supported C++ compilers:
+    + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
+    + for Windows:  Microsoft Visual Studio
+    + for macOS:  Xcode
+2. Download and extract the Libbulletjme source code from GitHub:
+  + using Git:
+    + `git clone https://github.com/stephengold/Libbulletjme.git`
+    + `cd Libbulletjme`
+    + `git checkout -b latest 14.0.0`
+  + using a web browser:
+    + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
+    + follow the "Source code (zip)" link
+    + save the ZIP file
+    + extract the contents of the saved ZIP file
+    + `cd` to the extracted directory/folder
+3. Set the `JAVA_HOME` environment variable:
+  + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
+  + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+  + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
+4. Run the [Gradle] wrapper on the desktop build script:
+  + using Bash or PowerShell:  `./gradlew build`
+  + using Windows Command Prompt:  `.\gradlew build`
+5. Building Android native libraries requires additional software:
+  + the Android SDK Tools
+  + the Android SDK Patch Applier (patcher)
+  + version 21.3.6528147 of the Android Native Development Kit (NDK)
+6. Run the Gradle wrapper on the Android build script:
+  + using Bash or PowerShell:  `./gradlew copyToDist --build-file=android.gradle`
+  + using Windows Command Prompt:  `.\gradlew copyToDist --build-file=android.gradle`
 
 After a successful build,
 Maven artifacts and native libraries will be found
-in the `dist` directory/folder.
+in the "dist" directory/folder.
 
-You can also install the Maven artifacts to your local Maven repository:
- + using Bash or PowerShell:  `./gradlew publishToMavenLocal`
- + using Windows Command Prompt:  `.\gradlew publishToMavenLocal`
+You can install the artifacts to your local Maven repository:
++ using Bash or PowerShell: `./gradlew publishToMavenLocal`
++ using Windows Command Prompt: `.\gradlew publishToMavenLocal`
 
 [Jump to table of contents](#toc)
 
