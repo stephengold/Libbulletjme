@@ -475,6 +475,7 @@ This project also made use of the following software tools:
   + the [Git] revision-control system and GitK commit viewer
   + the [Firefox] and [Google Chrome][chrome] web browsers
   + the [Gradle] build tool
+  + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
   + the Java compiler, standard doclet, and runtime environment
   + [jMonkeyEngine][jme] and the jME3 Software Development Kit
   + the [Linux Mint][mint] operating system
@@ -482,7 +483,6 @@ This project also made use of the following software tools:
   + the [Markdown] document-conversion tool
   + the [Meld] visual merge tool
   + Microsoft Windows and Visual Studio
-  + the [NetBeans] integrated development environment
 
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
