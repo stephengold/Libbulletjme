@@ -238,7 +238,7 @@ public class HelloVehicle {
 ## How to build Libbulletjme from source
 
 1. Install build software:
-  + A [Java Development Kit (JDK)][openJDK],
+  + A [Java Development Kit (JDK)][adoptium],
    if you don't already have one, and
   + one of the supported C++ compilers:
     + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
@@ -512,6 +512,7 @@ correct the situation: sgold@sonic.net
 [Jump to table of contents](#toc)
 
 
+[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
@@ -540,7 +541,6 @@ correct the situation: sgold@sonic.net
 [minie]: https://github.com/stephengold/Minie "Minie Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
-[openJDK]: https://openjdk.java.net "OpenJDK Project"
 [simmath]: https://github.com/Simsilica/SimMath "SimMath Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [travis]: https://travis-ci.com "Travis CI"
