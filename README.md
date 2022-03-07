@@ -256,26 +256,26 @@ public class HelloVehicle {
     + extract the contents of the saved ZIP file
     + `cd` to the extracted directory/folder
 3. Set the `JAVA_HOME` environment variable:
-  + using Bash:  `export JAVA_HOME="` *path to your JDK* `"`
+  + using Bash or Zsh: `export JAVA_HOME="` *path to your JDK* `"`
   + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
   + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
 4. Run the [Gradle] wrapper on the desktop build script:
-  + using Bash or PowerShell:  `./gradlew build`
-  + using Windows Command Prompt:  `.\gradlew build`
+  + using Bash or PowerShell or Zsh: `./gradlew build`
+  + using Windows Command Prompt: `.\gradlew build`
 5. Building Android native libraries requires additional software:
   + the Android SDK Tools
   + the Android SDK Patch Applier (patcher)
   + version 21.3.6528147 of the Android Native Development Kit (NDK)
-6. Run the Gradle wrapper on the Android build script:
-  + using Bash or PowerShell:  `./gradlew copyToDist --build-file=android.gradle`
-  + using Windows Command Prompt:  `.\gradlew copyToDist --build-file=android.gradle`
+6. Run the [Gradle] wrapper on the Android build script:
+  + using Bash or PowerShell or Zsh: `./gradlew copyToDist --build-file=android.gradle`
+  + using Windows Command Prompt: `.\gradlew copyToDist --build-file=android.gradle`
 
 After a successful build,
 Maven artifacts and native libraries will be found
 in the "dist" directory/folder.
 
 You can install the artifacts to your local Maven repository:
-+ using Bash or PowerShell: `./gradlew publishToMavenLocal`
++ using Bash or PowerShell or Zsh: `./gradlew publishToMavenLocal`
 + using Windows Command Prompt: `.\gradlew publishToMavenLocal`
 
 [Jump to table of contents](#toc)
