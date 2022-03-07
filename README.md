@@ -275,8 +275,12 @@ Maven artifacts and native libraries will be found
 in the "dist" directory/folder.
 
 You can install the artifacts to your local Maven repository:
-+ using Bash or PowerShell or Zsh: `./gradlew publishToMavenLocal`
-+ using Windows Command Prompt: `.\gradlew publishToMavenLocal`
++ using Bash or PowerShell or Zsh: `./gradlew install`
++ using Windows Command Prompt: `.\gradlew install`
+
+You can restore the project to a pristine state:
++ using Bash or PowerShell or Zsh: `./gradlew clean`
++ using Windows Command Prompt: `.\gradlew clean`
 
 [Jump to table of contents](#toc)
 
