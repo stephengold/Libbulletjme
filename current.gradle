@@ -15,6 +15,8 @@ tasks.withType(CppCompile) {
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform;
+Boolean isMacOS = DefaultNativePlatform.currentOperatingSystem.isMacOsX();
 
 model {
     buildTypes {
@@ -53,7 +55,9 @@ model {
 
     components {
         bulletjme(NativeLibrarySpec) {
-            targetPlatform 'MacOSX_ARM64' // to build on Apple Silicon
+            if (isMacOS) {
+                targetPlatform 'MacOSX_ARM64' // to build on Apple Silicon
+            }
 
             sources.cpp.source {
                 srcDir 'src/main/native/bullet3'
