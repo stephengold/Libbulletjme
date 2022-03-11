@@ -436,6 +436,7 @@ publishing {
         }
     }
 }
+publishMavenPublicationToMavenLocal.dependsOn('build')
 publishMavenPublicationToMavenLocal.doLast {
     println 'installed locally as ' + project.ext.baseName
 }
@@ -453,6 +454,7 @@ signing {
 tasks.withType(Sign) {
     onlyIf { project.hasProperty('signing.keyId') }
 }
+signMavenPublication.dependsOn('module')
 
 // cleanup tasks
 
