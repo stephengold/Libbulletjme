@@ -210,9 +210,9 @@ test.dependsOn('assemble')
 
 clean.dependsOn('cleanCxx', 'cleanLogs')
 
-task cleanCxx(type: Delete) {
+tasks.register('cleanCxx', Delete) {
     delete '.cxx'
 }
-task cleanLogs(type: Delete) { // JVM crash logs
+tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }

@@ -237,15 +237,15 @@ model {
                             pdbFile += pName + '/debug/'
                             pdbFile += flavor.name + '/bulletjme.pdb'
 
-                            task "copyPdbToDist$q" (type: Copy, dependsOn:
-                                 "bulletjme${q}SharedLibrary") {
+                            project.tasks.register('copyPdbToDist' + q, Copy) {
+                                dependsOn "bulletjme${q}SharedLibrary"
                                 from pdbFile
                                 rename { String filename ->
                                     return q + '_' + filename
                                 }
                                 into 'dist'
                             }
-                            jar.dependsOn("copyPdbToDist$q")
+                            jar.dependsOn('copyPdbToDist' + q)
                         }
                     } else { // buildType == Release
                         cppCompiler.args '/O2'
@@ -294,8 +294,8 @@ model {
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
 
-                    task "copyToDist$q" (type: Copy, dependsOn:
-                         "bulletjme${q}SharedLibrary") {
+                    project.tasks.register('copyToDist' + q, Copy) {
+                        dependsOn "bulletjme${q}SharedLibrary"
                         from sharedLibraryFile
                         rename { String filename ->
                             return q + '_' + filename
@@ -337,13 +337,13 @@ test.dependsOn('assemble')
 
 // publishing tasks
 
-task install {
+tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
     description 'Installs Maven artifacts to the local repository.'
 }
 
 assemble.dependsOn('copyToDistJars')
-task copyToDistJars (type: Copy) {
+tasks.register('copyToDistJars', Copy) {
     dependsOn 'jar', 'javadocJar', 'signArchives', 'signMavenPublication', 'sourcesJar'
     from 'build/libs'
     include '*.jar', '*.jar.asc'
@@ -353,14 +353,14 @@ task copyToDistJars (type: Copy) {
 jar {
     archiveBaseName = project.ext.baseName
 }
-task javadocJar(type: Jar) {
+tasks.register('javadocJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'javadoc'
     dependsOn 'javadoc'
     description 'Creates a JAR of javadoc.'
     from javadoc.destinationDir
 }
-task sourcesJar(type: Jar) {
+tasks.register('sourcesJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
     description 'Creates a JAR of Java sourcecode.'
@@ -374,28 +374,28 @@ artifacts {
 javadoc.dependsOn('compileTestJava')
 
 build.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
-task('module', type: Copy) {
+tasks.register('module', Copy) {
     dependsOn 'generateMetadataFileForMavenPublication'
     description 'Copies the module metadata to dist.'
     from "${buildDir}/publications/maven/module.json"
     into 'dist'
     rename 'module.json', project.ext.baseName + '.module'
 }
-task('moduleAsc', type: Copy) {
+tasks.register('moduleAsc', Copy) {
     dependsOn 'signMavenPublication'
     description 'Copies the signature of the module metadata to dist.'
     from "${buildDir}/publications/maven/module.json.asc"
     into 'dist'
     rename 'module.json.asc', project.ext.baseName + '.module.asc'
 }
-task('pom', type: Copy) {
+tasks.register('pom', Copy) {
     dependsOn 'generatePomFileForMavenPublication'
     description 'Copies the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml"
     into 'dist'
     rename 'pom-default.xml', project.ext.baseName + '.pom'
 }
-task('pomAsc', type: Copy) {
+tasks.register('pomAsc', Copy) {
     dependsOn 'signMavenPublication'
     description 'Copies the signature of the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml.asc"
@@ -460,12 +460,12 @@ signMavenPublication.dependsOn('module')
 
 clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
 
-task cleanCxx(type: Delete) {
+tasks.register('cleanCxx', Delete) {
     delete '.cxx'
 }
-task cleanDist(type: Delete) { // files to be distributed
+tasks.register('cleanDist', Delete) { // files to be distributed
     delete 'dist'
 }
-task cleanLogs(type: Delete) { // JVM crash logs
+tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
