@@ -3,7 +3,7 @@
 The [Libbulletjme Project][libbulletjme] adds JNI "glue code"
 to portions of [Bullet Physics][bullet]
 and [Khaled Mamou's V-HACD Library][vhacd],
-enabling 3-D physics simulation from Java applications.
+enabling 3-D physics simulation from [Java] applications.
 
 Complete source code (in C++ and Java) is provided under
 [a mixed open-source license][license].
@@ -58,7 +58,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:14.0.0'
+            implementation 'com.github.stephengold:Libbulletjme:14.1.0'
         }
 
     For some older versions of Gradle,
@@ -248,7 +248,7 @@ public class HelloVehicle {
   + using Git:
     + `git clone https://github.com/stephengold/Libbulletjme.git`
     + `cd Libbulletjme`
-    + `git checkout -b latest 14.0.0`
+    + `git checkout -b latest 14.1.0`
   + using a web browser:
     + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
     + follow the "Source code (zip)" link
@@ -480,7 +480,7 @@ This project also made use of the following software tools:
   + the [Firefox] and [Google Chrome][chrome] web browsers
   + the [Gradle] build tool
   + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
-  + the Java compiler, standard doclet, and runtime environment
+  + the [Java] compiler, standard doclet, and runtime environment
   + [jMonkeyEngine][jme] and the jME3 Software Development Kit
   + the [Linux Mint][mint] operating system
   + the [LLVM Compiler Infrastructure][llvm]
@@ -506,7 +506,7 @@ I am grateful to ndebruyn for helping me test the Android native libraries.
 
 I am grateful to Pavly Gerges for helping me test the armhf native library.
 
-I am grateful to Yanis Boudiaf for many helpful suggestions.
+I am grateful to Yanis Boudiaf and "qwq" for many helpful suggestions.
 
 I'm also grateful to my dear Holly, for keeping me sane.
 
@@ -530,7 +530,9 @@ correct the situation: sgold@sonic.net
 [github]: https://github.com "GitHub"
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
+[idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [imgur]: https://imgur.com/ "Imgur"
+[java]: https://java.com "Java"
 [jbullet]: http://jbullet.advel.cz "JBullet"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
