@@ -373,7 +373,7 @@ artifacts {
 }
 javadoc.dependsOn('compileTestJava')
 
-build.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
+assemble.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
 tasks.register('module', Copy) {
     dependsOn 'generateMetadataFileForMavenPublication'
     description 'Copies the module metadata to dist.'
@@ -436,7 +436,7 @@ publishing {
         }
     }
 }
-publishMavenPublicationToMavenLocal.dependsOn('build')
+publishMavenPublicationToMavenLocal.dependsOn('assemble')
 publishMavenPublicationToMavenLocal.doLast {
     println 'installed locally as ' + project.ext.baseName
 }
