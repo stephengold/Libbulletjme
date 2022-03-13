@@ -206,7 +206,7 @@ repositories {
 
 test.dependsOn('assemble')
 
-// cleanup tasks
+// cleanup tasks:
 
 clean.dependsOn('cleanCxx', 'cleanLogs')
 

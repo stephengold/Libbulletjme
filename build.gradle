@@ -10,7 +10,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
-    version = '14.0.0'
+    version = '14.1.0'
     baseName = "${artifact}-${version}"
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
@@ -456,7 +456,7 @@ tasks.withType(Sign) {
 }
 signMavenPublication.dependsOn('module')
 
-// cleanup tasks
+// cleanup tasks:
 
 clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
 

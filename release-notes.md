@@ -1,5 +1,10 @@
 # Release log for the Libbulletjme project
 
+## Version 14.1.0 released on 13 March 2022
+
+ + Added accessors for `m_erp` and `m_erp2` to the `SolverInfo` class.
+ + Explicitly required Java v8 or higher.
+
 ## Version 14.0.0 released on 2 March 2022
 
  + Redesigned the `ContactListener` interface for utility and efficiency.
