@@ -17,10 +17,26 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_copyAllParameters
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    getContactErp
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getContactErp
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    getGlobalCfm
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getGlobalCfm
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    getJointErp
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getJointErp
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -73,10 +89,26 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_SolverInfo_isSplitImpulseEnabled
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setContactErp
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setContactErp
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    setGlobalCfm
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setGlobalCfm
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setJointErp
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setJointErp
   (JNIEnv *, jclass, jlong, jfloat);
 
 /*

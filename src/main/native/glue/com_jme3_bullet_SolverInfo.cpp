@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -59,6 +59,21 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_copyAllParameters
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    getContactErp
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getContactErp
+(JNIEnv *pEnv, jclass, jlong infoId) {
+    const btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
+
+    btScalar result = pInfo->m_erp2;
+    return jfloat(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    getGlobalCfm
  * Signature: (J)F
  */
@@ -69,6 +84,21 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getGlobalCfm
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
 
     btScalar result = pInfo->m_globalCfm;
+    return jfloat(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    getJointErp
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_SolverInfo_getJointErp
+(JNIEnv *pEnv, jclass, jlong infoId) {
+    const btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.", 0);
+
+    btScalar result = pInfo->m_erp;
     return jfloat(result);
 }
 
@@ -165,6 +195,20 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_SolverInfo_isSplitImpulseEnabled
 
 /*
  * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setContactErp
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setContactErp
+(JNIEnv *pEnv, jclass, jlong infoId, jfloat erp) {
+    btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
+
+    pInfo->m_erp2 = btScalar(erp);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
  * Method:    setGlobalCfm
  * Signature: (JF)V
  */
@@ -175,6 +219,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setGlobalCfm
     NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
 
     pInfo->m_globalCfm = btScalar(cfm);
+}
+
+/*
+ * Class:     com_jme3_bullet_SolverInfo
+ * Method:    setJointErp
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_SolverInfo_setJointErp
+(JNIEnv *pEnv, jclass, jlong infoId, jfloat erp) {
+    btContactSolverInfo * const
+            pInfo = reinterpret_cast<btContactSolverInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The btContactSolverInfo does not exist.",)
+
+    pInfo->m_erp = btScalar(erp);
 }
 
 /*
