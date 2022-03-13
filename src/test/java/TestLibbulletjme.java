@@ -1316,6 +1316,41 @@ public class TestLibbulletjme {
         ManifoldPoints.getPositionWorldOnB(nativeId, tmpVector);
         assertEquals(30f, 31f, 32f, tmpVector, 0f);
     }
+
+    /**
+     * Test SolverInfo.
+     */
+    @Test
+    public void test016() {
+        loadNativeLibrary();
+
+        PhysicsSpace space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
+        SolverInfo info = space.getSolverInfo();
+        /*
+         * Invoke all the setters.
+         */
+        info.setContactErp(2f);
+        info.setGlobalCfm(3f);
+        info.setJointErp(4f);
+        info.setMinBatch(5);
+        info.setMode(0x6);
+        info.setNumIterations(7);
+        info.setSplitImpulseEnabled(false);
+        info.setSplitImpulseErp(8f);
+        info.setSplitImpulseThreshold(9f);
+        /*
+         * Verify the resulting SolverInfo.
+         */
+        Assert.assertEquals(2f, info.contactErp(), 0f);
+        Assert.assertEquals(3f, info.globalCfm(), 0f);
+        Assert.assertEquals(4f, info.jointErp(), 0f);
+        Assert.assertEquals(5, info.minBatch());
+        Assert.assertEquals(0x6, info.mode());
+        Assert.assertEquals(7, info.numIterations());
+        Assert.assertFalse(info.isSplitImpulseEnabled());
+        Assert.assertEquals(8f, info.splitImpulseErp(), 0f);
+        Assert.assertEquals(9f, info.splitImpulseThreshold(), 0f);
+    }
     // *************************************************************************
     // private methods
 
@@ -1823,7 +1858,9 @@ public class TestLibbulletjme {
         SolverInfo info = space.getSolverInfo();
         Assert.assertNotNull(info);
         Assert.assertNotEquals(0L, info.nativeId());
+        Assert.assertEquals(0.2f, info.contactErp(), 0f);
         Assert.assertEquals(0f, info.globalCfm(), 0f);
+        Assert.assertEquals(0.2f, info.jointErp(), 0f);
         Assert.assertEquals(128, info.minBatch());
 
         int expectedMode = (space instanceof MultiBodySpace) ? 0x114 : 0x104;
