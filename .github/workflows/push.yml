@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 8
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
@@ -24,8 +25,9 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 8
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
         shell: bash
@@ -37,8 +39,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 11
       - uses: gradle/wrapper-validation-action@v1.0.4
       - run: sudo apt-get update
@@ -52,8 +55,9 @@ jobs:
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 11
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=debug64
         shell: bash
@@ -65,8 +69,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 17
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
@@ -82,8 +87,9 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 17
       - run: clang --version
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=debug64
@@ -98,8 +104,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
+          distribution: 'zulu'
           java-version: 17
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
