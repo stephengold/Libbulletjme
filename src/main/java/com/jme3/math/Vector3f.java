@@ -154,6 +154,22 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Adds a specified vector and returns the sum in a 3rd vector. The current
+     * instance is unaffected unless it's <code>result</code>.
+     *
+     * @param vec the vector to add (not null, unaffected unless it's
+     *     <code>result</code>)
+     * @param result storage for the sum (not null)
+     * @return <code>result</code> (for chaining)
+     */
+    public Vector3f add(Vector3f vec, Vector3f result) {
+        result.x = x + vec.x;
+        result.y = y + vec.y;
+        result.z = z + vec.z;
+        return result;
+    }
+
+    /**
      * Adds the argument and returns the (modified) current instance. If the
      * argument is null, null is returned.
      *
@@ -447,6 +463,27 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Returns the negative. The current instance is unaffected.
+     *
+     * @return a new Vector3f
+     */
+    public Vector3f negate() {
+        return new Vector3f(-x, -y, -z);
+    }
+
+    /**
+     * Negates all 3 components and returns the (modified) current instance.
+     *
+     * @return the (modified) current instance (for chaining)
+     */
+    public Vector3f negateLocal() {
+        x = -x;
+        y = -y;
+        z = -z;
+        return this;
+    }
+
+    /**
      * Subtracts the argument and returns the difference as a new instance. The
      * current instance is unaffected.
      *
@@ -455,6 +492,25 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      */
     public Vector3f subtract(Vector3f vec) {
         return new Vector3f(x - vec.x, y - vec.y, z - vec.z);
+    }
+
+    /**
+     * Subtracts the argument and returns the (modified) current instance. If
+     * the argument is null, null is returned.
+     *
+     * @param vec the vector to subtract (unaffected unless it's
+     *     <code>this</code>) or null for none
+     * @return the (modified) current instance or null
+     */
+    public Vector3f subtractLocal(Vector3f vec) {
+        if (null == vec) {
+            logger.warning("Provided vector is null, null returned.");
+            return null;
+        }
+        x -= vec.x;
+        y -= vec.y;
+        z -= vec.z;
+        return this;
     }
 
     /**
