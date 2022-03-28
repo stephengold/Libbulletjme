@@ -408,7 +408,10 @@ IVHACD::Parameters  vhacd.VHACDParameters
    + `btSdfCollisionShape`
    + `btTriangleShape`
    + `btUniformScalingShape`
- + `btSoftMultiBodyDynamicsWorld`
+ + certain world types:
+   + `btDeformableMultiBodyDynamicsWorld`
+   + `btSimpleDynamicsWorld`
+   + `btSoftMultiBodyDynamicsWorld`
  + inverse dynamics
  + Bullet v3
  + extras, examples, and tests
