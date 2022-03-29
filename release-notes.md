@@ -1,77 +1,83 @@
 # Release log for the Libbulletjme project
 
+## Version 14.2.0 released on 28 March 2022
+
++ Bugfix:  `EXCEPTION_ACCESS_VIOLATION` on Windows (Minie issue #23)
++ Added `add()`, `negate()`, `negateLocal()`, and `subtractLocal()` methods to
+  the `Vector3f` class.
+
 ## Version 14.1.0 released on 13 March 2022
 
- + Added accessors for `m_erp` and `m_erp2` to the `SolverInfo` class.
- + Explicitly required Java v8 or higher.
++ Added accessors for `m_erp` and `m_erp2` to the `SolverInfo` class.
++ Explicitly required Java v8 or higher.
 
 ## Version 14.0.0 released on 2 March 2022
 
- + Redesigned the `ContactListener` interface for utility and efficiency.
-   (API changes)
- + Added the `PersistentManifolds` utility class.
- + Added the `countManifolds()` and `listManifolds()` methods
-   to the `PhysicsSpace` class.
- + Added a script to build native libraries for/on Apple Silicon.
- + Handle missing platform subdirectories in `NativeLibraryLoader`.
++ Redesigned the `ContactListener` interface for utility and efficiency.
+  (API changes)
++ Added the `PersistentManifolds` utility class.
++ Added the `countManifolds()` and `listManifolds()` methods
+  to the `PhysicsSpace` class.
++ Added a script to build native libraries for/on Apple Silicon.
++ Handle missing platform subdirectories in `NativeLibraryLoader`.
 
 ## Version 13.0.0 released on 26 February 2022
 
- + Added the `ManifoldPoints` utility class, which provides getters and setters
-   for `btManifoldPoint` without the need to instantiate
-   a `PhysicsCollisionEvent`.
- + The `PhysicsCollisionEvent.setContactCalcArea3Points()` method was moved
-   to the `ManifoldPoints` class. (API change)
- + The 4 setters added to `PhysicsCollisionEvent` in v12.8.0
-   were deleted. (API change)
- + The `PhysicsSpace.onContactProcessed()` method (added in v12.8.0)
-   was deleted. (API change)
- + Defined the `ContactListener` interface for immediate processing
-   of rigid-body contacts.
-   Overriding this interface of `PhysicsSpace` is now the recommended way
-   to process rigid-body contacts.
- + Added a new `update()` method to `PhysicsSpace` to enable callbacks
-   to specific `ContactListener` methods.
- + Deprecated 5 `PhysicsSpace` methods associated with event queueing:
-   + `addCollisionListener()`
-   + `addOngoingCollisionListener()`
-   + `distributeEvents()`
-   + `removeCollisionListener()`
-   + `removeOngoingCollisionListener()`
++ Added the `ManifoldPoints` utility class, which provides getters and setters
+  for `btManifoldPoint` without the need to instantiate
+  a `PhysicsCollisionEvent`.
++ The `PhysicsCollisionEvent.setContactCalcArea3Points()` method was moved
+  to the `ManifoldPoints` class. (API change)
++ The 4 setters added to `PhysicsCollisionEvent` in v12.8.0
+  were deleted. (API change)
++ The `PhysicsSpace.onContactProcessed()` method (added in v12.8.0)
+  was deleted. (API change)
++ Defined the `ContactListener` interface for immediate processing
+  of rigid-body contacts.
+  Overriding this interface of `PhysicsSpace` is now the recommended way
+  to process rigid-body contacts.
++ Added a new `update()` method to `PhysicsSpace` to enable callbacks
+  to specific `ContactListener` methods.
++ Deprecated 5 `PhysicsSpace` methods associated with event queueing:
+  + `addCollisionListener()`
+  + `addOngoingCollisionListener()`
+  + `distributeEvents()`
+  + `removeCollisionListener()`
+  + `removeOngoingCollisionListener()`
 
 ## Version 12.8.0 released on 25 February 2022
 
- + Bugfix:  btAssert from `HingeJoint.setAngularOnly(true)` (Minie issue 20)
- + Added a dynamic collision-filtering hook to the `CollisionSpace` class.
- + Added an immediate ongoing-contact handler to the `PhysicsSpace` class.
- + Added 4 native setters to the `PhysicsCollisionEvent` class.
- + Changed `PrimitiveAllocator` to throw an exception
-   on any destruction attempt.
- + Added a `Platform` mechanism to determine the generic name
-   of the operating system.
- + Built using Gradle v7.4 .
++ Bugfix:  btAssert from `HingeJoint.setAngularOnly(true)` (Minie issue 20)
++ Added a dynamic collision-filtering hook to the `CollisionSpace` class.
++ Added an immediate ongoing-contact handler to the `PhysicsSpace` class.
++ Added 4 native setters to the `PhysicsCollisionEvent` class.
++ Changed `PrimitiveAllocator` to throw an exception
+  on any destruction attempt.
++ Added a `Platform` mechanism to determine the generic name
+  of the operating system.
++ Built using Gradle v7.4 .
 
 ## Version 12.7.1 released on 24 January 2022
 
- + Bugfix: continuous collision detection causes memory corruption in a
-   multithreaded world (bullet3 issue 4117)
- + Restored support for the MacOSX32 platform.
- + Added `divide(float, float, float)`, `divideLocal(float, float, float)`, and
-   `mult(float, float, float)` methods to the `Vector3f` class.
- + Updated the Bullet sourcecode.
++ Bugfix: continuous collision detection causes memory corruption in a
+  multithreaded world (bullet3 issue 4117)
++ Restored support for the MacOSX32 platform.
++ Added `divide(float, float, float)`, `divideLocal(float, float, float)`, and
+  `mult(float, float, float)` methods to the `Vector3f` class.
++ Updated the Bullet sourcecode.
 
 ## Version 12.6.0 released on 4 December 2021
 
- + Bugfix: `btTriangleShape::isInside()` relies on the plane normal, which is
-   invalid for a degenerate triangle
- + Bugfix: unsafe `normalize()` is used in `btTriangleShape`
- + Bugfix: typo in `btTriangleShape::isInside()` ("distance" for "distance2")
- + Pending resolution of Travis CI ticket #34567:
-   + Upgraded MacOS64 build tools from Xcode 9.3 to Xcode 12.4 .
-   + Dropped support for the MacOSX32 platform.
- + Added the `isInsideTriangle()` method to the `NativeLibrary` class.
- + Updated the Bullet sourcecode to match SHA1 ID=10f72b9b5
-   of the bullet3 project.
++ Bugfix: `btTriangleShape::isInside()` relies on the plane normal, which is
+  invalid for a degenerate triangle
++ Bugfix: unsafe `normalize()` is used in `btTriangleShape`
++ Bugfix: typo in `btTriangleShape::isInside()` ("distance" for "distance2")
++ Pending resolution of Travis CI ticket #34567:
+  + Upgraded MacOS64 build tools from Xcode 9.3 to Xcode 12.4 .
+  + Dropped support for the MacOSX32 platform.
++ Added the `isInsideTriangle()` method to the `NativeLibrary` class.
++ Updated the Bullet sourcecode to match SHA1 ID=10f72b9b5
+  of the bullet3 project.
 
 ## Version 12.5.0 released on 8 November 2021
 
