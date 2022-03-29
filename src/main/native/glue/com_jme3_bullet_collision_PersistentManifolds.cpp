@@ -66,7 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBo
 
     const btCollisionObject * const result = pManifold->getBody0();
     btAssert(result);
-    return reinterpret_cast<long> (result);
+    return reinterpret_cast<jlong> (result);
 }
 
 /*
@@ -83,7 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBo
 
     const btCollisionObject * const result = pManifold->getBody1();
     btAssert(result);
-    return reinterpret_cast<long> (result);
+    return reinterpret_cast<jlong> (result);
 }
 
 /*
@@ -101,5 +101,5 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getPo
     int index = int(pointIndex);
     const btManifoldPoint * const result = &pManifold->getContactPoint(index);
     btAssert(result);
-    return reinterpret_cast<long> (result);
+    return reinterpret_cast<jlong> (result);
 }

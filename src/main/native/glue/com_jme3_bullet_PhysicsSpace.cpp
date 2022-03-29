@@ -246,7 +246,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getManifoldByIndex
 
     const btPersistentManifold * const
             pManifold = pDispatcher->getManifoldByIndexInternal(index);
-    return reinterpret_cast<long> (pManifold);
+    return reinterpret_cast<jlong> (pManifold);
 }
 
 /*
