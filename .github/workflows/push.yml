@@ -44,6 +44,9 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: gradle/wrapper-validation-action@v1.0.4
+      - uses: mattsb42/not-grep@1.0.0
+        with:
+          config-file: .github/not-grep.toml
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=debug64
