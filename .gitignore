@@ -4,3 +4,10 @@
 /.nb-gradle/
 /build/
 /private/
+/dist/
+
+#Eclipse Files
+.classpath
+/bin/
+.project
+/.settings/
