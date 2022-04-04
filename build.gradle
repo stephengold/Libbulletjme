@@ -203,7 +203,6 @@ model {
                     //cppCompiler.define 'BT_DEBUG_MEMORY_ALLOCATIONS'
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
                     //cppCompiler.define 'VERBOSE_RESIDUAL_PRINTF'
-                    buildable = false
                 }
                 if (isDp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
