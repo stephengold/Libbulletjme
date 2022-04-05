@@ -249,7 +249,7 @@ model {
                         }
                     } else { // buildType == Release
                         cppCompiler.args '/O2'
-                        cppCompiler.args '/Ob3'
+                        //cppCompiler.args '/Ob3'
                     }
                     if (isMt) {
                         cppCompiler.args '/openmp'
