@@ -119,7 +119,7 @@ public class GearJoint extends Constraint {
         /*
          * Create a double-ended joint.
          */
-        constraintId = createJoint(aId, bId, axisA, axisB);
+        constraintId = createJoint(aId, bId, axisA, axisB, ratio);
         
         assert getConstraintType(constraintId) == 10;
         setNativeId(constraintId);
@@ -128,7 +128,7 @@ public class GearJoint extends Constraint {
     // native private methods
     
     native private static long createJoint(long objectIdA, long objectIdB,
-            Vector3f axisInA, Vector3f axisInB);
+            Vector3f axisInA, Vector3f axisInB, float ratio);
     
     native private static void getAxisA(long jointId, Vector3f axisA);
     
