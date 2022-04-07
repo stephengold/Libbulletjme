@@ -130,9 +130,9 @@ public class GearJoint extends Constraint {
     native private static long createJoint(long objectIdA, long objectIdB,
             Vector3f axisInA, Vector3f axisInB, float ratio);
     
-    native private static void getAxisA(long jointId, Vector3f axisA);
+    native private static void getAxisA(long jointId, Vector3f storeResult);
     
-    native private static void getAxisB(long jointId, Vector3f axisB);
+    native private static void getAxisB(long jointId, Vector3f storeResult);
     
     native private static float getRatio(long jointId);
     
