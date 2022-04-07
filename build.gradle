@@ -213,7 +213,7 @@ model {
                 }
                 if (isQuickprof) {
                     cppCompiler.define 'BT_ENABLE_PROFILE'
-                    //cppCompiler.define 'BT_LINUX_REALTIME'
+                    cppCompiler.define 'BT_LINUX_REALTIME'
                 }
 
                 String q = pName + buildType.name + flavor.name
@@ -249,7 +249,7 @@ model {
                         }
                     } else { // buildType == Release
                         cppCompiler.args '/O2'
-                        //cppCompiler.args '/Ob3'
+                        cppCompiler.args '/Ob3'
                     }
                     if (isMt) {
                         cppCompiler.args '/openmp'
