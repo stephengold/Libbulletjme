@@ -112,7 +112,7 @@ public class GearJoint extends Constraint {
         assert axisA.isUnitVector();
         
         PhysicsRigidBody b = getBodyB();
-        long bId = a.nativeId();
+        long bId = b.nativeId();
         assert axisB.isUnitVector();
         
         long constraintId;
