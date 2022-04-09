@@ -122,7 +122,7 @@ public class GearJoint extends Constraint {
      * @param axisA the rotation axis in body A (unit vector, not null, unaffected)
      */
     public void setAxisA(Vector3f axisA) {
-        Validate.unitVector(axisA, "Axis in body A");
+        Validate.nonZero(axisA, "Axis in body A");
         
         long constraintId = nativeId();
         setAxisA(constraintId, axisA);
@@ -134,7 +134,7 @@ public class GearJoint extends Constraint {
      * @param axisA the rotation axis in body B (unit vector, not null, unaffected)
      */
     public void setAxisB(Vector3f axisB) {
-        Validate.unitVector(axisA, "Axis in body B");
+        Validate.nonZero(axisB, "Axis in body B");
         
         long constraintId = nativeId();
         setAxisB(constraintId, axisB);
