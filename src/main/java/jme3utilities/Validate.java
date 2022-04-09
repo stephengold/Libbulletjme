@@ -636,7 +636,7 @@ final public class Validate {
             } else {
                 what = description;
             }
-            String message = what + " must be a unit vector.";
+            String message = what + " must be a unit vector";
             throw new IllegalArgumentException(message);
         }
         
