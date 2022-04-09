@@ -615,31 +615,4 @@ final public class Validate {
 
         return true;
     }
-    
-    /**
-     * Validate a unit vector Vector3f as a method argument.
-     * 
-     * @param vector the vector to validate (unaffected)
-     * @param description a description of the argument
-     * @return true
-     * @throws IllegalArgumentException if the argument is not a unit vector
-     * @throws NullPointerException or IllegalArgumentException if the vector is
-     * null
-     */
-    public static boolean unitVector(Vector3f vector, String description) {
-        nonNull(vector, description);
-        
-        if(!vector.isUnitVector()) {
-            String what;
-            if (description == null) {
-                what = "Vector3f argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must be a unit vector";
-            throw new IllegalArgumentException(message);
-        }
-        
-        return true;
-    }
 }
