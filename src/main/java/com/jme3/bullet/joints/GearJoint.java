@@ -131,7 +131,7 @@ public class GearJoint extends Constraint {
     /**
      * Alter the joint's rotation axis in body B.
      * 
-     * @param axisA the rotation axis in body B (unit vector, not null, unaffected)
+     * @param axisB the rotation axis in body B (unit vector, not null, unaffected)
      */
     public void setAxisB(Vector3f axisB) {
         Validate.nonZero(axisB, "Axis in body B");

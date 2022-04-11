@@ -208,6 +208,7 @@ $(N)/glue/com_jme3_bullet_CollisionSpace.cpp \
 $(N)/glue/com_jme3_bullet_joints_Anchor.cpp \
 $(N)/glue/com_jme3_bullet_joints_ConeJoint.cpp \
 $(N)/glue/com_jme3_bullet_joints_Constraint.cpp \
+$(N)/glue/com_jme3_bullet_joints_GearJoint.cpp \
 $(N)/glue/com_jme3_bullet_joints_HingeJoint.cpp \
 $(N)/glue/com_jme3_bullet_joints_motors_RotationalLimitMotor.cpp \
 $(N)/glue/com_jme3_bullet_joints_motors_RotationMotor.cpp \
