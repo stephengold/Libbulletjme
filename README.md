@@ -58,7 +58,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:14.2.0'
+            implementation 'com.github.stephengold:Libbulletjme:14.3.0'
         }
 
     For some older versions of Gradle,
@@ -248,7 +248,7 @@ public class HelloVehicle {
   + using Git:
     + `git clone https://github.com/stephengold/Libbulletjme.git`
     + `cd Libbulletjme`
-    + `git checkout -b latest 14.2.0`
+    + `git checkout -b latest 14.3.0`
   + using a web browser:
     + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
     + follow the "Source code (zip)" link
@@ -317,6 +317,7 @@ btConvexShape                           .bullet.collision.shapes.ConvexShape
 btCylinderShape                         .bullet.collision.shapes.CylinderCollisionShape
 btDiscreteDynamicsWorld                 .bullet.PhysicsSpace
 btEmptyShape                            .bullet.collision.shapes.EmptyShape
+btGearConstraint                        .bullet.joints.GearJoint
 btGeneric6DofConstraint                 .bullet.joints.SixDofJoint
 btGeneric6DofSpring2Constraint          .bullet.joints.New6Dof
 btGeneric6DofSpringConstraint           .bullet.joints.SixDofSpringJoint
@@ -395,7 +396,6 @@ IVHACD::Parameters  vhacd.VHACDParameters
  + serialization (file loader)
  + certain constraints:
    + `btFixedConstraint`
-   + `btGearConstraint`
    + `btUniversalConstraint`
  + certain collision shapes:
    + `btCompoundFromGimpactShape`
@@ -496,6 +496,8 @@ V-HACD to my attention.
 
 I am grateful to ["dustContributor"](https://github.com/dustContributor)
 for [optimizing the cleaner thread](https://github.com/stephengold/Libbulletjme/pull/13).
+
+I am grateful to "elmfrain" for authoring the `GearJoint` class.
 
 I am grateful to [Github], [Sonatype], [AppVeyor], [Travis], [MacStadium], [JFrog], and [Imgur]
 for providing free hosting for this project
