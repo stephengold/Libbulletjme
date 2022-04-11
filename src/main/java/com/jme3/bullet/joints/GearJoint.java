@@ -143,6 +143,8 @@ public class GearJoint extends Constraint {
      * storeResult or new vector)
      */
     public Vector3f getAxisA(Vector3f storeResult) {
+        assert checkAxisA();
+
         if (storeResult == null) {
             return axisA.clone();
         } else {
@@ -158,6 +160,8 @@ public class GearJoint extends Constraint {
      * storeResult or new vector)
      */
     public Vector3f getAxisB(Vector3f storeResult) {
+        assert checkAxisB();
+
         if (storeResult == null) {
             return axisB.clone();
         } else {
@@ -172,6 +176,7 @@ public class GearJoint extends Constraint {
      * the B body
      */
     public float getRatio() {
+        assert ratio == getRatio(nativeId()) : ratio;
         return ratio;
     }
 
@@ -217,6 +222,36 @@ public class GearJoint extends Constraint {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test whether the local copy of the A body's axis matches the native
+     * value.
+     *
+     * @return true for an exact match, otherwise false
+     */
+    private boolean checkAxisA() {
+        long constraintId = nativeId();
+        Vector3f tmpVector = new Vector3f();
+        getAxisA(constraintId, tmpVector);
+        boolean result = axisA.equals(tmpVector);
+
+        return result;
+    }
+
+    /**
+     * Test whether the local copy of the A body's axis matches the native
+     * value.
+     *
+     * @return true for an exact match, otherwise false
+     */
+    private boolean checkAxisB() {
+        long constraintId = nativeId();
+        Vector3f tmpVector = new Vector3f();
+        getAxisB(constraintId, tmpVector);
+        boolean result = axisB.equals(tmpVector);
+
+        return result;
+    }
 
     /**
      * Create the configured joint in Bullet.
