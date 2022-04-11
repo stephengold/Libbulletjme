@@ -35,6 +35,7 @@ import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyVector3f;
 
 /**
  * A joint that couples the angular velocity for two bodies based on Bullet's
@@ -92,8 +93,8 @@ public class GearJoint extends Constraint {
             Vector3f axisInA, Vector3f axisInB) {
         super(rigidBodyA, rigidBodyB, Vector3f.ZERO, Vector3f.ZERO);
 
-        assert axisInA.isUnitVector() : axisInA;
-        assert axisInB.isUnitVector() : axisInB;
+        assert !MyVector3f.isZero(axisInA);
+        assert !MyVector3f.isZero(axisInB);
 
         axisA = axisInA.clone();
         axisB = axisInB.clone();
@@ -120,8 +121,8 @@ public class GearJoint extends Constraint {
             Vector3f axisInA, Vector3f axisInB, float ratio) {
         super(rigidBodyA, rigidBodyB, Vector3f.ZERO, Vector3f.ZERO);
 
-        assert axisInA.isUnitVector() : axisInA;
-        assert axisInB.isUnitVector() : axisInB;
+        assert !MyVector3f.isZero(axisInA);
+        assert !MyVector3f.isZero(axisInB);
 
         axisA = axisInA.clone();
         axisB = axisInB.clone();
@@ -213,11 +214,11 @@ public class GearJoint extends Constraint {
     private void createJoint() {
         PhysicsRigidBody a = getBodyA();
         long aId = a.nativeId();
-        assert axisA.isUnitVector();
+        assert !MyVector3f.isZero(axisA);
 
         PhysicsRigidBody b = getBodyB();
         long bId = b.nativeId();
-        assert axisB.isUnitVector();
+        assert !MyVector3f.isZero(axisB);
 
         long constraintId;
         /*
