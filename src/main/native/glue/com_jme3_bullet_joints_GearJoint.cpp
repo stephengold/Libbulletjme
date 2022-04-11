@@ -109,7 +109,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_GearJoint_getRatio
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.", 0)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
 
-    return pJoint->getRatio();
+    btScalar result = pJoint->getRatio();
+    return result;
 }
 
 /*
@@ -161,5 +162,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setRatio
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
 
-    pJoint->setRatio(ratio);
+    btScalar gearRatio = btScalar(ratio);
+    pJoint->setRatio(gearRatio);
 }
