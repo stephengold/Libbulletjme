@@ -148,16 +148,12 @@ public class Vec3d implements Cloneable {
         if( o == null || o.getClass() != getClass() )
             return false;
         Vec3d other = (Vec3d)o;
-        if (Double.compare(x, other.x) != 0) {
+        if( Double.compare(x, other.x) != 0 )
             return false;
-        }
-        if (Double.compare(y, other.y) != 0) {
+        if( Double.compare(y, other.y) != 0 )
             return false;
-        }
-        if (Double.compare(z, other.z) != 0) {
+        if( Double.compare(z, other.z) != 0 )
             return false;
-        }
-
         return true;
     }
 
