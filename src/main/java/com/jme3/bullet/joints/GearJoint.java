@@ -95,8 +95,8 @@ public class GearJoint extends Constraint {
             Vector3f axisInA, Vector3f axisInB) {
         super(rigidBodyA, rigidBodyB, Vector3f.ZERO, Vector3f.ZERO);
 
-        assert !MyVector3f.isZero(axisInA);
-        assert !MyVector3f.isZero(axisInB);
+        Validate.nonZero(axisInA, "axis in body A");
+        Validate.nonZero(axisInB, "axis in body B");
 
         axisA = axisInA.clone();
         axisB = axisInB.clone();
@@ -124,8 +124,8 @@ public class GearJoint extends Constraint {
             Vector3f axisInA, Vector3f axisInB, float ratio) {
         super(rigidBodyA, rigidBodyB, Vector3f.ZERO, Vector3f.ZERO);
 
-        assert !MyVector3f.isZero(axisInA);
-        assert !MyVector3f.isZero(axisInB);
+        Validate.nonZero(axisInA, "axis in body A");
+        Validate.nonZero(axisInB, "axis in body B");
 
         axisA = axisInA.clone();
         axisB = axisInB.clone();
