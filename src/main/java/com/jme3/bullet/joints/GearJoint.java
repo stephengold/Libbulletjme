@@ -38,7 +38,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyVector3f;
 
 /**
- * A joint that couples the angular velocity for two bodies based on Bullet's
+ * A joint that couples the angular velocities of two bodies, based on Bullet's
  * btGearConstraint.
  * <p>
  * <i>From the Bullet manual:</i><br>
@@ -61,15 +61,17 @@ public class GearJoint extends Constraint {
     // fields
 
     /**
-     * copy of the joint axis in A's local coordinates (unit vector)
+     * copy of the A body's axis of rotation in its local coordinates (unit
+     * vector)
      */
     final private Vector3f axisA;
     /**
-     * copy of the joint axis in B's local coordinates (unit vector)
+     * copy of the B body's axis of rotation in its local coordinates (unit
+     * vector)
      */
     final private Vector3f axisB;
     /**
-     * copy of the joint ratio; gear ratio
+     * copy of the gear ratio
      */
     private float ratio;
     // *************************************************************************
@@ -84,10 +86,10 @@ public class GearJoint extends Constraint {
      *
      * @param rigidBodyA the body for the A end (not null, alias created)
      * @param rigidBodyB the body for the B end (not null, alias created)
-     * @param axisInA the axis of rotation in A's local coordinates (not null,
-     * not zero, unaffected)
-     * @param axisInB the axis of rotation in B's local coordinates (not null,
-     * not zero, unaffected)
+     * @param axisInA the A body's axis of rotation in its local coordinates
+     * (unit vector, not null, unaffected)
+     * @param axisInB the B body's axis of rotation in its local coordinates
+     * (unit vector, not null, unaffected)
      */
     public GearJoint(PhysicsRigidBody rigidBodyA, PhysicsRigidBody rigidBodyB,
             Vector3f axisInA, Vector3f axisInB) {
@@ -103,7 +105,7 @@ public class GearJoint extends Constraint {
     }
 
     /**
-     * Instantiate a double-ended GearJoint with the specified ratio.
+     * Instantiate a double-ended GearJoint with the specified gear ratio.
      * <p>
      * To be effective, the joint must be added to the PhysicsSpace of both
      * bodies. Also, the bodies must be distinct and at least one of them must
@@ -111,11 +113,12 @@ public class GearJoint extends Constraint {
      *
      * @param rigidBodyA the body for the A end (not null, alias created)
      * @param rigidBodyB the body for the B end (not null, alias created)
-     * @param axisInA the axis of rotation in A's local coordinates (not null,
-     * not zero, unaffected)
-     * @param axisInB the axis of rotation in B's local coordinates (not null,
-     * not zero, unaffected)
-     * @param ratio the ratio of the rotation rates
+     * @param axisInA the A body's axis of rotation in its local coordinates
+     * (unit vector, not null, unaffected)
+     * @param axisInB the B body's axis of rotation in its local coordinates
+     * (unit vector, not null, unaffected)
+     * @param ratio the number of revolutions the A body should make for each
+     * revolution of the B body
      */
     public GearJoint(PhysicsRigidBody rigidBodyA, PhysicsRigidBody rigidBodyB,
             Vector3f axisInA, Vector3f axisInB, float ratio) {
@@ -133,10 +136,11 @@ public class GearJoint extends Constraint {
     // new methods exposed
 
     /**
-     * Copy the joint's rotation axis in body A.
+     * Copy A body's axis of rotation.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return The rotation axis in body A (either storeResult or new vector)
+     * @return the A body's axis of rotation in its local coordinates (either
+     * storeResult or new vector)
      */
     public Vector3f getAxisA(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -148,10 +152,11 @@ public class GearJoint extends Constraint {
     }
 
     /**
-     * Copy the joint's rotation axis in body B.
+     * Copy the B body's axis of rotation.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return The rotation axis in body B (either storeResult or new vector)
+     * @return the B body's axis of rotation in its local coordinates (either
+     * storeResult or new vector)
      */
     public Vector3f getAxisB(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -163,9 +168,10 @@ public class GearJoint extends Constraint {
     }
 
     /**
-     * Get the joint's gear ratio.
+     * Get the gear ratio.
      *
-     * @return The gear ratio
+     * @return the number of revolutions the A body makes for each revolution of
+     * the B body
      */
     public float getRatio() {
         long constraintId = nativeId();
@@ -173,9 +179,10 @@ public class GearJoint extends Constraint {
     }
 
     /**
-     * Alter the joint's rotation axis in body A.
+     * Alter the A body's axis of rotation.
      *
-     * @param axisInA the desired axis (unit vector, not null, unaffected)
+     * @param axisInA the desired axis in local coordinates (unit vector, not
+     * null, unaffected)
      */
     public void setAxisA(Vector3f axisInA) {
         Validate.nonZero(axisInA, "axis in body A");
@@ -186,9 +193,10 @@ public class GearJoint extends Constraint {
     }
 
     /**
-     * Alter the joint's rotation axis in body B.
+     * Alter the B body's axis of rotation.
      *
-     * @param axisInB the desired axis (unit vector, not null, unaffected)
+     * @param axisInB the axisInB axis in local coordinates (unit vector, not
+     * null, unaffected)
      */
     public void setAxisB(Vector3f axisInB) {
         Validate.nonZero(axisInB, "axis in body B");
@@ -201,7 +209,8 @@ public class GearJoint extends Constraint {
     /**
      * Alter the joint's gear ratio.
      *
-     * @param ratio the gear ratio
+     * @param ratio the number of revolutions the A body should make for each
+     * revolution of the B body (default=1)
      */
     public void setRatio(float ratio) {
         this.ratio = ratio;
@@ -225,9 +234,6 @@ public class GearJoint extends Constraint {
         assert !MyVector3f.isZero(axisB);
 
         long constraintId;
-        /*
-         * Create a double-ended joint.
-         */
         constraintId = createJoint(aId, bId, axisA, axisB, ratio);
 
         assert getConstraintType(constraintId) == 10;
