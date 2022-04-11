@@ -98,9 +98,9 @@ public class GearJoint extends Constraint {
         Validate.nonZero(axisInA, "axis in body A");
         Validate.nonZero(axisInB, "axis in body B");
 
-        axisA = axisInA.clone();
-        axisB = axisInB.clone();
-        ratio = 1.0f;
+        this.axisA = axisInA.normalize();
+        this.axisB = axisInB.normalize();
+        this.ratio = 1f;
         createJoint();
     }
 
@@ -127,8 +127,8 @@ public class GearJoint extends Constraint {
         Validate.nonZero(axisInA, "axis in body A");
         Validate.nonZero(axisInB, "axis in body B");
 
-        axisA = axisInA.clone();
-        axisB = axisInB.clone();
+        this.axisA = axisInA.normalize();
+        this.axisB = axisInB.normalize();
         this.ratio = ratio;
         createJoint();
     }
@@ -190,6 +190,8 @@ public class GearJoint extends Constraint {
         Validate.nonZero(axisInA, "axis in body A");
 
         axisA.set(axisInA);
+        MyVector3f.normalizeLocal(axisA);
+
         long constraintId = nativeId();
         setAxisA(constraintId, axisA);
     }
@@ -204,6 +206,8 @@ public class GearJoint extends Constraint {
         Validate.nonZero(axisInB, "axis in body B");
 
         axisB.set(axisInB);
+        MyVector3f.normalizeLocal(axisB);
+
         long constraintId = nativeId();
         setAxisB(constraintId, axisB);
     }
