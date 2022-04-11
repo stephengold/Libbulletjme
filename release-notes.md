@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 14.3.0 released on 11 April 2022
+
+Added the `GearJoint` class.
+
 ## Version 14.2.0 released on 28 March 2022
 
 + Bugfix:  `EXCEPTION_ACCESS_VIOLATION` on Windows (Minie issue #23)
