@@ -143,12 +143,11 @@ public class GearJoint extends Constraint {
      * storeResult or new vector)
      */
     public Vector3f getAxisA(Vector3f storeResult) {
-        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
-
-        long constraintId = nativeId();
-        getAxisA(constraintId, result);
-
-        return result;
+        if (storeResult == null) {
+            return axisA.clone();
+        } else {
+            return storeResult.set(axisA);
+        }
     }
 
     /**
@@ -159,12 +158,11 @@ public class GearJoint extends Constraint {
      * storeResult or new vector)
      */
     public Vector3f getAxisB(Vector3f storeResult) {
-        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
-
-        long constraintId = nativeId();
-        getAxisB(constraintId, result);
-
-        return result;
+        if (storeResult == null) {
+            return axisB.clone();
+        } else {
+            return storeResult.set(axisB);
+        }
     }
 
     /**
@@ -174,8 +172,7 @@ public class GearJoint extends Constraint {
      * the B body
      */
     public float getRatio() {
-        long constraintId = nativeId();
-        return getRatio(constraintId);
+        return ratio;
     }
 
     /**
