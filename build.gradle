@@ -180,7 +180,7 @@ model {
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
-                Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
+                Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof)
                 String os = targetPlatform.operatingSystem.name
                 if (buildable) {
                     // Decide whether to build the current flavor:

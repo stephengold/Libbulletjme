@@ -15,8 +15,8 @@ tasks.withType(CppCompile) {
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
-import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform;
-Boolean isMacOS = DefaultNativePlatform.currentOperatingSystem.isMacOsX();
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+Boolean isMacOS = DefaultNativePlatform.currentOperatingSystem.isMacOsX()
 
 model {
     buildTypes {
@@ -76,7 +76,7 @@ model {
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
-                Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof);
+                Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof)
                 String os = targetPlatform.operatingSystem.name
                 if (buildable) {
                     // Decide whether to build the current flavor:
