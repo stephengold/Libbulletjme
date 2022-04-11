@@ -7,7 +7,7 @@
  * Signature: (JJLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_GearJoint_createJoint
-(JNIEnv *pEnv, jclass, jlong bodyIdA, jlong bodyIdB, jobject axisInA, 
+(JNIEnv *pEnv, jclass, jlong bodyIdA, jlong bodyIdB, jobject axisInA,
     jobject axisInB, jfloat ratio) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -27,9 +27,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_GearJoint_createJoint
     btVector3 axisB;
     jmeBulletUtil::convert(pEnv, axisInB, &axisB);
 
-    btGearConstraint *
-        pJoint = new btGearConstraint(*pBodyA, *pBodyB, axisA, axisB, 
-        ratio); //dance021
+    btGearConstraint *pJoint
+        = new btGearConstraint(*pBodyA, *pBodyB, axisA, axisB, ratio); //dance021
 
     return reinterpret_cast<jlong> (pJoint);
 }
