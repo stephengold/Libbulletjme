@@ -72,7 +72,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_GearJoint_createJoint
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_getAxisA
 (JNIEnv *pEnv, jclass, jlong jointId, jobject storeResult) {
-    btGearConstraint *pJoint
+    const btGearConstraint * const pJoint
         = reinterpret_cast<btGearConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
@@ -88,7 +88,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_getAxisA
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_getAxisB
 (JNIEnv *pEnv, jclass, jlong jointId, jobject storeResult) {
-    btGearConstraint *pJoint
+    const btGearConstraint * const pJoint
         = reinterpret_cast<btGearConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
@@ -104,9 +104,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_getAxisB
  */
 JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_GearJoint_getRatio
 (JNIEnv *pEnv, jclass, jlong jointId) {
-    btGearConstraint *pJoint
+    const btGearConstraint * const pJoint
         = reinterpret_cast<btGearConstraint *> (jointId);
-    NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.", 0.f)
+    NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.", 0)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
 
     return pJoint->getRatio();
@@ -119,7 +119,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_GearJoint_getRatio
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setAxisA
 (JNIEnv *pEnv, jclass, jlong jointId, jobject axisA) {
-    btGearConstraint *pJoint
+    btGearConstraint * const pJoint
         = reinterpret_cast<btGearConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
@@ -138,7 +138,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setAxisA
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setAxisB
 (JNIEnv *pEnv, jclass, jlong jointId, jobject axisB) {
-    btGearConstraint *pJoint
+    btGearConstraint * const pJoint
         = reinterpret_cast<btGearConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
@@ -156,7 +156,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setAxisB
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setRatio
 (JNIEnv *pEnv, jclass, jlong jointId, jfloat ratio) {
-    btGearConstraint *pJoint
+    btGearConstraint * const pJoint
         = reinterpret_cast<btGearConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btGearConstraint does not exist.",)
     btAssert(pJoint->getConstraintType() == GEAR_CONSTRAINT_TYPE);
