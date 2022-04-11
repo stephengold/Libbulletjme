@@ -71,7 +71,7 @@ public class GearJoint extends Constraint {
     /**
      * copy of the joint ratio; gear ratio
      */
-    final private float ratio;
+    private float ratio;
     // *************************************************************************
     // constructors
 
@@ -175,11 +175,12 @@ public class GearJoint extends Constraint {
     /**
      * Alter the joint's rotation axis in body A.
      *
-     * @param axisA the desired axis (unit vector, not null, unaffected)
+     * @param axisInA the desired axis (unit vector, not null, unaffected)
      */
-    public void setAxisA(Vector3f axisA) {
-        Validate.nonZero(axisA, "Axis in body A");
+    public void setAxisA(Vector3f axisInA) {
+        Validate.nonZero(axisInA, "axis in body A");
 
+        axisA.set(axisInA);
         long constraintId = nativeId();
         setAxisA(constraintId, axisA);
     }
@@ -187,11 +188,12 @@ public class GearJoint extends Constraint {
     /**
      * Alter the joint's rotation axis in body B.
      *
-     * @param axisB the desired axis (unit vector, not null, unaffected)
+     * @param axisInB the desired axis (unit vector, not null, unaffected)
      */
-    public void setAxisB(Vector3f axisB) {
-        Validate.nonZero(axisB, "Axis in body B");
+    public void setAxisB(Vector3f axisInB) {
+        Validate.nonZero(axisInB, "axis in body B");
 
+        axisB.set(axisInB);
         long constraintId = nativeId();
         setAxisB(constraintId, axisB);
     }
@@ -202,6 +204,8 @@ public class GearJoint extends Constraint {
      * @param ratio the gear ratio
      */
     public void setRatio(float ratio) {
+        this.ratio = ratio;
+
         long constraintId = nativeId();
         setRatio(constraintId, ratio);
     }
