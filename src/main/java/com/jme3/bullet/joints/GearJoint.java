@@ -64,7 +64,7 @@ public class GearJoint extends Constraint {
      */
     final private Vector3f axisA;
     /**
-     * copy of the joint axis: in B's local coordinates (unit vector)
+     * copy of the joint axis in B's local coordinates (unit vector)
      */
     final private Vector3f axisB;
     /**
@@ -74,6 +74,20 @@ public class GearJoint extends Constraint {
     // *************************************************************************
     // constructors
 
+    /**
+     * Instantiate a double-ended GearJoint with a 1:1 ratio.
+     * <p>
+     * To be effective, the joint must be added to the PhysicsSpace of both
+     * bodies. Also, the bodies must be distinct and at least one of them must
+     * be dynamic.
+     *
+     * @param rigidBodyA the body for the A end (not null, alias created)
+     * @param rigidBodyB the body for the B end (not null, alias created)
+     * @param axisInA the axis of rotation in A's local coordinates (not null,
+     * not zero, unaffected)
+     * @param axisInB the axis of rotation in B's local coordinates (not null,
+     * not zero, unaffected)
+     */
     public GearJoint(PhysicsRigidBody rigidBodyA, PhysicsRigidBody rigidBodyB,
             Vector3f axisInA, Vector3f axisInB) {
         super(rigidBodyA, rigidBodyB, Vector3f.ZERO, Vector3f.ZERO);
@@ -87,6 +101,21 @@ public class GearJoint extends Constraint {
         createJoint();
     }
 
+    /**
+     * Instantiate a double-ended GearJoint with the specified ratio.
+     * <p>
+     * To be effective, the joint must be added to the PhysicsSpace of both
+     * bodies. Also, the bodies must be distinct and at least one of them must
+     * be dynamic.
+     *
+     * @param rigidBodyA the body for the A end (not null, alias created)
+     * @param rigidBodyB the body for the B end (not null, alias created)
+     * @param axisInA the axis of rotation in A's local coordinates (not null,
+     * not zero, unaffected)
+     * @param axisInB the axis of rotation in B's local coordinates (not null,
+     * not zero, unaffected)
+     * @param ratio the ratio of the rotation rates
+     */
     public GearJoint(PhysicsRigidBody rigidBodyA, PhysicsRigidBody rigidBodyB,
             Vector3f axisInA, Vector3f axisInB, float ratio) {
         super(rigidBodyA, rigidBodyB, Vector3f.ZERO, Vector3f.ZERO);
@@ -106,8 +135,7 @@ public class GearJoint extends Constraint {
      * Copy the joint's rotation axis in body A.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return The rotation axis in body A (either storeResult or new vector, if
-     * not null)
+     * @return The rotation axis in body A (either storeResult or new vector)
      */
     public Vector3f getAxisA(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -122,8 +150,7 @@ public class GearJoint extends Constraint {
      * Copy the joint's rotation axis in body B.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return The rotation axis in body B (either storeResult or new vector, if
-     * not null)
+     * @return The rotation axis in body B (either storeResult or new vector)
      */
     public Vector3f getAxisB(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -147,8 +174,7 @@ public class GearJoint extends Constraint {
     /**
      * Alter the joint's rotation axis in body A.
      *
-     * @param axisA the rotation axis in body A (unit vector, not null,
-     * unaffected)
+     * @param axisA the desired axis (unit vector, not null, unaffected)
      */
     public void setAxisA(Vector3f axisA) {
         Validate.nonZero(axisA, "Axis in body A");
@@ -160,8 +186,7 @@ public class GearJoint extends Constraint {
     /**
      * Alter the joint's rotation axis in body B.
      *
-     * @param axisB the rotation axis in body B (unit vector, not null,
-     * unaffected)
+     * @param axisB the desired axis (unit vector, not null, unaffected)
      */
     public void setAxisB(Vector3f axisB) {
         Validate.nonZero(axisB, "Axis in body B");
