@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,6 +49,10 @@ final public class FastMath {
      * The value PI as a float. (180 degrees)
      */
     public static final float PI = (float) Math.PI;
+    /**
+     * The value 2PI as a float. (360 degrees)
+     */
+    public static final float TWO_PI = 2.0f * PI;
     /**
      * The value PI/2 as a float. (90 degrees)
      */
