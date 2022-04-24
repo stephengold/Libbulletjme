@@ -1,5 +1,5 @@
 ---
-# GitHub workflow for commits pushed to the Libbulletjme repo - all branches
+# GitHub Actions workflow for commits pushed to the Libbulletjme repo - all branches
 
 name: CI at GitHub
 on: [push]
@@ -9,7 +9,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -24,7 +24,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -38,7 +38,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -57,7 +57,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -71,7 +71,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -89,7 +89,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
@@ -106,7 +106,7 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
