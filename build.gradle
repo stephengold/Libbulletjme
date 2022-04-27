@@ -469,3 +469,14 @@ tasks.register('cleanDist', Delete) { // files to be distributed
 tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
+
+// javadoc to (web)site tasks, triggered by push-master.yml
+
+tasks.register('copyJavadocToSite') {
+    dependsOn 'copyMasterJavadocToSite'
+}
+tasks.register('copyMasterJavadocToSite', Copy) {
+    dependsOn 'javadoc'
+    from "${buildDir}/docs/javadoc"
+    into 'build/site/javadoc/master'
+}
