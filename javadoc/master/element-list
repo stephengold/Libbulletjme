@@ -1,0 +1,17 @@
+com.jme3.bounding
+com.jme3.bullet
+com.jme3.bullet.collision
+com.jme3.bullet.collision.shapes
+com.jme3.bullet.collision.shapes.infos
+com.jme3.bullet.joints
+com.jme3.bullet.joints.motors
+com.jme3.bullet.objects
+com.jme3.bullet.objects.infos
+com.jme3.bullet.util
+com.jme3.math
+com.jme3.system
+com.jme3.util
+com.simsilica.mathd
+jme3utilities
+jme3utilities.math
+vhacd
