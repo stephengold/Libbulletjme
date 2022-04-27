@@ -436,6 +436,17 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Divides component-wise by the argument and returns the quotient as a new
+     * instance. The current instance is unaffected.
+     *
+     * @param divisor the divisor (not null, unaffected)
+     * @return a new Vector3f
+     */
+    public Vector3f divide(Vector3f divisor) {
+        return new Vector3f(x / divisor.x, y / divisor.y, z / divisor.z);
+    }
+
+    /**
      * Divides component-wise by the specified components and returns the quotient
      * as a new instance. The current instance is unaffected.
      *
