@@ -95,13 +95,17 @@ standalone Maven artifacts are provided.
 ## How to build Libbulletjme from source
 
 1. Install build software:
-  + A [Java Development Kit (JDK)][adoptium],
+  + a [Java Development Kit (JDK)][adoptium],
    if you don't already have one, and
   + one of the supported C++ compilers:
     + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
     + for Windows:  Microsoft Visual Studio
     + for macOS:  Xcode
-2. Download and extract the Libbulletjme source code from GitHub:
+2. Point the `JAVA_HOME` environment variable to your JDK installation:
+  + using Bash or Zsh: `export JAVA_HOME="` *path to your JDK* `"`
+  + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
+  + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
+3. Download and extract the Libbulletjme source code from GitHub:
   + using Git:
     + `git clone https://github.com/stephengold/Libbulletjme.git`
     + `cd Libbulletjme`
@@ -112,10 +116,6 @@ standalone Maven artifacts are provided.
     + save the ZIP file
     + extract the contents of the saved ZIP file
     + `cd` to the extracted directory/folder
-3. Set the `JAVA_HOME` environment variable:
-  + using Bash or Zsh: `export JAVA_HOME="` *path to your JDK* `"`
-  + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
-  + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
 4. Run the [Gradle] wrapper on the desktop build script:
   + using Bash or PowerShell or Zsh: `./gradlew build`
   + using Windows Command Prompt: `.\gradlew build`
