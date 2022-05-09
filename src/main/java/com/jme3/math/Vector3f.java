@@ -323,6 +323,17 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Multiplies with the argument and returns the product as a new instance.
+     * The current instance is unaffected.
+     *
+     * @param scalar the scaling factor
+     * @return a new Vector3f
+     */
+    public Vector3f mult(float scalar) {
+        return new Vector3f(x * scalar, y * scalar, z * scalar);
+    }
+
+    /**
      * Multiplies by the argument and returns the (modified) current instance.
      *
      * @param scalar the scaling factor
