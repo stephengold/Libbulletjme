@@ -14,7 +14,7 @@ S3=$GitDir/jmonkeyengine/jme3-core/src/main/java
 D3=$GitDir/Libbulletjme/src/main/java
 
 S4=$GitDir/Heart/HeartLibrary/src/main/java
-D4=~/Git/Libbulletjme/src/main/java
+D4=$GitDir/Libbulletjme/src/main/java
 
 S5=$GitDir/Minie/MinieLibrary/src/main/java
 D5=$GitDir/Libbulletjme/src/main/java
