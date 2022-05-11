@@ -40,6 +40,10 @@ public class MyVector3f {
     // constants and loggers
 
     /**
+     * index of the first (X) axis
+     */
+    final public static int firstAxis = 0;
+    /**
      * number of axes in the coordinate system
      */
     final public static int numAxes = 3;
@@ -55,6 +59,10 @@ public class MyVector3f {
      * index of the Z axis
      */
     final public static int zAxis = 2;
+    /**
+     * index of the final (Z) axis
+     */
+    final public static int lastAxis = numAxes - 1;
     /**
      * message logger for this class
      */
