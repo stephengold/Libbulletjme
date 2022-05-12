@@ -107,6 +107,18 @@ final public class FastMath {
     }
 
     /**
+     * Returns a number raised to an exponent power. fBase^fExponent
+     *
+     * @param fBase The base value (IE 2)
+     * @param fExponent The exponent value (IE 3)
+     * @return base raised to exponent (IE 8)
+     * @see java.lang.Math#pow(double, double)
+     */
+    public static float pow(float fBase, float fExponent) {
+        return (float) Math.pow(fBase, fExponent);
+    }
+
+    /**
      * Returns the square root of a given value.
      *
      * @param fValue The value to sqrt.
