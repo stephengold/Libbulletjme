@@ -185,4 +185,28 @@ public class MyMath {
         assert result >= 0.0 : result;
         return result;
     }
+
+    /**
+     * Convert an angle from radians to degrees.
+     *
+     * @param radians input angle
+     * @return equivalent in degrees
+     * @see java.lang.Math#toDegrees(double)
+     */
+    public static float toDegrees(float radians) {
+        float result = radians * FastMath.RAD_TO_DEG;
+        return result;
+    }
+
+    /**
+     * Convert an angle from degrees to radians.
+     *
+     * @param degrees input angle
+     * @return equivalent in radians
+     * @see java.lang.Math#toRadians(double)
+     */
+    public static float toRadians(float degrees) {
+        float result = degrees * FastMath.DEG_TO_RAD;
+        return result;
+    }
 }

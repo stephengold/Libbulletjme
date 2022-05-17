@@ -57,6 +57,14 @@ final public class FastMath {
      * The value PI/2 as a float. (90 degrees)
      */
     public static final float HALF_PI = 0.5f * PI;
+    /**
+     * A value to multiply a degree value by, to convert it to radians.
+     */
+    public static final float DEG_TO_RAD = PI / 180.0f;
+    /**
+     * A value to multiply a radian value by, to convert it to degrees.
+     */
+    public static final float RAD_TO_DEG = 180.0f / PI;
 
     /**
      * A direct call to Math.atan2.
