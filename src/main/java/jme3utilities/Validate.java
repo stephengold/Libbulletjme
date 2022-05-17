@@ -344,6 +344,33 @@ final public class Validate {
     }
 
     /**
+     * Validate a non-null, non-empty string as a method argument.
+     *
+     * @param string the String to validate
+     * @param description a description of the argument
+     * @return true
+     * @throws NullPointerException or IllegalArgumentException if the String is
+     * null
+     * @throws IllegalArgumentException if the String has zero length
+     */
+    public static boolean nonEmpty(String string, String description) {
+        nonNull(string, description);
+
+        if (string.isEmpty()) {
+            String what;
+            if (description == null) {
+                what = "String argument";
+            } else {
+                what = description;
+            }
+            String message = what + " must not be empty.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
      * Validate a non-negative integer as a method argument.
      *
      * @param iValue the value to validate
