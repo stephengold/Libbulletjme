@@ -85,6 +85,30 @@ final public class Validate {
     }
 
     /**
+     * Validate a finite single-precision value as a method argument.
+     *
+     * @param fValue the value to validate
+     * @param description a description of the argument
+     * @return true
+     * @throws IllegalArgumentException if the value is NaN or infinite
+     */
+    public static boolean finite(float fValue, String description) {
+        if (!Float.isFinite(fValue)) {
+            String what;
+            if (description == null) {
+                what = "float argument";
+            } else {
+                what = description;
+            }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
+            String message = what + " must be a finite number.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
      * Validate a finite Vector3f as a method argument.
      *
      * @param vector the vector to validate (unaffected)
