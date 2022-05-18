@@ -146,9 +146,21 @@ loadScripts(document, 'script');</script>
  linear (Lerp) *polation.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(float)" class="member-name-link">standardize</a><wbr>(float&nbsp;fValue)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(float,float)" class="member-name-link">modulo</a><wbr>(float&nbsp;fValue,
+ float&nbsp;modulus)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Compute the least non-negative value congruent with a single-precision
+ value with respect to the specified modulus.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(float)" class="member-name-link">standardize</a><wbr>(float&nbsp;fValue)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Standardize a single-precision value in preparation for hashing.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardizeAngle(float)" class="member-name-link">standardizeAngle</a><wbr>(float&nbsp;angle)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Standardize a rotation angle to the range [-Pi, Pi).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sumOfSquares(float...)" class="member-name-link">sumOfSquares</a><wbr>(float...&nbsp;fValues)</code></div>
@@ -281,6 +293,24 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="modulo(float,float)">
+<h3>modulo</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">modulo</span><wbr><span class="parameters">(float&nbsp;fValue,
+ float&nbsp;modulus)</span></div>
+<div class="block">Compute the least non-negative value congruent with a single-precision
+ value with respect to the specified modulus. modulo() differs from
+ remainder for negative values of the first argument. For instance,
+ modulo(-1f, 4f) == 3f, while -1f % 4f == -1f.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fValue</code> - input value</dd>
+<dd><code>modulus</code> - (&gt;0)</dd>
+<dt>Returns:</dt>
+<dd>fValue MOD modulus (&lt;modulus, &ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="standardize(float)">
 <h3>standardize</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">standardize</span><wbr><span class="parameters">(float&nbsp;fValue)</span></div>
@@ -290,6 +320,19 @@ loadScripts(document, 'script');</script>
 <dd><code>fValue</code> - input value</dd>
 <dt>Returns:</dt>
 <dd>an equivalent value that's not -0</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="standardizeAngle(float)">
+<h3>standardizeAngle</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">standardizeAngle</span><wbr><span class="parameters">(float&nbsp;angle)</span></div>
+<div class="block">Standardize a rotation angle to the range [-Pi, Pi).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>angle</code> - input (in radians)</dd>
+<dt>Returns:</dt>
+<dd>standardized angle (in radians, &lt;Pi, &ge;-Pi)</dd>
 </dl>
 </section>
 </li>
