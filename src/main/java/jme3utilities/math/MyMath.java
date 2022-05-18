@@ -28,6 +28,7 @@ package jme3utilities.math;
 
 import com.jme3.math.FastMath;
 import java.util.logging.Logger;
+import jme3utilities.Validate;
 
 /**
  * Mathematical utility methods. TODO method to combine 2 transforms
@@ -154,6 +155,32 @@ public class MyMath {
     }
 
     /**
+     * Compute the least non-negative value congruent with a single-precision
+     * value with respect to the specified modulus. modulo() differs from
+     * remainder for negative values of the first argument. For instance,
+     * modulo(-1f, 4f) == 3f, while -1f % 4f == -1f.
+     *
+     * @param fValue input value
+     * @param modulus (&gt;0)
+     * @return fValue MOD modulus (&lt;modulus, &ge;0)
+     */
+    public static float modulo(float fValue, float modulus) {
+        assert Validate.positive(modulus, "modulus");
+
+        float remainder = fValue % modulus;
+        float result;
+        if (fValue >= 0) {
+            result = remainder;
+        } else {
+            result = (remainder + modulus) % modulus;
+        }
+
+        assert result >= 0f : result;
+        assert result < modulus : result;
+        return result;
+    }
+
+    /**
      * Standardize a single-precision value in preparation for hashing.
      *
      * @param fValue input value
@@ -165,6 +192,25 @@ public class MyMath {
             result = 0f;
         }
 
+        return result;
+    }
+
+    /**
+     * Standardize a rotation angle to the range [-Pi, Pi).
+     *
+     * @param angle input (in radians)
+     * @return standardized angle (in radians, &lt;Pi, &ge;-Pi)
+     */
+    public static float standardizeAngle(float angle) {
+        Validate.finite(angle, "angle");
+
+        float result = modulo(angle, FastMath.TWO_PI);
+        if (result >= FastMath.PI) {
+            result -= FastMath.TWO_PI;
+        }
+
+        assert result >= -FastMath.PI : result;
+        assert result < FastMath.PI : result;
         return result;
     }
 
