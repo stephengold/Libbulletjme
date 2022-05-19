@@ -280,6 +280,16 @@ public final class Transform implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Sets the current instance to the identity transform: translation=(0,0,0)
+     * scaling=(1,1,1) rotation=(0,0,0,1).
+     */
+    public void loadIdentity() {
+        translation.set(0, 0, 0);
+        scale.set(1, 1, 1);
+        rot.set(0, 0, 0, 1);
+    }
+
+    /**
      * Returns a hash code. If two transforms are logically equivalent, they
      * will return the same hash code. The current instance is unaffected.
      *
