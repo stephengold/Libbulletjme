@@ -1,8 +1,17 @@
-// Gradle script to build native libraries for the current platform
+// Gradle script to build Maven artifacts and native libraries for the current platform
 
 plugins {
     id 'cpp'
-    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+}
+
+ext {
+    group = 'com.github.stephengold'
+    artifact = 'Libbulletjme'
+    version = '14.3.0'
+    baseName = "${artifact}-${version}"
+    websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
 
 sourceSets.test.java {
@@ -205,6 +214,98 @@ repositories {
 }
 
 test.dependsOn('assemble')
+
+// publishing tasks
+
+tasks.register('install') {
+    dependsOn 'publishMavenPublicationToMavenLocal'
+    description 'Installs Maven artifacts to the local repository.'
+}
+
+assemble.dependsOn('copyToDistJars')
+tasks.register('copyToDistJars', Copy) {
+    dependsOn 'jar', 'javadocJar', 'sourcesJar'
+    from 'build/libs'
+    include '*.jar'
+    into 'dist'
+}
+
+jar {
+    archiveBaseName = project.ext.baseName
+}
+tasks.register('javadocJar', Jar) {
+    archiveBaseName = project.ext.baseName
+    archiveClassifier = 'javadoc'
+    dependsOn 'javadoc'
+    description 'Creates a JAR of javadoc.'
+    from javadoc.destinationDir
+}
+tasks.register('sourcesJar', Jar) {
+    archiveBaseName = project.ext.baseName
+    archiveClassifier = 'sources'
+    description 'Creates a JAR of Java sourcecode.'
+    from 'src/main/java'
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives jar, javadocJar, sourcesJar
+}
+javadoc.dependsOn('compileTestJava')
+
+assemble.dependsOn('module', 'pom')
+tasks.register('module', Copy) {
+    dependsOn 'generateMetadataFileForMavenPublication'
+    description 'Copies the module metadata to dist.'
+    from "${buildDir}/publications/maven/module.json"
+    into 'dist'
+    rename 'module.json', project.ext.baseName + '.module'
+}
+tasks.register('pom', Copy) {
+    dependsOn 'generatePomFileForMavenPublication'
+    description 'Copies the Maven POM to dist.'
+    from "${buildDir}/publications/maven/pom-default.xml"
+    into 'dist'
+    rename 'pom-default.xml', project.ext.baseName + '.pom'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId artifact
+            from components.java
+            groupId project.ext.group
+            pom {
+                description = 'a JNI interface for Bullet Physics and V-HACD'
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        name = 'Stephen Gold'
+                    }
+                }
+                licenses {
+                    license {
+                        distribution = 'repo'
+                        name = 'New BSD (3-clause) License'
+                        url = 'https://opensource.org/licenses/BSD-3-Clause'
+                    }
+                }
+                name = project.ext.group + ':' + artifact
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/Libbulletjme.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/Libbulletjme.git'
+                    url = project.ext.websiteUrl + '/tree/master'
+                }
+                url = project.ext.websiteUrl
+            }
+            version project.ext.version
+        }
+    }
+}
+publishMavenPublicationToMavenLocal.dependsOn('assemble')
+publishMavenPublicationToMavenLocal.doLast {
+    println 'installed locally as ' + project.ext.baseName
+}
 
 // cleanup tasks:
 
