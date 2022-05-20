@@ -129,6 +129,8 @@ public final class NativeLibraryLoader {
         } else if (!file.canRead()) {
             logger.log(Level.SEVERE, "{0} is not readable", absoluteFilename);
         } else {
+            logger.log(Level.INFO, "Loading native library from {0}",
+                    absoluteFilename);
             System.load(absoluteFilename);
             success = true;
         }
