@@ -198,47 +198,53 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the inverse.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Transform.html" title="class in com.jme3.math">Transform</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotation(com.jme3.math.Quaternion)" class="member-name-link">setRotation</a><wbr>(<a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;rot)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadIdentity()" class="member-name-link">loadIdentity</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the rotation component to the argument.</div>
+<div class="block">Sets the current instance to the identity transform: translation=(0,0,0)
+ scaling=(1,1,1) rotation=(0,0,0,1).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Transform.html" title="class in com.jme3.math">Transform</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(float)" class="member-name-link">setScale</a><wbr>(float&nbsp;scale)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotation(com.jme3.math.Quaternion)" class="member-name-link">setRotation</a><wbr>(<a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;rot)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the scaling component to the argument.</div>
+<div class="block">Sets the rotation component to the argument.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Transform.html" title="class in com.jme3.math">Transform</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTranslation(com.jme3.math.Vector3f)" class="member-name-link">setTranslation</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;trans)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(float)" class="member-name-link">setScale</a><wbr>(float&nbsp;scale)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the scaling component to the argument.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Transform.html" title="class in com.jme3.math">Transform</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTranslation(com.jme3.math.Vector3f)" class="member-name-link">setTranslation</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;trans)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the translation component to the argument.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a string representation.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTransformMatrix()" class="member-name-link">toTransformMatrix</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTransformMatrix()" class="member-name-link">toTransformMatrix</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an equivalent transform matrix.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTransformMatrix(com.jme3.math.Matrix4f)" class="member-name-link">toTransformMatrix</a><wbr>(<a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a>&nbsp;store)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTransformMatrix(com.jme3.math.Matrix4f)" class="member-name-link">toTransformMatrix</a><wbr>(<a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a>&nbsp;store)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts to an equivalent transform matrix.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformInverseVector(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">transformInverseVector</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;in,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformInverseVector(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">transformInverseVector</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;in,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Applies the inverse transform to the specified coordinates and returns
  the result in <code>store</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformVector(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">transformVector</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;in,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformVector(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">transformVector</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;in,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Transforms the specified coordinates and returns the result in
  <code>store</code>.</div>
 </div>
@@ -492,6 +498,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dt>Returns:</dt>
 <dd>a new Transform</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="loadIdentity()">
+<h3>loadIdentity</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">loadIdentity</span>()</div>
+<div class="block">Sets the current instance to the identity transform: translation=(0,0,0)
+ scaling=(1,1,1) rotation=(0,0,0,1).</div>
 </section>
 </li>
 <li>
