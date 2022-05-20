@@ -1,5 +1,34 @@
 # Release log for the Libbulletjme project
 
+## Version 14.4.0 released on 20 May 2022
+
++ When allocating direct buffers, specify *native* byte order.
++ Added math methods:
+  + `FastMath.pow(float, float)`
+  + `MyMath.modulo(float, float)`
+  + `MyMath.standardizeAngle(float)`
+  + `MyMath.toDegrees(float)`
+  + `MyMath.toRadians(float)`
+  + `MyVector3f.accumulateScaled(Vector3f, Vector3f, float)`
+  + `Transform.loadIdentity()`
+  + `Vector3f.divide(Vector3f)`
+  + `Vector3f.mult(float)`
++ Added math constants:
+  + `FastMath.TWO_PI`
+  + `MyMath.DEG_TO_RAD`
+  + `MyMath.RAD_TO_DEG`
+  + `MyMath.rootHalf`
+  + `MyVector3f.firstAxis`
+  + `MyVector3f.lastAxis`
++ Added string methods:
+  + `MyString.escape(CharSequence)`
+  + `MyString.quote(CharSequence)`
++ Added validation methods:
+  + `Validate.axisIndex(int, String)`
+  + `Validate.finite(float, String)`
+  + `Validate.nonEmpty(String, String)`
++ Log the filename passed to `System.load()` in order to simplify debugging.
+
 ## Version 14.3.0 released on 11 April 2022
 
 Added the `GearJoint` class.
