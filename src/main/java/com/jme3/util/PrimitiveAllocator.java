@@ -33,6 +33,7 @@ package com.jme3.util;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * Allocate direct buffers without special logic. This should work on any JVM.
@@ -56,6 +57,8 @@ public final class PrimitiveAllocator implements BufferAllocator {
      */
     @Override
     public ByteBuffer allocate(int size) {
-        return ByteBuffer.allocateDirect(size);
+        return ByteBuffer.allocateDirect(size)
+                .order(ByteOrder.nativeOrder());
+        // The order of a newly-created byte buffer is always BIG_ENDIAN! 
     }
 }
