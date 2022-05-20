@@ -309,10 +309,13 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // cleanup tasks:
 
-clean.dependsOn('cleanCxx', 'cleanLogs')
+clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
 
 tasks.register('cleanCxx', Delete) {
     delete '.cxx'
+}
+tasks.register('cleanDist', Delete) { // files to be distributed
+    delete 'dist'
 }
 tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
