@@ -307,6 +307,33 @@ public class MyVector3f {
     }
 
     /**
+     * Determine the midpoint between 2 locations.
+     *
+     * @param vector1 coordinates of the first location (not null, unaffected
+     * unless it's storeResult)
+     * @param vector2 coordinates of the 2nd location (not null, unaffected
+     * unless it's storeResult)
+     * @param storeResult storage for the result (modified if not null, may be
+     * vector1 or vector2)
+     * @return a coordinate vector (either storeResult or a new instance)
+     */
+    public static Vector3f midpoint(Vector3f vector1, Vector3f vector2,
+            Vector3f storeResult) {
+        assert Validate.finite(vector1, "first location");
+        assert Validate.finite(vector2, "2nd location");
+
+        float x = (vector1.x + vector2.x) / 2f;
+        float y = (vector1.y + vector2.y) / 2f;
+        float z = (vector1.z + vector2.z) / 2f;
+
+        if (storeResult == null) {
+            return new Vector3f(x, y, z);
+        } else {
+            return storeResult.set(x, y, z);
+        }
+    }
+
+    /**
      * Test whether 2 vectors are distinct, without distinguishing 0 from -0.
      *
      * @param v1 the first input vector (not null, unaffected)
