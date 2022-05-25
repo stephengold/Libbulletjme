@@ -213,21 +213,28 @@ loadScripts(document, 'script');</script>
 <div class="block">Interpolate between (or extrapolate from) 2 vectors using linear (Lerp)
  *polation.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#ne(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">ne</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v1,
- <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v2)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Test whether 2 vectors are distinct, without distinguishing 0 from -0.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#normalizeLocal(com.jme3.math.Vector3f)" class="member-name-link">normalizeLocal</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Normalize the specified vector in place.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">standardize</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#midpoint(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">midpoint</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector1,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector2,
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Determine the midpoint between 2 locations.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#ne(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">ne</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v1,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v2)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Test whether 2 vectors are distinct, without distinguishing 0 from -0.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#normalizeLocal(com.jme3.math.Vector3f)" class="member-name-link">normalizeLocal</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Normalize the specified vector in place.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">standardize</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Standardize a vector in preparation for hashing.</div>
 </div>
 </div>
@@ -531,6 +538,26 @@ loadScripts(document, 'script');</script>
  v0 or v1)</dd>
 <dt>Returns:</dt>
 <dd>an interpolated vector (either storeResult or a new instance)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="midpoint(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>midpoint</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">midpoint</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector1,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector2,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Determine the midpoint between 2 locations.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vector1</code> - coordinates of the first location (not null, unaffected
+ unless it's storeResult)</dd>
+<dd><code>vector2</code> - coordinates of the 2nd location (not null, unaffected
+ unless it's storeResult)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null, may be
+ vector1 or vector2)</dd>
+<dt>Returns:</dt>
+<dd>a coordinate vector (either storeResult or a new instance)</dd>
 </dl>
 </section>
 </li>
