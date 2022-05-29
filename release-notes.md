@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 14.5.0 released on 29 May 2022
+
++ Bugfix: `PhysicsCharacter.onGround()` is unreliable (issue #18)
++ Added math methods:
+  + `BoundingBox.getCenter()`
+  + `MyVector3f.midpoint()`
+
 ## Version 14.4.0 released on 20 May 2022
 
 + When allocating direct buffers, specify *native* byte order.
