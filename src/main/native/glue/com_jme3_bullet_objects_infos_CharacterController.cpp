@@ -59,6 +59,11 @@ jmeKcc : public btKinematicCharacterController {
         return m_walkDirection;
     }
 
+    // Use the following method in place of onGround() to solve issue #18.
+    bool isOnGround() const {
+        return !m_wasJumping;
+    }
+
     bool isUsingGhostSweepTest() const {
         return m_useGhostObjectSweepTest;
     }
@@ -317,7 +322,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_infos_CharacterControlle
     const jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
     NULL_CHK(pEnv, pController, "The controller does not exist.", JNI_FALSE);
 
-    return pController->onGround();
+    return pController->isOnGround();
 }
 
 /*
