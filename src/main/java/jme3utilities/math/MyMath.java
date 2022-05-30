@@ -27,6 +27,9 @@
 package jme3utilities.math;
 
 import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Transform;
+import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -131,6 +134,26 @@ public class MyMath {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Test the specified transform for exact identity.
+     *
+     * @param transform which transform to test (not null, unaffected)
+     * @return true if exact identity, otherwise false
+     */
+    public static boolean isIdentity(Transform transform) {
+        boolean result = false;
+        Vector3f translation = transform.getTranslation();
+        if (MyVector3f.isZero(translation)) {
+            Quaternion rotation = transform.getRotation();
+            if (MyQuaternion.isRotationIdentity(rotation)) {
+                Vector3f scale = transform.getScale();
+                result = MyVector3f.isScaleIdentity(scale);
+            }
+        }
+
+        return result;
     }
 
     /**
