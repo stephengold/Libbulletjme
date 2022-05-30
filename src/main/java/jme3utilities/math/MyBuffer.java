@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019-2021, Stephen Gold
+ Copyright (c) 2019-2022, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
  */
 package jme3utilities.math;
 
+import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
@@ -274,6 +275,37 @@ final public class MyBuffer {
     }
 
     /**
+     * Apply the specified rotation to 3-D vectors in the specified FloatBuffer
+     * range.
+     *
+     * @param buffer the buffer that contains the vectors (not null, MODIFIED)
+     * @param startPosition the position at which the vectors start (&ge;0,
+     * &le;endPosition)
+     * @param endPosition the position at which the vectors end
+     * (&ge;startPosition, &le;capacity)
+     * @param rotation the rotation to apply (not null, unaffected)
+     */
+    public static void rotate(FloatBuffer buffer, int startPosition,
+            int endPosition, Quaternion rotation) {
+        Validate.nonNull(buffer, "buffer");
+        Validate.nonNull(rotation, "rotation");
+        Validate.inRange(startPosition, "start position", 0, endPosition);
+        Validate.inRange(endPosition, "end position", startPosition,
+                buffer.capacity());
+        int numFloats = endPosition - startPosition;
+        assert (numFloats % numAxes == 0) : numFloats;
+
+        int numVectors = numFloats / numAxes;
+        Vector3f tmpVector = new Vector3f();
+        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
+            int position = startPosition + vectorIndex * numAxes;
+            get(buffer, position, tmpVector);
+            rotation.mult(tmpVector, tmpVector);
+            put(buffer, position, tmpVector);
+        }
+    }
+
+    /**
      * Apply the specified coordinate transform to 3-D vectors in the specified
      * FloatBuffer range.
      *
@@ -300,6 +332,37 @@ final public class MyBuffer {
             int position = startPosition + vectorIndex * numAxes;
             get(buffer, position, tmpVector);
             transform.transformVector(tmpVector, tmpVector);
+            put(buffer, position, tmpVector);
+        }
+    }
+
+    /**
+     * Add the specified offset to 3-D vectors in the specified FloatBuffer
+     * range.
+     *
+     * @param buffer the buffer that contains the vectors (not null, MODIFIED)
+     * @param startPosition the position at which the vectors start (&ge;0,
+     * &le;endPosition)
+     * @param endPosition the position at which the vectors end
+     * (&ge;startPosition, &le;capacity)
+     * @param offsetVector the vector to add (not null, unaffected)
+     */
+    public static void translate(FloatBuffer buffer, int startPosition,
+            int endPosition, Vector3f offsetVector) {
+        Validate.nonNull(buffer, "buffer");
+        Validate.inRange(startPosition, "start position", 0, endPosition);
+        Validate.inRange(endPosition, "end position", startPosition,
+                buffer.capacity());
+        Validate.finite(offsetVector, "offset vector");
+        int numFloats = endPosition - startPosition;
+        assert (numFloats % numAxes == 0) : numFloats;
+
+        int numVectors = numFloats / numAxes;
+        Vector3f tmpVector = new Vector3f();
+        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
+            int position = startPosition + vectorIndex * numAxes;
+            get(buffer, position, tmpVector);
+            tmpVector.addLocal(offsetVector);
             put(buffer, position, tmpVector);
         }
     }
