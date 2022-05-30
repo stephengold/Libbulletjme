@@ -85,8 +85,7 @@ final public class MyBuffer {
         Validate.inRange(startPosition, "start position", 0, endPosition);
         Validate.inRange(endPosition, "end position", startPosition,
                 buffer.capacity());
-        Validate.inRange(axisIndex, "axis index", MyVector3f.xAxis,
-                MyVector3f.zAxis);
+        Validate.axisIndex(axisIndex, "axis index");
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
 
