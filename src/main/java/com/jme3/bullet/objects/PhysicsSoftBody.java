@@ -31,6 +31,7 @@
  */
 package com.jme3.bullet.objects;
 
+import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.SoftBodyWorldInfo;
 import com.jme3.bullet.collision.PcoType;
 import com.jme3.bullet.collision.shapes.CollisionShape;
@@ -1311,6 +1312,27 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
     // *************************************************************************
     // PhysicsBody methods
+
+    /**
+     * Calculate the axis-aligned bounding box for this body.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a bounding box (in physics-space coordinates, either storeResult
+     * or a new instance)
+     */
+    @Override
+    public BoundingBox boundingBox(BoundingBox storeResult) {
+        BoundingBox result
+                = (storeResult == null) ? new BoundingBox() : storeResult;
+
+        Vector3f minima = new Vector3f(); // TODO garbage
+        Vector3f maxima = new Vector3f();
+        long objectId = nativeId();
+        getBounds(objectId, minima, maxima);
+        result.setMinMax(minima, maxima);
+
+        return result;
+    }
 
     /**
      * Copy this body's gravitational acceleration.
