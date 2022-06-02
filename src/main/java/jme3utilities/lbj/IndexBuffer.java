@@ -134,6 +134,44 @@ public class IndexBuffer {
     // new methods exposed
 
     /**
+     * Copy all the indices to a new direct buffer. The new buffer's position
+     * will be 0, its limit will be its capacity, its mark will be undefined.
+     *
+     * @return a new direct buffer
+     */
+    public Buffer copyBuffer() {
+        if (bytes != null) {
+            int numBytes = bytes.capacity();
+            ByteBuffer result = BufferUtils.createByteBuffer(numBytes);
+            for (int position = 0; position < numBytes; ++position) {
+                byte index = bytes.get(position);
+                result.put(position, index);
+            }
+
+            return result;
+
+        } else if (shorts != null) {
+            int numShorts = shorts.capacity();
+            ShortBuffer result = BufferUtils.createShortBuffer(numShorts);
+            for (int position = 0; position < numShorts; ++position) {
+                short index = shorts.get(position);
+                result.put(position, index);
+            }
+
+            return result;
+        }
+
+        int numInts = ints.capacity();
+        IntBuffer result = BufferUtils.createIntBuffer(numInts);
+        for (int position = 0; position < numInts; ++position) {
+            int index = ints.get(position);
+            result.put(position, index);
+        }
+
+        return result;
+    }
+
+    /**
      * Create a mutable IndexBuffer with a new direct data buffer.
      *
      * @param capacity number of indices (&ge;0)
@@ -166,17 +204,6 @@ public class IndexBuffer {
 
         assert result >= 0 && result <= lastVertexIndex : result;
         return result;
-    }
-
-    /**
-     * Access the buffer data. For internal use only!
-     *
-     * @return the pre-existing buffer
-     */
-    public Buffer getBuffer() {
-        verifyMutable();
-        assert buffer != null;
-        return buffer;
     }
 
     /**
@@ -268,6 +295,16 @@ public class IndexBuffer {
 
         assert result >= 0 && result <= lastVertexIndex : result;
         return result;
+    }
+
+    /**
+     * Access the buffer data.
+     *
+     * @return the pre-existing buffer
+     */
+    protected Buffer getBuffer() {
+        assert buffer != null;
+        return buffer;
     }
 
     /**
