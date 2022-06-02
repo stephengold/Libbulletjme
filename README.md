@@ -81,10 +81,10 @@ standalone Maven artifacts are provided.
 
 ## Example applications
 
-+ [HelloLibbulletjme](https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloLibbulletjme.java):
++ [HelloLibbulletjme](https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/console/HelloLibbulletjme.java):
   drop a dynamic sphere onto a horizontal surface
 
-+ [HelloVehicle0](https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloVehicle0.java):
++ [HelloVehicle0](https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/console/HelloVehicle0.java):
   drive a vehicle on a horizontal surface
 
 [Jump to table of contents](#toc)
