@@ -1617,6 +1617,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Generate a new FloatBuffer using the given array of Vector3f objects.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#createIndexBuffer(int,int)" class="member-name-link">createIndexBuffer(int, int)</a> - Static method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Create a mutable IndexBuffer with a new direct data buffer.</div>
+</dd>
 <dt><a href="com/jme3/util/BufferUtils.html#createIntBuffer(int)" class="member-name-link">createIntBuffer(int)</a> - Static method in class com.jme3.util.<a href="com/jme3/util/BufferUtils.html" title="class in com.jme3.util">BufferUtils</a></dt>
 <dd>
 <div class="block">Create a new IntBuffer of the specified size.</div>
@@ -2186,6 +2190,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Acquire an instance of the TempVar class.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#get()" class="member-name-link">get()</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Read an index from the current read/write position, then increment the
+ position.</div>
+</dd>
 <dt><a href="com/jme3/math/Vector3f.html#get(int)" class="member-name-link">get(int)</a> - Method in class com.jme3.math.<a href="com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></dt>
 <dd>
 <div class="block">Returns the indexed component.</div>
@@ -2193,6 +2202,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/simsilica/mathd/Vec3d.html#get(int)" class="member-name-link">get(int)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></dt>
 <dd>
 <div class="block">Determine the indexed component of this vector.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#get(int)" class="member-name-link">get(int)</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Read an index from the specified buffer position.</div>
 </dd>
 <dt><a href="com/jme3/math/Matrix3f.html#get(int,int)" class="member-name-link">get(int, int)</a> - Method in class com.jme3.math.<a href="com/jme3/math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></dt>
 <dd>
@@ -2455,6 +2468,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Read the type of acceleration structure used for broadphase collision
  detection.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#getBuffer()" class="member-name-link">getBuffer()</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Access the buffer data.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/PhysicsCollisionObject.html#getCcdMotionThreshold()" class="member-name-link">getCcdMotionThreshold()</a> - Method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a></dt>
 <dd>
@@ -2907,6 +2924,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Return the triangle index from the shape of object B at the specified
  point of contact (native field: m_index1).</div>
 </dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#getIndexBuffer()" class="member-name-link">getIndexBuffer()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Access the index buffer.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/PhysicsCollisionObject.html#getInternalType(long)" class="member-name-link">getInternalType(long)</a> - Static method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a></dt>
 <dd>
 <div class="block">Read the type of this object.</div>
@@ -3227,6 +3248,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Copy this motor's constraint-force mixing parameters for normal
  conditions (m_normalCFM).</div>
 </dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#getNormals()" class="member-name-link">getNormals()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Access the normals buffer</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/ManifoldPoints.html#getNormalWorldOnB(long,com.jme3.math.Vector3f)" class="member-name-link">getNormalWorldOnB(long, Vector3f)</a> - Static method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ManifoldPoints.html" title="class in com.jme3.bullet.collision">ManifoldPoints</a></dt>
 <dd>
 <div class="block">Determine the normal on object B of the specified point in physics-space
@@ -3416,6 +3441,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/PersistentManifolds.html#getPointId(long,int)" class="member-name-link">getPointId(long, int)</a> - Static method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PersistentManifolds.html" title="class in com.jme3.bullet.collision">PersistentManifolds</a></dt>
 <dd>
 <div class="block">Return the indexed btManifoldPoint in the specified manifold.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#getPositions()" class="member-name-link">getPositions()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Access the positions buffer.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/ManifoldPoints.html#getPositionWorldOnA(long,com.jme3.math.Vector3f)" class="member-name-link">getPositionWorldOnA(long, Vector3f)</a> - Static method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ManifoldPoints.html" title="class in com.jme3.bullet.collision">ManifoldPoints</a></dt>
 <dd>
@@ -4106,6 +4135,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Determine the index of this link in its MultiBody.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html" class="type-name-link" title="class in jme3utilities.lbj">IndexBuffer</a> - Class in <a href="jme3utilities/lbj/package-summary.html">jme3utilities.lbj</a></dt>
+<dd>
+<div class="block">Wrapper class for the index buffer of a mesh.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/infos/IndexedMesh.html" class="type-name-link" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a> - Class in <a href="com/jme3/bullet/collision/shapes/infos/package-summary.html">com.jme3.bullet.collision.shapes.infos</a></dt>
 <dd>
 <div class="block">An indexed triangle mesh based on Bullet's btIndexedMesh.</div>
@@ -4292,6 +4325,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Test whether the native library was built with debugging enabled.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#isDirect()" class="member-name-link">isDirect()</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Test whether the buffer is direct.</div>
+</dd>
 <dt><a href="com/jme3/bullet/util/NativeLibrary.html#isDoublePrecision()" class="member-name-link">isDoublePrecision()</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeLibrary.html" title="class in com.jme3.bullet.util">NativeLibrary</a></dt>
 <dd>
 <div class="block">Test whether the native library uses double-precision arithmetic.</div>
@@ -4421,6 +4458,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/math/MyQuaternion.html#isPure(com.jme3.math.Quaternion)" class="member-name-link">isPure(Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
 <div class="block">Test for a pure Quaternion.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#isPureLines()" class="member-name-link">isPureLines()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Test whether 2 successive vertices represent an edge.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#isPureTriangles()" class="member-name-link">isPureTriangles()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Test whether 3 successive vertices represent a triangle.</div>
 </dd>
 <dt><a href="com/jme3/bullet/util/NativeLibrary.html#isQuickprof()" class="member-name-link">isQuickprof()</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeLibrary.html" title="class in com.jme3.bullet.util">NativeLibrary</a></dt>
 <dd>
@@ -4556,6 +4601,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Miscellaneous reusable classes for use with jMonkeyEngine3.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/package-summary.html">jme3utilities.lbj</a> - package jme3utilities.lbj</dt>
+<dd>&nbsp;</dd>
 <dt><a href="jme3utilities/math/package-summary.html">jme3utilities.math</a> - package jme3utilities.math</dt>
 <dd>
 <div class="block">Reusable classes which implement mathematical formulas and operations, for
@@ -4691,6 +4738,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/objects/infos/Sbcp.html#Lift" class="member-name-link">Lift</a> - Enum constant in enum class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/Sbcp.html" title="enum class in com.jme3.bullet.objects.infos">Sbcp</a></dt>
 <dd>
 <div class="block">lift coefficient (&ge;0, default=0, native field: kLF)</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#limit(int)" class="member-name-link">limit(int)</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Alter the limit.</div>
 </dd>
 <dt><a href="com/jme3/bullet/MultiBody.html#linearDamping()" class="member-name-link">linearDamping()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBody.html" title="class in com.jme3.bullet">MultiBody</a></dt>
 <dd>
@@ -5274,6 +5325,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Apple Mac OS X 64-bit Intel</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#makeImmutable()" class="member-name-link">makeImmutable()</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Make the buffer immutable.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/ManifoldPoints.html" class="type-name-link" title="class in com.jme3.bullet.collision">ManifoldPoints</a> - Class in <a href="com/jme3/bullet/collision/package-summary.html">com.jme3.bullet.collision</a></dt>
 <dd>
 <div class="block">Utility class to access fields of Bullet's btManifoldPoint class.</div>
@@ -5451,6 +5506,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Calculate the mechanical energy of this body (kinetic + potential)
  assuming a uniform gravitational field.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/Mesh.html" class="type-name-link" title="interface in jme3utilities.lbj">Mesh</a> - Interface in <a href="jme3utilities/lbj/package-summary.html">jme3utilities.lbj</a></dt>
+<dd>
+<div class="block">A generic mesh for visualizing a soft body.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/MeshCollisionShape.html" class="type-name-link" title="class in com.jme3.bullet.collision.shapes">MeshCollisionShape</a> - Class in <a href="com/jme3/bullet/collision/shapes/package-summary.html">com.jme3.bullet.collision.shapes</a></dt>
 <dd>
@@ -6292,6 +6351,15 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/PhysicsCollisionObject.html#proxyMask()" class="member-name-link">proxyMask()</a> - Method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a></dt>
 <dd>
 <div class="block">Determine the collision mask of this object's broadphase proxy.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#put(int)" class="member-name-link">put(int)</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Write the specified index at the current read/write position, then
+ increment the position.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#put(int,int)" class="member-name-link">put(int, int)</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Write the specified index at the specified buffer position.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyBuffer.html#put(java.nio.FloatBuffer,int,com.jme3.math.Vector3f)" class="member-name-link">put(FloatBuffer, int, Vector3f)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyBuffer.html" title="class in jme3utilities.math">MyBuffer</a></dt>
 <dd>
@@ -7632,6 +7700,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Alter the normal vectors of all nodes.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#setNormalsModified()" class="member-name-link">setNormalsModified()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Indicate that the normals buffer has been modified.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/ManifoldPoints.html#setNormalWorldOnB(long,com.jme3.math.Vector3f)" class="member-name-link">setNormalWorldOnB(long, Vector3f)</a> - Static method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ManifoldPoints.html" title="class in com.jme3.bullet.collision">ManifoldPoints</a></dt>
 <dd>
 <div class="block">Alter the normal on object B of the specified point in physics-space
@@ -7744,6 +7816,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Alter the number of position-solver iterations (native field:
  piterations).</div>
+</dd>
+<dt><a href="jme3utilities/lbj/Mesh.html#setPositionsModified()" class="member-name-link">setPositionsModified()</a> - Method in interface jme3utilities.lbj.<a href="jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a></dt>
+<dd>
+<div class="block">Indicate that the positions buffer has been modified.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/ManifoldPoints.html#setPositionWorldOnA(long,com.jme3.math.Vector3f)" class="member-name-link">setPositionWorldOnA(long, Vector3f)</a> - Static method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ManifoldPoints.html" title="class in com.jme3.bullet.collision">ManifoldPoints</a></dt>
 <dd>
@@ -8291,6 +8367,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/joints/SixDofSpringJoint.html#%3Cinit%3E(com.jme3.bullet.objects.PhysicsRigidBody,com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Matrix3f,com.jme3.math.Matrix3f,com.jme3.bullet.joints.JointEnd)" class="member-name-link">SixDofSpringJoint(PhysicsRigidBody, Vector3f, Vector3f, Matrix3f, Matrix3f, JointEnd)</a> - Constructor for class com.jme3.bullet.joints.<a href="com/jme3/bullet/joints/SixDofSpringJoint.html" title="class in com.jme3.bullet.joints">SixDofSpringJoint</a></dt>
 <dd>
 <div class="block">Instantiate a single-ended SixDofSpringJoint.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#size()" class="member-name-link">size()</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Return the buffer's limit.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/Activation.html#sleeping" class="member-name-link">sleeping</a> - Static variable in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/Activation.html" title="class in com.jme3.bullet.collision">Activation</a></dt>
 <dd>
@@ -9098,6 +9178,10 @@ the order they are declared.</div>
 <div class="block">Read the number of velocity-solver iterations (native field:
  viterations).</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#verifyMutable()" class="member-name-link">verifyMutable()</a> - Method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Verify that the buffer is still mutable.</div>
+</dd>
 <dt><a href="com/jme3/bullet/util/NativeLibrary.html#versionNumber()" class="member-name-link">versionNumber()</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeLibrary.html" title="class in com.jme3.bullet.util">NativeLibrary</a></dt>
 <dd>
 <div class="block">Determine the native library's core version number.</div>
@@ -9216,6 +9300,10 @@ the order they are declared.</div>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#worldTransform(com.jme3.math.Transform)" class="member-name-link">worldTransform(Transform)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
 <div class="block">Determine the transform of this link.</div>
+</dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#wrapIndexBuffer(java.nio.Buffer)" class="member-name-link">wrapIndexBuffer(Buffer)</a> - Static method in class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Create a mutable IndexBuffer by wrapping the specified data buffer.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:X">X</h2>

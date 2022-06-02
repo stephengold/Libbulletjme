@@ -13,5 +13,6 @@ com.jme3.system
 com.jme3.util
 com.simsilica.mathd
 jme3utilities
+jme3utilities.lbj
 jme3utilities.math
 vhacd
