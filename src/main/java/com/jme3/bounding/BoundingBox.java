@@ -94,7 +94,7 @@ public class BoundingBox {
      * Return the location of the center.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a location vector (either {@code storeResult} or a new vector);
+     * @return a location vector (either {@code storeResult} or a new vector)
      */
     public Vector3f getCenter(Vector3f storeResult) {
         if (storeResult == null) {
