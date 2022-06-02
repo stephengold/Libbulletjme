@@ -43,6 +43,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -50,6 +51,7 @@ import java.nio.ShortBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.lbj.IndexBuffer;
 import jme3utilities.math.MyBuffer;
 
 /**
@@ -215,6 +217,37 @@ public class PhysicsSoftBody extends PhysicsBody {
         long objectId = nativeId();
         int numNodes = nodeLocations.limit() / numAxes;
         appendNodes(objectId, numNodes, nodeLocations);
+    }
+
+    /**
+     * Append tetrahedra to this body. A tetrahedron defines a volume between 4
+     * nodes.
+     *
+     * @param tetrahedra a tetrahedron is created for every 4 indices in this
+     * buffer (not null, direct, size a multiple of 4)
+     */
+    public void appendTetras(IndexBuffer tetrahedra) {
+        if (!tetrahedra.isDirect()) {
+            throw new IllegalArgumentException("The buffer must be direct.");
+        }
+        if (tetrahedra.size() % 4 != 0) {
+            throw new IllegalArgumentException(
+                    "The number of indices must be a multiple of 4.");
+        }
+
+        long objectId = nativeId();
+        int numTetras = tetrahedra.size() / 4;
+        Buffer buffer = tetrahedra.copyBuffer();
+        if (buffer instanceof ByteBuffer) {
+            appendTetras(objectId, numTetras, (ByteBuffer) buffer);
+        } else if (buffer instanceof ShortBuffer) {
+            appendTetras(objectId, numTetras, (ShortBuffer) buffer);
+        } else if (buffer instanceof IntBuffer) {
+            appendTetras(objectId, numTetras, (IntBuffer) buffer);
+        } else {
+            throw new IllegalArgumentException(
+                    buffer.getClass().getSimpleName());
+        }
     }
 
     /**
