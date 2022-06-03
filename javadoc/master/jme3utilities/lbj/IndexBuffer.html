@@ -92,8 +92,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected </code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">IndexBuffer</a><wbr>(int&nbsp;capacity,
- int&nbsp;maxVertices)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">IndexBuffer</a><wbr>(int&nbsp;maxVertices,
+ int&nbsp;capacity)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Instantiate an IndexBuffer with a new direct, writable data buffer.</div>
 </div>
@@ -117,8 +117,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Copy all the indices to a new direct buffer.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createIndexBuffer(int,int)" class="member-name-link">createIndexBuffer</a><wbr>(int&nbsp;capacity,
- int&nbsp;maxVertices)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#createIndexBuffer(int,int)" class="member-name-link">createIndexBuffer</a><wbr>(int&nbsp;maxVertices,
+ int&nbsp;capacity)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Create a mutable IndexBuffer with a new direct data buffer.</div>
 </div>
@@ -200,13 +200,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(int,int)">
 <h3>IndexBuffer</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">IndexBuffer</span><wbr><span class="parameters">(int&nbsp;capacity,
- int&nbsp;maxVertices)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">IndexBuffer</span><wbr><span class="parameters">(int&nbsp;maxVertices,
+ int&nbsp;capacity)</span></div>
 <div class="block">Instantiate an IndexBuffer with a new direct, writable data buffer.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>capacity</code> - number of indices (&ge;0)</dd>
 <dd><code>maxVertices</code> - one more than the highest index value (&ge;1)</dd>
+<dd><code>capacity</code> - number of indices (&ge;0)</dd>
 </dl>
 </section>
 </li>
@@ -233,13 +233,13 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="createIndexBuffer(int,int)">
 <h3>createIndexBuffer</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></span>&nbsp;<span class="element-name">createIndexBuffer</span><wbr><span class="parameters">(int&nbsp;capacity,
- int&nbsp;maxVertices)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></span>&nbsp;<span class="element-name">createIndexBuffer</span><wbr><span class="parameters">(int&nbsp;maxVertices,
+ int&nbsp;capacity)</span></div>
 <div class="block">Create a mutable IndexBuffer with a new direct data buffer.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>capacity</code> - number of indices (&ge;0)</dd>
 <dd><code>maxVertices</code> - one more than the highest index value (&ge;1)</dd>
+<dd><code>capacity</code> - number of indices (&ge;0)</dd>
 <dt>Returns:</dt>
 <dd>a new instance</dd>
 </dl>
@@ -249,7 +249,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get(int)">
 <h3>get</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;position)</span></div>
-<div class="block">Read an index from the specified buffer position.</div>
+<div class="block">Read an index from the specified buffer position. Does not alter the
+ buffer's read/write position.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>position</code> - the position from which to read (&ge;0, &lt;limit)</dd>
@@ -288,7 +289,8 @@ loadScripts(document, 'script');</script>
 <h3>put</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(int&nbsp;position,
  int&nbsp;index)</span></div>
-<div class="block">Write the specified index at the specified buffer position.</div>
+<div class="block">Write the specified index at the specified buffer position. Does not
+ alter the buffer's read/write position.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>position</code> - the position to write to (&ge;0, &lt;limit)</dd>

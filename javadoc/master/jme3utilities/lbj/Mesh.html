@@ -95,14 +95,14 @@ loadScripts(document, 'script');</script>
 <div class="block">Access the index buffer.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNormals()" class="member-name-link">getNormals</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getNormalsData()" class="member-name-link">getNormalsData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Access the normals buffer</div>
+<div class="block">Access the normals data buffer.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getPositions()" class="member-name-link">getPositions</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getPositionsData()" class="member-name-link">getPositionsData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Access the positions buffer.</div>
+<div class="block">Access the positions data buffer.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isPureLines()" class="member-name-link">isPureLines</a>()</code></div>
@@ -117,12 +117,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setNormalsModified()" class="member-name-link">setNormalsModified</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Indicate that the normals buffer has been modified.</div>
+<div class="block">Indicate that the normals data has changed.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setPositionsModified()" class="member-name-link">setPositionsModified</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Indicate that the positions buffer has been modified.</div>
+<div class="block">Indicate that the positions data has changed.</div>
 </div>
 </div>
 </div>
@@ -138,6 +138,39 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getIndexBuffer()">
+<h3>getIndexBuffer</h3>
+<div class="member-signature"><span class="return-type"><a href="IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></span>&nbsp;<span class="element-name">getIndexBuffer</span>()</div>
+<div class="block">Access the index buffer.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the pre-existing instance (not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getNormalsData()">
+<h3>getNormalsData</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></span>&nbsp;<span class="element-name">getNormalsData</span>()</div>
+<div class="block">Access the normals data buffer.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the pre-existing buffer (not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPositionsData()">
+<h3>getPositionsData</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></span>&nbsp;<span class="element-name">getPositionsData</span>()</div>
+<div class="block">Access the positions data buffer.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the pre-existing buffer (not null)</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="isPureLines()">
 <h3>isPureLines</h3>
@@ -163,50 +196,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getIndexBuffer()">
-<h3>getIndexBuffer</h3>
-<div class="member-signature"><span class="return-type"><a href="IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></span>&nbsp;<span class="element-name">getIndexBuffer</span>()</div>
-<div class="block">Access the index buffer.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the pre-existing instance (not null)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getNormals()">
-<h3>getNormals</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></span>&nbsp;<span class="element-name">getNormals</span>()</div>
-<div class="block">Access the normals buffer</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the pre-existing buffer (not null)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getPositions()">
-<h3>getPositions</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></span>&nbsp;<span class="element-name">getPositions</span>()</div>
-<div class="block">Access the positions buffer.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the pre-existing buffer (not null)</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="setNormalsModified()">
 <h3>setNormalsModified</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setNormalsModified</span>()</div>
-<div class="block">Indicate that the normals buffer has been modified.</div>
+<div class="block">Indicate that the normals data has changed.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setPositionsModified()">
 <h3>setPositionsModified</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setPositionsModified</span>()</div>
-<div class="block">Indicate that the positions buffer has been modified.</div>
+<div class="block">Indicate that the positions data has changed.</div>
 </section>
 </li>
 </ul>
