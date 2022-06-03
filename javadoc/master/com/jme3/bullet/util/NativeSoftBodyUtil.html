@@ -112,17 +112,45 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#appendFromNativeMesh(com.jme3.bullet.collision.shapes.infos.IndexedMesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromNativeMesh</a><wbr>(<a href="../collision/shapes/infos/IndexedMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a>&nbsp;mesh,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#appendFromLineMesh(jme3utilities.lbj.Mesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromLineMesh</a><wbr>(<a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;mesh,
  <a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Append the edges in the specified line-mode Mesh to the specified soft
+ body.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#appendFromNativeMesh(com.jme3.bullet.collision.shapes.infos.IndexedMesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromNativeMesh</a><wbr>(<a href="../collision/shapes/infos/IndexedMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a>&nbsp;mesh,
+ <a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Add the triangles and unique edges in the specified native mesh to the
  specified soft body.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateIndexMap(java.nio.FloatBuffer)" class="member-name-link">generateIndexMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;positionBuffer)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#appendFromTriMesh(jme3utilities.lbj.Mesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromTriMesh</a><wbr>(<a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;mesh,
+ <a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Add the triangles and unique edges in the specified LBJ mesh to the
+ specified soft body.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#appendTetras(com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendTetras</a><wbr>(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Append tetrahedra to the specified soft body, one per face, connecting
+ its faces with the center of its axis-aligned bounding box.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateIndexMap(java.nio.FloatBuffer)" class="member-name-link">generateIndexMap</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;positionBuffer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Create an index map to merge any mesh vertices that share the same
  position.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../../../jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mapIndices(java.nio.IntBuffer,jme3utilities.lbj.IndexBuffer,jme3utilities.lbj.IndexBuffer)" class="member-name-link">mapIndices</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a>&nbsp;indexMap,
+ <a href="../../../../jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a>&nbsp;inputBuffer,
+ <a href="../../../../jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a>&nbsp;reuseBuffer)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Map all indices in the specified input buffer using the specified map
+ buffer.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mapVertexData(java.nio.IntBuffer,java.nio.FloatBuffer,int)" class="member-name-link">mapVertexData</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a>&nbsp;indexMap,
@@ -131,6 +159,33 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Copy all vertex data in the specified input buffer, using the specified
  map buffer to map vertex indices.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#updateClusterMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)" class="member-name-link">updateClusterMesh</a><wbr>(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;body,
+ <a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;store,
+ boolean&nbsp;meshInLocalSpace)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Update the position buffer of a Mesh from the clusters in the specified
+ soft body.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#updateMesh(com.jme3.bullet.objects.PhysicsSoftBody,java.nio.IntBuffer,jme3utilities.lbj.Mesh,boolean,boolean,com.jme3.math.Transform)" class="member-name-link">updateMesh</a><wbr>(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;body,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a>&nbsp;vertexToNodeMap,
+ <a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;store,
+ boolean&nbsp;meshInLocalSpace,
+ boolean&nbsp;updateNormals,
+ <a href="../../math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;physicsToMesh)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Update the position/normal buffers of a Mesh from the nodes in the
+ specified soft body.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#updatePinMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)" class="member-name-link">updatePinMesh</a><wbr>(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;body,
+ <a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;store,
+ boolean&nbsp;meshInLocalSpace)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Update the position buffer of a Mesh from the pinned nodes in the
+ specified soft body.</div>
 </div>
 </div>
 </div>
@@ -165,6 +220,22 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="appendFromLineMesh(jme3utilities.lbj.Mesh,com.jme3.bullet.objects.PhysicsSoftBody)">
+<h3>appendFromLineMesh</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">appendFromLineMesh</span><wbr><span class="parameters">(<a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;mesh,
+ <a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</span></div>
+<div class="block">Append the edges in the specified line-mode Mesh to the specified soft
+ body.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mesh</code> - the input LBJ mesh (not null, unaffected, mode=Lines,
+ position and index buffers must be direct)</dd>
+<dd><code>softBody</code> - the soft body to which links will be added (not null,
+ modified)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="appendFromNativeMesh(com.jme3.bullet.collision.shapes.infos.IndexedMesh,com.jme3.bullet.objects.PhysicsSoftBody)">
 <h3>appendFromNativeMesh</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">appendFromNativeMesh</span><wbr><span class="parameters">(<a href="../collision/shapes/infos/IndexedMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a>&nbsp;mesh,
@@ -180,17 +251,67 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="appendFromTriMesh(jme3utilities.lbj.Mesh,com.jme3.bullet.objects.PhysicsSoftBody)">
+<h3>appendFromTriMesh</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">appendFromTriMesh</span><wbr><span class="parameters">(<a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;mesh,
+ <a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</span></div>
+<div class="block">Add the triangles and unique edges in the specified LBJ mesh to the
+ specified soft body.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mesh</code> - the input LBJ mesh (not null, unaffected, mode=Triangles,
+ position and index buffers must be direct)</dd>
+<dd><code>softBody</code> - the soft body to which faces and links will be added (not
+ null, modified)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="appendTetras(com.jme3.bullet.objects.PhysicsSoftBody)">
+<h3>appendTetras</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">appendTetras</span><wbr><span class="parameters">(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;softBody)</span></div>
+<div class="block">Append tetrahedra to the specified soft body, one per face, connecting
+ its faces with the center of its axis-aligned bounding box.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>softBody</code> - the soft body to append to (not null, modified)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="generateIndexMap(java.nio.FloatBuffer)">
 <h3>generateIndexMap</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a></span>&nbsp;<span class="element-name">generateIndexMap</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;positionBuffer)</span></div>
 <div class="block">Create an index map to merge any mesh vertices that share the same
- position.</div>
+ position. Other vertex properties (such as normals and texture
+ coordinates) are ignored.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>positionBuffer</code> - the buffer of mesh-vertex positions (not null,
  limit a multiple of 3, unaffected)</dd>
 <dt>Returns:</dt>
 <dd>a new index map (not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="mapIndices(java.nio.IntBuffer,jme3utilities.lbj.IndexBuffer,jme3utilities.lbj.IndexBuffer)">
+<h3>mapIndices</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../../../jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></span>&nbsp;<span class="element-name">mapIndices</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a>&nbsp;indexMap,
+ <a href="../../../../jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a>&nbsp;inputBuffer,
+ <a href="../../../../jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a>&nbsp;reuseBuffer)</span></div>
+<div class="block">Map all indices in the specified input buffer using the specified map
+ buffer.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>indexMap</code> - the buffer to use to map input indices to result indices
+ (not null, unaffected)</dd>
+<dd><code>inputBuffer</code> - the input buffer to map (not null, unaffected)</dd>
+<dd><code>reuseBuffer</code> - the buffer to reuse for output, or null if none
+ (modified)</dd>
+<dt>Returns:</dt>
+<dd>a buffer containing mapped indices (either reuseBuffer or a new
+ buffer, not null)</dd>
 </dl>
 </section>
 </li>
@@ -212,6 +333,75 @@ loadScripts(document, 'script');</script>
  (&gt;0)</dd>
 <dt>Returns:</dt>
 <dd>a new buffer containing mapped vertex data</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="updateClusterMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)">
+<h3>updateClusterMesh</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateClusterMesh</span><wbr><span class="parameters">(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;body,
+ <a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;store,
+ boolean&nbsp;meshInLocalSpace)</span></div>
+<div class="block">Update the position buffer of a Mesh from the clusters in the specified
+ soft body.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>body</code> - the soft body to provide locations (not null, unaffected)</dd>
+<dd><code>store</code> - the Mesh to update (not null, position buffer must be
+ direct, modified)</dd>
+<dd><code>meshInLocalSpace</code> - if true, transform the cluster locations into the
+ body's local coordinates (relative to its bounding-box center), otherwise
+ use physics-space coordinates</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="updateMesh(com.jme3.bullet.objects.PhysicsSoftBody,java.nio.IntBuffer,jme3utilities.lbj.Mesh,boolean,boolean,com.jme3.math.Transform)">
+<h3>updateMesh</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateMesh</span><wbr><span class="parameters">(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;body,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/IntBuffer.html" title="class or interface in java.nio" class="external-link">IntBuffer</a>&nbsp;vertexToNodeMap,
+ <a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;store,
+ boolean&nbsp;meshInLocalSpace,
+ boolean&nbsp;updateNormals,
+ <a href="../../math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;physicsToMesh)</span></div>
+<div class="block">Update the position/normal buffers of a Mesh from the nodes in the
+ specified soft body. Mesh-vertex indices may be mapped to body-node
+ indices, and physics-space locations may be transformed into mesh
+ positions.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>body</code> - the soft body to provide locations and normals (not null,
+ unaffected)</dd>
+<dd><code>vertexToNodeMap</code> - the index map to apply (must be direct) or null
+ for identity</dd>
+<dd><code>store</code> - the Mesh to update (not null, position, normal, and index
+ buffers must be direct, modified)</dd>
+<dd><code>meshInLocalSpace</code> - if true, transform node locations into the body's
+ local coordinates (relative to its bounding-box center), otherwise use
+ physics-space coordinates</dd>
+<dd><code>updateNormals</code> - if true, update the normal buffer, otherwise ignore
+ the normal buffer</dd>
+<dd><code>physicsToMesh</code> - the coordinate transform to apply, or null for
+ identity (unaffected)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="updatePinMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)">
+<h3>updatePinMesh</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updatePinMesh</span><wbr><span class="parameters">(<a href="../objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&nbsp;body,
+ <a href="../../../../jme3utilities/lbj/Mesh.html" title="interface in jme3utilities.lbj">Mesh</a>&nbsp;store,
+ boolean&nbsp;meshInLocalSpace)</span></div>
+<div class="block">Update the position buffer of a Mesh from the pinned nodes in the
+ specified soft body.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>body</code> - the soft body to provide locations (not null, unaffected)</dd>
+<dd><code>store</code> - the Mesh to update (not null, position buffer must be
+ direct, modified)</dd>
+<dd><code>meshInLocalSpace</code> - if true, transform the cluster locations into the
+ body's local coordinates (relative to its bounding-box center), otherwise
+ use physics-space coordinates</dd>
 </dl>
 </section>
 </li>

@@ -383,22 +383,41 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Read the angular-stiffness coefficient (native field: m_kAST).</div>
 </dd>
-<dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#appendFaces(java.nio.IntBuffer)" class="member-name-link">appendFaces(IntBuffer)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
+<dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#appendFaces(jme3utilities.lbj.IndexBuffer)" class="member-name-link">appendFaces(IndexBuffer)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Append faces to this body.</div>
+</dd>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#appendFromLineMesh(jme3utilities.lbj.Mesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromLineMesh(Mesh, PhysicsSoftBody)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Append the edges in the specified line-mode Mesh to the specified soft
+ body.</div>
 </dd>
 <dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#appendFromNativeMesh(com.jme3.bullet.collision.shapes.infos.IndexedMesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromNativeMesh(IndexedMesh, PhysicsSoftBody)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
 <dd>
 <div class="block">Add the triangles and unique edges in the specified native mesh to the
  specified soft body.</div>
 </dd>
-<dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#appendLinks(java.nio.IntBuffer)" class="member-name-link">appendLinks(IntBuffer)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#appendFromTriMesh(jme3utilities.lbj.Mesh,com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendFromTriMesh(Mesh, PhysicsSoftBody)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Add the triangles and unique edges in the specified LBJ mesh to the
+ specified soft body.</div>
+</dd>
+<dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#appendLinks(jme3utilities.lbj.IndexBuffer)" class="member-name-link">appendLinks(IndexBuffer)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Append links to this body.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#appendNodes(java.nio.FloatBuffer)" class="member-name-link">appendNodes(FloatBuffer)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Append nodes to this body, each with mass=1.</div>
+</dd>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#appendTetras(com.jme3.bullet.objects.PhysicsSoftBody)" class="member-name-link">appendTetras(PhysicsSoftBody)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Append tetrahedra to the specified soft body, one per face, connecting
+ its faces with the center of its axis-aligned bounding box.</div>
+</dd>
+<dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#appendTetras(jme3utilities.lbj.IndexBuffer)" class="member-name-link">appendTetras(IndexBuffer)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
+<dd>
+<div class="block">Append tetrahedra to this body.</div>
 </dd>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#appliedForce(com.jme3.math.Vector3f)" class="member-name-link">appliedForce(Vector3f)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
@@ -4147,6 +4166,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Wrapper class for the index buffer of a mesh.</div>
 </dd>
+<dt><a href="jme3utilities/lbj/IndexBuffer.html#%3Cinit%3E(int,int)" class="member-name-link">IndexBuffer(int, int)</a> - Constructor for class jme3utilities.lbj.<a href="jme3utilities/lbj/IndexBuffer.html" title="class in jme3utilities.lbj">IndexBuffer</a></dt>
+<dd>
+<div class="block">Instantiate an IndexBuffer with a new direct, writable data buffer.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/infos/IndexedMesh.html" class="type-name-link" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a> - Class in <a href="com/jme3/bullet/collision/shapes/infos/package-summary.html">com.jme3.bullet.collision.shapes.infos</a></dt>
 <dd>
 <div class="block">An indexed triangle mesh based on Bullet's btIndexedMesh.</div>
@@ -5340,6 +5363,11 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/ManifoldPoints.html" class="type-name-link" title="class in com.jme3.bullet.collision">ManifoldPoints</a> - Class in <a href="com/jme3/bullet/collision/package-summary.html">com.jme3.bullet.collision</a></dt>
 <dd>
 <div class="block">Utility class to access fields of Bullet's btManifoldPoint class.</div>
+</dd>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#mapIndices(java.nio.IntBuffer,jme3utilities.lbj.IndexBuffer,jme3utilities.lbj.IndexBuffer)" class="member-name-link">mapIndices(IntBuffer, IndexBuffer, IndexBuffer)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Map all indices in the specified input buffer using the specified map
+ buffer.</div>
 </dd>
 <dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#mapVertexData(java.nio.IntBuffer,java.nio.FloatBuffer,int)" class="member-name-link">mapVertexData(IntBuffer, FloatBuffer, int)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
 <dd>
@@ -8917,9 +8945,24 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Update this space.</div>
 </dd>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#updateClusterMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)" class="member-name-link">updateClusterMesh(PhysicsSoftBody, Mesh, boolean)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Update the position buffer of a Mesh from the clusters in the specified
+ soft body.</div>
+</dd>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#updateMesh(com.jme3.bullet.objects.PhysicsSoftBody,java.nio.IntBuffer,jme3utilities.lbj.Mesh,boolean,boolean,com.jme3.math.Transform)" class="member-name-link">updateMesh(PhysicsSoftBody, IntBuffer, Mesh, boolean, boolean, Transform)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Update the position/normal buffers of a Mesh from the nodes in the
+ specified soft body.</div>
+</dd>
 <dt><a href="com/jme3/bullet/objects/VehicleWheel.html#updatePhysicsState()" class="member-name-link">updatePhysicsState()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/VehicleWheel.html" title="class in com.jme3.bullet.objects">VehicleWheel</a></dt>
 <dd>
 <div class="block">Update this wheel's location and orientation.</div>
+</dd>
+<dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#updatePinMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)" class="member-name-link">updatePinMesh(PhysicsSoftBody, Mesh, boolean)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
+<dd>
+<div class="block">Update the position buffer of a Mesh from the pinned nodes in the
+ specified soft body.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/CollisionShape.html#updateScale()" class="member-name-link">updateScale()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a></dt>
 <dd>
