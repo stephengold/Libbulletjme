@@ -45,14 +45,14 @@ public interface Mesh {
     IndexBuffer getIndexBuffer();
 
     /**
-     * Access the normals buffer
+     * Access the normals data buffer.
      *
      * @return the pre-existing buffer (not null)
      */
     FloatBuffer getNormalsData();
 
     /**
-     * Access the positions buffer.
+     * Access the positions data buffer.
      *
      * @return the pre-existing buffer (not null)
      */
@@ -75,12 +75,12 @@ public interface Mesh {
     boolean isPureTriangles();
 
     /**
-     * Indicate that the normals buffer has been modified.
+     * Indicate that the normals data has changed.
      */
     void setNormalsModified();
 
     /**
-     * Indicate that the positions buffer has been modified.
+     * Indicate that the positions data has changed.
      */
     void setPositionsModified();
 }
