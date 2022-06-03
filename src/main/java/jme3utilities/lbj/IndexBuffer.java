@@ -108,7 +108,7 @@ public class IndexBuffer {
      * @param capacity number of indices (&ge;0)
      * @param maxVertices one more than the highest index value (&ge;1)
      */
-    private IndexBuffer(int capacity, int maxVertices) {
+    protected IndexBuffer(int capacity, int maxVertices) {
         this.lastVertexIndex = maxVertices - 1;
 
         if (lastVertexIndex < (1 << 8)) {
