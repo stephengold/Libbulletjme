@@ -38,22 +38,6 @@ public interface Mesh {
     // new methods exposed
 
     /**
-     * Test whether 2 successive vertices represent an edge. In the context of
-     * OpenGL, this means the draw mode is GL_LINES. Indexing is allowed.
-     *
-     * @return true if pure lines, otherwise false
-     */
-    boolean isPureLines();
-
-    /**
-     * Test whether 3 successive vertices represent a triangle. In the context
-     * of OpenGL, this means the draw mode is GL_TRIANGLES. Indexing is allowed.
-     *
-     * @return true if pure triangles, otherwise false
-     */
-    boolean isPureTriangles();
-
-    /**
      * Access the index buffer.
      *
      * @return the pre-existing instance (not null)
@@ -73,6 +57,22 @@ public interface Mesh {
      * @return the pre-existing buffer (not null)
      */
     FloatBuffer getPositionsData();
+
+    /**
+     * Test whether 2 successive vertices represent an edge. In the context of
+     * OpenGL, this means the draw mode is GL_LINES. Indexing is allowed.
+     *
+     * @return true if pure lines, otherwise false
+     */
+    boolean isPureLines();
+
+    /**
+     * Test whether 3 successive vertices represent a triangle. In the context
+     * of OpenGL, this means the draw mode is GL_TRIANGLES. Indexing is allowed.
+     *
+     * @return true if pure triangles, otherwise false
+     */
+    boolean isPureTriangles();
 
     /**
      * Indicate that the normals buffer has been modified.
