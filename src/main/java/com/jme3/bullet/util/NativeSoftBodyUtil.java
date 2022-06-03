@@ -102,7 +102,7 @@ public class NativeSoftBodyUtil {
         assert mesh.isPureLines();
         Validate.nonNull(softBody, "soft body");
 
-        FloatBuffer positions = mesh.getPositions();
+        FloatBuffer positions = mesh.getPositionsData();
         assert positions.isDirect();
         softBody.appendNodes(positions);
 
@@ -172,7 +172,7 @@ public class NativeSoftBodyUtil {
         assert mesh.isPureTriangles();
         Validate.nonNull(softBody, "soft body");
 
-        FloatBuffer positions = mesh.getPositions();
+        FloatBuffer positions = mesh.getPositionsData();
         assert positions.isDirect();
         softBody.appendNodes(positions);
 
@@ -377,7 +377,7 @@ public class NativeSoftBodyUtil {
     public static void updateClusterMesh(PhysicsSoftBody body, Mesh store,
             boolean meshInLocalSpace) {
         long bodyId = body.nativeId();
-        FloatBuffer positionBuffer = store.getPositions();
+        FloatBuffer positionBuffer = store.getPositionsData();
         assert positionBuffer != null;
 
         updateClusterMesh(bodyId, positionBuffer, meshInLocalSpace);
@@ -408,12 +408,12 @@ public class NativeSoftBodyUtil {
             IntBuffer vertexToNodeMap, Mesh store, boolean meshInLocalSpace,
             boolean updateNormals, Transform physicsToMesh) {
         long bodyId = body.nativeId();
-        FloatBuffer positionBuffer = store.getPositions();
+        FloatBuffer positionBuffer = store.getPositionsData();
         assert positionBuffer != null;
 
         FloatBuffer normalBuffer = null;
         if (updateNormals) {
-            normalBuffer = store.getNormals();
+            normalBuffer = store.getNormalsData();
             assert normalBuffer != null;
         }
 
@@ -486,7 +486,7 @@ public class NativeSoftBodyUtil {
     public static void updatePinMesh(PhysicsSoftBody body, Mesh store,
             boolean meshInLocalSpace) {
         long bodyId = body.nativeId();
-        FloatBuffer positionBuffer = store.getPositions();
+        FloatBuffer positionBuffer = store.getPositionsData();
         assert positionBuffer != null;
 
         updatePinMesh(bodyId, positionBuffer, meshInLocalSpace);

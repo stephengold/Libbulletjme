@@ -65,14 +65,14 @@ public interface Mesh {
      *
      * @return the pre-existing buffer (not null)
      */
-    FloatBuffer getNormals();
+    FloatBuffer getNormalsData();
 
     /**
      * Access the positions buffer.
      *
      * @return the pre-existing buffer (not null)
      */
-    FloatBuffer getPositions();
+    FloatBuffer getPositionsData();
 
     /**
      * Indicate that the normals buffer has been modified.
