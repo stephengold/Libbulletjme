@@ -105,10 +105,10 @@ public class IndexBuffer {
     /**
      * Instantiate an IndexBuffer with a new direct, writable data buffer.
      *
-     * @param capacity number of indices (&ge;0)
      * @param maxVertices one more than the highest index value (&ge;1)
+     * @param capacity number of indices (&ge;0)
      */
-    protected IndexBuffer(int capacity, int maxVertices) {
+    protected IndexBuffer(int maxVertices, int capacity) {
         this.lastVertexIndex = maxVertices - 1;
 
         if (lastVertexIndex < (1 << 8)) {
@@ -174,15 +174,15 @@ public class IndexBuffer {
     /**
      * Create a mutable IndexBuffer with a new direct data buffer.
      *
-     * @param capacity number of indices (&ge;0)
      * @param maxVertices one more than the highest index value (&ge;1)
+     * @param capacity number of indices (&ge;0)
      * @return a new instance
      */
-    public static IndexBuffer createIndexBuffer(int capacity, int maxVertices) {
+    public static IndexBuffer createIndexBuffer(int maxVertices, int capacity) {
         Validate.nonNegative(capacity, "capacity");
         Validate.positive(maxVertices, "max number of vertices");
 
-        IndexBuffer result = new IndexBuffer(capacity, maxVertices);
+        IndexBuffer result = new IndexBuffer(maxVertices, capacity);
         return result;
     }
 
