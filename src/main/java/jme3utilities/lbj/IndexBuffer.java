@@ -187,7 +187,8 @@ public class IndexBuffer {
     }
 
     /**
-     * Read an index from the specified buffer position.
+     * Read an index from the specified buffer position. Does not alter the
+     * buffer's read/write position.
      *
      * @param position the position from which to read (&ge;0, &lt;limit)
      * @return the index that was read (&ge;0, &lt;numVertices)
@@ -230,7 +231,8 @@ public class IndexBuffer {
     }
 
     /**
-     * Write the specified index at the specified buffer position.
+     * Write the specified index at the specified buffer position. Does not
+     * alter the buffer's read/write position.
      *
      * @param position the position to write to (&ge;0, &lt;limit)
      * @param index the index to be written (&ge;0, &lt;numVertices)
