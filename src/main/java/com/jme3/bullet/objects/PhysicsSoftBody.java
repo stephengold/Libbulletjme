@@ -166,18 +166,28 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @param nodeIndices a face is created for every 3 indices in this buffer
      * (not null, direct, size a multiple of 3)
      */
-    public void appendFaces(IntBuffer nodeIndices) {
+    public void appendFaces(IndexBuffer nodeIndices) {
         if (!nodeIndices.isDirect()) {
             throw new IllegalArgumentException("The buffer must be direct.");
         }
-        if (nodeIndices.capacity() % vpt != 0) {
+        if (nodeIndices.size() % vpt != 0) {
             throw new IllegalArgumentException(
                     "The number of indices must be a multiple of 3.");
         }
 
         long objectId = nativeId();
-        int numFaces = nodeIndices.capacity() / vpt;
-        appendFaces(objectId, numFaces, nodeIndices);
+        int numFaces = nodeIndices.size() / vpt;
+        Buffer buffer = nodeIndices.copyBuffer();
+        if (buffer instanceof ByteBuffer) {
+            appendFaces(objectId, numFaces, (ByteBuffer) buffer);
+        } else if (buffer instanceof ShortBuffer) {
+            appendFaces(objectId, numFaces, (ShortBuffer) buffer);
+        } else if (buffer instanceof IntBuffer) {
+            appendFaces(objectId, numFaces, (IntBuffer) buffer);
+        } else {
+            throw new IllegalArgumentException(
+                    buffer.getClass().getSimpleName());
+        }
     }
 
     /**
@@ -187,18 +197,28 @@ public class PhysicsSoftBody extends PhysicsBody {
      * @param nodeIndices a link is created for each pair of indices in this
      * buffer (not null, direct, size a multiple of 2)
      */
-    public void appendLinks(IntBuffer nodeIndices) {
+    public void appendLinks(IndexBuffer nodeIndices) {
         if (!nodeIndices.isDirect()) {
             throw new IllegalArgumentException("The buffer must be direct.");
         }
-        if (nodeIndices.capacity() % vpe != 0) {
+        if (nodeIndices.size() % vpe != 0) {
             throw new IllegalArgumentException(
                     "The number of indices must be a multiple of 2.");
         }
 
         long objectId = nativeId();
-        int numLinks = nodeIndices.capacity() / vpe;
-        appendLinks(objectId, numLinks, nodeIndices);
+        int numLinks = nodeIndices.size() / vpe;
+        Buffer buffer = nodeIndices.copyBuffer();
+        if (buffer instanceof ByteBuffer) {
+            appendLinks(objectId, numLinks, (ByteBuffer) buffer);
+        } else if (buffer instanceof ShortBuffer) {
+            appendLinks(objectId, numLinks, (ShortBuffer) buffer);
+        } else if (buffer instanceof IntBuffer) {
+            appendLinks(objectId, numLinks, (IntBuffer) buffer);
+        } else {
+            throw new IllegalArgumentException(
+                    buffer.getClass().getSimpleName());
+        }
     }
 
     /**
