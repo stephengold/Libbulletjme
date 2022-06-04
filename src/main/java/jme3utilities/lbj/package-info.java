@@ -24,10 +24,7 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package jme3utilities.lbj;
-
 /**
  * Generic objects for visualizing soft bodies.
- *
- * @author Stephen Gold sgold@sonic.net
  */
+package jme3utilities.lbj;
