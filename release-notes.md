@@ -1,5 +1,27 @@
 # Release log for the Libbulletjme project
 
+## Version 15.0.0 released on 3 June 2022
+
++ Changed the arguments of `PhysicsSoftBody.appendFaces()`
+  and `PhysicsSoftBody.appendLinks()` (API change)
++ Added the `Mesh` interface and `IndexBuffer` class to simplify the interface
+  between soft bodies and the Sport graphics engine.
++ Added soft-body methods from Minie:
+  + `PhysicsSoftBody.appendTetras()`
+  + `PhysicsSoftBody.boundingBox()`
+  + `NativeSoftBodyUtils.appendFromLineMesh()`
+  + `NativeSoftBodyUtils.appendFromTriMesh()`
+  + `NativeSoftBodyUtils.appendTetras()`
+  + `NativeSoftBodyUtils.mapIndices()`
+  + `NativeSoftBodyUtils.updateClusterMesh()`
+  + `NativeSoftBodyUtils.updateMesh()`
+  + `NativeSoftBodyUtils.updatePinMesh()`
++ Added math methods from Heart:
+  + `MyMath.isIdentity(Transform)`
+  + `MyBuffer.rotate()`
+  + `MyBuffer.translate()`
++ Added the `phi` constant to the `MyMath` class
+
 ## Version 14.5.0 released on 29 May 2022
 
 + Bugfix: `PhysicsCharacter.onGround()` is unreliable (issue #18)
