@@ -43,6 +43,10 @@ public class MyMath {
     // constants and loggers
 
     /**
+     * golden ratio = 1.618...
+     */
+    final public static float phi = (1f + FastMath.sqrt(5f)) / 2f;
+    /**
      * square root of 1/2
      */
     final public static float rootHalf = FastMath.sqrt(0.5f);
