@@ -1,11 +1,22 @@
 # Release log for the Libbulletjme project
 
+## Version 15.1.0 released on 6 June 2022
+
++ Added accessors for global deactivation settings:
+  + `PhysicsBody.getDeactivationDeadline()`
+  + `PhysicsBody.isDeactivationEnabled()`
+  + `PhysicsBody.setDeactivationDeadline()`
+  + `PhysicsBody.setDeactivationEnabled()`
++ Added public setters for constraint pivots:
+  + `New6Dof.setPivotInA()`
+  + `New6Dof.setPivotInB()`
+
 ## Version 15.0.0 released on 3 June 2022
 
 + Changed the arguments of `PhysicsSoftBody.appendFaces()`
   and `PhysicsSoftBody.appendLinks()` (API change)
 + Added the `Mesh` interface and `IndexBuffer` class to simplify the interface
-  between soft bodies and the Sport graphics engine.
+  between soft bodies and the SPORT graphics engine.
 + Added soft-body methods from Minie:
   + `PhysicsSoftBody.appendTetras()`
   + `PhysicsSoftBody.boundingBox()`
