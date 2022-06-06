@@ -58,7 +58,7 @@ standalone Maven artifacts are provided.
             mavenCentral()
         }
         dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:15.0.0'
+            implementation 'com.github.stephengold:Libbulletjme:15.1.0'
         }
 
     For some older versions of Gradle,
@@ -109,7 +109,7 @@ standalone Maven artifacts are provided.
   + using Git:
     + `git clone https://github.com/stephengold/Libbulletjme.git`
     + `cd Libbulletjme`
-    + `git checkout -b latest 15.0.0`
+    + `git checkout -b latest 15.1.0`
   + using a web browser:
     + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
     + follow the "Source code (zip)" link
