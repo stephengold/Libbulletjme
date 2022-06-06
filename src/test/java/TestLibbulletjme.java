@@ -1006,11 +1006,8 @@ public class TestLibbulletjme {
     public void test011() {
         loadNativeLibrary();
 
-        Quaternion q = new Quaternion();
-        q.fromAngles(0.3f, 0.7f, 1f);
-
-        Matrix3f rotMatrix = new Matrix3f();
-        rotMatrix.set(q);
+        Quaternion q = new Quaternion().fromAngles(0.3f, 0.7f, 1f);
+        Matrix3f rotMatrix = new Matrix3f().set(q);
 
         Vector3f euler = RotationOrder.XZY.matrixToEuler(rotMatrix, null);
         assertEquals(-0.3f, -0.7f, -1f, euler, 1e-5f);
