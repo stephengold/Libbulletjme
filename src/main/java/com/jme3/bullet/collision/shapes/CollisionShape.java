@@ -137,8 +137,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
         recalculateAabb();
 
         long shapeId = nativeId();
-        Matrix3f basisMatrix = new Matrix3f();
-        basisMatrix.set(rotation);
+        Matrix3f basisMatrix = new Matrix3f().set(rotation);
         Vector3f maxima = new Vector3f();
         Vector3f minima = new Vector3f();
         getAabb(shapeId, translation, basisMatrix, minima, maxima);
