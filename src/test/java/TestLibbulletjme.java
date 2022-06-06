@@ -1348,6 +1348,39 @@ public class TestLibbulletjme {
         Assert.assertEquals(8f, info.splitImpulseErp(), 0f);
         Assert.assertEquals(9f, info.splitImpulseThreshold(), 0f);
     }
+
+    /**
+     * Test accessors for globals (default margin, deactivation deadline, and
+     * deactivation enabled flag).
+     */
+    @Test
+    public void test017() {
+        loadNativeLibrary();
+
+        // default margin for collision shapes
+        float margin = CollisionShape.getDefaultMargin();
+        Assert.assertEquals(0.04f, margin, 0f);
+
+        CollisionShape.setDefaultMargin(2.1f);
+        margin = CollisionShape.getDefaultMargin();
+        Assert.assertEquals(2.1f, margin, 0f);
+
+        // deactivation deadline
+        float deadline = PhysicsBody.getDeactivationDeadline();
+        Assert.assertEquals(2f, deadline, 0f);
+
+        PhysicsBody.setDeactivationDeadline(17f);
+        deadline = PhysicsBody.getDeactivationDeadline();
+        Assert.assertEquals(17f, deadline, 0f);
+
+        // deactivation enabled flag
+        boolean enabled = PhysicsBody.isDeactivationEnabled();
+        Assert.assertTrue(enabled);
+
+        PhysicsBody.setDeactivationEnabled(false);
+        enabled = PhysicsBody.isDeactivationEnabled();
+        Assert.assertFalse(enabled);
+    }
     // *************************************************************************
     // private methods
 
