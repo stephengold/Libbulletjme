@@ -305,6 +305,16 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter the equilibrium point of the indexed degree of freedom.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPivotInA(com.jme3.math.Vector3f)" class="member-name-link">setPivotInA</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;location)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Alter the pivot location in A's scaled local coordinates.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPivotInB(com.jme3.math.Vector3f)" class="member-name-link">setPivotInB</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;location)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Alter the pivot location in B's scaled local coordinates.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRotationOrder(com.jme3.bullet.RotationOrder)" class="member-name-link">setRotationOrder</a><wbr>(<a href="../RotationOrder.html" title="enum class in com.jme3.bullet">RotationOrder</a>&nbsp;rotationOrder)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Alter the order in which to apply axis rotations.</div>
@@ -321,7 +331,7 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.jme3.bullet.joints.Constraint">Methods inherited from class&nbsp;com.jme3.bullet.joints.<a href="Constraint.html" title="class in com.jme3.bullet.joints">Constraint</a></h3>
-<code><a href="Constraint.html#getAppliedImpulse()">getAppliedImpulse</a>, <a href="Constraint.html#getBodyA()">getBodyA</a>, <a href="Constraint.html#getBodyB()">getBodyB</a>, <a href="Constraint.html#getBreakingImpulseThreshold()">getBreakingImpulseThreshold</a>, <a href="Constraint.html#getConstraintType(long)">getConstraintType</a>, <a href="Constraint.html#getOverrideIterations()">getOverrideIterations</a>, <a href="Constraint.html#getPivot(com.jme3.bullet.joints.JointEnd,com.jme3.math.Vector3f)">getPivot</a>, <a href="Constraint.html#getPivotA(com.jme3.math.Vector3f)">getPivotA</a>, <a href="Constraint.html#getPivotB(com.jme3.math.Vector3f)">getPivotB</a>, <a href="Constraint.html#isCollisionBetweenLinkedBodies()">isCollisionBetweenLinkedBodies</a>, <a href="Constraint.html#isEnabled()">isEnabled</a>, <a href="Constraint.html#isFeedback()">isFeedback</a>, <a href="Constraint.html#overrideIterations(int)">overrideIterations</a>, <a href="Constraint.html#setBreakingImpulseThreshold(float)">setBreakingImpulseThreshold</a>, <a href="Constraint.html#setCollisionBetweenLinkedBodies(boolean)">setCollisionBetweenLinkedBodies</a>, <a href="Constraint.html#setEnabled(boolean)">setEnabled</a>, <a href="Constraint.html#setFeedback(boolean)">setFeedback</a>, <a href="Constraint.html#setPivotInA(com.jme3.math.Vector3f)">setPivotInA</a>, <a href="Constraint.html#setPivotInB(com.jme3.math.Vector3f)">setPivotInB</a></code></div>
+<code><a href="Constraint.html#getAppliedImpulse()">getAppliedImpulse</a>, <a href="Constraint.html#getBodyA()">getBodyA</a>, <a href="Constraint.html#getBodyB()">getBodyB</a>, <a href="Constraint.html#getBreakingImpulseThreshold()">getBreakingImpulseThreshold</a>, <a href="Constraint.html#getConstraintType(long)">getConstraintType</a>, <a href="Constraint.html#getOverrideIterations()">getOverrideIterations</a>, <a href="Constraint.html#getPivot(com.jme3.bullet.joints.JointEnd,com.jme3.math.Vector3f)">getPivot</a>, <a href="Constraint.html#getPivotA(com.jme3.math.Vector3f)">getPivotA</a>, <a href="Constraint.html#getPivotB(com.jme3.math.Vector3f)">getPivotB</a>, <a href="Constraint.html#isCollisionBetweenLinkedBodies()">isCollisionBetweenLinkedBodies</a>, <a href="Constraint.html#isEnabled()">isEnabled</a>, <a href="Constraint.html#isFeedback()">isFeedback</a>, <a href="Constraint.html#overrideIterations(int)">overrideIterations</a>, <a href="Constraint.html#setBreakingImpulseThreshold(float)">setBreakingImpulseThreshold</a>, <a href="Constraint.html#setCollisionBetweenLinkedBodies(boolean)">setCollisionBetweenLinkedBodies</a>, <a href="Constraint.html#setEnabled(boolean)">setEnabled</a>, <a href="Constraint.html#setFeedback(boolean)">setFeedback</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.jme3.bullet.joints.PhysicsJoint">Methods inherited from class&nbsp;com.jme3.bullet.joints.<a href="PhysicsJoint.html" title="class in com.jme3.bullet.joints">PhysicsJoint</a></h3>
 <code><a href="PhysicsJoint.html#countEnds()">countEnds</a>, <a href="PhysicsJoint.html#destroy()">destroy</a>, <a href="PhysicsJoint.html#findEnd(com.jme3.bullet.objects.PhysicsBody)">findEnd</a>, <a href="PhysicsJoint.html#findOtherBody(com.jme3.bullet.objects.PhysicsBody)">findOtherBody</a>, <a href="PhysicsJoint.html#getBody(com.jme3.bullet.joints.JointEnd)">getBody</a>, <a href="PhysicsJoint.html#getPhysicsSpace()">getPhysicsSpace</a>, <a href="PhysicsJoint.html#setBodyA(com.jme3.bullet.objects.PhysicsBody)">setBodyA</a>, <a href="PhysicsJoint.html#setBodyB(com.jme3.bullet.objects.PhysicsBody)">setBodyB</a>, <a href="PhysicsJoint.html#setNativeId(long)">setNativeId</a>, <a href="PhysicsJoint.html#setPhysicsSpace(com.jme3.bullet.PhysicsSpace)">setPhysicsSpace</a>, <a href="PhysicsJoint.html#toString()">toString</a></code></div>
@@ -773,6 +783,32 @@ loadScripts(document, 'script');</script>
 <dd><code>stiffness</code> - the desired stiffness (default=0)</dd>
 <dd><code>limitIfNeeded</code> - true&rarr;automatically limit stiffness to prevent
  the spring from moving too widely</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setPivotInA(com.jme3.math.Vector3f)">
+<h3>setPivotInA</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPivotInA</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;location)</span></div>
+<div class="block">Alter the pivot location in A's scaled local coordinates.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="Constraint.html#setPivotInA(com.jme3.math.Vector3f)">setPivotInA</a></code>&nbsp;in class&nbsp;<code><a href="Constraint.html" title="class in com.jme3.bullet.joints">Constraint</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>location</code> - the desired location (not null, unaffected)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setPivotInB(com.jme3.math.Vector3f)">
+<h3>setPivotInB</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPivotInB</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;location)</span></div>
+<div class="block">Alter the pivot location in B's scaled local coordinates.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="Constraint.html#setPivotInB(com.jme3.math.Vector3f)">setPivotInB</a></code>&nbsp;in class&nbsp;<code><a href="Constraint.html" title="class in com.jme3.bullet.joints">Constraint</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>location</code> - the desired location (not null, unaffected)</dd>
 </dl>
 </section>
 </li>
