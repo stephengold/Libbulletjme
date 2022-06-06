@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -598,6 +598,40 @@ public class New6Dof extends Constraint {
         setStiffness(constraintId, dofIndex, stiffness, limitIfNeeded);
     }
     // *************************************************************************
+    // Constraint methods
+
+    /**
+     * Alter the pivot location in A's scaled local coordinates.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    @Override
+    public void setPivotInA(Vector3f location) {
+        Validate.nonNull(location, "location");
+
+        long constraintId = nativeId();
+        setPivotInA(constraintId, location);
+
+        if (pivotA != null) {
+            super.setPivotInA(location);
+        }
+    }
+
+    /**
+     * Alter the pivot location in B's scaled local coordinates.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    @Override
+    public void setPivotInB(Vector3f location) {
+        Validate.nonNull(location, "location");
+
+        long constraintId = nativeId();
+        setPivotInB(constraintId, location);
+
+        super.setPivotInB(location);
+    }
+    // *************************************************************************
     // private methods
 
     /**
@@ -719,11 +753,14 @@ public class New6Dof extends Constraint {
             float damping, boolean limitIfNeeded);
 
     native private static void setEquilibriumPoint(long constraintId,
-            int dofIndex,
-            float value);
+            int dofIndex, float value);
 
     native private static void setEquilibriumPointToCurrent(long constraintId,
             int dofIndex);
+
+    native private static void setPivotInA(long jointId, Vector3f pivotInA);
+
+    native private static void setPivotInB(long jointId, Vector3f pivotInB);
 
     native private static void setRotationOrder(long constraintId,
             int rotOrder);

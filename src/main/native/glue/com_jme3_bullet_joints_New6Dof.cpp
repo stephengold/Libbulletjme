@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -417,6 +417,56 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointTo
     btAssert(dofIndex < 6);
 
     pConstraint->setEquilibriumPoint(dofIndex);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    setPivotInA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setPivotInA
+(JNIEnv *pEnv, jclass, jlong constraintId, jobject pivotA) {
+    btGeneric6DofSpring2Constraint *pConstraint
+            = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
+            constraintId);
+    NULL_CHK(pEnv, pConstraint,
+            "The btGeneric6DofSpring2Constraint does not exist.",);
+    btTypedConstraintType type = pConstraint->getConstraintType();
+    btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, pivotA, "The pivotA vector does not exist.",)
+
+    btVector3 pivotInA;
+    jmeBulletUtil::convert(pEnv, pivotA, &pivotInA);
+
+    btTransform frameA = pConstraint->getFrameOffsetA();
+    btTransform frameB = pConstraint->getFrameOffsetB();
+    frameB.setOrigin(pivotInA);
+    pConstraint->setFrames(frameA, frameB);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    setPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setPivotInB
+(JNIEnv *pEnv, jclass, jlong constraintId, jobject pivotB) {
+    btGeneric6DofSpring2Constraint *pConstraint
+            = reinterpret_cast<btGeneric6DofSpring2Constraint *> (
+            constraintId);
+    NULL_CHK(pEnv, pConstraint,
+            "The btGeneric6DofSpring2Constraint does not exist.",);
+    btTypedConstraintType type = pConstraint->getConstraintType();
+    btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, pivotB, "The pivotB vector does not exist.",)
+
+    btVector3 pivotInB;
+    jmeBulletUtil::convert(pEnv, pivotB, &pivotInB);
+
+    btTransform frameA = pConstraint->getFrameOffsetA();
+    btTransform frameB = pConstraint->getFrameOffsetB();
+    frameB.setOrigin(pivotInB);
+    pConstraint->setFrames(frameA, frameB);
 }
 
 /*

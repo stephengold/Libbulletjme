@@ -145,6 +145,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setEquilibriumPointTo
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    setPivotInA
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setPivotInA
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    setPivotInB
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setPivotInB
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
  * Method:    setRotationOrder
  * Signature: (JI)V
  */
