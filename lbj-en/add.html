@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>How to add Libbulletjme to an existing project :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/add.html">
+    <link rel="prev" href="implementation.html">
+    <link rel="next" href="sport.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="How to add Libbulletjme to an existing project">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li>Library tutorials</li>
+    <li><a href="add.html">Add to existing project</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/add.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">How to add Libbulletjme to an existing project</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Adding Libbulletjme to an existing Java project is a 7-step process:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add the Java library to the classpath.</p>
+</li>
+<li>
+<p>Download an appropriate native library.</p>
+</li>
+<li>
+<p>Load the native library.</p>
+</li>
+<li>
+<p>Create and configure a physics space.</p>
+</li>
+<li>
+<p>Create and configure collision objects
+and add them to the physics space.</p>
+</li>
+<li>
+<p>Simulate the physics space.</p>
+</li>
+<li>
+<p>Test and tune as necessary.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_java_library_to_classpath"><a class="anchor" href="#_add_java_library_to_classpath"></a>Add Java library to classpath</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_gradle_built_projects"><a class="anchor" href="#_gradle_built_projects"></a>Gradle-built projects</h3>
+<div class="paragraph">
+<p>Add to the project&#8217;s "build.gradle" file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation 'com.github.stephengold:Libbulletjme:15.1.0'
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For some older versions of Gradle,
+it&#8217;s necessary to replace <code>implementation</code> with <code>compile</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maven_built_projects"><a class="anchor" href="#_maven_built_projects"></a>Maven-built projects</h3>
+<div class="paragraph">
+<p>Add to the project&#8217;s "pom.xml" file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;repositories&gt;
+    &lt;repository&gt;
+      &lt;id&gt;mvnrepository&lt;/id&gt;
+      &lt;url&gt;https://repo1.maven.org/maven2/&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;com.github.stephengold&lt;/groupId&gt;
+  &lt;artifactId&gt;Libbulletjme&lt;/artifactId&gt;
+  &lt;version&gt;15.1.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ant_built_projects"><a class="anchor" href="#_ant_built_projects"></a>Ant-built projects</h3>
+<div class="paragraph">
+<p>Download the Libbulletjme library from GitHub:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/stephengold/Libbulletjme/releases/latest" class="bare">https://github.com/stephengold/Libbulletjme/releases/latest</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll want the class JAR ("Libbulletjme-15.1.0.jar")
+and probably the "-sources" and "-javadoc" JARs as well.</p>
+</div>
+<div class="paragraph">
+<p>Open the project&#8217;s properties in the NetBeans IDE:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Right-click on the project (not its assets) in the "Projects" window.</p>
+</li>
+<li>
+<p>Select <b class="menuref">Properties</b> to open the "Project Properties" dialog.</p>
+</li>
+<li>
+<p>Under "Categories:", click on <b class="button">Libraries</b>.</p>
+</li>
+<li>
+<p>Click on the <b class="button">Compile</b> tab.</p>
+</li>
+<li>
+<p>Add the Heart class JAR:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Click on the <b class="button">Add JAR/Folder</b> button.</p>
+</li>
+<li>
+<p>Navigate to the download directory.</p>
+</li>
+<li>
+<p>Select the "Libbulletjme-15.1.0" file.</p>
+</li>
+<li>
+<p>Click on the <b class="button">Open</b> button.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>(optional) Add JARs for javadoc and sources:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Click on the <b class="button">Edit</b> button.</p>
+</li>
+<li>
+<p>Click on the <b class="button">Browse&#8230;&#8203;</b> button to the right of "Javadoc:"</p>
+</li>
+<li>
+<p>Select the "Libbulletjme-15.1.0-javadoc.jar" file.</p>
+</li>
+<li>
+<p>Click on the <b class="button">Open</b> button.</p>
+</li>
+<li>
+<p>Click on the <b class="button">Browse&#8230;&#8203;</b> button to the right of "Sources:"</p>
+</li>
+<li>
+<p>Select the "Libbulletjme-15.1.0-sources.jar" file.</p>
+</li>
+<li>
+<p>Click on the <b class="button">Open</b> button button again.</p>
+</li>
+<li>
+<p>Click on the <b class="button">OK</b> button to close the "Edit Jar Reference" dialog.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Click on the <b class="button">OK</b> button to exit the "Project Properties" dialog.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_a_native_library"><a class="anchor" href="#_download_a_native_library"></a>Download a native library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pre-build native libraries can be downloaded from GitHub:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/stephengold/Libbulletjme/releases/latest" class="bare">https://github.com/stephengold/Libbulletjme/releases/latest</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You don&#8217;t need all 56 native libraries.
+Start with the "DebugSp" library for your development environment,
+for instance:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"Linux64DebugSp_libbulletjme.so" for Linux on x86_64</p>
+</li>
+<li>
+<p>"Windows64DebugSp_libbulletjme.so" for 64-bit Windows</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_load_the_native_library"><a class="anchor" href="#_load_the_native_library"></a>Load the native library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Load Libbulletjme&#8217;s native library before instantiating any physics objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import com.jme3.system.NativeLibraryLoader;
+NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Debug", "Sp");</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_physics_space"><a class="anchor" href="#_create_a_physics_space"></a>Create a physics space</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are many constructors and options.
+Here&#8217;s the simplest way:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import com.jme3.bullet.PhysicsSpace;
+PhysicsSpace physicsSpace = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_and_add_objects"><a class="anchor" href="#_create_and_add_objects"></a>Create and add objects</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Collision objects come in many different types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>bodies (<code>PhysicsBody</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>soft bodies (<code>PhysicsSoftBody</code>)</p>
+</li>
+<li>
+<p>rigid bodies (<code>PhysicsRigidBody</code>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>vehicles (<code>PhysicsVehicle</code>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>ghost objects (<code>PhysicsGhostObject</code>)</p>
+</li>
+<li>
+<p>characters (<code>PhysicsCharacter</code>)</p>
+</li>
+<li>
+<p>colliders (<code>MultiBodyCollider</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a code fragment that creates 2 objects, a ghost object and a rigid body
+that share a common shape:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">float radius = 2f;
+CollisionShape sphere2 = new SphereCollisionShape(radius);
+PhysicsGhostObject ghost1 = new PhysicsGhostObject(sphere2);
+float mass = 1f;
+PhysicsRigidBody body1 = new PhysicsRigidBody(sphere2, mass);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Collision objects aren&#8217;t simulated unless they&#8217;re added to a physics space.
+The best way is to use <code>addCollisionObject()</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">physicsSpace.addCollisionObject(ghost1);
+physicsSpace.addCollisionObject(body1);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simulate_the_physics_space"><a class="anchor" href="#_simulate_the_physics_space"></a>Simulate the physics space</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To simulate a single 20-millisecond time step:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">float timeStep = 0.02f; // in seconds
+physicsSpace.update(timeStep, 0);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In real-time simulation, the interval between updates will vary.
+However, it&#8217;s best to use steps of equal size.</p>
+</div>
+<div class="paragraph">
+<p>To attempt simulation of a specific time interval
+using the configured step size:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">physicsSpace.update(intervalSeconds);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hellolibbulletjme"><a class="anchor" href="#_hellolibbulletjme"></a>HelloLibbulletjme</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/console/HelloLibbulletjme.java">HelloLibbulletjme</a>
+is a complete console application (no graphics)
+that serves as a starting point for using Libbulletjme.</p>
+</div>
+<div class="paragraph">
+<p>It illustrates:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>loading a native library from the "~/Downloads" directory</p>
+</li>
+<li>
+<p>creating a <code>PhysicsSpace</code></p>
+</li>
+<li>
+<p>creating 2 collision objects and adding them to the space</p>
+</li>
+<li>
+<p>running the simulation for 50 time steps</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><code>HelloLibbulletjme</code> is the first in a series of
+tutorial apps designed for hands-on learning.
+I expect you to not only study the source code,
+but to actually run the app as well.
+Take time <strong>now</strong> to set up a
+<a href="https://en.wikipedia.org/wiki/Integrated_development_environment">software development environment</a>
+for this purpose!</p>
+</div>
+<div class="paragraph">
+<p>For instance, if you install Git and a Java Development Kit,
+you should be able to launch tutorial apps from a command shell, like so:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>git clone <a href="https://github.com/stephengold/LbjExamples.git" class="bare">https://github.com/stephengold/LbjExamples.git</a></code></p>
+</li>
+<li>
+<p><code>cd LbjExamples</code></p>
+</li>
+<li>
+<p><code>./gradlew HelloLibbulletjme</code></p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Two libraries are required: a Java library and a native library.</p>
+</li>
+<li>
+<p>Collision objects aren&#8217;t simulated unless they&#8217;re added to a space.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="implementation.html">Implementation</a></span>
+  <span class="next"><a href="sport.html">SPORT visualization</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

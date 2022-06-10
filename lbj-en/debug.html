@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Debugging physics issues :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/debug.html">
+    <link rel="prev" href="softbody.html">
+    <link rel="next" href="misc.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="Debugging physics issues">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li>Library tutorials</li>
+    <li><a href="debug.html">Debug aids</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/debug.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Debugging physics issues</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Libbulletjme uses <code>assert</code> statements to verify assumptions made while coding.
+During development, Java assertions should be enabled using:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the "-ea" JVM argument or</p>
+</li>
+<li>
+<p>the <code>enableAssertions</code> setting of Gradle <code>JavaExec</code> tasks.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Similarly, native-code assertions should be enabled during development,
+by loading a native library of the "debug" type,
+such as "Linux64DebugSp_libbulletjme.so".</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_visualization"><a class="anchor" href="#_visualization"></a>Visualization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many physics issues can be diagnosed visually.
+For instance, if you neglect to add a collision object to the physics space,
+SPORT will automatically remove it from the visualization.</p>
+</div>
+<div class="paragraph">
+<p>SPORT can be used to visualize:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>collision shapes,</p>
+</li>
+<li>
+<p>vehicle wheels,</p>
+</li>
+<li>
+<p>physics joints,</p>
+</li>
+<li>
+<p>soft bodies,</p>
+</li>
+<li>
+<p>the centers and local axes of collision objects, and</p>
+</li>
+<li>
+<p>the axis-aligned bounding boxes of collision objects.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_color_conventions"><a class="anchor" href="#_color_conventions"></a>Color conventions</h3>
+<div class="paragraph">
+<p>When visualizing a collision shape,
+SPORT uses colors to distinguish different types of collision objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>yellow for an object without contact response,
+including any ghost object,</p>
+</li>
+<li>
+<p>magenta for a rigid body (or collider) that&#8217;s dynamic, responsive, and active,</p>
+</li>
+<li>
+<p>gray for a rigid body or collider
+(with contact response) that&#8217;s static, kinematic, or inactive,</p>
+</li>
+<li>
+<p>brown for a character that&#8217;s grounded, and</p>
+</li>
+<li>
+<p>pink for a character (with contact response) that isn&#8217;t grounded.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When visualizing a physics joint, SPORT uses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>green for a "A" end and</p>
+</li>
+<li>
+<p>red for a "B" end.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When visualizing a soft body, SPORT uses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>red for the faces and</p>
+</li>
+<li>
+<p>orange for the links.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When visualizing coordinate axes, SPORT uses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>red for the +X axis,</p>
+</li>
+<li>
+<p>green for the +Y axis, and</p>
+</li>
+<li>
+<p>blue for the +Z axis.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When visualizing bounding boxes, SPORT uses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>red for a ghost object whose overlapping count has increased,</p>
+</li>
+<li>
+<p>green for a ghost whose count has decreased,</p>
+</li>
+<li>
+<p>yellow for a ghost whose count is unchanged, and</p>
+</li>
+<li>
+<p>white for a non-ghost collision object.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>During development, enable Java assertions and use debug-enabled libraries.</p>
+</li>
+<li>
+<p>SPORT visualization can be used to diagnose bugs.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="softbody.html">Soft bodies</a></span>
+  <span class="next"><a href="misc.html">Miscellany</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

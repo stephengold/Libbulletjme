@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>An introduction to rigid-body physics :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/rigidbody.html">
+    <link rel="prev" href="sport.html">
+    <link rel="next" href="shape.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="An introduction to rigid-body physics">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li>Library tutorials</li>
+    <li><a href="rigidbody.html">Rigid bodies</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/rigidbody.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">An introduction to rigid-body physics</h1>
+<div class="sect1">
+<h2 id="_the_5_familiar_features"><a class="anchor" href="#_the_5_familiar_features"></a>The 5 familiar features</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <em>rigid body</em> is a type of collision object
+that exhibits some familiar features of real-world objects, including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>rigidity</em>: a fixed shape and</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Inertia"><em>inertia</em></a>: resistance to changes of motion.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/objects/PhysicsRigidBody.html"><code>PhysicsRigidBody</code></a> constructor
+allows you to specify the new body&#8217;s mass and collision shape.
+Together, these properties determine its
+<a href="https://en.wikipedia.org/wiki/Moment_of_inertia"><em>moment of inertia</em></a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">CollisionShape ballShape = new SphereCollisionShape(1f);
+float ballMass = 2f;
+// create a rigid body
+PhysicsRigidBody ball = new PhysicsRigidBody(ballShape, ballMass);
+// calculate its moment of inertia (in local coordinates, diagonal entries only)
+Vector3f inertia = Vector3f.UNIT_XYZ.divide(ball.getInverseInertiaLocal(null));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, rigid bodies also exhibit 3 other features of real-world objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>They are <em>dynamic</em>:
+mobile, with their motion determined by
+<a href="https://en.wikipedia.org/wiki/Force"><em>forces</em></a>,
+<a href="https://en.wikipedia.org/wiki/Torque"><em>torques</em></a>, and
+<a href="https://en.wikipedia.org/wiki/Impulse_(physics)"><em>impulses</em></a>.</p>
+</li>
+<li>
+<p>They are subject to <em>gravity</em>:
+a continual downward force proportional to their mass.</p>
+</li>
+<li>
+<p>They exhibit <em>contact response</em>:
+powerful forces prevent them from intersecting other bodies.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However, these last 3 features are optional and can easily be disabled.</p>
+</div>
+<div class="sect2">
+<h3 id="_hellorigidbody"><a class="anchor" href="#_hellorigidbody"></a>HelloRigidBody</h3>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloRigidBody.java">HelloRigidBody</a> is a SPORT
+app that demonstrates the 5 familiar features of rigid bodies.</p>
+</div>
+<div class="paragraph">
+<p>Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Two balls, both falling slowly under the influence of gravity.</p>
+</li>
+<li>
+<p>The ball on the right receives an impulse that pushes it leftward.</p>
+</li>
+<li>
+<p>After the impulse ends, the ball&#8217;s inertia keeps it moving leftward.</p>
+</li>
+<li>
+<p>The simulation runs at 1/10th normal speed.</p>
+</li>
+<li>
+<p>The balls collide, generating contact forces
+that alter their motions but not their shapes.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>The ball on the right loses half its horizontal velocity.</p>
+</li>
+<li>
+<p>The ball on the left begins moving leftward as it falls.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_rigid_bodies"><a class="anchor" href="#_configuring_rigid_bodies"></a>Configuring rigid bodies</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_static_rigid_bodies"><a class="anchor" href="#_static_rigid_bodies"></a>Static rigid bodies</h3>
+<div class="paragraph">
+<p>Not all rigid bodies are dynamic.
+To create a <em>static</em> (non-moving) rigid body,
+specify <code>mass=0</code> in the constructor.
+Unlike a dynamic body,
+a static one is unaffected by forces, torques, and impulses,
+as if its mass were infinite.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloStaticBody.java">HelloStaticBody</a>
+is an app that combines static and dynamic rigid bodies.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Two balls: the top one dynamic, the bottom one static.</p>
+</li>
+<li>
+<p>The balls collide, generating contact forces
+that alter the path of the dynamic ball.</p>
+</li>
+<li>
+<p>The static ball stays fixed in place,
+unaffected by gravity and contact forces.</p>
+</li>
+<li>
+<p>In SPORT, dynamic rigid bodies are conventionally colored magenta,
+while non-dynamic ones are shown in gray.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_position"><a class="anchor" href="#_position"></a>Position</h3>
+<div class="paragraph">
+<p>Every rigid body occupies a <em>position</em> in space, described by 2 properties:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <em>location</em> of the body&#8217;s center and</p>
+</li>
+<li>
+<p>the body&#8217;s <em>orientation</em>:
+the rotation of its (local) axes relative to those of the physics space.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each property can be configured separately:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">body.setPhysicsLocation(new Vector3f(5f, 1f, 0f));
+body.setPhysicsRotation(new Quaternion(0.5f, 0.5f, 0.5f, 0.5f));</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Once a dynamic or static body has been initialized,
+it shouldn&#8217;t be repositioned in this manner.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The center of a dynamic body should be its
+<a href="https://en.wikipedia.org/wiki/Center_of_mass"><em>center of mass</em></a>,
+the point around which it tends to spin,
+and its local axes should correspond to the
+<a href="https://en.wikipedia.org/wiki/Principal_axis_(mechanics)"><em>principal axes</em></a>
+of its mass distribution.</p>
+</div>
+<div class="paragraph">
+<p>Unlike a dynamic body, a static body allows complete flexibility
+in the choice of center and local axes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_kinematic_flag"><a class="anchor" href="#_kinematic_flag"></a>Kinematic flag</h3>
+<div class="paragraph">
+<p>In addition to static and dynamic rigid bodies, there&#8217;s a third type.</p>
+</div>
+<div class="paragraph">
+<p><em>Kinematic</em> bodies share some properties with both static and dynamic ones.
+Like dynamic bodies, kinematic ones can move.
+However, they are unaffected by forces, torques, and impulses.
+Their movement is dictated by application logic that may, if desired,
+reposition them before each time step.</p>
+</div>
+<div class="paragraph">
+<p>In the presence of dynamic bodies, a kinematic body acts like
+an irresistible battering ram.</p>
+</div>
+<div class="paragraph">
+<p>There&#8217;s no direct way to instantiate a kinematic rigid body.
+The usual way is to instantiate a dynamic body and then convert it
+to kinematic using <code>rigidBody.setKinematic(true)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Due to a design flaw, a kinematic rigid body must have positive mass.
+To convert a static rigid body into a kinematic one, set its mass
+to a positive value <strong>before</strong> setting its kinematic flag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">rigidBody.setMass(1f);
+rigidBody.setKinematic(true);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloKinematics.java">HelloKinematics</a>
+is an app that combines kinematic and dynamic rigid bodies.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Two balls: the top one dynamic, the bottom one kinematic.</p>
+</li>
+<li>
+<p>The kinematic ball orbits a fixed point in space.</p>
+</li>
+<li>
+<p>The balls collide, generating contact forces
+that affect the motion of the dynamic ball.</p>
+</li>
+<li>
+<p>The kinematic ball continues orbiting,
+unaffected by gravity and contact forces.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_contact_response"><a class="anchor" href="#_contact_response"></a>Contact response</h3>
+<div class="paragraph">
+<p>When physics simulation detects a collision between
+2 bodies that both have contact response, it applies contact forces.</p>
+</div>
+<div class="paragraph">
+<p>To disable contact response for a particular rigid body,
+use <code>rigidBody.setContactResponse(false)</code>.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloContactResponse.java">HelloContactResponse</a>
+is an app that demonstrates contact response.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The ball falls until it collides with the blue (static) box,
+which provides a contact force to halt its motion and counteract gravity.</p>
+</li>
+<li>
+<p>Press <kbd>E</kbd> to disable the ball&#8217;s contact response.</p>
+</li>
+<li>
+<p>Afterwards, the box no longer exerts any force on the ball.
+Gravity takes over, and the ball falls through the box.</p>
+</li>
+<li>
+<p>In SPORT, non-responsive rigid bodies are shown in yellow.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This documentation assumes a keyboard with the "US" (QWERTY) layout.
+On keyboards with other layouts, keys may be labeled differently.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_velocity"><a class="anchor" href="#_velocity"></a>Velocity</h3>
+<div class="paragraph">
+<p>Every dynamic body has a <em>velocity</em> that quantifies its motion as of the
+end of the last time step (or the start of the next).</p>
+</div>
+<div class="paragraph">
+<p>More precisely, it has 2 velocities: <em>linear velocity</em> and <em>angular velocity</em>,
+both represented as 3-D vectors.
+The magnitude and direction of the linear velocity vector quantify the speed
+and direction at which the body&#8217;s center is traveling through space (if at all).
+The magnitude and direction of the angular velocity vector quantify the
+rate and axis direction of the body&#8217;s spinning motion (if any).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Both velocities of a static body are zero.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Both velocities of a kinematic body are undefined.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To alter the velocities of a dynamic rigid body,
+use its <code>setLinearVelocity()</code> and <code>setAngularVelocity()</code> methods.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_built_in_forces"><a class="anchor" href="#_built_in_forces"></a>Built-in forces</h3>
+<div class="paragraph">
+<p>Many real-world phenomena can be modeled as forces acting on rigid bodies.</p>
+</div>
+<div class="paragraph">
+<p>You can apply custom forces, impulses, and torques
+using the following 6 methods:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>applyCentralForce(Vector3f)</code></p>
+</li>
+<li>
+<p><code>applyCentralImpulse(Vector3f)</code></p>
+</li>
+<li>
+<p><code>applyForce(Vector3f force, Vector3f offset)</code></p>
+</li>
+<li>
+<p><code>applyImpulse(Vector3f impulse, Vector3f offset)</code></p>
+</li>
+<li>
+<p><code>applyTorque(Vector3f)</code></p>
+</li>
+<li>
+<p><code>applyTorqueImpulse(Vector3f)</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>However, some forces are so commonplace that they are
+"built into" rigid-body simulation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>drag forces:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>damping</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>gravity</p>
+</li>
+<li>
+<p>contact forces:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>restitution</p>
+</li>
+<li>
+<p>friction</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_damping"><a class="anchor" href="#_damping"></a>Damping</h4>
+<div class="paragraph">
+<p>In the absence of external forces,
+inertia would keep the velocities of a dynamic body constant.
+In the real world, however,
+we&#8217;re accustomed to seeing unpowered moving objects eventually come to rest.
+This behavior is often caused by <em>drag forces</em> (such as air resistance)
+that increase with speed.</p>
+</div>
+<div class="paragraph">
+<p>To simulate drag forces, each rigid body has <em>damping</em>,
+which quantifies how quickly its motion decays to zero,
+assuming the body is dynamic.</p>
+</div>
+<div class="paragraph">
+<p>More precisely, each body has 2 damping parameters:
+<em>linear damping</em> and <em>angular damping</em>,
+each of which ranges from zero (no drag) to one (motion ceases immediately).
+Linear damping damps the linear velocity, and
+angular damping damps the angular velocity.</p>
+</div>
+<div class="paragraph">
+<p>Accessors are provided for both parameters, separately and together:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">rigidBody.setAngularDamping(0.5f);  // default=0
+rigidBody.setLinearDamping(0.2f);   // default=0
+// or alternatively:
+float linearDamping = 0.5f;
+float angularDamping = 0.2f;
+rigidBody.setDamping(linearDamping, angularDamping);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloDamping.java">HelloDamping</a>
+is an app that demonstrates damping.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>4 cubes initially share the same linear and angular velocities.</p>
+</li>
+<li>
+<p>The top 2 have constant linear velocities, evidence of no linear damping.</p>
+</li>
+<li>
+<p>The left 2 have constant angular velocities, evidence of no angular damping.</p>
+</li>
+<li>
+<p>The linear velocities of the bottom 2 cubes decay quickly to zero
+due to strong linear damping.</p>
+</li>
+<li>
+<p>The angular velocities of the right 2 cubes decay quickly to zero
+due to strong angular damping.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gravity"><a class="anchor" href="#_gravity"></a>Gravity</h4>
+<div class="paragraph">
+<p>In the real world,
+we&#8217;re accustomed to seeing unsupported objects fall.
+This behavior is caused by <em>gravity</em>,
+a downward force that&#8217;s proportional to mass (and thus causes a constant
+<a href="https://en.wikipedia.org/wiki/Acceleration">acceleration</a>).</p>
+</div>
+<div class="paragraph">
+<p>To simulate this phenomenon, each body has a gravity vector
+that quantifies the acceleration, assuming the body is dynamic.
+To configure a body&#8217;s gravity, use <code>setGravity(accelerationVector)</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If following the Y-up axes convention, the X and Z components of the
+vector should be zero, and its Y component should be <strong>negative</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To disable gravity for a particular rigid body,
+use <code>rigidBody.setGravity(Vector3f.ZERO)</code>.</p>
+</div>
+<div class="paragraph">
+<p>When a body is added to a physics space,
+the gravity of the space typically gets applied to it,
+replacing any previously configured gravity.</p>
+</div>
+<div class="paragraph">
+<p>To disable gravity for a particular physics space and all bodies in it,
+use <code>physicsSpace.setGravity(Vector3f.ZERO)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To protect a rigid body from gravity changes caused by the space
+to which it&#8217;s added, use <code>rigidBody.setProtectGravity(true)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To simulate a non-uniform gravitational field,
+update the gravity of each body prior to each simulation step.
+<a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloNonUniformGravity.java">HelloNonUniformGravity</a>
+is an app that demonstrates this technique.
+The planet orbits a black hole whose location is indicated by colored arrows.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The planet&#8217;s path varies somewhat from orbit to orbit.
+This is partly due to inaccuracies of single-precision arithmetic.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restitution"><a class="anchor" href="#_restitution"></a>Restitution</h4>
+<div class="paragraph">
+<p>When responsive rigid bodies collide,
+contact forces come into play, altering their velocities.
+These forces are split into 2 components:  restitution and friction.</p>
+</div>
+<div class="paragraph">
+<p><em>Restitution</em> is a force parallel to the contact normal.
+Its strength hints at what the bodies might be made out of.</p>
+</div>
+<div class="paragraph">
+<p>If both bodies were made of hard, springy steel,
+they might separate without loss of
+<a href="https://en.wikipedia.org/wiki/Kinetic_energy">kinetic energy</a>,
+after undergoing what&#8217;s called a <em>perfectly elastic</em> collision.
+If, on the other hand, both bodies were made of soft, sticky clay,
+they might cling together, dissipating kinetic energy and
+undergoing what&#8217;s called a <em>perfectly inelastic</em> collision.</p>
+</div>
+<div class="paragraph">
+<p>In reality, no collision is perfectly elastic.
+Elasticity is quantified by a <em>coefficient of restitution</em>,
+which ranges from zero (perfectly inelastic) to one (perfectly elastic).</p>
+</div>
+<div class="paragraph">
+<p>In simulation, collisions are inelastic by default.
+(We saw this in <a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloRigidBody.java">HelloRigidBody.java</a>.)
+Each rigid body has a <em>restitution parameter</em>, which defaults to zero.
+For each collision, the coefficient of restitution
+is calculated by multiplying the parameters of the colliding bodies.</p>
+</div>
+<div class="paragraph">
+<p>To simulate a perfectly elastic collision, set the restitution parameters of
+both bodies to one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">rigidBodyA.setRestitution(1f); // default=0
+rigidBodyB.setRestitution(1f);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/NewtonsCradle.java">The Newton&#8217;s Cradle demo</a>
+demonstrates perfectly elastic collisions.
+At startup, the simulation is paused.
+Press <kbd>.</kbd> to start the simulation, or to pause it while it&#8217;s running.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_friction"><a class="anchor" href="#_friction"></a>Friction</h4>
+<div class="paragraph">
+<p>While restitution models contact forces parallel to the contact normal,
+<em>friction</em> models contact forces orthogonal to the contact normal.</p>
+</div>
+<div class="paragraph">
+<p>Each rigid body has a <em>friction parameter</em> (which defaults to 0.5).
+This parameter hints at the body&#8217;s surface characteristics.
+To configure the parameter, use <code>setFriction(parameter)</code>.
+Reducing a body&#8217;s friction parameter makes it more slippery (think wet ice).
+Increasing it yields better traction (think sandpaper or dry rubber).</p>
+</div>
+<div class="paragraph">
+<p>For each collision, a <em>coefficient of friction</em>
+is calculated by multiplying the parameters of the colliding bodies.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deactivation"><a class="anchor" href="#_deactivation"></a>Deactivation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It&#8217;s common for physics simulations to reach a
+<a href="https://en.wikipedia.org/wiki/Steady_state"><em>steady state</em></a> in which
+the some or all of the rigid bodies have stopped moving.
+If a dynamic rigid body doesn&#8217;t move for 2 seconds,
+the simulator may automatically <em>deactivate</em> it to reduce CPU consumption.</p>
+</div>
+<div class="paragraph">
+<p>To prevent a body from being deactivated,
+a certain amount of movement, either linear or angular,
+needs to occur every 2 seconds.
+Accessors are provided for these thresholds:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">float linearThreshold = 0.5f; // default=0.8
+float angularThreshold = 0.2f; // default=1
+rigidBody.setSleepingThresholds(linearThreshold, angularThreshold);</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<em>Sleeping</em> is synonym for deactivation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To disable deactivation for a particular rigid body,
+use <code>physicsSpace.setEnableSleep(false)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To disable deactivation globally (for all rigid bodies),
+use <code>PhysicsBody.setDeactivationEnabled(false)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To change the deactivation latency (for all rigid bodies),
+use <code>PhysicsBody.setDeactivationDeadline(newInterval)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To test whether a body is deactivated, use <code>rigidBody.isActive()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Deactivated bodies won&#8217;t be simulated (and won&#8217;t move)
+unless/until they get reactivated.
+Reactivation occurs when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a new contact is added (due to a collision),</p>
+</li>
+<li>
+<p>a custom force, torque, or impulse is applied, or</p>
+</li>
+<li>
+<p>the <code>rigidBody.activate()</code> method is invoked.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To reactivate all bodies in a particular physics space,
+use <code>physicsSpace.activateAll(true)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Puzzling behavior may occur if a deactivated body is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>supported by another body that then gets removed,</p>
+</li>
+<li>
+<p>supported by another body that then has its contact response disabled, or</p>
+</li>
+<li>
+<p>driven by a motorized physics joint.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The deactivated body will seem to be "stuck"
+because the events listed above do not, by themselves, reactivate it.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloDeactivation.java">HelloDeactivation</a>
+is an app that demonstrates deactivation.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The upper (dynamic) box falls until it collides with the lower (static) box,
+which provides a contact force to halt its motion and counteract gravity.</p>
+</li>
+<li>
+<p>About 2 seconds after the upper box stops moving, it gets deactivated.</p>
+</li>
+<li>
+<p>After the application removes the lower box,
+the upper box doesn&#8217;t resuming falling.
+Due to deactivation, it seems to be "stuck".</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_continuous_collision_detection"><a class="anchor" href="#_continuous_collision_detection"></a>Continuous collision detection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A common issue with discrete-time physics simulation
+involves a fast-moving dynamic body passing through a thin obstacle
+without any collision being detected.
+The issue arises because the body can pass from one side of the obstacle to
+the other in a single time step.
+The dynamic body doesn&#8217;t intersect the obstacle on any time step,
+so no collision is detected and no contact forces are simulated.</p>
+</div>
+<div class="paragraph">
+<p>To some extent, this issue could be mitigated by reducing the time step.
+But since CPU consumption is inversely proportional to the time step,
+this approach quickly becomes inefficient.</p>
+</div>
+<div class="paragraph">
+<p>To solve this issue,
+the simulator offers <em>continuous collision detection</em> (CCD),
+an algorithm for detecting collisions that occur <strong>between</strong> time steps.
+CCD substitutes a sphere for the collision shape of the fast-moving body,
+sweeps that sphere forward along the body&#8217;s projected path,
+and performs detailed collision tests on any potential
+obstacles found during the sweep.</p>
+</div>
+<div class="paragraph">
+<p>Because CCD involves extra computation, it&#8217;s disabled by default.
+Since it&#8217;s only necessary for fast-moving bodies, it&#8217;s enabled only
+when a body&#8217;s distance traveled per time step exceeds a threshold.
+To enable CCD for a particular rigid body,
+set its activation threshold to a positive value using
+<code>rigidBody.setCcdMotionThreshold(distancePerTimeStep)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To obtain the best possible results from CCD,
+tune both the motion threshold and the size of the swept sphere.
+Here&#8217;s a heuristic that works well for many situations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">if (rigidBody.isDynamic()) {
+    CollisionShape shape = rigidBody.getCollisionShape();
+    float radius = shape.maxRadius();
+    rigidBody.setCcdMotionThreshold(radius);
+    rigidBody.setCcdSweptSphereRadius(radius);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloCcd.java">HelloCcd</a>
+is an app that demonstrates CCD.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The 2 balls have the same size, mass, initial height, and initial velocity.</p>
+</li>
+<li>
+<p>The ball with CCD enabled (on the left) sticks the landing on the platform.</p>
+</li>
+<li>
+<p>The control ball (on the right) falls through the platform,
+passing from one side to the other in a single time step.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Rigid bodies simulate familiar features of real-world objects.</p>
+</li>
+<li>
+<p>There are 3 kinds: static, kinematic, and dynamic &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Static</th>
+<th class="tableblock halign-left valign-top">Kinematic</th>
+<th class="tableblock halign-left valign-top">Dynamic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Movement</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>prior to first time step only: <code>setPhysicsLocation()</code> <code>setPhysicsRotation()</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>setPhysicsLocation()</code> <code>setPhysicsRotation()</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>applyCentralForce()</code> <code>applyCentralImpulse()</code> <code>applyForce()</code> <code>applyImpulse()</code>
+  <code>applyTorque()</code> <code>applyTorqueImpulse()</code> <code>setAngularVelocity()</code>
+  <code>setLinearVelocity()</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Affected by forces, impulses, and torques?</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>No.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Yes.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Typical uses</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Non-moving objects such as floors, posts, terrain, and walls</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Application-controlled objects such as airships and elevators</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Physics-controlled objects such as balls, bricks, and ragdolls</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>How to configure</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>setMass(0f)</code> <code>setKinematic(false)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>setMass(positive)</code> <code>setKinematic(true)</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><code>setMass(positive)</code> <code>setKinematic(false)</code></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>The properties of rigid bodies include: shape, mass, moment of inertia,
+location, orientation, velocities (linear and angular),
+damping, gravity, restitution, friction, sleeping thresholds, CCD threshold,
+and swept-sphere radius.</p>
+</li>
+<li>
+<p>Contact response is an optional feature.</p>
+</li>
+<li>
+<p>If a dynamic rigid body moves too slowly,
+it might get automatically deactivated after 2 seconds.</p>
+</li>
+<li>
+<p>Continuous collision detection solves the problem
+of fast-moving dynamic bodies passing through thin obstacles.</p>
+</li>
+<li>
+<p>Continuous collision detection is disabled by default.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="sport.html">SPORT visualization</a></span>
+  <span class="next"><a href="shape.html">Collision shapes</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="3">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

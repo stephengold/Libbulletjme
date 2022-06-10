@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>An overview of the demo applications :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/demos.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="An overview of the demo applications">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li><a href="demos.html">Demo apps</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/demos.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">An overview of the demo applications</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Demo applications</em> are provided to showcase certain features of Libbulletjme.
+The following demos are found in
+<a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples">the com.github.stephengold.lbjexamples package of the "apps" sub-project</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/NewtonsCradle.java"><code>NewtonsCradle</code></a>
+demonstrates dynamic restitution and point-to-point joints</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/Pachinko.java"><code>Pachinko</code></a>
+demonstrates compound collision shapes and 2-D physics</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/ThousandCubes.java"><code>ThousandCubes</code></a>
+demonstrates stacking cubes and launching projectiles</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>(Not all applications in the package are intended as demos.)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_user_interface"><a class="anchor" href="#_user_interface"></a>User interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The demos are controlled by primarily by keyboard input.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The descriptions below assume a keyboard with the "US" (QWERTY) layout.
+On keyboards with other layouts, the keys may be labeled differently.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For convenience, the mapping of keys to actions is partly standardized.
+In most demos:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>.</kbd> and <kbd>Pause</kbd> toggle the simulation between running and paused,</p>
+</li>
+<li>
+<p><kbd>C</kbd> dumps the camera&#8217;s position to the console, and</p>
+</li>
+<li>
+<p><kbd>Esc</kbd> ends the application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For camera control, all demos use <code>Immediate</code> rotation mode.
+This means you can rotate the camera by simply moving the mouse.
+Furthermore:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>W</kbd> and <kbd>S</kbd> dolly the camera forward and back, respectively,</p>
+</li>
+<li>
+<p><kbd>A</kbd> and <kbd>D</kbd> dolly the camera left and right, respectively,</p>
+</li>
+<li>
+<p><kbd>Q</kbd> raises the camera, and</p>
+</li>
+<li>
+<p><kbd>Z</kbd> lowers the camera.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additional mappings are specific to each application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In <code>NewtonsCradle</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>F1</kbd>, <kbd>1</kbd>, and <kbd>Numpad1</kbd> restart with a single ball</p>
+</li>
+<li>
+<p><kbd>F2</kbd>, <kbd>2</kbd>, and <kbd>Numpad2</kbd> restart with 2 balls</p>
+</li>
+<li>
+<p><kbd>F3</kbd>, <kbd>3</kbd>, and <kbd>Numpad3</kbd> restart with 3 balls</p>
+</li>
+<li>
+<p><kbd>F4</kbd>, <kbd>4</kbd>, and <kbd>Numpad4</kbd> restart with 4 balls</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>In <code>Pachinko</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>F4</kbd>, <kbd>4</kbd>, and <kbd>Numpad4</kbd> restart with 4 rows of pins</p>
+</li>
+<li>
+<p><kbd>F5</kbd>, <kbd>5</kbd>, and <kbd>Numpad5</kbd> restart with 5 rows of pins</p>
+</li>
+<li>
+<p><kbd>F6</kbd>, <kbd>6</kbd>, and <kbd>Numpad6</kbd> restart with 6 rows of pins</p>
+</li>
+<li>
+<p><kbd>F7</kbd>, <kbd>7</kbd>, and <kbd>Numpad7</kbd> restart with 7 rows of pins</p>
+</li>
+<li>
+<p><kbd>F8</kbd>, <kbd>8</kbd>, and <kbd>Numpad8</kbd> restart with 8 rows of pins</p>
+</li>
+<li>
+<p><kbd>F9</kbd>, <kbd>9</kbd>, and <kbd>Numpad9</kbd> restart with 9 rows of pins</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>In <code>ThousandCubes</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>E</kbd> launch a red ball</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

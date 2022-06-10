@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>An introduction to character physics :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/character.html">
+    <link rel="prev" href="shape.html">
+    <link rel="next" href="vehicle.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="An introduction to character physics">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li>Library tutorials</li>
+    <li><a href="character.html">Characters</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/character.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">An introduction to character physics</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <em>physics character</em> is a collision object
+used to simulate game characters (people) walking, jumping, and falling.</p>
+</div>
+<div class="paragraph">
+<p>The standard physics character makes some simplifying assumptions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The character&#8217;s shape must be convex.</p>
+</li>
+<li>
+<p>The character remains upright even when jumping or falling:
+no sitting, squatting, ducking, or lying down.</p>
+</li>
+<li>
+<p>Limits are placed on:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>how steep a slope the character can climb,</p>
+</li>
+<li>
+<p>how high a step the character can climb, and</p>
+</li>
+<li>
+<p>how fast the character can fall.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Like a dynamic rigid body,
+a physics character has a collision shape, a location, and
+a gravity vector, along with velocities and damping parameters.
+It also has an option for contact response, which is enabled by default.</p>
+</div>
+<div class="paragraph">
+<p>However, a physics character has no concept of mass,
+and its motion is controlled very differently from a dynamic body.
+Instead of applying forces or directly updating the character&#8217;s velocities,
+the app should specify when and how the character should walk and jump.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creation"><a class="anchor" href="#_creation"></a>Creation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You can create a character by invoking the
+<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/objects/PhysicsCharacter.html"><code>PhysicsCharacter</code></a> constructor.
+This allows you to specify its collision shape and step height.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloCharacter.java">HelloCharacter</a> is a SPORT app
+that demonstrates the creation of a character,
+followed by automated jumps.
+Things to notice about the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The constructor requires a convex shape.
+In this app, a capsule is used.</p>
+</li>
+<li>
+<p>The <code>onGround()</code> method tests whether the character is supported
+by a solid surface (as opposed to jumping or falling).</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_walking"><a class="anchor" href="#_walking"></a>Walking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A character&#8217;s walking motion is controlled by its <em>walk direction</em> vector.
+During each simulation step, the horizontal component of the walk direction
+gets added to the character&#8217;s location.
+To stop the character from walking, invoke <code>setWalkDirection(Vector3f.ZERO)</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Despite its name, the walk direction need not be a unit vector.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloWalk.java">HelloWalk</a> demonstrates
+keyboard-controlled motion of a physics character.
+Things to notice while running the app:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Move the mouse to turn the camera.</p>
+</li>
+<li>
+<p>Press <kbd>Space bar</kbd> to jump.</p>
+</li>
+<li>
+<p>Press <kbd>W</kbd> to walk in the camera&#8217;s forward direction.</p>
+</li>
+<li>
+<p>Some of the mountains have slopes too steep for the character to climb.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_gravity_and_up_direction"><a class="anchor" href="#_gravity_and_up_direction"></a>Gravity and up direction</h3>
+<div class="paragraph">
+<p>The <em>up direction</em> of a physics character is a unit vector
+that points in the direction opposite its gravity vector.
+By default, the up direction is (0,1,0) and
+the gravity vector is (0,-29.4,0).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A character&#8217;s default gravity is 3x stronger
+than the default gravity of a <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/PhysicsSpace.html"><code>PhysicsSpace</code></a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Unlike the gravity of a rigid body, a character&#8217;s gravity is never
+overridden by any physics space.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To alter a character&#8217;s gravity vector,
+use <code>character.setGravity(Vector3f)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Altering the gravity vector automatically updates the character&#8217;s up direction.
+To alter the <strong>magnitude</strong> of a character&#8217;s gravity
+(without changing its direction) use <code>character.setGravity(float)</code>.</p>
+</div>
+<div class="paragraph">
+<p>To alter a character&#8217;s up direction, use <code>character.setUp(Vector3f)</code>.
+Altering the up direction automatically updates the gravity vector.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jump_speed"><a class="anchor" href="#_jump_speed"></a>Jump speed</h3>
+<div class="paragraph">
+<p>If a character jumps in its up direction,
+its predicted rise time and jump height
+are determined by its gravity and jump speed.
+Roughly speaking:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">float g = character.getGravity(null).length();
+float v0 = character.getJumpSpeed();
+float riseSeconds = v0 / g;
+float jumpHeight = v0 * v0 / (2f * g);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default jump speed is 10 psu per second.
+To alter a character&#8217;s jump speed, use <code>character.setJumpSpeed(float)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fall_speed"><a class="anchor" href="#_fall_speed"></a>Fall speed</h3>
+<div class="paragraph">
+<p><em>Fall speed</em> limits the speed of a falling character.
+To be realistic, it should be larger than the character&#8217;s jump speed.</p>
+</div>
+<div class="paragraph">
+<p>The default fall speed is 55 psu per second.
+To alter a character&#8217;s fall speed, use <code>character.setFallSpeed(float)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_height"><a class="anchor" href="#_step_height"></a>Step height</h3>
+<div class="paragraph">
+<p><em>Step height</em> limits how high a step the character can climb.
+To be realistic, it should be less than the character&#8217;s height.</p>
+</div>
+<div class="paragraph">
+<p>A character&#8217;s initial step height is set by the constructor.
+To alter it, use <code>character.setStepHeight(float)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_maximum_slope"><a class="anchor" href="#_maximum_slope"></a>Maximum slope</h3>
+<div class="paragraph">
+<p><em>Maximum slope</em> limits how steep a slope the character can climb.
+It is expressed as an angle in radians relative to the horizontal plane.</p>
+</div>
+<div class="paragraph">
+<p>The default maximum slope is &#960;/4, indicating a 45-degree angle.
+To alter it, use <code>character.setMaxSlope(float)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_contact_response"><a class="anchor" href="#_contact_response"></a>Contact response</h3>
+<div class="paragraph">
+<p>As with a rigid body, you can disable the contact response of a character using
+<code>character.setContactResponse(false)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Disabling a character&#8217;s contact response
+will compel it to fall, at least until contact response is re-enabled.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>A physics character simulates a game character walking, jumping, and falling.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="shape.html">Collision shapes</a></span>
+  <span class="next"><a href="vehicle.html">Vehicles</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

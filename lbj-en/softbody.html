@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>An introduction to soft-body physics :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/softbody.html">
+    <link rel="prev" href="collision.html">
+    <link rel="next" href="debug.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="An introduction to soft-body physics">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li>Library tutorials</li>
+    <li><a href="softbody.html">Soft bodies</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/softbody.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">An introduction to soft-body physics</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>While rope, cloth, and foam rubber
+can be simulated using many small rigid bodies,
+it is more convenient and efficient to treat them
+as individual bodies that can be deformed.
+To this end, Libbulletjme supports simulation of soft bodies
+in a manner roughly analogous to rigid bodies:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In place of <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/PhysicsSpace.html"><code>PhysicsSpace</code></a>,
+use <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/PhysicsSoftSpace.html"><code>PhysicsSoftSpace</code></a>.</p>
+</li>
+<li>
+<p>In place of <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/objects/PhysicsRigidBody.html"><code>PhysicsRigidBody</code></a>,
+use <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/objects/PhysicsSoftBody.html"><code>PhysicsSoftBody</code></a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>PhysicsSoftSpace</code> is a subclass of <code>PhysicsSpace</code>.
+It implements soft-body physics in addition to all the
+features of an ordinary <code>PhysicsSpace</code> (such as rigid bodies).</p>
+</div>
+<div class="paragraph">
+<p>The abstract class <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/PhysicsBody.html"><code>PhysicsBody</code></a>
+is a superclass of both <code>PhysicsRigidBody</code> and <code>PhysicsSoftBody</code>.
+It provides access to properties that rigid bodies and soft bodies
+have in common, such as gravity, location, mass, and joints.</p>
+</div>
+<div class="paragraph">
+<p>Soft bodies can collide with both rigid bodies and other soft bodies.
+They can also be joined to bodies of both types, using special subclasses
+of <code>PhysicsJoint</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_comparison_of_soft_bodies_and_rigid_bodies"><a class="anchor" href="#_a_comparison_of_soft_bodies_and_rigid_bodies"></a>A comparison of soft bodies and rigid bodies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unlike a rigid body, a soft body doesn&#8217;t have a <code>CollisionShape</code> or
+an orientation.
+Instead, it is composed of point masses (called "nodes") whose locations
+are specified in physics-space coordinates.
+A soft body&#8217;s shape, structure, mass distribution, and position are all defined
+by its mesh of nodes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To simulate rope, nodes can be connected in pairs (called <em>links</em>).</p>
+</li>
+<li>
+<p>To simulate cloth, nodes can be connected to form triangles (called <em>faces</em>).</p>
+</li>
+<li>
+<p>To simulate foam rubber, nodes can be connected to form tetrahedra (also
+called <em>tetras</em>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Unlike a rigid body, the physics location of a soft body is not its center
+of mass, but rather the center of its axis-aligned bounding box.</p>
+</div>
+<div class="paragraph">
+<p>Like rigid bodies, soft bodies have collision margins.
+However, since a soft body lacks a <code>CollisionShape</code>,
+different accessors are used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">float oldMargin = softBody.margin();
+softBody.setMargin(0.1f);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Soft bodies lack many other features of rigid bodies, including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>motion state (for extrapolating between time steps),</p>
+</li>
+<li>
+<p>deactivation/sleeping (for efficient simulation), and</p>
+</li>
+<li>
+<p>continuous collision detection (CCD) (for fast-moving objects).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_constructing_a_soft_body"><a class="anchor" href="#_constructing_a_soft_body"></a>Constructing a soft body</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To construct a soft body, start with the no-argument constructor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PhysicsSoftBody softBody = new PhysicsSoftBody()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This produces an empty body (one without any nodes, links, faces, tetras,
+or joints) that isn&#8217;t added to any physics space.</p>
+</div>
+<div class="paragraph">
+<p>Methods are provided to append nodes, links, and faces to a soft body.
+However, it&#8217;s often more convenient to generate a
+<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/jme3utilities/lbj/Mesh.html"><code>Mesh</code></a>
+with the desired shape and topology and append it to the body
+using a utility method:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>NativeSoftBodyUtil.appendFromTriMesh()</code>
+to append nodes and faces from a mesh composed of triangles</p>
+</li>
+<li>
+<p><code>NativeSoftBodyUtil.appendFromLineMesh()</code>
+to append nodes and links from a mesh composed of lines</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Be aware that meshes intended for graphics rendering often prove
+unsuitable for soft-body simulation.
+For instance, they may define multiple vertices at the same position
+or their edges/faces may be insufficiently subdivided.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_soft_body_configuration_and_pose_matching"><a class="anchor" href="#_soft_body_configuration_and_pose_matching"></a>Soft-body configuration and pose matching</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each soft body has numerous properties that can affect its behavior.
+Most of these are stored in its configuration object, which can be
+accessed using <code>getSoftConfig()</code>.
+Soft bodies and configuration objects are one-to-one.</p>
+</div>
+<div class="paragraph">
+<p>Configuration properties with <code>float</code> values are enumerated
+by the <code>Sbcp</code> ("soft-body configuration parameter") enum.
+For instance, a soft body can have a preferred shape (called its "default pose")
+that it tends to return to when deformed.
+The strength of this tendency depends on the configuration object&#8217;s
+"pose matching" parameter, which defaults to zero.</p>
+</div>
+<div class="paragraph">
+<p>For a simple example of a soft body, see
+<a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSoftBody.java">HelloSoftBody</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_soft_soft_collisions"><a class="anchor" href="#_soft_soft_collisions"></a>Soft-soft collisions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, collisions between soft bodies are not handled (ignored).
+One way to handle soft-soft collisions for a specific body is to
+set the <code>VF_SS</code> collision flag in its configuration object:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SoftBodyConfig config = softBody.getSoftConfig();
+int oldFlags = config.getCollisionFlags();
+config.setCollisionFlags(oldFlags, ConfigFlag.VF_SS);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a simple example of a collision between 2 soft bodies, see
+<a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSoftSoft.java">HelloSoftSoft</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_solver_iterations"><a class="anchor" href="#_solver_iterations"></a>Solver iterations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>During each simulation step, Bullet applies a series of
+iterative solvers to each soft body:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a cluster solver</p>
+</li>
+<li>
+<p>a drift solver</p>
+</li>
+<li>
+<p>a position solver</p>
+</li>
+<li>
+<p>a velocity solver</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The number of iterations for each solver is stored in the body&#8217;s
+configuration object.
+When simulating collisions, you can often improve accuracy by increasing the
+number of position-solver iterations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SoftBodyConfig config = softBody.getSoftConfig();
+config.setPositionIterations(numIterations);  // default=1</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stiffness_coefficients"><a class="anchor" href="#_stiffness_coefficients"></a>Stiffness coefficients</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each soft body has 3 stiffness coefficients.
+These are stored in its "material" object,
+which can be accessed using <code>getSoftMaterial()</code>.
+Soft bodies and their material objects are one-to-one.</p>
+</div>
+<div class="paragraph">
+<p>To simulate an object that flexes easily (such as cloth), create a soft
+body with many faces and set its angular-stiffness coefficient
+to a small value (such as zero):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PhysicsSoftBody.Material softMaterial = softBody.getSoftMaterial();
+softMaterial.setAngularStiffness(0f); // default=1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a simple example of cloth simulation, see
+<a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloCloth.java">HelloCloth</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mass_distribution"><a class="anchor" href="#_mass_distribution"></a>Mass distribution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a node is appended to a soft body, it has mass=1.
+To alter the mass of a pre-existing node, use the <code>setNodeMass()</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">softBody.setNodeMass(nodeIndex, desiredMass);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also alter the total mass of a soft body, distributing the mass across
+the pre-existing nodes in various ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>in proportion to the current mass of each node, using <code>setMassByCurrent()</code>,</p>
+</li>
+<li>
+<p>in proportion to the area of adjacent faces, using <code>setMassByArea()</code>, or</p>
+</li>
+<li>
+<p>in a custom fashion, using <code>setMasses()</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>softBody.setMass()</code> is equivalent to <code>setMassByCurrent()</code>.</p>
+</div>
+<div class="paragraph">
+<p>If a soft-body node has mass=0, it becomes <em>pinned</em> (immovable, like a static
+rigid body).</p>
+</div>
+<div class="paragraph">
+<p>For a simple example of a pinned node, see
+<a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloPin.java">HelloPin.java</a>.</p>
+</div>
+<div class="paragraph">
+<p>TODO: ropes, applying forces, anchors, soft joints, world info, aerodynamics</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_clusters"><a class="anchor" href="#_clusters"></a>Clusters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, soft-body collisions are handled using nodes and faces.
+As an alternative, they can be handled using groups of connected nodes
+(called "clusters").
+To enable cluster-based rigid-soft collisions for a specific soft body,
+set its <code>CL_RS</code> collision flag.
+To enable cluster-based soft-soft collisions, set its <code>CL_SS</code> flag.</p>
+</div>
+<div class="paragraph">
+<p>Clusters can overlap, but they can&#8217;t span multiple bodies.
+In other words, a single node can belong to multiple clusters,
+but a single cluster can&#8217;t contain nodes from multiple bodies.</p>
+</div>
+<div class="paragraph">
+<p>When a soft body is created, it doesn&#8217;t have any clusters.
+Once nodes are appended to a body, clusters can be generated automatically,
+using an iterative algorithm that&#8217;s built into Bullet:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">softBody.generateClusters(k, numIterations);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Soft bodies are a convenient and efficient way to simulate
+objects that can be deformed.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="collision.html">Managing collisions</a></span>
+  <span class="next"><a href="debug.html">Debug aids</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

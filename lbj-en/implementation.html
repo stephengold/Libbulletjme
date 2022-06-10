@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>How Libbulletjme works :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/implementation.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="How Libbulletjme works">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li><a href="implementation.html">Implementation</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/implementation.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">How Libbulletjme works</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>For physics simulation and collision detection,
+Libbulletjme uses <a href="https://pybullet.org/wordpress">the <em>Bullet Physics SDK</em></a>,
+a mature, open-source, 3-D physics simulator,
+released under <a href="https://github.com/bulletphysics/bullet3/blob/master/LICENSE.txt">a Zlib license</a>.</p>
+</div>
+<div class="paragraph">
+<p>To enable efficient simulation of moving meshes,
+Libbulletjme also incorporates Khaled Mamou&#8217;s
+<a href="https://github.com/kmammou/v-hacd">Volumetric-Hierarchical Approximate Convex Decomposition <em>(V-HACD)</em> algorithm</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_native_libraries"><a class="anchor" href="#_native_libraries"></a>Native libraries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bullet and V-HACD are written in C&#43;&#43;, so Libbulletjme uses
+<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/intro.html">the Java Native Interface (JNI)</a>
+to access their objects and methods.</p>
+</div>
+<div class="paragraph">
+<p>All C&#43;&#43; source code in Libbulletjme
+(a modified partial snapshot of Bullet, a snapshot of V-HACD, and some "glue code")
+resides in its "src/native" directory.
+Before instantiating physics objects,
+a Libbulletjme application must <a href="https://en.wikipedia.org/wiki/Dynamic_loading">dynamically load</a>
+a <em>native library</em> of this code,
+compiled for the <a href="https://en.wikipedia.org/wiki/Computing_platform">platform</a>
+on which the app is executing.</p>
+</div>
+<div class="paragraph">
+<p>Libbulletjme publishes native libraries for 14 different platforms.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+32-bit and 64-bit versions of the same operating system
+count as distinct platforms!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For each platform, Libbulletjme builds 2 types of libraries:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"Debug" (for development use) and</p>
+</li>
+<li>
+<p>"Release" (for production use).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Furthermore, native libraries come in various flavors, including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"Sp" (using <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">single-precision arithmetic</a>,
+single-threaded, without profiling),</p>
+</li>
+<li>
+<p>"SpMt" (similar to "Sp", but multithreaded),</p>
+</li>
+<li>
+<p>"SpQuickprof" (similar to "Sp", but with Quickprof
+<a href="https://en.wikipedia.org/wiki/Profiling_(computer_programming)">profiling</a>), and</p>
+</li>
+<li>
+<p>"Dp" (similar to "Sp" but using
+<a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">double-precision arithmetic</a>).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All these native libraries share a common API,
+so a single Java library suffices.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_collision_objects_spaces_and_shapes"><a class="anchor" href="#_collision_objects_spaces_and_shapes"></a>Collision objects, spaces, and shapes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Collision detection is organized around <em>collision objects</em>
+that interact in the context of a <em>collision space</em>.
+Collision objects can be <em>soft</em> (varying shape) or <em>rigid</em> (non-varying shape).
+Rigid objects can be <em>mobile</em> (moving) or <em>static</em> (non-moving).
+And mobile objects can be <em>dynamic</em> (driven by <a href="https://en.wikipedia.org/wiki/Force">forces</a>,
+<a href="https://en.wikipedia.org/wiki/Torque">torques</a>, and <a href="https://en.wikipedia.org/wiki/Impulse_(physics)">impulses</a>)
+or <em>kinematic</em> (driven directly by external calculations).</p>
+</div>
+<div class="paragraph">
+<p>In Libbulletjme, collision spaces that simulate forces, torques, and impulses
+are referred to as <em>physics spaces</em>.</p>
+</div>
+<div class="paragraph">
+<p>Each rigid collision object references a <em>collision shape</em>
+that describes the shape of its surface.
+Most collision shapes are <em>scalable</em>,
+allowing you to grow/shrink objects
+simply by varying the shape&#8217;s scale factors.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_coordinate_systems_and_units"><a class="anchor" href="#_coordinate_systems_and_units"></a>Coordinate systems and units</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A collision object&#8217;s absolute location and orientation are quantified
+in <em>physics-space coordinates</em>,
+based on a right-handed Cartesian coordinate system.</p>
+</div>
+<div class="paragraph">
+<p>With notable exceptions,
+Libbulletjme doesn&#8217;t specify real-world units for distance.
+Instead, its documentation refers to <em>physics-space units</em> (psu),
+which could be light-years or millimeters, depending on the application.
+Nor does Libbulletjme specify which axis serves as the "up" direction.
+If you use a Y-up coordinate system with a psu of one meter,
+then Libbulletjme&#8217;s default gravity
+will be roughly correct for the Earth&#8217;s surface.
+However, there are good reasons to use physics-space units other than meters.</p>
+</div>
+<div class="paragraph">
+<p>Locations relative to a collision object&#8217;s center and subject to its rotation
+are quantified using <em>local coordinates</em>.
+The documentation distinguishes <em>scaled local coordinates</em> (measured in psu)
+from <em>shape coordinates</em> (which depend on scale factors).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_discrete_time_and_collision_detection"><a class="anchor" href="#_discrete_time_and_collision_detection"></a>Discrete time and collision detection</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Within a physics space, simulation occurs in discrete <em>time steps</em>.
+While it&#8217;s possible to vary the step size from step to step,
+a fixed step size tends to yield more reproducible results.</p>
+</div>
+<div class="paragraph">
+<p>Each time step consists of 4 <em>phases</em>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><em>forward dynamics part one</em>,
+to apply known forces and torques
+and predict the next position of each collision object,</p>
+</li>
+<li>
+<p><em>broadphase collision detection</em>,
+to quickly determine (using axis-aligned bounding boxes)
+which object pairs might possibly collide,</p>
+</li>
+<li>
+<p><em>narrowphase collision detection</em>,
+to compute actual contacts (if any) between between objects, and</p>
+</li>
+<li>
+<p><em>forward dynamics part 2</em>,
+to apply contact forces, solve constraints, and update positions.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For fast-moving objects,
+Libbulletjme offers optional continuous collision detection (CCD)
+using swept spheres.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_direct_buffers_gc_and_threading"><a class="anchor" href="#_direct_buffers_gc_and_threading"></a>Direct buffers, GC, and threading</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Direct buffers used in Libbulletjme should have native byte order.</p>
+</div>
+<div class="paragraph">
+<p>All other native objects created by Libbulletjme are carefully tracked using
+weak references.</p>
+</div>
+<div class="paragraph">
+<p>Successful initialization of a native library causes Libbulletjme
+to start a daemon thread named "Physics Cleaner".
+Its purpose is to free any tracked native objects
+whose corresponding java objects have been garbage collected (GC&#8217;ed).</p>
+</div>
+<div class="paragraph">
+<p>As a performance enhancement,
+Libbulletjme can parallelize certain for-loops on platforms that support OpenMP.
+To enable this feature, a multi-threaded native library must be loaded.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For more detail about Bullet physics, download and read the
+<a href="https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf">Bullet User Manual</a>.</p>
+</div>
+<div class="paragraph">
+<p>To gain hands-on experience,
+proceed to <a href="add.html" class="xref page">the first tutorial page</a>.</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
