@@ -1,0 +1,19 @@
+---
+# configure Antora for deployment
+
+site:
+  title: The Libbulletjme project
+  start_page: lbj-en:ROOT:overview.adoc
+  url: https://stephengold.github.io/Libbulletjme
+content:
+  sources:
+    - url: https://github.com/stephengold/LbjExamples.git
+      branches: master
+      start_path: docs/en
+ui:
+  bundle:
+    url: https://github.com/stephengold/antora-ui-bundle/releases/download/v-sgold220125a/ui-bundle.zip
+    snapshot: true
+output:
+  clean: true
+  dir: build/site
