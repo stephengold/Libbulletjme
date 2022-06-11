@@ -103,6 +103,9 @@
     <a class="nav-link" href="demos.html">Demo apps</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="lexicon.html">Type lexicon</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
 <ul class="nav-list">
@@ -322,6 +325,129 @@ Please don&#8217;t use this software in safety-critical applications.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_whats_missing"><a class="anchor" href="#_whats_missing"></a>What&#8217;s missing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bullet is a complex project, and
+Libbulletjme doesn&#8217;t yet provide access to all of its features.
+In particular:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>btRigidBodyConstructionInfo</code></p>
+</li>
+<li>
+<p>"additional damping" for rigid bodies</p>
+</li>
+<li>
+<p>Bullet&#8217;s debug drawer (however, an OpenGL-based graphics engine is available)</p>
+</li>
+<li>
+<p>serialization (file loader)</p>
+</li>
+<li>
+<p>certain constraints:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>btFixedConstraint</code></p>
+</li>
+<li>
+<p><code>btUniversalConstraint</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>certain collision shapes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>btCompoundFromGimpactShape</code></p>
+</li>
+<li>
+<p><code>btConvexPointCloudShape</code></p>
+</li>
+<li>
+<p><code>btConvexTriangleMeshShape</code></p>
+</li>
+<li>
+<p><code>btGImpactCompoundShape</code></p>
+</li>
+<li>
+<p><code>btMinkowskiSumShape</code></p>
+</li>
+<li>
+<p><code>btMultimaterialTriangleMeshShape</code></p>
+</li>
+<li>
+<p><code>btScaledBvhTriangleMeshShape</code></p>
+</li>
+<li>
+<p><code>btSdfCollisionShape</code></p>
+</li>
+<li>
+<p><code>btTriangleShape</code></p>
+</li>
+<li>
+<p><code>btUniformScalingShape</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>certain world types:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>btDeformableMultiBodyDynamicsWorld</code></p>
+</li>
+<li>
+<p><code>btSimpleDynamicsWorld</code></p>
+</li>
+<li>
+<p><code>btSoftMultiBodyDynamicsWorld</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>inverse dynamics</p>
+</li>
+<li>
+<p>Bullet v3</p>
+</li>
+<li>
+<p>Bullet extras, examples, and tests</p>
+</li>
+<li>
+<p>execution logging/tracing</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Furthermore, Libbulletjme hasn&#8217;t yet been ported to the following platforms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the FreeBSD and iOS operating systems</p>
+</li>
+<li>
+<p>Windows on ARM architectures</p>
+</li>
+<li>
+<p>PowerPC architectures</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We welcome suggestions concerning the future development of Libbulletjme.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_getting_help"><a class="anchor" href="#_getting_help"></a>Getting help</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -334,6 +460,22 @@ Please don&#8217;t use this software in safety-critical applications.</p>
 <p>For issues that are best handled privately, contact Stephen by e-mail.
 His personal e-mail address appears
 on <a href="https://stephengold.github.io/">his homepage</a> and in the source code.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_name"><a class="anchor" href="#_the_name"></a>The name</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The project&#8217;s (somewhat awkward) name
+reflects that fact that it was originally created
+for the JMonkeyEngine (JME) game engine.</p>
+</div>
+<div class="paragraph">
+<p>Despite its history, Libbulletjme is self-contained;
+it doesn&#8217;t depend on JME.
+If you&#8217;re seeking a physics engine that&#8217;s integrated with JME,
+please consider <a href="https://stephengold.github.io/Minie">Minie</a>.</p>
 </div>
 </div>
 </div>

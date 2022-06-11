@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/lexicon.html">
+    <meta name="generator" content="Antora 3.0.1">
+    <link rel="stylesheet" href="../_/css/site.css">
+<meta property="og:image" content="../_/img/iconx128.png">
+<meta property="og:description" content="">
+<meta property="og:title" content="The Libbulletjme project">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
+        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        The Libbulletjme project
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Color themes</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="setTheme('canyon')">Canyon</a>
+            <a class="navbar-item" onclick="setTheme('dark')">Dark</a>
+            <a class="navbar-item" onclick="setTheme('jungle')">Jungle</a>
+            <a class="navbar-item" onclick="setTheme('light')">Light</a>
+            <a class="navbar-item" onclick="setTheme('pastel')">Pastel</a>
+            <a class="navbar-item" onclick="setTheme('phosphor')">Phosphor<a>
+            <a class="navbar-item" style="padding-top: 5px;padding-left: 1px;padding-right: 1px;"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="lbj-en" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="overview.html">Project links</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="implementation.html">Implementation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library tutorials</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="add.html">Add to existing project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="sport.html">SPORT visualization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rigidbody.html">Rigid bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="shape.html">Collision shapes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="character.html">Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="vehicle.html">Vehicles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="new6dof.html">New6Dof constraints</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="collision.html">Managing collisions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="softbody.html">Soft bodies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="debug.html">Debug aids</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc.html">Miscellany</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="build.html">Build procedures</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="demos.html">Demo apps</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="lexicon.html">Type lexicon</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme">Git repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases/latest">Latest release</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md">Release log</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/commits/master">Recent commits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues">Issue tracker</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/issues/new">File an issue</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Library APIs (javadoc)</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Libbulletjme/javadoc/master">Master branch</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Libbulletjme at other sites</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://repo1.maven.org/maven2/com/github/stephengold/Libbulletjme">Maven Central download</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://search.maven.org/artifact/com.github.stephengold/Libbulletjme">Maven Central search</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jitpack.io/#stephengold/Libbulletjme">JitPack (unofficial)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Projects using Libbulletjme</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io/Minie">Minie</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://dynamx.fr/">DynamX</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Other related projects</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://pybullet.org/wordpress">Bullet</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://jmonkeyengine.org">JMonkeyEngine</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/Simsilica/SimMath">SimMath</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/kmammou/v-hacd">V-HACD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/antora-ui-bundle">Website UI bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">People</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://stephengold.github.io">Stephen Gold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <span class="nav-text">Yanis Boudiaf</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">The Libbulletjme project</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">The Libbulletjme project</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="overview.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle-label">Project links</span>
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="overview.html">The Libbulletjme project</a></li>
+    <li><a href="lexicon.html">Type lexicon</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/lexicon.adoc">Edit this page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_lexicon_of_type_names"><a class="anchor" href="#_lexicon_of_type_names"></a>Lexicon of type names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When reading the documentation for the native code,
+it may help to know the correspondences
+between C++ class/struct/enum names and Java class names.
+The following table documents those correspondences.</p>
+</div>
+<table class="tableblock frame-all grid-none stretch">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Bullet v2 C++ type name</th>
+<th class="tableblock halign-left valign-top">Java class name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btBox2dShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.Box2dShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btBoxShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.BoxCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btBU_Simplex1to4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.SimplexCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btBvhTriangleMeshShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3 .bullet.collision.shapes.MeshCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCapsuleShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3 .bullet.collision.shapes.CapsuleCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionObject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3 .bullet.collision.PhysicsCollisionObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionObject::CollisionFlags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3 .bullet.collision.CollisionFlag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionObject::CollisionObjectTypes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.PcoType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.CollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionWorld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.CollisionSpace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionWorld::LocalConvexResult</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.PhysicsSweepTestResult</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCollisionWorld::LocalRayResult</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.PhysicsRayTestResult</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCompoundShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.CompoundCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCompoundShapeChild</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.info.ChildCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btConeShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.ConeCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btConeTwistConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.ConeJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btConstraintParams</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.motors.MotorParam</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btContactPointFlags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.ContactPointFlag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btContactSolverInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.SolverInfo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btConvex2dShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.Convex2dShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btConvexHullShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.HullCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btConvexShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.ConvexShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btCylinderShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.CylinderCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btDiscreteDynamicsWorld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.PhysicsSpace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btEmptyShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.EmptyShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btGearConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.GearJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btGeneric6DofConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.SixDofJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btGeneric6DofSpring2Constraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.New6Dof</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btGeneric6DofSpringConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.SixDofSpringJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btGImpactMeshShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.GImpactCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btHeightfieldTerrainShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.HeightfieldCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btHinge2Constraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.NewHinge</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btHingeConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.HingeJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btIndexedMesh</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.infos.IndexedMesh</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btKinematicCharacterController</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.infos.CharacterController</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btManifoldPoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.PhysicsCollisionEvent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMatrix3x3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.math.Matrix3f</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMultiBody</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.MultiBody</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMultiBodyCollider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.MultiBodyCollider</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMultiBodyLink</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.MultiBodyLink</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMultiBodyLink::eFeatherstoneJointType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.MultiBodyJointType</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMultiBodyDynamicsWorld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.MultiBodySpace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btMultiSphereShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.MultiSphere</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btOptimizedBvh</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btPairCachingGhostObject</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.PhysicsGhostObject</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btPersistentManifold</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.PersistentManifolds</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btPoint2PointConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.Point2PointJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btQuaternion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.math.Quaternion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btRaycastVehicle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.infos.VehicleController</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btRaycastVehicle::btVehicleTuning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.infos.VehicleTuning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btRigidBody</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.PhysicsRigidBody</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btRotationalLimitMotor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.motors.RotationalLimitMotor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btRotationalLimitMotor2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.motors.RotationMotor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSliderConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.SliderJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.PhysicsSoftBody</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::AJoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.SoftAngularJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::Anchor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.Anchor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::Body</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.object.PhysicsBody</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::Config</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.infos.SoftBodyConfig</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::eAeroModel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.infos.Aero</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::Joint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.SoftPhysicsJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::LJoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.SoftLinearJoint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBody::Material</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.infos.SoftBodyMaterial</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftBodyWorldInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.SoftBodyWorldInfo</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSoftRigidDynamicsWorld</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.PhysicsSoftSpace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSolverMode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.SolverMode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btSphereShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.SphereCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btStaticPlaneShape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.PlaneCollisionShape</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btTransform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.math.Transform</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btTranslationalLimitMotor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.motors.TranslationalLimitMotor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btTranslationalLimitMotor2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.motors.TranslationMotor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btTriangleIndexVertexArray</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.collision.shapes.infos.CompoundMesh</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btTriangleRaycastCallback::Eflags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.RayTestFlag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btTypedConstraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.joints.Constraint</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btVector3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.math.Vector3f</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">btWheelInfo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.objects.VehicleWheel</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IVHACD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vhacd.VHACD</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IVHACD::ConvexHull</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vhacd.VHACDHull</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IVHACD::Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vhacd.VHACDParameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RotateOrder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">com.jme3.bullet.RotationOrder</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Page contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>Copyright &copy; 2020&ndash;2022 by Stephen Gold</p>
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
