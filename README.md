@@ -52,27 +52,7 @@ standalone Maven artifacts are provided.
 
 ## How to add Libbulletjme to an existing project
 
- 1. For projects built using Gradle, add the following dependency:
-
-        repositories {
-            mavenCentral()
-        }
-        dependencies {
-            implementation 'com.github.stephengold:Libbulletjme:15.1.0'
-        }
-
-    For some older versions of Gradle,
-    it's necessary to replace `implementation` with `compile`.
-
- 2. Download appropriate native libraries from [GitHub][latest].
-    You probably don't need all 56 native libraries.
-    Start with the ReleaseSp library for your development environment
-    (for instance, "Linux64ReleaseSp_libbulletjme.so" for Linux on x86_64).
-
- 3. Load the native library:
-
-        import com.jme3.system.NativeLibraryLoader;
-        NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Release", "Sp");
+[How to add Libbulletjme to an existing project](https://stephengold.github.io/Libbulletjme/lbj-en/add.html)
 
 [Jump to table of contents](#toc)
 
@@ -94,50 +74,7 @@ standalone Maven artifacts are provided.
 
 ## How to build Libbulletjme from source
 
-1. Install build software:
-  + a [Java Development Kit (JDK)][adoptium],
-   if you don't already have one, and
-  + one of the supported C++ compilers:
-    + for Linux:  the [GNU Compiler Collection][gcc] or [Clang][llvm]
-    + for Windows:  Microsoft Visual Studio
-    + for macOS:  Xcode
-2. Point the `JAVA_HOME` environment variable to your JDK installation:
-  + using Bash or Zsh: `export JAVA_HOME="` *path to your JDK* `"`
-  + using Windows Command Prompt:  `set JAVA_HOME="` *path to your JDK* `"`
-  + using PowerShell: `$env:JAVA_HOME = '` *path to your JDK* `'`
-3. Download and extract the Libbulletjme source code from GitHub:
-  + using Git:
-    + `git clone https://github.com/stephengold/Libbulletjme.git`
-    + `cd Libbulletjme`
-    + `git checkout -b latest 15.1.0`
-  + using a web browser:
-    + browse to [the latest release](https://github.com/stephengold/Libbulletjme/releases/latest)
-    + follow the "Source code (zip)" link
-    + save the ZIP file
-    + extract the contents of the saved ZIP file
-    + `cd` to the extracted directory/folder
-4. Run the [Gradle] wrapper on the desktop build script:
-  + using Bash or PowerShell or Zsh: `./gradlew build`
-  + using Windows Command Prompt: `.\gradlew build`
-5. Building Android native libraries requires additional software:
-  + the Android SDK Tools
-  + the Android SDK Patch Applier (patcher)
-  + version 21.3.6528147 of the Android Native Development Kit (NDK)
-6. Run the [Gradle] wrapper on the Android build script:
-  + using Bash or PowerShell or Zsh: `./gradlew copyToDist --build-file=android.gradle`
-  + using Windows Command Prompt: `.\gradlew copyToDist --build-file=android.gradle`
-
-After a successful build,
-Maven artifacts and native libraries will be found
-in the "dist" directory/folder.
-
-You can install the artifacts to your local Maven repository:
-+ using Bash or PowerShell or Zsh: `./gradlew install`
-+ using Windows Command Prompt: `.\gradlew install`
-
-You can restore the project to a pristine state:
-+ using Bash or PowerShell or Zsh: `./gradlew clean`
-+ using Windows Command Prompt: `.\gradlew clean`
+[How to build Libbulletjme from source](https://stephengold.github.io/Libbulletjme/lbj-en/build.html)
 
 [Jump to table of contents](#toc)
 
@@ -146,95 +83,7 @@ You can restore the project to a pristine state:
 
 ## Lexicon of class/enum/struct names
 
-<pre>
-Bullet v2 C++ type:                     corresponding Java class: com.jme3...
-===================                     =====================================
-btBox2dShape                            .bullet.collision.shapes.Box2dShape
-btBoxShape                              .bullet.collision.shapes.BoxCollisionShape
-btBU_Simplex1to4                        .bullet.collision.shapes.SimplexCollisionShape
-btBvhTriangleMeshShape                  .bullet.collision.shapes.MeshCollisionShape
-btCapsuleShape                          .bullet.collision.shapes.CapsuleCollisionShape
-btCollisionObject                       .bullet.collision.PhysicsCollisionObject
-btCollisionObject::CollisionFlags       .bullet.collision.CollisionFlag
-btCollisionObject::CollisionObjectTypes .bullet.collision.PcoType
-btCollisionShape                        .bullet.collision.shapes.CollisionShape
-btCollisionWorld                        .bullet.CollisionSpace
-btCollisionWorld::LocalConvexResult     .bullet.collision.PhysicsSweepTestResult
-btCollisionWorld::LocalRayResult        .bullet.collision.PhysicsRayTestResult
-btCompoundShape                         .bullet.collision.shapes.CompoundCollisionShape
-btCompoundShapeChild                    .bullet.collision.shapes.info.ChildCollisionShape
-btConeShape                             .bullet.collision.shapes.ConeCollisionShape
-btConeTwistConstraint                   .bullet.joints.ConeJoint
-btConstraintParams                      .bullet.joints.motors.MotorParam
-btContactPointFlags                     .bullet.collision.ContactPointFlag
-btContactSolverInfo                     .bullet.SolverInfo
-btConvex2dShape                         .bullet.collision.shapes.Convex2dShape
-btConvexHullShape                       .bullet.collision.shapes.HullCollisionShape
-btConvexShape                           .bullet.collision.shapes.ConvexShape
-btCylinderShape                         .bullet.collision.shapes.CylinderCollisionShape
-btDiscreteDynamicsWorld                 .bullet.PhysicsSpace
-btEmptyShape                            .bullet.collision.shapes.EmptyShape
-btGearConstraint                        .bullet.joints.GearJoint
-btGeneric6DofConstraint                 .bullet.joints.SixDofJoint
-btGeneric6DofSpring2Constraint          .bullet.joints.New6Dof
-btGeneric6DofSpringConstraint           .bullet.joints.SixDofSpringJoint
-btGImpactMeshShape                      .bullet.collision.shapes.GImpactCollisionShape
-btHeightfieldTerrainShape               .bullet.collision.shapes.HeightfieldCollisionShape
-btHinge2Constraint                      .bullet.joints.NewHinge
-btHingeConstraint                       .bullet.joints.HingeJoint
-btIndexedMesh                           .bullet.collision.shapes.infos.IndexedMesh
-btKinematicCharacterController          .bullet.objects.infos.CharacterController
-btManifoldPoint                         .bullet.collision.PhysicsCollisionEvent
-btMatrix3x3                             .math.Matrix3f
-btMultiBody                             .bullet.MultiBody
-btMultiBodyCollider                     .bullet.objects.MultiBodyCollider
-btMultiBodyLink                         .bullet.MultiBodyLink
-btMultiBodyLink::eFeatherstoneJointType .bullet.MultiBodyJointType
-btMultiBodyDynamicsWorld                .bullet.MultiBodySpace
-btMultiSphereShape                      .bullet.collision.shapes.MultiSphere
-btOptimizedBvh                          .bullet.collision.shapes.infos.BoundingValueHierarchy
-btPairCachingGhostObject                .bullet.objects.PhysicsGhostObject
-btPersistentManifold                    .bullet.collision.PersistentManifolds
-btPoint2PointConstraint                 .bullet.joints.Point2PointJoint
-btQuaternion                            .math.Quaternion
-btRaycastVehicle                        .bullet.objects.infos.VehicleController
-btRaycastVehicle::btVehicleTuning       .bullet.objects.infos.VehicleTuning
-btRigidBody                             .bullet.objects.PhysicsRigidBody
-btRotationalLimitMotor                  .bullet.joints.motors.RotationalLimitMotor
-btRotationalLimitMotor2                 .bullet.joints.motors.RotationMotor
-btSliderConstraint                      .bullet.joints.SliderJoint
-btSoftBody                              .bullet.objects.PhysicsSoftBody
-btSoftBody::AJoint                      .bullet.joints.SoftAngularJoint
-btSoftBody::Anchor                      .bullet.joints.Anchor
-btSoftBody::Body                        .bullet.object.PhysicsBody
-btSoftBody::Config                      .bullet.objects.infos.SoftBodyConfig
-btSoftBody::eAeroModel                  .bullet.objects.infos.Aero
-btSoftBody::Joint                       .bullet.joints.SoftPhysicsJoint
-btSoftBody::LJoint                      .bullet.joints.SoftLinearJoint
-btSoftBody::Material                    .bullet.objects.infos.SoftBodyMaterial
-btSoftBodyWorldInfo                     .bullet.SoftBodyWorldInfo
-btSoftRigidDynamicsWorld                .bullet.PhysicsSoftSpace
-btSolverMode                            .bullet.SolverMode
-btSphereShape                           .bullet.collision.shapes.SphereCollisionShape
-btStaticPlaneShape                      .bullet.collision.shapes.PlaneCollisionShape
-btTransform                             .math.Transform
-btTranslationalLimitMotor               .bullet.joints.motors.TranslationalLimitMotor
-btTranslationalLimitMotor2              .bullet.joints.motors.TranslationMotor
-btTriangleIndexVertexArray              .bullet.collision.shapes.infos.CompoundMesh
-btTriangleRaycastCallback::Eflags       .bullet.RayTestFlag
-btTypedConstraint                       .bullet.joints.Constraint
-btVector3                               .math.Vector3f
-btWheelInfo                             .bullet.objects.VehicleWheel
-RotateOrder                             .bullet.RotationOrder
-</pre>
-
-<pre>
-V-HACD C++ type:    corresponding Java class:
-================    =========================
-IVHACD              vhacd.VHACD
-IVHACD::ConvexHull  vhacd.VHACDHull
-IVHACD::Parameters  vhacd.VHACDParameters
-</pre>
+[Lexicon of class/enum/struct names](https://stephengold.github.io/Libbulletjme/lbj-en/lexicon.html)
 
 [Jump to table of contents](#toc)
 
@@ -243,37 +92,7 @@ IVHACD::Parameters  vhacd.VHACDParameters
 
 ## What's missing
 
- + native libraries for:
-   + the FreeBSD and iOS operating systems
-   + Windows on ARM architectures
-   + PowerPC architectures
- + `btRigidBodyConstructionInfo`
- + "additional damping" for rigid bodies
- + debug drawer
- + serialization (file loader)
- + certain constraints:
-   + `btFixedConstraint`
-   + `btUniversalConstraint`
- + certain collision shapes:
-   + `btCompoundFromGimpactShape`
-   + `btConvexPointCloudShape`
-   + `btConvexTriangleMeshShape`
-   + `btGImpactCompoundShape`
-   + `btMinkowskiSumShape`
-   + `btMultimaterialTriangleMeshShape`
-   + `btScaledBvhTriangleMeshShape`
-   + `btSdfCollisionShape`
-   + `btTriangleShape`
-   + `btUniformScalingShape`
- + certain world types:
-   + `btDeformableMultiBodyDynamicsWorld`
-   + `btSimpleDynamicsWorld`
-   + `btSoftMultiBodyDynamicsWorld`
- + inverse dynamics
- + Bullet v3
- + extras, examples, and tests
- + execution logging/tracing
- + `btAssert()` should perhaps throw a Java exception
+[What's missing](https://stephengold.github.io/Libbulletjme/lbj-en/overview.html#_whats_missing)
 
 [Jump to table of contents](#toc)
 
