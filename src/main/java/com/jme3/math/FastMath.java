@@ -138,6 +138,17 @@ final public class FastMath {
     }
 
     /**
+     * Returns the tangent of the specified angle.
+     *
+     * @param fValue The value to tangent, in radians.
+     * @return The tangent of fValue.
+     * @see java.lang.Math#tan(double)
+     */
+    public static float tan(float fValue) {
+        return (float) Math.tan(fValue);
+    }
+
+    /**
      * Determine if two floats are approximately equal.
      * This takes into account the magnitude of the floats, since
      * large numbers will have larger differences be close to each other.
