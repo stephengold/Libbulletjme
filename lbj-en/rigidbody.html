@@ -118,7 +118,7 @@
     <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/releases">Recent releases</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">Read-me file</a>
+    <a class="nav-link" href="https://github.com/stephengold/Libbulletjme/blob/master/README.md">ReadMe file</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">License</a>
@@ -364,7 +364,7 @@ as if its mass were infinite.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloStaticBody.java">HelloStaticBody</a>
-is an app that combines static and dynamic rigid bodies.
+is a SPORT app that combines static and dynamic rigid bodies.
 Things to notice while running the app:</p>
 </div>
 <div class="olist arabic">
@@ -448,7 +448,7 @@ in the choice of center and local axes.</p>
 Like dynamic bodies, kinematic ones can move.
 However, they are unaffected by forces, torques, and impulses.
 Their movement is dictated by application logic that may, if desired,
-reposition them before each time step.</p>
+reposition them before each simulation step.</p>
 </div>
 <div class="paragraph">
 <p>In the presence of dynamic bodies, a kinematic body acts like
@@ -472,7 +472,7 @@ rigidBody.setKinematic(true);</code></pre>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloKinematics.java">HelloKinematics</a>
-is an app that combines kinematic and dynamic rigid bodies.
+is a SPORT app that combines kinematic and dynamic rigid bodies.
 Things to notice while running the app:</p>
 </div>
 <div class="olist arabic">
@@ -506,7 +506,7 @@ use <code>rigidBody.setContactResponse(false)</code>.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloContactResponse.java">HelloContactResponse</a>
-is an app that demonstrates contact response.
+is a SPORT app that demonstrates contact response.
 Things to notice while running the app:</p>
 </div>
 <div class="olist arabic">
@@ -545,7 +545,7 @@ On keyboards with other layouts, keys may be labeled differently.
 <h3 id="_velocity"><a class="anchor" href="#_velocity"></a>Velocity</h3>
 <div class="paragraph">
 <p>Every dynamic body has a <em>velocity</em> that quantifies its motion as of the
-end of the last time step (or the start of the next).</p>
+end of the last simulation step (and the start of the next).</p>
 </div>
 <div class="paragraph">
 <p>More precisely, it has 2 velocities: <em>linear velocity</em> and <em>angular velocity</em>,
@@ -686,7 +686,7 @@ rigidBody.setDamping(linearDamping, angularDamping);</code></pre>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloDamping.java">HelloDamping</a>
-is an app that demonstrates damping.
+is a SPORT app that demonstrates damping.
 Things to notice while running the app:</p>
 </div>
 <div class="olist arabic">
@@ -757,9 +757,9 @@ to which it&#8217;s added, use <code>rigidBody.setProtectGravity(true)</code>.</
 </div>
 <div class="paragraph">
 <p>To simulate a non-uniform gravitational field,
-update the gravity of each body prior to each simulation step.
+update the gravity of each body before each simulation step.
 <a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloNonUniformGravity.java">HelloNonUniformGravity</a>
-is an app that demonstrates this technique.
+is a SPORT app that demonstrates this technique.
 The planet orbits a black hole whose location is indicated by colored arrows.</p>
 </div>
 <div class="admonitionblock note">
@@ -940,7 +940,7 @@ because the events listed above do not, by themselves, reactivate it.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloDeactivation.java">HelloDeactivation</a>
-is an app that demonstrates deactivation.
+is a SPORT app that demonstrates deactivation.
 Things to notice while running the app:</p>
 </div>
 <div class="olist arabic">
@@ -969,8 +969,8 @@ Due to deactivation, it seems to be "stuck".</p>
 involves a fast-moving dynamic body passing through a thin obstacle
 without any collision being detected.
 The issue arises because the body can pass from one side of the obstacle to
-the other in a single time step.
-The dynamic body doesn&#8217;t intersect the obstacle on any time step,
+the other in a single simulation step.
+The dynamic body doesn&#8217;t intersect the obstacle after any step,
 so no collision is detected and no contact forces are simulated.</p>
 </div>
 <div class="paragraph">
@@ -981,7 +981,7 @@ this approach quickly becomes inefficient.</p>
 <div class="paragraph">
 <p>To solve this issue,
 the simulator offers <em>continuous collision detection</em> (CCD),
-an algorithm for detecting collisions that occur <strong>between</strong> time steps.
+an algorithm for detecting collisions that occur <strong>between</strong> simulation steps.
 CCD substitutes a sphere for the collision shape of the fast-moving body,
 sweeps that sphere forward along the body&#8217;s projected path,
 and performs detailed collision tests on any potential
@@ -990,7 +990,7 @@ obstacles found during the sweep.</p>
 <div class="paragraph">
 <p>Because CCD involves extra computation, it&#8217;s disabled by default.
 Since it&#8217;s only necessary for fast-moving bodies, it&#8217;s enabled only
-when a body&#8217;s distance traveled per time step exceeds a threshold.
+when a body&#8217;s distance traveled per simulation step exceeds a threshold.
 To enable CCD for a particular rigid body,
 set its activation threshold to a positive value using
 <code>rigidBody.setCcdMotionThreshold(distancePerTimeStep)</code>.</p>
@@ -1012,7 +1012,7 @@ Here&#8217;s a heuristic that works well for many situations:</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloCcd.java">HelloCcd</a>
-is an app that demonstrates CCD.
+is a SPORT app that demonstrates CCD.
 Things to notice while running the app:</p>
 </div>
 <div class="olist arabic">
@@ -1025,7 +1025,7 @@ Things to notice while running the app:</p>
 </li>
 <li>
 <p>The control ball (on the right) falls through the platform,
-passing from one side to the other in a single time step.</p>
+passing from one side to the other in a single simulation step.</p>
 </li>
 </ol>
 </div>
@@ -1065,7 +1065,7 @@ passing from one side to the other in a single time step.</p>
 <p>Movement</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>prior to first time step only: <code>setPhysicsLocation()</code> <code>setPhysicsRotation()</code></p>
+<p>prior to first simulation step only: <code>setPhysicsLocation()</code> <code>setPhysicsRotation()</code></p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><code>setPhysicsLocation()</code> <code>setPhysicsRotation()</code></p>
