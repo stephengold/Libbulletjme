@@ -270,7 +270,8 @@ resulting in a list of <em>manifolds</em> where the shapes intersect.</p>
 </div>
 <div class="paragraph">
 <p>Each manifold is composed of up to 4 <em>contact points</em>.
-Rigid-body dynamics use manifolds and contact points implement contact response,
+Bullet&#8217;s rigid-body dynamics
+uses manifolds and contact points implement contact response,
 including friction and restitution.</p>
 </div>
 <div class="paragraph">
@@ -537,6 +538,10 @@ When the distance is positive, there&#8217;s no intersection.
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/ConveyorDemo.java"><code>ConveyorDemo</code></a> is a SPORT app
+that implements conveyor belts using contact-point modification.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -585,8 +590,10 @@ That mechanism is now deprecated.
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ray_testing"><a class="anchor" href="#_ray_testing"></a>Ray testing</h2>
+<h2 id="_intersection_tests"><a class="anchor" href="#_intersection_tests"></a>Intersection tests</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_ray_test"><a class="anchor" href="#_ray_test"></a>Ray test</h3>
 <div class="paragraph">
 <p>The <code>space.rayTest()</code> method performs <em>ray test</em> against a space,
 returning a list of objects in the space
@@ -610,10 +617,8 @@ the "ray" used in a ray test has both a starting point and an ending point.
 use the <code>space.setRayTestFlags()</code> method.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_contact_testing"><a class="anchor" href="#_contact_testing"></a>Contact testing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_contact_test"><a class="anchor" href="#_contact_test"></a>Contact test</h3>
 <div class="paragraph">
 <p>The <code>contactTest()</code> method performs a <em>contact test</em> against a space,
 returning the number of contact points that would be created
@@ -636,10 +641,8 @@ Contact testing doesn&#8217;t detect contacts involving soft bodies.
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_sweep_testing"><a class="anchor" href="#_sweep_testing"></a>Sweep testing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_sweep_test"><a class="anchor" href="#_sweep_test"></a>Sweep test</h3>
 <div class="paragraph">
 <p>A sweep test combines features of a ray test and a contact test.</p>
 </div>
@@ -659,6 +662,7 @@ The shape must be convex.
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>
