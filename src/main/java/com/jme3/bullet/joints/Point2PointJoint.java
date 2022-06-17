@@ -197,6 +197,18 @@ public class Point2PointJoint extends Constraint {
     }
 
     /**
+     * Alter the joint's tau value.
+     *
+     * @param value the desired tau value (default=0.3)
+     */
+    public void setTau(float value) {
+        long constraintId = nativeId();
+        setTau(constraintId, value);
+    }
+    // *************************************************************************
+    // Constraint methods
+
+    /**
      * Alter the pivot location in A's scaled local coordinates.
      *
      * @param location the desired location (not null, unaffected)
@@ -227,16 +239,6 @@ public class Point2PointJoint extends Constraint {
         if (pivotB != null) {
             super.setPivotInB(location);
         }
-    }
-
-    /**
-     * Alter the joint's tau value.
-     *
-     * @param value the desired tau value (default=0.3)
-     */
-    public void setTau(float value) {
-        long constraintId = nativeId();
-        setTau(constraintId, value);
     }
     // *************************************************************************
     // Java private methods
