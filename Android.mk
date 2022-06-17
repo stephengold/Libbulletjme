@@ -154,6 +154,10 @@ $(N)/bullet3/BulletDynamics/MLCPSolvers/btLemkeAlgorithm.cpp \
 $(N)/bullet3/BulletDynamics/MLCPSolvers/btMLCPSolver.cpp \
 $(N)/bullet3/BulletDynamics/Vehicle/btRaycastVehicle.cpp \
 $(N)/bullet3/BulletDynamics/Vehicle/btWheelInfo.cpp \
+$(N)/bullet3/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodyHelpers.cpp \
+$(N)/bullet3/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.cpp \
+$(N)/bullet3/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBody.cpp \
+$(N)/bullet3/BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableContactConstraint.cpp \
 $(N)/bullet3/BulletSoftBody/btDefaultSoftBodySolver.cpp \
 $(N)/bullet3/BulletSoftBody/btDeformableBackwardEulerObjective.cpp \
 $(N)/bullet3/BulletSoftBody/btDeformableBodySolver.cpp \
