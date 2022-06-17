@@ -161,6 +161,17 @@ public class MyMath {
     }
 
     /**
+     * Test whether an integer value is odd.
+     *
+     * @param iValue input value to be tested
+     * @return true if x is odd, false if it's even
+     */
+    public static boolean isOdd(int iValue) {
+        boolean result = (iValue % 2) != 0;
+        return result;
+    }
+
+    /**
      * Interpolate between (or extrapolate from) 2 single-precision values using
      * linear (Lerp) *polation. No rounding error is introduced when y0==y1.
      *
