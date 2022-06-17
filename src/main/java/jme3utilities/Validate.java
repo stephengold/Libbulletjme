@@ -129,6 +129,7 @@ final public class Validate {
             } else {
                 what = description;
             }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, vector});
             String message = what + " must have all components finite.";
             throw new IllegalArgumentException(message);
         }
@@ -463,6 +464,7 @@ final public class Validate {
             } else {
                 what = description;
             }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, vector});
             String message = what + " must not have a negative component.";
             throw new IllegalArgumentException(message);
         }
@@ -650,6 +652,7 @@ final public class Validate {
             } else {
                 what = description;
             }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, vector});
             String message = what + " must have all components positive.";
             throw new IllegalArgumentException(message);
         }
