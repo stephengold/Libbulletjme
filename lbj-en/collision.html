@@ -279,22 +279,23 @@ including friction and restitution.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>enumerate overlaps,</p>
+<p>count or enumerate overlaps,</p>
 </li>
 <li>
 <p>customize which overlaps are handled and which are ignored,</p>
 </li>
 <li>
-<p>access the lists of manifolds and contact points, and</p>
+<p>access the manifolds and contact points, and</p>
 </li>
 <li>
-<p>perform custom actions when manifolds are created or destroyed
-or when contact points are processed.</p>
+<p>perform custom actions when Bullet creates or destroys a manifold
+or when it processes a contact point.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Mechanisms are also provided to enumerate objects that intersect with:</p>
+<p>It also provides mechanisms
+to count or enumerate collision objects that intersect with:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -310,8 +311,8 @@ or when contact points are processed.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>These tests are usually performed <strong>between</strong> simulation steps.
-They are useful when you want to add an object to a space without
+<p>Such <em>intersection tests</em> are usually performed <strong>between</strong> simulation steps.
+They are useful (for instance) when you want to add an object to a space without
 causing an immediate collision.</p>
 </div>
 </div>
@@ -324,7 +325,7 @@ causing an immediate collision.</p>
 created solely to detect overlaps with other collision objects.
 You can create a ghost by invoking the
 <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/objects/PhysicsGhostObject.html"><code>PhysicsGhostObject</code></a> constructor.
-In order to function, the ghost must be added to a space.</p>
+In order to work, the ghost must be added to a space.</p>
 </div>
 <div class="paragraph">
 <p>The constructor allows you to specify a collision shape.
@@ -368,7 +369,7 @@ To clarify what&#8217;s going on, its AABB is outlined in white.</p>
 <p>Press <kbd>Right arrow</kbd> to walk the character toward the ghost.</p>
 </li>
 <li>
-<p>The ghost turns red as soon as the character&#8217;s AABB touches the ghost&#8217;s AABB,
+<p>As soon as the character&#8217;s AABB touches the ghost&#8217;s AABB, the ghost turns red,
 even though their collision shapes haven&#8217;t intersected yet.</p>
 </li>
 <li>
@@ -380,6 +381,10 @@ at which time the ghost will momentarily turn yellow again.</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>In addition the counting overlapping objects,
+you can enumerate them using <code>ghost.getOverlappingObjects()</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -387,9 +392,9 @@ at which time the ghost will momentarily turn yellow again.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You might want to prevent collisions from occurring
-between some objects, perhaps under specific conditions.
-Filtering out an overlap during broadphase eliminates any possibility
-of a collision between the overlapping objects.
+between certain objects, perhaps under specific conditions.
+Filtering out an overlap during broadphase
+prevents collisions between the overlapping objects.
 Libbulletjme provides several mechanisms to implement such filtering.</p>
 </div>
 <div class="admonitionblock note">
@@ -415,16 +420,16 @@ This is the most efficient filtering mechanism.</p>
 <p>16 groups are defined,
 and each collision object belongs to exactly one group.
 By default, that group is <code>COLLISION_GROUP_01</code>.
-<code>collisionObject.setCollisionGroup()</code> can be used
-to assign an object to a different group.</p>
+To assign an object to a different group,
+invoke <code>collisionObject.setCollisionGroup()</code>.</p>
 </div>
 <div class="paragraph">
 <p>By default, collision objects collide only with objects in <code>COLLISION_GROUP_01</code>.
-You can alter an object&#8217;s collides-with set
-by invoking its <code>collisionObject.setCollideWithGroup()</code> method.</p>
+To alter an object&#8217;s collides-with set,
+invoke <code>collisionObject.setCollideWithGroup()</code>.</p>
 </div>
 <div class="paragraph">
-<p>For a collision to be occur between two collision objects X and Y,
+<p>For a collision to occur between objects X and Y,
 either X must collide with Y&#8217;s group <strong>OR</strong> Y must collide with X&#8217;s group.</p>
 </div>
 </div>
@@ -436,7 +441,7 @@ by creating <em>ignore lists</em> for specific collision objects.
 Ignore lists are more flexible than collision groups, but less efficient.</p>
 </div>
 <div class="paragraph">
-<p>By default, each collision object has an empty ignore list.
+<p>Each collision object is created with an empty ignore list.
 You can disable collisions between two objects X and Y by invoking
 <code>x.addToIgnoreList(y)</code>.</p>
 </div>
@@ -460,8 +465,8 @@ That would be redundant.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Ignore lists are used internally by <code>setCollisionBetweenLinkedBodies()</code>
-to disable collisions between the ends of physics joint.
+Ignore lists are used internally by physics joints
+to disable collisions between the ends of a joint.
 </td>
 </tr>
 </table>
@@ -484,21 +489,18 @@ Return <code>false</code> for overlaps you want Bullet to ignore.
 to trigger arbitrary actions when 2 AABBs overlap.</p>
 </div>
 <div class="paragraph">
-<p><code>needsCollision()</code> is the most flexible mechanism for filtering collisions.
-It&#8217;s also the least efficient.</p>
+<p><code>needsCollision()</code> is the most flexible mechanism for filtering collisions.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_enumerating_contacts"><a class="anchor" href="#_enumerating_contacts"></a>Enumerating contacts</h2>
+<h2 id="_access_to_manifolds_and_contact_points"><a class="anchor" href="#_access_to_manifolds_and_contact_points"></a>Access to manifolds and contact points</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The <code>physicsSpace.countManifolds()</code> method
-returns the number of manifolds in the space.</p>
-</div>
-<div class="paragraph">
-<p>Each manifold has a native ID, as does each contact point.</p>
+returns the number of contact manifolds in the space.
+Each manifold has a native ID, as does each contact point.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -682,7 +684,7 @@ to enumerate overlaps, manifolds, and contact points.</p>
 <li>
 <p>Between simulation steps,
 you can perform ray tests, contact tests, and sweep tests
-against a physics space.</p>
+against a space.</p>
 </li>
 </ul>
 </div>
