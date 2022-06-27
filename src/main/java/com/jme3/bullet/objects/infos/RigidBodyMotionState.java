@@ -66,10 +66,6 @@ public class RigidBodyMotionState extends NativePhysicsObject {
      * vehicle reference, or null if the rigid body is a vehicle
      */
     private PhysicsVehicle vehicle = null;
-    /**
-     * temporary storage for a Quaternion
-     */
-    final private Quaternion tmp_inverseWorldRotation = new Quaternion();
     // *************************************************************************
     // constructors
 
