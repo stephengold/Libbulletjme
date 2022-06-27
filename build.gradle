@@ -1,6 +1,7 @@
 // Gradle script to build Maven artifacts and desktop native libraries
 
 plugins {
+    id 'checkstyle'
     id 'cpp'
     id 'java-library'
     id 'maven-publish'
