@@ -89,7 +89,7 @@ public class VehicleWheel {
     /**
      * reusable rotation matrix
      */
-    final private Matrix3f tmp_Matrix = new Matrix3f();
+    final private Matrix3f tmpMatrix = new Matrix3f();
     /**
      * wheel orientation in physics-space coordinates
      */
@@ -661,8 +661,8 @@ public class VehicleWheel {
      */
     public void updatePhysicsState() {
         getWheelLocation(vehicleId, wheelIndex, wheelWorldLocation);
-        getWheelRotation(vehicleId, wheelIndex, tmp_Matrix);
-        wheelWorldRotation.fromRotationMatrix(tmp_Matrix);
+        getWheelRotation(vehicleId, wheelIndex, tmpMatrix);
+        wheelWorldRotation.fromRotationMatrix(tmpMatrix);
     }
     // *************************************************************************
     // Java private methods
