@@ -105,10 +105,10 @@ final class FreeingMethods {
                 methods.add(method);
             } catch (IllegalArgumentException
                     | NoClassDefFoundError
-                    | SecurityException e) {
+                    | SecurityException exception) {
                 System.out.println("c = " + c.getName());
-                throw new RuntimeException(e);
-            } catch (NoSuchMethodException e) {
+                throw new RuntimeException(exception);
+            } catch (NoSuchMethodException exception) {
                 // do nothing
             }
         }
