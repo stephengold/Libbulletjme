@@ -444,9 +444,11 @@ public class HingeJoint extends Constraint {
 
     native private static boolean getEnableAngularMotor(long jointId);
 
-    native private static void getFrameOffsetA(long jointId, Transform frameInA);
+    native private static void getFrameOffsetA(
+            long jointId, Transform frameInA);
 
-    native private static void getFrameOffsetB(long jointId, Transform frameInB);
+    native private static void getFrameOffsetB(
+            long jointId, Transform frameInB);
 
     native private static float getHingeAngle(long jointId);
 

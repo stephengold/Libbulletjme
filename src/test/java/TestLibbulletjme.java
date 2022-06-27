@@ -790,8 +790,10 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertFalse(space.isEmpty());
 
-        Assert.assertEquals(2, multiBody.getBaseCollider().proxyGroup().intValue());
-        Assert.assertEquals(-3, multiBody.getBaseCollider().proxyMask().intValue());
+        Assert.assertEquals(
+                2, multiBody.getBaseCollider().proxyGroup().intValue());
+        Assert.assertEquals(
+                -3, multiBody.getBaseCollider().proxyMask().intValue());
         Assert.assertEquals(1, link0.getCollider().proxyGroup().intValue());
         Assert.assertEquals(-1, link0.getCollider().proxyMask().intValue());
 
@@ -1784,7 +1786,8 @@ public class TestLibbulletjme {
         Assert.assertEquals(0.1f, pco.getContactDamping(), 0f);
 
         float largeFloat = NativeLibrary.isDoublePrecision() ? 1e30f : 1e18f;
-        Assert.assertEquals(largeFloat, pco.getContactProcessingThreshold(), 0f);
+        Assert.assertEquals(
+                largeFloat, pco.getContactProcessingThreshold(), 0f);
         Assert.assertEquals(largeFloat, pco.getContactStiffness(), 0f);
 
         Assert.assertEquals(0f, pco.getDeactivationTime(), 0f);

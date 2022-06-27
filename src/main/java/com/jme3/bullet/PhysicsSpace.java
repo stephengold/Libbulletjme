@@ -464,7 +464,8 @@ public class PhysicsSpace
 
         while (!contactProcessedEvents.isEmpty()) {
             PhysicsCollisionEvent event = contactProcessedEvents.pop();
-            for (PhysicsCollisionListener listener : contactProcessedListeners) {
+            for (PhysicsCollisionListener listener
+                    : contactProcessedListeners) {
                 listener.collision(event);
             }
         }
@@ -669,13 +670,14 @@ public class PhysicsSpace
     /**
      * De-register the specified listener for ongoing contacts.
      *
-     * @see
-     * #addOngoingCollisionListener(com.jme3.bullet.collision.PhysicsCollisionListener)
+     * @see #addOngoingCollisionListener(
+     * com.jme3.bullet.collision.PhysicsCollisionListener)
      * @param listener the listener to de-register (not null)
      * @deprecated Override the ContactListener methods instead.
      */
     @Deprecated
-    public void removeOngoingCollisionListener(PhysicsCollisionListener listener) {
+    public void removeOngoingCollisionListener(
+            PhysicsCollisionListener listener) {
         Validate.nonNull(listener, "listener");
 
         boolean success = contactProcessedListeners.remove(listener);
@@ -1073,9 +1075,11 @@ public class PhysicsSpace
         }
 
         long bodyAId = PersistentManifolds.getBodyAId(manifoldId);
-        PhysicsCollisionObject pcoA = PhysicsCollisionObject.findInstance(bodyAId);
+        PhysicsCollisionObject pcoA
+                = PhysicsCollisionObject.findInstance(bodyAId);
         long bodyBId = PersistentManifolds.getBodyBId(manifoldId);
-        PhysicsCollisionObject pcoB = PhysicsCollisionObject.findInstance(bodyBId);
+        PhysicsCollisionObject pcoB
+                = PhysicsCollisionObject.findInstance(bodyBId);
 
         for (int i = 0; i < numPoints; ++i) {
             long pointId = PersistentManifolds.getPointId(manifoldId, i);
