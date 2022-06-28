@@ -805,7 +805,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/joints/SoftPhysicsJoint.html#checkParameters()" class="member-name-link">checkParameters()</a> - Method in class com.jme3.bullet.joints.<a href="com/jme3/bullet/joints/SoftPhysicsJoint.html" title="class in com.jme3.bullet.joints">SoftPhysicsJoint</a></dt>
 <dd>
-<div class="block">Compare Bullet parameters against their the local copies.</div>
+<div class="block">Compare Bullet parameters against their local copies.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/New6Dof.html#checkRotationOrder()" class="member-name-link">checkRotationOrder()</a> - Method in class com.jme3.bullet.joints.<a href="com/jme3/bullet/joints/New6Dof.html" title="class in com.jme3.bullet.joints">New6Dof</a></dt>
 <dd>
@@ -1802,6 +1802,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Generate a textual description of the specified flags.</div>
 </dd>
+<dt><a href="jme3utilities/minie/MyShape.html#describeType(com.jme3.bullet.collision.shapes.CollisionShape)" class="member-name-link">describeType(CollisionShape)</a> - Static method in class jme3utilities.minie.<a href="jme3utilities/minie/MyShape.html" title="class in jme3utilities.minie">MyShape</a></dt>
+<dd>
+<div class="block">Describe the type of the specified shape.</div>
+</dd>
 <dt><a href="com/jme3/bullet/CollisionSpace.html#destroy()" class="member-name-link">destroy()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/CollisionSpace.html" title="class in com.jme3.bullet">CollisionSpace</a></dt>
 <dd>
 <div class="block">Remove all collision objects and physics joints.</div>
@@ -2738,7 +2742,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/objects/VehicleWheel.html#getDeltaRotation()" class="member-name-link">getDeltaRotation()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/VehicleWheel.html" title="class in com.jme3.bullet.objects">VehicleWheel</a></dt>
 <dd>
-<div class="block">Determine how much this wheel has turned since the last physics step.</div>
+<div class="block">Determine how much this wheel has turned since the last simulation step.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/VehicleWheel.html#getDirection(com.jme3.math.Vector3f)" class="member-name-link">getDirection(Vector3f)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/VehicleWheel.html" title="class in com.jme3.bullet.objects">VehicleWheel</a></dt>
 <dd>
@@ -4657,6 +4661,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Reusable classes which implement mathematical formulas and operations, for
  use with jMonkeyEngine3.</div>
 </dd>
+<dt><a href="jme3utilities/minie/package-summary.html">jme3utilities.minie</a> - package jme3utilities.minie</dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/jme3/system/JmeSystem.html" class="type-name-link" title="class in com.jme3.system">JmeSystem</a> - Class in <a href="com/jme3/system/package-summary.html">com.jme3.system</a></dt>
 <dd>
 <div class="block">Utility class to access platform-dependant features.</div>
@@ -4677,8 +4683,8 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#jointTorque(int)" class="member-name-link">jointTorque(int)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
 <div class="block">Determine the torque applied to the indexed DOF using
- <a href="com/jme3/bullet/MultiBodyLink.html#addJointTorque(int,float)"><code>MultiBodyLink.addJointTorque(int, float)</code></a>, which is zeroed after each physics
- tick.</div>
+ <a href="com/jme3/bullet/MultiBodyLink.html#addJointTorque(int,float)"><code>MultiBodyLink.addJointTorque(int, float)</code></a>, which is zeroed after each
+ simulation step.</div>
 </dd>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#jointType()" class="member-name-link">jointType()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
@@ -5067,6 +5073,10 @@ loadScripts(document, 'script');</script>
 <div class="block">message logger for this class</div>
 </dd>
 <dt><a href="jme3utilities/math/MyVector3f.html#logger" class="member-name-link">logger</a> - Static variable in class jme3utilities.math.<a href="jme3utilities/math/MyVector3f.html" title="class in jme3utilities.math">MyVector3f</a></dt>
+<dd>
+<div class="block">message logger for this class</div>
+</dd>
+<dt><a href="jme3utilities/minie/MyShape.html#logger" class="member-name-link">logger</a> - Static variable in class jme3utilities.minie.<a href="jme3utilities/minie/MyShape.html" title="class in jme3utilities.minie">MyShape</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
@@ -5818,6 +5828,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Mathematical utility methods.</div>
 </dd>
+<dt><a href="jme3utilities/minie/MyShape.html" class="type-name-link" title="class in jme3utilities.minie">MyShape</a> - Class in <a href="jme3utilities/minie/package-summary.html">jme3utilities.minie</a></dt>
+<dd>
+<div class="block">Utility methods for physics collision shapes.</div>
+</dd>
 <dt><a href="jme3utilities/MyString.html" class="type-name-link" title="class in jme3utilities">MyString</a> - Class in <a href="jme3utilities/package-summary.html">jme3utilities</a></dt>
 <dd>
 <div class="block">Utility methods for char sequences, strings, and collections of strings.</div>
@@ -6067,7 +6081,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/collision/ContactListener.html#onContactStarted(long)" class="member-name-link">onContactStarted(long)</a> - Method in interface com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ContactListener.html" title="interface in com.jme3.bullet.collision">ContactListener</a></dt>
 <dd>
-<div class="block">Invoked immediately after a new contact manifold is created.</div>
+<div class="block">Invoked immediately after a contact manifold is created.</div>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#onContactStarted(long)" class="member-name-link">onContactStarted(long)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
@@ -6626,6 +6640,11 @@ loadScripts(document, 'script');</script>
 <dt><a href="vhacd/VHACD.html#removeProgressListener(vhacd.VHACDProgressListener)" class="member-name-link">removeProgressListener(VHACDProgressListener)</a> - Static method in class vhacd.<a href="vhacd/VHACD.html" title="class in vhacd">VHACD</a></dt>
 <dd>
 <div class="block">De-register the specified progress listener.</div>
+</dd>
+<dt><a href="jme3utilities/MyString.html#removeSuffix(java.lang.String,java.lang.String)" class="member-name-link">removeSuffix(String, String)</a> - Static method in class jme3utilities.<a href="jme3utilities/MyString.html" title="class in jme3utilities">MyString</a></dt>
+<dd>
+<div class="block">Extract the remainder of the specified string after removing the
+ specified suffix.</div>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#removeTickListener(com.jme3.bullet.PhysicsTickListener)" class="member-name-link">removeTickListener(PhysicsTickListener)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
@@ -8780,6 +8799,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/PhysicsCollisionObject.html#toString()" class="member-name-link">toString()</a> - Method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a></dt>
 <dd>
 <div class="block">Represent this object as a String.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CollisionShape.html#toString()" class="member-name-link">toString()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a></dt>
+<dd>
+<div class="block">Represent this CollisionShape as a String.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/PhysicsJoint.html#toString()" class="member-name-link">toString()</a> - Method in class com.jme3.bullet.joints.<a href="com/jme3/bullet/joints/PhysicsJoint.html" title="class in com.jme3.bullet.joints">PhysicsJoint</a></dt>
 <dd>
