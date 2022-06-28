@@ -42,6 +42,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.minie.MyShape;
 
 /**
  * The abstract base class for collision shapes based on Bullet's
@@ -445,6 +446,20 @@ abstract public class CollisionShape extends NativePhysicsObject {
     protected void setNativeId(long shapeId) {
         super.setNativeId(shapeId);
         logger.log(Level.FINE, "Created {0}.", this);
+    }
+
+    /**
+     * Represent this CollisionShape as a String.
+     *
+     * @return a descriptive string of text (not null, not empty)
+     */
+    @Override
+    public String toString() {
+        String result = MyShape.describeType(this);
+        long shapeId = nativeId();
+        result += "#" + Long.toHexString(shapeId);
+
+        return result;
     }
     // *************************************************************************
     // Java private methods
