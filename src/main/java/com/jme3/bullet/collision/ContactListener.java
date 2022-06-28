@@ -52,15 +52,15 @@ public interface ContactListener {
      * Invoked immediately after a contact point is refreshed without being
      * removed. Skipped for Sphere-Sphere contacts.
      *
-     * @param objectA the first involved object (not null)
-     * @param objectB the 2nd involved object (not null)
+     * @param pcoA the first involved object (not null)
+     * @param pcoB the 2nd involved object (not null)
      * @param manifoldPointId the native ID of the btManifoldPoint (not 0)
      */
-    void onContactProcessed(PhysicsCollisionObject objectA,
-            PhysicsCollisionObject objectB, long manifoldPointId);
+    void onContactProcessed(PhysicsCollisionObject pcoA,
+            PhysicsCollisionObject pcoB, long manifoldPointId);
 
     /**
-     * Invoked immediately after a new contact manifold is created.
+     * Invoked immediately after a contact manifold is created.
      *
      * @param manifoldId the native ID of the btPersistentManifold (not 0)
      */
