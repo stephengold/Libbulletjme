@@ -176,7 +176,7 @@ public class ChildCollisionShape {
      * @param rotation the desired rotation relative to the parent (not null,
      * unaffected)
      * @see com.jme3.bullet.collision.shapes.CompoundCollisionShape
-     * #setChildTransform( com.jme3.bullet.collision.shapes.CollisionShape,
+     * #setChildTransform(com.jme3.bullet.collision.shapes.CollisionShape,
      * com.jme3.math.Transform)
      */
     public void setTransform(Vector3f offset, Matrix3f rotation) {
