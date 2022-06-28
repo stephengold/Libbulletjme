@@ -27,6 +27,7 @@
 package jme3utilities;
 
 import java.util.Locale;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -126,6 +127,30 @@ public class MyString {
             result = "\"" + escape(text) + "\"";
         }
 
+        return result;
+    }
+
+    /**
+     * Extract the remainder of the specified string after removing the
+     * specified suffix.
+     *
+     * @param input the input string (not null)
+     * @param suffix the suffix string (not null)
+     * @return the remainder of the input (not null)
+     */
+    public static String removeSuffix(String input, String suffix) {
+        Validate.nonNull(suffix, "suffix");
+        if (!input.endsWith(suffix)) {
+            logger.log(Level.SEVERE, "input={0}, suffix={1}", new Object[]{
+                quote(input), quote(suffix)
+            });
+            throw new IllegalArgumentException("input must end with suffix.");
+        }
+
+        int endPosition = input.length() - suffix.length();
+        String result = input.substring(0, endPosition);
+
+        assert result != null;
         return result;
     }
 }
