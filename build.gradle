@@ -431,7 +431,7 @@ publishing {
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Libbulletjme.git'
                     url = project.ext.websiteUrl + '/tree/master'
                 }
-                url = project.ext.websiteUrl
+                url = 'https://stephengold.github.io/Libbulletjme'
             }
             version project.ext.version
         }
