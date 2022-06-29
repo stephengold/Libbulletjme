@@ -199,7 +199,7 @@
                      value="Pattern variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="ClassTypeParameterName">
-            <property name="format" value="^[A-Z][a-z]*$"/>
+            <property name="format" value="^[A-Z]$"/>
             <message key="name.invalidPattern"
                      value="Class type name ''{0}'' must match pattern ''{1}''."/>
         </module>
