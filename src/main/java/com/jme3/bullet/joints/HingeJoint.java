@@ -460,8 +460,8 @@ public class HingeJoint extends Constraint {
 
     native private static float getUpperLimit(long jointId);
 
-    native private static void setAngularOnly(long jointId,
-            boolean angularOnly);
+    native private static void setAngularOnly(
+            long jointId, boolean angularOnly);
 
     native private static void setLimit(long jointId, float low, float high,
             float softness, float biasFactor, float relaxationFactor);
