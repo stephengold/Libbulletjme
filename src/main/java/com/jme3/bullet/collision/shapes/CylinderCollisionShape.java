@@ -230,8 +230,8 @@ public class CylinderCollisionShape extends ConvexShape {
         double yy = scale.y * halfExtents.y;
         double zz = scale.z * halfExtents.z;
 
-        double halfHeight;
         double bigRadius;
+        double halfHeight;
         switch (axis) {
             case PhysicsSpace.AXIS_X:
                 halfHeight = xx;
