@@ -58,6 +58,7 @@ import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
+import com.jme3.bullet.joints.New6Dof;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.bullet.objects.PhysicsGhostObject;
@@ -1382,6 +1383,40 @@ public class TestLibbulletjme {
         PhysicsBody.setDeactivationEnabled(false);
         enabled = PhysicsBody.isDeactivationEnabled();
         Assert.assertFalse(enabled);
+    }
+
+    /**
+     * Test a single-ended New6Dof joint, in a pendulum.
+     */
+    @Test
+    public void test018() {
+        loadNativeLibrary();
+        PhysicsSpace space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
+        space.setAccuracy(0.001f);
+        space.setMaxSubSteps(1001);
+        space.getSolverInfo().setJointErp(1f);
+
+        CollisionShape shape = new SphereCollisionShape(0.1f);
+        PhysicsRigidBody b = new PhysicsRigidBody(shape, 1f);
+        b.setPhysicsLocation(new Vector3f(4f, 0f, 0f));
+        space.addCollisionObject(b);
+
+        New6Dof p2p = new New6Dof(b, new Vector3f(-4f, 0f, 0f),
+                new Vector3f(0f, 0f, 0f), new Matrix3f(), new Matrix3f(),
+                RotationOrder.ZYX);
+        space.addJoint(p2p);
+
+        Assert.assertEquals(1, p2p.countEnds());
+        Assert.assertTrue(p2p.checkRotationOrder());
+        assertEquals(-4f, 0f, 0f, p2p.getPivotB(null), 0f);
+
+        space.update(1f);
+        Vector3f location = b.getMotionState().getLocation(null);
+        assertEquals(1.572f, -3.68f, 0f, location, 0.01f);
+
+        space.update(1f);
+        b.getMotionState().getLocation(location);
+        assertEquals(-3.944f, -0.666f, 0f, location, 0.01f);
     }
     // *************************************************************************
     // private methods
