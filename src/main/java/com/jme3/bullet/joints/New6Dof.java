@@ -61,7 +61,7 @@ import jme3utilities.math.MyVector3f;
  * <li>Lowerlimit &lt; Upperlimit &rarr; axis is limited in that range</li>
  * </ul>
  *
- * @author sgold@sonic.net
+ * @author Stephen Gold sgold@sonic.net
  */
 public class New6Dof extends Constraint {
     // *************************************************************************
