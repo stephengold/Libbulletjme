@@ -209,6 +209,7 @@ $(N)/glue/com_jme3_bullet_collision_shapes_PlaneCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_SimplexCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_SphereCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_CollisionSpace.cpp \
+$(N)/glue/com_jme3_bullet_DeformableSpace.cpp \
 $(N)/glue/com_jme3_bullet_joints_Anchor.cpp \
 $(N)/glue/com_jme3_bullet_joints_ConeJoint.cpp \
 $(N)/glue/com_jme3_bullet_joints_Constraint.cpp \
