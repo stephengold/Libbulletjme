@@ -40,7 +40,7 @@
  * Based on jmePhysicsSoftSpace.cpp by dokthar
  */
 void jmeDeformableSpace::createDeformableSpace(const btVector3& min,
-        const btVector3& max, int broadphaseType) {
+        const btVector3& max, jint broadphaseType) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);

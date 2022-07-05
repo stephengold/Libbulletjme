@@ -87,7 +87,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_DeformableSpace_createSpace
 
     jmeDeformableSpace * const
             pSpace = new jmeDeformableSpace(pEnv, object); //dance003
-    pSpace->createDeformableSpace(min, max, (int) broadphase);
+    pSpace->createDeformableSpace(min, max, broadphase);
 
     return reinterpret_cast<jlong> (pSpace);
 }
