@@ -237,6 +237,7 @@ $(N)/glue/com_jme3_bullet_objects_infos_SoftBodyMaterial.cpp \
 $(N)/glue/com_jme3_bullet_objects_infos_VehicleController.cpp \
 $(N)/glue/com_jme3_bullet_objects_infos_VehicleTuning.cpp \
 $(N)/glue/com_jme3_bullet_objects_MultiBodyCollider.cpp \
+$(N)/glue/com_jme3_bullet_objects_PhysicsBody.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsCharacter.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsGhostObject.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsRigidBody.cpp \
