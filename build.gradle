@@ -374,6 +374,8 @@ artifacts {
 }
 javadoc.dependsOn('compileTestJava')
 
+checkstyleMain.dependsOn('compileTestJava')
+
 assemble.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
 tasks.register('module', Copy) {
     dependsOn 'generateMetadataFileForMavenPublication'
