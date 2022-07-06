@@ -128,6 +128,15 @@ public class PhysicsSoftBody extends PhysicsBody {
         assert !isInWorld();
         assert isEmpty();
     }
+
+    /**
+     * Instantiate an uninitialized soft body, for internal use.
+     *
+     * @param unused to distinguish from the no-arg constructor
+     */
+    protected PhysicsSoftBody(boolean unused) {
+        // do nothing
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -1362,6 +1371,24 @@ public class PhysicsSoftBody extends PhysicsBody {
         assert countLinks() == 0;
         assert countTetras() == 0;
         assert countClusters() == 0;
+    }
+
+    /**
+     * Replace the configuration properties.
+     *
+     * @param newConfig the desired configuration
+     */
+    protected void setConfig(SoftBodyConfig newConfig) {
+        this.config = newConfig;
+    }
+
+    /**
+     * Replace the world-dependent info.
+     *
+     * @param newInfo the desired info
+     */
+    protected void setWorldInfoInternal(SoftBodyWorldInfo newInfo) {
+        this.worldInfo = newInfo;
     }
     // *************************************************************************
     // PhysicsBody methods
