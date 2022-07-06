@@ -251,7 +251,7 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
     }
 
     /**
-     * TODO description
+     * Return the split.
      *
      * @return the split value
      */
@@ -332,7 +332,7 @@ public abstract class SoftPhysicsJoint extends PhysicsJoint {
     }
 
     /**
-     * TODO description
+     * Alter the split.
      *
      * @param split the desired split value (default=1)
      */
