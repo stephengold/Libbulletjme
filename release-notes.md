@@ -1,5 +1,20 @@
 # Release log for the Libbulletjme project
 
+## Version 15.2.0 released on 6 July 2022
+
++ Bugfix:  values of 3 `ConfigFlag` constants are out-of-date
++ Bugfix:  Android native libraries are missing an object file
++ Bugfix:  `ConfigFlag.describe()` ignores 3 flags
++ Added the `DeformableSpace`, `MyShape`, and `ReducedDeformableBody` classes.
++ Added constants `SDF_MDF` and `SDF_RDN` to the `ConfigFlag` class.
++ Added the `tan()` method to the `FastMath` class.
++ Added the `isOdd()` method to the `MyMath` class.
++ Added the `removeSuffix()` method to the `MyString` class.
++ Added a warning when the native library version is unexpected.
++ Updated the Bullet sourcecode to match SHA1 ID=a1d96646
+  of the bullet3 project.
++ Added the "checkstyle" plugin to the build.
+
 ## Version 15.1.0 released on 6 June 2022
 
 + Added accessors for global deactivation settings:
