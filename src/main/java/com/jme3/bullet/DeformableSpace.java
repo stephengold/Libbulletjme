@@ -114,6 +114,16 @@ public class DeformableSpace extends MultiBodySpace {
     }
 
     /**
+     * Access the DeformableSpace <b>running on this thread</b>. For parallel
+     * physics, this may be invoked from the OpenGL thread.
+     *
+     * @return the pre-existing DeformableSpace running on this thread
+     */
+    public static DeformableSpace getDeformableSpace() {
+        return (DeformableSpace) getCollisionSpace();
+    }
+
+    /**
      * Enumerate soft bodies that have been added to this space and not yet
      * removed.
      *
@@ -123,16 +133,6 @@ public class DeformableSpace extends MultiBodySpace {
     public Collection<PhysicsSoftBody> getSoftBodyList() {
         Collection<PhysicsSoftBody> result = softBodyMap.values();
         return Collections.unmodifiableCollection(result);
-    }
-
-    /**
-     * Access the PhysicsSoftSpace <b>running on this thread</b>. For parallel
-     * physics, this may be invoked from the OpenGL thread.
-     *
-     * @return the pre-existing PhysicsSoftSpace running on this thread
-     */
-    public static PhysicsSoftSpace getSoftSpace() {
-        return (PhysicsSoftSpace) getCollisionSpace();
     }
 
     /**
