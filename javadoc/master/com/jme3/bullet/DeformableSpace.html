@@ -193,22 +193,22 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Remove all collision objects and physics joints.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPcoList()" class="member-name-link">getPcoList</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DeformableSpace.html" title="class in com.jme3.bullet">DeformableSpace</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getDeformableSpace()" class="member-name-link">getDeformableSpace</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Access the DeformableSpace <b>running on this thread</b>.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPcoList()" class="member-name-link">getPcoList</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Enumerate collision objects that have been added to this space and not
  yet removed.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSoftBodyList()" class="member-name-link">getSoftBodyList</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSoftBodyList()" class="member-name-link">getSoftBodyList</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Enumerate soft bodies that have been added to this space and not yet
  removed.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PhysicsSoftSpace.html" title="class in com.jme3.bullet">PhysicsSoftSpace</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getSoftSpace()" class="member-name-link">getSoftSpace</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Access the PhysicsSoftSpace <b>running on this thread</b>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="SoftBodyWorldInfo.html" title="class in com.jme3.bullet">SoftBodyWorldInfo</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWorldInfo()" class="member-name-link">getWorldInfo</a>()</code></div>
@@ -314,6 +314,18 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="getDeformableSpace()">
+<h3>getDeformableSpace</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DeformableSpace.html" title="class in com.jme3.bullet">DeformableSpace</a></span>&nbsp;<span class="element-name">getDeformableSpace</span>()</div>
+<div class="block">Access the DeformableSpace <b>running on this thread</b>. For parallel
+ physics, this may be invoked from the OpenGL thread.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the pre-existing DeformableSpace running on this thread</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="getSoftBodyList()">
 <h3>getSoftBodyList</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a>&gt;</span>&nbsp;<span class="element-name">getSoftBodyList</span>()</div>
@@ -323,18 +335,6 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>a new unmodifiable collection of pre-existing instances (not
  null)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getSoftSpace()">
-<h3>getSoftSpace</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="PhysicsSoftSpace.html" title="class in com.jme3.bullet">PhysicsSoftSpace</a></span>&nbsp;<span class="element-name">getSoftSpace</span>()</div>
-<div class="block">Access the PhysicsSoftSpace <b>running on this thread</b>. For parallel
- physics, this may be invoked from the OpenGL thread.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>the pre-existing PhysicsSoftSpace running on this thread</dd>
 </dl>
 </section>
 </li>

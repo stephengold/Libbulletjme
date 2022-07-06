@@ -2774,6 +2774,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Read the default margin for new shapes that are neither capsules nor
  spheres.</div>
 </dd>
+<dt><a href="com/jme3/bullet/DeformableSpace.html#getDeformableSpace()" class="member-name-link">getDeformableSpace()</a> - Static method in class com.jme3.bullet.<a href="com/jme3/bullet/DeformableSpace.html" title="class in com.jme3.bullet">DeformableSpace</a></dt>
+<dd>
+<div class="block">Access the DeformableSpace <b>running on this thread</b>.</div>
+</dd>
 <dt><a href="com/jme3/bullet/objects/VehicleWheel.html#getDeltaRotation()" class="member-name-link">getDeltaRotation()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/VehicleWheel.html" title="class in com.jme3.bullet.objects">VehicleWheel</a></dt>
 <dd>
 <div class="block">Determine how much this wheel has turned since the last simulation step.</div>
@@ -3748,10 +3752,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Read the joint's softness for off-axis translation.</div>
 </dd>
-<dt><a href="com/jme3/bullet/DeformableSpace.html#getSoftSpace()" class="member-name-link">getSoftSpace()</a> - Static method in class com.jme3.bullet.<a href="com/jme3/bullet/DeformableSpace.html" title="class in com.jme3.bullet">DeformableSpace</a></dt>
-<dd>
-<div class="block">Access the PhysicsSoftSpace <b>running on this thread</b>.</div>
-</dd>
 <dt><a href="com/jme3/bullet/PhysicsSoftSpace.html#getSoftSpace()" class="member-name-link">getSoftSpace()</a> - Static method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSoftSpace.html" title="class in com.jme3.bullet">PhysicsSoftSpace</a></dt>
 <dd>
 <div class="block">Access the PhysicsSoftSpace <b>running on this thread</b>.</div>
@@ -4690,8 +4690,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#isWorldInfoProtected()" class="member-name-link">isWorldInfoProtected()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
-<div class="block">Test whether this body's world info should be replaced by
- PhysicsSoftSpace.</div>
+<div class="block">Test whether this body's world info should be replaced when added to a
+ space.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#isZero(com.jme3.math.Quaternion)" class="member-name-link">isZero(Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
@@ -7687,8 +7687,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#setMass(float)" class="member-name-link">setMass(float)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
-<div class="block">Alter the total mass for this body, distributing it based on the current
- mass of each node.</div>
+<div class="block">Alter the total mass for this body, distributing it in proportion to the
+ current mass of each node.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#setMassByArea(float)" class="member-name-link">setMassByArea(float)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
@@ -8021,7 +8021,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#setProtectWorldInfo(boolean)" class="member-name-link">setProtectWorldInfo(boolean)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Alter whether this body's world info should be replaced when the body
- gets added to a PhysicsSoftSpace.</div>
+ gets added to a space.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/VehicleWheel.html#setRadius(float)" class="member-name-link">setRadius(float)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/VehicleWheel.html" title="class in com.jme3.bullet.objects">VehicleWheel</a></dt>
 <dd>
