@@ -255,6 +255,7 @@ $(N)/glue/com_jme3_bullet_util_NativeSoftBodyUtil.cpp \
 $(N)/glue/jmeBulletUtil.cpp \
 $(N)/glue/jmeClasses.cpp \
 $(N)/glue/jmeCollisionSpace.cpp \
+$(N)/glue/jmeDeformableSpace.cpp \
 $(N)/glue/jmeMotionState.cpp \
 $(N)/glue/jmeMultiBodySpace.cpp \
 $(N)/glue/jmePhysicsSoftSpace.cpp \
