@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
@@ -117,7 +116,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBodyConstraint * const
             pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
@@ -163,7 +161,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
     const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     int numMultiBodies = pWorld->getNumMultibodies();
     return (jint) numMultiBodies;
@@ -181,7 +178,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstr
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
     const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     int numConstraints = pWorld->getNumMultiBodyConstraints();
     return (jint) numConstraints;
@@ -199,7 +195,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
@@ -251,7 +246,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstr
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBodyConstraint * const
             pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
@@ -272,7 +266,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
     btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DISCRETE_DYNAMICS_WORLD);
 
     btMultiBodyConstraintSolver *pConstraintSolver;
     btMLCPSolverInterface *pMLCP;
