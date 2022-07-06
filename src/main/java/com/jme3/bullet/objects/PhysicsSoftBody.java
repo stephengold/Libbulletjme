@@ -111,7 +111,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * space.
      */
     public PhysicsSoftBody() {
-        worldInfo = new SoftBodyWorldInfo();
+        this.worldInfo = new SoftBodyWorldInfo();
         long infoId = worldInfo.nativeId();
         long bodyId = createEmpty(infoId);
         super.setNativeId(bodyId);
@@ -119,7 +119,7 @@ public class PhysicsSoftBody extends PhysicsBody {
                 getInternalType(bodyId);
         logger2.log(Level.FINE, "Created {0}.", this);
 
-        config = new SoftBodyConfig(this);
+        this.config = new SoftBodyConfig(this);
         super.initUserPointer();
 
         float defaultMargin = CollisionShape.getDefaultMargin();
@@ -804,7 +804,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public SoftBodyMaterial getSoftMaterial() {
         if (material == null) {
-            material = new SoftBodyMaterial(this);
+            this.material = new SoftBodyMaterial(this);
         }
 
         return material;
@@ -1326,8 +1326,8 @@ public class PhysicsSoftBody extends PhysicsBody {
             unassignNativeObject();
         }
 
-        material = null;
-        config = null;
+        this.material = null;
+        this.config = null;
     }
 
     /**
@@ -1353,7 +1353,7 @@ public class PhysicsSoftBody extends PhysicsBody {
                 getInternalType(objectId);
         logger2.log(Level.FINE, "Created {0}.", this);
 
-        config = new SoftBodyConfig(this);
+        this.config = new SoftBodyConfig(this);
         initUserPointer();
 
         assert !isInWorld();
