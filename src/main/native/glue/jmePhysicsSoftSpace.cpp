@@ -37,6 +37,7 @@
  */
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
         const btVector3& max, int broadphaseType) {
+    // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
 

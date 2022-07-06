@@ -87,7 +87,7 @@ public class PhysicsSoftBody extends PhysicsBody {
 
     /**
      * false&rarr; world info should be replaced when this body gets added to a
-     * PhysicsSoftSpace, true&rarr;world info should be preserved
+     * space, true&rarr;world info should be preserved
      */
     private boolean isWorldInfoProtected = false;
     /**
@@ -100,7 +100,7 @@ public class PhysicsSoftBody extends PhysicsBody {
     private SoftBodyMaterial material = null;
     /**
      * properties (including gravity) that may be replaced when this body gets
-     * added to a PhysicsSoftSpace
+     * added to a space
      */
     private SoftBodyWorldInfo worldInfo = null;
     // *************************************************************************
@@ -853,8 +853,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * Test whether this body's world info should be replaced by
-     * PhysicsSoftSpace.
+     * Test whether this body's world info should be replaced when added to a
+     * space.
      *
      * @return false if the info should be replaced, true if it should be
      * preserved
@@ -1188,7 +1188,7 @@ public class PhysicsSoftBody extends PhysicsBody {
 
     /**
      * Alter whether this body's world info should be replaced when the body
-     * gets added to a PhysicsSoftSpace.
+     * gets added to a space.
      *
      * @param newState true to preserve the world info, false to allow it to be
      * replaced (default=false)
@@ -1272,8 +1272,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     /**
      * Replace the world info of this body.
      * <p>
-     * Invoke this method <em>after</em> adding the body to a PhysicsSoftSpace.
-     * Adding a body to a PhysicsSoftSpace may replace its world info.
+     * Invoke this method <em>after</em> adding the body to a space. Adding a
+     * body to a space may replace its world info.
      *
      * @param worldInfo the desired SoftBodyWorldInfo (not null, alias created)
      */
@@ -1481,8 +1481,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     /**
      * Alter this body's gravitational acceleration.
      * <p>
-     * Invoke this method <em>after</em> adding the body to a PhysicsSoftSpace.
-     * Adding a body to a PhysicsSoftSpace may override its gravity.
+     * Invoke this method <em>after</em> adding the body to a space. Adding a
+     * body to a space may override its gravity.
      *
      * @param acceleration the desired acceleration vector (in physics-space
      * coordinates, not null, unaffected)
@@ -1499,8 +1499,8 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * Alter the total mass for this body, distributing it based on the current
-     * mass of each node.
+     * Alter the total mass for this body, distributing it in proportion to the
+     * current mass of each node.
      *
      * @param totalMass the desired total mass (&gt;0, default=numNodes)
      */
