@@ -26,6 +26,7 @@
  */
 
 import com.jme3.bullet.CollisionSpace;
+import com.jme3.bullet.DeformableSpace;
 import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.MultiBodyJointType;
 import com.jme3.bullet.MultiBodyLink;
@@ -604,6 +605,18 @@ public class TestLibbulletjme {
 
         space = new MultiBodySpace(Vector3f.ZERO, Vector3f.ZERO,
                 PhysicsSpace.BroadphaseType.DBVT);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        // Deformable spaces with various broadphase accelerators.
+        space = new DeformableSpace(Vector3f.ZERO, Vector3f.ZERO,
+                PhysicsSpace.BroadphaseType.DBVT, SolverType.SI);
+        verifyCollisionSpaceDefaults(space);
+        performRayTests(sphereShape, space);
+
+        space = new DeformableSpace(new Vector3f(-10f, -10f, -10f),
+                new Vector3f(10f, 10f, 10f),
+                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3, SolverType.SI);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
 
@@ -1621,6 +1634,17 @@ public class TestLibbulletjme {
 
         if (solver != SolverType.NNCG) {
             space = new MultiBodySpace(min, max, broadphase, solver) {
+                @Override
+                public void onContactProcessed(PhysicsCollisionObject a,
+                        PhysicsCollisionObject b, long manifoldPointId) {
+                    Assert.assertTrue(a == floor && b == drop
+                            || a == drop && b == floor);
+                    dropAndFloorHaveCollided = true;
+                }
+            };
+            performDropTest(dropShape, space);
+
+            space = new DeformableSpace(min, max, broadphase, solver) {
                 @Override
                 public void onContactProcessed(PhysicsCollisionObject a,
                         PhysicsCollisionObject b, long manifoldPointId) {
