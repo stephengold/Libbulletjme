@@ -242,6 +242,7 @@ $(N)/glue/com_jme3_bullet_objects_PhysicsCharacter.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsGhostObject.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsRigidBody.cpp \
 $(N)/glue/com_jme3_bullet_objects_PhysicsSoftBody.cpp \
+$(N)/glue/com_jme3_bullet_objects_ReducedDeformableBody.cpp \
 $(N)/glue/com_jme3_bullet_objects_VehicleWheel.cpp \
 $(N)/glue/com_jme3_bullet_PhysicsSoftSpace.cpp \
 $(N)/glue/com_jme3_bullet_PhysicsSpace.cpp \
