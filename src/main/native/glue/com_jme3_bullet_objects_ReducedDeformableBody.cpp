@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_ReducedDeformableBody_creat
     btScalar *pMasses;
 #ifdef BT_USE_DOUBLE_PRECISION
     float * const pFloats = pEnv->GetFloatArrayElements(masses, 0);
-    pRadii = new btScalar[n]; //dance038
+    pMasses = new btScalar[n]; //dance038
     for (int i = 0; i < n; ++i) {
         pMasses[i] = pFloats[i];
     }
