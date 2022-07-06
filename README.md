@@ -153,10 +153,12 @@ The Libbulletjme Project is based on open-source software:
 
 This project also made use of the following software tools:
 
+  + the [Checkstyle] tool
   + the [FindBugs] source-code analyzer
   + the [GNU Compiler Collection][gcc] and [Project Debugger][gdb]
   + the [Git] revision-control system and GitK commit viewer
   + the [Firefox] and [Google Chrome][chrome] web browsers
+  + the [GitKraken] client
   + the [Gradle] build tool
   + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
   + the [Java] compiler, standard doclet, and runtime environment
@@ -201,6 +203,7 @@ correct the situation: sgold@sonic.net
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
+[checkstyle]: https://checkstyle.org "Checkstyle"
 [chrome]: https://www.google.com/chrome "Chrome"
 [examples]: https://github.com/stephengold/LbjExamples "LbjExamples Project"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
@@ -209,6 +212,7 @@ correct the situation: sgold@sonic.net
 [gdb]: https://www.gnu.org/software/gdb/ "GNU Project Debugger"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
+[gitkraken]: https://www.gitkraken.com "GitKraken client"
 [gradle]: https://gradle.org "Gradle Project"
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
