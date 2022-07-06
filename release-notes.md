@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 15.2.0 released on 6 July 2022
+## Version 15.2.1 released on 6 July 2022
 
 + Bugfix:  values of 3 `ConfigFlag` constants are out-of-date
 + Bugfix:  Android native libraries are missing an object file
