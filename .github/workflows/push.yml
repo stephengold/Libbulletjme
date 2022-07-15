@@ -80,7 +80,7 @@ jobs:
       - run: sudo apt-get install -y g++-multilib
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
       - if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: crash-log
           path: '*.log'
@@ -97,7 +97,7 @@ jobs:
       - run: clang --version
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Pgithub=debug64
       - if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: crash-log
           path: '*.log'
@@ -114,7 +114,7 @@ jobs:
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
       - if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: crash-log
           path: '*.log'
