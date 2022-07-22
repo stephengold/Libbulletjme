@@ -730,6 +730,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
         for (int listIndex = 0; listIndex < numIgnoredObjects; ++listIndex) {
             long otherId = getObjectWithoutCollision(objectId, listIndex);
+            assert otherId != 0L;
             result[listIndex] = otherId;
         }
 
