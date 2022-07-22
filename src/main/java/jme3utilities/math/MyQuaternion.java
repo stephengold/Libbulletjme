@@ -406,7 +406,7 @@ public class MyQuaternion {
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
-        Quaternion q0inverse = conjugate(q0, null);
+        Quaternion q0inverse = conjugate(q0, null); // TODO garbage
         Quaternion ratio = q0inverse.multLocal(q1);
         Quaternion power = pow(ratio, t, ratio);
         result.set(q0);
