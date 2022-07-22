@@ -71,8 +71,10 @@ public class MyQuaternion {
     /**
      * Accumulate a linear combination of quaternions.
      *
-     * @param total sum of the scaled inputs so far (not null, modified)
-     * @param input the Quaternion to scale and add (not null, unaffected)
+     * @param total sum of the scaled inputs so far (not null, modified, may be
+     * {@code input})
+     * @param input the Quaternion to scale and add (not null, unaffected unless
+     * it's {@code total})
      * @param scale scale factor to apply to the input
      */
     public static void accumulateScaled(Quaternion total, Quaternion input,
@@ -131,8 +133,10 @@ public class MyQuaternion {
      * Determine the conjugate of a Quaternion. For unit quaternions, the
      * conjugate is a faster way to calculate the inverse.
      *
-     * @param q input value (not null, unaffected)
-     * @param storeResult storage for the result (modified if not null)
+     * @param q input value (not null, unaffected unless it's
+     * {@code storeResult})
+     * @param storeResult storage for the result (modified if not null, may be
+     * {@code q})
      * @return a conjugate quaternion (either storeResult or a new instance)
      */
     public static Quaternion conjugate(Quaternion q, Quaternion storeResult) {
@@ -277,8 +281,10 @@ public class MyQuaternion {
      * Determine the natural logarithm of a unit quaternion. Generally the
      * logarithm isn't itself a unit.
      *
-     * @param q input value (not null, unaffected, norm=1)
-     * @param storeResult storage for the result (modified if not null)
+     * @param q input value (not null, unaffected unless it's
+     * {@code storeResult}, norm=1)
+     * @param storeResult storage for the result (modified if not null, may be
+     * {@code q})
      * @return a pure Quaternion (either storeResult or a new instance)
      */
     public static Quaternion log(Quaternion q, Quaternion storeResult) {
@@ -347,9 +353,11 @@ public class MyQuaternion {
     /**
      * Raise a unit quaternion to the specified real power.
      *
-     * @param base input value (not null, unaffected, norm=1)
+     * @param base input value (not null, unaffected unless it's
+     * {@code storeResult}, norm=1)
      * @param exponent the exponent
-     * @param storeResult storage for the result (modified if not null)
+     * @param storeResult storage for the result (modified if not null, may be
+     * {@code base})
      * @return a unit quaternion (either storeResult or a new instance)
      */
     public static Quaternion pow(Quaternion base, float exponent,
@@ -389,12 +397,12 @@ public class MyQuaternion {
      * appropriate to do so.
      *
      * @param t descaled parameter value (&ge;0, &le;1)
-     * @param q0 function value at t=0 (not null, unaffected unless it's also
-     * storeResult, norm=1)
-     * @param q1 function value at t=1 (not null, unaffected unless it's also
-     * storeResult, norm=1)
+     * @param q0 function value at t=0 (not null, unaffected unless it's {@code
+     * storeResult}, norm=1)
+     * @param q1 function value at t=1 (not null, unaffected unless it's {@code
+     * storeResult}, norm=1)
      * @param storeResult storage for the result (modified if not null, may be
-     * q0 or q1)
+     * {@code q0} or {@code q1})
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
@@ -481,8 +489,9 @@ public class MyQuaternion {
     /**
      * Standardize a Quaternion in preparation for hashing.
      *
-     * @param input (not null, unaffected)
-     * @param storeResult storage for the result (modified if not null)
+     * @param input (not null, unaffected unless it's {@code storeResult})
+     * @param storeResult storage for the result (modified if not null, may be
+     * {@code input})
      * @return an equivalent Quaternion without negative zeros (either
      * storeResult or a new instance)
      */
