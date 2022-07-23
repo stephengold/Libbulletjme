@@ -267,8 +267,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Accumulate a linear combination of quaternions.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>total</code> - sum of the scaled inputs so far (not null, modified)</dd>
-<dd><code>input</code> - the Quaternion to scale and add (not null, unaffected)</dd>
+<dd><code>total</code> - sum of the scaled inputs so far (not null, modified, may be
+ <code>input</code>)</dd>
+<dd><code>input</code> - the Quaternion to scale and add (not null, unaffected unless
+ it's <code>total</code>)</dd>
 <dd><code>scale</code> - scale factor to apply to the input</dd>
 </dl>
 </section>
@@ -295,8 +297,10 @@ loadScripts(document, 'script');</script>
  conjugate is a faster way to calculate the inverse.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>q</code> - input value (not null, unaffected)</dd>
-<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dd><code>q</code> - input value (not null, unaffected unless it's
+ <code>storeResult</code>)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null, may be
+ <code>q</code>)</dd>
 <dt>Returns:</dt>
 <dd>a conjugate quaternion (either storeResult or a new instance)</dd>
 </dl>
@@ -397,8 +401,10 @@ loadScripts(document, 'script');</script>
  logarithm isn't itself a unit.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>q</code> - input value (not null, unaffected, norm=1)</dd>
-<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dd><code>q</code> - input value (not null, unaffected unless it's
+ <code>storeResult</code>, norm=1)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null, may be
+ <code>q</code>)</dd>
 <dt>Returns:</dt>
 <dd>a pure Quaternion (either storeResult or a new instance)</dd>
 </dl>
@@ -440,9 +446,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Raise a unit quaternion to the specified real power.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>base</code> - input value (not null, unaffected, norm=1)</dd>
+<dd><code>base</code> - input value (not null, unaffected unless it's
+ <code>storeResult</code>, norm=1)</dd>
 <dd><code>exponent</code> - the exponent</dd>
-<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null, may be
+ <code>base</code>)</dd>
 <dt>Returns:</dt>
 <dd>a unit quaternion (either storeResult or a new instance)</dd>
 </dl>
@@ -462,12 +470,12 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>t</code> - descaled parameter value (&ge;0, &le;1)</dd>
-<dd><code>q0</code> - function value at t=0 (not null, unaffected unless it's also
- storeResult, norm=1)</dd>
-<dd><code>q1</code> - function value at t=1 (not null, unaffected unless it's also
- storeResult, norm=1)</dd>
+<dd><code>q0</code> - function value at t=0 (not null, unaffected unless it's <code>
+ storeResult</code>, norm=1)</dd>
+<dd><code>q1</code> - function value at t=1 (not null, unaffected unless it's <code>
+ storeResult</code>, norm=1)</dd>
 <dd><code>storeResult</code> - storage for the result (modified if not null, may be
- q0 or q1)</dd>
+ <code>q0</code> or <code>q1</code>)</dd>
 <dt>Returns:</dt>
 <dd>an interpolated unit quaternion (either storeResult or a new
  instance)</dd>
@@ -528,8 +536,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Standardize a Quaternion in preparation for hashing.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>input</code> - (not null, unaffected)</dd>
-<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dd><code>input</code> - (not null, unaffected unless it's <code>storeResult</code>)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null, may be
+ <code>input</code>)</dd>
 <dt>Returns:</dt>
 <dd>an equivalent Quaternion without negative zeros (either
  storeResult or a new instance)</dd>
