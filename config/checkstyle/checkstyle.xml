@@ -10,7 +10,7 @@
 
     <!-- See https://checkstyle.org/config_filefilters.html -->
     <module name="BeforeExecutionExclusionFileFilter">
-        <property name="fileNamePattern" value="java[/]com[/](simsilica|jme3[/](math|system|util))"/>
+        <property name="fileNamePattern" value="java[/\\]com[/\\](simsilica|jme3[/\\](math|system|util))"/>
     </module>
 
     <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
