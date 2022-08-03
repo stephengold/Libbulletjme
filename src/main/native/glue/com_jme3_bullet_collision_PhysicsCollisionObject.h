@@ -99,6 +99,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setIgnoreCollisionCheck
+ * Signature: (JJZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setIgnoreCollisionCheck
+  (JNIEnv *, jclass, jlong, jlong, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    activate
  * Signature: (JZ)V
  */
@@ -416,14 +424,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setFriction
   (JNIEnv *, jclass, jlong, jfloat);
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
- * Method:    setIgnoreCollisionCheck
- * Signature: (JJZ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setIgnoreCollisionCheck
-  (JNIEnv *, jclass, jlong, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject

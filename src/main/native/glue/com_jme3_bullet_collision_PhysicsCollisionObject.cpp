@@ -180,6 +180,26 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setIgnoreCollisionCheck
+ * Signature: (JJZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setIgnoreCollisionCheck
+(JNIEnv *pEnv, jclass, jlong pco1Id, jlong pco2Id, jboolean setting) {
+    btCollisionObject * const
+            pObject1 = reinterpret_cast<btCollisionObject *> (pco1Id);
+    NULL_CHK(pEnv, pObject1, "The btCollisionObject #1 does not exist.",);
+
+    btCollisionObject * const
+            pObject2 = reinterpret_cast<btCollisionObject *> (pco2Id);
+    NULL_CHK(pEnv, pObject2, "The btCollisionObject #2 does not exist.",);
+
+    bool ignoreCollisionCheck = bool(setting);
+    pObject1->setIgnoreCollisionCheck(pObject2, ignoreCollisionCheck);
+    pObject2->setIgnoreCollisionCheck(pObject1, ignoreCollisionCheck);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    activate
  * Signature: (JZ)V
  */
@@ -841,26 +861,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
     NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
 
     pCollisionObject->setFriction((btScalar) friction);
-}
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
- * Method:    setIgnoreCollisionCheck
- * Signature: (JJZ)V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setIgnoreCollisionCheck
-(JNIEnv *pEnv, jclass, jlong pco1Id, jlong pco2Id, jboolean setting) {
-    btCollisionObject * const
-            pObject1 = reinterpret_cast<btCollisionObject *> (pco1Id);
-    NULL_CHK(pEnv, pObject1, "The btCollisionObject #1 does not exist.",);
-
-    btCollisionObject * const
-            pObject2 = reinterpret_cast<btCollisionObject *> (pco2Id);
-    NULL_CHK(pEnv, pObject2, "The btCollisionObject #2 does not exist.",);
-
-    bool ignoreCollisionCheck = bool(setting);
-    pObject1->setIgnoreCollisionCheck(pObject2, ignoreCollisionCheck);
-    pObject2->setIgnoreCollisionCheck(pObject1, ignoreCollisionCheck);
 }
 
 /*
