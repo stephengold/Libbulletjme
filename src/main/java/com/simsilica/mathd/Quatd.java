@@ -41,6 +41,7 @@ import com.jme3.math.Quaternion;
 
 /**
  *
+ *  @version   $Revision: 3951 $
  *  @author    Paul Speed
  */
 public final class Quatd implements Cloneable {

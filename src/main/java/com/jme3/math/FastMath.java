@@ -36,6 +36,7 @@ package com.jme3.math;
  * functions.  These are all used as static values and functions.
  *
  * @author Various
+ * @version $Id: FastMath.java,v 1.45 2007/08/26 08:44:20 irrisor Exp $
  */
 final public class FastMath {
     private FastMath() {

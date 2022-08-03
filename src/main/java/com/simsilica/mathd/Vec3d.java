@@ -41,6 +41,7 @@ import com.jme3.math.Vector3f;
 
 /**
  *
+ *  @version   $Revision: 3951 $
  *  @author    Paul Speed
  */
 public class Vec3d implements Cloneable {
