@@ -172,7 +172,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @param collisionGroup the groups to add, ORed together (bitmask)
      */
     public void addCollideWithGroup(int collisionGroup) {
-        collideWithGroups |= collisionGroup;
+        this.collideWithGroups |= collisionGroup;
         if (hasAssignedNativeObject()) {
             long objectId = nativeId();
             setCollideWithGroups(objectId, collideWithGroups);
@@ -778,7 +778,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @param collisionGroup the groups to remove, ORed together (bitmask)
      */
     public void removeCollideWithGroup(int collisionGroup) {
-        collideWithGroups &= ~collisionGroup;
+        this.collideWithGroups &= ~collisionGroup;
         if (hasAssignedNativeObject()) {
             setCollideWithGroups(collideWithGroups);
         }
@@ -852,7 +852,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      */
     public void setCollideWithGroups(int collisionGroups) {
         long objectId = nativeId();
-        collideWithGroups = collisionGroups;
+        this.collideWithGroups = collisionGroups;
         setCollideWithGroups(objectId, collideWithGroups);
     }
 
@@ -986,7 +986,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @see #getUserObject()
      */
     public void setUserObject(Object user) {
-        userObject = user;
+        this.userObject = user;
     }
 
     /**
