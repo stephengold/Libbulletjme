@@ -1141,7 +1141,14 @@ public class PhysicsRigidBody extends PhysicsBody {
 
         if (mass == this.mass) {
             return;
+
+        } else if (this.mass == massForStatic) {
+            // Static to non-static requires a rebuild.
+            this.mass = mass;
+            rebuildRigidBody();
+            return;
         }
+
         this.mass = mass;
         long objectId = nativeId();
         updateMassProps(objectId, shape.nativeId(), mass);
