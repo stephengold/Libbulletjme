@@ -40,6 +40,13 @@ import java.nio.ByteOrder;
  */
 public final class PrimitiveAllocator implements BufferAllocator {
     /**
+     * A no-argument constructor to avoid javadoc warnings from JDK 18.
+     */
+    public PrimitiveAllocator() {
+        // do nothing
+    }
+
+    /**
      * De-allocate a direct buffer.  Not supported!
      *
      * @param toBeDestroyed ignored

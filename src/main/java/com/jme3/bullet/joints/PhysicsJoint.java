@@ -71,6 +71,14 @@ abstract public class PhysicsJoint extends NativePhysicsObject {
      */
     private PhysicsSpace space = null;
     // *************************************************************************
+    // constructors
+
+    /**
+     * A no-argument constructor to avoid javadoc warnings from JDK 18.
+     */
+    protected PhysicsJoint() {
+    }
+    // *************************************************************************
     // new methods exposed
 
     /**
