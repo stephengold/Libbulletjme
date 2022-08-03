@@ -40,6 +40,8 @@ import com.jme3.math.Quaternion;
 
 
 /**
+ * Represents rotations and orientations in 3-dimensional space, using
+ * double-precision components.
  *
  *  @version   $Revision: 3951 $
  *  @author    Paul Speed
