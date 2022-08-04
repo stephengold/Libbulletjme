@@ -35,7 +35,7 @@ import jme3utilities.MyString;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MyShape {
+final public class MyShape {
     // *************************************************************************
     // constants and loggers
 
