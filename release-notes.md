@@ -1,5 +1,17 @@
 # Release log for the Libbulletjme project
 
+## Version 16.0.0 released on 4 August 2022
+
++ Qualified 13 utility classes as `final`. (API changes)
++ Protected 2 constructors of `SoftPhysicsJoint`. (API changes)
++ Bugfix:  `PhysicsRigidBody.setInverseInertiaLocal()` and
+  `PhysicsRigidBody.updateMassProps()` don't update the world inertia tensor
++ Bugfix:  static rigid body isn't rebuilt when assigned a positive mass
++ Bugfix:  when rebuilding a rigid body, its ignore list is lost
++ De-privatized the `setIgnoreCollisionCheck()` method
+  in `PhysicsCollisionObject`.
++ Added the "checkstyle" plugin to the build.
+
 ## Version 15.2.1 released on 6 July 2022
 
 + Bugfix:  values of 3 `ConfigFlag` constants are out-of-date
@@ -29,7 +41,7 @@
 ## Version 15.0.0 released on 3 June 2022
 
 + Changed the arguments of `PhysicsSoftBody.appendFaces()`
-  and `PhysicsSoftBody.appendLinks()` (API change)
+  and `PhysicsSoftBody.appendLinks()`. (API change)
 + Added the `Mesh` interface and `IndexBuffer` class to simplify the interface
   between soft bodies and the SPORT graphics engine.
 + Added soft-body methods from Minie:
