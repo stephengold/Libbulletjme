@@ -10,7 +10,6 @@
 + Bugfix:  when rebuilding a rigid body, its ignore list is lost
 + De-privatized the `setIgnoreCollisionCheck()` method
   in `PhysicsCollisionObject`.
-+ Added the "checkstyle" plugin to the build.
 
 ## Version 15.2.1 released on 6 July 2022
 
