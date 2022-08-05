@@ -38,6 +38,7 @@ import com.jme3.bullet.collision.PcoType;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.HeightfieldCollisionShape;
 import com.jme3.bullet.objects.infos.RigidBodyMotionState;
+import com.jme3.bullet.objects.infos.RigidBodySnapshot;
 import com.jme3.math.FastMath;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
@@ -575,7 +576,7 @@ public class PhysicsRigidBody extends PhysicsBody {
      */
     public void rebuildRigidBody() {
         PhysicsSpace removedFrom = null;
-        long[] ignoredIds = null;
+        RigidBodySnapshot snapshot = null;
 
         if (hasAssignedNativeObject()) {
             // Gather information regarding the existing native object.
@@ -583,11 +584,10 @@ public class PhysicsRigidBody extends PhysicsBody {
             if (removedFrom != null) {
                 removedFrom.removeCollisionObject(this);
             }
-
-            ignoredIds = listIgnoredIds();
-            clearIgnoreList();
+            snapshot = new RigidBodySnapshot(this);
 
             logger2.log(Level.FINE, "Clearing {0}.", this);
+            clearIgnoreList();
             unassignNativeObject();
         }
 
@@ -603,11 +603,8 @@ public class PhysicsRigidBody extends PhysicsBody {
 
         postRebuild();
 
-        if (ignoredIds != null) {
-            boolean toIgnore = true;
-            for (long id : ignoredIds) {
-                setIgnoreCollisionCheck(objectId, id, toIgnore);
-            }
+        if (snapshot != null) {
+            snapshot.applyTo(this);
         }
         if (removedFrom != null) {
             removedFrom.addCollisionObject(this);
