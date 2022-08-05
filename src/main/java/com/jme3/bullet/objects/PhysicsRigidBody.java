@@ -601,13 +601,17 @@ public class PhysicsRigidBody extends PhysicsBody {
                 getInternalType(objectId);
         logger2.log(Level.FINE, "Created {0}.", this);
 
+        if (mass != massForStatic) {
+            setKinematic(kinematic);
+        }
+
         postRebuild();
 
-        if (snapshot != null) {
-            snapshot.applyTo(this);
-        }
         if (removedFrom != null) {
             removedFrom.addCollisionObject(this);
+        }
+        if (snapshot != null) {
+            snapshot.applyTo(this);
         }
         // TODO physics joints
     }
