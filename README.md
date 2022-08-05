@@ -200,9 +200,7 @@ correct the situation: sgold@sonic.net
 [Jump to table of contents](#toc)
 
 
-[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
-[bsd3]: https://opensource.org/licenses/BSD-3-Clause "3-Clause BSD License"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [checkstyle]: https://checkstyle.org "Checkstyle"
 [chrome]: https://www.google.com/chrome "Chrome"
@@ -222,7 +220,6 @@ correct the situation: sgold@sonic.net
 [jbullet]: http://jbullet.advel.cz "JBullet"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
-[latest]: https://github.com/stephengold/Libbulletjme/releases/latest "latest release"
 [libbulletjme]: https://github.com/stephengold/Libbulletjme "Libbulletjme Project"
 [license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
