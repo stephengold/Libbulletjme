@@ -130,7 +130,7 @@ The soft-body portion was added in 2018,
 and is based on the work of Jules (aka "dokthar").
 
 The Java code is based partly jMonkeyEngine,
-partly on [Riccardo's V-hacd-java-bindings][v-hacd-java-bindings],
+partly on [Riccardo's V-hacd-java-bindings][vhacdBindings],
 and partly on [Minie].
 Minie is, in turn, based on `jme3-bullet`, another jMonkeyEngine library.
 
@@ -147,7 +147,7 @@ The Libbulletjme Project is based on open-source software:
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
-  + Riccardo Balbo's [V-hacd-java-bindings]
+  + Riccardo Balbo's [vhacdBindings]
   + Stephen Gold's [Heart]
   + Paul Speed's [SimMath]
 
@@ -236,4 +236,4 @@ correct the situation: sgold@sonic.net
 [sonatype]: https://www.sonatype.com "Sonatype"
 [travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
-[v-hacd-java-bindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
+[vhacdBindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
