@@ -141,15 +141,15 @@ Minie is, in turn, based on `jme3-bullet`, another jMonkeyEngine library.
 
 ## Acknowledgments
 
-The Libbulletjme Project is based on open-source software:
+The Libbulletjme Project is derived from open-source software:
 
   + the [Bullet] physics simulation kit
   + the [jMonkeyEngine][jme] game engine
   + [Dokthar's fork of jMonkeyEngine](https://github.com/dokthar/jmonkeyengine)
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
   + Riccardo Balbo's [vhacdBindings]
-  + Stephen Gold's [Heart]
-  + Paul Speed's [SimMath]
+  + Stephen Gold's [Heart] library
+  + Paul Speed's [SimMath] library
 
 This project also made use of the following software tools:
 
@@ -177,7 +177,8 @@ for [optimizing the cleaner thread](https://github.com/stephengold/Libbulletjme/
 
 I am grateful to "elmfrain" for authoring the `GearJoint` class.
 
-I am grateful to [Github], [Sonatype], [AppVeyor], [Travis], [MacStadium], [JFrog], and [Imgur]
+I am grateful to [GitHub], [Sonatype], [AppVeyor],
+[Travis], [MacStadium], [JFrog], and [Imgur]
 for providing free hosting for this project
 and many other open-source projects.
 
@@ -228,11 +229,11 @@ correct the situation: sgold@sonic.net
 [log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
 [macstadium]: https://www.macstadium.com/ "MacStadium"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
-[meld]: https://meldmerge.org "Meld Project"
+[meld]: https://meldmerge.org "Meld merge tool"
 [minie]: https://github.com/stephengold/Minie "Minie Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
-[simmath]: https://github.com/Simsilica/SimMath "SimMath Project"
+[simmath]: https://github.com/Simsilica/SimMath "SimMath Library"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
