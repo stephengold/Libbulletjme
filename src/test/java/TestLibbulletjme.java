@@ -204,10 +204,14 @@ public class TestLibbulletjme {
             6, 8, 9, 6, 7, 8,
             6, 10, 11, 6, 9, 10
         };
-        /*
-         * Generate a hulls for the mesh.
-         */
+
+        // Verify the VHACDParameters defaults.
         VHACDParameters parameters = new VHACDParameters();
+        Assert.assertFalse(parameters.getDebugEnabled());
+        Assert.assertEquals(32, parameters.getMaxVerticesPerHull());
+        Assert.assertEquals(100_000, parameters.getVoxelResolution());
+
+        // Generate hulls for the mesh.
         List<VHACDHull> vhacdHulls
                 = VHACD.compute(positionArray, indexArray, parameters);
         Assert.assertEquals(2, vhacdHulls.size());
