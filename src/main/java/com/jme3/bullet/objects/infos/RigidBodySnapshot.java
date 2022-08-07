@@ -131,7 +131,7 @@ public class RigidBodySnapshot {
     /**
      * anisotropic friction modes (bitmask)
      */
-    final private int anisotopicFrictionModes;
+    final private int anisotropicFrictionModes;
     /**
      * native IDs of all collision objects in the ignore list
      */
@@ -155,7 +155,7 @@ public class RigidBodySnapshot {
     /**
      * anisotropic friction components
      */
-    final private Vector3f anisotopicFrictionComponents;
+    final private Vector3f anisotropicFrictionComponents;
     /**
      * angular factors
      */
@@ -208,7 +208,7 @@ public class RigidBodySnapshot {
                 afMode |= bitMask;
             }
         }
-        this.anisotopicFrictionModes = afMode;
+        this.anisotropicFrictionModes = afMode;
 
         this.ignoreList = body.listIgnoredIds();
         this.rotationMatrix = body.getPhysicsRotationMatrix(null);
@@ -224,7 +224,7 @@ public class RigidBodySnapshot {
         this.location = body.getPhysicsLocationDp(null);
 
         // Vector3f
-        this.anisotopicFrictionComponents = body.getAnisotropicFriction(null);
+        this.anisotropicFrictionComponents = body.getAnisotropicFriction(null);
         this.angularFactor = body.getAngularFactor(null);
         this.linearFactor = body.getLinearFactor(null);
         this.totalAppliedForce = body.totalAppliedForce(null);
@@ -258,9 +258,8 @@ public class RigidBodySnapshot {
         body.setRestitution(restitution);
         body.setRollingFriction(rollingFriction);
         body.setSpinningFriction(spinningFriction);
-
         body.setAnisotropicFriction(
-                anisotopicFrictionComponents, anisotopicFrictionModes);
+                anisotropicFrictionComponents, anisotropicFrictionModes);
         body.setIgnoreList(ignoreList);
         body.setPhysicsRotation(rotationMatrix);
         body.setPhysicsLocationDp(location);
