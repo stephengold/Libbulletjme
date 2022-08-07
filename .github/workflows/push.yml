@@ -20,20 +20,6 @@ jobs:
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-  Java8-Windows:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: windows-2019
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: 8
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
-        shell: bash
-      - if: failure()
-        run: cat build/reports/tests/test/classes/TestLibbulletjme.html
-
   Java11-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-18.04
