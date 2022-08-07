@@ -70,7 +70,6 @@ public class VHACDParameters
         long objectId = create();
         super.setNativeId(objectId);
 
-        setConcavity(objectId, 0.0025);
         setMaxNumVerticesPerCH(objectId, 32);
     }
     // *************************************************************************
@@ -84,72 +83,8 @@ public class VHACDParameters
      */
     public void fromInputStream(InputStream is) throws IOException {
         DataInputStream dis = new DataInputStream(is);
-
-        setMaxConcavity(dis.readDouble());
-        setAlpha(dis.readDouble());
-        setBeta(dis.readDouble());
-        setMinVolumePerHull(dis.readDouble());
-
         setVoxelResolution(dis.readInt());
         setMaxVerticesPerHull(dis.readInt());
-        setPlaneDownSampling(dis.readInt());
-        setConvexHullDownSampling(dis.readInt());
-        setPCA(dis.readInt() != 0);
-        setACDMode(ACDMode.values()[dis.readInt()]);
-        setConvexHullApproximation(dis.readInt());
-        setOclAcceleration(dis.readInt());
-    }
-
-    /**
-     * Read the decomposition mode (native field: m_mode).
-     *
-     * @return an enum value (not null)
-     */
-    public ACDMode getACDMode() {
-        long objectId = nativeId();
-        int ordinal = getMode(objectId);
-        ACDMode result = ACDMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Read the bias toward clipping along symmetry planes. (native field:
-     * m_alpha).
-     *
-     * @return alpha (&ge;0, &le;1)
-     */
-    public double getAlpha() {
-        long objectId = nativeId();
-        double result = getAlpha(objectId);
-
-        return result;
-    }
-
-    /**
-     * Read the bias toward clipping along revolution axes (native field:
-     * m_beta).
-     *
-     * @return beta (&ge;0, &le;1)
-     */
-    public double getBeta() {
-        long objectId = nativeId();
-        double result = getBeta(objectId);
-
-        return result;
-    }
-
-    /**
-     * Read the precision of the convex-hull generation process (native field:
-     * m_convexhullDownsampling).
-     *
-     * @return precision (&ge;1, &le;16)
-     */
-    public int getConvexHullDownSampling() {
-        long objectId = nativeId();
-        int result = getConvexhullDownsampling(objectId);
-
-        return result;
     }
 
     /**
@@ -162,18 +97,6 @@ public class VHACDParameters
     }
 
     /**
-     * Read the maximum concavity (native field: m_concavity).
-     *
-     * @return concavity (&ge;0, &le;1)
-     */
-    public double getMaxConcavity() {
-        long objectId = nativeId();
-        double result = getConcavity(objectId);
-
-        return result;
-    }
-
-    /**
      * Read the maximum number of vertices per hull (native field:
      * m_maxNumVerticesPerCH).
      *
@@ -182,43 +105,6 @@ public class VHACDParameters
     public int getMaxVerticesPerHull() {
         long objectId = nativeId();
         int result = getMaxNumVerticesPerCH(objectId);
-
-        return result;
-    }
-
-    /**
-     * Read the minimum volume for added vertices (native field:
-     * m_minVolumePerCH).
-     *
-     * @return the volume (&ge;0, &le;0.01)
-     */
-    public double getMinVolumePerHull() {
-        long objectId = nativeId();
-        double result = getMinVolumePerCH(objectId);
-
-        return result;
-    }
-
-    /**
-     * Test whether to normalize the mesh (native field: m_pca).
-     *
-     * @return true &rarr; normalize, false &rarr; don't normalize
-     */
-    public boolean getPCA() {
-        long objectId = nativeId();
-        boolean result = getPca(objectId);
-
-        return result;
-    }
-
-    /**
-     * Read the granularity of the search (native field: m_planeDownsampling).
-     *
-     * @return granularity (&ge;1, &le;16)
-     */
-    public int getPlaneDownSampling() {
-        long objectId = nativeId();
-        int result = getPlaneDownsampling(objectId);
 
         return result;
     }
@@ -237,71 +123,12 @@ public class VHACDParameters
     }
 
     /**
-     * Set approximate convex decomposition mode (native field: m_mode).
-     *
-     * @param mode default = VOXEL
-     */
-    public void setACDMode(ACDMode mode) {
-        long objectId = nativeId();
-        setMode(objectId, mode.ordinal());
-    }
-
-    /**
-     * Set bias toward clipping along symmetry planes (native field: m_alpha).
-     *
-     * @param v default = 0.05, min = 0.0, max = 1.0,
-     */
-    public void setAlpha(double v) {
-        Validate.fraction(v, "alpha");
-
-        long objectId = nativeId();
-        setAlpha(objectId, v);
-    }
-
-    /**
-     * Set bias toward clipping along revolution axes (native field: m_beta).
-     *
-     * @param v default = 0.05, min = 0.0, max = 1.0
-     */
-    public void setBeta(double v) {
-        Validate.fraction(v, "beta");
-
-        long objectId = nativeId();
-        setBeta(objectId, v);
-    }
-
-    /**
-     * Set precision of the convex-hull generation process during the clipping
-     * plane selection stage (native field: m_convexhullDownsampling).
-     *
-     * @param v default = 4, min = 1, max = 16
-     */
-    public void setConvexHullDownSampling(int v) {
-        Validate.inRange(v, "precision", 1, 16);
-
-        long objectId = nativeId();
-        setConvexhullDownsampling(objectId, v);
-    }
-
-    /**
      * Alter whether debug output is enabled.
      *
      * @param d true &rarr; enable, false &rarr; disable (default=false)
      */
     public void setDebugEnabled(boolean d) {
         debug = d;
-    }
-
-    /**
-     * Set maximum concavity (native field: m_concavity).
-     *
-     * @param v default = 0.0025, min = 0.0, max = 1.0
-     */
-    public void setMaxConcavity(double v) {
-        Validate.fraction(v, "depth");
-
-        long objectId = nativeId();
-        setConcavity(objectId, v);
     }
 
     /**
@@ -315,43 +142,6 @@ public class VHACDParameters
 
         long objectId = nativeId();
         setMaxNumVerticesPerCH(objectId, v);
-    }
-
-    /**
-     * Set minimum volume to add vertices to convex-hulls (native field:
-     * m_minVolumePerCH).
-     *
-     * @param v default = 0.0001, min = 0.0, max = 0.01
-     */
-    public void setMinVolumePerHull(double v) {
-        Validate.inRange(v, "min volume", 0.0, 0.01);
-
-        long objectId = nativeId();
-        setMinVolumePerCH(objectId, v);
-    }
-
-    /**
-     * Enable/disable normalizing the mesh before applying the convex
-     * decomposition (native field: m_pca).
-     *
-     * @param v default = False
-     */
-    public void setPCA(boolean v) {
-        long objectId = nativeId();
-        setPca(objectId, v);
-    }
-
-    /**
-     * Set granularity of the search for the "best" clipping plane (native
-     * field: m_planeDownsampling).
-     *
-     * @param v default = 4, min = 1, max = 16
-     */
-    public void setPlaneDownSampling(int v) {
-        Validate.inRange(v, "granularity", 1, 16);
-
-        long objectId = nativeId();
-        setPlaneDownsampling(objectId, v);
     }
 
     /**
@@ -375,20 +165,8 @@ public class VHACDParameters
      */
     public void toOutputStream(OutputStream os) throws IOException {
         DataOutputStream dos = new DataOutputStream(os);
-
-        dos.writeDouble(getMaxConcavity());
-        dos.writeDouble(getAlpha());
-        dos.writeDouble(getBeta());
-        dos.writeDouble(getMinVolumePerHull());
-
         dos.writeInt(getVoxelResolution());
         dos.writeInt(getMaxVerticesPerHull());
-        dos.writeInt(getPlaneDownSampling());
-        dos.writeInt(getConvexHullDownSampling());
-        dos.writeInt(getPCA() ? 1 : 0);
-        dos.writeInt(getACDMode().ordinal());
-        dos.writeInt(getConvexHullApproximation());
-        dos.writeInt(getOclAcceleration());
     }
     // *************************************************************************
     // NativePhysicsObject methods
@@ -405,17 +183,7 @@ public class VHACDParameters
             long objectId = create();
             clone.reassignNativeId(objectId);
 
-            clone.setACDMode(getACDMode());
-            clone.setAlpha(getAlpha());
-            clone.setBeta(getBeta());
-            clone.setConvexHullApproximation(getConvexHullApproximation());
-            clone.setConvexHullDownSampling(getConvexHullDownSampling());
-            clone.setMaxConcavity(getMaxConcavity());
             clone.setMaxVerticesPerHull(getMaxVerticesPerHull());
-            clone.setMinVolumePerHull(getMinVolumePerHull());
-            clone.setOclAcceleration(getOclAcceleration());
-            clone.setPCA(getPCA());
-            clone.setPlaneDownSampling(getPlaneDownSampling());
             clone.setVoxelResolution(getVoxelResolution());
             return clone;
 
@@ -438,22 +206,8 @@ public class VHACDParameters
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
             VHACDParameters other = (VHACDParameters) otherObject;
-            int cha = other.getConvexHullApproximation();
-            int chds = other.getConvexHullDownSampling();
-            double maxConcavity = other.getMaxConcavity();
-            double mvph = other.getMinVolumePerHull();
-            result = getACDMode() == other.getACDMode()
-                    && (Double.compare(getAlpha(), other.getAlpha()) == 0)
-                    && (Double.compare(getBeta(), other.getBeta()) == 0)
-                    && getConvexHullApproximation() == cha
-                    && getConvexHullDownSampling() == chds
-                    && getDebugEnabled() == other.getDebugEnabled()
-                    && (Double.compare(getMaxConcavity(), maxConcavity) == 0)
+            result = getDebugEnabled() == other.getDebugEnabled()
                     && getMaxVerticesPerHull() == other.getMaxVerticesPerHull()
-                    && (Double.compare(getMinVolumePerHull(), mvph) == 0)
-                    && getOclAcceleration() == other.getOclAcceleration()
-                    && getPCA() == other.getPCA()
-                    && getPlaneDownSampling() == other.getPlaneDownSampling()
                     && getVoxelResolution() == other.getVoxelResolution();
         } else {
             result = false;
@@ -471,17 +225,7 @@ public class VHACDParameters
     public int hashCode() {
         int hash = 5;
         hash = 83 * hash + (debug ? 1 : 0);
-        hash = 83 * hash + getACDMode().hashCode();
-        hash = 83 * hash + Double.hashCode(getAlpha());
-        hash = 83 * hash + Double.hashCode(getBeta());
-        hash = 83 * hash + getConvexHullApproximation();
-        hash = 83 * hash + getConvexHullDownSampling();
-        hash = 83 * hash + Double.hashCode(getMaxConcavity());
         hash = 83 * hash + getMaxVerticesPerHull();
-        hash = 83 * hash + Double.hashCode(getMinVolumePerHull());
-        hash = 83 * hash + getOclAcceleration();
-        hash = 83 * hash + Boolean.hashCode(getPCA());
-        hash = 83 * hash + getPlaneDownSampling();
         hash = 83 * hash + getVoxelResolution();
 
         return hash;
@@ -498,46 +242,6 @@ public class VHACDParameters
         assert objectId != 0L;
         finalizeNative(objectId);
     }
-
-    /**
-     * native field: m_convexhullApproximation
-     *
-     * @return the value
-     */
-    private int getConvexHullApproximation() {
-        long objectId = nativeId();
-        return getConvexhullApproximation(objectId);
-    }
-
-    /**
-     * native field: m_oclAcceleration
-     *
-     * @return the value
-     */
-    private int getOclAcceleration() {
-        long objectId = nativeId();
-        return getOclAcceleration(objectId);
-    }
-
-    /**
-     * native field: m_convexhullApproximation
-     *
-     * @param value the desired value (default=true)
-     */
-    private void setConvexHullApproximation(int value) {
-        long objectId = nativeId();
-        setConvexhullApproximation(objectId, value);
-    }
-
-    /**
-     * native field: m_oclAcceleration
-     *
-     * @param value the desired value (default=true)
-     */
-    private void setOclAcceleration(int value) {
-        long objectId = nativeId();
-        setOclAcceleration(objectId, value);
-    }
     // *************************************************************************
     // native private methods
 
@@ -545,55 +249,12 @@ public class VHACDParameters
 
     native private static void finalizeNative(long objectId);
 
-    native private static double getAlpha(long objectId);
-
-    native private static double getBeta(long objectId);
-
-    native private static double getConcavity(long objectId);
-
-    native private static int getConvexhullApproximation(long objectId);
-
-    native private static int getConvexhullDownsampling(long objectId);
-
     native private static int getMaxNumVerticesPerCH(long objectId);
-
-    native private static double getMinVolumePerCH(long objectId);
-
-    native private static int getMode(long objectId);
-
-    native private static int getOclAcceleration(long objectId);
-
-    native private static boolean getPca(long objectId);
-
-    native private static int getPlaneDownsampling(long objectId);
 
     native private static int getResolution(long objectId);
 
-    native private static void setAlpha(long objectId, double alpha);
-
-    native private static void setBeta(long objectId, double beta);
-
-    native private static void setConcavity(long objectId, double depth);
-
-    native private static void setConvexhullApproximation(long objectId,
-            int value);
-
-    native private static void setConvexhullDownsampling(long objectId,
-            int precision);
-
     native private static void setMaxNumVerticesPerCH(long objectId,
             int numVertices);
-
-    native private static void setMinVolumePerCH(long objectId, double volume);
-
-    native private static void setMode(long objectId, int ordinal);
-
-    native private static void setOclAcceleration(long objectId, int value);
-
-    native private static void setPca(long objectId, boolean enable);
-
-    native private static void setPlaneDownsampling(long objectId,
-            int granularity);
 
     native private static void setResolution(long objectId, int maxVoxels);
 }

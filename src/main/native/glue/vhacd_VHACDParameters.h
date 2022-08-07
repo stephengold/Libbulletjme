@@ -25,90 +25,10 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
 
 /*
  * Class:     vhacd_VHACDParameters
- * Method:    getAlpha
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getAlpha
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getBeta
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getBeta
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getConcavity
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getConcavity
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getConvexhullApproximation
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullApproximation
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getConvexhullDownsampling
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getConvexhullDownsampling
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
  * Method:    getMaxNumVerticesPerCH
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxNumVerticesPerCH
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getMinVolumePerCH
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getMinVolumePerCH
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getMode
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMode
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getOclAcceleration
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getOclAcceleration
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getPca
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_getPca
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    getPlaneDownsampling
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getPlaneDownsampling
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -121,90 +41,10 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
 
 /*
  * Class:     vhacd_VHACDParameters
- * Method:    setAlpha
- * Signature: (JD)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setAlpha
-  (JNIEnv *, jclass, jlong, jdouble);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setBeta
- * Signature: (JD)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setBeta
-  (JNIEnv *, jclass, jlong, jdouble);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setConcavity
- * Signature: (JD)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConcavity
-  (JNIEnv *, jclass, jlong, jdouble);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setConvexhullApproximation
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullApproximation
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setConvexhullDownsampling
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setConvexhullDownsampling
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
  * Method:    setMaxNumVerticesPerCH
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setMinVolumePerCH
- * Signature: (JD)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMinVolumePerCH
-  (JNIEnv *, jclass, jlong, jdouble);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setMode
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMode
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setOclAcceleration
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setOclAcceleration
-  (JNIEnv *, jclass, jlong, jint);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setPca
- * Signature: (JZ)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setPca
-  (JNIEnv *, jclass, jlong, jboolean);
-
-/*
- * Class:     vhacd_VHACDParameters
- * Method:    setPlaneDownsampling
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setPlaneDownsampling
   (JNIEnv *, jclass, jlong, jint);
 
 /*
