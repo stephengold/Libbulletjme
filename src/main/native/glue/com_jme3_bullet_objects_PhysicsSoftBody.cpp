@@ -1416,8 +1416,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollis
     const btSoftBody * const pSoftBody
             = reinterpret_cast<btSoftBody *> (softId);
     NULL_CHK(pEnv, pSoftBody, "The btSoftBody does not exist.", JNI_FALSE)
-    btAssert(
-            pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
 
     btCollisionObject *pRigidBody
             = reinterpret_cast<btCollisionObject *> (rigidId);
