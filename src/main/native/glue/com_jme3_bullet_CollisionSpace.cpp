@@ -194,9 +194,9 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_getDeterministicO
 (JNIEnv *pEnv, jclass, jlong spaceId) {
     const jmeCollisionSpace * const
             pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
-    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", JNI_FALSE);
     const btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
-    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", 0);
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", JNI_FALSE);
 
     const btDispatcherInfo& dispatchInfo = pWorld->getDispatchInfo();
     bool result = dispatchInfo.m_deterministicOverlappingPairs;
