@@ -129,7 +129,7 @@ public class RigidBodySnapshot {
      */
     final private float spinningFriction;
     /**
-     * anisotopic friction modes (bitmask)
+     * anisotropic friction modes (bitmask)
      */
     final private int anisotopicFrictionModes;
     /**
@@ -272,7 +272,7 @@ public class RigidBodySnapshot {
         body.setLinearFactor(linearFactor);
 
         // Angular factors affect the application of torque.
-        body.setAngularFactor(scaleIdentity); // temporary settting
+        body.setAngularFactor(scaleIdentity); // temporary setting
         body.applyTorque(totalAppliedTorque);
         body.setAngularFactor(angularFactor);
 
