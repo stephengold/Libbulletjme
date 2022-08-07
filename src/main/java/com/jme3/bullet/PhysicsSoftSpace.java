@@ -76,6 +76,17 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      * Instantiate a PhysicsSoftSpace with a sequential-impulse solver. Must be
      * invoked on the designated physics thread.
      *
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     */
+    public PhysicsSoftSpace(BroadphaseType broadphaseType) {
+        this(new Vector3f(-10000f, -10000f, -10000f),
+                new Vector3f(10000f, 10000f, 10000f), broadphaseType);
+    }
+
+    /**
+     * Instantiate a PhysicsSoftSpace with a sequential-impulse solver. Must be
+     * invoked on the designated physics thread.
+     *
      * @param worldMin the desired minimum coordinate value for each axis (not
      * null, unaffected, default=(-10k,-10k,-10k))
      * @param worldMax the desired maximum coordinate value for each axis (not
