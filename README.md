@@ -104,7 +104,7 @@ standalone Maven artifacts are provided.
 + [The Bullet Physics SDK Manual](https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf)
 + [The Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
 + [The LbjExamples project][examples] at [GitHub]
-+ [The Minie project][minie] at [GitHub]
++ [The Minie project][minie]
 + [The V-HACD Library][vhacd] at [GitHub]
 + [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
 + [The Bullet Forum](https://pybullet.org/Bullet/phpBB3)
@@ -220,14 +220,14 @@ correct the situation: sgold@sonic.net
 [jbullet]: http://jbullet.advel.cz "JBullet"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
-[libbulletjme]: https://github.com/stephengold/Libbulletjme "Libbulletjme Project"
+[libbulletjme]: https://stephengold.github.io/Libbulletjme "Libbulletjme Project"
 [license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [log]: https://github.com/stephengold/Libbulletjme/blob/master/release-notes.md "release log"
 [macstadium]: https://www.macstadium.com/ "MacStadium"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [meld]: https://meldmerge.org "Meld merge tool"
-[minie]: https://github.com/stephengold/Minie "Minie Project"
+[minie]: https://stephengold.github.io/Minie "Minie Project"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
 [simmath]: https://github.com/Simsilica/SimMath "SimMath Library"
