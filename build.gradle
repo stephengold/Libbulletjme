@@ -95,16 +95,16 @@ model {
         //clang(Clang) // to favor Clang over Gcc
         gcc(Gcc)
         clang(Clang)
-        gcc5Arm32(Gcc) {
+        gcc6Arm32(Gcc) {
             target('Linux_ARM32') {
-                cppCompiler.executable = 'arm-linux-gnueabi-g++-5'
-                linker.executable = 'arm-linux-gnueabi-g++-5'
+                cppCompiler.executable = 'arm-linux-gnueabi-g++-6'
+                linker.executable = 'arm-linux-gnueabi-g++-6'
             }
         }
-        gcc5Arm32hf(Gcc) {
+        gcc6Arm32hf(Gcc) {
             target('Linux_ARM32hf') {
-                cppCompiler.executable = 'arm-linux-gnueabihf-g++-5'
-                linker.executable = 'arm-linux-gnueabihf-g++-5'
+                cppCompiler.executable = 'arm-linux-gnueabihf-g++-6'
+                linker.executable = 'arm-linux-gnueabihf-g++-6'
             }
         }
         gccArm64(Gcc) {
