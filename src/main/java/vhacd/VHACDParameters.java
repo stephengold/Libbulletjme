@@ -125,10 +125,10 @@ public class VHACDParameters
     /**
      * Alter whether debug output is enabled.
      *
-     * @param d true &rarr; enable, false &rarr; disable (default=false)
+     * @param setting true &rarr; enable, false &rarr; disable (default=false)
      */
-    public void setDebugEnabled(boolean d) {
-        debug = d;
+    public void setDebugEnabled(boolean setting) {
+        this.debug = setting;
     }
 
     /**
@@ -137,26 +137,26 @@ public class VHACDParameters
      * <p>
      * Note: the native default is 64.
      *
-     * @param v default = 32, min = 4, max = 1024)
+     * @param limit default = 32, min = 4, max = 1024)
      */
-    public void setMaxVerticesPerHull(int v) {
-        Validate.inRange(v, "max vertices", 4, 1024);
+    public void setMaxVerticesPerHull(int limit) {
+        Validate.inRange(limit, "limit", 4, 1024);
 
         long objectId = nativeId();
-        setMaxNumVerticesPerCH(objectId, v);
+        setMaxNumVerticesPerCH(objectId, limit);
     }
 
     /**
      * Alter the maximum number of voxels generated during the voxelization
      * stage (native field: m_resolution).
      *
-     * @param v default = 100_000, min = 10_000, max = 64_000_000
+     * @param maxVoxels default = 100_000, min = 10_000, max = 64_000_000
      */
-    public void setVoxelResolution(int v) {
-        Validate.inRange(v, "maxVoxels", 10_000, 64_000_000);
+    public void setVoxelResolution(int maxVoxels) {
+        Validate.inRange(maxVoxels, "maxVoxels", 10_000, 64_000_000);
 
         long objectId = nativeId();
-        setResolution(objectId, v);
+        setResolution(objectId, maxVoxels);
     }
 
     /**
@@ -187,6 +187,7 @@ public class VHACDParameters
 
             clone.setMaxVerticesPerHull(getMaxVerticesPerHull());
             clone.setVoxelResolution(getVoxelResolution());
+
             return clone;
 
         } catch (CloneNotSupportedException exception) {
@@ -226,7 +227,7 @@ public class VHACDParameters
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + (debug ? 1 : 0);
+        hash = 83 * hash + (getDebugEnabled() ? 1 : 0);
         hash = 83 * hash + getMaxVerticesPerHull();
         hash = 83 * hash + getVoxelResolution();
 
@@ -255,8 +256,7 @@ public class VHACDParameters
 
     native private static int getResolution(long objectId);
 
-    native private static void setMaxNumVerticesPerCH(long objectId,
-            int numVertices);
+    native private static void setMaxNumVerticesPerCH(long objectId, int limit);
 
-    native private static void setResolution(long objectId, int maxVoxels);
+    native private static void setResolution(long objectId, int numVoxels);
 }
