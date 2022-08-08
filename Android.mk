@@ -262,14 +262,6 @@ $(N)/glue/jmePhysicsSoftSpace.cpp \
 $(N)/glue/jmePhysicsSpace.cpp \
 $(N)/glue/vhacd_VHACD.cpp \
 $(N)/glue/vhacd_VHACDHull.cpp \
-$(N)/glue/vhacd_VHACDParameters.cpp \
-$(N)/v-hacd/src/FloatMath.cpp \
-$(N)/v-hacd/src/VHACD-ASYNC.cpp \
-$(N)/v-hacd/src/VHACD.cpp \
-$(N)/v-hacd/src/vhacdICHull.cpp \
-$(N)/v-hacd/src/vhacdManifoldMesh.cpp \
-$(N)/v-hacd/src/vhacdMesh.cpp \
-$(N)/v-hacd/src/vhacdRaycastMesh.cpp \
-$(N)/v-hacd/src/vhacdVolume.cpp
+$(N)/glue/vhacd_VHACDParameters.cpp
 
 include $(BUILD_SHARED_LIBRARY)
