@@ -27,28 +27,28 @@ jobs:
         - g++-6 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
     - arch: arm64
-      compiler: arm-linux-gnueabi-g++-6
+      compiler: arm-linux-gnueabi-g++-7
       addons:
         apt:
           packages:
-            - g++-6-arm-linux-gnueabi
+            - g++-7-arm-linux-gnueabi
       env:
         - FLAVOR=Dp32
       script:
         - g++ --version
-        - arm-linux-gnueabi-g++-6 -E -v
+        - arm-linux-gnueabi-g++-7 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
     - arch: arm64
-      compiler: arm-linux-gnueabi-g++-6
+      compiler: arm-linux-gnueabi-g++-7
       addons:
         apt:
           packages:
-            - g++-6-arm-linux-gnueabi
+            - g++-7-arm-linux-gnueabi
       env:
         - FLAVOR=Sp32
       script:
         - g++ --version
-        - arm-linux-gnueabi-g++-6 -E -v
+        - arm-linux-gnueabi-g++-7 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
     - arch: arm64
       compiler: arm-linux-gnueabihf-g++-6

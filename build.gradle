@@ -93,10 +93,10 @@ model {
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
         //clang(Clang) // to favor Clang over Gcc
-        gcc6Arm32(Gcc) {
+        gcc7Arm32(Gcc) {
             target('Linux_ARM32') {
-                cppCompiler.executable = 'arm-linux-gnueabi-g++-6'
-                linker.executable = 'arm-linux-gnueabi-g++-6'
+                cppCompiler.executable = 'arm-linux-gnueabi-g++-7'
+                linker.executable = 'arm-linux-gnueabi-g++-7'
             }
         }
         gcc6Arm32hf(Gcc) {
