@@ -14,6 +14,8 @@ jobs:
           packages:
             - g++-5-multilib
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - g++-5 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
@@ -23,6 +25,8 @@ jobs:
           packages:
             - g++-5-multilib
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - g++-5 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
@@ -35,6 +39,8 @@ jobs:
       env:
         - FLAVOR=Dp32
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - arm-linux-gnueabi-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
@@ -47,6 +53,8 @@ jobs:
       env:
         - FLAVOR=Sp32
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - arm-linux-gnueabi-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
@@ -59,6 +67,8 @@ jobs:
       env:
         - FLAVOR=Dp32
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - arm-linux-gnueabihf-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
@@ -71,6 +81,8 @@ jobs:
       env:
         - FLAVOR=Sp32
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - arm-linux-gnueabihf-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
@@ -83,6 +95,8 @@ jobs:
       env:
         - FLAVOR=Dp64
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - aarch64-linux-gnu-g++-5 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
@@ -95,6 +109,8 @@ jobs:
       env:
         - FLAVOR=Sp64
       script:
+        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
         - aarch64-linux-gnu-g++-5 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
