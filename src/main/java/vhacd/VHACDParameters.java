@@ -76,9 +76,9 @@ public class VHACDParameters
     // new methods exposed
 
     /**
-     * Read selected parameters from an InputStream.
+     * Read selected parameters from the specified InputStream.
      *
-     * @param is (not null)
+     * @param is the stream to read (not null)
      * @throws IOException from DataInputStream
      */
     public void fromInputStream(InputStream is) throws IOException {
@@ -97,7 +97,7 @@ public class VHACDParameters
     }
 
     /**
-     * Read the maximum number of vertices per hull (native field:
+     * Return the maximum number of vertices per convex hull (native field:
      * m_maxNumVerticesPerCH).
      *
      * @return the limit (&ge;4, &le;1024)
@@ -110,10 +110,10 @@ public class VHACDParameters
     }
 
     /**
-     * Read the maximum number of voxels generated during the voxelization stage
-     * (native field: m_resolution).
+     * Return the maximum number of voxels generated during the voxelization
+     * stage (native field: m_resolution).
      *
-     * @return number (&ge;10000, &le;64000000)
+     * @return the limit (&ge;10000, &le;64000000)
      */
     public int getVoxelResolution() {
         long objectId = nativeId();
@@ -132,8 +132,10 @@ public class VHACDParameters
     }
 
     /**
-     * Set maximum number of vertices per convex-hull (native field:
+     * Alter the maximum number of vertices per convex hull (native field:
      * m_maxNumVerticesPerCH).
+     * <p>
+     * Note: the native default is 64.
      *
      * @param v default = 32, min = 4, max = 1024)
      */
@@ -145,8 +147,8 @@ public class VHACDParameters
     }
 
     /**
-     * Set maximum number of voxels generated during the voxelization stage
-     * (native field: m_resolution).
+     * Alter the maximum number of voxels generated during the voxelization
+     * stage (native field: m_resolution).
      *
      * @param v default = 100_000, min = 10_000, max = 64_000_000
      */
@@ -158,9 +160,9 @@ public class VHACDParameters
     }
 
     /**
-     * Write selected parameters to an OutputStream.
+     * Write selected parameters to the specified OutputStream.
      *
-     * @param os (not null)
+     * @param os the stream to write (not null)
      * @throws IOException from DataOutputStream
      */
     public void toOutputStream(OutputStream os) throws IOException {
@@ -217,9 +219,9 @@ public class VHACDParameters
     }
 
     /**
-     * Generate the hash code for this object.
+     * Generate the hash code for this instance.
      *
-     * @return value for use in hashing
+     * @return a 32-bit value for use in hashing
      */
     @Override
     public int hashCode() {
