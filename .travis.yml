@@ -79,7 +79,7 @@ jobs:
       addons:
         apt:
           packages:
-            - g++-6-multilib
+            - g++-6
       env:
         - FLAVOR=Dp64
       script:
@@ -91,7 +91,7 @@ jobs:
       addons:
         apt:
           packages:
-            - g++-6-multilib
+            - g++-6
       env:
         - FLAVOR=Sp64
       script:
