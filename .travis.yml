@@ -8,111 +8,95 @@ os: linux
 
 jobs:
   include:
-    - compiler: gcc-5
+    - compiler: gcc-6
       addons:
         apt:
           packages:
-            - g++-5-multilib
+            - g++-6-multilib
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - g++-5 --version
+        - g++-6 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
-    - compiler: gcc-5
+    - compiler: gcc-6
       addons:
         apt:
           packages:
-            - g++-5-multilib
+            - g++-6-multilib
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - g++-5 --version
+        - g++-6 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
     - arch: arm64
-      compiler: arm-linux-gnueabi-g++-5
+      compiler: arm-linux-gnueabi-g++-6
       addons:
         apt:
           packages:
-            - g++-5-arm-linux-gnueabi
+            - g++-6-arm-linux-gnueabi
       env:
         - FLAVOR=Dp32
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - arm-linux-gnueabi-g++-5 -E -v
+        - arm-linux-gnueabi-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
     - arch: arm64
-      compiler: arm-linux-gnueabi-g++-5
+      compiler: arm-linux-gnueabi-g++-6
       addons:
         apt:
           packages:
-            - g++-5-arm-linux-gnueabi
+            - g++-6-arm-linux-gnueabi
       env:
         - FLAVOR=Sp32
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - arm-linux-gnueabi-g++-5 -E -v
+        - arm-linux-gnueabi-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
     - arch: arm64
-      compiler: arm-linux-gnueabihf-g++-5
+      compiler: arm-linux-gnueabihf-g++-6
       addons:
         apt:
           packages:
-            - g++-5-arm-linux-gnueabihf
+            - g++-6-arm-linux-gnueabihf
       env:
         - FLAVOR=Dp32
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - arm-linux-gnueabihf-g++-5 -E -v
+        - arm-linux-gnueabihf-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
     - arch: arm64
-      compiler: arm-linux-gnueabihf-g++-5
+      compiler: arm-linux-gnueabihf-g++-6
       addons:
         apt:
           packages:
-            - g++-5-arm-linux-gnueabihf
+            - g++-6-arm-linux-gnueabihf
       env:
         - FLAVOR=Sp32
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - arm-linux-gnueabihf-g++-5 -E -v
+        - arm-linux-gnueabihf-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
     - arch: arm64
-      compiler: gcc-5
+      compiler: gcc-6
       addons:
         apt:
           packages:
-            - g++-5-arm-linux-gnueabihf
+            - g++-6-multilib
       env:
         - FLAVOR=Dp64
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - aarch64-linux-gnu-g++-5 -E -v
+        - aarch64-linux-gnu-g++-6 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
     - arch: arm64
-      compiler: gcc-5
+      compiler: gcc-6
       addons:
         apt:
           packages:
-            - g++-5-arm-linux-gnueabihf
+            - g++-6-multilib
       env:
         - FLAVOR=Sp64
       script:
-        - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - g++ --version
-        - aarch64-linux-gnu-g++-5 -E -v
+        - aarch64-linux-gnu-g++-6 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
 
