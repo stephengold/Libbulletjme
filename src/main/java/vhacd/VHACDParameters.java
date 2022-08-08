@@ -29,6 +29,7 @@
  */
 package vhacd;
 
+import com.jme3.bullet.FillMode;
 import com.jme3.bullet.NativePhysicsObject;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -98,6 +99,45 @@ public class VHACDParameters
     }
 
     /**
+     * Return the algorithm to generate a solid object from voxels (native
+     * field: m_fillMode).
+     *
+     * @return an enum value (not null)
+     */
+    public FillMode getFillMode() {
+        long objectId = nativeId();
+        int ordinal = getFillMode(objectId);
+        FillMode result = FillMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the maximum number of convex hulls (native field:
+     * m_maxConvexHulls).
+     *
+     * @return the limit (&ge;1, &le;1024)
+     */
+    public int getMaxHulls() {
+        long objectId = nativeId();
+        int result = getMaxHulls(objectId);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum recursion depth (native field: m_maxRecursionDepth).
+     *
+     * @return the limit (&ge;1, &le;1024)
+     */
+    public int getMaxRecursion() {
+        long objectId = nativeId();
+        int result = getMaxRecursion(objectId);
+
+        return result;
+    }
+
+    /**
      * Return the maximum number of vertices per convex hull (native field:
      * m_maxNumVerticesPerCH).
      *
@@ -106,6 +146,32 @@ public class VHACDParameters
     public int getMaxVerticesPerHull() {
         long objectId = nativeId();
         int result = getMaxNumVerticesPerCH(objectId);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum edge length (native field: m_minEdgeLength).
+     *
+     * @return the limit (&ge;1, &le;1024)
+     */
+    public int getMinEdgeLength() {
+        long objectId = nativeId();
+        int result = getMinEdgeLength(objectId);
+
+        return result;
+    }
+
+    /**
+     * Return the tolerance for the percent difference between the voxel volume
+     * and the volume of the hull (native field:
+     * m_minimumVolumePercentErrorAllowed).
+     *
+     * @return the percentage (&gt;0, &lt;100)
+     */
+    public double getVolumePercentError() {
+        long objectId = nativeId();
+        double result = getVolumePercentError(objectId);
 
         return result;
     }
@@ -124,12 +190,114 @@ public class VHACDParameters
     }
 
     /**
+     * Test whether V-HACD should exploit multiple CPU cores (native field:
+     * m_asyncACD).
+     *
+     * @return true &rarr; multiple cores, false &rarr; single core
+     */
+    public boolean isAsync() {
+        long objectId = nativeId();
+        boolean result = isAsync(objectId);
+
+        return result;
+    }
+
+    /**
+     * Test whether V-HACD should attempt to split planes at the best location
+     * (native field: m_findBestPlane).
+     *
+     * @return true &rarr; multiple cores, false &rarr; single core
+     */
+    public boolean isFindBestPlane() {
+        long objectId = nativeId();
+        boolean result = isFindBestPlane(objectId);
+
+        return result;
+
+    }
+
+    /**
+     * Test whether V-HACD should shrinkwrap voxel positions to the source mesh
+     * (native field: m_shrinkWrap).
+     *
+     * @return true &rarr; shrinkwrap, false &rarr; don't shrinkwrap
+     */
+    public boolean isShrinkWrap() {
+        long objectId = nativeId();
+        boolean result = isShrinkWrap(objectId);
+
+        return result;
+    }
+
+    /**
+     * Alter whether multiple CPU cores will be used (native field: m_asyncACD).
+     *
+     * @param setting true &rarr; multiple cores, false &rarr; single core
+     * (default=true)
+     */
+    public void setAsync(boolean setting) {
+        long objectId = nativeId();
+        setAsync(objectId, setting);
+    }
+
+    /**
      * Alter whether debug output is enabled.
      *
      * @param setting true &rarr; enable, false &rarr; disable (default=false)
      */
     public void setDebugEnabled(boolean setting) {
         this.debug = setting;
+    }
+
+    /**
+     * Specify the algorithm to generate a solid object from voxels (native
+     * field: m_fillMode).
+     *
+     * @param mode the desired algorithm (not null, default=FloodFill)
+     */
+    public void setFillMode(FillMode mode) {
+        Validate.nonNull(mode, "mode");
+
+        long objectId = nativeId();
+        int ordinal = mode.ordinal();
+        setFillMode(objectId, ordinal);
+    }
+
+    /**
+     * Alter whether to attempt to split planes at the best location (native
+     * field: m_findBestPlane).
+     *
+     * @param setting true &rarr; attempt, false &rarr; don't attempt
+     * (default=false)
+     */
+    public void setFindBestPlane(boolean setting) {
+        long objectId = nativeId();
+        setFindBestPlane(objectId, setting);
+    }
+
+    /**
+     * Alter the maximum number of convex hulls (native field:
+     * m_maxConvexHulls).
+     *
+     * @param limit default = 64, min = 1, max = 1024)
+     */
+    public void setMaxHulls(int limit) {
+        Validate.inRange(limit, "limit", 1, 1024);
+
+        long objectId = nativeId();
+        setMaxHulls(objectId, limit);
+    }
+
+    /**
+     * Alter the maximum recursion depth (native field: m_maxRecursionDepth).
+     *
+     * @param depth default = 14, min = 1, max = 1024
+     */
+    public void setMaxRecursion(int depth) {
+        Validate.inRange(depth, "depth", 1, 1024);
+
+        long objectId = nativeId();
+        setMaxRecursion(objectId, depth);
     }
 
     /**
@@ -145,6 +313,44 @@ public class VHACDParameters
 
         long objectId = nativeId();
         setMaxNumVerticesPerCH(objectId, limit);
+    }
+
+    /**
+     * Alter the minimum edge length (native field: m_minEdgeLength).
+     *
+     * @param length default = 2, min = 1, max = 1024)
+     */
+    public void setMinEdgeLength(int length) {
+        Validate.inRange(length, "length", 1, 1024);
+
+        long objectId = nativeId();
+        setMinEdgeLength(objectId, length);
+    }
+
+    /**
+     * Alter whether to shrinkwrap voxel positions to the source mesh (native
+     * field: m_shrinkWrap).
+     *
+     * @param setting true &rarr; shrinkwrap, false &rarr; don't shrinkwrap
+     * (default=true)
+     */
+    public void setShrinkWrap(boolean setting) {
+        long objectId = nativeId();
+        setShrinkWrap(objectId, setting);
+    }
+
+    /**
+     * Alter the tolerance for the percent difference between the voxel volume
+     * and the volume of the hull (native field:
+     * m_minimumVolumePercentErrorAllowed).
+     *
+     * @param percentage default = 1, min = 0, max = 100
+     */
+    public void setVolumePercentError(double percentage) {
+        Validate.inRange(percentage, "percentage", 0, 100);
+
+        long objectId = nativeId();
+        setVolumePercentError(objectId, percentage);
     }
 
     /**
@@ -188,7 +394,15 @@ public class VHACDParameters
             long objectId = create();
             clone.reassignNativeId(objectId);
 
+            clone.setAsync(isAsync());
+            clone.setFillMode(getFillMode());
+            clone.setFindBestPlane(isFindBestPlane());
+            clone.setMaxHulls(getMaxHulls());
+            clone.setMaxRecursion(getMaxRecursion());
             clone.setMaxVerticesPerHull(getMaxVerticesPerHull());
+            clone.setMinEdgeLength(getMinEdgeLength());
+            clone.setShrinkWrap(isShrinkWrap());
+            clone.setVolumePercentError(getVolumePercentError());
             clone.setVoxelResolution(getVoxelResolution());
 
             return clone;
@@ -212,8 +426,16 @@ public class VHACDParameters
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
             VHACDParameters other = (VHACDParameters) otherObject;
-            result = getDebugEnabled() == other.getDebugEnabled()
+            result = isAsync() == other.isAsync()
+                    && getDebugEnabled() == other.getDebugEnabled()
+                    && getFillMode() == other.getFillMode()
+                    && isFindBestPlane() == other.isFindBestPlane()
+                    && getMaxHulls() == other.getMaxHulls()
+                    && getMaxRecursion() == other.getMaxRecursion()
                     && getMaxVerticesPerHull() == other.getMaxVerticesPerHull()
+                    && getMinEdgeLength() == other.getMinEdgeLength()
+                    && isShrinkWrap() == other.isShrinkWrap()
+                    && getVolumePercentError() == other.getVolumePercentError()
                     && getVoxelResolution() == other.getVoxelResolution();
         } else {
             result = false;
@@ -230,8 +452,16 @@ public class VHACDParameters
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + (getDebugEnabled() ? 1 : 0);
+        hash = 2 * hash + (isAsync() ? 1 : 0);
+        hash = 2 * hash + (getDebugEnabled() ? 1 : 0);
+        hash = 3 * hash + getFillMode().ordinal();
+        hash = 2 * hash + (isFindBestPlane() ? 1 : 0);
+        hash = 83 * hash + getMaxHulls();
+        hash = 83 * hash + getMaxRecursion();
         hash = 83 * hash + getMaxVerticesPerHull();
+        hash = 83 * hash + getMinEdgeLength();
+        hash = 2 * hash + (isShrinkWrap() ? 1 : 0);
+        hash = 83 * hash + Double.hashCode(getVolumePercentError());
         hash = 83 * hash + getVoxelResolution();
 
         return hash;
@@ -255,11 +485,44 @@ public class VHACDParameters
 
     native private static void finalizeNative(long objectId);
 
+    native private static int getFillMode(long objectId);
+
+    native private static int getMaxHulls(long objectId);
+
     native private static int getMaxNumVerticesPerCH(long objectId);
+
+    native private static int getMaxRecursion(long objectId);
+
+    native private static int getMinEdgeLength(long objectId);
 
     native private static int getResolution(long objectId);
 
+    native private static double getVolumePercentError(long objectId);
+
+    native private static boolean isAsync(long objectId);
+
+    native private static boolean isFindBestPlane(long objectId);
+
+    native private static boolean isShrinkWrap(long objectId);
+
+    native private static void setAsync(long objectId, boolean setting);
+
+    native private static void setFillMode(long objectId, int ordinal);
+
+    native private static void setFindBestPlane(long objectId, boolean setting);
+
+    native private static void setMaxHulls(long objectId, int limit);
+
     native private static void setMaxNumVerticesPerCH(long objectId, int limit);
 
+    native private static void setMaxRecursion(long objectId, int depth);
+
+    native private static void setMinEdgeLength(long objectId, int length);
+
     native private static void setResolution(long objectId, int numVoxels);
+
+    native private static void setShrinkWrap(long objectId, boolean setting);
+
+    native private static void setVolumePercentError(
+            long objectId, double percentage);
 }

@@ -25,10 +25,42 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
 
 /*
  * Class:     vhacd_VHACDParameters
+ * Method:    getFillMode
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getFillMode
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    getMaxHulls
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxHulls
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
  * Method:    getMaxNumVerticesPerCH
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxNumVerticesPerCH
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    getMaxRecursion
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxRecursion
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    getMinEdgeLength
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMinEdgeLength
   (JNIEnv *, jclass, jlong);
 
 /*
@@ -41,10 +73,90 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
 
 /*
  * Class:     vhacd_VHACDParameters
+ * Method:    getVolumePercentError
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getVolumePercentError
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    isAsync
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isAsync
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    isFindBestPlane
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isFindBestPlane
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    isShrinkWrap
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isShrinkWrap
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setAsync
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setAsync
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setFillMode
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setFillMode
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setFindBestPlane
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setFindBestPlane
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setMaxHulls
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxHulls
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     vhacd_VHACDParameters
  * Method:    setMaxNumVerticesPerCH
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setMaxRecursion
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxRecursion
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setMinEdgeLength
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMinEdgeLength
   (JNIEnv *, jclass, jlong, jint);
 
 /*
@@ -54,6 +166,22 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setResolution
   (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setShrinkWrap
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setShrinkWrap
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     vhacd_VHACDParameters
+ * Method:    setVolumePercentError
+ * Signature: (JD)V
+ */
+JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setVolumePercentError
+  (JNIEnv *, jclass, jlong, jdouble);
 
 #ifdef __cplusplus
 }
