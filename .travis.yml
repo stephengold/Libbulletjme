@@ -18,6 +18,7 @@ jobs:
           packages:
             - g++-5-multilib
       script:
+        - g++ --version
         - g++-5 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
     - compiler: gcc-5
@@ -26,6 +27,7 @@ jobs:
           packages:
             - g++-5-multilib
       script:
+        - g++ --version
         - g++-5 --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
     - arch: arm64
@@ -37,6 +39,7 @@ jobs:
       env:
         - FLAVOR=Dp32
       script:
+        - g++ --version
         - arm-linux-gnueabi-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
     - arch: arm64
@@ -48,6 +51,7 @@ jobs:
       env:
         - FLAVOR=Sp32
       script:
+        - g++ --version
         - arm-linux-gnueabi-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
     - arch: arm64
@@ -59,6 +63,7 @@ jobs:
       env:
         - FLAVOR=Dp32
       script:
+        - g++ --version
         - arm-linux-gnueabihf-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
     - arch: arm64
@@ -70,6 +75,7 @@ jobs:
       env:
         - FLAVOR=Sp32
       script:
+        - g++ --version
         - arm-linux-gnueabihf-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
     - arch: arm64
@@ -77,12 +83,14 @@ jobs:
       env:
         - FLAVOR=Dp64
       script:
+        - g++ --version
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
     - arch: arm64
       compiler: gcc
       env:
         - FLAVOR=Sp64
       script:
+        - g++ --version
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
     - dist: trusty
       language: android
