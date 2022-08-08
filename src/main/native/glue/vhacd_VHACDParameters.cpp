@@ -102,12 +102,12 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
-(JNIEnv *pEnv, jclass, jlong objectId, jint numVertices) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint limit) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
 
-    pParam->m_maxNumVerticesPerCH = (uint32_t) numVertices;
+    pParam->m_maxNumVerticesPerCH = (uint32_t) limit;
 }
 
 /*
@@ -116,10 +116,10 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setResolution
-(JNIEnv *pEnv, jclass, jlong objectId, jint maxVoxels) {
+(JNIEnv *pEnv, jclass, jlong objectId, jint numVoxels) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
     NULL_CHK(pEnv, pParam, "The parameters do not exist.",);
 
-    pParam->m_resolution = (uint32_t) maxVoxels;
+    pParam->m_resolution = (uint32_t) numVoxels;
 }
