@@ -63,15 +63,6 @@ jobs:
         - FLAVOR=Sp64
       script:
         - travis_wait 20 ./gradlew build --build-file=current.gradle --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
-    - dist: trusty
-      language: android
-      android:
-        components:
-          - tools
-      script:
-        - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
-        - echo y | sdkmanager "patcher;v4" > /dev/null
-        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 
 addons:
