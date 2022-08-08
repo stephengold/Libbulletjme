@@ -75,18 +75,20 @@ jobs:
         - arm-linux-gnueabihf-g++-5 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
     - arch: arm64
-      compiler: gcc
+      compiler: gcc-5
       env:
         - FLAVOR=Dp64
       script:
         - g++ --version
+        - aarch64-linux-gnu-g++-5 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
     - arch: arm64
-      compiler: gcc
+      compiler: gcc-5
       env:
         - FLAVOR=Sp64
       script:
         - g++ --version
+        - aarch64-linux-gnu-g++-5 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
 
