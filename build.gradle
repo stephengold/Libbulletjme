@@ -94,9 +94,13 @@ model {
         visualCpp(VisualCpp)
         //clang(Clang) // to favor Clang over Gcc
         gcc6(Gcc) {
+            target('Linux32') {
+                cppCompiler.executable = 'g++-6'
+                linker.executable = 'g++-6'
+            }
             target('Linux64') {
-                cppCompiler.executable = 'x86_64-linux-gnu-g++-6'
-                linker.executable = 'x86_64-linux-gnueabi-g++-6'
+                cppCompiler.executable = 'g++-6'
+                linker.executable = 'g++-6'
             }
         }
         gcc7Arm32(Gcc) {
