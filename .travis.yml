@@ -29,36 +29,42 @@ jobs:
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
     - arch: arm64
       compiler: clang
+      dist: bionic
       env:
         - FLAVOR=Dp32
       script:
         - travis_wait 20 ./gradlew assemble --build-file=current.gradle --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
     - arch: arm64
       compiler: clang
+      dist: bionic
       env:
         - FLAVOR=Sp32
       script:
         - travis_wait 20 ./gradlew assemble --build-file=current.gradle --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
     - arch: arm64
       compiler: clang
+      dist: bionic
       env:
         - FLAVOR=Dp32
       script:
         - travis_wait 20 ./gradlew assemble --build-file=current.gradle --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
     - arch: arm64
       compiler: clang
+      dist: bionic
       env:
         - FLAVOR=Sp32
       script:
         - travis_wait 20 ./gradlew assemble --build-file=current.gradle --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
     - arch: arm64
       compiler: clang
+      dist: bionic
       env:
         - FLAVOR=Dp64
       script:
         - travis_wait 20 ./gradlew build --build-file=current.gradle --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
     - arch: arm64
       compiler: clang
+      dist: bionic
       env:
         - FLAVOR=Sp64
       script:
