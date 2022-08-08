@@ -71,6 +71,7 @@ public class VHACDParameters
         super.setNativeId(objectId);
 
         setMaxNumVerticesPerCH(objectId, 32);
+        setResolution(objectId, 100_000);
     }
     // *************************************************************************
     // new methods exposed
@@ -149,6 +150,8 @@ public class VHACDParameters
     /**
      * Alter the maximum number of voxels generated during the voxelization
      * stage (native field: m_resolution).
+     * <p>
+     * Note: the native default is 400_000.
      *
      * @param maxVoxels default = 100_000, min = 10_000, max = 64_000_000
      */

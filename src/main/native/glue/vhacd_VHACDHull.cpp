@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,7 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
     NULL_CHK(pEnv, pHull, "The hull does not exist.", 0);
 
-    uint32_t numFloats = 3 * pHull->m_nPoints;
+    uint32_t numFloats = 3 * pHull->m_points.size();
 
     return (jint) numFloats;
 }
@@ -72,8 +72,13 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getPositions
     NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
 
     const jlong capacity = pEnv->GetDirectBufferCapacity(storeBuffer);
-    const uint32_t numFloats = 3 * pHull->m_nPoints;
-    for (uint32_t i = 0; i < numFloats && i < capacity; ++i) {
-        pPositions[i] = pHull->m_points[i];
+    const uint32_t numPoints = pHull->m_points.size();
+    for (uint32_t i = 0; i < numPoints; ++i) {
+        const uint32_t bp = 3 * i;
+        if (bp + 2 >= capacity)
+            break;
+        pPositions[bp] = pHull->m_points[i].mX;
+        pPositions[bp + 1] = pHull->m_points[i].mY;
+        pPositions[bp + 2] = pHull->m_points[i].mZ;
     }
 }

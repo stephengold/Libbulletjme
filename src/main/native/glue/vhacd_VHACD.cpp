@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,6 +38,7 @@
 #endif
 #include "vhacd_VHACD.h"
 #include "jmeBulletUtil.h"
+#define ENABLE_VHACD_IMPLEMENTATION 1
 #include "VHACD.h"
 
 using namespace VHACD;
@@ -51,8 +52,7 @@ public:
     }
 
     void Update(const double overallPercent, const double stagePercent,
-            const double operationPercent, const char* const stageName,
-            const char* const operationName) {
+            const char* const stageName, const char* operationName) {
 
         jstring arg4 = pEnv->NewStringUTF(stageName);
         if (pEnv->ExceptionCheck()) {
@@ -68,7 +68,7 @@ public:
 
         jfloat arg1 = overallPercent;
         jfloat arg2 = stagePercent;
-        jfloat arg3 = operationPercent;
+        jfloat arg3 = 100.0;
         pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
                 jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
     }
