@@ -8,10 +8,6 @@ os: linux
 
 jobs:
   include:
-    - os: osx
-      osx_image: xcode9.4.1
-      script:
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx
     - compiler: gcc-5
       addons:
         apt:
@@ -92,15 +88,6 @@ jobs:
       script:
         - g++ --version
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
-    - dist: trusty
-      language: android
-      android:
-        components:
-          - tools
-      script:
-        - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
-        - echo y | sdkmanager "patcher;v4" > /dev/null
-        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 
 addons:
