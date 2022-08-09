@@ -576,25 +576,20 @@ public class TestLibbulletjme {
         /*
          * Soft spaces with various broadphase accelerators.
          */
-        space = new PhysicsSoftSpace(Vector3f.ZERO,
-                Vector3f.ZERO, PhysicsSpace.BroadphaseType.SIMPLE);
+        space = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.SIMPLE);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
 
-        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
-                PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
+        space = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.AXIS_SWEEP_3);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
 
-        space = new PhysicsSoftSpace(new Vector3f(-10f, -10f, -10f),
-                new Vector3f(10f, 10f, 10f),
+        space = new PhysicsSoftSpace(
                 PhysicsSpace.BroadphaseType.AXIS_SWEEP_3_32);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
 
-        space = new PhysicsSoftSpace(Vector3f.ZERO, Vector3f.ZERO,
-                PhysicsSpace.BroadphaseType.DBVT);
+        space = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
         verifyCollisionSpaceDefaults(space);
         performRayTests(sphereShape, space);
         /*
@@ -843,10 +838,8 @@ public class TestLibbulletjme {
     public void test007() {
         loadNativeLibrary();
 
-        Vector3f min = new Vector3f(-10f, -10f, -10f);
-        Vector3f max = new Vector3f(10f, 10f, 10f);
-        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
-                PhysicsSpace.BroadphaseType.DBVT);
+        PhysicsSoftSpace physicsSpace
+                = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
 
         // Create a static, rigid sphere and add it to the physics space.
         float radius = 1f;
@@ -905,10 +898,8 @@ public class TestLibbulletjme {
     public void test008() {
         loadNativeLibrary();
 
-        Vector3f min = new Vector3f(-10f, -10f, -10f);
-        Vector3f max = new Vector3f(10f, 10f, 10f);
-        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
-                PhysicsSpace.BroadphaseType.DBVT);
+        PhysicsSoftSpace physicsSpace
+                = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
         /*
          * Stack 2 rigid boxes.
          */
@@ -949,10 +940,8 @@ public class TestLibbulletjme {
     public void test009() {
         loadNativeLibrary();
 
-        Vector3f min = new Vector3f(-10f, -10f, -10f);
-        Vector3f max = new Vector3f(10f, 10f, 10f);
-        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
-                PhysicsSpace.BroadphaseType.DBVT);
+        PhysicsSoftSpace physicsSpace
+                = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
         /*
          * Stack a spherical character on a box.
          */
@@ -997,10 +986,8 @@ public class TestLibbulletjme {
     public void test010() {
         loadNativeLibrary();
 
-        Vector3f min = new Vector3f(-10f, -10f, -10f);
-        Vector3f max = new Vector3f(10f, 10f, 10f);
-        PhysicsSoftSpace physicsSpace = new PhysicsSoftSpace(min, max,
-                PhysicsSpace.BroadphaseType.DBVT);
+        PhysicsSoftSpace physicsSpace
+                = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
         /*
          * A ghost sphere overlapping with a rigid box.
          */
@@ -1634,7 +1621,7 @@ public class TestLibbulletjme {
         performDropTest(dropShape, space);
 
         if (solver == SolverType.SI) {
-            space = new PhysicsSoftSpace(min, max, broadphase) {
+            space = new PhysicsSoftSpace(broadphase) {
                 @Override
                 public void onContactProcessed(PhysicsCollisionObject a,
                         PhysicsCollisionObject b, long manifoldPointId) {
