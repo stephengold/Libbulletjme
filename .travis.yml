@@ -16,6 +16,7 @@ jobs:
         - FLAVOR=noMt
       script:
         - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
+        - sudo ln -s /usr/include/x86_64-linux-gnu/bits /usr/include/bits
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
     - env:
