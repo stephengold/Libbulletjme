@@ -93,32 +93,36 @@ model {
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
         //clang(Clang) // to favor Clang over Gcc
+        gcc6(Gcc) {
+            target('Linux32') {
+                cppCompiler.executable = 'g++-6'
+                linker.executable = 'g++-6'
+            }
+            target('Linux64') {
+                cppCompiler.executable = 'g++-6'
+                linker.executable = 'g++-6'
+            }
+        }
+        gcc6Arm32hf(Gcc) {
+            target('Linux_ARM32hf') {
+                cppCompiler.executable = 'arm-linux-gnueabihf-g++-6'
+                linker.executable = 'arm-linux-gnueabihf-g++-6'
+            }
+        }
+        gcc6Arm64(Gcc) {
+            target('Linux_ARM64') {
+                cppCompiler.executable = 'aarch64-linux-gnu-g++-6'
+                linker.executable = 'aarch64-linux-gnu-g++-6'
+            }
+        }
+        gcc7Arm32(Gcc) {
+            target('Linux_ARM32') {
+                cppCompiler.executable = 'arm-linux-gnueabi-g++-7'
+                linker.executable = 'arm-linux-gnueabi-g++-7'
+            }
+        }
         gcc(Gcc)
         clang(Clang)
-        gcc5Arm32(Gcc) {
-            target('Linux_ARM32') {
-                cppCompiler.executable = 'arm-linux-gnueabi-g++-5'
-                linker.executable = 'arm-linux-gnueabi-g++-5'
-            }
-        }
-        gcc5Arm32hf(Gcc) {
-            target('Linux_ARM32hf') {
-                cppCompiler.executable = 'arm-linux-gnueabihf-g++-5'
-                linker.executable = 'arm-linux-gnueabihf-g++-5'
-            }
-        }
-        gccArm64(Gcc) {
-            target('Linux_ARM64') {
-                cppCompiler.executable = 'aarch64-linux-gnu-g++'
-                linker.executable = 'aarch64-linux-gnu-g++'
-            }
-        }
-        gcc8Arm64(Gcc) {
-            target('Linux_ARM64') {
-                cppCompiler.executable = 'aarch64-linux-gnu-g++-8'
-                linker.executable = 'aarch64-linux-gnu-gcc-8'
-            }
-        }
     }
 
     components {
