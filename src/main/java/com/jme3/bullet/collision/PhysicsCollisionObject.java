@@ -154,9 +154,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     // constructors
 
     /**
-     * A no-arg constructor to avoid javadoc warnings from JDK 18. TODO protect
+     * A no-arg constructor to avoid javadoc warnings from JDK 18.
      */
-    public PhysicsCollisionObject() {
+    protected PhysicsCollisionObject() {
         // do nothing
     }
     // *************************************************************************
