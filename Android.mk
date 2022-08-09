@@ -8,7 +8,6 @@ $(N)/bullet3 \
 $(N)/bullet3/BulletDynamics/Featherstone \
 $(N)/bullet3/LinearMath \
 $(N)/glue \
-$(N)/v-hacd/inc \
 $(N)/v-hacd/public
 
 LOCAL_CFLAGS := -std=c++11
