@@ -12,22 +12,15 @@ jobs:
       osx_image: xcode9.4.1
       script:
         - ./gradlew build --console=plain --no-daemon -Ptravis=osx
-    - compiler: gcc-6
-      addons:
-        apt:
-          packages:
-            - g++-6-multilib
+    - env:
+        - FLAVOR=noMt
       script:
-        - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
-        - g++-6 --version
+        - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
-    - compiler: gcc-6
-      addons:
-        apt:
-          packages:
-            - g++-6-multilib
+    - env:
+        - FLAVOR=Mt
       script:
-        - g++-6 --version
+        - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
     - arch: arm64
       compiler: arm-linux-gnueabi-g++-7
