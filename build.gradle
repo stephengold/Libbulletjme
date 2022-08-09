@@ -254,7 +254,7 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
-                    cppCompiler.args '-std=c++11' // ignored by g++-4.7
+                    cppCompiler.args '-std=c++11'
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
