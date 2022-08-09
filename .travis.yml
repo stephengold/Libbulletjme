@@ -8,10 +8,6 @@ os: linux
 
 jobs:
   include:
-    - os: osx
-      osx_image: xcode9.4.1
-      script:
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx
     - env:
         - FLAVOR=noMt
       script:
@@ -22,81 +18,6 @@ jobs:
       script:
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
-    - arch: arm64
-      compiler: arm-linux-gnueabi-g++-7
-      addons:
-        apt:
-          packages:
-            - g++-7-arm-linux-gnueabi
-      env:
-        - FLAVOR=Dp32
-      script:
-        - arm-linux-gnueabi-g++-7 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
-    - arch: arm64
-      compiler: arm-linux-gnueabi-g++-7
-      addons:
-        apt:
-          packages:
-            - g++-7-arm-linux-gnueabi
-      env:
-        - FLAVOR=Sp32
-      script:
-        - arm-linux-gnueabi-g++-7 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
-    - arch: arm64
-      compiler: arm-linux-gnueabihf-g++-6
-      addons:
-        apt:
-          packages:
-            - g++-6-arm-linux-gnueabihf
-      env:
-        - FLAVOR=Dp32
-      script:
-        - arm-linux-gnueabihf-g++-6 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
-    - arch: arm64
-      compiler: arm-linux-gnueabihf-g++-6
-      addons:
-        apt:
-          packages:
-            - g++-6-arm-linux-gnueabihf
-      env:
-        - FLAVOR=Sp32
-      script:
-        - arm-linux-gnueabihf-g++-6 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
-    - arch: arm64
-      compiler: gcc-6
-      addons:
-        apt:
-          packages:
-            - g++-6
-      env:
-        - FLAVOR=Dp64
-      script:
-        - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
-    - arch: arm64
-      compiler: gcc-6
-      addons:
-        apt:
-          packages:
-            - g++-6
-      env:
-        - FLAVOR=Sp64
-      script:
-        - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
-    - dist: trusty
-      language: android
-      android:
-        components:
-          - tools
-      script:
-        - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
-        - echo y | sdkmanager "patcher;v4" > /dev/null
-        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 
 addons:
