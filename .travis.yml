@@ -10,11 +10,15 @@ jobs:
   include:
     - env:
         - FLAVOR=noMt
+      addons:
+        apt:
+          packages:
+            - g++-7-multilib
       script:
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
     - env:
-        - FLAVOR=Mt
+        - FLAVOR=Mt64
       script:
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
