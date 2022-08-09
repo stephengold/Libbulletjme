@@ -78,15 +78,29 @@ public class VHACDParameters
     // new methods exposed
 
     /**
-     * Read selected parameters from the specified InputStream.
+     * Read all parameters from the specified InputStream.
      *
      * @param is the stream to read (not null)
      * @throws IOException from DataInputStream
      */
     public void fromInputStream(InputStream is) throws IOException {
         DataInputStream dis = new DataInputStream(is);
-        setVoxelResolution(dis.readInt());
+
+        setAsync(dis.readBoolean());
+        setDebugEnabled(dis.readBoolean());
+
+        int fillModeOrdinal = dis.readInt();
+        FillMode fillMode = FillMode.values()[fillModeOrdinal];
+        setFillMode(fillMode);
+
+        setFindBestPlane(dis.readBoolean());
+        setMaxHulls(dis.readInt());
+        setMaxRecursion(dis.readInt());
         setMaxVerticesPerHull(dis.readInt());
+        setMinEdgeLength(dis.readInt());
+        setShrinkWrap(dis.readBoolean());
+        setVolumePercentError(dis.readDouble());
+        setVoxelResolution(dis.readInt());
     }
 
     /**
@@ -369,15 +383,28 @@ public class VHACDParameters
     }
 
     /**
-     * Write selected parameters to the specified OutputStream.
+     * Write all parameters to the specified OutputStream.
      *
      * @param os the stream to write (not null)
      * @throws IOException from DataOutputStream
      */
     public void toOutputStream(OutputStream os) throws IOException {
         DataOutputStream dos = new DataOutputStream(os);
-        dos.writeInt(getVoxelResolution());
+
+        dos.writeBoolean(isAsync());
+        dos.writeBoolean(getDebugEnabled());
+
+        int fillModeOrdinal = getFillMode().ordinal();
+        dos.writeInt(fillModeOrdinal);
+
+        dos.writeBoolean(isFindBestPlane());
+        dos.writeInt(getMaxHulls());
+        dos.writeInt(getMaxRecursion());
         dos.writeInt(getMaxVerticesPerHull());
+        dos.writeInt(getMinEdgeLength());
+        dos.writeBoolean(isShrinkWrap());
+        dos.writeDouble(getVolumePercentError());
+        dos.writeInt(getVoxelResolution());
     }
     // *************************************************************************
     // NativePhysicsObject methods
