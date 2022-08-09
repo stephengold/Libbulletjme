@@ -27,6 +27,7 @@
 
 import com.jme3.bullet.CollisionSpace;
 import com.jme3.bullet.DeformableSpace;
+import com.jme3.bullet.FillMode;
 import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.MultiBodyJointType;
 import com.jme3.bullet.MultiBodyLink;
@@ -207,8 +208,16 @@ public class TestLibbulletjme {
 
         // Verify the VHACDParameters defaults.
         VHACDParameters parameters = new VHACDParameters();
+        Assert.assertTrue(parameters.isAsync());
         Assert.assertFalse(parameters.getDebugEnabled());
+        Assert.assertEquals(FillMode.FloodFill, parameters.getFillMode());
+        Assert.assertFalse(parameters.isFindBestPlane());
+        Assert.assertEquals(64, parameters.getMaxHulls());
+        Assert.assertEquals(14, parameters.getMaxRecursion());
         Assert.assertEquals(32, parameters.getMaxVerticesPerHull());
+        Assert.assertEquals(2, parameters.getMinEdgeLength());
+        Assert.assertTrue(parameters.isShrinkWrap());
+        Assert.assertEquals(1.0, parameters.getVolumePercentError(), 0.0);
         Assert.assertEquals(100_000, parameters.getVoxelResolution());
 
         // Generate hulls for the mesh.
