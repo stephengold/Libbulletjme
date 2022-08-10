@@ -227,7 +227,6 @@ public class VHACDParameters
         boolean result = isFindBestPlane(objectId);
 
         return result;
-
     }
 
     /**
