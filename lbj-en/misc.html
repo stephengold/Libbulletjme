@@ -305,6 +305,23 @@ which consists of 3 decimal numbers separated by dots:</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_tuning_the_solver"><a class="anchor" href="#_tuning_the_solver"></a>Tuning the solver</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The contact-and-constraint solver
+performs a limited number of iterations per time step,
+by default, 10.
+For higher-quality (but slower) simulation, increase this number.
+For instance, to use 20 iterations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">space.getSolverInfo().setNumIterations(20);</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_default_collision_margin"><a class="anchor" href="#_default_collision_margin"></a>Default collision margin</h2>
 <div class="sectionbody">
 <div class="paragraph">
