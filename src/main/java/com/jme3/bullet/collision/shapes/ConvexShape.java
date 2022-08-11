@@ -54,9 +54,9 @@ abstract public class ConvexShape extends CollisionShape {
     // constructors
 
     /**
-     * A no-arg constructor to avoid javadoc warnings from JDK 18.
+     * A no-arg constructor to avoid javadoc warnings from JDK 18. TODO protect
      */
-    protected ConvexShape() {
+    public ConvexShape() {
         // do nothing
     }
     // *************************************************************************
