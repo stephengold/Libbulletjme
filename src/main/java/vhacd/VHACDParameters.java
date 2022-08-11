@@ -334,7 +334,7 @@ public class VHACDParameters
      * Enable/disable normalizing the mesh before applying the convex
      * decomposition (native field: m_pca).
      *
-     * @param v default = False
+     * @param v default = false
      */
     public void setPCA(boolean v) {
         long objectId = nativeId();
@@ -417,6 +417,7 @@ public class VHACDParameters
             clone.setPCA(getPCA());
             clone.setPlaneDownSampling(getPlaneDownSampling());
             clone.setVoxelResolution(getVoxelResolution());
+
             return clone;
 
         } catch (CloneNotSupportedException exception) {
@@ -596,11 +597,11 @@ public class VHACDParameters
 
     native private static void setConcavity(long objectId, double depth);
 
-    native private static void setConvexhullApproximation(long objectId,
-            int value);
+    native private static void setConvexhullApproximation(
+            long objectId, int value);
 
-    native private static void setConvexhullDownsampling(long objectId,
-            int precision);
+    native private static void setConvexhullDownsampling(
+            long objectId, int precision);
 
     native private static void setMaxNumVerticesPerCH(long objectId, int limit);
 
@@ -612,8 +613,8 @@ public class VHACDParameters
 
     native private static void setPca(long objectId, boolean enable);
 
-    native private static void setPlaneDownsampling(long objectId,
-            int granularity);
+    native private static void setPlaneDownsampling(
+            long objectId, int granularity);
 
     native private static void setResolution(long objectId, int numVoxels);
 }
