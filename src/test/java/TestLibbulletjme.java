@@ -209,7 +209,7 @@ public class TestLibbulletjme {
             6, 10, 11, 6, 9, 10
         };
 
-        // Verify the VHACD4Parameters defaults.
+        // Verify the Vhacd4Parameters defaults.
         Vhacd4Parameters parameters4 = new Vhacd4Parameters();
         Assert.assertTrue(parameters4.isAsync());
         Assert.assertFalse(parameters4.getDebugEnabled());

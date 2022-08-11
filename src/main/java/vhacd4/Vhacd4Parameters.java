@@ -204,8 +204,8 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Test whether V-HACD should exploit multiple CPU cores (native field:
-     * m_asyncACD).
+     * Test whether V-HACD should exploit multiple CPU cores if available
+     * (native field: m_asyncACD).
      *
      * @return true &rarr; multiple cores, false &rarr; single core
      */
@@ -243,7 +243,8 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Alter whether multiple CPU cores will be used (native field: m_asyncACD).
+     * Alter whether V-HACD should exploit multiple CPU cores if available
+     * (native field: m_asyncACD).
      *
      * @param setting true &rarr; multiple cores, false &rarr; single core
      * (default=true)
