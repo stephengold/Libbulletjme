@@ -85,6 +85,9 @@ import java.util.List;
 import jme3utilities.Validate;
 import org.junit.Assert;
 import org.junit.Test;
+import vhacd.VHACD;
+import vhacd.VHACDHull;
+import vhacd.VHACDParameters;
 import vhacd4.Vhacd4;
 import vhacd4.Vhacd4Hull;
 import vhacd4.Vhacd4Parameters;
@@ -207,34 +210,49 @@ public class TestLibbulletjme {
         };
 
         // Verify the VHACD4Parameters defaults.
-        Vhacd4Parameters parameters = new Vhacd4Parameters();
-        Assert.assertTrue(parameters.isAsync());
-        Assert.assertFalse(parameters.getDebugEnabled());
-        Assert.assertEquals(FillMode.FloodFill, parameters.getFillMode());
-        Assert.assertFalse(parameters.isFindBestPlane());
-        Assert.assertEquals(64, parameters.getMaxHulls());
-        Assert.assertEquals(14, parameters.getMaxRecursion());
-        Assert.assertEquals(32, parameters.getMaxVerticesPerHull());
-        Assert.assertEquals(2, parameters.getMinEdgeLength());
-        Assert.assertTrue(parameters.isShrinkWrap());
-        Assert.assertEquals(1.0, parameters.getVolumePercentError(), 0.0);
-        Assert.assertEquals(100_000, parameters.getVoxelResolution());
+        Vhacd4Parameters parameters4 = new Vhacd4Parameters();
+        Assert.assertTrue(parameters4.isAsync());
+        Assert.assertFalse(parameters4.getDebugEnabled());
+        Assert.assertEquals(FillMode.FloodFill, parameters4.getFillMode());
+        Assert.assertFalse(parameters4.isFindBestPlane());
+        Assert.assertEquals(64, parameters4.getMaxHulls());
+        Assert.assertEquals(14, parameters4.getMaxRecursion());
+        Assert.assertEquals(32, parameters4.getMaxVerticesPerHull());
+        Assert.assertEquals(2, parameters4.getMinEdgeLength());
+        Assert.assertTrue(parameters4.isShrinkWrap());
+        Assert.assertEquals(1.0, parameters4.getVolumePercentError(), 0.0);
+        Assert.assertEquals(100_000, parameters4.getVoxelResolution());
 
         // Generate hulls for the mesh.
-        parameters.setMaxRecursion(1);
-        List<Vhacd4Hull> vhacdHulls
-                = Vhacd4.compute(positionArray, indexArray, parameters);
-        Assert.assertEquals(4, vhacdHulls.size());
+        parameters4.setMaxRecursion(1);
+        List<Vhacd4Hull> vhacd4Hulls
+                = Vhacd4.compute(positionArray, indexArray, parameters4);
+        Assert.assertEquals(4, vhacd4Hulls.size());
 
         CompoundCollisionShape compound = new CompoundCollisionShape();
         int numHullVertices = 0;
-        for (Vhacd4Hull vhacdHull : vhacdHulls) {
+        for (Vhacd4Hull vhacdHull : vhacd4Hulls) {
             HullCollisionShape hullShape = new HullCollisionShape(vhacdHull);
             numHullVertices += hullShape.countHullVertices();
             compound.addChildShape(hullShape);
         }
         Assert.assertEquals(35, numHullVertices);
 
+        VHACDParameters parameters = new VHACDParameters();
+        List<VHACDHull> vhacdHulls
+                = VHACD.compute(positionArray, indexArray, parameters);
+        Assert.assertEquals(2, vhacdHulls.size());
+
+        compound = new CompoundCollisionShape();
+        numHullVertices = 0;
+        for (VHACDHull vhacdHull : vhacdHulls) {
+            HullCollisionShape hullShape = new HullCollisionShape(vhacdHull);
+            numHullVertices += hullShape.countHullVertices();
+            compound.addChildShape(hullShape);
+        }
+        Assert.assertEquals(25, numHullVertices);
+
+        vhacd4Hulls = null;
         vhacdHulls = null;
         System.gc();
     }

@@ -131,6 +131,7 @@ model {
             sources.cpp.source {
                 srcDir 'src/main/native/bullet3'
                 srcDir 'src/main/native/glue'
+                srcDir 'src/main/native/v-hacd/src'
                 include '**/*.cpp'
             }
 
@@ -219,6 +220,7 @@ model {
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3"
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3/LinearMath"
+                    cppCompiler.args "/I$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/public"
                     if (isDebug) {
                         cppCompiler.args '/FS' // serialize PDB writes
@@ -253,6 +255,7 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/LinearMath"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
                     cppCompiler.args '-std=c++11'
                     if (isDebug) {

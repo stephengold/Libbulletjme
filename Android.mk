@@ -8,6 +8,7 @@ $(N)/bullet3 \
 $(N)/bullet3/BulletDynamics/Featherstone \
 $(N)/bullet3/LinearMath \
 $(N)/glue \
+$(N)/v-hacd/inc \
 $(N)/v-hacd/public
 
 LOCAL_CFLAGS := -std=c++11
@@ -261,6 +262,17 @@ $(N)/glue/jmePhysicsSoftSpace.cpp \
 $(N)/glue/jmePhysicsSpace.cpp \
 $(N)/glue/vhacd4_Vhacd4.cpp \
 $(N)/glue/vhacd4_Vhacd4Hull.cpp \
-$(N)/glue/vhacd4_Vhacd4Parameters.cpp
+$(N)/glue/vhacd4_Vhacd4Parameters.cpp \
+$(N)/glue/vhacd_VHACD.cpp \
+$(N)/glue/vhacd_VHACDHull.cpp \
+$(N)/glue/vhacd_VHACDParameters.cpp \
+$(N)/v-hacd/src/FloatMath.cpp \
+$(N)/v-hacd/src/VHACD-ASYNC.cpp \
+$(N)/v-hacd/src/VHACD.cpp \
+$(N)/v-hacd/src/vhacdICHull.cpp \
+$(N)/v-hacd/src/vhacdManifoldMesh.cpp \
+$(N)/v-hacd/src/vhacdMesh.cpp \
+$(N)/v-hacd/src/vhacdRaycastMesh.cpp \
+$(N)/v-hacd/src/vhacdVolume.cpp
 
 include $(BUILD_SHARED_LIBRARY)

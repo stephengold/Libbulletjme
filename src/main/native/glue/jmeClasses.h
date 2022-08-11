@@ -129,6 +129,10 @@ public:
     static jmethodID Vhacd4_addHull;
     static jmethodID Vhacd4_update;
 
+    static jclass Vhacd;
+    static jmethodID Vhacd_addHull;
+    static jmethodID Vhacd_update;
+
     static jmethodID DebugMeshCallback_addVector;
 
     static bool printFlag;
