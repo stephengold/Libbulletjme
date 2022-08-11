@@ -53,24 +53,6 @@ jobs:
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-  Java17-Linux:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'zulu'
-          java-version: 17
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y g++-multilib
-      - run: ./gradlew build --console=plain --no-daemon -Pflavor=SpMt -Pgithub=debug64
-      - if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: crash-log
-          path: '*.log'
-
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-11
