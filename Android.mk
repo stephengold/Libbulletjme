@@ -259,8 +259,8 @@ $(N)/glue/jmeMotionState.cpp \
 $(N)/glue/jmeMultiBodySpace.cpp \
 $(N)/glue/jmePhysicsSoftSpace.cpp \
 $(N)/glue/jmePhysicsSpace.cpp \
-$(N)/glue/vhacd_VHACD.cpp \
-$(N)/glue/vhacd_VHACDHull.cpp \
-$(N)/glue/vhacd_VHACDParameters.cpp
+$(N)/glue/vhacd4_Vhacd4.cpp \
+$(N)/glue/vhacd4_Vhacd4Hull.cpp \
+$(N)/glue/vhacd4_Vhacd4Parameters.cpp
 
 include $(BUILD_SHARED_LIBRARY)
