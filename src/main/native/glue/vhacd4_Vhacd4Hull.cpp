@@ -33,18 +33,20 @@
 /*
  * Author: Stephen Gold
  */
-#include "vhacd_VHACDHull.h"
+#include "vhacd4_Vhacd4Hull.h"
 #include "jmeBulletUtil.h"
-#include "VHACD.h"
+
+#define VHACD VHACD4
+#include "VHACD4.h"
 
 using namespace VHACD;
 
 /*
- * Class:     vhacd_VHACDHull
+ * Class:     vhacd4_Vhacd4Hull
  * Method:    getNumFloats
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Hull_getNumFloats
 (JNIEnv *pEnv, jclass, jlong hullId) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);
@@ -56,11 +58,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDHull_getNumFloats
 }
 
 /*
- * Class:     vhacd_VHACDHull
+ * Class:     vhacd4_Vhacd4Hull
  * Method:    getPositions
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getPositions
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Hull_getPositions
 (JNIEnv *pEnv, jclass, jlong hullId, jobject storeBuffer) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullId);

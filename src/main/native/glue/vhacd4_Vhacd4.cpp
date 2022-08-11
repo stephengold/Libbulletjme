@@ -36,10 +36,12 @@
 #ifndef NO_DEBUG
 #include <iostream>
 #endif
-#include "vhacd_VHACD.h"
+#include "vhacd4_Vhacd4.h"
 #include "jmeBulletUtil.h"
+
 #define ENABLE_VHACD_IMPLEMENTATION 1
-#include "VHACD.h"
+#define VHACD VHACD4
+#include "VHACD4.h"
 
 using namespace VHACD;
 
@@ -69,8 +71,8 @@ public:
         jfloat arg1 = overallPercent;
         jfloat arg2 = stagePercent;
         jfloat arg3 = 100.0;
-        pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
-                jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
+        pEnv->CallStaticVoidMethod(jmeClasses::Vhacd4,
+                jmeClasses::Vhacd4_update, arg1, arg2, arg3, arg4, arg5);
     }
 };
 
@@ -92,11 +94,11 @@ private:
 };
 
 /*
- * Class:     vhacd_VHACD
+ * Class:     vhacd4_Vhacd4
  * Method:    compute
  * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/IntBuffer;JZ)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4_compute
 (JNIEnv *pEnv, jclass, jobject positionsBuffer, jobject indicesBuffer,
         jlong paramsId, jboolean debug) {
     jmeClasses::initJavaClasses(pEnv);
@@ -144,8 +146,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
             pIvhacd->GetConvexHull(i, *pHull);
             const jlong hullId = reinterpret_cast<jlong> (pHull);
 
-            pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
-                    jmeClasses::Vhacd_addHull, hullId);
+            pEnv->CallStaticVoidMethod(jmeClasses::Vhacd4,
+                    jmeClasses::Vhacd4_addHull, hullId);
             delete pHull; //dance002
         }
     }

@@ -27,16 +27,16 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package vhacd;
+package vhacd4;
 
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import jme3utilities.math.MyVector3f;
 
 /**
- * A 3-D convex hull based on a V-HACD ConvexHull. Immutable.
+ * A 3-D convex hull based on a V-HACD version 4 ConvexHull. Immutable.
  */
-public class VHACDHull {
+public class Vhacd4Hull {
     // *************************************************************************
     // fields
 
@@ -52,7 +52,7 @@ public class VHACDHull {
      *
      * @param hullId the native ID of a ConvexHull (not zero)
      */
-    VHACDHull(long hullId) {
+    Vhacd4Hull(long hullId) {
         assert hullId != 0L;
 
         int numFloats = getNumFloats(hullId);

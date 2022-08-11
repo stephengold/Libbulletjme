@@ -27,7 +27,7 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package vhacd;
+package vhacd4;
 
 import com.jme3.bullet.FillMode;
 import com.jme3.bullet.NativePhysicsObject;
@@ -40,10 +40,10 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A set of tuning parameters for convex decomposition, based on V-HACD's
- * IVHACD::Parameters.
+ * A set of tuning parameters for convex decomposition, based on version 4 of
+ * V-HACD's IVHACD::Parameters.
  */
-public class VHACDParameters
+public class Vhacd4Parameters
         extends NativePhysicsObject
         implements Cloneable {
     // *************************************************************************
@@ -53,7 +53,7 @@ public class VHACDParameters
      * message logger for this class
      */
     final public static Logger logger
-            = Logger.getLogger(VHACDParameters.class.getName());
+            = Logger.getLogger(Vhacd4Parameters.class.getName());
     // *************************************************************************
     // fields
 
@@ -67,7 +67,7 @@ public class VHACDParameters
     /**
      * Instantiate the default tuning parameters.
      */
-    public VHACDParameters() {
+    public Vhacd4Parameters() {
         long objectId = create();
         super.setNativeId(objectId);
 
@@ -414,9 +414,9 @@ public class VHACDParameters
      * @return a new instance, equivalent to this one
      */
     @Override
-    public VHACDParameters clone() {
+    public Vhacd4Parameters clone() {
         try {
-            VHACDParameters clone = (VHACDParameters) super.clone();
+            Vhacd4Parameters clone = (Vhacd4Parameters) super.clone();
             long objectId = create();
             clone.reassignNativeId(objectId);
 
@@ -451,7 +451,7 @@ public class VHACDParameters
             result = true;
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
-            VHACDParameters other = (VHACDParameters) otherObject;
+            Vhacd4Parameters other = (Vhacd4Parameters) otherObject;
             result = isAsync() == other.isAsync()
                     && getDebugEnabled() == other.getDebugEnabled()
                     && getFillMode() == other.getFillMode()

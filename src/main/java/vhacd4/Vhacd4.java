@@ -27,7 +27,7 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package vhacd;
+package vhacd4;
 
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
@@ -38,12 +38,13 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyVector3f;
+import vhacd.VHACDProgressListener;
 
 /**
  * Utility class to perform Volumetric-Hierarchical Approximate Convex
  * Decomposition on an indexed mesh.
  */
-final public class VHACD {
+final public class Vhacd4 {
     // *************************************************************************
     // constants and loggers
 
@@ -55,7 +56,7 @@ final public class VHACD {
      * message logger for this class
      */
     final public static Logger logger
-            = Logger.getLogger(VHACD.class.getName());
+            = Logger.getLogger(Vhacd4.class.getName());
     // *************************************************************************
     // fields
 
@@ -67,14 +68,14 @@ final public class VHACD {
     /**
      * list of hulls computed during the latest decomposition
      */
-    private static List<VHACDHull> results;
+    private static List<Vhacd4Hull> results;
     // *************************************************************************
     // constructors
 
     /**
      * A private constructor to inhibit instantiation of this class.
      */
-    private VHACD() {
+    private Vhacd4() {
     }
     // *************************************************************************
     // new methods exposed
@@ -101,8 +102,8 @@ final public class VHACD {
      * @param params the tuning parameters to use (not null, unaffected)
      * @return a new list of hulls, or an empty list if the algorithm failed
      */
-    public static List<VHACDHull> compute(float[] positions, int[] indices,
-            VHACDParameters params) {
+    public static List<Vhacd4Hull> compute(float[] positions, int[] indices,
+            Vhacd4Parameters params) {
         Validate.nonNull(positions, "positions");
         Validate.nonNull(indices, "indices");
         assert positions.length % MyVector3f.numAxes == 0 : positions.length;
@@ -137,7 +138,7 @@ final public class VHACD {
      * This method is invoked by native code.
      */
     private static void addHull(long hullId) {
-        VHACDHull hull = new VHACDHull(hullId);
+        Vhacd4Hull hull = new Vhacd4Hull(hullId);
         results.add(hull);
     }
 

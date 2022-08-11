@@ -41,7 +41,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
-import vhacd.VHACDHull;
+import vhacd4.Vhacd4Hull;
 
 /**
  * A convex-hull CollisionShape based on Bullet's btConvexHullShape. For a 2-D
@@ -124,7 +124,7 @@ public class HullCollisionShape extends ConvexShape {
      *
      * @param vhacdHull (not null, unaffected)
      */
-    public HullCollisionShape(VHACDHull vhacdHull) {
+    public HullCollisionShape(Vhacd4Hull vhacdHull) {
         Validate.nonNull(vhacdHull, "V-HACD hull");
 
         points = vhacdHull.clonePositions();

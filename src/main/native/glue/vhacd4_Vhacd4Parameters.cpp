@@ -33,18 +33,20 @@
 /*
  * Author: Stephen Gold
  */
-#include "vhacd_VHACDParameters.h"
+#include "vhacd4_Vhacd4Parameters.h"
 #include "jmeBulletUtil.h"
-#include "VHACD.h"
+
+#define VHACD VHACD4
+#include "VHACD4.h"
 
 using namespace VHACD;
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    create
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_vhacd_VHACDParameters_create
+JNIEXPORT jlong JNICALL Java_vhacd4_Vhacd4Parameters_create
 (JNIEnv *pEnv, jclass) {
     jmeClasses::initJavaClasses(pEnv);
 
@@ -53,11 +55,11 @@ JNIEXPORT jlong JNICALL Java_vhacd_VHACDParameters_create
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    finalizeNative
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_finalizeNative
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -67,11 +69,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_finalizeNative
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getFillMode
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getFillMode
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Parameters_getFillMode
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -97,11 +99,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getFillMode
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getMaxHulls
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxHulls
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Parameters_getMaxHulls
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -112,11 +114,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxHulls
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getMaxNumVerticesPerCH
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxNumVerticesPerCH
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Parameters_getMaxNumVerticesPerCH
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -127,11 +129,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxNumVerticesPerCH
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getMaxRecursion
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxRecursion
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Parameters_getMaxRecursion
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -142,11 +144,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMaxRecursion
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getMinEdgeLength
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMinEdgeLength
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Parameters_getMinEdgeLength
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -157,11 +159,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getMinEdgeLength
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getResolution
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
+JNIEXPORT jint JNICALL Java_vhacd4_Vhacd4Parameters_getResolution
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -172,11 +174,11 @@ JNIEXPORT jint JNICALL Java_vhacd_VHACDParameters_getResolution
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    getVolumePercentError
  * Signature: (J)D
  */
-JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getVolumePercentError
+JNIEXPORT jdouble JNICALL Java_vhacd4_Vhacd4Parameters_getVolumePercentError
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -188,11 +190,11 @@ JNIEXPORT jdouble JNICALL Java_vhacd_VHACDParameters_getVolumePercentError
 
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    isAsync
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isAsync
+JNIEXPORT jboolean JNICALL Java_vhacd4_Vhacd4Parameters_isAsync
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -203,11 +205,11 @@ JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isAsync
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    isFindBestPlane
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isFindBestPlane
+JNIEXPORT jboolean JNICALL Java_vhacd4_Vhacd4Parameters_isFindBestPlane
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -218,11 +220,11 @@ JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isFindBestPlane
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    isShrinkWrap
  * Signature: (J)Z
  */
-JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isShrinkWrap
+JNIEXPORT jboolean JNICALL Java_vhacd4_Vhacd4Parameters_isShrinkWrap
 (JNIEnv *pEnv, jclass, jlong objectId) {
     const IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -233,11 +235,11 @@ JNIEXPORT jboolean JNICALL Java_vhacd_VHACDParameters_isShrinkWrap
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setAsync
  * Signature: (JZ)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setAsync
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setAsync
 (JNIEnv *pEnv, jclass, jlong objectId, jboolean setting) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -247,11 +249,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setAsync
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setFillMode
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setFillMode
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setFillMode
 (JNIEnv *pEnv, jclass, jlong objectId, jint ordinal) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -274,11 +276,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setFillMode
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setFindBestPlane
  * Signature: (JZ)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setFindBestPlane
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setFindBestPlane
 (JNIEnv *pEnv, jclass, jlong objectId, jboolean setting) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -288,11 +290,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setFindBestPlane
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setMaxHulls
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxHulls
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setMaxHulls
 (JNIEnv *pEnv, jclass, jlong objectId, jint limit) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -302,11 +304,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxHulls
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setMaxNumVerticesPerCH
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setMaxNumVerticesPerCH
 (JNIEnv *pEnv, jclass, jlong objectId, jint limit) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -316,11 +318,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxNumVerticesPerCH
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setMaxRecursion
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxRecursion
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setMaxRecursion
 (JNIEnv *pEnv, jclass, jlong objectId, jint depth) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -330,11 +332,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMaxRecursion
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setMinEdgeLength
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMinEdgeLength
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setMinEdgeLength
 (JNIEnv *pEnv, jclass, jlong objectId, jint length) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -344,11 +346,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setMinEdgeLength
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setResolution
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setResolution
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setResolution
 (JNIEnv *pEnv, jclass, jlong objectId, jint numVoxels) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -358,11 +360,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setResolution
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setShrinkWrap
  * Signature: (JZ)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setShrinkWrap
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setShrinkWrap
 (JNIEnv *pEnv, jclass, jlong objectId, jboolean setting) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);
@@ -372,11 +374,11 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setShrinkWrap
 }
 
 /*
- * Class:     vhacd_VHACDParameters
+ * Class:     vhacd4_Vhacd4Parameters
  * Method:    setVolumePercentError
  * Signature: (JD)V
  */
-JNIEXPORT void JNICALL Java_vhacd_VHACDParameters_setVolumePercentError
+JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Parameters_setVolumePercentError
 (JNIEnv *pEnv, jclass, jlong objectId, jdouble percentage) {
     IVHACD::Parameters * const pParam
             = reinterpret_cast<IVHACD::Parameters *> (objectId);

@@ -85,9 +85,9 @@ import java.util.List;
 import jme3utilities.Validate;
 import org.junit.Assert;
 import org.junit.Test;
-import vhacd.VHACD;
-import vhacd.VHACDHull;
-import vhacd.VHACDParameters;
+import vhacd4.Vhacd4;
+import vhacd4.Vhacd4Hull;
+import vhacd4.Vhacd4Parameters;
 
 /**
  * JUnit automated tests for Libbulletjme.
@@ -206,8 +206,8 @@ public class TestLibbulletjme {
             6, 10, 11, 6, 9, 10
         };
 
-        // Verify the VHACDParameters defaults.
-        VHACDParameters parameters = new VHACDParameters();
+        // Verify the VHACD4Parameters defaults.
+        Vhacd4Parameters parameters = new Vhacd4Parameters();
         Assert.assertTrue(parameters.isAsync());
         Assert.assertFalse(parameters.getDebugEnabled());
         Assert.assertEquals(FillMode.FloodFill, parameters.getFillMode());
@@ -222,13 +222,13 @@ public class TestLibbulletjme {
 
         // Generate hulls for the mesh.
         parameters.setMaxRecursion(1);
-        List<VHACDHull> vhacdHulls
-                = VHACD.compute(positionArray, indexArray, parameters);
+        List<Vhacd4Hull> vhacdHulls
+                = Vhacd4.compute(positionArray, indexArray, parameters);
         Assert.assertEquals(4, vhacdHulls.size());
 
         CompoundCollisionShape compound = new CompoundCollisionShape();
         int numHullVertices = 0;
-        for (VHACDHull vhacdHull : vhacdHulls) {
+        for (Vhacd4Hull vhacdHull : vhacdHulls) {
             HullCollisionShape hullShape = new HullCollisionShape(vhacdHull);
             numHullVertices += hullShape.countHullVertices();
             compound.addChildShape(hullShape);

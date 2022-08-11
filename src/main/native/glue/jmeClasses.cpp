@@ -114,9 +114,9 @@ jmethodID jmeClasses::Transform_rotation;
 jmethodID jmeClasses::Transform_translation;
 jmethodID jmeClasses::Transform_scale;
 
-jclass jmeClasses::Vhacd;
-jmethodID jmeClasses::Vhacd_addHull;
-jmethodID jmeClasses::Vhacd_update;
+jclass jmeClasses::Vhacd4;
+jmethodID jmeClasses::Vhacd4_addHull;
+jmethodID jmeClasses::Vhacd4_update;
 
 /*
  * global flag to enable/disable the initialization message
@@ -580,19 +580,19 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Vhacd = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("vhacd/VHACD"));
+    Vhacd4 = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("vhacd4/Vhacd4"));
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 
-    Vhacd_addHull = pEnv->GetStaticMethodID(Vhacd, "addHull", "(J)V");
+    Vhacd4_addHull = pEnv->GetStaticMethodID(Vhacd4, "addHull", "(J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 
-    Vhacd_update = pEnv->GetStaticMethodID(Vhacd, "update",
+    Vhacd4_update = pEnv->GetStaticMethodID(Vhacd4, "update",
             "(DDDLjava/lang/String;Ljava/lang/String;)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
