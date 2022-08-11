@@ -289,7 +289,7 @@ public class VHACDParameters
      * @param d true &rarr; enable, false &rarr; disable (default=false)
      */
     public void setDebugEnabled(boolean d) {
-        debug = d;
+        this.debug = d;
     }
 
     /**
@@ -308,13 +308,13 @@ public class VHACDParameters
      * Alter the maximum number of vertices per convex hull (native field:
      * m_maxNumVerticesPerCH).
      *
-     * @param v default = 32, min = 4, max = 1024)
+     * @param limit default = 32, min = 4, max = 1024)
      */
-    public void setMaxVerticesPerHull(int v) {
-        Validate.inRange(v, "max vertices", 4, 1024);
+    public void setMaxVerticesPerHull(int limit) {
+        Validate.inRange(limit, "limit", 4, 1024);
 
         long objectId = nativeId();
-        setMaxNumVerticesPerCH(objectId, v);
+        setMaxNumVerticesPerCH(objectId, limit);
     }
 
     /**
@@ -358,13 +358,13 @@ public class VHACDParameters
      * Alter the maximum number of voxels generated during the voxelization
      * stage (native field: m_resolution).
      *
-     * @param v default = 100_000, min = 10_000, max = 64_000_000
+     * @param maxVoxels default = 100_000, min = 10_000, max = 64_000_000
      */
-    public void setVoxelResolution(int v) {
-        Validate.inRange(v, "maxVoxels", 10_000, 64_000_000);
+    public void setVoxelResolution(int maxVoxels) {
+        Validate.inRange(maxVoxels, "maxVoxels", 10_000, 64_000_000);
 
         long objectId = nativeId();
-        setResolution(objectId, v);
+        setResolution(objectId, maxVoxels);
     }
 
     /**
@@ -602,8 +602,7 @@ public class VHACDParameters
     native private static void setConvexhullDownsampling(long objectId,
             int precision);
 
-    native private static void setMaxNumVerticesPerCH(long objectId,
-            int numVertices);
+    native private static void setMaxNumVerticesPerCH(long objectId, int limit);
 
     native private static void setMinVolumePerCH(long objectId, double volume);
 
@@ -616,5 +615,5 @@ public class VHACDParameters
     native private static void setPlaneDownsampling(long objectId,
             int granularity);
 
-    native private static void setResolution(long objectId, int maxVoxels);
+    native private static void setResolution(long objectId, int numVoxels);
 }
