@@ -492,6 +492,27 @@ public class Vhacd4Parameters
 
         return hash;
     }
+
+    /**
+     * Represent this instance as a String.
+     *
+     * @return a descriptive string of text (not null, not empty)
+     */
+    @Override
+    public String toString() {
+        String result = String.format("Vhacd4Parameters[%n"
+                + " async=%s  debug=%s  %s  findBest=%s%n"
+                + " maxHulls=%s  maxRecursion=%s  maxVPH=%s  minEdge=%s%n"
+                + " resolution=%s  shrink=%s  volumeErr=%s%%%n"
+                + "]",
+                isAsync(), getDebugEnabled(), getFillMode(), isFindBestPlane(),
+                getMaxHulls(), getMaxRecursion(), getMaxVerticesPerHull(),
+                getMinEdgeLength(), getVoxelResolution(), isShrinkWrap(),
+                getVolumePercentError()
+        );
+
+        return result;
+    }
     // *************************************************************************
     // Java private methods
 
