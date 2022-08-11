@@ -85,6 +85,7 @@ import java.util.List;
 import jme3utilities.Validate;
 import org.junit.Assert;
 import org.junit.Test;
+import vhacd.ACDMode;
 import vhacd.VHACD;
 import vhacd.VHACDHull;
 import vhacd.VHACDParameters;
@@ -238,7 +239,20 @@ public class TestLibbulletjme {
         }
         Assert.assertEquals(35, numHullVertices);
 
+        // Verify the VHACDParameters defaults.
         VHACDParameters parameters = new VHACDParameters();
+        Assert.assertFalse(parameters.getDebugEnabled());
+        Assert.assertEquals(ACDMode.VOXEL, parameters.getACDMode());
+        Assert.assertEquals(0.05, parameters.getAlpha(), 0.0);
+        Assert.assertEquals(0.05, parameters.getBeta(), 0.0);
+        Assert.assertEquals(4, parameters.getConvexHullDownSampling());
+        Assert.assertEquals(0.0025, parameters.getMaxConcavity(), 0.0);
+        Assert.assertEquals(32, parameters.getMaxVerticesPerHull());
+        Assert.assertEquals(0.0001, parameters.getMinVolumePerHull(), 0.0);
+        Assert.assertFalse(parameters.getPCA());
+        Assert.assertEquals(4, parameters.getPlaneDownSampling());
+        Assert.assertEquals(100_000, parameters.getVoxelResolution());
+
         List<VHACDHull> vhacdHulls
                 = VHACD.compute(positionArray, indexArray, parameters);
         Assert.assertEquals(2, vhacdHulls.size());
