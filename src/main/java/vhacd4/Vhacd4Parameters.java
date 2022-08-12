@@ -167,7 +167,7 @@ public class Vhacd4Parameters
     /**
      * Return the minimum edge length (native field: m_minEdgeLength).
      *
-     * @return the limit (&ge;1, &le;1024)
+     * @return the limit (&ge;1, &le;32)
      */
     public int getMinEdgeLength() {
         long objectId = nativeId();
@@ -332,10 +332,10 @@ public class Vhacd4Parameters
     /**
      * Alter the minimum edge length (native field: m_minEdgeLength).
      *
-     * @param length default = 2, min = 1, max = 1024)
+     * @param length default = 2, min = 1, max = 32)
      */
     public void setMinEdgeLength(int length) {
-        Validate.inRange(length, "length", 1, 1024);
+        Validate.inRange(length, "length", 1, 32);
 
         long objectId = nativeId();
         setMinEdgeLength(objectId, length);
