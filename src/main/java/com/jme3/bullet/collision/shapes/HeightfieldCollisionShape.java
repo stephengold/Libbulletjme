@@ -82,10 +82,6 @@ public class HeightfieldCollisionShape extends CollisionShape {
      */
     private boolean useZigzag = false;
     /**
-     * scale factor for Bullet to apply to the heightfield
-     */
-    final private float heightScale = 1f;
-    /**
      * highest sample in the heightfield or -minHeight, whichever is higher
      */
     private float maxHeight;
@@ -273,6 +269,7 @@ public class HeightfieldCollisionShape extends CollisionShape {
             directBuffer.put(height);
         }
 
+        float heightScale = 1f;
         long shapeId = createShape2(heightStickWidth, heightStickLength,
                 directBuffer, heightScale, minHeight, maxHeight, upAxis,
                 flipQuadEdges, flipTriangleWinding, useDiamond, useZigzag);
