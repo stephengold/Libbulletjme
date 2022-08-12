@@ -160,7 +160,6 @@ public class TestLibbulletjme {
          */
         for (int i = 0; i < 50; ++i) {
             space.update(0.02f, 0);
-            //System.out.printf("location = %s%n", prb.getPhysicsLocation());
         }
         /*
          * Check the final location of the box.
@@ -1764,8 +1763,6 @@ public class TestLibbulletjme {
          */
         for (int i = 0; i < 50; ++i) {
             space.update(0.02f, 0, false, true, false);
-            //System.out.printf("location = %s%n",
-            //        dropBody.getPhysicsLocation(null));
         }
 
         if (space instanceof PhysicsSpace) {
