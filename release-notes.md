@@ -1,5 +1,23 @@
 # Release log for the Libbulletjme project
 
+## Version 16.1.0 released on TBD
+
++ Bugfix:  I/O resources not safely closed in `VHACDParameters`.
++ Added V-HACD v4 without removing the classic version:
+  + Added the `Vhacd4`, `Vhacd4Hull`, and `Vhacd4Parameters` classes.
+  + Added the `FillMode` enum.
+  + Added a new constructor for `HullCollisionShape`.
++ Added the `setIgnoreList()` method to the `PhysicsCollisionObject` class.
++ Added a simpler constructor to `PhysicsSoftSpace`.
++ Overrode the `toString()` method of `VHACDParameters`.
++ Publicized the `rebuildRigidBody()` method of the `PhysicsRigidBody` class.
++ Created per-class loggers for `SoftBodyMaterial` and `SoftBodyWorldInfo`.
++ Upgraded the GCC compilers used to build Linux natives:
+  + Linux32 and Linux64 non-multithreaded, from v4.7.3 to v7.5.0
+  + Linux_ARM32hf and Linux_ARM64, from v5.4.0 to v6.5.0
+  + Linux64 multithreaded and Linux_ARM32 with software floating-point,
+    from v5.4.0 to v7.5.0
+
 ## Version 16.0.0 released on 4 August 2022
 
 + Qualified 13 utility classes as `final`. (API changes)
@@ -192,7 +210,7 @@ Added the `GearJoint` class.
 
 ## Version 12.3.1 released on 23 October 2021
 
-Bugfix: contact filtering is too agressive
+Bugfix: contact filtering is too aggressive
 
 ## Version 12.3.0 released on 22 October 2021
 
