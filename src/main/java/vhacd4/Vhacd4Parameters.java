@@ -142,7 +142,7 @@ public class Vhacd4Parameters
     /**
      * Return the maximum recursion depth (native field: m_maxRecursionDepth).
      *
-     * @return the limit (&ge;1, &le;1024)
+     * @return the limit (&ge;2, &le;64)
      */
     public int getMaxRecursion() {
         long objectId = nativeId();
@@ -305,10 +305,10 @@ public class Vhacd4Parameters
     /**
      * Alter the maximum recursion depth (native field: m_maxRecursionDepth).
      *
-     * @param depth default = 14, min = 1, max = 1024
+     * @param depth default = 14, min = 2, max = 64
      */
     public void setMaxRecursion(int depth) {
-        Validate.inRange(depth, "depth", 1, 1024);
+        Validate.inRange(depth, "depth", 2, 64);
 
         long objectId = nativeId();
         setMaxRecursion(objectId, depth);
