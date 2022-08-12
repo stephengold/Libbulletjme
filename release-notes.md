@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 16.1.0 released on TBD
+## Version 16.1.0 released on 12 August 2022
 
 + Bugfix:  I/O resources not safely closed in `VHACDParameters`.
 + Added V-HACD v4 without removing the classic version:
