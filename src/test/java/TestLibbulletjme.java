@@ -183,7 +183,7 @@ public class TestLibbulletjme {
         /*
          * Generate an L-shaped mesh: 12 vertices, 20 triangles
          */
-        float[] positionArray = new float[]{
+        float[] positionArray = {
             0f, 0f, 0f,
             2f, 0f, 0f,
             2f, 1f, 0f,
@@ -197,7 +197,7 @@ public class TestLibbulletjme {
             1f, 3f, 1f,
             0f, 3f, 1f
         };
-        int[] indexArray = new int[]{
+        int[] indexArray = {
             0, 1, 7, 0, 7, 6,
             0, 6, 11, 0, 11, 5,
             4, 5, 11, 4, 11, 10,
@@ -1083,11 +1083,11 @@ public class TestLibbulletjme {
         CollisionShape compound = new CompoundCollisionShape();
         CollisionShape gimpact = new GImpactCollisionShape();
 
-        float[] hf = new float[]{0f, 0f, 0f, 0f};
+        float[] hf = {0f, 0f, 0f, 0f};
         CollisionShape heightfield = new HeightfieldCollisionShape(hf);
 
-        int[] indexArray = new int[]{0, 0, 0};
-        Vector3f[] positionArray = new Vector3f[]{new Vector3f(0f, 0f, 0f)};
+        int[] indexArray = {0, 0, 0};
+        Vector3f[] positionArray = {new Vector3f(0f, 0f, 0f)};
         IndexedMesh indexedMesh = new IndexedMesh(positionArray, indexArray);
         CollisionShape mesh = new MeshCollisionShape(true, indexedMesh);
 
