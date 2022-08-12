@@ -54,7 +54,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
      * message logger for this class
      */
     final public static Logger logger
-            = Logger.getLogger(PhysicsSoftBody.class.getName());
+            = Logger.getLogger(SoftBodyWorldInfo.class.getName());
     // *************************************************************************
     // constructors
 
