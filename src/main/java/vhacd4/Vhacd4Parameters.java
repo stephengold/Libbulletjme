@@ -155,7 +155,7 @@ public class Vhacd4Parameters
      * Return the maximum number of vertices per convex hull (native field:
      * m_maxNumVerticesPerCH).
      *
-     * @return the limit (&ge;4, &le;1024)
+     * @return the limit (&ge;4, &le;2048)
      */
     public int getMaxVerticesPerHull() {
         long objectId = nativeId();
@@ -320,10 +320,10 @@ public class Vhacd4Parameters
      * <p>
      * Note: the native default is 64.
      *
-     * @param limit default = 32, min = 4, max = 1024)
+     * @param limit default = 32, min = 4, max = 2048)
      */
     public void setMaxVerticesPerHull(int limit) {
-        Validate.inRange(limit, "limit", 4, 1024);
+        Validate.inRange(limit, "limit", 4, 2048);
 
         long objectId = nativeId();
         setMaxNumVerticesPerCH(objectId, limit);
