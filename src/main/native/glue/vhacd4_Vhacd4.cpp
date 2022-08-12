@@ -38,18 +38,25 @@
 #endif
 #include "vhacd4_Vhacd4.h"
 #include "jmeBulletUtil.h"
-
-#define ENABLE_VHACD_IMPLEMENTATION 1
+/*
+ * Use the pre-processor to move V-HACD v4 native code into namespaces
+ * that are distinct from those occupied by classic V-HACD.
+ */
 #define VHACD VHACD4
+#define IVHACD IVHACD4
+
+// This module includes the V-HACD v4 implementation, not just its API:
+#define ENABLE_VHACD_IMPLEMENTATION 1
+
 #include "VHACD4.h"
 
 using namespace VHACD;
 
-class Callback : public IVHACD::IUserCallback {
+class Callback4 : public IVHACD::IUserCallback {
 public:
     JNIEnv *pEnv;
 
-    Callback(JNIEnv *pJNIEnv) {
+    Callback4(JNIEnv *pJNIEnv) {
         pEnv = pJNIEnv;
     }
 
@@ -119,7 +126,7 @@ JNIEXPORT void JNICALL Java_vhacd4_Vhacd4_compute
             = reinterpret_cast<IVHACD::Parameters *> (paramsId);
     NULL_CHK(pEnv, pParams, "The parameters do not exist.",)
 
-    Callback callback = Callback(pEnv);
+    Callback4 callback = Callback4(pEnv);
     pParams->m_callback = &callback;
 
     Logger logger(debug);
