@@ -84,23 +84,23 @@ public class Vhacd4Parameters
      * @throws IOException from DataInputStream
      */
     public void fromInputStream(InputStream is) throws IOException {
-        DataInputStream dis = new DataInputStream(is);
+        try (DataInputStream dis = new DataInputStream(is)) {
+            setAsync(dis.readBoolean());
+            setDebugEnabled(dis.readBoolean());
 
-        setAsync(dis.readBoolean());
-        setDebugEnabled(dis.readBoolean());
+            int fillModeOrdinal = dis.readInt();
+            FillMode fillMode = FillMode.values()[fillModeOrdinal];
+            setFillMode(fillMode);
 
-        int fillModeOrdinal = dis.readInt();
-        FillMode fillMode = FillMode.values()[fillModeOrdinal];
-        setFillMode(fillMode);
-
-        setFindBestPlane(dis.readBoolean());
-        setMaxHulls(dis.readInt());
-        setMaxRecursion(dis.readInt());
-        setMaxVerticesPerHull(dis.readInt());
-        setMinEdgeLength(dis.readInt());
-        setShrinkWrap(dis.readBoolean());
-        setVolumePercentError(dis.readDouble());
-        setVoxelResolution(dis.readInt());
+            setFindBestPlane(dis.readBoolean());
+            setMaxHulls(dis.readInt());
+            setMaxRecursion(dis.readInt());
+            setMaxVerticesPerHull(dis.readInt());
+            setMinEdgeLength(dis.readInt());
+            setShrinkWrap(dis.readBoolean());
+            setVolumePercentError(dis.readDouble());
+            setVoxelResolution(dis.readInt());
+        }
     }
 
     /**
@@ -391,22 +391,22 @@ public class Vhacd4Parameters
      * @throws IOException from DataOutputStream
      */
     public void toOutputStream(OutputStream os) throws IOException {
-        DataOutputStream dos = new DataOutputStream(os);
+        try (DataOutputStream dos = new DataOutputStream(os)) {
+            dos.writeBoolean(isAsync());
+            dos.writeBoolean(getDebugEnabled());
 
-        dos.writeBoolean(isAsync());
-        dos.writeBoolean(getDebugEnabled());
+            int fillModeOrdinal = getFillMode().ordinal();
+            dos.writeInt(fillModeOrdinal);
 
-        int fillModeOrdinal = getFillMode().ordinal();
-        dos.writeInt(fillModeOrdinal);
-
-        dos.writeBoolean(isFindBestPlane());
-        dos.writeInt(getMaxHulls());
-        dos.writeInt(getMaxRecursion());
-        dos.writeInt(getMaxVerticesPerHull());
-        dos.writeInt(getMinEdgeLength());
-        dos.writeBoolean(isShrinkWrap());
-        dos.writeDouble(getVolumePercentError());
-        dos.writeInt(getVoxelResolution());
+            dos.writeBoolean(isFindBestPlane());
+            dos.writeInt(getMaxHulls());
+            dos.writeInt(getMaxRecursion());
+            dos.writeInt(getMaxVerticesPerHull());
+            dos.writeInt(getMinEdgeLength());
+            dos.writeBoolean(isShrinkWrap());
+            dos.writeDouble(getVolumePercentError());
+            dos.writeInt(getVoxelResolution());
+        }
     }
     // *************************************************************************
     // NativePhysicsObject methods
