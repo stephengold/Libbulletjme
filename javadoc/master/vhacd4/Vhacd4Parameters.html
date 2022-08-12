@@ -159,7 +159,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../com/jme3/bullet/FillMode.html" title="enum class in com.jme3.bullet">FillMode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFillMode()" class="member-name-link">getFillMode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return the algorithm to generate a solid object from voxels (native
+<div class="block">Return the algorithm that fills voxels to create a solid object (native
  field: m_fillMode).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
@@ -205,14 +205,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAsync()" class="member-name-link">isAsync</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test whether V-HACD should exploit multiple CPU cores if available
- (native field: m_asyncACD).</div>
+<div class="block">Test whether V-HACD should run on a new thread (native field:
+ m_asyncACD).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFindBestPlane()" class="member-name-link">isFindBestPlane</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test whether V-HACD should attempt to split planes at the best location
- (native field: m_findBestPlane).</div>
+<div class="block">Test whether V-HACD should try to find the optimal location for splitting
+ hulls (native field: m_findBestPlane).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isShrinkWrap()" class="member-name-link">isShrinkWrap</a>()</code></div>
@@ -223,8 +223,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAsync(boolean)" class="member-name-link">setAsync</a><wbr>(boolean&nbsp;setting)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter whether V-HACD should exploit multiple CPU cores if available
- (native field: m_asyncACD).</div>
+<div class="block">Alter whether V-HACD should run on a new thread (native field:
+ m_asyncACD).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDebugEnabled(boolean)" class="member-name-link">setDebugEnabled</a><wbr>(boolean&nbsp;setting)</code></div>
@@ -234,14 +234,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFillMode(com.jme3.bullet.FillMode)" class="member-name-link">setFillMode</a><wbr>(<a href="../com/jme3/bullet/FillMode.html" title="enum class in com.jme3.bullet">FillMode</a>&nbsp;mode)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Specify the algorithm to generate a solid object from voxels (native
+<div class="block">Specify the algorithm that fills voxels to create a solid object (native
  field: m_fillMode).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFindBestPlane(boolean)" class="member-name-link">setFindBestPlane</a><wbr>(boolean&nbsp;setting)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter whether to attempt to split planes at the best location (native
- field: m_findBestPlane).</div>
+<div class="block">Alter whether V-HACD should try to find the optimal location for
+ splitting hulls (native field: m_findBestPlane).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaxHulls(int)" class="member-name-link">setMaxHulls</a><wbr>(int&nbsp;limit)</code></div>
@@ -373,7 +373,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="getFillMode()">
 <h3>getFillMode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../com/jme3/bullet/FillMode.html" title="enum class in com.jme3.bullet">FillMode</a></span>&nbsp;<span class="element-name">getFillMode</span>()</div>
-<div class="block">Return the algorithm to generate a solid object from voxels (native
+<div class="block">Return the algorithm that fills voxels to create a solid object (native
  field: m_fillMode).</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -400,7 +400,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Return the maximum recursion depth (native field: m_maxRecursionDepth).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the limit (&ge;1, &le;1024)</dd>
+<dd>the limit (&ge;2, &le;64)</dd>
 </dl>
 </section>
 </li>
@@ -412,7 +412,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  m_maxNumVerticesPerCH).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the limit (&ge;4, &le;1024)</dd>
+<dd>the limit (&ge;4, &le;2048)</dd>
 </dl>
 </section>
 </li>
@@ -423,7 +423,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Return the minimum edge length (native field: m_minEdgeLength).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the limit (&ge;1, &le;1024)</dd>
+<dd>the limit (&ge;1, &le;32)</dd>
 </dl>
 </section>
 </li>
@@ -456,11 +456,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="isAsync()">
 <h3>isAsync</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isAsync</span>()</div>
-<div class="block">Test whether V-HACD should exploit multiple CPU cores if available
- (native field: m_asyncACD).</div>
+<div class="block">Test whether V-HACD should run on a new thread (native field:
+ m_asyncACD).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true &rarr; multiple cores, false &rarr; single core</dd>
+<dd>true &rarr; create new thread, false &rarr; use the existing
+ thread</dd>
 </dl>
 </section>
 </li>
@@ -468,11 +469,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="isFindBestPlane()">
 <h3>isFindBestPlane</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFindBestPlane</span>()</div>
-<div class="block">Test whether V-HACD should attempt to split planes at the best location
- (native field: m_findBestPlane).</div>
+<div class="block">Test whether V-HACD should try to find the optimal location for splitting
+ hulls (native field: m_findBestPlane).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true &rarr; multiple cores, false &rarr; single core</dd>
+<dd>true &rarr; find optimal location, false &rarr; split in the
+ middle</dd>
 </dl>
 </section>
 </li>
@@ -484,7 +486,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  (native field: m_shrinkWrap).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true &rarr; shrinkwrap, false &rarr; don't shrinkwrap</dd>
+<dd>true &rarr; shrinkwrap enabled, false &rarr; shrinkwrap disabled</dd>
 </dl>
 </section>
 </li>
@@ -492,12 +494,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setAsync(boolean)">
 <h3>setAsync</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setAsync</span><wbr><span class="parameters">(boolean&nbsp;setting)</span></div>
-<div class="block">Alter whether V-HACD should exploit multiple CPU cores if available
- (native field: m_asyncACD).</div>
+<div class="block">Alter whether V-HACD should run on a new thread (native field:
+ m_asyncACD).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>setting</code> - true &rarr; multiple cores, false &rarr; single core
- (default=true)</dd>
+<dd><code>setting</code> - true &rarr; create new thread, false &rarr; use the
+ existing thread (default=true)</dd>
 </dl>
 </section>
 </li>
@@ -516,7 +518,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setFillMode(com.jme3.bullet.FillMode)">
 <h3>setFillMode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setFillMode</span><wbr><span class="parameters">(<a href="../com/jme3/bullet/FillMode.html" title="enum class in com.jme3.bullet">FillMode</a>&nbsp;mode)</span></div>
-<div class="block">Specify the algorithm to generate a solid object from voxels (native
+<div class="block">Specify the algorithm that fills voxels to create a solid object (native
  field: m_fillMode).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -528,11 +530,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setFindBestPlane(boolean)">
 <h3>setFindBestPlane</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setFindBestPlane</span><wbr><span class="parameters">(boolean&nbsp;setting)</span></div>
-<div class="block">Alter whether to attempt to split planes at the best location (native
- field: m_findBestPlane).</div>
+<div class="block">Alter whether V-HACD should try to find the optimal location for
+ splitting hulls (native field: m_findBestPlane).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>setting</code> - true &rarr; attempt, false &rarr; don't attempt
+<dd><code>setting</code> - find optimal location, false &rarr; split in the middle
  (default=false)</dd>
 </dl>
 </section>
@@ -556,7 +558,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Alter the maximum recursion depth (native field: m_maxRecursionDepth).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>depth</code> - default = 14, min = 1, max = 1024</dd>
+<dd><code>depth</code> - default = 14, min = 2, max = 64</dd>
 </dl>
 </section>
 </li>
@@ -570,7 +572,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  Note: the native default is 64.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>limit</code> - default = 32, min = 4, max = 1024)</dd>
+<dd><code>limit</code> - default = 32, min = 4, max = 2048)</dd>
 </dl>
 </section>
 </li>
@@ -581,7 +583,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Alter the minimum edge length (native field: m_minEdgeLength).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>length</code> - default = 2, min = 1, max = 1024)</dd>
+<dd><code>length</code> - default = 2, min = 1, max = 32)</dd>
 </dl>
 </section>
 </li>
@@ -593,8 +595,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  field: m_shrinkWrap).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>setting</code> - true &rarr; shrinkwrap, false &rarr; don't shrinkwrap
- (default=true)</dd>
+<dd><code>setting</code> - true &rarr; enable shrinkwrap, false &rarr; disable
+ shrinkwrap (default=true)</dd>
 </dl>
 </section>
 </li>
