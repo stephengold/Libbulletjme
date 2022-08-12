@@ -225,10 +225,10 @@ public class TestLibbulletjme {
         Assert.assertEquals(100_000, parameters4.getVoxelResolution());
 
         // Generate hulls for the mesh.
-        parameters4.setMaxRecursion(1);
+        parameters4.setMaxRecursion(2);
         List<Vhacd4Hull> vhacd4Hulls
                 = Vhacd4.compute(positionArray, indexArray, parameters4);
-        Assert.assertEquals(4, vhacd4Hulls.size());
+        Assert.assertEquals(6, vhacd4Hulls.size());
 
         CompoundCollisionShape compound = new CompoundCollisionShape();
         int numHullVertices = 0;
@@ -237,7 +237,7 @@ public class TestLibbulletjme {
             numHullVertices += hullShape.countHullVertices();
             compound.addChildShape(hullShape);
         }
-        Assert.assertEquals(35, numHullVertices);
+        Assert.assertEquals(58, numHullVertices);
 
         // Verify the VHACDParameters defaults.
         VHACDParameters parameters = new VHACDParameters();
