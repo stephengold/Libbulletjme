@@ -113,7 +113,7 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Return the algorithm to generate a solid object from voxels (native
+     * Return the algorithm that fills voxels to create a solid object (native
      * field: m_fillMode).
      *
      * @return an enum value (not null)
@@ -204,10 +204,11 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Test whether V-HACD should exploit multiple CPU cores if available
-     * (native field: m_asyncACD).
+     * Test whether V-HACD should run on a new thread (native field:
+     * m_asyncACD).
      *
-     * @return true &rarr; multiple cores, false &rarr; single core
+     * @return true &rarr; create new thread, false &rarr; use the existing
+     * thread
      */
     public boolean isAsync() {
         long objectId = nativeId();
@@ -217,10 +218,11 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Test whether V-HACD should attempt to split planes at the best location
-     * (native field: m_findBestPlane).
+     * Test whether V-HACD should try to find the optimal location for splitting
+     * hulls (native field: m_findBestPlane).
      *
-     * @return true &rarr; multiple cores, false &rarr; single core
+     * @return true &rarr; find optimal location, false &rarr; split in the
+     * middle
      */
     public boolean isFindBestPlane() {
         long objectId = nativeId();
@@ -233,7 +235,7 @@ public class Vhacd4Parameters
      * Test whether V-HACD should shrinkwrap voxel positions to the source mesh
      * (native field: m_shrinkWrap).
      *
-     * @return true &rarr; shrinkwrap, false &rarr; don't shrinkwrap
+     * @return true &rarr; shrinkwrap enabled, false &rarr; shrinkwrap disabled
      */
     public boolean isShrinkWrap() {
         long objectId = nativeId();
@@ -243,11 +245,11 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Alter whether V-HACD should exploit multiple CPU cores if available
-     * (native field: m_asyncACD).
+     * Alter whether V-HACD should run on a new thread (native field:
+     * m_asyncACD).
      *
-     * @param setting true &rarr; multiple cores, false &rarr; single core
-     * (default=true)
+     * @param setting true &rarr; create new thread, false &rarr; use the
+     * existing thread (default=true)
      */
     public void setAsync(boolean setting) {
         long objectId = nativeId();
@@ -264,7 +266,7 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Specify the algorithm to generate a solid object from voxels (native
+     * Specify the algorithm that fills voxels to create a solid object (native
      * field: m_fillMode).
      *
      * @param mode the desired algorithm (not null, default=FloodFill)
@@ -278,10 +280,10 @@ public class Vhacd4Parameters
     }
 
     /**
-     * Alter whether to attempt to split planes at the best location (native
-     * field: m_findBestPlane).
+     * Alter whether V-HACD should try to find the optimal location for
+     * splitting hulls (native field: m_findBestPlane).
      *
-     * @param setting true &rarr; attempt, false &rarr; don't attempt
+     * @param setting find optimal location, false &rarr; split in the middle
      * (default=false)
      */
     public void setFindBestPlane(boolean setting) {
@@ -345,8 +347,8 @@ public class Vhacd4Parameters
      * Alter whether to shrinkwrap voxel positions to the source mesh (native
      * field: m_shrinkWrap).
      *
-     * @param setting true &rarr; shrinkwrap, false &rarr; don't shrinkwrap
-     * (default=true)
+     * @param setting true &rarr; enable shrinkwrap, false &rarr; disable
+     * shrinkwrap (default=true)
      */
     public void setShrinkWrap(boolean setting) {
         long objectId = nativeId();

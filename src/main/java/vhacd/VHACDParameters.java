@@ -296,6 +296,8 @@ public class VHACDParameters
      * Set maximum concavity (native field: m_concavity).
      *
      * @param v default = 0.0025, min = 0.0, max = 1.0
+     * <p>
+     * Note: the native default is 0.001.
      */
     public void setMaxConcavity(double v) {
         Validate.fraction(v, "depth");
@@ -308,7 +310,9 @@ public class VHACDParameters
      * Alter the maximum number of vertices per convex hull (native field:
      * m_maxNumVerticesPerCH).
      *
-     * @param limit default = 32, min = 4, max = 1024)
+     * @param limit default = 32, min = 4, max = 1024
+     * <p>
+     * Note: the native default is 64.
      */
     public void setMaxVerticesPerHull(int limit) {
         Validate.inRange(limit, "limit", 4, 1024);
