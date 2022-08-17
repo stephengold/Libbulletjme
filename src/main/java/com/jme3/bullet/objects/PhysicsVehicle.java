@@ -711,6 +711,11 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     // *************************************************************************
     // PhysicsRigidBody methods
 
+    /**
+     * Invoked during a rebuild after the native object is created.
+     * <p>
+     * For use by subclasses.
+     */
     @Override
     protected void postRebuild() {
         super.postRebuild();
