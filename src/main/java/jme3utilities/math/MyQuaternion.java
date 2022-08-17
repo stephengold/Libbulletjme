@@ -37,7 +37,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MyQuaternion {
+public class MyQuaternion { // TODO finalize the class
     // *************************************************************************
     // constants and loggers
 
