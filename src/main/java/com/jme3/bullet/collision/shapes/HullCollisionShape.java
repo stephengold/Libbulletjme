@@ -90,7 +90,7 @@ public class HullCollisionShape extends ConvexShape {
         Validate.nonEmpty(locations, "locations");
 
         int numLocations = locations.size();
-        points = new float[numAxes * numLocations];
+        this.points = new float[numAxes * numLocations];
         int j = 0;
         for (Vector3f location : locations) {
             points[j + PhysicsSpace.AXIS_X] = location.x;
@@ -133,7 +133,7 @@ public class HullCollisionShape extends ConvexShape {
         Validate.positive(numFloats, "limit");
         Validate.require(numFloats % numAxes == 0, "limit a multiple of 3");
 
-        points = new float[numFloats];
+        this.points = new float[numFloats];
         for (int i = 0; i < numFloats; ++i) {
             points[i] = flippedBuffer.get(i);
         }
@@ -330,7 +330,7 @@ public class HullCollisionShape extends ConvexShape {
         assert (numFloats % numAxes == 0) : numFloats;
         int numVertices = numFloats / numAxes;
 
-        directBuffer = BufferUtils.createFloatBuffer(numFloats);
+        this.directBuffer = BufferUtils.createFloatBuffer(numFloats);
         for (float f : points) {
             if (!MyMath.isFinite(f)) {
                 throw new IllegalArgumentException("illegal coordinate: " + f);
