@@ -112,8 +112,8 @@ public class HullCollisionShape extends ConvexShape {
      */
     public HullCollisionShape(float... points) {
         Validate.nonEmpty(points, "points");
-        Validate.require(points.length % numAxes == 0,
-                "length a multiple of 3");
+        Validate.require(
+                points.length % numAxes == 0, "length a multiple of 3");
 
         this.points = points.clone();
         createShape();
@@ -350,11 +350,11 @@ public class HullCollisionShape extends ConvexShape {
 
     native private static int countHullVertices(long shapeId);
 
-    native private static long createShapeF(FloatBuffer vertices,
-            int numVertices);
+    native private static long createShapeF(
+            FloatBuffer vertices, int numVertices);
 
-    native private static void getHullVerticesF(long shapeId,
-            FloatBuffer vertices);
+    native private static void getHullVerticesF(
+            long shapeId, FloatBuffer vertices);
 
     native private static void recalcAabb(long shapeId);
 }
