@@ -267,6 +267,20 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="&lt;init&gt;(java.nio.FloatBuffer)">
+<h3>HullCollisionShape</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">HullCollisionShape</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;flippedBuffer)</span></div>
+<div class="block">Instantiate a shape based on a flipped buffer containing coordinates. For
+ best performance and stability, the convex hull should have no more than
+ 100 vertices.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>flippedBuffer</code> - the coordinates on which to base the shape (not
+ null, limit&gt;0, limit a multiple of 3, unaffected)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="&lt;init&gt;(vhacd4.Vhacd4Hull)">
 <h3>HullCollisionShape</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">HullCollisionShape</span><wbr><span class="parameters">(<a href="../../../../../vhacd4/Vhacd4Hull.html" title="class in vhacd4">Vhacd4Hull</a>&nbsp;vhacd4Hull)</span></div>
@@ -287,20 +301,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vhacdHull</code> - (not null, unaffected)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(java.nio.FloatBuffer)">
-<h3>HullCollisionShape</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">HullCollisionShape</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;flippedBuffer)</span></div>
-<div class="block">Instantiate a shape based on a flipped buffer containing coordinates. For
- best performance and stability, the convex hull should have no more than
- 100 vertices.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>flippedBuffer</code> - the coordinates on which to base the shape (not
- null, limit&gt;0, limit a multiple of 3, unaffected)</dd>
 </dl>
 </section>
 </li>
