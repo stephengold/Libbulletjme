@@ -120,6 +120,28 @@ public class HullCollisionShape extends ConvexShape {
     }
 
     /**
+     * Instantiate a shape based on a flipped buffer containing coordinates. For
+     * best performance and stability, the convex hull should have no more than
+     * 100 vertices.
+     *
+     * @param flippedBuffer the coordinates on which to base the shape (not
+     * null, limit&gt;0, limit a multiple of 3, unaffected)
+     */
+    public HullCollisionShape(FloatBuffer flippedBuffer) {
+        Validate.nonNull(flippedBuffer, "flipped buffer");
+        int numFloats = flippedBuffer.limit();
+        Validate.positive(numFloats, "limit");
+        Validate.require(numFloats % numAxes == 0, "limit a multiple of 3");
+
+        points = new float[numFloats];
+        for (int i = 0; i < numFloats; ++i) {
+            points[i] = flippedBuffer.get(i);
+        }
+
+        createShape();
+    }
+
+    /**
      * Instantiate a shape based on a Vhacd4Hull. For best performance and
      * stability, the convex hull should have no more than 100 vertices.
      *
@@ -142,28 +164,6 @@ public class HullCollisionShape extends ConvexShape {
         Validate.nonNull(vhacdHull, "V-HACD hull");
 
         this.points = vhacdHull.clonePositions();
-        createShape();
-    }
-
-    /**
-     * Instantiate a shape based on a flipped buffer containing coordinates. For
-     * best performance and stability, the convex hull should have no more than
-     * 100 vertices.
-     *
-     * @param flippedBuffer the coordinates on which to base the shape (not
-     * null, limit&gt;0, limit a multiple of 3, unaffected)
-     */
-    public HullCollisionShape(FloatBuffer flippedBuffer) {
-        Validate.nonNull(flippedBuffer, "flipped buffer");
-        int numFloats = flippedBuffer.limit();
-        Validate.positive(numFloats, "limit");
-        Validate.require(numFloats % numAxes == 0, "limit a multiple of 3");
-
-        points = new float[numFloats];
-        for (int i = 0; i < numFloats; ++i) {
-            points[i] = flippedBuffer.get(i);
-        }
-
         createShape();
     }
     // *************************************************************************
