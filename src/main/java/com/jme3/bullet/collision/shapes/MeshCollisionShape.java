@@ -82,8 +82,8 @@ public class MeshCollisionShape extends CollisionShape {
      * @param meshes the collection on which to base the shape (must contain at
      * least one triangle)
      */
-    public MeshCollisionShape(boolean useCompression,
-            Collection<IndexedMesh> meshes) {
+    public MeshCollisionShape(
+            boolean useCompression, Collection<IndexedMesh> meshes) {
         Validate.nonEmpty(meshes, "meshes");
         nativeMesh = new CompoundMesh();
         for (IndexedMesh submesh : meshes) {
@@ -211,8 +211,8 @@ public class MeshCollisionShape extends CollisionShape {
     // *************************************************************************
     // native private methods
 
-    native private static long createShape(boolean useCompression,
-            boolean buildBvh, long meshId);
+    native private static long
+            createShape(boolean useCompression, boolean buildBvh, long meshId);
 
     native private static void recalcAabb(long shapeId);
 

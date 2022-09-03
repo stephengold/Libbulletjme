@@ -511,8 +511,8 @@ abstract public class CollisionShape extends NativePhysicsObject {
     native private static void getAabb(long shapeId, Vector3f location,
             Matrix3f basisMatrix, Vector3f storeMinima, Vector3f storeMaxima);
 
-    native private static void getLocalScaling(long shapeId,
-            Vector3f storeVector);
+    native private static void
+            getLocalScaling(long shapeId, Vector3f storeVector);
 
     native private static float getMargin(long shapeId);
 
@@ -528,8 +528,8 @@ abstract public class CollisionShape extends NativePhysicsObject {
 
     native private static boolean isPolyhedral(long shapeId);
 
-    native private static void setContactFilterEnabled(long shapeId,
-            boolean setting);
+    native private static void
+            setContactFilterEnabled(long shapeId, boolean setting);
 
     native private static void setLocalScaling(long shapeId, Vector3f scale);
 

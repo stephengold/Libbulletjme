@@ -248,8 +248,8 @@ public class HeightfieldCollisionShape extends CollisionShape {
      * @param worldScale the desired scale factor for each local axis (not null,
      * no negative component, unaffected)
      */
-    private void createCollisionHeightfield(float[] heightmap,
-            Vector3f worldScale) {
+    private void
+            createCollisionHeightfield(float[] heightmap, Vector3f worldScale) {
         scale.set(worldScale);
 
         heightfieldData = heightmap.clone();

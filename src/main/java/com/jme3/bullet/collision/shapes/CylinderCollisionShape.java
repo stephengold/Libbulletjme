@@ -105,16 +105,16 @@ public class CylinderCollisionShape extends ConvexShape {
             int endPosition, int axisIndex) {
         Validate.nonNull(buffer, "buffer");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         Validate.axisIndex(axisIndex, "axis index");
 
         axis = axisIndex;
         MyBuffer.maxAbs(buffer, startPosition, endPosition, halfExtents);
         float halfHeight = halfExtents.get(axisIndex);
 
-        float radius = MyBuffer.cylinderRadius(buffer, startPosition,
-                endPosition, axisIndex);
+        float radius = MyBuffer
+                .cylinderRadius(buffer, startPosition, endPosition, axisIndex);
         halfExtents.set(radius, radius, radius);
         halfExtents.set(axisIndex, halfHeight);
         createShape();

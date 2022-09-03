@@ -192,6 +192,6 @@ public class ConeCollisionShape extends ConvexShape {
     // *************************************************************************
     // native private methods
 
-    native private static long createShape(int axisIndex, float radius,
-            float height);
+    native private static long
+            createShape(int axisIndex, float radius, float height);
 }
