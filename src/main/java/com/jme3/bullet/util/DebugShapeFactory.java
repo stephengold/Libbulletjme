@@ -280,8 +280,8 @@ final public class DebugShapeFactory {
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 9)
      */
-    private static FloatBuffer createPlaneTriangles(PlaneCollisionShape shape,
-            float halfExtent) {
+    private static FloatBuffer
+            createPlaneTriangles(PlaneCollisionShape shape, float halfExtent) {
         assert shape != null;
         assert halfExtent > 0f : halfExtent;
         /*
@@ -315,8 +315,8 @@ final public class DebugShapeFactory {
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 3)
      */
-    private static FloatBuffer createPlaneVertices(PlaneCollisionShape shape,
-            float halfExtent) {
+    private static FloatBuffer
+            createPlaneVertices(PlaneCollisionShape shape, float halfExtent) {
         assert shape != null;
         assert halfExtent > 0f : halfExtent;
         /*
@@ -363,9 +363,9 @@ final public class DebugShapeFactory {
     // *************************************************************************
     // native private methods
 
-    native private static void getTriangles(long shapeId, int meshResolution,
-            DebugMeshCallback buffer);
+    native private static void getTriangles(
+            long shapeId, int meshResolution, DebugMeshCallback buffer);
 
-    native private static void getVertices(long shapeId, int meshResolution,
-            DebugMeshCallback buffer);
+    native private static void getVertices(
+            long shapeId, int meshResolution, DebugMeshCallback buffer);
 }

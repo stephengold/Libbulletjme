@@ -168,6 +168,7 @@ public class MultiSphere extends ConvexShape {
         this.radii = new float[numSpheres];
         for (int i = 0; i < numSpheres; ++i) {
             this.centers[i] = centers.get(i).clone();
+
             float radius = radii.get(i);
             assert radius >= 0f : radius;
             this.radii[i] = radius;

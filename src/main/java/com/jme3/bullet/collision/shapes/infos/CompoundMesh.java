@@ -189,16 +189,16 @@ public class CompoundMesh extends NativePhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static void addIndexedMesh(long compoundMeshId,
-            long submeshId);
+    native private static void
+            addIndexedMesh(long compoundMeshId, long submeshId);
 
     native private static long createEmptyTiva();
 
     native private static void finalizeNative(long compoundMeshId);
 
-    native private static void getScaling(long compoundMeshId,
-            Vector3f storeVector);
+    native private static void
+            getScaling(long compoundMeshId, Vector3f storeVector);
 
-    native private static void setScaling(long compoundMeshId, float xScale,
-            float yScale, float zScale);
+    native private static void setScaling(
+            long compoundMeshId, float xScale, float yScale, float zScale);
 }
