@@ -184,7 +184,7 @@ public class IndexedMesh extends NativePhysicsObject {
     // Java private methods
 
     /**
-     * Create a new btIndexedMesh using the current configuration.
+     * Create a {@code btIndexedMesh} using the current configuration.
      */
     private void createMesh() {
         assert vertexStride == 12 : vertexStride;

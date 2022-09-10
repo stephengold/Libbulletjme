@@ -57,7 +57,7 @@ import jme3utilities.Validate;
 
 /**
  * A CollisionSpace to simulate dynamic physics, with its own
- * btDiscreteDynamicsWorld.
+ * {@code btDiscreteDynamicsWorld}.
  *
  * @author normenhansen
  */
@@ -1032,7 +1032,8 @@ public class PhysicsSpace
      * <p>
      * Override this method to customize how contacts are handled.
      *
-     * @param manifoldId the native ID of the btPersistentManifold (not 0)
+     * @param manifoldId the native ID of the {@code btPersistentManifold} (not
+     * zero)
      */
     @Override
     public void onContactEnded(long manifoldId) {
@@ -1048,7 +1049,7 @@ public class PhysicsSpace
      *
      * @param pcoA the first involved object (not null)
      * @param pcoB the 2nd involved object (not null)
-     * @param pointId the native ID of the btManifoldPoint (not 0)
+     * @param pointId the native ID of the {@code btManifoldPoint} (not zero)
      */
     @Override
     public void onContactProcessed(PhysicsCollisionObject pcoA,
@@ -1065,7 +1066,8 @@ public class PhysicsSpace
      * <p>
      * Override this method to customize how contacts are handled.
      *
-     * @param manifoldId the native ID of the btPersistentManifold (not 0)
+     * @param manifoldId the native ID of the {@code btPersistentManifold} (not
+     * zero)
      */
     @Override
     public void onContactStarted(long manifoldId) {

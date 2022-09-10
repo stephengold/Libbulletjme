@@ -47,7 +47,7 @@ import jme3utilities.Validate;
 
 /**
  * The abstract base class for collision objects based on Bullet's
- * btCollisionObject.
+ * {@code btCollisionObject}.
  * <p>
  * Subclasses include MultiBodyCollider, PhysicsBody, PhysicsCharacter, and
  * PhysicsGhostObject.

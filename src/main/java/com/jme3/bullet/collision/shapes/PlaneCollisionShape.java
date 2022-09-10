@@ -97,7 +97,7 @@ public class PlaneCollisionShape extends CollisionShape {
     // Java private methods
 
     /**
-     * Instantiate the configured btStaticPlaneShape.
+     * Instantiate the configured {@code btStaticPlaneShape}.
      */
     private void createShape() {
         long shapeId = createShape(plane.getNormal(), plane.getConstant());

@@ -423,7 +423,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     /**
      * Return the type of this shape.
      *
-     * @param shapeId the ID of the btCollisionShape (not zero)
+     * @param shapeId the ID of the {@code btCollisionShape} (not zero)
      * @return the type value (from Bullet's {@code enum BroadphaseNativeTypes})
      */
     final native protected static int getShapeType(long shapeId);
@@ -437,7 +437,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Synchronize the copied scale factors with the btCollisionShape.
+     * Synchronize the copied scale factors with the {@code btCollisionShape}.
      */
     protected void updateScale() {
         long shapeId = nativeId();
@@ -449,7 +449,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     /**
      * Initialize the native ID.
      *
-     * @param shapeId the identifier of the btCollisionShape (not zero)
+     * @param shapeId the identifier of the {@code btCollisionShape} (not zero)
      */
     @Override
     protected void setNativeId(long shapeId) {

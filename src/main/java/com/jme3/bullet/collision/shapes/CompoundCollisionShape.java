@@ -74,7 +74,7 @@ public class CompoundCollisionShape extends CollisionShape {
     // fields
 
     /**
-     * child shapes of this shape
+     * children that make up this shape
      */
     final private ArrayList<ChildCollisionShape> children;
     // *************************************************************************

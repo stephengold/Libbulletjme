@@ -214,7 +214,7 @@ public class ReducedDeformableBody extends PhysicsSoftBody {
     // PhysicsSoftBody methods
 
     /**
-     * Create a new, empty btReducedDeformableBody for this
+     * Create an empty {@code btReducedDeformableBody} for this
      * ReducedDeformableBody, using the pre-existing worldInfo. The pre-existing
      * btReducedDeformableBody (if any) will be destroyed.
      */

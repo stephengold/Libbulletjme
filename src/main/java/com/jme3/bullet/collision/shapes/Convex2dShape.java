@@ -140,7 +140,7 @@ public class Convex2dShape extends ConvexShape {
     // Java private methods
 
     /**
-     * Instantiate an empty btConvex2dShape.
+     * Instantiate an empty {@code btConvex2dShape}.
      */
     private void createShape() {
         long childId = base.nativeId();

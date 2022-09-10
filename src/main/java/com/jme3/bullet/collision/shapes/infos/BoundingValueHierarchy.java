@@ -38,7 +38,7 @@ import jme3utilities.Validate;
 
 /**
  * A Bounding-Value Hierarchy (BVH) generated for a MeshCollisionShape, based on
- * Bullet's btOptimizedBvh.
+ * Bullet's {@code btOptimizedBvh}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

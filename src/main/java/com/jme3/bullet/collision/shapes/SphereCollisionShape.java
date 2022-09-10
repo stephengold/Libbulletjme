@@ -40,8 +40,8 @@ import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
 
 /**
- * A spherical CollisionShape based on Bullet's btSphereShape. These shapes have
- * no margin and can only be scaled uniformly.
+ * A spherical collision shape based on Bullet's {@code btSphereShape}. These
+ * shapes have no margin and can only be scaled uniformly.
  *
  * @author normenhansen
  * @see MultiSphere
@@ -59,7 +59,7 @@ public class SphereCollisionShape extends ConvexShape {
     // fields
 
     /**
-     * copy of the unscaled radius (&ge;0)
+     * copy of the unscaled radius (in shape units, &ge;0)
      */
     final private float radius;
     // *************************************************************************
@@ -90,7 +90,7 @@ public class SphereCollisionShape extends ConvexShape {
     /**
      * Instantiate a sphere shape with the specified radius.
      *
-     * @param radius the desired unscaled radius (&ge;0)
+     * @param radius the desired unscaled radius (in shape units, &ge;0)
      */
     public SphereCollisionShape(float radius) {
         Validate.nonNegative(radius, "radius");
@@ -164,7 +164,7 @@ public class SphereCollisionShape extends ConvexShape {
     // Java private methods
 
     /**
-     * Instantiate the configured btSphereShape.
+     * Instantiate the configured {@code btSphereShape}.
      */
     private void createShape() {
         assert radius >= 0f : radius;
