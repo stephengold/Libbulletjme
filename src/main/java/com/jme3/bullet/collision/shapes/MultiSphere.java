@@ -77,9 +77,7 @@ public class MultiSphere extends ConvexShape {
 
         this.centers = new Vector3f[1];
         centers[0] = new Vector3f(0f, 0f, 0f);
-
-        radii = new float[1];
-        radii[0] = radius;
+        this.radii = new float[]{radius};
 
         createShape();
     }
@@ -101,9 +99,7 @@ public class MultiSphere extends ConvexShape {
         centers[0] = new Vector3f(0f, halfHeight, 0f);
         centers[1] = new Vector3f(0f, -halfHeight, 0f);
 
-        radii = new float[2];
-        radii[0] = radius;
-        radii[1] = radius;
+        this.radii = new float[]{radius, radius};
 
         createShape();
     }
@@ -142,9 +138,7 @@ public class MultiSphere extends ConvexShape {
                 throw new IllegalArgumentException("axisIndex = " + axisIndex);
         }
 
-        radii = new float[2];
-        radii[0] = radius;
-        radii[1] = radius;
+        this.radii = new float[]{radius, radius};
 
         createShape();
     }
@@ -192,8 +186,8 @@ public class MultiSphere extends ConvexShape {
         this.centers = new Vector3f[1];
         centers[0] = center.clone();
 
-        radii = new float[1];
-        radii[0] = radius;
+        this.radii = new float[]{radius};
+
 
         createShape();
     }
