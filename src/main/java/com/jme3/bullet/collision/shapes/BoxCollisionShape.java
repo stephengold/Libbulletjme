@@ -40,8 +40,8 @@ import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
 
 /**
- * An axis-aligned, rectangular-solid CollisionShape based on Bullet's
- * btBoxShape. For a rectangle, use Box2dShape.
+ * An axis-aligned, rectangular-solid collision shape based on Bullet's
+ * {@code btBoxShape}. For a rectangle, use Box2dShape.
  *
  * @author normenhansen
  */
@@ -58,7 +58,8 @@ public class BoxCollisionShape extends ConvexShape {
     // fields
 
     /**
-     * copy of the unscaled half extents (not null, no negative component)
+     * copy of the unscaled half extents (in shape units, not null, no negative
+     * component)
      */
     final private Vector3f halfExtents = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
@@ -67,8 +68,8 @@ public class BoxCollisionShape extends ConvexShape {
     /**
      * Instantiate a cube-shaped box with the specified half extent.
      *
-     * @param halfExtent the desired unscaled half extent on each local axis
-     * (not negative)
+     * @param halfExtent the desired half extent on each local axis (in shape
+     * units, not negative)
      */
     public BoxCollisionShape(float halfExtent) {
         Validate.nonNegative(halfExtent, "half extent");
@@ -80,12 +81,12 @@ public class BoxCollisionShape extends ConvexShape {
     /**
      * Instantiate a box shape with the specified half extents.
      *
-     * @param xHalfExtent the desired unscaled half extent on the local X axis
-     * (not negative)
-     * @param yHalfExtent the desired unscaled half extent on the local Y axis
-     * (not negative)
-     * @param zHalfExtent the desired unscaled half extent on the local Z axis
-     * (not negative)
+     * @param xHalfExtent the desired half extent on the local X axis (in shape
+     * units, not negative)
+     * @param yHalfExtent the desired half extent on the local Y axis (in shape
+     * units, not negative)
+     * @param zHalfExtent the desired half extent on the local Z axis (in shape
+     * units, not negative)
      */
     public BoxCollisionShape(float xHalfExtent, float yHalfExtent,
             float zHalfExtent) {
@@ -122,7 +123,7 @@ public class BoxCollisionShape extends ConvexShape {
     /**
      * Instantiate a box shape with the specified half extents.
      *
-     * @param halfExtents the desired unscaled half extents (not null, no
+     * @param halfExtents the desired half extents (in shape units, not null, no
      * negative component, unaffected)
      */
     public BoxCollisionShape(Vector3f halfExtents) {
@@ -156,7 +157,7 @@ public class BoxCollisionShape extends ConvexShape {
     /**
      * Calculate how far the box extends from its center.
      *
-     * @return a distance (in physics-space units, &ge;0)
+     * @return the distance (in physics-space units, &ge;0)
      */
     @Override
     public float maxRadius() {
@@ -171,7 +172,7 @@ public class BoxCollisionShape extends ConvexShape {
     // Java private methods
 
     /**
-     * Instantiate the configured btBoxShape.
+     * Instantiate the configured {@code btBoxShape}.
      */
     private void createShape() {
         assert MyVector3f.isAllNonNegative(halfExtents) : halfExtents;

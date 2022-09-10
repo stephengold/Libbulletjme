@@ -44,8 +44,8 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A CollisionShape formed by combining child shapes, based on Bullet's
- * btCompoundShape.
+ * A collision shape formed by combining child shapes, based on Bullet's
+ * {@code btCompoundShape}.
  *
  * @author normenhansen
  */
@@ -463,7 +463,8 @@ public class CompoundCollisionShape extends CollisionShape {
     // Java private methods
 
     /**
-     * Instantiate an empty btCompoundShape with the specified initial capacity.
+     * Instantiate an empty {@code btCompoundShape} with the specified initial
+     * capacity.
      *
      * @param initialCapacity the number of children to allocate (&gt;0)
      */
@@ -480,7 +481,7 @@ public class CompoundCollisionShape extends CollisionShape {
     }
 
     /**
-     * Add the configured children to the empty btCompoundShape.
+     * Add the configured children to the empty {@code btCompoundShape}.
      */
     private void loadChildren() {
         long parentId = nativeId();

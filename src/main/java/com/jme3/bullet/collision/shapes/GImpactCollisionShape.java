@@ -37,7 +37,7 @@ import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 
 /**
- * A mesh CollisionShape based on Bullet's btGImpactMeshShape.
+ * A mesh collisions shape based on Bullet's {@code btGImpactMeshShape}.
  *
  * @author normenhansen
  */
@@ -114,7 +114,7 @@ public class GImpactCollisionShape extends CollisionShape {
     // Java private methods
 
     /**
-     * Instantiate the configured btGImpactMeshShape.
+     * Instantiate the configured {@code btGImpactMeshShape}.
      */
     private void createShape() {
         long meshId = nativeMesh.nativeId();

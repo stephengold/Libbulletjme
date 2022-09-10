@@ -102,7 +102,7 @@ public class SphereCollisionShape extends ConvexShape {
     // new methods exposed
 
     /**
-     * Determine the collision margin for this shape.
+     * Return the collision margin for this shape.
      *
      * @return the margin distance (in physics-space units, &ge;0)
      */
@@ -112,9 +112,9 @@ public class SphereCollisionShape extends ConvexShape {
     }
 
     /**
-     * Read the radius of the sphere.
+     * Return the radius of the sphere.
      *
-     * @return the unscaled radius (&ge;0)
+     * @return the unscaled radius (in shape units, &ge;0)
      */
     public float getRadius() {
         assert radius >= 0f : radius;

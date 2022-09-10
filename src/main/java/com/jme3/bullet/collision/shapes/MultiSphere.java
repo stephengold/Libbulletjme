@@ -38,8 +38,8 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * A convex CollisionShape based on Bullet's btMultiSphereShape. Unlike a
- * CapsuleCollisionShape or a SphereCollisionShape, these shapes have margins
+ * A convex collision shape based on Bullet's {@code btMultiSphereShape}. Unlike
+ * a CapsuleCollisionShape or a SphereCollisionShape, these shapes have margins
  * and can be scaled non-uniformly.
  *
  * @author Stephen Gold sgold@sonic.net
@@ -57,11 +57,11 @@ public class MultiSphere extends ConvexShape {
     // fields
 
     /**
-     * copies of the unscaled radii (each &ge;0)
+     * copies of the unscaled radii (in shape units, each &ge;0)
      */
     final private float[] radii;
     /**
-     * copies of center locations
+     * copies of the center locations (in shape coordinates)
      */
     final private Vector3f[] centers;
     // *************************************************************************
@@ -70,7 +70,7 @@ public class MultiSphere extends ConvexShape {
     /**
      * Instantiate a centered sphere shape with the specified radius.
      *
-     * @param radius the desired unscaled radius (&ge;0)
+     * @param radius the desired radius (in shape units, &ge;0)
      */
     public MultiSphere(float radius) {
         Validate.nonNegative(radius, "radius");
@@ -88,9 +88,9 @@ public class MultiSphere extends ConvexShape {
      * Instantiate a centered Y-axis capsule shape with the specified radius and
      * height.
      *
-     * @param radius the desired unscaled radius (&ge;0)
-     * @param height the desired unscaled height of the cylindrical portion
-     * (&ge;0)
+     * @param radius the desired radius (in shape units, &ge;0)
+     * @param height the desired height of the cylindrical portion (in shape
+     * units, &ge;0)
      */
     public MultiSphere(float radius, float height) {
         Validate.nonNegative(radius, "radius");
@@ -113,9 +113,9 @@ public class MultiSphere extends ConvexShape {
      * Instantiate a centered capsule shape with the specified radius, height,
      * and axis.
      *
-     * @param radius the desired unscaled radius (&ge;0)
-     * @param height the desired unscaled height of the cylindrical portion
-     * (&ge;0)
+     * @param radius the desired radius (in shape units, &ge;0)
+     * @param height the desired height of the cylindrical portion (in shape
+     * units, &ge;0)
      * @param axisIndex which local axis to use for the height: 0&rarr;X,
      * 1&rarr;Y, 2&rarr;Z
      */
@@ -153,8 +153,10 @@ public class MultiSphere extends ConvexShape {
     /**
      * Instantiate a multi-sphere shape with the specified centers and radii.
      *
-     * @param centers the list of center offsets (not null, not empty)
-     * @param radii the list of radii (not null, not empty, each &ge;0)
+     * @param centers the list of center locations (in shape coordinates, not
+     * null, not empty)
+     * @param radii the list of radii (in shape units, not null, not empty, each
+     * &ge;0)
      */
     public MultiSphere(List<Vector3f> centers, List<Float> radii) {
         Validate.nonEmpty(centers, "centers");
@@ -179,8 +181,9 @@ public class MultiSphere extends ConvexShape {
      * Instantiate an eccentric sphere shape with the specified center and
      * radius.
      *
-     * @param center the offset of the center (not null, unaffected)
-     * @param radius the desired unscaled radius (&ge;0)
+     * @param center the location of the center (in shape coordinates, not null,
+     * unaffected)
+     * @param radius the desired radius (in shape units, &ge;0)
      */
     public MultiSphere(Vector3f center, float radius) {
         Validate.finite(center, "center");
@@ -198,12 +201,12 @@ public class MultiSphere extends ConvexShape {
     // new methods exposed
 
     /**
-     * Copy the offset of the center of the indexed sphere.
+     * Copy the location of the center of the indexed sphere.
      *
      * @param sphereIndex which sphere to read (&ge;0)
      * @param storeResult storage for the result (modified if not null)
-     * @return the center offset (either storeResult or a new instance, not
-     * null)
+     * @return the center location (in shape coordinates, either
+     * {@code storeResult} or a new instance, not null)
      */
     public Vector3f copyCenter(int sphereIndex, Vector3f storeResult) {
         Validate.inRange(sphereIndex, "sphere index", 0, radii.length - 1);
@@ -226,7 +229,7 @@ public class MultiSphere extends ConvexShape {
     }
 
     /**
-     * Read the radius of the indexed sphere.
+     * Return the radius of the indexed sphere.
      *
      * @param sphereIndex which sphere to read (&ge;0)
      * @return the unscaled radius (&ge;0)

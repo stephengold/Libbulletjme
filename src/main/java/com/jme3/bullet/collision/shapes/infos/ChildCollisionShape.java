@@ -41,8 +41,10 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * An element of a CompoundCollisionShape, consisting of a (non-compound) child
+ * An element in a CompoundCollisionShape, consisting of a (non-compound) base
  * shape, offset and rotated with respect to its parent.
+ * <p>
+ * Despite its name, it is not a subtype of CollisionShape!
  *
  * @author normenhansen
  */
@@ -74,7 +76,7 @@ public class ChildCollisionShape {
     // constructors
 
     /**
-     * Instantiate a child shape for use in a compound shape.
+     * Instantiate a child for use in a compound shape.
      *
      * @param offset the desired translation in the parent's coordinate system
      * (not null, unaffected)

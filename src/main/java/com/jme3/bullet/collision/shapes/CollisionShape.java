@@ -46,11 +46,11 @@ import jme3utilities.minie.MyShape;
 
 /**
  * The abstract base class for collision shapes based on Bullet's
- * btCollisionShape.
+ * {@code btCollisionShape}.
  * <p>
  * Subclasses include ConvexShape and MeshCollisionShape. As suggested in the
- * Bullet manual, a single CollisionShape can be shared among multiple collision
- * objects.
+ * Bullet manual, a single collision shape can be shared among multiple
+ * collision objects.
  *
  * @author normenhansen
  */
@@ -176,7 +176,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Read the default margin for new shapes that are neither capsules nor
+     * Return the default margin for new shapes that are neither capsules nor
      * spheres.
      *
      * @return the margin distance (in physics-space units, &gt;0)
@@ -187,7 +187,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Read the collision margin for this shape.
+     * Return the collision margin for this shape.
      *
      * @return the margin distance (in physics-space units, &ge;0)
      */
@@ -214,9 +214,9 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Read the type of this shape.
+     * Return the type of this shape.
      *
-     * @return the type value (from enum BroadphaseNativeTypes)
+     * @return the type value (from Bullet's {@code enum BroadphaseNativeTypes})
      */
     public int getShapeType() {
         long shapeId = nativeId();
@@ -421,10 +421,10 @@ abstract public class CollisionShape extends NativePhysicsObject {
     // new protected methods
 
     /**
-     * Read the type of this shape.
+     * Return the type of this shape.
      *
      * @param shapeId the ID of the btCollisionShape (not zero)
-     * @return the type value (from enum BroadphaseNativeTypes)
+     * @return the type value (from Bullet's {@code enum BroadphaseNativeTypes})
      */
     final native protected static int getShapeType(long shapeId);
 
