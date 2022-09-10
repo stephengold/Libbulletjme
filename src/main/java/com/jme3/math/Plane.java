@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2021 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,6 +76,16 @@ public class Plane implements Cloneable, java.io.Serializable {
 
         this.normal.set(normal);
         this.constant = constant;
+    }
+
+    /**
+     * Constructor instantiates a new <code>Plane</code> object.
+     *
+     * @param normal      The normal of the plane.
+     * @param displacement A vector representing a point on the plane.
+     */
+    public Plane(Vector3f normal, Vector3f displacement) {
+        this(normal, displacement.dot(normal));
     }
 
     /**
