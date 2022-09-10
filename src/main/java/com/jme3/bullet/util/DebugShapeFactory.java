@@ -205,10 +205,10 @@ final public class DebugShapeFactory {
         int totalFloats = 0;
 
         for (int childIndex = 0; childIndex < numChildren; ++childIndex) {
-            ChildCollisionShape childShape = children[childIndex];
-            CollisionShape shape = childShape.getShape();
-            childShape.copyTransform(tmpTransform);
-            FloatBuffer buffer = getDebugTriangles(shape, meshResolution);
+            ChildCollisionShape child = children[childIndex];
+            CollisionShape baseShape = child.getShape();
+            child.copyTransform(tmpTransform);
+            FloatBuffer buffer = getDebugTriangles(baseShape, meshResolution);
 
             int numFloats = buffer.capacity();
             MyBuffer.transform(buffer, 0, numFloats, tmpTransform);
@@ -247,10 +247,10 @@ final public class DebugShapeFactory {
         int totalFloats = 0;
 
         for (int childIndex = 0; childIndex < numChildren; ++childIndex) {
-            ChildCollisionShape childShape = children[childIndex];
-            CollisionShape shape = childShape.getShape();
-            childShape.copyTransform(tmpTransform);
-            FloatBuffer buffer = debugVertices(shape, meshResolution);
+            ChildCollisionShape child = children[childIndex];
+            CollisionShape baseShape = child.getShape();
+            child.copyTransform(tmpTransform);
+            FloatBuffer buffer = debugVertices(baseShape, meshResolution);
 
             int numFloats = buffer.capacity();
             MyBuffer.transform(buffer, 0, numFloats, tmpTransform);

@@ -235,8 +235,8 @@ public class CompoundCollisionShape extends CollisionShape {
         int result = -1;
         for (int index = 0; index < children.size(); ++index) {
             ChildCollisionShape ccs = children.get(index);
-            CollisionShape shape = ccs.getShape();
-            if (shape == childShape) {
+            CollisionShape baseShape = ccs.getShape();
+            if (baseShape == childShape) {
                 result = index;
                 break;
             }
@@ -392,8 +392,8 @@ public class CompoundCollisionShape extends CollisionShape {
 
         if (result) {
             for (ChildCollisionShape child : children) {
-                CollisionShape childShape = child.getShape();
-                if (!childShape.canScale(scale)) {
+                CollisionShape baseShape = child.getShape();
+                if (!baseShape.canScale(scale)) {
                     result = false;
                     break;
                 }
@@ -414,11 +414,11 @@ public class CompoundCollisionShape extends CollisionShape {
         Transform tmpTransform = new Transform();
 
         for (ChildCollisionShape child : children) {
-            CollisionShape childShape = child.getShape();
+            CollisionShape baseShape = child.getShape();
             child.copyOffset(tmpTransform.getTranslation());
             tmpTransform.getTranslation().multLocal(scale);
             child.copyRotation(tmpTransform.getRotation());
-            float childRadius = DebugShapeFactory.maxDistance(childShape,
+            float childRadius = DebugShapeFactory.maxDistance(baseShape,
                     tmpTransform, DebugShapeFactory.lowResolution);
             if (childRadius > result) {
                 result = childRadius;
@@ -455,8 +455,8 @@ public class CompoundCollisionShape extends CollisionShape {
          * in synch with the native ones.
          */
         for (ChildCollisionShape child : children) {
-            CollisionShape childShape = child.getShape();
-            childShape.updateScale();
+            CollisionShape baseShape = child.getShape();
+            baseShape.updateScale();
         }
     }
     // *************************************************************************
