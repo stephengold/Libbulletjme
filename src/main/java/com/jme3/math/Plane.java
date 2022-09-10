@@ -121,6 +121,20 @@ public class Plane implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * <code>pseudoDistance</code> calculates the distance from this plane to
+     * a provided point. If the point is on the negative side of the plane the
+     * distance returned is negative, otherwise it is positive. If the point is
+     * on the plane, it is zero.
+     *
+     * @param point
+     *            the point to check.
+     * @return the signed distance from the plane to a point.
+     */
+    public float pseudoDistance(Vector3f point) {
+        return normal.dot(point) - constant;
+    }
+
+    /**
      * <code>toString</code> returns a string representation of this plane.
      * It represents the normal as a <code>Vector3f</code>, so the format is:
      *
