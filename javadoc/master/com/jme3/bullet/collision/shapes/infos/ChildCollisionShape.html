@@ -78,8 +78,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ChildCollisionShape</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">An element of a CompoundCollisionShape, consisting of a (non-compound) child
- shape, offset and rotated with respect to its parent.</div>
+<div class="block">An element in a CompoundCollisionShape, consisting of a (non-compound) base
+ shape, offset and rotated with respect to its parent.
+ <p>
+ Despite its name, it is not a subtype of CollisionShape!</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -112,7 +114,7 @@ loadScripts(document, 'script');</script>
  <a href="../../../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;rotation,
  <a href="../CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a>&nbsp;shape)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate a child shape for use in a compound shape.</div>
+<div class="block">Instantiate a child for use in a compound shape.</div>
 </div>
 </div>
 </section>
@@ -197,7 +199,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ChildCollisionShape</span><wbr><span class="parameters">(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset,
  <a href="../../../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;rotation,
  <a href="../CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a>&nbsp;shape)</span></div>
-<div class="block">Instantiate a child shape for use in a compound shape.</div>
+<div class="block">Instantiate a child for use in a compound shape.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>offset</code> - the desired translation in the parent's coordinate system

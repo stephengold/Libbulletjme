@@ -91,8 +91,8 @@ loadScripts(document, 'script');</script>
 <div class="block">The abstract base class for collision objects based on Bullet's
  btCollisionObject.
  <p>
- Subclasses include <code>MultiBodyCollider</code>, <code>PhysicsBody</code>,
- <code>PhysicsCharacter</code>, and <code>PhysicsGhostObject</code>.</div>
+ Subclasses include MultiBodyCollider, PhysicsBody, PhysicsCharacter, and
+ PhysicsGhostObject.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -263,7 +263,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copyPcoProperties(com.jme3.bullet.collision.PhysicsCollisionObject)" class="member-name-link">copyPcoProperties</a><wbr>(<a href="PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a>&nbsp;old)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy common properties from another <code>PhysicsCollisionObject</code>.</div>
+<div class="block">Copy common properties from another collision object.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countIgnored()" class="member-name-link">countIgnored</a>()</code></div>
@@ -294,7 +294,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCcdMotionThreshold()" class="member-name-link">getCcdMotionThreshold</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Read the continuous collision detection (CCD) motion threshold (native
+<div class="block">Return the continuous collision detection (CCD) motion threshold (native
  field: m_ccdMotionThreshold).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
@@ -316,7 +316,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>protected static int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getCollisionFlags(long)" class="member-name-link">getCollisionFlags</a><wbr>(long&nbsp;objectId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Read the collision flags of this object.</div>
+<div class="block">Return the collision flags of this object.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCollisionGroup()" class="member-name-link">getCollisionGroup</a>()</code></div>
@@ -454,7 +454,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isInWorld()" class="member-name-link">isInWorld</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test whether this object is added to a <code>CollisionSpace</code>.</div>
+<div class="block">Test whether this object is added to a space.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isStatic()" class="member-name-link">isStatic</a>()</code></div>
@@ -604,7 +604,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spaceId()" class="member-name-link">spaceId</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return the ID of the <code>CollisionSpace</code> where this object is added.</div>
+<div class="block">Return the ID of the space where this object is added.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -922,8 +922,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">activate</span><wbr><span class="parameters">(boolean&nbsp;forceFlag)</span></div>
 <div class="block">Reactivate this object if it has been deactivated due to lack of motion.
  <p>
- Deactivation doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>forceFlag</code> - true to force activation</dd>
@@ -951,8 +950,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Add another collision object to this object's ignore list and vice versa.
  <p>
  Any collisions with objects on the list will be ignored. However, the
- wheels of a <code>PhysicsVehicle</code> aren't collision objects, so the
- vehicle's ignore list doesn't affect them.</div>
+ wheels of a PhysicsVehicle aren't collision objects, so the vehicle's
+ ignore list doesn't affect them.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>otherPco</code> - the other collision object (not null, not this, modified)</dd>
@@ -987,7 +986,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="copyPcoProperties(com.jme3.bullet.collision.PhysicsCollisionObject)">
 <h3>copyPcoProperties</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">copyPcoProperties</span><wbr><span class="parameters">(<a href="PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a>&nbsp;old)</span></div>
-<div class="block">Copy common properties from another <code>PhysicsCollisionObject</code>.</div>
+<div class="block">Copy common properties from another collision object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>old</code> - (not null, unaffected)</dd>
@@ -1030,8 +1029,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getActivationState</span>()</div>
 <div class="block">Return this object's activation state (native field: m_activationState1).
  <p>
- Deactivation doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the state (1=active tag, 2=island sleeping, 3=wants deactivation,
@@ -1052,8 +1050,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Copy this object's anisotropic friction components (native field:
  m_anisotropicFriction).
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -1067,11 +1064,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getCcdMotionThreshold()">
 <h3>getCcdMotionThreshold</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getCcdMotionThreshold</span>()</div>
-<div class="block">Read the continuous collision detection (CCD) motion threshold (native
+<div class="block">Return the continuous collision detection (CCD) motion threshold (native
  field: m_ccdMotionThreshold).
  <p>
- CCD doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the minimum distance per timestep to trigger CCD (in
@@ -1085,8 +1081,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getCcdSquareMotionThreshold</span>()</div>
 <div class="block">Return the squared motion threshold.
  <p>
- CCD doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the minimum distance squared (in physics-space units, &ge;0)</dd>
@@ -1100,8 +1095,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Return the radius of the sphere used for continuous collision detection
  (CCD) (native field: m_ccdSweptSphereRadius).
  <p>
- CCD doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the radius (in physics-space units, &ge;0)</dd>
@@ -1158,8 +1152,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getContactDamping</span>()</div>
 <div class="block">Return the contact damping (native field: m_contactDamping).
  <p>
- Contact damping doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Contact damping doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the damping</dd>
@@ -1173,8 +1166,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Return the contact-processing threshold (native field:
  m_contactProcessingThreshold).
  <p>
- Contact processing doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Contact processing doesn't affect a PhysicsCharacter or
+ PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the threshold distance (in physics-space units)</dd>
@@ -1187,8 +1180,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getContactStiffness</span>()</div>
 <div class="block">Return the contact stiffness (native field: m_contactStiffness).
  <p>
- Contact stiffness doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Contact stiffness doesn't affect a PhysicsCharacter or
+ PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the stiffness</dd>
@@ -1201,8 +1194,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getDeactivationTime</span>()</div>
 <div class="block">Return the deactivation time (native field: m_deactivationTime).
  <p>
- Deactivation doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the time (in seconds)</dd>
@@ -1215,8 +1207,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getFriction</span>()</div>
 <div class="block">Return this object's friction parameter (native field: m_friction).
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the parameter value (&ge;0)</dd>
@@ -1301,8 +1292,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Return this object's restitution (bounciness) (native field:
  m_restitution).
  <p>
- Restitution doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Restitution doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>restitution value</dd>
@@ -1315,8 +1305,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">getRollingFriction</span>()</div>
 <div class="block">Return this object's rolling friction (native field: m_rollingFriction).
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>friction value</dd>
@@ -1344,8 +1333,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Return this object's spinning friction (native field:
  m_spinningFriction).
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>friction value</dd>
@@ -1390,8 +1378,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasAnisotropicFriction</span><wbr><span class="parameters">(int&nbsp;mode)</span></div>
 <div class="block">Test whether this object has anisotropic friction.
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mode</code> - the mode(s) to test for: 1=basic anisotropic friction,
@@ -1427,8 +1414,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isActive</span>()</div>
 <div class="block">Test whether this object has been deactivated due to lack of motion.
  <p>
- Deactivation doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if object still active, false if deactivated</dd>
@@ -1451,7 +1437,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isInWorld()">
 <h3>isInWorld</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isInWorld</span>()</div>
-<div class="block">Test whether this object is added to a <code>CollisionSpace</code>.</div>
+<div class="block">Test whether this object is added to a space.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true&rarr;added to a space, false&rarr;not added to a space</dd>
@@ -1492,9 +1478,8 @@ loadScripts(document, 'script');</script>
 <h3>proxyGroup</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">proxyGroup</span>()</div>
 <div class="block">Return the collision group of this object's broadphase proxy. A proxy is
- created when the object is added to a <code>CollisionSpace</code>, and its
- group is 32 for a <code>PhysicsCharacter</code>, 2 for a static object, or 1
- for anything else.</div>
+ created when the object is added to a space, and its group is 32 for a
+ PhysicsCharacter, 2 for a static object, or 1 for anything else.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the proxy's collision group (a bitmask with exactly one bit set)
@@ -1507,8 +1492,8 @@ loadScripts(document, 'script');</script>
 <h3>proxyMask</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a></span>&nbsp;<span class="element-name">proxyMask</span>()</div>
 <div class="block">Return the collision mask of this object's broadphase proxy. A proxy is
- created when the object is added to a <code>CollisionSpace</code>, and its
- mask is -3 for a static object or -1 for anything else.</div>
+ created when the object is added to a space, and its mask is -3 for a
+ static object or -1 for anything else.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the proxy's bitmask, or null if this object has no proxy</dd>
@@ -1545,8 +1530,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter this object's anisotropic friction (native field:
  m_anisotropicFriction).
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>components</code> - the desired friction components (not null, unaffected,
@@ -1566,8 +1550,7 @@ loadScripts(document, 'script');</script>
  CCD addresses the issue of fast objects passing through other objects
  with no collision detected.
  <p>
- CCD doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>threshold</code> - the desired minimum distance per timestep to trigger CCD
@@ -1582,8 +1565,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter the continuous collision detection (CCD) swept-sphere radius for
  this object (native field: m_ccdSweptSphereRadius).
  <p>
- CCD doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>radius</code> - (in physics-space units, &ge;0, default=0)</dd>
@@ -1609,7 +1591,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter which collision group this object belongs to.
  <p>
  Groups are represented by bitmasks with exactly one bit set. Manifest
- constants are defined in <code>PhysicsCollisionObject</code>.
+ constants are defined in PhysicsCollisionObject.
  <p>
  Two objects can collide only if one of them has the collisionGroup of the
  other in its collideWithGroups set.</div>
@@ -1637,8 +1619,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setContactDamping</span><wbr><span class="parameters">(float&nbsp;damping)</span></div>
 <div class="block">Alter the contact damping (native field: m_contactDamping).
  <p>
- Contact damping doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Contact damping doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>damping</code> - the desired damping (default=0.1)</dd>
@@ -1652,8 +1633,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter the contact-processing threshold (native field:
  m_contactProcessingThreshold).
  <p>
- Contact processing doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Contact processing doesn't affect a PhysicsCharacter or
+ PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>distance</code> - the desired threshold distance (in physics-space units,
@@ -1667,8 +1648,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setContactStiffness</span><wbr><span class="parameters">(float&nbsp;stiffness)</span></div>
 <div class="block">Alter the contact stiffness (native field: m_contactStiffness).
  <p>
- Contact stiffness doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Contact stiffness doesn't affect a PhysicsCharacter or
+ PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>stiffness</code> - the desired stiffness (default=1e18 with SP library or
@@ -1682,8 +1663,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDeactivationTime</span><wbr><span class="parameters">(float&nbsp;time)</span></div>
 <div class="block">Alter the deactivation time (native field: m_deactivationTime).
  <p>
- Deactivation doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>time</code> - the desired time (in seconds, default=0)</dd>
@@ -1696,8 +1676,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setFriction</span><wbr><span class="parameters">(float&nbsp;friction)</span></div>
 <div class="block">Alter this object's friction (native field: m_friction).
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>friction</code> - the desired friction value (&ge;0, default=0.5)</dd>
@@ -1723,8 +1702,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter this object's restitution (bounciness) (native field:
  m_restitution). For perfect elasticity, set restitution=1.
  <p>
- Restitution doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Restitution doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>restitution</code> - the desired value (default=0)</dd>
@@ -1739,8 +1717,7 @@ loadScripts(document, 'script');</script>
  the contact normal (native field: m_rollingFriction). Use this to stop
  bodies from rolling.
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>friction</code> - the desired friction value (default=0)</dd>
@@ -1754,8 +1731,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter this object's spinning friction: torsional friction around the
  contact normal (native field: m_spinningFriction). Use for grasping.
  <p>
- Friction doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>friction</code> - the desired friction value (default=0)</dd>
@@ -1783,7 +1759,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="spaceId()">
 <h3>spaceId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">spaceId</span>()</div>
-<div class="block">Return the ID of the <code>CollisionSpace</code> where this object is added.</div>
+<div class="block">Return the ID of the space where this object is added.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the ID, or zero if not added to any space</dd>
@@ -1819,7 +1795,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getCollisionFlags(long)">
 <h3>getCollisionFlags</h3>
 <div class="member-signature"><span class="modifiers">protected static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCollisionFlags</span><wbr><span class="parameters">(long&nbsp;objectId)</span></div>
-<div class="block">Read the collision flags of this object. Flag values are defined in
+<div class="block">Return the collision flags of this object. Flag values are defined in
  <a href="CollisionFlag.html" title="class in com.jme3.bullet.collision"><code>CollisionFlag</code></a>. Native method.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -1864,8 +1840,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;desiredState)</span></div>
 <div class="block">Alter the activation state of this object. Native method.
  <p>
- Deactivation doesn't affect a <code>PhysicsCharacter</code> or
- <code>PhysicsGhostObject</code>.</div>
+ Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>objectId</code> - the ID of the btCollisionObject (not zero)</dd>
