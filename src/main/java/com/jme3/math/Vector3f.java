@@ -282,6 +282,24 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Right multiplies by the specified components (cross product) and returns
+     * the (modified) current instance.
+     *
+     * @param otherX the X component of the right factor
+     * @param otherY the Y component of the right factor
+     * @param otherZ the Z component of the right factor
+     * @return the (modified) current instance (for chaining)
+     */
+    public Vector3f crossLocal(float otherX, float otherY, float otherZ) {
+        float tempx = (y * otherZ) - (z * otherY);
+        float tempy = (z * otherX) - (x * otherZ);
+        z = (x * otherY) - (y * otherX);
+        x = tempx;
+        y = tempy;
+        return this;
+    }
+
+    /**
      * Tests for a unit vector, with 1% tolerance. The current instance is
      * unaffected.
      *
