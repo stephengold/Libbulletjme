@@ -102,16 +102,6 @@ public class SphereCollisionShape extends ConvexShape {
     // new methods exposed
 
     /**
-     * Return the collision margin for this shape.
-     *
-     * @return the margin distance (in physics-space units, &ge;0)
-     */
-    @Override
-    public float getMargin() {
-        return 0f;
-    }
-
-    /**
      * Return the radius of the sphere.
      *
      * @return the unscaled radius (in shape units, &ge;0)
@@ -136,6 +126,16 @@ public class SphereCollisionShape extends ConvexShape {
         boolean canScale
                 = super.canScale(scale) && MyVector3f.isScaleUniform(scale);
         return canScale;
+    }
+
+    /**
+     * Return the collision margin for this shape.
+     *
+     * @return the margin distance (in physics-space units, &ge;0)
+     */
+    @Override
+    public float getMargin() {
+        return 0f;
     }
 
     /**
