@@ -277,7 +277,7 @@ public class HullCollisionShape extends ConvexShape {
         return result;
     }
     // *************************************************************************
-    // CollisionShape methods
+    // ConvexShape methods
 
     /**
      * Calculate how far this shape extends from its center, including margin.

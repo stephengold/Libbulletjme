@@ -242,7 +242,7 @@ public class MultiSphere extends ConvexShape {
         return radius;
     }
     // *************************************************************************
-    // CollisionShape methods
+    // ConvexShape methods
 
     /**
      * Recalculate this shape's bounding box if necessary.

@@ -152,7 +152,7 @@ public class BoxCollisionShape extends ConvexShape {
         }
     }
     // *************************************************************************
-    // CollisionShape methods
+    // ConvexShape methods
 
     /**
      * Calculate how far the box extends from its center.
