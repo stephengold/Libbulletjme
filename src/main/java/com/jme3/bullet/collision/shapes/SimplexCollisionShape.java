@@ -90,7 +90,7 @@ public class SimplexCollisionShape extends ConvexShape {
      * null, unaffected)
      */
     public SimplexCollisionShape(Vector3f point1, Vector3f point2) {
-        locations = new Vector3f[2];
+        this.locations = new Vector3f[2];
         locations[0] = point1.clone();
         locations[1] = point2.clone();
         createShape();
@@ -108,7 +108,7 @@ public class SimplexCollisionShape extends ConvexShape {
      */
     public SimplexCollisionShape(Vector3f vertex1, Vector3f vertex2,
             Vector3f vertex3) {
-        locations = new Vector3f[3];
+        this.locations = new Vector3f[3];
         locations[0] = vertex1.clone();
         locations[1] = vertex2.clone();
         locations[2] = vertex3.clone();
@@ -129,7 +129,7 @@ public class SimplexCollisionShape extends ConvexShape {
      */
     public SimplexCollisionShape(Vector3f vertex1, Vector3f vertex2,
             Vector3f vertex3, Vector3f vertex4) {
-        locations = new Vector3f[4];
+        this.locations = new Vector3f[4];
         locations[0] = vertex1.clone();
         locations[1] = vertex2.clone();
         locations[2] = vertex3.clone();
@@ -160,7 +160,7 @@ public class SimplexCollisionShape extends ConvexShape {
         assert numVertices >= 1 : numVertices;
         assert numVertices <= 4 : numVertices;
 
-        locations = new Vector3f[numVertices];
+        this.locations = new Vector3f[numVertices];
         for (int vertexIndex = 0; vertexIndex < numVertices; ++vertexIndex) {
             locations[vertexIndex] = new Vector3f();
             MyBuffer.get(buffer, startPosition + vertexIndex * numAxes,

@@ -85,7 +85,7 @@ public class CompoundCollisionShape extends CollisionShape {
      * dynamic AABB, and no children).
      */
     public CompoundCollisionShape() {
-        children = new ArrayList<>(defaultCapacity);
+        this.children = new ArrayList<>(defaultCapacity);
         createEmpty(defaultCapacity);
     }
 
@@ -99,7 +99,7 @@ public class CompoundCollisionShape extends CollisionShape {
     public CompoundCollisionShape(int initialCapacity) {
         Validate.positive(initialCapacity, "initial capacity");
 
-        children = new ArrayList<>(initialCapacity);
+        this.children = new ArrayList<>(initialCapacity);
         createEmpty(initialCapacity);
     }
     // *************************************************************************

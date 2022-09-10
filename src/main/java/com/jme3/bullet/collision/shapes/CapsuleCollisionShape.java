@@ -212,7 +212,7 @@ public class CapsuleCollisionShape extends ConvexShape {
 
         setContactFilterEnabled(enableContactFilter);
         setScale(scale);
-        margin = 0f;
+        this.margin = 0f;
     }
     // *************************************************************************
     // native private methods

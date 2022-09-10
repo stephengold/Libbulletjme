@@ -174,9 +174,9 @@ public class HeightfieldCollisionShape extends CollisionShape {
         Validate.nonNegative(scale, "scale");
         Validate.axisIndex(upAxis, "up axis");
 
-        heightStickLength = stickLength;
-        heightStickWidth = stickWidth;
-        heightfieldData = heightmap.clone();
+        this.heightStickLength = stickLength;
+        this.heightStickWidth = stickWidth;
+        this.heightfieldData = heightmap.clone();
         this.scale.set(scale);
         this.upAxis = upAxis;
         this.flipQuadEdges = flipQuadEdges;
@@ -236,8 +236,8 @@ public class HeightfieldCollisionShape extends CollisionShape {
         } else {
             max = -min;
         }
-        minHeight = min;
-        maxHeight = max;
+        this.minHeight = min;
+        this.maxHeight = max;
     }
 
     /**
@@ -252,11 +252,11 @@ public class HeightfieldCollisionShape extends CollisionShape {
             createCollisionHeightfield(float[] heightmap, Vector3f worldScale) {
         scale.set(worldScale);
 
-        heightfieldData = heightmap.clone();
-        heightStickWidth = (int) FastMath.sqrt(heightfieldData.length);
+        this.heightfieldData = heightmap.clone();
+        this.heightStickWidth = (int) FastMath.sqrt(heightfieldData.length);
         assert heightStickWidth > 1 : heightStickWidth;
 
-        heightStickLength = heightStickWidth;
+        this.heightStickLength = heightStickWidth;
 
         calculateMinAndMax();
         createShape();
@@ -266,7 +266,8 @@ public class HeightfieldCollisionShape extends CollisionShape {
      * Instantiate the configured btHeightfieldTerrainShape.
      */
     private void createShape() {
-        directBuffer = BufferUtils.createFloatBuffer(heightfieldData.length);
+        this.directBuffer
+                = BufferUtils.createFloatBuffer(heightfieldData.length);
         for (float height : heightfieldData) {
             if (!MyMath.isFinite(height)) {
                 throw new IllegalArgumentException("illegal height: " + height);

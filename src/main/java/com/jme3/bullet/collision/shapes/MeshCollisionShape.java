@@ -85,7 +85,7 @@ public class MeshCollisionShape extends CollisionShape {
     public MeshCollisionShape(
             boolean useCompression, Collection<IndexedMesh> meshes) {
         Validate.nonEmpty(meshes, "meshes");
-        nativeMesh = new CompoundMesh();
+        this.nativeMesh = new CompoundMesh();
         for (IndexedMesh submesh : meshes) {
             nativeMesh.add(submesh);
         }
@@ -106,7 +106,7 @@ public class MeshCollisionShape extends CollisionShape {
     public MeshCollisionShape(boolean useCompression,
             IndexedMesh... submeshes) {
         Validate.nonEmpty(submeshes, "submeshes");
-        nativeMesh = new CompoundMesh();
+        this.nativeMesh = new CompoundMesh();
         for (IndexedMesh submesh : submeshes) {
             nativeMesh.add(submesh);
         }
@@ -128,15 +128,15 @@ public class MeshCollisionShape extends CollisionShape {
     public MeshCollisionShape(byte[] bvhBytes, IndexedMesh... submeshes) {
         Validate.nonNull(bvhBytes, "BVH data");
         Validate.nonEmpty(submeshes, "submeshes");
-        nativeMesh = new CompoundMesh();
+        this.nativeMesh = new CompoundMesh();
         for (IndexedMesh submesh : submeshes) {
             nativeMesh.add(submesh);
         }
         Validate.require(nativeMesh.countTriangles() > 0,
                 "at least one triangle");
 
-        useCompression = true;
-        bvh = new BoundingValueHierarchy(bvhBytes);
+        this.useCompression = true;
+        this.bvh = new BoundingValueHierarchy(bvhBytes);
         createShape();
     }
     // *************************************************************************

@@ -66,7 +66,7 @@ public class GImpactCollisionShape extends CollisionShape {
      * @param submeshes the mesh(es) on which to base the shape (not null)
      */
     public GImpactCollisionShape(IndexedMesh... submeshes) {
-        nativeMesh = new CompoundMesh();
+        this.nativeMesh = new CompoundMesh();
         for (IndexedMesh submesh : submeshes) {
             nativeMesh.add(submesh);
         }

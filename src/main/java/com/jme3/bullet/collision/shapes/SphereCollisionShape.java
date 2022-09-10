@@ -83,7 +83,7 @@ public class SphereCollisionShape extends ConvexShape {
         Validate.inRange(endPosition, "end position", startPosition,
                 buffer.capacity());
 
-        radius = MyBuffer.maxLength(buffer, startPosition, endPosition);
+        this.radius = MyBuffer.maxLength(buffer, startPosition, endPosition);
         createShape();
     }
 
@@ -174,7 +174,7 @@ public class SphereCollisionShape extends ConvexShape {
 
         setContactFilterEnabled(enableContactFilter);
         setScale(scale);
-        margin = 0f;
+        this.margin = 0f;
     }
     // *************************************************************************
     // native private methods

@@ -82,7 +82,7 @@ public class CylinderCollisionShape extends ConvexShape {
         Validate.nonNegative(height, "height");
         Validate.axisIndex(axisIndex, "axis index");
 
-        axis = axisIndex;
+        this.axis = axisIndex;
         halfExtents.set(radius, radius, radius);
         halfExtents.set(axisIndex, height / 2f);
         createShape();
@@ -109,7 +109,7 @@ public class CylinderCollisionShape extends ConvexShape {
                 endPosition, "end position", startPosition, buffer.capacity());
         Validate.axisIndex(axisIndex, "axis index");
 
-        axis = axisIndex;
+        this.axis = axisIndex;
         MyBuffer.maxAbs(buffer, startPosition, endPosition, halfExtents);
         float halfHeight = halfExtents.get(axisIndex);
 
@@ -130,7 +130,7 @@ public class CylinderCollisionShape extends ConvexShape {
         Validate.nonNegative(halfExtents, "half extents");
 
         this.halfExtents.set(halfExtents);
-        axis = PhysicsSpace.AXIS_Z;
+        this.axis = PhysicsSpace.AXIS_Z;
         createShape();
     }
 

@@ -75,7 +75,7 @@ public class MultiSphere extends ConvexShape {
     public MultiSphere(float radius) {
         Validate.nonNegative(radius, "radius");
 
-        centers = new Vector3f[1];
+        this.centers = new Vector3f[1];
         centers[0] = new Vector3f(0f, 0f, 0f);
 
         radii = new float[1];
@@ -97,8 +97,7 @@ public class MultiSphere extends ConvexShape {
         Validate.nonNegative(height, "height");
 
         float halfHeight = height / 2f;
-
-        centers = new Vector3f[2];
+        this.centers = new Vector3f[2];
         centers[0] = new Vector3f(0f, halfHeight, 0f);
         centers[1] = new Vector3f(0f, -halfHeight, 0f);
 
@@ -125,7 +124,7 @@ public class MultiSphere extends ConvexShape {
 
         float halfHeight = height / 2f;
 
-        centers = new Vector3f[2];
+        this.centers = new Vector3f[2];
         switch (axisIndex) {
             case PhysicsSpace.AXIS_X:
                 centers[0] = new Vector3f(halfHeight, 0f, 0f);
@@ -189,7 +188,7 @@ public class MultiSphere extends ConvexShape {
         Validate.finite(center, "center");
         Validate.nonNegative(radius, "radius");
 
-        centers = new Vector3f[1];
+        this.centers = new Vector3f[1];
         centers[0] = center.clone();
 
         radii = new float[1];
