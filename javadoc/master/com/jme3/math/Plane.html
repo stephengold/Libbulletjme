@@ -133,6 +133,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last even-row-color">
 <div class="block">Constructor instantiates a new <code>Plane</code> object.</div>
 </div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">Plane</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;normal,
+ <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;displacement)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Constructor instantiates a new <code>Plane</code> object.</div>
+</div>
 </div>
 </section>
 </li>
@@ -168,9 +173,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block"><code>getNormal</code> retrieves the normal of the plane.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pseudoDistance(com.jme3.math.Vector3f)" class="member-name-link">pseudoDistance</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;point)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block"><code>pseudoDistance</code> calculates the distance from this plane to
+ a provided point.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block"><code>toString</code> returns a string representation of this plane.</div>
 </div>
 </div>
@@ -226,6 +237,19 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>Plane</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Plane</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;normal,
+ <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;displacement)</span></div>
+<div class="block">Constructor instantiates a new <code>Plane</code> object.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>normal</code> - The normal of the plane.</dd>
+<dd><code>displacement</code> - A vector representing a point on the plane.</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -268,6 +292,22 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>store</code> - storage for the result (not null, modified)</dd>
 <dt>Returns:</dt>
 <dd>the location of the nearest point (store)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="pseudoDistance(com.jme3.math.Vector3f)">
+<h3>pseudoDistance</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">pseudoDistance</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;point)</span></div>
+<div class="block"><code>pseudoDistance</code> calculates the distance from this plane to
+ a provided point. If the point is on the negative side of the plane the
+ distance returned is negative, otherwise it is positive. If the point is
+ on the plane, it is zero.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>point</code> - the point to check.</dd>
+<dt>Returns:</dt>
+<dd>the signed distance from the plane to a point.</dd>
 </dl>
 </section>
 </li>
