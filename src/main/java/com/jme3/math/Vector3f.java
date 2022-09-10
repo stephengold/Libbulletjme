@@ -420,6 +420,22 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Multiplies component-wise with the argument and returns the product as a
+     * new instance. If the argument is null, null is returned. Either way, the
+     * current instance is unaffected.
+     *
+     * @param vec the scale vector (unaffected) or null for none
+     * @return a new Vector3f or null
+     */
+    public Vector3f mult(Vector3f vec) {
+        if (null == vec) {
+            logger.warning("Provided vector is null, null returned.");
+            return null;
+        }
+        return mult(vec, null);
+    }
+
+    /**
      * Multiplies component-wise by the specified components and returns the
      * product as a new instance. The current instance is unaffected.
      *
