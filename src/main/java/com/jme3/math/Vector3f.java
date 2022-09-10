@@ -352,6 +352,26 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Multiplies with the specified scalar and returns the product in the
+     * specified vector. The current instance is unaffected, unless it's
+     * <code>product</code>.
+     *
+     * @param scalar the scaling factor
+     * @param product storage for the product, or null for a new Vector3f
+     * @return either <code>product</code> or a new Vector3f
+     */
+    public Vector3f mult(float scalar, Vector3f product) {
+        if (null == product) {
+            product = new Vector3f();
+        }
+
+        product.x = x * scalar;
+        product.y = y * scalar;
+        product.z = z * scalar;
+        return product;
+    }
+
+    /**
      * Multiplies by the argument and returns the (modified) current instance.
      *
      * @param scalar the scaling factor
