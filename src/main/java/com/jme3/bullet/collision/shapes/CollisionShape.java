@@ -64,9 +64,17 @@ abstract public class CollisionShape extends NativePhysicsObject {
     final public static Logger logger
             = Logger.getLogger(CollisionShape.class.getName());
     /**
+     * local copy of {@link com.jme3.math.Quaternion#IDENTITY}
+     */
+    final private static Quaternion rotateIdentity = new Quaternion();
+    /**
      * local copy of {@link com.jme3.math.Transform#IDENTITY}
      */
     final private static Transform transformIdentity = new Transform();
+    /**
+     * local copy of {@link com.jme3.math.Vector3f#ZERO}
+     */
+    final private static Vector3f translateIdentity = new Vector3f(0f, 0f, 0f);
     // *************************************************************************
     // fields
 
@@ -98,6 +106,22 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Return the center of the shape's axis-aligned bounding box in local
+     * coordinates.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a location in the local coordinate system (either
+     * {@code storeResult} or a new vector)
+     */
+    public Vector3f aabbCenter(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        BoundingBox aabb = boundingBox(translateIdentity, rotateIdentity, null);
+        aabb.getCenter(result);
+
+        return result;
+    }
 
     /**
      * Calculate an axis-aligned bounding box for this shape with the specified
