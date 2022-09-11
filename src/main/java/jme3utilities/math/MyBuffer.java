@@ -26,6 +26,7 @@
  */
 package jme3utilities.math;
 
+import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
@@ -67,7 +68,69 @@ final public class MyBuffer {
     // new methods exposed
 
     /**
-     * Find the the radius of a bounding cylinder for the specified FloatBuffer
+     * Return the sample covariance of 3-D vectors in the specified FloatBuffer
+     * range.
+     *
+     * @param buffer the buffer that contains the vectors (not null, unaffected)
+     * @param startPosition the position at which the vectors start (&ge;0,
+     * &le;endPosition-6)
+     * @param endPosition the position at which the vectors end
+     * (&ge;startPosition+6, &le;capacity)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the unbiased sample covariance (either storeResult or a new
+     * matrix, not null)
+     */
+    public static Matrix3f covariance(FloatBuffer buffer, int startPosition,
+            int endPosition, Matrix3f storeResult) {
+        Validate.nonNull(buffer, "buffer");
+        Validate.inRange(startPosition, "start position", 0,
+                endPosition - 2 * numAxes);
+        Validate.inRange(endPosition, "end position",
+                startPosition + 2 * numAxes, buffer.capacity());
+        Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
+        int numFloats = endPosition - startPosition;
+        assert (numFloats % numAxes == 0) : numFloats;
+
+        int numVectors = numFloats / numAxes;
+        Vector3f sampleMean = mean(buffer, startPosition, endPosition, null);
+
+        // Accumulate sums in the upper triangle of the matrix.
+        result.zero();
+        float[] aboveMean = new float[numAxes];
+        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
+            int position = startPosition + vectorIndex * numAxes;
+
+            float x = buffer.get(position + MyVector3f.xAxis);
+            float y = buffer.get(position + MyVector3f.yAxis);
+            float z = buffer.get(position + MyVector3f.zAxis);
+            aboveMean[0] = x - sampleMean.x;
+            aboveMean[1] = y - sampleMean.y;
+            aboveMean[2] = z - sampleMean.z;
+            for (int rowIndex = 0; rowIndex < numAxes; ++rowIndex) {
+                for (int colIndex = rowIndex; colIndex < numAxes; ++colIndex) {
+                    float sum = result.get(rowIndex, colIndex);
+                    sum += aboveMean[rowIndex] * aboveMean[colIndex];
+                    result.set(rowIndex, colIndex, sum);
+                }
+            }
+        }
+
+        // Multiply sums by 1/(N-1) and fill in the lower triangle.
+        float nMinus1 = numVectors - 1;
+        for (int rowIndex = 0; rowIndex < numAxes; ++rowIndex) {
+            for (int colIndex = rowIndex; colIndex < numAxes; ++colIndex) {
+                float sum = result.get(rowIndex, colIndex);
+                float element = sum / nMinus1;
+                result.set(rowIndex, colIndex, element);
+                result.set(colIndex, rowIndex, element);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Return the radius of a bounding cylinder for the specified FloatBuffer
      * range.
      *
      * @param buffer the buffer that contains the vectors (not null, unaffected)
@@ -251,6 +314,80 @@ final public class MyBuffer {
 
         float result = (float) Math.sqrt(maxLengthSquared);
         assert result >= 0f : result;
+        return result;
+    }
+
+    /**
+     * Find the maximum and minimum coordinates of 3-D vectors in the specified
+     * FloatBuffer range. An empty range stores infinities.
+     *
+     * @param buffer the buffer that contains the vectors (not null, unaffected)
+     * @param startPosition the position at which the vectors start (&ge;0,
+     * &le;endPosition)
+     * @param endPosition the position at which the vectors end
+     * (&ge;startPosition, &le;capacity)
+     * @param storeMaxima storage for maxima (not null, modified)
+     * @param storeMinima storage for minima (not null, modified)
+     */
+    public static void maxMin(FloatBuffer buffer, int startPosition,
+            int endPosition, Vector3f storeMaxima, Vector3f storeMinima) {
+        Validate.nonNull(buffer, "buffer");
+        Validate.inRange(startPosition, "start position", 0, endPosition);
+        Validate.inRange(endPosition, "end position", startPosition,
+                buffer.capacity());
+        int numFloats = endPosition - startPosition;
+        assert (numFloats % numAxes == 0) : numFloats;
+
+        storeMaxima.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY,
+                Float.NEGATIVE_INFINITY);
+        storeMinima.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+                Float.POSITIVE_INFINITY);
+        Vector3f tmpVector = new Vector3f();
+        int numVectors = numFloats / numAxes;
+        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
+            int position = startPosition + vectorIndex * numAxes;
+            get(buffer, position, tmpVector);
+            MyVector3f.accumulateMinima(storeMinima, tmpVector);
+            MyVector3f.accumulateMaxima(storeMaxima, tmpVector);
+        }
+    }
+
+    /**
+     * Determine the arithmetic mean of 3-D vectors in the specified FloatBuffer
+     * range.
+     *
+     * @param buffer the buffer that contains the vectors (not null, unaffected)
+     * @param startPosition the position at which the vectors start (&ge;0,
+     * &le;endPosition-3)
+     * @param endPosition the position at which the vectors end
+     * (&ge;startPosition+3, &le;capacity)
+     * @param storeResult storage for the result (modified if not null)
+     * @return the mean (either storeResult or a new vector, not null)
+     */
+    public static Vector3f mean(FloatBuffer buffer, int startPosition,
+            int endPosition, Vector3f storeResult) {
+        Validate.nonNull(buffer, "buffer");
+        Validate.inRange(startPosition, "start position", 0,
+                endPosition - numAxes);
+        Validate.inRange(endPosition, "end position", startPosition + numAxes,
+                buffer.capacity());
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        int numFloats = endPosition - startPosition;
+        assert (numFloats % numAxes == 0) : numFloats;
+
+        int numVectors = numFloats / numAxes;
+        result.zero();
+        for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
+            int position = startPosition + vectorIndex * numAxes;
+
+            float x = buffer.get(position + MyVector3f.xAxis);
+            float y = buffer.get(position + MyVector3f.yAxis);
+            float z = buffer.get(position + MyVector3f.zAxis);
+
+            result.addLocal(x, y, z);
+        }
+        result.divideLocal(numVectors);
+
         return result;
     }
 
