@@ -110,10 +110,15 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Matrix3f,com.jme3.bullet.collision.shapes.CollisionShape)" class="member-name-link">ChildCollisionShape</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset,
- <a href="../../../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;rotation,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.bullet.collision.shapes.CollisionShape)" class="member-name-link">ChildCollisionShape</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset,
  <a href="../CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a>&nbsp;shape)</code></div>
 <div class="col-last even-row-color">
+<div class="block">Instantiate a child without any rotation.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Matrix3f,com.jme3.bullet.collision.shapes.CollisionShape)" class="member-name-link">ChildCollisionShape</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset,
+ <a href="../../../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;rotation,
+ <a href="../CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a>&nbsp;shape)</code></div>
+<div class="col-last odd-row-color">
 <div class="block">Instantiate a child for use in a compound shape.</div>
 </div>
 </div>
@@ -161,6 +166,11 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Alter the child's coordinate transform copy.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ChildCollisionShape.html" title="class in com.jme3.bullet.collision.shapes.infos">ChildCollisionShape</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#split(com.jme3.math.Triangle)" class="member-name-link">split</a><wbr>(<a href="../../../../math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;parentTriangle)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Attempt to divide this child into 2 children.</div>
+</div>
 </div>
 </div>
 </div>
@@ -205,6 +215,21 @@ loadScripts(document, 'script');</script>
 <dd><code>offset</code> - the desired translation in the parent's coordinate system
  (not null, unaffected)</dd>
 <dd><code>rotation</code> - the desired rotation in the parent's coordinate system
+ (not null, unaffected)</dd>
+<dd><code>shape</code> - the base shape (not null, not a compound shape, alias
+ created)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.jme3.math.Vector3f,com.jme3.bullet.collision.shapes.CollisionShape)">
+<h3>ChildCollisionShape</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ChildCollisionShape</span><wbr><span class="parameters">(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset,
+ <a href="../CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a>&nbsp;shape)</span></div>
+<div class="block">Instantiate a child without any rotation.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>offset</code> - the desired translation in the parent's coordinate system
  (not null, unaffected)</dd>
 <dd><code>shape</code> - the base shape (not null, not a compound shape, alias
  created)</dd>
@@ -303,6 +328,23 @@ loadScripts(document, 'script');</script>
  com.jme3.math.Transform)</code></a></li>
 </ul>
 </dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="split(com.jme3.math.Triangle)">
+<h3>split</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ChildCollisionShape.html" title="class in com.jme3.bullet.collision.shapes.infos">ChildCollisionShape</a>[]</span>&nbsp;<span class="element-name">split</span><wbr><span class="parameters">(<a href="../../../../math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;parentTriangle)</span></div>
+<div class="block">Attempt to divide this child into 2 children. The base shape must be
+ splittable.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>parentTriangle</code> - a triangle that defines the splitting plane (in
+ parent's shape coordinates, not null, unaffected)</dd>
+<dt>Returns:</dt>
+<dd>a pair of children, the first element on the triangle's minus
+ side and the 2nd element on its plus side; either element may be null,
+ indicating an empty child</dd>
 </dl>
 </section>
 </li>
