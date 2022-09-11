@@ -36,6 +36,7 @@ import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Matrix4f;
 import com.jme3.math.Transform;
+import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -354,6 +355,46 @@ public class CompoundCollisionShape extends CollisionShape {
 
         ChildCollisionShape child = children.get(childIndex);
         child.setTransform(offset, rotation);
+    }
+
+    /**
+     * Divide this shape into 2 compound shapes. Each of this shape's children
+     * must be based on a splittable shape.
+     *
+     * @param parentTriangle a triangle that defines the splitting plane (in the
+     * parent's shape coordinates, not null, unaffected)
+     * @return a pair of shapes, not centered, the first element on the plane's
+     * minus side and the 2nd element on its plus side; either element may be
+     * null, indicating an empty shape
+     */
+    public CompoundCollisionShape[] split(Triangle parentTriangle) {
+        Validate.nonNull(parentTriangle, "parent triangle");
+        /*
+         * Organize the children into (up to) 2 new compound shapes, based on
+         * which side(s) of the splitting plane they are on.
+         */
+        int numChildren = children.size();
+        CompoundCollisionShape[] result = new CompoundCollisionShape[2];
+        Matrix3f newRotation = new Matrix3f();
+        Vector3f newOffset = new Vector3f();
+        for (ChildCollisionShape oldChild : children) {
+            ChildCollisionShape[] mp = oldChild.split(parentTriangle);
+            for (int sideI = 0; sideI < 2; ++sideI) {
+                ChildCollisionShape newChild = mp[sideI];
+                if (newChild != null) {
+                    if (result[sideI] == null) {
+                        result[sideI] = new CompoundCollisionShape(numChildren);
+                    }
+                    CollisionShape baseShape = newChild.getShape();
+                    newChild.copyOffset(newOffset);
+                    newChild.copyRotationMatrix(newRotation);
+                    result[sideI]
+                            .addChildShape(baseShape, newOffset, newRotation);
+                }
+            }
+        }
+
+        return result;
     }
 
     /**
