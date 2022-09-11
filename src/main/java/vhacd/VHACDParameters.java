@@ -645,5 +645,5 @@ public class VHACDParameters
     native private static void setPlaneDownsampling(
             long objectId, int granularity);
 
-    native private static void setResolution(long objectId, int numVoxels);
+    native private static void setResolution(long objectId, int maxVoxels);
 }
