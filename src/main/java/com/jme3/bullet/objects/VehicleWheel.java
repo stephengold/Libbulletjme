@@ -502,7 +502,7 @@ public class VehicleWheel {
      * @param frontWheel true&rarr;front wheel, false&rarr;non-front wheel
      */
     public void setFrontWheel(boolean frontWheel) {
-        isFront = frontWheel;
+        this.isFront = frontWheel;
         applyInfo();
     }
 
