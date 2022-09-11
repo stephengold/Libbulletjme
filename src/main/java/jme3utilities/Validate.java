@@ -481,6 +481,8 @@ final public class Validate {
      * "Applications should throw instances of this class to indicate other
      * illegal uses of the null object." To throw an IllegalArgumentException
      * instead, set {@link #throwNpe} to false.
+     * <p>
+     * Compare with {@code Objects.requireNonNull()}.
      *
      * @param object the reference to validate
      * @param description a description of the argument

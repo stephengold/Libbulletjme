@@ -43,7 +43,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * An indexed triangle mesh based on Bullet's btIndexedMesh. Immutable.
+ * An indexed triangle mesh based on Bullet's {@code btIndexedMesh}. Immutable.
  *
  * @author Stephen Gold sgold@sonic.net
  */

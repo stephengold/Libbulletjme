@@ -68,8 +68,8 @@ final public class MyBuffer {
     // new methods exposed
 
     /**
-     * Return the sample covariance of 3-D vectors in the specified FloatBuffer
-     * range.
+     * Return the sample covariance of the 3-D vectors in the specified
+     * FloatBuffer range.
      *
      * @param buffer the buffer that contains the vectors (not null, unaffected)
      * @param startPosition the position at which the vectors start (&ge;0,
