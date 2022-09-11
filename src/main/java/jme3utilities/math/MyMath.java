@@ -194,6 +194,32 @@ public class MyMath { // TODO finalize the class
     }
 
     /**
+     * Find the median of 3 single-precision values.
+     *
+     * @param a the first input value
+     * @param b the 2nd input value
+     * @param c the 3rd input value
+     * @return the median of the 3 values
+     */
+    public static float mid(float a, float b, float c) {
+        if (a >= b) {
+            if (b >= c) {
+                return b; // a >= b >= c
+            } else if (a >= c) {
+                return c; // a >= c > b
+            } else {
+                return a; // c > a >= b
+            }
+        } else if (a >= c) {
+            return a; // b > a >= c
+        } else if (b >= c) {
+            return c; // b >= c > a
+        } else {
+            return b; // c > b > a
+        }
+    }
+
+    /**
      * Find the minimum of some single-precision values.
      *
      * @param fValues the input values
