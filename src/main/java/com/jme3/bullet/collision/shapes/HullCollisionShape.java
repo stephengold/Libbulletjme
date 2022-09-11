@@ -39,12 +39,14 @@ import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.RectangularSolid;
 import jme3utilities.math.VectorSet;
 import jme3utilities.math.VectorSetUsingBuffer;
 import vhacd.VHACDHull;
@@ -142,6 +144,65 @@ public class HullCollisionShape extends ConvexShape {
         this.points = new float[numFloats];
         for (int i = 0; i < numFloats; ++i) {
             points[i] = flippedBuffer.get(i);
+        }
+
+        createShape();
+    }
+
+    /**
+     * Instantiate an 8-vertex shape to match the specified rectangular solid.
+     *
+     * @param rectangularSolid the solid on which to base the shape (not null)
+     */
+    public HullCollisionShape(RectangularSolid rectangularSolid) {
+        Vector3f maxima = rectangularSolid.maxima(null);
+        Vector3f minima = rectangularSolid.minima(null);
+
+        // Enumerate the local coordinates of the 8 corners of the box.
+        Collection<Vector3f> cornerLocations = new ArrayList<>(8);
+        cornerLocations.add(new Vector3f(maxima.x, maxima.y, maxima.z));
+        cornerLocations.add(new Vector3f(maxima.x, maxima.y, minima.z));
+        cornerLocations.add(new Vector3f(maxima.x, minima.y, maxima.z));
+        cornerLocations.add(new Vector3f(maxima.x, minima.y, minima.z));
+        cornerLocations.add(new Vector3f(minima.x, maxima.y, maxima.z));
+        cornerLocations.add(new Vector3f(minima.x, maxima.y, minima.z));
+        cornerLocations.add(new Vector3f(minima.x, minima.y, maxima.z));
+        cornerLocations.add(new Vector3f(minima.x, minima.y, minima.z));
+
+        // Transform corner locations to shape coordinates.
+        int numFloats = numAxes * cornerLocations.size();
+        this.points = new float[numFloats];
+        int floatIndex = 0;
+        Vector3f tempVector = new Vector3f();
+        for (Vector3f location : cornerLocations) {
+            rectangularSolid.localToWorld(location, tempVector);
+            points[floatIndex + PhysicsSpace.AXIS_X] = tempVector.x;
+            points[floatIndex + PhysicsSpace.AXIS_Y] = tempVector.y;
+            points[floatIndex + PhysicsSpace.AXIS_Z] = tempVector.z;
+            floatIndex += numAxes;
+        }
+
+        createShape();
+    }
+
+    /**
+     * Instantiate a shape based on an array of locations. For best performance
+     * and stability, the convex hull should have no more than 100 vertices.
+     *
+     * @param locations an array of location vectors (in shape coordinates, not
+     * null, not empty, unaffected)
+     */
+    public HullCollisionShape(Vector3f... locations) {
+        Validate.nonEmpty(locations, "points");
+
+        int numFloats = numAxes * locations.length;
+        this.points = new float[numFloats];
+        int floatIndex = 0;
+        for (Vector3f location : locations) {
+            points[floatIndex + PhysicsSpace.AXIS_X] = location.x;
+            points[floatIndex + PhysicsSpace.AXIS_Y] = location.y;
+            points[floatIndex + PhysicsSpace.AXIS_Z] = location.z;
+            floatIndex += numAxes;
         }
 
         createShape();
