@@ -317,6 +317,20 @@ public class SimplexCollisionShape extends ConvexShape {
         long shapeId = nativeId();
         recalcAabb(shapeId);
     }
+
+    /**
+     * Approximate this shape with a HullCollisionShape.
+     *
+     * @return a new shape
+     */
+    @Override
+    public HullCollisionShape toHullShape() {
+        assert MyVector3f.isScaleIdentity(scale) : scale;
+        HullCollisionShape result = new HullCollisionShape(locations);
+        result.setMargin(margin);
+
+        return result;
+    }
     // *************************************************************************
     // Java private methods
 

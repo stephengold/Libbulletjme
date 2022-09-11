@@ -32,7 +32,9 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Vector3f;
+import java.nio.FloatBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -193,6 +195,45 @@ public class CapsuleCollisionShape extends ConvexShape {
     public void setMargin(float margin) {
         logger2.log(Level.WARNING,
                 "Cannot alter the margin of a CapsuleCollisionShape.");
+    }
+
+    /**
+     * Approximate this shape with a HullCollisionShape.
+     *
+     * @return a new shape
+     */
+    @Override
+    public HullCollisionShape toHullShape() {
+        float defaultMargin = getDefaultMargin();
+        float effectiveRadius = scale.x * radius; // in physics-space units
+
+        HullCollisionShape result;
+        if (effectiveRadius > defaultMargin) {
+            // Use 42 vertices with the default margin.
+            CapsuleCollisionShape shrunkenCapsule = new CapsuleCollisionShape(
+                    effectiveRadius - defaultMargin, height, axis);
+            FloatBuffer buffer = DebugShapeFactory.debugVertices(
+                    shrunkenCapsule, DebugShapeFactory.lowResolution);
+
+            // Flip the buffer.
+            buffer.rewind();
+            buffer.limit(buffer.capacity());
+
+            result = new HullCollisionShape(buffer);
+
+        } else { // Use a 2 vertices with a reduced margin.
+            Vector3f v1 = new Vector3f();
+            v1.set(axis, height / 2f);
+            Vector3f v2 = v1.negate();
+            result = new HullCollisionShape(v1, v2);
+            if (effectiveRadius <= 1e-9f) {
+                result.setMargin(1e-9f);
+            } else {
+                result.setMargin(effectiveRadius);
+            }
+        }
+
+        return result;
     }
     // *************************************************************************
     // Java private methods

@@ -32,10 +32,13 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Vector3f;
+import java.nio.FloatBuffer;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyMath;
 
 /**
  * A convex collision shape based on Bullet's {@code btMultiSphereShape}. Unlike
@@ -273,6 +276,46 @@ public class MultiSphere extends ConvexShape {
     protected void recalculateAabb() {
         long shapeId = nativeId();
         recalcAabb(shapeId);
+    }
+
+    /**
+     * Approximate this shape with a HullCollisionShape.
+     *
+     * @return a new shape
+     */
+    @Override
+    public HullCollisionShape toHullShape() {
+        float medianScale = MyMath.mid(scale.x, scale.y, scale.z);
+        assert medianScale > 0f : medianScale;
+        float minRadius = MyMath.min(radii);
+        float defaultMargin = getDefaultMargin();
+        float hullMargin = Math.min(defaultMargin, minRadius * medianScale);
+        /*
+         * Construct a copy of this shape with its radii reduced
+         * to compensate for the hull's collision margin.
+         */
+        int numSpheres = radii.length;
+        float[] reducedRadii = new float[numSpheres];
+        for (int sphereIndex = 0; sphereIndex < numSpheres; ++sphereIndex) {
+            float rr = radii[sphereIndex] - hullMargin / medianScale;
+            if (rr < 1e-6f) {
+                rr = 1e-6f;
+            }
+            reducedRadii[sphereIndex] = rr;
+        }
+        MultiSphere reducedShape = new MultiSphere(centers, reducedRadii);
+        reducedShape.setScale(scale);
+        FloatBuffer buffer = DebugShapeFactory
+                .debugVertices(reducedShape, DebugShapeFactory.lowResolution);
+
+        // Flip the buffer.
+        buffer.rewind();
+        buffer.limit(buffer.capacity());
+
+        HullCollisionShape result = new HullCollisionShape(buffer);
+        result.setMargin(hullMargin);
+
+        return result;
     }
     // *************************************************************************
     // Java private methods
