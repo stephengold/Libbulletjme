@@ -29,6 +29,7 @@ package jme3utilities.math;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
+import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -291,6 +292,29 @@ public class MyMath { // TODO finalize the class
      */
     public static float toRadians(float degrees) {
         float result = degrees * FastMath.DEG_TO_RAD;
+        return result;
+    }
+
+    /**
+     * Apply the inverse of the specified transform to each vertex of a
+     * Triangle.
+     *
+     * @param transform the transform to use (not null, unaffected)
+     * @param input the input triangle (not null, unaffected unless it's
+     * {@code storeResult}
+     * @param storeResult storage for the result (modified if not null)
+     * @return the transformed triangle (either storeResult or a new instance)
+     */
+    public static Triangle transformInverse(
+            Transform transform, Triangle input, Triangle storeResult) {
+        Triangle result = (storeResult == null) ? new Triangle() : storeResult;
+        Vector3f tmpVector = new Vector3f();
+        for (int vertexIndex = 0; vertexIndex < 3; ++vertexIndex) {
+            Vector3f inputVector = input.get(vertexIndex); // alias
+            transform.transformInverseVector(inputVector, tmpVector);
+            result.set(vertexIndex, tmpVector);
+        }
+
         return result;
     }
 }
