@@ -598,7 +598,9 @@ loadScripts(document, 'script');</script>
  the case of a method argument, the javadoc for NullPointerException says,
  "Applications should throw instances of this class to indicate other
  illegal uses of the null object." To throw an IllegalArgumentException
- instead, set <a href="#throwNpe"><code>throwNpe</code></a> to false.</div>
+ instead, set <a href="#throwNpe"><code>throwNpe</code></a> to false.
+ <p>
+ Compare with <code>Objects.requireNonNull()</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>object</code> - the reference to validate</dd>
