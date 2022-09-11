@@ -33,12 +33,16 @@ package com.jme3.bullet.collision.shapes.infos;
 
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
+import com.jme3.bullet.collision.shapes.EmptyShape;
+import com.jme3.bullet.collision.shapes.HullCollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
+import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyMath;
 
 /**
  * An element in a CompoundCollisionShape, consisting of a (non-compound) base
@@ -204,5 +208,43 @@ public class ChildCollisionShape {
     public void setTransform(Vector3f offset, Matrix3f rotation) {
         this.offset.set(offset);
         this.rotation.set(rotation);
+    }
+
+    /**
+     * Attempt to divide this child into 2 children. The base shape must be
+     * splittable.
+     *
+     * @param parentTriangle a triangle that defines the splitting plane (in
+     * parent's shape coordinates, not null, unaffected)
+     * @return a pair of children, the first element on the triangle's minus
+     * side and the 2nd element on its plus side; either element may be null,
+     * indicating an empty child
+     */
+    public ChildCollisionShape[] split(Triangle parentTriangle) {
+        Validate.nonNull(parentTriangle, "parent triangle");
+
+        ChildCollisionShape[] result = new ChildCollisionShape[2];
+        if (shape instanceof EmptyShape) {
+            return result;
+        }
+        HullCollisionShape hull = (HullCollisionShape) shape; // TODO more cases
+
+        Transform c2pTransform = copyTransform(null);
+        Triangle childTriangle
+                = MyMath.transformInverse(c2pTransform, parentTriangle, null);
+        ChildCollisionShape[] mp = hull.split(childTriangle);
+
+        Transform tmpTransform = new Transform();
+        for (int i = 0; i < 2; ++i) {
+            if (mp[i] != null) {
+                mp[i].copyTransform(tmpTransform);
+                tmpTransform.combineWithParent(c2pTransform);
+                Vector3f newOffset = tmpTransform.getTranslation(); // alias
+                CollisionShape base = mp[i].getShape();
+                result[i] = new ChildCollisionShape(newOffset, rotation, base);
+            }
+        }
+
+        return result;
     }
 }
