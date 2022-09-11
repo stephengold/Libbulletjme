@@ -194,6 +194,32 @@ public class MyMath { // TODO finalize the class
     }
 
     /**
+     * Compute the least non-negative value congruent with an integer value with
+     * respect to the specified modulus. modulo() differs from remainder for
+     * negative values of the first argument. For instance, modulo(-1, 4) == 3,
+     * while -1 % 4 == -1.
+     *
+     * @param iValue input value
+     * @param modulus (&gt;0)
+     * @return iValue MOD modulus (&lt;modulus, &ge;0)
+     */
+    public static int modulo(int iValue, int modulus) {
+        assert Validate.positive(modulus, "modulus");
+
+        int remainder = iValue % modulus;
+        int result;
+        if (iValue >= 0) {
+            result = remainder;
+        } else {
+            result = (remainder + modulus) % modulus;
+        }
+
+        assert result >= 0f : result;
+        assert result < modulus : result;
+        return result;
+    }
+
+    /**
      * Compute the least non-negative value congruent with a single-precision
      * value with respect to the specified modulus. modulo() differs from
      * remainder for negative values of the first argument. For instance,
