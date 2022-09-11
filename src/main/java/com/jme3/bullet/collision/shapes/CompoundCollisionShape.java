@@ -519,6 +519,34 @@ public class CompoundCollisionShape extends CollisionShape {
             baseShape.updateScale();
         }
     }
+
+    /**
+     * Approximate this shape with a splittable shape.
+     *
+     * @return a splittable shape (either this shape or a new one)
+     */
+    @Override
+    public CollisionShape toSplittableShape() {
+        CompoundCollisionShape result;
+        if (canSplit()) {
+            result = this;
+
+        } else {
+            int numChildren = children.size();
+            result = new CompoundCollisionShape(numChildren);
+            Matrix3f tmpRotation = new Matrix3f();
+            Vector3f tmpOffset = new Vector3f();
+            for (ChildCollisionShape child : children) {
+                CollisionShape baseShape = child.getShape();
+                CollisionShape splittableShape = baseShape.toSplittableShape();
+                child.copyOffset(tmpOffset);
+                child.copyRotationMatrix(tmpRotation);
+                result.addChildShape(splittableShape, tmpOffset, tmpRotation);
+            }
+        }
+
+        return result;
+    }
     // *************************************************************************
     // Java private methods
 
