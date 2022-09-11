@@ -911,11 +911,11 @@ public class MultiBody extends NativePhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static void addBaseForce(long multiBodyId,
-            Vector3f forceVector);
+    native private static void
+            addBaseForce(long multiBodyId, Vector3f forceVector);
 
-    native private static void addBaseTorque(long multiBodyId,
-            Vector3f torqueVector);
+    native private static void
+            addBaseTorque(long multiBodyId, Vector3f torqueVector);
 
     native private static void clearConstraintForces(long multiBodyId);
 
@@ -934,28 +934,28 @@ public class MultiBody extends NativePhysicsObject {
 
     native private static long getBaseCollider(long multiBodyId);
 
-    native private static void getBaseForce(long multiBodyId,
-            Vector3f storeVector);
+    native private static void
+            getBaseForce(long multiBodyId, Vector3f storeVector);
 
-    native private static void getBaseInertia(long multiBodyId,
-            Vector3f storeVector);
+    native private static void
+            getBaseInertia(long multiBodyId, Vector3f storeVector);
 
     native private static float getBaseMass(long multiBodyId);
 
-    native private static void getBaseOmega(long multiBodyId,
-            Vector3f storeVector);
+    native private static void
+            getBaseOmega(long multiBodyId, Vector3f storeVector);
 
-    native private static void getBasePos(long multiBodyId,
-            Vector3f storeVector);
+    native private static void
+            getBasePos(long multiBodyId, Vector3f storeVector);
 
-    native private static void getBaseTorque(long multiBodyId,
-            Vector3f storeVector);
+    native private static void
+            getBaseTorque(long multiBodyId, Vector3f storeVector);
 
-    native private static void getBaseVel(long multiBodyId,
-            Vector3f storeVector);
+    native private static void
+            getBaseVel(long multiBodyId, Vector3f storeVector);
 
-    native private static void getBaseWorldTransform(long multiBodyId,
-            Transform storeTransform);
+    native private static void
+            getBaseWorldTransform(long multiBodyId, Transform storeTransform);
 
     native private static boolean getCanSleep(long multiBodyId);
 
@@ -981,8 +981,8 @@ public class MultiBody extends NativePhysicsObject {
 
     native private static boolean getUseGyroTerm(long multiBodyId);
 
-    native private static void getWorldToBaseRot(long multiBodyId,
-            Quaternion storeQuaternion);
+    native private static void
+            getWorldToBaseRot(long multiBodyId, Quaternion storeQuaternion);
 
     native private static boolean hasFixedBase(long multiBodyId);
 
@@ -990,26 +990,26 @@ public class MultiBody extends NativePhysicsObject {
 
     native private static boolean isUsingRK4Integration(long multiBodyId);
 
-    native private static void setBaseCollider(long multiBodyId,
-            long colliderId);
+    native private static void
+            setBaseCollider(long multiBodyId, long colliderId);
 
-    native private static void setBaseOmega(long multiBodyId,
-            Vector3f angularVelocityVector);
+    native private static void
+            setBaseOmega(long multiBodyId, Vector3f angularVelocityVector);
 
-    native private static void setBasePos(long multiBodyId,
-            Vector3f positionVector);
+    native private static void
+            setBasePos(long multiBodyId, Vector3f positionVector);
 
-    native private static void setBaseVel(long multiBodyId,
-            Vector3f velocityVector);
+    native private static void
+            setBaseVel(long multiBodyId, Vector3f velocityVector);
 
-    native private static void setBaseWorldTransform(long multiBodyId,
-            Transform transform);
+    native private static void
+            setBaseWorldTransform(long multiBodyId, Transform transform);
 
-    native private static void setCollideWithGroups(long multiBodyId,
-            int collisionGroups);
+    native private static void
+            setCollideWithGroups(long multiBodyId, int collisionGroups);
 
-    native private static void setCollisionGroup(long multiBodyId,
-            int collisionGroup);
+    native private static void
+            setCollisionGroup(long multiBodyId, int collisionGroup);
 
     native private static void setupFixed(long multiBodyId, int linkIndex,
             float mass, Vector3f inertiaVector, int parentLinkIndex,
@@ -1038,11 +1038,11 @@ public class MultiBody extends NativePhysicsObject {
             Quaternion parent2LinkQuaternion, Vector3f parent2PivotVector,
             Vector3f pivotToLinkVector, boolean disableParentCollision);
 
-    native private static void setWorldToBaseRot(long multiBodyId,
-            Quaternion quaternion);
+    native private static void
+            setWorldToBaseRot(long multiBodyId, Quaternion quaternion);
 
-    native private static void useGlobalVelocities(long multiBodyId,
-            boolean use);
+    native private static void
+            useGlobalVelocities(long multiBodyId, boolean use);
 
     native private static void useRK4Integration(long multiBodyId, boolean use);
 }
