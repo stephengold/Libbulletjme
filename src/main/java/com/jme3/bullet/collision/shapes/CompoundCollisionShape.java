@@ -404,6 +404,25 @@ public class CompoundCollisionShape extends CollisionShape {
     }
 
     /**
+     * Test whether this shape can be split by an arbitrary plane.
+     *
+     * @return true if splittable, false otherwise
+     */
+    @Override
+    public boolean canSplit() {
+        boolean result = true;
+        for (ChildCollisionShape child : children) {
+            CollisionShape baseShape = child.getShape();
+            if (!baseShape.canSplit()) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Estimate how far this shape extends from its center.
      *
      * @return a distance estimate (in physics-space units, &ge;0)

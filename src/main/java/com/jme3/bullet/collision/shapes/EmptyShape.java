@@ -73,6 +73,16 @@ public class EmptyShape extends CollisionShape {
     // CollisionShape methods
 
     /**
+     * Test whether this shape can be split by an arbitrary plane.
+     *
+     * @return true if splittable, false otherwise
+     */
+    @Override
+    public boolean canSplit() {
+        return true;
+    }
+
+    /**
      * Determine how far the shape extends from its center.
      *
      * @return the distance (in physics-space units, &ge;0)

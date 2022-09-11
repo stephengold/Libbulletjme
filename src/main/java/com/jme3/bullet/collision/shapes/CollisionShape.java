@@ -176,6 +176,16 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
+     * Test whether this shape can be split by an arbitrary plane. Meant to be
+     * overridden.
+     *
+     * @return true if splittable, false otherwise
+     */
+    public boolean canSplit() {
+        return false;
+    }
+
+    /**
      * Return the default margin for new shapes that are neither capsules nor
      * spheres.
      *
