@@ -4453,6 +4453,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Instantiate a shape based on an array containing coordinates.</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html#%3Cinit%3E(com.jme3.math.Vector3f...)" class="member-name-link">HullCollisionShape(Vector3f...)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">HullCollisionShape</a></dt>
+<dd>
+<div class="block">Instantiate a shape based on an array of locations.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html#%3Cinit%3E(java.nio.FloatBuffer)" class="member-name-link">HullCollisionShape(FloatBuffer)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">HullCollisionShape</a></dt>
 <dd>
 <div class="block">Instantiate a shape based on a flipped buffer containing coordinates.</div>
@@ -4460,6 +4464,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html#%3Cinit%3E(java.util.Collection)" class="member-name-link">HullCollisionShape(Collection&lt;Vector3f&gt;)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">HullCollisionShape</a></dt>
 <dd>
 <div class="block">Instantiate a shape based on the specified collection of locations.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html#%3Cinit%3E(jme3utilities.math.RectangularSolid)" class="member-name-link">HullCollisionShape(RectangularSolid)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">HullCollisionShape</a></dt>
+<dd>
+<div class="block">Instantiate an 8-vertex shape to match the specified rectangular solid.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html#%3Cinit%3E(vhacd.VHACDHull)" class="member-name-link">HullCollisionShape(VHACDHull)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">HullCollisionShape</a></dt>
 <dd>
@@ -9356,6 +9364,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">spinning friction</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CompoundCollisionShape.html#split(com.jme3.math.Triangle)" class="member-name-link">split(Triangle)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CompoundCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CompoundCollisionShape</a></dt>
+<dd>
+<div class="block">Divide this shape into 2 compound shapes.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html#split(com.jme3.math.Triangle)" class="member-name-link">split(Triangle)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/HullCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">HullCollisionShape</a></dt>
 <dd>
 <div class="block">Attempt to divide this shape into 2 child shapes.</div>
@@ -9529,6 +9541,34 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/math/VectorSetUsingBuffer.html#toFloatArray()" class="member-name-link">toFloatArray()</a> - Method in class jme3utilities.math.<a href="jme3utilities/math/VectorSetUsingBuffer.html" title="class in jme3utilities.math">VectorSetUsingBuffer</a></dt>
 <dd>
 <div class="block">Create an array of floats containing all values in this set.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/BoxCollisionShape.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/BoxCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">BoxCollisionShape</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CapsuleCollisionShape.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CapsuleCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CapsuleCollisionShape</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/ConvexShape.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CylinderCollisionShape.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CylinderCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CylinderCollisionShape</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MultiSphere.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MultiSphere.html" title="class in com.jme3.bullet.collision.shapes">MultiSphere</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/SimplexCollisionShape.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/SimplexCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">SimplexCollisionShape</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/SphereCollisionShape.html#toHullShape()" class="member-name-link">toHullShape()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/SphereCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">SphereCollisionShape</a></dt>
+<dd>
+<div class="block">Approximate this shape with a HullCollisionShape.</div>
 </dd>
 <dt><a href="vhacd/VHACDParameters.html#toMap()" class="member-name-link">toMap()</a> - Method in class vhacd.<a href="vhacd/VHACDParameters.html" title="class in vhacd">VHACDParameters</a></dt>
 <dd>
