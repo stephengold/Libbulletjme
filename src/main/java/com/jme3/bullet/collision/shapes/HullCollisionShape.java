@@ -208,16 +208,6 @@ public class HullCollisionShape extends ConvexShape {
     }
 
     /**
-     * Test whether this shape can be split by an arbitrary plane.
-     *
-     * @return true if splittable, false otherwise
-     */
-    @Override
-    public boolean canSplit() {
-        return true;
-    }
-
-    /**
      * Copy the unscaled vertex locations of the optimized convex hull.
      *
      * @return a new array (not null)
@@ -411,6 +401,16 @@ public class HullCollisionShape extends ConvexShape {
     }
     // *************************************************************************
     // ConvexShape methods
+
+    /**
+     * Test whether this shape can be split by an arbitrary plane.
+     *
+     * @return true if splittable, false otherwise
+     */
+    @Override
+    public boolean canSplit() {
+        return true;
+    }
 
     /**
      * Calculate how far this shape extends from its center, including margin.
