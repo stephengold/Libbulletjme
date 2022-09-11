@@ -194,6 +194,24 @@ public class MyMath { // TODO finalize the class
     }
 
     /**
+     * Find the minimum of some single-precision values.
+     *
+     * @param fValues the input values
+     * @return the most negative value
+     * @see java.lang.Math#min(float, float)
+     */
+    public static float min(float... fValues) {
+        float result = Float.POSITIVE_INFINITY;
+        for (float value : fValues) {
+            if (value < result) {
+                result = value;
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Compute the least non-negative value congruent with an integer value with
      * respect to the specified modulus. modulo() differs from remainder for
      * negative values of the first argument. For instance, modulo(-1, 4) == 3,
