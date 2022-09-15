@@ -341,6 +341,28 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
+     * Returns the distance between this vector and the argument. The current
+     * instance is unaffected.
+     *
+     * @param v the vector to compare (not null, unaffected)
+     * @return the Euclidean distance (not negative)
+     */
+    public float distance(Vector3f v) {
+        /*
+         * Use double-precision arithmetic to reduce the chance of overflow
+         * (when distanceSquared > Float.MAX_VALUE) or underflow (when
+         * distanceSquared is < Float.MIN_VALUE).
+         */
+        double dx = x - v.x;
+        double dy = y - v.y;
+        double dz = z - v.z;
+        double distanceSquared = dx * dx + dy * dy + dz * dz;
+        float result = (float) Math.sqrt(distanceSquared);
+
+        return result;
+    }
+
+    /**
      * Multiplies with the argument and returns the product as a new instance.
      * The current instance is unaffected.
      *
