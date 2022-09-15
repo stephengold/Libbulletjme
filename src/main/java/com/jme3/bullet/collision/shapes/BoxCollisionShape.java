@@ -38,6 +38,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 import jme3utilities.math.RectangularSolid;
 
 /**
@@ -151,6 +152,18 @@ public class BoxCollisionShape extends ConvexShape {
         } else {
             return storeResult.set(halfExtents);
         }
+    }
+
+    /**
+     * Return the unscaled volume of the box.
+     *
+     * @return the volume (in shape units cubed, &ge;0)
+     */
+    public float unscaledVolume() {
+        float result = MyVolume.boxVolume(halfExtents);
+
+        assert result >= 0f : result;
+        return result;
     }
     // *************************************************************************
     // ConvexShape methods

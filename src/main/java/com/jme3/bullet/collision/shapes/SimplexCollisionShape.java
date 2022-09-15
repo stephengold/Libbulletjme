@@ -39,6 +39,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 
 /**
  * A simple point, line-segment, triangle, or tetrahedron collision shape based
@@ -269,6 +270,22 @@ public class SimplexCollisionShape extends ConvexShape {
 
         assert MyVector3f.isAllNonNegative(result) : result;
         return result;
+    }
+
+    /**
+     * Calculate the unscaled volume of the simplex.
+     *
+     * @return the volume (in shape units cubed, &ge;0)
+     */
+    public float unscaledVolume() {
+        float volume = 0f;
+        if (locations.length > 3) {
+            volume = (float) MyVolume.tetrahedronVolume(locations[0],
+                    locations[1], locations[2], locations[3]);
+        }
+
+        assert volume >= 0f : volume;
+        return volume;
     }
     // *************************************************************************
     // ConvexShape methods

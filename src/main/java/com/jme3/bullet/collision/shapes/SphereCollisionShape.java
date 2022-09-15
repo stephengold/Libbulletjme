@@ -39,6 +39,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 
 /**
  * A spherical collision shape based on Bullet's {@code btSphereShape}. These
@@ -110,6 +111,18 @@ public class SphereCollisionShape extends ConvexShape {
     public float getRadius() {
         assert radius >= 0f : radius;
         return radius;
+    }
+
+    /**
+     * Return the unscaled volume of the sphere.
+     *
+     * @return the volume (in shape units cubed, &ge;0)
+     */
+    public float unscaledVolume() {
+        float result = MyVolume.sphereVolume(radius);
+
+        assert result >= 0f : result;
+        return result;
     }
     // *************************************************************************
     // ConvexShape methods

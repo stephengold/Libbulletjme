@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 
 /**
  * A conical collision shape based on Bullet's {@code btConeShapeX},
@@ -150,6 +151,18 @@ public class ConeCollisionShape extends ConvexShape {
         float result = MyMath.hypotenuse(radius, height / 2f) * scale.x;
         result += margin;
 
+        return result;
+    }
+
+    /**
+     * Return the unscaled volume of the cone.
+     *
+     * @return the volume (in shape units cubed, &ge;0)
+     */
+    public float unscaledVolume() {
+        float result = MyVolume.coneVolume(radius, height);
+
+        assert result >= 0f : result;
         return result;
     }
     // *************************************************************************

@@ -40,6 +40,7 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyBuffer;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 
 /**
  * A cylindrical collision shape based on Bullet's {@code btCylinderShapeX},
@@ -190,6 +191,18 @@ public class CylinderCollisionShape extends ConvexShape {
      */
     public float getHeight() {
         float result = 2f * halfExtents.get(axis);
+
+        assert result >= 0f : result;
+        return result;
+    }
+
+    /**
+     * Return the unscaled volume of the cylinder.
+     *
+     * @return the volume (in shape units cubed, &ge;0)
+     */
+    public float unscaledVolume() {
+        float result = MyVolume.cylinderVolume(halfExtents);
 
         assert result >= 0f : result;
         return result;
