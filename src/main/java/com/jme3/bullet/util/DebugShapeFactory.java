@@ -33,6 +33,7 @@ package com.jme3.bullet.util;
 
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
+import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.infos.ChildCollisionShape;
 import com.jme3.math.Plane;
@@ -181,6 +182,28 @@ final public class DebugShapeFactory {
         float result = callback.maxDistance(transform);
 
         return result;
+    }
+
+    /**
+     * Calculate the volume of a debug mesh for the specified convex shape. The
+     * shape's scale and margin are taken into account, but not its debug-mesh
+     * resolution.
+     *
+     * @param shape (not null, convex, unaffected)
+     * @param meshResolution (0=low, 1=high)
+     * @return the scaled volume (in physics-space units cubed, &ge;0)
+     */
+    public static float volumeConvex(ConvexShape shape, int meshResolution) {
+        Validate.inRange(meshResolution, "mesh resolution", lowResolution,
+                highResolution);
+
+        long shapeId = shape.nativeId();
+        DebugMeshCallback callback = new DebugMeshCallback();
+        getTriangles(shapeId, meshResolution, callback);
+        float volume = callback.volumeConvex();
+
+        assert volume >= 0f : volume;
+        return volume;
     }
     // *************************************************************************
     // private methods
