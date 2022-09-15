@@ -141,6 +141,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Estimate how far the specified (non-compound, non-plane) shape extends
  from some origin, based on its debug mesh.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#volumeConvex(com.jme3.bullet.collision.shapes.ConvexShape,int)" class="member-name-link">volumeConvex</a><wbr>(<a href="../collision/shapes/ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a>&nbsp;shape,
+ int&nbsp;meshResolution)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Calculate the volume of a debug mesh for the specified convex shape.</div>
+</div>
 </div>
 </div>
 </div>
@@ -254,6 +260,23 @@ loadScripts(document, 'script');</script>
 <dd><code>meshResolution</code> - (0=low, 1=high)</dd>
 <dt>Returns:</dt>
 <dd>the maximum length of the transformed vertex locations (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="volumeConvex(com.jme3.bullet.collision.shapes.ConvexShape,int)">
+<h3>volumeConvex</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">volumeConvex</span><wbr><span class="parameters">(<a href="../collision/shapes/ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a>&nbsp;shape,
+ int&nbsp;meshResolution)</span></div>
+<div class="block">Calculate the volume of a debug mesh for the specified convex shape. The
+ shape's scale and margin are taken into account, but not its debug-mesh
+ resolution.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>shape</code> - (not null, convex, unaffected)</dd>
+<dd><code>meshResolution</code> - (0=low, 1=high)</dd>
+<dt>Returns:</dt>
+<dd>the scaled volume (in physics-space units cubed, &ge;0)</dd>
 </dl>
 </section>
 </li>
