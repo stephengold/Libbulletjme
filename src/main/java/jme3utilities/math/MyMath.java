@@ -89,6 +89,23 @@ public class MyMath { // TODO finalize the class
     }
 
     /**
+     * Cube the specified single-precision value. Logs a warning in case of
+     * overflow.
+     *
+     * @param fValue input value to be cubed
+     * @return fValue raised to the third power
+     */
+    public static float cube(float fValue) {
+        float result = fValue * fValue * fValue;
+
+        if (Float.isInfinite(result)) {
+            String message = String.format("Overflow from cubing %g.", fValue);
+            logger.warning(message);
+        }
+        return result;
+    }
+
+    /**
      * Determine the root sum of squares of some single-precision values.
      * Double-precision arithmetic is used to reduce the risk of overflow.
      *
