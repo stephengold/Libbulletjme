@@ -38,6 +38,7 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 
 /**
  * Temporary objects used to return debug meshes from native Bullet.
@@ -52,6 +53,10 @@ class DebugMeshCallback {
      * number of axes in a vector
      */
     final private static int numAxes = 3;
+    /**
+     * number of vertices per triangle
+     */
+    final private static int vpt = 3;
     /**
      * message logger for this class
      */
@@ -105,6 +110,35 @@ class DebugMeshCallback {
         float result = (float) Math.sqrt(maxSquaredDistance);
 
         return result;
+    }
+
+    /**
+     * Calculate volume of the mesh, assuming it's closed and convex.
+     *
+     * @return the volume (in cubic mesh units)
+     */
+    float volumeConvex() {
+        int numVertices = list.size();
+        int numTriangles = numVertices / vpt;
+        assert numTriangles * vpt == numVertices : numVertices;
+
+        double total = 0.0;
+        if (numTriangles > 0) {
+            Vector3f fixed = list.get(0);
+            for (int triIndex = 0; triIndex < numTriangles; ++triIndex) {
+                int firstVertex = vpt * triIndex;
+                Vector3f pos1 = list.get(firstVertex);
+                Vector3f pos2 = list.get(firstVertex + 1);
+                Vector3f pos3 = list.get(firstVertex + 2);
+                double tetraVolume
+                        = MyVolume.tetrahedronVolume(pos1, pos2, pos3, fixed);
+                total += tetraVolume;
+            }
+        }
+        float volume = (float) total;
+
+        assert volume >= 0f : volume;
+        return volume;
     }
     // *************************************************************************
     // private methods
