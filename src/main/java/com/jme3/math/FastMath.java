@@ -58,6 +58,10 @@ final public class FastMath {
      */
     public static final float HALF_PI = 0.5f * PI;
     /**
+     * The value PI/4 as a float. (45 degrees)
+     */
+    public static final float QUARTER_PI = 0.25f * PI;
+    /**
      * A value to multiply a degree value by, to convert it to radians.
      */
     public static final float DEG_TO_RAD = PI / 180.0f;
