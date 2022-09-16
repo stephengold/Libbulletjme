@@ -47,6 +47,7 @@ import jme3utilities.math.MyVolume;
  * margin and can only be scaled uniformly.
  *
  * @author normenhansen
+ * @see MultiSphere
  */
 public class CapsuleCollisionShape extends ConvexShape {
     // *************************************************************************
