@@ -142,19 +142,6 @@ public class ConeCollisionShape extends ConvexShape {
     }
 
     /**
-     * Calculate how far the cone extends from its center.
-     *
-     * @return a distance (in physics-space units, &ge;0)
-     */
-    @Override
-    public float maxRadius() {
-        float result = MyMath.hypotenuse(radius, height / 2f) * scale.x;
-        result += margin;
-
-        return result;
-    }
-
-    /**
      * Return the unscaled volume of the cone.
      *
      * @return the volume (in shape units cubed, &ge;0)
@@ -181,6 +168,19 @@ public class ConeCollisionShape extends ConvexShape {
         boolean canScale
                 = super.canScale(scale) && MyVector3f.isScaleUniform(scale);
         return canScale;
+    }
+
+    /**
+     * Calculate how far the cone extends from its center.
+     *
+     * @return a distance (in physics-space units, &ge;0)
+     */
+    @Override
+    public float maxRadius() {
+        float result = MyMath.hypotenuse(radius, height / 2f) * scale.x;
+        result += margin;
+
+        return result;
     }
     // *************************************************************************
     // Java private methods
