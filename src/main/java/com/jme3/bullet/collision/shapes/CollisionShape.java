@@ -355,8 +355,8 @@ abstract public class CollisionShape extends NativePhysicsObject {
      * infinite)
      */
     public float maxRadius() {
-        float result = DebugShapeFactory.maxDistance(this, transformIdentity,
-                DebugShapeFactory.lowResolution);
+        float result = DebugShapeFactory.maxDistance(
+                this, transformIdentity, DebugShapeFactory.lowResolution);
         return result;
     }
 
