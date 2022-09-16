@@ -91,6 +91,16 @@ public class EmptyShape extends CollisionShape {
     public float maxRadius() {
         return 0f;
     }
+
+    /**
+     * Estimate the volume of this shape, including scale and margin.
+     *
+     * @return 0
+     */
+    @Override
+    public float scaledVolume() {
+        return 0f;
+    }
     // *************************************************************************
     // Java private methods
 

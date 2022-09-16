@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
+import jme3utilities.math.MyVolume;
 
 /**
  * A convex collision shape based on Bullet's {@code btMultiSphereShape}. Unlike
@@ -276,6 +277,34 @@ public class MultiSphere extends ConvexShape {
     protected void recalculateAabb() {
         long shapeId = nativeId();
         recalcAabb(shapeId);
+    }
+
+    /**
+     * Estimate the volume of the shape, including scale and margin.
+     *
+     * @return the volume (in physics-space units cubed, &ge;0)
+     */
+    @Override
+    public float scaledVolume() {
+        float volume;
+        int numSpheres = radii.length;
+        if (numSpheres == 1) {
+            float radius = radii[0];
+            float unscaledVolume = MyVolume.sphereVolume(radius);
+            volume = unscaledVolume * scale.x * scale.y * scale.z;
+
+        } else if (numSpheres == 2 && radii[0] == radii[1]) { // capsule
+            float radius = radii[0];
+            float height = centers[0].distance(centers[1]);
+            float unscaledVolume = MyVolume.capsuleVolume(radius, height);
+            volume = unscaledVolume * scale.x * scale.y * scale.z;
+
+        } else { // use the debug mesh
+            volume = super.scaledVolume();
+        }
+
+        assert volume >= 0f : volume;
+        return volume;
     }
 
     /**
