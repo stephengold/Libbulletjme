@@ -93,7 +93,7 @@ public class PhysicsSoftBody extends PhysicsBody {
     /**
      * configuration properties of this soft body
      */
-    private SoftBodyConfig config = null;
+    private SoftBodyConfig config;
     /**
      * material properties of this soft body, allocated lazily
      */
@@ -102,7 +102,7 @@ public class PhysicsSoftBody extends PhysicsBody {
      * properties (including gravity) that may be replaced when this body gets
      * added to a space
      */
-    private SoftBodyWorldInfo worldInfo = null;
+    private SoftBodyWorldInfo worldInfo;
     // *************************************************************************
     // constructors
 
