@@ -399,8 +399,8 @@ public class TranslationalLimitMotor extends NativePhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static void getAccumulatedImpulse(long motorId,
-            Vector3f vector);
+    native private static void
+            getAccumulatedImpulse(long motorId, Vector3f vector);
 
     native private static float getDamping(long motorId);
 
@@ -420,25 +420,25 @@ public class TranslationalLimitMotor extends NativePhysicsObject {
 
     native private static void getStopCFM(long motorId, Vector3f vector);
 
-    native private static void getTargetVelocity(long motorId,
-            Vector3f velocity);
+    native private static void
+            getTargetVelocity(long motorId, Vector3f velocity);
 
     native private static void getUpperLimit(long motorId, Vector3f vector);
 
     native private static boolean isEnabled(long motorId, int axisIndex);
 
-    native private static void setAccumulatedImpulse(long motorId,
-            Vector3f vector);
+    native private static void
+            setAccumulatedImpulse(long motorId, Vector3f vector);
 
     native private static void setDamping(long motorId, float damping);
 
-    native private static void setEnabled(long motorId, int axisIndex,
-            boolean enableMotor);
+    native private static void
+            setEnabled(long motorId, int axisIndex, boolean enableMotor);
 
     native private static void setERP(long motorId, Vector3f vector);
 
-    native private static void setLimitSoftness(long motorId,
-            float limitSoftness);
+    native private static void
+            setLimitSoftness(long motorId, float limitSoftness);
 
     native private static void setLowerLimit(long motorId, Vector3f vector);
 
@@ -450,8 +450,8 @@ public class TranslationalLimitMotor extends NativePhysicsObject {
 
     native private static void setStopCFM(long motorId, Vector3f stopCFM);
 
-    native private static void setTargetVelocity(long motorId,
-            Vector3f velocity);
+    native private static void
+            setTargetVelocity(long motorId, Vector3f velocity);
 
     native private static void setUpperLimit(long motorId, Vector3f vector);
 }
