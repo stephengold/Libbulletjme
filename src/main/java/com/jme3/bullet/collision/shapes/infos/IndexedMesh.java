@@ -42,6 +42,7 @@ import java.nio.ShortBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.DistinctVectorValues;
 import jme3utilities.math.MyBuffer;
 
 /**
@@ -125,6 +126,48 @@ public class IndexedMesh extends NativePhysicsObject {
         numTriangles = numIndices / vpt;
         indices = BufferUtils.createIntBuffer(indexArray);
         indexStride = vpt * intBytes;
+
+        createMesh();
+    }
+
+    /**
+     * Instantiate an IndexedMesh based on the specified vertex positions. An
+     * index will be assigned to each distinct position.
+     *
+     * @param buffer the vertex positions of an non-indexed triangle mesh (not
+     * null, flipped, limit a multiple of 9, unaffected)
+     */
+    public IndexedMesh(FloatBuffer buffer) {
+        Validate.nonNull(buffer, "buffer");
+        int numFloats = buffer.limit();
+        Validate.require(numFloats % 9 == 0, "size a multiple of 9");
+
+        // Assign an index to each distinct vertex position.
+        DistinctVectorValues dvv
+                = new DistinctVectorValues(buffer, 0, numFloats);
+
+        this.numVertices = dvv.countDistinct();
+        this.vertexPositions
+                = BufferUtils.createFloatBuffer(numAxes * numVertices);
+        this.vertexStride = numAxes * floatBytes;
+
+        int numIndices = numFloats / numAxes;
+        this.numTriangles = numIndices / vpt;
+        this.indices = BufferUtils.createIntBuffer(numIndices);
+        this.indexStride = vpt * intBytes;
+
+        Vector3f tmpVector = new Vector3f();
+        for (int oldVi = 0; oldVi < numIndices; ++oldVi) {
+            int newVi = dvv.findVvid(oldVi);
+            assert newVi >= 0 : newVi;
+            indices.put(oldVi, newVi);
+
+            int readPosition = numAxes * oldVi;
+            MyBuffer.get(buffer, readPosition, tmpVector);
+            int writePosition = numAxes * newVi;
+            MyBuffer.put(vertexPositions, writePosition, tmpVector);
+            // Some vertex positions may be written multiple times!
+        }
 
         createMesh();
     }
