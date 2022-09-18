@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 jMonkeyEngine
+ * Copyright (c) 2019-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -119,13 +119,13 @@ public class IndexedMesh extends NativePhysicsObject {
         int numIndices = indexArray.length;
         Validate.require(numIndices % vpt == 0, "length a multiple of 3");
 
-        numVertices = positionArray.length;
-        vertexPositions = BufferUtils.createFloatBuffer(positionArray);
-        vertexStride = numAxes * floatBytes;
+        this.numVertices = positionArray.length;
+        this.vertexPositions = BufferUtils.createFloatBuffer(positionArray);
+        this.vertexStride = numAxes * floatBytes;
 
-        numTriangles = numIndices / vpt;
-        indices = BufferUtils.createIntBuffer(indexArray);
-        indexStride = vpt * intBytes;
+        this.numTriangles = numIndices / vpt;
+        this.indices = BufferUtils.createIntBuffer(indexArray);
+        this.indexStride = vpt * intBytes;
 
         createMesh();
     }
