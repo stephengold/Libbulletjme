@@ -339,8 +339,8 @@ public class TranslationMotor extends NativePhysicsObject {
     native private static void
             getMaxMotorForce(long motorId, Vector3f storeVector);
 
-    native private static void
-            getParameter(long motorId, int parameterIndex, Vector3f storeVector);
+    native private static void getParameter(
+            long motorId, int parameterIndex, Vector3f storeVector);
 
     native private static void
             getServoTarget(long motorId, Vector3f storeVector);
