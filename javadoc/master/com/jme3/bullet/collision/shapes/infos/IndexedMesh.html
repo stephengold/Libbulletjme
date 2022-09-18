@@ -121,6 +121,10 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Instantiate an IndexedMesh based on the specified positions and indices.</div>
 </div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.nio.FloatBuffer)" class="member-name-link">IndexedMesh</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;buffer)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Instantiate an IndexedMesh based on the specified vertex positions.</div>
+</div>
 </div>
 </section>
 </li>
@@ -206,6 +210,19 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>positionArray</code> - (not null, unaffected)</dd>
 <dd><code>indexArray</code> - (not null, unaffected, length a multiple of 3)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.nio.FloatBuffer)">
+<h3>IndexedMesh</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">IndexedMesh</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/FloatBuffer.html" title="class or interface in java.nio" class="external-link">FloatBuffer</a>&nbsp;buffer)</span></div>
+<div class="block">Instantiate an IndexedMesh based on the specified vertex positions. An
+ index will be assigned to each distinct position.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>buffer</code> - the vertex positions of an non-indexed triangle mesh (not
+ null, flipped, limit a multiple of 9, unaffected)</dd>
 </dl>
 </section>
 </li>
