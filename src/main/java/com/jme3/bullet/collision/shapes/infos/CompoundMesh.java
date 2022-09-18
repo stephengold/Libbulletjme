@@ -73,6 +73,19 @@ public class CompoundMesh extends NativePhysicsObject {
     public CompoundMesh() {
         createEmpty();
     }
+
+    /**
+     * Copy an existing mesh.
+     *
+     * @param original the mesh to copy (not null, unaffected)
+     */
+    public CompoundMesh(CompoundMesh original) {
+        createEmpty();
+        for (IndexedMesh submesh : original.submeshes) {
+            add(submesh);
+        }
+        setScale(original.scale);
+    }
     // *************************************************************************
     // new methods exposed
 
