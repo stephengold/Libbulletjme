@@ -61,6 +61,18 @@ public class GImpactCollisionShape extends CollisionShape {
     // constructors
 
     /**
+     * Instantiate a shape based on the specified compound mesh and offset.
+     *
+     * @param mesh the mesh on which to base the shape (not null, unaffected)
+     * @param offset the offset to add to the vertex positions (not null,
+     * unaffected)
+     */
+    public GImpactCollisionShape(CompoundMesh mesh, Vector3f offset) {
+        this.nativeMesh = new CompoundMesh(mesh, offset);
+        createShape();
+    }
+
+    /**
      * Instantiate a shape based on the specified native mesh(es).
      *
      * @param submeshes the mesh(es) on which to base the shape (not null)
