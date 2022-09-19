@@ -241,7 +241,7 @@ public class IndexedMesh extends NativePhysicsObject {
     }
 
     /**
-     * Copy the vertex positions to a new buffer.
+     * Copy all of the vertex positions to a new buffer.
      *
      * @return a new, direct, unflipped buffer
      */

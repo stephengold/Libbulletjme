@@ -98,7 +98,7 @@ public class MeshCollisionShape extends CollisionShape {
     }
 
     /**
-     * Instantiate a shape from the specified compound mesh.
+     * Instantiate a shape based on the specified compound mesh.
      *
      * @param useCompression true to use quantized AABB compression
      * @param mesh the mesh on which to base the shape (must contain at least
@@ -243,7 +243,7 @@ public class MeshCollisionShape extends CollisionShape {
     // Java private methods
 
     /**
-     * Instantiate the configured btBvhTriangleMeshShape.
+     * Instantiate the configured {@code btBvhTriangleMeshShape}.
      */
     private void createShape() {
         int numTriangles = nativeMesh.countTriangles();
