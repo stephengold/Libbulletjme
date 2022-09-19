@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 jMonkeyEngine
+ * Copyright (c) 2019-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyVector3f;
 
 /**
  * A scalable mesh that combines multiple indexed meshes. Based on Bullet's
@@ -149,6 +150,31 @@ public class CompoundMesh extends NativePhysicsObject {
         result.set(scale);
 
         return result;
+    }
+
+    /**
+     * Find the maximum and minimum coordinates for each axis among the scaled
+     * vertices in this mesh.
+     *
+     * @param storeMaxima storage for the maxima (not null, modified)
+     * @param storeMinima storage for the minima (not null, modified)
+     */
+    public void maxMin(Vector3f storeMaxima, Vector3f storeMinima) {
+        storeMaxima.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY,
+                Float.NEGATIVE_INFINITY);
+        storeMinima.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+                Float.POSITIVE_INFINITY);
+
+        Vector3f max = new Vector3f();
+        Vector3f min = new Vector3f();
+        for (IndexedMesh submesh : submeshes) {
+            submesh.maxMin(max, min);
+            MyVector3f.accumulateMinima(storeMinima, min);
+            MyVector3f.accumulateMaxima(storeMaxima, max);
+        }
+
+        storeMaxima.multLocal(scale);
+        storeMinima.multLocal(scale);
     }
 
     /**
