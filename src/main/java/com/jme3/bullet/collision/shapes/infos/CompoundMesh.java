@@ -89,6 +89,28 @@ public class CompoundMesh extends NativePhysicsObject {
         }
         setScale(original.scale);
     }
+
+    /**
+     * Instantiate a mesh by applying an offset to an existing mesh.
+     *
+     * @param base the mesh to use as a base (not null, unaffected)
+     * @param offset the offset to add to the scaled vertex positions (not null,
+     * unaffected)
+     */
+    public CompoundMesh(CompoundMesh base, Vector3f offset) {
+        createEmpty();
+
+        Transform transform = new Transform();
+        transform.getScale().set(scale);
+        transform.setTranslation(offset);
+        for (IndexedMesh oldSubmesh : base.submeshes) {
+            FloatBuffer positions = oldSubmesh.copyVertexPositions();
+            MyBuffer.transform(positions, 0, positions.capacity(), transform);
+            IntBuffer indices = oldSubmesh.copyIndices();
+            IndexedMesh newSubmesh = new IndexedMesh(positions, indices);
+            add(newSubmesh);
+        }
+    }
     // *************************************************************************
     // new methods exposed
 
