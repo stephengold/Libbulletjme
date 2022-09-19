@@ -165,9 +165,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Count how many vertices are in this mesh.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IndexedMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#split(com.jme3.math.Plane)" class="member-name-link">split</a><wbr>(<a href="../../../../math/Plane.html" title="class in com.jme3.math">Plane</a>&nbsp;splittingPlane)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maxMin(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">maxMin</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMaxima,
+ <a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMinima)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find the maximum and minimum coordinates for each axis among the vertices
+ in this mesh.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IndexedMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#split(com.jme3.math.Plane)" class="member-name-link">split</a><wbr>(<a href="../../../../math/Plane.html" title="class in com.jme3.math">Plane</a>&nbsp;splittingPlane)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Attempt to divide this mesh into 2 meshes.</div>
 </div>
 </div>
@@ -293,6 +300,20 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the count (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="maxMin(com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>maxMin</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">maxMin</span><wbr><span class="parameters">(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMaxima,
+ <a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMinima)</span></div>
+<div class="block">Find the maximum and minimum coordinates for each axis among the vertices
+ in this mesh.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>storeMaxima</code> - storage for the maxima (not null, modified)</dd>
+<dd><code>storeMinima</code> - storage for the minima (not null, modified)</dd>
 </dl>
 </section>
 </li>

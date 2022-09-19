@@ -125,6 +125,11 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Copy an existing mesh.</div>
 </div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.bullet.collision.shapes.infos.CompoundMesh,com.jme3.math.Vector3f)" class="member-name-link">CompoundMesh</a><wbr>(<a href="CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a>&nbsp;base,
+ <a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Instantiate a mesh by applying an offset to an existing mesh.</div>
+</div>
 </div>
 </section>
 </li>
@@ -160,13 +165,20 @@ loadScripts(document, 'script');</script>
 <div class="block">Copy the scale factors.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(com.jme3.math.Vector3f)" class="member-name-link">setScale</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;scale)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maxMin(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">maxMin</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMaxima,
+ <a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMinima)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find the maximum and minimum coordinates for each axis among the scaled
+ vertices in this mesh.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(com.jme3.math.Vector3f)" class="member-name-link">setScale</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;scale)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Alter the scale factors.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#split(com.jme3.math.Triangle)" class="member-name-link">split</a><wbr>(<a href="../../../../math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;scaledTriangle)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#split(com.jme3.math.Triangle)" class="member-name-link">split</a><wbr>(<a href="../../../../math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;scaledTriangle)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Attempt to divide this mesh into 2 meshes.</div>
 </div>
 </div>
@@ -222,6 +234,20 @@ loadScripts(document, 'script');</script>
 </dl>
 </section>
 </li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.jme3.bullet.collision.shapes.infos.CompoundMesh,com.jme3.math.Vector3f)">
+<h3>CompoundMesh</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CompoundMesh</span><wbr><span class="parameters">(<a href="CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a>&nbsp;base,
+ <a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;offset)</span></div>
+<div class="block">Instantiate a mesh by applying an offset to an existing mesh.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>base</code> - the mesh to use as a base (not null, unaffected)</dd>
+<dd><code>offset</code> - the offset to add to the scaled vertex positions (not null,
+ unaffected)</dd>
+</dl>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -274,6 +300,20 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>the scale factor for each local axis (either storeResult or a new
  vector, not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="maxMin(com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>maxMin</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">maxMin</span><wbr><span class="parameters">(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMaxima,
+ <a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeMinima)</span></div>
+<div class="block">Find the maximum and minimum coordinates for each axis among the scaled
+ vertices in this mesh.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>storeMaxima</code> - storage for the maxima (not null, modified)</dd>
+<dd><code>storeMinima</code> - storage for the minima (not null, modified)</dd>
 </dl>
 </section>
 </li>
