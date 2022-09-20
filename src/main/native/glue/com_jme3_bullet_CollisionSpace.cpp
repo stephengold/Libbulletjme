@@ -270,6 +270,40 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasContact
 }
 
 /*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    pairTest
+ * Signature: (JJJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_pairTest
+(JNIEnv *pEnv, jclass, jlong spaceId, jlong aId, jlong bId, jobject listener) {
+jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
+    btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", 0);
+
+    btCollisionObject * const
+            pObjectA = reinterpret_cast<btCollisionObject *> (aId);
+    NULL_CHK(pEnv, pObjectA, "Collision object A does not exist.", 0);
+    const int aType = pObjectA->getInternalType();
+    btAssert(aType > 0);
+    btAssert(aType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    btCollisionObject * const
+            pObjectB = reinterpret_cast<btCollisionObject *> (bId);
+    NULL_CHK(pEnv, pObjectB, "Collision object B does not exist.", 0);
+    const int bType = pObjectB->getInternalType();
+    btAssert(bType > 0);
+    btAssert(bType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    JmeContactResultCallback callback(pEnv, listener);
+    pWorld->contactPairTest(pObjectA, pObjectB, callback);
+
+    jint result = callback.m_invocationCount;
+    return result;
+}
+
+/*
  * Callback used in raycasts.
  */
 struct JmeRayResultCallback : public btCollisionWorld::RayResultCallback {

@@ -428,6 +428,29 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
+     * Perform a pair test. The collision objects need not be added to the
+     * space.
+     *
+     * @param pcoA the first collision object to test (not null, unaffected)
+     * @param pcoB the 2nd collision object to test (not null, unaffected)
+     * @param listener the callback for reporting contacts (may be null)
+     * @return the number of times the listener was invoked, or would have been
+     * if it weren't null (&ge;0)
+     */
+    public int pairTest(PhysicsCollisionObject pcoA,
+            PhysicsCollisionObject pcoB, PhysicsCollisionListener listener) {
+        Validate.nonNull(pcoA, "object A");
+        Validate.nonNull(pcoB, "object B");
+
+        long spaceId = nativeId();
+        long aId = pcoA.nativeId();
+        long bId = pcoB.nativeId();
+        int result = pairTest(spaceId, aId, bId, listener);
+
+        return result;
+    }
+
+    /**
      * Perform a ray-collision test (raycast) and sort the results by ascending
      * hitFraction.
      *
@@ -728,6 +751,9 @@ public class CollisionSpace extends NativePhysicsObject {
 
     native private static boolean
             hasContact(long spaceId, int shape0Type, int shape1Type);
+
+    native private static int pairTest(long spaceId, long aId, long bId,
+            PhysicsCollisionListener listener);
 
     native private static void rayTest_native(Vector3f fromLocation,
             Vector3f toLocation, long spaceId,

@@ -73,6 +73,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasContact
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    pairTest
+ * Signature: (JJJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_pairTest
+  (JNIEnv *, jclass, jlong, jlong, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    rayTest_native
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
