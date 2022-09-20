@@ -72,7 +72,7 @@ public class MeshCollisionShape extends CollisionShape {
     /**
      * native mesh used to construct this shape
      */
-    private CompoundMesh nativeMesh;
+    final private CompoundMesh nativeMesh;
     // *************************************************************************
     // constructors
 
