@@ -32,6 +32,8 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.bullet.PhysicsSpace;
+import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
+import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
@@ -200,6 +202,24 @@ public class HeightfieldCollisionShape extends CollisionShape {
 
         assert count > 0 : count;
         return count;
+    }
+    // *************************************************************************
+    // CollisionShape methods
+
+    /**
+     * Approximate this shape with a splittable shape.
+     *
+     * @return a new splittable shape
+     */
+    @Override
+    public CollisionShape toSplittableShape() {
+        // Generate debug triangles.
+        FloatBuffer buffer = DebugShapeFactory
+                .getDebugTriangles(this, DebugShapeFactory.lowResolution);
+        IndexedMesh nativeMesh = new IndexedMesh(buffer);
+        MeshCollisionShape result = new MeshCollisionShape(true, nativeMesh);
+
+        return result;
     }
     // *************************************************************************
     // Java private methods
