@@ -246,7 +246,7 @@ public class IndexedMesh extends NativePhysicsObject {
      * @return a new, direct, unflipped buffer
      */
     public FloatBuffer copyVertexPositions() {
-        int numFloats = vertexPositions.capacity();
+        int numFloats = numVertices * numAxes;
         FloatBuffer result = BufferUtils.createFloatBuffer(numFloats);
         for (int bufPos = 0; bufPos < numFloats; ++bufPos) {
             float tmpFloat = vertexPositions.get(bufPos);
