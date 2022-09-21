@@ -1,5 +1,69 @@
 # Release log for the Libbulletjme project
 
+## Version 16.2.0 released on 21 September 2022
+
++ Bugfix:  assertion failure in `VHACDHull` after a failed decomposition
++ Added the `pairTest()` method to the `CollisionSpace` class.
++ Implemented collision-shape splitting:
+  + Added `split()` methods to 7 classes:
+    + `ChildCollisionShape`
+    + `CompoundCollisionShape`
+    + `CompoundMesh`
+    + `GImpactCollisionShape`
+    + `HullCollisionShape`
+    + `IndexedMesh`
+    + `MeshCollisionShape`
+  + Added the `canSplit() and `toSplittableShape()` methods
+    to the `CollisionShape` class.
+  + Added some constructors to 5 classes:
+    + `CompoundMesh`
+    + `GImpactCollisionShape`
+    + `HullCollisionShape`
+    + `IndexedMesh`
+    + `MeshCollisionShape`
+  + Added the `toHullShape()` method to the `ConvexShape` class.
+
++ Implemented center/volume estimation for collision shapes:
+  + Added the `aabbCenter()` and `scaledVolume()
+    methods to the `CollisionShape` class.
+  + Added the `maxMin()` method to the `CompoundMesh` class.
+  + Added `volumeConvex()` methods to the `DebugMeshCallback`
+    and `DebugShapeFactory` classes.
+  + Added the `copyTriangle()` and `maxMin()` methods
+    to the `IndexedMesh` class.
+
++ Added math classes:
+  + `DistinctVectorValues`
+  + `MyVolume`
+  + `RectangularSolid`
+  + `Triangle`
+  + `VectorSetUsingBuffer`
++ Added math methods:
+  + `MyBuffer.convariance()`
+  + `MyBuffer.maxMin()`
+  + `MyBuffer.mean()`
+  + `MyMath.cube()`
+  + `MyMath.mid(float, float, float)`
+  + `MyMath.min(float...)`
+  + `MyMath.modulo(int, int)`
+  + `MyMath.transformInverse()` for a `Triangle`
+  + the normal-and-displacement constructor for a `Plane`
+  + `Plane.pseudoDistance()`
+  + `Vector3f.crossLocal()`
+  + `Vector3f.distance()`
+  + `Vector3f.mult(float, Vector3f)`
+  + `Vector3f.mult(Vector3f)`
++ Added the `FastMath.QUARTER_PI` constant.
++ Added the `VectorSet` interface.
+
++ Added supplemental V-HACD methods:
+  + `VHACDParameters.toMap()`
+  + `Vhacd4Parameters.nextFillMode()`
+  + `Vhacd4Parameters.toMap()`
++ Updated the Bullet sourcecode to match SHA1 ID=dad061fc1
+  of the bullet3 project.
++ Upgraded Node.js to v16.17.0
+
 ## Version 16.1.0 released on 12 August 2022
 
 + Bugfix:  I/O resources not safely closed in `VHACDParameters`.
