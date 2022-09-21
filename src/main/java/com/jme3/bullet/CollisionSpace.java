@@ -204,8 +204,6 @@ public class CollisionSpace extends NativePhysicsObject {
      */
     public int contactTest(
             PhysicsCollisionObject pco, PhysicsCollisionListener listener) {
-        Validate.nonNull(pco, "collision object");
-
         long spaceId = nativeId();
         long pcoId = pco.nativeId();
         int result = contactTest(spaceId, pcoId, listener);
@@ -439,9 +437,6 @@ public class CollisionSpace extends NativePhysicsObject {
      */
     public int pairTest(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, PhysicsCollisionListener listener) {
-        Validate.nonNull(pcoA, "object A");
-        Validate.nonNull(pcoB, "object B");
-
         long spaceId = nativeId();
         long aId = pcoA.nativeId();
         long bId = pcoB.nativeId();

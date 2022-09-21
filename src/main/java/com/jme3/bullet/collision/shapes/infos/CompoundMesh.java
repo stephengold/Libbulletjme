@@ -179,8 +179,8 @@ public class CompoundMesh extends NativePhysicsObject {
     }
 
     /**
-     * Find the maximum and minimum coordinates for each axis among the scaled
-     * vertices in this mesh.
+     * Find the maximum and minimum coordinates for each local axis among the
+     * scaled vertices in this mesh.
      *
      * @param storeMaxima storage for the maxima (not null, modified)
      * @param storeMinima storage for the minima (not null, modified)
