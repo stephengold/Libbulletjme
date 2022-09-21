@@ -196,9 +196,9 @@ public class IndexBuffer {
     public int get(int position) {
         int result;
         if (bytes != null) {
-            result = bytes.get(position) & (int) 0xff;
+            result = bytes.get(position) & 0xff;
         } else if (shorts != null) {
-            result = shorts.get(position) & (int) 0xffff;
+            result = shorts.get(position) & 0xffff;
         } else {
             result = ints.get(position);
         }
@@ -288,9 +288,9 @@ public class IndexBuffer {
     protected int get() {
         int result;
         if (bytes != null) {
-            result = bytes.get() & (int) 0xff;
+            result = bytes.get() & 0xff;
         } else if (shorts != null) {
-            result = shorts.get() & (int) 0xffff;
+            result = shorts.get() & 0xffff;
         } else {
             result = ints.get();
         }
