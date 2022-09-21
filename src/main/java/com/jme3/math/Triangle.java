@@ -41,8 +41,7 @@ import jme3utilities.math.MyVector3f;
  * @author Mark Powell
  * @author Joshua Slack
  */
-public class Triangle implements Cloneable, java.io.Serializable {
-    static final long serialVersionUID = 1;
+public class Triangle {
     /**
      * location of the first vertex
      */
