@@ -572,7 +572,7 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
         return;
     }
 
-    pEnv->CallBooleanMethod(resultList, jmeClasses::List_addmethod, result);
+    pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -620,7 +620,7 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
         return;
     }
 
-    pEnv->CallBooleanMethod(resultList, jmeClasses::List_addmethod, result);
+    pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

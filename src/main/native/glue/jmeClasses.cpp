@@ -43,7 +43,7 @@ JavaVM * jmeClasses::vm;
 
 jclass jmeClasses::IllegalArgumentException;
 
-jmethodID jmeClasses::List_addmethod;
+jmethodID jmeClasses::List_addMethod;
 
 jmethodID jmeClasses::CollisionSpace_notifyCollisionGroupListeners;
 
@@ -198,7 +198,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    List_addmethod = pEnv->GetMethodID(List, "add", "(Ljava/lang/Object;)Z");
+    List_addMethod = pEnv->GetMethodID(List, "add", "(Ljava/lang/Object;)Z");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;

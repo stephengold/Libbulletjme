@@ -56,7 +56,7 @@ public:
 
     static jclass IllegalArgumentException;
 
-    static jmethodID List_addmethod;
+    static jmethodID List_addMethod;
 
     static jmethodID CollisionSpace_notifyCollisionGroupListeners;
 
