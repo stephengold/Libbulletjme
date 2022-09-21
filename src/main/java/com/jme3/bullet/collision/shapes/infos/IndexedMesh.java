@@ -136,7 +136,7 @@ public class IndexedMesh extends NativePhysicsObject {
      * Instantiate an IndexedMesh based on the specified vertex positions. An
      * index will be assigned to each distinct position.
      *
-     * @param buffer the vertex positions of an non-indexed triangle mesh (not
+     * @param buffer the vertex positions of a non-indexed triangle mesh (not
      * null, flipped, limit a multiple of 9, unaffected)
      */
     public IndexedMesh(FloatBuffer buffer) {
@@ -241,7 +241,7 @@ public class IndexedMesh extends NativePhysicsObject {
     }
 
     /**
-     * Copy all of the vertex positions to a new buffer.
+     * Copy all the vertex positions to a new buffer.
      *
      * @return a new, direct, unflipped buffer
      */
