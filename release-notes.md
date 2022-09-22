@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 16.2.0 released on 21 September 2022
+## Version 16.2.1 released on 22 September 2022
 
 + Bugfix:  assertion failure in `VHACDHull` after a failed decomposition
 + Added the `pairTest()` method to the `CollisionSpace` class.
@@ -13,7 +13,7 @@
     + `HullCollisionShape`
     + `IndexedMesh`
     + `MeshCollisionShape`
-  + Added the `canSplit() and `toSplittableShape()` methods
+  + Added the `canSplit()` and `toSplittableShape()` methods
     to the `CollisionShape` class.
   + Added some constructors to 5 classes:
     + `CompoundMesh`
@@ -39,7 +39,7 @@
   + `Triangle`
   + `VectorSetUsingBuffer`
 + Added math methods:
-  + `MyBuffer.convariance()`
+  + `MyBuffer.covariance()`
   + `MyBuffer.maxMin()`
   + `MyBuffer.mean()`
   + `MyMath.cube()`
