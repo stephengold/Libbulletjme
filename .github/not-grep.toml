@@ -1,3 +1,0 @@
-# Fail if the word "long" is found in the "src/main/native/glue" directory.
-[exclude]
-"src/main/native/glue/*" = "\blong\b"
