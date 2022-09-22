@@ -24,7 +24,7 @@
   + Added the `toHullShape()` method to the `ConvexShape` class.
 
 + Implemented center/volume estimation for collision shapes:
-  + Added the `aabbCenter()` and `scaledVolume()
+  + Added the `aabbCenter()` and `scaledVolume()`
     methods to the `CollisionShape` class.
   + Added the `maxMin()` method to the `CompoundMesh` class.
   + Added `volumeConvex()` methods to the `DebugMeshCallback`
