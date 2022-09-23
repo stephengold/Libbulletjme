@@ -129,7 +129,7 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(boolean,com.jme3.bullet.collision.shapes.infos.CompoundMesh)" class="member-name-link">MeshCollisionShape</a><wbr>(boolean&nbsp;useCompression,
  <a href="infos/CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a>&nbsp;mesh)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate a shape based on the specified compound mesh.</div>
+<div class="block">Instantiate a shape based on the specified CompoundMesh.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(boolean,com.jme3.bullet.collision.shapes.infos.IndexedMesh...)" class="member-name-link">MeshCollisionShape</a><wbr>(boolean&nbsp;useCompression,
  <a href="infos/IndexedMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">IndexedMesh</a>...&nbsp;submeshes)</code></div>
@@ -248,12 +248,12 @@ loadScripts(document, 'script');</script>
 <h3>MeshCollisionShape</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">MeshCollisionShape</span><wbr><span class="parameters">(boolean&nbsp;useCompression,
  <a href="infos/CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a>&nbsp;mesh)</span></div>
-<div class="block">Instantiate a shape based on the specified compound mesh.</div>
+<div class="block">Instantiate a shape based on the specified CompoundMesh.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>useCompression</code> - true to use quantized AABB compression</dd>
-<dd><code>mesh</code> - the mesh on which to base the shape (must contain at least
- one triangle)</dd>
+<dd><code>mesh</code> - the mesh on which to base the shape (not null, must contain
+ at least one triangle, unaffected)</dd>
 </dl>
 </section>
 </li>
