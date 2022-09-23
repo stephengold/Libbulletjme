@@ -61,7 +61,7 @@ public class RigidBodySnapshot {
      */
     final private static Vector3f scaleIdentity = new Vector3f(1f, 1f, 1f);
     // *************************************************************************
-    // fields
+    // fields TODO privatize
 
     /**
      * contact-response flag
