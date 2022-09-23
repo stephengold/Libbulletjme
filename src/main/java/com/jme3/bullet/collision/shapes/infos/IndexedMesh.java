@@ -142,7 +142,7 @@ public class IndexedMesh extends NativePhysicsObject {
     public IndexedMesh(FloatBuffer buffer) {
         Validate.nonNull(buffer, "buffer");
         int numFloats = buffer.limit();
-        Validate.require(numFloats % 9 == 0, "size a multiple of 9");
+        Validate.require(numFloats % 9 == 0, "limit a multiple of 9");
 
         // Assign an index to each distinct vertex position.
         DistinctVectorValues dvv
