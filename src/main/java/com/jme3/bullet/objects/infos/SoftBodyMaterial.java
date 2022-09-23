@@ -146,12 +146,12 @@ public class SoftBodyMaterial extends NativePhysicsObject {
 
     native private static float getVolumeStiffnessFactor(long materialId);
 
-    native private static void setAngularStiffnessFactor(long materialId,
-            float stiffness);
+    native private static void
+            setAngularStiffnessFactor(long materialId, float stiffness);
 
-    native private static void setLinearStiffnessFactor(long materialId,
-            float stiffness);
+    native private static void
+            setLinearStiffnessFactor(long materialId, float stiffness);
 
-    native private static void setVolumeStiffnessFactor(long materialId,
-            float stiffness);
+    native private static void
+            setVolumeStiffnessFactor(long materialId, float stiffness);
 }
