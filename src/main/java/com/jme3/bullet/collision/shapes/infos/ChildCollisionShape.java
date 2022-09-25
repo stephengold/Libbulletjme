@@ -230,6 +230,7 @@ public class ChildCollisionShape {
         HullCollisionShape hull = (HullCollisionShape) shape; // TODO more cases
 
         Transform c2pTransform = copyTransform(null);
+        shape.getScale(c2pTransform.getScale()); // Copy the scale factors.
         Triangle childTriangle
                 = MyMath.transformInverse(c2pTransform, parentTriangle, null);
         ChildCollisionShape[] mp = hull.split(childTriangle);
