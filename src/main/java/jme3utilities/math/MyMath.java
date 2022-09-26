@@ -269,6 +269,24 @@ public class MyMath { // TODO finalize the class
     }
 
     /**
+     * Find the maximum of some single-precision values.
+     *
+     * @param fValues the input values
+     * @return the most positive value
+     * @see java.lang.Math#max(float, float)
+     */
+    public static float max(float... fValues) {
+        float result = Float.NEGATIVE_INFINITY;
+        for (float value : fValues) {
+            if (value > result) {
+                result = value;
+            }
+        }
+
+        return result;
+    }
+
+    /**
      * Find the median of 3 single-precision values.
      *
      * @param a the first input value
