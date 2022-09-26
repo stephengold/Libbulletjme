@@ -84,6 +84,24 @@ public class RectangularSolid {
     // new methods exposed
 
     /**
+     * Determine the half extents of the solid.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the half extent of each local axis (either storeResult or a new
+     * vector, not null, all components non-negative)
+     */
+    public Vector3f halfExtents(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        maxima.subtract(minima, result);
+        result.divideLocal(2f);
+
+        assert result.x >= 0f : result.x;
+        assert result.y >= 0f : result.y;
+        assert result.z >= 0f : result.z;
+        return result;
+    }
+
+    /**
      * Rotate from local coordinates to world coordinates.
      *
      * @param local the input coordinates (not null, unaffected)
