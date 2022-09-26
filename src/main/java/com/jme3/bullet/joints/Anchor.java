@@ -231,8 +231,8 @@ public class Anchor extends PhysicsJoint {
         PhysicsRigidBody b = getRigidBody();
         long bId = b.nativeId();
 
-        long anchorId = createAnchor(aId, nodeIndexA, bId, pivotInB,
-                allowCollisions, influence);
+        long anchorId = createAnchor(
+                aId, nodeIndexA, bId, pivotInB, allowCollisions, influence);
         setNativeIdNotTracked(anchorId);
     }
     // *************************************************************************
