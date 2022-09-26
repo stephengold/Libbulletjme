@@ -1,5 +1,20 @@
 # Release log for the Libbulletjme project
 
+## Version 16.3.0 released on 25 September 2022
+
++ Bugfix:  shape's scale isn't copied in `HullCollisionShape.split()`
++ Bugfix:  shape's scale is ignored by `ChildCollisionShape.split()`
++ Bugfix:  `MeshCollisionShape.split()` doesn't preserve scaling
++ Bugfix:  `GImpactCollisionShape.split()` doesn't preserve scaling
++ Added the `Generator` class for randomization.
++ Added a 4-sphere constructor to the `MultiSphere` class.
++ Added 4 more math methods:
+  + `MyMath.fromAngles()`
+  + `MyMath.isBetween()`
+  + `MyMath.max()`
+  + `RectangularSolid.halfExtents()`
++ Added the `root2` constant to the `MyMath` class.
+
 ## Version 16.2.1 released on 22 September 2022
 
 + Bugfix:  assertion failure in `VHACDHull` after a failed decomposition
