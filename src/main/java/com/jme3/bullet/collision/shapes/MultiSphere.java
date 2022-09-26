@@ -35,11 +35,13 @@ import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Vector3f;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVolume;
+import jme3utilities.math.RectangularSolid;
 
 /**
  * A convex collision shape based on Bullet's {@code btMultiSphereShape}. Unlike
@@ -170,6 +172,54 @@ public class MultiSphere extends ConvexShape {
             float radius = radii.get(i);
             assert radius >= 0f : radius;
             this.radii[i] = radius;
+        }
+
+        createShape();
+    }
+
+    /**
+     * Instantiate a 4-sphere shape to fill the specified RectangularSolid. The
+     * spheres will be of equal size, arranged in a rectangle.
+     *
+     * @param rectangularSolid the solid on which to base the shape (not null)
+     */
+    public MultiSphere(RectangularSolid rectangularSolid) {
+        Vector3f halfExtents = rectangularSolid.halfExtents(null);
+        float radius = MyMath.min(halfExtents.x, halfExtents.y, halfExtents.z);
+
+        // Enumerate the local coordinates of the centers of the 4 spheres.
+        Vector3f max = rectangularSolid.maxima(null);
+        max.subtractLocal(radius, radius, radius);
+        Vector3f min = rectangularSolid.minima(null);
+        min.addLocal(radius, radius, radius);
+        List<Vector3f> centerLocations = new ArrayList<>(4);
+        if (radius == halfExtents.x) {
+            float x = max.x;
+            centerLocations.add(new Vector3f(x, max.y, max.z));
+            centerLocations.add(new Vector3f(x, max.y, min.z));
+            centerLocations.add(new Vector3f(x, min.y, max.z));
+            centerLocations.add(new Vector3f(x, min.y, min.z));
+        } else if (radius == halfExtents.y) {
+            float y = max.y;
+            centerLocations.add(new Vector3f(max.x, y, max.z));
+            centerLocations.add(new Vector3f(max.x, y, min.z));
+            centerLocations.add(new Vector3f(min.x, y, max.z));
+            centerLocations.add(new Vector3f(min.x, y, min.z));
+        } else {
+            assert radius == halfExtents.z;
+            float z = max.z;
+            centerLocations.add(new Vector3f(max.x, max.y, z));
+            centerLocations.add(new Vector3f(max.x, min.y, z));
+            centerLocations.add(new Vector3f(min.x, max.y, z));
+            centerLocations.add(new Vector3f(min.x, min.y, z));
+        }
+
+        // Transform centers to shape coordinates.
+        this.centers = new Vector3f[4];
+        this.radii = new float[]{radius, radius, radius, radius};
+        for (int sphereI = 0; sphereI < 4; ++sphereI) {
+            Vector3f localCenter = centerLocations.get(sphereI);
+            centers[sphereI] = rectangularSolid.localToWorld(localCenter, null);
         }
 
         createShape();
