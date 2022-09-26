@@ -27,6 +27,7 @@
 package jme3utilities.math;
 
 import com.jme3.math.FastMath;
+import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
@@ -102,6 +103,42 @@ public class MyMath { // TODO finalize the class
             String message = String.format("Overflow from cubing %g.", fValue);
             logger.warning(message);
         }
+        return result;
+    }
+
+    /**
+     * Sets a rotation matrix from the specified Tait-Bryan angles, applying the
+     * rotations in x-z-y extrinsic order or y-z'-x" intrinsic order.
+     *
+     * @param xAngle the X angle (in radians)
+     * @param yAngle the Y angle (in radians)
+     * @param zAngle the Z angle (in radians)
+     * @param storeResult storage for the result (modified if not null)
+     * @return a rotation matrix (either storeResult or a new instance)
+     */
+    public static Matrix3f fromAngles(
+            float xAngle, float yAngle, float zAngle, Matrix3f storeResult) {
+        Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
+
+        float c1 = FastMath.cos(yAngle);
+        float c2 = FastMath.cos(zAngle);
+        float c3 = FastMath.cos(xAngle);
+        float s1 = FastMath.sin(yAngle);
+        float s2 = FastMath.sin(zAngle);
+        float s3 = FastMath.sin(xAngle);
+
+        result.set(0, 0, c1 * c2);
+        result.set(0, 1, s1 * s3 - c1 * c3 * s2);
+        result.set(0, 2, c3 * s1 + c1 * s2 * s3);
+
+        result.set(1, 0, s2);
+        result.set(1, 1, c2 * c3);
+        result.set(1, 2, -c2 * s3);
+
+        result.set(2, 0, -c2 * s1);
+        result.set(2, 1, c1 * s3 + c3 * s1 * s2);
+        result.set(2, 2, c1 * c3 - s1 * s2 * s3);
+
         return result;
     }
 
