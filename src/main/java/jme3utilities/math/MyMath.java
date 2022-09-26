@@ -49,6 +49,10 @@ public class MyMath { // TODO finalize the class
      */
     final public static float phi = (1f + FastMath.sqrt(5f)) / 2f;
     /**
+     * square root of 2
+     */
+    final public static float root2 = FastMath.sqrt(2f);
+    /**
      * square root of 1/2
      */
     final public static float rootHalf = FastMath.sqrt(0.5f);
