@@ -102,8 +102,13 @@ loadScripts(document, 'script');</script>
 <div class="block">golden ratio = 1.618...</div>
 </div>
 <div class="col-first even-row-color"><code>static final float</code></div>
-<div class="col-second even-row-color"><code><a href="#rootHalf" class="member-name-link">rootHalf</a></code></div>
+<div class="col-second even-row-color"><code><a href="#root2" class="member-name-link">root2</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">square root of 2</div>
+</div>
+<div class="col-first odd-row-color"><code>static final float</code></div>
+<div class="col-second odd-row-color"><code><a href="#rootHalf" class="member-name-link">rootHalf</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">square root of 1/2</div>
 </div>
 </div>
@@ -132,15 +137,31 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Cube the specified single-precision value.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hypotenuse(float...)" class="member-name-link">hypotenuse</a><wbr>(float...&nbsp;fValues)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fromAngles(float,float,float,com.jme3.math.Matrix3f)" class="member-name-link">fromAngles</a><wbr>(float&nbsp;xAngle,
+ float&nbsp;yAngle,
+ float&nbsp;zAngle,
+ <a href="../../com/jme3/math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Sets a rotation matrix from the specified Tait-Bryan angles, applying the
+ rotations in x-z-y extrinsic order or y-z'-x" intrinsic order.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hypotenuse(float...)" class="member-name-link">hypotenuse</a><wbr>(float...&nbsp;fValues)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Determine the root sum of squares of some single-precision values.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hypotenuseDouble(double...)" class="member-name-link">hypotenuseDouble</a><wbr>(double...&nbsp;dValues)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hypotenuseDouble(double...)" class="member-name-link">hypotenuseDouble</a><wbr>(double...&nbsp;dValues)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Determine the root sum of squares of some double-precision values.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isBetween(float,float,float)" class="member-name-link">isBetween</a><wbr>(float&nbsp;a,
+ float&nbsp;b,
+ float&nbsp;c)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Test whether b is between a and c.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isFinite(float)" class="member-name-link">isFinite</a><wbr>(float&nbsp;value)</code></div>
@@ -166,61 +187,66 @@ loadScripts(document, 'script');</script>
  linear (Lerp) *polation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mid(float,float,float)" class="member-name-link">mid</a><wbr>(float&nbsp;a,
- float&nbsp;b,
- float&nbsp;c)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#max(float...)" class="member-name-link">max</a><wbr>(float...&nbsp;fValues)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Find the median of 3 single-precision values.</div>
+<div class="block">Find the maximum of some single-precision values.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#min(float...)" class="member-name-link">min</a><wbr>(float...&nbsp;fValues)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mid(float,float,float)" class="member-name-link">mid</a><wbr>(float&nbsp;a,
+ float&nbsp;b,
+ float&nbsp;c)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Find the minimum of some single-precision values.</div>
+<div class="block">Find the median of 3 single-precision values.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(float,float)" class="member-name-link">modulo</a><wbr>(float&nbsp;fValue,
- float&nbsp;modulus)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#min(float...)" class="member-name-link">min</a><wbr>(float...&nbsp;fValues)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Find the minimum of some single-precision values.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(float,float)" class="member-name-link">modulo</a><wbr>(float&nbsp;fValue,
+ float&nbsp;modulus)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Compute the least non-negative value congruent with a single-precision
  value with respect to the specified modulus.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(int,int)" class="member-name-link">modulo</a><wbr>(int&nbsp;iValue,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(int,int)" class="member-name-link">modulo</a><wbr>(int&nbsp;iValue,
  int&nbsp;modulus)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Compute the least non-negative value congruent with an integer value with
  respect to the specified modulus.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(float)" class="member-name-link">standardize</a><wbr>(float&nbsp;fValue)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(float)" class="member-name-link">standardize</a><wbr>(float&nbsp;fValue)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Standardize a single-precision value in preparation for hashing.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardizeAngle(float)" class="member-name-link">standardizeAngle</a><wbr>(float&nbsp;angle)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardizeAngle(float)" class="member-name-link">standardizeAngle</a><wbr>(float&nbsp;angle)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Standardize a rotation angle to the range [-Pi, Pi).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sumOfSquares(float...)" class="member-name-link">sumOfSquares</a><wbr>(float...&nbsp;fValues)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sumOfSquares(float...)" class="member-name-link">sumOfSquares</a><wbr>(float...&nbsp;fValues)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Compute the sum of squares of some single-precision values.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toDegrees(float)" class="member-name-link">toDegrees</a><wbr>(float&nbsp;radians)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toDegrees(float)" class="member-name-link">toDegrees</a><wbr>(float&nbsp;radians)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Convert an angle from radians to degrees.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toRadians(float)" class="member-name-link">toRadians</a><wbr>(float&nbsp;degrees)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toRadians(float)" class="member-name-link">toRadians</a><wbr>(float&nbsp;degrees)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Convert an angle from degrees to radians.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#transformInverse(com.jme3.math.Transform,com.jme3.math.Triangle,com.jme3.math.Triangle)" class="member-name-link">transformInverse</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#transformInverse(com.jme3.math.Transform,com.jme3.math.Triangle,com.jme3.math.Triangle)" class="member-name-link">transformInverse</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
  <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;input,
  <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;storeResult)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Apply the inverse of the specified transform to each vertex of a
  Triangle.</div>
 </div>
@@ -246,6 +272,13 @@ loadScripts(document, 'script');</script>
 <h3>phi</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">phi</span></div>
 <div class="block">golden ratio = 1.618...</div>
+</section>
+</li>
+<li>
+<section class="detail" id="root2">
+<h3>root2</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">root2</span></div>
+<div class="block">square root of 2</div>
 </section>
 </li>
 <li>
@@ -302,6 +335,26 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="fromAngles(float,float,float,com.jme3.math.Matrix3f)">
+<h3>fromAngles</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></span>&nbsp;<span class="element-name">fromAngles</span><wbr><span class="parameters">(float&nbsp;xAngle,
+ float&nbsp;yAngle,
+ float&nbsp;zAngle,
+ <a href="../../com/jme3/math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Sets a rotation matrix from the specified Tait-Bryan angles, applying the
+ rotations in x-z-y extrinsic order or y-z'-x" intrinsic order.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>xAngle</code> - the X angle (in radians)</dd>
+<dd><code>yAngle</code> - the Y angle (in radians)</dd>
+<dd><code>zAngle</code> - the Z angle (in radians)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>a rotation matrix (either storeResult or a new instance)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="hypotenuse(float...)">
 <h3>hypotenuse</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">hypotenuse</span><wbr><span class="parameters">(float...&nbsp;fValues)</span></div>
@@ -325,6 +378,23 @@ loadScripts(document, 'script');</script>
 <dd><code>dValues</code> - the input values</dd>
 <dt>Returns:</dt>
 <dd>the positive square root of the sum of squares (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isBetween(float,float,float)">
+<h3>isBetween</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isBetween</span><wbr><span class="parameters">(float&nbsp;a,
+ float&nbsp;b,
+ float&nbsp;c)</span></div>
+<div class="block">Test whether b is between a and c.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>a</code> - the first input value</dd>
+<dd><code>b</code> - the 2nd input value</dd>
+<dd><code>c</code> - the 3rd input value</dd>
+<dt>Returns:</dt>
+<dd>true if b is between a and c (inclusive), otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -383,6 +453,25 @@ loadScripts(document, 'script');</script>
 <dd><code>y1</code> - function value at t=1</dd>
 <dt>Returns:</dt>
 <dd>an interpolated function value</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="max(float...)">
+<h3>max</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">max</span><wbr><span class="parameters">(float...&nbsp;fValues)</span></div>
+<div class="block">Find the maximum of some single-precision values.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fValues</code> - the input values</dd>
+<dt>Returns:</dt>
+<dd>the most positive value</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list-long">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html#max(double,double)" title="class or interface in java.lang" class="external-link"><code>Math.max(float, float)</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
