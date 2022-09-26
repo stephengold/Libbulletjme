@@ -15,6 +15,7 @@ com.simsilica.mathd
 jme3utilities
 jme3utilities.lbj
 jme3utilities.math
+jme3utilities.math.noise
 jme3utilities.minie
 vhacd
 vhacd4

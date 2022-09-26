@@ -2527,6 +2527,18 @@ loadScripts(document, 'script');</script>
 <div class="block">Create an index map to merge any mesh vertices that share the same
  position.</div>
 </dd>
+<dt><a href="jme3utilities/math/noise/Generator.html" class="type-name-link" title="class in jme3utilities.math.noise">Generator</a> - Class in <a href="jme3utilities/math/noise/package-summary.html">jme3utilities.math.noise</a></dt>
+<dd>
+<div class="block">Generate pseudo-random numbers, vectors, and selections.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#%3Cinit%3E()" class="member-name-link">Generator()</a> - Constructor for class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Instantiate a pseudo-random generator with a seed likely to be unique.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#%3Cinit%3E(long)" class="member-name-link">Generator(long)</a> - Constructor for class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Instantiate a pseudo-random generator with the specified seed.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/PcoType.html#generic" class="member-name-link">generic</a> - Static variable in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PcoType.html" title="class in com.jme3.bullet.collision">PcoType</a></dt>
 <dd>
 <div class="block">default value, unused in Libbulletjme (native name: CO_COLLISION_OBJECT)</div>
@@ -5111,6 +5123,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Reusable classes which implement mathematical formulas and operations, for
  use with jMonkeyEngine3.</div>
 </dd>
+<dt><a href="jme3utilities/math/noise/package-summary.html">jme3utilities.math.noise</a> - package jme3utilities.math.noise</dt>
+<dd>
+<div class="block">Reusable classes and interfaces for implementing noise and pseudo-random
+ number generation in jMonkeyEngine3.</div>
+</dd>
 <dt><a href="jme3utilities/minie/package-summary.html">jme3utilities.minie</a> - package jme3utilities.minie</dt>
 <dd>
 <div class="block">Bullet physics support for jMonkeyEngine3.</div>
@@ -6560,6 +6577,28 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Advance the fill mode to the next value.</div>
 </dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#nextFloat(float,float)" class="member-name-link">nextFloat(float, float)</a> - Method in class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Generate a single-precision value, uniformly distributed between 2
+ extremes.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#nextInt(int,int)" class="member-name-link">nextInt(int, int)</a> - Method in class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Generate an integer value, uniformly distributed between 2 extremes.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#nextQuaternion(com.jme3.math.Quaternion)" class="member-name-link">nextQuaternion(Quaternion)</a> - Method in class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Generate a uniformly distributed, pseudo-random unit quaternion.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#nextUnitVector3f(com.jme3.math.Vector3f)" class="member-name-link">nextUnitVector3f(Vector3f)</a> - Method in class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Generate a uniformly distributed, pseudo-random unit vector.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#nextVector3f(com.jme3.math.Vector3f)" class="member-name-link">nextVector3f(Vector3f)</a> - Method in class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Generate a pseudo-random vector that is uniformly distributed throughout
+ the unit sphere centered on the origin.</div>
+</dd>
 <dt><a href="com/jme3/bullet/SolverType.html#NNCG" class="member-name-link">NNCG</a> - Enum constant in enum class com.jme3.bullet.<a href="com/jme3/bullet/SolverType.html" title="enum class in com.jme3.bullet">SolverType</a></dt>
 <dd>
 <div class="block">btNNCGConstraintSolver: using the Non-smooth Nonlinear Conjugate Gradient
@@ -6956,6 +6995,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/math/FastMath.html#PI" class="member-name-link">PI</a> - Static variable in class com.jme3.math.<a href="com/jme3/math/FastMath.html" title="class in com.jme3.math">FastMath</a></dt>
 <dd>
 <div class="block">The value PI as a float.</div>
+</dd>
+<dt><a href="jme3utilities/math/noise/Generator.html#pick(E%5B%5D)" class="member-name-link">pick(E[])</a> - Method in class jme3utilities.math.noise.<a href="jme3utilities/math/noise/Generator.html" title="class in jme3utilities.math.noise">Generator</a></dt>
+<dd>
+<div class="block">Pick a pseudo-random element from the specified array.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/ReducedDeformableBody.html#pinNode(int)" class="member-name-link">pinNode(int)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/ReducedDeformableBody.html" title="class in com.jme3.bullet.objects">ReducedDeformableBody</a></dt>
 <dd>
