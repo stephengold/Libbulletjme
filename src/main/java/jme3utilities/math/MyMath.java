@@ -179,6 +179,27 @@ public class MyMath { // TODO finalize the class
     }
 
     /**
+     * Test whether b is between a and c.
+     *
+     * @param a the first input value
+     * @param b the 2nd input value
+     * @param c the 3rd input value
+     * @return true if b is between a and c (inclusive), otherwise false
+     */
+    public static boolean isBetween(float a, float b, float c) {
+        if (a > c) {
+            return a >= b && b >= c;
+        } else if (a < c) {
+            return a <= b && b <= c;
+        } else if (a == c) {
+            return a == b;
+        } else {
+            String message = "a = " + a + " c = " + c;
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
      * Test whether the specified floating-point value is finite. Note that Java
      * 8 provides {@link java.lang.Float#isFinite(float)}.
      *
