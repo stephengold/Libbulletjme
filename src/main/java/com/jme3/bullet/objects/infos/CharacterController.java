@@ -73,7 +73,7 @@ public class CharacterController extends NativePhysicsObject {
     public CharacterController(PhysicsCharacter character) {
         Validate.nonNull(character, "collision object");
 
-        pco = character;
+        this.pco = character;
         createController();
     }
     // *************************************************************************
