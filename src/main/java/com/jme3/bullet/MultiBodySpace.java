@@ -146,7 +146,9 @@ public class MultiBodySpace extends PhysicsSpace {
      */
     public Collection<MultiBody> getMultiBodyList() {
         Collection<MultiBody> result = multiBodyMap.values();
-        return Collections.unmodifiableCollection(result);
+        result = Collections.unmodifiableCollection(result);
+
+        return result;
     }
 
     /**
@@ -156,7 +158,8 @@ public class MultiBodySpace extends PhysicsSpace {
      * @return the pre-existing MultiBodySpace running on this thread
      */
     public static MultiBodySpace getMultiBodySpace() {
-        return (MultiBodySpace) getCollisionSpace();
+        CollisionSpace result = getCollisionSpace();
+        return (MultiBodySpace) result;
     }
 
     /**

@@ -132,11 +132,14 @@ public class ChildCollisionShape {
      * null)
      */
     public Vector3f copyOffset(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return offset.clone();
+            result = offset.clone();
         } else {
-            return storeResult.set(offset);
+            result = storeResult.set(offset);
         }
+
+        return result;
     }
 
     /**
@@ -159,11 +162,14 @@ public class ChildCollisionShape {
      * @return a rotation matrix (either storeResult or a new matrix, not null)
      */
     public Matrix3f copyRotationMatrix(Matrix3f storeResult) {
+        Matrix3f result;
         if (storeResult == null) {
-            return rotation.clone();
+            result = rotation.clone();
         } else {
-            return storeResult.set(rotation);
+            result = storeResult.set(rotation);
         }
+
+        return result;
     }
 
     /**

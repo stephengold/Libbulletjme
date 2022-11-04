@@ -210,7 +210,9 @@ public class HingeJoint extends Constraint {
      */
     public boolean getEnableMotor() {
         long constraintId = nativeId();
-        return getEnableAngularMotor(constraintId);
+        boolean result = getEnableAngularMotor(constraintId);
+
+        return result;
     }
 
     /**
@@ -247,7 +249,9 @@ public class HingeJoint extends Constraint {
      */
     public float getHingeAngle() {
         long constraintId = nativeId();
-        return getHingeAngle(constraintId);
+        float result = getHingeAngle(constraintId);
+
+        return result;
     }
 
     /**
@@ -267,7 +271,9 @@ public class HingeJoint extends Constraint {
      */
     final public float getLowerLimit() {
         long constraintId = nativeId();
-        return getLowerLimit(constraintId);
+        float result = getLowerLimit(constraintId);
+
+        return result;
     }
 
     /**
@@ -277,7 +283,9 @@ public class HingeJoint extends Constraint {
      */
     public float getMotorTargetVelocity() {
         long constraintId = nativeId();
-        return getMotorTargetVelocity(constraintId);
+        float result = getMotorTargetVelocity(constraintId);
+
+        return result;
     }
 
     /**
@@ -287,7 +295,9 @@ public class HingeJoint extends Constraint {
      */
     public float getMaxMotorImpulse() {
         long constraintId = nativeId();
-        return getMaxMotorImpulse(constraintId);
+        float result = getMaxMotorImpulse(constraintId);
+
+        return result;
     }
 
     /**
@@ -306,7 +316,9 @@ public class HingeJoint extends Constraint {
      */
     final public float getUpperLimit() {
         long constraintId = nativeId();
-        return getUpperLimit(constraintId);
+        float result = getUpperLimit(constraintId);
+
+        return result;
     }
 
     /**

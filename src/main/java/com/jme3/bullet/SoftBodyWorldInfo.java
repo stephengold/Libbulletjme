@@ -230,7 +230,9 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
      */
     public float waterOffset() {
         long infoId = nativeId();
-        return getWaterOffset(infoId);
+        float result = getWaterOffset(infoId);
+
+        return result;
     }
     // *************************************************************************
     // Java private methods

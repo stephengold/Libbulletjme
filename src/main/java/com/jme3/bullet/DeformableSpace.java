@@ -120,7 +120,8 @@ public class DeformableSpace extends MultiBodySpace {
      * @return the pre-existing DeformableSpace running on this thread
      */
     public static DeformableSpace getDeformableSpace() {
-        return (DeformableSpace) getCollisionSpace();
+        CollisionSpace result = getCollisionSpace();
+        return (DeformableSpace) result;
     }
 
     /**
@@ -132,7 +133,9 @@ public class DeformableSpace extends MultiBodySpace {
      */
     public Collection<PhysicsSoftBody> getSoftBodyList() {
         Collection<PhysicsSoftBody> result = softBodyMap.values();
-        return Collections.unmodifiableCollection(result);
+        result = Collections.unmodifiableCollection(result);
+
+        return result;
     }
 
     /**

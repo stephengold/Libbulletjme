@@ -718,7 +718,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      */
     public boolean isActive() {
         long objectId = nativeId();
-        return isActive(objectId);
+        boolean result = isActive(objectId);
+
+        return result;
     }
 
     /**
