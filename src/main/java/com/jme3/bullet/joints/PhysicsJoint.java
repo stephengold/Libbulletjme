@@ -207,7 +207,7 @@ abstract public class PhysicsJoint extends NativePhysicsObject {
      * @param physicsSpace (may be null)
      */
     public void setPhysicsSpace(PhysicsSpace physicsSpace) {
-        space = physicsSpace;
+        this.space = physicsSpace;
     }
     // *************************************************************************
     // new protected methods
@@ -220,7 +220,7 @@ abstract public class PhysicsJoint extends NativePhysicsObject {
     final protected void setBodyA(PhysicsBody body) {
         assert body != null;
         assert bodyA == null : bodyA;
-        bodyA = body;
+        this.bodyA = body;
     }
 
     /**
@@ -231,7 +231,7 @@ abstract public class PhysicsJoint extends NativePhysicsObject {
     final protected void setBodyB(PhysicsBody body) {
         assert body != null;
         assert bodyB == null : bodyB;
-        bodyB = body;
+        this.bodyB = body;
     }
     // *************************************************************************
     // NativePhysicsObject methods

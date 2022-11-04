@@ -124,8 +124,8 @@ public class New6Dof extends Constraint {
             RotationOrder rotationOrder) {
         super(rigidBodyB, JointEnd.B, pivotInB, pivotInWorld);
 
-        rotA = rotInWorld.clone();
-        rotB = rotInB.clone();
+        this.rotA = rotInWorld.clone();
+        this.rotB = rotInB.clone();
         this.rotationOrder = rotationOrder;
         createConstraint();
     }
@@ -156,8 +156,8 @@ public class New6Dof extends Constraint {
             Matrix3f rotInA, Matrix3f rotInB, RotationOrder rotationOrder) {
         super(rigidBodyA, rigidBodyB, pivotInA, pivotInB);
 
-        rotA = rotInA.clone();
-        rotB = rotInB.clone();
+        this.rotA = rotInA.clone();
+        this.rotB = rotInB.clone();
         this.rotationOrder = rotationOrder;
         createConstraint();
     }
@@ -694,7 +694,7 @@ public class New6Dof extends Constraint {
         assert translationMotor == null;
 
         long constraintId = nativeId();
-        rotationMotor = new RotationMotor[MyVector3f.numAxes];
+        this.rotationMotor = new RotationMotor[MyVector3f.numAxes];
 
         for (int axisIndex = 0; axisIndex < MyVector3f.numAxes; ++axisIndex) {
             long motorId = getRotationalMotor(constraintId, axisIndex);

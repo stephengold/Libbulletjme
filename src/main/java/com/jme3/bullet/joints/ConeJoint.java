@@ -108,8 +108,8 @@ public class ConeJoint extends Constraint {
     public ConeJoint(
             PhysicsRigidBody rigidBodyA, Vector3f pivotInA, Matrix3f rotInA) {
         super(rigidBodyA, JointEnd.A, pivotInA, translateIdentity);
-        rotA = rotInA.clone();
-        rotB = rotA;
+        this.rotA = rotInA.clone();
+        this.rotB = rotA;
         createJoint();
     }
 
@@ -130,8 +130,8 @@ public class ConeJoint extends Constraint {
     public ConeJoint(PhysicsRigidBody rigidBodyA, PhysicsRigidBody rigidBodyB,
             Vector3f pivotInA, Vector3f pivotInB) {
         super(rigidBodyA, rigidBodyB, pivotInA, pivotInB);
-        rotA = new Matrix3f();
-        rotB = new Matrix3f();
+        this.rotA = new Matrix3f();
+        this.rotB = new Matrix3f();
         createJoint();
     }
 
@@ -157,8 +157,8 @@ public class ConeJoint extends Constraint {
             Vector3f pivotInA, Vector3f pivotInB, Matrix3f rotInA,
             Matrix3f rotInB) {
         super(rigidBodyA, rigidBodyB, pivotInA, pivotInB);
-        rotA = rotInA.clone();
-        rotB = rotInB.clone();
+        this.rotA = rotInA.clone();
+        this.rotB = rotInB.clone();
         createJoint();
     }
     // *************************************************************************
@@ -234,7 +234,7 @@ public class ConeJoint extends Constraint {
      */
     public void setAngularOnly(boolean value) {
         long constraintId = nativeId();
-        angularOnly = value;
+        this.angularOnly = value;
         setAngularOnly(constraintId, value);
     }
 

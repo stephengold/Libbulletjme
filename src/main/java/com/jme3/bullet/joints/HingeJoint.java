@@ -122,9 +122,9 @@ public class HingeJoint extends Constraint {
 
         assert axisInA.isUnitVector() : axisInA;
         assert axisInWorld.isUnitVector() : axisInWorld;
-        axisA = axisInA.clone();
-        axisB = axisInWorld.clone();
-        useReferenceFrameA = (referenceFrame == JointEnd.A);
+        this.axisA = axisInA.clone();
+        this.axisB = axisInWorld.clone();
+        this.useReferenceFrameA = (referenceFrame == JointEnd.A);
         createJoint();
         /*
          * Synchronize the btHingeConstraint parameters with the local copies.
@@ -163,8 +163,8 @@ public class HingeJoint extends Constraint {
 
         assert axisInA.isUnitVector() : axisInA;
         assert axisInB.isUnitVector() : axisInB;
-        axisA = axisInA.clone();
-        axisB = axisInB.clone();
+        this.axisA = axisInA.clone();
+        this.axisB = axisInB.clone();
         createJoint();
         /*
          * Synchronize btHingeConstraint parameters with local copies.
@@ -369,9 +369,9 @@ public class HingeJoint extends Constraint {
     public void setLimit(float low, float high, float softness, float bias,
             float relaxation) {
         long constraintId = nativeId();
-        biasFactor = bias;
-        relaxationFactor = relaxation;
-        limitSoftness = softness;
+        this.biasFactor = bias;
+        this.relaxationFactor = relaxation;
+        this.limitSoftness = softness;
         setLimit(constraintId, low, high, softness, bias, relaxation);
     }
     // *************************************************************************

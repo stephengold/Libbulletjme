@@ -141,9 +141,9 @@ public class SixDofJoint extends Constraint {
             JointEnd linearReferenceFrame) {
         super(rigidBodyB, JointEnd.B, pivotInB, pivotInWorld);
 
-        useLinearReferenceFrameA = (linearReferenceFrame == JointEnd.A);
-        rotA = rotInWorld.clone();
-        rotB = rotInB.clone();
+        this.useLinearReferenceFrameA = (linearReferenceFrame == JointEnd.A);
+        this.rotA = rotInWorld.clone();
+        this.rotB = rotInB.clone();
         createJoint();
     }
 
@@ -173,8 +173,8 @@ public class SixDofJoint extends Constraint {
         super(rigidBodyA, rigidBodyB, pivotInA, pivotInB);
 
         this.useLinearReferenceFrameA = useLinearReferenceFrameA;
-        rotA = rotInA.clone();
-        rotB = rotInB.clone();
+        this.rotA = rotInA.clone();
+        this.rotB = rotInB.clone();
         createJoint();
     }
 
@@ -199,8 +199,8 @@ public class SixDofJoint extends Constraint {
         super(rigidBodyA, rigidBodyB, pivotInA, pivotInB);
 
         this.useLinearReferenceFrameA = useLinearReferenceFrameA;
-        rotA = new Matrix3f();
-        rotB = new Matrix3f();
+        this.rotA = new Matrix3f();
+        this.rotB = new Matrix3f();
         createJoint();
     }
     // *************************************************************************
@@ -506,7 +506,7 @@ public class SixDofJoint extends Constraint {
         assert translationalMotor == null;
 
         long constraintId = nativeId();
-        rotationalMotors = new RotationalLimitMotor[numAxes];
+        this.rotationalMotors = new RotationalLimitMotor[numAxes];
 
         for (int axisIndex = 0; axisIndex < numAxes; ++axisIndex) {
             long motorId = getRotationalLimitMotor(constraintId, axisIndex);
@@ -514,7 +514,7 @@ public class SixDofJoint extends Constraint {
         }
 
         long motorId = getTranslationalLimitMotor(constraintId);
-        translationalMotor = new TranslationalLimitMotor(motorId);
+        this.translationalMotor = new TranslationalLimitMotor(motorId);
     }
     // *************************************************************************
     // native private methods
