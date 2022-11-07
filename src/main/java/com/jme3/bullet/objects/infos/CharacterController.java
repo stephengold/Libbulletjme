@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2021 jMonkeyEngine
+ * Copyright (c) 2009-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -91,9 +91,8 @@ public class CharacterController extends NativePhysicsObject {
         setGravity(source.getGravity(null));
         setJumpSpeed(source.getJumpSpeed());
         setLinearDamping(source.getLinearDamping());
-        /*
-         * Walk direction affects linear velocity, so set it first!
-         */
+
+        // Walk direction affects linear velocity, so set it first!
         setWalkDirection(source.getWalkDirection(null));
         setLinearVelocity(source.getLinearVelocity(null));
 

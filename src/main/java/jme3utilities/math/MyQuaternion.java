@@ -100,9 +100,8 @@ public class MyQuaternion { // TODO finalize the class
         assert Validate.nonNull(input, "input");
 
         normalizeLocal(input);
-        /*
-         * Generate each of the 24 cardinal rotations.
-         */
+
+        // Generate each of the 24 cardinal rotations.
         Quaternion cardinalRotation = new Quaternion();
         Quaternion bestCardinalRotation = new Quaternion();
         Vector3f z = new Vector3f();
