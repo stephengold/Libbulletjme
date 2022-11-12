@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 jMonkeyEngine
+ * Copyright (c) 2019-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,19 @@
 #include "LinearMath/btAlignedAllocator.h"
 #include "LinearMath/btQuickprof.h"
 #include "LinearMath/btThreads.h"
+
+extern int gNumClampedCcdMotions;
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    countClampedCcdMotions
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_util_NativeLibrary_countClampedCcdMotions
+(JNIEnv *pEnv, jclass) {
+    int result = gNumClampedCcdMotions;
+    return jint(result);
+}
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
