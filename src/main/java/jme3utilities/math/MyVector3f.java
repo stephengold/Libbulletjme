@@ -35,7 +35,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MyVector3f { // TODO finalize the class
+final public class MyVector3f {
     // *************************************************************************
     // constants and loggers
 

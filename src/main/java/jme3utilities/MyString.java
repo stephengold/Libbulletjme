@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MyString { // TODO finalize the class
+final public class MyString {
     // *************************************************************************
     // constants and loggers
 

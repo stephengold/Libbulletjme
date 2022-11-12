@@ -40,7 +40,7 @@ import jme3utilities.Validate;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MyMath { // TODO finalize the class
+final public class MyMath {
     // *************************************************************************
     // constants and loggers
 
