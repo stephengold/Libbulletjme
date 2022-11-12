@@ -9,7 +9,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
-    version = '16.3.0'
+    version = '17.0.0'
     baseName = "${artifact}-${version}"
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }

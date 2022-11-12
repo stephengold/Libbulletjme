@@ -1,5 +1,18 @@
 # Release log for the Libbulletjme project
 
+## Version 17.0.0 released on 12 November 2022
+
++ Renamed the public logger in `ConvexShape`. (API change)
++ Renamed 2 protected fields in `RigidBodySnapshot`. (API change)
++ Protected 5 no-arg constructors. (API changes)
++ Qualified 6 public classes as `final`. (API changes)
++ Privatized 27 protected fields in `RigidBodySnapshot`.
++ Added 3 new methods:
+  + `NativeLibrary.countClampedMotions()`
+  + `PhysicsSpace.isCcdWithStaticOnly()`
+  + `PhysicsSpace.setCcdWithStaticOnly()`
++ Upgraded Node.js to v18.12.1
+
 ## Version 16.3.0 released on 25 September 2022
 
 + Bugfix:  shape's scale isn't copied in `HullCollisionShape.split()`
