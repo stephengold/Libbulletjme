@@ -440,11 +440,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">angular velocity (in physics-space coordinates)</div>
 </dd>
-<dt><a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html#anisotopicFrictionComponents" class="member-name-link">anisotopicFrictionComponents</a> - Variable in class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html" title="class in com.jme3.bullet.objects.infos">RigidBodySnapshot</a></dt>
+<dt><a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html#anisotropicFrictionComponents" class="member-name-link">anisotropicFrictionComponents</a> - Variable in class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html" title="class in com.jme3.bullet.objects.infos">RigidBodySnapshot</a></dt>
 <dd>
 <div class="block">anisotropic friction components</div>
 </dd>
-<dt><a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html#anisotopicFrictionModes" class="member-name-link">anisotopicFrictionModes</a> - Variable in class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html" title="class in com.jme3.bullet.objects.infos">RigidBodySnapshot</a></dt>
+<dt><a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html#anisotropicFrictionModes" class="member-name-link">anisotropicFrictionModes</a> - Variable in class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/RigidBodySnapshot.html" title="class in com.jme3.bullet.objects.infos">RigidBodySnapshot</a></dt>
 <dd>
 <div class="block">anisotropic friction modes (bitmask)</div>
 </dd>
@@ -1644,6 +1644,11 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/shapes/CompoundCollisionShape.html#countChildren()" class="member-name-link">countChildren()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CompoundCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CompoundCollisionShape</a></dt>
 <dd>
 <div class="block">Count the child shapes.</div>
+</dd>
+<dt><a href="com/jme3/bullet/util/NativeLibrary.html#countClampedCcdMotions()" class="member-name-link">countClampedCcdMotions()</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeLibrary.html" title="class in com.jme3.bullet.util">NativeLibrary</a></dt>
+<dd>
+<div class="block">Count the cumulative number of clamped CCD motions (native variable:
+ gNumClampedCcdMotions).</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#countClusters()" class="member-name-link">countClusters()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
@@ -4757,6 +4762,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Test whether b is between a and c.</div>
 </dd>
+<dt><a href="com/jme3/bullet/PhysicsSpace.html#isCcdWithStaticOnly()" class="member-name-link">isCcdWithStaticOnly()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
+<dd>
+<div class="block">Test whether CCD checks for collisions with static and kinematic bodies
+ (native field: m_ccdWithStaticOnly).</div>
+</dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#isCollisionAllowed(long)" class="member-name-link">isCollisionAllowed(long)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Test whether collisions are allowed between this body and the identified
@@ -5433,10 +5443,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
-<dt><a href="com/jme3/bullet/collision/shapes/ConvexShape.html#logger" class="member-name-link">logger</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a></dt>
-<dd>
-<div class="block">message logger for this class TODO rename</div>
-</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#logger" class="member-name-link">logger</a> - Static variable in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
@@ -5782,6 +5788,10 @@ loadScripts(document, 'script');</script>
 <div class="block">message logger for this class</div>
 </dd>
 <dt><a href="com/jme3/bullet/NativePhysicsObject.html#loggerN" class="member-name-link">loggerN</a> - Static variable in class com.jme3.bullet.<a href="com/jme3/bullet/NativePhysicsObject.html" title="class in com.jme3.bullet">NativePhysicsObject</a></dt>
+<dd>
+<div class="block">message logger for this class</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/ConvexShape.html#loggerX" class="member-name-link">loggerX</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
@@ -7926,6 +7936,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Alter the continuous collision detection (CCD) swept-sphere radius for
  this object (native field: m_ccdSweptSphereRadius).</div>
+</dd>
+<dt><a href="com/jme3/bullet/PhysicsSpace.html#setCcdWithStaticOnly(boolean)" class="member-name-link">setCcdWithStaticOnly(boolean)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
+<dd>
+<div class="block">Alter whether CCD checks for collisions with static and kinematic bodies
+ (native field: m_ccdWithStaticOnly).</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/SoftPhysicsJoint.html#setCFM(float)" class="member-name-link">setCFM(float)</a> - Method in class com.jme3.bullet.joints.<a href="com/jme3/bullet/joints/SoftPhysicsJoint.html" title="class in com.jme3.bullet.joints">SoftPhysicsJoint</a></dt>
 <dd>
