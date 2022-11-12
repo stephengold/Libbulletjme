@@ -1974,6 +1974,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countRigidBodies());
         Assert.assertEquals(1 / 60f, space.getAccuracy(), 0f);
         assertEquals(0f, -9.81f, 0f, space.getGravity(null), 0f);
+        Assert.assertFalse(space.isCcdWithStaticOnly());
         Assert.assertFalse(space.isUsingScr());
         Assert.assertEquals(0, space.listManifoldIds().length);
         Assert.assertEquals(4, space.maxSubSteps());

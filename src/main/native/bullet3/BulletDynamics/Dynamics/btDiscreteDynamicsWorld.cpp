@@ -198,6 +198,7 @@ btDiscreteDynamicsWorld::btDiscreteDynamicsWorld(btDispatcher* dispatcher, btBro
 	  m_fixedTimeStep(0),
 	  m_synchronizeAllMotionStates(false),
 	  m_applySpeculativeContactRestitution(false),
+	  m_ccdWithStaticOnly(false), // stephengold added 2022-11-11
 	  m_profileTimings(0),
 	  m_latencyMotionStateInterpolation(true)
 
@@ -760,9 +761,13 @@ public:
 	btScalar m_allowedPenetration;
 	btOverlappingPairCache* m_pairCache;
 	btDispatcher* m_dispatcher;
+        bool m_ccdWithStaticOnly; // stephengold added 2022-11-11
 
 public:
-	btClosestNotMeConvexResultCallback(btCollisionObject* me, const btVector3& fromA, const btVector3& toA, btOverlappingPairCache* pairCache, btDispatcher* dispatcher) : btCollisionWorld::ClosestConvexResultCallback(fromA, toA),
+	btClosestNotMeConvexResultCallback(btCollisionObject* me, const btVector3& fromA, // stephengold modified 2022-11-11
+ const btVector3& toA, btOverlappingPairCache* pairCache, btDispatcher* dispatcher, bool ccdWithStaticOnly) // stephengold modified 2022-11-11
+                 : btCollisionWorld::ClosestConvexResultCallback(fromA, toA), // stephengold modified 2022-11-11
+                m_ccdWithStaticOnly(ccdWithStaticOnly), // stephengold modified 2022-11-11
 																																										   m_me(me),
 																																										   m_allowedPenetration(0.0f),
 																																										   m_pairCache(pairCache),
@@ -800,6 +805,11 @@ public:
 		///don't do CCD when the collision filters are not matching
 		if (!ClosestConvexResultCallback::needsCollision(proxy0))
 			return false;
+                if (m_ccdWithStaticOnly) { // stephengold added 2022-11-11
+                    btCollisionObject* otherObj = (btCollisionObject*)proxy0->m_clientObject; // stephengold added 2022-11-11
+                    if (!otherObj->isStaticOrKinematicObject()) // stephengold added 2022-11-11
+			return false; // stephengold added 2022-11-11
+                } // stephengold added 2022-11-11
 		if (m_pairCache->getOverlapFilterCallback()) {
 			btBroadphaseProxy* proxy1 = m_me->getBroadphaseHandle();
 			bool collides = m_pairCache->needsBroadphaseCollision(proxy0, proxy1);
@@ -866,28 +876,9 @@ void btDiscreteDynamicsWorld::createPredictiveContactsInternal(btRigidBody** bod
 				if (body->getCollisionShape()->isConvex())
 				{
 					gNumClampedCcdMotions++;
-#ifdef PREDICTIVE_CONTACT_USE_STATIC_ONLY
-					class StaticOnlyCallback : public btClosestNotMeConvexResultCallback
-					{
-					public:
-						StaticOnlyCallback(btCollisionObject* me, const btVector3& fromA, const btVector3& toA, btOverlappingPairCache* pairCache, btDispatcher* dispatcher) : btClosestNotMeConvexResultCallback(me, fromA, toA, pairCache, dispatcher)
-						{
-						}
-
-						virtual bool needsCollision(btBroadphaseProxy* proxy0) const
-						{
-							btCollisionObject* otherObj = (btCollisionObject*)proxy0->m_clientObject;
-							if (!otherObj->isStaticOrKinematicObject())
-								return false;
-							return btClosestNotMeConvexResultCallback::needsCollision(proxy0);
-						}
-					};
-
-					StaticOnlyCallback sweepResults(body, body->getWorldTransform().getOrigin(), predictedTrans.getOrigin(), getBroadphase()->getOverlappingPairCache(), getDispatcher());
-#else
-					btClosestNotMeConvexResultCallback sweepResults(body, body->getWorldTransform().getOrigin(), predictedTrans.getOrigin(), getBroadphase()->getOverlappingPairCache(), getDispatcher());
-#endif
-					//btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
+					btClosestNotMeConvexResultCallback sweepResults( // stephengold modified 2022-11-11
+                                            body, body->getWorldTransform().getOrigin(), predictedTrans.getOrigin(), // stephengold modified 2022-11-11
+                                            getBroadphase()->getOverlappingPairCache(), getDispatcher(), m_ccdWithStaticOnly); // stephengold modified 2022-11-11
 					btSphereShape tmpSphere(body->getCcdSweptSphereRadius());  //btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
 					sweepResults.m_allowedPenetration = getDispatchInfo().m_allowedCcdPenetration;
 
@@ -968,28 +959,9 @@ void btDiscreteDynamicsWorld::integrateTransformsInternal(btRigidBody** bodies, 
 				if (body->getCollisionShape()->isConvex())
 				{
 					gNumClampedCcdMotions++;
-#ifdef USE_STATIC_ONLY
-					class StaticOnlyCallback : public btClosestNotMeConvexResultCallback
-					{
-					public:
-						StaticOnlyCallback(btCollisionObject* me, const btVector3& fromA, const btVector3& toA, btOverlappingPairCache* pairCache, btDispatcher* dispatcher) : btClosestNotMeConvexResultCallback(me, fromA, toA, pairCache, dispatcher)
-						{
-						}
-
-						virtual bool needsCollision(btBroadphaseProxy* proxy0) const
-						{
-							btCollisionObject* otherObj = (btCollisionObject*)proxy0->m_clientObject;
-							if (!otherObj->isStaticOrKinematicObject())
-								return false;
-							return btClosestNotMeConvexResultCallback::needsCollision(proxy0);
-						}
-					};
-
-					StaticOnlyCallback sweepResults(body, body->getWorldTransform().getOrigin(), predictedTrans.getOrigin(), getBroadphase()->getOverlappingPairCache(), getDispatcher());
-#else
-					btClosestNotMeConvexResultCallback sweepResults(body, body->getWorldTransform().getOrigin(), predictedTrans.getOrigin(), getBroadphase()->getOverlappingPairCache(), getDispatcher());
-#endif
-					//btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
+					btClosestNotMeConvexResultCallback sweepResults( // stephengold modified 2022-11-11
+                                            body, body->getWorldTransform().getOrigin(), predictedTrans.getOrigin(), // stephengold modified 2022-11-11
+                                            getBroadphase()->getOverlappingPairCache(), getDispatcher(), m_ccdWithStaticOnly); // stephengold modified 2022-11-11
 					btSphereShape tmpSphere(body->getCcdSweptSphereRadius());  //btConvexShape* convexShape = static_cast<btConvexShape*>(body->getCollisionShape());
 					sweepResults.m_allowedPenetration = getDispatchInfo().m_allowedCcdPenetration;
 

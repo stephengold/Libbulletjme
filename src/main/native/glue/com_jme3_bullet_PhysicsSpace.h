@@ -103,6 +103,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    isCcdWithStaticOnly
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_PhysicsSpace_isCcdWithStaticOnly
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    isSpeculativeContactRestitution
  * Signature: (J)Z
  */
@@ -140,6 +148,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeConstraint
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
   (JNIEnv *, jclass, jlong, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setCcdWithStaticOnly
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setCcdWithStaticOnly
+  (JNIEnv *, jclass, jlong, jboolean);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace

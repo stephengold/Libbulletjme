@@ -59,6 +59,7 @@ protected:
 	bool m_ownsConstraintSolver;
 	bool m_synchronizeAllMotionStates;
 	bool m_applySpeculativeContactRestitution;
+        bool m_ccdWithStaticOnly;
 
 	btAlignedObjectArray<btActionInterface*> m_actions;
 
@@ -214,6 +215,12 @@ public:
 	bool getApplySpeculativeContactRestitution() const
 	{
 		return m_applySpeculativeContactRestitution;
+	}
+	void setCcdWithStaticOnly(bool enable) {
+		m_ccdWithStaticOnly = enable;
+	}
+	bool getCcdWithStaticOnly() const {
+		return m_ccdWithStaticOnly;
 	}
 
 	///Preliminary serialization test for Bullet 2.76. Loading those files requires a separate parser (see Bullet/Demos/SerializeDemo)

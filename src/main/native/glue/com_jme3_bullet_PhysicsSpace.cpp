@@ -285,6 +285,23 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_getSolverInfo
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    isCcdWithStaticOnly
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_PhysicsSpace_isCcdWithStaticOnly
+(JNIEnv *pEnv, jclass, jlong spaceId) {
+    const jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.", JNI_FALSE);
+    const btDiscreteDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.", JNI_FALSE);
+
+    bool result = pWorld->getCcdWithStaticOnly();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    isSpeculativeContactRestitution
  * Signature: (J)Z
  */
@@ -391,6 +408,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_removeRigidBody
     pUser->m_jmeSpace = NULL;
 
     pWorld->removeRigidBody(pBody);
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    setCcdWithStaticOnly
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setCcdWithStaticOnly
+(JNIEnv *pEnv, jclass, jlong spaceId, jboolean setting) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",);
+    btDiscreteDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The physics world does not exist.",);
+
+    bool enable = bool(setting);
+    pWorld->setCcdWithStaticOnly(enable);
 }
 
 /*
