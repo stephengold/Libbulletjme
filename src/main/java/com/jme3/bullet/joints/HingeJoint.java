@@ -427,8 +427,7 @@ public class HingeJoint extends Constraint {
             a.setPhysicsLocation(saveLocation);
             a.setPhysicsRotation(saveRotation);
 
-        } else {
-            // Create a double-ended joint.
+        } else { // Create a double-ended joint.
             assert !useReferenceFrameA;
             long bId = b.nativeId();
             constraintId = createJoint(aId, bId, pivotA, axisA, pivotB, axisB);
