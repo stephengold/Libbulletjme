@@ -101,9 +101,9 @@ public class HullCollisionShape extends ConvexShape {
         this.points = new float[numAxes * numLocations];
         int j = 0;
         for (Vector3f location : locations) {
-            points[j + PhysicsSpace.AXIS_X] = location.x;
-            points[j + PhysicsSpace.AXIS_Y] = location.y;
-            points[j + PhysicsSpace.AXIS_Z] = location.z;
+            this.points[j + PhysicsSpace.AXIS_X] = location.x;
+            this.points[j + PhysicsSpace.AXIS_Y] = location.y;
+            this.points[j + PhysicsSpace.AXIS_Z] = location.z;
             j += numAxes;
         }
 
@@ -143,7 +143,7 @@ public class HullCollisionShape extends ConvexShape {
 
         this.points = new float[numFloats];
         for (int i = 0; i < numFloats; ++i) {
-            points[i] = flippedBuffer.get(i);
+            this.points[i] = flippedBuffer.get(i);
         }
 
         createShape();
@@ -176,9 +176,9 @@ public class HullCollisionShape extends ConvexShape {
         Vector3f tempVector = new Vector3f();
         for (Vector3f location : cornerLocations) {
             rectangularSolid.localToWorld(location, tempVector);
-            points[floatIndex + PhysicsSpace.AXIS_X] = tempVector.x;
-            points[floatIndex + PhysicsSpace.AXIS_Y] = tempVector.y;
-            points[floatIndex + PhysicsSpace.AXIS_Z] = tempVector.z;
+            this.points[floatIndex + PhysicsSpace.AXIS_X] = tempVector.x;
+            this.points[floatIndex + PhysicsSpace.AXIS_Y] = tempVector.y;
+            this.points[floatIndex + PhysicsSpace.AXIS_Z] = tempVector.z;
             floatIndex += numAxes;
         }
 
@@ -199,9 +199,9 @@ public class HullCollisionShape extends ConvexShape {
         this.points = new float[numFloats];
         int floatIndex = 0;
         for (Vector3f location : locations) {
-            points[floatIndex + PhysicsSpace.AXIS_X] = location.x;
-            points[floatIndex + PhysicsSpace.AXIS_Y] = location.y;
-            points[floatIndex + PhysicsSpace.AXIS_Z] = location.z;
+            this.points[floatIndex + PhysicsSpace.AXIS_X] = location.x;
+            this.points[floatIndex + PhysicsSpace.AXIS_Y] = location.y;
+            this.points[floatIndex + PhysicsSpace.AXIS_Z] = location.z;
             floatIndex += numAxes;
         }
 
