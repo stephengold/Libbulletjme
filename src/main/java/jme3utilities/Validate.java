@@ -28,9 +28,11 @@ package jme3utilities;
 
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.math.MyMath;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
@@ -126,6 +128,35 @@ final public class Validate {
             String what;
             if (description == null) {
                 what = "Vector3f argument";
+            } else {
+                what = description;
+            }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, vector});
+            String message = what + " must have all components finite.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
+     * Validate a finite Vec3d as a method argument.
+     *
+     * @param vector the vector to validate (unaffected)
+     * @param description a description of the argument
+     * @return true
+     * @throws IllegalArgumentException if the vector has a NaN or infinite
+     * component
+     * @throws NullPointerException or IllegalArgumentException if the vector is
+     * null
+     */
+    public static boolean finite(Vec3d vector, String description) {
+        nonNull(vector, description);
+
+        if (!MyMath.isFinite(vector)) {
+            String what;
+            if (description == null) {
+                what = "Vec3d argument";
             } else {
                 what = description;
             }
