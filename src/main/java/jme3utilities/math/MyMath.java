@@ -32,6 +32,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -214,6 +215,43 @@ final public class MyMath {
         if (Float.isInfinite(value)) {
             return false;
         } else if (Float.isNaN(value)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Tests whether the argument is a valid vector, returning false if it's
+     * null or if any component is NaN or infinite.
+     *
+     * @see com.jme3.math.Vector3f#isValidVector(com.jme3.math.Vector3f)
+     *
+     * @param vector the vector to test (unaffected)
+     * @return true if non-null and finite, otherwise false
+     */
+    public static boolean isFinite(Vec3d vector) {
+        if (vector == null) {
+            return false;
+        } else if (isFiniteDouble(vector.x) && isFiniteDouble(vector.y)
+                && isFiniteDouble(vector.z)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Test whether the specified floating-point value is finite. Note that Java
+     * 8 provides {@link java.lang.Double#isFinite(double)}.
+     *
+     * @param value the value to test
+     * @return true if finite, false if NaN or infinity
+     */
+    public static boolean isFiniteDouble(double value) {
+        if (Double.isInfinite(value)) {
+            return false;
+        } else if (Double.isNaN(value)) {
             return false;
         } else {
             return true;
