@@ -91,6 +91,21 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getL
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getLocalScalingDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getLocalScalingDp
+(JNIEnv *pEnv, jclass, jlong shapeId, jobject storeVector) {
+    const btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, storeVector, "The storeVector does not exist.",);
+
+    jmeBulletUtil::convertDp(pEnv, &pShape->getLocalScaling(), storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    getMargin
  * Signature: (J)F
  */

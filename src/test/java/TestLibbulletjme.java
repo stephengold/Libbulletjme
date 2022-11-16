@@ -1170,10 +1170,13 @@ public class TestLibbulletjme {
     @Test
     public void test013() {
         loadNativeLibrary();
-        /*
-         * Create a sphere-shaped dynamic rigid body.
-         */
-        CollisionShape shape = new SphereCollisionShape(0.1f);
+
+        CollisionShape shape = new MultiSphere(0.1f);
+        shape.setScale(new Vector3f(0.2f, 0.3f, 0.4f));
+        Vec3d sc = shape.getScaleDp(null);
+        assertEquals(0.2, 0.3, 0.4, sc, 1e-6);
+
+        // Create a sphere-shaped dynamic rigid body.
         PhysicsRigidBody body = new PhysicsRigidBody(shape, 1f);
         Vec3d gIn = new Vec3d(9.01234567, 0.98765433, -0.01234567);
         Quatd qIn = new Quatd(7.01234567, 8.01234567, -1.01234567, -2.01234567);
@@ -1943,6 +1946,7 @@ public class TestLibbulletjme {
         Assert.assertNotNull(shape);
         Assert.assertNotEquals(0L, shape.nativeId());
         assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
+        assertEquals(1.0, 1.0, 1.0, shape.getScaleDp(null), 0.0);
         Assert.assertTrue(shape.isContactFilterEnabled());
     }
 
