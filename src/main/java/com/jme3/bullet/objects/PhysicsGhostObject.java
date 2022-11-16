@@ -37,10 +37,12 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.Validate;
 
 /**
  * A collision object for intangibles, based on Bullet's
@@ -142,6 +144,19 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
 
     /**
+     * Directly alter the location of this object's center.
+     *
+     * @param location the desired location (in physics-space coordinates, not
+     * null, finite, unaffected)
+     */
+    public void setPhysicsLocationDp(Vec3d location) {
+        Validate.finite(location, "location");
+
+        long objectId = nativeId();
+        setPhysicsLocationDp(objectId, location);
+    }
+
+    /**
      * Directly alter this object's orientation.
      *
      * @param rotation the desired orientation (a rotation matrix in
@@ -221,6 +236,9 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
 
     native private static void
             setPhysicsLocation(long objectId, Vector3f location);
+
+    native private static void
+            setPhysicsLocationDp(long objectId, Vec3d location);
 
     native private static void
             setPhysicsRotation(long objectId, Matrix3f rotation);

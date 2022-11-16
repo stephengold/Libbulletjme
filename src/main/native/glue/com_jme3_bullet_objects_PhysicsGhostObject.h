@@ -83,6 +83,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsGhostObject
+ * Method:    setPhysicsLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsLocationDp
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsGhostObject
  * Method:    setPhysicsRotation
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */

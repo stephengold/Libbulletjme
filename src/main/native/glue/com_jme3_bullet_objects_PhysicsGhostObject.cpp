@@ -160,6 +160,24 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsGhostObject
+ * Method:    setPhysicsLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsLocationDp
+  (JNIEnv *pEnv, jclass, jlong ghostId, jobject locationVector) {
+    btPairCachingGhostObject * const
+            pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
+    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
+
+    jmeBulletUtil::convertDp(
+            pEnv, locationVector, &pGhost->getWorldTransform().getOrigin());
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsGhostObject
  * Method:    setPhysicsRotation
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */

@@ -1176,6 +1176,17 @@ public class TestLibbulletjme {
         Vec3d sc = shape.getScaleDp(null);
         assertEquals(0.2, 0.3, 0.4, sc, 1e-6);
 
+        // Create a sphere-shaped ghost object.
+        PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
+        Vec3d xIn = new Vec3d(7.01234567, 6.01234567, 0.01234567);
+        ghost.setPhysicsLocationDp(xIn);
+        Vec3d xOut1 = ghost.getPhysicsLocationDp(null);
+        if (NativeLibrary.isDoublePrecision()) {
+            Assert.assertEquals(xIn, xOut1);
+        } else {
+            assertEquals(xIn.x, xIn.y, xIn.z, xOut1, 1e-6);
+        }
+
         // Create a sphere-shaped dynamic rigid body.
         PhysicsRigidBody body = new PhysicsRigidBody(shape, 1f);
         Vec3d gIn = new Vec3d(9.01234567, 0.98765433, -0.01234567);
@@ -1183,7 +1194,6 @@ public class TestLibbulletjme {
         qIn.normalizeLocal();
         Vec3d vIn = new Vec3d(4.01234567, 2.01234567, 3.01234567);
         Vec3d wIn = new Vec3d(5.01234567, 1.01234567, 8.01234567);
-        Vec3d xIn = new Vec3d(7.01234567, 6.01234567, 0.01234567);
         body.setGravityDp(gIn);
         body.setPhysicsRotationDp(qIn);
         body.setLinearVelocityDp(vIn);
