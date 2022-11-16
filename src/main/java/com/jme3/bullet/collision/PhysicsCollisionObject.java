@@ -38,6 +38,7 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
+import com.jme3.math.TransformDp;
 import com.jme3.math.Vector3f;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
@@ -651,6 +652,25 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         getPhysicsLocation(result.getTranslation());
         getPhysicsRotation(result.getRotation());
         getScale(result.getScale());
+
+        return result;
+    }
+
+    /**
+     * Copy the coordinate transform of this object, including the scale of its
+     * shape.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a coordinate transform (in physics-space coordinates, either
+     * storeResult or a new Transform, not null)
+     */
+    public TransformDp getTransformDp(TransformDp storeResult) {
+        TransformDp result
+                = (storeResult == null) ? new TransformDp() : storeResult;
+
+        getPhysicsLocationDp(result.getTranslation());
+        getPhysicsRotationDp(result.getRotation());
+        collisionShape.getScaleDp(result.getScale());
 
         return result;
     }
