@@ -169,6 +169,17 @@ loadScripts(document, 'script');</script>
 <div class="block">Test whether the specified floating-point value is finite.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isFinite(com.simsilica.mathd.Vec3d)" class="member-name-link">isFinite</a><wbr>(<a href="../../com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;vector)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Tests whether the argument is a valid vector, returning false if it's
+ null or if any component is NaN or infinite.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isFiniteDouble(double)" class="member-name-link">isFiniteDouble</a><wbr>(double&nbsp;value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Test whether the specified floating-point value is finite.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isIdentity(com.jme3.math.Transform)" class="member-name-link">isIdentity</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Test the specified transform for exact identity.</div>
@@ -404,6 +415,40 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFinite</span><wbr><span class="parameters">(float&nbsp;value)</span></div>
 <div class="block">Test whether the specified floating-point value is finite. Note that Java
  8 provides <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Float.html#isFinite(float)" title="class or interface in java.lang" class="external-link"><code>Float.isFinite(float)</code></a>.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - the value to test</dd>
+<dt>Returns:</dt>
+<dd>true if finite, false if NaN or infinity</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isFinite(com.simsilica.mathd.Vec3d)">
+<h3>isFinite</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFinite</span><wbr><span class="parameters">(<a href="../../com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;vector)</span></div>
+<div class="block">Tests whether the argument is a valid vector, returning false if it's
+ null or if any component is NaN or infinite.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vector</code> - the vector to test (unaffected)</dd>
+<dt>Returns:</dt>
+<dd>true if non-null and finite, otherwise false</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list-long">
+<li><a href="../../com/jme3/math/Vector3f.html#isValidVector(com.jme3.math.Vector3f)"><code>Vector3f.isValidVector(com.jme3.math.Vector3f)</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isFiniteDouble(double)">
+<h3>isFiniteDouble</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFiniteDouble</span><wbr><span class="parameters">(double&nbsp;value)</span></div>
+<div class="block">Test whether the specified floating-point value is finite. Note that Java
+ 8 provides <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html#isFinite(double)" title="class or interface in java.lang" class="external-link"><code>Double.isFinite(double)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>value</code> - the value to test</dd>
