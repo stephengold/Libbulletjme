@@ -476,7 +476,7 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     /**
      * Directly alter this character's location.
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not null, finite, unaffected)
      */
     public void setPhysicsLocationDp(Vec3d location) {
         Validate.finite(location, "location");
