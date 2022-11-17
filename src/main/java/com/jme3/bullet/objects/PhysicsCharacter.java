@@ -40,6 +40,7 @@ import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.bullet.objects.infos.CharacterController;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -470,6 +471,16 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     public void setPhysicsLocation(Vector3f location) {
         Validate.nonNull(location, "location");
         controller.warp(location);
+    }
+
+    /**
+     * Directly alter this character's location.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    public void setPhysicsLocationDp(Vec3d location) {
+        Validate.finite(location, "location");
+        controller.warpDp(location);
     }
 
     /**

@@ -49,6 +49,7 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.ConeCollisionShape;
 import com.jme3.bullet.collision.shapes.Convex2dShape;
+import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.bullet.collision.shapes.CylinderCollisionShape;
 import com.jme3.bullet.collision.shapes.EmptyShape;
 import com.jme3.bullet.collision.shapes.GImpactCollisionShape;
@@ -1161,10 +1162,21 @@ public class TestLibbulletjme {
             assertEquals(xIn.x, xIn.y, xIn.z, xOut2, 1e-6);
         }
 
-        CollisionShape shape = new MultiSphere(0.1f);
+        ConvexShape shape = new MultiSphere(0.1f);
         shape.setScale(new Vector3f(0.2f, 0.3f, 0.4f));
         Vec3d sc = shape.getScaleDp(null);
         assertEquals(0.2, 0.3, 0.4, sc, 1e-6);
+
+        // Create a sphere-shaped character.
+        PhysicsCharacter character = new PhysicsCharacter(shape, 1f);
+        testPco(character);
+        character.setPhysicsLocationDp(xIn);
+        Vec3d xOut4 = character.getPhysicsLocationDp(null);
+        if (NativeLibrary.isDoublePrecision()) {
+            Assert.assertEquals(xIn, xOut4);
+        } else {
+            assertEquals(xIn.x, xIn.y, xIn.z, xOut4, 1e-6);
+        }
 
         // Create a sphere-shaped ghost object.
         PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
