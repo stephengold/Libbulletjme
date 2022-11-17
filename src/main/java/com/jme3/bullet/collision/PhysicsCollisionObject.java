@@ -45,6 +45,7 @@ import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyMath;
 
 /**
  * The abstract base class for collision objects based on Bullet's
@@ -520,7 +521,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in physics-space coordinates, either
-     * storeResult or a new vector, not null)
+     * storeResult or a new vector, finite)
      */
     public Vec3d getPhysicsLocationDp(Vec3d storeResult) {
         Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
@@ -528,6 +529,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         long objectId = nativeId();
         getLocationDp(objectId, result);
 
+        assert MyMath.isFinite(result);
         return result;
     }
 

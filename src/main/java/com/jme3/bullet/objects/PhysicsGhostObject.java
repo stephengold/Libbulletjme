@@ -136,9 +136,11 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
      * Directly alter the location of this object's center.
      *
      * @param location the desired location (in physics-space coordinates, not
-     * null, unaffected)
+     * null, finite, unaffected)
      */
     public void setPhysicsLocation(Vector3f location) {
+        Validate.finite(location, "location");
+
         long objectId = nativeId();
         setPhysicsLocation(objectId, location);
     }
