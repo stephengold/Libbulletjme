@@ -35,6 +35,7 @@ import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -470,6 +471,18 @@ public class CharacterController extends NativePhysicsObject {
         long controllerId = nativeId();
         warp(controllerId, location);
     }
+
+    /**
+     * Directly alter the location of the character's center.
+     *
+     * @param location the desired physics location (not null, unaffected)
+     */
+    public void warpDp(Vec3d location) {
+        Validate.finite(location, "location");
+
+        long controllerId = nativeId();
+        warpDp(controllerId, location);
+    }
     // *************************************************************************
     // Java private methods
 
@@ -570,4 +583,6 @@ public class CharacterController extends NativePhysicsObject {
             setWalkDirection(long controllerId, Vector3f direction);
 
     native private static void warp(long controllerId, Vector3f location);
+
+    native private static void warpDp(long controllerId, Vec3d location);
 }

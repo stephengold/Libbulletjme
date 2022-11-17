@@ -263,6 +263,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_se
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_warp
   (JNIEnv *, jclass, jlong, jobject);
 
+/*
+ * Class:     com_jme3_bullet_objects_infos_CharacterController
+ * Method:    warpDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_warpDp
+  (JNIEnv *, jclass, jlong, jobject);
+
 #ifdef __cplusplus
 }
 #endif

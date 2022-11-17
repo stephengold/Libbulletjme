@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -549,6 +549,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_wa
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, locationVector, &vec);
+
+    pController->warp(vec);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_CharacterController
+ * Method:    warpDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_warpDp
+(JNIEnv *pEnv, jclass, jlong kccId, jobject locationVector) {
+    jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
+    NULL_CHK(pEnv, pController, "The controller does not exist.",);
+
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
+    btVector3 vec;
+    jmeBulletUtil::convertDp(pEnv, locationVector, &vec);
 
     pController->warp(vec);
 }
