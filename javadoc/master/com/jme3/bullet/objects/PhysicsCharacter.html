@@ -758,7 +758,7 @@ loadScripts(document, 'script');</script>
  <a href="#warp(com.jme3.math.Vector3f)"><code>warp(com.jme3.math.Vector3f)</code></a>.)</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>location</code> - the desired location (not null, unaffected)</dd>
+<dd><code>location</code> - the desired location (not null, finite, unaffected)</dd>
 </dl>
 </section>
 </li>
@@ -769,7 +769,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Directly alter this character's location.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>location</code> - the desired location (not null, unaffected)</dd>
+<dd><code>location</code> - the desired location (not null, finite, unaffected)</dd>
 </dl>
 </section>
 </li>
@@ -830,7 +830,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Directly alter the location of this character's center.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>location</code> - the desired physics location (not null, unaffected)</dd>
+<dd><code>location</code> - the desired physics location (not null, finite,
+ unaffected)</dd>
 </dl>
 </section>
 </li>
