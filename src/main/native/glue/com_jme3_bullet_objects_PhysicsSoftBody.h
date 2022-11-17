@@ -691,6 +691,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLo
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    setPhysicsLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLocationDp
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    setPose
  * Signature: (JZZ)V
  */

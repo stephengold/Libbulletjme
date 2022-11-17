@@ -1184,7 +1184,20 @@ public class PhysicsSoftBody extends PhysicsBody {
     }
 
     /**
-     * Set the "default pose" or "lowest energy state" of this body to its
+     * Directly relocate the center of this body's bounding box.
+     *
+     * @param location the desired location (in physics-space coordinates, not
+     * null, finite, unaffected)
+     */
+    public void setPhysicsLocationDp(Vec3d location) {
+        Validate.finite(location, "location");
+
+        long objectId = nativeId();
+        setPhysicsLocationDp(objectId, location);
+    }
+
+    /**
+     * Set the "default pose" (lowest energy state) of this body based on its
      * current pose.
      *
      * @param setVolumePose true&rarr;alter the volume pose, false&rarr; don't
@@ -1787,6 +1800,9 @@ public class PhysicsSoftBody extends PhysicsBody {
 
     native private static void
             setPhysicsLocation(long bodyId, Vector3f locationVector);
+
+    native private static void
+            setPhysicsLocationDp(long bodyId, Vec3d locationVector);
 
     native private static void
             setPose(long bodyId, boolean setVolumePose, boolean setFramePose);

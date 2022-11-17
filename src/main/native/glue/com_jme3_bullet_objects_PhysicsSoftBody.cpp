@@ -1768,6 +1768,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLo
 
 /*
  * Class:     com_jme3_bullet_objects_PhysicsSoftBody
+ * Method:    setPhysicsLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLocationDp
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject locationVector) {
+    btSoftBody * const pBody = reinterpret_cast<btSoftBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",)
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
+    btVector3 vec;
+    jmeBulletUtil::convertDp(pEnv, locationVector, &vec);
+
+    vec -= getBoundingCenter(pBody);
+    pBody->translate(vec);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsSoftBody
  * Method:    setPose
  * Signature: (JZZ)V
  */

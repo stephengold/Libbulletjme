@@ -1171,6 +1171,29 @@ public class TestLibbulletjme {
     public void test013() {
         loadNativeLibrary();
 
+        // Generate a subdivided square mesh with alternating diagonals.
+        int numLines = 3;
+        float lineSpacing = 0.1f; // mesh units
+        IndexedMesh squareGrid
+                = createClothGrid(numLines, numLines, lineSpacing);
+
+        // Create a soft square and add it to the physics space.
+        PhysicsSoftBody cloth = new PhysicsSoftBody();
+        testPco(cloth);
+        NativeSoftBodyUtil.appendFromNativeMesh(squareGrid, cloth);
+
+        Vec3d xIn = new Vec3d(7.01234567, 6.01234567, 0.01234567);
+        cloth.setPhysicsLocationDp(xIn);
+
+        Vector3f xOut3 = cloth.getPhysicsLocation(null);
+        assertEquals(7.01234567f, 6.01234567f, 0.01234567f, xOut3, 1e-6f);
+        Vec3d xOut2 = cloth.getPhysicsLocationDp(null);
+        if (NativeLibrary.isDoublePrecision()) {
+            assertEquals(xIn.x, xIn.y, xIn.z, xOut2, 1e-15);
+        } else {
+            assertEquals(xIn.x, xIn.y, xIn.z, xOut2, 1e-6);
+        }
+
         CollisionShape shape = new MultiSphere(0.1f);
         shape.setScale(new Vector3f(0.2f, 0.3f, 0.4f));
         Vec3d sc = shape.getScaleDp(null);
@@ -1178,7 +1201,7 @@ public class TestLibbulletjme {
 
         // Create a sphere-shaped ghost object.
         PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
-        Vec3d xIn = new Vec3d(7.01234567, 6.01234567, 0.01234567);
+        testPco(ghost);
         ghost.setPhysicsLocationDp(xIn);
         Vec3d xOut1 = ghost.getPhysicsLocationDp(null);
         if (NativeLibrary.isDoublePrecision()) {
