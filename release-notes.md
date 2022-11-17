@@ -1,5 +1,22 @@
 # Release log for the Libbulletjme project
 
+## Version 17.1.0 released on 17 November 2022
+
++ Bugfix:  `getPhysicsLocationDp()` returns wrong location for a soft body
++ Added 8 double-precision accessors for physics objects:
+  + `CharacterController.warpDp()`
+  + `CollisionShape.getScaleDp()`
+  + `MultiBodyCollider.setPhysicsLocationDp()`
+  + `PhysicsCharacter.setPhysicsLocationDp()`
+  + `PhysicsCollisionObject.getTransformDp()`
+  + `PhysicsGhostObject.setPhysicsLocationDp()`
+  + `PhysicsSoftBody.setPhysicsLocationDp()`
+  + `RigidBodyMotionState.getLocationDp()`
++ Added the `TransformDp` math class.
++ Added the `isFiniteDouble()` and `isFinite(Vec3d)` methods
+  to the `MyMath` class.
++ Added the `finite(Vec3d, String)` method to the `Validate` class.
+
 ## Version 17.0.0 released on 12 November 2022
 
 + Renamed the public logger in `ConvexShape`. (API change)
