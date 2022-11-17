@@ -94,6 +94,21 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
 
 /*
  * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
+ * Method:    getWorldLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldLocationDp
+(JNIEnv *pEnv, jclass, jlong stateId, jobject storeVector) {
+    jmeMotionState *pMotionState
+            = reinterpret_cast<jmeMotionState *> (stateId);
+    NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
+
+    jmeBulletUtil::convertDp(
+            pEnv, &pMotionState->worldTransform.getOrigin(), storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_RigidBodyMotionState
  * Method:    getWorldRotation
  * Signature: (JLcom/jme3/math/Matrix3f;)V
  */

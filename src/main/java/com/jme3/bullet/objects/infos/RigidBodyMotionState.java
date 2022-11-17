@@ -37,8 +37,10 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jme3utilities.math.MyMath;
 
 /**
  * The motion state (transform) of a rigid body, with thread-safe access.
@@ -94,6 +96,23 @@ public class RigidBodyMotionState extends NativePhysicsObject {
         getWorldLocation(motionStateId, result);
 
         assert Vector3f.isValidVector(result);
+        return result;
+    }
+
+    /**
+     * Copy the location from this motion state.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the location vector (in physics-space coordinates, either
+     * storeResult or a new vector, not null)
+     */
+    public Vec3d getLocationDp(Vec3d storeResult) {
+        Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
+
+        long motionStateId = nativeId();
+        getWorldLocationDp(motionStateId, result);
+
+        assert MyMath.isFinite(result);
         return result;
     }
 
@@ -206,6 +225,9 @@ public class RigidBodyMotionState extends NativePhysicsObject {
 
     native private static void
             getWorldLocation(long stateId, Vector3f storeResult);
+
+    native private static void
+            getWorldLocationDp(long stateId, Vec3d storeVector);
 
     native private static void
             getWorldRotation(long stateId, Matrix3f storeResult);
