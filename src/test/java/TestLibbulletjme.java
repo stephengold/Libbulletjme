@@ -1308,9 +1308,8 @@ public class TestLibbulletjme {
                 0f, ManifoldPoints.getContactMotion1(nativeId), 0f);
         Assert.assertEquals(
                 0f, ManifoldPoints.getContactMotion2(nativeId), 0f);
-        /*
-         * Invoke all the setters.
-         */
+
+        // Invoke all the setters.
         ManifoldPoints.setAppliedImpulse(nativeId, 1f);
         ManifoldPoints.setAppliedImpulseLateral1(nativeId, 2f);
         ManifoldPoints.setAppliedImpulseLateral2(nativeId, 3f);
@@ -1333,9 +1332,8 @@ public class TestLibbulletjme {
                 .setPositionWorldOnA(nativeId, new Vector3f(27f, 28f, 29f));
         ManifoldPoints
                 .setPositionWorldOnB(nativeId, new Vector3f(30f, 31f, 32f));
-        /*
-         * Verify the resulting point.
-         */
+
+        // Verify the resulting point.
         Assert.assertEquals(11, ManifoldPoints.getFlags(nativeId));
         Assert.assertEquals(0, ManifoldPoints.getLifeTime(nativeId));
 
@@ -1766,9 +1764,8 @@ public class TestLibbulletjme {
             drop = dropBody;
             floor = floorBody;
         }
-        /*
-         * 50 iterations with a 20-msec timestep
-         */
+
+        // 50 iterations with a 20-msec timestep
         for (int i = 0; i < 50; ++i) {
             space.update(0.02f, 0, false, true, false);
         }
