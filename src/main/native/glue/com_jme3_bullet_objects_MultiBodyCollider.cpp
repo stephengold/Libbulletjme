@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -73,6 +73,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
 
     btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
     jmeBulletUtil::convert(pEnv, locationVector, pLocation);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_MultiBodyCollider
+ * Method:    setPhysicsLocationDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsLocationDp
+(JNIEnv *pEnv, jclass, jlong colliderId, jobject locationVector) {
+    btMultiBodyLinkCollider * const pCollider
+            = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
+    NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    btAssert(pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
+
+    btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
+    jmeBulletUtil::convertDp(pEnv, locationVector, pLocation);
 }
 
 /*
