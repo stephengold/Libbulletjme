@@ -1191,6 +1191,7 @@ public class TestLibbulletjme {
 
         // Create a sphere-shaped dynamic rigid body.
         PhysicsRigidBody body = new PhysicsRigidBody(shape, 1f);
+        testPco(body);
         Vec3d gIn = new Vec3d(9.01234567, 0.98765433, -0.01234567);
         Quatd qIn = new Quatd(7.01234567, 8.01234567, -1.01234567, -2.01234567);
         qIn.normalizeLocal();
