@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 17.1.0 released on 17 November 2022
+## Version 17.1.0 released on 23 November 2022
 
 + Bugfix:  `getPhysicsLocationDp()` returns wrong location for a soft body
 + Added 8 double-precision accessors for physics objects:
