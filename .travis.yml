@@ -13,6 +13,7 @@ jobs:
     - os: osx
       osx_image: xcode9.4.1
       script:
+        - date
         - ./gradlew build --console=plain --no-daemon -Ptravis=osx
 
     # Linux32 and Linux64 non-multithreaded (job .2):
@@ -23,6 +24,7 @@ jobs:
           packages:
             - g++-7-multilib
       script:
+        - date
         - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - sudo ln -s /usr/include/x86_64-linux-gnu/bits /usr/include/bits
         - g++ --version
@@ -32,6 +34,7 @@ jobs:
     - env:
         - FLAVOR=Mt64
       script:
+        - date
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
 
@@ -45,6 +48,7 @@ jobs:
       env:
         - FLAVOR=Dp32
       script:
+        - date
         - arm-linux-gnueabi-g++-7 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
 
@@ -58,6 +62,7 @@ jobs:
       env:
         - FLAVOR=Sp32
       script:
+        - date
         - arm-linux-gnueabi-g++-7 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
 
@@ -71,6 +76,7 @@ jobs:
       env:
         - FLAVOR=Dp32
       script:
+        - date
         - arm-linux-gnueabihf-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
 
@@ -84,6 +90,7 @@ jobs:
       env:
         - FLAVOR=Sp32
       script:
+        - date
         - arm-linux-gnueabihf-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
 
@@ -97,6 +104,7 @@ jobs:
       env:
         - FLAVOR=Dp64
       script:
+        - date
         - aarch64-linux-gnu-g++-6 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
 
@@ -110,6 +118,7 @@ jobs:
       env:
         - FLAVOR=Sp64
       script:
+        - date
         - aarch64-linux-gnu-g++-6 -E -v
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
@@ -120,6 +129,7 @@ jobs:
         components:
           - tools
       script:
+        - date
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - echo y | sdkmanager "patcher;v4" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
