@@ -478,7 +478,8 @@ public class CharacterController extends NativePhysicsObject {
     /**
      * Directly alter the location of the character's center.
      *
-     * @param location the desired physics location (not null, unaffected)
+     * @param location the desired physics location (not null, finite,
+     * unaffected)
      */
     public void warpDp(Vec3d location) {
         Validate.finite(location, "location");
