@@ -155,7 +155,7 @@ model {
                     // CI build with -Ptravis= specified on the command line
                     String travis = project.ext.travis
                     if (travis == 'amd64') { // using g++-4.7, so skip Mt flavors
-                        buildable = (!isMt) && !pName.startsWith('Linux_ARM')
+                        buildable = (!isMt) && !pName.contains('_ARM')
                     } else if (travis == 'amd64mt') { // using g++-5 to build Mt flavors
                         buildable = isMt && (pName == 'Linux64')
                     } else if (travis == 'arm32') {
@@ -165,7 +165,7 @@ model {
                     } else if (travis == 'arm64') {
                         buildable = (pName == 'Linux_ARM64')
                     } else if (travis == 'osx') { // using xcode9.3 for its 32-bit support
-                        buildable = pName.startsWith('MacOSX')
+                        buildable = pName.startsWith('MacOSX') && !pName.contains('_ARM')
                     }
                 } else {
                     // non-CI build (neither -Pgithub= nor -Ptravis= specified)
