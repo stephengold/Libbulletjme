@@ -89,6 +89,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    rayTestNativeDp
+ * Signature: (Lcom/simsilica/mathd/Vec3d;Lcom/simsilica/mathd/Vec3d;JLjava/util/List;I)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTestNativeDp
+  (JNIEnv *, jclass, jobject, jobject, jlong, jobject, jint);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    removeCollisionObject
  * Signature: (JJ)V
  */

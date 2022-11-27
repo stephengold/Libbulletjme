@@ -380,6 +380,36 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    rayTestNativeDp
+ * Signature: (Lcom/simsilica/mathd/Vec3d;Lcom/simsilica/mathd/Vec3d;JLjava/util/List;I)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTestNativeDp
+(JNIEnv *pEnv, jclass, jobject from, jobject to, jlong spaceId,
+        jobject resultList, jint flags) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.",);
+    btCollisionWorld *pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.",)
+
+    NULL_CHK(pEnv, to, "The to vector does not exist.",);
+    btVector3 native_to;
+    jmeBulletUtil::convertDp(pEnv, to, &native_to);
+
+    NULL_CHK(pEnv, from, "The from vector does not exist.",);
+    btVector3 native_from;
+    jmeBulletUtil::convertDp(pEnv, from, &native_from);
+
+    NULL_CHK(pEnv, resultList, "The result list does not exist.",);
+
+    JmeRayResultCallback
+    resultCallback(pEnv, native_from, native_to, resultList, flags);
+
+    pWorld->rayTest(native_from, native_to, resultCallback);
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    removeCollisionObject
  * Signature: (JJ)V
  */
