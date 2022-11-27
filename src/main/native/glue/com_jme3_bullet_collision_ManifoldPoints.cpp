@@ -375,6 +375,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPosition
 
 /*
  * Class:     com_jme3_bullet_collision_ManifoldPoints
+ * Method:    getPositionWorldOnADp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPositionWorldOnADp
+(JNIEnv *pEnv, jclass, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
+
+    jmeBulletUtil::convertDp(pEnv, &pPoint->m_positionWorldOnA, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_ManifoldPoints
  * Method:    getPositionWorldOnB
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
@@ -385,6 +399,20 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPosition
     NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
 
     jmeBulletUtil::convert(pEnv, &pPoint->m_positionWorldOnB, storeVector);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_ManifoldPoints
+ * Method:    getPositionWorldOnBDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPositionWorldOnBDp
+(JNIEnv *pEnv, jclass, jlong pointId, jobject storeVector) {
+    const btManifoldPoint * const
+            pPoint = reinterpret_cast<btManifoldPoint *> (pointId);
+    NULL_CHK(pEnv, pPoint, "The btManifoldPoint does not exist.",)
+
+    jmeBulletUtil::convertDp(pEnv, &pPoint->m_positionWorldOnB, storeVector);
 }
 
 /*

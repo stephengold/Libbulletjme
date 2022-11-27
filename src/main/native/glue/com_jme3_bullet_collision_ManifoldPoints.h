@@ -193,10 +193,26 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPosition
 
 /*
  * Class:     com_jme3_bullet_collision_ManifoldPoints
+ * Method:    getPositionWorldOnADp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPositionWorldOnADp
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_ManifoldPoints
  * Method:    getPositionWorldOnB
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPositionWorldOnB
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_collision_ManifoldPoints
+ * Method:    getPositionWorldOnBDp
+ * Signature: (JLcom/simsilica/mathd/Vec3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_ManifoldPoints_getPositionWorldOnBDp
   (JNIEnv *, jclass, jlong, jobject);
 
 /*
