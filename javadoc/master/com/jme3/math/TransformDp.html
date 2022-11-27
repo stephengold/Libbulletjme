@@ -211,9 +211,16 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns a string representation.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformVector(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)" class="member-name-link">transformVector</a><wbr>(<a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;in,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformInverseVector(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)" class="member-name-link">transformInverseVector</a><wbr>(<a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;in,
  <a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Applies the inverse transform to the specified coordinates and returns
+ the result in <code>storeResult</code>.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformVector(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)" class="member-name-link">transformVector</a><wbr>(<a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;in,
+ <a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;storeResult)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Transforms the specified coordinates and returns the result in
  <code>storeResult</code>.</div>
 </div>
@@ -428,6 +435,28 @@ loadScripts(document, 'script');</script>
 <dd><code>translate</code> - the desired translation (not null, unaffected)</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance (for chaining)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="transformInverseVector(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)">
+<h3>transformInverseVector</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">transformInverseVector</span><wbr><span class="parameters">(<a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;in,
+ <a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;storeResult)</span></div>
+<div class="block">Applies the inverse transform to the specified coordinates and returns
+ the result in <code>storeResult</code>. If the <code>storeResult</code> is null, a
+ new Vec3d is created to hold the value. Either way, the current instance
+ is unaffected, unless <code>storeResult</code> is its translation or scaling.
+ <p>
+ It IS safe for <code>in</code> and <code>storeResult</code> to be the same object.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>in</code> - the coordinates to transform (not null, unaffected unless it's
+ <code>storeResult</code>)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>the transformed coordinates (either <code>storeResult</code> or a new
+ Vec3d)</dd>
 </dl>
 </section>
 </li>
