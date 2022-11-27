@@ -364,6 +364,22 @@ public class Vec3d implements Cloneable {
     }
 
     /**
+     * Divides component-wise by the argument and returns the (modified) current
+     * instance.
+     * <p>
+     * It IS safe for {@code v} and {@code this} to be the same object.
+     *
+     * @param v the divisor (not null, unaffected unless it's {@code this})
+     * @return the (modified) current instance (for chaining)
+     */
+    public final Vec3d divideLocal( Vec3d v ) {
+        x /= v.x;
+        y /= v.y;
+        z /= v.z;
+        return this;
+    }
+ 
+    /**
      * Determine the squared length of this vector.
      *
      * @return the squared length (&ge;0)
