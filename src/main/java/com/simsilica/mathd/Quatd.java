@@ -381,7 +381,51 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Invert this Quatd to produce a new Quatd.
+     * Convert to an equivalent rotation matrix. The current instance is
+     * unaffected.
+     *
+     * <p>Note: the result is created from a normalized version of the current
+     * instance.
+     *
+     * @return a new 3x3 rotation matrix
+     */
+    public Matrix3d toRotationMatrix() {
+        double d = lengthSq();
+        double s = 2 / d;
+
+        // Premultiply for better performance
+        double xs = x * s;
+        double ys = y * s;
+        double zs = z * s;
+        double xx = x * xs;
+        double xy = x * ys;
+        double xz = x * zs;
+        double xw = w * xs;
+        double yy = y * ys;
+        double yz = y * zs;
+        double yw = w * ys;
+        double zz = z * zs;
+        double zw = w * zs;
+
+        // using s=2/norm (instead of 1/norm) saves 9 multiplications by 2 here
+        double m00 = 1 - (yy + zz);
+        double m01 = (xy - zw);
+        double m02 = (xz + yw);
+        double m10 = (xy + zw);
+        double m11 = 1 - (xx + zz);
+        double m12 = (yz - xw);
+        double m20 = (xz - yw);
+        double m21 = (yz + xw);
+        double m22 = 1 - (xx + yy);
+
+        return new Matrix3d( m00, m01, m02,
+                             m10, m11, m12,
+                             m20, m21, m22 );
+    }
+
+    /**
+     * Returns the multiplicative inverse.  For a quaternion with norm=0, null is
+     * returned. Either way, the current instance is unaffected.
      *
      * @return a new instance, or null if not invertible
      */
