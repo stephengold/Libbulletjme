@@ -1378,6 +1378,12 @@ public class TestLibbulletjme {
         assertEquals(27f, 28f, 29f, tmpVector, 0f);
         ManifoldPoints.getPositionWorldOnB(nativeId, tmpVector);
         assertEquals(30f, 31f, 32f, tmpVector, 0f);
+
+        Vec3d tmpVec = new Vec3d();
+        ManifoldPoints.getPositionWorldOnADp(nativeId, tmpVec);
+        assertEquals(27., 28., 29., tmpVec, 0.);
+        ManifoldPoints.getPositionWorldOnBDp(nativeId, tmpVec);
+        assertEquals(30., 31., 32., tmpVec, 0.);
     }
 
     /**
@@ -1845,6 +1851,21 @@ public class TestLibbulletjme {
         List<PhysicsRayTestResult> results2 = space.rayTest(
                 new Vector3f(0.7f, 0.7f, 2f), new Vector3f(0.7f, 0.7f, -2f));
         Assert.assertEquals(1, results2.size());
+
+        List<PhysicsRayTestResult> results0d = space.rayTestDp(
+                new Vec3d(0.8, 0.8, 2.), new Vec3d(0.8, 0.8, 0.),
+                new ArrayList<>(2));
+        Assert.assertEquals(0, results0d.size());
+
+        List<PhysicsRayTestResult> results1d = space.rayTestDp(
+                new Vec3d(0.7, 0.7, 2.), new Vec3d(0.7, 0.7, 0.),
+                new ArrayList<>(2));
+        Assert.assertEquals(1, results1d.size());
+
+        List<PhysicsRayTestResult> results2d = space.rayTestDp(
+                new Vec3d(0.7f, 0.7, 2.), new Vec3d(0.7, 0.7, -2.),
+                new ArrayList<>(2));
+        Assert.assertEquals(1, results2d.size());
 
         space.removeCollisionObject(ghost);
 
