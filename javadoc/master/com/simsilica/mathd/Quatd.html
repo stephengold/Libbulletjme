@@ -187,7 +187,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inverse()" class="member-name-link">inverse</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Invert this Quatd to produce a new Quatd.</div>
+<div class="block">Returns the multiplicative inverse.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lengthSq()" class="member-name-link">lengthSq</a>()</code></div>
@@ -253,9 +253,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Instantiate a Quaternion based on this Quatd.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toRotationMatrix()" class="member-name-link">toRotationMatrix</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Convert to an equivalent rotation matrix.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Represent this Quatd as a String.</div>
 </div>
 </div>
@@ -571,10 +576,26 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </section>
 </li>
 <li>
+<section class="detail" id="toRotationMatrix()">
+<h3>toRotationMatrix</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></span>&nbsp;<span class="element-name">toRotationMatrix</span>()</div>
+<div class="block">Convert to an equivalent rotation matrix. The current instance is
+ unaffected.
+
+ <p>Note: the result is created from a normalized version of the current
+ instance.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a new 3x3 rotation matrix</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="inverse()">
 <h3>inverse</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">inverse</span>()</div>
-<div class="block">Invert this Quatd to produce a new Quatd.</div>
+<div class="block">Returns the multiplicative inverse.  For a quaternion with norm=0, null is
+ returned. Either way, the current instance is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a new instance, or null if not invertible</dd>
