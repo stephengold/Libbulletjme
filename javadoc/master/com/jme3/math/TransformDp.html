@@ -488,14 +488,15 @@ loadScripts(document, 'script');</script>
  <a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;storeResult)</span></div>
 <div class="block">Transforms the specified coordinates and returns the result in
  <code>storeResult</code>. If the <code>storeResult</code> is null, a new Vec3d is
- created to hold the value. The current instance is unaffected unless
- <code>storeResult</code> is its scaling component or its translation
- component.
+ created to hold the value. Either way, the current instance is
+ unaffected, unless <code>storeResult</code> is its scaling component or its
+ translation component.
  <p>
  It IS safe for <code>in</code> and <code>storeResult</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>in</code> - the coordinates to transform (not null, unaffected)</dd>
+<dd><code>in</code> - the coordinates to transform (not null, unaffected unless it's
+ <code>storeResult</code>)</dd>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
 <dd>the transformed coordinates (either <code>storeResult</code> or a new

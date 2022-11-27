@@ -264,8 +264,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  float&nbsp;y,
  float&nbsp;z)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Divides component-wise by the specified components and returns the quotient
- as a new instance.</div>
+<div class="block">Divides component-wise by the specified components and returns the
+ quotient as a new instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#divide(com.jme3.math.Vector3f)" class="member-name-link">divide</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;divisor)</code></div>
@@ -1013,8 +1013,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">divide</span><wbr><span class="parameters">(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;z)</span></div>
-<div class="block">Divides component-wise by the specified components and returns the quotient
- as a new instance. The current instance is unaffected.</div>
+<div class="block">Divides component-wise by the specified components and returns the
+ quotient as a new instance. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - the divisor for the X component</dd>
@@ -1033,7 +1033,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>divisor</code> - the divisor (not null, unaffected)</dd>
+<dd><code>divisor</code> - the divisor (not null, unaffected unless it's
+ <code>this</code>)</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance (for chaining)</dd>
 </dl>

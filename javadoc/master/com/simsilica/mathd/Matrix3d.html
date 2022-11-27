@@ -83,7 +83,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Matrix3d</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></span></div>
-<div class="block">A matrix composed of 9 double-precision components, used to represent
+<div class="block">A matrix composed of 9 double-precision elements, used to represent
  rotations in 3-dimensional space.</div>
 </section>
 <section class="summary">
@@ -167,7 +167,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  double&nbsp;m21,
  double&nbsp;m22)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Instantiate a matrix with the specified components.</div>
+<div class="block">Instantiate a matrix with the specified elements.</div>
 </div>
 </div>
 </section>
@@ -212,7 +212,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.simsilica.mathd.Matrix3d)" class="member-name-link">set</a><wbr>(<a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a>&nbsp;mat)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy all components of the specified matrix to this matrix.</div>
+<div class="block">Copy all elements of the specified matrix to this matrix.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
@@ -331,7 +331,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  double&nbsp;m20,
  double&nbsp;m21,
  double&nbsp;m22)</span></div>
-<div class="block">Instantiate a matrix with the specified components.</div>
+<div class="block">Instantiate a matrix with the specified elements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>m00</code> - the desired value for row 0, column 0</dd>
@@ -371,12 +371,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="set(com.simsilica.mathd.Matrix3d)">
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a>&nbsp;mat)</span></div>
-<div class="block">Copy all components of the specified matrix to this matrix.</div>
+<div class="block">Copy all elements of the specified matrix to this matrix.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mat</code> - the desired value (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>this matrix</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -385,6 +385,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>makeIdentity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></span>&nbsp;<span class="element-name">makeIdentity</span>()</div>
 <div class="block">Configure as an identity matrix (diagonals = 1, other elements = 0).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the (modified) current instance (for chaining)</dd>
+</dl>
 </section>
 </li>
 <li>
