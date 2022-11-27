@@ -134,7 +134,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
 
     /**
-     * Directly alter the location of this object's center.
+     * Directly alter the location of the ghost's center.
      *
      * @param location the desired location (in physics-space coordinates, not
      * null, finite, unaffected)
@@ -147,7 +147,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
 
     /**
-     * Directly alter the location of this object's center.
+     * Directly alter the location of the ghost's center.
      *
      * @param location the desired location (in physics-space coordinates, not
      * null, finite, unaffected)
@@ -160,7 +160,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
 
     /**
-     * Directly alter this object's orientation.
+     * Directly alter the ghost's orientation.
      *
      * @param rotation the desired orientation (a rotation matrix in
      * physics-space coordinates, not null, unaffected)
@@ -171,7 +171,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
 
     /**
-     * Directly alter this object's orientation.
+     * Directly alter the ghost's orientation.
      *
      * @param rotation the desired orientation (a rotation quaternion in
      * physics-space coordinates, not null, unaffected)
@@ -182,7 +182,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     }
 
     /**
-     * Directly alter this object's orientation.
+     * Directly alter the ghost's orientation.
      *
      * @param rotation the desired orientation (a rotation quaternion in
      * physics-space coordinates, not null, unaffected)
