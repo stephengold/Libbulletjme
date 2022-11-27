@@ -246,6 +246,35 @@ final public class TransformDp {
     }
 
     /**
+     * Applies the inverse transform to the specified coordinates and returns
+     * the result in {@code storeResult}. If the {@code storeResult} is null, a
+     * new Vec3d is created to hold the value. Either way, the current instance
+     * is unaffected, unless {@code storeResult} is its translation or scaling.
+     * <p>
+     * It IS safe for {@code in} and {@code storeResult} to be the same object.
+     *
+     * @param in the coordinates to transform (not null, unaffected unless it's
+     * {@code storeResult})
+     * @param storeResult storage for the result (modified if not null)
+     * @return the transformed coordinates (either {@code storeResult} or a new
+     * Vec3d)
+     */
+    public Vec3d transformInverseVector(Vec3d in, Vec3d storeResult) {
+        Vec3d result;
+        if (storeResult == null) {
+            result = in.clone();
+        } else {
+            result = storeResult.set(in);
+        }
+
+        result.subtractLocal(translation);
+        rotation.inverse().mult(result, result);
+        result.divideLocal(scaling);
+
+        return result;
+    }
+
+    /**
      * Transforms the specified coordinates and returns the result in
      * {@code storeResult}. If the {@code storeResult} is null, a new Vec3d is
      * created to hold the value. The current instance is unaffected unless
