@@ -287,6 +287,35 @@ public final class Quatd implements Cloneable {
     }
 
     /**
+     * Multiplies by the specified quaternion and returns the product in a 3rd
+     * quaternion. The current instance is unaffected, unless it's
+     * {@code storeResult}.
+     *
+     * <p>This method is used to combine rotations. Note that quaternion
+     * multiplication is noncommutative, so generally q * p != p * q.
+     *
+     * <p>It IS safe for {@code q} and {@code storeResult} to be the same
+     * object. However, if {@code this} and {@code storeResult} are the same
+     * object, the result is undefined.
+     *
+     * @param q the right factor (not null, unaffected unless it's 
+     * {@code storeResult})
+     * @param storeResult storage for the product, or null for a new Quatd
+     * @return {@code this * q} (either {@code storeResult} or a new Quatd)
+     */
+    public Quatd mult( Quatd q, Quatd storeResult ) {
+        if (storeResult == null) {
+            storeResult = new Quatd();
+        }
+        double qw = q.w, qx = q.x, qy = q.y, qz = q.z;
+        storeResult.x = x * qw + y * qz - z * qy + w * qx;
+        storeResult.y = -x * qz + y * qw + z * qx + w * qy;
+        storeResult.z = x * qy - y * qx + z * qw + w * qz;
+        storeResult.w = -x * qx - y * qy - z * qz + w * qw;
+        return storeResult;
+    }
+
+    /**
      * Rotate the specified vector by this Quatd and store the result in another
      * vector.
      *
