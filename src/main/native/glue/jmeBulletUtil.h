@@ -59,6 +59,7 @@ public:
     static void convertDp(JNIEnv *, jobject inQuatd, btQuaternion * out);
     static void convertDp(JNIEnv *, jobject inVec3d, btVector3 * out);
     static void convertQuat(JNIEnv *, jobject inQuaternion, btMatrix3x3 * out);
+    static void convertQuatDp(JNIEnv *, jobject inQuatd, btMatrix3x3 * out);
 
     static void addRayTestResult(JNIEnv *, jobject resultList,
             const btVector3 *pNormal, btScalar hitFraction,

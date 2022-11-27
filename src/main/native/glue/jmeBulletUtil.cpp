@@ -468,6 +468,56 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv,
             (xz - yw), (yz + xw), 1.0 - (xx + yy));
 }
 
+void convertQuatDp(JNIEnv *pEnv, jobject inQuatd, btMatrix3x3 * pmOut) {
+    NULL_CHK(pEnv, inQuatd, "The input Quatd does not exist.",)
+    NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
+
+    double x = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_x);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double y = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_y);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double z = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_z);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double w = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_w);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    // TODO use btMatrix3x3 constructor from btQuaternion
+
+    double norm = w * w + x * x + y * y + z * z;
+    double s = (norm == 1.0) ? 2.0 : (norm > 0.1) ? 2.0 / norm : 0.0;
+
+    // compute xs/ys/zs first to save 6 multiplications, since xs/ys/zs
+    // will be used 2-4 times each.
+    double xs = x * s;
+    double ys = y * s;
+    double zs = z * s;
+    double xx = x * xs;
+    double xy = x * ys;
+    double xz = x * zs;
+    double xw = w * xs;
+    double yy = y * ys;
+    double yz = y * zs;
+    double yw = w * ys;
+    double zz = z * zs;
+    double zw = w * zs;
+
+    // using s=2/norm (instead of 1/norm) saves 9 multiplications by 2 here
+    pmOut->setValue(1.0 - (yy + zz), (xy - zw), (xz + yw),
+            (xy + zw), 1.0 - (xx + zz), (yz - xw),
+            (xz - yw), (yz + xw), 1.0 - (xx + yy));
+}
+
 void jmeBulletUtil::convertQuat(JNIEnv *pEnv, const btMatrix3x3 *pmIn,
         jobject outQuaternion) {
     NULL_CHK(pEnv, pmIn, "The input btMatrix3x3 does not exist.",)
