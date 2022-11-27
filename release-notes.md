@@ -1,5 +1,19 @@
 # Release log for the Libbulletjme project
 
+## Version 17.2.0 released on 27 November 2022
+
++ Added 4 double-precision accessors for physics objects:
+  + `CollisionSpace.rayTestDp()`
+  + `ManifoldPoints.getPositionWorldOnADp()`
+  + `ManifoldPoints.getPositionWorldOnBDp()`
+  + `PhysicsGhostObject.setPhysicsRotationDp()`
++ Added the `Matrix3d` math class.
++ Added the `mult(Quatd, Quatd)` and `toRotationMatrix()` methods
+  to the `Quatd` class.
++ Added the `combineWithParent()` and `transformInverseVector()` methods
+  to the `TransformDp` class.
++ Added the `divideLocal()` method to the `Vec3d` class.
+
 ## Version 17.1.0 released on 23 November 2022
 
 + Bugfix:  `getPhysicsLocationDp()` returns wrong location for a soft body
