@@ -468,26 +468,27 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv,
             (xz - yw), (yz + xw), 1.0 - (xx + yy));
 }
 
-void convertQuatDp(JNIEnv *pEnv, jobject inQuatd, btMatrix3x3 * pmOut) {
+void jmeBulletUtil::convertQuatDp(
+        JNIEnv *pEnv, jobject inQuatd, btMatrix3x3 *pmOut) {
     NULL_CHK(pEnv, inQuatd, "The input Quatd does not exist.",)
     NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
 
-    double x = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_x);
+    double x = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_x);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    double y = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_y);
+    double y = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_y);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    double z = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_z);
+    double z = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_z);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    double w = pEnv->GetFloatField(inQuatd, jmeClasses::Quatd_w);
+    double w = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_w);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
