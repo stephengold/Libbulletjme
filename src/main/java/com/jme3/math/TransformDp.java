@@ -121,6 +121,29 @@ final public class TransformDp {
     // new methods exposed
 
     /**
+     * Combines with the argument and returns the (modified) current instance.
+     * <p>
+     * It IS NOT safe for {@code this} and {@code parent} to be the same object.
+     *
+     * @param parent the parent transform (not null, unaffected unless it's
+     * {@code this})
+     * @return the (modified) current instance (for chaining)
+     */
+    public TransformDp combineWithParent(TransformDp parent) {
+        Vec3d parentScaling = parent.getScale(); // alias
+        scaling.multLocal(parentScaling);
+
+        Quatd parentRotation = parent.getRotation(); // alias
+        parentRotation.mult(rotation, rotation);
+
+        translation.multLocal(parentScaling);
+        parentRotation.mult(translation, translation);
+        translation.addLocal(parent.translation);
+
+        return this;
+    }
+
+    /**
      * Accesses the rotation component.
      *
      * @return the pre-existing instance (not null)
