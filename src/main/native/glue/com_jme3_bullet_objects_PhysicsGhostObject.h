@@ -105,6 +105,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotation__JLcom_jme3_math_Quaternion_2
   (JNIEnv *, jclass, jlong, jobject);
 
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsGhostObject
+ * Method:    setPhysicsRotationDp
+ * Signature: (JLcom/simsilica/mathd/Quatd;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotationDp
+  (JNIEnv *, jclass, jlong, jobject);
+
 #ifdef __cplusplus
 }
 #endif

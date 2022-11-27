@@ -211,3 +211,21 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     jmeBulletUtil::convertQuat(pEnv, quaternion,
             &pGhost->getWorldTransform().getBasis());
 }
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsGhostObject
+ * Method:    setPhysicsRotationDp
+ * Signature: (JLcom/simsilica/mathd/Quatd;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotationDp
+(JNIEnv *pEnv, jclass, jlong ghostId, jobject quaternion) {
+    btPairCachingGhostObject * const
+            pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
+    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+
+    NULL_CHK(pEnv, quaternion, "The quaternion does not exist.",)
+
+    btMatrix3x3& out = pGhost->getWorldTransform().getBasis();
+    jmeBulletUtil::convertQuatDp(pEnv, quaternion, &out);
+}

@@ -37,6 +37,7 @@ import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.util.LinkedList;
 import java.util.List;
@@ -179,6 +180,17 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
         long objectId = nativeId();
         setPhysicsRotation(objectId, rotation);
     }
+
+    /**
+     * Directly alter this object's orientation.
+     *
+     * @param rotation the desired orientation (a rotation quaternion in
+     * physics-space coordinates, not null, unaffected)
+     */
+    public void setPhysicsRotationDp(Quatd rotation) {
+        long objectId = nativeId();
+        setPhysicsRotationDp(objectId, rotation);
+    }
     // *************************************************************************
     // PhysicsCollisionObject methods
 
@@ -247,4 +259,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
 
     native private static void
             setPhysicsRotation(long objectId, Quaternion rotation);
+
+    native private static void
+            setPhysicsRotationDp(long objectId, Quatd rotation);
 }
