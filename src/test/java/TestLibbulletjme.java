@@ -1601,15 +1601,15 @@ public class TestLibbulletjme {
             directory = new File("build/libs/bulletjme/shared");
         }
 
-        boolean success = NativeLibraryLoader.loadLibbulletjme(fromDist,
-                directory, "Debug", "SpMt");
+        boolean success = NativeLibraryLoader
+                .loadLibbulletjme(fromDist, directory, "Debug", "SpMt");
         if (success) {
             Assert.assertFalse(NativeLibrary.isDoublePrecision());
             Assert.assertTrue(NativeLibrary.isThreadSafe());
 
         } else { // fallback to Sp-flavored library
-            success = NativeLibraryLoader.loadLibbulletjme(fromDist,
-                    directory, "Debug", "Sp");
+            success = NativeLibraryLoader
+                    .loadLibbulletjme(fromDist, directory, "Debug", "Sp");
             if (success) {
                 Assert.assertFalse(NativeLibrary.isDoublePrecision());
                 Assert.assertFalse(NativeLibrary.isThreadSafe());
@@ -1617,8 +1617,8 @@ public class TestLibbulletjme {
         }
 
         if (!success) { // fallback to Dp-flavored library
-            success = NativeLibraryLoader.loadLibbulletjme(fromDist,
-                    directory, "Debug", "Dp");
+            success = NativeLibraryLoader
+                    .loadLibbulletjme(fromDist, directory, "Debug", "Dp");
             if (success) {
                 Assert.assertTrue(NativeLibrary.isDoublePrecision());
                 Assert.assertFalse(NativeLibrary.isThreadSafe());

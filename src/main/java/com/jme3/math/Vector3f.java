@@ -534,8 +534,8 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Divides component-wise by the specified components and returns the quotient
-     * as a new instance. The current instance is unaffected.
+     * Divides component-wise by the specified components and returns the
+     * quotient as a new instance. The current instance is unaffected.
      *
      * @param x the divisor for the X component
      * @param y the divisor for the Y component
