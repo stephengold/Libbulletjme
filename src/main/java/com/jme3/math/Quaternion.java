@@ -100,7 +100,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Instantiates a quaternion with specified components.
+     * Instantiates a quaternion with the specified components.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -569,7 +569,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * However, if {@code this} and {@code storeResult} are the same object, the result
      * is undefined.
      *
-     * @param q the right factor (not null, unaffected unless it's {@code res})
+     * @param q the right factor (not null, unaffected unless it's {@code storeResult})
      * @param storeResult storage for the product, or null for a new Quaternion
      * @return {@code this * q} (either {@code storeResult} or a new Quaternion)
      */

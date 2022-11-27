@@ -49,19 +49,19 @@ import com.jme3.math.Quaternion;
 public final class Quatd implements Cloneable {
 
     /**
-     * X component of the Quatd
+     * The first imaginary (X) component. Not an angle!
      */
     public double x;
     /**
-     * Y component of the Quatd
+     * The 2nd imaginary (Y) component. Not an angle!
      */
     public double y;
     /**
-     * Z component of the Quatd
+     * The 3rd imaginary (Z) component. Not an angle!
      */
     public double z;
     /**
-     * W component of the Quatd
+     * The real (W) component. Not an angle!
      */
     public double w;
 
@@ -109,7 +109,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Create a copy of this Quatd.
+     * Create a copy. The current instance is unaffected.
      *
      * @return a new instance, equivalent to this one
      */
@@ -167,7 +167,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Set all components of this Quatd to the specified values.
+     * Set all 4 components to the specified values.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -184,10 +184,10 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Copy all components of the specified Quatd to this Quatd.
+     * Copy all 4 components from the argument.
      *
-     * @param q the desired value (not null, unaffected)
-     * @return this Quatd
+     * @param q the quaternion to copy (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public final Quatd set( Quatd q ) {
         this.x = q.x;
@@ -440,7 +440,7 @@ public final class Quatd implements Cloneable {
 
     /**
      * Builds a Quaternion from the Euler rotation angles (x,y,z) aka
-     * (pitch, yaw, roll)).  They are applyed in order: (y, z, x) aka (yaw, roll, pitch).
+     * (pitch, yaw, roll)).  They are applied in order: (y, z, x) aka (yaw, roll, pitch).
      * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
      *
      * @param xAngle the desired rotation about the +X axis (in radians)

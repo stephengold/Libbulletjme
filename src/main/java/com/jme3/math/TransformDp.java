@@ -300,13 +300,14 @@ final public class TransformDp {
     /**
      * Transforms the specified coordinates and returns the result in
      * {@code storeResult}. If the {@code storeResult} is null, a new Vec3d is
-     * created to hold the value. The current instance is unaffected unless
-     * {@code storeResult} is its scaling component or its translation
-     * component.
+     * created to hold the value. Either way, the current instance is
+     * unaffected, unless {@code storeResult} is its scaling component or its
+     * translation component.
      * <p>
      * It IS safe for {@code in} and {@code storeResult} to be the same object.
      *
-     * @param in the coordinates to transform (not null, unaffected)
+     * @param in the coordinates to transform (not null, unaffected unless it's
+     * {@code storeResult})
      * @param storeResult storage for the result (modified if not null)
      * @return the transformed coordinates (either {@code storeResult} or a new
      * Vec3d)

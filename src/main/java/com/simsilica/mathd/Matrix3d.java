@@ -38,7 +38,7 @@ package com.simsilica.mathd;
 
 
 /**
- * A matrix composed of 9 double-precision components, used to represent
+ * A matrix composed of 9 double-precision elements, used to represent
  * rotations in 3-dimensional space.
  *
  *  @author    Paul Speed
@@ -90,7 +90,7 @@ public class Matrix3d implements Cloneable {
     }
  
     /**
-     * Instantiate a matrix with the specified components.
+     * Instantiate a matrix with the specified elements.
      *
      * @param m00 the desired value for row 0, column 0
      * @param m01 the desired value for row 0, column 1
@@ -128,10 +128,10 @@ public class Matrix3d implements Cloneable {
     }
  
     /**
-     * Copy all components of the specified matrix to this matrix.
+     * Copy all elements of the specified matrix to this matrix.
      *
      * @param mat the desired value (not null, unaffected)
-     * @return this matrix
+     * @return the (modified) current instance (for chaining)
      */
     public Matrix3d set( Matrix3d mat ) {
         this.m00 = mat.m00;
@@ -148,6 +148,8 @@ public class Matrix3d implements Cloneable {
  
     /**
      * Configure as an identity matrix (diagonals = 1, other elements = 0).
+     * 
+     * @return the (modified) current instance (for chaining)
      */
     public Matrix3d makeIdentity() {
         m01 = m02 = m10 = m12 = m20 = m21 = 0;

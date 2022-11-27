@@ -550,7 +550,8 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * Divides component-wise by the argument and returns the (modified) current
      * instance.
      *
-     * @param divisor the divisor (not null, unaffected)
+     * @param divisor the divisor (not null, unaffected unless it's
+     * {@code this})
      * @return the (modified) current instance (for chaining)
      */
     public Vector3f divideLocal(Vector3f divisor) {
