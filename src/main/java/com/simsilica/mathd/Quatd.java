@@ -167,6 +167,19 @@ public final class Quatd implements Cloneable {
     }
 
     /**
+     * Test for a zero value. The current instance is unaffected.
+     *
+     * @return true if all components are 0 or -0, false otherwise
+     */
+    public boolean isZero() {
+        if ( x == 0. && y == 0. && z == 0. && w == 0. ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Set all 4 components to the specified values.
      *
      * @param x the desired X component
