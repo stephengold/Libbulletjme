@@ -417,6 +417,70 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
     }
 }
 
+// Copy Bullet btMatrix3x3 data to a SimMath Matrix3d object.
+
+void jmeBulletUtil::convertDp(JNIEnv *pEnv,
+        const btMatrix3x3 *pmIn, jobject outMatrix3d) {
+    NULL_CHK(pEnv, pmIn, "The input btMatrix3x3 does not exist.",)
+    NULL_CHK(pEnv, outMatrix3d, "The output Matrix3d does not exist.",);
+
+    double m00 = pmIn->getRow(0).m_floats[0];
+    double m01 = pmIn->getRow(0).m_floats[1];
+    double m02 = pmIn->getRow(0).m_floats[2];
+    double m10 = pmIn->getRow(1).m_floats[0];
+    double m11 = pmIn->getRow(1).m_floats[1];
+    double m12 = pmIn->getRow(1).m_floats[2];
+    double m20 = pmIn->getRow(2).m_floats[0];
+    double m21 = pmIn->getRow(2).m_floats[1];
+    double m22 = pmIn->getRow(2).m_floats[2];
+
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m00, m00);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m01, m01);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m02, m02);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m10, m10);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m11, m11);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m12, m12);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m20, m20);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m21, m21);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m22, m22);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+}
+
 void jmeBulletUtil::convertQuat(JNIEnv *pEnv,
         jobject inQuaternion, btMatrix3x3 *pmOut) {
     NULL_CHK(pEnv, inQuaternion, "The input Quaternion does not exist.",)
@@ -466,6 +530,62 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv,
     pmOut->setValue(1.0 - (yy + zz), (xy - zw), (xz + yw),
             (xy + zw), 1.0 - (xx + zz), (yz - xw),
             (xz - yw), (yz + xw), 1.0 - (xx + yy));
+}
+
+// Copy SimMath Matrix3d data to a Bullet btMatrix3x3 object.
+
+void jmeBulletUtil::convertDp(
+            JNIEnv *pEnv, jobject inMatrix3d, btMatrix3x3 *pmOut) {
+    NULL_CHK(pEnv, inMatrix3d, "The input Matrix3d does not exist.",)
+    NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
+
+    double m00 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m00);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m01 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m01);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m02 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m02);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m10 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m10);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m11 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m11);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m12 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m12);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m20 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m20);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m21 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m21);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    double m22 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m22);
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    pmOut->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 }
 
 void jmeBulletUtil::convertQuatDp(
