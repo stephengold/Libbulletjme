@@ -87,6 +87,16 @@ public:
     static jfieldID Quaternion_z;
     static jfieldID Quaternion_w;
 
+    static jfieldID Matrix3d_m00;
+    static jfieldID Matrix3d_m01;
+    static jfieldID Matrix3d_m02;
+    static jfieldID Matrix3d_m10;
+    static jfieldID Matrix3d_m11;
+    static jfieldID Matrix3d_m12;
+    static jfieldID Matrix3d_m20;
+    static jfieldID Matrix3d_m21;
+    static jfieldID Matrix3d_m22;
+
     static jfieldID Matrix3f_m00;
     static jfieldID Matrix3f_m01;
     static jfieldID Matrix3f_m02;

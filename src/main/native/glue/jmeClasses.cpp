@@ -74,6 +74,16 @@ jfieldID jmeClasses::Quaternion_y;
 jfieldID jmeClasses::Quaternion_z;
 jfieldID jmeClasses::Quaternion_w;
 
+jfieldID jmeClasses::Matrix3d_m00;
+jfieldID jmeClasses::Matrix3d_m01;
+jfieldID jmeClasses::Matrix3d_m02;
+jfieldID jmeClasses::Matrix3d_m10;
+jfieldID jmeClasses::Matrix3d_m11;
+jfieldID jmeClasses::Matrix3d_m12;
+jfieldID jmeClasses::Matrix3d_m20;
+jfieldID jmeClasses::Matrix3d_m21;
+jfieldID jmeClasses::Matrix3d_m22;
+
 jfieldID jmeClasses::Matrix3f_m00;
 jfieldID jmeClasses::Matrix3f_m01;
 jfieldID jmeClasses::Matrix3f_m02;
@@ -370,6 +380,57 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
     Quaternion_w = pEnv->GetFieldID(Quaternion, "w", "F");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+
+    jclass Matrix3d = pEnv->FindClass("com/simsilica/mathd/Matrix3d");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m00 = pEnv->GetFieldID(Matrix3d, "m00", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m01 = pEnv->GetFieldID(Matrix3d, "m01", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m02 = pEnv->GetFieldID(Matrix3d, "m02", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m10 = pEnv->GetFieldID(Matrix3d, "m10", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m11 = pEnv->GetFieldID(Matrix3d, "m11", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m12 = pEnv->GetFieldID(Matrix3d, "m12", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m20 = pEnv->GetFieldID(Matrix3d, "m20", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m21 = pEnv->GetFieldID(Matrix3d, "m21", "D");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Matrix3d_m22 = pEnv->GetFieldID(Matrix3d, "m22", "D");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
