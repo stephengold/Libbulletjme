@@ -1918,6 +1918,8 @@ public class TestLibbulletjme {
 
         assertEquals(0f, 0f, 0f, pco.getPhysicsLocation(null), 0f);
         assertEquals(0., 0., 0., pco.getPhysicsLocationDp(null), 0.);
+        assertEquals(0f, 0f, 0f, 1f, pco.getPhysicsRotation(null), 0f);
+        assertEquals(0., 0., 0., 1., pco.getPhysicsRotationDp(null), 0.);
         Assert.assertEquals(
                 new Matrix3d(), pco.getPhysicsRotationMatrixDp(null));
 
@@ -1941,9 +1943,6 @@ public class TestLibbulletjme {
             Assert.assertEquals(0f, body.getLinearDamping(), 0f);
             assertEquals(1f, 1f, 1f, body.getLinearFactor(null), 0f);
             Assert.assertEquals(0.8f, body.getLinearSleepingThreshold(), 0f);
-            assertEquals(0f, 0f, 0f, 1f, body.getPhysicsRotation(null), 0f);
-            assertEquals(0.0, 0.0, 0.0, 1.0,
-                    body.getPhysicsRotationDp(null), 0.0);
             Assert.assertTrue(body.isContactResponse());
             Assert.assertFalse(body.isGravityProtected());
             Assert.assertFalse(body.isKinematic());
