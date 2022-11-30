@@ -166,6 +166,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
      * physics-space coordinates, not null, unaffected)
      */
     public void setPhysicsRotation(Matrix3f rotation) {
+        Validate.nonNull(rotation, "rotation");
         long objectId = nativeId();
         setPhysicsRotation(objectId, rotation);
     }
@@ -174,9 +175,10 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
      * Directly alter the ghost's orientation.
      *
      * @param rotation the desired orientation (a rotation quaternion in
-     * physics-space coordinates, not null, unaffected)
+     * physics-space coordinates, not null, not zero, unaffected)
      */
     public void setPhysicsRotation(Quaternion rotation) {
+        Validate.nonZero(rotation, "rotation");
         long objectId = nativeId();
         setPhysicsRotation(objectId, rotation);
     }

@@ -888,6 +888,8 @@ public class PhysicsRigidBody extends PhysicsBody {
      * physics-space coordinates, not null, unaffected)
      */
     public void setLinearVelocityDp(Vec3d velocity) {
+        Validate.nonNull(velocity, "velocity");
+
         long objectId = nativeId();
         setLinearVelocityDp(objectId, velocity);
         activate();
@@ -900,6 +902,8 @@ public class PhysicsRigidBody extends PhysicsBody {
      * null, unaffected)
      */
     public void setPhysicsLocationDp(Vec3d location) {
+        Validate.nonNull(location, "location");
+
         long objectId = nativeId();
         setPhysicsLocationDp(objectId, location);
     }
@@ -925,10 +929,10 @@ public class PhysicsRigidBody extends PhysicsBody {
      * Directly reorient this body.
      *
      * @param orientation the desired orientation (relative to physics-space
-     * coordinates, not null, unaffected)
+     * coordinates, not null, not zero, unaffected)
      */
     public void setPhysicsRotation(Quaternion orientation) {
-        Validate.nonNull(orientation, "orientation");
+        Validate.nonZero(orientation, "orientation");
 
         long objectId = nativeId();
         setPhysicsRotation(objectId, orientation);
@@ -938,10 +942,10 @@ public class PhysicsRigidBody extends PhysicsBody {
      * Directly reorient this body.
      *
      * @param orientation the desired orientation (relative to physics-space
-     * coordinates, not null, unaffected)
+     * coordinates, not null, not zero, unaffected)
      */
     public void setPhysicsRotationDp(Quatd orientation) {
-        Validate.nonNull(orientation, "orientation");
+        Validate.nonZero(orientation, "orientation");
 
         long objectId = nativeId();
         setPhysicsRotationDp(objectId, orientation);

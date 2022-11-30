@@ -176,6 +176,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      * physics-space coordinates, not null, unaffected)
      */
     public void setPhysicsRotation(Matrix3f rotation) {
+        Validate.nonNull(rotation, "rotation");
         long objectId = nativeId();
         setPhysicsRotation(objectId, rotation);
     }
