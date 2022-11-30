@@ -216,7 +216,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(32, parameters4.getMaxVerticesPerHull());
         Assert.assertEquals(2, parameters4.getMinEdgeLength());
         Assert.assertTrue(parameters4.isShrinkWrap());
-        Assert.assertEquals(1.0, parameters4.getVolumePercentError(), 0.0);
+        Assert.assertEquals(1., parameters4.getVolumePercentError(), 0.);
         Assert.assertEquals(100_000, parameters4.getVoxelResolution());
 
         // Generate hulls for the mesh.
@@ -238,12 +238,12 @@ public class TestLibbulletjme {
         VHACDParameters parameters = new VHACDParameters();
         Assert.assertFalse(parameters.getDebugEnabled());
         Assert.assertEquals(ACDMode.VOXEL, parameters.getACDMode());
-        Assert.assertEquals(0.05, parameters.getAlpha(), 0.0);
-        Assert.assertEquals(0.05, parameters.getBeta(), 0.0);
+        Assert.assertEquals(0.05, parameters.getAlpha(), 0.);
+        Assert.assertEquals(0.05, parameters.getBeta(), 0.);
         Assert.assertEquals(4, parameters.getConvexHullDownSampling());
-        Assert.assertEquals(0.0025, parameters.getMaxConcavity(), 0.0);
+        Assert.assertEquals(0.0025, parameters.getMaxConcavity(), 0.);
         Assert.assertEquals(32, parameters.getMaxVerticesPerHull());
-        Assert.assertEquals(0.0001, parameters.getMinVolumePerHull(), 0.0);
+        Assert.assertEquals(0.0001, parameters.getMinVolumePerHull(), 0.);
         Assert.assertFalse(parameters.getPCA());
         Assert.assertEquals(4, parameters.getPlaneDownSampling());
         Assert.assertEquals(100_000, parameters.getVoxelResolution());
@@ -1917,7 +1917,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0.5f, pco.getFriction(), 0f);
 
         assertEquals(0f, 0f, 0f, pco.getPhysicsLocation(null), 0f);
-        assertEquals(0.0, 0.0, 0.0, pco.getPhysicsLocationDp(null), 0.0);
+        assertEquals(0., 0., 0., pco.getPhysicsLocationDp(null), 0.);
         Assert.assertEquals(
                 new Matrix3d(), pco.getPhysicsRotationMatrixDp(null));
 
@@ -1937,7 +1937,7 @@ public class TestLibbulletjme {
             assertEquals(1f, 1f, 1f, body.getAngularFactor(null), 0f);
             Assert.assertEquals(1f, body.getAngularSleepingThreshold(), 0f);
             assertEquals(0f, 0f, 0f, body.getGravity(null), 0f);
-            assertEquals(0.0, 0.0, 0.0, body.getGravityDp(null), 0.0);
+            assertEquals(0., 0., 0., body.getGravityDp(null), 0.);
             Assert.assertEquals(0f, body.getLinearDamping(), 0f);
             assertEquals(1f, 1f, 1f, body.getLinearFactor(null), 0f);
             Assert.assertEquals(0.8f, body.getLinearSleepingThreshold(), 0f);
@@ -1953,12 +1953,12 @@ public class TestLibbulletjme {
             if (body.isDynamic()) {
                 assertEquals(0f, 0f, 0f, body.getAngularVelocity(null), 0f);
                 assertEquals(
-                        0.0, 0.0, 0.0, body.getAngularVelocityDp(null), 0.0);
+                        0., 0., 0., body.getAngularVelocityDp(null), 0.);
                 assertEquals(0f, 0f, 0f,
                         body.getAngularVelocityLocal(null), 0f);
                 assertEquals(0f, 0f, 0f, body.getLinearVelocity(null), 0f);
                 assertEquals(
-                        0.0, 0.0, 0.0, body.getLinearVelocityDp(null), 0.0);
+                        0., 0., 0., body.getLinearVelocityDp(null), 0.);
                 Assert.assertEquals(0f, body.getSquaredSpeed(), 0f);
                 Assert.assertFalse(body.isStatic());
                 Assert.assertEquals(0f, body.kineticEnergy(), 0f);
@@ -1979,7 +1979,7 @@ public class TestLibbulletjme {
         Assert.assertNotNull(shape);
         Assert.assertNotEquals(0L, shape.nativeId());
         assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
-        assertEquals(1.0, 1.0, 1.0, shape.getScaleDp(null), 0.0);
+        assertEquals(1., 1., 1., shape.getScaleDp(null), 0.);
         Assert.assertTrue(shape.isContactFilterEnabled());
     }
 
