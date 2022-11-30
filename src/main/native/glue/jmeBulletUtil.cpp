@@ -37,6 +37,8 @@
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
 
+// Copy JMonkeyEngine Vector3f data to a Bullet btVector3 object.
+
 void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inVector3f, btVector3 *pvOut) {
     NULL_CHK(pEnv, inVector3f, "The input Vector3f does not exist.",)
     NULL_CHK(pEnv, pvOut, "The output btVector3 does not exist.",);
@@ -62,7 +64,7 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inVector3f, btVector3 *pvOut) 
     pvOut->setZ(z);
 }
 
-// Copy a SimMath Quatd to a btQuaternion
+// Copy SimMath Quatd data to a Bullet btQuaternion object.
 
 void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inQuatd, btQuaternion *pqOut) {
     NULL_CHK(pEnv, inQuatd, "The input Quatd does not exist.",)
@@ -96,7 +98,7 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inQuatd, btQuaternion *pqOut
     pqOut->setW(w);
 }
 
-// Copy a SimMath Vec3d to a btVector3
+// Copy SimMath Vec3d data to a Bullet btVector3 object.
 
 void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inVec3d, btVector3 *pvOut) {
     NULL_CHK(pEnv, inVec3d, "The input Vec3d does not exist.",)
@@ -123,6 +125,8 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inVec3d, btVector3 *pvOut) {
     pvOut->setY(y);
     pvOut->setZ(z);
 }
+
+// Copy JMonkeyEngine Quaternion data to a Bullet btQuaternion object.
 
 void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inQuaternion, btQuaternion *pqOut) {
     NULL_CHK(pEnv, inQuaternion, "The input Quaternion does not exist.",)
@@ -155,6 +159,8 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inQuaternion, btQuaternion *pq
     pqOut->setW(w);
 }
 
+// Copy Bullet btVector3 data to a JMonkeyEngine Vector3f object.
+
 void jmeBulletUtil::convert(JNIEnv *pEnv, const btVector3 *pvIn, jobject outVector3f) {
     NULL_CHK(pEnv, pvIn, "The input btVector3 does not exist.",)
     NULL_CHK(pEnv, outVector3f, "The output Vector3f does not exist.",);
@@ -180,7 +186,7 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, const btVector3 *pvIn, jobject outVect
     }
 }
 
-// Copy a btQuaternion to a SimMath Quatd
+// Copy Bullet btQuaternion data to a SimMath Quatd object.
 
 void jmeBulletUtil::convertDp(JNIEnv *pEnv, const btQuaternion *pqIn,
         jobject outQuatd) {
@@ -210,7 +216,7 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv, const btQuaternion *pqIn,
     }
 }
 
-// Copy a btVector3 to a SimMath Vec3d
+// Copy Bullet btVector3 data to a SimMath Vec3d object.
 
 void jmeBulletUtil::convertDp(JNIEnv *pEnv, const btVector3 *pvIn, jobject outVec3d) {
     NULL_CHK(pEnv, pvIn, "The input btVector3 does not exist.",)
@@ -238,7 +244,7 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv, const btVector3 *pvIn, jobject outVe
     }
 }
 
-// Copy a btQuaternion to a JME Quaternion
+// Copy Bullet btQuaternion data to a JMonkeyEngine Quaternion object.
 
 void jmeBulletUtil::convert(JNIEnv *pEnv, const btQuaternion *pqIn,
         jobject outQuaternion) {
@@ -267,7 +273,7 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, const btQuaternion *pqIn,
     }
 }
 
-// Copy a btTransform to a JME Transform
+// Copy Bullet btTransform data to a JMonkeyEngine Transform object.
 
 void jmeBulletUtil::convert(JNIEnv *pEnv,
         const btTransform *ptIn, jobject outTransform) {
@@ -301,6 +307,8 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
         return;
     }
 }
+
+// Copy JMonkeyEngine Matrix3f data to a Bullet btMatrix3x3 object.
 
 void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inMatrix3f, btMatrix3x3 *pmOut) {
     NULL_CHK(pEnv, inMatrix3f, "The input Matrix3f does not exist.",)
@@ -354,6 +362,8 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inMatrix3f, btMatrix3x3 *pmOut
 
     pmOut->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 }
+
+// Copy Bullet btMatrix3x3 data to a JMonkeyEngine Matrix3f object.
 
 void jmeBulletUtil::convert(JNIEnv *pEnv,
         const btMatrix3x3 *pmIn, jobject outMatrix3f) {
@@ -481,6 +491,8 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv,
     }
 }
 
+// Convert a JMonkeyEngine Quaternion to a Bullet rotation matrix.
+
 void jmeBulletUtil::convertQuat(JNIEnv *pEnv,
         jobject inQuaternion, btMatrix3x3 *pmOut) {
     NULL_CHK(pEnv, inQuaternion, "The input Quaternion does not exist.",)
@@ -588,6 +600,8 @@ void jmeBulletUtil::convertDp(
     pmOut->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 }
 
+// Convert a SimMath Quatd to a Bullet rotation matrix.
+
 void jmeBulletUtil::convertQuatDp(
         JNIEnv *pEnv, jobject inQuatd, btMatrix3x3 *pmOut) {
     NULL_CHK(pEnv, inQuatd, "The input Quatd does not exist.",)
@@ -638,6 +652,8 @@ void jmeBulletUtil::convertQuatDp(
             (xy + zw), 1.0 - (xx + zz), (yz - xw),
             (xz - yw), (yz + xw), 1.0 - (xx + yy));
 }
+
+// Convert a Bullet rotation matrix to a JMonkeyEngine Quaternion.
 
 void jmeBulletUtil::convertQuat(JNIEnv *pEnv, const btMatrix3x3 *pmIn,
         jobject outQuaternion) {
@@ -703,9 +719,8 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv, const btMatrix3x3 *pmIn,
     }
 }
 
-/*
- * Add a ray-test result to a list.
- */
+// Add a ray-test result to a list.
+
 void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
         const btVector3 *pHitNormal, btScalar hitFraction,
         const btCollisionObject *pHitObject, int partIndex, int triangleIndex) {
@@ -750,9 +765,8 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
     }
 }
 
-/*
- * Add a sweep-test result to a list.
- */
+// Add a sweep-test result to a list.
+
 void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
         const btVector3 *pHitNormal, btScalar hitFraction,
         const btCollisionObject *pHitObject, int partIndex, int triangleIndex) {
@@ -797,6 +811,8 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
         return;
     }
 }
+
+// Convert a JMonkeyEngine Transform to a Bullet btTransform and a scale vector.
 
 void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inTransform, btTransform *ptOut,
         btVector3 *pvOutScale) {
