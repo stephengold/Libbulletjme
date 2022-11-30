@@ -210,7 +210,7 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
     // Java private methods
 
     /**
-     * This method is invoked by native code.
+     * This method is invoked by native code. TODO rename
      *
      * @param co the collision object to add (alias created)
      */
