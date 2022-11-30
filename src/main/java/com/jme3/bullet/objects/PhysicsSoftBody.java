@@ -43,6 +43,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
+import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
@@ -1506,6 +1507,24 @@ public class PhysicsSoftBody extends PhysicsBody {
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
         result.loadIdentity();
+        return result;
+    }
+
+    /**
+     * Copy the orientation (rotation) of this body to a Quatd.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a rotation Quatd (in physics-space coordinates, either
+     * storeResult or a new instance, not null)
+     */
+    @Override
+    public Quatd getPhysicsRotationDp(Quatd storeResult) {
+        Quatd result;
+        if (storeResult == null) {
+            result = new Quatd();
+        } else {
+            result = storeResult.set(0., 0., 0., 1.);
+        }
         return result;
     }
 
