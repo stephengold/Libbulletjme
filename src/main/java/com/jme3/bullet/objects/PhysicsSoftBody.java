@@ -43,6 +43,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
+import com.simsilica.mathd.Matrix3d;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.nio.Buffer;
@@ -1540,6 +1541,25 @@ public class PhysicsSoftBody extends PhysicsBody {
     public Matrix3f getPhysicsRotationMatrix(Matrix3f storeResult) {
         Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
         result.loadIdentity();
+        return result;
+    }
+
+    /**
+     * Copy the orientation of this body (the basis of its local coordinate
+     * system) to a Matrix3d.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a rotation matrix (in physics-space coordinates, either
+     * storeResult or a new matrix, not null)
+     */
+    @Override
+    public Matrix3d getPhysicsRotationMatrixDp(Matrix3d storeResult) {
+        Matrix3d result;
+        if (storeResult == null) {
+            result = new Matrix3d();
+        } else {
+            result = storeResult.makeIdentity();
+        }
         return result;
     }
 

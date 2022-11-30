@@ -77,6 +77,7 @@ import com.jme3.math.Plane;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.system.NativeLibraryLoader;
+import com.simsilica.mathd.Matrix3d;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.io.File;
@@ -1914,8 +1915,12 @@ public class TestLibbulletjme {
 
         Assert.assertEquals(0f, pco.getDeactivationTime(), 0f);
         Assert.assertEquals(0.5f, pco.getFriction(), 0f);
+
         assertEquals(0f, 0f, 0f, pco.getPhysicsLocation(null), 0f);
         assertEquals(0.0, 0.0, 0.0, pco.getPhysicsLocationDp(null), 0.0);
+        Assert.assertEquals(
+                new Matrix3d(), pco.getPhysicsRotationMatrixDp(null));
+
         Assert.assertNull(pco.proxyGroup());
         Assert.assertNull(pco.proxyMask());
         Assert.assertEquals(0f, pco.getRestitution(), 0f);

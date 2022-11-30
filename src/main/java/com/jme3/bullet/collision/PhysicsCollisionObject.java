@@ -40,6 +40,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.TransformDp;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Matrix3d;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
@@ -579,6 +580,23 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
         long objectId = nativeId();
         getBasis(objectId, result);
+
+        return result;
+    }
+
+    /**
+     * Copy the orientation of this object (the basis of its local coordinate
+     * system) to a Matrix3d.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return a rotation matrix (in physics-space coordinates, either
+     * storeResult or a new matrix, not null)
+     */
+    public Matrix3d getPhysicsRotationMatrixDp(Matrix3d storeResult) {
+        Matrix3d result = (storeResult == null) ? new Matrix3d() : storeResult;
+
+        long objectId = nativeId();
+        getBasisDp(objectId, result);
 
         return result;
     }
@@ -1249,6 +1267,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             getAnisotropicFriction(long objectId, Vector3f storeResult);
 
     native private static void getBasis(long objectId, Matrix3f storeResult);
+
+    native private static void getBasisDp(long objectId, Matrix3d storeMatrix);
 
     native private static float getCcdMotionThreshold(long objectId);
 

@@ -263,6 +263,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_get
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getBasisDp
+ * Signature: (JLcom/simsilica/mathd/Matrix3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getBasisDp
+(JNIEnv *pEnv, jclass, jlong pcoId, jobject storeMatrix) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
+    NULL_CHK(pEnv, storeMatrix, "The storeMatrix does not exist.",);
+
+    const btMatrix3x3& basis = pCollisionObject->getWorldTransform().getBasis();
+    jmeBulletUtil::convertDp(pEnv, &basis, storeMatrix);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getCcdMotionThreshold
  * Signature: (J)F
  */
