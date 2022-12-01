@@ -163,20 +163,10 @@ void jmeBulletUtil::convert(
     float y = pvIn->getY();
     float z = pvIn->getZ();
 
-    pEnv->SetFloatField(outVector3f, jmeClasses::Vector3f_x, x);
+    pEnv->CallObjectMethod(
+            outVector3f, jmeClasses::Vector3f_set, x, y, z);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outVector3f, jmeClasses::Vector3f_y, y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outVector3f, jmeClasses::Vector3f_z, z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
     }
 }
 
@@ -186,27 +176,16 @@ void jmeBulletUtil::convertDp(
         JNIEnv *pEnv, const btQuaternion *pqIn, jobject outQuatd) {
     NULL_CHK(pEnv, pqIn, "The input btQuaternion does not exist.",)
     NULL_CHK(pEnv, outQuatd, "The output Quatd does not exist.",);
-    NULL_CHK(pEnv, jmeClasses::Quatd_x, "The SimMath library is missing.",);
+    NULL_CHK(pEnv, jmeClasses::Quatd_set, "The SimMath library is missing.",);
 
-    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_w, pqIn->w());
+    double x = pqIn->getX();
+    double y = pqIn->getY();
+    double z = pqIn->getZ();
+    double w = pqIn->getW();
+
+    pEnv->CallObjectMethod(outQuatd, jmeClasses::Quatd_set, x, y, z, w);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_x, pqIn->x());
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_y, pqIn->y());
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetDoubleField(outQuatd, jmeClasses::Quatd_z, pqIn->z());
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
     }
 }
 
@@ -216,26 +195,15 @@ void jmeBulletUtil::convertDp(
         JNIEnv *pEnv, const btVector3 *pvIn, jobject outVec3d) {
     NULL_CHK(pEnv, pvIn, "The input btVector3 does not exist.",)
     NULL_CHK(pEnv, outVec3d, "The output Vec3d does not exist.",);
-    NULL_CHK(pEnv, jmeClasses::Vec3d_x, "The SimMath library is missing.",);
+    NULL_CHK(pEnv, jmeClasses::Vec3d_set, "The SimMath library is missing.",);
 
     double x = pvIn->getX();
     double y = pvIn->getY();
     double z = pvIn->getZ();
 
-    pEnv->SetDoubleField(outVec3d, jmeClasses::Vec3d_x, x);
+    pEnv->CallObjectMethod(outVec3d, jmeClasses::Vec3d_set, x, y, z);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetDoubleField(outVec3d, jmeClasses::Vec3d_y, y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetDoubleField(outVec3d, jmeClasses::Vec3d_z, z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
     }
 }
 
@@ -246,25 +214,15 @@ void jmeBulletUtil::convert(
     NULL_CHK(pEnv, pqIn, "The input btQuaternion does not exist.",)
     NULL_CHK(pEnv, outQuaternion, "The output Quaternion does not exist.",);
 
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_w, pqIn->w());
+    float x = pqIn->x();
+    float y = pqIn->y();
+    float z = pqIn->z();
+    float w = pqIn->w();
+
+    pEnv->CallObjectMethod(
+            outQuaternion, jmeClasses::Quaternion_set, x, y, z, w);
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_x, pqIn->x());
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_y, pqIn->y());
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_z, pqIn->z());
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
     }
 }
 
