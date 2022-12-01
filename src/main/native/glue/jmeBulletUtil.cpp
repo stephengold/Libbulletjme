@@ -60,9 +60,7 @@ void jmeBulletUtil::convert(
         return;
     }
 
-    pvOut->setX(x);
-    pvOut->setY(y);
-    pvOut->setZ(z);
+    pvOut->setValue(x, y, z);
 }
 
 // Copy SimMath Quatd data to a Bullet btQuaternion object.
@@ -94,10 +92,7 @@ void jmeBulletUtil::convertDp(
         return;
     }
 
-    pqOut->setX(x);
-    pqOut->setY(y);
-    pqOut->setZ(z);
-    pqOut->setW(w);
+    pqOut->setValue(x, y, z, w);
 }
 
 // Copy SimMath Vec3d data to a Bullet btVector3 object.
@@ -123,9 +118,7 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inVec3d, btVector3 *pvOut) {
         return;
     }
 
-    pvOut->setX(x);
-    pvOut->setY(y);
-    pvOut->setZ(z);
+    pvOut->setValue(x, y, z);
 }
 
 // Copy JMonkeyEngine Quaternion data to a Bullet btQuaternion object.
@@ -156,10 +149,7 @@ void jmeBulletUtil::convert(
         return;
     }
 
-    pqOut->setX(x);
-    pqOut->setY(y);
-    pqOut->setZ(z);
-    pqOut->setW(w);
+    pqOut->setValue(x, y, z, w);
 }
 
 // Copy Bullet btVector3 data to a JMonkeyEngine Vector3f object.
