@@ -71,7 +71,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
-    btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
+    btVector3 * const pLocation = &pCollider->getWorldTransform().getOrigin();
     jmeBulletUtil::convert(pEnv, locationVector, pLocation);
 }
 
@@ -90,7 +90,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
-    btVector3 *pLocation = &pCollider->getWorldTransform().getOrigin();
+    btVector3 * const pLocation = &pCollider->getWorldTransform().getOrigin();
     jmeBulletUtil::convertDp(pEnv, locationVector, pLocation);
 }
 
@@ -109,6 +109,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
 
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
 
-    btMatrix3x3 *pRotation = &pCollider->getWorldTransform().getBasis();
+    btMatrix3x3 * const pRotation = &pCollider->getWorldTransform().getBasis();
     jmeBulletUtil::convert(pEnv, rotationMatrix, pRotation);
 }

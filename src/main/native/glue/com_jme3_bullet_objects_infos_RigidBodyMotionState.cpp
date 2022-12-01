@@ -85,7 +85,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_f
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldLocation
 (JNIEnv *pEnv, jclass, jlong stateId, jobject value) {
-    jmeMotionState *pMotionState
+    const jmeMotionState * const pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
@@ -99,7 +99,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldLocationDp
 (JNIEnv *pEnv, jclass, jlong stateId, jobject storeVector) {
-    jmeMotionState *pMotionState
+    const jmeMotionState * const pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
@@ -114,7 +114,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldRotation
 (JNIEnv *pEnv, jclass, jlong stateId, jobject value) {
-    jmeMotionState *pMotionState
+    const jmeMotionState * const pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
@@ -129,7 +129,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_getWorldRotationQuat
 (JNIEnv *pEnv, jclass, jlong stateId, jobject value) {
-    jmeMotionState *pMotionState
+    const jmeMotionState * const pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
