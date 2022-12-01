@@ -71,21 +71,25 @@ public:
     static jfieldID Vec3d_x;
     static jfieldID Vec3d_y;
     static jfieldID Vec3d_z;
+    static jmethodID Vec3d_set;
 
     static jclass Vector3f;
     static jfieldID Vector3f_x;
     static jfieldID Vector3f_y;
     static jfieldID Vector3f_z;
+    static jmethodID Vector3f_set;
 
     static jfieldID Quatd_x;
     static jfieldID Quatd_y;
     static jfieldID Quatd_z;
     static jfieldID Quatd_w;
+    static jmethodID Quatd_set;
 
     static jfieldID Quaternion_x;
     static jfieldID Quaternion_y;
     static jfieldID Quaternion_z;
     static jfieldID Quaternion_w;
+    static jmethodID Quaternion_set;
 
     static jfieldID Matrix3d_m00;
     static jfieldID Matrix3d_m01;

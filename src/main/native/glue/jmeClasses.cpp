@@ -58,21 +58,25 @@ jmethodID jmeClasses::PhysicsGhostObject_addOverlappingObject;
 jfieldID jmeClasses::Vec3d_x;
 jfieldID jmeClasses::Vec3d_y;
 jfieldID jmeClasses::Vec3d_z;
+jmethodID jmeClasses::Vec3d_set;
 
 jclass jmeClasses::Vector3f;
 jfieldID jmeClasses::Vector3f_x;
 jfieldID jmeClasses::Vector3f_y;
 jfieldID jmeClasses::Vector3f_z;
+jmethodID jmeClasses::Vector3f_set;
 
 jfieldID jmeClasses::Quatd_x;
 jfieldID jmeClasses::Quatd_y;
 jfieldID jmeClasses::Quatd_z;
 jfieldID jmeClasses::Quatd_w;
+jmethodID jmeClasses::Quatd_set;
 
 jfieldID jmeClasses::Quaternion_x;
 jfieldID jmeClasses::Quaternion_y;
 jfieldID jmeClasses::Quaternion_z;
 jfieldID jmeClasses::Quaternion_w;
+jmethodID jmeClasses::Quaternion_set;
 
 jfieldID jmeClasses::Matrix3d_m00;
 jfieldID jmeClasses::Matrix3d_m01;
@@ -289,11 +293,13 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         Vec3d_x = NULL;
         Vec3d_y = NULL;
         Vec3d_z = NULL;
+        Vec3d_set = NULL;
 
         Quatd_x = NULL;
         Quatd_y = NULL;
         Quatd_z = NULL;
         Quatd_w = NULL;
+        Quatd_set = NULL;
 
         Matrix3d_m00 = NULL;
         Matrix3d_m01 = NULL;
@@ -321,6 +327,11 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             pEnv->Throw(pEnv->ExceptionOccurred());
             return;
         }
+        Vec3d_set = pEnv->GetMethodID(Vec3d, "set", "(DDD)Lcom/simsilica/mathd/Vec3d;");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
 
         jclass Quatd = pEnv->FindClass("com/simsilica/mathd/Quatd");
         if (pEnv->ExceptionCheck()) {
@@ -343,6 +354,11 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             return;
         }
         Quatd_w = pEnv->GetFieldID(Quatd, "w", "D");
+        if (pEnv->ExceptionCheck()) {
+            pEnv->Throw(pEnv->ExceptionOccurred());
+            return;
+        }
+        Quatd_set = pEnv->GetMethodID(Quatd, "set", "(DDDD)Lcom/simsilica/mathd/Quatd;");
         if (pEnv->ExceptionCheck()) {
             pEnv->Throw(pEnv->ExceptionOccurred());
             return;
@@ -420,6 +436,11 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
+    Vector3f_set = pEnv->GetMethodID(Vector3f, "set", "(FFF)Lcom/jme3/math/Vector3f;");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
 
     jclass Quaternion = pEnv->FindClass("com/jme3/math/Quaternion");
     if (pEnv->ExceptionCheck()) {
@@ -442,6 +463,11 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
     Quaternion_w = pEnv->GetFieldID(Quaternion, "w", "F");
+    if (pEnv->ExceptionCheck()) {
+        pEnv->Throw(pEnv->ExceptionOccurred());
+        return;
+    }
+    Quaternion_set = pEnv->GetMethodID(Quaternion, "set", "(FFFF)Lcom/jme3/math/Quaternion;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
