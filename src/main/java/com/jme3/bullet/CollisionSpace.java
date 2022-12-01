@@ -713,14 +713,14 @@ public class CollisionSpace extends NativePhysicsObject {
      * This method is invoked by native code to determine whether the specified
      * objects should be allowed to collide. Invoked during broadphase, after
      * axis-aligned bounding boxes, ignore lists, and collision groups have been
-     * checked.
+     * checked. TODO rename
      *
      * @param pcoA the first collision object (not null)
      * @param pcoB the 2nd collision object (not null)
      * @return true to simulate collisions between pcoA and pcoB, false to
      * ignore such collisions during this timestep
      */
-    private boolean notifyCollisionGroupListeners_native( // TODO rename
+    private boolean notifyCollisionGroupListeners_native(
             PhysicsCollisionObject pcoA, PhysicsCollisionObject pcoB) {
         boolean result = needsCollision(pcoA, pcoB);
         return result;
@@ -775,9 +775,9 @@ public class CollisionSpace extends NativePhysicsObject {
     native private static int pairTest(long spaceId, long aId, long bId,
             PhysicsCollisionListener listener);
 
-    native private static void rayTest_native( // TODO rename
+    native private static void rayTest_native(
             Vector3f fromLocation, Vector3f toLocation, long spaceId,
-            List<PhysicsRayTestResult> addToList, int flags);
+            List<PhysicsRayTestResult> addToList, int flags); // TODO rename
 
     native private static void rayTestNativeDp(
             Vec3d fromLocation, Vec3d toLocation, long spaceId,
