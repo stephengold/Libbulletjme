@@ -600,7 +600,7 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>gravity</code> - the desired acceleration vector (in physics-space units
- per second squared, not null, unaffected, default=(0,-29.4,0))</dd>
+ per second squared, not null, finite, unaffected, default=(0,-29.4,0))</dd>
 </dl>
 </section>
 </li>
@@ -635,7 +635,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Alter the linear velocity of the character's center.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>velocity</code> - the desired velocity vector (not null)</dd>
+<dd><code>velocity</code> - the desired velocity vector (not null, finite)</dd>
 </dl>
 </section>
 </li>
@@ -708,7 +708,7 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>offset</code> - the desired location increment for each simulation step (in
- physics-space coordinates, not null, unaffected, default=(0,0,0))</dd>
+ physics-space coordinates, not null, finite, unaffected, default=(0,0,0))</dd>
 </dl>
 </section>
 </li>
