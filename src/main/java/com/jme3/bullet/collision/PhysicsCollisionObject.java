@@ -1264,9 +1264,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     native private static int getActivationState(long objectId);
 
     native private static void
-            getAnisotropicFriction(long objectId, Vector3f storeResult);
+            getAnisotropicFriction(long objectId, Vector3f storeVector);
 
-    native private static void getBasis(long objectId, Matrix3f storeResult);
+    native private static void getBasis(long objectId, Matrix3f storeMatrix);
 
     native private static void getBasisDp(long objectId, Matrix3d storeMatrix);
 
@@ -1290,9 +1290,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     native private static float getFriction(long objectId);
 
-    native private static void getLocation(long objectId, Vector3f storeResult);
+    native private static void getLocation(long objectId, Vector3f storeVector);
 
-    native private static void getLocationDp(long objectId, Vec3d storeResult);
+    native private static void getLocationDp(long objectId, Vec3d storeVector);
 
     native private static int getNumObjectsWithoutCollision(long objectId);
 
@@ -1300,10 +1300,10 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             getObjectWithoutCollision(long objectId, int listIndex);
 
     native private static void
-            getOrientation(long objectId, Quaternion storeResult);
+            getOrientation(long objectId, Quaternion storeQuat);
 
     native private static void
-            getOrientationDp(long objectId, Quatd storeResult);
+            getOrientationDp(long objectId, Quatd storeQuat);
 
     native private static int getProxyFilterGroup(long objectId);
 
