@@ -89,6 +89,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
+    NULL_CHK(pEnv, value, "The storeVector3f does not exist.",);
+
     jmeBulletUtil::convert(pEnv, &pMotionState->worldTransform.getOrigin(), value);
 }
 
@@ -102,6 +104,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
     const jmeMotionState * const pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
+
+    NULL_CHK(pEnv, storeVector, "The storeVec3d does not exist.",);
 
     jmeBulletUtil::convertDp(
             pEnv, &pMotionState->worldTransform.getOrigin(), storeVector);
@@ -118,6 +122,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
 
+    NULL_CHK(pEnv, value, "The storeMatrix3f does not exist.",);
+
     jmeBulletUtil::convert(pEnv, &pMotionState->worldTransform.getBasis(),
             value);
 }
@@ -132,6 +138,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_RigidBodyMotionState_g
     const jmeMotionState * const pMotionState
             = reinterpret_cast<jmeMotionState *> (stateId);
     NULL_CHK(pEnv, pMotionState, "The motion state does not exist.",)
+
+    NULL_CHK(pEnv, value, "The storeQuaternion does not exist.",);
 
     jmeBulletUtil::convertQuat(pEnv, &pMotionState->worldTransform.getBasis(),
             value);
