@@ -430,6 +430,8 @@ void jmeBulletUtil::convertDp(
         JNIEnv *pEnv, const btMatrix3x3 *pmIn, jobject outMatrix3d) {
     NULL_CHK(pEnv, pmIn, "The input btMatrix3x3 does not exist.",)
     NULL_CHK(pEnv, outMatrix3d, "The output Matrix3d does not exist.",);
+    NULL_CHK(pEnv, jmeClasses::Matrix3d_m00,
+            "The SimMath library is missing.",);
 
     double m00 = pmIn->getRow(0).m_floats[0];
     double m01 = pmIn->getRow(0).m_floats[1];
@@ -547,6 +549,8 @@ void jmeBulletUtil::convertDp(
             JNIEnv *pEnv, jobject inMatrix3d, btMatrix3x3 *pmOut) {
     NULL_CHK(pEnv, inMatrix3d, "The input Matrix3d does not exist.",)
     NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
+    NULL_CHK(pEnv, jmeClasses::Matrix3d_m00,
+            "The SimMath library is missing.",);
 
     double m00 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m00);
     if (pEnv->ExceptionCheck()) {
