@@ -542,6 +542,18 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv, const btMatrix3x3 *pmIn,
     convert(pEnv, &q, outQuaternion);
 }
 
+// Convert a Bullet rotation matrix to a SimMath Quatd.
+
+void jmeBulletUtil::convertQuatDp(
+        JNIEnv *pEnv, const btMatrix3x3 *pmIn, jobject outQuatd) {
+    NULL_CHK(pEnv, pmIn, "The input btMatrix3x3 does not exist.",)
+    NULL_CHK(pEnv, outQuatd, "The output Quatd does not exist.",);
+
+    btQuaternion q;
+    pmIn->getRotation(q);
+    convertDp(pEnv, &q, outQuatd);
+}
+
 // Add a ray-test result to a list.
 
 void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,

@@ -50,6 +50,7 @@ public:
     static void convertDp(JNIEnv *, const btQuaternion * in, jobject outQuatd);
     static void convertDp(JNIEnv *, const btVector3 * in, jobject outVec3d);
     static void convertQuat(JNIEnv *, const btMatrix3x3 * in, jobject outQuaternion);
+    static void convertQuatDp(JNIEnv *, const btMatrix3x3 * in, jobject outQuatd);
 
     // convert jMonkeyEngine math objects to Bullet:
     static void convert(JNIEnv *, jobject inMatrix3f, btMatrix3x3 * out);
