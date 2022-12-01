@@ -158,6 +158,19 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
+     * Test for identity. The matrix is unaffected.
+     *
+     * @return true if all diagonals = 1 and all other elements = 0 or -0,
+     * otherwise false
+     */
+    public boolean isIdentity() {
+        boolean result = (m00 == 1. && m01 == 0. && m02 == 0.)
+                && (m10 == 0. && m11 == 1. && m12 == 0.)
+                && (m20 == 0. && m21 == 0. && m22 == 1.);
+        return result;
+    }
+
+    /**
      * Multiply by the scalar argument and return the (modified) current
      * instance.
      *
