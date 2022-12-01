@@ -455,50 +455,9 @@ void jmeBulletUtil::convertQuat(
     NULL_CHK(pEnv, inQuaternion, "The input Quaternion does not exist.",)
     NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
 
-    float x = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    float y = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    float z = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    float w = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    // TODO use btMatrix3x3 constructor from btQuaternion
-
-    float norm = w * w + x * x + y * y + z * z;
-    float s = (norm == 1.0) ? 2.0 : (norm > 0.1) ? 2.0 / norm : 0.0;
-
-    // compute xs/ys/zs first to save 6 multiplications, since xs/ys/zs
-    // will be used 2-4 times each.
-    float xs = x * s;
-    float ys = y * s;
-    float zs = z * s;
-    float xx = x * xs;
-    float xy = x * ys;
-    float xz = x * zs;
-    float xw = w * xs;
-    float yy = y * ys;
-    float yz = y * zs;
-    float yw = w * ys;
-    float zz = z * zs;
-    float zw = w * zs;
-
-    // using s=2/norm (instead of 1/norm) saves 9 multiplications by 2 here
-    pmOut->setValue(1.0 - (yy + zz), (xy - zw), (xz + yw),
-            (xy + zw), 1.0 - (xx + zz), (yz - xw),
-            (xz - yw), (yz + xw), 1.0 - (xx + yy));
+    btQuaternion q;
+    convert(pEnv, inQuaternion, &q);
+    pmOut->setRotation(q);
 }
 
 // Copy SimMath Matrix3d data to a Bullet btMatrix3x3 object.
@@ -566,50 +525,9 @@ void jmeBulletUtil::convertQuatDp(
     NULL_CHK(pEnv, inQuatd, "The input Quatd does not exist.",)
     NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
 
-    double x = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    double y = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    double z = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    double w = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    // TODO use btMatrix3x3 constructor from btQuaternion
-
-    double norm = w * w + x * x + y * y + z * z;
-    double s = (norm == 1.0) ? 2.0 : (norm > 0.1) ? 2.0 / norm : 0.0;
-
-    // compute xs/ys/zs first to save 6 multiplications, since xs/ys/zs
-    // will be used 2-4 times each.
-    double xs = x * s;
-    double ys = y * s;
-    double zs = z * s;
-    double xx = x * xs;
-    double xy = x * ys;
-    double xz = x * zs;
-    double xw = w * xs;
-    double yy = y * ys;
-    double yz = y * zs;
-    double yw = w * ys;
-    double zz = z * zs;
-    double zw = w * zs;
-
-    // using s=2/norm (instead of 1/norm) saves 9 multiplications by 2 here
-    pmOut->setValue(1.0 - (yy + zz), (xy - zw), (xz + yw),
-            (xy + zw), 1.0 - (xx + zz), (yz - xw),
-            (xz - yw), (yz + xw), 1.0 - (xx + yy));
+    btQuaternion q;
+    convertDp(pEnv, inQuatd, &q);
+    pmOut->setRotation(q);
 }
 
 // Convert a Bullet rotation matrix to a JMonkeyEngine Quaternion.
@@ -618,64 +536,10 @@ void jmeBulletUtil::convertQuat(JNIEnv *pEnv, const btMatrix3x3 *pmIn,
         jobject outQuaternion) {
     NULL_CHK(pEnv, pmIn, "The input btMatrix3x3 does not exist.",)
     NULL_CHK(pEnv, outQuaternion, "The output Quaternion does not exist.",);
-    // TODO use btMatrix3x3 getRotation() method
 
-    // the trace is the sum of the diagonal elements; see
-    // http://mathworld.wolfram.com/MatrixTrace.html
-    float t = pmIn->getRow(0).m_floats[0] + pmIn->getRow(1).m_floats[1] + pmIn->getRow(2).m_floats[2];
-    float w, x, y, z;
-    // we protect the division by s by ensuring that s>=1
-    if (t >= 0) { // |w| >= .5
-        float s = sqrt(t + 1); // |s|>=1 ...
-        w = 0.5f * s;
-        s = 0.5f / s; // so this division isn't bad
-        x = (pmIn->getRow(2).m_floats[1] - pmIn->getRow(1).m_floats[2]) * s;
-        y = (pmIn->getRow(0).m_floats[2] - pmIn->getRow(2).m_floats[0]) * s;
-        z = (pmIn->getRow(1).m_floats[0] - pmIn->getRow(0).m_floats[1]) * s;
-    } else if ((pmIn->getRow(0).m_floats[0] > pmIn->getRow(1).m_floats[1]) && (pmIn->getRow(0).m_floats[0] > pmIn->getRow(2).m_floats[2])) {
-        float s = sqrt(1.0f + pmIn->getRow(0).m_floats[0] - pmIn->getRow(1).m_floats[1] - pmIn->getRow(2).m_floats[2]); // |s|>=1
-        x = s * 0.5f; // |x| >= .5
-        s = 0.5f / s;
-        y = (pmIn->getRow(1).m_floats[0] + pmIn->getRow(0).m_floats[1]) * s;
-        z = (pmIn->getRow(0).m_floats[2] + pmIn->getRow(2).m_floats[0]) * s;
-        w = (pmIn->getRow(2).m_floats[1] - pmIn->getRow(1).m_floats[2]) * s;
-    } else if (pmIn->getRow(1).m_floats[1] > pmIn->getRow(2).m_floats[2]) {
-        float s = sqrt(1.0f + pmIn->getRow(1).m_floats[1] - pmIn->getRow(0).m_floats[0] - pmIn->getRow(2).m_floats[2]); // |s|>=1
-        y = s * 0.5f; // |y| >= .5
-        s = 0.5f / s;
-        x = (pmIn->getRow(1).m_floats[0] + pmIn->getRow(0).m_floats[1]) * s;
-        z = (pmIn->getRow(2).m_floats[1] + pmIn->getRow(1).m_floats[2]) * s;
-        w = (pmIn->getRow(0).m_floats[2] - pmIn->getRow(2).m_floats[0]) * s;
-    } else {
-        float s = sqrt(1.0f + pmIn->getRow(2).m_floats[2] - pmIn->getRow(0).m_floats[0] - pmIn->getRow(1).m_floats[1]); // |s|>=1
-        z = s * 0.5f; // |z| >= .5
-        s = 0.5f / s;
-        x = (pmIn->getRow(0).m_floats[2] + pmIn->getRow(2).m_floats[0]) * s;
-        y = (pmIn->getRow(2).m_floats[1] + pmIn->getRow(1).m_floats[2]) * s;
-        w = (pmIn->getRow(1).m_floats[0] - pmIn->getRow(0).m_floats[1]) * s;
-    }
-
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_x, x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_y, y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_z, z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
-    pEnv->SetFloatField(outQuaternion, jmeClasses::Quaternion_w, w);
-    //  TODO pEnv->CallObjectMethod(out, jmeClasses::Quaternion_set, x, y, z, w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    btQuaternion q;
+    pmIn->getRotation(q);
+    convert(pEnv, &q, outQuaternion);
 }
 
 // Add a ray-test result to a list.
