@@ -232,20 +232,20 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_preTick = pEnv->GetMethodID(PhysicsSpace, "preTick_native",
-            "(F)V");
+    PhysicsSpace_preTick
+            = pEnv->GetMethodID(PhysicsSpace, "preTick_native", "(F)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_postTick = pEnv->GetMethodID(PhysicsSpace, "postTick_native",
-            "(F)V");
+    PhysicsSpace_postTick
+            = pEnv->GetMethodID(PhysicsSpace, "postTick_native", "(F)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_onContactEnded = pEnv->GetMethodID(PhysicsSpace,
-            "onContactEnded", "(J)V");
+    PhysicsSpace_onContactEnded
+            = pEnv->GetMethodID(PhysicsSpace, "onContactEnded", "(J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -258,8 +258,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSpace_onContactStarted = pEnv->GetMethodID(PhysicsSpace,
-            "onContactStarted", "(J)V");
+    PhysicsSpace_onContactStarted
+            = pEnv->GetMethodID(PhysicsSpace, "onContactStarted", "(J)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -289,6 +289,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         Vec3d_x = NULL;
         Vec3d_y = NULL;
         Vec3d_z = NULL;
+
         Quatd_x = NULL;
         Quatd_y = NULL;
         Quatd_z = NULL;
@@ -501,8 +502,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    DebugMeshCallback_addVector = pEnv->GetMethodID(DebugMeshCallback,
-            "addVector", "(FFFII)V");
+    DebugMeshCallback_addVector
+            = pEnv->GetMethodID(DebugMeshCallback, "addVector", "(FFFII)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -555,14 +556,14 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsRay_hitFraction = pEnv->GetFieldID(PhysicsRay_Class, "hitFraction",
-            "F");
+    PhysicsRay_hitFraction
+            = pEnv->GetFieldID(PhysicsRay_Class, "hitFraction", "F");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsRay_normal = pEnv->GetFieldID(PhysicsRay_Class, "normal",
-            "Lcom/jme3/math/Vector3f;");
+    PhysicsRay_normal = pEnv->GetFieldID(
+            PhysicsRay_Class, "normal", "Lcom/jme3/math/Vector3f;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -572,8 +573,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsRay_triangleIndex = pEnv->GetFieldID(PhysicsRay_Class,
-            "triangleIndex", "I");
+    PhysicsRay_triangleIndex
+            = pEnv->GetFieldID(PhysicsRay_Class, "triangleIndex", "I");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -592,26 +593,26 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSweep_hitFraction = pEnv->GetFieldID(PhysicsSweep_Class,
-            "hitFraction", "F");
+    PhysicsSweep_hitFraction
+            = pEnv->GetFieldID(PhysicsSweep_Class, "hitFraction", "F");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSweep_normal = pEnv->GetFieldID(PhysicsSweep_Class, "normal",
-            "Lcom/jme3/math/Vector3f;");
+    PhysicsSweep_normal = pEnv->GetFieldID(
+            PhysicsSweep_Class, "normal", "Lcom/jme3/math/Vector3f;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSweep_partIndex = pEnv->GetFieldID(PhysicsSweep_Class, "partIndex",
-            "I");
+    PhysicsSweep_partIndex
+            = pEnv->GetFieldID(PhysicsSweep_Class, "partIndex", "I");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
-    PhysicsSweep_triangleIndex = pEnv->GetFieldID(PhysicsSweep_Class,
-            "triangleIndex", "I");
+    PhysicsSweep_triangleIndex
+            = pEnv->GetFieldID(PhysicsSweep_Class, "triangleIndex", "I");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -623,22 +624,22 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Transform_rotation = pEnv->GetMethodID(Transform, "getRotation",
-            "()Lcom/jme3/math/Quaternion;");
+    Transform_rotation = pEnv->GetMethodID(
+            Transform, "getRotation", "()Lcom/jme3/math/Quaternion;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 
-    Transform_translation = pEnv->GetMethodID(Transform, "getTranslation",
-            "()Lcom/jme3/math/Vector3f;");
+    Transform_translation = pEnv->GetMethodID(
+            Transform, "getTranslation", "()Lcom/jme3/math/Vector3f;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
     }
 
-    Transform_scale = pEnv->GetMethodID(Transform, "getScale",
-            "()Lcom/jme3/math/Vector3f;");
+    Transform_scale = pEnv->GetMethodID(
+            Transform, "getScale", "()Lcom/jme3/math/Vector3f;");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -675,8 +676,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         return;
     }
 
-    Vhacd_update = pEnv->GetStaticMethodID(Vhacd, "update",
-            "(DDDLjava/lang/String;Ljava/lang/String;)V");
+    Vhacd_update = pEnv->GetStaticMethodID(
+            Vhacd, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
@@ -702,8 +703,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
      * Invoke NativeLibrary.postInitialization()
      * in order to start the Physics Cleaner thread.
      */
-    jmethodID postInitialization = pEnv->GetStaticMethodID(NativeLibrary_Class,
-            "postInitialization", "()V");
+    jmethodID postInitialization = pEnv->GetStaticMethodID(
+            NativeLibrary_Class, "postInitialization", "()V");
     if (pEnv->ExceptionCheck()) {
         pEnv->Throw(pEnv->ExceptionOccurred());
         return;
