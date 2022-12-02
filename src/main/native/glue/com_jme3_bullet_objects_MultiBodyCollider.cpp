@@ -112,3 +112,23 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
     btMatrix3x3 * const pRotation = &pCollider->getWorldTransform().getBasis();
     jmeBulletUtil::convert(pEnv, rotationMatrix, pRotation);
 }
+
+/*
+ * Class:     com_jme3_bullet_objects_MultiBodyCollider
+ * Method:    setPhysicsRotationDp
+ * Signature: (JLcom/simsilica/mathd/Matrix3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysicsRotationDp
+(JNIEnv *pEnv, jclass, jlong colliderId, jobject rotationMatrix) {
+    btMultiBodyLinkCollider * const pCollider
+            = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
+    NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
+    btAssert(pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK);
+
+    NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
+
+    btMatrix3x3 * const pRotation = &pCollider->getWorldTransform().getBasis();
+    jmeBulletUtil::convertDp(pEnv, rotationMatrix, pRotation);
+}
+

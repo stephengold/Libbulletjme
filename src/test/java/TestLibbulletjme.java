@@ -62,6 +62,7 @@ import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.joints.New6Dof;
+import com.jme3.bullet.objects.MultiBodyCollider;
 import com.jme3.bullet.objects.PhysicsBody;
 import com.jme3.bullet.objects.PhysicsCharacter;
 import com.jme3.bullet.objects.PhysicsGhostObject;
@@ -1239,6 +1240,32 @@ public class TestLibbulletjme {
         body.setPhysicsRotationDp(mIn);
         Matrix3d mOut3 = body.getPhysicsRotationMatrixDp(null);
         Assert.assertEquals(mIn, mOut3);
+
+        // Create a sphere-shaped base collider.
+        int numLinks = 0;
+        float baseMass = 1f;
+        Vector3f baseInertia = Vector3f.UNIT_XYZ;
+        boolean fixedBase = true;
+        boolean canSleep = true;
+        MultiBody multiBody = new MultiBody(
+                numLinks, baseMass, baseInertia, fixedBase, canSleep);
+        multiBody.addBaseCollider(shape);
+        MultiBodyCollider collider = multiBody.getBaseCollider();
+        testPco(collider);
+
+        collider.setPhysicsLocationDp(xIn);
+        collider.setPhysicsRotationDp(mIn);
+
+        Matrix3d mOut5 = collider.getPhysicsRotationMatrixDp(null);
+        Assert.assertEquals(mIn, mOut5);
+        Quatd qOut5 = collider.getPhysicsRotationDp(null);
+        assertEquals(0.5, 0.5, 0.5, 0.5, qOut5, 0.);
+        Vec3d xOut5 = collider.getPhysicsLocationDp(null);
+        if (NativeLibrary.isDoublePrecision()) {
+            Assert.assertEquals(xIn, xOut5);
+        } else {
+            assertEquals(xIn.x, xIn.y, xIn.z, xOut5, 1e-6);
+        }
     }
 
     /**

@@ -37,6 +37,7 @@ import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Matrix3d;
 import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -180,6 +181,18 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
         long objectId = nativeId();
         setPhysicsRotation(objectId, rotation);
     }
+
+    /**
+     * Directly alter this collider's orientation.
+     *
+     * @param orientation the desired orientation (a rotation matrix in
+     * physics-space coordinates, not null, unaffected)
+     */
+    public void setPhysicsRotationDp(Matrix3d orientation) {
+        Validate.nonNull(orientation, "orientation");
+        long objectId = nativeId();
+        setPhysicsRotationDp(objectId, orientation);
+    }
     // *************************************************************************
     // Java private methods
 
@@ -209,4 +222,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
 
     native private static void
             setPhysicsRotation(long objectId, Matrix3f rotation);
+
+    native private static void
+            setPhysicsRotationDp(long objectId, Matrix3d rotationMatrix);
 }
