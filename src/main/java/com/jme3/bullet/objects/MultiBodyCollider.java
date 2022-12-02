@@ -178,6 +178,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      */
     public void setPhysicsRotation(Matrix3f orientation) {
         Validate.nonNull(orientation, "orientation");
+
         long objectId = nativeId();
         setPhysicsRotation(objectId, orientation);
     }
@@ -190,6 +191,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      */
     public void setPhysicsRotationDp(Matrix3d orientation) {
         Validate.nonNull(orientation, "orientation");
+
         long objectId = nativeId();
         setPhysicsRotationDp(objectId, orientation);
     }
