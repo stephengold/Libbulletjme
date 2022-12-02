@@ -1197,6 +1197,7 @@ public class TestLibbulletjme {
         Quatd qOut2 = ghost.getPhysicsRotationDp(null);
         assertEquals(0.5, -0.5, -0.5, -0.5, qOut2, 0.);
 
+        Matrix3d mIn = new Matrix3d(0., 0., 1., 1., 0., 0., 0., 1., 0.);
         // Create a sphere-shaped dynamic rigid body.
         PhysicsRigidBody body = new PhysicsRigidBody(shape, 1f);
         testPco(body);
@@ -1230,6 +1231,10 @@ public class TestLibbulletjme {
             assertEquals(wIn.x, wIn.y, wIn.z, wOut, 1e-6);
             assertEquals(xIn.x, xIn.y, xIn.z, xOut, 1e-6);
         }
+
+        body.setPhysicsRotationDp(mIn);
+        Matrix3d mOut3 = body.getPhysicsRotationMatrixDp(null);
+        Assert.assertEquals(mIn, mOut2);
     }
 
     /**

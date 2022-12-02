@@ -815,9 +815,28 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsR
 /*
  * Class:     com_jme3_bullet_objects_PhysicsRigidBody
  * Method:    setPhysicsRotationDp
+ * Signature: (JLcom/simsilica/mathd/Matrix3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotationDp__JLcom_simsilica_mathd_Matrix3d_2
+(JNIEnv *pEnv, jclass, jlong bodyId, jobject rotationMatrix3d) {
+    btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
+    NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
+    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    jmeMotionState * const pMotionState
+            = (jmeMotionState *) pBody->getMotionState();
+
+    NULL_CHK(pEnv, rotationMatrix3d, "The rotation Matrix3d does not exist.",);
+
+    pMotionState->setKinematicRotationMatrix3d(pEnv, rotationMatrix3d);
+    pBody->setCenterOfMassTransform(pMotionState->worldTransform);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsRigidBody
+ * Method:    setPhysicsRotationDp
  * Signature: (JLcom/simsilica/mathd/Quatd;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotationDp
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setPhysicsRotationDp__JLcom_simsilica_mathd_Quatd_2
 (JNIEnv *pEnv, jclass, jlong bodyId, jobject rotationQuatd) {
     btRigidBody *pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);

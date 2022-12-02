@@ -79,6 +79,11 @@ void jmeMotionState::setKinematicRotation(JNIEnv *pEnv, jobject rotationMatrix3f
     dirty = true;
 }
 
+void jmeMotionState::setKinematicRotationMatrix3d(JNIEnv *pEnv, jobject rotationMatrix3dIn) {
+    jmeBulletUtil::convertDp(pEnv, rotationMatrix3dIn, &worldTransform.getBasis());
+    dirty = true;
+}
+
 void jmeMotionState::setKinematicRotationQuat(JNIEnv *pEnv, jobject rotationQuaternionIn) {
     jmeBulletUtil::convertQuat(pEnv, rotationQuaternionIn, &worldTransform.getBasis());
     dirty = true;

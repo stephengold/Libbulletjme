@@ -54,6 +54,7 @@ public:
     void setKinematicLocation(JNIEnv *, jobject locationVector3fIn);
     void setKinematicLocationDp(JNIEnv *, jobject locationVec3dIn);
     void setKinematicRotation(JNIEnv *, jobject rotationMatrix3fIn);
+    void setKinematicRotationMatrix3d(JNIEnv *, jobject rotationMatrix3dIn);
     void setKinematicRotationQuat(JNIEnv *, jobject rotationQuaternionIn);
     void setKinematicRotationQuatd(JNIEnv *, jobject rotationQuatdIn);
     void setKinematicTransform(const btTransform& worldTransformIn);
