@@ -1993,6 +1993,8 @@ public class TestLibbulletjme {
         assertEquals(0f, 0f, 0f, 1f, pco.getPhysicsRotation(null), 0f);
         assertEquals(0., 0., 0., 1., pco.getPhysicsRotationDp(null), 0.);
         Assert.assertEquals(
+                Matrix3f.IDENTITY, pco.getPhysicsRotationMatrix(null));
+        Assert.assertEquals(
                 new Matrix3d(), pco.getPhysicsRotationMatrixDp(null));
 
         Assert.assertNull(pco.proxyGroup());
@@ -2038,6 +2040,10 @@ public class TestLibbulletjme {
                 Assert.assertEquals(0f, body.getMass(), 0f);
                 Assert.assertTrue(body.isStatic());
             }
+
+        } else if (pco instanceof MultiBodyCollider) {
+            MultiBodyCollider collider = (MultiBodyCollider) pco;
+            Assert.assertNotNull(collider.getMultiBody());
         }
     }
 
