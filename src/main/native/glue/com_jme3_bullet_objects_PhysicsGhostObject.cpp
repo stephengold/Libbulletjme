@@ -215,9 +215,27 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
 /*
  * Class:     com_jme3_bullet_objects_PhysicsGhostObject
  * Method:    setPhysicsRotationDp
+ * Signature: (JLcom/simsilica/mathd/Matrix3d;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotationDp__JLcom_simsilica_mathd_Matrix3d_2
+(JNIEnv *pEnv, jclass, jlong ghostId, jobject matrix) {
+    btPairCachingGhostObject * const
+            pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
+    NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
+    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+
+    NULL_CHK(pEnv, matrix, "The matrix does not exist.",)
+
+    btMatrix3x3& out = pGhost->getWorldTransform().getBasis();
+    jmeBulletUtil::convertDp(pEnv, matrix, &out);
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_PhysicsGhostObject
+ * Method:    setPhysicsRotationDp
  * Signature: (JLcom/simsilica/mathd/Quatd;)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotationDp
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysicsRotationDp__JLcom_simsilica_mathd_Quatd_2
 (JNIEnv *pEnv, jclass, jlong ghostId, jobject quaternion) {
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
