@@ -31,6 +31,8 @@
  */
 package com.jme3.math;
 
+import java.util.logging.Logger;
+
 /**
  * <code>Matrix4f</code> represents a single-precision 4x4 matrix for use as a
  * 3-D coordinate transform or perspective transform. It provides convenience
@@ -47,6 +49,7 @@ package com.jme3.math;
  */
 public final class Matrix4f implements Cloneable {
 
+    private static final Logger logger = Logger.getLogger(Matrix4f.class.getName());
     /**
      * the element in row 0, column 0
      */
