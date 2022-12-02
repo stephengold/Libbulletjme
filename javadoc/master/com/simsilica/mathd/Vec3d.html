@@ -84,7 +84,12 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></span></div>
 <div class="block">A vector composed of 3 double-precision components, used to represent
- locations, offsets, and directions in 3-dimensional space.</div>
+ locations, offsets, velocities, and directions in 3-dimensional space.
+ <p>
+ Methods with names ending in "Local" modify the current instance. They are
+ used to cut down on the creation of new instances.
+ <p>
+ The conventional ordering of components is (X, Y, Z).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -100,37 +105,37 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color"><code>static final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color"><code><a href="#UNIT_X" class="member-name-link">UNIT_X</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">shared instance of the +X direction (1,0,0) - Do not modify!</div>
+<div class="block">Shared instance of the +X direction (1,0,0).</div>
 </div>
 <div class="col-first odd-row-color"><code>static final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#UNIT_Y" class="member-name-link">UNIT_Y</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">shared instance of the +Y direction (0,1,0) - Do not modify!</div>
+<div class="block">Shared instance of the +Y direction (0,1,0).</div>
 </div>
 <div class="col-first even-row-color"><code>static final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color"><code><a href="#UNIT_Z" class="member-name-link">UNIT_Z</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">shared instance of the +Z direction (0,0,1) - Do not modify!</div>
+<div class="block">Shared instance of the +Z direction (0,0,1).</div>
 </div>
 <div class="col-first odd-row-color"><code>double</code></div>
 <div class="col-second odd-row-color"><code><a href="#x" class="member-name-link">x</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">X component of the vector</div>
+<div class="block">The first (X) component.</div>
 </div>
 <div class="col-first even-row-color"><code>double</code></div>
 <div class="col-second even-row-color"><code><a href="#y" class="member-name-link">y</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Y component of the vector</div>
+<div class="block">The 2nd (Y) component.</div>
 </div>
 <div class="col-first odd-row-color"><code>double</code></div>
 <div class="col-second odd-row-color"><code><a href="#z" class="member-name-link">z</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">Z component of the vector</div>
+<div class="block">The 3rd (Z) component.</div>
 </div>
 <div class="col-first even-row-color"><code>static final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color"><code><a href="#ZERO" class="member-name-link">ZERO</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">shared instance of the all-zero vector (0,0,0) - Do not modify!</div>
+<div class="block">Shared instance of the all-zero vector (0,0,0).</div>
 </div>
 </div>
 </section>
@@ -145,21 +150,21 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Vec3d</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate a vector with the value (0,0,0).</div>
+<div class="block">Instantiates an all-zero vector (0,0,0).</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(double,double,double)" class="member-name-link">Vec3d</a><wbr>(double&nbsp;x,
  double&nbsp;y,
  double&nbsp;z)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Instantiate a vector with the specified components.</div>
+<div class="block">Instantiates a vector with the specified components.</div>
 </div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f)" class="member-name-link">Vec3d</a><wbr>(<a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate based on the specified Vector3f.</div>
+<div class="block">Instantiates a double-precision copy of the argument.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.simsilica.mathd.Vec3d)" class="member-name-link">Vec3d</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Instantiate a copy of the specified Vec3d.</div>
+<div class="block">Instantiates a copy of the argument.</div>
 </div>
 </div>
 </section>
@@ -180,35 +185,37 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  double&nbsp;vy,
  double&nbsp;vz)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sum this vector with the specified components to yield a new vector.</div>
+<div class="block">Adds specified amounts to the vector's components and returns the sum as
+ a new instance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#add(com.simsilica.mathd.Vec3d)" class="member-name-link">add</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sum this vector with the specified vector to yield a new vector.</div>
+<div class="block">Adds the argument and returns the sum as a new instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addLocal(double,double,double)" class="member-name-link">addLocal</a><wbr>(double&nbsp;vx,
  double&nbsp;vy,
  double&nbsp;vz)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add the specified components to this vector in place.</div>
+<div class="block">Adds specified amounts to the vector's components and returns the
+ (modified) current instance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addLocal(com.simsilica.mathd.Vec3d)" class="member-name-link">addLocal</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Add the specified vector to this vector in place.</div>
+<div class="block">Adds the argument and returns the (modified) current instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clone()" class="member-name-link">clone</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Create a copy of this vector.</div>
+<div class="block">Creates a copy.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#cross(com.simsilica.mathd.Vec3d)" class="member-name-link">cross</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Take the cross product of this vector times the specified vector to yield
- a new vector.</div>
+<div class="block">Calculates a cross product with the argument and returns the product as a
+ new instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#divideLocal(com.simsilica.mathd.Vec3d)" class="member-name-link">divideLocal</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
@@ -219,43 +226,43 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dot(com.simsilica.mathd.Vec3d)" class="member-name-link">dot</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the dot product of the specified vector with this vector.</div>
+<div class="block">Returns the dot (or inner) product with the argument.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test for strict equality with another object.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int)" class="member-name-link">get</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the indexed component of this vector.</div>
+<div class="block">Returns the indexed component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Generate the hash code for this vector.</div>
+<div class="block">Returns a hash code.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#length()" class="member-name-link">length</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the length of this vector.</div>
+<div class="block">Returns the length (or magnitude).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lengthSq()" class="member-name-link">lengthSq</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the squared length of this vector.</div>
+<div class="block">Returns the square of the length.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(double)" class="member-name-link">multLocal</a><wbr>(double&nbsp;s)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Uniformly scale this vector in place.</div>
+<div class="block">Multiplies by the argument and returns the (modified) current instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(com.simsilica.mathd.Vec3d)" class="member-name-link">multLocal</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Scale this vector by the specified vector component-by-component, in
- place.</div>
+<div class="block">Multiplies component-wise by the argument and returns the (modified)
+ current instance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#normalizeLocal()" class="member-name-link">normalizeLocal</a>()</code></div>
@@ -267,43 +274,44 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  double&nbsp;y,
  double&nbsp;z)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set all components of this vector to the specified values.</div>
+<div class="block">Sets all 3 components to specified values.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,double)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  double&nbsp;d)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the indexed component of this vector.</div>
+<div class="block">Sets the indexed component.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.jme3.math.Vector3f)" class="member-name-link">set</a><wbr>(<a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy all components of the specified Vector3f to this vector.</div>
+<div class="block">Copies all 3 components of the argument, converting them to
+ double precision.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.simsilica.mathd.Vec3d)" class="member-name-link">set</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy all components of the specified vector to this vector.</div>
+<div class="block">Copies all 3 components from the argument.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#subtract(com.simsilica.mathd.Vec3d)" class="member-name-link">subtract</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Subtract the specified vector to yield a new vector.</div>
+<div class="block">Subtracts the argument and returns the difference as a new instance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#subtractLocal(com.simsilica.mathd.Vec3d)" class="member-name-link">subtractLocal</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Subtract the specified vector from this vector in place.</div>
+<div class="block">Subtracts the argument and returns the (modified) current instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Represent this vector as a String.</div>
+<div class="block">Returns a string representation of the vector, which is unaffected.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toVector3f()" class="member-name-link">toVector3f</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Instantiate a Vector3f based on this vector.</div>
+<div class="block">Creates a single-precision copy of the current instance.</div>
 </div>
 </div>
 </div>
@@ -326,49 +334,49 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="UNIT_X">
 <h3>UNIT_X</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">UNIT_X</span></div>
-<div class="block">shared instance of the +X direction (1,0,0) - Do not modify!</div>
+<div class="block">Shared instance of the +X direction (1,0,0). Do not modify!</div>
 </section>
 </li>
 <li>
 <section class="detail" id="UNIT_Y">
 <h3>UNIT_Y</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">UNIT_Y</span></div>
-<div class="block">shared instance of the +Y direction (0,1,0) - Do not modify!</div>
+<div class="block">Shared instance of the +Y direction (0,1,0). Do not modify!</div>
 </section>
 </li>
 <li>
 <section class="detail" id="UNIT_Z">
 <h3>UNIT_Z</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">UNIT_Z</span></div>
-<div class="block">shared instance of the +Z direction (0,0,1) - Do not modify!</div>
+<div class="block">Shared instance of the +Z direction (0,0,1). Do not modify!</div>
 </section>
 </li>
 <li>
 <section class="detail" id="ZERO">
 <h3>ZERO</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">ZERO</span></div>
-<div class="block">shared instance of the all-zero vector (0,0,0) - Do not modify!</div>
+<div class="block">Shared instance of the all-zero vector (0,0,0). Do not modify!</div>
 </section>
 </li>
 <li>
 <section class="detail" id="x">
 <h3>x</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">x</span></div>
-<div class="block">X component of the vector</div>
+<div class="block">The first (X) component.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="y">
 <h3>y</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">y</span></div>
-<div class="block">Y component of the vector</div>
+<div class="block">The 2nd (Y) component.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="z">
 <h3>z</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">z</span></div>
-<div class="block">Z component of the vector</div>
+<div class="block">The 3rd (Z) component.</div>
 </section>
 </li>
 </ul>
@@ -383,7 +391,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;()">
 <h3>Vec3d</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Vec3d</span>()</div>
-<div class="block">Instantiate a vector with the value (0,0,0).</div>
+<div class="block">Instantiates an all-zero vector (0,0,0).</div>
 </section>
 </li>
 <li>
@@ -392,7 +400,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Vec3d</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;y,
  double&nbsp;z)</span></div>
-<div class="block">Instantiate a vector with the specified components.</div>
+<div class="block">Instantiates a vector with the specified components.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - the desired X component</dd>
@@ -405,7 +413,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;(com.simsilica.mathd.Vec3d)">
 <h3>Vec3d</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Vec3d</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Instantiate a copy of the specified Vec3d.</div>
+<div class="block">Instantiates a copy of the argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the Vec3d to copy (not null, unaffected)</dd>
@@ -416,7 +424,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;(com.jme3.math.Vector3f)">
 <h3>Vec3d</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Vec3d</span><wbr><span class="parameters">(<a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
-<div class="block">Instantiate based on the specified Vector3f.</div>
+<div class="block">Instantiates a double-precision copy of the argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the input Vector3f (not null, unaffected)</dd>
@@ -435,7 +443,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toVector3f()">
 <h3>toVector3f</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">toVector3f</span>()</div>
-<div class="block">Instantiate a Vector3f based on this vector.</div>
+<div class="block">Creates a single-precision copy of the current instance.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a new Vector3f</dd>
@@ -446,7 +454,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Generate the hash code for this vector.</div>
+<div class="block">Returns a hash code. If two vectors have identical values, they will
+ have the same hash code. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -459,14 +468,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">Test for strict equality with another object.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. If
+ <code>o</code> is null, false is returned. Either way, the current instance is
+ unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>o</code> - the object to compare to (may be null, unaffected)</dd>
+<dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if the objects have the same value, otherwise false</dd>
+<dd>true if the objects have identical values, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -476,14 +487,14 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(double&nbsp;x,
  double&nbsp;y,
  double&nbsp;z)</span></div>
-<div class="block">Set all components of this vector to the specified values.</div>
+<div class="block">Sets all 3 components to specified values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - the desired X component</dd>
 <dd><code>y</code> - the desired Y component</dd>
 <dd><code>z</code> - the desired Z component</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -491,12 +502,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="set(com.simsilica.mathd.Vec3d)">
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Copy all components of the specified vector to this vector.</div>
+<div class="block">Copies all 3 components from the argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>v</code> - the desired value (not null, unaffected)</dd>
+<dd><code>v</code> - the Vec3d to copy (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -504,12 +515,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="set(com.jme3.math.Vector3f)">
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
-<div class="block">Copy all components of the specified Vector3f to this vector.</div>
+<div class="block">Copies all 3 components of the argument, converting them to
+ double precision.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>v</code> - the input Vector3f (not null, unaffected)</dd>
+<dd><code>v</code> - the Vector3f to copy (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -517,12 +529,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="clone()">
 <h3>clone</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">clone</span>()</div>
-<div class="block">Create a copy of this vector.</div>
+<div class="block">Creates a copy. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>a new instance, equivalent to this one</dd>
+<dd>a new instance, equivalent to the current one</dd>
 </dl>
 </section>
 </li>
@@ -530,15 +542,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="get(int)">
 <h3>get</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Determine the indexed component of this vector.</div>
+<div class="block">Returns the indexed component. The vector is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - 0 for the X component, 1 for the Y component, or 2 for the Z
- component</dd>
+<dd><code>i</code> - 0, 1, or 2</dd>
 <dt>Returns:</dt>
-<dd>the component value</dd>
+<dd>the X component if i=0, the Y component if i=1, or the Z
+     component if i=2</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IndexOutOfBoundsException.html" title="class or interface in java.lang" class="external-link">IndexOutOfBoundsException</a></code> - if index is not 0, 1, or 2</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IndexOutOfBoundsException.html" title="class or interface in java.lang" class="external-link">IndexOutOfBoundsException</a></code> - if <code>i</code> is not 0, 1, or 2</dd>
 </dl>
 </section>
 </li>
@@ -547,16 +559,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
  double&nbsp;d)</span></div>
-<div class="block">Alter the indexed component of this vector.</div>
+<div class="block">Sets the indexed component.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>i</code> - 0 for the X component, 1 for the Y component, or 2 for the Z
- component</dd>
-<dd><code>d</code> - the desired value for the component</dd>
+<dd><code>i</code> - which component to set: 0 &rarr; the X component, 1 &rarr;
+     the Y component, 2 &rarr; the Z component</dd>
+<dd><code>d</code> - the desired component value</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IndexOutOfBoundsException.html" title="class or interface in java.lang" class="external-link">IndexOutOfBoundsException</a></code> - if index is not 0, 1, or 2</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if <code>i</code> is not 0, 1, or 2</dd>
 </dl>
 </section>
 </li>
@@ -564,12 +576,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="add(com.simsilica.mathd.Vec3d)">
 <h3>add</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Sum this vector with the specified vector to yield a new vector.</div>
+<div class="block">Adds the argument and returns the sum as a new instance. The current
+ instance is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the vector to add (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>a new instance</dd>
+<dd>a new Vec3d</dd>
 </dl>
 </section>
 </li>
@@ -579,14 +592,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">add</span><wbr><span class="parameters">(double&nbsp;vx,
  double&nbsp;vy,
  double&nbsp;vz)</span></div>
-<div class="block">Sum this vector with the specified components to yield a new vector.</div>
+<div class="block">Adds specified amounts to the vector's components and returns the sum as
+ a new instance. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>vx</code> - the amount to increase the X component</dd>
-<dd><code>vy</code> - the amount to increase the Y component</dd>
-<dd><code>vz</code> - the amount to increase the Z component</dd>
+<dd><code>vx</code> - the amount to add to the X component</dd>
+<dd><code>vy</code> - the amount to add to the Y component</dd>
+<dd><code>vz</code> - the amount to add to the Z component</dd>
 <dt>Returns:</dt>
-<dd>a new instance</dd>
+<dd>a new Vec3d</dd>
 </dl>
 </section>
 </li>
@@ -594,12 +608,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="subtract(com.simsilica.mathd.Vec3d)">
 <h3>subtract</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">subtract</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Subtract the specified vector to yield a new vector.</div>
+<div class="block">Subtracts the argument and returns the difference as a new instance. The
+ current instance is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the vector to subtract (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>a new instance</dd>
+<dd>a new Vec3d</dd>
 </dl>
 </section>
 </li>
@@ -607,14 +622,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="addLocal(com.simsilica.mathd.Vec3d)">
 <h3>addLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">addLocal</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Add the specified vector to this vector in place.
-
- It IS safe for v and this to be the same object.</div>
+<div class="block">Adds the argument and returns the (modified) current instance.
+ <p>
+ It IS safe for <code>v</code> and <code>this</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>v</code> - the vector to add (not null, unaffected unless it's this)</dd>
+<dd><code>v</code> - the vector to add (not null, unaffected unless it's
+     <code>this</code>)</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -624,14 +640,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">addLocal</span><wbr><span class="parameters">(double&nbsp;vx,
  double&nbsp;vy,
  double&nbsp;vz)</span></div>
-<div class="block">Add the specified components to this vector in place.</div>
+<div class="block">Adds specified amounts to the vector's components and returns the
+ (modified) current instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>vx</code> - the amount to increase the X component</dd>
-<dd><code>vy</code> - the amount to increase the Y component</dd>
-<dd><code>vz</code> - the amount to increase the Z component</dd>
+<dd><code>vx</code> - the amount to add to the X component</dd>
+<dd><code>vy</code> - the amount to add to the Y component</dd>
+<dd><code>vz</code> - the amount to add to the Z component</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -639,14 +656,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="subtractLocal(com.simsilica.mathd.Vec3d)">
 <h3>subtractLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">subtractLocal</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Subtract the specified vector from this vector in place.
-
- It IS safe for v and this to be the same object.</div>
+<div class="block">Subtracts the argument and returns the (modified) current instance.
+ <p>
+ It IS safe for <code>v</code> and <code>this</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>v</code> - the vector to subtract (not null, unaffected unless it's this)</dd>
+<dd><code>v</code> - the vector to subtract (not null, unaffected unless it's
+     <code>this</code>)</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -654,12 +672,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="multLocal(double)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(double&nbsp;s)</span></div>
-<div class="block">Uniformly scale this vector in place.</div>
+<div class="block">Multiplies by the argument and returns the (modified) current instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>s</code> - the scale factor</dd>
+<dd><code>s</code> - the scaling factor</dd>
 <dt>Returns:</dt>
-<dd>this</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -667,15 +685,15 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="multLocal(com.simsilica.mathd.Vec3d)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Scale this vector by the specified vector component-by-component, in
- place.
-
- It IS safe for v and this to be the same object.</div>
+<div class="block">Multiplies component-wise by the argument and returns the (modified)
+ current instance.
+ <p>
+ It IS safe for <code>v</code> and <code>this</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>v</code> - the vector to multiply (not null, unaffected unless it's this)</dd>
+<dd><code>v</code> - the scale vector (not null, unaffected unless it's <code>this</code>)</dd>
 <dt>Returns:</dt>
-<dd>this vector</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -699,10 +717,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="lengthSq()">
 <h3>lengthSq</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">lengthSq</span>()</div>
-<div class="block">Determine the squared length of this vector.</div>
+<div class="block">Returns the square of the length. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the squared length (&ge;0)</dd>
+<dd>the sum of the squared components (not negative)</dd>
 </dl>
 </section>
 </li>
@@ -710,10 +728,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="length()">
 <h3>length</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">length</span>()</div>
-<div class="block">Determine the length of this vector.</div>
+<div class="block">Returns the length (or magnitude). The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the length (&ge;0)</dd>
+<dd>the root-sum of the squared components (not negative)</dd>
 </dl>
 </section>
 </li>
@@ -721,10 +739,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="normalizeLocal()">
 <h3>normalizeLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">normalizeLocal</span>()</div>
-<div class="block">Normalize this vector in place.</div>
+<div class="block">Normalize this vector in place. For a zero vector, the result is
+ undefined.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>this</dd>
+<dd>the (normalized) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -732,7 +751,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="dot(com.simsilica.mathd.Vec3d)">
 <h3>dot</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">dot</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Determine the dot product of the specified vector with this vector.</div>
+<div class="block">Returns the dot (or inner) product with the argument. The current
+ instance is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the vector to multiply (not null, unaffected)</dd>
@@ -745,13 +765,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="cross(com.simsilica.mathd.Vec3d)">
 <h3>cross</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">cross</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Take the cross product of this vector times the specified vector to yield
- a new vector.</div>
+<div class="block">Calculates a cross product with the argument and returns the product as a
+ new instance. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the right factor (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>a new instance</dd>
+<dd><code>this</code> cross <code>v</code> (a new Vec3d)</dd>
 </dl>
 </section>
 </li>
@@ -759,16 +779,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Represent this vector as a String.
-
- The format is:
-
- Vec3d[XX.XXXXXXXXXXXXX, YY.YYYYYYYYYYYYY, ZZ.ZZZZZZZZZZZZZ]</div>
+<div class="block">Returns a string representation of the vector, which is unaffected.
+ For example, the +X direction vector is represented by:
+ <pre>
+ Vec3d[1.0, 0.0, 0.0]
+ </pre></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>a descriptive string of text (not null, not empty)</dd>
+<dd>the string representation (not null, not empty)</dd>
 </dl>
 </section>
 </li>

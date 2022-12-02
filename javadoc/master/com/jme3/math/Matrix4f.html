@@ -83,15 +83,15 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Matrix4f</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></span></div>
-<div class="block"><code>Matrix4f</code> represents a single-precision 4x4 matrix for use as a
- 3-D coordinate transform or perspective transform. It provides convenience
- methods for loading data from many sources.
+<div class="block">A 4x4 matrix composed of 16 single-precision elements, used to represent
+ linear or perspective transformations of 3-D coordinates.
 
- The rightmost column (column 3) stores the translation vector. Element
+ <p>The rightmost column (column 3) stores the translation vector. Element
  numbering is (row,column), so m03 is the row 0, column 3, which is the X
- translation. This means that the implicit storage order is column-major.
- However, the get() and set() functions on float arrays default to row-major
- order!</div>
+ translation.
+
+ <p>Methods with names ending in "Local" modify the current instance. They are
+ used to avoid creating garbage.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -107,82 +107,82 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m00" class="member-name-link">m00</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 0, column 0</div>
+<div class="block">The element in row 0, column 0.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m01" class="member-name-link">m01</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 0, column 1</div>
+<div class="block">The element in row 0, column 1.</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m02" class="member-name-link">m02</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 0, column 2</div>
+<div class="block">The element in row 0, column 2.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m03" class="member-name-link">m03</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 0, column 3 (the X translation)</div>
+<div class="block">The element in row 0, column 3 (the X translation).</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m10" class="member-name-link">m10</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 1, column 0</div>
+<div class="block">The element in row 1, column 0.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m11" class="member-name-link">m11</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 1, column 1</div>
+<div class="block">The element in row 1, column 1.</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m12" class="member-name-link">m12</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 1, column 2</div>
+<div class="block">The element in row 1, column 2.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m13" class="member-name-link">m13</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 1, column 3 (the Y translation)</div>
+<div class="block">The element in row 1, column 3 (the Y translation).</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m20" class="member-name-link">m20</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 2, column 0</div>
+<div class="block">The element in row 2, column 0.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m21" class="member-name-link">m21</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 2, column 1</div>
+<div class="block">The element in row 2, column 1.</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m22" class="member-name-link">m22</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 2, column 2</div>
+<div class="block">The element in row 2, column 2.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m23" class="member-name-link">m23</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 2, column 3 (the Z translation)</div>
+<div class="block">The element in row 2, column 3 (the Z translation).</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m30" class="member-name-link">m30</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 3, column 0</div>
+<div class="block">The element in row 3, column 0.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m31" class="member-name-link">m31</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 3, column 1</div>
+<div class="block">The element in row 3, column 1.</div>
 </div>
 <div class="col-first even-row-color"><code>float</code></div>
 <div class="col-second even-row-color"><code><a href="#m32" class="member-name-link">m32</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">the element in row 3, column 2</div>
+<div class="block">The element in row 3, column 2.</div>
 </div>
 <div class="col-first odd-row-color"><code>float</code></div>
 <div class="col-second odd-row-color"><code><a href="#m33" class="member-name-link">m33</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">the element in row 3, column 3</div>
+<div class="block">The element in row 3, column 3.</div>
 </div>
 </div>
 </section>
@@ -197,8 +197,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Matrix4f</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Create a <code>Matrix4f</code> initialized to identity (diagonals = 1,
- other elements = 0).</div>
+<div class="block">Instantiates an identity matrix (diagonals = 1, other elements = 0).</div>
 </div>
 </div>
 </section>
@@ -217,81 +216,79 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clone()" class="member-name-link">clone</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Create a copy.</div>
+<div class="block">Creates a copy.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test for equality with the specified object.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block"><code>hashCode</code> returns the hash code value as an integer and is
- supported for the benefit of hashing based collection classes such as
- Hashtable, HashMap, HashSet etc.</div>
+<div class="block">Returns a hash code.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invertLocal()" class="member-name-link">invertLocal</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Invert in place.</div>
+<div class="block">Inverts in place.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadIdentity()" class="member-name-link">loadIdentity</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Load identity (diagonals = 1, other elements = 0).</div>
+<div class="block">Configures as an identity matrix (diagonals = 1, other elements = 0).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(float)" class="member-name-link">multLocal</a><wbr>(float&nbsp;scalar)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Multiply in place, by the specified scalar.</div>
+<div class="block">Multiplies by the scalar argument.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(float,float,float)" class="member-name-link">setScale</a><wbr>(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;z)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the scale component of this 3-D coordinate transform.</div>
+<div class="block">Alters the scale component of the coordinate transform.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(com.jme3.math.Vector3f)" class="member-name-link">setScale</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;scale)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the scale component of this 3-D coordinate transform.</div>
+<div class="block">Alters the scale component of the coordinate transform.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTranslation(com.jme3.math.Vector3f)" class="member-name-link">setTranslation</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;translation)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the translation component of this 3-D coordinate transform.</div>
+<div class="block">Alters the translation component of the coordinate transform.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toRotationMatrix(com.jme3.math.Matrix3f)" class="member-name-link">toRotationMatrix</a><wbr>(<a href="Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;mat)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the rotation component of this 3-D coordinate transform.</div>
+<div class="block">Determines the rotation component of the coordinate transform.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toRotationQuat(com.jme3.math.Quaternion)" class="member-name-link">toRotationQuat</a><wbr>(<a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the rotation component of this 3-D coordinate transform.</div>
+<div class="block">Returns the rotation component of the coordinate transform.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toScaleVector(com.jme3.math.Vector3f)" class="member-name-link">toScaleVector</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the scale component of this 3-D coordinate transform.</div>
+<div class="block">Determines the scale component of the coordinate transform.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Represent as a String.</div>
+<div class="block">Returns a string representation of the matrix, which is unaffected.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTranslationVector(com.jme3.math.Vector3f)" class="member-name-link">toTranslationVector</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the translation component of this 3-D coordinate transform.</div>
+<div class="block">Returns the translation component of the coordinate transform.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#zero()" class="member-name-link">zero</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set all elements to zero.</div>
+<div class="block">Sets all elements to zero.</div>
 </div>
 </div>
 </div>
@@ -314,112 +311,112 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="m00">
 <h3>m00</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m00</span></div>
-<div class="block">the element in row 0, column 0</div>
+<div class="block">The element in row 0, column 0.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m01">
 <h3>m01</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m01</span></div>
-<div class="block">the element in row 0, column 1</div>
+<div class="block">The element in row 0, column 1.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m02">
 <h3>m02</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m02</span></div>
-<div class="block">the element in row 0, column 2</div>
+<div class="block">The element in row 0, column 2.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m03">
 <h3>m03</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m03</span></div>
-<div class="block">the element in row 0, column 3 (the X translation)</div>
+<div class="block">The element in row 0, column 3 (the X translation).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m10">
 <h3>m10</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m10</span></div>
-<div class="block">the element in row 1, column 0</div>
+<div class="block">The element in row 1, column 0.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m11">
 <h3>m11</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m11</span></div>
-<div class="block">the element in row 1, column 1</div>
+<div class="block">The element in row 1, column 1.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m12">
 <h3>m12</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m12</span></div>
-<div class="block">the element in row 1, column 2</div>
+<div class="block">The element in row 1, column 2.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m13">
 <h3>m13</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m13</span></div>
-<div class="block">the element in row 1, column 3 (the Y translation)</div>
+<div class="block">The element in row 1, column 3 (the Y translation).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m20">
 <h3>m20</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m20</span></div>
-<div class="block">the element in row 2, column 0</div>
+<div class="block">The element in row 2, column 0.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m21">
 <h3>m21</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m21</span></div>
-<div class="block">the element in row 2, column 1</div>
+<div class="block">The element in row 2, column 1.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m22">
 <h3>m22</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m22</span></div>
-<div class="block">the element in row 2, column 2</div>
+<div class="block">The element in row 2, column 2.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m23">
 <h3>m23</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m23</span></div>
-<div class="block">the element in row 2, column 3 (the Z translation)</div>
+<div class="block">The element in row 2, column 3 (the Z translation).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m30">
 <h3>m30</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m30</span></div>
-<div class="block">the element in row 3, column 0</div>
+<div class="block">The element in row 3, column 0.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m31">
 <h3>m31</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m31</span></div>
-<div class="block">the element in row 3, column 1</div>
+<div class="block">The element in row 3, column 1.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m32">
 <h3>m32</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m32</span></div>
-<div class="block">the element in row 3, column 2</div>
+<div class="block">The element in row 3, column 2.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="m33">
 <h3>m33</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">m33</span></div>
-<div class="block">the element in row 3, column 3</div>
+<div class="block">The element in row 3, column 3.</div>
 </section>
 </li>
 </ul>
@@ -434,8 +431,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;()">
 <h3>Matrix4f</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Matrix4f</span>()</div>
-<div class="block">Create a <code>Matrix4f</code> initialized to identity (diagonals = 1,
- other elements = 0).</div>
+<div class="block">Instantiates an identity matrix (diagonals = 1, other elements = 0).</div>
 </section>
 </li>
 </ul>
@@ -450,17 +446,17 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="loadIdentity()">
 <h3>loadIdentity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">loadIdentity</span>()</div>
-<div class="block">Load identity (diagonals = 1, other elements = 0).</div>
+<div class="block">Configures as an identity matrix (diagonals = 1, other elements = 0).</div>
 </section>
 </li>
 <li>
 <section class="detail" id="multLocal(float)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(float&nbsp;scalar)</span></div>
-<div class="block">Multiply in place, by the specified scalar.</div>
+<div class="block">Multiplies by the scalar argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>scalar</code> - the scale factor to apply to all elements</dd>
+<dd><code>scalar</code> - the scaling factor to apply to all elements</dd>
 </dl>
 </section>
 </li>
@@ -468,10 +464,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="invertLocal()">
 <h3>invertLocal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></span>&nbsp;<span class="element-name">invertLocal</span>()</div>
-<div class="block">Invert in place.</div>
+<div class="block">Inverts in place. If the current instance is singular, the matrix is
+ zeroed.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>this matrix (inverted)</dd>
+<dd>the (inverted) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -479,10 +476,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="zero()">
 <h3>zero</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></span>&nbsp;<span class="element-name">zero</span>()</div>
-<div class="block">Set all elements to zero.</div>
+<div class="block">Sets all elements to zero.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>this (zeroed)</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -490,12 +487,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toTranslationVector(com.jme3.math.Vector3f)">
 <h3>toTranslationVector</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">toTranslationVector</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector)</span></div>
-<div class="block">Determine the translation component of this 3-D coordinate transform.</div>
+<div class="block">Returns the translation component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vector</code> - storage for the result (not null, modified)</dd>
 <dt>Returns:</dt>
-<dd>vector</dd>
+<dd>the translation component (in <code>vector</code>) for chaining</dd>
 </dl>
 </section>
 </li>
@@ -503,12 +500,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toRotationQuat(com.jme3.math.Quaternion)">
 <h3>toRotationQuat</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a></span>&nbsp;<span class="element-name">toRotationQuat</span><wbr><span class="parameters">(<a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q)</span></div>
-<div class="block">Determine the rotation component of this 3-D coordinate transform.</div>
+<div class="block">Returns the rotation component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>q</code> - storage for the result (not null, modified)</dd>
 <dt>Returns:</dt>
-<dd>q</dd>
+<dd>the rotation component (in <code>q</code>) for chaining</dd>
 </dl>
 </section>
 </li>
@@ -516,7 +513,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toRotationMatrix(com.jme3.math.Matrix3f)">
 <h3>toRotationMatrix</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">toRotationMatrix</span><wbr><span class="parameters">(<a href="Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;mat)</span></div>
-<div class="block">Determine the rotation component of this 3-D coordinate transform.</div>
+<div class="block">Determines the rotation component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mat</code> - storage for the result (not null, modified)</dd>
@@ -527,12 +524,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toScaleVector(com.jme3.math.Vector3f)">
 <h3>toScaleVector</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">toScaleVector</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</span></div>
-<div class="block">Determine the scale component of this 3-D coordinate transform.</div>
+<div class="block">Determines the scale component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>store</code> - storage for the result (not null, modified)</dd>
 <dt>Returns:</dt>
-<dd>store</dd>
+<dd>the scale factors (in <code>store</code>) for chaining</dd>
 </dl>
 </section>
 </li>
@@ -542,7 +539,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setScale</span><wbr><span class="parameters">(float&nbsp;x,
  float&nbsp;y,
  float&nbsp;z)</span></div>
-<div class="block">Alter the scale component of this 3-D coordinate transform.</div>
+<div class="block">Alters the scale component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - the desired scale factor for the X axis</dd>
@@ -555,7 +552,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setScale(com.jme3.math.Vector3f)">
 <h3>setScale</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setScale</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;scale)</span></div>
-<div class="block">Alter the scale component of this 3-D coordinate transform.</div>
+<div class="block">Alters the scale component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>scale</code> - the desired scale factors (not null, unaffected)</dd>
@@ -566,7 +563,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setTranslation(com.jme3.math.Vector3f)">
 <h3>setTranslation</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTranslation</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;translation)</span></div>
-<div class="block">Alter the translation component of this 3-D coordinate transform.</div>
+<div class="block">Alters the translation component of the coordinate transform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>translation</code> - the desired translation (not null, unaffected)</dd>
@@ -577,7 +574,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Represent as a String. For example, identity would be represented by:
+<div class="block">Returns a string representation of the matrix, which is unaffected. For
+ example, the identity matrix is represented by:
  <pre>
  Matrix4f
  [
@@ -591,7 +589,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>the string representation of this object.</dd>
+<dd>the string representation (not null, not empty)</dd>
 </dl>
 </section>
 </li>
@@ -599,14 +597,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block"><code>hashCode</code> returns the hash code value as an integer and is
- supported for the benefit of hashing based collection classes such as
- Hashtable, HashMap, HashSet etc.</div>
+<div class="block">Returns a hash code. If two matrices have identical values, they will
+ have the same hash code. The matrix is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>the hashcode for this instance of Matrix4f.</dd>
+<dd>a 32-bit value for use in hashing</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
@@ -620,14 +617,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">Test for equality with the specified object.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. If
+ <code>o</code> is null, false is returned. Either way, the current instance is
+ unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>o</code> - the object to compare, or null</dd>
+<dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if this and o are equal, otherwise false</dd>
+<dd>true if the objects have identical values, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -635,7 +634,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="clone()">
 <h3>clone</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></span>&nbsp;<span class="element-name">clone</span>()</div>
-<div class="block">Create a copy.</div>
+<div class="block">Creates a copy. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
