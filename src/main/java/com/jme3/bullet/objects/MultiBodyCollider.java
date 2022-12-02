@@ -173,13 +173,13 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
     /**
      * Directly alter this collider's orientation.
      *
-     * @param rotation the desired orientation (a rotation matrix in
+     * @param orientation the desired orientation (a rotation matrix in
      * physics-space coordinates, not null, unaffected)
      */
-    public void setPhysicsRotation(Matrix3f rotation) {
-        Validate.nonNull(rotation, "rotation");
+    public void setPhysicsRotation(Matrix3f orientation) {
+        Validate.nonNull(orientation, "orientation");
         long objectId = nativeId();
-        setPhysicsRotation(objectId, rotation);
+        setPhysicsRotation(objectId, orientation);
     }
 
     /**
@@ -215,14 +215,14 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
     native private static long createCollider(long multiBodyId, int linkIndex);
 
     native private static void
-            setPhysicsLocation(long objectId, Vector3f location);
+            setPhysicsLocation(long colliderId, Vector3f locationVector);
 
     native private static void
-            setPhysicsLocationDp(long objectId, Vec3d location);
+            setPhysicsLocationDp(long colliderId, Vec3d locationVector);
 
     native private static void
-            setPhysicsRotation(long objectId, Matrix3f rotation);
+            setPhysicsRotation(long colliderId, Matrix3f rotationMatrix);
 
     native private static void
-            setPhysicsRotationDp(long objectId, Matrix3d rotationMatrix);
+            setPhysicsRotationDp(long colliderId, Matrix3d rotationMatrix);
 }
