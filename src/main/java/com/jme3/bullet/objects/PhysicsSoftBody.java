@@ -1034,7 +1034,9 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public float restingLengthsScale() {
         long objectId = nativeId();
-        return getRestLengthScale(objectId);
+        float result = getRestLengthScale(objectId);
+
+        return result;
     }
 
     /**
@@ -1322,7 +1324,9 @@ public class PhysicsSoftBody extends PhysicsBody {
      */
     public float volume() {
         long objectId = nativeId();
-        return getVolume(objectId);
+        float result = getVolume(objectId);
+
+        return result;
     }
 
     /**

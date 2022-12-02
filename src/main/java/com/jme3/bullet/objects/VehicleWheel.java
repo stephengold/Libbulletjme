@@ -183,11 +183,14 @@ public class VehicleWheel {
      * a new instance)
      */
     public Vector3f getAxle(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return axisDirection.clone();
+            result = axisDirection.clone();
         } else {
-            return storeResult.set(axisDirection);
+            result = storeResult.set(axisDirection);
         }
+
+        return result;
     }
 
     /**
@@ -267,7 +270,8 @@ public class VehicleWheel {
      * @return the coefficient of friction
      */
     public float getFrictionSlip() {
-        return tuning.getFrictionSlip();
+        float result = tuning.getFrictionSlip();
+        return result;
     }
 
     /**
@@ -287,11 +291,14 @@ public class VehicleWheel {
      * or a new instance)
      */
     public Vector3f getLocation(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return location.clone();
+            result = location.clone();
         } else {
-            return storeResult.set(location);
+            result = storeResult.set(location);
         }
+
+        return result;
     }
 
     /**
@@ -301,7 +308,8 @@ public class VehicleWheel {
      * @return the maximum force
      */
     public float getMaxSuspensionForce() {
-        return tuning.getMaxSuspensionForce();
+        float result = tuning.getMaxSuspensionForce();
+        return result;
     }
 
     /**
@@ -315,7 +323,8 @@ public class VehicleWheel {
      * relative to its rest length (in hundredths of a physics-space unit)
      */
     public float getMaxSuspensionTravelCm() {
-        return tuning.getMaxSuspensionTravelCm();
+        float result = tuning.getMaxSuspensionTravelCm();
+        return result;
     }
 
     /**
@@ -365,7 +374,8 @@ public class VehicleWheel {
      * 1&rarr;wheel has full traction)
      */
     public float getSkidInfo() {
-        return getSkidInfo(vehicleId, wheelIndex);
+        float result = getSkidInfo(vehicleId, wheelIndex);
+        return result;
     }
 
     /**
@@ -396,7 +406,8 @@ public class VehicleWheel {
      * @return the stiffness constant
      */
     public float getSuspensionStiffness() {
-        return tuning.getSuspensionStiffness();
+        float result = tuning.getSuspensionStiffness();
+        return result;
     }
 
     /**
@@ -406,7 +417,8 @@ public class VehicleWheel {
      * @return the damping
      */
     public float getWheelsDampingCompression() {
-        return tuning.getSuspensionCompression();
+        float result = tuning.getSuspensionCompression();
+        return result;
     }
 
     /**
@@ -416,7 +428,8 @@ public class VehicleWheel {
      * @return the damping
      */
     public float getWheelsDampingRelaxation() {
-        return tuning.getSuspensionDamping();
+        float result = tuning.getSuspensionDamping();
+        return result;
     }
 
     /**
@@ -427,11 +440,14 @@ public class VehicleWheel {
      * storeResult or a new instance)
      */
     public Vector3f getWheelWorldLocation(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return wheelWorldLocation.clone();
+            result = wheelWorldLocation.clone();
         } else {
-            return storeResult.set(wheelWorldLocation);
+            result = storeResult.set(wheelWorldLocation);
         }
+
+        return result;
     }
 
     /**
@@ -442,11 +458,14 @@ public class VehicleWheel {
      * a new instance)
      */
     public Quaternion getWheelWorldRotation(Quaternion storeResult) {
+        Quaternion result;
         if (storeResult == null) {
-            return wheelWorldRotation.clone();
+            result = wheelWorldRotation.clone();
         } else {
-            return storeResult.set(wheelWorldRotation);
+            result = storeResult.set(wheelWorldRotation);
         }
+
+        return result;
     }
 
     /**

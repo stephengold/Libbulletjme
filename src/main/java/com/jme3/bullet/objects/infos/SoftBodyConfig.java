@@ -94,7 +94,9 @@ public class SoftBodyConfig {
      */
     public int clusterIterations() {
         long bodyId = body.nativeId();
-        return getClusterIterations(bodyId);
+        int result = getClusterIterations(bodyId);
+
+        return result;
     }
 
     /**
@@ -105,7 +107,9 @@ public class SoftBodyConfig {
      */
     public int collisionFlags() {
         long bodyId = body.nativeId();
-        return getCollisionsFlags(bodyId);
+        int result = getCollisionsFlags(bodyId);
+
+        return result;
     }
 
     /**
@@ -126,7 +130,9 @@ public class SoftBodyConfig {
      */
     public int driftIterations() {
         long bodyId = body.nativeId();
-        return getDriftIterations(bodyId);
+        int result = getDriftIterations(bodyId);
+
+        return result;
     }
 
     /**
@@ -218,7 +224,9 @@ public class SoftBodyConfig {
      */
     public int positionIterations() {
         long bodyId = body.nativeId();
-        return getPositionIterations(bodyId);
+        int result = getPositionIterations(bodyId);
+
+        return result;
     }
 
     /**
@@ -382,7 +390,9 @@ public class SoftBodyConfig {
      */
     public int velocityIterations() {
         long bodyId = body.nativeId();
-        return getVelocitiesIterations(bodyId);
+        int result = getVelocitiesIterations(bodyId);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
