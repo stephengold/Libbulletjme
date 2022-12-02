@@ -3705,7 +3705,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsGhostObject.html#getOverlappingObjects()" class="member-name-link">getOverlappingObjects()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsGhostObject.html" title="class in com.jme3.bullet.objects">PhysicsGhostObject</a></dt>
 <dd>
-<div class="block">Access a list of overlapping objects.</div>
+<div class="block">Update and access a list of overlapping objects.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/Constraint.html#getOverrideIterations()" class="member-name-link">getOverrideIterations()</a> - Method in class com.jme3.bullet.joints.<a href="com/jme3/bullet/joints/Constraint.html" title="class in com.jme3.bullet.joints">Constraint</a></dt>
 <dd>
@@ -3799,7 +3799,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/PhysicsCollisionObject.html#getPhysicsRotationMatrix(com.jme3.math.Matrix3f)" class="member-name-link">getPhysicsRotationMatrix(Matrix3f)</a> - Method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a></dt>
 <dd>
 <div class="block">Copy the orientation of this object (the basis of its local coordinate
- system) to a 3x3 matrix.</div>
+ system) to a Matrix3f.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#getPhysicsRotationMatrix(com.jme3.math.Matrix3f)" class="member-name-link">getPhysicsRotationMatrix(Matrix3f)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
@@ -8924,6 +8924,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Directly reorient this body.</div>
 </dd>
+<dt><a href="com/jme3/bullet/objects/MultiBodyCollider.html#setPhysicsRotationDp(com.simsilica.mathd.Matrix3d)" class="member-name-link">setPhysicsRotationDp(Matrix3d)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/MultiBodyCollider.html" title="class in com.jme3.bullet.objects">MultiBodyCollider</a></dt>
+<dd>
+<div class="block">Directly alter this collider's orientation.</div>
+</dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsGhostObject.html#setPhysicsRotationDp(com.simsilica.mathd.Matrix3d)" class="member-name-link">setPhysicsRotationDp(Matrix3d)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsGhostObject.html" title="class in com.jme3.bullet.objects">PhysicsGhostObject</a></dt>
 <dd>
 <div class="block">Directly alter the ghost's orientation.</div>
@@ -9892,7 +9896,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/CollisionSpace.html#sweepTest(com.jme3.bullet.collision.shapes.ConvexShape,com.jme3.math.Transform,com.jme3.math.Transform,java.util.List,float)" class="member-name-link">sweepTest(ConvexShape, Transform, Transform, List&lt;PhysicsSweepTestResult&gt;, float)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/CollisionSpace.html" title="class in com.jme3.bullet">CollisionSpace</a></dt>
 <dd>
-<div class="block">Perform a sweep-collision test and store the results in an existing list.</div>
+<div class="block">Perform a sweep-collision test and store the results in an existing list,
+ in arbitrary order.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
