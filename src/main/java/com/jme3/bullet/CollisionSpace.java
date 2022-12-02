@@ -71,7 +71,7 @@ public class CollisionSpace extends NativePhysicsObject {
     // fields
 
     /**
-     * type of acceleration structure
+     * type of acceleration data structure
      */
     private PhysicsSpace.BroadphaseType broadphaseType
             = PhysicsSpace.BroadphaseType.DBVT;
@@ -601,7 +601,8 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Perform a sweep-collision test and store the results in an existing list.
+     * Perform a sweep-collision test and store the results in an existing list,
+     * in arbitrary order.
      * <p>
      * The starting and ending locations must be at least 0.4 physics-space
      * units apart.

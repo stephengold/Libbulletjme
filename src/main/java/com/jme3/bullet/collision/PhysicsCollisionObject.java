@@ -569,7 +569,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     /**
      * Copy the orientation of this object (the basis of its local coordinate
-     * system) to a 3x3 matrix.
+     * system) to a Matrix3f.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a rotation matrix (in physics-space coordinates, either

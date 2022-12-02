@@ -161,7 +161,7 @@ public class MultiBodyCollider extends PhysicsCollisionObject {
      * Directly alter the location of this collider's center.
      *
      * @param location the desired location (in physics-space coordinates, not
-     * null, unaffected)
+     * null, finite, unaffected)
      */
     public void setPhysicsLocationDp(Vec3d location) {
         Validate.finite(location, "location");
