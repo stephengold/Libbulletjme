@@ -41,7 +41,12 @@ import com.jme3.math.Vector3f;
 
 /**
  * A vector composed of 3 double-precision components, used to represent
- * locations, offsets, and directions in 3-dimensional space.
+ * locations, offsets, velocities, and directions in 3-dimensional space.
+ * <p>
+ * Methods with names ending in "Local" modify the current instance. They are
+ * used to cut down on the creation of new instances.
+ * <p>
+ * The conventional ordering of components is (X, Y, Z).
  *
  *  @version   $Revision: 3951 $
  *  @author    Paul Speed
@@ -49,42 +54,42 @@ import com.jme3.math.Vector3f;
 public class Vec3d implements Cloneable {
 
     /**
-     * shared instance of the +X direction (1,0,0) - Do not modify!
+     * Shared instance of the +X direction (1,0,0). Do not modify!
      */
     public static final Vec3d UNIT_X = new Vec3d(1,0,0);
     /**
-     * shared instance of the +Y direction (0,1,0) - Do not modify!
+     * Shared instance of the +Y direction (0,1,0). Do not modify!
      */
     public static final Vec3d UNIT_Y = new Vec3d(0,1,0);
     /**
-     * shared instance of the +Z direction (0,0,1) - Do not modify!
+     * Shared instance of the +Z direction (0,0,1). Do not modify!
      */
     public static final Vec3d UNIT_Z = new Vec3d(0,0,1);
     /**
-     * shared instance of the all-zero vector (0,0,0) - Do not modify!
+     * Shared instance of the all-zero vector (0,0,0). Do not modify!
      */
     public static final Vec3d ZERO = new Vec3d();
     /**
-     * X component of the vector
+     * The first (X) component.
      */
     public double x;
     /**
-     * Y component of the vector
+     * The 2nd (Y) component.
      */
     public double y;
     /**
-     * Z component of the vector
+     * The 3rd (Z) component.
      */
     public double z;
  
     /**
-     * Instantiate a vector with the value (0,0,0).
+     * Instantiates an all-zero vector (0,0,0).
      */
     public Vec3d() {
     }
     
     /**
-     * Instantiate a vector with the specified components.
+     * Instantiates a vector with the specified components.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -97,7 +102,7 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Instantiate a copy of the specified Vec3d.
+     * Instantiates a copy of the argument.
      *
      * @param v the Vec3d to copy (not null, unaffected)
      */
@@ -106,7 +111,7 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Instantiate based on the specified Vector3f.
+     * Instantiates a double-precision copy of the argument.
      *
      * @param v the input Vector3f (not null, unaffected)
      */
@@ -115,7 +120,7 @@ public class Vec3d implements Cloneable {
     }
  
     /**
-     * Instantiate a Vector3f based on this vector.
+     * Creates a single-precision copy of the current instance.
      *
      * @return a new Vector3f
      */
@@ -124,7 +129,8 @@ public class Vec3d implements Cloneable {
     }
  
     /**
-     * Generate the hash code for this vector.
+     * Returns a hash code. If two vectors have identical values, they will
+     * have the same hash code. The current instance is unaffected.
      *
      * @return a 32-bit value for use in hashing
      */
@@ -138,10 +144,12 @@ public class Vec3d implements Cloneable {
     }
     
     /**
-     * Test for strict equality with another object.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code o} is null, false is returned. Either way, the current instance is
+     * unaffected.
      *
-     * @param o the object to compare to (may be null, unaffected)
-     * @return true if the objects have the same value, otherwise false
+     * @param o the object to compare (may be null, unaffected)
+     * @return true if the objects have identical values, otherwise false
      */
     @Override
     public boolean equals( Object o ) {
@@ -160,12 +168,12 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Set all components of this vector to the specified values.
+     * Sets all 3 components to specified values.
      *
      * @param x the desired X component
      * @param y the desired Y component
      * @param z the desired Z component
-     * @return this vector
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d set( double x, double y, double z ) {
         this.x = x;
@@ -175,10 +183,10 @@ public class Vec3d implements Cloneable {
     }
     
     /**
-     * Copy all components of the specified vector to this vector.
+     * Copies all 3 components from the argument.
      *
-     * @param v the desired value (not null, unaffected)
-     * @return this vector
+     * @param v the Vec3d to copy (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d set( Vec3d v ) {
         this.x = v.x;
@@ -188,10 +196,11 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Copy all components of the specified Vector3f to this vector.
+     * Copies all 3 components of the argument, converting them to
+     * double precision.
      *
-     * @param v the input Vector3f (not null, unaffected)
-     * @return this vector
+     * @param v the Vector3f to copy (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d set( Vector3f v ) {
         this.x = v.x;
@@ -201,9 +210,9 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Create a copy of this vector.
+     * Creates a copy. The current instance is unaffected.
      *
-     * @return a new instance, equivalent to this one
+     * @return a new instance, equivalent to the current one
      */
     @Override
     public final Vec3d clone() {
@@ -211,12 +220,12 @@ public class Vec3d implements Cloneable {
     }
  
     /**
-     * Determine the indexed component of this vector.
+     * Returns the indexed component. The vector is unaffected.
      *
-     * @param i 0 for the X component, 1 for the Y component, or 2 for the Z
-     * component
-     * @return the component value
-     * @throws IndexOutOfBoundsException if index is not 0, 1, or 2
+     * @param i 0, 1, or 2
+     * @return the X component if i=0, the Y component if i=1, or the Z
+     *     component if i=2
+     * @throws IndexOutOfBoundsException if {@code i} is not 0, 1, or 2
      */
     public double get( int i ) {
         switch( i ) {
@@ -232,13 +241,13 @@ public class Vec3d implements Cloneable {
     }
     
     /**
-     * Alter the indexed component of this vector.
+     * Sets the indexed component.
      *
-     * @param i 0 for the X component, 1 for the Y component, or 2 for the Z
-     * component
-     * @param d the desired value for the component
-     * @return this vector
-     * @throws IndexOutOfBoundsException if index is not 0, 1, or 2
+     * @param i which component to set: 0 &rarr; the X component, 1 &rarr;
+     *     the Y component, 2 &rarr; the Z component
+     * @param d the desired component value
+     * @return the (modified) current instance (for chaining)
+     * @throws IllegalArgumentException if {@code i} is not 0, 1, or 2
      */
     public Vec3d set( int i, double d ) {
         switch( i ) {
@@ -258,44 +267,48 @@ public class Vec3d implements Cloneable {
     }
  
     /**
-     * Sum this vector with the specified vector to yield a new vector.
+     * Adds the argument and returns the sum as a new instance. The current
+     * instance is unaffected.
      *
      * @param v the vector to add (not null, unaffected)
-     * @return a new instance
+     * @return a new Vec3d
      */
     public final Vec3d add( Vec3d v ) {
         return new Vec3d(x + v.x, y + v.y, z + v.z);
     }
 
     /**
-     * Sum this vector with the specified components to yield a new vector.
+     * Adds specified amounts to the vector's components and returns the sum as
+     * a new instance. The current instance is unaffected.
      *
-     * @param vx the amount to increase the X component
-     * @param vy the amount to increase the Y component
-     * @param vz the amount to increase the Z component
-     * @return a new instance
+     * @param vx the amount to add to the X component
+     * @param vy the amount to add to the Y component
+     * @param vz the amount to add to the Z component
+     * @return a new Vec3d
      */
     public final Vec3d add( double vx, double vy, double vz ) {
         return new Vec3d(x + vx, y + vy, z + vz);
     }
 
     /**
-     * Subtract the specified vector to yield a new vector.
+     * Subtracts the argument and returns the difference as a new instance. The
+     * current instance is unaffected.
      *
      * @param v the vector to subtract (not null, unaffected)
-     * @return a new instance
+     * @return a new Vec3d
      */
     public final Vec3d subtract( Vec3d v ) {
         return new Vec3d(x - v.x, y - v.y, z - v.z);
     }
 
     /**
-     * Add the specified vector to this vector in place.
+     * Adds the argument and returns the (modified) current instance.
+     * <p>
+     * It IS safe for {@code v} and {@code this} to be the same object.
      *
-     * It IS safe for v and this to be the same object.
-     *
-     * @param v the vector to add (not null, unaffected unless it's this)
-     * @return this vector
+     * @param v the vector to add (not null, unaffected unless it's
+     *     {@code this})
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d addLocal( Vec3d v ) {
         x += v.x;
@@ -305,12 +318,13 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Add the specified components to this vector in place.
+     * Adds specified amounts to the vector's components and returns the
+     * (modified) current instance.
      *
-     * @param vx the amount to increase the X component
-     * @param vy the amount to increase the Y component
-     * @param vz the amount to increase the Z component
-     * @return this vector
+     * @param vx the amount to add to the X component
+     * @param vy the amount to add to the Y component
+     * @param vz the amount to add to the Z component
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d addLocal( double vx, double vy, double vz ) {
         x += vx;
@@ -320,12 +334,13 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Subtract the specified vector from this vector in place.
+     * Subtracts the argument and returns the (modified) current instance.
+     * <p>
+     * It IS safe for {@code v} and {@code this} to be the same object.
      *
-     * It IS safe for v and this to be the same object.
-     *
-     * @param v the vector to subtract (not null, unaffected unless it's this)
-     * @return this vector
+     * @param v the vector to subtract (not null, unaffected unless it's
+     *     {@code this})
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d subtractLocal( Vec3d v ) {
         x -= v.x;
@@ -335,10 +350,10 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Uniformly scale this vector in place.
-     * 
-     * @param s the scale factor
-     * @return this
+     * Multiplies by the argument and returns the (modified) current instance.
+     *
+     * @param s the scaling factor
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d multLocal( double s ) {
         x *= s;
@@ -348,13 +363,13 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Scale this vector by the specified vector component-by-component, in
-     * place.
+     * Multiplies component-wise by the argument and returns the (modified)
+     * current instance.
+     * <p>
+     * It IS safe for {@code v} and {@code this} to be the same object.
      *
-     * It IS safe for v and this to be the same object.
-     *
-     * @param v the vector to multiply (not null, unaffected unless it's this)
-     * @return this vector
+     * @param v the scale vector (not null, unaffected unless it's {@code this})
+     * @return the (modified) current instance (for chaining)
      */
     public final Vec3d multLocal( Vec3d v ) {
         x *= v.x;
@@ -380,34 +395,36 @@ public class Vec3d implements Cloneable {
     }
  
     /**
-     * Determine the squared length of this vector.
+     * Returns the square of the length. The current instance is unaffected.
      *
-     * @return the squared length (&ge;0)
+     * @return the sum of the squared components (not negative)
      */
     public final double lengthSq() {
         return x * x + y * y + z * z;
     }
     
     /**
-     * Determine the length of this vector.
+     * Returns the length (or magnitude). The current instance is unaffected.
      *
-     * @return the length (&ge;0)
+     * @return the root-sum of the squared components (not negative)
      */
     public final double length() {
         return Math.sqrt(lengthSq());                
     }
 
     /**
-     * Normalize this vector in place.
+     * Normalize this vector in place. For a zero vector, the result is
+     * undefined.
      *
-     * @return this
+     * @return the (normalized) current instance (for chaining)
      */
     public final Vec3d normalizeLocal() {
         return multLocal(1.0 / length());
     }
  
     /**
-     * Determine the dot product of the specified vector with this vector.
+     * Returns the dot (or inner) product with the argument. The current
+     * instance is unaffected.
      *
      * @param v the vector to multiply (not null, unaffected)
      * @return the dot product
@@ -417,11 +434,11 @@ public class Vec3d implements Cloneable {
     }
  
     /**
-     * Take the cross product of this vector times the specified vector to yield
-     * a new vector.
+     * Calculates a cross product with the argument and returns the product as a
+     * new instance. The current instance is unaffected.
      *
      * @param v the right factor (not null, unaffected)
-     * @return a new instance
+     * @return {@code this} cross {@code v} (a new Vec3d)
      */
     public final Vec3d cross( Vec3d v ) {
         double xNew = (y * v.z) - (z * v.y);
@@ -431,13 +448,13 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Represent this vector as a String.
+     * Returns a string representation of the vector, which is unaffected.
+     * For example, the +X direction vector is represented by:
+     * <pre>
+     * Vec3d[1.0, 0.0, 0.0]
+     * </pre>
      *
-     * The format is:
-     *
-     * Vec3d[XX.XXXXXXXXXXXXX, YY.YYYYYYYYYYYYY, ZZ.ZZZZZZZZZZZZZ]
-     *
-     * @return a descriptive string of text (not null, not empty)
+     * @return the string representation (not null, not empty)
      */
     @Override
     public String toString() {
