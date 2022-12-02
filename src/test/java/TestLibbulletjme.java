@@ -1234,7 +1234,7 @@ public class TestLibbulletjme {
 
         body.setPhysicsRotationDp(mIn);
         Matrix3d mOut3 = body.getPhysicsRotationMatrixDp(null);
-        Assert.assertEquals(mIn, mOut2);
+        Assert.assertEquals(mIn, mOut3);
     }
 
     /**
