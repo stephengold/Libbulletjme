@@ -361,7 +361,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a string representation.</div>
+<div class="block">Returns a string representation of the quaternion, which is unaffected.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toTransformMatrix(com.jme3.math.Matrix4f)" class="member-name-link">toTransformMatrix</a><wbr>(<a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a>&nbsp;store)</code></div>
@@ -946,21 +946,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Returns a string representation. The current instance is unaffected. The
- format is:
-
- <p>(X.XXXX, Y.YYYY, Z.ZZZZ, W.WWWW)</div>
+<div class="block">Returns a string representation of the quaternion, which is unaffected.
+ For example, the identity quaternion is represented by:
+ <pre>
+ (0.0, 0.0, 0.0, 1.0)
+ </pre></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>the string representation</dd>
-<dt>See Also:</dt>
-<dd>
-<ul class="see-list">
-<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link"><code>Object.toString()</code></a></li>
-</ul>
-</dd>
+<dd>the string representation (not null, not empty)</dd>
 </dl>
 </section>
 </li>
@@ -968,15 +963,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. The
- current instance is unaffected.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. If
+ <code>o</code> is null, false is returned. Either way, the current instance is
+ unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if equal, otherwise false</dd>
+<dd>true if the objects have identical values, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -984,13 +980,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Returns a hash code. If two quaternions are logically equivalent, they
- will return the same hash code. The current instance is unaffected.</div>
+<div class="block">Returns a hash code. If two quaternions have identical values, they
+ will have the same hash code. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>the hash code value</dd>
+<dd>a 32-bit value for use in hashing</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">

@@ -545,7 +545,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Tests for exact identity. The matrix is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if equal to <a href="#IDENTITY"><code>IDENTITY</code></a>, otherwise false</dd>
+<dd>true if all diagonals = 1 and all other elements = 0 or -0,
+ otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -653,7 +654,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
 <div class="block">Returns a string representation of the matrix, which is unaffected. For
- example, an identity matrix would be represented by:
+ example, the identity matrix is represented by:
  <pre>
  Matrix3f
  [
@@ -666,7 +667,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>the string representation</dd>
+<dd>the string representation (not null, not empty)</dd>
 </dl>
 </section>
 </li>
@@ -674,13 +675,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Returns a hash code. If two matrices are logically equivalent, they will
- return the same hash code. The current instance is unaffected.</div>
+<div class="block">Returns a hash code. If two matrices have identical values, they will
+ have the same hash code. The matrix is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>the hash-code value</dd>
+<dd>a 32-bit value for use in hashing</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
@@ -694,15 +695,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. The
- current instance is unaffected.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. If
+ <code>o</code> is null, false is returned. Either way, the current instance is
+ unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if equal, otherwise false</dd>
+<dd>true if the objects have identical values, otherwise false</dd>
 </dl>
 </section>
 </li>
