@@ -767,13 +767,13 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns a string representation. The current instance is unaffected. The
-     * format is:
+     * Returns a string representation of the quaternion, which is unaffected.
+     * For example, the identity quaternion is represented by:
+     * <pre>
+     * (0.0, 0.0, 0.0, 1.0)
+     * </pre>
      *
-     * <p>(X.XXXX, Y.YYYY, Z.ZZZZ, W.WWWW)
-     *
-     * @return the string representation
-     * @see java.lang.Object#toString()
+     * @return the string representation (not null, not empty)
      */
     @Override
     public String toString() {
@@ -781,11 +781,12 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Tests for exact equality with the argument, distinguishing -0 from 0. The
-     * current instance is unaffected.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code o} is null, false is returned. Either way, the current instance is
+     * unaffected.
      *
      * @param o the object to compare (may be null, unaffected)
-     * @return true if equal, otherwise false
+     * @return true if the objects have identical values, otherwise false
      */
     @Override
     public boolean equals(Object o) {
@@ -814,10 +815,10 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns a hash code. If two quaternions are logically equivalent, they
-     * will return the same hash code. The current instance is unaffected.
+     * Returns a hash code. If two quaternions have identical values, they
+     * will have the same hash code. The current instance is unaffected.
      *
-     * @return the hash code value
+     * @return a 32-bit value for use in hashing
      * @see java.lang.Object#hashCode()
      */
     @Override

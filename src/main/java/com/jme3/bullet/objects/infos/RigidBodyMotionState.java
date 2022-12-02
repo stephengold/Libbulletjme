@@ -85,7 +85,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Copy the location from this motion state.
+     * Copy the location to a Vector3f.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the location vector (in physics-space coordinates, either
@@ -102,7 +102,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     }
 
     /**
-     * Copy the location from this motion state.
+     * Copy the location to a Vector3d.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the location vector (in physics-space coordinates, either
@@ -119,11 +119,11 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     }
 
     /**
-     * Copy the orientation from this motion state (as a matrix).
+     * Copy the orientation to a Matrix3f.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return the rotation matrix (in physics-space coordinates, either
-     * storeResult or a new vector, not null)
+     * @return the orientation (in physics-space coordinates, either storeResult
+     * or a new matrix, not null)
      */
     public Matrix3f getOrientation(Matrix3f storeResult) {
         Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
@@ -135,11 +135,11 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     }
 
     /**
-     * Copy the orientation from this motion state (as a Quaternion).
+     * Copy the orientation to a Quaternion.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return the rotation Quaternion (in physics-space coordinates, either
-     * storeResult or a new vector, not null)
+     * @return the orientation (in physics-space coordinates, either storeResult
+     * or a new instance, not null)
      */
     public Quaternion getOrientation(Quaternion storeResult) {
         Quaternion result
@@ -156,7 +156,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the orientation (in physics-space coordinates, either storeResult
-     * or a new vector, not null)
+     * or a new matrix, not null)
      */
     public Matrix3d getOrientationMatrixDp(Matrix3d storeResult) {
         Matrix3d result = (storeResult == null) ? new Matrix3d() : storeResult;
@@ -172,7 +172,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the orientation (in physics-space coordinates, either storeResult
-     * or a new vector, not null)
+     * or a new instance, not null)
      */
     public Quatd getOrientationQuaternionDp(Quatd storeResult) {
         Quatd result = (storeResult == null) ? new Quatd() : storeResult;

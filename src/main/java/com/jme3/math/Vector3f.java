@@ -737,7 +737,7 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
      * unaffected.
      *
      * @param o the object to compare (may be null, unaffected)
-     * @return true if equal, otherwise false
+     * @return true if the objects have identical values, otherwise false
      */
     @Override
     public boolean equals(Object o) {
@@ -763,10 +763,10 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns a hash code. If two vectors are logically equivalent, they will
-     * return the same hash code. The current instance is unaffected.
+     * Returns a hash code. If two vectors have identical values, they will
+     * have the same hash code. The current instance is unaffected.
      *
-     * @return the hash code value
+     * @return a 32-bit value for use in hashing
      */
     @Override
     public int hashCode() {
@@ -778,12 +778,13 @@ public final class Vector3f implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Returns a string representation. The current instance is unaffected. The
-     * format is:
+     * Returns a string representation of the vector, which is unaffected.
+     * For example, the +X direction vector is represented by:
+     * <pre>
+     * (1.0, 0.0, 0.0)
+     * </pre>
      *
-     * <p>(XX.XXXX, YY.YYYY, ZZ.ZZZZ)
-     *
-     * @return the string representation
+     * @return the string representation (not null, not empty)
      */
     @Override
     public String toString() {

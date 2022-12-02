@@ -519,7 +519,7 @@ public class VectorSetUsingBuffer implements VectorSet {
      * @param x the X component of the value
      * @param y the Y component of the value
      * @param z the Z component of the value
-     * @return the hash code of the value
+     * @return a 32-bit value for use in hashing
      */
     private static int hash(float x, float y, float z) {
         int hashCode = 37;

@@ -144,7 +144,7 @@ public class IntPair implements Comparable<IntPair> {
     /**
      * Generate the hash code for this pair.
      *
-     * @return the value to use for hashing
+     * @return a 32-bit value for use in hashing
      */
     @Override
     public int hashCode() {
