@@ -37,6 +37,8 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
+import com.simsilica.mathd.Matrix3d;
+import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -150,6 +152,38 @@ public class RigidBodyMotionState extends NativePhysicsObject {
     }
 
     /**
+     * Copy the orientation to a Matrix3d.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the orientation (in physics-space coordinates, either storeResult
+     * or a new vector, not null)
+     */
+    public Matrix3d getOrientationMatrixDp(Matrix3d storeResult) {
+        Matrix3d result = (storeResult == null) ? new Matrix3d() : storeResult;
+
+        long motionStateId = nativeId();
+        getWorldRotationDp(motionStateId, result);
+
+        return result;
+    }
+
+    /**
+     * Copy the orientation to a Quatd.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the orientation (in physics-space coordinates, either storeResult
+     * or a new vector, not null)
+     */
+    public Quatd getOrientationQuaternionDp(Quatd storeResult) {
+        Quatd result = (storeResult == null) ? new Quatd() : storeResult;
+
+        long motionStateId = nativeId();
+        getWorldRotationQuatDp(motionStateId, result);
+
+        return result;
+    }
+
+    /**
      * Test whether physics-space coordinates should match the spatial's local
      * coordinates.
      *
@@ -233,5 +267,11 @@ public class RigidBodyMotionState extends NativePhysicsObject {
             getWorldRotation(long stateId, Matrix3f storeMatrix);
 
     native private static void
+            getWorldRotationDp(long stateId, Matrix3d storeMatrix);
+
+    native private static void
             getWorldRotationQuat(long stateId, Quaternion storeQuat);
+
+    native private static void
+            getWorldRotationQuatDp(long stateId, Quatd storeQuat);
 }

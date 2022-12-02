@@ -1486,6 +1486,40 @@ public class TestLibbulletjme {
         b.getMotionState().getLocation(location);
         assertEquals(-3.944f, -0.666f, 0f, location, 0.01f);
     }
+
+    /**
+     * Test the RigidBodyMotionState defaults.
+     */
+    @Test
+    public void test019() {
+        loadNativeLibrary();
+        RigidBodyMotionState state = new RigidBodyMotionState();
+
+        Vector3f x = state.getLocation(null);
+        assertEquals(0f, 0f, 0f, x, 0f);
+
+        Vec3d xx = state.getLocationDp(null);
+        assertEquals(0., 0., 0., xx, 0.);
+
+        Matrix3f m = new Matrix3f();
+        state.getOrientation(m);
+        Assert.assertTrue(m.isIdentity());
+
+        Quaternion q = new Quaternion();
+        state.getOrientation(q);
+        assertEquals(0f, 0f, 0f, 1f, q, 0f);
+
+        Matrix3d mm = state.getOrientationMatrixDp(null);
+        Assert.assertTrue(mm.isIdentity());
+
+        Quatd qq = state.getOrientationQuaternionDp(null);
+        assertEquals(0., 0., 0., 1., qq, 0.);
+
+        Assert.assertFalse(state.isApplyPhysicsLocal());
+
+        Transform t = state.physicsTransform(null);
+        Assert.assertTrue(t.equals(Transform.IDENTITY));
+    }
     // *************************************************************************
     // private methods
 
