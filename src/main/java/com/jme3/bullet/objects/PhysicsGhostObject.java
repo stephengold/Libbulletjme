@@ -207,6 +207,8 @@ public class PhysicsGhostObject extends PhysicsCollisionObject {
      * physics-space coordinates, not null, not zero, unaffected)
      */
     public void setPhysicsRotationDp(Quatd orientation) {
+        Validate.nonZero(orientation, "orientation");
+
         long objectId = nativeId();
         setPhysicsRotationDp(objectId, orientation);
     }
