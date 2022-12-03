@@ -84,7 +84,7 @@ loadScripts(document, 'script');</script>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></span></div>
 <div class="block">A vector composed of 3 single-precision components, used to represent
- locations, offsets, and directions in 3-dimensional space.
+ locations, offsets, velocities, and directions in 3-dimensional space.
 
  <p>Methods with names ending in "Local" modify the current instance. They are
  used to cut down on the creation of new instances.</div>
@@ -739,8 +739,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
      <code>result</code>)</dd>
 <dd><code>result</code> - storage for the product, or null for a new Vector3f</dd>
 <dt>Returns:</dt>
-<dd><code>this</code> cross <code>v</code> (either
-     <code>result</code> or a new Vector3f)</dd>
+<dd><code>this</code> cross <code>v</code> (either <code>result</code> or a new
+     Vector3f)</dd>
 </dl>
 </section>
 </li>
@@ -761,8 +761,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>otherZ</code> - the Z component of the right factor</dd>
 <dd><code>result</code> - storage for the product, or null for a new Vector3f</dd>
 <dt>Returns:</dt>
-<dd><code>this</code> cross <code>v</code> (either
-     <code>result</code> or a new Vector3f)</dd>
+<dd><code>this</code> cross (X,Y,Z) (either <code>result</code> or a new
+     Vector3f)</dd>
 </dl>
 </section>
 </li>
@@ -1084,8 +1084,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  the argument is null, null is returned.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>vec</code> - the vector to subtract (unaffected unless it's
-     <code>this</code>) or null for none</dd>
+<dd><code>vec</code> - the vector to subtract (unaffected unless it's <code>this</code>)
+     or null for none</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance or null</dd>
 </dl>

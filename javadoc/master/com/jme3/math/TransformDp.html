@@ -213,7 +213,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns a string representation.</div>
+<div class="block">Returns a string representation of the transform, which is unaffected.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transformInverseVector(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)" class="member-name-link">transformInverseVector</a><wbr>(<a href="../../simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;in,
@@ -508,15 +508,16 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;otherObject)</span></div>
-<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. The
- current instance is unaffected.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0. If
+ <code>otherObject</code> is null, false is returned. Either way, the current
+ instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>otherObject</code> - the object to compare to (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if the objects are exactly equal, otherwise false</dd>
+<dd>true if the objects have identical values, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -524,8 +525,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Returns a hash code. If two transforms are logically equivalent, they
- will return the same hash code. The current instance is unaffected.</div>
+<div class="block">Returns a hash code. If two transforms have identical values, they will
+ have the same hash code. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -538,12 +539,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Returns a string representation. The current instance is unaffected. The
- format is:
+<div class="block">Returns a string representation of the transform, which is unaffected.
+ For example, the identity transform is represented by:
  <pre>
- TransformDp[ TX.XXXX, TY.YYYY, TZ.ZZZZ]
- [ R.XXXX, R.YYYY, R.ZZZZ, R.WWWW]
- [ S.XXXX , S.YYYY, S.ZZZZ]
+ TransformDp[ 0.0, 0.0, 0.0]
+ [ 0.0, 0.0, 0.0, 1.0]
+ [ 1.0 , 1.0, 1.0]
  </pre></div>
 <dl class="notes">
 <dt>Overrides:</dt>

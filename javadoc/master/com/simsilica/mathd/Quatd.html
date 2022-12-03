@@ -83,8 +83,12 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Quatd</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Cloneable.html" title="class or interface in java.lang" class="external-link">Cloneable</a></span></div>
-<div class="block">Represents rotations and orientations in 3-dimensional space, using
- double-precision components.</div>
+<div class="block">Used to efficiently represent rotations and orientations in 3-dimensional
+ space, without risk of gimbal lock. Each instance has 4 double-precision
+ components: 3 imaginary components (X, Y, and Z) and a real component (W).
+ <p>
+ Mathematically, quaternions are an extension of complex numbers. In
+ mathematics texts, W often appears first, but here order is (X, Y, Z, W).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -130,22 +134,23 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Quatd</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate an identity Quatd (0,0,0,1).</div>
+<div class="block">Instantiate an identity quaternion: all components zeroed except
+ <code>w</code>, which is set to 1.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(double,double,double,double)" class="member-name-link">Quatd</a><wbr>(double&nbsp;x,
  double&nbsp;y,
  double&nbsp;z,
  double&nbsp;w)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Instantiate a Quatd with the specified components.</div>
+<div class="block">Instantiate a quaternion with the specified components.</div>
 </div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Quaternion)" class="member-name-link">Quatd</a><wbr>(<a href="../../jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;quat)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate based on the specified Quaternion.</div>
+<div class="block">Instantiate based on the specified (single-precision) Quaternion.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.simsilica.mathd.Quatd)" class="member-name-link">Quatd</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;quat)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Instantiate a copy of the specified Quatd.</div>
+<div class="block">Instantiate a copy of the argument.</div>
 </div>
 </div>
 </section>
@@ -169,7 +174,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test for strict equality with another object.</div>
+<div class="block">Test for exact equality with the argument, distinguishing -0 from 0.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fromAngles(double,double,double)" class="member-name-link">fromAngles</a><wbr>(double&nbsp;xAngle,
@@ -182,12 +187,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Generate the hash code for this Quatd.</div>
+<div class="block">Return a hash code.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inverse()" class="member-name-link">inverse</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the multiplicative inverse.</div>
+<div class="block">Return the multiplicative inverse.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRotationIdentity()" class="member-name-link">isRotationIdentity</a>()</code></div>
@@ -202,32 +207,31 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lengthSq()" class="member-name-link">lengthSq</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the squared length of this Quatd.</div>
+<div class="block">Return the squared length.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Quatd)" class="member-name-link">mult</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Take the Hamilton product of this Quatd times the specified Quatd to
- yield a new Quatd.</div>
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd to yield a new Quatd.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Quatd,com.simsilica.mathd.Quatd)" class="member-name-link">mult</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
  <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Multiplies by the specified quaternion and returns the product in a 3rd
+<div class="block">Multiply by the specified quaternion and return the product in a 3rd
  quaternion.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Vec3d)" class="member-name-link">mult</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rotate the specified vector by this Quatd to produce a new vector.</div>
+<div class="block">Rotate the specified vector to produce a new vector.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)" class="member-name-link">mult</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v,
  <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;result)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rotate the specified vector by this Quatd and store the result in another
- vector.</div>
+<div class="block">Rotate a specified vector and return the result in another vector.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(com.simsilica.mathd.Quatd)" class="member-name-link">multLocal</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</code></div>
@@ -238,7 +242,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#normalizeLocal()" class="member-name-link">normalizeLocal</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Normalize this Quatd in place.</div>
+<div class="block">Normalize the current instance in place.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(double,double,double,double)" class="member-name-link">set</a><wbr>(double&nbsp;x,
@@ -251,7 +255,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.jme3.math.Quaternion)" class="member-name-link">set</a><wbr>(<a href="../../jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;quat)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy all components of the specified Quaternion to this Quatd.</div>
+<div class="block">Copy all components of the specified (single-precision) Quaternion to
+ the current instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.simsilica.mathd.Quatd)" class="member-name-link">set</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</code></div>
@@ -261,7 +266,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toQuaternion()" class="member-name-link">toQuaternion</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Instantiate a Quaternion based on this Quatd.</div>
+<div class="block">Create a (single-precision) Quaternion that approximates the current
+ instance.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toRotationMatrix()" class="member-name-link">toRotationMatrix</a>()</code></div>
@@ -271,7 +277,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Represent this Quatd as a String.</div>
+<div class="block">Returns a string representation of the quaternion, which is unaffected.</div>
 </div>
 </div>
 </div>
@@ -330,7 +336,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;()">
 <h3>Quatd</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Quatd</span>()</div>
-<div class="block">Instantiate an identity Quatd (0,0,0,1).</div>
+<div class="block">Instantiate an identity quaternion: all components zeroed except
+ <code>w</code>, which is set to 1.</div>
 </section>
 </li>
 <li>
@@ -340,7 +347,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
  double&nbsp;y,
  double&nbsp;z,
  double&nbsp;w)</span></div>
-<div class="block">Instantiate a Quatd with the specified components.</div>
+<div class="block">Instantiate a quaternion with the specified components.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>x</code> - the desired X component</dd>
@@ -354,10 +361,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;(com.simsilica.mathd.Quatd)">
 <h3>Quatd</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Quatd</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;quat)</span></div>
-<div class="block">Instantiate a copy of the specified Quatd.</div>
+<div class="block">Instantiate a copy of the argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>quat</code> - the Quatd to copy (not null, unaffected)</dd>
+<dd><code>quat</code> - the quaternion to copy (not null, unaffected)</dd>
 </dl>
 </section>
 </li>
@@ -365,7 +372,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;(com.jme3.math.Quaternion)">
 <h3>Quatd</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Quatd</span><wbr><span class="parameters">(<a href="../../jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;quat)</span></div>
-<div class="block">Instantiate based on the specified Quaternion.</div>
+<div class="block">Instantiate based on the specified (single-precision) Quaternion.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>quat</code> - the input Quaternion (not null, unaffected)</dd>
@@ -397,7 +404,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toQuaternion()">
 <h3>toQuaternion</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></span>&nbsp;<span class="element-name">toQuaternion</span>()</div>
-<div class="block">Instantiate a Quaternion based on this Quatd.</div>
+<div class="block">Create a (single-precision) Quaternion that approximates the current
+ instance.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a new Quaternion</dd>
@@ -408,7 +416,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Generate the hash code for this Quatd.</div>
+<div class="block">Return a hash code. If two quaternions have identical values, they
+ will have the same hash code. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -421,14 +430,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="equals(java.lang.Object)">
 <h3>equals</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<div class="block">Test for strict equality with another object.</div>
+<div class="block">Test for exact equality with the argument, distinguishing -0 from 0. If
+ <code>o</code> is null, false is returned. Either way, the current instance is
+ unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>o</code> - the object to compare to (may be null, unaffected)</dd>
+<dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if the objects have the same value, otherwise false</dd>
+<dd>true if the objects have identical values, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -439,7 +450,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Test for an identity rotation. The quaternion is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if X Y and Z are all 0 or -0 and W is non-zero, otherwise
+<dd>true if X, Y, and Z are all 0 or -0 and W is non-zero, otherwise
  false</dd>
 </dl>
 </section>
@@ -470,7 +481,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>z</code> - the desired Z component</dd>
 <dd><code>w</code> - the desired W component</dd>
 <dt>Returns:</dt>
-<dd>this Quatd</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -491,12 +502,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="set(com.jme3.math.Quaternion)">
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="../../jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;quat)</span></div>
-<div class="block">Copy all components of the specified Quaternion to this Quatd.</div>
+<div class="block">Copy all components of the specified (single-precision) Quaternion to
+ the current instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>quat</code> - the input Quaternion (not null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>this Quatd</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -504,8 +516,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="mult(com.simsilica.mathd.Quatd)">
 <h3>mult</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</span></div>
-<div class="block">Take the Hamilton product of this Quatd times the specified Quatd to
- yield a new Quatd.</div>
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd to yield a new Quatd. The current instance is unaffected.
+ <p>
+ It IS safe for <code>q</code> and <code>this</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>q</code> - the right factor (not null, unaffected)</dd>
@@ -520,13 +534,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</span></div>
 <div class="block">Take the Hamilton product of this Quatd times the specified Quatd in
  place.
-
- It IS safe for q and this to be the same object.</div>
+ <p>
+ It IS safe for <code>q</code> and <code>this</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>q</code> - the right factor (not null, unaffected unless it's this)</dd>
+<dd><code>q</code> - the right factor (not null, unaffected unless it's <code>this</code>)</dd>
 <dt>Returns:</dt>
-<dd>this Quatd</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -534,7 +548,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="mult(com.simsilica.mathd.Vec3d)">
 <h3>mult</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</span></div>
-<div class="block">Rotate the specified vector by this Quatd to produce a new vector.</div>
+<div class="block">Rotate the specified vector to produce a new vector. The quaternion
+ is unaffected.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the input vector (not null, unaffected)</dd>
@@ -548,7 +563,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>mult</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
  <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;storeResult)</span></div>
-<div class="block">Multiplies by the specified quaternion and returns the product in a 3rd
+<div class="block">Multiply by the specified quaternion and return the product in a 3rd
  quaternion. The current instance is unaffected, unless it's
  <code>storeResult</code>.
 
@@ -573,16 +588,17 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>mult</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v,
  <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;result)</span></div>
-<div class="block">Rotate the specified vector by this Quatd and store the result in another
- vector.
-
- It IS safe for v and result to be the same object.</div>
+<div class="block">Rotate a specified vector and return the result in another vector. The
+ quaternion is unaffected.
+ <p>
+ It IS safe for <code>v</code> and <code>result</code> to be the same object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>v</code> - the input vector (not null, unaffected unless it's result)</dd>
+<dd><code>v</code> - the vector to rotate (not null, unaffected unless it's
+     <code>result</code>)</dd>
 <dd><code>result</code> - storage for the result (not null)</dd>
 <dt>Returns:</dt>
-<dd>result</dd>
+<dd>the (rotated) vector <code>result</code></dd>
 </dl>
 </section>
 </li>
@@ -590,7 +606,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="lengthSq()">
 <h3>lengthSq</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">lengthSq</span>()</div>
-<div class="block">Determine the squared length of this Quatd.</div>
+<div class="block">Return the squared length.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the squared length (&ge;0)</dd>
@@ -601,10 +617,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="normalizeLocal()">
 <h3>normalizeLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">normalizeLocal</span>()</div>
-<div class="block">Normalize this Quatd in place.</div>
+<div class="block">Normalize the current instance in place.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>this Quatd</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 </dl>
 </section>
 </li>
@@ -612,8 +628,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toRotationMatrix()">
 <h3>toRotationMatrix</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></span>&nbsp;<span class="element-name">toRotationMatrix</span>()</div>
-<div class="block">Convert to an equivalent rotation matrix. The current instance is
- unaffected.
+<div class="block">Convert to an equivalent rotation matrix. The quaternion is unaffected.
 
  <p>Note: the result is created from a normalized version of the current
  instance.</div>
@@ -627,8 +642,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="inverse()">
 <h3>inverse</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">inverse</span>()</div>
-<div class="block">Returns the multiplicative inverse.  For a quaternion with norm=0, null is
- returned. Either way, the current instance is unaffected.</div>
+<div class="block">Return the multiplicative inverse.  For a quaternion with norm=0, <code>
+ null</code> is returned. Either way, the quaternion is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a new instance, or null if not invertible</dd>
@@ -649,7 +664,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>yAngle</code> - the desired rotation about the +Y axis (in radians)</dd>
 <dd><code>zAngle</code> - the desired rotation about the +Z axis (in radians)</dd>
 <dt>Returns:</dt>
-<dd>this Quatd</dd>
+<dd>the (modified) current instance (for chaining)</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list-long">
@@ -663,16 +678,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Represent this Quatd as a String.
-
- The format is:
-
- Quatd[XX.XXXXXXXXXXXXX, YY.YYYYYYYYYYYYY, ZZ.ZZZZZZZZZZZZZ, WW.WWWWWWWWWWWWW]</div>
+<div class="block">Returns a string representation of the quaternion, which is unaffected.
+ For example, the identity quaternion is represented by:
+ <pre>
+ Quatd[0.0, 0.0, 0.0, 1.0]
+ </pre></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>a descriptive string of text (not null, not empty)</dd>
+<dd>the string representation (not null, not empty)</dd>
 </dl>
 </section>
 </li>

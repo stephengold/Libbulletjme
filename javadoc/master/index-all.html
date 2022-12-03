@@ -2245,11 +2245,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Matrix3d.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></dt>
 <dd>
-<div class="block">Test for strict equality with another object.</div>
+<div class="block">Tests for exact equality with the argument, distinguishing -0 from 0.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Test for strict equality with another object.</div>
+<div class="block">Test for exact equality with the argument, distinguishing -0 from 0.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Vec3d.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></dt>
 <dd>
@@ -4527,11 +4527,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Matrix3d.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></dt>
 <dd>
-<div class="block">Generate the hash code for the matrix, which is unaffected.</div>
+<div class="block">Return a hash code.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Generate the hash code for this Quatd.</div>
+<div class="block">Return a hash code.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Vec3d.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></dt>
 <dd>
@@ -4723,7 +4723,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#inverse()" class="member-name-link">inverse()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Returns the multiplicative inverse.</div>
+<div class="block">Return the multiplicative inverse.</div>
 </dd>
 <dt><a href="com/jme3/math/Transform.html#invert()" class="member-name-link">invert()</a> - Method in class com.jme3.math.<a href="com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a></dt>
 <dd>
@@ -5303,7 +5303,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#lengthSq()" class="member-name-link">lengthSq()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Determine the squared length of this Quatd.</div>
+<div class="block">Return the squared length.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Vec3d.html#lengthSq()" class="member-name-link">lengthSq()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></dt>
 <dd>
@@ -6422,22 +6422,21 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#mult(com.simsilica.mathd.Quatd)" class="member-name-link">mult(Quatd)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Take the Hamilton product of this Quatd times the specified Quatd to
- yield a new Quatd.</div>
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd to yield a new Quatd.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#mult(com.simsilica.mathd.Quatd,com.simsilica.mathd.Quatd)" class="member-name-link">mult(Quatd, Quatd)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Multiplies by the specified quaternion and returns the product in a 3rd
+<div class="block">Multiply by the specified quaternion and return the product in a 3rd
  quaternion.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#mult(com.simsilica.mathd.Vec3d)" class="member-name-link">mult(Vec3d)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Rotate the specified vector by this Quatd to produce a new vector.</div>
+<div class="block">Rotate the specified vector to produce a new vector.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#mult(com.simsilica.mathd.Vec3d,com.simsilica.mathd.Vec3d)" class="member-name-link">mult(Vec3d, Vec3d)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Rotate the specified vector by this Quatd and store the result in another
- vector.</div>
+<div class="block">Rotate a specified vector and return the result in another vector.</div>
 </dd>
 <dt><a href="com/jme3/bullet/MultiBody.html" class="type-name-link" title="class in com.jme3.bullet">MultiBody</a> - Class in <a href="com/jme3/bullet/package-summary.html">com.jme3.bullet</a></dt>
 <dd>
@@ -6832,7 +6831,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#normalizeLocal()" class="member-name-link">normalizeLocal()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Normalize this Quatd in place.</div>
+<div class="block">Normalize the current instance in place.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Vec3d.html#normalizeLocal()" class="member-name-link">normalizeLocal()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></dt>
 <dd>
@@ -7303,24 +7302,25 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html" class="type-name-link" title="class in com.simsilica.mathd">Quatd</a> - Class in <a href="com/simsilica/mathd/package-summary.html">com.simsilica.mathd</a></dt>
 <dd>
-<div class="block">Represents rotations and orientations in 3-dimensional space, using
- double-precision components.</div>
+<div class="block">Used to efficiently represent rotations and orientations in 3-dimensional
+ space, without risk of gimbal lock.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#%3Cinit%3E()" class="member-name-link">Quatd()</a> - Constructor for class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Instantiate an identity Quatd (0,0,0,1).</div>
+<div class="block">Instantiate an identity quaternion: all components zeroed except
+ <code>w</code>, which is set to 1.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#%3Cinit%3E(double,double,double,double)" class="member-name-link">Quatd(double, double, double, double)</a> - Constructor for class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Instantiate a Quatd with the specified components.</div>
+<div class="block">Instantiate a quaternion with the specified components.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#%3Cinit%3E(com.jme3.math.Quaternion)" class="member-name-link">Quatd(Quaternion)</a> - Constructor for class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Instantiate based on the specified Quaternion.</div>
+<div class="block">Instantiate based on the specified (single-precision) Quaternion.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#%3Cinit%3E(com.simsilica.mathd.Quatd)" class="member-name-link">Quatd(Quatd)</a> - Constructor for class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Instantiate a copy of the specified Quatd.</div>
+<div class="block">Instantiate a copy of the argument.</div>
 </dd>
 <dt><a href="com/jme3/math/Quaternion.html" class="type-name-link" title="class in com.jme3.math">Quaternion</a> - Class in <a href="com/jme3/math/package-summary.html">com.jme3.math</a></dt>
 <dd>
@@ -7819,7 +7819,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#set(com.jme3.math.Quaternion)" class="member-name-link">set(Quaternion)</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Copy all components of the specified Quaternion to this Quatd.</div>
+<div class="block">Copy all components of the specified (single-precision) Quaternion to
+ the current instance.</div>
 </dd>
 <dt><a href="com/jme3/math/TransformDp.html#set(com.jme3.math.TransformDp)" class="member-name-link">set(TransformDp)</a> - Method in class com.jme3.math.<a href="com/jme3/math/TransformDp.html" title="class in com.jme3.math">TransformDp</a></dt>
 <dd>
@@ -9996,7 +9997,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#toQuaternion()" class="member-name-link">toQuaternion()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Instantiate a Quaternion based on this Quatd.</div>
+<div class="block">Create a (single-precision) Quaternion that approximates the current
+ instance.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#toRadians(float)" class="member-name-link">toRadians(float)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
@@ -10084,7 +10086,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/math/TransformDp.html#toString()" class="member-name-link">toString()</a> - Method in class com.jme3.math.<a href="com/jme3/math/TransformDp.html" title="class in com.jme3.math">TransformDp</a></dt>
 <dd>
-<div class="block">Returns a string representation.</div>
+<div class="block">Returns a string representation of the transform, which is unaffected.</div>
 </dd>
 <dt><a href="com/jme3/math/Vector3f.html#toString()" class="member-name-link">toString()</a> - Method in class com.jme3.math.<a href="com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></dt>
 <dd>
@@ -10096,7 +10098,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/simsilica/mathd/Quatd.html#toString()" class="member-name-link">toString()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Quatd.html" title="class in com.simsilica.mathd">Quatd</a></dt>
 <dd>
-<div class="block">Represent this Quatd as a String.</div>
+<div class="block">Returns a string representation of the quaternion, which is unaffected.</div>
 </dd>
 <dt><a href="com/simsilica/mathd/Vec3d.html#toString()" class="member-name-link">toString()</a> - Method in class com.simsilica.mathd.<a href="com/simsilica/mathd/Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></dt>
 <dd>
@@ -10622,7 +10624,7 @@ the order they are declared.</div>
 <dt><a href="com/jme3/math/Vector3f.html" class="type-name-link" title="class in com.jme3.math">Vector3f</a> - Class in <a href="com/jme3/math/package-summary.html">com.jme3.math</a></dt>
 <dd>
 <div class="block">A vector composed of 3 single-precision components, used to represent
- locations, offsets, and directions in 3-dimensional space.</div>
+ locations, offsets, velocities, and directions in 3-dimensional space.</div>
 </dd>
 <dt><a href="com/jme3/math/Vector3f.html#%3Cinit%3E()" class="member-name-link">Vector3f()</a> - Constructor for class com.jme3.math.<a href="com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></dt>
 <dd>
