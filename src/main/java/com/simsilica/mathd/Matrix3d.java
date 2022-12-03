@@ -241,10 +241,12 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
-     * Test for strict equality with another object.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code o} is null, false is returned. Either way, the current instance is
+     * unaffected.
      *
-     * @param o the object to compare to (may be null, unaffected)
-     * @return true if the objects have the same value, otherwise false
+     * @param o the object to compare (may be null, unaffected)
+     * @return true if the objects have identical values, otherwise false
      */
     @Override
     public boolean equals( Object o ) {
@@ -277,7 +279,8 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
-     * Generate the hash code for the matrix, which is unaffected.
+     * Return a hash code. If two matrices have identical values, they
+     * will have the same hash code. The matrix is unaffected.
      *
      * @return a 32-bit value for use in hashing
      */
@@ -297,7 +300,11 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
-     * Return a string representation of the matrix, which is unaffected. 
+     * Return a string representation of the matrix, which is unaffected. For
+     * example, an identity matrix would be represented by:
+     * <pre>
+     * Matrix3d[{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}]
+     * </pre>
      *
      * @return a descriptive string of text (not null, not empty)
      */

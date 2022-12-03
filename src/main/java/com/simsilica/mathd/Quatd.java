@@ -40,8 +40,12 @@ import com.jme3.math.Quaternion;
 
 
 /**
- * Represents rotations and orientations in 3-dimensional space, using
- * double-precision components.
+ * Used to efficiently represent rotations and orientations in 3-dimensional
+ * space, without risk of gimbal lock. Each instance has 4 double-precision
+ * components: 3 imaginary components (X, Y, and Z) and a real component (W).
+ * <p>
+ * Mathematically, quaternions are an extension of complex numbers. In
+ * mathematics texts, W often appears first, but here order is (X, Y, Z, W).
  *
  *  @version   $Revision: 3951 $
  *  @author    Paul Speed
@@ -66,14 +70,15 @@ public final class Quatd implements Cloneable {
     public double w;
 
     /**
-     * Instantiate an identity Quatd (0,0,0,1).
+     * Instantiate an identity quaternion: all components zeroed except
+     * {@code w}, which is set to 1.
      */
     public Quatd() {
         this( 0, 0, 0, 1 );
     }
 
     /**
-     * Instantiate a Quatd with the specified components.
+     * Instantiate a quaternion with the specified components.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -88,16 +93,16 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Instantiate a copy of the specified Quatd.
+     * Instantiate a copy of the argument.
      *
-     * @param quat the Quatd to copy (not null, unaffected)
+     * @param quat the quaternion to copy (not null, unaffected)
      */
     public Quatd( Quatd quat ) {
         this(quat.x, quat.y, quat.z, quat.w);
     }
 
     /**
-     * Instantiate based on the specified Quaternion.
+     * Instantiate based on the specified (single-precision) Quaternion.
      *
      * @param quat the input Quaternion (not null, unaffected)
      */
@@ -119,7 +124,8 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Instantiate a Quaternion based on this Quatd.
+     * Create a (single-precision) Quaternion that approximates the current
+     * instance.
      *
      * @return a new Quaternion
      */
@@ -128,7 +134,8 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Generate the hash code for this Quatd.
+     * Return a hash code. If two quaternions have identical values, they
+     * will have the same hash code. The current instance is unaffected.
      *
      * @return a 32-bit value for use in hashing
      */
@@ -143,10 +150,12 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Test for strict equality with another object.
+     * Test for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code o} is null, false is returned. Either way, the current instance is
+     * unaffected.
      *
-     * @param o the object to compare to (may be null, unaffected)
-     * @return true if the objects have the same value, otherwise false
+     * @param o the object to compare (may be null, unaffected)
+     * @return true if the objects have identical values, otherwise false
      */
     @Override
     public boolean equals( Object o ) {
@@ -169,7 +178,7 @@ public final class Quatd implements Cloneable {
     /**
      * Test for an identity rotation. The quaternion is unaffected.
      *
-     * @return true if X Y and Z are all 0 or -0 and W is non-zero, otherwise
+     * @return true if X, Y, and Z are all 0 or -0 and W is non-zero, otherwise
      * false
      */
     public boolean isRotationIdentity() {
@@ -200,7 +209,7 @@ public final class Quatd implements Cloneable {
      * @param y the desired Y component
      * @param z the desired Z component
      * @param w the desired W component
-     * @return this Quatd
+     * @return the (modified) current instance (for chaining)
      */
     public final Quatd set( double x, double y, double z, double w ) {
         this.x = x;
@@ -225,10 +234,11 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Copy all components of the specified Quaternion to this Quatd.
+     * Copy all components of the specified (single-precision) Quaternion to
+     * the current instance.
      *
      * @param quat the input Quaternion (not null, unaffected)
-     * @return this Quatd
+     * @return the (modified) current instance (for chaining)
      */
     public final Quatd set( Quaternion quat ) {
         this.x = quat.getX();
@@ -239,8 +249,10 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Take the Hamilton product of this Quatd times the specified Quatd to
-     * yield a new Quatd.
+     * Take the Hamilton product of the current instance times the specified
+     * Quatd to yield a new Quatd. The current instance is unaffected.
+     * <p>
+     * It IS safe for {@code q} and {@code this} to be the same object.
      *
      * @param q the right factor (not null, unaffected)
      * @return a new instance
@@ -262,11 +274,11 @@ public final class Quatd implements Cloneable {
     /**
      * Take the Hamilton product of this Quatd times the specified Quatd in
      * place.
+     * <p>
+     * It IS safe for {@code q} and {@code this} to be the same object.
      *
-     * It IS safe for q and this to be the same object.
-     *
-     * @param q the right factor (not null, unaffected unless it's this)
-     * @return this Quatd
+     * @param q the right factor (not null, unaffected unless it's {@code this})
+     * @return the (modified) current instance (for chaining)
      */
     public final Quatd multLocal( Quatd q ) {
         double qx = q.x;
@@ -287,7 +299,8 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Rotate the specified vector by this Quatd to produce a new vector.
+     * Rotate the specified vector to produce a new vector. The quaternion
+     * is unaffected.
      *
      * @param v the input vector (not null, unaffected)
      * @return a new instance
@@ -314,7 +327,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Multiplies by the specified quaternion and returns the product in a 3rd
+     * Multiply by the specified quaternion and return the product in a 3rd
      * quaternion. The current instance is unaffected, unless it's
      * {@code storeResult}.
      *
@@ -343,14 +356,15 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Rotate the specified vector by this Quatd and store the result in another
-     * vector.
+     * Rotate a specified vector and return the result in another vector. The
+     * quaternion is unaffected.
+     * <p>
+     * It IS safe for {@code v} and {@code result} to be the same object.
      *
-     * It IS safe for v and result to be the same object.
-     *
-     * @param v the input vector (not null, unaffected unless it's result)
+     * @param v the vector to rotate (not null, unaffected unless it's
+     *     {@code result})
      * @param result storage for the result (not null)
-     * @return result
+     * @return the (rotated) vector {@code result}
      */
     public Vec3d mult( Vec3d v, Vec3d result ) {
         if( v.x == 0 && v.y == 0 && v.z == 0 ) {
@@ -378,7 +392,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Determine the squared length of this Quatd.
+     * Return the squared length.
      *
      * @return the squared length (&ge;0)
      */
@@ -387,9 +401,9 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Normalize this Quatd in place.
+     * Normalize the current instance in place.
      *
-     * @return this Quatd
+     * @return the (modified) current instance (for chaining)
      */
     public final Quatd normalizeLocal() {
         double d = lengthSq();
@@ -408,8 +422,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Convert to an equivalent rotation matrix. The current instance is
-     * unaffected.
+     * Convert to an equivalent rotation matrix. The quaternion is unaffected.
      *
      * <p>Note: the result is created from a normalized version of the current
      * instance.
@@ -451,8 +464,8 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Returns the multiplicative inverse.  For a quaternion with norm=0, null is
-     * returned. Either way, the current instance is unaffected.
+     * Return the multiplicative inverse.  For a quaternion with norm=0, {@code
+     * null} is returned. Either way, the quaternion is unaffected.
      *
      * @return a new instance, or null if not invertible
      */
@@ -473,7 +486,7 @@ public final class Quatd implements Cloneable {
      * @param xAngle the desired rotation about the +X axis (in radians)
      * @param yAngle the desired rotation about the +Y axis (in radians)
      * @param zAngle the desired rotation about the +Z axis (in radians)
-     * @return this Quatd
+     * @return the (modified) current instance (for chaining)
      */
     public Quatd fromAngles( double xAngle, double yAngle, double zAngle ) {
         double a;
@@ -505,13 +518,13 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Represent this Quatd as a String.
+     * Returns a string representation of the quaternion, which is unaffected.
+     * For example, the identity quaternion is represented by:
+     * <pre>
+     * Quatd[0.0, 0.0, 0.0, 1.0]
+     * </pre>
      *
-     * The format is:
-     *
-     * Quatd[XX.XXXXXXXXXXXXX, YY.YYYYYYYYYYYYY, ZZ.ZZZZZZZZZZZZZ, WW.WWWWWWWWWWWWW]
-     *
-     * @return a descriptive string of text (not null, not empty)
+     * @return the string representation (not null, not empty)
      */
     @Override
     public String toString() {

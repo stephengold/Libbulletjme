@@ -1504,8 +1504,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Copy the orientation (rotation) of this body to a Quaternion.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return an identity quaternion (either storeResult or a new
-     * instance, not null)
+     * @return an identity quaternion (either storeResult or a new instance, not
+     * null)
      */
     @Override
     public Quaternion getPhysicsRotation(Quaternion storeResult) {
@@ -1519,8 +1519,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      * Copy the orientation (rotation) of this body to a Quatd.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return an identity quaternion (either storeResult or a new
-     * instance, not null)
+     * @return an identity quaternion (either storeResult or a new instance, not
+     * null)
      */
     @Override
     public Quatd getPhysicsRotationDp(Quatd storeResult) {
@@ -1538,8 +1538,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      * system) to a Matrix3f.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return an identity matrix (either storeResult or a new
-     * instance, not null)
+     * @return an identity matrix (either storeResult or a new instance, not
+     * null)
      */
     @Override
     public Matrix3f getPhysicsRotationMatrix(Matrix3f storeResult) {
@@ -1553,8 +1553,8 @@ public class PhysicsSoftBody extends PhysicsBody {
      * system) to a Matrix3d.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return an identity matrix (either storeResult or a new
-     * instance, not null)
+     * @return an identity matrix (either storeResult or a new instance, not
+     * null)
      */
     @Override
     public Matrix3d getPhysicsRotationMatrixDp(Matrix3d storeResult) {

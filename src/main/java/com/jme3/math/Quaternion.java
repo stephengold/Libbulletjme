@@ -534,7 +534,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      *
      * @param q the quaternion to add (not null, unaffected unless it's
      *     {@code this})
-     * @return the (modified) current instance
+     * @return the (modified) current instance (for chaining)
      */
     public Quaternion addLocal(Quaternion q) {
         this.x += q.x;

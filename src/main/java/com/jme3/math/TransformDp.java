@@ -330,11 +330,12 @@ final public class TransformDp {
     // Object methods
 
     /**
-     * Tests for exact equality with the argument, distinguishing -0 from 0. The
-     * current instance is unaffected.
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code otherObject} is null, false is returned. Either way, the current
+     * instance is unaffected.
      *
      * @param otherObject the object to compare to (may be null, unaffected)
-     * @return true if the objects are exactly equal, otherwise false
+     * @return true if the objects have identical values, otherwise false
      */
     @Override
     public boolean equals(Object otherObject) {
@@ -355,8 +356,8 @@ final public class TransformDp {
     }
 
     /**
-     * Returns a hash code. If two transforms are logically equivalent, they
-     * will return the same hash code. The current instance is unaffected.
+     * Returns a hash code. If two transforms have identical values, they will
+     * have the same hash code. The current instance is unaffected.
      *
      * @return a 32-bit value for use in hashing
      */
@@ -370,12 +371,12 @@ final public class TransformDp {
     }
 
     /**
-     * Returns a string representation. The current instance is unaffected. The
-     * format is:
+     * Returns a string representation of the transform, which is unaffected.
+     * For example, the identity transform is represented by:
      * <pre>
-     * TransformDp[ TX.XXXX, TY.YYYY, TZ.ZZZZ]
-     * [ R.XXXX, R.YYYY, R.ZZZZ, R.WWWW]
-     * [ S.XXXX , S.YYYY, S.ZZZZ]
+     * TransformDp[ 0.0, 0.0, 0.0]
+     * [ 0.0, 0.0, 0.0, 1.0]
+     * [ 1.0 , 1.0, 1.0]
      * </pre>
      *
      * @return the string representation (not null, not empty)
