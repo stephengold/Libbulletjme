@@ -309,8 +309,9 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * {@code obj} is null, false is returned. Either way, the current instance
      * is unaffected.
      *
-     * @param obj the object to compare to (may be null, unaffected)
-     * @return true if the objects have identical values, otherwise false
+     * @param obj the object to compare (may be null, unaffected)
+     * @return true if {@code this} and {@code obj} have identical values,
+     *     otherwise false
      */
     @Override
     public boolean equals(Object obj) {

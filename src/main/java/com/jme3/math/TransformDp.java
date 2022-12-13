@@ -334,8 +334,9 @@ final public class TransformDp {
      * {@code otherObject} is null, false is returned. Either way, the current
      * instance is unaffected.
      *
-     * @param otherObject the object to compare to (may be null, unaffected)
-     * @return true if the objects have identical values, otherwise false
+     * @param otherObject the object to compare (may be null, unaffected)
+     * @return true if {@code this} and {@code otherObject} have identical
+     * values, otherwise false
      */
     @Override
     public boolean equals(Object otherObject) {

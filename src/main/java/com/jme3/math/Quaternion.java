@@ -786,7 +786,8 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * unaffected.
      *
      * @param o the object to compare (may be null, unaffected)
-     * @return true if the objects have identical values, otherwise false
+     * @return true if {@code this} and {@code o} have identical values,
+     *     otherwise false
      */
     @Override
     public boolean equals(Object o) {
