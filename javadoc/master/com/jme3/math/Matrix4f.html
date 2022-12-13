@@ -241,7 +241,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(float)" class="member-name-link">multLocal</a><wbr>(float&nbsp;scalar)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Multiplies by the scalar argument.</div>
+<div class="block">Multiplies in place by the scalar argument.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScale(float,float,float)" class="member-name-link">setScale</a><wbr>(float&nbsp;x,
@@ -453,7 +453,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="multLocal(float)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(float&nbsp;scalar)</span></div>
-<div class="block">Multiplies by the scalar argument.</div>
+<div class="block">Multiplies in place by the scalar argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>scalar</code> - the scaling factor to apply to all elements</dd>
@@ -626,7 +626,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dt>Parameters:</dt>
 <dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
-<dd>true if the objects have identical values, otherwise false</dd>
+<dd>true if <code>this</code> and <code>o</code> have identical values,
+     otherwise false</dd>
 </dl>
 </section>
 </li>
