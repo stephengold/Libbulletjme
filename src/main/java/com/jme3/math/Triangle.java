@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2020 jMonkeyEngine
+ * Copyright (c) 2009-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,37 +34,36 @@ package com.jme3.math;
 import jme3utilities.math.MyVector3f;
 
 /**
- * <code>Triangle</code> defines a triangle in terms of its vertex locations,
- * with auxiliary storage for its centroid, normal vector, projection, and
- * index.
+ * Describes a triangle in terms of its vertex locations, with auxiliary storage
+ * for its normal vector.
  *
  * @author Mark Powell
  * @author Joshua Slack
  */
 public class Triangle {
     /**
-     * location of the first vertex
+     * The location of the first vertex in winding order.
      */
     final private Vector3f pointA = new Vector3f();
     /**
-     * location of the 2nd vertex
+     * The location of the 2nd vertex in winding order.
      */
     final private Vector3f pointB = new Vector3f();
     /**
-     * location of the 3rd vertex
+     * The location of the 3rd vertex in winding order.
      */
     final private Vector3f pointC = new Vector3f();
     private transient Vector3f normal;
 
     /**
-     * Instantiate a zero-size Triangle at the origin.
+     * Instantiate a zero-size triangle at the origin.
      */
     public Triangle() {
     }
 
     /**
-     * Instantiate a <Code>Triangle</code> with the specified vertex locations.
-     * Vertices should be listed in the desired winding order, typically
+     * Instantiates a triangle with the specified vertex locations. Vertices
+     * should be listed in the desired winding order, typically
      * counter-clockwise.
      *
      * @param p1 the location of the first vertex (not null, unaffected)
@@ -78,7 +77,7 @@ public class Triangle {
     }
 
     /**
-     * Access the location of the indexed vertex.
+     * Accesses the location of the indexed vertex.
      *
      * @param i the index of the vertex to access (0, 1, or 2)
      * @return a pre-existing location vector, or null if the index is invalid
@@ -97,7 +96,7 @@ public class Triangle {
     }
 
     /**
-     * Access the location of the first vertex.
+     * Accesses the location of the first vertex.
      *
      * @return the pre-existing location vector (not null)
      */
@@ -106,7 +105,7 @@ public class Triangle {
     }
 
     /**
-     * Access the location of the 2nd vertex.
+     * Accesses the location of the 2nd vertex.
      *
      * @return the pre-existing location vector (not null)
      */
@@ -115,7 +114,7 @@ public class Triangle {
     }
 
     /**
-     * Access the location of the 3rd vertex.
+     * Accesses the location of the 3rd vertex.
      *
      * @return the pre-existing location vector (not null)
      */
@@ -124,8 +123,7 @@ public class Triangle {
     }
 
     /**
-     * Alter the location of the indexed vertex and delete the stored centroid
-     * and normal.
+     * Alters the location of the indexed vertex and deletes the stored normal.
      *
      * @param i the index of the vertex to alter (0, 1, or 2)
      * @param point the desired location (not null, unaffected)
@@ -147,8 +145,7 @@ public class Triangle {
     }
 
     /**
-     * Alter the location of the first vertex and delete the stored centroid and
-     * normal.
+     * Alters the location of the first vertex and deletes the stored normal.
      *
      * @param v the desired location (not null, unaffected)
      */
@@ -159,8 +156,7 @@ public class Triangle {
     }
 
     /**
-     * Alter the location of the 2nd vertex and delete the stored centroid and
-     * normal.
+     * Alters the location of the 2nd vertex and deletes the stored normal.
      *
      * @param v the desired location (not null, unaffected)
      */
@@ -171,8 +167,7 @@ public class Triangle {
     }
 
     /**
-     * Alter the location of the 3rd vertex and delete the stored centroid and
-     * normal.
+     * Alters the location of the 3rd vertex and deletes the stored normal.
      *
      * @param v the desired location (not null, unaffected)
      */
@@ -183,8 +178,7 @@ public class Triangle {
     }
 
     /**
-     * Alter the locations of all 3 vertices and delete the stored centroid and
-     * normal.
+     * Alters the locations of all 3 vertices and deletes the stored normal.
      *
      * @param v1 the desired location of the first vertex (not null, unaffected)
      * @param v2 the desired location of the 2nd vertex (not null, unaffected)
@@ -199,7 +193,7 @@ public class Triangle {
     }
 
     /**
-     * Recalculate the stored normal based on the current vertex locations.
+     * Recalculates the stored normal based on the current vertex locations.
      */
     public void calculateNormal() {
         if (normal == null) {
@@ -212,7 +206,7 @@ public class Triangle {
     }
 
     /**
-     * Access the stored normal, updating it if it is null.
+     * Accesses the stored normal, updating it if it is null.
      *
      * @return unit normal vector (an internal vector subject to re-use)
      */

@@ -106,7 +106,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the location vector (in physics-space coordinates, either
-     * storeResult or a new vector, not null)
+     * storeResult or a new vector, not null, finite)
      */
     public Vec3d getLocationDp(Vec3d storeResult) {
         Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
