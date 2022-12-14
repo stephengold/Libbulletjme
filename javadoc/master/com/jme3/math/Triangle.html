@@ -78,9 +78,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Triangle</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block"><code>Triangle</code> defines a triangle in terms of its vertex locations,
- with auxiliary storage for its centroid, normal vector, projection, and
- index.</div>
+<div class="block">Describes a triangle in terms of its vertex locations, with auxiliary storage
+ for its normal vector.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,13 +93,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Triangle</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate a zero-size Triangle at the origin.</div>
+<div class="block">Instantiate a zero-size triangle at the origin.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">Triangle</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;p1,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;p2,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;p3)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Instantiate a <Code>Triangle</code> with the specified vertex locations.</div>
+<div class="block">Instantiates a triangle with the specified vertex locations.</div>
 </div>
 </div>
 </section>
@@ -119,65 +118,60 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateNormal()" class="member-name-link">calculateNormal</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Recalculate the stored normal based on the current vertex locations.</div>
+<div class="block">Recalculates the stored normal based on the current vertex locations.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get(int)" class="member-name-link">get</a><wbr>(int&nbsp;i)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Access the location of the indexed vertex.</div>
+<div class="block">Accesses the location of the indexed vertex.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get1()" class="member-name-link">get1</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Access the location of the first vertex.</div>
+<div class="block">Accesses the location of the first vertex.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get2()" class="member-name-link">get2</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Access the location of the 2nd vertex.</div>
+<div class="block">Accesses the location of the 2nd vertex.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#get3()" class="member-name-link">get3</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Access the location of the 3rd vertex.</div>
+<div class="block">Accesses the location of the 3rd vertex.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNormal()" class="member-name-link">getNormal</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Access the stored normal, updating it if it is null.</div>
+<div class="block">Accesses the stored normal, updating it if it is null.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,com.jme3.math.Vector3f)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;point)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the location of the indexed vertex and delete the stored centroid
- and normal.</div>
+<div class="block">Alters the location of the indexed vertex and deletes the stored normal.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">set</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v1,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v2,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v3)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the locations of all 3 vertices and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the locations of all 3 vertices and deletes the stored normal.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set1(com.jme3.math.Vector3f)" class="member-name-link">set1</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the location of the first vertex and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the location of the first vertex and deletes the stored normal.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set2(com.jme3.math.Vector3f)" class="member-name-link">set2</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the location of the 2nd vertex and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the location of the 2nd vertex and deletes the stored normal.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set3(com.jme3.math.Vector3f)" class="member-name-link">set3</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the location of the 3rd vertex and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the location of the 3rd vertex and deletes the stored normal.</div>
 </div>
 </div>
 </div>
@@ -200,7 +194,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Triangle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Triangle</span>()</div>
-<div class="block">Instantiate a zero-size Triangle at the origin.</div>
+<div class="block">Instantiate a zero-size triangle at the origin.</div>
 </section>
 </li>
 <li>
@@ -209,8 +203,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Triangle</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;p1,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;p2,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;p3)</span></div>
-<div class="block">Instantiate a <Code>Triangle</code> with the specified vertex locations.
- Vertices should be listed in the desired winding order, typically
+<div class="block">Instantiates a triangle with the specified vertex locations. Vertices
+ should be listed in the desired winding order, typically
  counter-clockwise.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -232,7 +226,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get(int)">
 <h3>get</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">get</span><wbr><span class="parameters">(int&nbsp;i)</span></div>
-<div class="block">Access the location of the indexed vertex.</div>
+<div class="block">Accesses the location of the indexed vertex.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>i</code> - the index of the vertex to access (0, 1, or 2)</dd>
@@ -245,7 +239,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get1()">
 <h3>get1</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">get1</span>()</div>
-<div class="block">Access the location of the first vertex.</div>
+<div class="block">Accesses the location of the first vertex.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the pre-existing location vector (not null)</dd>
@@ -256,7 +250,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get2()">
 <h3>get2</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">get2</span>()</div>
-<div class="block">Access the location of the 2nd vertex.</div>
+<div class="block">Accesses the location of the 2nd vertex.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the pre-existing location vector (not null)</dd>
@@ -267,7 +261,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="get3()">
 <h3>get3</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">get3</span>()</div>
-<div class="block">Access the location of the 3rd vertex.</div>
+<div class="block">Accesses the location of the 3rd vertex.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the pre-existing location vector (not null)</dd>
@@ -279,8 +273,7 @@ loadScripts(document, 'script');</script>
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;point)</span></div>
-<div class="block">Alter the location of the indexed vertex and delete the stored centroid
- and normal.</div>
+<div class="block">Alters the location of the indexed vertex and deletes the stored normal.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>i</code> - the index of the vertex to alter (0, 1, or 2)</dd>
@@ -292,8 +285,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="set1(com.jme3.math.Vector3f)">
 <h3>set1</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set1</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
-<div class="block">Alter the location of the first vertex and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the location of the first vertex and deletes the stored normal.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the desired location (not null, unaffected)</dd>
@@ -304,8 +296,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="set2(com.jme3.math.Vector3f)">
 <h3>set2</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set2</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
-<div class="block">Alter the location of the 2nd vertex and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the location of the 2nd vertex and deletes the stored normal.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the desired location (not null, unaffected)</dd>
@@ -316,8 +307,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="set3(com.jme3.math.Vector3f)">
 <h3>set3</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set3</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
-<div class="block">Alter the location of the 3rd vertex and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the location of the 3rd vertex and deletes the stored normal.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the desired location (not null, unaffected)</dd>
@@ -330,8 +320,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v1,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v2,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v3)</span></div>
-<div class="block">Alter the locations of all 3 vertices and delete the stored centroid and
- normal.</div>
+<div class="block">Alters the locations of all 3 vertices and deletes the stored normal.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v1</code> - the desired location of the first vertex (not null, unaffected)</dd>
@@ -344,14 +333,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="calculateNormal()">
 <h3>calculateNormal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">calculateNormal</span>()</div>
-<div class="block">Recalculate the stored normal based on the current vertex locations.</div>
+<div class="block">Recalculates the stored normal based on the current vertex locations.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getNormal()">
 <h3>getNormal</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getNormal</span>()</div>
-<div class="block">Access the stored normal, updating it if it is null.</div>
+<div class="block">Accesses the stored normal, updating it if it is null.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>unit normal vector (an internal vector subject to re-use)</dd>
