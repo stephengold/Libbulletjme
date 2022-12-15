@@ -339,7 +339,7 @@ public final class Quatd implements Cloneable {
      * object. However, if {@code this} and {@code storeResult} are the same
      * object, the result is undefined.
      *
-     * @param q the right factor (not null, unaffected unless it's 
+     * @param q the right factor (not null, unaffected unless it's
      * {@code storeResult})
      * @param storeResult storage for the product, or null for a new Quatd
      * @return {@code this * q} (either {@code storeResult} or a new Quatd)
@@ -481,7 +481,7 @@ public final class Quatd implements Cloneable {
 
     /**
      * Builds a Quaternion from the Euler rotation angles (x,y,z) aka
-     * (pitch, yaw, roll)).  They are applied in order: (y, z, x) aka (yaw, roll, pitch).
+     * (pitch, yaw, roll).  They are applied in order: (y, z, x) aka (yaw, roll, pitch).
      * @see <a href="http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm">http://www.euclideanspace.com/maths/geometry/rotations/conversions/eulerToQuaternion/index.htm</a>
      *
      * @param xAngle the desired rotation about the +X axis (in radians)
