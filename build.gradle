@@ -453,6 +453,10 @@ tasks.withType(Sign) {
 }
 signMavenPublication.dependsOn('module')
 
+tasks.register('checkstyle') {
+    dependsOn 'checkstyleMain', 'checkstyleTest'
+}
+
 // cleanup tasks:
 
 clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
