@@ -67,15 +67,15 @@ public class ChildCollisionShape {
     /**
      * base shape (not null, not a compound shape)
      */
-    private CollisionShape shape;
+    final private CollisionShape shape;
     /**
      * copy of rotation in the parent's coordinate system (not null)
      */
-    private Matrix3f rotation;
+    final private Matrix3f rotation;
     /**
      * copy of translation in the parent's coordinate system (not null)
      */
-    private Vector3f offset;
+    final private Vector3f offset;
     // *************************************************************************
     // constructors
 
