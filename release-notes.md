@@ -1,5 +1,24 @@
 # Release log for the Libbulletjme project
 
+## Version 17.3.0 released on 15 December 2022
+
++ Bugfix: `getPhysicsRotationDp()` returns wrong rotation for a soft body
++ Overrode the `equals()` and `hashCode()` methods of the `Matrix3d` class.
++ Added 6 double-precision accessors for physics objects:
+  + `MultiBodyCollider.setPhysicsRotationDp()`
+  + `PhysicsCollisionObject.getPhysicsRotationMatrixDp()`
+  + `PhysicsGhostObject.setPhysicsRotationDp(Matrix3d)`
+  + `PhysicsRigidBody.setPhysicsRotationDp(Matrix3d)`
+  + `RigidBodyMotionState.getOrientationMatrixDp()`
+  + `RigidBodyMotionState.getOrientationQuaternionDp()`
++ Added 4 new math methods:
+  + `Matrix3d.isIdentity()`
+  + `Quatd.isRotationIdentity()`
+  + `Quatd.isZero()`
+  + `Validate.nonZero(Quatd)`
++ Dramatically simplified the `jmeBulletUtil` native class.
++ Integrated https://github.com/bulletphysics/bullet3/pull/4284
+
 ## Version 17.2.0 released on 27 November 2022
 
 + Added 4 double-precision accessors for physics objects:
