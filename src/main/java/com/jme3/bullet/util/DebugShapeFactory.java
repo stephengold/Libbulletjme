@@ -96,8 +96,8 @@ final public class DebugShapeFactory {
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 3)
      */
-    public static FloatBuffer debugVertices(CollisionShape shape,
-            int meshResolution) {
+    public static FloatBuffer debugVertices(
+            CollisionShape shape, int meshResolution) {
         Validate.nonNull(shape, "shape");
         Validate.inRange(meshResolution, "mesh resolution", lowResolution,
                 highResolution);
@@ -131,8 +131,8 @@ final public class DebugShapeFactory {
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 9)
      */
-    public static FloatBuffer getDebugTriangles(CollisionShape shape,
-            int meshResolution) {
+    public static FloatBuffer getDebugTriangles(
+            CollisionShape shape, int meshResolution) {
         Validate.nonNull(shape, "shape");
         Validate.inRange(meshResolution, "mesh resolution", lowResolution,
                 highResolution);

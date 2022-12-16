@@ -119,8 +119,8 @@ final public class NativeSoftBodyUtil {
      * @param softBody the soft body to which faces and links will be added (not
      * null, modified)
      */
-    public static void appendFromNativeMesh(IndexedMesh mesh,
-            PhysicsSoftBody softBody) {
+    public static void appendFromNativeMesh(
+            IndexedMesh mesh, PhysicsSoftBody softBody) {
         Validate.nonNull(softBody, "soft body");
 
         FloatBuffer positions = mesh.copyVertexPositions();
@@ -369,8 +369,8 @@ final public class NativeSoftBodyUtil {
      * body's local coordinates (relative to its bounding-box center), otherwise
      * use physics-space coordinates
      */
-    public static void updateClusterMesh(PhysicsSoftBody body, Mesh store,
-            boolean meshInLocalSpace) {
+    public static void updateClusterMesh(
+            PhysicsSoftBody body, Mesh store, boolean meshInLocalSpace) {
         long bodyId = body.nativeId();
         FloatBuffer positionBuffer = store.getPositionsData();
         assert positionBuffer != null;
@@ -474,8 +474,8 @@ final public class NativeSoftBodyUtil {
      * body's local coordinates (relative to its bounding-box center), otherwise
      * use physics-space coordinates
      */
-    public static void updatePinMesh(PhysicsSoftBody body, Mesh store,
-            boolean meshInLocalSpace) {
+    public static void updatePinMesh(
+            PhysicsSoftBody body, Mesh store, boolean meshInLocalSpace) {
         long bodyId = body.nativeId();
         FloatBuffer positionBuffer = store.getPositionsData();
         assert positionBuffer != null;
@@ -489,10 +489,10 @@ final public class NativeSoftBodyUtil {
     native private static void updateClusterMesh(long softBodyId,
             FloatBuffer outPositionBuffer, boolean meshInLocalSpace);
 
-    native private static void updateMesh(long softBodyId,
-            IntBuffer inIndexMapping, FloatBuffer outPositionBuffer,
-            FloatBuffer outNormalBuffer, boolean meshInLocalSpace,
-            boolean updateNormals);
+    native private static void updateMesh(
+            long softBodyId, IntBuffer inIndexMapping,
+            FloatBuffer outPositionBuffer, FloatBuffer outNormalBuffer,
+            boolean meshInLocalSpace, boolean updateNormals);
 
     native private static void updateMesh(long softBodyId,
             FloatBuffer outPositionBuffer, FloatBuffer outNormalBuffer,
