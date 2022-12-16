@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * locations, offsets, velocities, and directions in 3-dimensional space.
  *
  * <p>Methods with names ending in "Local" modify the current instance. They are
- * used to cut down on the creation of new instances.
+ * used to to avoid creating temporary vectors.
  *
  * @author Mark Powell
  * @author Joshua Slack

@@ -44,7 +44,7 @@ import com.jme3.math.Vector3f;
  * locations, offsets, velocities, and directions in 3-dimensional space.
  * <p>
  * Methods with names ending in "Local" modify the current instance. They are
- * used to cut down on the creation of new instances.
+ * used to avoid creating temporary vectors.
  * <p>
  * The conventional ordering of components is (X, Y, Z).
  *
