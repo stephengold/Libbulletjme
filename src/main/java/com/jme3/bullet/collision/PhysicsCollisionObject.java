@@ -248,6 +248,19 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
+     * Return the collision flags. Flag values are defined in
+     * {@link com.jme3.bullet.collision.CollisionFlag}.
+     *
+     * @return the values of all flags that are set, ORed together
+     */
+    public int collisionFlags() {
+        long objectId = nativeId();
+        int result = getCollisionFlags(objectId);
+
+        return result;
+    }
+
+    /**
      * Copy common properties from another collision object.
      *
      * @param old (not null, unaffected)
@@ -1153,6 +1166,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @return the flags that are set, ORed together
      */
     native protected static int getCollisionFlags(long objectId);
+    // TODO privatize
 
     /**
      * Return the type of this object. Native method.
