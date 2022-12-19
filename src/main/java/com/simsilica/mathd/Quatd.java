@@ -177,7 +177,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Test for an identity rotation. The quaternion is unaffected.
+     * Tests for an identity rotation. The quaternion is unaffected.
      *
      * @return true if X, Y, and Z are all 0 or -0 and W is non-zero, otherwise
      * false
@@ -191,7 +191,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Test for a zero value. The quaternion is unaffected.
+     * Tests for a zero value. The quaternion is unaffected.
      *
      * @return true if all components are 0 or -0, otherwise false
      */

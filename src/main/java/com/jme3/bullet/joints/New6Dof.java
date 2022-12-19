@@ -197,12 +197,11 @@ public class New6Dof extends Constraint {
     }
 
     /**
-     * Determine the translation component of the global transform of the offset
-     * for body A.
+     * Calculate the pivot location of the A end.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return the origin location (either storeResult or a new vector, not
-     * null)
+     * @return a location vector (in physics-space coordinates, either
+     * storeResult or a new vector, not null)
      */
     public Vector3f calculatedOriginA(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -214,12 +213,11 @@ public class New6Dof extends Constraint {
     }
 
     /**
-     * Determine the translation component of the global transform of the offset
-     * for body B.
+     * Calculate the pivot location of the B end.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return the origin location (either storeResult or a new vector, not
-     * null)
+     * @return a location vector (in physics-space coordinates, either
+     * storeResult or a new vector, not null)
      */
     public Vector3f calculatedOriginB(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;

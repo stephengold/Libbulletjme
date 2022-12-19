@@ -993,7 +993,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the contact damping (native field: m_contactDamping).
+     * Alter the contact damping (native field: m_contactDamping). Also affects
+     * the collision flags.
      * <p>
      * Contact damping doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -1021,7 +1022,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the contact stiffness (native field: m_contactStiffness).
+     * Alter the contact stiffness (native field: m_contactStiffness). Also
+     * affects the collision flags.
      * <p>
      * Contact stiffness doesn't affect a PhysicsCharacter or
      * PhysicsGhostObject.
