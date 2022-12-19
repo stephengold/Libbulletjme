@@ -288,14 +288,14 @@ public class Matrix3d implements Cloneable {
     @Override
     public int hashCode() {
         long bits = Double.doubleToLongBits(m00);
-        bits ^= Double.doubleToLongBits(m01) * 13L;
-        bits ^= Double.doubleToLongBits(m02) * 13L;
-        bits ^= Double.doubleToLongBits(m10) * 13L;
-        bits ^= Double.doubleToLongBits(m11) * 13L;
-        bits ^= Double.doubleToLongBits(m12) * 13L;
-        bits ^= Double.doubleToLongBits(m20) * 13L;
-        bits ^= Double.doubleToLongBits(m21) * 13L;
-        bits ^= Double.doubleToLongBits(m22) * 13L;
+        bits ^= Double.doubleToLongBits(m01) * 2L;
+        bits ^= Double.doubleToLongBits(m02) * 3L;
+        bits ^= Double.doubleToLongBits(m10) * 4L;
+        bits ^= Double.doubleToLongBits(m11) * 5L;
+        bits ^= Double.doubleToLongBits(m12) * 6L;
+        bits ^= Double.doubleToLongBits(m20) * 7L;
+        bits ^= Double.doubleToLongBits(m21) * 8L;
+        bits ^= Double.doubleToLongBits(m22) * 9L;
 
         return ((int)bits) ^ ((int)(bits >> 32));
     }
