@@ -179,17 +179,25 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatedBasisA(com.jme3.math.Matrix3f)" class="member-name-link">calculatedBasisA</a><wbr>(<a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Calculate the pivot orientation of the A end.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatedBasisB(com.jme3.math.Matrix3f)" class="member-name-link">calculatedBasisB</a><wbr>(<a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Calculate the pivot orientation of the B end.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatedOriginA(com.jme3.math.Vector3f)" class="member-name-link">calculatedOriginA</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the translation component of the global transform of the offset
- for body A.</div>
+<div class="block">Calculate the pivot location of the A end.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatedOriginB(com.jme3.math.Vector3f)" class="member-name-link">calculatedOriginB</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the translation component of the global transform of the offset
- for body B.</div>
+<div class="block">Calculate the pivot location of the B end.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkRotationOrder()" class="member-name-link">checkRotationOrder</a>()</code></div>
@@ -439,17 +447,44 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="calculatedOriginA(com.jme3.math.Vector3f)">
-<h3>calculatedOriginA</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">calculatedOriginA</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Determine the translation component of the global transform of the offset
- for body A.</div>
+<section class="detail" id="calculatedBasisA(com.jme3.math.Matrix3f)">
+<h3>calculatedBasisA</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></span>&nbsp;<span class="element-name">calculatedBasisA</span><wbr><span class="parameters">(<a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Calculate the pivot orientation of the A end.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
-<dd>the origin location (either storeResult or a new vector, not
- null)</dd>
+<dd>the orientation (a rotation matrix in physics-space coordinates,
+ either storeResult or a new matrix, not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="calculatedBasisB(com.jme3.math.Matrix3f)">
+<h3>calculatedBasisB</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a></span>&nbsp;<span class="element-name">calculatedBasisB</span><wbr><span class="parameters">(<a href="../../math/Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Calculate the pivot orientation of the B end.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>the orientation (a rotation matrix in physics-space coordinates,
+ either storeResult or a new matrix, not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="calculatedOriginA(com.jme3.math.Vector3f)">
+<h3>calculatedOriginA</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">calculatedOriginA</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Calculate the pivot location of the A end.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>a location vector (in physics-space coordinates, either
+ storeResult or a new vector, not null)</dd>
 </dl>
 </section>
 </li>
@@ -457,14 +492,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="calculatedOriginB(com.jme3.math.Vector3f)">
 <h3>calculatedOriginB</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">calculatedOriginB</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Determine the translation component of the global transform of the offset
- for body B.</div>
+<div class="block">Calculate the pivot location of the B end.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
-<dd>the origin location (either storeResult or a new vector, not
- null)</dd>
+<dd>a location vector (in physics-space coordinates, either
+ storeResult or a new vector, not null)</dd>
 </dl>
 </section>
 </li>

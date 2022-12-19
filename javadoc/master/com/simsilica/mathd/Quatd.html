@@ -197,12 +197,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isRotationIdentity()" class="member-name-link">isRotationIdentity</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test for an identity rotation.</div>
+<div class="block">Tests for an identity rotation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isZero()" class="member-name-link">isZero</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Test for a zero value.</div>
+<div class="block">Tests for a zero value.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#lengthSq()" class="member-name-link">lengthSq</a>()</code></div>
@@ -448,11 +448,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="isRotationIdentity()">
 <h3>isRotationIdentity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isRotationIdentity</span>()</div>
-<div class="block">Test for an identity rotation. The quaternion is unaffected.</div>
+<div class="block">Tests for an identity rotation. The quaternion is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if X, Y, and Z are all 0 or -0 and W is non-zero, otherwise
- false</dd>
+<dd>true if W is non-zero and not NaN
+ and X, Y, and Z are all 0 or -0, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -460,7 +460,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="isZero()">
 <h3>isZero</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isZero</span>()</div>
-<div class="block">Test for a zero value. The quaternion is unaffected.</div>
+<div class="block">Tests for a zero value. The quaternion is unaffected.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>true if all components are 0 or -0, otherwise false</dd>
