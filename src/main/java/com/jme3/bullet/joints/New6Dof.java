@@ -165,6 +165,38 @@ public class New6Dof extends Constraint {
     // new methods exposed
 
     /**
+     * Calculate the pivot orientation of the A end.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the orientation (a rotation matrix in physics-space coordinates,
+     * either storeResult or a new matrix, not null)
+     */
+    public Matrix3f calculatedBasisA(Matrix3f storeResult) {
+        Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
+
+        long constraintId = nativeId();
+        getCalculatedBasisA(constraintId, result);
+
+        return result;
+    }
+
+    /**
+     * Calculate the pivot orientation of the B end.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return the orientation (a rotation matrix in physics-space coordinates,
+     * either storeResult or a new matrix, not null)
+     */
+    public Matrix3f calculatedBasisB(Matrix3f storeResult) {
+        Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
+
+        long constraintId = nativeId();
+        getCalculatedBasisB(constraintId, result);
+
+        return result;
+    }
+
+    /**
      * Determine the translation component of the global transform of the offset
      * for body A.
      *
@@ -722,6 +754,12 @@ public class New6Dof extends Constraint {
 
     native private static void
             getAxis(long constraintId, int axisIndex, Vector3f storeVector);
+
+    native private static void
+            getCalculatedBasisA(long constraintId, Matrix3f storeMatrix);
+
+    native private static void
+            getCalculatedBasisB(long constraintId, Matrix3f storeMatrix);
 
     native private static void
             getCalculatedOriginA(long constraintId, Vector3f storeVector);

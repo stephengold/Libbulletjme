@@ -175,6 +175,50 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedBasisA
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedBasisA
+(JNIEnv *pEnv, jclass, jlong constraintId, jobject storeMatrix) {
+    btGeneric6DofSpring2Constraint * const pConstraint
+            = reinterpret_cast<btGeneric6DofSpring2Constraint *> (constraintId);
+    NULL_CHK(pEnv, pConstraint,
+            "The btGeneric6DofSpring2Constraint does not exist.",);
+    btTypedConstraintType type = pConstraint->getConstraintType();
+    btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, storeMatrix, "The store matrix does not exist.",);
+
+    pConstraint->calculateTransforms();
+
+    const btTransform& cta = pConstraint->getCalculatedTransformA();
+    const btMatrix3x3 * const pBasis = &cta.getBasis();
+    jmeBulletUtil::convert(pEnv, pBasis, storeMatrix);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedBasisB
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedBasisB
+(JNIEnv *pEnv, jclass, jlong constraintId, jobject storeMatrix) {
+    btGeneric6DofSpring2Constraint * const pConstraint
+            = reinterpret_cast<btGeneric6DofSpring2Constraint *> (constraintId);
+    NULL_CHK(pEnv, pConstraint,
+            "The btGeneric6DofSpring2Constraint does not exist.",);
+    btTypedConstraintType type = pConstraint->getConstraintType();
+    btAssert(type == D6_SPRING_2_CONSTRAINT_TYPE);
+    NULL_CHK(pEnv, storeMatrix, "The store matrix does not exist.",);
+
+    pConstraint->calculateTransforms();
+
+    const btTransform& ctb = pConstraint->getCalculatedTransformB();
+    const btMatrix3x3 * const pBasis = &ctb.getBasis();
+    jmeBulletUtil::convert(pEnv, pBasis, storeMatrix);
+}
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
  * Method:    getCalculatedOriginA
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */

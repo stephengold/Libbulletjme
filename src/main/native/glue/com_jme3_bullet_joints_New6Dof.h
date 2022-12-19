@@ -49,6 +49,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getAxis
 
 /*
  * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedBasisA
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedBasisA
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
+ * Method:    getCalculatedBasisB
+ * Signature: (JLcom/jme3/math/Matrix3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_getCalculatedBasisB
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_joints_New6Dof
  * Method:    getCalculatedOriginA
  * Signature: (JLcom/jme3/math/Vector3f;)V
  */
