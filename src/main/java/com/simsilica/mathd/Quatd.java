@@ -179,15 +179,14 @@ public final class Quatd implements Cloneable {
     /**
      * Tests for an identity rotation. The quaternion is unaffected.
      *
-     * @return true if X, Y, and Z are all 0 or -0 and W is non-zero, otherwise
-     * false
+     * @return true if W is non-zero and not NaN
+     * and X, Y, and Z are all 0 or -0, otherwise false
      */
     public boolean isRotationIdentity() {
-        if (x == 0. && y == 0. && z == 0. && w != 0.) {
+        if( x == 0. && y == 0. && z == 0. && w != 0. && !Double.isNaN(w) )
             return true;
-        } else {
+        else
             return false;
-        }
     }
 
     /**
