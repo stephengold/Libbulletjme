@@ -230,11 +230,14 @@ public class SixDofJoint extends Constraint {
      * storeResult or a new vector, not null)
      */
     public Vector3f getAngularLowerLimit(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return angularLowerLimit.clone();
+            result = angularLowerLimit.clone();
         } else {
-            return storeResult.set(angularLowerLimit);
+            result = storeResult.set(angularLowerLimit);
         }
+
+        return result;
     }
 
     /**
@@ -245,11 +248,14 @@ public class SixDofJoint extends Constraint {
      * storeResult or a new vector, not null)
      */
     public Vector3f getAngularUpperLimit(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return angularUpperLimit.clone();
+            result = angularUpperLimit.clone();
         } else {
-            return storeResult.set(angularUpperLimit);
+            result = storeResult.set(angularUpperLimit);
         }
+
+        return result;
     }
 
     /**
@@ -287,11 +293,14 @@ public class SixDofJoint extends Constraint {
      * storeResult or a new vector, not null)
      */
     public Vector3f getLinearLowerLimit(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return linearLowerLimit.clone();
+            result = linearLowerLimit.clone();
         } else {
-            return storeResult.set(linearLowerLimit);
+            result = storeResult.set(linearLowerLimit);
         }
+
+        return result;
     }
 
     /**
@@ -302,11 +311,14 @@ public class SixDofJoint extends Constraint {
      * storeResult or a new vector, not null)
      */
     public Vector3f getLinearUpperLimit(Vector3f storeResult) {
+        Vector3f result;
         if (storeResult == null) {
-            return linearUpperLimit.clone();
+            result = linearUpperLimit.clone();
         } else {
-            return storeResult.set(linearUpperLimit);
+            result = storeResult.set(linearUpperLimit);
         }
+
+        return result;
     }
 
     /**
