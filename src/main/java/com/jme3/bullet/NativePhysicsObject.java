@@ -165,7 +165,7 @@ abstract public class NativePhysicsObject
         Validate.nonZero(nativeId, "nativeId");
 
         if (nativeId != id) {
-            id = nativeId;
+            this.id = nativeId;
             NpoTracker tracker = new NpoTracker(this);
             NpoTracker previous = map.put(nativeId, tracker);
             assert previous == null : id;
@@ -182,7 +182,7 @@ abstract public class NativePhysicsObject
         Validate.nonZero(nativeId, "nativeId");
         assert !hasAssignedNativeObject() : id;
 
-        id = nativeId;
+        this.id = nativeId;
         NpoTracker tracker = new NpoTracker(this);
         NpoTracker previous = map.put(nativeId, tracker);
         assert previous == null : id;
@@ -198,7 +198,7 @@ abstract public class NativePhysicsObject
         Validate.nonZero(nativeId, "nativeId");
         assert !hasAssignedNativeObject() : id;
 
-        id = nativeId;
+        this.id = nativeId;
     }
 
     /**
@@ -208,7 +208,7 @@ abstract public class NativePhysicsObject
      */
     final protected void unassignNativeObject() {
         assert hasAssignedNativeObject();
-        id = 0L;
+        this.id = 0L;
     }
     // *************************************************************************
     // Comparable methods
