@@ -168,7 +168,7 @@ abstract public class NativePhysicsObject
             this.id = nativeId;
             NpoTracker tracker = new NpoTracker(this);
             NpoTracker previous = map.put(nativeId, tracker);
-            assert previous == null : id;
+            assert previous == null : Long.toHexString(id);
         }
     }
 
@@ -180,12 +180,12 @@ abstract public class NativePhysicsObject
      */
     protected void setNativeId(long nativeId) {
         Validate.nonZero(nativeId, "nativeId");
-        assert !hasAssignedNativeObject() : id;
+        assert !hasAssignedNativeObject() : Long.toHexString(id);
 
         this.id = nativeId;
         NpoTracker tracker = new NpoTracker(this);
         NpoTracker previous = map.put(nativeId, tracker);
-        assert previous == null : id;
+        assert previous == null : Long.toHexString(id);
     }
 
     /**
@@ -196,7 +196,7 @@ abstract public class NativePhysicsObject
      */
     final protected void setNativeIdNotTracked(long nativeId) {
         Validate.nonZero(nativeId, "nativeId");
-        assert !hasAssignedNativeObject() : id;
+        assert !hasAssignedNativeObject() : Long.toHexString(id);
 
         this.id = nativeId;
     }
