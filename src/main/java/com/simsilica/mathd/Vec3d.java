@@ -169,6 +169,20 @@ public class Vec3d implements Cloneable {
     }
 
     /**
+     * Tests for finite components. The vector is unaffected.
+     *
+     * @return false if any component is infinite or NaN, otherwise true
+     */
+    public boolean isFinite() {
+        if( Double.isInfinite(x) || Double.isNaN(x)
+                || Double.isInfinite(y) || Double.isNaN(y)
+                || Double.isInfinite(z) || Double.isNaN(z) )
+            return false;
+        else
+            return true;
+    }
+
+    /**
      * Sets all 3 components to specified values.
      *
      * @param x the desired X component
