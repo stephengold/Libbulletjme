@@ -311,7 +311,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Read the flags used in ray tests (native field: m_flags).
+     * Return the flags used in ray tests (native field: m_flags).
      *
      * @return which flags are used
      * @see com.jme3.bullet.RayTestFlag
