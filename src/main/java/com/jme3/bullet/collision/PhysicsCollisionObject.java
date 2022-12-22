@@ -269,11 +269,19 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         assert old.hasAssignedNativeObject();
         assert old.nativeId() != nativeId();
 
+        int flags = old.collisionFlags();
+        boolean hasCsd
+                = (flags & CollisionFlag.HAS_CONTACT_STIFFNESS_DAMPING) != 0;
+
         setCcdMotionThreshold(old.getCcdMotionThreshold());
         setCcdSweptSphereRadius(old.getCcdSweptSphereRadius());
-        setContactDamping(old.getContactDamping());
+        if (hasCsd) {
+            setContactDamping(old.getContactDamping());
+        }
         setContactProcessingThreshold(old.getContactProcessingThreshold());
-        setContactStiffness(old.getContactStiffness());
+        if (hasCsd) {
+            setContactStiffness(old.getContactStiffness());
+        }
         setDeactivationTime(old.getDeactivationTime());
         setFriction(old.getFriction());
         setRestitution(old.getRestitution());
