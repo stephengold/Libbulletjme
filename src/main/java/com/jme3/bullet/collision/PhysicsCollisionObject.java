@@ -1253,6 +1253,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     @Override
     public String toString() {
         String result = getClass().getSimpleName();
+        result = result.replace("Body", "");
         result = result.replace("Physics", "");
         result = result.replace("Object", "");
         long objectId = nativeId();
