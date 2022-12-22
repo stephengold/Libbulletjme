@@ -192,12 +192,14 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatedOriginA(com.jme3.math.Vector3f)" class="member-name-link">calculatedOriginA</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate the pivot location of the A end.</div>
+<div class="block">Calculate the pivot location of the A end (native field:
+ m_calculatedTransformA.m_origin).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculatedOriginB(com.jme3.math.Vector3f)" class="member-name-link">calculatedOriginB</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate the pivot location of the B end.</div>
+<div class="block">Calculate the pivot location of the B end (native field:
+ m_calculatedTransformB.m_origin).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkRotationOrder()" class="member-name-link">checkRotationOrder</a>()</code></div>
@@ -219,24 +221,28 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAngles(com.jme3.math.Vector3f)" class="member-name-link">getAngles</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate the constraint's rotation angles.</div>
+<div class="block">Calculate the constraint's rotation angles (native field:
+ m_calculatedAxisAngleDiff).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAxis(int,com.jme3.math.Vector3f)" class="member-name-link">getAxis</a><wbr>(int&nbsp;axisIndex,
  <a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate the indexed axis of the Constraint.</div>
+<div class="block">Calculate the indexed axis of the Constraint (native field:
+ m_calculatedAxis).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Transform.html" title="class in com.jme3.math">Transform</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFrameTransform(com.jme3.bullet.joints.JointEnd,com.jme3.math.Transform)" class="member-name-link">getFrameTransform</a><wbr>(<a href="JointEnd.html" title="enum class in com.jme3.bullet.joints">JointEnd</a>&nbsp;end,
  <a href="../../math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy the constraint's frame transform relative to the specified end.</div>
+<div class="block">Copy the constraint's frame transform relative to the specified end
+ (native fields: m_frameInA, m_frameInB).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPivotOffset(com.jme3.math.Vector3f)" class="member-name-link">getPivotOffset</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copy the constraint's pivot offset.</div>
+<div class="block">Copy the constraint's pivot offset (native field:
+ m_calculatedLinearDiff).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="motors/RotationMotor.html" title="class in com.jme3.bullet.joints.motors">RotationMotor</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRotationMotor(int)" class="member-name-link">getRotationMotor</a><wbr>(int&nbsp;axisIndex)</code></div>
@@ -247,7 +253,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../RotationOrder.html" title="enum class in com.jme3.bullet">RotationOrder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRotationOrder()" class="member-name-link">getRotationOrder</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Read the order in which axis rotations are applied.</div>
+<div class="block">Return the order in which axis rotations are applied (native field:
+ m_rotateOrder).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="motors/TranslationMotor.html" title="class in com.jme3.bullet.joints.motors">TranslationMotor</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTranslationMotor()" class="member-name-link">getTranslationMotor</a>()</code></div>
@@ -478,7 +485,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="calculatedOriginA(com.jme3.math.Vector3f)">
 <h3>calculatedOriginA</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">calculatedOriginA</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Calculate the pivot location of the A end.</div>
+<div class="block">Calculate the pivot location of the A end (native field:
+ m_calculatedTransformA.m_origin).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -492,7 +500,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="calculatedOriginB(com.jme3.math.Vector3f)">
 <h3>calculatedOriginB</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">calculatedOriginB</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Calculate the pivot location of the B end.</div>
+<div class="block">Calculate the pivot location of the B end (native field:
+ m_calculatedTransformB.m_origin).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -549,7 +558,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getAngles(com.jme3.math.Vector3f)">
 <h3>getAngles</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getAngles</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Calculate the constraint's rotation angles.</div>
+<div class="block">Calculate the constraint's rotation angles (native field:
+ m_calculatedAxisAngleDiff).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -564,7 +574,8 @@ loadScripts(document, 'script');</script>
 <h3>getAxis</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getAxis</span><wbr><span class="parameters">(int&nbsp;axisIndex,
  <a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Calculate the indexed axis of the Constraint.</div>
+<div class="block">Calculate the indexed axis of the Constraint (native field:
+ m_calculatedAxis).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>axisIndex</code> - the axis index of the desired motor: 0&rarr;X, 1&rarr;Y,
@@ -581,7 +592,8 @@ loadScripts(document, 'script');</script>
 <h3>getFrameTransform</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Transform.html" title="class in com.jme3.math">Transform</a></span>&nbsp;<span class="element-name">getFrameTransform</span><wbr><span class="parameters">(<a href="JointEnd.html" title="enum class in com.jme3.bullet.joints">JointEnd</a>&nbsp;end,
  <a href="../../math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;storeResult)</span></div>
-<div class="block">Copy the constraint's frame transform relative to the specified end.</div>
+<div class="block">Copy the constraint's frame transform relative to the specified end
+ (native fields: m_frameInA, m_frameInB).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>end</code> - which end (not null)</dd>
@@ -595,7 +607,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getPivotOffset(com.jme3.math.Vector3f)">
 <h3>getPivotOffset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getPivotOffset</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Copy the constraint's pivot offset.</div>
+<div class="block">Copy the constraint's pivot offset (native field:
+ m_calculatedLinearDiff).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -624,7 +637,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getRotationOrder()">
 <h3>getRotationOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../RotationOrder.html" title="enum class in com.jme3.bullet">RotationOrder</a></span>&nbsp;<span class="element-name">getRotationOrder</span>()</div>
-<div class="block">Read the order in which axis rotations are applied.</div>
+<div class="block">Return the order in which axis rotations are applied (native field:
+ m_rotateOrder).</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>an enum value (not null)</dd>
