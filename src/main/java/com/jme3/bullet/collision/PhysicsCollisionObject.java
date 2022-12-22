@@ -1256,8 +1256,12 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         result = result.replace("Body", "");
         result = result.replace("Physics", "");
         result = result.replace("Object", "");
-        long objectId = nativeId();
-        result += "#" + Long.toHexString(objectId);
+        if (hasAssignedNativeObject()) {
+            long objectId = nativeId();
+            result += "#" + Long.toHexString(objectId);
+        } else {
+            result += "#unassigned";
+        }
 
         return result;
     }
