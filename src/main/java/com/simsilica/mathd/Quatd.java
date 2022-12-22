@@ -195,11 +195,10 @@ public final class Quatd implements Cloneable {
      * @return true if all components are 0 or -0, otherwise false
      */
     public boolean isZero() {
-        if ( x == 0. && y == 0. && z == 0. && w == 0. ) {
+        if( x == 0. && y == 0. && z == 0. && w == 0. )
             return true;
-        } else {
+        else
             return false;
-        }
     }
 
     /**
