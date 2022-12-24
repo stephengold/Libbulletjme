@@ -14,7 +14,7 @@
   + `PhysicsCollisionObject.collisionFlags()`
   + `Vec3d.isFinite()`
 + Reduced the likelihood of hash collisions in `Matrix3d`.
-+ Made the result of `PhysicsCollisionObject.toString() more concise.
++ Made the result of `PhysicsCollisionObject.toString()` more concise.
 
 ## Version 17.3.0 released on 15 December 2022
 
