@@ -1,5 +1,21 @@
 # Release log for the Libbulletjme project
 
+## Version 17.4.0 released on 23 December 2022
+
++ Bugfix: transforms not updated for the `getCalculatedOriginA()` and
+  `getCalculatedOriginB()` methods in the `New6Dof` class
++ Bugfix: `Quatd.isRotationIdentity()` accepts NaNs
++ Bugfix: `toString()` fails for an unassigned `PhysicsCollisionObject`
++ Bugfix: `PhysicsCollisionObject.copyPcoProperties()` results in
+  different collision flags
++ Added 4 new methods:
+  + `New6Dof.calculatedBasisA()`
+  + `New6Dof.calculatedBasisB()`
+  + `PhysicsCollisionObject.collisionFlags()`
+  + `Vec3d.isFinite()`
++ Reduced the likelihood of hash collisions in `Matrix3d`.
++ Made the result of `PhysicsCollisionObject.toString() more concise.
+
 ## Version 17.3.0 released on 15 December 2022
 
 + Bugfix: `getPhysicsRotationDp()` returns wrong rotation for a soft body
