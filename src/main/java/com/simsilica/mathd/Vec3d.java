@@ -46,7 +46,7 @@ import com.jme3.math.Vector3f;
  * Methods with names ending in "Local" modify the current instance. They are
  * used to avoid creating temporary vectors.
  * <p>
- * The conventional ordering of components is (X, Y, Z).
+ * The conventional order of components is (X, Y, Z).
  *
  *  @version   $Revision: 3951 $
  *  @author    Paul Speed

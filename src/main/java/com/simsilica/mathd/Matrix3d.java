@@ -38,8 +38,14 @@ package com.simsilica.mathd;
 
 
 /**
- * A matrix composed of 9 double-precision elements, used to represent
- * rotations in 3-dimensional space.
+ * A square matrix composed of 9 double-precision elements, used to represent
+ * linear transformations of 3-dimensional vectors.
+ * <p>
+ * Methods with names ending in "Local" modify the current instance. They are
+ * used to avoid creating temporary objects.
+ * <p>
+ * By convention, indices start from zero. The conventional order of indices is
+ * (row, column).
  *
  *  @author    Paul Speed
  */
