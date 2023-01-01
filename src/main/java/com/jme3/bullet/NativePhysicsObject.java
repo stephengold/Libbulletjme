@@ -203,8 +203,7 @@ abstract public class NativePhysicsObject
 
     /**
      * Unassign (but don't free) the assigned native object, assuming that one
-     * is assigned. Typically invoked while cloning a subclass, followed by
-     * setNativeId().
+     * is assigned.
      */
     final protected void unassignNativeObject() {
         assert hasAssignedNativeObject();
