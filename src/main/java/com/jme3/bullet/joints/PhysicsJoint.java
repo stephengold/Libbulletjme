@@ -260,8 +260,12 @@ abstract public class PhysicsJoint extends NativePhysicsObject {
         result = result.replace("Physics", "");
         result = result.replace("Point", "P");
         result = result.replace("Six", "6");
-        long jointId = nativeId();
-        result += "#" + Long.toHexString(jointId);
+        if (hasAssignedNativeObject()) {
+            long jointId = nativeId();
+            result += "#" + Long.toHexString(jointId);
+        } else {
+            result += "#unassigned";
+        }
 
         return result;
     }
