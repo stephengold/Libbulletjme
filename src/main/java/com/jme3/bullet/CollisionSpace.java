@@ -73,8 +73,7 @@ public class CollisionSpace extends NativePhysicsObject {
     /**
      * type of acceleration data structure
      */
-    private PhysicsSpace.BroadphaseType broadphaseType
-            = PhysicsSpace.BroadphaseType.DBVT;
+    final private PhysicsSpace.BroadphaseType broadphaseType;
     /**
      * comparator for raytest results
      */
