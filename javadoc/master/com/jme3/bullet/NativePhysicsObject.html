@@ -120,7 +120,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">NativePhysicsObject</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">A no-arg constructor to avoid javadoc warnings from JDK 18.</div>
+<div class="block">Instantiate with no tracker and no assigned native object.</div>
 </div>
 </div>
 </section>
@@ -241,7 +241,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;()">
 <h3>NativePhysicsObject</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">NativePhysicsObject</span>()</div>
-<div class="block">A no-arg constructor to avoid javadoc warnings from JDK 18.</div>
+<div class="block">Instantiate with no tracker and no assigned native object.</div>
 </section>
 </li>
 </ul>
@@ -256,7 +256,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="countTrackers()">
 <h3>countTrackers</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">countTrackers</span>()</div>
-<div class="block">Count how many native objects are being tracked.</div>
+<div class="block">Count how many native objects are being tracked. This method is intended
+ for debugging.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the count (&ge;0)</dd>
@@ -267,7 +268,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="dumpTrackers()">
 <h3>dumpTrackers</h3>
 <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">dumpTrackers</span>()</div>
-<div class="block">Dump all native-object trackers to <code>System.out</code>.</div>
+<div class="block">Dump all native-object trackers to <code>System.out</code>. This method is
+ intended for debugging.</div>
 </section>
 </li>
 <li>
