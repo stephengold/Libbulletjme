@@ -74,9 +74,9 @@ abstract public class PhysicsJoint extends NativePhysicsObject {
     // constructors
 
     /**
-     * A no-argument constructor to avoid javadoc warnings from JDK 18.
+     * Instantiate a PhysicsJoint.
      */
-    protected PhysicsJoint() {
+    protected PhysicsJoint() { // to avoid a warning from JDK 18 javadoc
     }
     // *************************************************************************
     // new methods exposed

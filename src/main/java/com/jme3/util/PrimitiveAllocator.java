@@ -40,10 +40,9 @@ import java.nio.ByteOrder;
  */
 public final class PrimitiveAllocator implements BufferAllocator {
     /**
-     * A no-argument constructor to avoid javadoc warnings from JDK 18.
+     * Instantiate an allocator.
      */
-    public PrimitiveAllocator() {
-        // do nothing
+    public PrimitiveAllocator() { // to avoid a warning from JDK 18 javadoc
     }
 
     /**

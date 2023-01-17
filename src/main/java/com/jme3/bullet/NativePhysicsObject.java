@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,16 +75,16 @@ abstract public class NativePhysicsObject
     // constructors
 
     /**
-     * A no-arg constructor to avoid javadoc warnings from JDK 18.
+     * Instantiate with no tracker and no assigned native object.
      */
-    protected NativePhysicsObject() {
-        // do nothing
+    protected NativePhysicsObject() { // to avoid a warning from JDK 18 javadoc
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Count how many native objects are being tracked.
+     * Count how many native objects are being tracked. This method is intended
+     * for debugging.
      *
      * @return the count (&ge;0)
      */
@@ -94,7 +94,8 @@ abstract public class NativePhysicsObject
     }
 
     /**
-     * Dump all native-object trackers to {@code System.out}.
+     * Dump all native-object trackers to {@code System.out}. This method is
+     * intended for debugging.
      */
     final public static void dumpTrackers() {
         System.out.println("Active trackers:");

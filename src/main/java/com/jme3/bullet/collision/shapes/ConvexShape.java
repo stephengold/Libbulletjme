@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,10 +56,10 @@ abstract public class ConvexShape extends CollisionShape {
     // constructors
 
     /**
-     * A no-arg constructor to avoid javadoc warnings from JDK 18.
+     * Instantiate a collision shape with no tracker and no assigned native
+     * object.
      */
-    protected ConvexShape() {
-        // do nothing
+    protected ConvexShape() { // explicit to avoid a warning from JDK 18 javadoc
     }
     // *************************************************************************
     // new methods exposed
