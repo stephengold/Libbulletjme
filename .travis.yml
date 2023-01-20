@@ -9,12 +9,12 @@ os: linux
 jobs:
   include:
 
-    # MacOSX32 and MacOSX64 (job .1):
+    # MacOSX32 (job .1):
     - os: osx
       osx_image: xcode9.4.1
       script:
         - date
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx
+        - ./gradlew build --console=plain --no-daemon -Ptravis=osx32
 
     # Linux32 and Linux64 non-multithreaded (job .2):
     - env:
@@ -133,6 +133,13 @@ jobs:
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - echo y | sdkmanager "patcher;v4" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
+        
+    # MacOSX64 and MacOSX_ARM64 (job .11):
+    - os: osx
+      osx_image: xcode14.2
+      script:
+        - date
+        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
 
 
 addons:
@@ -195,6 +202,10 @@ deploy:
     - dist/MacOSX64DebugSp_libbulletjme.dylib
     - dist/MacOSX64ReleaseDp_libbulletjme.dylib
     - dist/MacOSX64ReleaseSp_libbulletjme.dylib
+    - dist/MacOSX_ARM64DebugDp_libbulletjme.dylib
+    - dist/MacOSX_ARM64DebugSp_libbulletjme.dylib
+    - dist/MacOSX_ARM64ReleaseDp_libbulletjme.dylib
+    - dist/MacOSX_ARM64ReleaseSp_libbulletjme.dylib
   on:
     repo: stephengold/Libbulletjme
     tags: true   # deploy on tag push only

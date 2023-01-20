@@ -164,8 +164,10 @@ model {
                         buildable = (pName == 'Linux_ARM32hf')
                     } else if (travis == 'arm64') {
                         buildable = (pName == 'Linux_ARM64')
-                    } else if (travis == 'osx') { // using xcode9.3 for its 32-bit support
-                        buildable = pName.startsWith('MacOSX') && !pName.contains('_ARM')
+                    } else if (travis == 'osx32') { // use xcode9.4.1 for 32-bit support
+                        buildable = (pName == 'MacOSX32')
+                    } else if (travis == 'osx64') { // use xcode14.2 for ARM support
+                        buildable = pName.startsWith('MacOSX') && pName.contains('64')
                     }
                 } else {
                     // non-CI build (neither -Pgithub= nor -Ptravis= specified)
@@ -187,8 +189,8 @@ model {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
                         buildable = (os != 'osx') && pName.contains('64')
                     }
-                    //if (isDp) buildable = false // to skip all double-precision flavors
-                    //if (isMt) buildable = false // to skip all multithreaded flavors
+                    if (isDp) buildable = false // to skip all double-precision flavors
+                    if (isMt) buildable = false // to skip all multithreaded flavors
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
