@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2022, Stephen Gold
+ Copyright (c) 2013-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -266,9 +266,9 @@ final public class MyMath {
      */
     public static boolean isIdentity(Transform transform) {
         boolean result = false;
-        Vector3f translation = transform.getTranslation();
+        Vector3f translation = transform.getTranslation(); // alias
         if (MyVector3f.isZero(translation)) {
-            Quaternion rotation = transform.getRotation();
+            Quaternion rotation = transform.getRotation(); // alias
             if (MyQuaternion.isRotationIdentity(rotation)) {
                 Vector3f scale = transform.getScale();
                 result = MyVector3f.isScaleIdentity(scale);
