@@ -14,7 +14,7 @@ jobs:
       osx_image: xcode9.4.1
       script:
         - date
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx32
+        - ./gradlew assemble --console=plain --no-daemon -Ptravis=osx32
 
     # Linux32 and Linux64 non-multithreaded (job .2):
     - env:
