@@ -91,6 +91,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
     if (!success) {
         jclass newExc = pEnv->FindClass("java/lang/RuntimeException");
         pEnv->ThrowNew(newExc, "Unable to serialize, native error reported");
+        return 0;
     }
 
     jbyteArray byteArray = pEnv->NewByteArray(ssize);

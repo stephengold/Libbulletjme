@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -95,6 +95,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_infos_Boundin
     if (!success) {
         jclass newExc = pEnv->FindClass("java/lang/RuntimeException");
         pEnv->ThrowNew(newExc, "Unable to serialize, native error reported");
+        return 0;
     }
 
     jbyteArray byteArray = pEnv->NewByteArray(bufferSize);

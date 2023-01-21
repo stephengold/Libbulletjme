@@ -486,6 +486,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setSolverType
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The solver type is out of range.");
+            return;
     }
 
     btConstraintSolver *pOldSolver = pWorld->getConstraintSolver();

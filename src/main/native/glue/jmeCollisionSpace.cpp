@@ -131,6 +131,7 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The broadphase type is out of range.");
+            return 0;
     }
 
     btOverlappingPairCache * const

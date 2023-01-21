@@ -288,6 +288,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
         default:
             pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The solver type is out of range.");
+            return;
     }
 
     pWorld->setMultiBodyConstraintSolver(pConstraintSolver);
