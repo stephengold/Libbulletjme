@@ -40,6 +40,12 @@
 
 #define LIBBULLETJME_VERSION "17.4.0"
 
+#define EXCEPTION_CHK(pEnv, retval) \
+    if (pEnv->ExceptionCheck()) { \
+        (pEnv)->Throw(pEnv->ExceptionOccurred()); \
+        return retval; \
+    }
+
 #ifdef _DEBUG
 #define NULL_CHK(pEnv, pointer, message, retval) \
     if ((pointer) == NULL) { \

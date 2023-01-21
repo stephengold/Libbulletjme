@@ -109,17 +109,11 @@ struct JmeContactResultCallback
         jobject const eventObject = m_pEnv->NewObject(
                 jmeClasses::PhysicsCollisionEvent_Class,
                 jmeClasses::PhysicsCollisionEvent_init, pcoA, pcoB, manifoldId);
-        if (m_pEnv->ExceptionCheck()) {
-            m_pEnv->Throw(m_pEnv->ExceptionOccurred());
-            return (btScalar) 1;
-        }
+        EXCEPTION_CHK(m_pEnv, btScalar(1));
 
         m_pEnv->CallVoidMethod(m_listener,
                 jmeClasses::PhysicsCollisionListener_method, eventObject);
-        if (m_pEnv->ExceptionCheck()) {
-            m_pEnv->Throw(m_pEnv->ExceptionOccurred());
-            return (btScalar) 1;
-        }
+        EXCEPTION_CHK(m_pEnv, btScalar(1));
 
         return (btScalar) 1;
     }

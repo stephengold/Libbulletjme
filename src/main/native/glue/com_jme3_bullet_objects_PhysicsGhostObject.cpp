@@ -69,10 +69,7 @@ public:
                 jmeClasses::PhysicsGhostObject_addOverlappingObject,
                 javaCollisionObject1);
         m_env->DeleteLocalRef(javaCollisionObject1);
-        if (m_env->ExceptionCheck()) {
-            m_env->Throw(m_env->ExceptionOccurred());
-            return false;
-        }
+        EXCEPTION_CHK(m_env, false);
 
         return false;
     }

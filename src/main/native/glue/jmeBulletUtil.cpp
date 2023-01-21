@@ -45,20 +45,11 @@ void jmeBulletUtil::convert(
     NULL_CHK(pEnv, pvOut, "The output btVector3 does not exist.",);
 
     float x = pEnv->GetFloatField(inVector3f, jmeClasses::Vector3f_x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float y = pEnv->GetFloatField(inVector3f, jmeClasses::Vector3f_y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float z = pEnv->GetFloatField(inVector3f, jmeClasses::Vector3f_z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pvOut->setValue(x, y, z);
 }
@@ -72,25 +63,13 @@ void jmeBulletUtil::convertDp(
     NULL_CHK(pEnv, jmeClasses::Quatd_x, "The SimMath library is missing.",);
 
     double x = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double y = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double z = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double w = pEnv->GetDoubleField(inQuatd, jmeClasses::Quatd_w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pqOut->setValue(x, y, z, w);
 }
@@ -103,20 +82,11 @@ void jmeBulletUtil::convertDp(JNIEnv *pEnv, jobject inVec3d, btVector3 *pvOut) {
     NULL_CHK(pEnv, jmeClasses::Vec3d_x, "The SimMath library is missing.",);
 
     double x = pEnv->GetDoubleField(inVec3d, jmeClasses::Vec3d_x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double y = pEnv->GetDoubleField(inVec3d, jmeClasses::Vec3d_y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double z = pEnv->GetDoubleField(inVec3d, jmeClasses::Vec3d_z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pvOut->setValue(x, y, z);
 }
@@ -129,25 +99,13 @@ void jmeBulletUtil::convert(
     NULL_CHK(pEnv, pqOut, "The output btQuaternion does not exist.",);
 
     float x = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_x);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float y = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_y);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float z = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float w = pEnv->GetFloatField(inQuaternion, jmeClasses::Quaternion_w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pqOut->setValue(x, y, z, w);
 }
@@ -163,11 +121,8 @@ void jmeBulletUtil::convert(
     float y = pvIn->getY();
     float z = pvIn->getZ();
 
-    pEnv->CallObjectMethod(
-            outVector3f, jmeClasses::Vector3f_set, x, y, z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-    }
+    pEnv->CallObjectMethod(outVector3f, jmeClasses::Vector3f_set, x, y, z);
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btQuaternion data to a SimMath Quatd object.
@@ -184,9 +139,7 @@ void jmeBulletUtil::convertDp(
     double w = pqIn->getW();
 
     pEnv->CallObjectMethod(outQuatd, jmeClasses::Quatd_set, x, y, z, w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btVector3 data to a SimMath Vec3d object.
@@ -202,9 +155,7 @@ void jmeBulletUtil::convertDp(
     double z = pvIn->getZ();
 
     pEnv->CallObjectMethod(outVec3d, jmeClasses::Vec3d_set, x, y, z);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btQuaternion data to a JMonkeyEngine Quaternion object.
@@ -221,9 +172,7 @@ void jmeBulletUtil::convert(
 
     pEnv->CallObjectMethod(
             outQuaternion, jmeClasses::Quaternion_set, x, y, z, w);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btTransform data to a JMonkeyEngine Transform object.
@@ -246,20 +195,11 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
     jobject scale_out
             = pEnv->CallObjectMethod(outTransform, jmeClasses::Transform_scale);
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_x, 1);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_y, 1);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_z, 1);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy JMonkeyEngine Matrix3f data to a Bullet btMatrix3x3 object.
@@ -270,50 +210,23 @@ void jmeBulletUtil::convert(
     NULL_CHK(pEnv, pmOut, "The output btMatrix3x3 does not exist.",);
 
     float m00 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m00);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m01 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m01);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m02 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m02);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m10 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m10);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m11 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m11);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m12 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m12);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m20 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m20);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m21 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m21);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     float m22 = pEnv->GetFloatField(inMatrix3f, jmeClasses::Matrix3f_m22);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pmOut->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 }
@@ -336,50 +249,23 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
     float m22 = pmIn->getRow(2).m_floats[2];
 
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m00, m00);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m01, m01);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m02, m02);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m10, m10);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m11, m11);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m12, m12);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m20, m20);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m21, m21);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m22, m22);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btMatrix3x3 data to a SimMath Matrix3d object.
@@ -402,50 +288,23 @@ void jmeBulletUtil::convertDp(
     double m22 = pmIn->getRow(2).m_floats[2];
 
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m00, m00);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m01, m01);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m02, m02);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m10, m10);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m11, m11);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m12, m12);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m20, m20);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m21, m21);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m22, m22);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Convert a JMonkeyEngine Quaternion to a Bullet rotation matrix.
@@ -470,50 +329,23 @@ void jmeBulletUtil::convertDp(
             "The SimMath library is missing.",);
 
     double m00 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m00);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m01 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m01);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m02 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m02);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m10 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m10);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m11 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m11);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m12 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m12);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m20 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m20);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m21 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m21);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     double m22 = pEnv->GetDoubleField(inMatrix3d, jmeClasses::Matrix3d_m22);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pmOut->setValue(m00, m01, m02, m10, m11, m12, m20, m21, m22);
 }
@@ -566,39 +398,21 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
     jmeUserPointer const pUser = (jmeUserPointer) pHitObject->getUserPointer();
 
     pEnv->SetObjectField(result, jmeClasses::PhysicsRay_normal, normalvec);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(
             result, jmeClasses::PhysicsRay_hitFraction, hitFraction);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetIntField(result, jmeClasses::PhysicsRay_partIndex, partIndex);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetIntField(
             result, jmeClasses::PhysicsRay_triangleIndex, triangleIndex);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetObjectField(result, jmeClasses::PhysicsRay_collisionObject,
             pUser->m_javaRef);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Add a sweep-test result to a list.
@@ -613,39 +427,21 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
     jmeUserPointer pUser = (jmeUserPointer) pHitObject->getUserPointer();
 
     pEnv->SetObjectField(result, jmeClasses::PhysicsSweep_normal, normalvec);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(
             result, jmeClasses::PhysicsSweep_hitFraction, hitFraction);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetIntField(result, jmeClasses::PhysicsSweep_partIndex, partIndex);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetIntField(result, jmeClasses::PhysicsSweep_triangleIndex,
             triangleIndex);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
     pEnv->SetObjectField(result, jmeClasses::PhysicsSweep_collisionObject,
             pUser->m_javaRef);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 // Convert a JMonkeyEngine Transform to a Bullet btTransform and a scale vector.
@@ -658,24 +454,15 @@ void jmeBulletUtil::convert(JNIEnv *pEnv, jobject inTransform,
 
     jobject translation_vec = pEnv->CallObjectMethod(
             inTransform, jmeClasses::Transform_translation);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     jobject rot_quat = pEnv->CallObjectMethod(
             inTransform, jmeClasses::Transform_rotation);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     jobject scale_vec
             = pEnv->CallObjectMethod(inTransform, jmeClasses::Transform_scale);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     btVector3 native_translation_vec;
     convert(pEnv, translation_vec, &native_translation_vec);

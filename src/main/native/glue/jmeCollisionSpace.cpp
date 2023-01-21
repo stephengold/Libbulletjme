@@ -87,10 +87,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     pEnv->DeleteLocalRef(javaPhysicsSpace);
     pEnv->DeleteLocalRef(javaCollisionObject0);
     pEnv->DeleteLocalRef(javaCollisionObject1);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return false;
-    }
+    EXCEPTION_CHK(pEnv, false);
 
     return (bool) result;
 }
@@ -99,16 +96,10 @@ jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
     this->pEnv = pEnv;
 
     m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 
     pEnv->GetJavaVM(&vm);
-    if (pEnv->ExceptionCheck()) {
-        pEnv->Throw(pEnv->ExceptionOccurred());
-        return;
-    }
+    EXCEPTION_CHK(pEnv,);
 }
 
 void jmeCollisionSpace::attachThread() {
