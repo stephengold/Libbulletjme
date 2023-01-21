@@ -42,7 +42,6 @@
 
 #define EXCEPTION_CHK(pEnv, retval) \
     if (pEnv->ExceptionCheck()) { \
-        (pEnv)->Throw(pEnv->ExceptionOccurred()); \
         return retval; \
     }
 
