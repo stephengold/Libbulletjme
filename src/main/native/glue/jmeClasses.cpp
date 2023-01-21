@@ -245,7 +245,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V");
     EXCEPTION_CHK(pEnv,);
 
-    jclass vec3d = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/simsilica/mathd/Vec3d"));
+    jclass vec3d = pEnv->FindClass("com/simsilica/mathd/Vec3d");
     if (pEnv->ExceptionCheck()) {
         pEnv->ExceptionClear();
 
