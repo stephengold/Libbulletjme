@@ -198,8 +198,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     pEnv->GetJavaVM(&vm);
 
-    IllegalArgumentException = (jclass) pEnv->NewGlobalRef(pEnv->FindClass(
-            "java/lang/IllegalArgumentException"));
+    IllegalArgumentException = pEnv->FindClass("java/lang/IllegalArgumentException");
+    IllegalArgumentException = (jclass) pEnv->NewGlobalRef(IllegalArgumentException);
     EXCEPTION_CHK(pEnv,);
 
     jclass List = pEnv->FindClass("java/util/List");
@@ -315,7 +315,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         EXCEPTION_CHK(pEnv,);
     }
 
-    Vector3f = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/math/Vector3f"));
+    Vector3f = pEnv->FindClass("com/jme3/math/Vector3f");
+    Vector3f = (jclass) pEnv->NewGlobalRef(Vector3f);
     EXCEPTION_CHK(pEnv,);
     Vector3f_x = pEnv->GetFieldID(Vector3f, "x", "F");
     EXCEPTION_CHK(pEnv,);
@@ -360,8 +361,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     Matrix3f_m22 = pEnv->GetFieldID(Matrix3f, "m22", "F");
     EXCEPTION_CHK(pEnv,);
 
-    NullPointerException = (jclass) pEnv->NewGlobalRef(pEnv->FindClass(
-            "java/lang/NullPointerException"));
+    NullPointerException = pEnv->FindClass("java/lang/NullPointerException");
+    NullPointerException = (jclass) pEnv->NewGlobalRef(NullPointerException);
     EXCEPTION_CHK(pEnv,);
 
     jclass DebugMeshCallback
@@ -391,7 +392,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             "(Lcom/jme3/bullet/collision/PhysicsCollisionEvent;)V");
     EXCEPTION_CHK(pEnv,);
 
-    PhysicsRay_Class = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/collision/PhysicsRayTestResult"));
+    PhysicsRay_Class = pEnv->FindClass("com/jme3/bullet/collision/PhysicsRayTestResult");
+    PhysicsRay_Class = (jclass) pEnv->NewGlobalRef(PhysicsRay_Class);
     EXCEPTION_CHK(pEnv,);
 
     PhysicsRay_collisionObject = pEnv->GetFieldID(PhysicsRay_Class,
@@ -410,7 +412,9 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             = pEnv->GetFieldID(PhysicsRay_Class, "triangleIndex", "I");
     EXCEPTION_CHK(pEnv,);
 
-    PhysicsSweep_Class = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("com/jme3/bullet/collision/PhysicsSweepTestResult"));
+    PhysicsSweep_Class = pEnv->FindClass(
+            "com/jme3/bullet/collision/PhysicsSweepTestResult");
+    PhysicsSweep_Class = (jclass) pEnv->NewGlobalRef(PhysicsSweep_Class);
     EXCEPTION_CHK(pEnv,);
 
     PhysicsSweep_collisionObject = pEnv->GetFieldID(PhysicsSweep_Class,
@@ -445,7 +449,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             Transform, "getScale", "()Lcom/jme3/math/Vector3f;");
     EXCEPTION_CHK(pEnv,);
 
-    Vhacd4 = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("vhacd4/Vhacd4"));
+    Vhacd4 = pEnv->FindClass("vhacd4/Vhacd4");
+    Vhacd4 = (jclass) pEnv->NewGlobalRef(Vhacd4);
     EXCEPTION_CHK(pEnv,);
 
     Vhacd4_addHull = pEnv->GetStaticMethodID(Vhacd4, "addHull", "(J)V");
@@ -455,7 +460,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             "(DDDLjava/lang/String;Ljava/lang/String;)V");
     EXCEPTION_CHK(pEnv,);
 
-    Vhacd = (jclass) pEnv->NewGlobalRef(pEnv->FindClass("vhacd/VHACD"));
+    Vhacd = pEnv->FindClass("vhacd/VHACD");
+    Vhacd = (jclass) pEnv->NewGlobalRef(Vhacd);
     EXCEPTION_CHK(pEnv,);
 
     Vhacd_addHull = pEnv->GetStaticMethodID(Vhacd, "addHull", "(J)V");
