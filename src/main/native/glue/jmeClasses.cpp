@@ -42,6 +42,7 @@
 JavaVM * jmeClasses::vm;
 
 jclass jmeClasses::IllegalArgumentException;
+jclass jmeClasses::RuntimeException;
 
 jmethodID jmeClasses::List_addMethod;
 
@@ -220,6 +221,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     GLOBAL_CLASS(IllegalArgumentException,
             "java/lang/IllegalArgumentException");
+    GLOBAL_CLASS(RuntimeException, "java/lang/RuntimeException");
 
     jclass list = pEnv->FindClass("java/util/List");
     EXCEPTION_CHK(pEnv,);

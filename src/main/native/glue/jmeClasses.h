@@ -60,6 +60,7 @@ public:
     static void initJavaClasses(JNIEnv *);
 
     static jclass IllegalArgumentException;
+    static jclass RuntimeException;
 
     static jmethodID List_addMethod;
 
