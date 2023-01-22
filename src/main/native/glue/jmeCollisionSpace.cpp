@@ -101,7 +101,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
 jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
     this->pEnv = pEnv;
 
-    m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace); //dance040
+    m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace);
     EXCEPTION_CHK(pEnv,);
 
     pEnv->GetJavaVM(&vm);
@@ -219,5 +219,4 @@ jmeCollisionSpace::~jmeCollisionSpace() {
     }
 
     delete m_collisionWorld; //dance007
-    pEnv->DeleteWeakGlobalRef(m_javaSpace); //dance040
 }
