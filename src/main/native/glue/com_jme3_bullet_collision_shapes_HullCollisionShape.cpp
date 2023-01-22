@@ -73,6 +73,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape
 
     NULL_CHK(pEnv, buffer, "The buffer does not exist.", 0);
     const jlong numFloats = pEnv->GetDirectBufferCapacity(buffer);
+    EXCEPTION_CHK(pEnv, 0);
     if (numFloats < 3 * n) {
         pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                 "The buffer is too small.");
@@ -81,6 +82,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape
     const jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
     NULL_CHK(pEnv, pBuffer, "The buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     btConvexHullShape * const pShape = new btConvexHullShape(); //dance016
 
@@ -110,6 +112,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
 
     NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
     const jlong floatsCapacity = pEnv->GetDirectBufferCapacity(storeBuffer);
+    EXCEPTION_CHK(pEnv,);
     int numVerts = pShape->getNumPoints();
     jlong floatsNeeded = 3 * (jlong) numVerts;
     if (floatsNeeded > floatsCapacity) {
@@ -119,6 +122,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
     }
     jfloat *pWrite = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pWrite, "The store buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const btVector3 *pVertices = pShape->getUnscaledPoints();
     for (int i = 0; i < numVerts; ++i) {

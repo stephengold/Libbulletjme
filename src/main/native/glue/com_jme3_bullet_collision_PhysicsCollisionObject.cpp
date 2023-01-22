@@ -707,6 +707,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_ini
 
     pUser = new jmeUserInfo(); //dance013
     pUser->m_javaRef = pEnv->NewWeakGlobalRef(object);
+    EXCEPTION_CHK(pEnv,);
     pUser->m_group = group;
     pUser->m_groups = groups;
     pUser->m_jmeSpace = NULL;

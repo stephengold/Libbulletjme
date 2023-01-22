@@ -199,6 +199,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     pEnv->GetJavaVM(&vm);
 
     IllegalArgumentException = pEnv->FindClass("java/lang/IllegalArgumentException");
+    EXCEPTION_CHK(pEnv,);
     IllegalArgumentException = (jclass) pEnv->NewGlobalRef(IllegalArgumentException);
     EXCEPTION_CHK(pEnv,);
 
@@ -319,6 +320,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     }
 
     Vector3f = pEnv->FindClass("com/jme3/math/Vector3f");
+    EXCEPTION_CHK(pEnv,);
     Vector3f = (jclass) pEnv->NewGlobalRef(Vector3f);
     EXCEPTION_CHK(pEnv,);
     Vector3f_x = pEnv->GetFieldID(Vector3f, "x", "F");
@@ -365,6 +367,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     EXCEPTION_CHK(pEnv,);
 
     NullPointerException = pEnv->FindClass("java/lang/NullPointerException");
+    EXCEPTION_CHK(pEnv,);
     NullPointerException = (jclass) pEnv->NewGlobalRef(NullPointerException);
     EXCEPTION_CHK(pEnv,);
 
@@ -453,6 +456,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     EXCEPTION_CHK(pEnv,);
 
     Vhacd4 = pEnv->FindClass("vhacd4/Vhacd4");
+    EXCEPTION_CHK(pEnv,);
     Vhacd4 = (jclass) pEnv->NewGlobalRef(Vhacd4);
     EXCEPTION_CHK(pEnv,);
 
@@ -464,6 +468,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     EXCEPTION_CHK(pEnv,);
 
     Vhacd = pEnv->FindClass("vhacd/VHACD");
+    EXCEPTION_CHK(pEnv,);
     Vhacd = (jclass) pEnv->NewGlobalRef(Vhacd);
     EXCEPTION_CHK(pEnv,);
 

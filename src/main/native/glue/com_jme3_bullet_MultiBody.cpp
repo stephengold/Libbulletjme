@@ -136,6 +136,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
 
     jmeUserPointer const pUser = new jmeUserInfo(); //dance005
     pUser->m_javaRef = pEnv->NewWeakGlobalRef(object);
+    EXCEPTION_CHK(pEnv, 0);
     pUser->m_group = 0x1;
     pUser->m_groups = 0x1;
     pUser->m_jmeSpace = NULL;

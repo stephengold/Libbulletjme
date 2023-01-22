@@ -50,18 +50,21 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
     btVector3 * const pCenters = new btVector3[n]; //dance017
     for (int i = 0; i < n; ++i) {
         jobject center = pEnv->GetObjectArrayElement(centers, i);
+        EXCEPTION_CHK(pEnv, 0);
         jmeBulletUtil::convert(pEnv, center, &pCenters[i]);
     }
 
     btScalar *pRadii;
 #ifdef BT_USE_DOUBLE_PRECISION
     float * const pFloats = pEnv->GetFloatArrayElements(radii, 0);
+    EXCEPTION_CHK(pEnv, 0);
     pRadii = new btScalar[n]; //dance018
     for (int i = 0; i < n; ++i) {
         pRadii[i] = pFloats[i];
     }
 #else
     pRadii = pEnv->GetFloatArrayElements(radii, 0);
+    EXCEPTION_CHK(pEnv, 0);
 #endif
 
     btMultiSphereShape * const
@@ -73,6 +76,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
 #else
     pEnv->ReleaseFloatArrayElements(radii, pRadii, 0);
 #endif
+    EXCEPTION_CHK(pEnv, 0);
     delete[] pCenters; //dance017
 
     return reinterpret_cast<jlong> (pShape);

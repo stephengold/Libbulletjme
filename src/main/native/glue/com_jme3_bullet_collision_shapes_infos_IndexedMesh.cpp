@@ -51,11 +51,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     const unsigned char * const pIndices
             = (unsigned char *) pEnv->GetDirectBufferAddress(byteBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_UCHAR;
@@ -85,11 +87,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     const unsigned char * const pIndices
             = (unsigned char *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_INTEGER;
@@ -119,11 +123,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     const unsigned char * const pIndices
             = (unsigned char *) pEnv->GetDirectBufferAddress(shortBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
+    EXCEPTION_CHK(pEnv, 0);
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_SHORT;

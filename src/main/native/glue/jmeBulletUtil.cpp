@@ -392,7 +392,9 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
         const btVector3 *pHitNormal, btScalar hitFraction,
         const btCollisionObject *pHitObject, int partIndex, int triangleIndex) {
     jobject result = pEnv->AllocObject(jmeClasses::PhysicsRay_Class);
+    EXCEPTION_CHK(pEnv,);
     jobject normalvec = pEnv->AllocObject(jmeClasses::Vector3f);
+    EXCEPTION_CHK(pEnv,);
 
     convert(pEnv, pHitNormal, normalvec);
     jmeUserPointer const pUser = (jmeUserPointer) pHitObject->getUserPointer();
@@ -421,7 +423,9 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
         const btVector3 *pHitNormal, btScalar hitFraction,
         const btCollisionObject *pHitObject, int partIndex, int triangleIndex) {
     jobject result = pEnv->AllocObject(jmeClasses::PhysicsSweep_Class);
+    EXCEPTION_CHK(pEnv,);
     jobject normalvec = pEnv->AllocObject(jmeClasses::Vector3f);
+    EXCEPTION_CHK(pEnv,);
 
     convert(pEnv, pHitNormal, normalvec);
     jmeUserPointer pUser = (jmeUserPointer) pHitObject->getUserPointer();

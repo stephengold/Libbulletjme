@@ -65,9 +65,11 @@ public:
         }
         jmeUserPointer const pUser = (jmeUserInfo *) pOther->getUserPointer();
         jobject javaCollisionObject1 = m_env->NewLocalRef(pUser->m_javaRef);
+        EXCEPTION_CHK(m_env, false);
         m_env->CallVoidMethod(m_object,
                 jmeClasses::PhysicsGhostObject_addOverlappingObject,
                 javaCollisionObject1);
+        EXCEPTION_CHK(m_env, false);
         m_env->DeleteLocalRef(javaCollisionObject1);
         EXCEPTION_CHK(m_env, false);
 

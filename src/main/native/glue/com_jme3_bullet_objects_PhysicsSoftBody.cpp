@@ -135,6 +135,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendCluste
     const jint * const pBuffer
             = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     int newClusterIndex = pBody->clusterCount();
     pBody->m_clusters.resize(newClusterIndex + 1);
@@ -168,6 +169,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces_
     const jbyte * const pBuffer
             = (jbyte *) pEnv->GetDirectBufferAddress(byteBuffer);
     NULL_CHK(pEnv, pBuffer, "The ByteBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 3 * numFaces;) {
         int ni1 = pBuffer[i++];
@@ -201,6 +203,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces_
     const jshort * const pBuffer
             = (jshort *) pEnv->GetDirectBufferAddress(shortBuffer);
     NULL_CHK(pEnv, pBuffer, "The ShortBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 3 * numFaces;) {
         int ni1 = 0xFFFF & pBuffer[i++];
@@ -234,6 +237,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendFaces_
     const jint * const pBuffer
             = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 3 * numFaces;) {
         int ni1 = pBuffer[i++];
@@ -267,6 +271,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks_
     const jbyte * const pBuffer
             = (jbyte *) pEnv->GetDirectBufferAddress(byteBuffer);
     NULL_CHK(pEnv, pBuffer, "The ByteBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 2 * numLinks;) {
         int ni1 = pBuffer[i++];
@@ -296,6 +301,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks_
     const jshort * const pBuffer
             = (jshort *) pEnv->GetDirectBufferAddress(shortBuffer);
     NULL_CHK(pEnv, pBuffer, "The ShortBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 2 * numLinks;) {
         int ni1 = 0xFFFF & pBuffer[i++];
@@ -325,6 +331,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendLinks_
     const jint * const pBuffer
             = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 2 * numLinks;) {
         int ni1 = pBuffer[i++];
@@ -354,6 +361,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendNodes
     const jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pBuffer, "The FloatBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 3 * numNodes;) {
         float x = pBuffer[i++];
@@ -378,6 +386,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras
     const jbyte * const pBuffer
             = (jbyte *) pEnv->GetDirectBufferAddress(byteBuffer);
     NULL_CHK(pEnv, pBuffer, "The ByteBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 4 * numTetras;) {
         int ni1 = pBuffer[i++];
@@ -415,6 +424,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras
     const jshort * const pBuffer
             = (jshort *) pEnv->GetDirectBufferAddress(shortBuffer);
     NULL_CHK(pEnv, pBuffer, "The ShortBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 4 * numTetras;) {
         int ni1 = 0xFFFF & pBuffer[i++];
@@ -452,6 +462,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_appendTetras
     const jint * const pBuffer
             = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     for (int i = 0; i < 4 * numTetras;) {
         int ni1 = pBuffer[i++];
@@ -878,6 +889,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersL
     NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
     jfloat * pBuffer = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pBuffer, "The store buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     int numClusters = pBody->clusterCount();
     for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
@@ -906,6 +918,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersM
     jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pBuffer, "The store buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     int numClusters = pBody->clusterCount();
     for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
@@ -930,6 +943,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getClustersP
     NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
     jfloat * pBuffer = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pBuffer, "The store buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     int numClusters = pBody->clusterCount();
     for (int clusterIndex = 0; clusterIndex < numClusters; ++clusterIndex) {
@@ -956,6 +970,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getFacesInde
     NULL_CHK(pEnv, intBuffer, "The IntBuffer does not exist.",);
     jint * const pBuffer = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const int size = pBody->m_faces.size();
 
@@ -984,6 +999,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getLinksInde
     NULL_CHK(pEnv, intBuffer, "The IntBuffer does not exist.",);
     jint * const pBuffer = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const int size = pBody->m_links.size();
     const btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
@@ -1044,8 +1060,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMasses
     jfloat * const pMasses
             = (jfloat *) pEnv->GetDirectBufferAddress(massBuffer);
     NULL_CHK(pEnv, pMasses, "The mass buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const jlong capacity = pEnv->GetDirectBufferCapacity(massBuffer);
+    EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
     for (int i = 0; i < numNodes && i < capacity; ++i) {
         pMasses[i] = pBody->getMass(i);
@@ -1192,6 +1210,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesNorm
     jfloat * pWrite
             = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pWrite, "The store buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
@@ -1219,6 +1238,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesPosi
     jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pBuffer, "The FloatBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const int size = pBody->m_nodes.size();
 
@@ -1245,6 +1265,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getNodesVelo
     NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
     jfloat *pWrite = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pWrite, "The store buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0; nodeIndex < numNodes; ++nodeIndex) {
@@ -1350,6 +1371,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getTetrasInd
     NULL_CHK(pEnv, intBuffer, "The IntBuffer does not exist.",);
     jint * const pBuffer = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const int size = pBody->m_tetras.size();
     const btSoftBody::Node * const pFirstNode = &pBody->m_nodes[0];
@@ -1466,6 +1488,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_listNodesInC
     NULL_CHK(pEnv, intBuffer, "The IntBuffer does not exist.",);
     jint * const pBuffer = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pBuffer, "The IntBuffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const btSoftBody::Node *pFirstNode = &pBody->m_nodes[0];
     const btSoftBody::Cluster *pCluster = pBody->m_clusters[clusterIndex];
@@ -1692,8 +1715,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMasses
     const jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(massBuffer);
     NULL_CHK(pEnv, pBuffer, "The mass buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const jlong capacity = pEnv->GetDirectBufferCapacity(massBuffer);
+    EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
     for (int i = 0; i < numNodes && i < capacity; ++i) {
         pBody->setMass(i, pBuffer[i]);
@@ -1734,8 +1759,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNormals
     const jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(normalBuffer);
     NULL_CHK(pEnv, pBuffer, "The normal buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const jlong capacity = pEnv->GetDirectBufferCapacity(normalBuffer) - 2;
+    EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0, offset = 0;
             nodeIndex < numNodes && offset < capacity;) {
@@ -1874,8 +1901,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocitie
     const jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(velocityBuffer);
     NULL_CHK(pEnv, pBuffer, "The velocity buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const jlong capacity = pEnv->GetDirectBufferCapacity(velocityBuffer) - 2;
+    EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0, offset = 0;
             nodeIndex < numNodes && offset < capacity;) {

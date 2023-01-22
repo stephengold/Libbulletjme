@@ -320,6 +320,7 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
     if (javaPhysicsSpace != NULL) {
         pEnv->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
                 timeStep);
+        EXCEPTION_CHK(pEnv,);
         pEnv->DeleteLocalRef(javaPhysicsSpace);
         EXCEPTION_CHK(pEnv,);
     }
@@ -333,6 +334,7 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
     JNIEnv * const pEnv = pSpace->getEnv();
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    EXCEPTION_CHK(pEnv,);
     if (javaPhysicsSpace != NULL) {
         pEnv->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
                 timeStep);

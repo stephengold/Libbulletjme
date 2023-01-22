@@ -90,12 +90,15 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
     bool success = pBvh->serialize(pBuffer, ssize, true);
     if (!success) {
         jclass newExc = pEnv->FindClass("java/lang/RuntimeException");
+        EXCEPTION_CHK(pEnv, 0);
         pEnv->ThrowNew(newExc, "Unable to serialize, native error reported");
         return 0;
     }
 
     jbyteArray byteArray = pEnv->NewByteArray(ssize);
+    EXCEPTION_CHK(pEnv, 0);
     pEnv->SetByteArrayRegion(byteArray, 0, ssize, (jbyte *) pBuffer);
+    EXCEPTION_CHK(pEnv, 0);
     btAlignedFree(pBuffer); //dance015
 
     return byteArray;

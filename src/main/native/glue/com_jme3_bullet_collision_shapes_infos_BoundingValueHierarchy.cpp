@@ -40,9 +40,11 @@
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_deSerialize
 (JNIEnv *pEnv, jclass, jbyteArray bytearray) {
     int len = pEnv->GetArrayLength(bytearray);
+    EXCEPTION_CHK(pEnv, 0);
     void *pBuffer = btAlignedAlloc(len, 16); //dance035
     pEnv->GetByteArrayRegion(bytearray, 0, len,
             reinterpret_cast<jbyte *> (pBuffer));
+    EXCEPTION_CHK(pEnv, 0);
 
     btOptimizedBvh * const
             pBvh = btOptimizedBvh::deSerializeInPlace(pBuffer, len, true);
@@ -94,12 +96,15 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_infos_Boundin
     bool success = pBvh->serialize(pBuffer, bufferSize, true);
     if (!success) {
         jclass newExc = pEnv->FindClass("java/lang/RuntimeException");
+        EXCEPTION_CHK(pEnv, 0);
         pEnv->ThrowNew(newExc, "Unable to serialize, native error reported");
         return 0;
     }
 
     jbyteArray byteArray = pEnv->NewByteArray(bufferSize);
+    EXCEPTION_CHK(pEnv, 0);
     pEnv->SetByteArrayRegion(byteArray, 0, bufferSize, (jbyte *) pBuffer);
+    EXCEPTION_CHK(pEnv, 0);
     btAlignedFree(pBuffer); //dance015
 
     return byteArray;

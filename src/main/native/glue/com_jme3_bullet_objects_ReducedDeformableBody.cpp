@@ -51,18 +51,21 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_ReducedDeformableBody_creat
     btVector3 * const pLocations = new btVector3[n]; //dance037
     for (int i = 0; i < n; ++i) {
         jobject location = pEnv->GetObjectArrayElement(locations, i);
+        EXCEPTION_CHK(pEnv, 0);
         jmeBulletUtil::convert(pEnv, location, &pLocations[i]);
     }
 
     btScalar *pMasses;
 #ifdef BT_USE_DOUBLE_PRECISION
     float * const pFloats = pEnv->GetFloatArrayElements(masses, 0);
+    EXCEPTION_CHK(pEnv, 0);
     pMasses = new btScalar[n]; //dance038
     for (int i = 0; i < n; ++i) {
         pMasses[i] = pFloats[i];
     }
 #else
     pMasses = pEnv->GetFloatArrayElements(masses, 0);
+    EXCEPTION_CHK(pEnv, 0);
 #endif
 
     btSoftBodyWorldInfo * const
@@ -78,6 +81,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_ReducedDeformableBody_creat
 #else
     pEnv->ReleaseFloatArrayElements(masses, pMasses, 0);
 #endif
+    EXCEPTION_CHK(pEnv, 0);
     delete[] pLocations; //dance037
 
     pBody->getCollisionShape()->setMargin(CONVEX_DISTANCE_MARGIN);

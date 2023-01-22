@@ -77,15 +77,21 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
     JNIEnv * const pEnv = pSpace->getEnv();
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    EXCEPTION_CHK(pEnv, false);
     jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef); // TODO is this necessary?
+    EXCEPTION_CHK(pEnv, false);
     jobject javaCollisionObject1 = pEnv->NewLocalRef(pUser1->m_javaRef);
+    EXCEPTION_CHK(pEnv, false);
 
     const jboolean result = pEnv->CallBooleanMethod(javaPhysicsSpace,
             jmeClasses::CollisionSpace_notifyCollisionGroupListeners,
             javaCollisionObject0, javaCollisionObject1);
+    EXCEPTION_CHK(pEnv, false);
 
     pEnv->DeleteLocalRef(javaPhysicsSpace);
+    EXCEPTION_CHK(pEnv, false);
     pEnv->DeleteLocalRef(javaCollisionObject0);
+    EXCEPTION_CHK(pEnv, false);
     pEnv->DeleteLocalRef(javaCollisionObject1);
     EXCEPTION_CHK(pEnv, false);
 

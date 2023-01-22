@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -70,8 +70,10 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getPositions
     jfloat * const pPositions
             = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
     NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
 
     const jlong capacity = pEnv->GetDirectBufferCapacity(storeBuffer);
+    EXCEPTION_CHK(pEnv,);
     const uint32_t numFloats = 3 * pHull->m_nPoints;
     for (uint32_t i = 0; i < numFloats && i < capacity; ++i) {
         pPositions[i] = pHull->m_points[i];
