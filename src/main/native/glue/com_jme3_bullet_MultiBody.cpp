@@ -135,7 +135,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
             canSleep); //dance004
 
     jmeUserPointer const pUser = new jmeUserInfo(); //dance005
-    pUser->m_javaRef = pEnv->NewWeakGlobalRef(object);
+    pUser->m_javaRef = pEnv->NewWeakGlobalRef(object); //dance039
     EXCEPTION_CHK(pEnv, 0);
     pUser->m_group = 0x1;
     pUser->m_groups = 0x1;
@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeMultiDof
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
-(JNIEnv *, jclass, jlong multiBodyId) {
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
     const btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
 
@@ -173,6 +173,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
         jmeUserPointer const
                 pUser = (jmeUserPointer) pMultiBody->getUserPointer();
         if (pUser) {
+            if (pUser->m_javaRef) {
+                pEnv->DeleteWeakGlobalRef(pUser->m_javaRef); //dance039
+                EXCEPTION_CHK(pEnv,);
+            }
             delete pUser; //dance005
         }
         delete pMultiBody; //dance004
