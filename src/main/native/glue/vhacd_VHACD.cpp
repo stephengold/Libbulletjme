@@ -106,8 +106,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
     NULL_CHK(pEnv, indicesBuffer, "The indices buffer does not exist.",);
     const jint * const pIndices
             = (jint *) pEnv->GetDirectBufferAddress(indicesBuffer);
-    EXCEPTION_CHK(pEnv,);
     NULL_CHK(pEnv, pIndices, "The indices buffer is not direct.",);
+    EXCEPTION_CHK(pEnv,);
     const jlong numInts = pEnv->GetDirectBufferCapacity(indicesBuffer);
     EXCEPTION_CHK(pEnv,);
 

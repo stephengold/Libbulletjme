@@ -365,8 +365,8 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
     if (javaPhysicsSpace != NULL) {
         pEnv->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_preTick,
                 timeStep);
-        pEnv->DeleteLocalRef(javaPhysicsSpace);
         EXCEPTION_CHK(pEnv,);
+        pEnv->DeleteLocalRef(javaPhysicsSpace);
     }
 }
 
