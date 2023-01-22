@@ -180,11 +180,13 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
 
     jobject translation_out = pEnv->CallObjectMethod(
             outTransform, jmeClasses::Transform_translation);
+    EXCEPTION_CHK(pEnv,);
     const btVector3& origin = ptIn->getOrigin();
     convert(pEnv, &origin, translation_out);
 
     jobject rotation_out = pEnv->CallObjectMethod(
             outTransform, jmeClasses::Transform_rotation);
+    EXCEPTION_CHK(pEnv,);
     const btQuaternion rotation = ptIn->getRotation();
     convert(pEnv, &rotation, rotation_out);
 
