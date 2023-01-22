@@ -122,7 +122,6 @@ void jmeBulletUtil::convert(
     float z = pvIn->getZ();
 
     pEnv->CallObjectMethod(outVector3f, jmeClasses::Vector3f_set, x, y, z);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btQuaternion data to a SimMath Quatd object.
@@ -139,7 +138,6 @@ void jmeBulletUtil::convertDp(
     double w = pqIn->getW();
 
     pEnv->CallObjectMethod(outQuatd, jmeClasses::Quatd_set, x, y, z, w);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btVector3 data to a SimMath Vec3d object.
@@ -155,7 +153,6 @@ void jmeBulletUtil::convertDp(
     double z = pvIn->getZ();
 
     pEnv->CallObjectMethod(outVec3d, jmeClasses::Vec3d_set, x, y, z);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btQuaternion data to a JMonkeyEngine Quaternion object.
@@ -172,7 +169,6 @@ void jmeBulletUtil::convert(
 
     pEnv->CallObjectMethod(
             outQuaternion, jmeClasses::Quaternion_set, x, y, z, w);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btTransform data to a JMonkeyEngine Transform object.
@@ -199,7 +195,6 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_y, 1);
     EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(scale_out, jmeClasses::Vector3f_z, 1);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy JMonkeyEngine Matrix3f data to a Bullet btMatrix3x3 object.
@@ -265,7 +260,6 @@ void jmeBulletUtil::convert(JNIEnv *pEnv,
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m21, m21);
     EXCEPTION_CHK(pEnv,);
     pEnv->SetFloatField(outMatrix3f, jmeClasses::Matrix3f_m22, m22);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Copy Bullet btMatrix3x3 data to a SimMath Matrix3d object.
@@ -304,7 +298,6 @@ void jmeBulletUtil::convertDp(
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m21, m21);
     EXCEPTION_CHK(pEnv,);
     pEnv->SetDoubleField(outMatrix3d, jmeClasses::Matrix3d_m22, m22);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Convert a JMonkeyEngine Quaternion to a Bullet rotation matrix.
@@ -414,7 +407,6 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
     EXCEPTION_CHK(pEnv,);
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Add a sweep-test result to a list.
@@ -445,7 +437,6 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
     EXCEPTION_CHK(pEnv,);
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
-    EXCEPTION_CHK(pEnv,);
 }
 
 // Convert a JMonkeyEngine Transform to a Bullet btTransform and a scale vector.

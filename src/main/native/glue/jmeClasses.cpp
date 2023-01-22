@@ -162,7 +162,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
              */
             pEnv->CallStaticVoidMethod(NativeLibrary_Class,
                     NativeLibrary_reinitialization);
-            EXCEPTION_CHK(pEnv,);
         }
 
         return;
@@ -494,5 +493,4 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             NativeLibrary_Class, "postInitialization", "()V");
     EXCEPTION_CHK(pEnv,);
     pEnv->CallStaticVoidMethod(NativeLibrary_Class, postInitialization);
-    EXCEPTION_CHK(pEnv,);
 }

@@ -105,7 +105,6 @@ jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
     EXCEPTION_CHK(pEnv,);
 
     pEnv->GetJavaVM(&vm);
-    EXCEPTION_CHK(pEnv,);
 }
 
 void jmeCollisionSpace::attachThread() {
