@@ -58,10 +58,9 @@ JNIEXPORT jobject JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
     NULL_CHK(pEnv, pUser, "The jmeUserInfo does not exist.", 0);
 
-    jobject pco = pUser->m_javaRef;
-    NULL_CHK(pEnv, pco, "The PhysicsCollisionObject does not exist.", 0);
+    jobject result = pUser->m_javaRef;
+    NULL_CHK(pEnv, result, "The PhysicsCollisionObject does not exist.", 0);
 
-    jobject result = pEnv->NewWeakGlobalRef(pco);
     return result;
 }
 
