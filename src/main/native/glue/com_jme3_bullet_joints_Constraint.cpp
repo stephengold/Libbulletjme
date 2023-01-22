@@ -48,8 +48,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getConstraintType
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.", 0)
 
     btTypedConstraintType constraintType = pConstraint->getConstraintType();
-    btAssert(constraintType >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(constraintType <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, constraintType >= POINT2POINT_CONSTRAINT_TYPE, 0);
+    ASSERT_CHK(pEnv, constraintType <= MAX_CONSTRAINT_TYPE, 0);
 
     return constraintType;
 }
@@ -64,8 +64,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_enableFeedback
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",);
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE,);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE,);
 
     bool needsFeedback = enable;
     pConstraint->enableFeedback(needsFeedback);
@@ -81,8 +81,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_finalizeNative
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",);
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE,);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE,);
 
     delete pConstraint; //dance021
 }
@@ -97,8 +97,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getAppliedImpuls
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.", 0)
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE, 0);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE, 0);
 
     btScalar result = pConstraint->getAppliedImpulse();
     return result;
@@ -114,8 +114,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Constraint_getBreakingImpul
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.", 0)
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE, 0);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE, 0);
 
     btScalar result = pConstraint->getBreakingImpulseThreshold();
     return result;
@@ -131,8 +131,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_joints_Constraint_getOverrideIterati
     const btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.", 0);
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE, 0);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE, 0);
 
     int overrideIterations = pConstraint->getOverrideNumSolverIterations();
     return overrideIterations;
@@ -149,8 +149,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_isEnabled
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",
             JNI_FALSE);
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE, 0);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE, 0);
 
     bool result = pConstraint->isEnabled();
     return result;
@@ -167,8 +167,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_Constraint_needsFeedback
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",
             JNI_FALSE);
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE, 0);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE, 0);
 
     bool result = pConstraint->needsFeedback();
     return result;
@@ -184,8 +184,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_overrideIterations
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",);
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE,);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE,);
 
     int overrideNumIterations = numIterations;
     pConstraint->setOverrideNumSolverIterations(overrideNumIterations);
@@ -201,8 +201,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setBreakingImpulse
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",)
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE,);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE,);
 
     btScalar threshold = btScalar(desiredValue);
     pConstraint->setBreakingImpulseThreshold(threshold);
@@ -218,8 +218,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Constraint_setEnabled
     btTypedConstraint * const
             pConstraint = reinterpret_cast<btTypedConstraint *> (constraintId);
     NULL_CHK(pEnv, pConstraint, "The btTypedConstraint does not exist.",)
-    btAssert(pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE);
-    btAssert(pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() >= POINT2POINT_CONSTRAINT_TYPE,);
+    ASSERT_CHK(pEnv, pConstraint->getConstraintType() <= MAX_CONSTRAINT_TYPE,);
 
     bool enabled = desiredSetting;
     pConstraint->setEnabled(enabled);

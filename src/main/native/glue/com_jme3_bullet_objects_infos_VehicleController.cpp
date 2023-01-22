@@ -88,8 +88,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_appl
     btRaycastVehicle * const
             pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
     NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.",);
-    btAssert(wheelIndex >= 0);
-    btAssert(wheelIndex < pController->getNumWheels());
+    ASSERT_CHK(pEnv, wheelIndex >= 0,);
+    ASSERT_CHK(pEnv, wheelIndex < pController->getNumWheels(),);
 
     pController->applyEngineForce(force, wheelIndex);
 }
@@ -104,8 +104,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_brak
     btRaycastVehicle * const
             pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
     NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.",);
-    btAssert(wheelIndex >= 0);
-    btAssert(wheelIndex < pController->getNumWheels());
+    ASSERT_CHK(pEnv, wheelIndex >= 0,);
+    ASSERT_CHK(pEnv, wheelIndex < pController->getNumWheels(),);
 
     pController->setBrake(value, wheelIndex);
 }
@@ -127,7 +127,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_cre
 
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
     NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.", 0);
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    ASSERT_CHK(pEnv, pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY, 0);
 
     const btRaycastVehicle::btVehicleTuning * const
             pTuning = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
@@ -258,8 +258,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_ra
     btRaycastVehicle * const
             pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
     NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.", 0);
-    btAssert(wheelIndex >= 0);
-    btAssert(wheelIndex < pController->getNumWheels());
+    ASSERT_CHK(pEnv, wheelIndex >= 0, 0);
+    ASSERT_CHK(pEnv, wheelIndex < pController->getNumWheels(), 0);
 
     btWheelInfo& wheel = pController->m_wheelInfo[wheelIndex];
     btScalar result = pController->rayCast(wheel);
@@ -291,12 +291,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_setC
     btRaycastVehicle * const
             pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
     NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.",);
-    btAssert(right >= 0);
-    btAssert(right <= 2);
-    btAssert(up >= 0);
-    btAssert(up <= 2);
-    btAssert(forward >= 0);
-    btAssert(forward <= 2);
+    ASSERT_CHK(pEnv, right >= 0,);
+    ASSERT_CHK(pEnv, right <= 2,);
+    ASSERT_CHK(pEnv, up >= 0,);
+    ASSERT_CHK(pEnv, up <= 2,);
+    ASSERT_CHK(pEnv, forward >= 0,);
+    ASSERT_CHK(pEnv, forward <= 2,);
 
     pController->setCoordinateSystem(right, up, forward);
 }
@@ -338,8 +338,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_stee
     btRaycastVehicle * const
             pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
     NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.",);
-    btAssert(wheelIndex >= 0);
-    btAssert(wheelIndex < pController->getNumWheels());
+    ASSERT_CHK(pEnv, wheelIndex >= 0,);
+    ASSERT_CHK(pEnv, wheelIndex < pController->getNumWheels(),);
 
     pController->setSteeringValue(angle, wheelIndex);
 }
@@ -355,8 +355,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_upda
     btRaycastVehicle * const
             pController = reinterpret_cast<btRaycastVehicle *> (controllerId);
     NULL_CHK(pEnv, pController, "The btRaycastVehicle does not exist.",);
-    btAssert(wheelIndex >= 0);
-    btAssert(wheelIndex < pController->getNumWheels());
+    ASSERT_CHK(pEnv, wheelIndex >= 0,);
+    ASSERT_CHK(pEnv, wheelIndex < pController->getNumWheels(),);
 
     pController->updateWheelTransform(wheelIndex, interpolated);
 }

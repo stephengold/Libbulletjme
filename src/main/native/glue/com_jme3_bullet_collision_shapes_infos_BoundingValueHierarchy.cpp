@@ -74,7 +74,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
     btBvhTriangleMeshShape * const
             pShape = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.", 0);
-    btAssert(pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE, 0);
 
     btOptimizedBvh * const pBvh = pShape->getOptimizedBvh();
     return reinterpret_cast<jlong> (pBvh);

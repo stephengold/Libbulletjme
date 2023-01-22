@@ -100,7 +100,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverla
     const btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.", 0)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT, 0);
 
     return pGhost->getNumOverlappingObjects();
 }
@@ -115,7 +115,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_getOverla
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     btHashedOverlappingPairCache * const
             pCache = pGhost->getOverlappingPairCache();
@@ -133,7 +133,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setGhostF
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     pGhost->setCollisionFlags(pGhost->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 }
@@ -148,7 +148,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
@@ -166,7 +166,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
@@ -184,7 +184,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     NULL_CHK(pEnv, matrix, "The rotation matrix does not exist.",)
 
@@ -202,7 +202,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     NULL_CHK(pEnv, quaternion, "The quaternion does not exist.",)
 
@@ -220,7 +220,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     NULL_CHK(pEnv, matrix, "The matrix does not exist.",)
 
@@ -238,7 +238,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsGhostObject_setPhysic
     btPairCachingGhostObject * const
             pGhost = reinterpret_cast<btPairCachingGhostObject *> (ghostId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.",)
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT,);
 
     NULL_CHK(pEnv, quaternion, "The quaternion does not exist.",)
 

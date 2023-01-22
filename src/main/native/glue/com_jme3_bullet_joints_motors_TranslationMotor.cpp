@@ -138,7 +138,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_getPa
             jmeBulletUtil::convert(pEnv, &pMotor->m_stopERP, storeVector);
             break;
         default:
-            btAssert(0);
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The parameter is unknown.");
     }
 }
 
@@ -213,8 +214,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
             JNI_FALSE);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, axisIndex < 3, JNI_FALSE);
 
     bool flag = pMotor->m_springDampingLimited[axisIndex];
     return (jboolean) flag;
@@ -231,8 +232,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
             JNI_FALSE);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, axisIndex < 3, JNI_FALSE);
 
     bool flag = pMotor->m_enableMotor[axisIndex];
     return (jboolean) flag;
@@ -249,8 +250,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
             JNI_FALSE);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, axisIndex < 3, JNI_FALSE);
 
     bool flag = pMotor->m_servoMotor[axisIndex];
     return (jboolean) flag;
@@ -267,8 +268,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
             JNI_FALSE);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, axisIndex < 3, JNI_FALSE);
 
     bool flag = pMotor->m_enableSpring[axisIndex];
     return (jboolean) flag;
@@ -285,8 +286,8 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_i
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",
             JNI_FALSE);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, axisIndex < 3, JNI_FALSE);
 
     bool flag = pMotor->m_springStiffnessLimited[axisIndex];
     return (jboolean) flag;
@@ -332,8 +333,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setDa
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0,);
+    ASSERT_CHK(pEnv, axisIndex < 3,);
 
     bool flag = (bool) limitFlag;
     pMotor->m_springDampingLimited[axisIndex] = flag;
@@ -394,8 +395,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setMo
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0,);
+    ASSERT_CHK(pEnv, axisIndex < 3,);
 
     bool flag = (bool) enableFlag;
     pMotor->m_enableMotor[axisIndex] = flag;
@@ -427,7 +428,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setPa
             jmeBulletUtil::convert(pEnv, vector, &pMotor->m_stopERP);
             break;
         default:
-            btAssert(0);
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The parameter is unknown.");
     }
 }
 
@@ -441,8 +443,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSe
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0,);
+    ASSERT_CHK(pEnv, axisIndex < 3,);
 
     bool flag = (bool) enableFlag;
     pMotor->m_servoMotor[axisIndex] = flag;
@@ -473,8 +475,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSp
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0,);
+    ASSERT_CHK(pEnv, axisIndex < 3,);
 
     bool flag = (bool) enableFlag;
     pMotor->m_enableSpring[axisIndex] = flag;
@@ -506,8 +508,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_TranslationMotor_setSt
     btTranslationalLimitMotor2 *pMotor
             = reinterpret_cast<btTranslationalLimitMotor2 *> (motorId);
     NULL_CHK(pEnv, pMotor, "The btTranslationalLimitMotor2 does not exist.",);
-    btAssert(axisIndex >= 0);
-    btAssert(axisIndex < 3);
+    ASSERT_CHK(pEnv, axisIndex >= 0,);
+    ASSERT_CHK(pEnv, axisIndex < 3,);
 
     bool flag = (bool) limitFlag;
     pMotor->m_springStiffnessLimited[axisIndex] = flag;

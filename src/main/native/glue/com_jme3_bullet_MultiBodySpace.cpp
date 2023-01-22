@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.",);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     NULL_CHK(pEnv, pUser, "The user object does not exist.",)
-    btAssert(pUser->m_jmeSpace == NULL);
+    ASSERT_CHK(pEnv, pUser->m_jmeSpace == NULL,);
     pUser->m_jmeSpace = pSpace;
 
     pWorld->addMultiBody(pMultiBody);
@@ -72,8 +72,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
      */
     btMultiBodyLinkCollider *pCollider = pMultiBody->getBaseCollider();
     if (pCollider && pCollider->getCollisionShape()) {
-        btAssert(pCollider->getInternalType()
-                & btCollisionObject::CO_FEATHERSTONE_LINK);
+        ASSERT_CHK(pEnv, pCollider->getInternalType()
+                & btCollisionObject::CO_FEATHERSTONE_LINK,);
         pUser = (jmeUserPointer) pCollider->getUserPointer();
         pUser->m_jmeSpace = pSpace;
         int cfGroup, cfMask;
@@ -93,8 +93,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBody
     for (int linkI = 0; linkI < pMultiBody->getNumLinks(); ++linkI) {
         pCollider = pMultiBody->getLink(linkI).m_collider;
         if (pCollider && pCollider->getCollisionShape()) {
-            btAssert(pCollider->getInternalType()
-                    & btCollisionObject::CO_FEATHERSTONE_LINK);
+            ASSERT_CHK(pEnv, pCollider->getInternalType()
+                    & btCollisionObject::CO_FEATHERSTONE_LINK,);
             pUser = (jmeUserPointer) pCollider->getUserPointer();
             pUser->m_jmeSpace = pSpace;
             pWorld->addCollisionObject((btCollisionObject *) pCollider,
@@ -115,7 +115,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.",);
 
     btMultiBodyConstraint * const
             pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
@@ -160,7 +160,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultibodies
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
     const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.", 0);
 
     int numMultiBodies = pWorld->getNumMultibodies();
     return (jint) numMultiBodies;
@@ -177,7 +177,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBodySpace_getNumMultiBodyConstr
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
     const btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.", 0);
 
     int numConstraints = pWorld->getNumMultiBodyConstraints();
     return (jint) numConstraints;
@@ -194,7 +194,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.",);
 
     btMultiBody * const
             pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
@@ -202,7 +202,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
 
     jmeUserPointer pUser = (jmeUserPointer) pMultiBody->getUserPointer();
     NULL_CHK(pEnv, pUser, "The user object does not exist.",)
-    btAssert(pUser->m_jmeSpace == pSpace);
+    ASSERT_CHK(pEnv, pUser->m_jmeSpace == pSpace,);
     pUser->m_jmeSpace = NULL;
 
     pWorld->removeMultiBody(pMultiBody);
@@ -211,8 +211,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
      */
     btMultiBodyLinkCollider *pCollider = pMultiBody->getBaseCollider();
     if (pCollider && pCollider->getCollisionShape()) {
-        btAssert(pCollider->getInternalType()
-                & btCollisionObject::CO_FEATHERSTONE_LINK);
+        ASSERT_CHK(pEnv, pCollider->getInternalType()
+                & btCollisionObject::CO_FEATHERSTONE_LINK,);
         pUser = (jmeUserPointer) pCollider->getUserPointer();
         pUser->m_jmeSpace = NULL;
         pWorld->removeCollisionObject((btCollisionObject *) pCollider);
@@ -223,8 +223,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBody
     for (int linkI = 0; linkI < pMultiBody->getNumLinks(); ++linkI) {
         pCollider = pMultiBody->getLink(linkI).m_collider;
         if (pCollider && pCollider->getCollisionShape()) {
-            btAssert(pCollider->getInternalType()
-                    & btCollisionObject::CO_FEATHERSTONE_LINK);
+            ASSERT_CHK(pEnv, pCollider->getInternalType()
+                    & btCollisionObject::CO_FEATHERSTONE_LINK,);
             pUser = (jmeUserPointer) pCollider->getUserPointer();
             pUser->m_jmeSpace = NULL;
             pWorld->removeCollisionObject((btCollisionObject *) pCollider);
@@ -245,7 +245,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_removeMultiBodyConstr
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.",);
 
     btMultiBodyConstraint * const
             pConstraint = reinterpret_cast<btMultiBodyConstraint *> (constraintId);
@@ -265,7 +265,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_setSolverType
             pSpace = reinterpret_cast<jmeMultiBodySpace *> (spaceId);
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btMultiBodyDynamicsWorld * const pWorld = pSpace->getMultiBodyWorld();
-    btAssert(pWorld != NULL);
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.",);
 
     btMultiBodyConstraintSolver *pConstraintSolver;
     btMLCPSolverInterface *pMLCP;

@@ -66,7 +66,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_GImpactCollisionSha
     btGImpactMeshShape *pShape
             = reinterpret_cast<btGImpactMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btGImpactMeshShape does not exist.",);
-    btAssert(pShape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == GIMPACT_SHAPE_PROXYTYPE,);
 
     pShape->updateBound();
 }

@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
     btConvexHullShape * const pShape
             = reinterpret_cast<btConvexHullShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btConvexHullShape does not exist.", 0);
-    btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE, 0);
 
     int count = pShape->getNumPoints();
     return count;
@@ -108,7 +108,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
     const btConvexHullShape * const pShape
             = reinterpret_cast<btConvexHullShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btConvexHullShape does not exist.",)
-    btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE,);
 
     NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
     const jlong floatsCapacity = pEnv->GetDirectBufferCapacity(storeBuffer);
@@ -144,7 +144,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
     btConvexHullShape * const pShape
             = reinterpret_cast<btConvexHullShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btConvexHullShape does not exist.",);
-    btAssert(pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == CONVEX_HULL_SHAPE_PROXYTYPE,);
 
     pShape->recalcLocalAabb();
 }

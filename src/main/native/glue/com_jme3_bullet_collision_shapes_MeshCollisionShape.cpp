@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
     btBvhTriangleMeshShape *pShape
             = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.",);
-    btAssert(pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE,);
 
     pShape->recalcLocalAabb();
 }
@@ -82,7 +82,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
     btBvhTriangleMeshShape *pMesh
             = reinterpret_cast<btBvhTriangleMeshShape *> (meshobj);
     NULL_CHK(pEnv, pMesh, "The btBvhTriangleMeshShape does not exist.", 0);
-    btAssert(pMesh->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pMesh->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE, 0);
 
     btOptimizedBvh *pBvh = pMesh->getOptimizedBvh();
     unsigned int ssize = pBvh->calculateSerializeBufferSize();
@@ -113,7 +113,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
     btBvhTriangleMeshShape * const
             pShape = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.",);
-    btAssert(pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE,);
 
     btOptimizedBvh * const pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);

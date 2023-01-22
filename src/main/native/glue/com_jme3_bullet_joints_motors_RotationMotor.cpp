@@ -137,7 +137,9 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_getPar
             scalar = pMotor->m_stopERP;
             break;
         default:
-            btAssert(0);
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The parameter is unknown.");
+            return 0;
     }
 
     return (jfloat) scalar;
@@ -415,7 +417,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_motors_RotationMotor_setParam
             pMotor->m_stopERP = scalar;
             break;
         default:
-            btAssert(0);
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The parameter is unknown.");
     }
 }
 

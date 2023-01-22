@@ -132,7 +132,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSha
     btBU_Simplex1to4 *pShape
             = reinterpret_cast<btBU_Simplex1to4 *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBU_Simplex1to4 does not exist.",);
-    btAssert(pShape->getShapeType() == TETRAHEDRAL_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == TETRAHEDRAL_SHAPE_PROXYTYPE,);
 
     pShape->recalcLocalAabb();
 }

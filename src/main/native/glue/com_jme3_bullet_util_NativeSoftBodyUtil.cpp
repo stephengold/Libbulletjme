@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateCluste
         jboolean meshInLocalSpace) {
     btSoftBody * const pBody = reinterpret_cast<btSoftBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY,);
 
     NULL_CHK(pEnv, positionsBuffer, "The positions buffer does not exist.",);
     jfloat * const pBuffer
@@ -83,7 +83,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
         jboolean meshInLocalSpace, jboolean doNormalUpdate) {
     btSoftBody * const pBody = reinterpret_cast<btSoftBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY,);
 
     NULL_CHK(pEnv, indexMap, "The index map does not exist.",);
     const jint * const pJme2bulletMap
@@ -141,7 +141,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
     const btSoftBody * const pBody
             = reinterpret_cast<btSoftBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY,);
 
     NULL_CHK(pEnv, positionsBuffer, "The positions buffer does not exist.",);
     jfloat * const pPositions
@@ -191,7 +191,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updatePinMes
     const btSoftBody * const
             pBody = reinterpret_cast<btSoftBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btSoftBody does not exist.",);
-    btAssert(pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pBody->getInternalType() & btCollisionObject::CO_SOFT_BODY,);
 
     NULL_CHK(pEnv, positionsBuffer, "The positions buffer does not exist.",);
     jfloat *pBuffer = (jfloat *) pEnv->GetDirectBufferAddress(positionsBuffer);

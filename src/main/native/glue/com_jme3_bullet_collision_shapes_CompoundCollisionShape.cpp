@@ -47,7 +47,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btCompoundShape *pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
     NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
-    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     btCollisionShape *pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
@@ -73,7 +73,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     const btCompoundShape * const pShape
             = reinterpret_cast<btCompoundShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.",)
-    btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     NULL_CHK(pEnv, massBuffer, "The mass buffer does not exist.",);
     const jfloat * const pBuffer
@@ -109,7 +109,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     const btCompoundShape * const pShape
             = reinterpret_cast<btCompoundShape *> (compoundId);
     NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.", 0)
-    btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE, 0);
 
     const int result = pShape->getNumChildShapes();
 
@@ -143,7 +143,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
 (JNIEnv *pEnv, jclass, jlong shapeId) {
     btCompoundShape *pShape = reinterpret_cast<btCompoundShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btCompoundShape does not exist.",);
-    btAssert(pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     pShape->recalculateLocalAabb();
 }
@@ -158,7 +158,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btCompoundShape * const pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
     NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
-    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     btCollisionShape * const pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
@@ -177,7 +177,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btCompoundShape * const
             pCompound = reinterpret_cast<btCompoundShape *> (compoundShapeId);
     NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
-    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",);
     btMatrix3x3 rotation;
@@ -208,7 +208,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btCompoundShape * const pCompound
             = reinterpret_cast<btCompoundShape *> (compoundShapeId);
     NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
-    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     btCollisionShape * const pChild
             = reinterpret_cast<btCollisionShape *> (childShapeId);
@@ -241,7 +241,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btCompoundShape * const
             pCompound = reinterpret_cast<btCompoundShape *> (compoundShapeId);
     NULL_CHK(pEnv, pCompound, "The btCompoundShape does not exist.",)
-    btAssert(pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pCompound->getShapeType() == COMPOUND_SHAPE_PROXYTYPE,);
 
     NULL_CHK(pEnv, offsetVector, "The offset vector does not exist.",);
     btVector3 offset;

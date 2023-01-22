@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -717,17 +717,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
 
     const int i = (int) linkIndex;
-    btAssert(i >= 0);
+    ASSERT_CHK(pEnv, i >= 0,);
 
     btScalar m = (btScalar) mass;
-    btAssert(mass > 0);
+    ASSERT_CHK(pEnv, mass > 0,);
 
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 
     int parent = (int) parentLinkIndex;
-    btAssert(i >= -1);
+    ASSERT_CHK(pEnv, parent >= -1,);
 
     NULL_CHK(pEnv, parent2LinkQuaternion,
             "The parent2Link quaternion does not exist.",);
@@ -761,17 +761,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
 
     const int i = (int) linkIndex;
-    btAssert(i >= 0);
+    ASSERT_CHK(pEnv, i >= 0,);
 
     btScalar m = (btScalar) mass;
-    btAssert(mass > 0);
+    ASSERT_CHK(pEnv, mass > 0,);
 
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 
     int parent = (int) parentLinkIndex;
-    btAssert(i >= -1);
+    ASSERT_CHK(pEnv, parent >= -1,);
 
     NULL_CHK(pEnv, parent2LinkQuaternion,
             "The parent2Link quaternion does not exist.",);
@@ -807,17 +807,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
 
     const int i = (int) linkIndex;
-    btAssert(i >= 0);
+    ASSERT_CHK(pEnv, i >= 0,);
 
     btScalar m = (btScalar) mass;
-    btAssert(mass > 0);
+    ASSERT_CHK(pEnv, mass > 0,);
 
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 
     int parent = (int) parentLinkIndex;
-    btAssert(i >= -1);
+    ASSERT_CHK(pEnv, parent >= -1,);
 
     NULL_CHK(pEnv, parent2LinkQuaternion,
             "The parent2Link quaternion does not exist.",);
@@ -857,17 +857,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
 
     const int i = (int) linkIndex;
-    btAssert(i >= 0);
+    ASSERT_CHK(pEnv, i >= 0,);
 
     btScalar m = (btScalar) mass;
-    btAssert(mass > 0);
+    ASSERT_CHK(pEnv, mass > 0,);
 
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 
     int parent = (int) parentLinkIndex;
-    btAssert(i >= -1);
+    ASSERT_CHK(pEnv, parent >= -1,);
 
     NULL_CHK(pEnv, parent2LinkQuaternion,
             "The parent2Link quaternion does not exist.",);
@@ -906,17 +906,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
 
     const int i = (int) linkIndex;
-    btAssert(i >= 0);
+    ASSERT_CHK(pEnv, i >= 0,);
 
     btScalar m = (btScalar) mass;
-    btAssert(mass > 0);
+    ASSERT_CHK(pEnv, mass > 0,);
 
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
 
     int parent = (int) parentLinkIndex;
-    btAssert(i >= -1);
+    ASSERT_CHK(pEnv, parent >= -1,);
 
     NULL_CHK(pEnv, parent2LinkQuaternion,
             "The parent2Link quaternion does not exist.",);

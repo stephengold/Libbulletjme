@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -79,7 +79,9 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_RotationOrder_matrixToEuler
             break;
 
         default:
-            btAssert(false);
+            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+                    "The rotation order is unknown.");
+            return JNI_FALSE;
     }
 
     jmeBulletUtil::convert(pEnv, &angles, storeVector);

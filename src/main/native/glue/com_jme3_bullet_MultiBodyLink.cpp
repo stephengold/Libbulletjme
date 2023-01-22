@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -103,8 +103,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addJointTorque
     NULL_CHK(pEnv, pLink, "The link does not exist.",);
 
     int dof = (int) dofIndex;
-    btAssert(dof >= 0);
-    btAssert(dof < pLink->m_dofCount);
+    ASSERT_CHK(pEnv, dof >= 0,);
+    ASSERT_CHK(pEnv, dof < pLink->m_dofCount,);
     btScalar amount = (btScalar) torque;
 
     pLink->m_jointTorque[dof] += amount;
@@ -332,8 +332,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointPos
     NULL_CHK(pEnv, pLink, "The link does not exist.", 0);
 
     int dof = (int) dofIndex;
-    btAssert(dof >= 0);
-    btAssert(dof < pLink->m_dofCount);
+    ASSERT_CHK(pEnv, dof >= 0, 0);
+    ASSERT_CHK(pEnv, dof < pLink->m_dofCount, 0);
 
     btScalar jointPos = pLink->m_jointPos[dof];
     return (jfloat) jointPos;
@@ -351,8 +351,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointTorque
     NULL_CHK(pEnv, pLink, "The link does not exist.", 0);
 
     int dof = (int) dofIndex;
-    btAssert(dof >= 0);
-    btAssert(dof < pLink->m_dofCount);
+    ASSERT_CHK(pEnv, dof >= 0, 0);
+    ASSERT_CHK(pEnv, dof < pLink->m_dofCount, 0);
 
     btScalar jointTorque = pLink->m_jointTorque[dof];
     return (jfloat) jointTorque;
@@ -385,8 +385,8 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_MultiBodyLink_getJointVel
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", 0);
 
     const int dof = (int) dofIndex;
-    btAssert(dof >= 0);
-    btAssert(dof < pMultiBody->getLink(linkIndex).m_dofCount);
+    ASSERT_CHK(pEnv, dof >= 0, 0);
+    ASSERT_CHK(pEnv, dof < pMultiBody->getLink(linkIndex).m_dofCount, 0);
 
     const btScalar * const pVelocities
             = pMultiBody->getJointVelMultiDof(linkIndex);
@@ -579,8 +579,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setJointPos
     btMultibodyLink& link = pMultiBody->getLink(linkIndex);
 
     const int dof = (int) dofIndex;
-    btAssert(dof >= 0);
-    btAssert(dof < link.m_dofCount);
+    ASSERT_CHK(pEnv, dof >= 0,);
+    ASSERT_CHK(pEnv, dof < link.m_dofCount,);
 
     link.m_jointPos[dof] = (btScalar) position;
     link.updateCacheMultiDof();
@@ -599,8 +599,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_setJointVel
     NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
 
     const int dof = (int) dofIndex;
-    btAssert(dof >= 0);
-    btAssert(dof < pMultiBody->getLink(linkIndex).m_dofCount);
+    ASSERT_CHK(pEnv, dof >= 0,);
+    ASSERT_CHK(pEnv, dof < pMultiBody->getLink(linkIndex).m_dofCount,);
 
     btScalar * const pVelocities = pMultiBody->getJointVelMultiDof(linkIndex);
     pVelocities[dof] = (btScalar) velocity;

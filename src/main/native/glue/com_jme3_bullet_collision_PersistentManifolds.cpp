@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 jMonkeyEngine
+ * Copyright (c) 2022-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,11 +44,11 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_countP
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
     NULL_CHK(pEnv, pManifold, "The btPersistentManifold does not exist.", 0);
-    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    ASSERT_CHK(pEnv, pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE, 0);
 
     int result = pManifold->getNumContacts();
-    btAssert(result >= 0);
-    btAssert(result <= MANIFOLD_CACHE_SIZE);
+    ASSERT_CHK(pEnv, result >= 0, 0);
+    ASSERT_CHK(pEnv, result <= MANIFOLD_CACHE_SIZE, 0);
     return result;
 }
 
@@ -62,10 +62,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBo
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
     NULL_CHK(pEnv, pManifold, "The btPersistentManifold does not exist.", 0);
-    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    ASSERT_CHK(pEnv, pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE, 0);
 
     const btCollisionObject * const result = pManifold->getBody0();
-    btAssert(result);
+    NULL_CHK(pEnv, result, "The body A does not exist.", 0);
     return reinterpret_cast<jlong> (result);
 }
 
@@ -79,10 +79,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getBo
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
     NULL_CHK(pEnv, pManifold, "The btPersistentManifold does not exist.", 0);
-    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    ASSERT_CHK(pEnv, pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE, 0);
 
     const btCollisionObject * const result = pManifold->getBody1();
-    btAssert(result);
+    NULL_CHK(pEnv, result, "The body B does not exist.", 0);
     return reinterpret_cast<jlong> (result);
 }
 
@@ -96,10 +96,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PersistentManifolds_getPo
     const btPersistentManifold * const
             pManifold = reinterpret_cast<btPersistentManifold *> (manifoldId);
     NULL_CHK(pEnv, pManifold, "The btPersistentManifold does not exist.", 0);
-    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    ASSERT_CHK(pEnv, pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE, 0);
 
     int index = int(pointIndex);
     const btManifoldPoint * const result = &pManifold->getContactPoint(index);
-    btAssert(result);
+    NULL_CHK(pEnv, result, "The contact point does not exist.", 0);
     return reinterpret_cast<jlong> (result);
 }

@@ -46,12 +46,18 @@
     }
 
 #ifdef _DEBUG
+#define ASSERT_CHK(pEnv, assertion, retval) \
+    if (!(assertion)) { \
+        (pEnv)->ThrowNew(jmeClasses::RuntimeException, "expected " #assertion); \
+        return retval; \
+    }
 #define NULL_CHK(pEnv, pointer, message, retval) \
     if ((pointer) == NULL) { \
         (pEnv)->ThrowNew(jmeClasses::NullPointerException, message); \
         return retval; \
     }
 #else
+#define ASSERT_CHK(pEnv, assertion, retval)
 #define NULL_CHK(pEnv, pointer, message, retval)
 #endif
 

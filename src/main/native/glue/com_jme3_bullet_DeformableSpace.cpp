@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 jMonkeyEngine
+ * Copyright (c) 2022-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,17 +51,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_DeformableSpace_addSoftBody
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btDeformableMultiBodyDynamicsWorld * const
             pWorld = pSpace->getDeformableWorld();
-    btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD);
+    NULL_CHK(pEnv, pWorld, "The deformable world does not exist.",);
+    ASSERT_CHK(pEnv, pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD,);
 
     btSoftBody * const
             pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
     NULL_CHK(pEnv, pSoftBody, "The collision object does not exist.",)
-    btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY,);
 
     jmeUserPointer const pUser = (jmeUserPointer) pSoftBody->getUserPointer();
     NULL_CHK(pEnv, pUser, "The user object does not exist.",)
-    btAssert(pUser->m_jmeSpace == NULL);
+    ASSERT_CHK(pEnv, pUser->m_jmeSpace == NULL,);
     pUser->m_jmeSpace = pSpace;
 
     pWorld->addSoftBody(pSoftBody);
@@ -104,8 +104,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_DeformableSpace_getNumSoftBodies
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0);
     const btDeformableMultiBodyDynamicsWorld * const
             pWorld = pSpace->getDeformableWorld();
-    btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD);
+    NULL_CHK(pEnv, pWorld, "The deformable world does not exist.", 0);
+    ASSERT_CHK(pEnv, pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD, 0);
 
     const btSoftBodyArray& softBodies = pWorld->getSoftBodyArray();
     int sz = softBodies.size();
@@ -124,8 +124,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_DeformableSpace_getWorldInfo
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.", 0)
     btDeformableMultiBodyDynamicsWorld * const
             pWorld = pSpace->getDeformableWorld();
-    btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD);
+    NULL_CHK(pEnv, pWorld, "The deformable world does not exist.", 0);
+    ASSERT_CHK(pEnv, pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD, 0);
 
     btSoftBodyWorldInfo *pWorldInfo = &(pWorld->getWorldInfo());
     return reinterpret_cast<jlong> (pWorldInfo);
@@ -143,16 +143,16 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_DeformableSpace_removeSoftBody
     NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
     btDeformableMultiBodyDynamicsWorld * const
             pWorld = pSpace->getDeformableWorld();
-    btAssert(pWorld != NULL);
-    btAssert(pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD);
+    NULL_CHK(pEnv, pWorld, "The deformable world does not exist.",);
+    ASSERT_CHK(pEnv, pWorld->getWorldType() == BT_DEFORMABLE_MULTIBODY_DYNAMICS_WORLD,);
 
     btSoftBody * const pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
     NULL_CHK(pEnv, pSoftBody, "The collision object does not exist.",)
-    btAssert(pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pSoftBody->getInternalType() & btCollisionObject::CO_SOFT_BODY,);
 
     jmeUserPointer const pUser = (jmeUserPointer) pSoftBody->getUserPointer();
     NULL_CHK(pEnv, pUser, "The user object does not exist.",)
-    btAssert(pUser->m_jmeSpace == pSpace);
+    ASSERT_CHK(pEnv, pUser->m_jmeSpace == pSpace,);
     pUser->m_jmeSpace = NULL;
 
     pWorld->removeSoftBody(pSoftBody);

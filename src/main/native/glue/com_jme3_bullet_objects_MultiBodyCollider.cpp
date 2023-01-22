@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -66,8 +66,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
     NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
-    btAssert(pCollider->getInternalType()
-            & btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
@@ -85,8 +85,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
     NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
-    btAssert(pCollider->getInternalType()
-            & btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
 
@@ -104,8 +104,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
     NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
-    btAssert(pCollider->getInternalType()
-            & btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
 
@@ -123,8 +123,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_MultiBodyCollider_setPhysics
     btMultiBodyLinkCollider * const pCollider
             = reinterpret_cast<btMultiBodyLinkCollider *> (colliderId);
     NULL_CHK(pEnv, pCollider, "The btMultiBodyLinkCollider does not exist.",)
-    btAssert(pCollider->getInternalType()
-            & btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, pCollider->getInternalType()
+            & btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
 

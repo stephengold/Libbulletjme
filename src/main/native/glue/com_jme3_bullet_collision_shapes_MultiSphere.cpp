@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020 jMonkeyEngine
+ * Copyright (c) 2018-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -92,7 +92,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_recalcA
     btMultiSphereShape *pShape
             = reinterpret_cast<btMultiSphereShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btMultiSphereShape does not exist.",);
-    btAssert(pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == MULTI_SPHERE_SHAPE_PROXYTYPE,);
 
     pShape->recalcLocalAabb();
 }

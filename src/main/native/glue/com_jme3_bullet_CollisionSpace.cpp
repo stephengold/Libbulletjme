@@ -55,8 +55,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_addCollisionObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHK(pEnv, pCollisionObject, "The collision object does not exist.",);
     const int internalType = pCollisionObject->getInternalType();
-    btAssert(internalType > 0);
-    btAssert(internalType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, internalType > 0,);
+    ASSERT_CHK(pEnv, internalType <= btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     jmeUserPointer const
             pUser = (jmeUserPointer) pCollisionObject->getUserPointer();
@@ -135,8 +135,8 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHK(pEnv, pCollisionObject, "The collision object does not exist.", 0);
     const int internalType = pCollisionObject->getInternalType();
-    btAssert(internalType > 0);
-    btAssert(internalType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, internalType > 0, 0);
+    ASSERT_CHK(pEnv, internalType <= btCollisionObject::CO_FEATHERSTONE_LINK, 0);
 
     JmeContactResultCallback callback(pEnv, listener);
     pWorld->contactTest(pCollisionObject, callback);
@@ -229,10 +229,10 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasClosest
     const btCollisionDispatcher * const pDispatcher
             = (const btCollisionDispatcher *) pWorld->getDispatcher();
     NULL_CHK(pEnv, pDispatcher, "The dispatcher does not exist.", JNI_FALSE);
-    btAssert(shape0Type >= 0);
-    btAssert(shape0Type < MAX_BROADPHASE_COLLISION_TYPES);
-    btAssert(shape1Type >= 0);
-    btAssert(shape1Type < MAX_BROADPHASE_COLLISION_TYPES);
+    ASSERT_CHK(pEnv, shape0Type >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, shape0Type < MAX_BROADPHASE_COLLISION_TYPES, JNI_FALSE);
+    ASSERT_CHK(pEnv, shape1Type >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, shape1Type < MAX_BROADPHASE_COLLISION_TYPES, JNI_FALSE);
 
     bool result = pDispatcher->hasClosestFunction(shape0Type, shape1Type);
     return (jboolean) result;
@@ -253,10 +253,10 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_hasContact
     const btCollisionDispatcher * const pDispatcher
             = (const btCollisionDispatcher *) pWorld->getDispatcher();
     NULL_CHK(pEnv, pDispatcher, "The dispatcher does not exist.", JNI_FALSE);
-    btAssert(shape0Type >= 0);
-    btAssert(shape0Type < MAX_BROADPHASE_COLLISION_TYPES);
-    btAssert(shape1Type >= 0);
-    btAssert(shape1Type < MAX_BROADPHASE_COLLISION_TYPES);
+    ASSERT_CHK(pEnv, shape0Type >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, shape0Type < MAX_BROADPHASE_COLLISION_TYPES, JNI_FALSE);
+    ASSERT_CHK(pEnv, shape1Type >= 0, JNI_FALSE);
+    ASSERT_CHK(pEnv, shape1Type < MAX_BROADPHASE_COLLISION_TYPES, JNI_FALSE);
 
     bool result = pDispatcher->hasContactFunction(shape0Type, shape1Type);
     return (jboolean) result;
@@ -279,15 +279,15 @@ jmeCollisionSpace * const
             pObjectA = reinterpret_cast<btCollisionObject *> (aId);
     NULL_CHK(pEnv, pObjectA, "Collision object A does not exist.", 0);
     const int aType = pObjectA->getInternalType();
-    btAssert(aType > 0);
-    btAssert(aType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, aType > 0, 0);
+    ASSERT_CHK(pEnv, aType <= btCollisionObject::CO_FEATHERSTONE_LINK, 0);
 
     btCollisionObject * const
             pObjectB = reinterpret_cast<btCollisionObject *> (bId);
     NULL_CHK(pEnv, pObjectB, "Collision object B does not exist.", 0);
     const int bType = pObjectB->getInternalType();
-    btAssert(bType > 0);
-    btAssert(bType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, bType > 0, 0);
+    ASSERT_CHK(pEnv, bType <= btCollisionObject::CO_FEATHERSTONE_LINK, 0);
 
     JmeContactResultCallback callback(pEnv, listener);
     pWorld->contactPairTest(pObjectA, pObjectB, callback);
@@ -418,8 +418,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHK(pEnv, pCollisionObject, "The collision object does not exist.",);
     const int internalType = pCollisionObject->getInternalType();
-    btAssert(internalType > 0);
-    btAssert(internalType <= btCollisionObject::CO_FEATHERSTONE_LINK);
+    ASSERT_CHK(pEnv, internalType > 0,);
+    ASSERT_CHK(pEnv, internalType <= btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     pWorld->removeCollisionObject(pCollisionObject);
 

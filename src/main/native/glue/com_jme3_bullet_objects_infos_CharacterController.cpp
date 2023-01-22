@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2022 jMonkeyEngine
+ * Copyright (c) 2009-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -79,7 +79,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_c
     btPairCachingGhostObject * const pGhost
             = reinterpret_cast<btPairCachingGhostObject *> (pcoId);
     NULL_CHK(pEnv, pGhost, "The btPairCachingGhostObject does not exist.", 0);
-    btAssert(pGhost->getInternalType() & btCollisionObject::CO_GHOST_OBJECT);
+    ASSERT_CHK(pEnv, pGhost->getInternalType()
+            & btCollisionObject::CO_GHOST_OBJECT, 0);
 
     btCollisionShape * const pShape = pGhost->getCollisionShape();
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);

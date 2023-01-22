@@ -48,11 +48,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
     NULL_CHK(pEnv, pBodyA, "Rigid body A does not exist.", 0)
-    btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    ASSERT_CHK(pEnv, pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY, 0);
 
     btRigidBody *pBodyB = reinterpret_cast<btRigidBody *> (bodyIdB);
     NULL_CHK(pEnv, pBodyB, "Rigid body B does not exist.", 0)
-    btAssert(pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    ASSERT_CHK(pEnv, pBodyB->getInternalType() & btCollisionObject::CO_RIGID_BODY, 0);
 
     NULL_CHK(pEnv, pivotA, "The pivotA vector does not exist.", 0)
     btVector3 pivotInA;
@@ -80,7 +80,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
 
     btRigidBody *pBodyA = reinterpret_cast<btRigidBody *> (bodyIdA);
     NULL_CHK(pEnv, pBodyA, "Rigid body A does not exist.", 0)
-    btAssert(pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY);
+    ASSERT_CHK(pEnv, pBodyA->getInternalType() & btCollisionObject::CO_RIGID_BODY, 0);
 
     NULL_CHK(pEnv, pivotA, "The pivotA vector does not exist.", 0)
     btVector3 pivotInA;
@@ -102,7 +102,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getDamping
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.", 0)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE, 0);
 
     return pJoint->m_setting.m_damping;
 }
@@ -117,7 +117,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getImpulse
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.", 0)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE, 0);
 
     return pJoint->m_setting.m_impulseClamp;
 }
@@ -132,7 +132,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getPivotInA
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
     NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
 
     const btVector3& location = pJoint->getPivotInA();
@@ -149,7 +149,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getPivotInB
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
     NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
 
     const btVector3& location = pJoint->getPivotInB();
@@ -166,7 +166,7 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_getTau
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.", 0)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE, 0);
 
     return pJoint->m_setting.m_tau;
 }
@@ -181,7 +181,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setDamping
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
 
     pJoint->m_setting.m_damping = damping;
 }
@@ -196,7 +196,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setImpulseCl
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
 
     pJoint->m_setting.m_impulseClamp = clamp;
 }
@@ -211,7 +211,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInA
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
 
     btVector3 pivot;
@@ -229,7 +229,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInB
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
 
     btVector3 pivot;
@@ -247,7 +247,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setTau
     btPoint2PointConstraint *pJoint
             = reinterpret_cast<btPoint2PointConstraint *> (jointId);
     NULL_CHK(pEnv, pJoint, "The btPoint2PointConstraint does not exist.",)
-    btAssert(pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE);
+    ASSERT_CHK(pEnv, pJoint->getConstraintType() == POINT2POINT_CONSTRAINT_TYPE,);
 
     pJoint->m_setting.m_tau = tau;
 }

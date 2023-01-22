@@ -47,16 +47,16 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
         jobject pivotVector, jboolean allowCollisions, jfloat influence) {
     btSoftBody *pSoftBody = reinterpret_cast<btSoftBody *> (softBodyId);
     NULL_CHK(pEnv, pSoftBody, "The btSoftBody does not exist.", 0)
-    btAssert(pSoftBody->getInternalType()
-            & btCollisionObject::CO_SOFT_BODY);
+    ASSERT_CHK(pEnv, pSoftBody->getInternalType()
+            & btCollisionObject::CO_SOFT_BODY, 0);
 
     btRigidBody *pRigidBody = reinterpret_cast<btRigidBody *> (rigidBodyId);
     NULL_CHK(pEnv, pRigidBody, "The btRigidBody does not exist.", 0);
-    btAssert(pRigidBody->getInternalType()
-            & btCollisionObject::CO_RIGID_BODY);
+    ASSERT_CHK(pEnv, pRigidBody->getInternalType()
+            & btCollisionObject::CO_RIGID_BODY, 0);
 
-    btAssert(nodeIndex >= 0);
-    btAssert(nodeIndex < pSoftBody->m_nodes.size());
+    ASSERT_CHK(pEnv, nodeIndex >= 0, 0);
+    ASSERT_CHK(pEnv, nodeIndex < pSoftBody->m_nodes.size(), 0);
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, pivotVector, &vec);
