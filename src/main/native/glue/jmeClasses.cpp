@@ -149,6 +149,27 @@ bool jmeClasses::printFlag = true;
  * to alter this flag.
  */
 bool jmeClasses::reinitializationCallbackFlag = false;
+/*
+ * macros used to initialize the global variables:
+ */
+#define GLOBAL_CLASS(var, resource) { \
+    (var) = pEnv->FindClass(resource); \
+    EXCEPTION_CHK(pEnv,); \
+    (var) = (jclass) pEnv->NewGlobalRef(var); \
+    EXCEPTION_CHK(pEnv,); \
+}
+#define GLOBAL_FIELD(var, clss, name, sig) { \
+    (var) = pEnv->GetFieldID((clss), (name), (sig)); \
+    EXCEPTION_CHK(pEnv,); \
+}
+#define GLOBAL_METHOD(var, clss, name, sig) { \
+    (var) = pEnv->GetMethodID((clss), (name), (sig)); \
+    EXCEPTION_CHK(pEnv,); \
+}
+#define GLOBAL_STATIC_METHOD(var, clss, name, sig) { \
+    (var) = pEnv->GetStaticMethodID((clss), (name), (sig)); \
+    EXCEPTION_CHK(pEnv,); \
+}
 
 /*
  * Initialize this instance for the specified environment.
@@ -197,53 +218,43 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     pEnv->GetJavaVM(&vm);
 
-    IllegalArgumentException = pEnv->FindClass("java/lang/IllegalArgumentException");
-    EXCEPTION_CHK(pEnv,);
-    IllegalArgumentException = (jclass) pEnv->NewGlobalRef(IllegalArgumentException);
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_CLASS(IllegalArgumentException,
+            "java/lang/IllegalArgumentException");
 
     jclass list = pEnv->FindClass("java/util/List");
     EXCEPTION_CHK(pEnv,);
-    List_addMethod = pEnv->GetMethodID(list, "add", "(Ljava/lang/Object;)Z");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_METHOD(List_addMethod, list, "add", "(Ljava/lang/Object;)Z");
 
     jclass collisionSpace = pEnv->FindClass("com/jme3/bullet/CollisionSpace");
     EXCEPTION_CHK(pEnv,);
-    CollisionSpace_notifyCollisionGroupListeners = pEnv->GetMethodID(
+    GLOBAL_METHOD(CollisionSpace_notifyCollisionGroupListeners,
             collisionSpace,
             "notifyCollisionGroupListeners_native",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;)Z");
-    EXCEPTION_CHK(pEnv,);
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;)Z"
+    );
 
     jclass physicsSpace = pEnv->FindClass("com/jme3/bullet/PhysicsSpace");
     EXCEPTION_CHK(pEnv,);
-    PhysicsSpace_preTick
-            = pEnv->GetMethodID(physicsSpace, "preTick_native", "(F)V");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSpace_postTick
-            = pEnv->GetMethodID(physicsSpace, "postTick_native", "(F)V");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSpace_onContactEnded
-            = pEnv->GetMethodID(physicsSpace, "onContactEnded", "(J)V");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSpace_onContactProcessed = pEnv->GetMethodID(
+    GLOBAL_METHOD(PhysicsSpace_preTick, physicsSpace, "preTick_native", "(F)V");
+    GLOBAL_METHOD(PhysicsSpace_postTick, physicsSpace, "postTick_native", "(F)V");
+    GLOBAL_METHOD(PhysicsSpace_onContactEnded,
+            physicsSpace, "onContactEnded", "(J)V");
+    GLOBAL_METHOD(PhysicsSpace_onContactProcessed,
             physicsSpace,
             "onContactProcessed",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V"
     );
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSpace_onContactStarted
-            = pEnv->GetMethodID(physicsSpace, "onContactStarted", "(J)V");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_METHOD(PhysicsSpace_onContactStarted,
+            physicsSpace, "onContactStarted", "(J)V");
 
     jclass physicsGhostObject
             = pEnv->FindClass("com/jme3/bullet/objects/PhysicsGhostObject");
     EXCEPTION_CHK(pEnv,);
-    PhysicsGhostObject_addOverlappingObject = pEnv->GetMethodID(
+    GLOBAL_METHOD(PhysicsGhostObject_addOverlappingObject,
             physicsGhostObject,
             "addOverlappingObject_native",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V");
-    EXCEPTION_CHK(pEnv,);
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V"
+    );
 
     jclass vec3d = pEnv->FindClass("com/simsilica/mathd/Vec3d");
     if (pEnv->ExceptionCheck()) {
@@ -274,217 +285,144 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
         Matrix3d_m22 = NULL;
 
     } else {
-        Vec3d_x = pEnv->GetFieldID(vec3d, "x", "D");
-        EXCEPTION_CHK(pEnv,);
-        Vec3d_y = pEnv->GetFieldID(vec3d, "y", "D");
-        EXCEPTION_CHK(pEnv,);
-        Vec3d_z = pEnv->GetFieldID(vec3d, "z", "D");
-        EXCEPTION_CHK(pEnv,);
-        Vec3d_set = pEnv->GetMethodID(vec3d, "set", "(DDD)Lcom/simsilica/mathd/Vec3d;");
-        EXCEPTION_CHK(pEnv,);
+        GLOBAL_FIELD(Vec3d_x, vec3d, "x", "D");
+        GLOBAL_FIELD(Vec3d_y, vec3d, "y", "D");
+        GLOBAL_FIELD(Vec3d_z, vec3d, "z", "D");
+        GLOBAL_METHOD(Vec3d_set,
+                vec3d, "set", "(DDD)Lcom/simsilica/mathd/Vec3d;");
 
         jclass quatd = pEnv->FindClass("com/simsilica/mathd/Quatd");
         EXCEPTION_CHK(pEnv,);
-        Quatd_x = pEnv->GetFieldID(quatd, "x", "D");
-        EXCEPTION_CHK(pEnv,);
-        Quatd_y = pEnv->GetFieldID(quatd, "y", "D");
-        EXCEPTION_CHK(pEnv,);
-        Quatd_z = pEnv->GetFieldID(quatd, "z", "D");
-        EXCEPTION_CHK(pEnv,);
-        Quatd_w = pEnv->GetFieldID(quatd, "w", "D");
-        EXCEPTION_CHK(pEnv,);
-        Quatd_set = pEnv->GetMethodID(quatd, "set", "(DDDD)Lcom/simsilica/mathd/Quatd;");
-        EXCEPTION_CHK(pEnv,);
+        GLOBAL_FIELD(Quatd_x, quatd, "x", "D");
+        GLOBAL_FIELD(Quatd_y, quatd, "y", "D");
+        GLOBAL_FIELD(Quatd_z, quatd, "z", "D");
+        GLOBAL_FIELD(Quatd_w, quatd, "w", "D");
+        GLOBAL_METHOD(Quatd_set,
+                quatd, "set", "(DDDD)Lcom/simsilica/mathd/Quatd;");
 
         jclass matrix3d = pEnv->FindClass("com/simsilica/mathd/Matrix3d");
         EXCEPTION_CHK(pEnv,);
-        Matrix3d_m00 = pEnv->GetFieldID(matrix3d, "m00", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m01 = pEnv->GetFieldID(matrix3d, "m01", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m02 = pEnv->GetFieldID(matrix3d, "m02", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m10 = pEnv->GetFieldID(matrix3d, "m10", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m11 = pEnv->GetFieldID(matrix3d, "m11", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m12 = pEnv->GetFieldID(matrix3d, "m12", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m20 = pEnv->GetFieldID(matrix3d, "m20", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m21 = pEnv->GetFieldID(matrix3d, "m21", "D");
-        EXCEPTION_CHK(pEnv,);
-        Matrix3d_m22 = pEnv->GetFieldID(matrix3d, "m22", "D");
-        EXCEPTION_CHK(pEnv,);
+        GLOBAL_FIELD(Matrix3d_m00, matrix3d, "m00", "D");
+        GLOBAL_FIELD(Matrix3d_m01, matrix3d, "m01", "D");
+        GLOBAL_FIELD(Matrix3d_m02, matrix3d, "m02", "D");
+        GLOBAL_FIELD(Matrix3d_m10, matrix3d, "m10", "D");
+        GLOBAL_FIELD(Matrix3d_m11, matrix3d, "m11", "D");
+        GLOBAL_FIELD(Matrix3d_m12, matrix3d, "m12", "D");
+        GLOBAL_FIELD(Matrix3d_m20, matrix3d, "m20", "D");
+        GLOBAL_FIELD(Matrix3d_m21, matrix3d, "m21", "D");
+        GLOBAL_FIELD(Matrix3d_m22, matrix3d, "m22", "D");
     }
 
-    Vector3f = pEnv->FindClass("com/jme3/math/Vector3f");
-    EXCEPTION_CHK(pEnv,);
-    Vector3f = (jclass) pEnv->NewGlobalRef(Vector3f);
-    EXCEPTION_CHK(pEnv,);
-    Vector3f_x = pEnv->GetFieldID(Vector3f, "x", "F");
-    EXCEPTION_CHK(pEnv,);
-    Vector3f_y = pEnv->GetFieldID(Vector3f, "y", "F");
-    EXCEPTION_CHK(pEnv,);
-    Vector3f_z = pEnv->GetFieldID(Vector3f, "z", "F");
-    EXCEPTION_CHK(pEnv,);
-    Vector3f_set = pEnv->GetMethodID(Vector3f, "set", "(FFF)Lcom/jme3/math/Vector3f;");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_CLASS(Vector3f, "com/jme3/math/Vector3f");
+    GLOBAL_FIELD(Vector3f_x, Vector3f, "x", "F");
+    GLOBAL_FIELD(Vector3f_y, Vector3f, "y", "F");
+    GLOBAL_FIELD(Vector3f_z, Vector3f, "z", "F");
+    GLOBAL_METHOD(Vector3f_set,
+            Vector3f, "set", "(FFF)Lcom/jme3/math/Vector3f;");
 
     jclass quaternion = pEnv->FindClass("com/jme3/math/Quaternion");
     EXCEPTION_CHK(pEnv,);
-    Quaternion_x = pEnv->GetFieldID(quaternion, "x", "F");
-    EXCEPTION_CHK(pEnv,);
-    Quaternion_y = pEnv->GetFieldID(quaternion, "y", "F");
-    EXCEPTION_CHK(pEnv,);
-    Quaternion_z = pEnv->GetFieldID(quaternion, "z", "F");
-    EXCEPTION_CHK(pEnv,);
-    Quaternion_w = pEnv->GetFieldID(quaternion, "w", "F");
-    EXCEPTION_CHK(pEnv,);
-    Quaternion_set = pEnv->GetMethodID(quaternion, "set", "(FFFF)Lcom/jme3/math/Quaternion;");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_FIELD(Quaternion_x, quaternion, "x", "F");
+    GLOBAL_FIELD(Quaternion_y, quaternion, "y", "F");
+    GLOBAL_FIELD(Quaternion_z, quaternion, "z", "F");
+    GLOBAL_FIELD(Quaternion_w, quaternion, "w", "F");
+    GLOBAL_METHOD(Quaternion_set,
+            quaternion, "set", "(FFFF)Lcom/jme3/math/Quaternion;");
 
     jclass matrix3f = pEnv->FindClass("com/jme3/math/Matrix3f");
     EXCEPTION_CHK(pEnv,);
-    Matrix3f_m00 = pEnv->GetFieldID(matrix3f, "m00", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m01 = pEnv->GetFieldID(matrix3f, "m01", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m02 = pEnv->GetFieldID(matrix3f, "m02", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m10 = pEnv->GetFieldID(matrix3f, "m10", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m11 = pEnv->GetFieldID(matrix3f, "m11", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m12 = pEnv->GetFieldID(matrix3f, "m12", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m20 = pEnv->GetFieldID(matrix3f, "m20", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m21 = pEnv->GetFieldID(matrix3f, "m21", "F");
-    EXCEPTION_CHK(pEnv,);
-    Matrix3f_m22 = pEnv->GetFieldID(matrix3f, "m22", "F");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_FIELD(Matrix3f_m00, matrix3f, "m00", "F");
+    GLOBAL_FIELD(Matrix3f_m01, matrix3f, "m01", "F");
+    GLOBAL_FIELD(Matrix3f_m02, matrix3f, "m02", "F");
+    GLOBAL_FIELD(Matrix3f_m10, matrix3f, "m10", "F");
+    GLOBAL_FIELD(Matrix3f_m11, matrix3f, "m11", "F");
+    GLOBAL_FIELD(Matrix3f_m12, matrix3f, "m12", "F");
+    GLOBAL_FIELD(Matrix3f_m20, matrix3f, "m20", "F");
+    GLOBAL_FIELD(Matrix3f_m21, matrix3f, "m21", "F");
+    GLOBAL_FIELD(Matrix3f_m22, matrix3f, "m22", "F");
 
-    NullPointerException = pEnv->FindClass("java/lang/NullPointerException");
-    EXCEPTION_CHK(pEnv,);
-    NullPointerException = (jclass) pEnv->NewGlobalRef(NullPointerException);
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_CLASS(NullPointerException, "java/lang/NullPointerException");
 
     jclass debugMeshCallback
             = pEnv->FindClass("com/jme3/bullet/util/DebugMeshCallback");
     EXCEPTION_CHK(pEnv,);
 
-    DebugMeshCallback_addVector
-            = pEnv->GetMethodID(debugMeshCallback, "addVector", "(FFFII)V");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_METHOD(DebugMeshCallback_addVector,
+            debugMeshCallback, "addVector", "(FFFII)V");
 
-    PhysicsCollisionEvent_Class = pEnv->FindClass(
+    GLOBAL_CLASS(PhysicsCollisionEvent_Class,
             "com/jme3/bullet/collision/PhysicsCollisionEvent");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsCollisionEvent_Class
-            = (jclass) pEnv->NewGlobalRef(PhysicsCollisionEvent_Class);
-    EXCEPTION_CHK(pEnv,);
-    PhysicsCollisionEvent_init = pEnv->GetMethodID(PhysicsCollisionEvent_Class,
+    GLOBAL_METHOD(PhysicsCollisionEvent_init,
+            PhysicsCollisionEvent_Class,
             "<init>",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V");
-    EXCEPTION_CHK(pEnv,);
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;J)V"
+    );
 
     jclass physicsCollisionListener = pEnv->FindClass(
             "com/jme3/bullet/collision/PhysicsCollisionListener");
     EXCEPTION_CHK(pEnv,);
-    PhysicsCollisionListener_method = pEnv->GetMethodID(
-            physicsCollisionListener, "collision",
-            "(Lcom/jme3/bullet/collision/PhysicsCollisionEvent;)V");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_METHOD(PhysicsCollisionListener_method,
+            physicsCollisionListener,
+            "collision",
+            "(Lcom/jme3/bullet/collision/PhysicsCollisionEvent;)V"
+    );
 
-    PhysicsRay_Class = pEnv->FindClass("com/jme3/bullet/collision/PhysicsRayTestResult");
-    PhysicsRay_Class = (jclass) pEnv->NewGlobalRef(PhysicsRay_Class);
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_CLASS(PhysicsRay_Class,
+            "com/jme3/bullet/collision/PhysicsRayTestResult");
 
-    PhysicsRay_collisionObject = pEnv->GetFieldID(PhysicsRay_Class,
+    GLOBAL_FIELD(PhysicsRay_collisionObject,
+            PhysicsRay_Class,
             "collisionObject",
-            "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsRay_hitFraction
-            = pEnv->GetFieldID(PhysicsRay_Class, "hitFraction", "F");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsRay_normal = pEnv->GetFieldID(
+            "Lcom/jme3/bullet/collision/PhysicsCollisionObject;"
+    );
+    GLOBAL_FIELD(PhysicsRay_hitFraction, PhysicsRay_Class, "hitFraction", "F");
+    GLOBAL_FIELD(PhysicsRay_normal,
             PhysicsRay_Class, "normal", "Lcom/jme3/math/Vector3f;");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsRay_partIndex = pEnv->GetFieldID(PhysicsRay_Class, "partIndex", "I");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsRay_triangleIndex
-            = pEnv->GetFieldID(PhysicsRay_Class, "triangleIndex", "I");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_FIELD(PhysicsRay_partIndex, PhysicsRay_Class, "partIndex", "I");
+    GLOBAL_FIELD(PhysicsRay_triangleIndex,
+            PhysicsRay_Class, "triangleIndex", "I");
 
-    PhysicsSweep_Class = pEnv->FindClass(
+    GLOBAL_CLASS(PhysicsSweep_Class,
             "com/jme3/bullet/collision/PhysicsSweepTestResult");
-    PhysicsSweep_Class = (jclass) pEnv->NewGlobalRef(PhysicsSweep_Class);
-    EXCEPTION_CHK(pEnv,);
-
-    PhysicsSweep_collisionObject = pEnv->GetFieldID(PhysicsSweep_Class,
+    GLOBAL_FIELD(PhysicsSweep_collisionObject,
+            PhysicsSweep_Class,
             "collisionObject",
-            "Lcom/jme3/bullet/collision/PhysicsCollisionObject;");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSweep_hitFraction
-            = pEnv->GetFieldID(PhysicsSweep_Class, "hitFraction", "F");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSweep_normal = pEnv->GetFieldID(
+            "Lcom/jme3/bullet/collision/PhysicsCollisionObject;"
+    );
+    GLOBAL_FIELD(PhysicsSweep_hitFraction,
+            PhysicsSweep_Class, "hitFraction", "F");
+    GLOBAL_FIELD(PhysicsSweep_normal,
             PhysicsSweep_Class, "normal", "Lcom/jme3/math/Vector3f;");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSweep_partIndex
-            = pEnv->GetFieldID(PhysicsSweep_Class, "partIndex", "I");
-    EXCEPTION_CHK(pEnv,);
-    PhysicsSweep_triangleIndex
-            = pEnv->GetFieldID(PhysicsSweep_Class, "triangleIndex", "I");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_FIELD(PhysicsSweep_partIndex,
+            PhysicsSweep_Class, "partIndex", "I");
+    GLOBAL_FIELD(PhysicsSweep_triangleIndex,
+            PhysicsSweep_Class, "triangleIndex", "I");
 
     jclass transform = pEnv->FindClass("com/jme3/math/Transform");
     EXCEPTION_CHK(pEnv,);
 
-    Transform_rotation = pEnv->GetMethodID(
+    GLOBAL_METHOD(Transform_rotation,
             transform, "getRotation", "()Lcom/jme3/math/Quaternion;");
-    EXCEPTION_CHK(pEnv,);
 
-    Transform_translation = pEnv->GetMethodID(
-            transform, "getTranslation", "()Lcom/jme3/math/Vector3f;");
-    EXCEPTION_CHK(pEnv,);
-
-    Transform_scale = pEnv->GetMethodID(
+    GLOBAL_METHOD(Transform_scale,
             transform, "getScale", "()Lcom/jme3/math/Vector3f;");
-    EXCEPTION_CHK(pEnv,);
 
-    Vhacd4 = pEnv->FindClass("vhacd4/Vhacd4");
-    EXCEPTION_CHK(pEnv,);
-    Vhacd4 = (jclass) pEnv->NewGlobalRef(Vhacd4);
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_METHOD(Transform_translation,
+            transform, "getTranslation", "()Lcom/jme3/math/Vector3f;");
 
-    Vhacd4_addHull = pEnv->GetStaticMethodID(Vhacd4, "addHull", "(J)V");
-    EXCEPTION_CHK(pEnv,);
+    GLOBAL_CLASS(Vhacd4, "vhacd4/Vhacd4");
+    GLOBAL_STATIC_METHOD(Vhacd4_addHull, Vhacd4, "addHull", "(J)V");
+    GLOBAL_STATIC_METHOD(Vhacd4_update,
+            Vhacd4, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
 
-    Vhacd4_update = pEnv->GetStaticMethodID(Vhacd4, "update",
-            "(DDDLjava/lang/String;Ljava/lang/String;)V");
-    EXCEPTION_CHK(pEnv,);
-
-    Vhacd = pEnv->FindClass("vhacd/VHACD");
-    EXCEPTION_CHK(pEnv,);
-    Vhacd = (jclass) pEnv->NewGlobalRef(Vhacd);
-    EXCEPTION_CHK(pEnv,);
-
-    Vhacd_addHull = pEnv->GetStaticMethodID(Vhacd, "addHull", "(J)V");
-    EXCEPTION_CHK(pEnv,);
-
-    Vhacd_update = pEnv->GetStaticMethodID(
+    GLOBAL_CLASS(Vhacd, "vhacd/VHACD");
+    GLOBAL_STATIC_METHOD(Vhacd_addHull, Vhacd, "addHull", "(J)V");
+    GLOBAL_STATIC_METHOD(Vhacd_update,
             Vhacd, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
-    EXCEPTION_CHK(pEnv,);
 
-    NativeLibrary_Class = pEnv->FindClass("com/jme3/bullet/util/NativeLibrary");
-    EXCEPTION_CHK(pEnv,);
-    NativeLibrary_Class = (jclass) pEnv->NewGlobalRef(NativeLibrary_Class);
-    EXCEPTION_CHK(pEnv,);
-    NativeLibrary_reinitialization = pEnv->GetStaticMethodID(
+    GLOBAL_CLASS(NativeLibrary_Class, "com/jme3/bullet/util/NativeLibrary");
+    GLOBAL_STATIC_METHOD(NativeLibrary_reinitialization,
             NativeLibrary_Class, "reinitialization", "()V");
-    EXCEPTION_CHK(pEnv,);
     /*
      * Invoke NativeLibrary.postInitialization()
      * in order to start the Physics Cleaner thread.
