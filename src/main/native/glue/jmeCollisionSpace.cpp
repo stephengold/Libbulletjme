@@ -93,7 +93,6 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     pEnv->DeleteLocalRef(javaCollisionObject0);
     EXCEPTION_CHK(pEnv, false);
     pEnv->DeleteLocalRef(javaCollisionObject1);
-    EXCEPTION_CHK(pEnv, false);
 
     return (bool) result;
 }

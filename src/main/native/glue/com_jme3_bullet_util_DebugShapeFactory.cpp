@@ -69,7 +69,6 @@ public:
         pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
                 vertexC.getX(), vertexC.getY(), vertexC.getZ(),
                 partId, triangleIndex);
-        EXCEPTION_CHK(pEnv,);
     }
 };
 
