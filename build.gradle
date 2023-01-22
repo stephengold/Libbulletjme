@@ -349,6 +349,9 @@ tasks.register('copyToDistJars', Copy) {
 
 jar {
     archiveBaseName = project.ext.baseName
+    manifest {
+        attributes 'Created-By': "${JavaVersion.current()} (${System.getProperty("java.vendor")})"
+    }
 }
 tasks.register('javadocJar', Jar) {
     archiveBaseName = project.ext.baseName
