@@ -219,12 +219,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Take the Hamilton product of the current instance times the specified
  Quatd to yield a new Quatd.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Quatd,com.simsilica.mathd.Quatd)" class="member-name-link">mult</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
- <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;storeResult)</code></div>
+ <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;result)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Multiply by the specified quaternion and return the product in a 3rd
- quaternion.</div>
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd and return the product in a 3rd Quatd.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Vec3d)" class="member-name-link">mult</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
@@ -240,8 +240,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(com.simsilica.mathd.Quatd)" class="member-name-link">multLocal</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Take the Hamilton product of this Quatd times the specified Quatd in
- place.</div>
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd in place.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#normalizeLocal()" class="member-name-link">normalizeLocal</a>()</code></div>
@@ -524,7 +524,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Take the Hamilton product of the current instance times the specified
  Quatd to yield a new Quatd. The current instance is unaffected.
  <p>
- It IS safe for <code>q</code> and <code>this</code> to be the same object.</div>
+ It IS safe for <code>q</code> and <code>this</code> to be the same object.
+ <p>
+ This method is used to combine rotations. Note that quaternion
+ multiplication is noncommutative, so generally q * p != p * q.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>q</code> - the right factor (not null, unaffected)</dd>
@@ -534,11 +537,38 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </section>
 </li>
 <li>
+<section class="detail" id="mult(com.simsilica.mathd.Quatd,com.simsilica.mathd.Quatd)">
+<h3>mult</h3>
+<div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
+ <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;result)</span></div>
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd and return the product in a 3rd Quatd. The current instance is
+ unaffected, unless it's <code>result</code>.
+ <p>
+ This method is used to combine rotations. Note that quaternion
+ multiplication is noncommutative, so generally q * p != p * q.
+ <p>
+ It IS safe for any or all of <code>q</code>, <code>result</code>, and <code>this</code>
+ to be the same object.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>q</code> - the right factor (not null, unaffected unless it's
+ <code>result</code>)</dd>
+<dd><code>result</code> - storage for the product, or null for a new Quatd</dd>
+<dt>Returns:</dt>
+<dd><code>this * q</code> (either <code>result</code> or a new Quatd)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="multLocal(com.simsilica.mathd.Quatd)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</span></div>
-<div class="block">Take the Hamilton product of this Quatd times the specified Quatd in
- place.
+<div class="block">Take the Hamilton product of the current instance times the specified
+ Quatd in place.
+ <p>
+ This method is used to combine rotations. Note that quaternion
+ multiplication is noncommutative, so generally q * p != p * q.
  <p>
  It IS safe for <code>q</code> and <code>this</code> to be the same object.</div>
 <dl class="notes">
@@ -560,31 +590,6 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>v</code> - the input vector (not null, unaffected)</dd>
 <dt>Returns:</dt>
 <dd>a new instance</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="mult(com.simsilica.mathd.Quatd,com.simsilica.mathd.Quatd)">
-<h3>mult</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
- <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;storeResult)</span></div>
-<div class="block">Multiply by the specified quaternion and return the product in a 3rd
- quaternion. The current instance is unaffected, unless it's
- <code>storeResult</code>.
-
- <p>This method is used to combine rotations. Note that quaternion
- multiplication is noncommutative, so generally q * p != p * q.
-
- <p>It IS safe for <code>q</code> and <code>storeResult</code> to be the same
- object. However, if <code>this</code> and <code>storeResult</code> are the same
- object, the result is undefined.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>q</code> - the right factor (not null, unaffected unless it's
- <code>storeResult</code>)</dd>
-<dd><code>storeResult</code> - storage for the product, or null for a new Quatd</dd>
-<dt>Returns:</dt>
-<dd><code>this * q</code> (either <code>storeResult</code> or a new Quatd)</dd>
 </dl>
 </section>
 </li>
