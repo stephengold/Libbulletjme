@@ -413,7 +413,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Return the address of the JNIEnv that this space uses for callbacks. For 
+     * Return the address of the JNIEnv that this space uses for callbacks. For
      * debugging and testing.
      *
      * @return the virtual address of the (native) object (not zero)
