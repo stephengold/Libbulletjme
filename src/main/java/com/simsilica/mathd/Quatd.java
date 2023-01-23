@@ -256,6 +256,9 @@ public final class Quatd implements Cloneable {
      * Quatd to yield a new Quatd. The current instance is unaffected.
      * <p>
      * It IS safe for {@code q} and {@code this} to be the same object.
+     * <p>
+     * This method is used to combine rotations. Note that quaternion
+     * multiplication is noncommutative, so generally q * p != p * q.
      *
      * @param q the right factor (not null, unaffected)
      * @return a new instance
@@ -275,11 +278,11 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Multiply by the specified quaternion and return the product in a 3rd
-     * quaternion. The current instance is unaffected, unless it's
-     * {@code result}.
-     *
-     * <p>This method is used to combine rotations. Note that quaternion
+     * Take the Hamilton product of the current instance times the specified
+     * Quatd and return the product in a 3rd Quatd. The current instance is
+     * unaffected, unless it's {@code result}.
+     * <p>
+     * This method is used to combine rotations. Note that quaternion
      * multiplication is noncommutative, so generally q * p != p * q.
      * <p>
      * It IS safe for any or all of {@code q}, {@code result}, and {@code this}
@@ -310,8 +313,11 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Take the Hamilton product of this Quatd times the specified Quatd in
-     * place.
+     * Take the Hamilton product of the current instance times the specified
+     * Quatd in place.
+     * <p>
+     * This method is used to combine rotations. Note that quaternion
+     * multiplication is noncommutative, so generally q * p != p * q.
      * <p>
      * It IS safe for {@code q} and {@code this} to be the same object.
      *
