@@ -84,6 +84,11 @@ public:
         return m_collisionWorld;
     }
 
+    const JNIEnv *
+    getEnv() const {
+        return pEnv;
+    }
+
     JNIEnv *
     getEnvAndAttach() {
         attachThread();

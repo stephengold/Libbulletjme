@@ -49,6 +49,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_getDeterministicO
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    getJniEnvId
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_getJniEnvId
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    getNumCollisionObjects
  * Signature: (J)I
  */

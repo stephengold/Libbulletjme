@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2022 jMonkeyEngine
+ * Copyright (c) 2009-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -413,6 +413,19 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
+     * Return the address of the JNIEnv that this space uses for callbacks. For 
+     * debugging and testing.
+     *
+     * @return the virtual address of the (native) object (not zero)
+     */
+    public long jniEnvId() {
+        long spaceId = nativeId();
+        long result = getJniEnvId(spaceId);
+
+        return result;
+    }
+
+    /**
      * Callback to determine whether the specified objects should be allowed to
      * collide. Invoked during broadphase, after axis-aligned bounding boxes,
      * ignore lists, and collision groups have been checked. Override this
@@ -763,6 +776,8 @@ public class CollisionSpace extends NativePhysicsObject {
 
     native private static boolean
             getDeterministicOverlappingPairs(long spaceId);
+
+    native private static long getJniEnvId(long spaceId);
 
     native private static int getNumCollisionObjects(long spaceId);
 

@@ -199,6 +199,21 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_getDeterministicO
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    getJniEnvId
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_getJniEnvId
+(JNIEnv *pEnv, jclass, jlong spaceId) {
+    const jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
+
+    const JNIEnv * result = pSpace->getEnv();
+    return jlong(result);
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    getNumCollisionObjects
  * Signature: (J)I
  */
