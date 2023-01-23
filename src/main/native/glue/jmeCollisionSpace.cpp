@@ -105,7 +105,12 @@ jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
 }
 
 void jmeCollisionSpace::attachThread() {
+#ifdef ANDROID
+    // doesn't match the Invocation API spec
+    jint retCode = jmeClasses::vm->AttachCurrentThread(&pEnv, NULL);
+#else
     jint retCode = jmeClasses::vm->AttachCurrentThread((void **)&pEnv, NULL);
+#endif
     btAssert(retCode == JNI_OK);
 }
 
