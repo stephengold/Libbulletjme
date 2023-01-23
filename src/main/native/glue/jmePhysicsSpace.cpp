@@ -126,7 +126,7 @@ void jmePhysicsSpace::contactEndedCallback(btPersistentManifold * const &pm) {
     pSpace->m_mutex.lock();
 #endif
 
-    JNIEnv * const pEnv = pSpace->getEnv();
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
     jobject javaPhysicsSpace
             = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace == NULL) {
@@ -191,7 +191,7 @@ bool jmePhysicsSpace::contactProcessedCallback(btManifoldPoint& contactPoint,
 #if BT_THREADSAFE
     pSpace->m_mutex.lock();
 #endif
-    JNIEnv * const pEnv = pSpace->getEnv();
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace == NULL) {
         printf("null javaPhysicsSpace in contactProcessedCallback\n");
@@ -288,7 +288,7 @@ void jmePhysicsSpace::contactStartedCallback(btPersistentManifold * const &pm) {
     pSpace->m_mutex.lock();
 #endif
 
-    JNIEnv * const pEnv = pSpace->getEnv();
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
     jobject javaPhysicsSpace
             = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace == NULL) {
@@ -343,7 +343,7 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
 
     jmePhysicsSpace * const
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv * const pEnv = pSpace->getEnv();
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     if (javaPhysicsSpace != NULL) {
         pEnv->CallVoidMethod(javaPhysicsSpace, jmeClasses::PhysicsSpace_postTick,
@@ -359,7 +359,7 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 
     jmePhysicsSpace * const
             pSpace = (jmePhysicsSpace *) pWorld->getWorldUserInfo();
-    JNIEnv * const pEnv = pSpace->getEnv();
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     EXCEPTION_CHK(pEnv,);
     if (javaPhysicsSpace != NULL) {

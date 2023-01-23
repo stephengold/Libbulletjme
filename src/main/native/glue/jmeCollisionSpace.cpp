@@ -75,7 +75,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
      * As a final test, invoke the applicable collision-group listeners, if any.
      */
     jmeCollisionSpace * const pSpace = pUser0->m_jmeSpace;
-    JNIEnv * const pEnv = pSpace->getEnv();
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
     jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
     EXCEPTION_CHK(pEnv, false);
     jobject javaCollisionObject0 = pEnv->NewLocalRef(pUser0->m_javaRef); // TODO is this necessary?

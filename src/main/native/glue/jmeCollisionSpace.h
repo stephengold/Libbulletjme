@@ -85,7 +85,7 @@ public:
     }
 
     JNIEnv *
-    getEnv() {
+    getEnvAndAttach() {
         attachThread();
         return pEnv;
     }
