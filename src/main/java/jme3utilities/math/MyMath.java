@@ -270,7 +270,7 @@ final public class MyMath {
         if (MyVector3f.isZero(translation)) {
             Quaternion rotation = transform.getRotation(); // alias
             if (MyQuaternion.isRotationIdentity(rotation)) {
-                Vector3f scale = transform.getScale();
+                Vector3f scale = transform.getScale(); // alias
                 result = MyVector3f.isScaleIdentity(scale);
             }
         }
