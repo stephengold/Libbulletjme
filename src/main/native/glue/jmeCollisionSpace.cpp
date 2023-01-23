@@ -102,18 +102,11 @@ jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
 
     m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace);
     EXCEPTION_CHK(pEnv,);
-
-    pEnv->GetJavaVM(&vm);
 }
 
 void jmeCollisionSpace::attachThread() {
-#ifdef ANDROID
-    vm->AttachCurrentThread((JNIEnv **) & pEnv, NULL);
-#elif defined (JNI_VERSION_1_2)
-    vm->AttachCurrentThread((void **) &pEnv, NULL);
-#else
-    vm->AttachCurrentThread(&pEnv, NULL);
-#endif
+    jint retCode = jmeClasses::vm->AttachCurrentThread((void **)&pEnv, NULL);
+    btAssert(retCode == JNI_OK);
 }
 
 btBroadphaseInterface * jmeCollisionSpace::createBroadphase(

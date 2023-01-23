@@ -65,6 +65,9 @@ class jmeClasses {
 public:
     static void initJavaClasses(JNIEnv *);
 
+    // pointer to the Java virtual machine
+    static JavaVM * vm;
+
     static jclass IllegalArgumentException;
     static jclass RuntimeException;
 
@@ -165,8 +168,6 @@ public:
     static bool reinitializationCallbackFlag;
 
 private:
-    static JavaVM * vm;
-
     jmeClasses() {
     }
 

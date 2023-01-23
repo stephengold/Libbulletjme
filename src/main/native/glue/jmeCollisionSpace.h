@@ -55,7 +55,6 @@ protected:
      */
     JNIEnv *pEnv;
     jobject m_javaSpace;
-    JavaVM * vm;
     /*
      * exclusive access to the JavaVM and JNIEnv during parallel for loops:
      */
