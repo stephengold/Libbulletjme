@@ -1,5 +1,23 @@
 # Release log for the Libbulletjme project
 
+## Version 17.5.0 released on 23 January 2023
+
++ Bugfix: `PhysicsCollisionObject.findInstance()`
+  creates a weak global reference that's never deleted.
++ Bugfix: weak global references in `PhysicsCollisionObject` and `MultiBody`
+  are never deleted.
++ Bugfix: assertion failure when `toString()` is invoked on an unassigned joint
++ Added 4 new methods:
+  + `CollisionSpace.jniEnvId()`
+  + `CompoundCollisionShape.connectivityMatrix()`
+  + `CompoundCollisionShape.countGroups()`
+  + `NativeLibrary.jniEnvId()`
+  + `New6Dof.getRotationMatrix()`
++ Changed how 64-bit MacOSX natives are released, for both ARM and Intel.
++ Throw Java exceptions (instead of crashing the JVM with `btAssert()`)
+  in the JNI glue code.
++ Improved handling of Java exceptions in the JNI glue code.
+
 ## Version 17.4.0 released on 23 December 2022
 
 + Bugfix: transforms not updated for the `getCalculatedOriginA()` and
