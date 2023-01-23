@@ -52,6 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MultiSphere_create
         jobject center = pEnv->GetObjectArrayElement(centers, i);
         EXCEPTION_CHK(pEnv, 0);
         jmeBulletUtil::convert(pEnv, center, &pCenters[i]);
+        EXCEPTION_CHK(pEnv, 0);
     }
 
     btScalar *pRadii;

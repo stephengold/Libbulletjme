@@ -57,7 +57,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
     btTransform trans;
     jmeBulletUtil::convert(pEnv, offsetVector, &trans.getOrigin());
+    EXCEPTION_CHK(pEnv,);
     jmeBulletUtil::convert(pEnv, rotationMatrix, &trans.getBasis());
+    EXCEPTION_CHK(pEnv,);
 
     pCompound->addChildShape(trans, pChild);
 }
@@ -96,6 +98,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     delete[] pMasses; //dance022
 
     jmeBulletUtil::convert(pEnv, &principal, storeTransform);
+    EXCEPTION_CHK(pEnv,);
     jmeBulletUtil::convert(pEnv, &inertia, storeInertia);
 }
 
@@ -182,6 +185,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",);
     btMatrix3x3 rotation;
     jmeBulletUtil::convert(pEnv, rotationMatrix, &rotation);
+    EXCEPTION_CHK(pEnv,);
 
     bool shouldRecalculateLocalAabb = true;
     int numChildren = pCompound->getNumChildShapes();
@@ -218,7 +222,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
     btTransform transform;
     jmeBulletUtil::convert(pEnv, offsetVector, &transform.getOrigin());
+    EXCEPTION_CHK(pEnv,);
     jmeBulletUtil::convert(pEnv, rotationMatrix, &transform.getBasis());
+    EXCEPTION_CHK(pEnv,);
 
     bool shouldRecalculateLocalAabb = true;
     int numChildren = pCompound->getNumChildShapes();
@@ -246,6 +252,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     NULL_CHK(pEnv, offsetVector, "The offset vector does not exist.",);
     btVector3 offset;
     jmeBulletUtil::convert(pEnv, offsetVector, &offset);
+    EXCEPTION_CHK(pEnv,);
 
     bool shouldRecalculateLocalAabb = true;
     int numChildren = pCompound->getNumChildShapes();

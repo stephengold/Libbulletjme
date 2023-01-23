@@ -137,10 +137,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
     btVector3 min;
     jmeBulletUtil::convert(pEnv, minVector, &min);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, maxVector, "The max vector does not exist.", 0)
     btVector3 max;
     jmeBulletUtil::convert(pEnv, maxVector, &max);
+    EXCEPTION_CHK(pEnv, 0);
 
     jmeMultiBodySpace * const
             pSpace = new jmeMultiBodySpace(pEnv, object); //dance003

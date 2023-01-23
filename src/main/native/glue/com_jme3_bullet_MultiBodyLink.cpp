@@ -51,6 +51,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addConstraintForce
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",);
     btVector3 force;
     jmeBulletUtil::convert(pEnv, forceVector, &force);
+    EXCEPTION_CHK(pEnv,);
 
     pLink->m_appliedConstraintForce += force;
 }
@@ -69,6 +70,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addConstraintTorque
     NULL_CHK(pEnv, torqueVector, "The torque vector does not exist.",);
     btVector3 torque;
     jmeBulletUtil::convert(pEnv, torqueVector, &torque);
+    EXCEPTION_CHK(pEnv,);
 
     pLink->m_appliedConstraintTorque += torque;
 }
@@ -87,6 +89,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addForce
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",);
     btVector3 force;
     jmeBulletUtil::convert(pEnv, forceVector, &force);
+    EXCEPTION_CHK(pEnv,);
 
     pLink->m_appliedForce += force;
 }
@@ -124,6 +127,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_addTorque
     NULL_CHK(pEnv, torqueVector, "The torque vector does not exist.",);
     btVector3 torque;
     jmeBulletUtil::convert(pEnv, torqueVector, &torque);
+    EXCEPTION_CHK(pEnv,);
 
     pLink->m_appliedTorque += torque;
 }
@@ -518,6 +522,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_localFrameToWorld
     NULL_CHK(pEnv, rotationMatrix, "The rotation matrix does not exist.",)
     btMatrix3x3 local_frame;
     jmeBulletUtil::convert(pEnv, rotationMatrix, &local_frame);
+    EXCEPTION_CHK(pEnv,);
 
     const btMatrix3x3 world_frame
             = pMultiBody->localFrameToWorld(linkIndex, local_frame);
@@ -540,6 +545,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_localPosToWorld
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 local_pos;
     jmeBulletUtil::convert(pEnv, locationVector, &local_pos);
+    EXCEPTION_CHK(pEnv,);
 
     const btVector3 world_pos
             = pMultiBody->localPosToWorld(linkIndex, local_pos);
@@ -621,6 +627,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodyLink_worldPosToLocal
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 world_pos;
     jmeBulletUtil::convert(pEnv, locationVector, &world_pos);
+    EXCEPTION_CHK(pEnv,);
 
     const btVector3 local_pos
             = pMultiBody->worldPosToLocal(linkIndex, world_pos);

@@ -57,18 +57,22 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint
     NULL_CHK(pEnv, pivotInA, "The pivotInA vector does not exist.", 0)
     btVector3 pivotA;
     jmeBulletUtil::convert(pEnv, pivotInA, &pivotA);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, pivotInB, "The pivotInB vector does not exist.", 0)
     btVector3 pivotB;
     jmeBulletUtil::convert(pEnv, pivotInB, &pivotB);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, axisInA, "The axisInA vector does not exist.", 0)
     btVector3 axisA;
     jmeBulletUtil::convert(pEnv, axisInA, &axisA);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, axisInB, "The axisInB vector does not exist.", 0)
     btVector3 axisB;
     jmeBulletUtil::convert(pEnv, axisInB, &axisB);
+    EXCEPTION_CHK(pEnv, 0);
 
     btHingeConstraint *
             pJoint = new btHingeConstraint(*pBodyA, *pBodyB, pivotA, pivotB,
@@ -94,10 +98,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_HingeJoint_createJoint1
     NULL_CHK(pEnv, pivotInA, "The pivotInA vector does not exist.", 0)
     btVector3 pivot;
     jmeBulletUtil::convert(pEnv, pivotInA, &pivot);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, axisInA, "The axisInA vector does not exist.", 0)
     btVector3 axis;
     jmeBulletUtil::convert(pEnv, axisInA, &axis);
+    EXCEPTION_CHK(pEnv, 0);
 
     btHingeConstraint *pJoint = new btHingeConstraint(*pBodyA, pivot, axis,
             useReferenceFrameA); //dance021

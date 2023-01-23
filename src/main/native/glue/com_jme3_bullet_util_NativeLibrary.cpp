@@ -174,12 +174,16 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isInsideTrian
 
     btVector3 pt;
     jmeBulletUtil::convert(pEnv, testVector, &pt);
+    EXCEPTION_CHK(pEnv, JNI_FALSE);
     btVector3 p0;
     jmeBulletUtil::convert(pEnv, v0Vector, &p0);
+    EXCEPTION_CHK(pEnv, JNI_FALSE);
     btVector3 p1;
     jmeBulletUtil::convert(pEnv, v1Vector, &p1);
+    EXCEPTION_CHK(pEnv, JNI_FALSE);
     btVector3 p2;
     jmeBulletUtil::convert(pEnv, v2Vector, &p2);
+    EXCEPTION_CHK(pEnv, JNI_FALSE);
 
     btTriangleShape triangleShape(p0, p1, p2);
     btScalar margin = (btScalar) maxSeparation;

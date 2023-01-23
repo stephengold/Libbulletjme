@@ -309,6 +309,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_ju
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, jumpVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->jump(vec);
 }
@@ -372,6 +373,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_se
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",);
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, velocityVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->setAngularVelocity(vec);
 }
@@ -403,6 +405,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_se
             "The acceleration vector does not exist.",);
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, accelerationVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->setGravity(vec);
 }
@@ -446,6 +449,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_se
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, velocityVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->setLinearVelocity(vec);
 }
@@ -502,6 +506,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_se
     NULL_CHK(pEnv, upVector, "The vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, upVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->setUp(vec);
 }
@@ -533,6 +538,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_se
     NULL_CHK(pEnv, directionVector, "The direction vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, directionVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->setWalkDirection(vec);
 }
@@ -550,6 +556,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_wa
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, locationVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->warp(vec);
 }
@@ -567,6 +574,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_wa
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convertDp(pEnv, locationVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pController->warp(vec);
 }

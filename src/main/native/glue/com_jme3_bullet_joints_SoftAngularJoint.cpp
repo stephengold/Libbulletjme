@@ -56,6 +56,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJoint
     NULL_CHK(pEnv, axisVector, "The axis vector does not exist.", 0)
     btVector3 ax;
     jmeBulletUtil::convert(pEnv, axisVector, &ax);
+    EXCEPTION_CHK(pEnv, 0);
 
     btSoftBody::AJoint::Specs specs;
     specs.cfm = cfm;
@@ -92,6 +93,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_createJoint
     NULL_CHK(pEnv, axisVector, "The axis vector does not exist.", 0)
     btVector3 ax;
     jmeBulletUtil::convert(pEnv, axisVector, &ax);
+    EXCEPTION_CHK(pEnv, 0);
 
     btSoftBody::AJoint::Specs specs;
     specs.cfm = cfm;
@@ -123,6 +125,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftAngularJoint_setAxis
     NULL_CHK(pEnv, axisVector, "The axis vector does not exist.",)
     btVector3 ax;
     jmeBulletUtil::convert(pEnv, axisVector, &ax);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->m_refs[0]
             = pJoint->m_bodies[0].xform().inverse().getBasis() * ax;

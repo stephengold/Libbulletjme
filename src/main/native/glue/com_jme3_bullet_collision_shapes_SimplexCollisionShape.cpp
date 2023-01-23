@@ -47,6 +47,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
 
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, vector1, &vec1);
+    EXCEPTION_CHK(pEnv, 0);
 
     btBU_Simplex1to4* simplexShape = new btBU_Simplex1to4(vec1); //dance016
     return reinterpret_cast<jlong> (simplexShape);
@@ -63,9 +64,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
 
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, vector1, &vec1);
+    EXCEPTION_CHK(pEnv, 0);
 
     btVector3 vec2;
     jmeBulletUtil::convert(pEnv, vector2, &vec2);
+    EXCEPTION_CHK(pEnv, 0);
 
     btBU_Simplex1to4*
             simplexShape = new btBU_Simplex1to4(vec1, vec2); //dance016
@@ -83,12 +86,15 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
 
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, vector1, &vec1);
+    EXCEPTION_CHK(pEnv, 0);
 
     btVector3 vec2;
     jmeBulletUtil::convert(pEnv, vector2, &vec2);
+    EXCEPTION_CHK(pEnv, 0);
 
     btVector3 vec3;
     jmeBulletUtil::convert(pEnv, vector3, &vec3);
+    EXCEPTION_CHK(pEnv, 0);
 
     btBU_Simplex1to4*
             simplexShape = new btBU_Simplex1to4(vec1, vec2, vec3); //dance016
@@ -107,15 +113,19 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_SimplexCollisionSh
 
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, vector1, &vec1);
+    EXCEPTION_CHK(pEnv, 0);
 
     btVector3 vec2;
     jmeBulletUtil::convert(pEnv, vector2, &vec2);
+    EXCEPTION_CHK(pEnv, 0);
 
     btVector3 vec3;
     jmeBulletUtil::convert(pEnv, vector3, &vec3);
+    EXCEPTION_CHK(pEnv, 0);
 
     btVector3 vec4;
     jmeBulletUtil::convert(pEnv, vector4, &vec4);
+    EXCEPTION_CHK(pEnv, 0);
 
     btBU_Simplex1to4*
             simplexShape = new btBU_Simplex1to4(vec1, vec2, vec3, vec4); //dance016

@@ -54,10 +54,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_GearJoint_createJoint
     NULL_CHK(pEnv, axisInA, "The axisInA vector does not exist.", 0)
     btVector3 axisA;
     jmeBulletUtil::convert(pEnv, axisInA, &axisA);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, axisInB, "The axisInB vector does not exist.", 0)
     btVector3 axisB;
     jmeBulletUtil::convert(pEnv, axisInB, &axisB);
+    EXCEPTION_CHK(pEnv, 0);
 
     btGearConstraint *pJoint
         = new btGearConstraint(*pBodyA, *pBodyB, axisA, axisB, ratio); //dance021
@@ -128,6 +130,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setAxisA
     NULL_CHK(pEnv, axisA, "The axisA vector does not exist.",)
     btVector3 axisInA;
     jmeBulletUtil::convert(pEnv, axisA, &axisInA);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->setAxisA(axisInA);
 }
@@ -147,6 +150,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_GearJoint_setAxisB
     NULL_CHK(pEnv, axisB, "The axisB vector does not exist.",)
     btVector3 axisInB;
     jmeBulletUtil::convert(pEnv, axisB, &axisInB);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->setAxisB(axisInB);
 }

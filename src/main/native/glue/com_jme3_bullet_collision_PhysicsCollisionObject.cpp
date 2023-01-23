@@ -760,6 +760,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
     NULL_CHK(pEnv, frictionVector, "The friction vector does not exist.",)
     btVector3 tempVector;
     jmeBulletUtil::convert(pEnv, frictionVector, &tempVector);
+    EXCEPTION_CHK(pEnv,);
 
     pCollisionObject->setAnisotropicFriction(tempVector, (int) mode);
 }
@@ -897,7 +898,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
 
     btTransform transform;
     jmeBulletUtil::convert(pEnv, locationVector, &transform.getOrigin());
+    EXCEPTION_CHK(pEnv,);
     jmeBulletUtil::convert(pEnv, basisMatrix, &transform.getBasis());
+    EXCEPTION_CHK(pEnv,);
 
     pCollisionObject->setWorldTransform(transform);
 }

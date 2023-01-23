@@ -50,6 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CylinderCollisionS
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, halfExtentsVector, &vec);
+    EXCEPTION_CHK(pEnv, 0);
 
     btCollisionShape *pShape;
     switch (axis) {

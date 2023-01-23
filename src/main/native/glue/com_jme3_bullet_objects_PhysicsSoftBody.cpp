@@ -56,6 +56,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addForce__JL
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, forceVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->addForce(vec);
 }
@@ -74,6 +75,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addForce__JL
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, forceVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     ASSERT_CHK(pEnv, nodeId >= 0,);
     ASSERT_CHK(pEnv, nodeId < pBody->m_nodes.size(),);
@@ -95,6 +97,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity_
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",);
     btVector3 bulletVector;
     jmeBulletUtil::convert(pEnv, velocityVector, &bulletVector);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->addVelocity(bulletVector);
 }
@@ -113,6 +116,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_addVelocity_
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",);
     btVector3 bulletVector;
     jmeBulletUtil::convert(pEnv, velocityVector, &bulletVector);
+    EXCEPTION_CHK(pEnv,);
 
     ASSERT_CHK(pEnv, nodeId >= 0,);
     ASSERT_CHK(pEnv, nodeId < pBody->m_nodes.size(),);
@@ -498,6 +502,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysics
 
     btQuaternion rot = btQuaternion();
     jmeBulletUtil::convert(pEnv, rotation, &rot);
+    EXCEPTION_CHK(pEnv,);
     pBody->rotate(rot);
 }
 
@@ -514,6 +519,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysics
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, scaleVector, &vec);
+    EXCEPTION_CHK(pEnv,);
     pBody->scale(vec);
 }
 
@@ -532,6 +538,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysics
     btTransform trs;
     btVector3 scale;
     jmeBulletUtil::convert(pEnv, transform, &trs, &scale);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->scale(scale);
     pBody->transform(trs);
@@ -550,6 +557,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_applyPhysics
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, offsetVector, &vec);
+    EXCEPTION_CHK(pEnv,);
     pBody->translate(vec);
 }
 
@@ -716,6 +724,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getBounds
 
     const btVector3& minima = pBody->m_bounds[0];
     jmeBulletUtil::convert(pEnv, &minima, storeMinima);
+    EXCEPTION_CHK(pEnv,);
 
     const btVector3& maxima = pBody->m_bounds[1];
     jmeBulletUtil::convert(pEnv, &maxima, storeMaxima);
@@ -1790,6 +1799,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLo
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, locationVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     vec -= getBoundingCenter(pBody);
     pBody->translate(vec);
@@ -1809,6 +1819,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setPhysicsLo
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",);
     btVector3 vec;
     jmeBulletUtil::convertDp(pEnv, locationVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     vec -= getBoundingCenter(pBody);
     pBody->translate(vec);
@@ -1932,6 +1943,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocity
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",);
     btVector3 bulletVector;
     jmeBulletUtil::convert(pEnv, velocityVector, &bulletVector);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setVelocity(bulletVector);
 }
@@ -1978,6 +1990,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setWindVeloc
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",);
     btVector3 bulletVector;
     jmeBulletUtil::convert(pEnv, velocityVector, &bulletVector);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setWindVelocity(bulletVector);
 }

@@ -49,6 +49,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_RotationOrder_matrixToEuler
     NULL_CHK(pEnv, rotMatrix, "The rotMatrix does not exist.", JNI_FALSE);
     btMatrix3x3 basis;
     jmeBulletUtil::convert(pEnv, rotMatrix, &basis);
+    EXCEPTION_CHK(pEnv, JNI_FALSE);
 
     bool result = false;
     btVector3 angles;

@@ -59,13 +59,17 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_createJoint
     NULL_CHK(pEnv, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform frameInA;
     jmeBulletUtil::convert(pEnv, pivotInA, &frameInA.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInA, &frameInA.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, pivotInB, "The pivotInB vector does not exist.", 0)
     NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     btGeneric6DofConstraint *
             pJoint = new btGeneric6DofConstraint(*pBodyA, *pBodyB, frameInA,
@@ -92,7 +96,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SixDofJoint_createJoint1
     NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     btGeneric6DofConstraint *
             pJoint = new btGeneric6DofConstraint(*pBodyB, frameInB,
@@ -215,6 +221,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularLowerLi
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, limitVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->setAngularLowerLimit(vec);
 }
@@ -233,6 +240,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setAngularUpperLi
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, limitVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->setAngularUpperLimit(vec);
 }
@@ -251,6 +259,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setLinearLowerLim
     NULL_CHK(pEnv, limitVector, "The limit vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, limitVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->setLinearLowerLimit(vec);
 }
@@ -269,6 +278,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SixDofJoint_setLinearUpperLim
     NULL_CHK(pEnv, limitVector, "The limit vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, limitVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->setLinearUpperLimit(vec);
 }

@@ -60,6 +60,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Anchor_createAnchor
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, pivotVector, &vec);
+    EXCEPTION_CHK(pEnv, 0);
     pSoftBody->appendAnchor(nodeIndex, pRigidBody, vec, !allowCollisions,
             influence);
 

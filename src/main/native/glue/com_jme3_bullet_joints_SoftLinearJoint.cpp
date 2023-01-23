@@ -56,6 +56,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointS
     NULL_CHK(pEnv, positionVector, "The position vector does not exist.", 0)
     btVector3 pos;
     jmeBulletUtil::convert(pEnv, positionVector, &pos);
+    EXCEPTION_CHK(pEnv, 0);
 
     btSoftBody::LJoint::Specs specs;
     specs.cfm = cfm;
@@ -92,6 +93,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_createJointS
     NULL_CHK(pEnv, positionVector, "The position vector does not exist.", 0)
     btVector3 pos;
     jmeBulletUtil::convert(pEnv, positionVector, &pos);
+    EXCEPTION_CHK(pEnv, 0);
 
     btSoftBody::LJoint::Specs specs;
     specs.cfm = cfm;
@@ -123,6 +125,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_SoftLinearJoint_setPosition
     NULL_CHK(pEnv, positionVector, "The position vector does not exist.",)
     btVector3 pos;
     jmeBulletUtil::convert(pEnv, positionVector, &pos);
+    EXCEPTION_CHK(pEnv,);
 
     pJoint->m_refs[0] = pJoint->m_bodies[0].xform().inverse() * pos;
     pJoint->m_refs[1] = pJoint->m_bodies[1].xform().inverse() * pos;

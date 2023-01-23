@@ -373,10 +373,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
     NULL_CHK(pEnv, to, "The to vector does not exist.",);
     btVector3 native_to;
     jmeBulletUtil::convert(pEnv, to, &native_to);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, from, "The from vector does not exist.",);
     btVector3 native_from;
     jmeBulletUtil::convert(pEnv, from, &native_from);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, resultList, "The result list does not exist.",);
 
@@ -403,10 +405,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTestNativeDp
     NULL_CHK(pEnv, to, "The to vector does not exist.",);
     btVector3 native_to;
     jmeBulletUtil::convertDp(pEnv, to, &native_to);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, from, "The from vector does not exist.",);
     btVector3 native_from;
     jmeBulletUtil::convertDp(pEnv, from, &native_from);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, resultList, "The result list does not exist.",);
 
@@ -537,9 +541,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
     btVector3 scale; // scales are ignored
     btTransform native_to;
     jmeBulletUtil::convert(pEnv, to, &native_to, &scale);
+    EXCEPTION_CHK(pEnv,);
 
     btTransform native_from;
     jmeBulletUtil::convert(pEnv, from, &native_from, &scale);
+    EXCEPTION_CHK(pEnv,);
 
     JmeConvexResultCallback
     resultCallback(pEnv, native_from, native_to, resultList);

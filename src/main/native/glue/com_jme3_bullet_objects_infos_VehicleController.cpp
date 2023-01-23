@@ -57,14 +57,17 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_addW
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.", 0);
     btVector3 location;
     jmeBulletUtil::convert(pEnv, locationVector, &location);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, directionVector, "The direction vector does not exist.", 0);
     btVector3 direction;
     jmeBulletUtil::convert(pEnv, directionVector, &direction);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, axleVector, "The axle vector does not exist.", 0);
     btVector3 axle;
     jmeBulletUtil::convert(pEnv, axleVector, &axle);
+    EXCEPTION_CHK(pEnv, 0);
 
     btRaycastVehicle::btVehicleTuning * const
             pTuning = reinterpret_cast<btRaycastVehicle::btVehicleTuning *> (
@@ -316,14 +319,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_setu
     NULL_CHK(pEnv, rightVector, "The right vector does not exist.",);
     btVector3 right;
     jmeBulletUtil::convert(pEnv, rightVector, &right);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, upVector, "The up vector does not exist.",);
     btVector3 up;
     jmeBulletUtil::convert(pEnv, upVector, &up);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, forwardVector, "The forward vector does not exist.",);
     btVector3 forward;
     jmeBulletUtil::convert(pEnv, forwardVector, &forward);
+    EXCEPTION_CHK(pEnv,);
 
     pController->setupCoordinateSystem(right, up, forward);
 }

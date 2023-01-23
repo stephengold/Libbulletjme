@@ -52,6 +52,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseForce
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",)
     btVector3 force;
     jmeBulletUtil::convert(pEnv, forceVector, &force);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->addBaseForce(force);
 }
@@ -70,6 +71,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_addBaseTorque
     NULL_CHK(pEnv, torqueVector, "The torque vector does not exist.",)
     btVector3 torque;
     jmeBulletUtil::convert(pEnv, torqueVector, &torque);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->addBaseTorque(torque);
 }
@@ -129,6 +131,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.", 0)
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
+    EXCEPTION_CHK(pEnv, 0);
 
     btMultiBody * const
             pMultiBody = new btMultiBody(numLinks, baseMass, inertia, fixedBase,
@@ -617,6 +620,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseOmega
             "The angular velocity vector does not exist.",);
     btVector3 omega;
     jmeBulletUtil::convert(pEnv, angularVelocityVector, &omega);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setBaseOmega(omega);
 }
@@ -635,6 +639,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBasePos
     NULL_CHK(pEnv, positionVector, "The position vector does not exist.",);
     btVector3 pos;
     jmeBulletUtil::convert(pEnv, positionVector, &pos);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setBasePos(pos);
 }
@@ -653,6 +658,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseVel
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",);
     btVector3 vel;
     jmeBulletUtil::convert(pEnv, velocityVector, &vel);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setBaseVel(vel);
 }
@@ -672,6 +678,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setBaseWorldTransform
     btTransform tr;
     btVector3 scale;
     jmeBulletUtil::convert(pEnv, transform, &tr, &scale);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setBaseWorldTransform(tr);
 }
@@ -729,6 +736,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
+    EXCEPTION_CHK(pEnv,);
 
     int parent = (int) parentLinkIndex;
     ASSERT_CHK(pEnv, parent >= -1,);
@@ -737,14 +745,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupFixed
             "The parent2Link quaternion does not exist.",);
     btQuaternion rotParentToThis;
     jmeBulletUtil::convert(pEnv, parent2LinkQuaternion, &rotParentToThis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, parent2PivotVector, "The parent2pivot vector does not exist.",);
     btVector3 parentComToThisPivotOffset;
     jmeBulletUtil::convert(pEnv, parent2PivotVector, &parentComToThisPivotOffset);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, pivot2LinkVector, "The pivot2link vector does not exist.",);
     btVector3 thisPivotToThisComOffset;
     jmeBulletUtil::convert(pEnv, pivot2LinkVector, &thisPivotToThisComOffset);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setupFixed(i, m, inertia, parent, rotParentToThis,
             parentComToThisPivotOffset, thisPivotToThisComOffset);
@@ -773,6 +784,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
+    EXCEPTION_CHK(pEnv,);
 
     int parent = (int) parentLinkIndex;
     ASSERT_CHK(pEnv, parent >= -1,);
@@ -781,14 +793,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPlanar
             "The parent2Link quaternion does not exist.",);
     btQuaternion rotParentToThis;
     jmeBulletUtil::convert(pEnv, parent2LinkQuaternion, &rotParentToThis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, axisVector, "The axis vector does not exist.",);
     btVector3 rotationAxis;
     jmeBulletUtil::convert(pEnv, axisVector, &rotationAxis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, parent2LinkVector, "The parent2link vector does not exist.",);
     btVector3 parentComToThisComOffset;
     jmeBulletUtil::convert(pEnv, parent2LinkVector, &parentComToThisComOffset);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setupPlanar(i, m, inertia, parent, rotParentToThis,
             rotationAxis, parentComToThisComOffset,
@@ -819,6 +834,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
+    EXCEPTION_CHK(pEnv,);
 
     int parent = (int) parentLinkIndex;
     ASSERT_CHK(pEnv, parent >= -1,);
@@ -827,18 +843,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupPrismatic
             "The parent2Link quaternion does not exist.",);
     btQuaternion rotParentToThis;
     jmeBulletUtil::convert(pEnv, parent2LinkQuaternion, &rotParentToThis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, axisVector, "The axis vector does not exist.",);
     btVector3 jointAxis;
     jmeBulletUtil::convert(pEnv, axisVector, &jointAxis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, parent2PivotVector, "The parent2pivot vector does not exist.",);
     btVector3 parentComToThisPivotOffset;
     jmeBulletUtil::convert(pEnv, parent2PivotVector, &parentComToThisPivotOffset);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, pivot2LinkVector, "The pivot2link vector does not exist.",);
     btVector3 thisPivotToThisComOffset;
     jmeBulletUtil::convert(pEnv, pivot2LinkVector, &thisPivotToThisComOffset);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setupPrismatic(i, m, inertia, parent, rotParentToThis,
             jointAxis, parentComToThisPivotOffset, thisPivotToThisComOffset,
@@ -869,6 +889,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
+    EXCEPTION_CHK(pEnv,);
 
     int parent = (int) parentLinkIndex;
     ASSERT_CHK(pEnv, parent >= -1,);
@@ -877,18 +898,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
             "The parent2Link quaternion does not exist.",);
     btQuaternion rotParentToThis;
     jmeBulletUtil::convert(pEnv, parent2LinkQuaternion, &rotParentToThis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, axisVector, "The axis vector does not exist.",);
     btVector3 jointAxis;
     jmeBulletUtil::convert(pEnv, axisVector, &jointAxis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, parent2PivotVector, "The parent2pivot vector does not exist.",);
     btVector3 parentComToThisPivotOffset;
     jmeBulletUtil::convert(pEnv, parent2PivotVector, &parentComToThisPivotOffset);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, pivot2LinkVector, "The pivot2link vector does not exist.",);
     btVector3 thisPivotToThisComOffset;
     jmeBulletUtil::convert(pEnv, pivot2LinkVector, &thisPivotToThisComOffset);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setupRevolute(i, m, inertia, parent, rotParentToThis,
             jointAxis, parentComToThisPivotOffset, thisPivotToThisComOffset,
@@ -918,6 +943,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
     NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.",);
     btVector3 inertia;
     jmeBulletUtil::convert(pEnv, inertiaVector, &inertia);
+    EXCEPTION_CHK(pEnv,);
 
     int parent = (int) parentLinkIndex;
     ASSERT_CHK(pEnv, parent >= -1,);
@@ -926,14 +952,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
             "The parent2Link quaternion does not exist.",);
     btQuaternion rotParentToThis;
     jmeBulletUtil::convert(pEnv, parent2LinkQuaternion, &rotParentToThis);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, parent2PivotVector, "The parent2pivot vector does not exist.",);
     btVector3 parentComToThisPivotOffset;
     jmeBulletUtil::convert(pEnv, parent2PivotVector, &parentComToThisPivotOffset);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, pivot2LinkVector, "The pivot2link vector does not exist.",);
     btVector3 thisPivotToThisComOffset;
     jmeBulletUtil::convert(pEnv, pivot2LinkVector, &thisPivotToThisComOffset);
+    EXCEPTION_CHK(pEnv,);
 
     pMultiBody->setupSpherical(i, m, inertia, parent, rotParentToThis,
             parentComToThisPivotOffset, thisPivotToThisComOffset,

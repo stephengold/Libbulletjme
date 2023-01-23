@@ -50,6 +50,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyCentra
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",)
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, forceVector, &vec1);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->applyCentralForce(vec1);
 }
@@ -67,6 +68,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyCentra
     NULL_CHK(pEnv, impulseVector, "The impulse vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, impulseVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->applyCentralImpulse(vec);
 }
@@ -85,10 +87,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyForce
     NULL_CHK(pEnv, forceVector, "The force vector does not exist.",)
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, forceVector, &vec1);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 vec2;
     jmeBulletUtil::convert(pEnv, locationVector, &vec2);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->applyForce(vec1, vec2);
 }
@@ -107,10 +111,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyImpuls
     NULL_CHK(pEnv, impulseVector, "The impulse vector does not exist.",)
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, impulseVector, &vec1);
+    EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, locationVector, "The location vector does not exist.",)
     btVector3 vec2;
     jmeBulletUtil::convert(pEnv, locationVector, &vec2);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->applyImpulse(vec1, vec2);
 }
@@ -128,6 +134,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorque
     NULL_CHK(pEnv, torqueVector, "The torque vector does not exist.",)
     btVector3 vec1;
     jmeBulletUtil::convert(pEnv, torqueVector, &vec1);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->applyTorque(vec1);
 }
@@ -146,6 +153,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_applyTorque
             "The torque-impulse vector does not exist.",)
             btVector3 vec1;
     jmeBulletUtil::convert(pEnv, torqueImpulseVector, &vec1);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->applyTorqueImpulse(vec1);
 }
@@ -498,6 +506,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularF
     NULL_CHK(pEnv, factorVector, "The factor vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, factorVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setAngularFactor(vec);
 }
@@ -530,6 +539,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularV
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, velocityVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setAngularVelocity(vec);
 }
@@ -548,6 +558,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setAngularV
     NULL_CHK(pEnv, velocityVectorDp, "The velocity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convertDp(pEnv, velocityVectorDp, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setAngularVelocity(vec);
 }
@@ -598,6 +609,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravity
     NULL_CHK(pEnv, gravityVector, "The gravity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, gravityVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setGravity(vec);
 }
@@ -616,6 +628,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setGravityD
     NULL_CHK(pEnv, gravityVectorDp, "The gravity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convertDp(pEnv, gravityVectorDp, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setGravity(vec);
 }
@@ -634,6 +647,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setInverseI
     NULL_CHK(pEnv, invInertiaVector, "The inverse-inertia vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, invInertiaVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setInvInertiaDiagLocal(vec);
     pBody->updateInertiaTensor();
@@ -681,6 +695,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearFa
     NULL_CHK(pEnv, factorVector, "The factor vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, factorVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setLinearFactor(vec);
 }
@@ -714,6 +729,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVe
     NULL_CHK(pEnv, velocityVector, "The velocity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, velocityVector, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setLinearVelocity(vec);
 }
@@ -732,6 +748,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setLinearVe
     NULL_CHK(pEnv, velocityVectorDp, "The velocity vector does not exist.",)
     btVector3 vec;
     jmeBulletUtil::convertDp(pEnv, velocityVectorDp, &vec);
+    EXCEPTION_CHK(pEnv,);
 
     pBody->setLinearVelocity(vec);
 }

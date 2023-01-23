@@ -49,6 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_BoxCollisionShape_
 
     btVector3 vec;
     jmeBulletUtil::convert(pEnv, halfExtentsVector, &vec);
+    EXCEPTION_CHK(pEnv, 0);
 
     btBoxShape *pShape = new btBoxShape(vec); //dance016
     return reinterpret_cast<jlong> (pShape);

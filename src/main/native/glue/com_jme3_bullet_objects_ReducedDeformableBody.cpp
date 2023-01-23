@@ -53,6 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_ReducedDeformableBody_creat
         jobject location = pEnv->GetObjectArrayElement(locations, i);
         EXCEPTION_CHK(pEnv, 0);
         jmeBulletUtil::convert(pEnv, location, &pLocations[i]);
+        EXCEPTION_CHK(pEnv, 0);
     }
 
     btScalar *pMasses;
@@ -181,6 +182,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_ReducedDeformableBody_setLin
 
     btVector3 velocity;
     jmeBulletUtil::convert(pEnv, velocityVector, &velocity);
+    EXCEPTION_CHK(pEnv,);
     pBody->setRigidVelocity(velocity);
 }
 

@@ -59,13 +59,17 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SliderJoint_createJoint
     NULL_CHK(pEnv, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform frameInA;
     jmeBulletUtil::convert(pEnv, pivotInA, &frameInA.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInA, &frameInA.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, pivotInB, "The pivotInB vector does not exist.", 0)
     NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     btSliderConstraint *pJoint = new btSliderConstraint(*pBodyA, *pBodyB,
             frameInA, frameInB, useLinearReferenceFrameA); //dance021
@@ -91,7 +95,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_SliderJoint_createJoint1
     NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     btSliderConstraint *pJoint = new btSliderConstraint(*pBodyB, frameInB,
             useLinearReferenceFrameA); //dance021

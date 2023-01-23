@@ -58,13 +58,17 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createDoubleEnded
     NULL_CHK(pEnv, rotInA, "The rotInA matrix does not exist.", 0)
     btTransform frameInA;
     jmeBulletUtil::convert(pEnv, pivotInA, &frameInA.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInA, &frameInA.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, pivotInB, "The pivotInB vector does not exist.", 0)
     NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
     btGeneric6DofSpring2Constraint *
@@ -92,7 +96,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_New6Dof_createSingleEnded
     NULL_CHK(pEnv, rotInB, "The rotInB matrix does not exist.", 0)
     btTransform frameInB;
     jmeBulletUtil::convert(pEnv, pivotInB, &frameInB.getOrigin());
+    EXCEPTION_CHK(pEnv, 0);
     jmeBulletUtil::convert(pEnv, rotInB, &frameInB.getBasis());
+    EXCEPTION_CHK(pEnv, 0);
 
     RotateOrder rotateOrder = (RotateOrder) rotOrderIndex;
     btGeneric6DofSpring2Constraint *
@@ -485,6 +491,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setPivotInA
 
     btVector3 pivotInA;
     jmeBulletUtil::convert(pEnv, pivotA, &pivotInA);
+    EXCEPTION_CHK(pEnv,);
 
     btTransform frameA = pConstraint->getFrameOffsetA();
     btTransform frameB = pConstraint->getFrameOffsetB();
@@ -510,6 +517,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_New6Dof_setPivotInB
 
     btVector3 pivotInB;
     jmeBulletUtil::convert(pEnv, pivotB, &pivotInB);
+    EXCEPTION_CHK(pEnv,);
 
     btTransform frameA = pConstraint->getFrameOffsetA();
     btTransform frameB = pConstraint->getFrameOffsetB();

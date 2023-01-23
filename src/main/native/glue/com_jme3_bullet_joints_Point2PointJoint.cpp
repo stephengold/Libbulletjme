@@ -57,10 +57,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
     NULL_CHK(pEnv, pivotA, "The pivotA vector does not exist.", 0)
     btVector3 pivotInA;
     jmeBulletUtil::convert(pEnv, pivotA, &pivotInA);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, pivotB, "The pivotB vector does not exist.", 0)
     btVector3 pivotInB;
     jmeBulletUtil::convert(pEnv, pivotB, &pivotInB);
+    EXCEPTION_CHK(pEnv, 0);
 
     btPoint2PointConstraint *
             pJoint = new btPoint2PointConstraint(*pBodyA, *pBodyB, pivotInA,
@@ -85,6 +87,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_createJoint
     NULL_CHK(pEnv, pivotA, "The pivotA vector does not exist.", 0)
     btVector3 pivotInA;
     jmeBulletUtil::convert(pEnv, pivotA, &pivotInA);
+    EXCEPTION_CHK(pEnv, 0);
 
     btPoint2PointConstraint *
             pJoint = new btPoint2PointConstraint(*pBodyA, pivotInA); //dance021
@@ -216,6 +219,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInA
 
     btVector3 pivot;
     jmeBulletUtil::convert(pEnv, locationVector, &pivot);
+    EXCEPTION_CHK(pEnv,);
     pJoint->setPivotA(pivot);
 }
 
@@ -234,6 +238,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_joints_Point2PointJoint_setPivotInB
 
     btVector3 pivot;
     jmeBulletUtil::convert(pEnv, locationVector, &pivot);
+    EXCEPTION_CHK(pEnv,);
     pJoint->setPivotB(pivot);
 }
 

@@ -189,10 +189,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
     btVector3 min;
     jmeBulletUtil::convert(pEnv, minVector, &min);
+    EXCEPTION_CHK(pEnv, 0);
 
     NULL_CHK(pEnv, maxVector, "The max vector does not exist.", 0)
     btVector3 max;
     jmeBulletUtil::convert(pEnv, maxVector, &max);
+    EXCEPTION_CHK(pEnv, 0);
 
     jmePhysicsSpace * const
             pSpace = new jmePhysicsSpace(pEnv, object); //dance003
@@ -444,6 +446,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_setGravity
 
     btVector3 gravity;
     jmeBulletUtil::convert(pEnv, gravityVector, &gravity);
+    EXCEPTION_CHK(pEnv,);
 
     pWorld->setGravity(gravity);
 }
