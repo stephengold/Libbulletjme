@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 17.5.1 released on 23 January 2023
+## Version 17.5.2 released on 23 January 2023
 
 + Bugfix: `PhysicsCollisionObject.findInstance()`
   creates a weak global reference that's never deleted.
