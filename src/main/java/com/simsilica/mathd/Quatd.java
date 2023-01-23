@@ -281,25 +281,31 @@ public final class Quatd implements Cloneable {
      *
      * <p>This method is used to combine rotations. Note that quaternion
      * multiplication is noncommutative, so generally q * p != p * q.
-     *
-     * <p>It IS safe for {@code q} and {@code result} to be the same
-     * object. However, if {@code this} and {@code result} are the same
-     * object, the result is undefined.
+     * <p>
+     * It IS safe for any or all of {@code q}, {@code result}, and {@code this}
+     * to be the same object.
      *
      * @param q the right factor (not null, unaffected unless it's
      * {@code result})
      * @param result storage for the product, or null for a new Quatd
      * @return {@code this * q} (either {@code result} or a new Quatd)
      */
-    public Quatd mult( Quatd q, Quatd result ) {
-        if (result == null) {
-            result = new Quatd();
-        }
-        double qw = q.w, qx = q.x, qy = q.y, qz = q.z;
-        result.x = x * qw + y * qz - z * qy + w * qx;
-        result.y = -x * qz + y * qw + z * qx + w * qy;
-        result.z = x * qy - y * qx + z * qw + w * qz;
-        result.w = -x * qx - y * qy - z * qz + w * qw;
+    public final Quatd mult( Quatd q, Quatd result ) {
+        double qx = q.x;
+        double qy = q.y;
+        double qz = q.z;
+        double qw = q.w;
+
+        double xr = x * qw + y * qz - z * qy + w * qx;
+        double yr = -x * qz + y * qw + z * qx + w * qy;
+        double zr = x * qy - y * qx + z * qw + w * qz;
+        double wr = -x * qx - y * qy - z * qz + w * qw;
+
+        if( result == null ) {
+            result = new Quatd(xr, yr, zr, wr); 
+        } else {
+            result.set(xr, yr, zr, wr);
+        } 
         return result;
     }
 
