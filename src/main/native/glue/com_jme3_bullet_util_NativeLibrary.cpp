@@ -223,7 +223,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_util_NativeLibrary_jniEnvId
 (JNIEnv *pEnv, jclass) {
-    return jlong(pEnv);
+    return reinterpret_cast<jlong> (pEnv);
 }
 
 /*

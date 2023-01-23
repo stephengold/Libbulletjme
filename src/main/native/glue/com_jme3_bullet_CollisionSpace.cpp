@@ -209,7 +209,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_getJniEnvId
     NULL_CHK(pEnv, pSpace, "The collision space does not exist.", 0);
 
     const JNIEnv * result = pSpace->getEnv();
-    return jlong(result);
+    return reinterpret_cast<jlong> (result);
 }
 
 /*
