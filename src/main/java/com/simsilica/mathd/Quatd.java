@@ -275,6 +275,35 @@ public final class Quatd implements Cloneable {
     }
 
     /**
+     * Multiply by the specified quaternion and return the product in a 3rd
+     * quaternion. The current instance is unaffected, unless it's
+     * {@code result}.
+     *
+     * <p>This method is used to combine rotations. Note that quaternion
+     * multiplication is noncommutative, so generally q * p != p * q.
+     *
+     * <p>It IS safe for {@code q} and {@code result} to be the same
+     * object. However, if {@code this} and {@code result} are the same
+     * object, the result is undefined.
+     *
+     * @param q the right factor (not null, unaffected unless it's
+     * {@code result})
+     * @param result storage for the product, or null for a new Quatd
+     * @return {@code this * q} (either {@code result} or a new Quatd)
+     */
+    public Quatd mult( Quatd q, Quatd result ) {
+        if (result == null) {
+            result = new Quatd();
+        }
+        double qw = q.w, qx = q.x, qy = q.y, qz = q.z;
+        result.x = x * qw + y * qz - z * qy + w * qx;
+        result.y = -x * qz + y * qw + z * qx + w * qy;
+        result.z = x * qy - y * qx + z * qw + w * qz;
+        result.w = -x * qx - y * qy - z * qz + w * qw;
+        return result;
+    }
+
+    /**
      * Take the Hamilton product of this Quatd times the specified Quatd in
      * place.
      * <p>
@@ -327,35 +356,6 @@ public final class Quatd implements Cloneable {
                     * w * vz;
 
         return new Vec3d(rx, ry, rz);
-    }
-
-    /**
-     * Multiply by the specified quaternion and return the product in a 3rd
-     * quaternion. The current instance is unaffected, unless it's
-     * {@code result}.
-     *
-     * <p>This method is used to combine rotations. Note that quaternion
-     * multiplication is noncommutative, so generally q * p != p * q.
-     *
-     * <p>It IS safe for {@code q} and {@code result} to be the same
-     * object. However, if {@code this} and {@code result} are the same
-     * object, the result is undefined.
-     *
-     * @param q the right factor (not null, unaffected unless it's
-     * {@code result})
-     * @param result storage for the product, or null for a new Quatd
-     * @return {@code this * q} (either {@code result} or a new Quatd)
-     */
-    public Quatd mult( Quatd q, Quatd result ) {
-        if (result == null) {
-            result = new Quatd();
-        }
-        double qw = q.w, qx = q.x, qy = q.y, qz = q.z;
-        result.x = x * qw + y * qz - z * qy + w * qx;
-        result.y = -x * qz + y * qw + z * qx + w * qy;
-        result.z = x * qy - y * qx + z * qw + w * qz;
-        result.w = -x * qx - y * qy - z * qz + w * qw;
-        return result;
     }
 
     /**
