@@ -261,7 +261,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(double)" class="member-name-link">multLocal</a><wbr>(double&nbsp;s)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Multiplies by the argument and returns the (modified) current instance.</div>
+<div class="block">Multiplies by the scalar argument and returns the (modified) current
+ instance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(com.simsilica.mathd.Vec3d)" class="member-name-link">multLocal</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
@@ -285,12 +286,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(int,double)" class="member-name-link">set</a><wbr>(int&nbsp;i,
  double&nbsp;d)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the indexed component.</div>
+<div class="block">Alters the indexed component.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.jme3.math.Vector3f)" class="member-name-link">set</a><wbr>(<a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Copies all 3 components of the argument, converting them to
+<div class="block">Copies all 3 components from the argument, converting them to
  double precision.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
@@ -532,7 +533,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="set(com.jme3.math.Vector3f)">
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(<a href="../../jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
-<div class="block">Copies all 3 components of the argument, converting them to
+<div class="block">Copies all 3 components from the argument, converting them to
  double precision.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -565,7 +566,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>i</code> - 0, 1, or 2</dd>
 <dt>Returns:</dt>
 <dd>the X component if i=0, the Y component if i=1, or the Z
-     component if i=2</dd>
+ component if i=2</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IndexOutOfBoundsException.html" title="class or interface in java.lang" class="external-link">IndexOutOfBoundsException</a></code> - if <code>i</code> is not 0, 1, or 2</dd>
 </dl>
@@ -576,11 +577,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>set</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">set</span><wbr><span class="parameters">(int&nbsp;i,
  double&nbsp;d)</span></div>
-<div class="block">Sets the indexed component.</div>
+<div class="block">Alters the indexed component.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>i</code> - which component to set: 0 &rarr; the X component, 1 &rarr;
-     the Y component, 2 &rarr; the Z component</dd>
+ the Y component, 2 &rarr; the Z component</dd>
 <dd><code>d</code> - the desired component value</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance (for chaining)</dd>
@@ -645,7 +646,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the vector to add (not null, unaffected unless it's
-     <code>this</code>)</dd>
+ <code>this</code>)</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance (for chaining)</dd>
 </dl>
@@ -679,7 +680,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>v</code> - the vector to subtract (not null, unaffected unless it's
-     <code>this</code>)</dd>
+ <code>this</code>)</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance (for chaining)</dd>
 </dl>
@@ -689,7 +690,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="multLocal(double)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(double&nbsp;s)</span></div>
-<div class="block">Multiplies by the argument and returns the (modified) current instance.</div>
+<div class="block">Multiplies by the scalar argument and returns the (modified) current
+ instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>s</code> - the scaling factor</dd>
