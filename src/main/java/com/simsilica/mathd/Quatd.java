@@ -74,7 +74,7 @@ public final class Quatd implements Cloneable {
     public double w;
 
     /**
-     * Instantiate an identity quaternion: all components zeroed except
+     * Instantiates an identity quaternion: all components zeroed except
      * {@code w}, which is set to 1.
      */
     public Quatd() {
@@ -82,7 +82,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Instantiate a quaternion with the specified components.
+     * Instantiates a quaternion with the specified components.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -97,7 +97,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Instantiate a copy of the argument.
+     * Instantiates a copy of the argument.
      *
      * @param quat the quaternion to copy (not null, unaffected)
      */
@@ -106,7 +106,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Instantiate based on the specified (single-precision) Quaternion.
+     * Instantiates based on the specified (single-precision) Quaternion.
      *
      * @param quat the input Quaternion (not null, unaffected)
      */
@@ -128,7 +128,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Create a (single-precision) Quaternion that approximates the current
+     * Creates a (single-precision) Quaternion that approximates the current
      * instance.
      *
      * @return a new Quaternion
@@ -138,7 +138,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Return a hash code. If two quaternions have identical values, they
+     * Returns a hash code. If two quaternions have identical values, they
      * will have the same hash code. The current instance is unaffected.
      *
      * @return a 32-bit value for use in hashing
@@ -154,7 +154,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Test for exact equality with the argument, distinguishing -0 from 0. If
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
      * {@code o} is null, false is returned. Either way, the current instance is
      * unaffected.
      *
@@ -206,7 +206,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Set all 4 components to the specified values.
+     * Sets all 4 components to the specified values.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -223,7 +223,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Copy all 4 components from the argument.
+     * Copies all 4 components from the argument.
      *
      * @param q the quaternion to copy (not null, unaffected)
      * @return the (modified) current instance (for chaining)
@@ -237,7 +237,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Copy all components of the specified (single-precision) Quaternion to
+     * Copies all 4 components of the specified (single-precision) Quaternion to
      * the current instance.
      *
      * @param quat the input Quaternion (not null, unaffected)
@@ -252,16 +252,16 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Take the Hamilton product of the current instance times the specified
-     * Quatd to yield a new Quatd. The current instance is unaffected.
+     * Takes the Hamilton product of the current instance times the argument to
+     * yield a new Quatd. The current instance is unaffected.
      * <p>
      * It IS safe for {@code q} and {@code this} to be the same object.
      * <p>
-     * This method is used to combine rotations. Note that quaternion
-     * multiplication is noncommutative, so generally q * p != p * q.
+     * This method is used to combine rotations. Note that the Hamilton product
+     * is noncommutative, so generally q * p != p * q.
      *
      * @param q the right factor (not null, unaffected)
-     * @return a new instance
+     * @return {@code this * q} (a new instance)
      */
     public final Quatd mult( Quatd q ) {
         double qx = q.x;
@@ -278,12 +278,11 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Take the Hamilton product of the current instance times the specified
-     * Quatd and return the product in a 3rd Quatd. The current instance is
+     * Takes the Hamilton product of the current instance times the first argument and returns the product in the 2nd argument. The current instance is
      * unaffected, unless it's {@code result}.
      * <p>
-     * This method is used to combine rotations. Note that quaternion
-     * multiplication is noncommutative, so generally q * p != p * q.
+     * This method is used to combine rotations. Note that the Hamilton product
+     * is noncommutative, so generally q * p != p * q.
      * <p>
      * It IS safe for any or all of {@code q}, {@code result}, and {@code this}
      * to be the same object.
@@ -313,11 +312,10 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Take the Hamilton product of the current instance times the specified
-     * Quatd in place.
+     * Takes the Hamilton product of the current instance times the argument, in place.
      * <p>
-     * This method is used to combine rotations. Note that quaternion
-     * multiplication is noncommutative, so generally q * p != p * q.
+     * This method is used to combine rotations. Note that the Hamilton product
+     * is noncommutative, so generally q * p != p * q.
      * <p>
      * It IS safe for {@code q} and {@code this} to be the same object.
      *
@@ -343,7 +341,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Rotate the specified vector to produce a new vector. The quaternion
+     * Rotates the argument vector to produce a new vector. The quaternion
      * is unaffected.
      *
      * @param v the input vector (not null, unaffected)
@@ -371,13 +369,13 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Rotate a specified vector and return the result in another vector. The
+     * Rotates a specified vector and return the result in another vector. The
      * quaternion is unaffected.
      * <p>
      * It IS safe for {@code v} and {@code result} to be the same object.
      *
      * @param v the vector to rotate (not null, unaffected unless it's
-     *     {@code result})
+     * {@code result})
      * @param result storage for the result (not null)
      * @return the (rotated) vector {@code result}
      */
@@ -407,7 +405,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Return the squared length.
+     * Returns the squared length.
      *
      * @return the squared length (&ge;0)
      */
@@ -416,7 +414,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Normalize the current instance in place.
+     * Normalizes the current instance in place.
      *
      * @return the (modified) current instance (for chaining)
      */
@@ -437,9 +435,10 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Convert to an equivalent rotation matrix. The quaternion is unaffected.
-     *
-     * <p>Note: the result is created from a normalized version of the current
+     * Converts the quaternion to an equivalent rotation matrix. The quaternion
+     * is unaffected.
+     * <p>
+     * Note: the result is created from a normalized version of the current
      * instance.
      *
      * @return a new 3x3 rotation matrix
@@ -479,8 +478,8 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Return the multiplicative inverse.  For a quaternion with norm=0, {@code
-     * null} is returned. Either way, the quaternion is unaffected.
+     * Returns the multiplicative inverse.  For a quaternion with norm=0, {@code
+     * null} is returned. Either way, the current instance is unaffected.
      *
      * @return a new instance, or null if not invertible
      */

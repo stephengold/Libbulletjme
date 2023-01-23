@@ -89,14 +89,14 @@ public class Matrix3d implements Cloneable {
     protected double m22;
     
     /**
-     * Instantiate an identity matrix (diagonals = 1, other elements = 0).
+     * Instantiates an identity matrix (diagonals = 1, other elements = 0).
      */
     public Matrix3d() {
         makeIdentity();
     }
  
     /**
-     * Instantiate a matrix with the specified elements.
+     * Instantiates a matrix with the specified elements.
      *
      * @param m00 the desired value for row 0, column 0
      * @param m01 the desired value for row 0, column 1
@@ -123,7 +123,7 @@ public class Matrix3d implements Cloneable {
     } 
  
     /**
-     * Create a copy of this matrix.
+     * Creates a copy of the current instance.
      *
      * @return a new instance, equivalent to this one
      */
@@ -134,7 +134,7 @@ public class Matrix3d implements Cloneable {
     }
  
     /**
-     * Copy all elements of the specified matrix to this matrix.
+     * Copies all elements of the argument to the current instance.
      *
      * @param mat the desired value (not null, unaffected)
      * @return the (modified) current instance (for chaining)
@@ -153,7 +153,8 @@ public class Matrix3d implements Cloneable {
     }
  
     /**
-     * Configure as an identity matrix (diagonals = 1, other elements = 0).
+     * Configures the current instance as an identity matrix (diagonals = 1, other
+     * elements = 0).
      * 
      * @return the (modified) current instance (for chaining)
      */
@@ -178,7 +179,7 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
-     * Multiply by the scalar argument and return the (modified) current
+     * Multiplies by the scalar argument and returns the (modified) current
      * instance.
      *
      * @param scale the scaling factor
@@ -199,7 +200,7 @@ public class Matrix3d implements Cloneable {
     }
     
     /**
-     * Return the determinant. The matrix is unaffected.
+     * Returns the determinant. The matrix is unaffected.
      *
      * @return the determinant
      */
@@ -211,7 +212,7 @@ public class Matrix3d implements Cloneable {
     }
     
     /**
-     * Return the multiplicative inverse. If the current instance is singular,
+     * Returns the multiplicative inverse. If the current instance is singular,
      * an identity matrix is returned. The current instance is unaffected.
      *
      * @return a new Matrix3d
@@ -239,7 +240,7 @@ public class Matrix3d implements Cloneable {
     }
     
     /**
-     * Return the transpose. The current instance is unaffected.
+     * Returns the transpose. The current instance is unaffected.
      *
      * @return a new Matrix3d
      */

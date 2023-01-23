@@ -211,7 +211,7 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Copies all 3 components of the argument, converting them to
+     * Copies all 3 components from the argument, converting them to
      * double precision.
      *
      * @param v the Vector3f to copy (not null, unaffected)
@@ -239,7 +239,7 @@ public class Vec3d implements Cloneable {
      *
      * @param i 0, 1, or 2
      * @return the X component if i=0, the Y component if i=1, or the Z
-     *     component if i=2
+     * component if i=2
      * @throws IndexOutOfBoundsException if {@code i} is not 0, 1, or 2
      */
     public double get( int i ) {
@@ -256,10 +256,10 @@ public class Vec3d implements Cloneable {
     }
     
     /**
-     * Sets the indexed component.
+     * Alters the indexed component.
      *
      * @param i which component to set: 0 &rarr; the X component, 1 &rarr;
-     *     the Y component, 2 &rarr; the Z component
+     * the Y component, 2 &rarr; the Z component
      * @param d the desired component value
      * @return the (modified) current instance (for chaining)
      * @throws IllegalArgumentException if {@code i} is not 0, 1, or 2
@@ -322,7 +322,7 @@ public class Vec3d implements Cloneable {
      * It IS safe for {@code v} and {@code this} to be the same object.
      *
      * @param v the vector to add (not null, unaffected unless it's
-     *     {@code this})
+     * {@code this})
      * @return the (modified) current instance (for chaining)
      */
     public final Vec3d addLocal( Vec3d v ) {
@@ -354,7 +354,7 @@ public class Vec3d implements Cloneable {
      * It IS safe for {@code v} and {@code this} to be the same object.
      *
      * @param v the vector to subtract (not null, unaffected unless it's
-     *     {@code this})
+     * {@code this})
      * @return the (modified) current instance (for chaining)
      */
     public final Vec3d subtractLocal( Vec3d v ) {
@@ -365,7 +365,8 @@ public class Vec3d implements Cloneable {
     }
 
     /**
-     * Multiplies by the argument and returns the (modified) current instance.
+     * Multiplies by the scalar argument and returns the (modified) current
+     * instance.
      *
      * @param s the scaling factor
      * @return the (modified) current instance (for chaining)
