@@ -1,7 +1,7 @@
 ---
 # configure deployment by AppVeyor.com
 
-version: 17.5.0
+version: 17.5.1
 
 image: Visual Studio 2022
 
@@ -11,15 +11,15 @@ build_script:
   - cmd: gradlew.bat build --console=plain --no-daemon
 
 artifacts:
-  - path: dist/Libbulletjme-17.5.0.jar
+  - path: dist/Libbulletjme-17.5.1.jar
     name: classJar
-  - path: dist/Libbulletjme-17.5.0-javadoc.jar
+  - path: dist/Libbulletjme-17.5.1-javadoc.jar
     name: javadocJar
-  - path: dist/Libbulletjme-17.5.0-sources.jar
+  - path: dist/Libbulletjme-17.5.1-sources.jar
     name: sourcesJar
-  - path: dist/Libbulletjme-17.5.0.pom
+  - path: dist/Libbulletjme-17.5.1.pom
     name: pom
-  - path: dist/Libbulletjme-17.5.0.module
+  - path: dist/Libbulletjme-17.5.1.module
     name: module
   - path: dist/Windows32DebugDp_bulletjme.dll
     name: dll32DD
