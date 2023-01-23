@@ -33,7 +33,7 @@
 #include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
 #endif
 #include "jmePhysicsSpace.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "jmeUserInfo.h"
 
 /*

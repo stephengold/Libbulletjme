@@ -37,7 +37,7 @@
 #include <iostream>
 #endif
 #include "vhacd_VHACD.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "VHACD.h"
 
 using namespace VHACD;

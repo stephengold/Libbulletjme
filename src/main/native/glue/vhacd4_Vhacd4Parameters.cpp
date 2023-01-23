@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@
  * Author: Stephen Gold
  */
 #include "vhacd4_Vhacd4Parameters.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 
 #define VHACD VHACD4
 #include "VHACD4.h"

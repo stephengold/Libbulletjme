@@ -34,7 +34,7 @@
  * Author: Dokthar
  */
 #include "com_jme3_bullet_objects_infos_SoftBodyMaterial.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "BulletSoftBody/btSoftBody.h"
 
 /*

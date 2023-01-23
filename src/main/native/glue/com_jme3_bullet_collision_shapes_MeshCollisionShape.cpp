@@ -34,7 +34,7 @@
  * Author: Normen Hansen
  */
 #include "com_jme3_bullet_collision_shapes_MeshCollisionShape.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
 
 /*

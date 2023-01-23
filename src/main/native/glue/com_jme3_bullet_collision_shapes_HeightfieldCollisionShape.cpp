@@ -34,7 +34,7 @@
  * Author: Normen Hansen
  */
 #include "com_jme3_bullet_collision_shapes_HeightfieldCollisionShape.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
 
 /*

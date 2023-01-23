@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "jmeCollisionSpace.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "jmeUserInfo.h"
 
 /*

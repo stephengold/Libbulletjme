@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2020 jMonkeyEngine
+ * Copyright (c) 2018-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,8 @@
  * Author: Stephen Gold
  */
 #include "com_jme3_bullet_collision_shapes_EmptyShape.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
+#include "BulletCollision/CollisionShapes/btEmptyShape.h"
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_EmptyShape

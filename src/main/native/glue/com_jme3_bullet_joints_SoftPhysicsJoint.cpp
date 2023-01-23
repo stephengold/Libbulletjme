@@ -34,7 +34,7 @@
  * Author: Dokthar
  */
 #include "com_jme3_bullet_joints_SoftPhysicsJoint.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "BulletSoftBody/btSoftBody.h"
 
 /*

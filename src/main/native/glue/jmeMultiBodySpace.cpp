@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "jmeMultiBodySpace.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
 
 /*

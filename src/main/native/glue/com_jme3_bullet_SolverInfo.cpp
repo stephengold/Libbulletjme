@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@
  */
 #include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
 #include "com_jme3_bullet_SolverInfo.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 
 /*
  * Author: Stephen Gold

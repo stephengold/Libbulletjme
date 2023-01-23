@@ -34,7 +34,7 @@
  * Author: Normen Hansen
  */
 #include "com_jme3_bullet_objects_PhysicsCharacter.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "jmePhysicsSpace.h"
 #include "BulletCollision/CollisionDispatch/btGhostObject.h"
 

@@ -37,7 +37,7 @@
 #include <iostream>
 #endif
 #include "vhacd4_Vhacd4.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 /*
  * Use the pre-processor to move V-HACD v4 native code into namespaces
  * that are distinct from those occupied by classic V-HACD.

@@ -34,7 +34,7 @@
  * Author: Stephen Gold
  */
 #include "vhacd_VHACDHull.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
 #include "VHACD.h"
 
 using namespace VHACD;

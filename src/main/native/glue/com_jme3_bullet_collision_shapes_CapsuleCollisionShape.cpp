@@ -34,7 +34,8 @@
  * Author: Normen Hansen
  */
 #include "com_jme3_bullet_collision_shapes_CapsuleCollisionShape.h"
-#include "jmeBulletUtil.h"
+#include "jmeClasses.h"
+#include "BulletCollision/CollisionShapes/btCapsuleShape.h"
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CapsuleCollisionShape
