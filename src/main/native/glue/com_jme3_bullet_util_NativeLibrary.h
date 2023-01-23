@@ -97,6 +97,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
 
 /*
  * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    jniEnvId
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_util_NativeLibrary_jniEnvId
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
  * Method:    resetQuickprof
  * Signature: ()V
  */

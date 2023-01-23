@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 jMonkeyEngine
+ * Copyright (c) 2019-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -155,6 +155,14 @@ final public class NativeLibrary {
      * @return true if thread-safe, otherwise false
      */
     native public static boolean isThreadSafe();
+
+    /**
+     * Return the address of the current thread's JNIEnv. For debugging
+     * and testing.
+     *
+     * @return the virtual address of the (native) object (not zero)
+     */
+    native public static long jniEnvId();
 
     /**
      * Reset Quickprof. This feature is enabled only in native libraries built

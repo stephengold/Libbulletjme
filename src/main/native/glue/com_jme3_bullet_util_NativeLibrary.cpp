@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 jMonkeyEngine
+ * Copyright (c) 2019-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -214,6 +214,16 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_NativeLibrary_isThreadSafe
 #else
     return JNI_FALSE;
 #endif //BT_THREADSAFE
+}
+
+/*
+ * Class:     com_jme3_bullet_util_NativeLibrary
+ * Method:    jniEnvId
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_util_NativeLibrary_jniEnvId
+(JNIEnv *pEnv, jclass) {
+    return jlong(pEnv);
 }
 
 /*
