@@ -164,10 +164,10 @@ model {
                         buildable = (pName == 'Linux_ARM32hf')
                     } else if (travis == 'arm64') {
                         buildable = (pName == 'Linux_ARM64')
-                    } else if (travis == 'osx32') { // xcode9.4.1 job
-                        buildable = (pName == 'MacOSX32')
-                    } else if (travis == 'osx64') { // xcode14.2 job
-                        buildable = pName.startsWith('MacOSX') && pName.contains('64')
+                    } else if (travis == 'osx_intel') { // xcode9.4.1 job
+                        buildable = pName.startsWith('MacOSX') && !pName.contains('_ARM')
+                    } else if (travis == 'osx_arm') { // xcode12.2 job
+                        buildable = (pName == 'MacOSX_ARM64')
                     }
                 } else {
                     // non-CI build (neither -Pgithub= nor -Ptravis= specified)

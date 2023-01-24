@@ -9,12 +9,12 @@ os: linux
 jobs:
   include:
 
-    # MacOSX32 (job .1):
+    # MacOSX32 and MacOSX64 (job .1):
     - os: osx
       osx_image: xcode9.4.1
       script:
         - date
-        - ./gradlew assemble --console=plain --no-daemon -Ptravis=osx32
+        - ./gradlew assemble --console=plain --no-daemon -Ptravis=osx_intel
 
     # Linux32 and Linux64 non-multithreaded (job .2):
     - env:
@@ -134,12 +134,12 @@ jobs:
         - echo y | sdkmanager "patcher;v4" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
         
-    # MacOSX64 and MacOSX_ARM64 (job .11):
+    # MacOSX_ARM64 (job .11):
     - os: osx
-      osx_image: xcode14.2
+      osx_image: xcode12.2
       script:
         - date
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx64
+        - ./gradlew build --console=plain --no-daemon -Ptravis=osx_arm
 
 
 addons:
