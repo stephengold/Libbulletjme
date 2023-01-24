@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 17.5.3 released on 24 January 2023
+## Version 17.5.4 released on 24 January 2023
 
 + Build MacOSX_ARM64 natives for release using Xcode 12.3 .
 + Build MacOSX64 natives for release using Xcode 9.4.1 .
