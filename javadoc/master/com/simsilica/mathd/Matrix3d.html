@@ -207,7 +207,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return a hash code.</div>
+<div class="block">Returns a hash code.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invert()" class="member-name-link">invert</a>()</code></div>
@@ -222,7 +222,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#makeIdentity()" class="member-name-link">makeIdentity</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Configures the current instance as an identity matrix (diagonals = 1, other
+<div class="block">Configures the matrix as an identity matrix (diagonals = 1, other
  elements = 0).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
@@ -239,7 +239,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Return a string representation of the matrix, which is unaffected.</div>
+<div class="block">Returns a string representation of the matrix, which is unaffected.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#transpose()" class="member-name-link">transpose</a>()</code></div>
@@ -406,7 +406,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="makeIdentity()">
 <h3>makeIdentity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Matrix3d.html" title="class in com.simsilica.mathd">Matrix3d</a></span>&nbsp;<span class="element-name">makeIdentity</span>()</div>
-<div class="block">Configures the current instance as an identity matrix (diagonals = 1, other
+<div class="block">Configures the matrix as an identity matrix (diagonals = 1, other
  elements = 0).</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -488,7 +488,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <dd><code>o</code> - the object to compare (may be null, unaffected)</dd>
 <dt>Returns:</dt>
 <dd>true if <code>this</code> and <code>o</code> have identical values,
-     otherwise false</dd>
+ otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -496,7 +496,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="hashCode()">
 <h3>hashCode</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Return a hash code. If two matrices have identical values, they
+<div class="block">Returns a hash code. If two matrices have identical values, they
  will have the same hash code. The matrix is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
@@ -510,7 +510,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">Return a string representation of the matrix, which is unaffected. For
+<div class="block">Returns a string representation of the matrix, which is unaffected. For
  example, an identity matrix would be represented by:
  <pre>
  Matrix3d[{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}]

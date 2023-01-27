@@ -173,7 +173,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clone()" class="member-name-link">clone</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Create a copy.</div>
+<div class="block">Creates a copy.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
@@ -223,7 +223,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Quatd,com.simsilica.mathd.Quatd)" class="member-name-link">mult</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
  <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;result)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Takes the Hamilton product of the current instance times the first argument and returns the product in the 2nd argument.</div>
+<div class="block">Takes the Hamilton product of the current instance times the first
+ argument and returns the product in the 2nd argument.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.simsilica.mathd.Vec3d)" class="member-name-link">mult</a><wbr>(<a href="Vec3d.html" title="class in com.simsilica.mathd">Vec3d</a>&nbsp;v)</code></div>
@@ -239,7 +240,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(com.simsilica.mathd.Quatd)" class="member-name-link">multLocal</a><wbr>(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Takes the Hamilton product of the current instance times the argument, in place.</div>
+<div class="block">Takes the Hamilton product of the current instance times the argument,
+ in place.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>final <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#normalizeLocal()" class="member-name-link">normalizeLocal</a>()</code></div>
@@ -393,7 +395,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="clone()">
 <h3>clone</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">clone</span>()</div>
-<div class="block">Create a copy. The current instance is unaffected.</div>
+<div class="block">Creates a copy. The current instance is unaffected.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
@@ -539,8 +541,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>mult</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q,
  <a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;result)</span></div>
-<div class="block">Takes the Hamilton product of the current instance times the first argument and returns the product in the 2nd argument. The current instance is
- unaffected, unless it's <code>result</code>.
+<div class="block">Takes the Hamilton product of the current instance times the first
+ argument and returns the product in the 2nd argument. The current
+ instance is unaffected, unless it's <code>result</code>.
  <p>
  This method is used to combine rotations. Note that the Hamilton product
  is noncommutative, so generally q * p != p * q.
@@ -561,7 +564,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="multLocal(com.simsilica.mathd.Quatd)">
 <h3>multLocal</h3>
 <div class="member-signature"><span class="modifiers">public final</span>&nbsp;<span class="return-type"><a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(<a href="Quatd.html" title="class in com.simsilica.mathd">Quatd</a>&nbsp;q)</span></div>
-<div class="block">Takes the Hamilton product of the current instance times the argument, in place.
+<div class="block">Takes the Hamilton product of the current instance times the argument,
+ in place.
  <p>
  This method is used to combine rotations. Note that the Hamilton product
  is noncommutative, so generally q * p != p * q.
