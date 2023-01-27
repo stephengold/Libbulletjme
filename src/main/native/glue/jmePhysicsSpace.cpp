@@ -63,7 +63,7 @@ void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
             pSolverPool = new btConstraintSolverPoolMt(numSolvers); // TODO leak
 
     // Create the multithreaded dynamics world.
-    m_collisionWorld = new btDiscreteDynamicsWorldMt(pDispatcher, pBroadphase,
+    m_pCollisionWorld = new btDiscreteDynamicsWorldMt(pDispatcher, pBroadphase,
             pSolverPool, pConstraintSolver, pCollisionConfiguration); //dance007
 
     modify(); // Apply the standard modifications.
@@ -89,7 +89,7 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
             pConstraintSolver = new btSequentialImpulseConstraintSolver(); //dance006
 
     // Create the discrete dynamics world.
-    m_collisionWorld = new btDiscreteDynamicsWorld(pDispatcher, pBroadphase,
+    m_pCollisionWorld = new btDiscreteDynamicsWorld(pDispatcher, pBroadphase,
             pConstraintSolver, pCollisionConfiguration); //dance007
 
     modify(); // Apply the standard modifications.

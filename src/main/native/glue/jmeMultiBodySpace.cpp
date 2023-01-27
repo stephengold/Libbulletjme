@@ -55,7 +55,7 @@ createMultiBodySpace(const btVector3& min, const btVector3& max,
             pConstraintSolver = new btMultiBodyConstraintSolver(); //dance006
 
     // Create the multibody dynamics world.
-    m_collisionWorld = new btMultiBodyDynamicsWorld(pDispatcher, pBroadphase,
+    m_pCollisionWorld = new btMultiBodyDynamicsWorld(pDispatcher, pBroadphase,
             pConstraintSolver, pCollisionConfiguration); //dance007
 
     modify(); // Make the standard modifications.

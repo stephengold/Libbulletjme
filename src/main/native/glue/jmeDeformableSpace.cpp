@@ -64,7 +64,7 @@ void jmeDeformableSpace::createDeformableSpace(const btVector3& min,
             pWorld = new btDeformableMultiBodyDynamicsWorld(pDispatcher,
                     pBroadphase, pConstraintSolver, pCollisionConfiguration,
                     pDeformableSolver); //dance007
-    m_collisionWorld = pWorld;
+    m_pCollisionWorld = pWorld;
 
     // Do btSoftBodyWorldInfo modifications.
     btSoftBodyWorldInfo softBodyWorldInfo = pWorld->getWorldInfo();

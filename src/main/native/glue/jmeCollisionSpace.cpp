@@ -157,21 +157,21 @@ void jmeCollisionSpace::createCollisionSpace(const btVector3& min,
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
 
     // Create the collision world.
-    m_collisionWorld = new btCollisionWorld(pDispatcher, pBroadphase,
+    m_pCollisionWorld = new btCollisionWorld(pDispatcher, pBroadphase,
             pCollisionConfiguration); //dance007
 }
 
 jmeCollisionSpace::~jmeCollisionSpace() {
-    int numCollisionObjects = m_collisionWorld->getNumCollisionObjects();
+    int numCollisionObjects = m_pCollisionWorld->getNumCollisionObjects();
     if (numCollisionObjects > 0) {
         /*
          * To avoid JME issue #1351, remove all collision objects.
          */
         btCollisionObjectArray&
-                objects = m_collisionWorld->getCollisionObjectArray();
+                objects = m_pCollisionWorld->getCollisionObjectArray();
         for (int i = numCollisionObjects - 1; i >= 0; --i) {
             btCollisionObject *pObject = objects[i];
-            m_collisionWorld->removeCollisionObject(pObject);
+            m_pCollisionWorld->removeCollisionObject(pObject);
 
             jmeUserPointer const
                     pUser = (jmeUserPointer) pObject->getUserPointer();
@@ -181,9 +181,9 @@ jmeCollisionSpace::~jmeCollisionSpace() {
             }
         }
     }
-    btAssert(m_collisionWorld->getNumCollisionObjects() == 0);
+    btAssert(m_pCollisionWorld->getNumCollisionObjects() == 0);
 
-    btBroadphaseInterface *pBroadphase = m_collisionWorld->getBroadphase();
+    btBroadphaseInterface *pBroadphase = m_pCollisionWorld->getBroadphase();
     if (pBroadphase) {
         btOverlappingPairCache * const
                 pPairCache = pBroadphase->getOverlappingPairCache();
@@ -204,8 +204,8 @@ jmeCollisionSpace::~jmeCollisionSpace() {
         delete pBroadphase; //dance009
     }
 
-    btCollisionDispatcher *
-            pDispatcher = (btCollisionDispatcher *) m_collisionWorld->getDispatcher();
+    btCollisionDispatcher *pDispatcher =
+            (btCollisionDispatcher *) m_pCollisionWorld->getDispatcher();
     if (pDispatcher) {
         btCollisionConfiguration *
                 pCollisionConfiguration = pDispatcher->getCollisionConfiguration();
@@ -215,5 +215,5 @@ jmeCollisionSpace::~jmeCollisionSpace() {
         delete pDispatcher; //dance008
     }
 
-    delete m_collisionWorld; //dance007
+    delete m_pCollisionWorld; //dance007
 }

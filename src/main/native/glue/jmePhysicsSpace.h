@@ -85,12 +85,12 @@ public:
      */
     const btDiscreteDynamicsWorld *
     getDynamicsWorld() const {
-        return (btDiscreteDynamicsWorld *) m_collisionWorld;
+        return (btDiscreteDynamicsWorld *) m_pCollisionWorld;
     }
 
     btDiscreteDynamicsWorld *
     getDynamicsWorld() {
-        return (btDiscreteDynamicsWorld *) m_collisionWorld;
+        return (btDiscreteDynamicsWorld *) m_pCollisionWorld;
     }
 
     static void

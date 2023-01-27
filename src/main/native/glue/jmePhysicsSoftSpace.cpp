@@ -58,7 +58,7 @@ void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
     btSoftRigidDynamicsWorld * const
             pWorld = new btSoftRigidDynamicsWorld(pDispatcher, pBroadphase,
             pConstraintSolver, pCollisionConfiguration, pSoftSolver); //dance007
-    m_collisionWorld = pWorld;
+    m_pCollisionWorld = pWorld;
 
     // Do btSoftBodyWorldInfo modifications.
     btSoftBodyWorldInfo softBodyWorldInfo = pWorld->getWorldInfo();

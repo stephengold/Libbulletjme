@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -61,11 +61,11 @@ public:
      */
     const btMultiBodyDynamicsWorld *
     getMultiBodyWorld() const {
-        return (btMultiBodyDynamicsWorld *) m_collisionWorld;
+        return (btMultiBodyDynamicsWorld *) m_pCollisionWorld;
     }
     btMultiBodyDynamicsWorld *
     getMultiBodyWorld() {
-        return (btMultiBodyDynamicsWorld *) m_collisionWorld;
+        return (btMultiBodyDynamicsWorld *) m_pCollisionWorld;
     }
 };
 

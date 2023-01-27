@@ -49,7 +49,7 @@ struct jmeFilterCallback : public btOverlapFilterCallback {
 
 class jmeCollisionSpace {
 protected:
-    btCollisionWorld * m_collisionWorld;
+    btCollisionWorld * m_pCollisionWorld;
     /*
      * an interface pointer for the Java thread that simulates this space:
      */
@@ -75,12 +75,12 @@ public:
 
     const btCollisionWorld *
     getCollisionWorld() const {
-        return m_collisionWorld;
+        return m_pCollisionWorld;
     }
 
     btCollisionWorld *
     getCollisionWorld() {
-        return m_collisionWorld;
+        return m_pCollisionWorld;
     }
 
     const JNIEnv *

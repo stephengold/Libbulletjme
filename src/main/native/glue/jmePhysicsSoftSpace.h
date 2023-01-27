@@ -52,12 +52,12 @@ public:
 
     const btSoftRigidDynamicsWorld *
     getSoftDynamicsWorld() const {
-        return (btSoftRigidDynamicsWorld *) m_collisionWorld;
+        return (btSoftRigidDynamicsWorld *) m_pCollisionWorld;
     }
 
     btSoftRigidDynamicsWorld *
     getSoftDynamicsWorld() {
-        return (btSoftRigidDynamicsWorld *) m_collisionWorld;
+        return (btSoftRigidDynamicsWorld *) m_pCollisionWorld;
     }
 };
 
