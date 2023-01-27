@@ -118,7 +118,7 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Create a copy. The current instance is unaffected.
+     * Creates a copy. The current instance is unaffected.
      *
      * @return a new instance, equivalent to this one
      */
@@ -278,8 +278,9 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Takes the Hamilton product of the current instance times the first argument and returns the product in the 2nd argument. The current instance is
-     * unaffected, unless it's {@code result}.
+     * Takes the Hamilton product of the current instance times the first
+     * argument and returns the product in the 2nd argument. The current
+     * instance is unaffected, unless it's {@code result}.
      * <p>
      * This method is used to combine rotations. Note that the Hamilton product
      * is noncommutative, so generally q * p != p * q.
@@ -312,7 +313,8 @@ public final class Quatd implements Cloneable {
     }
 
     /**
-     * Takes the Hamilton product of the current instance times the argument, in place.
+     * Takes the Hamilton product of the current instance times the argument,
+     * in place.
      * <p>
      * This method is used to combine rotations. Note that the Hamilton product
      * is noncommutative, so generally q * p != p * q.

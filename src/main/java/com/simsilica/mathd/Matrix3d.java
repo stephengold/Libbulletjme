@@ -154,7 +154,7 @@ public class Matrix3d implements Cloneable {
     }
  
     /**
-     * Configures the current instance as an identity matrix (diagonals = 1, other
+     * Configures the matrix as an identity matrix (diagonals = 1, other
      * elements = 0).
      * 
      * @return the (modified) current instance (for chaining)
@@ -256,7 +256,7 @@ public class Matrix3d implements Cloneable {
      *
      * @param o the object to compare (may be null, unaffected)
      * @return true if {@code this} and {@code o} have identical values,
-     *     otherwise false
+     * otherwise false
      */
     @Override
     public boolean equals( Object o ) {
@@ -289,7 +289,7 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
-     * Return a hash code. If two matrices have identical values, they
+     * Returns a hash code. If two matrices have identical values, they
      * will have the same hash code. The matrix is unaffected.
      *
      * @return a 32-bit value for use in hashing
@@ -310,7 +310,7 @@ public class Matrix3d implements Cloneable {
     }
 
     /**
-     * Return a string representation of the matrix, which is unaffected. For
+     * Returns a string representation of the matrix, which is unaffected. For
      * example, an identity matrix would be represented by:
      * <pre>
      * Matrix3d[{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}]
