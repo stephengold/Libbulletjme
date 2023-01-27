@@ -53,7 +53,7 @@ protected:
     /*
      * an interface pointer for the Java thread that simulates this space:
      */
-    JNIEnv *pEnv;
+    JNIEnv *m_pEnv;
     jobject m_javaSpace;
     /*
      * exclusive access to the JavaVM and JNIEnv during parallel for loops:
@@ -85,13 +85,13 @@ public:
 
     const JNIEnv *
     getEnv() const {
-        return pEnv;
+        return m_pEnv;
     }
 
     JNIEnv *
     getEnvAndAttach() {
         attachThread();
-        return pEnv;
+        return m_pEnv;
     }
 
     jobject

@@ -98,7 +98,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
 }
 
 jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
-    this->pEnv = pEnv;
+    this->m_pEnv = pEnv;
 
     m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace);
     EXCEPTION_CHK(pEnv,);
@@ -107,9 +107,9 @@ jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
 void jmeCollisionSpace::attachThread() {
 #ifdef ANDROID
     // doesn't match the Invocation API spec
-    jint retCode = jmeClasses::vm->AttachCurrentThread(&pEnv, NULL);
+    jint retCode = jmeClasses::vm->AttachCurrentThread(&m_pEnv, NULL);
 #else
-    jint retCode = jmeClasses::vm->AttachCurrentThread((void **)&pEnv, NULL);
+    jint retCode = jmeClasses::vm->AttachCurrentThread((void **)&m_pEnv, NULL);
 #endif
     btAssert(retCode == JNI_OK);
 }
@@ -131,7 +131,7 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
             pBroadphase = new btDbvtBroadphase(); //dance009
             break;
         default:
-            pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
+            m_pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                     "The broadphase type is out of range.");
             return 0;
     }
