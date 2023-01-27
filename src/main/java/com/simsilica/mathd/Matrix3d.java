@@ -127,6 +127,7 @@ public class Matrix3d implements Cloneable {
      *
      * @return a new instance, equivalent to this one
      */
+    @Override
     public Matrix3d clone() {
         return new Matrix3d(m00, m01, m02,  
                             m10, m11, m12,
