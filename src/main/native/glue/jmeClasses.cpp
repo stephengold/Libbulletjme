@@ -254,7 +254,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     EXCEPTION_CHK(pEnv,);
     GLOBAL_METHOD(PhysicsGhostObject_addOverlappingObject,
             physicsGhostObject,
-            "addOverlappingObject_native",
+            "addOverlappingObject",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;)V"
     );
 
