@@ -89,10 +89,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_pairTest
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
- * Method:    rayTest_native
+ * Method:    rayTestNative
  * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;JLjava/util/List;I)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTest_1native
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTestNative
   (JNIEnv *, jclass, jobject, jobject, jlong, jobject, jint);
 
 /*

@@ -493,7 +493,7 @@ public class CollisionSpace extends NativePhysicsObject {
             Vector3f from, Vector3f to, List<PhysicsRayTestResult> results) {
         results.clear();
         long spaceId = nativeId();
-        rayTest_native(from, to, spaceId, results, rayTestFlags);
+        rayTestNative(from, to, spaceId, results, rayTestFlags);
 
         results.sort(hitFractionComparator);
         return results;
@@ -552,7 +552,7 @@ public class CollisionSpace extends NativePhysicsObject {
             Vector3f from, Vector3f to, List<PhysicsRayTestResult> results) {
         results.clear();
         long spaceId = nativeId();
-        rayTest_native(from, to, spaceId, results, rayTestFlags);
+        rayTestNative(from, to, spaceId, results, rayTestFlags);
 
         return results;
     }
@@ -790,9 +790,9 @@ public class CollisionSpace extends NativePhysicsObject {
     native private static int pairTest(long spaceId, long aId, long bId,
             PhysicsCollisionListener listener);
 
-    native private static void rayTest_native(
+    native private static void rayTestNative(
             Vector3f fromLocation, Vector3f toLocation, long spaceId,
-            List<PhysicsRayTestResult> addToList, int flags); // TODO rename
+            List<PhysicsRayTestResult> addToList, int flags);
 
     native private static void rayTestNativeDp(
             Vec3d fromLocation, Vec3d toLocation, long spaceId,
