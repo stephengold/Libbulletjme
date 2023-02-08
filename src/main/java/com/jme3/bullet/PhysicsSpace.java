@@ -1235,7 +1235,7 @@ public class PhysicsSpace
      *
      * @param timeStep the time per simulation step (in seconds, &ge;0)
      */
-    private void postTick_native(float timeStep) { // TODO rename
+    private void postTick(float timeStep) {
         for (PhysicsTickListener listener : tickListeners) {
             listener.physicsTick(this, timeStep);
         }
@@ -1246,7 +1246,7 @@ public class PhysicsSpace
      *
      * @param timeStep the time per simulation step (in seconds, &ge;0)
      */
-    private void preTick_native(float timeStep) { // TODO rename
+    private void preTick(float timeStep) {
         for (PhysicsTickListener listener : tickListeners) {
             listener.prePhysicsTick(this, timeStep);
         }

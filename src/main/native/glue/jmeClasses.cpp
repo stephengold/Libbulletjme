@@ -237,8 +237,8 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass physicsSpace = pEnv->FindClass("com/jme3/bullet/PhysicsSpace");
     EXCEPTION_CHK(pEnv,);
-    GLOBAL_METHOD(PhysicsSpace_preTick, physicsSpace, "preTick_native", "(F)V");
-    GLOBAL_METHOD(PhysicsSpace_postTick, physicsSpace, "postTick_native", "(F)V");
+    GLOBAL_METHOD(PhysicsSpace_preTick, physicsSpace, "preTick", "(F)V");
+    GLOBAL_METHOD(PhysicsSpace_postTick, physicsSpace, "postTick", "(F)V");
     GLOBAL_METHOD(PhysicsSpace_onContactEnded,
             physicsSpace, "onContactEnded", "(J)V");
     GLOBAL_METHOD(PhysicsSpace_onContactProcessed,
