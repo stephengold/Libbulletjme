@@ -67,14 +67,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_fin
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
- * Method:    getCollisionFlags
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionFlags
-  (JNIEnv *, jclass, jlong);
-
-/*
- * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    getInternalType
  * Signature: (J)I
  */
@@ -167,6 +159,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
  * Signature: (J)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollideWithGroups
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getCollisionFlags
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getCollisionFlags
   (JNIEnv *, jclass, jlong);
 
 /*
