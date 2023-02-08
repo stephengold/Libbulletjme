@@ -121,10 +121,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setDeterministicOverl
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
- * Method:    sweepTest_native
+ * Method:    sweepTestNative
  * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTestNative
   (JNIEnv *, jclass, jlong, jobject, jobject, jlong, jobject, jfloat);
 
 #ifdef __cplusplus

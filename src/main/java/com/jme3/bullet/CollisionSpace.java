@@ -640,7 +640,7 @@ public class CollisionSpace extends NativePhysicsObject {
         long shapeId = shape.nativeId();
         long spaceId = nativeId();
         results.clear();
-        sweepTest_native(
+        sweepTestNative(
                 shapeId, start, end, spaceId, results, allowedCcdPenetration);
 
         return results;
@@ -803,7 +803,7 @@ public class CollisionSpace extends NativePhysicsObject {
     native private static void setDeterministicOverlappingPairs(
             long spaceId, boolean desiredSetting);
 
-    native private static void sweepTest_native(long shapeId, Transform from,
+    native private static void sweepTestNative(long shapeId, Transform from,
             Transform to, long spaceId, List<PhysicsSweepTestResult> addToList,
-            float allowedCcdPenetration); // TODO rename
+            float allowedCcdPenetration);
 }

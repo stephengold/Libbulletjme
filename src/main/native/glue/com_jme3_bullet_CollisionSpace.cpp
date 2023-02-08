@@ -513,10 +513,10 @@ struct JmeConvexResultCallback : public btCollisionWorld::ConvexResultCallback {
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
- * Method:    sweepTest_native
+ * Method:    sweepTestNative
  * Signature: (JLcom/jme3/math/Transform;Lcom/jme3/math/Transform;JLjava/util/List;F)V
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTest_1native
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_sweepTestNative
 (JNIEnv *pEnv, jclass, jlong shapeId, jobject from, jobject to, jlong spaceId,
         jobject resultList, jfloat allowedCcdPenetration) {
     jmeCollisionSpace * const
