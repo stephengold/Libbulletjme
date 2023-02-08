@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 jMonkeyEngine
+ * Copyright (c) 2022-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -108,7 +108,7 @@ final public class PersistentManifolds {
      * @return a new array of btManifoldPoint IDs (not null, may be empty)
      * @see com.jme3.bullet.collision.ManifoldPoints
      */
-    public long[] listPointIds(long persistentManifoldId) { // TODO static
+    public static long[] listPointIds(long persistentManifoldId) {
         int numPoints = countPoints(persistentManifoldId);
         long[] result = new long[numPoints];
 
