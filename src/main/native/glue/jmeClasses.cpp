@@ -231,7 +231,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     EXCEPTION_CHK(pEnv,);
     GLOBAL_METHOD(CollisionSpace_notifyCollisionGroupListeners,
             collisionSpace,
-            "notifyCollisionGroupListeners_native",
+            "notifyCollisionGroupListeners",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;)Z"
     );
 
