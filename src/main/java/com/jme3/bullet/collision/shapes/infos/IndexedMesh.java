@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 jMonkeyEngine
+ * Copyright (c) 2019-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -176,14 +176,13 @@ public class IndexedMesh extends NativePhysicsObject {
 
     /**
      * Instantiate an IndexedMesh based on the specified positions and indices.
-     * For internal use.
      *
      * @param positionBuffer (not null, not flipped, length a multiple of 3,
      * alias created)
      * @param indexBuffer (not null, not flipped, length a multiple of 3, alias
      * created)
      */
-    IndexedMesh(FloatBuffer positionBuffer, IntBuffer indexBuffer) {
+    public IndexedMesh(FloatBuffer positionBuffer, IntBuffer indexBuffer) {
         Validate.nonNull(positionBuffer, "position buffer");
         Validate.nonNull(indexBuffer, "index buffer");
         int numFloats = positionBuffer.capacity();
