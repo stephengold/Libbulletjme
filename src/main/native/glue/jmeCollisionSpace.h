@@ -51,9 +51,13 @@ class jmeCollisionSpace {
 protected:
     btCollisionWorld * m_pCollisionWorld;
     /*
-     * an interface pointer for the Java thread that simulates this space:
+     * interface pointer most recently attached by this space:
      */
-    JNIEnv *m_pEnv;
+    JNIEnv *m_pAttachEnv;
+    /*
+     * interface pointer for the thread that created this space:
+     */
+    JNIEnv *m_pCreateEnv;
     jobject m_javaSpace;
     /*
      * exclusive access to the JavaVM and JNIEnv during parallel for loops:
@@ -84,14 +88,19 @@ public:
     }
 
     const JNIEnv *
-    getEnv() const {
-        return m_pEnv;
+    getAttachEnv() const {
+        return m_pAttachEnv;
+    }
+
+    const JNIEnv *
+    getCreateEnv() const {
+        return m_pCreateEnv;
     }
 
     JNIEnv *
     getEnvAndAttach() {
         attachThread();
-        return m_pEnv;
+        return m_pAttachEnv;
     }
 
     jobject
