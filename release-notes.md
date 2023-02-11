@@ -1,5 +1,22 @@
 # Release log for the Libbulletjme project
 
+## Version 18.0.0 released on 11 February 2023
+
++ Renamed 6 methods in the Java-native interface, to avoid underscores:
+  + `CollisionSpace.notifyCollisionGroupListeners_native()`
+  + `CollisionSpace.rayTest_native()`
+  + `CollisionSpace.sweepTest_native()`
+  + `PhysicsGhostObject.addOverlappingObject_native()`
+  + `PhysicsSpace.postTick_native()`
+  + `PhysicsSpace.preTick_native()`
++ Changed the Java API:
+  + Added a `static` qualifier to the `listPointIds()` method
+    in the `PersistentManifolds` class.
+  + Privatized the `getCollisionFlags()` method
+    in the `PhysicsCollisionObject` class.
++ Bugfix:  `jmeCollisionSpace::m_pEnv` gets modified during callbacks
++ Publicized another constructor of the `IndexedMesh` class.
+
 ## Version 17.5.4 released on 24 January 2023
 
 + Build MacOSX_ARM64 natives for release using Xcode 12.3 .
