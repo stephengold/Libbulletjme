@@ -610,12 +610,12 @@ public class CollisionSpace extends NativePhysicsObject {
      * recomputed during each {@code update()} (native field:
      * m_forceUpdateAllAabbs).
      *
-     * @param forceUpdateAllAabbs true &rarr; recompute all AABBs, false &rarr;
-     * skip inactive objects (default=true)
+     * @param desiredSetting true &rarr; recompute all AABBs, false &rarr; skip
+     * inactive objects (default=true)
      */
-    public void setForceUpdateAllAabbs(boolean forceUpdateAllAabbs) {
+    public void setForceUpdateAllAabbs(boolean desiredSetting) {
         long spaceId = nativeId();
-        setForceUpdateAllAabbs(spaceId, forceUpdateAllAabbs);
+        setForceUpdateAllAabbs(spaceId, desiredSetting);
     }
 
     /**
@@ -830,7 +830,8 @@ public class CollisionSpace extends NativePhysicsObject {
     native private static void setDeterministicOverlappingPairs(
             long spaceId, boolean desiredSetting);
 
-    native private static void setForceUpdateAllAabbs(long spaceId, boolean vL);
+    native private static void
+            setForceUpdateAllAabbs(long spaceId, boolean desiredSetting);
 
     native private static void sweepTestNative(long shapeId, Transform from,
             Transform to, long spaceId, List<PhysicsSweepTestResult> addToList,
