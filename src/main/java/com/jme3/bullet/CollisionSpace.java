@@ -178,7 +178,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Let all Collision Objects on stepSimulation update their aabb even it is not active
+     * Changing the Force Update All Aaabs Value
      *
      * @param forceUpdateAllAabbs - value
      */
@@ -188,7 +188,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * checking if all Collision Objects on stepSimulation update their aabb even it is not active
+     * Check Force Update All Aabbs is enabled
      *
      * @return true if all Collision Objects on stepSimulation update their aabb
      */
