@@ -256,7 +256,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isForceUpdateAllAabbs()" class="member-name-link">isForceUpdateAllAabbs</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">checking if all Collision Objects on stepSimulation update their aabb even it is not active</div>
+<div class="block">Test whether the bounding boxes of inactive collision objects should be
+ recomputed during each <code>update()</code> (native field:
+ m_forceUpdateAllAabbs).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isUsingDeterministicDispatch()" class="member-name-link">isUsingDeterministicDispatch</a>()</code></div>
@@ -334,7 +336,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setForceUpdateAllAabbs(boolean)" class="member-name-link">setForceUpdateAllAabbs</a><wbr>(boolean&nbsp;forceUpdateAllAabbs)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Let all Collision Objects on stepSimulation update their aabb even it is not active</div>
+<div class="block">Alter whether the bounding boxes of inactive collision objects should be
+ recomputed during each <code>update()</code> (native field:
+ m_forceUpdateAllAabbs).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRayTestFlags(int)" class="member-name-link">setRayTestFlags</a><wbr>(int&nbsp;flags)</code></div>
@@ -453,10 +457,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setForceUpdateAllAabbs(boolean)">
 <h3>setForceUpdateAllAabbs</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setForceUpdateAllAabbs</span><wbr><span class="parameters">(boolean&nbsp;forceUpdateAllAabbs)</span></div>
-<div class="block">Let all Collision Objects on stepSimulation update their aabb even it is not active</div>
+<div class="block">Alter whether the bounding boxes of inactive collision objects should be
+ recomputed during each <code>update()</code> (native field:
+ m_forceUpdateAllAabbs).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>forceUpdateAllAabbs</code> - - value</dd>
+<dd><code>forceUpdateAllAabbs</code> - true &rarr; recompute all AABBs, false &rarr;
+ skip inactive objects (default=true)</dd>
 </dl>
 </section>
 </li>
@@ -464,10 +471,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isForceUpdateAllAabbs()">
 <h3>isForceUpdateAllAabbs</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isForceUpdateAllAabbs</span>()</div>
-<div class="block">checking if all Collision Objects on stepSimulation update their aabb even it is not active</div>
+<div class="block">Test whether the bounding boxes of inactive collision objects should be
+ recomputed during each <code>update()</code> (native field:
+ m_forceUpdateAllAabbs).</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if all Collision Objects on stepSimulation update their aabb</dd>
+<dd>true to recompute all AABBs, false to skip inactive objects</dd>
 </dl>
 </section>
 </li>
