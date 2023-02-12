@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2022, Stephen Gold
+ Copyright (c) 2020-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -2043,6 +2043,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0, space.countCollisionObjects());
         Assert.assertEquals(
                 RayTestFlag.SubSimplexRaytest, space.getRayTestFlags());
+        Assert.assertTrue(space.isForceUpdateAllAabbs());
         Assert.assertFalse(space.isUsingDeterministicDispatch());
     }
 
