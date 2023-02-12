@@ -178,9 +178,12 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Let all Collision Objects on stepSimulation update their aabb even it is not active
+     * Alter whether the bounding boxes of inactive collision objects should be
+     * recomputed during each {@code update()} (native field:
+     * m_forceUpdateAllAabbs).
      *
-     * @param forceUpdateAllAabbs - value
+     * @param forceUpdateAllAabbs true &rarr; recompute all AABBs, false &rarr;
+     * skip inactive objects (default=true)
      */
     public void setForceUpdateAllAabbs(boolean forceUpdateAllAabbs) {
         long spaceId = nativeId();
@@ -188,9 +191,11 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * checking if all Collision Objects on stepSimulation update their aabb even it is not active
+     * Test whether the bounding boxes of inactive collision objects should be
+     * recomputed during each {@code update()} (native field:
+     * m_forceUpdateAllAabbs).
      *
-     * @return true if all Collision Objects on stepSimulation update their aabb
+     * @return true to recompute all AABBs, false to skip inactive objects
      */
     public boolean isForceUpdateAllAabbs() {
         long spaceId = nativeId();
