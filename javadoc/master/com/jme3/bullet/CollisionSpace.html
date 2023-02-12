@@ -334,7 +334,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Remove the specified collision object from this space.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setForceUpdateAllAabbs(boolean)" class="member-name-link">setForceUpdateAllAabbs</a><wbr>(boolean&nbsp;forceUpdateAllAabbs)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setForceUpdateAllAabbs(boolean)" class="member-name-link">setForceUpdateAllAabbs</a><wbr>(boolean&nbsp;desiredSetting)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Alter whether the bounding boxes of inactive collision objects should be
  recomputed during each <code>update()</code> (native field:
@@ -450,33 +450,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>object</code> - the collision object to add (not null)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="setForceUpdateAllAabbs(boolean)">
-<h3>setForceUpdateAllAabbs</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setForceUpdateAllAabbs</span><wbr><span class="parameters">(boolean&nbsp;forceUpdateAllAabbs)</span></div>
-<div class="block">Alter whether the bounding boxes of inactive collision objects should be
- recomputed during each <code>update()</code> (native field:
- m_forceUpdateAllAabbs).</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>forceUpdateAllAabbs</code> - true &rarr; recompute all AABBs, false &rarr;
- skip inactive objects (default=true)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="isForceUpdateAllAabbs()">
-<h3>isForceUpdateAllAabbs</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isForceUpdateAllAabbs</span>()</div>
-<div class="block">Test whether the bounding boxes of inactive collision objects should be
- recomputed during each <code>update()</code> (native field:
- m_forceUpdateAllAabbs).</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>true to recompute all AABBs, false to skip inactive objects</dd>
 </dl>
 </section>
 </li>
@@ -687,6 +660,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="isForceUpdateAllAabbs()">
+<h3>isForceUpdateAllAabbs</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isForceUpdateAllAabbs</span>()</div>
+<div class="block">Test whether the bounding boxes of inactive collision objects should be
+ recomputed during each <code>update()</code> (native field:
+ m_forceUpdateAllAabbs).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true to recompute all AABBs, false to skip inactive objects</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="isUsingDeterministicDispatch()">
 <h3>isUsingDeterministicDispatch</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isUsingDeterministicDispatch</span>()</div>
@@ -863,6 +849,20 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>pco</code> - the collision object to remove (not null, modified)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setForceUpdateAllAabbs(boolean)">
+<h3>setForceUpdateAllAabbs</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setForceUpdateAllAabbs</span><wbr><span class="parameters">(boolean&nbsp;desiredSetting)</span></div>
+<div class="block">Alter whether the bounding boxes of inactive collision objects should be
+ recomputed during each <code>update()</code> (native field:
+ m_forceUpdateAllAabbs).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>desiredSetting</code> - true &rarr; recompute all AABBs, false &rarr; skip
+ inactive objects (default=true)</dd>
 </dl>
 </section>
 </li>
