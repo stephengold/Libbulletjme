@@ -178,6 +178,26 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
+     * Let all Collision Objects on stepSimulation update their aabb even it is not active
+     *
+     * @param forceUpdateAllAabbs - value
+     */
+    public void setForceUpdateAllAabbs(boolean forceUpdateAllAabbs) {
+        long spaceId = nativeId();
+        setForceUpdateAllAabbs(spaceId, forceUpdateAllAabbs);
+    }
+
+    /**
+     * checking if all Collision Objects on stepSimulation update their aabb even it is not active
+     *
+     * @return true if all Collision Objects on stepSimulation update their aabb
+     */
+    public boolean isForceUpdateAllAabbs() {
+        long spaceId = nativeId();
+        return isForceUpdateAllAabbs(spaceId);
+    }
+
+    /**
      * Add the specified collision object to this space.
      *
      * @param pco the collision object to add (not null, modified)
@@ -799,6 +819,10 @@ public class CollisionSpace extends NativePhysicsObject {
             List<PhysicsRayTestResult> addToList, int flags);
 
     native private static void removeCollisionObject(long spaceId, long pcoId);
+
+    native private static void setForceUpdateAllAabbs(long spaceId, boolean vL);
+
+    native private static boolean isForceUpdateAllAabbs(long spaceId);
 
     native private static void setDeterministicOverlappingPairs(
             long spaceId, boolean desiredSetting);

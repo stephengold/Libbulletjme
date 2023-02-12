@@ -113,6 +113,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    setForceUpdateAllAabbs
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setForceUpdateAllAabbs
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    isForceUpdateAllAabbs
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_isForceUpdateAllAabbs
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    setDeterministicOverlappingPairs
  * Signature: (JZ)V
  */

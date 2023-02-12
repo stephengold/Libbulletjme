@@ -422,6 +422,38 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_rayTestNativeDp
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    setForceUpdateAllAabbs
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setForceUpdateAllAabbs
+(JNIEnv *pEnv, jclass, jlong spaceId, jboolean forceUpdate) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.",);
+    btCollisionWorld *pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.",)
+
+    pWorld->setForceUpdateAllAabbs(forceUpdate);
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    isForceUpdateAllAabbs
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_isForceUpdateAllAabbs
+(JNIEnv *pEnv, jclass, jlong spaceId) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", false);
+    btCollisionWorld *pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", false)
+
+    return pWorld->getForceUpdateAllAabbs();
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    removeCollisionObject
  * Signature: (JJ)V
  */
