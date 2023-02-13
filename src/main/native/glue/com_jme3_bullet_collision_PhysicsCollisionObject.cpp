@@ -174,10 +174,16 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
     btCollisionObject * const
             pObject1 = reinterpret_cast<btCollisionObject *> (pco1Id);
     NULL_CHK(pEnv, pObject1, "The btCollisionObject #1 does not exist.",);
+    const int internalType1 = pObject1->getInternalType();
+    ASSERT_CHK(pEnv, internalType1 > 0,);
+    ASSERT_CHK(pEnv, internalType1 <= btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     btCollisionObject * const
             pObject2 = reinterpret_cast<btCollisionObject *> (pco2Id);
     NULL_CHK(pEnv, pObject2, "The btCollisionObject #2 does not exist.",);
+    const int internalType2 = pObject2->getInternalType();
+    ASSERT_CHK(pEnv, internalType2 > 0,);
+    ASSERT_CHK(pEnv, internalType2 <= btCollisionObject::CO_FEATHERSTONE_LINK,);
 
     bool ignoreCollisionCheck = bool(setting);
     pObject1->setIgnoreCollisionCheck(pObject2, ignoreCollisionCheck);
@@ -508,10 +514,18 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_ge
             pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
     NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",
             0);
+    ASSERT_CHK(pEnv, listIndex >= 0, 0);
+    ASSERT_CHK(pEnv,
+            listIndex < pCollisionObject->getNumObjectsWithoutCollision(), 0);
 
     int index = int(listIndex);
     const btCollisionObject *
             result = pCollisionObject->getObjectWithoutCollision(index);
+    const int internalType = result->getInternalType();
+    ASSERT_CHK(pEnv, internalType > 0, 0);
+    ASSERT_CHK(pEnv, internalType <= btCollisionObject::CO_FEATHERSTONE_LINK,
+            0);
+
     return reinterpret_cast<jlong> (result);
 }
 
