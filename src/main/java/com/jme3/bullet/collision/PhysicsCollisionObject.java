@@ -200,7 +200,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * wheels of a PhysicsVehicle aren't collision objects, so the vehicle's
      * ignore list doesn't affect them.
      *
-     * @param otherPco the other collision object (not null, not this, modified)
+     * @param otherPco the other collision object (not null, not {@code this},
+     * modified)
      */
     public void addToIgnoreList(PhysicsCollisionObject otherPco) {
         Validate.nonNull(otherPco, "other");
@@ -312,7 +313,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Find the PhysicCollisionObject with the specified ID. Native method.
+     * Find the collision object with the specified ID. Native method.
      *
      * @param pcoId the native identifier (not zero)
      * @return the pre-existing instance, or null if it's been reclaimed
@@ -1072,7 +1073,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the ignore list.
+     * Replace the ignore list.
      *
      * @param idList the collision-object IDs to ignore (not null, may be empty,
      * unaffected)
@@ -1215,7 +1216,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             setCollisionFlags(long objectId, int desiredFlags);
 
     /**
-     * Alter the ignore list for collisions.
+     * Alter the ignore list for collisions. TODO privatize
      *
      * @param object1Id the ID of the first btCollisionObject (not zero)
      * @param object2Id the ID of the 2nd btCollisionObject (not zero)
