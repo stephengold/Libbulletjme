@@ -42,7 +42,6 @@ import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jme3utilities.math.MyMath;
 
 /**
  * The motion state (transform) of a rigid body, with thread-safe access.
@@ -114,7 +113,7 @@ public class RigidBodyMotionState extends NativePhysicsObject {
         long motionStateId = nativeId();
         getWorldLocationDp(motionStateId, result);
 
-        assert MyMath.isFinite(result);
+        assert result.isFinite() : result;
         return result;
     }
 

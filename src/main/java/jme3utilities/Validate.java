@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2014-2022, Stephen Gold
+ Copyright (c) 2014-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@ import com.simsilica.mathd.Vec3d;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jme3utilities.math.MyMath;
 import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
@@ -154,7 +153,7 @@ final public class Validate {
     public static boolean finite(Vec3d vector, String description) {
         nonNull(vector, description);
 
-        if (!MyMath.isFinite(vector)) {
+        if (!vector.isFinite()) {
             String what;
             if (description == null) {
                 what = "Vec3d argument";

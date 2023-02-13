@@ -56,7 +56,6 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.lbj.IndexBuffer;
 import jme3utilities.math.MyBuffer;
-import jme3utilities.math.MyMath;
 
 /**
  * A collision object to simulate a soft body, based on Bullet's btSoftBody. It
@@ -1496,7 +1495,7 @@ public class PhysicsSoftBody extends PhysicsBody {
         long objectId = nativeId();
         getPhysicsLocationDp(objectId, result);
 
-        assert MyMath.isFinite(result) : result;
+        assert result.isFinite() : result;
         return result;
     }
 

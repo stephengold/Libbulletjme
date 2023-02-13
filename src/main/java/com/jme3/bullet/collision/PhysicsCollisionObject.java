@@ -46,7 +46,6 @@ import com.simsilica.mathd.Vec3d;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
-import jme3utilities.math.MyMath;
 
 /**
  * The abstract base class for collision objects based on Bullet's
@@ -552,7 +551,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         long objectId = nativeId();
         getLocationDp(objectId, result);
 
-        assert MyMath.isFinite(result);
+        assert result.isFinite();
         return result;
     }
 

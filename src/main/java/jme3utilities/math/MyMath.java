@@ -225,11 +225,11 @@ final public class MyMath {
      * Tests whether the argument is a valid vector, returning false if it's
      * null or if any component is NaN or infinite.
      *
-     * @see com.jme3.math.Vector3f#isValidVector(com.jme3.math.Vector3f)
-     *
      * @param vector the vector to test (unaffected)
      * @return true if non-null and finite, otherwise false
+     * @deprecated use {@link com.simsilica.mathd.Vec3d#isFinite()}
      */
+    @Deprecated
     public static boolean isFinite(Vec3d vector) {
         if (vector == null) {
             return false;
