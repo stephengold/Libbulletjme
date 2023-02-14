@@ -43,6 +43,8 @@ import com.jme3.math.Vector3f;
 import com.simsilica.mathd.Matrix3d;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
+import java.util.Collection;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -137,6 +139,10 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     // fields
 
     /**
+     * other objects with which collisions are ignored, or null for none
+     */
+    private Collection<PhysicsCollisionObject> ignoreList;
+    /**
      * shape of this object, or null if none
      */
     private CollisionShape collisionShape;
@@ -206,7 +212,18 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         Validate.nonNull(otherPco, "other");
         Validate.require(otherPco != this, "2 distinct collision objects");
 
-        if (!ignores(otherPco)) {
+        if (ignoreList == null) {
+            this.ignoreList = new TreeSet<>();
+        }
+        if (!ignoreList.contains(otherPco)) {
+            ignoreList.add(otherPco);
+
+            if (otherPco.ignoreList == null) {
+                otherPco.ignoreList = new TreeSet<>();
+            }
+            assert !otherPco.ignoreList.contains(this);
+            otherPco.ignoreList.add(this);
+
             long thisId = nativeId();
             long otherId = otherPco.nativeId();
             boolean toIgnore = true;
@@ -240,11 +257,18 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      */
     public void clearIgnoreList() {
         long thisId = nativeId();
-        long[] otherIds = listIgnoredIds();
-        for (long otherId : otherIds) {
+        if (ignoreList != null && !ignoreList.isEmpty()) {
             boolean toIgnore = false;
-            setIgnoreCollisionCheck(thisId, otherId, toIgnore);
+            for (PhysicsCollisionObject otherPco : ignoreList) {
+                long otherId = otherPco.nativeId();
+                setIgnoreCollisionCheck(thisId, otherId, toIgnore);
+
+                assert otherPco.ignoreList.contains(this);
+                otherPco.ignoreList.remove(this);
+            }
+            ignoreList.clear();
         }
+
     }
 
     /**
@@ -304,9 +328,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @see #addToIgnoreList(com.jme3.bullet.collision.PhysicsCollisionObject)
      */
     public int countIgnored() {
-        long objectId = nativeId();
-        int result = getNumObjectsWithoutCollision(objectId);
+        int result = (ignoreList == null) ? 0 : ignoreList.size();
 
+        assert result == getNumObjectsWithoutCollision(nativeId());
         assert result >= 0 : result;
         return result;
     }
@@ -753,18 +777,11 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @see #addToIgnoreList(com.jme3.bullet.collision.PhysicsCollisionObject)
      */
     public boolean ignores(PhysicsCollisionObject other) {
-        boolean result = false;
-        if (other != null && other != this) {
-            long objectId = nativeId();
-            long otherId = other.nativeId();
-            int numIgnoredObjects = getNumObjectsWithoutCollision(objectId);
-            for (int index = 0; index < numIgnoredObjects; ++index) {
-                long id = getObjectWithoutCollision(objectId, index);
-                if (id == otherId) {
-                    result = true;
-                    break;
-                }
-            }
+        boolean result;
+        if (ignoreList == null || other == null) {
+            result = false;
+        } else {
+            result = ignoreList.contains(other);
         }
 
         return result;
@@ -900,7 +917,13 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         Validate.nonNull(otherPco, "other");
         Validate.require(otherPco != this, "2 distinct collision objects");
 
-        if (ignores(otherPco)) {
+        if (ignoreList != null && ignoreList.contains(otherPco)) {
+            ignoreList.remove(otherPco);
+
+            assert otherPco.ignoreList != null;
+            assert otherPco.ignoreList.contains(this);
+            otherPco.ignoreList.remove(this);
+
             long thisId = nativeId();
             long otherId = otherPco.nativeId();
             boolean toIgnore = false;
@@ -1079,11 +1102,11 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      */
     public void setIgnoreList(long[] idList) {
         Validate.nonNull(idList, "ID list");
-        clearIgnoreList();
 
-        long thisId = nativeId();
+        clearIgnoreList();
         for (long otherId : idList) {
-            setIgnoreCollisionCheck(thisId, otherId, true);
+            PhysicsCollisionObject otherPco = findInstance(otherId);
+            addToIgnoreList(otherPco);
         }
     }
 
