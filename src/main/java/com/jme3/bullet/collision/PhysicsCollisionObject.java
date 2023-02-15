@@ -566,7 +566,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in physics-space coordinates, either
-     * storeResult or a new vector, finite)
+     * storeResult or a new vector, not null, finite)
      */
     public Vec3d getPhysicsLocationDp(Vec3d storeResult) {
         Vec3d result = (storeResult == null) ? new Vec3d() : storeResult;
@@ -574,7 +574,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         long objectId = nativeId();
         getLocationDp(objectId, result);
 
-        assert result.isFinite();
+        assert result.isFinite() : result;
         return result;
     }
 
