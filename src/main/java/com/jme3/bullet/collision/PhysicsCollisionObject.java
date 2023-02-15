@@ -846,7 +846,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      *
      * @return a new array (not null, may be empty)
      * @see #addToIgnoreList(com.jme3.bullet.collision.PhysicsCollisionObject)
+     * @deprecated use {@link #listIgnoredPcos()}
      */
+    @Deprecated
     public long[] listIgnoredIds() {
         long objectId = nativeId();
         int numIgnoredObjects = getNumObjectsWithoutCollision(objectId);
@@ -1124,7 +1126,10 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      *
      * @param idList the collision-object IDs to ignore (not null, may be empty,
      * unaffected)
+     * @deprecated use {@link #setIgnoreList(
+     * com.jme3.bullet.collision.PhysicsCollisionObject[])}
      */
+    @Deprecated
     public void setIgnoreList(long[] idList) {
         Validate.nonNull(idList, "ID list");
 
