@@ -829,7 +829,8 @@ public class PhysicsSpace
     }
 
     /**
-     * Update this space.
+     * Update this space. This method should be invoked from the thread that
+     * created the space.
      *
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      * @param maxSteps the maximum number of steps of size {@code accuracy}
@@ -845,6 +846,10 @@ public class PhysicsSpace
             boolean doProcessed, boolean doStarted) {
         assert Validate.nonNegative(timeInterval, "time interval");
         assert Validate.nonNegative(maxSteps, "max steps");
+
+        if (NativeLibrary.jniEnvId() != jniEnvId()) {
+            logger.log(Level.WARNING, "invoked from wrong thread");
+        }
 
         long spaceId = nativeId();
         assert accuracy > 0f : accuracy;
@@ -1071,7 +1076,7 @@ public class PhysicsSpace
      */
     @Override
     public void onContactEnded(long manifoldId) {
-        // do nothing
+        assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
     }
 
     /**
@@ -1088,6 +1093,8 @@ public class PhysicsSpace
     @Override
     public void onContactProcessed(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long pointId) {
+        assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
+
         PhysicsCollisionEvent event
                 = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
         // Queue the event to be handled later by distributeEvents().
@@ -1105,6 +1112,8 @@ public class PhysicsSpace
      */
     @Override
     public void onContactStarted(long manifoldId) {
+        assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
+
         int numPoints = PersistentManifolds.countPoints(manifoldId);
         if (numPoints == 0) {
             return;
@@ -1236,6 +1245,8 @@ public class PhysicsSpace
      * @param timeStep the time per simulation step (in seconds, &ge;0)
      */
     private void postTick(float timeStep) {
+        assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
+
         for (PhysicsTickListener listener : tickListeners) {
             listener.physicsTick(this, timeStep);
         }
@@ -1247,6 +1258,8 @@ public class PhysicsSpace
      * @param timeStep the time per simulation step (in seconds, &ge;0)
      */
     private void preTick(float timeStep) {
+        assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
+
         for (PhysicsTickListener listener : tickListeners) {
             listener.prePhysicsTick(this, timeStep);
         }
