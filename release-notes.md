@@ -1,5 +1,16 @@
 # Release log for the Libbulletjme project
 
+## Version 18.1.0 released on 15 February 2023
+
++ Bugfix: ignored collision objects get garbage-collected prematurely
++ Added the `isForceUpdateAllAabbs()` and `setForceUpdateAllAabbs()`
+  methods to the `CollisionSpace` class, to provide an (optional) optimization.
++ Added the `listIgnoredPcos()` and `setIgnoreList(PhysicsCollisionObject[])`
+  methods to the `PhysicsCollisionObject` class and deprecated the
+  `listIgnoredIds()` and `setIgnoreList(long[])` methods.
++ Deprecated the `isFinite(Vec3d)` method in the `MyMath` class.
++ Added various checks, including a few for the threading model.
+
 ## Version 18.0.0 released on 11 February 2023
 
 + Renamed 6 methods in the Java-native interface, to avoid underscores:
@@ -14,7 +25,7 @@
     in the `PersistentManifolds` class.
   + Privatized the `getCollisionFlags()` method
     in the `PhysicsCollisionObject` class.
-+ Bugfix:  `jmeCollisionSpace::m_pEnv` gets modified during callbacks
++ Bugfix: `jmeCollisionSpace::m_pEnv` gets modified during callbacks
 + Publicized another constructor of the `IndexedMesh` class.
 
 ## Version 17.5.4 released on 24 January 2023
