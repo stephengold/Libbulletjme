@@ -209,7 +209,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * modified)
      */
     public void addToIgnoreList(PhysicsCollisionObject otherPco) {
-        Validate.nonNull(otherPco, "other");
+        Validate.nonNull(otherPco, "other collision object");
         Validate.require(otherPco != this, "2 distinct collision objects");
 
         if (ignoreList == null) {
@@ -268,7 +268,6 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             }
             ignoreList.clear();
         }
-
     }
 
     /**
@@ -941,7 +940,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * @param otherPco the other collision object (not null, not this, modified)
      */
     public void removeFromIgnoreList(PhysicsCollisionObject otherPco) {
-        Validate.nonNull(otherPco, "other");
+        Validate.nonNull(otherPco, "other collision object");
         Validate.require(otherPco != this, "2 distinct collision objects");
 
         if (ignoreList != null && ignoreList.contains(otherPco)) {
