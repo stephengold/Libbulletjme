@@ -69,6 +69,7 @@ SIMD_FORCE_INLINE int btGetConstraintIslandId1(const btTypedConstraint* lhs)
 {
 	const btCollisionObject& rcolObj0 = lhs->getRigidBodyA();
 	const btCollisionObject& rcolObj1 = lhs->getRigidBodyB();
+        btAssert(rcolObj0.getIslandTag() >= 0 || rcolObj1.getIslandTag() >= 0); // stephengold added 2023-02-14
 	int islandId = rcolObj0.getIslandTag() >= 0 ? rcolObj0.getIslandTag() : rcolObj1.getIslandTag();
 	return islandId;
 }
@@ -435,6 +436,7 @@ void btSimulationIslandManagerMt::addManifoldsToIslands(btDispatcher* dispatcher
 			{
 				// scatter manifolds into various islands
 				int islandId = getIslandId(manifold);
+                                btAssert(islandId >= 0); // stephengold added 2023-02-14
 				// if island not sleeping,
 				if (Island* island = getIsland(islandId))
 				{
@@ -455,6 +457,7 @@ void btSimulationIslandManagerMt::addConstraintsToIslands(btAlignedObjectArray<b
 		if (constraint->isEnabled())
 		{
 			int islandId = btGetConstraintIslandId1(constraint);
+                        btAssert(islandId >= 0); // stephengold added 2023-02-14
 			// if island is not sleeping,
 			if (Island* island = getIsland(islandId))
 			{
