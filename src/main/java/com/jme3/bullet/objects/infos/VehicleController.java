@@ -332,7 +332,7 @@ public class VehicleController extends NativePhysicsObject {
     }
 
     /**
-     * used internally
+     * Used internally.
      *
      * @param wheel (not null)
      */
