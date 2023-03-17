@@ -59,7 +59,7 @@ protected:
 	bool m_ownsConstraintSolver;
 	bool m_synchronizeAllMotionStates;
 	bool m_applySpeculativeContactRestitution;
-        bool m_ccdWithStaticOnly;
+        bool m_ccdWithStaticOnly; // stephengold added 2022-11-11
 
 	btAlignedObjectArray<btActionInterface*> m_actions;
 
@@ -216,12 +216,12 @@ public:
 	{
 		return m_applySpeculativeContactRestitution;
 	}
-	void setCcdWithStaticOnly(bool enable) {
-		m_ccdWithStaticOnly = enable;
-	}
-	bool getCcdWithStaticOnly() const {
-		return m_ccdWithStaticOnly;
-	}
+	void setCcdWithStaticOnly(bool enable) { // stephengold added 2022-11-11
+		m_ccdWithStaticOnly = enable; // stephengold added 2022-11-11
+	} // stephengold added 2022-11-11
+	bool getCcdWithStaticOnly() const { // stephengold added 2022-11-11
+		return m_ccdWithStaticOnly; // stephengold added 2022-11-11
+	} // stephengold added 2022-11-11
 
 	///Preliminary serialization test for Bullet 2.76. Loading those files requires a separate parser (see Bullet/Demos/SerializeDemo)
 	virtual void serialize(btSerializer * serializer);
