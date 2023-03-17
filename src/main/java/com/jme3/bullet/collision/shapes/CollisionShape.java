@@ -302,7 +302,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
      */
     public boolean isContactFilterEnabled() {
         assert enableContactFilter == isContactFilterEnabled(nativeId()) :
-                enableContactFilter;
+                "copy of flag = " + enableContactFilter;
         return enableContactFilter;
     }
 
