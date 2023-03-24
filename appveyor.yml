@@ -63,7 +63,7 @@ deploy:
   artifact: classJar,javadocJar,sourcesJar,pom,module,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DDM,dll64DS,dll64DSM,dll64RD,dll64RDM,dll64RS,dll64RSM,pdb32DD,pdb32DS,pdb64DD,pdb64DDM,pdb64DS,pdb64DSM
   provider: GitHub
   auth_token:
-    secure: 0UE0o/i9Syg2cXGswVRmBJ16Uz6/6tDWyIJ56SBYVqCzvfm2RMq94b1VIKX2n0FA
+    secure: OGfG0B0VZ+f3OrcB9wEPEooA5oGPeNIeSKDYS5SkjC1kmElxd9RTHgOhwpHTmdeR
   force_update: true               # overwrite existing release if present
   on:
     appveyor_repo_tag: true        # deploy on tag push only
