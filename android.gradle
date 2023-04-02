@@ -31,7 +31,7 @@ android {
     externalNativeBuild.ndkBuild {
         path 'Android.mk'
     }
-    ndkVersion '21.3.6528147'
+    ndkVersion '21.4.7075529'
 }
 
 tasks.register('copyToDist') {}
