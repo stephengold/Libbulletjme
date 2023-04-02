@@ -11,6 +11,7 @@ jobs:
 
     # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64:
     - dist: trusty
+      jdk: oraclejdk11
       language: android
       android:
         components:
