@@ -10,7 +10,7 @@ jobs:
   include:
 
     # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64:
-    - dist: bionic
+    - dist: trusty
       language: android
       android:
         components:
