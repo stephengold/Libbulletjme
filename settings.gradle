@@ -1,1 +1,8 @@
 rootProject.name = 'Libbulletjme'
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
