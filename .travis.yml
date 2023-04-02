@@ -18,8 +18,6 @@ jobs:
           - tools
       script:
         - date
-        - cat `which jdk_switcher`
-        - jdk_switcher use openjdk8
         - sdkmanager --list
         - echo y | sdkmanager "ndk;21.4.7075529" > /dev/null
         - echo y | sdkmanager "patcher;v4" > /dev/null
@@ -27,7 +25,6 @@ jobs:
         - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
         - export JAVA_HOME=$HOME/oraclejdk11
         - $TRAVIS_BUILD_DIR/install-jdk.sh -f 11 --target $JAVA_HOME
-        - jdk_switcher use oraclejdk11
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
         
 
