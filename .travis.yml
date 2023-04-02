@@ -18,6 +18,7 @@ jobs:
           - tools
       script:
         - date
+        - cat `which jdk_switcher`
         - jdk_switcher use openjdk8
         - sdkmanager --list
         - echo y | sdkmanager "ndk;21.4.7075529" > /dev/null
