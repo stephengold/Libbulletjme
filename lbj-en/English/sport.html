@@ -3,21 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Project overview :: The Libbulletjme project</title>
-    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/overview.html">
-    <meta name="generator" content="Antora 3.1.2">
-    <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:image" content="../_/img/iconx128.png">
-<meta property="og:description" content="Project overview">
+    <title>Visualization using the SPORT graphics engine :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/English/sport.html">
+    <link rel="prev" href="add.html">
+    <link rel="next" href="rigidbody.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<meta property="og:image" content="../../_/img/iconx128.png">
+<meta property="og:description" content="Visualization using the SPORT graphics engine">
 <meta property="og:title" content="The Libbulletjme project">
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
   </head>
   <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
-        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        <img alt="" src="../../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
         The Libbulletjme project
       </a>
       <button class="navbar-burger" data-target="topbar-nav">
@@ -45,7 +47,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="lbj-en" data-version="master">
+<div class="nav-container" data-component="lbj-en" data-version="English">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -64,7 +66,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="add.html">Add to existing project</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="sport.html">SPORT visualization</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -215,14 +217,14 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">The Libbulletjme project</span>
-    <span class="version">master</span>
+    <span class="version">English</span>
   </div>
   <ul class="components">
     <li class="component is-current">
       <span class="title">The Libbulletjme project</span>
       <ul class="versions">
         <li class="version is-current">
-          <a href="overview.html">master</a>
+          <a href="overview.html">English</a>
         </li>
       </ul>
     </li>
@@ -238,259 +240,114 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="overview.html">The Libbulletjme project</a></li>
-    <li><a href="overview.html">Project overview</a></li>
+    <li>Library tutorials</li>
+    <li><a href="sport.html">SPORT visualization</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/overview.adoc">Edit this page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/sport.adoc">Edit this page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Project overview</h1>
+<h1 class="page">Visualization using the SPORT graphics engine</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Libbulletjme</em> is a 3-D <a href="https://en.wikipedia.org/wiki/Physics_engine">physics simulation</a> library
-for <a href="https://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>.</p>
+<p>The <code>HelloLibbulletjme</code> app
+(introduced on <a href="add.html" class="xref page">the previous page</a>)
+is simple, readable and complete.
+However, as a console app, its output is limited to text.</p>
 </div>
 <div class="paragraph">
-<p>Use it to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>add solidity to walls, characters, projectiles, landscapes, and vehicles,</p>
-</li>
-<li>
-<p>detect collisions between complex shapes,</p>
-</li>
-<li>
-<p>perform contact, ray, and sweep tests,</p>
-</li>
-<li>
-<p>simulate cloth, rope, and deformable volumes,
-including their interactions with rigid bodies and each other.</p>
-</li>
-</ul>
+<p>Text provides scant insight into what the 3-D physics simulation is doing.
+For most people, pictures are far easier to understand.</p>
 </div>
 <div class="paragraph">
-<p>Tutorials and example apps are provided to help you get started.</p>
-</div>
-<div class="paragraph">
-<p>All software in the Libbulletjme project is free and open-source,
-including the Java library, the native libraries, the demo and tutorial apps,
-and the software used to build, test, and run them.</p>
-</div>
-<div class="paragraph">
-<p>The underlying simulation software comes from
-<a href="https://pybullet.org/wordpress"><em>Bullet</em></a>, a mature real-time physics simulator.
-But although Bullet is written in <a href="https://en.wikipedia.org/wiki/C%2B%2B">C&#43;&#43;</a>,
-you won&#8217;t need any knowledge of C&#43;&#43; to use Libbulletjme.</p>
-</div>
-<div class="paragraph">
-<p>Libbulletjme also incorporates source code from
-<a href="https://github.com/kmammou/v-hacd">the V-HACD project</a> and
-<a href="https://github.com/Simsilica/SimMath">the SimMath library</a>.</p>
+<p>For the purpose of this tutorial series,
+we&#8217;ve created a graphics engine named SPORT
+(the Simple Physics-ORienTed engine).
+SPORT enables us to visualize physics objects
+without cluttering up the physics code with too many rendering calls.
+It is open-source, written in Java, and included in
+<a href="https://github.com/stephengold/LbjExamples">the LbjExamples project</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_caveats"><a class="anchor" href="#_caveats"></a>Caveats</h2>
+<h2 id="_hellosport"><a class="anchor" href="#_hellosport"></a>HelloSport</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Libbulletjme&#8217;s focus is on simulating
-<a href="https://en.wikipedia.org/wiki/Classical_mechanics">classical mechanics</a>
-in just enough detail to add verisimilitude to 3-D games.
-It&#8217;s not intended for 2-D <a href="https://en.wikipedia.org/wiki/Platform_game">platformers</a>,
-nor for scientific research.
-For 2-D physics, consider using <a href="http://www.dyn4j.org/">dyn4j</a> instead.</p>
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSport.java">HelloSport</a>
+is a direct conversion of <code>HelloLibbulletjme</code> into a SPORT app.</p>
 </div>
 <div class="paragraph">
-<p>Libbulletjme and its documentation
-assume a certain level of proficiency with
-the Java programming language.
-This project isn&#8217;t aimed at non-programmers,
-nor developers without prior Java experience.
-Similarly, some familiarity with 3-D graphics and vector math is assumed.</p>
+<p>Details to note:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The app is declared as a subclass of <code>BasePhysicsApp&lt;PhysicsSpace&gt;</code>,
+indicating that it will simulate a plain <code>PhysicsSpace</code>.</p>
+</li>
+<li>
+<p>The app implements the 3 abstract methods of <code>BasePhysicsApp</code>
+(<code>createSpace</code>, <code>populateSpace</code>, and <code>updateSpace</code>),
+all of which are invoked automatically.</p>
+</li>
+<li>
+<p><code>BasePhysicsApp</code> automatically loads the Libbulletjme native library.</p>
+</li>
+<li>
+<p><code>BasePhysicsApp</code> provides:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>the <code>physicsSpace</code> field to access the space and</p>
+</li>
+<li>
+<p>the <code>visualizeShape()</code> method to visualize the shape of a collision object.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Whereas <code>HelloLibbulletjme</code> used <code>update(intervalSeconds, 0)</code>
+to simulate one step at a time,
+<code>HelloSport</code> attempts real-time simulation using <code>update(intervalSeconds)</code>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>While an understanding of classical mechanics is assumed,
-many of its technical terms are linked (at first use)
-to the relevant article in the English Wikipedia.</p>
+<p>Running <code>HelloSport</code> should open a window on your computer&#8217;s desktop
+and play a brief animation of a sphere falling onto a horizontal surface.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://raw.githubusercontent.com/stephengold/Libbulletjme/master/LICENSE">The library&#8217;s mixed open-source license</a>
-disclaims liability for defects.
-Please don&#8217;t use this software in safety-critical applications.</p>
+<p>Pressing <kbd>Esc</kbd> should close the window and terminate the app.</p>
 </div>
 <div class="paragraph">
-<p>Starting with version 16.1.0,
-Libbulletjme is no longer compatible with the older versions of "libc"
-found on systems such as CentOS 7 and Ubuntu Xenial 16.04.</p>
+<p>Hereafter, all our tutorial apps will use SPORT.
+Additional features of SPORT will be introduced as needed.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_whats_missing"><a class="anchor" href="#_whats_missing"></a>What&#8217;s missing</h2>
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Bullet is a large project, and
-Libbulletjme doesn&#8217;t yet provide access to all of its features.
-In particular:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>btRigidBodyConstructionInfo</code></p>
+<p>SPORT is a graphics engine, created specifically for Libbulletjme tutorials.</p>
 </li>
 <li>
-<p>"additional damping" for rigid bodies</p>
-</li>
-<li>
-<p>Bullet&#8217;s debug drawer (but see the SPORT graphics engine in LbjExamples)</p>
-</li>
-<li>
-<p>serialization (file loader)</p>
-</li>
-<li>
-<p>certain constraints:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>btFixedConstraint</code></p>
-</li>
-<li>
-<p><code>btUniversalConstraint</code></p>
+<p>SPORT provides a simple toolkit for visualizing 3-D physics.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>certain collision shapes:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>btCompoundFromGimpactShape</code></p>
-</li>
-<li>
-<p><code>btConvexPointCloudShape</code></p>
-</li>
-<li>
-<p><code>btConvexTriangleMeshShape</code></p>
-</li>
-<li>
-<p><code>btGImpactCompoundShape</code></p>
-</li>
-<li>
-<p><code>btMinkowskiSumShape</code></p>
-</li>
-<li>
-<p><code>btMultimaterialTriangleMeshShape</code></p>
-</li>
-<li>
-<p><code>btScaledBvhTriangleMeshShape</code></p>
-</li>
-<li>
-<p><code>btSdfCollisionShape</code></p>
-</li>
-<li>
-<p><code>btTriangleShape</code></p>
-</li>
-<li>
-<p><code>btUniformScalingShape</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>certain world types:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><code>btSimpleDynamicsWorld</code></p>
-</li>
-<li>
-<p><code>btSoftMultiBodyDynamicsWorld</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>inverse dynamics</p>
-</li>
-<li>
-<p>Bullet v3</p>
-</li>
-<li>
-<p>Bullet extras, examples, and tests (but see the Java examples in LbjExamples)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Furthermore, Libbulletjme hasn&#8217;t yet been ported to the following platforms:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the FreeBSD and iOS operating systems</p>
-</li>
-<li>
-<p>Windows on ARM architectures</p>
-</li>
-<li>
-<p>PowerPC architectures</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>We welcome suggestions concerning the future development of Libbulletjme.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_getting_help"><a class="anchor" href="#_getting_help"></a>Getting help</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>For self-help, make use of
-<a href="add.html" class="xref page">the tutorials</a>,
-<a href="https://stephengold.github.io/Libbulletjme/javadoc/master">the javadoc</a>, and
-<a href="https://github.com/stephengold/Libbulletjme">the source code</a>.</p>
-</div>
-<div class="paragraph">
-<p>For issues that are best handled privately, contact Stephen by e-mail.
-His personal e-mail address appears
-on <a href="https://stephengold.github.io/">his homepage</a> and in the source code.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_name"><a class="anchor" href="#_the_name"></a>The name</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The project&#8217;s (somewhat awkward) name
-reflects that fact that it was originally created
-for the JMonkeyEngine (JME) game engine.</p>
-</div>
-<div class="paragraph">
-<p>Despite its history, Libbulletjme is self-contained;
-it doesn&#8217;t depend on JME.
-If you&#8217;re seeking a physics engine that&#8217;s integrated with JME,
-please consider <a href="https://stephengold.github.io/Minie">Minie</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you&#8217;re curious how Libbulletjme works,
-proceed to <a href="implementation.html" class="xref page">the Implementation page</a>.</p>
-</div>
-<div class="paragraph">
-<p>To gain hands-on experience,
-proceed to <a href="add.html" class="xref page">the first tutorial page</a>.</p>
-</div>
-</div>
-</div>
+<nav class="pagination">
+  <span class="prev"><a href="add.html">Add to existing project</a></span>
+  <span class="next"><a href="rigidbody.html">Rigid bodies</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Page contents" data-levels="2">
   <div class="toc-menu"></div>
@@ -501,7 +358,7 @@ proceed to <a href="add.html" class="xref page">the first tutorial page</a>.</p>
 <footer class="footer">
   <p>Copyright &copy; 2020&ndash;2023 by Stephen Gold</p>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

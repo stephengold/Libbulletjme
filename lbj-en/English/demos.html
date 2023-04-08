@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>How Libbulletjme works :: The Libbulletjme project</title>
-    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/implementation.html">
-    <meta name="generator" content="Antora 3.1.2">
-    <link rel="stylesheet" href="../_/css/site.css">
-<meta property="og:image" content="../_/img/iconx128.png">
-<meta property="og:description" content="How Libbulletjme works">
+    <title>An overview of the demo applications :: The Libbulletjme project</title>
+    <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/English/demos.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<meta property="og:image" content="../../_/img/iconx128.png">
+<meta property="og:description" content="An overview of the demo applications">
 <meta property="og:title" content="The Libbulletjme project">
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
   </head>
   <body class="article">
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://stephengold.github.io/Libbulletjme">
-        <img alt="" src="../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
+        <img alt="" src="../../_/img/iconx128.png" width="32" type="image/x-icon" style="margin-right:16px">
         The Libbulletjme project
       </a>
       <button class="navbar-burger" data-target="topbar-nav">
@@ -45,7 +45,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="lbj-en" data-version="master">
+<div class="nav-container" data-component="lbj-en" data-version="English">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -54,7 +54,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="implementation.html">Implementation</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -99,7 +99,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="build.html">Build procedures</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="demos.html">Demo apps</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -215,14 +215,14 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">The Libbulletjme project</span>
-    <span class="version">master</span>
+    <span class="version">English</span>
   </div>
   <ul class="components">
     <li class="component is-current">
       <span class="title">The Libbulletjme project</span>
       <ul class="versions">
         <li class="version is-current">
-          <a href="overview.html">master</a>
+          <a href="overview.html">English</a>
         </li>
       </ul>
     </li>
@@ -238,49 +238,60 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="overview.html">The Libbulletjme project</a></li>
-    <li><a href="implementation.html">Implementation</a></li>
+    <li><a href="demos.html">Demo apps</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/implementation.adoc">Edit this page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stephengold/LbjExamples/edit/master/docs/en/modules/ROOT/pages/demos.adoc">Edit this page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">How Libbulletjme works</h1>
+<h1 class="page">An overview of the demo applications</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>For physics simulation and collision detection,
-Libbulletjme uses <a href="https://pybullet.org/wordpress">the <em>Bullet Physics SDK</em></a>,
-a mature, open-source, 3-D physics simulator,
-released under <a href="https://github.com/bulletphysics/bullet3/blob/master/LICENSE.txt">a Zlib license</a>.</p>
+<p><em>Demo applications</em> are provided to showcase certain features of Libbulletjme.
+The following demos are found in
+<a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples">the com.github.stephengold.lbjexamples package of the "apps" sub-project</a>:</p>
 </div>
-<div class="paragraph">
-<p>To enable efficient simulation of moving meshes,
-Libbulletjme also incorporates Khaled Mamou&#8217;s
-<a href="https://github.com/kmammou/v-hacd">Volumetric-Hierarchical Approximate Convex Decomposition <em>(V-HACD)</em> algorithm</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/ConveyorDemo.java"><code>ConveyorDemo</code></a>
+demonstrates contact-point modifications</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/NewtonsCradle.java"><code>NewtonsCradle</code></a>
+demonstrates dynamic restitution and point-to-point joints</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/Pachinko.java"><code>Pachinko</code></a>
+demonstrates compound collision shapes and 2-D physics</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/SplitDemo.java"><code>SplitDemo</code></a>
+demonstrates dynamic splitting of rigid bodies</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/TestGearJoint.java"><code>TestGearJoint</code></a>
+demonstrates a gear joint</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/ThousandCubes.java"><code>ThousandCubes</code></a>
+demonstrates stacking cubes and launching projectiles</p>
+</li>
+<li>
+<p><a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/lbjexamples/Windlass.java"><code>Windlass</code></a>
+demonstrates rope simulation using rigid bodies</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_native_libraries"><a class="anchor" href="#_native_libraries"></a>Native libraries</h2>
+<h2 id="_user_interface"><a class="anchor" href="#_user_interface"></a>User interface</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Bullet and V-HACD are written in C&#43;&#43;, so Libbulletjme uses
-<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/jni/spec/intro.html">the Java Native Interface (JNI)</a>
-to access their objects and methods.</p>
-</div>
-<div class="paragraph">
-<p>All C&#43;&#43; source code in Libbulletjme
-(a modified partial snapshot of Bullet, a snapshot of V-HACD, and some "glue code")
-resides in its "src/native" directory.
-Before instantiating physics objects,
-a Libbulletjme application must <a href="https://en.wikipedia.org/wiki/Dynamic_loading">dynamically load</a>
-a <em>native library</em> of this code,
-compiled for the <a href="https://en.wikipedia.org/wiki/Computing_platform">platform</a>
-on which the app is executing.</p>
-</div>
-<div class="paragraph">
-<p>Libbulletjme publishes native libraries for 14 different platforms.</p>
+<p>The demos are controlled primarily by keyboard input.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -289,178 +300,166 @@ on which the app is executing.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-32-bit and 64-bit versions of the same operating system
-count as distinct platforms!
+The descriptions below assume a keyboard with the "US" (QWERTY) layout.
+On keyboards with other layouts, the keys may be labeled differently.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>For each platform, Libbulletjme builds 2 types of libraries:</p>
+<p>For convenience, the mapping of keys to actions is partly standardized.
+In most demos:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>"Debug" (for development use) and</p>
+<p><kbd>.</kbd> and <kbd>Pause</kbd> toggle the simulation between running and paused,</p>
 </li>
 <li>
-<p>"Release" (for production use).</p>
+<p><kbd>C</kbd> dumps the camera&#8217;s position to the console, and</p>
+</li>
+<li>
+<p><kbd>Esc</kbd> ends the application.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Furthermore, native libraries come in various flavors, including:</p>
+<p>For camera control, all demos use <code>Immediate</code> rotation mode.
+This means you can rotate the camera by simply moving the mouse.
+Furthermore:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>"Sp" (using <a href="https://en.wikipedia.org/wiki/Single-precision_floating-point_format">single-precision arithmetic</a>,
-single-threaded, without profiling),</p>
+<p><kbd>W</kbd> and <kbd>S</kbd> dolly the camera forward and back, respectively,</p>
 </li>
 <li>
-<p>"SpMt" (similar to "Sp", but multithreaded),</p>
+<p><kbd>A</kbd> and <kbd>D</kbd> dolly the camera left and right, respectively,</p>
 </li>
 <li>
-<p>"SpQuickprof" (similar to "Sp", but with Quickprof
-<a href="https://en.wikipedia.org/wiki/Profiling_(computer_programming)">profiling</a>), and</p>
+<p><kbd>Q</kbd> raises the camera, and</p>
 </li>
 <li>
-<p>"Dp" (similar to "Sp" but using
-<a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">double-precision arithmetic</a>).</p>
+<p><kbd>Z</kbd> lowers the camera.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>All these native libraries share a common API,
-so a single Java library suffices.</p>
+<p>Additional mappings are specific to each application:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_collision_objects_spaces_and_shapes"><a class="anchor" href="#_collision_objects_spaces_and_shapes"></a>Collision objects, spaces, and shapes</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Collision detection is organized around <em>collision objects</em>
-that interact in the context of a <em>collision space</em>.
-Collision objects can be <em>soft</em> (varying shape) or <em>rigid</em> (non-varying shape).
-Rigid objects can be <em>mobile</em> (moving) or <em>static</em> (non-moving).
-And mobile objects can be <em>dynamic</em> (driven by <a href="https://en.wikipedia.org/wiki/Force">forces</a>,
-<a href="https://en.wikipedia.org/wiki/Torque">torques</a>, and <a href="https://en.wikipedia.org/wiki/Impulse_(physics)">impulses</a>)
-or <em>kinematic</em> (driven directly by external calculations).</p>
-</div>
-<div class="paragraph">
-<p>In Libbulletjme, collision spaces that simulate forces, torques, and impulses
-are referred to as <em>physics spaces</em>.</p>
-</div>
-<div class="paragraph">
-<p>Each rigid collision object references a <em>collision shape</em>
-that describes the shape of its surface.
-Most collision shapes are <em>scalable</em>,
-allowing you to grow or shrink objects
-simply by varying the shape&#8217;s scale factors.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_coordinate_systems_and_units"><a class="anchor" href="#_coordinate_systems_and_units"></a>Coordinate systems and units</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A collision object&#8217;s absolute location and orientation are quantified
-in <em>physics-space coordinates</em>,
-based on a right-handed Cartesian coordinate system.</p>
-</div>
-<div class="paragraph">
-<p>With notable exceptions,
-Libbulletjme doesn&#8217;t specify real-world units for distance.
-Instead, its documentation refers to <em>physics-space units</em> (psu),
-which could be light-years or millimeters, depending on the application.
-Nor does Libbulletjme specify which axis serves as the "up" direction.
-If you use a Y-up coordinate system with a psu of one meter,
-then Libbulletjme&#8217;s default gravity
-will be roughly correct for the Earth&#8217;s surface.
-However, there are good reasons to use physics-space units other than meters.</p>
-</div>
-<div class="paragraph">
-<p>Locations relative to a collision object&#8217;s center and subject to its rotation
-are quantified using <em>local coordinates</em>.
-The documentation distinguishes <em>scaled local coordinates</em> (measured in psu)
-from <em>shape coordinates</em> (which depend on scale factors).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_discrete_time_and_collision_detection"><a class="anchor" href="#_discrete_time_and_collision_detection"></a>Discrete time and collision detection</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Within a physics space, simulation occurs in discrete steps.
-While it&#8217;s possible to vary the time step from step to step,
-a fixed time step tends to yield more reproducible results.</p>
-</div>
-<div class="paragraph">
-<p>Each time step consists of 4 <em>phases</em>:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p><em>forward dynamics part one</em>,
-to apply known forces and torques
-and predict the next position of each collision object,</p>
+<p>In <code>ConveyorDemo</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>Enter</kbd>, <kbd>I</kbd>, <kbd>Ins</kbd>, <kbd>Numpad0</kbd>, and <kbd>Spacebar</kbd>
+drop a box onto the conveyor belt</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p><em>broadphase collision detection</em>,
-to quickly determine (using axis-aligned bounding boxes)
-which object pairs might possibly collide,</p>
+<p>In <code>NewtonsCradle</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>F1</kbd>, <kbd>1</kbd>, and <kbd>Numpad1</kbd> restart with a single ball</p>
 </li>
 <li>
-<p><em>narrowphase collision detection</em>,
-to compute actual contacts (if any) between between objects, and</p>
+<p><kbd>F2</kbd>, <kbd>2</kbd>, and <kbd>Numpad2</kbd> restart with 2 balls</p>
 </li>
 <li>
-<p><em>forward dynamics part 2</em>,
-to apply contact forces, solve constraints, and update positions.</p>
+<p><kbd>F3</kbd>, <kbd>3</kbd>, and <kbd>Numpad3</kbd> restart with 3 balls</p>
 </li>
-</ol>
+<li>
+<p><kbd>F4</kbd>, <kbd>4</kbd>, and <kbd>Numpad4</kbd> restart with 4 balls</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>For fast-moving objects,
-Libbulletjme offers optional continuous collision detection (CCD)
-using swept spheres.</p>
+</li>
+<li>
+<p>In <code>Pachinko</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>F4</kbd>, <kbd>4</kbd>, and <kbd>Numpad4</kbd> restart with 4 rows of pins</p>
+</li>
+<li>
+<p><kbd>F5</kbd>, <kbd>5</kbd>, and <kbd>Numpad5</kbd> restart with 5 rows of pins</p>
+</li>
+<li>
+<p><kbd>F6</kbd>, <kbd>6</kbd>, and <kbd>Numpad6</kbd> restart with 6 rows of pins</p>
+</li>
+<li>
+<p><kbd>F7</kbd>, <kbd>7</kbd>, and <kbd>Numpad7</kbd> restart with 7 rows of pins</p>
+</li>
+<li>
+<p><kbd>F8</kbd>, <kbd>8</kbd>, and <kbd>Numpad8</kbd> restart with 8 rows of pins</p>
+</li>
+<li>
+<p><kbd>F9</kbd>, <kbd>9</kbd>, and <kbd>Numpad9</kbd> restart with 9 rows of pins</p>
+</li>
+</ul>
 </div>
+</li>
+<li>
+<p>In <code>SplitDemo</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>Tab</kbd> convert all bodies to splittable shapes</p>
+</li>
+<li>
+<p><kbd>Home</kbd>, <kbd>Numpad5</kbd> restart with a random rigid body</p>
+</li>
+<li>
+<p><kbd>Enter</kbd>, <kbd>Numpad0</kbd>, <kbd>Spacebar</kbd> split all shapes</p>
+</li>
+<li>
+<p><kbd>L bracket</kbd>, <kbd>R bracket</kbd> rotate the splitting plane</p>
+</li>
+</ul>
 </div>
+</li>
+<li>
+<p>In <code>TestGearJoint</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>R</kbd> and <kbd>Down arrow</kbd> apply +Y torque to the drive shaft</p>
+</li>
+<li>
+<p><kbd>F</kbd> and <kbd>Up arrow</kbd> apply -Y torque to the drive shaft</p>
+</li>
+</ul>
 </div>
-<div class="sect1">
-<h2 id="_direct_buffers_garbage_collection_and_threading"><a class="anchor" href="#_direct_buffers_garbage_collection_and_threading"></a>Direct buffers, garbage collection, and threading</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Direct buffers used in Libbulletjme should have native byte order.</p>
+</li>
+<li>
+<p>In <code>ThousandCubes</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>E</kbd> launch a red ball</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>All other native objects created by Libbulletjme are carefully tracked using
-weak references.</p>
+</li>
+<li>
+<p>In <code>Windlass</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><kbd>Down arrow</kbd> turn the barrel counter-clockwise</p>
+</li>
+<li>
+<p><kbd>Up arrow</kbd> turn the barrel clockwise</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<p>Successful initialization of a native library causes Libbulletjme
-to start a daemon thread named "Physics Cleaner".
-Its purpose is to free any tracked native objects
-whose corresponding java objects have been garbage collected.</p>
-</div>
-<div class="paragraph">
-<p>As a performance enhancement,
-Libbulletjme can parallelize certain for-loops on platforms that support OpenMP.
-To enable this feature, a multi-threaded native library must be loaded.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next steps</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>For more detail about Bullet physics, download and read the
-<a href="https://github.com/bulletphysics/bullet3/blob/master/docs/Bullet_User_Manual.pdf">Bullet User Manual</a>.</p>
-</div>
-<div class="paragraph">
-<p>To gain hands-on experience,
-proceed to <a href="add.html" class="xref page">the first tutorial page</a>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -474,7 +473,7 @@ proceed to <a href="add.html" class="xref page">the first tutorial page</a>.</p>
 <footer class="footer">
   <p>Copyright &copy; 2020&ndash;2023 by Stephen Gold</p>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
