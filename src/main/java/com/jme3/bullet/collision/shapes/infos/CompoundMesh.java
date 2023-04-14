@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 jMonkeyEngine
+ * Copyright (c) 2019-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -265,7 +265,7 @@ public class CompoundMesh extends NativePhysicsObject {
     // Java private methods
 
     /**
-     * Compare Bullet's scale factors to the local copy.
+     * Compare Bullet's scale factors to the JVM copy.
      *
      * @param tempVector caller-allocated temporary storage (not null)
      * @return true if scale factors are exactly equal, otherwise false
