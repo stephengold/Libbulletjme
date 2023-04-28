@@ -15,10 +15,10 @@ android {
     buildTypes.debug {
         jniDebuggable = true
     }
-    compileSdkVersion 30
+    compileSdk 30
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 30
+        minSdk 22
+        targetSdk 30
         ndk {
             //abiFilters 'x86_64'
         }
