@@ -1,4 +1,4 @@
-// Gradle script to build Maven artifacts and desktop native libraries
+// Gradle build script for Maven artifacts and desktop native libraries
 
 plugins {
     id 'checkstyle'
@@ -443,7 +443,7 @@ publishMavenPublicationToMavenLocal.doLast {
     println 'installed locally as ' + project.ext.baseName
 }
 
-// signing tasks
+// signing tasks:
 
 // Signing relies on the existence of 3 properties
 // (signing.keyId, signing.password, and signing.secretKeyRingFile)
