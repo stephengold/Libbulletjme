@@ -12,7 +12,7 @@ ext {
     group = 'com.github.stephengold'
     artifact = 'Libbulletjme'
     version = '18.1.0'
-    baseName = "${artifact}-${version}"
+    baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
 
