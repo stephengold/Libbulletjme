@@ -582,6 +582,7 @@ public class PhysicsRigidBody extends PhysicsBody {
         long oldId = 0L;
         PhysicsSpace removedFrom = null;
         RigidBodySnapshot snapshot = null;
+        Vec3d gravity = null;
 
         if (hasAssignedNativeObject()) {
             // Gather information regarding the existing native object.
@@ -591,6 +592,7 @@ public class PhysicsRigidBody extends PhysicsBody {
                 removedFrom.removeCollisionObject(this);
             }
             snapshot = new RigidBodySnapshot(this);
+            gravity = getGravityDp(null);
 
             logger2.log(Level.INFO, "Clearing {0}.", this);
             clearIgnoreList();
@@ -629,6 +631,9 @@ public class PhysicsRigidBody extends PhysicsBody {
         }
         if (snapshot != null) {
             snapshot.applyTo(this);
+        }
+        if (gravity != null) {
+            setGravityDp(objectId, gravity);
         }
         // TODO physics joints
     }
