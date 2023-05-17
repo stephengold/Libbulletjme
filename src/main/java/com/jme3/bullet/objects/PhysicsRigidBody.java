@@ -1233,19 +1233,6 @@ public class PhysicsRigidBody extends PhysicsBody {
     // Java private methods
 
     /**
-     * Compare Bullet's mass to the JVM copy.
-     *
-     * @return true if the masses are approximately equal, otherwise false
-     */
-    private boolean checkMass() {
-        long objectId = nativeId();
-        float nativeMass = getMass(objectId);
-        boolean result = FastMath.approximateEquals(nativeMass, mass);
-
-        return result;
-    }
-
-    /**
      * Compare Bullet's kinematic flag to the JVM copy.
      *
      * @return true if the flags are equal, otherwise false
@@ -1264,6 +1251,19 @@ public class PhysicsRigidBody extends PhysicsBody {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Compare Bullet's mass to the JVM copy.
+     *
+     * @return true if the masses are approximately equal, otherwise false
+     */
+    private boolean checkMass() {
+        long objectId = nativeId();
+        float nativeMass = getMass(objectId);
+        boolean result = FastMath.approximateEquals(nativeMass, mass);
+
+        return result;
     }
 
     /**
