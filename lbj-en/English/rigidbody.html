@@ -468,19 +468,8 @@ an irresistible battering ram.</p>
 </div>
 <div class="paragraph">
 <p>There&#8217;s no direct way to instantiate a kinematic rigid body.
-The usual way is to instantiate a dynamic body and then convert it
+The usual way is to instantiate a static or dynamic body and then convert it
 to kinematic using <code>rigidBody.setKinematic(true)</code>.</p>
-</div>
-<div class="paragraph">
-<p>Due to a design flaw, a kinematic rigid body must have positive mass.
-To convert a static rigid body into a kinematic one, set its mass
-to a positive value <strong>before</strong> setting its kinematic flag:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">rigidBody.setMass(1f);
-rigidBody.setKinematic(true);</code></pre>
-</div>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloKinematics.java">HelloKinematics</a> is a SPORT app
