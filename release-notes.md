@@ -1,5 +1,14 @@
 # Release log for the Libbulletjme project
 
+## Version 18.2.0 released on 17 May 2023
+
++ Bugfix: the gravity of a rigid body is altered by a rebuild
++ Integrated https://github.com/bulletphysics/bullet3/pull/4413
++ Integrated https://github.com/bulletphysics/bullet3/pull/4462
++ Allow zero-mass kinematic rigid bodies.
++ Added the `applyAllExceptIgnoreListTo()`
+  method to the `RigidBodySnapshot` class.
+
 ## Version 18.1.0 released on 15 February 2023
 
 + Bugfix: ignored collision objects get garbage-collected prematurely
