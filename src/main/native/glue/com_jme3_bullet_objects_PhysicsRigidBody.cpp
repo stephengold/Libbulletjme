@@ -663,21 +663,29 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsRigidBody_setKinemati
     btRigidBody * const pBody = reinterpret_cast<btRigidBody *> (bodyId);
     NULL_CHK(pEnv, pBody, "The btRigidBody does not exist.",);
     ASSERT_CHK(pEnv, pBody->getInternalType() & btCollisionObject::CO_RIGID_BODY,);
-    ASSERT_CHK(pEnv, !pBody->isStaticObject(),);
 
     int flags = pBody->getCollisionFlags();
     bool oldValue = pBody->isKinematicObject();
 
-    if (value && !oldValue) { // dynamic -> kinematic
-        flags = flags | btCollisionObject::CF_KINEMATIC_OBJECT;
+    if (value && !oldValue) { // dynamic/static -> kinematic
+        flags &= ~btCollisionObject::CF_STATIC_OBJECT;
+        flags |= btCollisionObject::CF_KINEMATIC_OBJECT;
         pBody->setCollisionFlags(flags);
+
         pBody->setActivationState(DISABLE_DEACTIVATION);
 
-    } else if (oldValue && !value) { // kinematic -> dynamic
-        flags = flags & ~btCollisionObject::CF_KINEMATIC_OBJECT;
+    } else if (oldValue && !value) { // kinematic -> dynamic/static
+        bool zeroMass = (pBody->getMass() == btScalar(0.0));
+        if (zeroMass) {
+            flags |= btCollisionObject::CF_STATIC_OBJECT;
+        }
+        flags &= ~btCollisionObject::CF_KINEMATIC_OBJECT;
         pBody->setCollisionFlags(flags);
-        pBody->activate(true);
-        pBody->forceActivationState(ACTIVE_TAG);
+
+        if (!zeroMass) {
+            pBody->activate(true);
+            pBody->forceActivationState(ACTIVE_TAG);
+        }
     }
 }
 
