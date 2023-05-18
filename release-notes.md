@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 18.2.0 released on 17 May 2023
+## Version 18.2.1 released on 17 May 2023
 
 + Bugfix: the gravity of a rigid body is altered by a rebuild
 + Integrated https://github.com/bulletphysics/bullet3/pull/4413
