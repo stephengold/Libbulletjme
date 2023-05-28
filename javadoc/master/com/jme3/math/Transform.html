@@ -403,8 +403,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Combines with the argument and returns the (modified) current instance.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>parent</code> - the parent transform (not null, unaffected unless it's
-     <code>this</code>)</dd>
+<dd><code>parent</code> - the parent transform (not null, <code>parent.rot.norm()
+     == 1</code>, unaffected unless it's <code>this</code>)</dd>
 <dt>Returns:</dt>
 <dd>the (modified) current instance (for chaining)</dd>
 </dl>
