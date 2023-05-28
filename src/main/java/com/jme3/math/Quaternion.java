@@ -610,6 +610,8 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * Rotates the argument vector. Despite the name, the current instance is
      * unaffected.
      *
+     * <p>The current instance is assumed to have norm=1.
+     *
      * <p>Despite the name, the result differs from the mathematical definition
      * of vector-quaternion multiplication.
      *
@@ -677,6 +679,8 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     /**
      * Rotates a specified vector and returns the result in another vector. The
      * current instance is unaffected.
+     *
+     * <p>The current instance is assumed to have norm=1.
      *
      * <p>It is safe for {@code v} and {@code store} to be the same object.
      *

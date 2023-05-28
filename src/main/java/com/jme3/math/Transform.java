@@ -156,8 +156,8 @@ public final class Transform implements Cloneable, java.io.Serializable {
     /**
      * Combines with the argument and returns the (modified) current instance.
      *
-     * @param parent the parent transform (not null, unaffected unless it's
-     *     <code>this</code>)
+     * @param parent the parent transform (not null, {@code parent.rot.norm()
+     *     == 1}, unaffected unless it's <code>this</code>)
      * @return the (modified) current instance (for chaining)
      */
     public Transform combineWithParent(Transform parent) {
