@@ -330,7 +330,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     public int countIgnored() {
         int result = (ignoreList == null) ? 0 : ignoreList.size();
 
-        assert result == getNumObjectsWithoutCollision(nativeId());
+        assert checkIgnoreList();
         assert result >= 0 : result;
         return result;
     }
@@ -1342,6 +1342,25 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Compare Bullet's ignore list to the JVM copy.
+     *
+     * @return true if the lists agree, otherwise false
+     */
+    private boolean checkIgnoreList() {
+        long objectId = nativeId();
+        int nativeCount = getNumObjectsWithoutCollision(objectId);
+        int jvmCount = (ignoreList == null) ? 0 : ignoreList.size();
+        if (jvmCount != nativeCount) {
+            logger.log(Level.SEVERE, "{0}  jvmCount = {1}, nativeCount = {2}",
+                    new Object[]{this, jvmCount, nativeCount});
+            return false;
+        }
+
+        // TODO compare every item in both lists
+        return true;
+    }
 
     /**
      * Free the identified tracked native object. Invoked by reflection.
