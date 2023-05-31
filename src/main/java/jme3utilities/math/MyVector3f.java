@@ -124,8 +124,8 @@ final public class MyVector3f {
      * @param input the vector to scale and add (not null, unaffected)
      * @param scale scale factor to apply to the input
      */
-    public static void accumulateScaled(Vector3f total, Vector3f input,
-            float scale) {
+    public static void accumulateScaled(
+            Vector3f total, Vector3f input, float scale) {
         assert Validate.nonNull(total, "total");
         assert Validate.nonNull(input, "input");
 
@@ -163,8 +163,8 @@ final public class MyVector3f {
      * @param store2 storage for the 2nd basis vector (not null, modified)
      * @param store3 storage for the 3rd basis vector (not null, modified)
      */
-    public static void generateBasis(Vector3f in1, Vector3f store2,
-            Vector3f store3) {
+    public static void generateBasis(
+            Vector3f in1, Vector3f store2, Vector3f store3) {
         assert Validate.nonZero(in1, "starting direction");
         assert Validate.nonNull(store2, "2nd basis vector");
         assert Validate.nonNull(store3, "3nd basis vector");
@@ -293,8 +293,8 @@ final public class MyVector3f {
      * v0 or v1)
      * @return an interpolated vector (either storeResult or a new instance)
      */
-    public static Vector3f lerp(float t, Vector3f v0, Vector3f v1,
-            Vector3f storeResult) {
+    public static Vector3f lerp(
+            float t, Vector3f v0, Vector3f v1, Vector3f storeResult) {
         assert Validate.nonNull(v0, "v0");
         assert Validate.nonNull(v1, "v1");
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -317,8 +317,8 @@ final public class MyVector3f {
      * vector1 or vector2)
      * @return a coordinate vector (either storeResult or a new instance)
      */
-    public static Vector3f midpoint(Vector3f vector1, Vector3f vector2,
-            Vector3f storeResult) {
+    public static Vector3f midpoint(
+            Vector3f vector1, Vector3f vector2, Vector3f storeResult) {
         assert Validate.finite(vector1, "first location");
         assert Validate.finite(vector2, "2nd location");
 

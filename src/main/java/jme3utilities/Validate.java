@@ -205,8 +205,8 @@ final public class Validate {
      * @throws IllegalArgumentException if the value is outside the range [min,
      * max]
      */
-    public static boolean inRange(int iValue, String description,
-            int min, int max) {
+    public static boolean inRange(
+            int iValue, String description, int min, int max) {
         if (iValue < min) {
             String what;
             if (description == null) {
@@ -246,8 +246,8 @@ final public class Validate {
      * @return true
      * @throws IllegalArgumentException if the value is outside the range
      */
-    public static boolean inRange(float fValue, String description,
-            float min, float max) {
+    public static boolean inRange(
+            float fValue, String description, float min, float max) {
         if (!(fValue >= min)) {
             String what;
             if (description == null) {
@@ -287,8 +287,8 @@ final public class Validate {
      * @return true
      * @throws IllegalArgumentException if the value is outside the range
      */
-    public static boolean inRange(double dValue, String description,
-            double min, double max) {
+    public static boolean inRange(
+            double dValue, String description, double min, double max) {
         if (!(dValue >= min)) {
             String what;
             if (description == null) {

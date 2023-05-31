@@ -77,8 +77,8 @@ final public class MyQuaternion {
      * it's {@code total})
      * @param scale scale factor to apply to the input
      */
-    public static void accumulateScaled(Quaternion total, Quaternion input,
-            float scale) {
+    public static void accumulateScaled(
+            Quaternion total, Quaternion input, float scale) {
         assert Validate.nonNull(total, "total");
         assert Validate.nonNull(input, "input");
 
@@ -359,8 +359,8 @@ final public class MyQuaternion {
      * {@code base})
      * @return a unit quaternion (either storeResult or a new instance)
      */
-    public static Quaternion pow(Quaternion base, float exponent,
-            Quaternion storeResult) {
+    public static Quaternion pow(
+            Quaternion base, float exponent, Quaternion storeResult) {
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
@@ -405,8 +405,8 @@ final public class MyQuaternion {
      * @return an interpolated unit quaternion (either storeResult or a new
      * instance)
      */
-    public static Quaternion slerp(float t, Quaternion q0, Quaternion q1,
-            Quaternion storeResult) {
+    public static Quaternion slerp(
+            float t, Quaternion q0, Quaternion q1, Quaternion storeResult) {
         assert Validate.inRange(t, "t", 0f, 1f);
         assert validateUnit(q0, "q0", 0.0001f);
         assert validateUnit(q1, "q1", 0.0001f);
@@ -494,8 +494,8 @@ final public class MyQuaternion {
      * @return an equivalent Quaternion without negative zeros (either
      * storeResult or a new instance)
      */
-    public static Quaternion standardize(Quaternion input,
-            Quaternion storeResult) {
+    public static Quaternion standardize(
+            Quaternion input, Quaternion storeResult) {
         assert Validate.nonNull(input, "input quaternion");
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
@@ -523,8 +523,8 @@ final public class MyQuaternion {
      * @throws IllegalArgumentException if the norm is out of tolerance
      * @throws NullPointerException if the Quaternion is null
      */
-    public static boolean validateUnit(Quaternion q, String description,
-            float tolerance) {
+    public static boolean validateUnit(
+            Quaternion q, String description, float tolerance) {
         assert Validate.nonNull(q, description);
 
         double norm = lengthSquared(q);
