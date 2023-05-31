@@ -338,8 +338,8 @@ public class PhysicsRigidBody extends PhysicsBody {
 
         long objectId = nativeId();
         getAngularVelocity(objectId, result);
-        Quaternion localToWorld = getPhysicsRotation(null);
-        Quaternion worldToLocal = localToWorld.inverse();
+        Quaternion localToWorld = getPhysicsRotation(null); // garbage
+        Quaternion worldToLocal = localToWorld.inverse(); // garbage
         worldToLocal.mult(result, result);
 
         return result;
