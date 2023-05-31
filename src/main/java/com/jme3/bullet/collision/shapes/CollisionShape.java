@@ -467,9 +467,9 @@ abstract public class CollisionShape extends NativePhysicsObject {
         Validate.nonNegative(scale, "scale");
         if (!canScale(scale)) {
             String typeName = getClass().getCanonicalName();
-            String msg = String.format("%s cannot be scaled to (%s,%s,%s)",
+            String message = String.format("%s cannot be scaled to (%s,%s,%s)",
                     typeName, scale.x, scale.y, scale.z);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException(message);
         }
 
         long shapeId = nativeId();

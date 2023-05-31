@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019-2022 Stephen Gold
+ Copyright (c) 2019-2023 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -124,12 +124,12 @@ public class VectorSetUsingBuffer implements VectorSet {
      */
     public static void dumpStats(String tag) {
         long msec = System.currentTimeMillis() - resetMillis;
-        String msg = String.format(
+        String message = String.format(
                 "%s %d enlargement%s, %d search%s, and %d read%s in %d msec",
                 tag, numEnlargements, (numEnlargements == 1) ? "" : "s",
                 numSearches, (numSearches == 1) ? "" : "es",
                 numReads, (numReads == 1) ? "" : "s", msec);
-        System.out.println(msg);
+        System.out.println(message);
     }
     // *************************************************************************
     // VectorSet methods
