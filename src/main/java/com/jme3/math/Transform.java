@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2021 jMonkeyEngine
+ * Copyright (c) 2009-2022 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -128,6 +128,17 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * Sets the scaling component to the argument.
      *
      * @param scale the desired scale factors (not null, unaffected)
+     * @return the (modified) current instance (for chaining)
+     */
+    public Transform setScale(Vector3f scale) {
+        this.scale.set(scale);
+        return this;
+    }
+
+    /**
+     * Sets the scaling component to the argument. This yields uniform scaling.
+     *
+     * @param scale the desired scale factor for all local axes
      * @return the (modified) current instance (for chaining)
      */
     public Transform setScale(float scale) {
