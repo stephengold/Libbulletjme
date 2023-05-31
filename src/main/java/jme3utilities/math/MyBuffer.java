@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2019-2022, Stephen Gold
+ Copyright (c) 2019-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -89,7 +89,7 @@ final public class MyBuffer {
                 startPosition + 2 * numAxes, buffer.capacity());
         Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         int numVectors = numFloats / numAxes;
         Vector3f sampleMean = mean(buffer, startPosition, endPosition, null);
@@ -150,7 +150,7 @@ final public class MyBuffer {
                 endPosition, "end position", startPosition, buffer.capacity());
         Validate.axisIndex(axisIndex, "axis index");
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         double maxRadiusSquared = 0.0;
         int numVectors = numFloats / numAxes;
@@ -259,7 +259,7 @@ final public class MyBuffer {
                 endPosition, "end position", startPosition, buffer.capacity());
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         int numVectors = numFloats / numAxes;
         result.zero();
@@ -295,7 +295,7 @@ final public class MyBuffer {
         Validate.inRange(
                 endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         double maxLengthSquared = 0.0;
         int numVectors = numFloats / numAxes;
@@ -336,7 +336,7 @@ final public class MyBuffer {
         Validate.inRange(
                 endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         storeMaxima.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY,
                 Float.NEGATIVE_INFINITY);
@@ -373,7 +373,7 @@ final public class MyBuffer {
                 buffer.capacity());
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         int numVectors = numFloats / numAxes;
         result.zero();
@@ -429,7 +429,7 @@ final public class MyBuffer {
         Validate.inRange(
                 endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         int numVectors = numFloats / numAxes;
         Vector3f tmpVector = new Vector3f();
@@ -460,7 +460,7 @@ final public class MyBuffer {
         Validate.inRange(
                 endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         Vector3f tmpVector = new Vector3f();
         int numVectors = numFloats / numAxes;
@@ -491,7 +491,7 @@ final public class MyBuffer {
                 endPosition, "end position", startPosition, buffer.capacity());
         Validate.finite(offsetVector, "offset vector");
         int numFloats = endPosition - startPosition;
-        assert (numFloats % numAxes == 0) : numFloats;
+        Validate.require(numFloats % numAxes == 0, "numFloats a multiple of 3");
 
         int numVectors = numFloats / numAxes;
         Vector3f tmpVector = new Vector3f();
