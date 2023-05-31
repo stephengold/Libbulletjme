@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2022, Stephen Gold
+ Copyright (c) 2013-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -44,6 +44,10 @@ final public class MyString {
      */
     final private static Logger logger
             = Logger.getLogger(MyString.class.getName());
+    /**
+     * names of the coordinate axes
+     */
+    final private static String[] axisNames = {"X", "Y", "Z"};
     // *************************************************************************
     // constructors
 
@@ -54,6 +58,18 @@ final public class MyString {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Describe a coordinate axis.
+     *
+     * @param axisIndex the index of the axis: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
+     * @return a textual description (not null, not empty)
+     */
+    public static String axisName(int axisIndex) {
+        Validate.axisIndex(axisIndex, "axis index");
+        String axisName = axisNames[axisIndex];
+        return axisName;
+    }
 
     /**
      * Replace all tab, quote, newline, and backslash characters in the
