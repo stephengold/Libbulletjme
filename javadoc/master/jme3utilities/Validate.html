@@ -276,6 +276,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Validate an arbitrary boolean-valued expression involving method
  arguments.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardAngle(float,java.lang.String)" class="member-name-link">standardAngle</a><wbr>(float&nbsp;fValue,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Validate a standardized angle as a method argument.</div>
+</div>
 </div>
 </div>
 </div>
@@ -787,6 +793,24 @@ loadScripts(document, 'script');</script>
 <dd>true</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is false</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="standardAngle(float,java.lang.String)">
+<h3>standardAngle</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">standardAngle</span><wbr><span class="parameters">(float&nbsp;fValue,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description)</span></div>
+<div class="block">Validate a standardized angle as a method argument.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>fValue</code> - the value to validate</dd>
+<dd><code>description</code> - a description of the argument</dd>
+<dt>Returns:</dt>
+<dd>true</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range [-PI,
+ PI]</dd>
 </dl>
 </section>
 </li>
