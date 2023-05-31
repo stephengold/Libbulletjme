@@ -83,8 +83,8 @@ final public class MyBuffer {
     public static Matrix3f covariance(FloatBuffer buffer, int startPosition,
             int endPosition, Matrix3f storeResult) {
         Validate.nonNull(buffer, "buffer");
-        Validate.inRange(startPosition, "start position", 0,
-                endPosition - 2 * numAxes);
+        Validate.inRange(
+                startPosition, "start position", 0, endPosition - 2 * numAxes);
         Validate.inRange(endPosition, "end position",
                 startPosition + 2 * numAxes, buffer.capacity());
         Matrix3f result = (storeResult == null) ? new Matrix3f() : storeResult;
@@ -146,8 +146,8 @@ final public class MyBuffer {
             int endPosition, int axisIndex) {
         Validate.nonNull(buffer, "buffer");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         Validate.axisIndex(axisIndex, "axis index");
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
@@ -196,8 +196,8 @@ final public class MyBuffer {
      * @return a buffer with at least the required capacity (either storeResult
      * or a new direct buffer)
      */
-    public static FloatBuffer ensureCapacity(int minFloats,
-            FloatBuffer bufferToReuse) {
+    public static FloatBuffer ensureCapacity(
+            int minFloats, FloatBuffer bufferToReuse) {
         Validate.nonNegative(minFloats, "minimum number of elements");
 
         FloatBuffer result;
@@ -227,8 +227,8 @@ final public class MyBuffer {
      * @param startPosition the position at which to start reading (&ge;0)
      * @param storeVector storage for the vector (not null, modified)
      */
-    public static void get(FloatBuffer buffer, int startPosition,
-            Vector3f storeVector) {
+    public static void get(
+            FloatBuffer buffer, int startPosition, Vector3f storeVector) {
         Validate.nonNull(buffer, "buffer");
         Validate.nonNegative(startPosition, "start position");
         Validate.nonNull(storeVector, "store vector");
@@ -255,8 +255,8 @@ final public class MyBuffer {
             int endPosition, Vector3f storeResult) {
         Validate.nonNull(buffer, "buffer");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
@@ -288,12 +288,12 @@ final public class MyBuffer {
      * @return the radius of the minimum bounding sphere centered at the origin
      * (&ge;0)
      */
-    public static float maxLength(FloatBuffer buffer, int startPosition,
-            int endPosition) {
+    public static float maxLength(
+            FloatBuffer buffer, int startPosition, int endPosition) {
         Validate.nonNull(buffer, "buffer");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
 
@@ -333,8 +333,8 @@ final public class MyBuffer {
             int endPosition, Vector3f storeMaxima, Vector3f storeMinima) {
         Validate.nonNull(buffer, "buffer");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
 
@@ -367,8 +367,8 @@ final public class MyBuffer {
     public static Vector3f mean(FloatBuffer buffer, int startPosition,
             int endPosition, Vector3f storeResult) {
         Validate.nonNull(buffer, "buffer");
-        Validate.inRange(startPosition, "start position", 0,
-                endPosition - numAxes);
+        Validate.inRange(
+                startPosition, "start position", 0, endPosition - numAxes);
         Validate.inRange(endPosition, "end position", startPosition + numAxes,
                 buffer.capacity());
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -399,8 +399,8 @@ final public class MyBuffer {
      * @param startPosition the position at which to start writing (&ge;0)
      * @param vector the input vector (not null, unaffected)
      */
-    public static void put(FloatBuffer buffer, int startPosition,
-            Vector3f vector) {
+    public static void put(
+            FloatBuffer buffer, int startPosition, Vector3f vector) {
         Validate.nonNull(buffer, "buffer");
         Validate.nonNegative(startPosition, "start position");
         Validate.nonNull(vector, "vector");
@@ -426,8 +426,8 @@ final public class MyBuffer {
         Validate.nonNull(buffer, "buffer");
         Validate.nonNull(rotation, "rotation");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
 
@@ -457,8 +457,8 @@ final public class MyBuffer {
         Validate.nonNull(buffer, "buffer");
         Validate.nonNull(transform, "transform");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;
 
@@ -487,8 +487,8 @@ final public class MyBuffer {
             int endPosition, Vector3f offsetVector) {
         Validate.nonNull(buffer, "buffer");
         Validate.inRange(startPosition, "start position", 0, endPosition);
-        Validate.inRange(endPosition, "end position", startPosition,
-                buffer.capacity());
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
         Validate.finite(offsetVector, "offset vector");
         int numFloats = endPosition - startPosition;
         assert (numFloats % numAxes == 0) : numFloats;

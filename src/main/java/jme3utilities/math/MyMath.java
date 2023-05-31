@@ -576,6 +576,7 @@ final public class MyMath {
     public static Triangle transformInverse(
             Transform transform, Triangle input, Triangle storeResult) {
         Triangle result = (storeResult == null) ? new Triangle() : storeResult;
+
         Vector3f tmpVector = new Vector3f();
         for (int vertexIndex = 0; vertexIndex < 3; ++vertexIndex) {
             Vector3f inputVector = input.get(vertexIndex); // alias

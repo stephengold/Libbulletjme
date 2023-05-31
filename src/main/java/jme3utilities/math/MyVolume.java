@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2014-2022, Stephen Gold
+ Copyright (c) 2014-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -157,8 +157,8 @@ final public class MyVolume {
      * @param v4 the location of the 4th vertex (not null, unaffected)
      * @return the volume (&ge;0)
      */
-    public static double tetrahedronVolume(Vector3f v1, Vector3f v2,
-            Vector3f v3, Vector3f v4) {
+    public static double tetrahedronVolume(
+            Vector3f v1, Vector3f v2, Vector3f v3, Vector3f v4) {
         Validate.finite(v1, "first vertex");
         Validate.finite(v2, "2nd vertex");
         Validate.finite(v3, "3rd vertex");
