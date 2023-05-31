@@ -66,11 +66,11 @@ public class IntPair implements Comparable<IntPair> {
         assert a != b;
 
         if (a < b) {
-            smaller = a;
-            larger = b;
+            this.smaller = a;
+            this.larger = b;
         } else {
-            larger = a;
-            smaller = b;
+            this.larger = a;
+            this.smaller = b;
         }
         assert smaller < larger;
     }
