@@ -32,12 +32,13 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
+import com.jme3.util.TempVars;
 import com.simsilica.mathd.Vec3d;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * Mathematical utility methods. TODO method to combine 2 transforms
+ * Mathematical utility methods.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -90,6 +91,60 @@ final public class MyMath {
         } else {
             result = dValue;
         }
+
+        return result;
+    }
+
+    /**
+     * Combine the specified transforms.
+     * <p>
+     * It is safe for any or all of {@code child}, {@code parent}, and
+     * {@code storeResult} to be the same object.
+     * <p>
+     * Unlike {@link
+     * com.jme3.math.Transform#combineWithParent(com.jme3.math.Transform)}, this
+     * method works on transforms containing non-normalized quaternions.
+     *
+     * @param child the transform applied first (not null, unaffected unless
+     * it's {@code storeResult})
+     * @param parent the transform applied last (not null, unaffected unless
+     * it's {@code storeResult})
+     * @param storeResult (modified if not null)
+     * @return a Transform equivalent to {@code child} followed by
+     * {@code parent} (either {@code storeResult} or a new instance)
+     */
+    public static Transform combine(
+            Transform child, Transform parent, Transform storeResult) {
+        TempVars tempVars = TempVars.get();
+        Vector3f combTranslation = tempVars.vect1; // alias
+        Quaternion combRotation = tempVars.quat1; // alias
+        Vector3f combScale = tempVars.vect2; // alias
+
+        Vector3f parentTranslation = parent.getTranslation(); // alias
+        Quaternion parentRotation = parent.getRotation(); // alias
+        Vector3f parentScale = parent.getScale(); // alias
+
+        // Combine the scales.
+        child.getScale().mult(parentScale, combScale);
+
+        // Combine the (intrinsic) rotations and re-normalize.
+        Quaternion childRotation = child.getRotation(); // alias
+        parentRotation.mult(childRotation, combRotation);
+        MyQuaternion.normalizeLocal(combRotation);
+        /*
+         * The combined translation is the parent's scale, rotation,
+         * and translation applied (in that order) to the child's translation.
+         */
+        child.getTranslation().mult(parentScale, combTranslation);
+        MyQuaternion.rotate(parentRotation, combTranslation, combTranslation);
+        combTranslation.addLocal(parentTranslation);
+
+        Transform result
+                = (storeResult == null) ? new Transform() : storeResult;
+        result.setTranslation(combTranslation);
+        result.setRotation(combRotation);
+        result.setScale(combScale);
+        tempVars.release();
 
         return result;
     }
