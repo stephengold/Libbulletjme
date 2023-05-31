@@ -361,10 +361,11 @@ final public class MyVector3f {
         assert Validate.nonNull(input, "input");
 
         double lengthSquared = lengthSquared(input);
-        double dScale = Math.sqrt(lengthSquared);
-        float fScale = (float) dScale;
-        if (fScale != 0f && fScale != 1f) {
-            input.divideLocal(fScale);
+        if (lengthSquared < 0.9999998 || lengthSquared > 1.0000002) {
+            float fScale = (float) Math.sqrt(lengthSquared);
+            if (fScale != 0f) {
+                input.divideLocal(fScale);
+            }
         }
     }
 
