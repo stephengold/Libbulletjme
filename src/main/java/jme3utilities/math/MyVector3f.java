@@ -269,7 +269,8 @@ final public class MyVector3f {
 
     /**
      * Determine the squared length of a vector. Unlike
-     * {@link com.jme3.math.Vector3f#lengthSquared()}, this method returns a
+     * {@link com.jme3.math.Vector3f#lengthSquared()}, this method uses
+     * double-precision arithmetic to reduce the risk of overflow and returns a
      * double-precision value for precise comparison of lengths.
      *
      * @param vector input (not null, unaffected)
@@ -281,17 +282,19 @@ final public class MyVector3f {
     }
 
     /**
-     * Interpolate between (or extrapolate from) 2 vectors using linear (Lerp)
-     * *polation. No rounding error is introduced when v1==v2.
+     * Interpolate linearly between (or extrapolate linearly from) 2 vectors.
+     * <p>
+     * No rounding error is introduced when v1==v2.
      *
-     * @param t descaled parameter value (0&rarr;v0, 1&rarr;v1)
-     * @param v0 function value at t=0 (not null, unaffected unless it's also
-     * storeResult)
-     * @param v1 function value at t=1 (not null, unaffected unless it's also
-     * storeResult)
+     * @param t the weight given to {@code v1}
+     * @param v0 the function value at t=0 (not null, unaffected unless it's
+     * also {@code storeResult})
+     * @param v1 the function value at t=1 (not null, unaffected unless it's
+     * also {@code storeResult})
      * @param storeResult storage for the result (modified if not null, may be
-     * v0 or v1)
-     * @return an interpolated vector (either storeResult or a new instance)
+     * {@code v0} or {@code v1})
+     * @return the interpolated value (either {@code storeResult} or a new
+     * instance)
      */
     public static Vector3f lerp(
             float t, Vector3f v0, Vector3f v1, Vector3f storeResult) {
@@ -315,7 +318,8 @@ final public class MyVector3f {
      * unless it's storeResult)
      * @param storeResult storage for the result (modified if not null, may be
      * vector1 or vector2)
-     * @return a coordinate vector (either storeResult or a new instance)
+     * @return a coordinate vector (either {@code storeResult} or a new
+     * instance)
      */
     public static Vector3f midpoint(
             Vector3f vector1, Vector3f vector2, Vector3f storeResult) {

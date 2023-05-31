@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2018-2022, Stephen Gold
+ Copyright (c) 2018-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -65,7 +65,7 @@ public class RectangularSolid {
     // constructors
 
     /**
-     * Instantiate a zero-size rectangular solid at the origin.
+     * Instantiate a zero-extent rectangular solid at the origin.
      */
     public RectangularSolid() {
     }
@@ -103,6 +103,9 @@ public class RectangularSolid {
 
     /**
      * Rotate from local coordinates to world coordinates.
+     * <p>
+     * It is safe for {@code local} and {@code storeResult} to be the same
+     * object.
      *
      * @param local the input coordinates (not null, unaffected)
      * @param storeResult storage for the result (modified if not null)

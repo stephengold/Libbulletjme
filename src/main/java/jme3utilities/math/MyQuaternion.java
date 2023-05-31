@@ -89,11 +89,11 @@ final public class MyQuaternion {
     }
 
     /**
-     * Find the cardinal rotation most similar to the specified input. A
+     * Find the cardinal rotation most similar to the specified Quaternion. A
      * cardinal rotation is one for which the rotation angles on all 3 axes are
      * integer multiples of Pi/2 radians.
      *
-     * @param input (not null, modified)
+     * @param input the input value (not null, modified)
      */
     public static void cardinalizeLocal(Quaternion input) {
         assert Validate.nonNull(input, "input");
@@ -128,14 +128,17 @@ final public class MyQuaternion {
     }
 
     /**
-     * Determine the conjugate of a Quaternion. For unit quaternions, the
-     * conjugate is a faster way to calculate the inverse.
+     * Return the conjugate of a Quaternion.
+     * <p>
+     * For normalized quaternions, the conjugate is a fast way to calculate the
+     * inverse.
      *
-     * @param q input value (not null, unaffected unless it's
+     * @param q the input value (not null, unaffected unless it's
      * {@code storeResult})
      * @param storeResult storage for the result (modified if not null, may be
      * {@code q})
-     * @return a conjugate quaternion (either storeResult or a new instance)
+     * @return a conjugate quaternion (either {@code storeResult} or a new
+     * instance)
      */
     public static Quaternion conjugate(Quaternion q, Quaternion storeResult) {
         Quaternion result
@@ -151,11 +154,13 @@ final public class MyQuaternion {
     }
 
     /**
-     * Determine the dot (scalar) product of 2 quaternions. This method returns
-     * a double-precision value for precise calculation of angles.
+     * Return the dot (scalar) product of 2 quaternions.
+     * <p>
+     * This method returns a double-precision value for precise comparison of
+     * angles.
      *
-     * @param q1 the first Quaternion (not null, unaffected)
-     * @param q2 the 2nd Quaternion (not null, unaffected)
+     * @param q1 the first input value (not null, unaffected)
+     * @param q2 the 2nd input value (not null, unaffected)
      * @return the dot product
      */
     public static double dot(Quaternion q1, Quaternion q2) {
@@ -173,11 +178,12 @@ final public class MyQuaternion {
     }
 
     /**
-     * Determine the exponential of a pure Quaternion.
+     * Return the exponential of a pure Quaternion.
      *
-     * @param q input value (not null, unaffected, w=0)
+     * @param q the input value (not null, w=0, unaffected)
      * @param storeResult storage for the result (modified if not null)
-     * @return a unit quaternion (either storeResult or a new instance)
+     * @return the exponential value (either {@code storeResult} or a new
+     * instance)
      */
     public static Quaternion exp(Quaternion q, Quaternion storeResult) {
         assert Validate.require(isPure(q), "a pure quaternion");
@@ -205,7 +211,7 @@ final public class MyQuaternion {
     /**
      * Test for a pure Quaternion.
      *
-     * @param q the input (not null, unaffected)
+     * @param q the value to test (not null, unaffected)
      * @return true if w=0, false otherwise
      */
     public static boolean isPure(Quaternion q) {
@@ -220,9 +226,10 @@ final public class MyQuaternion {
 
     /**
      * Test whether the specified Quaternion represents an identity rotation.
-     * Accepts any non-zero value for w.
+     * <p>
+     * Accepts any finite, non-zero value for w.
      *
-     * @param q input value (not null, unaffected)
+     * @param q the value to test (not null, unaffected)
      * @return true for a rotation identity, otherwise false
      */
     public static boolean isRotationIdentity(Quaternion q) {
@@ -241,8 +248,8 @@ final public class MyQuaternion {
     /**
      * Test for a zero Quaternion.
      *
-     * @param q the input (not null, unaffected)
-     * @return true if the Quaternion equals (0,0,0,0), false otherwise
+     * @param q the value to test (not null, unaffected)
+     * @return true if the argument equals (0,0,0,0), false otherwise
      */
     public static boolean isZero(Quaternion q) {
         float qx = q.getX();
@@ -258,11 +265,12 @@ final public class MyQuaternion {
     }
 
     /**
-     * Determine the squared length of a Quaternion. Unlike
-     * {@link com.jme3.math.Quaternion#norm()}, this method returns a
+     * Return the squared length of the argument.
+     * <p>
+     * Unlike {@link com.jme3.math.Quaternion#norm()}, this method returns a
      * double-precision value for precise comparison of lengths.
      *
-     * @param q input (not null, unaffected)
+     * @param q the input value (not null, unaffected)
      * @return the squared length (&ge;0)
      */
     public static double lengthSquared(Quaternion q) {
@@ -276,14 +284,15 @@ final public class MyQuaternion {
     }
 
     /**
-     * Determine the natural logarithm of a unit quaternion. Generally the
-     * logarithm isn't itself a unit.
+     * Return the natural logarithm of a normalized quaternion.
+     * <p>
+     * In general, the result isn't itself normalized.
      *
-     * @param q input value (not null, unaffected unless it's
-     * {@code storeResult}, norm=1)
+     * @param q the input value (not null, norm approximately equal to 1,
+     * unaffected unless it's {@code storeResult})
      * @param storeResult storage for the result (modified if not null, may be
      * {@code q})
-     * @return a pure Quaternion (either storeResult or a new instance)
+     * @return a pure quaternion (either {@code storeResult} or a new instance)
      */
     public static Quaternion log(Quaternion q, Quaternion storeResult) {
         Quaternion result
@@ -317,8 +326,8 @@ final public class MyQuaternion {
      * Test whether 2 quaternions are distinct, without distinguishing 0 from
      * -0.
      *
-     * @param a the first input quaternion (not null, unaffected)
-     * @param b the 2nd input quaternion (not null, unaffected)
+     * @param a the first input value (not null, unaffected)
+     * @param b the 2nd input value (not null, unaffected)
      * @return true if distinct, otherwise false
      */
     public static boolean ne(Quaternion a, Quaternion b) {
@@ -334,7 +343,7 @@ final public class MyQuaternion {
     /**
      * Normalize the specified Quaternion in place.
      *
-     * @param input (not null, modified)
+     * @param input the instance to normalize (not null, modified)
      */
     public static void normalizeLocal(Quaternion input) {
         assert Validate.nonNull(input, "input");
@@ -348,14 +357,14 @@ final public class MyQuaternion {
     }
 
     /**
-     * Raise a unit quaternion to the specified real power.
+     * Raise a normalized quaternion to the specified real power.
      *
-     * @param base input value (not null, unaffected unless it's
-     * {@code storeResult}, norm=1)
+     * @param base the input value (not null, norm approximately equal to 1,
+     * unaffected unless it's {@code storeResult})
      * @param exponent the exponent
      * @param storeResult storage for the result (modified if not null, may be
      * {@code base})
-     * @return a unit quaternion (either storeResult or a new instance)
+     * @return the power (either {@code storeResult} or a new instance)
      */
     public static Quaternion pow(
             Quaternion base, float exponent, Quaternion storeResult) {
@@ -388,19 +397,22 @@ final public class MyQuaternion {
     }
 
     /**
-     * Interpolate between 2 unit quaternions using spherical linear (Slerp)
-     * interpolation. This method always produces a unit, and doesn't trash q1.
-     * The caller is responsible for flipping the sign of q0 or q1 when it's
-     * appropriate to do so.
+     * Interpolate between 2 normalized quaternions using spherical linear
+     * (Slerp) interpolation.
+     * <p>
+     * This method always produces a normalized result and doesn't trash q1.
+     * <p>
+     * The caller is responsible for flipping the sign of {@code q0} or
+     * {@code q1} when it's appropriate to do so.
      *
-     * @param t descaled parameter value (&ge;0, &le;1)
-     * @param q0 function value at t=0 (not null, unaffected unless it's {@code
-     * storeResult}, norm=1)
-     * @param q1 function value at t=1 (not null, unaffected unless it's {@code
-     * storeResult}, norm=1)
+     * @param t the weight given to {@code q1} (&ge;0, &le;1)
+     * @param q0 the function value at t=0 (not null, norm approximately equal
+     * to 1, unaffected unless it's {@code storeResult})
+     * @param q1 the function value at t=1 (not null, norm approximately equal
+     * to 1, unaffected unless it's {@code storeResult})
      * @param storeResult storage for the result (modified if not null, may be
      * {@code q0} or {@code q1})
-     * @return an interpolated unit quaternion (either storeResult or a new
+     * @return an interpolated value (either {@code storeResult} or a new
      * instance)
      */
     public static Quaternion slerp(
@@ -421,16 +433,21 @@ final public class MyQuaternion {
     }
 
     /**
-     * Interpolate between 4 unit quaternions using the Squad function. The
-     * caller is responsible for flipping signs when it's appropriate to do so.
+     * Interpolate between 4 normalized quaternions using the Squad function.
+     * The caller is responsible for flipping signs when it's appropriate to do
+     * so.
      *
-     * @param t descaled parameter value (&ge;0, &le;1)
-     * @param p function value at t=0 (not null, unaffected, norm=1)
-     * @param a the first control point (not null, unaffected, norm=1)
-     * @param b the 2nd control point (not null, unaffected, norm=1)
-     * @param q function value at t=1 (not null, unaffected, norm=1)
+     * @param t the weight given to {@code q} (&ge;0, &le;1)
+     * @param p function value at t=0 (not null, norm approximately equal to 1,
+     * unaffected unless it's {@code storeResult})
+     * @param a the first control point (not null, norm approximately equal to
+     * 1, unaffected unless it's {@code storeResult})
+     * @param b the 2nd control point (not null, norm approximately equal to 1,
+     * unaffected unless it's {@code storeResult})
+     * @param q function value at t=1 (not null, norm approximately equal to 1,
+     * unaffected unless it's {@code storeResult})
      * @param storeResult storage for the result (modified if not null)
-     * @return interpolated unit quaternion (either storeResult or a new
+     * @return the interpolated value (either {@code storeResult} or a new
      * instance)
      */
     public static Quaternion squad(float t, Quaternion p, Quaternion a,
@@ -451,15 +468,18 @@ final public class MyQuaternion {
     }
 
     /**
-     * Determine Squad parameter "a" for a continuous first derivative at the
+     * Return Squad parameter "a" for a continuous first derivative at the
      * middle point of 3 specified control points.
      *
-     * @param q0 previous control point (not null, unaffected, norm=1)
-     * @param q1 current control point (not null, unaffected, norm=1)
-     * @param q2 following control point (not null, unaffected, norm=1)
+     * @param q0 the previous control point (not null, norm approximately equal
+     * to 1, unaffected unless it's {@code storeResult})
+     * @param q1 the current control point (not null, norm approximately equal
+     * to 1, unaffected unless it's {@code storeResult})
+     * @param q2 the following control point (not null, norm approximately equal
+     * to 1, unaffected unless it's {@code storeResult})
      * @param storeResult storage for the result (modified if not null)
-     * @return a unit quaternion for use as a Squad parameter (either
-     * storeResult or a new instance)
+     * @return the Squad parameter (either {@code storeResult} or a new
+     * instance)
      */
     public static Quaternion squadA(Quaternion q0, Quaternion q1,
             Quaternion q2, Quaternion storeResult) {
@@ -486,7 +506,8 @@ final public class MyQuaternion {
     /**
      * Standardize a Quaternion in preparation for hashing.
      *
-     * @param input (not null, unaffected unless it's {@code storeResult})
+     * @param input the input value (not null, unaffected unless it's
+     * {@code storeResult})
      * @param storeResult storage for the result (modified if not null, may be
      * {@code input})
      * @return an equivalent Quaternion without negative zeros (either
@@ -511,9 +532,9 @@ final public class MyQuaternion {
     }
 
     /**
-     * Validate a unit quaternion as a method argument.
+     * Validate a normalized quaternion as a method argument.
      *
-     * @param q Quaternion to validate (not null, unaffected)
+     * @param q the Quaternion to validate (not null, unaffected)
      * @param description description of the Quaternion
      * @param tolerance for the norm (&ge;0)
      * @return true

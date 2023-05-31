@@ -119,7 +119,7 @@ final public class MyMath {
      * @param yAngle the Y angle (in radians)
      * @param zAngle the Z angle (in radians)
      * @param storeResult storage for the result (modified if not null)
-     * @return a rotation matrix (either storeResult or a new instance)
+     * @return a rotation matrix (either {@code storeResult} or a new instance)
      */
     public static Matrix3f fromAngles(
             float xAngle, float yAngle, float zAngle, Matrix3f storeResult) {
@@ -148,7 +148,7 @@ final public class MyMath {
     }
 
     /**
-     * Determine the root sum of squares of some single-precision values.
+     * Return the root sum of squares of some single-precision values.
      * Double-precision arithmetic is used to reduce the risk of overflow.
      *
      * @param fValues the input values
@@ -167,7 +167,7 @@ final public class MyMath {
     }
 
     /**
-     * Determine the root sum of squares of some double-precision values.
+     * Return the root sum of squares of some double-precision values.
      *
      * @param dValues the input values
      * @return the positive square root of the sum of squares (&ge;0)
@@ -222,8 +222,8 @@ final public class MyMath {
     }
 
     /**
-     * Tests whether the argument is a valid vector, returning false if it's
-     * null or if any component is NaN or infinite.
+     * Test whether the argument is a valid vector, returning false if it's null
+     * or if any component is NaN or infinite.
      *
      * @param vector the vector to test (unaffected)
      * @return true if non-null and finite, otherwise false
@@ -281,7 +281,7 @@ final public class MyMath {
     /**
      * Test whether an integer value is odd.
      *
-     * @param iValue input value to be tested
+     * @param iValue the value to be tested
      * @return true if x is odd, false if it's even
      */
     public static boolean isOdd(int iValue) {
@@ -290,13 +290,15 @@ final public class MyMath {
     }
 
     /**
-     * Interpolate between (or extrapolate from) 2 single-precision values using
-     * linear (Lerp) *polation. No rounding error is introduced when y0==y1.
+     * Interpolate linearly between (or extrapolate linearly from) 2
+     * single-precision values.
+     * <p>
+     * No rounding error is introduced when y0==y1.
      *
-     * @param t descaled parameter value (0&rarr;y0, 1&rarr;y1)
-     * @param y0 function value at t=0
-     * @param y1 function value at t=1
-     * @return an interpolated function value
+     * @param t the weight given to {@code y1}
+     * @param y0 the function value at t=0
+     * @param y1 the function value at t=1
+     * @return the interpolated function value
      */
     public static float lerp(float t, float y0, float y1) {
         float result;
@@ -373,12 +375,13 @@ final public class MyMath {
     }
 
     /**
-     * Compute the least non-negative value congruent with an integer value with
-     * respect to the specified modulus. modulo() differs from remainder for
-     * negative values of the first argument. For instance, modulo(-1, 4) == 3,
-     * while -1 % 4 == -1.
+     * Return the least non-negative value congruent with the input value with
+     * respect to the specified modulus.
+     * <p>
+     * This differs from remainder for negative input values. For instance,
+     * modulo(-1, 4) == 3, while -1 % 4 == -1.
      *
-     * @param iValue input value
+     * @param iValue the input value
      * @param modulus (&gt;0)
      * @return iValue MOD modulus (&lt;modulus, &ge;0)
      */
@@ -399,12 +402,13 @@ final public class MyMath {
     }
 
     /**
-     * Compute the least non-negative value congruent with a single-precision
-     * value with respect to the specified modulus. modulo() differs from
-     * remainder for negative values of the first argument. For instance,
+     * Return the least non-negative value congruent with the input value with
+     * respect to the specified modulus.
+     * <p>
+     * This differs from remainder for negative input values. For instance,
      * modulo(-1f, 4f) == 3f, while -1f % 4f == -1f.
      *
-     * @param fValue input value
+     * @param fValue the input value
      * @param modulus (&gt;0)
      * @return fValue MOD modulus (&lt;modulus, &ge;0)
      */
@@ -442,8 +446,8 @@ final public class MyMath {
     /**
      * Standardize a rotation angle to the range [-Pi, Pi).
      *
-     * @param angle input (in radians)
-     * @return standardized angle (in radians, &lt;Pi, &ge;-Pi)
+     * @param angle the input angle (in radians)
+     * @return the standardized angle (in radians, &lt;Pi, &ge;-Pi)
      */
     public static float standardizeAngle(float angle) {
         Validate.finite(angle, "angle");
@@ -459,7 +463,7 @@ final public class MyMath {
     }
 
     /**
-     * Compute the sum of squares of some single-precision values.
+     * Return the sum of squares of some single-precision values.
      * Double-precision arithmetic is used to reduce the risk of overflow.
      *
      * @param fValues the input values
@@ -503,12 +507,16 @@ final public class MyMath {
     /**
      * Apply the inverse of the specified transform to each vertex of a
      * Triangle.
+     * <p>
+     * It is safe for {@code input} and {@code storeResult} to be the same
+     * object.
      *
-     * @param transform the transform to use (not null, unaffected)
+     * @param transform the transform to apply (not null, unaffected)
      * @param input the input triangle (not null, unaffected unless it's
-     * {@code storeResult}
+     * {@code storeResult})
      * @param storeResult storage for the result (modified if not null)
-     * @return the transformed triangle (either storeResult or a new instance)
+     * @return the transformed triangle (either {@code storeResult} or a new
+     * instance)
      */
     public static Triangle transformInverse(
             Transform transform, Triangle input, Triangle storeResult) {
