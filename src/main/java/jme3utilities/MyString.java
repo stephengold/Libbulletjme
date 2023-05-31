@@ -29,6 +29,8 @@ package jme3utilities;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utility methods for char sequences, strings, and collections of strings.
@@ -44,6 +46,10 @@ final public class MyString {
      */
     final private static Logger logger
             = Logger.getLogger(MyString.class.getName());
+    /**
+     * pattern for matching a scientific-notation exponent
+     */
+    final private static Pattern sciPattern = Pattern.compile("[Ee][+-]?\\d+$");
     /**
      * names of the coordinate axes
      */
@@ -69,6 +75,38 @@ final public class MyString {
         Validate.axisIndex(axisIndex, "axis index");
         String axisName = axisNames[axisIndex];
         return axisName;
+    }
+
+    /**
+     * Generate a textual description of a single-precision floating-point
+     * value.
+     *
+     * @param fValue the value to describe
+     * @return a description (not null, not empty)
+     */
+    public static String describe(float fValue) {
+        String raw = String.format(Locale.US, "%g", fValue);
+        String result = trimFloat(raw);
+
+        assert result != null;
+        assert !result.isEmpty();
+        return result;
+    }
+
+    /**
+     * Generate a textual description of a single-precision floating-point value
+     * using at most 3 decimal places.
+     *
+     * @param fValue the value to describe
+     * @return a description (not null, not empty)
+     */
+    public static String describeFraction(float fValue) {
+        String raw = String.format(Locale.US, "%.3f", fValue);
+        String result = trimFloat(raw);
+
+        assert result != null;
+        assert !result.isEmpty();
+        return result;
     }
 
     /**
@@ -167,6 +205,46 @@ final public class MyString {
         String result = input.substring(0, endPosition);
 
         assert result != null;
+        return result;
+    }
+    // *************************************************************************
+    // private methods
+
+    /**
+     * Trim any trailing zeros and one trailing decimal point from a string
+     * representation of a float. Also remove any leading minus sign from zero.
+     *
+     * @param input the String to trim (not null)
+     * @return a trimmed String (not null)
+     */
+    private static String trimFloat(String input) {
+        String result;
+        Matcher matcher = sciPattern.matcher(input);
+        if (matcher.find()) {
+            int suffixPos = matcher.start();
+            String suffix = input.substring(suffixPos);
+            String number = input.substring(0, suffixPos);
+            result = trimFloat(number) + suffix;
+
+        } else if (input.contains(".")) {
+            int end = input.length();
+            char[] chars = input.toCharArray();
+            while (end >= 1 && chars[end - 1] == '0') {
+                --end;
+            }
+            if (end >= 1 && chars[end - 1] == '.') {
+                --end;
+            }
+            result = input.substring(0, end);
+
+        } else {
+            result = input;
+        }
+
+        if ("-0".equals(result)) {
+            result = "0";
+        }
+
         return result;
     }
 }
