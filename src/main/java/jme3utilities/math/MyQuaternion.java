@@ -235,7 +235,8 @@ final public class MyQuaternion {
     public static boolean isRotationIdentity(Quaternion q) {
         float qw = q.getW();
 
-        if (qw != 0f && q.getX() == 0f && q.getY() == 0f && q.getZ() == 0f) {
+        if (qw != 0f && !Float.isNaN(qw)
+                && q.getX() == 0f && q.getY() == 0f && q.getZ() == 0f) {
             return true;
         } else {
             return false;
