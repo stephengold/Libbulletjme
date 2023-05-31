@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2022, Stephen Gold
+ Copyright (c) 2013-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -295,11 +295,11 @@ final public class MyVector3f {
      */
     public static Vector3f lerp(
             float t, Vector3f v0, Vector3f v1, Vector3f storeResult) {
-        assert Validate.nonNull(v0, "v0");
-        assert Validate.nonNull(v1, "v1");
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        result.x = MyMath.lerp(t, v0.x, v1.x);
+        float v0x = v0.x;
+        float v1x = v1.x;
+        result.x = MyMath.lerp(t, v0x, v1x);
         result.y = MyMath.lerp(t, v0.y, v1.y);
         result.z = MyMath.lerp(t, v0.z, v1.z);
 

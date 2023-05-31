@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -79,10 +79,9 @@ final public class MyQuaternion {
      */
     public static void accumulateScaled(
             Quaternion total, Quaternion input, float scale) {
-        assert Validate.nonNull(total, "total");
-        assert Validate.nonNull(input, "input");
-
-        float x = total.getX() + input.getX() * scale;
+        float tx = total.getX();
+        float ix = input.getX();
+        float x = tx + ix * scale;
         float y = total.getY() + input.getY() * scale;
         float z = total.getZ() + input.getZ() * scale;
         float w = total.getW() + input.getW() * scale;
@@ -323,10 +322,9 @@ final public class MyQuaternion {
      * @return true if distinct, otherwise false
      */
     public static boolean ne(Quaternion a, Quaternion b) {
-        assert Validate.nonNull(a, "first input quaternion");
-        assert Validate.nonNull(b, "2nd input quaternion");
-
-        boolean result = a.getW() != b.getW()
+        float aw = a.getW();
+        float bw = b.getW();
+        boolean result = aw != bw
                 || a.getX() != b.getX()
                 || a.getY() != b.getY()
                 || a.getZ() != b.getZ();
@@ -407,7 +405,7 @@ final public class MyQuaternion {
      */
     public static Quaternion slerp(
             float t, Quaternion q0, Quaternion q1, Quaternion storeResult) {
-        assert Validate.inRange(t, "t", 0f, 1f);
+        assert Validate.fraction(t, "weight");
         assert validateUnit(q0, "q0", 0.0001f);
         assert validateUnit(q1, "q1", 0.0001f);
         Quaternion result
@@ -437,7 +435,7 @@ final public class MyQuaternion {
      */
     public static Quaternion squad(float t, Quaternion p, Quaternion a,
             Quaternion b, Quaternion q, Quaternion storeResult) {
-        assert Validate.inRange(t, "t", 0f, 1f);
+        assert Validate.fraction(t, "weight");
         assert validateUnit(p, "p", 0.0001f);
         assert validateUnit(a, "a", 0.0001f);
         assert validateUnit(b, "b", 0.0001f);
@@ -496,7 +494,6 @@ final public class MyQuaternion {
      */
     public static Quaternion standardize(
             Quaternion input, Quaternion storeResult) {
-        assert Validate.nonNull(input, "input quaternion");
         Quaternion result
                 = (storeResult == null) ? new Quaternion() : storeResult;
 
