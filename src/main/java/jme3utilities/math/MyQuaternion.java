@@ -397,6 +397,59 @@ final public class MyQuaternion {
     }
 
     /**
+     * Rotate the input vector using the specified quaternion.
+     * <p>
+     * Unlike {@link com.jme3.math.Quaternion#mult(com.jme3.math.Vector3f,
+     * com.jme3.math.Vector3f)}, this method doesn't assume the quaternion is
+     * normalized. Instead, rotation is performed using a normalized version of
+     * the quaternion.
+     *
+     * @param rotation the desired rotation (not null, not zero, unaffected)
+     * @param input the vector to rotate (not null, finite, unaffected unless
+     * it's {@code storeResult})
+     * @param storeResult storage for the result (modified if not null, may be
+     * {@code input})
+     * @return the rotated vector (either {@code storeResult} or a new instance)
+     */
+    public static Vector3f rotate(
+            Quaternion rotation, Vector3f input, Vector3f storeResult) {
+        Validate.nonZero(rotation, "rotation");
+        Validate.finite(input, "input vector");
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        float x = rotation.getX();
+        float y = rotation.getY();
+        float z = rotation.getZ();
+        float w = rotation.getW();
+        double lengthSquared = lengthSquared(rotation);
+        if (lengthSquared < 0.9999998 || lengthSquared > 1.0000002) {
+            double dScale = Math.sqrt(lengthSquared);
+            x /= dScale;
+            y /= dScale;
+            z /= dScale;
+            w /= dScale;
+        }
+
+        float x2 = x * x;
+        float y2 = y * y;
+        float z2 = z * z;
+        float w2 = w * w;
+
+        float vx = input.x;
+        float vy = input.y;
+        float vz = input.z;
+
+        result.x = vx * (x2 - y2 - z2 + w2)
+                + 2f * y * (x * vy + w * vz) + 2f * z * (x * vz - w * vy);
+        result.y = vy * (y2 - z2 - x2 + w2)
+                + 2f * z * (y * vz + w * vx) + 2f * x * (y * vx - w * vz);
+        result.z = vz * (z2 - x2 - y2 + w2)
+                + 2f * x * (z * vx + w * vy) + 2f * y * (z * vy - w * vx);
+
+        return result;
+    }
+
+    /**
      * Interpolate between 2 normalized quaternions using spherical linear
      * (Slerp) interpolation.
      * <p>
