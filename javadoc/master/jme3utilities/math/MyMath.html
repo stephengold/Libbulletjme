@@ -149,12 +149,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hypotenuse(float...)" class="member-name-link">hypotenuse</a><wbr>(float...&nbsp;fValues)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Determine the root sum of squares of some single-precision values.</div>
+<div class="block">Return the root sum of squares of some single-precision values.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#hypotenuseDouble(double...)" class="member-name-link">hypotenuseDouble</a><wbr>(double...&nbsp;dValues)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Determine the root sum of squares of some double-precision values.</div>
+<div class="block">Return the root sum of squares of some double-precision values.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#isBetween(float,float,float)" class="member-name-link">isBetween</a><wbr>(float&nbsp;a,
@@ -195,8 +195,8 @@ loadScripts(document, 'script');</script>
  float&nbsp;y0,
  float&nbsp;y1)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Interpolate between (or extrapolate from) 2 single-precision values using
- linear (Lerp) *polation.</div>
+<div class="block">Interpolate linearly between (or extrapolate linearly from) 2
+ single-precision values.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#max(float...)" class="member-name-link">max</a><wbr>(float...&nbsp;fValues)</code></div>
@@ -219,14 +219,14 @@ loadScripts(document, 'script');</script>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(float,float)" class="member-name-link">modulo</a><wbr>(float&nbsp;fValue,
  float&nbsp;modulus)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Compute the least non-negative value congruent with a single-precision
- value with respect to the specified modulus.</div>
+<div class="block">Return the least non-negative value congruent with the input value with
+ respect to the specified modulus.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#modulo(int,int)" class="member-name-link">modulo</a><wbr>(int&nbsp;iValue,
  int&nbsp;modulus)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Compute the least non-negative value congruent with an integer value with
+<div class="block">Return the least non-negative value congruent with the input value with
  respect to the specified modulus.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
@@ -242,7 +242,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sumOfSquares(float...)" class="member-name-link">sumOfSquares</a><wbr>(float...&nbsp;fValues)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Compute the sum of squares of some single-precision values.</div>
+<div class="block">Return the sum of squares of some single-precision values.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toDegrees(float)" class="member-name-link">toDegrees</a><wbr>(float&nbsp;radians)</code></div>
@@ -362,7 +362,7 @@ loadScripts(document, 'script');</script>
 <dd><code>zAngle</code> - the Z angle (in radians)</dd>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
-<dd>a rotation matrix (either storeResult or a new instance)</dd>
+<dd>a rotation matrix (either <code>storeResult</code> or a new instance)</dd>
 </dl>
 </section>
 </li>
@@ -370,7 +370,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hypotenuse(float...)">
 <h3>hypotenuse</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">hypotenuse</span><wbr><span class="parameters">(float...&nbsp;fValues)</span></div>
-<div class="block">Determine the root sum of squares of some single-precision values.
+<div class="block">Return the root sum of squares of some single-precision values.
  Double-precision arithmetic is used to reduce the risk of overflow.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -384,7 +384,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="hypotenuseDouble(double...)">
 <h3>hypotenuseDouble</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">hypotenuseDouble</span><wbr><span class="parameters">(double...&nbsp;dValues)</span></div>
-<div class="block">Determine the root sum of squares of some double-precision values.</div>
+<div class="block">Return the root sum of squares of some double-precision values.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>dValues</code> - the input values</dd>
@@ -432,8 +432,8 @@ loadScripts(document, 'script');</script>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
 <div class="deprecation-comment">use <a href="../../com/simsilica/mathd/Vec3d.html#isFinite()"><code>Vec3d.isFinite()</code></a></div>
 </div>
-<div class="block">Tests whether the argument is a valid vector, returning false if it's
- null or if any component is NaN or infinite.</div>
+<div class="block">Test whether the argument is a valid vector, returning false if it's null
+ or if any component is NaN or infinite.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>vector</code> - the vector to test (unaffected)</dd>
@@ -476,7 +476,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Test whether an integer value is odd.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>iValue</code> - input value to be tested</dd>
+<dd><code>iValue</code> - the value to be tested</dd>
 <dt>Returns:</dt>
 <dd>true if x is odd, false if it's even</dd>
 </dl>
@@ -488,15 +488,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">lerp</span><wbr><span class="parameters">(float&nbsp;t,
  float&nbsp;y0,
  float&nbsp;y1)</span></div>
-<div class="block">Interpolate between (or extrapolate from) 2 single-precision values using
- linear (Lerp) *polation. No rounding error is introduced when y0==y1.</div>
+<div class="block">Interpolate linearly between (or extrapolate linearly from) 2
+ single-precision values.
+ <p>
+ No rounding error is introduced when y0==y1.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>t</code> - descaled parameter value (0&rarr;y0, 1&rarr;y1)</dd>
-<dd><code>y0</code> - function value at t=0</dd>
-<dd><code>y1</code> - function value at t=1</dd>
+<dd><code>t</code> - the weight given to <code>y1</code></dd>
+<dd><code>y0</code> - the function value at t=0</dd>
+<dd><code>y1</code> - the function value at t=1</dd>
 <dt>Returns:</dt>
-<dd>an interpolated function value</dd>
+<dd>the interpolated function value</dd>
 </dl>
 </section>
 </li>
@@ -560,13 +562,14 @@ loadScripts(document, 'script');</script>
 <h3>modulo</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">modulo</span><wbr><span class="parameters">(int&nbsp;iValue,
  int&nbsp;modulus)</span></div>
-<div class="block">Compute the least non-negative value congruent with an integer value with
- respect to the specified modulus. modulo() differs from remainder for
- negative values of the first argument. For instance, modulo(-1, 4) == 3,
- while -1 % 4 == -1.</div>
+<div class="block">Return the least non-negative value congruent with the input value with
+ respect to the specified modulus.
+ <p>
+ This differs from remainder for negative input values. For instance,
+ modulo(-1, 4) == 3, while -1 % 4 == -1.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>iValue</code> - input value</dd>
+<dd><code>iValue</code> - the input value</dd>
 <dd><code>modulus</code> - (&gt;0)</dd>
 <dt>Returns:</dt>
 <dd>iValue MOD modulus (&lt;modulus, &ge;0)</dd>
@@ -578,13 +581,14 @@ loadScripts(document, 'script');</script>
 <h3>modulo</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">modulo</span><wbr><span class="parameters">(float&nbsp;fValue,
  float&nbsp;modulus)</span></div>
-<div class="block">Compute the least non-negative value congruent with a single-precision
- value with respect to the specified modulus. modulo() differs from
- remainder for negative values of the first argument. For instance,
+<div class="block">Return the least non-negative value congruent with the input value with
+ respect to the specified modulus.
+ <p>
+ This differs from remainder for negative input values. For instance,
  modulo(-1f, 4f) == 3f, while -1f % 4f == -1f.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>fValue</code> - input value</dd>
+<dd><code>fValue</code> - the input value</dd>
 <dd><code>modulus</code> - (&gt;0)</dd>
 <dt>Returns:</dt>
 <dd>fValue MOD modulus (&lt;modulus, &ge;0)</dd>
@@ -611,9 +615,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Standardize a rotation angle to the range [-Pi, Pi).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>angle</code> - input (in radians)</dd>
+<dd><code>angle</code> - the input angle (in radians)</dd>
 <dt>Returns:</dt>
-<dd>standardized angle (in radians, &lt;Pi, &ge;-Pi)</dd>
+<dd>the standardized angle (in radians, &lt;Pi, &ge;-Pi)</dd>
 </dl>
 </section>
 </li>
@@ -621,7 +625,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sumOfSquares(float...)">
 <h3>sumOfSquares</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">sumOfSquares</span><wbr><span class="parameters">(float...&nbsp;fValues)</span></div>
-<div class="block">Compute the sum of squares of some single-precision values.
+<div class="block">Return the sum of squares of some single-precision values.
  Double-precision arithmetic is used to reduce the risk of overflow.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -676,15 +680,19 @@ loadScripts(document, 'script');</script>
  <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;input,
  <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;storeResult)</span></div>
 <div class="block">Apply the inverse of the specified transform to each vertex of a
- Triangle.</div>
+ Triangle.
+ <p>
+ It is safe for <code>input</code> and <code>storeResult</code> to be the same
+ object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>transform</code> - the transform to use (not null, unaffected)</dd>
+<dd><code>transform</code> - the transform to apply (not null, unaffected)</dd>
 <dd><code>input</code> - the input triangle (not null, unaffected unless it's
- <code>storeResult</code></dd>
+ <code>storeResult</code>)</dd>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
-<dd>the transformed triangle (either storeResult or a new instance)</dd>
+<dd>the transformed triangle (either <code>storeResult</code> or a new
+ instance)</dd>
 </dl>
 </section>
 </li>

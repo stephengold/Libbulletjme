@@ -110,7 +110,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">RectangularSolid</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate a zero-size rectangular solid at the origin.</div>
+<div class="block">Instantiate a zero-extent rectangular solid at the origin.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f)" class="member-name-link">RectangularSolid</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents)</code></div>
 <div class="col-last odd-row-color">
@@ -192,7 +192,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>RectangularSolid</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RectangularSolid</span>()</div>
-<div class="block">Instantiate a zero-size rectangular solid at the origin.</div>
+<div class="block">Instantiate a zero-extent rectangular solid at the origin.</div>
 </section>
 </li>
 <li>
@@ -234,7 +234,10 @@ loadScripts(document, 'script');</script>
 <h3>localToWorld</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">localToWorld</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;local,
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Rotate from local coordinates to world coordinates.</div>
+<div class="block">Rotate from local coordinates to world coordinates.
+ <p>
+ It is safe for <code>local</code> and <code>storeResult</code> to be the same
+ object.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>local</code> - the input coordinates (not null, unaffected)</dd>

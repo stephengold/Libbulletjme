@@ -874,7 +874,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#cardinalizeLocal(com.jme3.math.Quaternion)" class="member-name-link">cardinalizeLocal(Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Find the cardinal rotation most similar to the specified input.</div>
+<div class="block">Find the cardinal rotation most similar to the specified Quaternion.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsVehicle.html#castRay(int)" class="member-name-link">castRay(int)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsVehicle.html" title="class in com.jme3.bullet.objects">PhysicsVehicle</a></dt>
 <dd>
@@ -1361,7 +1361,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#conjugate(com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">conjugate(Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Determine the conjugate of a Quaternion.</div>
+<div class="block">Return the conjugate of a Quaternion.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/CompoundCollisionShape.html#connectivityMatrix(com.jme3.bullet.CollisionSpace)" class="member-name-link">connectivityMatrix(CollisionSpace)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CompoundCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CompoundCollisionShape</a></dt>
 <dd>
@@ -2163,7 +2163,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#dot(com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">dot(Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Determine the dot (scalar) product of 2 quaternions.</div>
+<div class="block">Return the dot (scalar) product of 2 quaternions.</div>
 </dd>
 <dt><a href="com/jme3/math/Vector3f.html#dot(com.jme3.math.Vector3f)" class="member-name-link">dot(Vector3f)</a> - Method in class com.jme3.math.<a href="com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></dt>
 <dd>
@@ -2314,7 +2314,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#exp(com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">exp(Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Determine the exponential of a pure Quaternion.</div>
+<div class="block">Return the exponential of a pure Quaternion.</div>
 </dd>
 <dt><a href="com/jme3/bullet/util/NativeLibrary.html#expectedVersion" class="member-name-link">expectedVersion</a> - Static variable in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeLibrary.html" title="class in com.jme3.bullet.util">NativeLibrary</a></dt>
 <dd>
@@ -4654,11 +4654,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#hypotenuse(float...)" class="member-name-link">hypotenuse(float...)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
-<div class="block">Determine the root sum of squares of some single-precision values.</div>
+<div class="block">Return the root sum of squares of some single-precision values.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#hypotenuseDouble(double...)" class="member-name-link">hypotenuseDouble(double...)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
-<div class="block">Determine the root sum of squares of some double-precision values.</div>
+<div class="block">Return the root sum of squares of some double-precision values.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
@@ -5377,7 +5377,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#lengthSquared(com.jme3.math.Quaternion)" class="member-name-link">lengthSquared(Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Determine the squared length of a Quaternion.</div>
+<div class="block">Return the squared length of the argument.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyVector3f.html#lengthSquared(com.jme3.math.Vector3f)" class="member-name-link">lengthSquared(Vector3f)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyVector3f.html" title="class in jme3utilities.math">MyVector3f</a></dt>
 <dd>
@@ -5385,13 +5385,12 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#lerp(float,float,float)" class="member-name-link">lerp(float, float, float)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
-<div class="block">Interpolate between (or extrapolate from) 2 single-precision values using
- linear (Lerp) *polation.</div>
+<div class="block">Interpolate linearly between (or extrapolate linearly from) 2
+ single-precision values.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyVector3f.html#lerp(float,com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">lerp(float, Vector3f, Vector3f, Vector3f)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyVector3f.html" title="class in jme3utilities.math">MyVector3f</a></dt>
 <dd>
-<div class="block">Interpolate between (or extrapolate from) 2 vectors using linear (Lerp)
- *polation.</div>
+<div class="block">Interpolate linearly between (or extrapolate linearly from) 2 vectors.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/infos/Sbcp.html#Lift" class="member-name-link">Lift</a> - Enum constant in enum class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/Sbcp.html" title="enum class in com.jme3.bullet.objects.infos">Sbcp</a></dt>
 <dd>
@@ -5507,7 +5506,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#log(com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">log(Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Determine the natural logarithm of a unit quaternion.</div>
+<div class="block">Return the natural logarithm of a normalized quaternion.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/Activation.html#logger" class="member-name-link">logger</a> - Static variable in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/Activation.html" title="class in com.jme3.bullet.collision">Activation</a></dt>
 <dd>
@@ -6418,12 +6417,12 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#modulo(float,float)" class="member-name-link">modulo(float, float)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
-<div class="block">Compute the least non-negative value congruent with a single-precision
- value with respect to the specified modulus.</div>
+<div class="block">Return the least non-negative value congruent with the input value with
+ respect to the specified modulus.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#modulo(int,int)" class="member-name-link">modulo(int, int)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
-<div class="block">Compute the least non-negative value congruent with an integer value with
+<div class="block">Return the least non-negative value congruent with the input value with
  respect to the specified modulus.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/motors/MotorParam.html#MotorCfm" class="member-name-link">MotorCfm</a> - Enum constant in enum class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/MotorParam.html" title="enum class in com.jme3.bullet.joints.motors">MotorParam</a></dt>
@@ -7302,7 +7301,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#pow(com.jme3.math.Quaternion,float,com.jme3.math.Quaternion)" class="member-name-link">pow(Quaternion, float, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Raise a unit quaternion to the specified real power.</div>
+<div class="block">Raise a normalized quaternion to the specified real power.</div>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsTickListener.html#prePhysicsTick(com.jme3.bullet.PhysicsSpace,float)" class="member-name-link">prePhysicsTick(PhysicsSpace, float)</a> - Method in interface com.jme3.bullet.<a href="com/jme3/bullet/PhysicsTickListener.html" title="interface in com.jme3.bullet">PhysicsTickListener</a></dt>
 <dd>
@@ -7508,7 +7507,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/RectangularSolid.html#%3Cinit%3E()" class="member-name-link">RectangularSolid()</a> - Constructor for class jme3utilities.math.<a href="jme3utilities/math/RectangularSolid.html" title="class in jme3utilities.math">RectangularSolid</a></dt>
 <dd>
-<div class="block">Instantiate a zero-size rectangular solid at the origin.</div>
+<div class="block">Instantiate a zero-extent rectangular solid at the origin.</div>
 </dd>
 <dt><a href="jme3utilities/math/RectangularSolid.html#%3Cinit%3E(com.jme3.math.Vector3f)" class="member-name-link">RectangularSolid(Vector3f)</a> - Constructor for class jme3utilities.math.<a href="jme3utilities/math/RectangularSolid.html" title="class in jme3utilities.math">RectangularSolid</a></dt>
 <dd>
@@ -7709,6 +7708,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Apply the specified rotation (in the parent's coordinate system) to each
  child.</div>
+</dd>
+<dt><a href="jme3utilities/math/MyQuaternion.html#rotate(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">rotate(Quaternion, Vector3f, Vector3f)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
+<dd>
+<div class="block">Rotate the input vector using the specified quaternion.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyBuffer.html#rotate(java.nio.FloatBuffer,int,int,com.jme3.math.Quaternion)" class="member-name-link">rotate(FloatBuffer, int, int, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyBuffer.html" title="class in jme3utilities.math">MyBuffer</a></dt>
 <dd>
@@ -9696,8 +9699,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#slerp(float,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">slerp(float, Quaternion, Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Interpolate between 2 unit quaternions using spherical linear (Slerp)
- interpolation.</div>
+<div class="block">Interpolate between 2 normalized quaternions using spherical linear
+ (Slerp) interpolation.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/SliderJoint.html" class="type-name-link" title="class in com.jme3.bullet.joints">SliderJoint</a> - Class in <a href="com/jme3/bullet/joints/package-summary.html">com.jme3.bullet.joints</a></dt>
 <dd>
@@ -9884,11 +9887,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#squad(float,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">squad(float, Quaternion, Quaternion, Quaternion, Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Interpolate between 4 unit quaternions using the Squad function.</div>
+<div class="block">Interpolate between 4 normalized quaternions using the Squad function.</div>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#squadA(com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">squadA(Quaternion, Quaternion, Quaternion, Quaternion)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Determine Squad parameter "a" for a continuous first derivative at the
+<div class="block">Return Squad parameter "a" for a continuous first derivative at the
  middle point of 3 specified control points.</div>
 </dd>
 <dt><a href="jme3utilities/Validate.html#standardAngle(float,java.lang.String)" class="member-name-link">standardAngle(float, String)</a> - Static method in class jme3utilities.<a href="jme3utilities/Validate.html" title="class in jme3utilities">Validate</a></dt>
@@ -9980,7 +9983,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyMath.html#sumOfSquares(float...)" class="member-name-link">sumOfSquares(float...)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyMath.html" title="class in jme3utilities.math">MyMath</a></dt>
 <dd>
-<div class="block">Compute the sum of squares of some single-precision values.</div>
+<div class="block">Return the sum of squares of some single-precision values.</div>
 </dd>
 <dt><a href="com/jme3/bullet/FillMode.html#SurfaceOnly" class="member-name-link">SurfaceOnly</a> - Enum constant in enum class com.jme3.bullet.<a href="com/jme3/bullet/FillMode.html" title="enum class in com.jme3.bullet">FillMode</a></dt>
 <dd>
@@ -10563,7 +10566,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="jme3utilities/math/MyQuaternion.html#validateUnit(com.jme3.math.Quaternion,java.lang.String,float)" class="member-name-link">validateUnit(Quaternion, String, float)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyQuaternion.html" title="class in jme3utilities.math">MyQuaternion</a></dt>
 <dd>
-<div class="block">Validate a unit quaternion as a method argument.</div>
+<div class="block">Validate a normalized quaternion as a method argument.</div>
 </dd>
 <dt><a href="com/jme3/bullet/FillMode.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class com.jme3.bullet.<a href="com/jme3/bullet/FillMode.html" title="enum class in com.jme3.bullet">FillMode</a></dt>
 <dd>

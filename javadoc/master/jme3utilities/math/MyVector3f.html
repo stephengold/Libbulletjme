@@ -210,8 +210,7 @@ loadScripts(document, 'script');</script>
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v1,
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Interpolate between (or extrapolate from) 2 vectors using linear (Lerp)
- *polation.</div>
+<div class="block">Interpolate linearly between (or extrapolate linearly from) 2 vectors.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#midpoint(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">midpoint</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector1,
@@ -508,7 +507,8 @@ loadScripts(document, 'script');</script>
 <h3>lengthSquared</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">lengthSquared</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector)</span></div>
 <div class="block">Determine the squared length of a vector. Unlike
- <a href="../../com/jme3/math/Vector3f.html#lengthSquared()"><code>Vector3f.lengthSquared()</code></a>, this method returns a
+ <a href="../../com/jme3/math/Vector3f.html#lengthSquared()"><code>Vector3f.lengthSquared()</code></a>, this method uses
+ double-precision arithmetic to reduce the risk of overflow and returns a
  double-precision value for precise comparison of lengths.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -525,19 +525,21 @@ loadScripts(document, 'script');</script>
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v0,
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v1,
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Interpolate between (or extrapolate from) 2 vectors using linear (Lerp)
- *polation. No rounding error is introduced when v1==v2.</div>
+<div class="block">Interpolate linearly between (or extrapolate linearly from) 2 vectors.
+ <p>
+ No rounding error is introduced when v1==v2.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>t</code> - descaled parameter value (0&rarr;v0, 1&rarr;v1)</dd>
-<dd><code>v0</code> - function value at t=0 (not null, unaffected unless it's also
- storeResult)</dd>
-<dd><code>v1</code> - function value at t=1 (not null, unaffected unless it's also
- storeResult)</dd>
+<dd><code>t</code> - the weight given to <code>v1</code></dd>
+<dd><code>v0</code> - the function value at t=0 (not null, unaffected unless it's
+ also <code>storeResult</code>)</dd>
+<dd><code>v1</code> - the function value at t=1 (not null, unaffected unless it's
+ also <code>storeResult</code>)</dd>
 <dd><code>storeResult</code> - storage for the result (modified if not null, may be
- v0 or v1)</dd>
+ <code>v0</code> or <code>v1</code>)</dd>
 <dt>Returns:</dt>
-<dd>an interpolated vector (either storeResult or a new instance)</dd>
+<dd>the interpolated value (either <code>storeResult</code> or a new
+ instance)</dd>
 </dl>
 </section>
 </li>
@@ -557,7 +559,8 @@ loadScripts(document, 'script');</script>
 <dd><code>storeResult</code> - storage for the result (modified if not null, may be
  vector1 or vector2)</dd>
 <dt>Returns:</dt>
-<dd>a coordinate vector (either storeResult or a new instance)</dd>
+<dd>a coordinate vector (either <code>storeResult</code> or a new
+ instance)</dd>
 </dl>
 </section>
 </li>
