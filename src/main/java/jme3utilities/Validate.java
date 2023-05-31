@@ -26,6 +26,7 @@
  */
 package jme3utilities;
 
+import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.simsilica.mathd.Quatd;
@@ -740,6 +741,20 @@ final public class Validate {
             throw new IllegalArgumentException(message);
         }
 
+        return true;
+    }
+
+    /**
+     * Validate a standardized angle as a method argument.
+     *
+     * @param fValue the value to validate
+     * @param description a description of the argument
+     * @return true
+     * @throws IllegalArgumentException if the value is outside the range [-PI,
+     * PI]
+     */
+    public static boolean standardAngle(float fValue, String description) {
+        inRange(fValue, description, -FastMath.PI, FastMath.PI);
         return true;
     }
 }
