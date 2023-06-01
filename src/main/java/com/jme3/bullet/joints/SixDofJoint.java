@@ -41,6 +41,7 @@ import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyMath;
 
 /**
  * A 6 degree-of-freedom joint based on Bullet's btGeneric6DofConstraint. Axis
@@ -482,7 +483,8 @@ public class SixDofJoint extends Constraint {
             jInB.getRotation().fromRotationMatrix(rotB);
             jInB.setTranslation(pivotB);
 
-            Transform bToWorld = jInB.invert().combineWithParent(jInWorld);
+            Transform bToWorld = jInB.invert();
+            MyMath.combine(bToWorld, jInWorld, bToWorld);
 
             Vector3f saveLocation = b.getPhysicsLocation(null);
             Quaternion saveRotation = b.getPhysicsRotation(null);
