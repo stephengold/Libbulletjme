@@ -467,7 +467,7 @@ final public class MyBuffer {
         for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
             int position = startPosition + vectorIndex * numAxes;
             get(buffer, position, tmpVector);
-            rotation.mult(tmpVector, tmpVector);
+            MyQuaternion.rotate(rotation, tmpVector, tmpVector);
             put(buffer, position, tmpVector);
         }
     }

@@ -116,7 +116,7 @@ public class RectangularSolid {
         Validate.finite(local, "local");
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
 
-        localToWorld.mult(local, result);
+        MyQuaternion.rotate(localToWorld, local, result);
         return result;
     }
 
