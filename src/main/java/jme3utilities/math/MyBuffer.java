@@ -32,6 +32,7 @@ import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -214,6 +215,36 @@ final public class MyBuffer {
                 throw new IllegalArgumentException(message);
             }
             result = bufferToReuse;
+        }
+
+        return result;
+    }
+
+    /**
+     * Count the number of times the specified value occurs in the specified
+     * IntBuffer range.
+     *
+     * @param buffer the buffer that contains the data (not null, unaffected)
+     * @param startPosition the position at which the data start (&ge;0,
+     * &le;endPosition)
+     * @param endPosition the position at which the data end (&ge;startPosition,
+     * &le;capacity)
+     * @param intValue the value to search for
+     * @return the number of occurrences found (&ge;0)
+     */
+    public static int frequency(IntBuffer buffer, int startPosition,
+            int endPosition, int intValue) {
+        Validate.nonNull(buffer, "buffer");
+        Validate.inRange(startPosition, "start position", 0, endPosition);
+        Validate.inRange(
+                endPosition, "end position", startPosition, buffer.capacity());
+
+        int result = 0;
+        for (int position = startPosition; position < endPosition; ++position) {
+            int bufferValue = buffer.get(position);
+            if (bufferValue == intValue) {
+                ++result;
+            }
         }
 
         return result;
