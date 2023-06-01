@@ -159,6 +159,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Accumulate a linear combination of vectors.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#describe(com.jme3.math.Vector3f)" class="member-name-link">describe</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Generate a textual description of a Vector3f value.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#describeDirection(com.jme3.math.Vector3f)" class="member-name-link">describeDirection</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Generate a textual description of a direction vector.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#dot(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">dot</a><wbr>(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector1,
  <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector2)</code></div>
@@ -398,6 +408,32 @@ loadScripts(document, 'script');</script>
 <dd><code>total</code> - sum of the scaled inputs so far (not null, modified)</dd>
 <dd><code>input</code> - the vector to scale and add (not null, unaffected)</dd>
 <dd><code>scale</code> - scale factor to apply to the input</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="describe(com.jme3.math.Vector3f)">
+<h3>describe</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">describe</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector)</span></div>
+<div class="block">Generate a textual description of a Vector3f value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>vector</code> - the value to describe (may be null, unaffected)</dd>
+<dt>Returns:</dt>
+<dd>a description (not null, not empty)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="describeDirection(com.jme3.math.Vector3f)">
+<h3>describeDirection</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">describeDirection</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
+<div class="block">Generate a textual description of a direction vector.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>v</code> - the value to describe (may be null, unaffected)</dd>
+<dt>Returns:</dt>
+<dd>a description (not null, not empty)</dd>
 </dl>
 </section>
 </li>
