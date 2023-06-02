@@ -179,7 +179,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -287,11 +287,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="block">Multiplies by the specified quaternion and returns the product in a 3rd
  quaternion.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mult(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">mult</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#mult(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">mult</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rotates a specified vector and returns the result in another vector.</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">use <a href="../../../jme3utilities/math/MyQuaternion.html#rotate(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)"><code>MyQuaternion.rotate(com.jme3.math.Quaternion, com.jme3.math.Vector3f, com.jme3.math.Vector3f)</code></a></div>
+</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(float)" class="member-name-link">multLocal</a><wbr>(float&nbsp;scalar)</code></div>
@@ -313,10 +315,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Multiplies by the argument and returns the (modified) current instance.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#multLocal(com.jme3.math.Vector3f)" class="member-name-link">multLocal</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Rotates the argument vector.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#multLocal(com.jme3.math.Vector3f)" class="member-name-link">multLocal</a><wbr>(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">use <a href="../../../jme3utilities/math/MyQuaternion.html#rotate(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)"><code>MyQuaternion.rotate(com.jme3.math.Quaternion, com.jme3.math.Vector3f, com.jme3.math.Vector3f)</code></a></div>
+</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#norm()" class="member-name-link">norm</a>()</code></div>
@@ -817,11 +821,17 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="multLocal(com.jme3.math.Vector3f)">
 <h3>multLocal</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">multLocal</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">use <a href="../../../jme3utilities/math/MyQuaternion.html#rotate(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)"><code>MyQuaternion.rotate(com.jme3.math.Quaternion, com.jme3.math.Vector3f, com.jme3.math.Vector3f)</code></a></div>
+</div>
 <div class="block">Rotates the argument vector. Despite the name, the current instance is
  unaffected.
 
- <p>The current instance is assumed to have norm=1.
+ <p>The quaternion is assumed to be normalized (norm=1). No error checking
+ is performed; the caller must ensure that the norm is approximately equal
+ to 1.
 
  <p>Despite the name, the result differs from the mathematical definition
  of vector-quaternion multiplication.</div>
@@ -875,12 +885,18 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="mult(com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
 <h3>mult</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v,
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">mult</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;v,
  <a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">use <a href="../../../jme3utilities/math/MyQuaternion.html#rotate(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)"><code>MyQuaternion.rotate(com.jme3.math.Quaternion, com.jme3.math.Vector3f, com.jme3.math.Vector3f)</code></a></div>
+</div>
 <div class="block">Rotates a specified vector and returns the result in another vector. The
  current instance is unaffected.
 
- <p>The current instance is assumed to have norm=1.
+ <p>The quaternion is assumed to be normalized (norm=1). No error checking
+ is performed; the caller must ensure that the norm is approximately equal
+ to 1.
 
  <p>It is safe for <code>v</code> and <code>store</code> to be the same object.
 
