@@ -33,6 +33,7 @@ package com.jme3.bullet.util;
 
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.objects.PhysicsSoftBody;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
@@ -443,14 +444,14 @@ final public class NativeSoftBodyUtil {
             }
 
             if (normalBuffer != null) { // Rotate the normals.
+                Quaternion p2mr = physicsToMesh.getRotation(); // alias
                 normalBuffer.rewind();
                 while (normalBuffer.hasRemaining()) {
                     normalBuffer.mark();
                     tempVector.x = normalBuffer.get();
                     tempVector.y = normalBuffer.get();
                     tempVector.z = normalBuffer.get();
-                    MyQuaternion.rotate(physicsToMesh.getRotation(),
-                            tempVector, tempVector);
+                    MyQuaternion.rotate(p2mr, tempVector, tempVector);
 
                     normalBuffer.reset();
                     normalBuffer.put(tempVector.x);
