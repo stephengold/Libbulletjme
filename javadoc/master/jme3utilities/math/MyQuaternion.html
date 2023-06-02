@@ -197,45 +197,52 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Rotate the input vector using the specified quaternion.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#slerp(float,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">slerp</a><wbr>(float&nbsp;t,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#rotateInverse(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">rotateInverse</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;rotation,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Rotate the input vector using the inverse of the specified quaternion.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#slerp(float,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">slerp</a><wbr>(float&nbsp;t,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q0,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q1,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;storeResult)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Interpolate between 2 normalized quaternions using spherical linear
  (Slerp) interpolation.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#squad(float,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">squad</a><wbr>(float&nbsp;t,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#squad(float,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">squad</a><wbr>(float&nbsp;t,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;p,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;a,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;b,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;storeResult)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Interpolate between 4 normalized quaternions using the Squad function.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#squadA(com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">squadA</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q0,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#squadA(com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">squadA</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q0,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q1,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q2,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;storeResult)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Return Squad parameter "a" for a continuous first derivative at the
  middle point of 3 specified control points.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">standardize</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;input,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#standardize(com.jme3.math.Quaternion,com.jme3.math.Quaternion)" class="member-name-link">standardize</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;input,
  <a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;storeResult)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Standardize a Quaternion in preparation for hashing.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validateUnit(com.jme3.math.Quaternion,java.lang.String,float)" class="member-name-link">validateUnit</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#validateUnit(com.jme3.math.Quaternion,java.lang.String,float)" class="member-name-link">validateUnit</a><wbr>(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description,
  float&nbsp;tolerance)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Validate a normalized quaternion as a method argument.</div>
 </div>
 </div>
@@ -504,6 +511,25 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>rotation</code> - the desired rotation (not null, not zero, unaffected)</dd>
+<dd><code>input</code> - the vector to rotate (not null, finite, unaffected unless
+ it's <code>storeResult</code>)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null, may be
+ <code>input</code>)</dd>
+<dt>Returns:</dt>
+<dd>the rotated vector (either <code>storeResult</code> or a new instance)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="rotateInverse(com.jme3.math.Quaternion,com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>rotateInverse</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">rotateInverse</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;rotation,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Rotate the input vector using the inverse of the specified quaternion.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>rotation</code> - the rotation (not null, not zero, unaffected)</dd>
 <dd><code>input</code> - the vector to rotate (not null, finite, unaffected unless
  it's <code>storeResult</code>)</dd>
 <dd><code>storeResult</code> - storage for the result (modified if not null, may be

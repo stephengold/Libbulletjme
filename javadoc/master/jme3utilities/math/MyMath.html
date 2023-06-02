@@ -261,13 +261,27 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Convert an angle from degrees to radians.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#transformInverse(com.jme3.math.Transform,com.jme3.math.Triangle,com.jme3.math.Triangle)" class="member-name-link">transformInverse</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#transform(com.jme3.math.Transform,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">transform</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Apply the specified transform to a Vector3f.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#transformInverse(com.jme3.math.Transform,com.jme3.math.Triangle,com.jme3.math.Triangle)" class="member-name-link">transformInverse</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
  <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;input,
  <a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a>&nbsp;storeResult)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Apply the inverse of the specified transform to each vertex of a
  Triangle.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#transformInverse(com.jme3.math.Transform,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">transformInverse</a><wbr>(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Apply the inverse of the specified transform to a Vector3f.</div>
 </div>
 </div>
 </div>
@@ -707,6 +721,32 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="transform(com.jme3.math.Transform,com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>transform</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">transform</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Apply the specified transform to a Vector3f.
+ <p>
+ It is safe for <code>input</code> and <code>storeResult</code> to be the same
+ object.
+ <p>
+ Unlike <a href="../../com/jme3/math/Transform.html#transformVector(com.jme3.math.Vector3f,com.jme3.math.Vector3f)"><code>Transform.transformVector(com.jme3.math.Vector3f, com.jme3.math.Vector3f)</code></a>, this method works on transforms containing
+ non-normalized quaternions.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>transform</code> - the transform to apply (not null, unaffected unless
+ <code>storeResult</code> is its translation or scaling component)</dd>
+<dd><code>input</code> - the input vector (not null, unaffected unless it's
+ <code>storeResult</code>)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>the transformed vector (either <code>storeResult</code> or a new
+ instance)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="transformInverse(com.jme3.math.Transform,com.jme3.math.Triangle,com.jme3.math.Triangle)">
 <h3>transformInverse</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Triangle.html" title="class in com.jme3.math">Triangle</a></span>&nbsp;<span class="element-name">transformInverse</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
@@ -725,6 +765,32 @@ loadScripts(document, 'script');</script>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
 <dd>the transformed triangle (either <code>storeResult</code> or a new
+ instance)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="transformInverse(com.jme3.math.Transform,com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<h3>transformInverse</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">transformInverse</span><wbr><span class="parameters">(<a href="../../com/jme3/math/Transform.html" title="class in com.jme3.math">Transform</a>&nbsp;transform,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;input,
+ <a href="../../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Apply the inverse of the specified transform to a Vector3f.
+ <p>
+ It is safe for <code>input</code> and <code>storeResult</code> to be the same
+ object.
+ <p>
+ Unlike <a href="../../com/jme3/math/Transform.html#transformInverseVector(com.jme3.math.Vector3f,com.jme3.math.Vector3f)"><code>Transform.transformInverseVector(com.jme3.math.Vector3f, com.jme3.math.Vector3f)</code></a>, this method works on transforms containing
+ non-normalized quaternions.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>transform</code> - the transform to un-apply (not null, unaffected unless
+ <code>storeResult</code> is its translation or scaling component)</dd>
+<dd><code>input</code> - the input vector (not null, unaffected unless it's
+ <code>storeResult</code>)</dd>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>the transformed vector (either <code>storeResult</code> or a new
  instance)</dd>
 </dl>
 </section>
