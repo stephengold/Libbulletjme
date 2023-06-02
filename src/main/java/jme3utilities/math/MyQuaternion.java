@@ -534,8 +534,6 @@ final public class MyQuaternion {
      * Interpolate between 2 normalized quaternions using spherical linear
      * (Slerp) interpolation.
      * <p>
-     * This method always produces a normalized result and doesn't trash q1.
-     * <p>
      * The caller is responsible for flipping the sign of {@code q0} or
      * {@code q1} when it's appropriate to do so.
      *
