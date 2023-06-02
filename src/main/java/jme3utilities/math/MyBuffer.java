@@ -498,7 +498,7 @@ final public class MyBuffer {
         for (int vectorIndex = 0; vectorIndex < numVectors; ++vectorIndex) {
             int position = startPosition + vectorIndex * numAxes;
             get(buffer, position, tmpVector);
-            transform.transformVector(tmpVector, tmpVector);
+            MyMath.transform(transform, tmpVector, tmpVector);
             put(buffer, position, tmpVector);
         }
     }
