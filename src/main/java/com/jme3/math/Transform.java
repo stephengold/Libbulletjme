@@ -170,7 +170,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * @param parent the parent transform (not null, {@code parent.rot.norm()}
      *     approximately equal to 1, unaffected unless it's <code>this</code>)
      * @return the (modified) current instance (for chaining)
+     * @deprecated use {@link
+     *     jme3utilities.math.MyMath#combine(com.jme3.math.Transform,
+     *     com.jme3.math.Transform, com.jme3.math.Transform)}
      */
+    @Deprecated
     public Transform combineWithParent(Transform parent) {
         //applying parent scale to local scale
         scale.multLocal(parent.scale);
@@ -201,7 +205,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * @param store storage for the result (modified if not null)
      * @return the transformed coordinates (either <code>store</code> or a new
      *     Vector3f)
+     * @deprecated use {@link
+     *     jme3utilities.math.MyMath#transform(com.jme3.math.Transform,
+     *     com.jme3.math.Vector3f, com.jme3.math.Vector3f)}
      */
+    @Deprecated
     public Vector3f transformVector(final Vector3f in, Vector3f store) {
         if (store == null) {
             store = new Vector3f();
@@ -228,7 +236,11 @@ public final class Transform implements Cloneable, java.io.Serializable {
      * @param store storage for the result (modified if not null)
      * @return the transformed coordinates (either <code>store</code> or a new
      *     Vector3f)
+     * @deprecated use {@link
+     *     jme3utilities.math.MyMath#transformInverse(com.jme3.math.Transform,
+     *     com.jme3.math.Vector3f, com.jme3.math.Vector3f)}
      */
+    @Deprecated
     public Vector3f transformInverseVector(final Vector3f in, Vector3f store) {
         if (store == null) {
             store = new Vector3f();
