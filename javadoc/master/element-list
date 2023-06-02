@@ -13,6 +13,7 @@ com.jme3.system
 com.jme3.util
 com.simsilica.mathd
 jme3utilities
+jme3utilities.debug
 jme3utilities.lbj
 jme3utilities.math
 jme3utilities.math.noise
