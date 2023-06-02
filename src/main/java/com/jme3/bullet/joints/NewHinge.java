@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2023 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,6 +42,7 @@ import com.jme3.math.Matrix3f;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
+import jme3utilities.math.MyMath;
 
 /**
  * A 3 degree-of-freedom Constraint that mimics ODE's Hinge2 joint, such as
@@ -250,7 +251,7 @@ public class NewHinge extends New6Dof {
             pivotInBody(PhysicsRigidBody body, Vector3f anchor) {
         Transform bodyToWorld = body.getTransform(null);
         bodyToWorld.setScale(1f);
-        Vector3f result = bodyToWorld.transformInverseVector(anchor, null);
+        Vector3f result = MyMath.transformInverse(bodyToWorld, anchor, null);
 
         return result;
     }

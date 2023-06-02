@@ -621,7 +621,7 @@ final public class MyMath {
         Vector3f tmpVector = new Vector3f();
         for (int vertexIndex = 0; vertexIndex < 3; ++vertexIndex) {
             Vector3f inputVector = input.get(vertexIndex); // alias
-            transform.transformInverseVector(inputVector, tmpVector);
+            MyMath.transformInverse(transform, inputVector, tmpVector);
             result.set(vertexIndex, tmpVector);
         }
 
