@@ -560,6 +560,47 @@ final public class MyMath {
     }
 
     /**
+     * Apply the specified transform to a Vector3f.
+     * <p>
+     * It is safe for {@code input} and {@code storeResult} to be the same
+     * object.
+     * <p>
+     * Unlike {@link
+     * com.jme3.math.Transform#transformVector(com.jme3.math.Vector3f,
+     * com.jme3.math.Vector3f)}, this method works on transforms containing
+     * non-normalized quaternions.
+     *
+     * @param transform the transform to apply (not null, unaffected unless
+     * {@code storeResult} is its translation or scaling component)
+     * @param input the input vector (not null, unaffected unless it's
+     * {@code storeResult})
+     * @param storeResult storage for the result (modified if not null)
+     * @return the transformed vector (either {@code storeResult} or a new
+     * instance)
+     */
+    public static Vector3f transform(
+            Transform transform, Vector3f input, Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        Vector3f translation = transform.getTranslation(); // alias
+        if (translation == result) {
+            translation = translation.clone();
+        }
+
+        // scale
+        Vector3f scale = transform.getScale(); // alias
+        input.mult(scale, result);
+
+        // rotate
+        Quaternion rotation = transform.getRotation(); // alias
+        MyQuaternion.rotate(rotation, result, result);
+
+        // translate
+        result.addLocal(translation);
+
+        return result;
+    }
+
+    /**
      * Apply the inverse of the specified transform to each vertex of a
      * Triangle.
      * <p>
@@ -583,6 +624,47 @@ final public class MyMath {
             transform.transformInverseVector(inputVector, tmpVector);
             result.set(vertexIndex, tmpVector);
         }
+
+        return result;
+    }
+
+    /**
+     * Apply the inverse of the specified transform to a Vector3f.
+     * <p>
+     * It is safe for {@code input} and {@code storeResult} to be the same
+     * object.
+     * <p>
+     * Unlike {@link
+     * com.jme3.math.Transform#transformInverseVector(com.jme3.math.Vector3f,
+     * com.jme3.math.Vector3f)}, this method works on transforms containing
+     * non-normalized quaternions.
+     *
+     * @param transform the transform to un-apply (not null, unaffected unless
+     * {@code storeResult} is its translation or scaling component)
+     * @param input the input vector (not null, unaffected unless it's
+     * {@code storeResult})
+     * @param storeResult storage for the result (modified if not null)
+     * @return the transformed vector (either {@code storeResult} or a new
+     * instance)
+     */
+    public static Vector3f transformInverse(
+            Transform transform, Vector3f input, Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        Vector3f scale = transform.getScale(); // alias
+        if (scale == result) {
+            scale = scale.clone();
+        }
+
+        // un-translate
+        Vector3f translation = transform.getTranslation(); // alias
+        input.subtract(translation, result);
+
+        // un-rotate
+        Quaternion rotation = transform.getRotation(); // alias
+        MyQuaternion.rotateInverse(rotation, result, result);
+
+        // de-scale
+        result.divideLocal(scale);
 
         return result;
     }
