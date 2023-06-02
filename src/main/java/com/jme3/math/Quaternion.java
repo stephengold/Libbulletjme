@@ -619,7 +619,11 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      *
      * @param v the vector to rotate (not null)
      * @return the (modified) vector {@code v}
+     * @deprecated use {@link
+     *     jme3utilities.math.MyQuaternion#rotate(com.jme3.math.Quaternion,
+     *     com.jme3.math.Vector3f, com.jme3.math.Vector3f)}
      */
+    @Deprecated
     public Vector3f multLocal(Vector3f v) {
         float tempX, tempY;
         tempX = w * w * v.x + 2 * y * w * v.z - 2 * z * w * v.y + x * x * v.x
@@ -695,7 +699,11 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      *     {@code store})
      * @param store storage for the result, or null for a new Vector3f
      * @return the rotated vector (either {@code store} or a new Vector3f)
+     * @deprecated use {@link
+     *     jme3utilities.math.MyQuaternion#rotate(com.jme3.math.Quaternion,
+     *     com.jme3.math.Vector3f, com.jme3.math.Vector3f)}
      */
+    @Deprecated
     public Vector3f mult(Vector3f v, Vector3f store) {
         if (store == null) {
             store = new Vector3f();
