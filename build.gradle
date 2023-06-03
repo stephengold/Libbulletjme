@@ -460,6 +460,7 @@ signMavenPublication.dependsOn('module')
 
 tasks.register('checkstyle') {
     dependsOn 'checkstyleMain', 'checkstyleTest'
+    description 'Checks the style of all Java sourcecode.'
 }
 
 // cleanup tasks:
