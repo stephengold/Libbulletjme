@@ -1,5 +1,41 @@
 # Release log for the Libbulletjme project
 
+## Version 18.3.0 released on 3 June 2023
+
++ Bugfix: `MyQuaternion.isRotationIdentity()` accepts NaNs
++ New capability to dump physics objects for debug purposes,
+  which entailed addition of the following classes/methods from Heart/Minie:
+  + `Describer`
+  + `Dumper`
+  + `DumpFlags`
+  + `MyBuffer.frequency()`
+  + `MyPco`
+  + `MyQuaternion.describe()`
+  + `MyString.axisName()`
+  + `MyString.describe()`
+  + `MyString.describeFraction()`
+  + `MyString.describeMatrix()`
+  + `MyVector3f.describe()`
+  + `MyVector3f.describeDirection()`
+  + `PhysicsDescriber`
+  + `PhysicsDumper`
++ Better 3-D rotations and transformations by adding 5 methods from Heart:
+  + `MyQuaternion.rotate()`
+  + `MyQuaternion.rotateInverse()`
+  + `MyMath.combine()`
+  + `MyMath.transform()`
+  + `MyMath.transformInverse()`
++ Deprecated the corresponding math methods:
+  + `Quaternion.multLocal(Vector3f)`
+  + `Quaternion.mult(Vector3f, Vector3f)`
+  + `Transform.combineWithParent()`
+  + `Transform.transformInverseVector()`
+  + `Transform.transformVector()`
++ Other methods added:
+  + `GImpactCollisionShape.countMeshTriangles()`
+  + `Transform.setScale(Vector3f)`
+  + `Validate.standardAngle()`
+
 ## Version 18.2.1 released on 17 May 2023
 
 + Bugfix: the gravity of a rigid body is altered by a rebuild
