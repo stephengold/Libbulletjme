@@ -87,6 +87,7 @@ import java.io.File;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import jme3utilities.Validate;
 import org.junit.Assert;
 import org.junit.Test;
@@ -111,6 +112,11 @@ public class TestLibbulletjme {
      * number of vertices per triangle
      */
     final private static int vpt = 3;
+    /**
+     * message logger for this class
+     */
+    final public static Logger logger
+            = Logger.getLogger(TestLibbulletjme.class.getName());
     // *************************************************************************
     // fields
 

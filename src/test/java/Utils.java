@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021-2022, Stephen Gold
+ Copyright (c) 2021-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -29,6 +29,7 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
+import java.util.logging.Logger;
 import org.junit.Assert;
 
 /**
@@ -37,6 +38,14 @@ import org.junit.Assert;
  * @author Stephen Gold sgold@sonic.net
  */
 final public class Utils {
+    // *************************************************************************
+    // constants and loggers
+
+    /**
+     * message logger for this class
+     */
+    final public static Logger logger
+            = Logger.getLogger(Utils.class.getName());
     // *************************************************************************
     // constructors
 
