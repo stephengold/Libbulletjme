@@ -931,6 +931,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Instantiate a child for use in a compound shape.</div>
 </dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#ChildShapes" class="member-name-link">ChildShapes</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">children in compound collision shapes</div>
+</dd>
 <dt><a href="com/jme3/bullet/objects/infos/ConfigFlag.html#CL_RS" class="member-name-link">CL_RS</a> - Static variable in class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/ConfigFlag.html" title="class in com.jme3.bullet.objects.infos">ConfigFlag</a></dt>
 <dd>
 <div class="block">enable the Cluster-versus-Convex handler for rigid-versus-soft collisions</div>
@@ -1029,6 +1033,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Create a copy of this PhysicsDescriber.</div>
 </dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#clone()" class="member-name-link">clone()</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Create a deep copy of this dumper.</div>
+</dd>
 <dt><a href="vhacd/VHACDParameters.html#clone()" class="member-name-link">clone()</a> - Method in class vhacd.<a href="vhacd/VHACDParameters.html" title="class in vhacd">VHACDParameters</a></dt>
 <dd>
 <div class="block">Create a copy of these parameters.</div>
@@ -1084,6 +1092,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">cluster-versus-rigidBody impulse-split coefficient (&ge;0, &le;1,
  default=0.5, native field: kSR_SPLT_CL)</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#ClustersInSofts" class="member-name-link">ClustersInSofts</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">clusters in soft bodies</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/infos/Sbcp.html#ClusterSoftHardness" class="member-name-link">ClusterSoftHardness</a> - Enum constant in enum class com.jme3.bullet.objects.infos.<a href="com/jme3/bullet/objects/infos/Sbcp.html" title="enum class in com.jme3.bullet.objects.infos">Sbcp</a></dt>
 <dd>
@@ -2344,6 +2356,42 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Read the number of drift-solver iterations (native field: diterations).</div>
 </dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.collision.shapes.CollisionShape,java.lang.String)" class="member-name-link">dump(CollisionShape, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified CollisionShape.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.joints.PhysicsJoint,java.lang.String)" class="member-name-link">dump(PhysicsJoint, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsJoint in a PhysicsSpace context.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.objects.MultiBodyCollider,java.lang.String)" class="member-name-link">dump(MultiBodyCollider, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified MultiBodyCollider.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.objects.PhysicsCharacter,java.lang.String)" class="member-name-link">dump(PhysicsCharacter, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsCharacter.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.objects.PhysicsGhostObject,java.lang.String)" class="member-name-link">dump(PhysicsGhostObject, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsGhostObject.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.objects.PhysicsRigidBody,java.lang.String)" class="member-name-link">dump(PhysicsRigidBody, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsRigidBody.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.objects.PhysicsSoftBody,java.lang.String)" class="member-name-link">dump(PhysicsSoftBody, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsSoftBody.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.PhysicsSpace)" class="member-name-link">dump(PhysicsSpace)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsSpace.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#dump(com.jme3.bullet.PhysicsSpace,java.lang.String)" class="member-name-link">dump(PhysicsSpace, String)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Dump the specified PhysicsSpace.</div>
+</dd>
 <dt><a href="jme3utilities/debug/Dumper.html" class="type-name-link" title="class in jme3utilities.debug">Dumper</a> - Class in <a href="jme3utilities/debug/package-summary.html">jme3utilities.debug</a></dt>
 <dd>
 <div class="block">Dump portions of a Libbulletjme object for debugging.</div>
@@ -2355,6 +2403,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/debug/Dumper.html#%3Cinit%3E(java.io.PrintStream)" class="member-name-link">Dumper(PrintStream)</a> - Constructor for class jme3utilities.debug.<a href="jme3utilities/debug/Dumper.html" title="class in jme3utilities.debug">Dumper</a></dt>
 <dd>
 <div class="block">Instantiate a dumper that will use the specified output stream.</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html" class="type-name-link" title="enum class in jme3utilities.minie">DumpFlags</a> - Enum Class in <a href="jme3utilities/minie/package-summary.html">jme3utilities.minie</a></dt>
+<dd>
+<div class="block">Enumerate the flags used to configure a PhysicsDumper.</div>
 </dd>
 <dt><a href="com/jme3/bullet/util/NativeLibrary.html#dumpMemoryLeaks()" class="member-name-link">dumpMemoryLeaks()</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeLibrary.html" title="class in com.jme3.bullet.util">NativeLibrary</a></dt>
 <dd>
@@ -3273,6 +3325,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/debug/Dumper.html#getDescriber()" class="member-name-link">getDescriber()</a> - Method in class jme3utilities.debug.<a href="jme3utilities/debug/Dumper.html" title="class in jme3utilities.debug">Dumper</a></dt>
 <dd>
 <div class="block">Access the Describer used by this dumper.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#getDescriber()" class="member-name-link">getDescriber()</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Access the Describer used by this Dumper.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/VehicleWheel.html#getDirection(com.jme3.math.Vector3f)" class="member-name-link">getDirection(Vector3f)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/VehicleWheel.html" title="class in com.jme3.bullet.objects">VehicleWheel</a></dt>
 <dd>
@@ -4861,6 +4917,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Test whether the specified collision object is in this object's ignore
  list.</div>
 </dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#Ignores" class="member-name-link">Ignores</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">ignored objects in collision objects</div>
+</dd>
 <dt><a href="jme3utilities/debug/Dumper.html#indentIncrement()" class="member-name-link">indentIncrement()</a> - Method in class jme3utilities.debug.<a href="jme3utilities/debug/Dumper.html" title="class in jme3utilities.debug">Dumper</a></dt>
 <dd>
 <div class="block">Read the indent increment.</div>
@@ -5149,6 +5209,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/joints/motors/TranslationalLimitMotor.html#isEnabled(int)" class="member-name-link">isEnabled(int)</a> - Method in class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/TranslationalLimitMotor.html" title="class in com.jme3.bullet.joints.motors">TranslationalLimitMotor</a></dt>
 <dd>
 <div class="block">Test whether the indexed axis is enabled (native field: m_enableMotor).</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#isEnabled(jme3utilities.minie.DumpFlags)" class="member-name-link">isEnabled(DumpFlags)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Test whether the specified dump flag is set.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/motors/RotationalLimitMotor.html#isEnableMotor()" class="member-name-link">isEnableMotor()</a> - Method in class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/RotationalLimitMotor.html" title="class in com.jme3.bullet.joints.motors">RotationalLimitMotor</a></dt>
 <dd>
@@ -5471,6 +5535,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#jointPosition(int)" class="member-name-link">jointPosition(int)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
 <div class="block">Determine the position of the indexed DOF.</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#JointsInBodies" class="member-name-link">JointsInBodies</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">physics joints in rigid bodies</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#JointsInSpaces" class="member-name-link">JointsInSpaces</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">joints in physics spaces</div>
 </dd>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#jointTorque(int)" class="member-name-link">jointTorque(int)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
@@ -5910,6 +5982,10 @@ loadScripts(document, 'script');</script>
 <div class="block">message logger for this class</div>
 </dd>
 <dt><a href="jme3utilities/minie/PhysicsDescriber.html#logger" class="member-name-link">logger</a> - Static variable in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDescriber.html" title="class in jme3utilities.minie">PhysicsDescriber</a></dt>
+<dd>
+<div class="block">message logger for this class</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#logger" class="member-name-link">logger</a> - Static variable in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
@@ -6641,6 +6717,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Enumerate certain parameters of a RotationMotor or TranslationMotor, based on
  Bullet's btConstraintParams.</div>
 </dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#Motors" class="member-name-link">Motors</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">motors in physics joints</div>
+</dd>
 <dt><a href="com/jme3/math/Vector3f.html#mult(float)" class="member-name-link">mult(float)</a> - Method in class com.jme3.math.<a href="com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></dt>
 <dd>
 <div class="block">Multiplies with the argument and returns the product as a new instance.</div>
@@ -6887,6 +6967,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Return the ID of the assigned native object, assuming that one is
  assigned.</div>
 </dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#NativeIDs" class="member-name-link">NativeIDs</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">native IDs of physics objects</div>
+</dd>
 <dt><a href="com/jme3/bullet/joints/motors/MotorParam.html#nativeIndex()" class="member-name-link">nativeIndex()</a> - Method in enum class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/MotorParam.html" title="enum class in com.jme3.bullet.joints.motors">MotorParam</a></dt>
 <dd>
 <div class="block">Determine the parameter's index in native code.</div>
@@ -7031,6 +7115,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#nodeNormal(int,com.jme3.math.Vector3f)" class="member-name-link">nodeNormal(int, Vector3f)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Copy the normal vector of the indexed node.</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#NodesInClusters" class="member-name-link">NodesInClusters</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">soft-body nodes in clusters</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#NodesInSofts" class="member-name-link">NodesInSofts</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">nodes in soft bodies</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#nodeVelocity(int,com.jme3.math.Vector3f)" class="member-name-link">nodeVelocity(int, Vector3f)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
@@ -7213,6 +7305,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Read the part index at the point of contact.</div>
 </dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#Pcos" class="member-name-link">Pcos</a> - Enum constant in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">collision objects in physics spaces</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/PcoType.html" class="type-name-link" title="class in com.jme3.bullet.collision">PcoType</a> - Class in <a href="com/jme3/bullet/collision/package-summary.html">com.jme3.bullet.collision</a></dt>
 <dd>
 <div class="block">Named constants for types of PhysicsCollisionObject.</div>
@@ -7280,6 +7376,18 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/minie/PhysicsDescriber.html#%3Cinit%3E()" class="member-name-link">PhysicsDescriber()</a> - Constructor for class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDescriber.html" title="class in jme3utilities.minie">PhysicsDescriber</a></dt>
 <dd>
 <div class="block">Instantiate a describer with the default separator.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html" class="type-name-link" title="class in jme3utilities.minie">PhysicsDumper</a> - Class in <a href="jme3utilities/minie/package-summary.html">jme3utilities.minie</a></dt>
+<dd>
+<div class="block">Dump Minie data structures for debugging purposes.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#%3Cinit%3E()" class="member-name-link">PhysicsDumper()</a> - Constructor for class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Instantiate a PhysicsDumper that uses <code>System.out</code> for output.</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#%3Cinit%3E(java.io.PrintStream)" class="member-name-link">PhysicsDumper(PrintStream)</a> - Constructor for class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Instantiate a PhysicsDumper that uses the specified output stream.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsGhostObject.html" class="type-name-link" title="class in com.jme3.bullet.objects">PhysicsGhostObject</a> - Class in <a href="com/jme3/bullet/objects/package-summary.html">com.jme3.bullet.objects</a></dt>
 <dd>
@@ -8601,6 +8709,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/joints/motors/TranslationalLimitMotor.html#setEnabled(int,boolean)" class="member-name-link">setEnabled(int, boolean)</a> - Method in class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/TranslationalLimitMotor.html" title="class in com.jme3.bullet.joints.motors">TranslationalLimitMotor</a></dt>
 <dd>
 <div class="block">Enable or disable the indexed axis (native field: m_enableMotor).</div>
+</dd>
+<dt><a href="jme3utilities/minie/PhysicsDumper.html#setEnabled(jme3utilities.minie.DumpFlags,boolean)" class="member-name-link">setEnabled(DumpFlags, boolean)</a> - Method in class jme3utilities.minie.<a href="jme3utilities/minie/PhysicsDumper.html" title="class in jme3utilities.minie">PhysicsDumper</a></dt>
+<dd>
+<div class="block">Configure the specified dump flag.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/motors/RotationalLimitMotor.html#setEnableMotor(boolean)" class="member-name-link">setEnableMotor(boolean)</a> - Method in class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/RotationalLimitMotor.html" title="class in com.jme3.bullet.joints.motors">RotationalLimitMotor</a></dt>
 <dd>
@@ -10864,6 +10976,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
 <dt><a href="vhacd/ACDMode.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class vhacd.<a href="vhacd/ACDMode.html" title="enum class in vhacd">ACDMode</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
@@ -10924,6 +11040,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><a href="com/jme3/system/Platform.html#values()" class="member-name-link">values()</a> - Static method in enum class com.jme3.system.<a href="com/jme3/system/Platform.html" title="enum class in com.jme3.system">Platform</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="jme3utilities/minie/DumpFlags.html#values()" class="member-name-link">values()</a> - Static method in enum class jme3utilities.minie.<a href="jme3utilities/minie/DumpFlags.html" title="enum class in jme3utilities.minie">DumpFlags</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
