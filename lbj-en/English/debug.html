@@ -278,7 +278,7 @@ such as "Linux64DebugSp_libbulletjme.so".</p>
 <div class="paragraph">
 <p>Many physics issues can be diagnosed visually.
 For instance, if you neglect to add a collision object to the physics space,
-SPORT will automatically remove it from the visualization.</p>
+SPORT will automatically omit it from the visualization.</p>
 </div>
 <div class="paragraph">
 <p>SPORT can be used to visualize:</p>
@@ -397,6 +397,114 @@ including any ghost object,</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_an_introduction_to_physicsdumper"><a class="anchor" href="#_an_introduction_to_physicsdumper"></a>An introduction to <code>PhysicsDumper</code></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following temporary statements could be used to dump
+(to <code>System.out</code>) all collision objects in a physics space:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PhysicsDumper dumper = new PhysicsDumper();
+dumper.dump(physicsSpace);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is sample output for a space containing 2 rigid bodies and nothing else:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>PhysicsSpace with 0 chars, 0 ghosts, 0 joints, 2 rigids, 0 vehicles
+ bphase=DBVT grav[y=-9.81] timeStep[0.0166667 maxSS=4] listeners[c=0 t=1]
+ solver[SI iters=10 cfm=0 batch=128 splitImp[th=global erp=0.1] mode=WarmStart,VelocityDependent,SIMD,Cone]
+ rayTest=SubSimplex,HeightfieldAccel
+  Rigid Kin msLoc[x=-0.243501 y=-0.317344]
+   contact[fric=0.5 rest=0 damp=0.1 pth=1e+18 stiff=1e+18]
+   Sphere r=1 marg=0
+   with 0 ignores and 0 joints
+  Rigid Dyn(mass=2) msLoc[x=3.39744 y=-4.02647] loc[x=3.42799 y=-4.13896] orient[x=0 y=0 z=-0.24 w=0.971]
+   contact[fric=0.5 rest=0 damp=0.1 pth=1e+18 stiff=1e+18]
+   grav[y=-9.81] NOTprotected ccd[mth=0] damp[l=0 a=0] sleep[lth=0.8 ath=1 time=0]
+   v[x=2.96385 y=-10.9131] force[xyz=0] lFact[xyz=1]
+   inert[xyz=0.8] w[z=-0.714854] torq[xyz=0] aFact[xyz=1]
+   Sphere r=1 marg=0
+   with 0 ignores and 0 joints</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>2-space indentation indicates the hierarchy of spaces/objects/joints.
+Single-space indentation indicates additional description
+of the foregoing object.
+Related values are enclosed in square brackets.</p>
+</div>
+<div class="paragraph">
+<p>To dump a physics space to a text file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PrintStream dumpStream = new PrintStream("dump.txt");
+PhysicsDumper dumper = new PhysicsDumper(dumpStream);
+dumper.dump(physicsSpace);</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_is_dumped"><a class="anchor" href="#_what_is_dumped"></a>What is dumped</h3>
+<div class="paragraph">
+<p>You can dump specific collision objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">dumper.dump(character);
+dumper.dump(multiBodyCollider);
+dumper.dump(ghostObject);
+dumper.dump(rigidBody);
+dumper.dump(softBody);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can dump specific collision shapes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">dumper.dump(collisionShape, "");</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When dumping a space,
+the default is to describe every collision object;
+physics joints are counted but not described in detail.
+To describe the joints in each body, configure the dumper like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">dumper.setEnabled(DumpFlags.JointsInBodies, true); // default=false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To describe the motors in each joint, configure the dumper like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">dumper.setEnabled(DumpFlags.Motors, true); // default=false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To dump just the physics joints (no collision objects):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">dumper.setEnabled(DumpFlags.Pcos, false); // default=true
+dumper.setEnabled(DumpFlags.JointsInSpaces, true); // default=false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other dump flags can be set to describe the nodes or clusters in each soft body
+or the child shapes in each compound collision shape.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="ulist">
@@ -406,6 +514,9 @@ including any ghost object,</p>
 </li>
 <li>
 <p>SPORT visualization can be used to diagnose issues.</p>
+</li>
+<li>
+<p>To obtain detailed information about scenes and physics, use a dumper.</p>
 </li>
 </ul>
 </div>
