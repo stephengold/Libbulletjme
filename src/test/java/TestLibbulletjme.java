@@ -56,6 +56,7 @@ import com.jme3.bullet.collision.shapes.GImpactCollisionShape;
 import com.jme3.bullet.collision.shapes.HeightfieldCollisionShape;
 import com.jme3.bullet.collision.shapes.HullCollisionShape;
 import com.jme3.bullet.collision.shapes.MeshCollisionShape;
+import com.jme3.bullet.collision.shapes.MinkowskiSum;
 import com.jme3.bullet.collision.shapes.MultiSphere;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
@@ -436,6 +437,19 @@ public class TestLibbulletjme {
         buf = DebugShapeFactory
                 .getDebugTriangles(hull, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
+
+        // MinkowkiSum
+        MinkowskiSum sum = new MinkowskiSum(box, cone);
+        verifyCollisionShapeDefaults(sum);
+        Assert.assertEquals(0.08f, sum.getMargin(), 0f);
+        Assert.assertFalse(sum.isConcave());
+        Assert.assertTrue(sum.isConvex());
+        Assert.assertFalse(sum.isInfinite());
+        Assert.assertFalse(sum.isNonMoving());
+        Assert.assertFalse(sum.isPolyhedral());
+        buf = DebugShapeFactory
+                .getDebugTriangles(sum, DebugShapeFactory.lowResolution);
+        Assert.assertEquals(702, buf.capacity());
 
         // MultiSphere
         MultiSphere multiSphere = new MultiSphere(1f);
