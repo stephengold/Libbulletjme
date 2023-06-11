@@ -204,6 +204,7 @@ $(N)/glue/com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_infos_CompoundMesh.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_infos_IndexedMesh.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_MeshCollisionShape.cpp \
+$(N)/glue/com_jme3_bullet_collision_shapes_MinkowskiSum.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_MultiSphere.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_PlaneCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_SimplexCollisionShape.cpp \
