@@ -816,6 +816,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Test whether the specified scale factors can be applied to this shape.</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html#canScale(com.jme3.math.Vector3f)" class="member-name-link">canScale(Vector3f)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a></dt>
+<dd>
+<div class="block">Test whether the specified scale factors can be applied to this shape.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/SimplexCollisionShape.html#canScale(com.jme3.math.Vector3f)" class="member-name-link">canScale(Vector3f)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/SimplexCollisionShape.html" title="class in com.jme3.bullet.collision.shapes">SimplexCollisionShape</a></dt>
 <dd>
 <div class="block">Test whether the specified scale factors can be applied to this shape.</div>
@@ -4329,6 +4333,14 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Access the base shape.</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html#getShapeA()" class="member-name-link">getShapeA()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a></dt>
+<dd>
+<div class="block">Access the first base shape.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html#getShapeB()" class="member-name-link">getShapeB()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a></dt>
+<dd>
+<div class="block">Access the 2nd base shape.</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/CollisionShape.html#getShapeType()" class="member-name-link">getShapeType()</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a></dt>
 <dd>
 <div class="block">Return the type of this shape.</div>
@@ -6069,6 +6081,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html#logger2" class="member-name-link">logger2</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a></dt>
+<dd>
+<div class="block">message logger for this class</div>
+</dd>
 <dt><a href="com/jme3/bullet/collision/shapes/MultiSphere.html#logger2" class="member-name-link">logger2</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MultiSphere.html" title="class in com.jme3.bullet.collision.shapes">MultiSphere</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
@@ -6675,6 +6691,15 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/math/RectangularSolid.html#minima(com.jme3.math.Vector3f)" class="member-name-link">minima(Vector3f)</a> - Method in class jme3utilities.math.<a href="jme3utilities/math/RectangularSolid.html" title="class in jme3utilities.math">RectangularSolid</a></dt>
 <dd>
 <div class="block">Copy minimum coordinate value for each local axis.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" class="type-name-link" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a> - Class in <a href="com/jme3/bullet/collision/shapes/package-summary.html">com.jme3.bullet.collision.shapes</a></dt>
+<dd>
+<div class="block">A convex collision shape to represent the Minkowki sum of 2 convex shapes,
+ based on Bullet's <code>btMinkowskiSumShape</code>.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html#%3Cinit%3E(com.jme3.bullet.collision.shapes.ConvexShape,com.jme3.bullet.collision.shapes.ConvexShape)" class="member-name-link">MinkowskiSum(ConvexShape, ConvexShape)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a></dt>
+<dd>
+<div class="block">Instantiate the Minkowki sum of the specified shapes.</div>
 </dd>
 <dt><a href="com/jme3/bullet/joints/motors/MotorParam.html#minValue()" class="member-name-link">minValue()</a> - Method in enum class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/MotorParam.html" title="enum class in com.jme3.bullet.joints.motors">MotorParam</a></dt>
 <dd>
@@ -9598,6 +9623,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/shapes/infos/CompoundMesh.html#setScale(com.jme3.math.Vector3f)" class="member-name-link">setScale(Vector3f)</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/CompoundMesh.html" title="class in com.jme3.bullet.collision.shapes.infos">CompoundMesh</a></dt>
 <dd>
 <div class="block">Alter the scale factors.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html#setScale(com.jme3.math.Vector3f)" class="member-name-link">setScale(Vector3f)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/MinkowskiSum.html" title="class in com.jme3.bullet.collision.shapes">MinkowskiSum</a></dt>
+<dd>
+<div class="block">Alter the scale of this shape and its base.</div>
 </dd>
 <dt><a href="com/jme3/math/Matrix4f.html#setScale(com.jme3.math.Vector3f)" class="member-name-link">setScale(Vector3f)</a> - Method in class com.jme3.math.<a href="com/jme3/math/Matrix4f.html" title="class in com.jme3.math">Matrix4f</a></dt>
 <dd>
