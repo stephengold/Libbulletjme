@@ -32,8 +32,10 @@
 package com.jme3.bullet.collision.shapes;
 
 import com.jme3.math.Vector3f;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
+import jme3utilities.math.MyVector3f;
 
 /**
  * A convex collision shape to represent the Minkowki sum of 2 convex shapes,
@@ -105,6 +107,7 @@ public class MinkowskiSum extends ConvexShape {
 
     /**
      * Test whether the specified scale factors can be applied to this shape.
+     * For MinkowskiSum shapes, scaling must be unity.
      *
      * @param scale the desired scale factor for each local axis (may be null,
      * unaffected)
@@ -112,29 +115,36 @@ public class MinkowskiSum extends ConvexShape {
      */
     @Override
     public boolean canScale(Vector3f scale) {
-        boolean result = shapeA.canScale(scale) && shapeB.canScale(scale);
+        boolean canScale = super.canScale(scale)
+                && MyVector3f.isScaleIdentity(scale);
+
+        return canScale;
+    }
+
+    /**
+     * Return the collision margin for this shape.
+     *
+     * @return the margin distance (in physics-space units, &ge;0)
+     */
+    @Override
+    public float getMargin() {
+        this.margin = shapeA.nativeMargin() + shapeB.nativeMargin();
+        float result = super.getMargin();
+
         return result;
     }
 
     /**
-     * Alter the scale of this shape and its base. CAUTION: Not all shapes can
-     * be scaled arbitrarily.
-     * <p>
-     * Note that if shapes are shared (between collision objects and/or compound
-     * shapes) changes can have unintended consequences.
+     * Alter the collision margin of this shape. This feature is disabled for
+     * MinkowskiSum shapes. The margin of a MinkowskiSum is simply the sum of
+     * the (native) margins of the base shapes.
      *
-     * @param scale the desired scale factor for each local axis (not null, no
-     * negative component, unaffected, default=(1,1,1))
+     * @param margin the desired margin distance (in physics-space units)
      */
     @Override
-    public void setScale(Vector3f scale) {
-        super.setScale(scale);
-        /*
-         * Update the base shapes to keep their copied scale factors
-         * in synch with the native ones.
-         */
-        shapeA.updateScale();
-        shapeB.updateScale();
+    public void setMargin(float margin) {
+        logger2.log(Level.WARNING,
+                "Cannot directly alter the margin of a MinkowskiSum");
     }
     // *************************************************************************
     // Java private methods
