@@ -160,8 +160,7 @@ public class MinkowskiSum extends ConvexShape {
 
         setContactFilterEnabled(enableContactFilter);
         setScale(scale);
-        float totalMargin = shapeA.getMargin() + shapeB.getMargin();
-        setMargin(totalMargin);
+        this.margin = shapeA.getMargin() + shapeB.getMargin();
     }
     // *************************************************************************
     // native private methods
