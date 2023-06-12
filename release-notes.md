@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 18.4.0 released on 11 June 2023
+
++ Added support for `btMinkowskiSumShape` via new class `MinkowskiSum`.
++ Added the protected `nativeMargin()` method to the `CollisionShape` class.
++ Changed the return type of the `getBaseShape()` method in the
+ `Convex2dShape` class.
+
 ## Version 18.3.0 released on 3 June 2023
 
 + Bugfix: `MyQuaternion.isRotationIdentity()` accepts NaNs
