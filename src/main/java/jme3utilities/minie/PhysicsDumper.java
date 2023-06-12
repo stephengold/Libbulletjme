@@ -1286,8 +1286,8 @@ public class PhysicsDumper extends Dumper {
      * @param joints (not null, unaffected)
      * @param indent (not null, may be empty)
      */
-    private void dumpJoints(Collection<? extends PhysicsJoint> joints,
-            String indent) {
+    private void dumpJoints(
+            Collection<? extends PhysicsJoint> joints, String indent) {
         for (PhysicsJoint joint : joints) {
             dump(joint, indent);
         }
