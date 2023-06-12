@@ -228,8 +228,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
      */
     public float getMargin() {
         assert margin > 0f : margin;
-        assert margin == getMargin(nativeId()) :
-                margin + " != " + getMargin(nativeId());
+        assert margin == nativeMargin() : margin + " != " + nativeMargin();
         return margin;
     }
 
@@ -501,6 +500,19 @@ abstract public class CollisionShape extends NativePhysicsObject {
      * @return the type value (from Bullet's {@code enum BroadphaseNativeTypes})
      */
     final native protected static int getShapeType(long shapeId);
+
+    /**
+     * Return the native collision margin of this shape.
+     *
+     * @return the margin distance (in physics-space units, &ge;0)
+     */
+    final protected float nativeMargin() {
+        long shapeId = nativeId();
+        float result = getMargin(shapeId);
+
+        assert result >= 0f : result;
+        return margin;
+    }
 
     /**
      * Recalculate this shape's bounding box if necessary. Meant to be
