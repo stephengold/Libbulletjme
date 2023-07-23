@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Stephen Gold
+ Copyright (c) 2022-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -75,7 +75,7 @@ public class IndexBuffer {
      * @param dataBuffer the data buffer to wrap (a ByteBuffer or ShortBuffer or
      * IntBuffer, alias created)
      */
-    private IndexBuffer(Buffer dataBuffer) {
+    protected IndexBuffer(Buffer dataBuffer) {
         this.buffer = dataBuffer;
 
         if (dataBuffer instanceof ByteBuffer) {
