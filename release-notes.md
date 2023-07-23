@@ -1,5 +1,11 @@
 # Release log for the Libbulletjme project
 
+## Version 18.5.0 released on 23 July 2023
+
++ Added a `MyMath.clamp()` method with `int` arguments.
++ Exposed the `IndexBuffer` wrap constructor to subclasses.
++ Modified `MinkowskiSum.createShape()` to avoid generating a warning message.
+
 ## Version 18.4.0 released on 11 June 2023
 
 + Added support for `btMinkowskiSumShape` via new class `MinkowskiSum`.
