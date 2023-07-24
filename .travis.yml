@@ -60,13 +60,13 @@ jobs:
           packages:
             - g++-6-arm-linux-gnueabihf
       env:
-        - FLAVOR=Dp32
+        - FLAVOR=Arm32hf
       script:
         - date
         - arm-linux-gnueabihf-g++-6 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Ptravis=arm32hf
 
-    # Linux_ARM64 (job .6):
+    # Linux_ARM64 double-precision (job .6):
     - arch: arm64
       compiler: gcc-6
       addons:
@@ -78,9 +78,23 @@ jobs:
       script:
         - date
         - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Ptravis=arm64
+        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
 
-    # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .7):
+    # Linux_ARM64 single-precision (job .7):
+    - arch: arm64
+      compiler: gcc-6
+      addons:
+        apt:
+          packages:
+            - g++-6
+      env:
+        - FLAVOR=Sp64
+      script:
+        - date
+        - aarch64-linux-gnu-g++-6 -E -v
+        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
+
+    # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .8):
     - dist: trusty
       language: android
       android:
@@ -92,7 +106,7 @@ jobs:
         - echo y | sdkmanager "patcher;v4" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
-    # MacOSX_ARM64 (job .8):
+    # MacOSX_ARM64 (job .9):
     - os: osx
       osx_image: xcode12.3
       script:
