@@ -38,7 +38,7 @@
 
 #include <jni.h>
 
-#define LIBBULLETJME_VERSION "18.5.1"
+#define LIBBULLETJME_VERSION "18.5.2"
 
 #define EXCEPTION_CHK(pEnv, retval) \
     if (pEnv->ExceptionCheck()) { \
