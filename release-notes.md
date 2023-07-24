@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 18.5.0 released on 23 July 2023
+## Version 18.5.1 released on 24 July 2023
 
 + Added a `MyMath.clamp()` method with `int` arguments.
 + Exposed the `IndexBuffer` wrap constructor to subclasses.
