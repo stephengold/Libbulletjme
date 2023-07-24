@@ -38,7 +38,7 @@ jobs:
         - g++ --version
         - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
 
-    # Linux_ARM32 software floating-point, double-precision (job .4):
+    # Linux_ARM32 software floating-point (job .4):
     - arch: arm64
       compiler: arm-linux-gnueabi-g++-7
       addons:
@@ -46,27 +46,13 @@ jobs:
           packages:
             - g++-7-arm-linux-gnueabi
       env:
-        - FLAVOR=Dp32
+        - FLAVOR=Arm32
       script:
         - date
         - arm-linux-gnueabi-g++-7 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Ptravis=arm32
 
-    # Linux_ARM32 software floating-point, single-precision (job .5):
-    - arch: arm64
-      compiler: arm-linux-gnueabi-g++-7
-      addons:
-        apt:
-          packages:
-            - g++-7-arm-linux-gnueabi
-      env:
-        - FLAVOR=Sp32
-      script:
-        - date
-        - arm-linux-gnueabi-g++-7 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32
-
-    # Linux_ARM32hf double-precision (job .6):
+    # Linux_ARM32hf (job .5):
     - arch: arm64
       compiler: arm-linux-gnueabihf-g++-6
       addons:
@@ -78,23 +64,9 @@ jobs:
       script:
         - date
         - arm-linux-gnueabihf-g++-6 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm32hf
+        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Ptravis=arm32hf
 
-    # Linux_ARM32hf single-precision (job .7):
-    - arch: arm64
-      compiler: arm-linux-gnueabihf-g++-6
-      addons:
-        apt:
-          packages:
-            - g++-6-arm-linux-gnueabihf
-      env:
-        - FLAVOR=Sp32
-      script:
-        - date
-        - arm-linux-gnueabihf-g++-6 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm32hf
-
-    # Linux_ARM64 double-precision (job .8):
+    # Linux_ARM64 (job .6):
     - arch: arm64
       compiler: gcc-6
       addons:
@@ -106,23 +78,9 @@ jobs:
       script:
         - date
         - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
+        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Ptravis=arm64
 
-    # Linux_ARM64 single-precision (job .9):
-    - arch: arm64
-      compiler: gcc-6
-      addons:
-        apt:
-          packages:
-            - g++-6
-      env:
-        - FLAVOR=Sp64
-      script:
-        - date
-        - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
-
-    # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .10):
+    # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .7):
     - dist: trusty
       language: android
       android:
@@ -133,8 +91,8 @@ jobs:
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - echo y | sdkmanager "patcher;v4" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
-        
-    # MacOSX_ARM64 (job .11):
+
+    # MacOSX_ARM64 (job .8):
     - os: osx
       osx_image: xcode12.3
       script:
