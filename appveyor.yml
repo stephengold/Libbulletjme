@@ -58,12 +58,15 @@ artifacts:
   - path: dist/Windows64DebugSpMt_bulletjme.pdb
     name: pdb64DSM
 
+# Deploy using personal access token expiring on Sep 16 2023
+# Browse to GitHub user pulldown -> Settings -> "Developer settings"
+# Browse to AppVeyor menu bar -> "Account" -> "Encrypt YAML"
 deploy:
   description: release description goes here
   artifact: classJar,javadocJar,sourcesJar,pom,module,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DDM,dll64DS,dll64DSM,dll64RD,dll64RDM,dll64RS,dll64RSM,pdb32DD,pdb32DS,pdb64DD,pdb64DDM,pdb64DS,pdb64DSM
   provider: GitHub
   auth_token:
-    secure: OGfG0B0VZ+f3OrcB9wEPEooA5oGPeNIeSKDYS5SkjC1kmElxd9RTHgOhwpHTmdeR
+    secure: AK9hPC5n+p4aZF5cyEsj8BH6otHJZ8kZmkdviyJ7AsoyOfmj8i907Pd8d9QCtlS7
   force_update: true               # overwrite existing release if present
   on:
     appveyor_repo_tag: true        # deploy on tag push only
