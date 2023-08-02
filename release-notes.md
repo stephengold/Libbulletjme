@@ -11,7 +11,7 @@
 + Added support for `btMinkowskiSumShape` via new class `MinkowskiSum`.
 + Added the protected `nativeMargin()` method to the `CollisionShape` class.
 + Changed the return type of the `getBaseShape()` method in the
- `Convex2dShape` class.
+  `Convex2dShape` class.
 
 ## Version 18.3.0 released on 3 June 2023
 
