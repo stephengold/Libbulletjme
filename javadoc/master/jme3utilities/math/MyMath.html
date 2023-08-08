@@ -212,10 +212,20 @@ loadScripts(document, 'script');</script>
 <div class="block">Interpolate linearly between (or extrapolate linearly from) 2
  single-precision values.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#max(float...)" class="member-name-link">max</a><wbr>(float...&nbsp;fValues)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#log2(int)" class="member-name-link">log2</a><wbr>(int&nbsp;iValue)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Calculate the floor of the base-2 logarithm of the input value.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#max(float...)" class="member-name-link">max</a><wbr>(float...&nbsp;fValues)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Find the maximum of some single-precision values.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#maxInt(int...)" class="member-name-link">maxInt</a><wbr>(int...&nbsp;iValues)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Find the maximum of some int values.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mid(float,float,float)" class="member-name-link">mid</a><wbr>(float&nbsp;a,
@@ -574,6 +584,20 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="log2(int)">
+<h3>log2</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">log2</span><wbr><span class="parameters">(int&nbsp;iValue)</span></div>
+<div class="block">Calculate the floor of the base-2 logarithm of the input value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>iValue</code> - the input value (&ge;1)</dd>
+<dt>Returns:</dt>
+<dd>the largest integer N&le;30 for which <code>(1 &lt;&lt; N) &lt;= iValue</code>
+ (&ge;0, &le;30)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="max(float...)">
 <h3>max</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">max</span><wbr><span class="parameters">(float...&nbsp;fValues)</span></div>
@@ -587,6 +611,26 @@ loadScripts(document, 'script');</script>
 <dd>
 <ul class="see-list-long">
 <li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html#max(double,double)" title="class or interface in java.lang" class="external-link"><code>Math.max(float, float)</code></a></li>
+</ul>
+</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="maxInt(int...)">
+<h3>maxInt</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">maxInt</span><wbr><span class="parameters">(int...&nbsp;iValues)</span></div>
+<div class="block">Find the maximum of some int values.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>iValues</code> - the input values</dd>
+<dt>Returns:</dt>
+<dd>the most positive value</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="see-list-long">
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collections.html#max(java.util.Collection)" title="class or interface in java.util" class="external-link"><code>Collections.max(java.util.Collection)</code></a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html#max(double,double)" title="class or interface in java.lang" class="external-link"><code>Math.max(int, int)</code></a></li>
 </ul>
 </dd>
 </dl>
