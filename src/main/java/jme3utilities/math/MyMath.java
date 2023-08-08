@@ -389,6 +389,19 @@ final public class MyMath {
     }
 
     /**
+     * Calculate the floor of the base-2 logarithm of the input value.
+     *
+     * @param iValue the input value (&ge;1)
+     * @return the largest integer N&le;30 for which {@code (1 << N) <= iValue}
+     * (&ge;0, &le;30)
+     */
+    public static int log2(int iValue) {
+        Validate.positive(iValue, "input value");
+        int result = 31 - Integer.numberOfLeadingZeros(iValue);
+        return result;
+    }
+
+    /**
      * Find the maximum of some single-precision values.
      *
      * @param fValues the input values
@@ -398,6 +411,25 @@ final public class MyMath {
     public static float max(float... fValues) {
         float result = Float.NEGATIVE_INFINITY;
         for (float value : fValues) {
+            if (value > result) {
+                result = value;
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Find the maximum of some int values.
+     *
+     * @param iValues the input values
+     * @return the most positive value
+     * @see java.util.Collections#max(java.util.Collection)
+     * @see java.lang.Math#max(int, int)
+     */
+    public static int maxInt(int... iValues) {
+        int result = Integer.MIN_VALUE;
+        for (int value : iValues) {
             if (value > result) {
                 result = value;
             }
