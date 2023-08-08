@@ -71,6 +71,17 @@ final public class FastMath {
     public static final float RAD_TO_DEG = 180.0f / PI;
 
     /**
+     * Returns the arc tangent of an angle given in radians.<br>
+     *
+     * @param fValue The angle, in radians.
+     * @return fValue's atan
+     * @see java.lang.Math#atan(double)
+     */
+    public static float atan(float fValue) {
+        return (float) Math.atan(fValue);
+    }
+
+    /**
      * A direct call to Math.atan2.
      *
      * @param fY ordinate
