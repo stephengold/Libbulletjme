@@ -47,40 +47,40 @@ public interface Mesh {
     /**
      * Access the normals data buffer.
      *
-     * @return the pre-existing buffer (not null)
+     * @return the pre-existing direct buffer (not null)
      */
     FloatBuffer getNormalsData();
 
     /**
      * Access the positions data buffer.
      *
-     * @return the pre-existing buffer (not null)
+     * @return the pre-existing direct buffer (not null)
      */
     FloatBuffer getPositionsData();
 
     /**
-     * Test whether 2 successive vertices represent an edge. In the context of
-     * OpenGL, this means the draw mode is GL_LINES. Indexing is allowed.
+     * Test whether the mesh consists of lines in list mode. In the context of
+     * OpenGL, this means the draw mode is GL_LINES. Indexing is ignored.
      *
-     * @return true if pure lines, otherwise false
+     * @return true if lines in list mode, otherwise false
      */
     boolean isPureLines();
 
     /**
-     * Test whether 3 successive vertices represent a triangle. In the context
-     * of OpenGL, this means the draw mode is GL_TRIANGLES. Indexing is allowed.
+     * Test whether the mesh consists of triangles in list mode. In the context
+     * of OpenGL, this means the draw mode is GL_TRIANGLES. Indexing is ignored.
      *
-     * @return true if pure triangles, otherwise false
+     * @return true if triangles in list mode, otherwise false
      */
     boolean isPureTriangles();
 
     /**
-     * Indicate that the normals data has changed.
+     * Indicate that the normals data buffer is dirty.
      */
     void setNormalsModified();
 
     /**
-     * Indicate that the positions data has changed.
+     * Indicate that the positions data buffer is dirty.
      */
     void setPositionsModified();
 }
