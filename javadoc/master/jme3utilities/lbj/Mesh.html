@@ -107,22 +107,22 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isPureLines()" class="member-name-link">isPureLines</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Test whether 2 successive vertices represent an edge.</div>
+<div class="block">Test whether the mesh consists of lines in list mode.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#isPureTriangles()" class="member-name-link">isPureTriangles</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Test whether 3 successive vertices represent a triangle.</div>
+<div class="block">Test whether the mesh consists of triangles in list mode.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setNormalsModified()" class="member-name-link">setNormalsModified</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Indicate that the normals data has changed.</div>
+<div class="block">Indicate that the normals data buffer is dirty.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setPositionsModified()" class="member-name-link">setPositionsModified</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Indicate that the positions data has changed.</div>
+<div class="block">Indicate that the positions data buffer is dirty.</div>
 </div>
 </div>
 </div>
@@ -156,7 +156,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Access the normals data buffer.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the pre-existing buffer (not null)</dd>
+<dd>the pre-existing direct buffer (not null)</dd>
 </dl>
 </section>
 </li>
@@ -167,7 +167,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Access the positions data buffer.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the pre-existing buffer (not null)</dd>
+<dd>the pre-existing direct buffer (not null)</dd>
 </dl>
 </section>
 </li>
@@ -175,11 +175,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isPureLines()">
 <h3>isPureLines</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isPureLines</span>()</div>
-<div class="block">Test whether 2 successive vertices represent an edge. In the context of
- OpenGL, this means the draw mode is GL_LINES. Indexing is allowed.</div>
+<div class="block">Test whether the mesh consists of lines in list mode. In the context of
+ OpenGL, this means the draw mode is GL_LINES. Indexing is ignored.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if pure lines, otherwise false</dd>
+<dd>true if lines in list mode, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -187,11 +187,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="isPureTriangles()">
 <h3>isPureTriangles</h3>
 <div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">isPureTriangles</span>()</div>
-<div class="block">Test whether 3 successive vertices represent a triangle. In the context
- of OpenGL, this means the draw mode is GL_TRIANGLES. Indexing is allowed.</div>
+<div class="block">Test whether the mesh consists of triangles in list mode. In the context
+ of OpenGL, this means the draw mode is GL_TRIANGLES. Indexing is ignored.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>true if pure triangles, otherwise false</dd>
+<dd>true if triangles in list mode, otherwise false</dd>
 </dl>
 </section>
 </li>
@@ -199,14 +199,14 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setNormalsModified()">
 <h3>setNormalsModified</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setNormalsModified</span>()</div>
-<div class="block">Indicate that the normals data has changed.</div>
+<div class="block">Indicate that the normals data buffer is dirty.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setPositionsModified()">
 <h3>setPositionsModified</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">setPositionsModified</span>()</div>
-<div class="block">Indicate that the positions data has changed.</div>
+<div class="block">Indicate that the positions data buffer is dirty.</div>
 </section>
 </li>
 </ul>
