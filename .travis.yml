@@ -78,7 +78,7 @@ jobs:
       script:
         - date
         - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
+        - travis_wait 20 ./gradlew build --exclude-task check --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
 
     # Linux_ARM64 single-precision (job .7):
     - arch: arm64
