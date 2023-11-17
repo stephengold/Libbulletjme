@@ -61,7 +61,7 @@ repositories {
     mavenCentral()
 }
 
-// cleanup tasks:
+// Register cleanup tasks:
 
 clean.dependsOn('cleanCxx', 'cleanDist')
 
