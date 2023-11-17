@@ -74,7 +74,7 @@ standalone Maven artifacts are provided.
 
 ## How to build Libbulletjme from source
 
-[How to build Libbulletjme from source](https://stephengold.github.io/Libbulletjme/lbj-en/build.html)
+[How to build Libbulletjme from source](https://stephengold.github.io/Libbulletjme/lbj-en/English/build.html)
 
 [Jump to table of contents](#toc)
 
@@ -83,7 +83,7 @@ standalone Maven artifacts are provided.
 
 ## Lexicon of class/enum/struct names
 
-[Lexicon of class/enum/struct names](https://stephengold.github.io/Libbulletjme/lbj-en/lexicon.html)
+[Lexicon of class/enum/struct names](https://stephengold.github.io/Libbulletjme/lbj-en/English/lexicon.html)
 
 [Jump to table of contents](#toc)
 
@@ -92,7 +92,7 @@ standalone Maven artifacts are provided.
 
 ## What's missing
 
-[What's missing](https://stephengold.github.io/Libbulletjme/lbj-en/overview.html#_whats_missing)
+[What's missing](https://stephengold.github.io/Libbulletjme/lbj-en/English/overview.html#_whats_missing)
 
 [Jump to table of contents](#toc)
 
@@ -106,7 +106,7 @@ standalone Maven artifacts are provided.
 + [The LbjExamples project][examples] at [GitHub]
 + [The Minie project][minie]
 + [The V-HACD Library][vhacd] at [GitHub]
-+ [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/jme3/advanced/physics.html)
++ [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/docs/3.4/physics/physics.html)
 + [The Bullet Forum](https://pybullet.org/Bullet/phpBB3)
 + [The Bullet home page][bullet]
 + [JBullet], a known alternative to Libbulletjme
