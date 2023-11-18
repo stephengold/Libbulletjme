@@ -1095,10 +1095,13 @@ public class PhysicsSpace
             PhysicsCollisionObject pcoB, long pointId) {
         assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
 
-        PhysicsCollisionEvent event
-                = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
-        // Queue the event to be handled later by distributeEvents().
-        contactProcessedEvents.add(event);
+        if (!contactStartedListeners.isEmpty()) {
+            PhysicsCollisionEvent event
+                    = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
+
+            // Queue the event to be handled later by distributeEvents().
+            contactProcessedEvents.add(event);
+        }
     }
 
     /**
@@ -1114,6 +1117,9 @@ public class PhysicsSpace
     public void onContactStarted(long manifoldId) {
         assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
 
+        if (contactStartedListeners.isEmpty()) {
+            return;
+        }
         int numPoints = PersistentManifolds.countPoints(manifoldId);
         if (numPoints == 0) {
             return;
