@@ -1097,7 +1097,7 @@ public class PhysicsSpace
             PhysicsCollisionObject pcoB, long pointId) {
         assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
 
-        if (!contactStartedListeners.isEmpty()) {
+        if (!contactProcessedListeners.isEmpty()) {
             PhysicsCollisionEvent event
                     = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
 
