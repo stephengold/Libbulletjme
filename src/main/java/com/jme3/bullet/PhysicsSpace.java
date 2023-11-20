@@ -1068,7 +1068,7 @@ public class PhysicsSpace
     // ContactListener methods
 
     /**
-     * Invoked by native code immediately after a contact manifold is removed.
+     * Invoked by native code immediately after a contact manifold is destroyed.
      * Skipped if stepSimulation() was invoked with doEnded=false.
      * <p>
      * Override this method to customize how contacts are handled.
@@ -1083,7 +1083,7 @@ public class PhysicsSpace
 
     /**
      * Invoked by native code immediately after a contact point is refreshed
-     * without being removed. Skipped for Sphere-Sphere contacts. Skipped if
+     * without being destroyed. Skipped for Sphere-Sphere contacts. Skipped if
      * stepSimulation() was invoked with doProcessed=false.
      * <p>
      * Override this method to customize how contacts are handled.
