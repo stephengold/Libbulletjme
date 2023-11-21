@@ -395,7 +395,9 @@ public class PhysicsSpace
      * Count how many collision listeners are registered with this space.
      *
      * @return the count (&ge;0)
+     * @deprecated Override the ContactListener methods instead.
      */
+    @Deprecated
     public int countCollisionListeners() {
         int result = contactProcessedListeners.size()
                 + contactStartedListeners.size();

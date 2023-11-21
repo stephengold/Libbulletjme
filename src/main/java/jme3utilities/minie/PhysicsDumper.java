@@ -783,9 +783,8 @@ public class PhysicsDumper extends Dumper {
             stream.printf("%s maxSS=%d", accuDesc, maxSS);
         }
 
-        int cCount = space.countCollisionListeners();
         int tCount = space.countTickListeners();
-        stream.printf("] listeners[c=%d t=%d]", cCount, tCount);
+        stream.printf("] listeners=%d", tCount);
 
         // 3rd line: solver type and info
         addLine(indent);

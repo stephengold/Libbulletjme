@@ -2075,7 +2075,6 @@ public class TestLibbulletjme {
     private static void verifyPhysicsSpaceDefaults(PhysicsSpace space) {
         verifyCollisionSpaceDefaults(space);
 
-        Assert.assertEquals(0, space.countCollisionListeners());
         Assert.assertEquals(0, space.countJoints());
         Assert.assertEquals(0, space.countManifolds());
         Assert.assertEquals(0, space.countRigidBodies());
