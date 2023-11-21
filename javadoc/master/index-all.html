@@ -1694,7 +1694,9 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#countCollisionListeners()" class="member-name-link">countCollisionListeners()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
-<div class="block">Count how many collision listeners are registered with this space.</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Override the ContactListener methods instead.</div>
+</div>
 </dd>
 <dt><a href="com/jme3/bullet/CollisionSpace.html#countCollisionObjects()" class="member-name-link">countCollisionObjects()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/CollisionSpace.html" title="class in com.jme3.bullet">CollisionSpace</a></dt>
 <dd>
@@ -7297,7 +7299,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#onContactEnded(long)" class="member-name-link">onContactEnded(long)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
-<div class="block">Invoked by native code immediately after a contact manifold is removed.</div>
+<div class="block">Invoked by native code immediately after a contact manifold is destroyed.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/ContactListener.html#onContactProcessed(com.jme3.bullet.collision.PhysicsCollisionObject,com.jme3.bullet.collision.PhysicsCollisionObject,long)" class="member-name-link">onContactProcessed(PhysicsCollisionObject, PhysicsCollisionObject, long)</a> - Method in interface com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ContactListener.html" title="interface in com.jme3.bullet.collision">ContactListener</a></dt>
 <dd>
@@ -7307,7 +7309,7 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#onContactProcessed(com.jme3.bullet.collision.PhysicsCollisionObject,com.jme3.bullet.collision.PhysicsCollisionObject,long)" class="member-name-link">onContactProcessed(PhysicsCollisionObject, PhysicsCollisionObject, long)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
 <div class="block">Invoked by native code immediately after a contact point is refreshed
- without being removed.</div>
+ without being destroyed.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/ContactListener.html#onContactStarted(long)" class="member-name-link">onContactStarted(long)</a> - Method in interface com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/ContactListener.html" title="interface in com.jme3.bullet.collision">ContactListener</a></dt>
 <dd>

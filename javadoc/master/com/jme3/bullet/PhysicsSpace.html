@@ -254,10 +254,12 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Test whether the specified PhysicsJoint is added to this space.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countCollisionListeners()" class="member-name-link">countCollisionListeners</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Count how many collision listeners are registered with this space.</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#countCollisionListeners()" class="member-name-link">countCollisionListeners</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Override the ContactListener methods instead.</div>
+</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countJoints()" class="member-name-link">countJoints</a>()</code></div>
@@ -401,7 +403,7 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onContactEnded(long)" class="member-name-link">onContactEnded</a><wbr>(long&nbsp;manifoldId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Invoked by native code immediately after a contact manifold is removed.</div>
+<div class="block">Invoked by native code immediately after a contact manifold is destroyed.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onContactProcessed(com.jme3.bullet.collision.PhysicsCollisionObject,com.jme3.bullet.collision.PhysicsCollisionObject,long)" class="member-name-link">onContactProcessed</a><wbr>(<a href="collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a>&nbsp;pcoA,
@@ -409,7 +411,7 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
  long&nbsp;pointId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Invoked by native code immediately after a contact point is refreshed
- without being removed.</div>
+ without being destroyed.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onContactStarted(long)" class="member-name-link">onContactStarted</a><wbr>(long&nbsp;manifoldId)</code></div>
@@ -783,7 +785,11 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <li>
 <section class="detail" id="countCollisionListeners()">
 <h3>countCollisionListeners</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">countCollisionListeners</span>()</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">countCollisionListeners</span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">Override the ContactListener methods instead.</div>
+</div>
 <div class="block">Count how many collision listeners are registered with this space.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -1396,7 +1402,7 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <section class="detail" id="onContactEnded(long)">
 <h3>onContactEnded</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onContactEnded</span><wbr><span class="parameters">(long&nbsp;manifoldId)</span></div>
-<div class="block">Invoked by native code immediately after a contact manifold is removed.
+<div class="block">Invoked by native code immediately after a contact manifold is destroyed.
  Skipped if stepSimulation() was invoked with doEnded=false.
  <p>
  Override this method to customize how contacts are handled.</div>
@@ -1416,7 +1422,7 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
  <a href="collision/PhysicsCollisionObject.html" title="class in com.jme3.bullet.collision">PhysicsCollisionObject</a>&nbsp;pcoB,
  long&nbsp;pointId)</span></div>
 <div class="block">Invoked by native code immediately after a contact point is refreshed
- without being removed. Skipped for Sphere-Sphere contacts. Skipped if
+ without being destroyed. Skipped for Sphere-Sphere contacts. Skipped if
  stepSimulation() was invoked with doProcessed=false.
  <p>
  Override this method to customize how contacts are handled.</div>
