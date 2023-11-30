@@ -108,7 +108,7 @@ jobs:
 
     # MacOSX_ARM64 (job .9):
     - os: osx
-      osx_image: xcode12.3
+      osx_image: xcode14.2
       script:
         - date
         - ./gradlew assemble --console=plain --no-daemon -Ptravis=osx_arm
