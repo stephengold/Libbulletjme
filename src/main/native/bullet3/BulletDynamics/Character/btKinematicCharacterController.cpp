@@ -341,6 +341,7 @@ bool btKinematicCharacterController::needsCollision(const btCollisionObject* bod
 {
 	bool collides = (body0->getBroadphaseHandle()->m_collisionFilterGroup & body1->getBroadphaseHandle()->m_collisionFilterMask) != 0;
 	collides = collides && (body1->getBroadphaseHandle()->m_collisionFilterGroup & body0->getBroadphaseHandle()->m_collisionFilterMask);
+	collides = collides && body0->checkCollideWithOverride(body1); // stephengold added 2023-11-30  
 	return collides;
 }
 
