@@ -1,5 +1,20 @@
 # Release log for the Libbulletjme project
 
+## Version 18.6.0 released on 30 November 2023
+
++ bugfix:  `PhysicsCharacter` disregards ignore lists
++ Deprecated the `PhysicsSpace.countCollisionListeners()` method.
++ Optimized `PhysicsSpace.onContactProcessed()` and `onContactStarted()` to
+  create event objects only when listeners are registered.
++ Added 3 math methods:
+  + `FastMath.atan()`
+  + `MyMath.log2()`
+  + `MyMath.maxInt()`
++ Updated the Bullet source code to match SHA1 ID=6bb8d112
+  of the bullet3 project.
++ Build MacOSX_ARM64 natives for release using Xcode 14.2 .
++ Upgraded Node.js to v20.10.0
+
 ## Version 18.5.2 released on 24 July 2023
 
 + Added a `MyMath.clamp()` method with `int` arguments.
