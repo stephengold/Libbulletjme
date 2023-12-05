@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 18.6.1 released on 4 December 2023
+
++ bugfix:  BVH algorithm broken
+
 ## Version 18.6.0 released on 30 November 2023
 
 + bugfix:  `PhysicsCharacter` disregards ignore lists
