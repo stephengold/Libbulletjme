@@ -2,11 +2,11 @@
 
 ## Version 18.6.1 released on 4 December 2023
 
-+ bugfix:  BVH algorithm broken
+Bugfix: BVH algorithm fails
 
 ## Version 18.6.0 released on 30 November 2023
 
-+ bugfix:  `PhysicsCharacter` disregards ignore lists
++ Bugfix: `PhysicsCharacter` disregards ignore lists
 + Deprecated the `PhysicsSpace.countCollisionListeners()` method.
 + Optimized `PhysicsSpace.onContactProcessed()` and `onContactStarted()` to
   create event objects only when listeners are registered.
