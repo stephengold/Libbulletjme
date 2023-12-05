@@ -154,9 +154,9 @@ model {
                 } else if (project.hasProperty('travis')) {
                     // CI build with -Ptravis= specified on the command line
                     String travis = project.ext.travis
-                    if (travis == 'amd64') { // using g++-4.7, so skip Mt flavors
+                    if (travis == 'amd64') { // using g++-7, skip Mt flavors
                         buildable = (!isMt) && !pName.contains('_ARM')
-                    } else if (travis == 'amd64mt') { // using g++-5 to build Mt flavors
+                    } else if (travis == 'amd64mt') { // using g++-7 to build Mt flavors
                         buildable = isMt && (pName == 'Linux64')
                     } else if (travis == 'arm32') {
                         buildable = (pName == 'Linux_ARM32')
@@ -166,7 +166,7 @@ model {
                         buildable = (pName == 'Linux_ARM64')
                     } else if (travis == 'osx_intel') { // xcode9.4.1 job
                         buildable = pName.startsWith('MacOSX') && !pName.contains('_ARM')
-                    } else if (travis == 'osx_arm') { // xcode12.3 job
+                    } else if (travis == 'osx_arm') { // xcode14.2 job
                         buildable = (pName == 'MacOSX_ARM64')
                     }
                 } else {
