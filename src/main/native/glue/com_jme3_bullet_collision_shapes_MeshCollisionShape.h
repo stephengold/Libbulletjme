@@ -7,6 +7,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#undef com_jme3_bullet_collision_shapes_MeshCollisionShape_maxSubmeshes
+#define com_jme3_bullet_collision_shapes_MeshCollisionShape_maxSubmeshes 1024L
+#undef com_jme3_bullet_collision_shapes_MeshCollisionShape_maxTrianglesInAnySubmesh
+#define com_jme3_bullet_collision_shapes_MeshCollisionShape_maxTrianglesInAnySubmesh 2097151L
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    createShape
