@@ -164,12 +164,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#indentIncrement()" class="member-name-link">indentIncrement</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Read the indent increment.</div>
+<div class="block">Return the indent increment.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Dumper.html" title="class in jme3utilities.debug">Dumper</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDescriber(jme3utilities.debug.Describer)" class="member-name-link">setDescriber</a><wbr>(<a href="Describer.html" title="class in jme3utilities.debug">Describer</a>&nbsp;newDescriber)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter which describer to use.</div>
+<div class="block">Replace the current Describer with the specified one.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Dumper.html" title="class in jme3utilities.debug">Dumper</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setIndentIncrement(java.lang.String)" class="member-name-link">setIndentIncrement</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newValue)</code></div>
@@ -249,7 +249,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="indentIncrement()">
 <h3>indentIncrement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">indentIncrement</span>()</div>
-<div class="block">Read the indent increment.</div>
+<div class="block">Return the indent increment.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>(not null, may be empty)</dd>
@@ -260,10 +260,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="setDescriber(jme3utilities.debug.Describer)">
 <h3>setDescriber</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Dumper.html" title="class in jme3utilities.debug">Dumper</a></span>&nbsp;<span class="element-name">setDescriber</span><wbr><span class="parameters">(<a href="Describer.html" title="class in jme3utilities.debug">Describer</a>&nbsp;newDescriber)</span></div>
-<div class="block">Alter which describer to use.</div>
+<div class="block">Replace the current Describer with the specified one.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>newDescriber</code> - (not null, alias created)</dd>
+<dd><code>newDescriber</code> - the desired Describer (not null, alias created)</dd>
 <dt>Returns:</dt>
 <dd>this instance for chaining</dd>
 </dl>
