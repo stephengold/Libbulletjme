@@ -100,7 +100,7 @@ public class VectorSetUsingBuffer implements VectorSet {
     public VectorSetUsingBuffer(int numVectors, boolean direct) {
         Validate.positive(numVectors, "number of vectors");
 
-        useDirectBuffers = direct;
+        this.useDirectBuffers = direct;
         allocate(numVectors);
         flip();
     }
@@ -331,8 +331,8 @@ public class VectorSetUsingBuffer implements VectorSet {
      */
     @Override
     public FloatBuffer toBuffer() {
-        startPositionPlus1 = null;
-        endPosition = null;
+        this.startPositionPlus1 = null;
+        this.endPosition = null;
 
         return buffer;
     }
@@ -421,9 +421,9 @@ public class VectorSetUsingBuffer implements VectorSet {
         int hashIndex = MyMath.modulo(hashCode, startPositionPlus1.length);
         int spp1 = startPositionPlus1[hashIndex];
         if (spp1 == 0) {
-            startPositionPlus1[hashIndex] = position + 1;
+            this.startPositionPlus1[hashIndex] = position + 1;
         }
-        endPosition[hashIndex] = position;
+        this.endPosition[hashIndex] = position;
 
         buffer.put(x);
         buffer.put(y);
@@ -440,12 +440,12 @@ public class VectorSetUsingBuffer implements VectorSet {
 
         int numFloats = numAxes * numVectors + 1;
         if (useDirectBuffers) {
-            buffer = BufferUtils.createFloatBuffer(numFloats);
+            this.buffer = BufferUtils.createFloatBuffer(numFloats);
         } else {
-            buffer = FloatBuffer.wrap(new float[numFloats]);
+            this.buffer = FloatBuffer.wrap(new float[numFloats]);
         }
-        startPositionPlus1 = new int[numFloats]; // initialized to all 0s
-        endPosition = new int[numFloats];
+        this.startPositionPlus1 = new int[numFloats]; // initialized to all 0s
+        this.endPosition = new int[numFloats];
     }
 
     /**
