@@ -97,7 +97,7 @@ public class Dumper implements Cloneable {
     }
 
     /**
-     * Read the indent increment.
+     * Return the indent increment.
      *
      * @return (not null, may be empty)
      */
@@ -107,9 +107,9 @@ public class Dumper implements Cloneable {
     }
 
     /**
-     * Alter which describer to use.
+     * Replace the current Describer with the specified one.
      *
-     * @param newDescriber (not null, alias created)
+     * @param newDescriber the desired Describer (not null, alias created)
      * @return this instance for chaining
      */
     public Dumper setDescriber(Describer newDescriber) {

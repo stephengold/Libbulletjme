@@ -106,9 +106,9 @@ public class Describer implements Cloneable {
     }
 
     /**
-     * Read the list separator.
+     * Return the list separator.
      *
-     * @return separator text string (not null, may be empty)
+     * @return separator text string (not null, may be empty, default=" ")
      */
     public String listSeparator() {
         assert listSeparator != null;

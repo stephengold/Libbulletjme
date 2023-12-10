@@ -205,6 +205,8 @@ final public class Validate {
      * @return true
      * @throws IllegalArgumentException if the value is outside the range [min,
      * max]
+     * <p>
+     * Compare with {@code Objects.checkIndex()} in Java 9.
      */
     public static boolean inRange(
             int iValue, String description, int min, int max) {
