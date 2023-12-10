@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021-2022, Stephen Gold
+ Copyright (c) 2021-2023, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -116,7 +116,7 @@ public class DistinctVectorValues {
                 ++nextVvid;
                 value2Vvid.put(vector, vvid);
             }
-            vectorIndex2Vvid[vectorIndex] = vvid;
+            this.vectorIndex2Vvid[vectorIndex] = vvid;
         }
         this.numDistinctValues = nextVvid;
     }
