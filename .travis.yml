@@ -128,8 +128,11 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-# Deploy using personal access token expiring on Sep 16 2023
+# Deploy using personal access token (classic) expiring on Mar 9 2024
 # Browse to GitHub user pulldown -> Settings -> "Developer settings"
+# cd Libbulletjme
+# travis encrypt {token}
+# cat /dev/null > ~/.bash_history && history -c && exit
 deploy:
   provider: releases
   skip_cleanup: true
