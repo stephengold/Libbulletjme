@@ -61,7 +61,7 @@ public interface VectorSet {
      *
      * @param vectors the values to add (not null, unaffected)
      */
-    void addAll(Iterable<? extends Vector3f> vectors); // TODO Vector3f is final
+    void addAll(Iterable<Vector3f> vectors);
 
     /**
      * Reset this set to its initial (empty) state without altering its
