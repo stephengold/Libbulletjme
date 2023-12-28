@@ -1292,16 +1292,6 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             setCollisionFlags(long objectId, int desiredFlags);
 
     /**
-     * Alter the ignore list for collisions. TODO privatize
-     *
-     * @param object1Id the ID of the first btCollisionObject (not zero)
-     * @param object2Id the ID of the 2nd btCollisionObject (not zero)
-     * @param setting true to ignore, false to stop ignoring
-     */
-    native protected static void setIgnoreCollisionCheck(
-            long object1Id, long object2Id, boolean setting);
-
-    /**
      * Directly alter this object's location and basis.
      *
      * @param centerLocation the desired location for this object's center (in
@@ -1469,6 +1459,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     native private static void setDeactivationTime(long objectId, float time);
 
     native private static void setFriction(long objectId, float friction);
+
+    native private static void setIgnoreCollisionCheck(
+            long object1Id, long object2Id, boolean setting);
 
     native private static void setLocationAndBasis(
             long objectId, Vector3f location, Matrix3f basis);
