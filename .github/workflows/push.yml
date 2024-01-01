@@ -70,7 +70,7 @@ jobs:
           name: crash-log
           path: '*.log'
 
-  Java18-Linux:
+  Java17-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-20.04
     steps:
@@ -78,7 +78,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 18
+          java-version: 17
       - run: sudo apt-get update
       - run: sudo apt-get install -y g++-multilib
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
@@ -88,7 +88,7 @@ jobs:
           name: crash-log
           path: '*.log'
 
-  Java19-Windows:
+  Java17-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
     steps:
@@ -96,7 +96,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: 19
+          java-version: 17
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
       - if: failure()
