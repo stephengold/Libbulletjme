@@ -2007,6 +2007,15 @@ loadScripts(document, 'script');</script>
 <div class="block">flag to enable a custom material callback for per-triangle
  friction/restitution (not supported by Libbulletjme)</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html" class="type-name-link" title="class in com.jme3.bullet.collision.shapes">CustomConvexShape</a> - Class in <a href="com/jme3/bullet/collision/shapes/package-summary.html">com.jme3.bullet.collision.shapes</a></dt>
+<dd>
+<div class="block">The abstract base class for custom collision shape defined in terms of its
+ supporting vertices, based on Bullet's <code>btConvexInternalShape</code>.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">CustomConvexShape(Vector3f, Vector3f)</a> - Constructor for class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html" title="class in com.jme3.bullet.collision.shapes">CustomConvexShape</a></dt>
+<dd>
+<div class="block">Instantiate a custom collision shape.</div>
+</dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#cutLink(int,int,float)" class="member-name-link">cutLink(int, int, float)</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
 <div class="block">Cut a pre-existing link in this body.</div>
@@ -5803,6 +5812,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Rotate from local coordinates to world coordinates.</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html#locateSupport(float,float,float)" class="member-name-link">locateSupport(float, float, float)</a> - Method in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html" title="class in com.jme3.bullet.collision.shapes">CustomConvexShape</a></dt>
+<dd>
+<div class="block">Locate the shape's supporting vertex for the specified location, ignoring
+ collision margin.</div>
+</dd>
 <dt><a href="com/jme3/bullet/MultiBodyLink.html#location(com.jme3.math.Vector3f)" class="member-name-link">location(Vector3f)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodyLink.html" title="class in com.jme3.bullet">MultiBodyLink</a></dt>
 <dd>
 <div class="block">Determine the location of this link's center of mass.</div>
@@ -6232,6 +6246,10 @@ loadScripts(document, 'script');</script>
 <div class="block">message logger for this class</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/ConvexShape.html#loggerX" class="member-name-link">loggerX</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a></dt>
+<dd>
+<div class="block">message logger for this class</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html#loggerY" class="member-name-link">loggerY</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html" title="class in com.jme3.bullet.collision.shapes">CustomConvexShape</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
@@ -10437,6 +10455,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="jme3utilities/math/MyVolume.html#tetrahedronVolume(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">tetrahedronVolume(Vector3f, Vector3f, Vector3f, Vector3f)</a> - Static method in class jme3utilities.math.<a href="jme3utilities/math/MyVolume.html" title="class in jme3utilities.math">MyVolume</a></dt>
 <dd>
 <div class="block">Determine the volume of the specified tetrahedron.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html#threadTmpVector" class="member-name-link">threadTmpVector</a> - Static variable in class com.jme3.bullet.collision.shapes.<a href="com/jme3/bullet/collision/shapes/CustomConvexShape.html" title="class in com.jme3.bullet.collision.shapes">CustomConvexShape</a></dt>
+<dd>
+<div class="block">temporary storage for one vector per thread</div>
 </dd>
 <dt><a href="jme3utilities/Validate.html#throwNpe" class="member-name-link">throwNpe</a> - Static variable in class jme3utilities.<a href="jme3utilities/Validate.html" title="class in jme3utilities">Validate</a></dt>
 <dd>
