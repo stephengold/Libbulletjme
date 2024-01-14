@@ -47,6 +47,7 @@ jclass jmeClasses::RuntimeException;
 jmethodID jmeClasses::List_addMethod;
 
 jmethodID jmeClasses::CollisionSpace_notifyCollisionGroupListeners;
+jmethodID jmeClasses::CustomConvexShape_locateSupport;
 
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
@@ -236,6 +237,12 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             "notifyCollisionGroupListeners",
             "(Lcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;)Z"
     );
+
+    jclass customConvexShape
+            = pEnv->FindClass("com/jme3/bullet/collision/shapes/CustomConvexShape");
+    EXCEPTION_CHK(pEnv,);
+    GLOBAL_METHOD(CustomConvexShape_locateSupport, customConvexShape,
+            "locateSupport", "(FFF)Lcom/jme3/math/Vector3f;");
 
     jclass physicsSpace = pEnv->FindClass("com/jme3/bullet/PhysicsSpace");
     EXCEPTION_CHK(pEnv,);

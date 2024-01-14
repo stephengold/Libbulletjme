@@ -195,6 +195,7 @@ $(N)/glue/com_jme3_bullet_collision_shapes_CollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_CompoundCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_ConeCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_Convex2dShape.cpp \
+$(N)/glue/com_jme3_bullet_collision_shapes_CustomConvexShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_CylinderCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_EmptyShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_GImpactCollisionShape.cpp \

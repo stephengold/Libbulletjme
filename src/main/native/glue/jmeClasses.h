@@ -74,6 +74,7 @@ public:
     static jmethodID List_addMethod;
 
     static jmethodID CollisionSpace_notifyCollisionGroupListeners;
+    static jmethodID CustomConvexShape_locateSupport;
 
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;
