@@ -102,7 +102,7 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
  * constructor:
  */
 jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
-    this->m_pCreateEnv = pEnv;
+    m_pCreateEnv = pEnv;
     attachThread();
 
     m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace); // TODO leak

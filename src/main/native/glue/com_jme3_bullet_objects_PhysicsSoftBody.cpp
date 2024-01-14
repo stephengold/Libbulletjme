@@ -1473,7 +1473,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_isCollis
     ASSERT_CHK(pEnv, pRigidBody->getInternalType()
             & btCollisionObject::CO_RIGID_BODY, JNI_FALSE);
 
-    btAlignedObjectArray<const class btCollisionObject *> cdos
+    btAlignedObjectArray<const btCollisionObject *> cdos
            = pSoftBody->m_collisionDisabledObjects;
     int cdoIndex = cdos.findLinearSearch(pRigidBody);
     bool allowed = (cdoIndex == cdos.size());
