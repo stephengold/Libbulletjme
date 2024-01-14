@@ -288,6 +288,7 @@ public class TestLibbulletjme {
         Box2dShape box2d = new Box2dShape(1f, 2f);
         verifyCollisionShapeDefaults(box2d);
         Assert.assertEquals(0.04f, box2d.getMargin(), 0f);
+        Assert.assertEquals(17, box2d.getShapeType());
         Assert.assertFalse(box2d.isConcave());
         Assert.assertTrue(box2d.isConvex());
         Assert.assertFalse(box2d.isInfinite());
@@ -301,6 +302,7 @@ public class TestLibbulletjme {
         BoxCollisionShape box = new BoxCollisionShape(1f);
         verifyCollisionShapeDefaults(box);
         Assert.assertEquals(0.04f, box.getMargin(), 0f);
+        Assert.assertEquals(0, box.getShapeType());
         Assert.assertFalse(box.isConcave());
         Assert.assertTrue(box.isConvex());
         Assert.assertFalse(box.isInfinite());
@@ -316,6 +318,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(PhysicsSpace.AXIS_Y, capsule.getAxis());
         Assert.assertEquals(1f, capsule.getHeight(), 0f);
         Assert.assertEquals(0f, capsule.getMargin(), 0f);
+        Assert.assertEquals(10, capsule.getShapeType());
         Assert.assertFalse(capsule.isConcave());
         Assert.assertTrue(capsule.isConvex());
         Assert.assertFalse(capsule.isInfinite());
@@ -330,6 +333,7 @@ public class TestLibbulletjme {
         verifyCollisionShapeDefaults(compound);
         Assert.assertEquals(0, compound.countChildren());
         Assert.assertEquals(0.04f, compound.getMargin(), 0f);
+        Assert.assertEquals(31, compound.getShapeType());
         Assert.assertFalse(compound.isConcave());
         Assert.assertFalse(compound.isConvex());
         Assert.assertFalse(compound.isInfinite());
@@ -345,6 +349,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(PhysicsSpace.AXIS_Y, cone.getAxis());
         Assert.assertEquals(1f, cone.getHeight(), 0f);
         Assert.assertEquals(0.04f, cone.getMargin(), 0f);
+        Assert.assertEquals(11, cone.getShapeType());
         Assert.assertFalse(cone.isConcave());
         Assert.assertTrue(cone.isConvex());
         Assert.assertFalse(cone.isInfinite());
@@ -360,6 +365,7 @@ public class TestLibbulletjme {
         Convex2dShape convex2d = new Convex2dShape(flatCone);
         verifyCollisionShapeDefaults(convex2d);
         Assert.assertEquals(0.04f, convex2d.getMargin(), 0f);
+        Assert.assertEquals(18, convex2d.getShapeType());
         Assert.assertFalse(convex2d.isConcave());
         Assert.assertTrue(convex2d.isConvex());
         Assert.assertFalse(convex2d.isInfinite());
@@ -376,6 +382,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(PhysicsSpace.AXIS_Z, cylinder.getAxis());
         Assert.assertEquals(2f, cylinder.getHeight(), 0f);
         Assert.assertEquals(0.04f, cylinder.getMargin(), 0f);
+        Assert.assertEquals(13, cylinder.getShapeType());
         Assert.assertFalse(cylinder.isConcave());
         Assert.assertTrue(cylinder.isConvex());
         Assert.assertFalse(cylinder.isInfinite());
@@ -389,6 +396,7 @@ public class TestLibbulletjme {
         EmptyShape empty = new EmptyShape(true);
         verifyCollisionShapeDefaults(empty);
         Assert.assertEquals(0.04f, empty.getMargin(), 0f);
+        Assert.assertEquals(27, empty.getShapeType());
         Assert.assertTrue(empty.isConcave());
         Assert.assertFalse(empty.isConvex());
         Assert.assertFalse(empty.isInfinite());
@@ -406,6 +414,7 @@ public class TestLibbulletjme {
         verifyCollisionShapeDefaults(hcs);
         Assert.assertEquals(9, hcs.countMeshVertices());
         Assert.assertEquals(0.04f, hcs.getMargin(), 0f);
+        Assert.assertEquals(24, hcs.getShapeType());
         Assert.assertTrue(hcs.isConcave());
         Assert.assertFalse(hcs.isConvex());
         Assert.assertFalse(hcs.isInfinite());
@@ -429,6 +438,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(6, hull.countHullVertices());
         Assert.assertEquals(6, hull.countMeshVertices());
         Assert.assertEquals(0.04f, hull.getMargin(), 0f);
+        Assert.assertEquals(4, hull.getShapeType());
         Assert.assertFalse(hull.isConcave());
         Assert.assertTrue(hull.isConvex());
         Assert.assertFalse(hull.isInfinite());
@@ -442,6 +452,7 @@ public class TestLibbulletjme {
         MinkowskiSum sum = new MinkowskiSum(box, cone);
         verifyCollisionShapeDefaults(sum);
         Assert.assertEquals(0.08f, sum.getMargin(), 0f);
+        Assert.assertEquals(16, sum.getShapeType());
         Assert.assertFalse(sum.isConcave());
         Assert.assertTrue(sum.isConvex());
         Assert.assertFalse(sum.isInfinite());
@@ -457,6 +468,7 @@ public class TestLibbulletjme {
         Utils.assertEquals(0f, 0f, 0f, multiSphere.copyCenter(0, null), 0f);
         Assert.assertEquals(1, multiSphere.countSpheres());
         Assert.assertEquals(1f, multiSphere.getRadius(0), 0f);
+        Assert.assertEquals(9, multiSphere.getShapeType());
         Assert.assertFalse(multiSphere.isConcave());
         Assert.assertTrue(multiSphere.isConvex());
         Assert.assertFalse(multiSphere.isInfinite());
@@ -473,6 +485,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(0.04f, pcs.getMargin(), 0f);
         Assert.assertEquals(0f, pcs.getPlane().getConstant(), 0f);
         Utils.assertEquals(0f, 1f, 0f, pcs.getPlane().getNormal(), 0f);
+        Assert.assertEquals(28, pcs.getShapeType());
         Assert.assertTrue(pcs.isConcave());
         Assert.assertFalse(pcs.isConvex());
         Assert.assertTrue(pcs.isInfinite());
@@ -489,6 +502,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(1, simplex1.countMeshVertices());
         Utils.assertEquals(0f, 0f, 0f, simplex1.copyVertex(0, null), 0f);
         Utils.assertEquals(0f, 0f, 0f, simplex1.getHalfExtents(null), 0f);
+        Assert.assertEquals(2, simplex1.getShapeType());
         buf = DebugShapeFactory
                 .getDebugTriangles(simplex1, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
@@ -501,6 +515,7 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, 0f, 0f, simplex2.copyVertex(0, null), 0f);
         Utils.assertEquals(-1f, 0f, 0f, simplex2.copyVertex(1, null), 0f);
         Utils.assertEquals(1f, 0f, 0f, simplex2.getHalfExtents(null), 0f);
+        Assert.assertEquals(2, simplex2.getShapeType());
         buf = DebugShapeFactory
                 .getDebugTriangles(simplex2, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
@@ -517,6 +532,7 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, 1f, 0f, simplex3.copyVertex(1, null), 0f);
         Utils.assertEquals(1f, 0f, 1f, simplex3.copyVertex(2, null), 0f);
         Utils.assertEquals(1f, 1f, 1f, simplex3.getHalfExtents(null), 0f);
+        Assert.assertEquals(2, simplex3.getShapeType());
         buf = DebugShapeFactory
                 .getDebugTriangles(simplex3, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
@@ -535,6 +551,7 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, -1f, 0f, simplex4.copyVertex(2, null), 0f);
         Utils.assertEquals(-1f, -1f, 0f, simplex4.copyVertex(3, null), 0f);
         Utils.assertEquals(1f, 1f, 1f, simplex4.getHalfExtents(null), 0f);
+        Assert.assertEquals(2, simplex4.getShapeType());
         buf = DebugShapeFactory
                 .getDebugTriangles(simplex4, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
@@ -543,6 +560,7 @@ public class TestLibbulletjme {
         SphereCollisionShape sphere = new SphereCollisionShape(1f);
         verifyCollisionShapeDefaults(sphere);
         Assert.assertEquals(0f, sphere.getMargin(), 0f);
+        Assert.assertEquals(8, sphere.getShapeType());
         Assert.assertFalse(sphere.isConcave());
         Assert.assertTrue(sphere.isConvex());
         Assert.assertFalse(sphere.isInfinite());
