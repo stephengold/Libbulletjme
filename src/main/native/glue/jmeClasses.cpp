@@ -184,6 +184,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
              */
             pEnv->CallStaticVoidMethod(NativeLibrary_Class,
                     NativeLibrary_reinitialization);
+            // no check for exceptions!
         }
 
         return;
@@ -218,6 +219,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 #endif // BT_THREADSAFE
 
     pEnv->GetJavaVM(&vm);
+    // no check for exceptions!
 
     GLOBAL_CLASS(IllegalArgumentException,
             "java/lang/IllegalArgumentException");
@@ -348,7 +350,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     jclass debugMeshCallback
             = pEnv->FindClass("com/jme3/bullet/util/DebugMeshCallback");
     EXCEPTION_CHK(pEnv,);
-
     GLOBAL_METHOD(DebugMeshCallback_addVector,
             debugMeshCallback, "addVector", "(FFFII)V");
 
@@ -433,4 +434,5 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
             NativeLibrary_Class, "postInitialization", "()V");
     EXCEPTION_CHK(pEnv,);
     pEnv->CallStaticVoidMethod(NativeLibrary_Class, postInitialization);
+    // no check for exceptions!
 }

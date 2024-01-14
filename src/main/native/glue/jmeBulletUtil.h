@@ -72,7 +72,9 @@ public:
             const btCollisionObject *, int partIndex, int triangleIndex);
 
 private:
-
+    /*
+     * constructor:
+     */
     jmeBulletUtil() {
     }
 

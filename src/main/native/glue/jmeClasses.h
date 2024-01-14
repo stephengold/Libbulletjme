@@ -168,6 +168,9 @@ public:
     static bool reinitializationCallbackFlag;
 
 private:
+    /*
+     * constructor:
+     */
     jmeClasses() {
     }
 

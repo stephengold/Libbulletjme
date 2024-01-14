@@ -93,15 +93,19 @@ bool jmeFilterCallback::needBroadphaseCollision(btBroadphaseProxy *pProxy0,
     pEnv->DeleteLocalRef(javaCollisionObject0);
     EXCEPTION_CHK(pEnv, false);
     pEnv->DeleteLocalRef(javaCollisionObject1);
+    // no check for exceptions!
 
     return (bool) result;
 }
 
+/*
+ * constructor:
+ */
 jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
     this->m_pCreateEnv = pEnv;
     attachThread();
 
-    m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace);
+    m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace); // TODO leak
     EXCEPTION_CHK(pEnv,);
 }
 

@@ -350,6 +350,7 @@ void jmePhysicsSpace::postTickCallback(btDynamicsWorld *pWorld,
                 timeStep);
         EXCEPTION_CHK(pEnv,);
         pEnv->DeleteLocalRef(javaPhysicsSpace);
+        // no check for exceptions!
     }
 }
 
@@ -367,6 +368,7 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
                 timeStep);
         EXCEPTION_CHK(pEnv,);
         pEnv->DeleteLocalRef(javaPhysicsSpace);
+        // no check for exceptions!
     }
 }
 

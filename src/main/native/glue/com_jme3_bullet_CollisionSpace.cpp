@@ -113,6 +113,7 @@ struct JmeContactResultCallback
 
         m_pEnv->CallVoidMethod(m_listener,
                 jmeClasses::PhysicsCollisionListener_method, eventObject);
+        // no check for exceptions!
 
         return (btScalar) 1;
     }

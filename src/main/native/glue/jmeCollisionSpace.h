@@ -69,6 +69,9 @@ protected:
             const btVector3 & max, int broadphaseId);
 
 public:
+    /*
+     * constructor:
+     */
     jmeCollisionSpace(JNIEnv *, jobject javaSpace);
 
     virtual ~jmeCollisionSpace();

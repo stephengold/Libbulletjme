@@ -122,6 +122,7 @@ void jmeBulletUtil::convert(
     float z = pvIn->getZ();
 
     pEnv->CallObjectMethod(outVector3f, jmeClasses::Vector3f_set, x, y, z);
+    // no check for exceptions!
 }
 
 // Copy Bullet btQuaternion data to a SimMath Quatd object.
@@ -138,6 +139,7 @@ void jmeBulletUtil::convertDp(
     double w = pqIn->getW();
 
     pEnv->CallObjectMethod(outQuatd, jmeClasses::Quatd_set, x, y, z, w);
+    // no check for exceptions!
 }
 
 // Copy Bullet btVector3 data to a SimMath Vec3d object.
@@ -153,6 +155,7 @@ void jmeBulletUtil::convertDp(
     double z = pvIn->getZ();
 
     pEnv->CallObjectMethod(outVec3d, jmeClasses::Vec3d_set, x, y, z);
+    // no check for exceptions!
 }
 
 // Copy Bullet btQuaternion data to a JMonkeyEngine Quaternion object.
@@ -169,6 +172,7 @@ void jmeBulletUtil::convert(
 
     pEnv->CallObjectMethod(
             outQuaternion, jmeClasses::Quaternion_set, x, y, z, w);
+    // no check for exceptions!
 }
 
 // Copy Bullet btTransform data to a JMonkeyEngine Transform object.
@@ -409,6 +413,7 @@ void jmeBulletUtil::addRayTestResult(JNIEnv *pEnv, jobject resultList,
     EXCEPTION_CHK(pEnv,);
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
+    // no check for exceptions!
 }
 
 // Add a sweep-test result to a list.
@@ -439,6 +444,7 @@ void jmeBulletUtil::addSweepTestResult(JNIEnv *pEnv, jobject resultList,
     EXCEPTION_CHK(pEnv,);
 
     pEnv->CallBooleanMethod(resultList, jmeClasses::List_addMethod, result);
+    // no check for exceptions!
 }
 
 // Convert a JMonkeyEngine Transform to a Bullet btTransform and a scale vector.

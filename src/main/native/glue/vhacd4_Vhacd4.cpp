@@ -77,12 +77,15 @@ public:
         jfloat arg3 = 100.0;
         pEnv->CallStaticVoidMethod(jmeClasses::Vhacd4,
                 jmeClasses::Vhacd4_update, arg1, arg2, arg3, arg4, arg5);
+        // no check for exceptions!
     }
 };
 
 class Logger : public IVHACD::IUserLogger {
 public:
-
+    /*
+     * constructor:
+     */
     Logger(bool b) {
         log = b;
     }

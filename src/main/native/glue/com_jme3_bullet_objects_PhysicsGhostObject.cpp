@@ -73,6 +73,7 @@ public:
                 javaCollisionObject1);
         EXCEPTION_CHK(m_env, false);
         m_env->DeleteLocalRef(javaCollisionObject1);
+        // no check for exceptions!
 
         return false;
     }

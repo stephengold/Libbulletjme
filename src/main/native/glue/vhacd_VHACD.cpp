@@ -67,12 +67,15 @@ public:
         jfloat arg3 = operationPercent;
         pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
                 jmeClasses::Vhacd_update, arg1, arg2, arg3, arg4, arg5);
+        // no check for exceptions!
     }
 };
 
 class Logger : public IVHACD::IUserLogger {
 public:
-
+    /*
+     * constructor:
+     */
     Logger(bool b) {
         log = b;
     }

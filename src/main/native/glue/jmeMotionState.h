@@ -43,6 +43,9 @@ private:
     bool dirty;
     btTransform * trans;
 public:
+    /*
+     * constructor:
+     */
     jmeMotionState();
     virtual ~jmeMotionState();
 
