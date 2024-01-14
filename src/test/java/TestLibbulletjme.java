@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2023, Stephen Gold
+ Copyright (c) 2020-2024, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -50,6 +50,7 @@ import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.ConeCollisionShape;
 import com.jme3.bullet.collision.shapes.Convex2dShape;
 import com.jme3.bullet.collision.shapes.ConvexShape;
+import com.jme3.bullet.collision.shapes.CustomConvexShape;
 import com.jme3.bullet.collision.shapes.CylinderCollisionShape;
 import com.jme3.bullet.collision.shapes.EmptyShape;
 import com.jme3.bullet.collision.shapes.GImpactCollisionShape;
@@ -374,6 +375,36 @@ public class TestLibbulletjme {
         buf = DebugShapeFactory
                 .getDebugTriangles(convex2d, DebugShapeFactory.lowResolution);
         Assert.assertEquals(504, buf.capacity());
+
+        // custom convex
+        CustomConvexShape custom = new CustomConvexShape(
+                null, new Vector3f(1f, 1f, 1f)) {
+            @Override
+            protected Vector3f locateSupport(
+                    float testX, float testY, float testZ) {
+                Vector3f result = threadTmpVector.get();
+                result.set(testX, testY, testZ);
+                float length = result.length();
+                if (length > 0f) {
+                    result.multLocal(1f / length); // vertex on sphere with r=1
+                } else {
+                    result.set(1f, 0f, 0f);
+                }
+
+                return result;
+            }
+        };
+        verifyCollisionShapeDefaults(custom);
+        Assert.assertEquals(0.04f, custom.getMargin(), 0f);
+        Assert.assertEquals(19, custom.getShapeType());
+        Assert.assertFalse(custom.isConcave());
+        Assert.assertTrue(custom.isConvex());
+        Assert.assertFalse(custom.isInfinite());
+        Assert.assertFalse(custom.isNonMoving());
+        Assert.assertFalse(custom.isPolyhedral());
+        buf = DebugShapeFactory
+                .getDebugTriangles(custom, DebugShapeFactory.lowResolution);
+        Assert.assertEquals(720, buf.capacity());
 
         // Cylinder
         CylinderCollisionShape cylinder
