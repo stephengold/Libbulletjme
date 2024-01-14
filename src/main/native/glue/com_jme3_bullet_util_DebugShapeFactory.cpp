@@ -38,15 +38,15 @@
 #include "BulletCollision/CollisionShapes/btShapeHull.h"
 
 class DebugCallback : public btTriangleCallback, public btInternalTriangleIndexCallback {
+    JNIEnv *m_pEnv;
+    jobject m_callback;
 public:
-    JNIEnv *pEnv;
-    jobject callback;
     /*
      * constructor:
      */
     DebugCallback(JNIEnv *pEnv, jobject object) {
-        this->pEnv = pEnv;
-        this->callback = object;
+        m_pEnv = pEnv;
+        m_callback = object;
     }
 
     virtual void internalProcessTriangleIndex(btVector3* triangle,
@@ -60,15 +60,15 @@ public:
         vertexA = triangle[0];
         vertexB = triangle[1];
         vertexC = triangle[2];
-        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
+        m_pEnv->CallVoidMethod(m_callback, jmeClasses::DebugMeshCallback_addVector,
                 vertexA.getX(), vertexA.getY(), vertexA.getZ(),
                 partId, triangleIndex);
-        EXCEPTION_CHK(pEnv,);
-        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
+        EXCEPTION_CHK(m_pEnv,);
+        m_pEnv->CallVoidMethod(m_callback, jmeClasses::DebugMeshCallback_addVector,
                 vertexB.getX(), vertexB.getY(), vertexB.getZ(),
                 partId, triangleIndex);
-        EXCEPTION_CHK(pEnv,);
-        pEnv->CallVoidMethod(callback, jmeClasses::DebugMeshCallback_addVector,
+        EXCEPTION_CHK(m_pEnv,);
+        m_pEnv->CallVoidMethod(m_callback, jmeClasses::DebugMeshCallback_addVector,
                 vertexC.getX(), vertexC.getY(), vertexC.getZ(),
                 partId, triangleIndex);
         // no check for exceptions!
