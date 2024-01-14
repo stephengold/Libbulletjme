@@ -45,7 +45,9 @@ class jmeGhostOverlapCallback : public btOverlapCallback {
     jobject m_object;
     btCollisionObject * m_ghost;
 public:
-
+    /*
+     * constructor:
+     */
     jmeGhostOverlapCallback(JNIEnv *pEnv, jobject object,
             btCollisionObject *pGhost)
     : m_env(pEnv),

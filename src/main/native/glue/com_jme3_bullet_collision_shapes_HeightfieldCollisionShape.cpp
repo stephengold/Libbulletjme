@@ -45,7 +45,9 @@ ATTRIBUTE_ALIGNED16(class)
 HeightfieldShape : public btHeightfieldTerrainShape {
     public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
-
+    /*
+     * constructor:
+     */
     HeightfieldShape(int heightStickWidth, int heightStickLength,
             const void *pHeightfieldData, btScalar heightScale,
             btScalar minHeight, btScalar maxHeight, int upAxis,

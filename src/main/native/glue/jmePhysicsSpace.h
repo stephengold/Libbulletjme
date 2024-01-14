@@ -49,7 +49,6 @@ protected:
     modify();
 
 public:
-
     /*
      * constructor:
      */

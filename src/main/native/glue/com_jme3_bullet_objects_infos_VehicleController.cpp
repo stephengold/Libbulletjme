@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2021 jMonkeyEngine
+ * Copyright (c) 2009-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -139,7 +139,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_objects_infos_VehicleController_cre
     pBody->setActivationState(DISABLE_DEACTIVATION);
 
     btVehicleRaycaster * const
-            pCaster = new btDefaultVehicleRaycaster(pWorld); //dance033 TODO leak
+            pCaster = new btDefaultVehicleRaycaster(pWorld); // TODO leak
     btRaycastVehicle * const
             pController = new btRaycastVehicle(*pTuning, pBody, pCaster); //dance032
 

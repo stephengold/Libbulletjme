@@ -41,7 +41,9 @@
  */
 class jmePhysicsSoftSpace : public jmePhysicsSpace {
 public:
-
+    /*
+     * constructor:
+     */
     jmePhysicsSoftSpace(JNIEnv *env, jobject javaSpace)
     : jmePhysicsSpace(env, javaSpace) {
     }

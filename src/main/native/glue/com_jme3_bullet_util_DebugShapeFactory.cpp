@@ -41,7 +41,9 @@ class DebugCallback : public btTriangleCallback, public btInternalTriangleIndexC
 public:
     JNIEnv *pEnv;
     jobject callback;
-
+    /*
+     * constructor:
+     */
     DebugCallback(JNIEnv *pEnv, jobject object) {
         this->pEnv = pEnv;
         this->callback = object;

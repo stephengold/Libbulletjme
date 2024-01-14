@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023 jMonkeyEngine
+ * Copyright (c) 2020-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,9 @@ using namespace VHACD;
 class Callback : public IVHACD::IUserCallback {
 public:
     JNIEnv *pEnv;
-
+    /*
+     * constructor:
+     */
     Callback(JNIEnv *pJNIEnv) {
         pEnv = pJNIEnv;
     }
