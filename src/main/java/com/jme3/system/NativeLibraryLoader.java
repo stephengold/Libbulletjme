@@ -109,10 +109,6 @@ public final class NativeLibraryLoader {
         } else {
             String subdirectory = MyString.firstToLower(platform.toString());
             file = new File(directory, subdirectory);
-            if (!file.exists()) {
-                // Look for a native library built using current.gradle:
-                file = directory;
-            }
 
             String bt = MyString.firstToLower(buildType);
             file = new File(file, bt);
