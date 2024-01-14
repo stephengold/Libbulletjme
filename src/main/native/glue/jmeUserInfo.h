@@ -45,7 +45,7 @@ public:
     jint m_group; // CollisionGroup: a bitmask with exactly one bit set
     jint m_groups; // CollideWithGroups: a bitmask
     jmeCollisionSpace *m_jmeSpace; // NULL means not added to any space
-    jobject m_javaRef; // a MultiBody or PhysicsCollisionObject
+    jweak m_javaRef; // a MultiBody or PhysicsCollisionObject
 } *jmeUserPointer;
 
 #endif
