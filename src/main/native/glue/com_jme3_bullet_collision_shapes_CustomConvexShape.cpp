@@ -86,10 +86,14 @@ public:
     void
     calculateLocalInertia(btScalar mass, btVector3& storeResult) const {
         btVector3 scaleVector = getLocalScaling();
-        btVector3 factor(scaleVector.y() * scaleVector.z(),
-                         scaleVector.z() * scaleVector.x(),
-                         scaleVector.x() * scaleVector.y());
-        storeResult = factor * mass * m_descaledInertia;
+        btScalar x = scaleVector.x();
+        btScalar y = scaleVector.y();
+        btScalar z = scaleVector.z();
+        btScalar xx = x * x;
+        btScalar yy = y * y;
+        btScalar zz = z * z;
+        btVector3 factor(yy + zz, zz + xx, xx + yy);
+        storeResult = m_descaledInertia * mass * factor / 2;
     }
 
     void
