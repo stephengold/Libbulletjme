@@ -155,8 +155,8 @@ loadScripts(document, 'script');</script>
  float&nbsp;testY,
  float&nbsp;testZ)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Locate the shape's supporting vertex for the specified location, ignoring
- collision margin.</div>
+<div class="block">Locate the shape's supporting vertex for the specified direction,
+ ignoring collision margin.</div>
 </div>
 </div>
 </div>
@@ -236,17 +236,17 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">locateSupport</span><wbr><span class="parameters">(float&nbsp;testX,
  float&nbsp;testY,
  float&nbsp;testZ)</span></div>
-<div class="block">Locate the shape's supporting vertex for the specified location, ignoring
- collision margin. Meant to be overridden.
+<div class="block">Locate the shape's supporting vertex for the specified direction,
+ ignoring collision margin.
  <p>
  This method is invoked by native code.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>testX</code> - the X-coordinate of the location to test (in descaled shape
+<dd><code>testX</code> - the X-coordinate of the direction to test (in descaled shape
  coordinates)</dd>
-<dd><code>testY</code> - the Y-coordinate of the location to test (in descaled shape
+<dd><code>testY</code> - the Y-coordinate of the direction to test (in descaled shape
  coordinates)</dd>
-<dd><code>testZ</code> - the Z-coordinate of the location to test (in descaled shape
+<dd><code>testZ</code> - the Z-coordinate of the direction to test (in descaled shape
  coordinates)</dd>
 <dt>Returns:</dt>
 <dd>the location of the supporting vertex (in descaled shape
