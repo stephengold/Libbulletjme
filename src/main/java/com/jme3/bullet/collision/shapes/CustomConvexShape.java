@@ -83,16 +83,16 @@ abstract public class CustomConvexShape extends ConvexShape {
     // new protected methods
 
     /**
-     * Locate the shape's supporting vertex for the specified location, ignoring
-     * collision margin. Meant to be overridden.
+     * Locate the shape's supporting vertex for the specified direction,
+     * ignoring collision margin.
      * <p>
      * This method is invoked by native code.
      *
-     * @param testX the X-coordinate of the location to test (in descaled shape
+     * @param testX the X-coordinate of the direction to test (in descaled shape
      * coordinates)
-     * @param testY the Y-coordinate of the location to test (in descaled shape
+     * @param testY the Y-coordinate of the direction to test (in descaled shape
      * coordinates)
-     * @param testZ the Z-coordinate of the location to test (in descaled shape
+     * @param testZ the Z-coordinate of the direction to test (in descaled shape
      * coordinates)
      * @return the location of the supporting vertex (in descaled shape
      * coordinates)
