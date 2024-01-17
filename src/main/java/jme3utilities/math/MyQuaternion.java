@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2023, Stephen Gold
+ Copyright (c) 2017-2024, Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -432,10 +432,8 @@ final public class MyQuaternion {
     /**
      * Rotate the input vector using the specified quaternion.
      * <p>
-     * Unlike {@link com.jme3.math.Quaternion#mult(com.jme3.math.Vector3f,
-     * com.jme3.math.Vector3f)}, this method doesn't assume the quaternion is
-     * normalized. Instead, rotation is performed using a normalized version of
-     * the quaternion.
+     * This method doesn't assume the quaternion is normalized. Instead,
+     * rotation is performed using a normalized version of the quaternion.
      *
      * @param rotation the desired rotation (not null, not zero, unaffected)
      * @param input the vector to rotate (not null, finite, unaffected unless
