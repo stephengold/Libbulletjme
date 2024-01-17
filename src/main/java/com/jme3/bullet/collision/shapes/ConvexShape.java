@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023 jMonkeyEngine
+ * Copyright (c) 2020-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -71,8 +71,8 @@ abstract public class ConvexShape extends CollisionShape {
      */
     public HullCollisionShape toHullShape() {
         // Generate low-res debug vertices.
-        FloatBuffer buffer = DebugShapeFactory
-                .debugVertices(this, DebugShapeFactory.lowResolution);
+        FloatBuffer buffer = DebugShapeFactory.debugVertices(
+                this, DebugShapeFactory.lowResolution);
 
         // Flip the buffer.
         buffer.rewind();
