@@ -33,7 +33,6 @@ import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import com.jme3.util.TempVars;
-import com.simsilica.mathd.Vec3d;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -292,26 +291,6 @@ final public class MyMath {
             return false;
         } else {
             return true;
-        }
-    }
-
-    /**
-     * Test whether the argument is a valid vector, returning false if it's null
-     * or if any component is NaN or infinite.
-     *
-     * @param vector the vector to test (unaffected)
-     * @return true if non-null and finite, otherwise false
-     * @deprecated use {@link com.simsilica.mathd.Vec3d#isFinite()}
-     */
-    @Deprecated
-    public static boolean isFinite(Vec3d vector) {
-        if (vector == null) {
-            return false;
-        } else if (isFiniteDouble(vector.x) && isFiniteDouble(vector.y)
-                && isFiniteDouble(vector.z)) {
-            return true;
-        } else {
-            return false;
         }
     }
 
