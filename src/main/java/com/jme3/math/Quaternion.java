@@ -242,8 +242,10 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     }
 
     /**
-     * Sets the quaternion from the specified rotation matrix. Does not verify
-     * that the argument is a valid rotation matrix.
+     * Sets the quaternion from the specified rotation matrix.
+     *
+     * <p>Does not verify that the argument is a valid rotation matrix.
+     * Positive scaling is compensated for, but not reflection or shear.
      *
      * @param matrix the input matrix (not null, unaffected)
      * @return the (modified) current instance (for chaining)
@@ -255,7 +257,9 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
 
     /**
      * Sets the quaternion from a rotation matrix with the specified elements.
-     * Does not verify that the arguments form a valid rotation matrix.
+     *
+     * <p>Does not verify that the arguments form a valid rotation matrix.
+     * Positive scaling is compensated for, but not reflection or shear.
      *
      * @param m00 the matrix element in row 0, column 0
      * @param m01 the matrix element in row 0, column 1
@@ -271,7 +275,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
     public Quaternion fromRotationMatrix(float m00, float m01, float m02,
             float m10, float m11, float m12, float m20, float m21, float m22) {
         // first normalize the forward (F), up (U) and side (S) vectors of the rotation matrix
-        // so that the scale does not affect the rotation
+        // so that positive scaling does not affect the rotation
         float lengthSquared = m00 * m00 + m10 * m10 + m20 * m20;
         if (lengthSquared != 1f && lengthSquared != 0f) {
             lengthSquared = 1.0f / FastMath.sqrt(lengthSquared);
@@ -450,7 +454,7 @@ public final class Quaternion implements Cloneable, java.io.Serializable {
      * current instance is unaffected.
      *
      * <p>Note: preserves the translation and scaling components of
-     * {@code result}.
+     * {@code result} unless {@code result} includes reflection.
      *
      * <p>Note: the result is created from a normalized version of the current
      * instance.

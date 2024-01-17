@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2022 jMonkeyEngine
+ * Copyright (c) 2009-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -249,6 +249,9 @@ public final class Matrix4f implements Cloneable {
     /**
      * Returns the rotation component of the coordinate transform.
      *
+     * <p>Assumes (but does not verify) that the transform consists entirely of
+     * translation, rotation, and positive scaling -- no reflection or shear.
+     *
      * @param q storage for the result (not null, modified)
      * @return the rotation component (in {@code q}) for chaining
      */
@@ -259,6 +262,9 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * Determines the rotation component of the coordinate transform.
+     *
+     * <p>If the transform includes scaling or reflection or shear, the result
+     * might not be a valid rotation matrix.
      *
      * @param mat storage for the result (not null, modified)
      */
@@ -276,6 +282,9 @@ public final class Matrix4f implements Cloneable {
 
     /**
      * Determines the scale component of the coordinate transform.
+     *
+     * <p>All components of the result will be non-negative, even if the
+     * coordinate transform includes reflection.
      *
      * @param store storage for the result (not null, modified)
      * @return the scale factors (in {@code store}) for chaining
