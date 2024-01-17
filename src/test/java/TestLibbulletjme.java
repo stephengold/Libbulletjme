@@ -295,8 +295,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(box2d.isInfinite());
         Assert.assertFalse(box2d.isNonMoving());
         Assert.assertFalse(box2d.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(box2d, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                box2d, DebugShapeFactory.lowResolution);
         Assert.assertEquals(108, buf.capacity());
 
         // Box
@@ -309,8 +309,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(box.isInfinite());
         Assert.assertFalse(box.isNonMoving());
         Assert.assertTrue(box.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(box, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                box, DebugShapeFactory.lowResolution);
         Assert.assertEquals(108, buf.capacity());
 
         // Capsule
@@ -325,8 +325,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(capsule.isInfinite());
         Assert.assertFalse(capsule.isNonMoving());
         Assert.assertFalse(capsule.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(capsule, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                capsule, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Compound without added children
@@ -340,8 +340,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(compound.isInfinite());
         Assert.assertFalse(compound.isNonMoving());
         Assert.assertFalse(compound.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(compound, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                compound, DebugShapeFactory.lowResolution);
         Assert.assertEquals(0, buf.capacity());
 
         // Cone
@@ -356,8 +356,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(cone.isInfinite());
         Assert.assertFalse(cone.isNonMoving());
         Assert.assertFalse(cone.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(cone, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                cone, DebugShapeFactory.lowResolution);
         Assert.assertEquals(702, buf.capacity());
 
         // Convex2d
@@ -372,8 +372,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(convex2d.isInfinite());
         Assert.assertFalse(convex2d.isNonMoving());
         Assert.assertFalse(convex2d.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(convex2d, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                convex2d, DebugShapeFactory.lowResolution);
         Assert.assertEquals(504, buf.capacity());
 
         // custom convex
@@ -402,8 +402,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(custom.isInfinite());
         Assert.assertFalse(custom.isNonMoving());
         Assert.assertFalse(custom.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(custom, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                custom, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Cylinder
@@ -419,8 +419,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(cylinder.isInfinite());
         Assert.assertFalse(cylinder.isNonMoving());
         Assert.assertFalse(cylinder.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(cylinder, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                cylinder, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Empty
@@ -434,8 +434,8 @@ public class TestLibbulletjme {
         Assert.assertTrue(empty.isNonMoving());
         Assert.assertFalse(empty.isPolyhedral());
         Assert.assertEquals(0f, empty.unscaledVolume(), 0f);
-        buf = DebugShapeFactory
-                .getDebugTriangles(empty, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                empty, DebugShapeFactory.lowResolution);
         Assert.assertEquals(0, buf.capacity());
 
         // Heightfield
@@ -451,8 +451,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(hcs.isInfinite());
         Assert.assertTrue(hcs.isNonMoving());
         Assert.assertFalse(hcs.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(hcs, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                hcs, DebugShapeFactory.lowResolution);
         Assert.assertEquals(72, buf.capacity());
 
         // Hull
@@ -475,8 +475,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(hull.isInfinite());
         Assert.assertFalse(hull.isNonMoving());
         Assert.assertTrue(hull.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(hull, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                hull, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // MinkowkiSum
@@ -489,8 +489,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(sum.isInfinite());
         Assert.assertFalse(sum.isNonMoving());
         Assert.assertFalse(sum.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(sum, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                sum, DebugShapeFactory.lowResolution);
         Assert.assertEquals(702, buf.capacity());
 
         // MultiSphere
@@ -522,8 +522,8 @@ public class TestLibbulletjme {
         Assert.assertTrue(pcs.isInfinite());
         Assert.assertTrue(pcs.isNonMoving());
         Assert.assertFalse(pcs.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(pcs, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                pcs, DebugShapeFactory.lowResolution);
         Assert.assertEquals(18, buf.capacity());
 
         // Simplex of 1 vertex
@@ -534,8 +534,8 @@ public class TestLibbulletjme {
         Utils.assertEquals(0f, 0f, 0f, simplex1.copyVertex(0, null), 0f);
         Utils.assertEquals(0f, 0f, 0f, simplex1.getHalfExtents(null), 0f);
         Assert.assertEquals(2, simplex1.getShapeType());
-        buf = DebugShapeFactory
-                .getDebugTriangles(simplex1, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                simplex1, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Simplex of 2 vertices
@@ -547,8 +547,8 @@ public class TestLibbulletjme {
         Utils.assertEquals(-1f, 0f, 0f, simplex2.copyVertex(1, null), 0f);
         Utils.assertEquals(1f, 0f, 0f, simplex2.getHalfExtents(null), 0f);
         Assert.assertEquals(2, simplex2.getShapeType());
-        buf = DebugShapeFactory
-                .getDebugTriangles(simplex2, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                simplex2, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Simplex of 3 vertices
@@ -564,8 +564,8 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, 0f, 1f, simplex3.copyVertex(2, null), 0f);
         Utils.assertEquals(1f, 1f, 1f, simplex3.getHalfExtents(null), 0f);
         Assert.assertEquals(2, simplex3.getShapeType());
-        buf = DebugShapeFactory
-                .getDebugTriangles(simplex3, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                simplex3, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Simplex of 4 vertices
@@ -583,8 +583,8 @@ public class TestLibbulletjme {
         Utils.assertEquals(-1f, -1f, 0f, simplex4.copyVertex(3, null), 0f);
         Utils.assertEquals(1f, 1f, 1f, simplex4.getHalfExtents(null), 0f);
         Assert.assertEquals(2, simplex4.getShapeType());
-        buf = DebugShapeFactory
-                .getDebugTriangles(simplex4, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                simplex4, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
         // Sphere
@@ -597,8 +597,8 @@ public class TestLibbulletjme {
         Assert.assertFalse(sphere.isInfinite());
         Assert.assertFalse(sphere.isNonMoving());
         Assert.assertFalse(sphere.isPolyhedral());
-        buf = DebugShapeFactory
-                .getDebugTriangles(sphere, DebugShapeFactory.lowResolution);
+        buf = DebugShapeFactory.getDebugTriangles(
+                sphere, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
     }
 
@@ -1435,17 +1435,17 @@ public class TestLibbulletjme {
         ManifoldPoints.setContactMotion2(nativeId, 9f);
         ManifoldPoints.setDistance1(nativeId, 10f);
         ManifoldPoints.setFlags(nativeId, 11);
-        ManifoldPoints
-                .setLateralFrictionDir1(nativeId, new Vector3f(12f, 13f, 14f));
-        ManifoldPoints
-                .setLateralFrictionDir2(nativeId, new Vector3f(15f, 16f, 17f));
+        ManifoldPoints.setLateralFrictionDir1(
+                nativeId, new Vector3f(12f, 13f, 14f));
+        ManifoldPoints.setLateralFrictionDir2(
+                nativeId, new Vector3f(15f, 16f, 17f));
         ManifoldPoints.setLocalPointA(nativeId, new Vector3f(18f, 19f, 20f));
         ManifoldPoints.setLocalPointB(nativeId, new Vector3f(21f, 22f, 23f));
         ManifoldPoints.setNormalWorldOnB(nativeId, new Vector3f(24f, 25f, 26f));
-        ManifoldPoints
-                .setPositionWorldOnA(nativeId, new Vector3f(27f, 28f, 29f));
-        ManifoldPoints
-                .setPositionWorldOnB(nativeId, new Vector3f(30f, 31f, 32f));
+        ManifoldPoints.setPositionWorldOnA(
+                nativeId, new Vector3f(27f, 28f, 29f));
+        ManifoldPoints.setPositionWorldOnB(
+                nativeId, new Vector3f(30f, 31f, 32f));
 
         // Verify the resulting point.
         Assert.assertEquals(11, ManifoldPoints.getFlags(nativeId));
@@ -1713,15 +1713,15 @@ public class TestLibbulletjme {
             directory = new File("build/libs/bulletjme/shared");
         }
 
-        boolean success = NativeLibraryLoader
-                .loadLibbulletjme(fromDist, directory, "Debug", "SpMt");
+        boolean success = NativeLibraryLoader.loadLibbulletjme(
+                fromDist, directory, "Debug", "SpMt");
         if (success) {
             Assert.assertFalse(NativeLibrary.isDoublePrecision());
             Assert.assertTrue(NativeLibrary.isThreadSafe());
 
         } else { // fallback to Sp-flavored library
-            success = NativeLibraryLoader
-                    .loadLibbulletjme(fromDist, directory, "Debug", "Sp");
+            success = NativeLibraryLoader.loadLibbulletjme(
+                    fromDist, directory, "Debug", "Sp");
             if (success) {
                 Assert.assertFalse(NativeLibrary.isDoublePrecision());
                 Assert.assertFalse(NativeLibrary.isThreadSafe());
@@ -1729,8 +1729,8 @@ public class TestLibbulletjme {
         }
 
         if (!success) { // fallback to Dp-flavored library
-            success = NativeLibraryLoader
-                    .loadLibbulletjme(fromDist, directory, "Debug", "Dp");
+            success = NativeLibraryLoader.loadLibbulletjme(
+                    fromDist, directory, "Debug", "Dp");
             if (success) {
                 Assert.assertTrue(NativeLibrary.isDoublePrecision());
                 Assert.assertFalse(NativeLibrary.isThreadSafe());
