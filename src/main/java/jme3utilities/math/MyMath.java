@@ -122,9 +122,7 @@ final public class MyMath {
      * It is safe for any or all of {@code child}, {@code parent}, and
      * {@code storeResult} to be the same object.
      * <p>
-     * Unlike {@link
-     * com.jme3.math.Transform#combineWithParent(com.jme3.math.Transform)}, this
-     * method works on transforms containing non-normalized quaternions.
+     * This method works on transforms containing non-normalized quaternions.
      *
      * @param child the transform applied first (not null, unaffected unless
      * it's {@code storeResult})
@@ -618,10 +616,7 @@ final public class MyMath {
      * It is safe for {@code input} and {@code storeResult} to be the same
      * object.
      * <p>
-     * Unlike {@link
-     * com.jme3.math.Transform#transformVector(com.jme3.math.Vector3f,
-     * com.jme3.math.Vector3f)}, this method works on transforms containing
-     * non-normalized quaternions.
+     * This method works on transforms containing non-normalized quaternions.
      *
      * @param transform the transform to apply (not null, unaffected unless
      * {@code storeResult} is its translation or scaling component)
@@ -687,10 +682,7 @@ final public class MyMath {
      * It is safe for {@code input} and {@code storeResult} to be the same
      * object.
      * <p>
-     * Unlike {@link
-     * com.jme3.math.Transform#transformInverseVector(com.jme3.math.Vector3f,
-     * com.jme3.math.Vector3f)}, this method works on transforms containing
-     * non-normalized quaternions.
+     * This method works on transforms containing non-normalized quaternions.
      *
      * @param transform the transform to un-apply (not null, unaffected unless
      * {@code storeResult} is its translation or scaling component)
