@@ -499,7 +499,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toRotationQuat(com.jme3.math.Quaternion)">
 <h3>toRotationQuat</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a></span>&nbsp;<span class="element-name">toRotationQuat</span><wbr><span class="parameters">(<a href="Quaternion.html" title="class in com.jme3.math">Quaternion</a>&nbsp;q)</span></div>
-<div class="block">Returns the rotation component of the coordinate transform.</div>
+<div class="block">Returns the rotation component of the coordinate transform.
+
+ <p>Assumes (but does not verify) that the transform consists entirely of
+ translation, rotation, and positive scaling -- no reflection or shear.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>q</code> - storage for the result (not null, modified)</dd>
@@ -512,7 +515,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toRotationMatrix(com.jme3.math.Matrix3f)">
 <h3>toRotationMatrix</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">toRotationMatrix</span><wbr><span class="parameters">(<a href="Matrix3f.html" title="class in com.jme3.math">Matrix3f</a>&nbsp;mat)</span></div>
-<div class="block">Determines the rotation component of the coordinate transform.</div>
+<div class="block">Determines the rotation component of the coordinate transform.
+
+ <p>If the transform includes scaling or reflection or shear, the result
+ might not be a valid rotation matrix.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mat</code> - storage for the result (not null, modified)</dd>
@@ -523,7 +529,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="toScaleVector(com.jme3.math.Vector3f)">
 <h3>toScaleVector</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">toScaleVector</span><wbr><span class="parameters">(<a href="Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;store)</span></div>
-<div class="block">Determines the scale component of the coordinate transform.</div>
+<div class="block">Determines the scale component of the coordinate transform.
+
+ <p>All components of the result will be non-negative, even if the
+ coordinate transform includes reflection.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>store</code> - storage for the result (not null, modified)</dd>

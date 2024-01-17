@@ -424,9 +424,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="fromTransformMatrix(com.jme3.math.Matrix4f)">
 <h3>fromTransformMatrix</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">fromTransformMatrix</span><wbr><span class="parameters">(<a href="Matrix4f.html" title="class in com.jme3.math">Matrix4f</a>&nbsp;mat)</span></div>
-<div class="block">Sets the current instance from a transform matrix. Any shear in the
+<div class="block">Sets the current instance from a transform matrix. Any reflection or shear in the
  matrix is lost -- in other words, it may not be possible to recreate the
- original matrix from the result.</div>
+ original matrix from the result.
+
+ <p>After this method is invoked, all components of <code>scale</code> will be
+ non-negative, even if <code>mat</code> includes reflection.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>mat</code> - the input matrix (not null, unaffected)</dd>
@@ -437,7 +440,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="invert()">
 <h3>invert</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Transform.html" title="class in com.jme3.math">Transform</a></span>&nbsp;<span class="element-name">invert</span>()</div>
-<div class="block">Returns the inverse. The current instance is unaffected.</div>
+<div class="block">Returns the inverse. The current instance is unaffected.
+
+ <p>Assumes (but does not verify) that the scale factors are all positive.
+ If any component of <code>scale</code> is negative or zero, the result is
+ undefined.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a new Transform</dd>
