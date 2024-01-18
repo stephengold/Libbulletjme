@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * The abstract base class for custom collision shape defined in terms of its
+ * The abstract base class for custom collision shapes defined in terms of their
  * supporting vertices, based on Bullet's {@code btConvexInternalShape}.
  *
  * @author Stephen Gold sgold@sonic.net
@@ -78,7 +78,8 @@ abstract public class CustomConvexShape extends ConvexShape {
     // constructors
 
     /**
-     * Instantiate a custom collision shape.
+     * Instantiate a custom collision shape with the specified extent and
+     * inertia.
      *
      * @param halfExtents the desired half extents on each local axis, for
      * scale=(1,1,1) and margin=0 (unaffected), or {@code null} to calculate
