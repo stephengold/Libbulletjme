@@ -102,17 +102,17 @@ abstract public class CustomConvexShape extends ConvexShape {
      * <p>
      * This method is invoked by native code.
      *
-     * @param testX the X-coordinate of the direction to test (in descaled shape
+     * @param dirX the X-coordinate of the direction to test (in scaled shape
      * coordinates)
-     * @param testY the Y-coordinate of the direction to test (in descaled shape
+     * @param dirY the Y-coordinate of the direction to test (in scaled shape
      * coordinates)
-     * @param testZ the Z-coordinate of the direction to test (in descaled shape
+     * @param dirZ the Z-coordinate of the direction to test (in scaled shape
      * coordinates)
-     * @return the location of the supporting vertex (in descaled shape
+     * @return the location of the supporting vertex (in scaled shape
      * coordinates)
      */
     abstract protected Vector3f locateSupport(
-            float testX, float testY, float testZ);
+            float dirX, float dirY, float dirZ);
     // *************************************************************************
     // Java private methods
 

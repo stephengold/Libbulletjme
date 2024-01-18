@@ -115,21 +115,17 @@ public:
     }
 
     btVector3
-    localGetSupportingVertexWithoutMargin(const btVector3& testVector) const {
-        btVector3 scaleVector = getLocalScaling();
-        btVector3 descaled = testVector / scaleVector;
-
-        jfloat testX = descaled.x();
-        jfloat testY = descaled.y();
-        jfloat testZ = descaled.z();
+    localGetSupportingVertexWithoutMargin(const btVector3& dirVector) const {
+        jfloat dirX = dirVector.x();
+        jfloat dirY = dirVector.y();
+        jfloat dirZ = dirVector.z();
         jobject javaVertex = m_pCreateEnv->CallObjectMethod(
                 m_javaShapeRef, jmeClasses::CustomConvexShape_locateSupport,
-                testX, testY, testZ);
+                dirX, dirY, dirZ);
         // no check for exceptions!
 
         btVector3 result;
         jmeBulletUtil::convert(m_pCreateEnv, javaVertex, &result);
-        result *= scaleVector;
 
         return result;
     }
