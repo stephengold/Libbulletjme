@@ -151,9 +151,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>protected abstract <a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#locateSupport(float,float,float)" class="member-name-link">locateSupport</a><wbr>(float&nbsp;testX,
- float&nbsp;testY,
- float&nbsp;testZ)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#locateSupport(float,float,float)" class="member-name-link">locateSupport</a><wbr>(float&nbsp;dirX,
+ float&nbsp;dirY,
+ float&nbsp;dirZ)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Locate the shape's supporting vertex for the specified direction,
  ignoring collision margin.</div>
@@ -233,23 +233,23 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="locateSupport(float,float,float)">
 <h3>locateSupport</h3>
-<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">locateSupport</span><wbr><span class="parameters">(float&nbsp;testX,
- float&nbsp;testY,
- float&nbsp;testZ)</span></div>
+<div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">locateSupport</span><wbr><span class="parameters">(float&nbsp;dirX,
+ float&nbsp;dirY,
+ float&nbsp;dirZ)</span></div>
 <div class="block">Locate the shape's supporting vertex for the specified direction,
  ignoring collision margin.
  <p>
  This method is invoked by native code.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>testX</code> - the X-coordinate of the direction to test (in descaled shape
+<dd><code>dirX</code> - the X-coordinate of the direction to test (in scaled shape
  coordinates)</dd>
-<dd><code>testY</code> - the Y-coordinate of the direction to test (in descaled shape
+<dd><code>dirY</code> - the Y-coordinate of the direction to test (in scaled shape
  coordinates)</dd>
-<dd><code>testZ</code> - the Z-coordinate of the direction to test (in descaled shape
+<dd><code>dirZ</code> - the Z-coordinate of the direction to test (in scaled shape
  coordinates)</dd>
 <dt>Returns:</dt>
-<dd>the location of the supporting vertex (in descaled shape
+<dd>the location of the supporting vertex (in scaled shape
  coordinates)</dd>
 </dl>
 </section>
