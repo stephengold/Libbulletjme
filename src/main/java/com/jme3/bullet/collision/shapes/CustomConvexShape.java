@@ -63,6 +63,17 @@ abstract public class CustomConvexShape extends ConvexShape {
             return new Vector3f();
         }
     };
+    /**
+     * copy of the half extents on each local axis, for scale=(1,1,1) and
+     * margin=0, or {@code null} to calculate AABBs using the supporting
+     * vertices
+     */
+    final private Vector3f halfExtents;
+    /**
+     * copy of the rotational inertia for each local axis, for a shape with
+     * mass=1 and scale=(1,1,1)
+     */
+    final private Vector3f inertia;
     // *************************************************************************
     // constructors
 
@@ -77,7 +88,10 @@ abstract public class CustomConvexShape extends ConvexShape {
      */
     public CustomConvexShape(Vector3f halfExtents, Vector3f inertia) {
         Validate.positive(inertia, "inertia");
-        createShape(halfExtents, inertia);
+
+        this.halfExtents = (halfExtents == null) ? null : halfExtents.clone();
+        this.inertia = inertia.clone();
+        createShape();
     }
     // *************************************************************************
     // new protected methods
@@ -104,14 +118,8 @@ abstract public class CustomConvexShape extends ConvexShape {
 
     /**
      * Instantiate the configured shape in Bullet.
-     *
-     * @param halfExtents the desired half extents on each local axis, for
-     * scale=(1,1,1) and margin=0 (unaffected), or {@code null} to calculate
-     * AABBs using the supporting vertices
-     * @param inertia the desired local inertia vector for a shape with mass=1
-     * and scale=(1,1,1) (not null, all components &gt;0, unaffected)
      */
-    private void createShape(Vector3f halfExtents, Vector3f inertia) {
+    private void createShape() {
         long shapeId = createShapeNative(halfExtents, inertia);
         setNativeId(shapeId);
 
