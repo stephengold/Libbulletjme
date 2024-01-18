@@ -102,23 +102,24 @@ public class Ellipsoid extends CustomConvexShape {
      * units, &gt;0)
      * @param c the desired unscaled half extent on the local Z axis (in shape
      * units, &gt;0)
-     * @param solid true for a filled solid, false for a hollow shell
+     * @param inertiaFactor 0.2 for a uniform-density solid, 1/3 for a hollow
+     * shell (&ge;0, &le;1)
      * @return a new instance
      */
     final public static Ellipsoid newInstance(
-            float a, float b, float c, boolean solid) {
+            float a, float b, float c, float inertiaFactor) {
         Validate.positive(a, "a");
         Validate.positive(b, "b");
         Validate.positive(c, "c");
+        Validate.fraction(inertiaFactor, "inertia factor");
 
         // see https://adamheins.com/blog/ellipsoidal-shell-inertia
-        float constant = solid ? 0.2f : 1 / 3f;
         float aa = a * a;
         float bb = b * b;
         float cc = c * c;
-        float ix = constant * (bb + cc);
-        float iy = constant * (aa + cc);
-        float iz = constant * (aa + bb);
+        float ix = inertiaFactor * (bb + cc);
+        float iy = inertiaFactor * (aa + cc);
+        float iz = inertiaFactor * (aa + bb);
         Vector3f inertia = new Vector3f(ix, iy, iz);
 
         Vector3f halfExtents = new Vector3f(a, b, c);
