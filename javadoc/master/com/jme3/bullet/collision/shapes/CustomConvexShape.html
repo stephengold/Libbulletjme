@@ -84,10 +84,14 @@ loadScripts(document, 'script');</script>
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="../../NativePhysicsObject.html" title="class in com.jme3.bullet">NativePhysicsObject</a>&gt;</code></dd>
 </dl>
+<dl class="notes">
+<dt>Direct Known Subclasses:</dt>
+<dd><code><a href="Ellipsoid.html" title="class in com.jme3.bullet.collision.shapes">Ellipsoid</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">CustomConvexShape</span>
 <span class="extends-implements">extends <a href="ConvexShape.html" title="class in com.jme3.bullet.collision.shapes">ConvexShape</a></span></div>
-<div class="block">The abstract base class for custom collision shape defined in terms of its
+<div class="block">The abstract base class for custom collision shapes defined in terms of their
  supporting vertices, based on Bullet's <code>btConvexInternalShape</code>.</div>
 </section>
 <section class="summary">
@@ -134,7 +138,8 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">CustomConvexShape</a><wbr>(<a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents,
  <a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;inertia)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Instantiate a custom collision shape.</div>
+<div class="block">Instantiate a custom collision shape with the specified extent and
+ inertia.</div>
 </div>
 </div>
 </section>
@@ -211,7 +216,8 @@ loadScripts(document, 'script');</script>
 <h3>CustomConvexShape</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CustomConvexShape</span><wbr><span class="parameters">(<a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents,
  <a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;inertia)</span></div>
-<div class="block">Instantiate a custom collision shape.</div>
+<div class="block">Instantiate a custom collision shape with the specified extent and
+ inertia.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>halfExtents</code> - the desired half extents on each local axis, for
