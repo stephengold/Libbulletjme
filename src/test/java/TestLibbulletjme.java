@@ -381,9 +381,9 @@ public class TestLibbulletjme {
                 null, new Vector3f(1f, 1f, 1f)) {
             @Override
             protected Vector3f locateSupport(
-                    float testX, float testY, float testZ) {
+                    float dirX, float dirY, float dirZ) {
                 Vector3f result = threadTmpVector.get();
-                result.set(testX, testY, testZ);
+                result.set(dirX, dirY, dirZ);
                 float length = result.length();
                 if (length > 0f) {
                     result.multLocal(1f / length); // vertex on sphere with r=1
