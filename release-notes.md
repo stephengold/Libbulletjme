@@ -1,5 +1,38 @@
 # Release log for the Libbulletjme project
 
+## Version 19.0.0 released on 19 January 2024
+
++ Changed the Java API:
+  + Privatized the `PhysicsCollisionObject.setIgnoreCollisionCheck()` method.
+  + Simplified the signature of `VectorSet.addAll()`
+  + Deleted 14 previouly deprecated methods:
+    + `MyMath.isFinite(Vec3d)`
+    + `PhysicsCollisionObject.listIgnoredIds()`
+    + `PhysicsCollisionObject.setIgnoreList()`
+    + `PhysicsSpace.addCollisionListener()`
+    + `PhysicsSpace.addOngoingCollisionListener()`
+    + `PhysicsSpace.countCollisionListeners()`
+    + `PhysicsSpace.distributeEvents()`
+    + `PhysicsSpace.removeCollisionListener()`
+    + `PhysicsSpace.removeOngoingCollisionListener()`
+    + `Quaternion.multLocal(Vector3f)`
+    + `Quaternion.mult(Vector3f, Vector3f)`
+    + `Transform.combineWithParent()`
+    + `Transform.transformVector()`
+    + `Transform.transformInverseVector()`
++ Added return values to 2 native methods:
+  + `DebugShapeFactor.getTriangles()`
+  + `DebugShapeFactor.getVertices()`
+
++ Added the `CustomConvexShape` class.
++ Added 2 methods to pre-existing classes:
+  + `CompoundMesh.countSubmeshes()`
+  + `CompoundMesh.getSubmesh()`
++ Added runtime checks:
+  + in the `MeshCollisionShape` class, for meshes that are too complex
+  + in the `DebugShapeFactory` class, for `buildHull()` failures
++ Upgraded Node.js to v20.11.0
+
 ## Version 18.6.1 released on 4 December 2023
 
 Bugfix: BVH algorithm fails
