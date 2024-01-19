@@ -114,7 +114,12 @@ final public class DebugShapeFactory {
         } else {
             long shapeId = shape.nativeId();
             DebugMeshCallback callback = new DebugMeshCallback();
-            getVertices(shapeId, meshResolution, callback);
+            boolean success = getVertices(shapeId, meshResolution, callback);
+            if (!success) {
+                String shapeType = shape.getClass().getSimpleName();
+                throw new RuntimeException(
+                        "getVertices() failed, shapeType = " + shapeType);
+            }
             result = callback.getVertices();
         }
 
@@ -149,7 +154,12 @@ final public class DebugShapeFactory {
         } else {
             long shapeId = shape.nativeId();
             DebugMeshCallback callback = new DebugMeshCallback();
-            getTriangles(shapeId, meshResolution, callback);
+            boolean success = getTriangles(shapeId, meshResolution, callback);
+            if (!success) {
+                String shapeType = shape.getClass().getSimpleName();
+                throw new RuntimeException(
+                        "getTriangles() failed, shapeType = " + shapeType);
+            }
             result = callback.getVertices();
         }
 
@@ -178,7 +188,12 @@ final public class DebugShapeFactory {
 
         long shapeId = shape.nativeId();
         DebugMeshCallback callback = new DebugMeshCallback();
-        getVertices(shapeId, meshResolution, callback);
+        boolean success = getVertices(shapeId, meshResolution, callback);
+        if (!success) {
+            String shapeType = shape.getClass().getSimpleName();
+            throw new RuntimeException(
+                    "getVertices() failed, shapeType = " + shapeType);
+        }
         float result = callback.maxDistance(transform);
 
         return result;
@@ -199,7 +214,12 @@ final public class DebugShapeFactory {
 
         long shapeId = shape.nativeId();
         DebugMeshCallback callback = new DebugMeshCallback();
-        getTriangles(shapeId, meshResolution, callback);
+        boolean success = getTriangles(shapeId, meshResolution, callback);
+        if (!success) {
+            String shapeType = shape.getClass().getSimpleName();
+            throw new RuntimeException(
+                    "getTriangles() failed, shapeType = " + shapeType);
+        }
         float volume = callback.volumeConvex();
 
         assert volume >= 0f : volume;

@@ -102,7 +102,11 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriang
         // Create a hull approximation.
         btShapeHull * const pHull = new btShapeHull(pConvex); //dance027
         float margin = pConvex->getMargin();
-        pHull->buildHull(margin, resolution);
+        bool success = pHull->buildHull(margin, resolution);
+        if (!success) {
+            delete pHull; //dance027
+            return JNI_FALSE;
+        }
 
         int numberOfTriangles = pHull->numTriangles();
         const unsigned int * const pHullIndices = pHull->getIndexPointer();
@@ -165,7 +169,11 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertic
         // Create a hull approximation.
         btShapeHull * const pHull = new btShapeHull(pConvex); //dance026
         float margin = pConvex->getMargin();
-        pHull->buildHull(margin, resolution);
+        bool success = pHull->buildHull(margin, resolution);
+        if (!success) {
+            delete pHull; //dance026
+            return JNI_FALSE;
+        }
 
         int numberOfVertices = pHull->numVertices();
         const btVector3 * const pHullVertices = pHull->getVertexPointer();
