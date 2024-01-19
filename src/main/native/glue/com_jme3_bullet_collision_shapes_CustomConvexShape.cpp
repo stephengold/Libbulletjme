@@ -127,6 +127,22 @@ public:
         btVector3 result;
         jmeBulletUtil::convert(m_pCreateEnv, javaVertex, &result);
 
+#ifdef BT_DEBUG
+        if (!m_useSlowAabb) {
+            /*
+             * The supporting vertex must lie on or inside
+             * the bounding box described by the half extents
+             * passed to the constructor.
+             */
+            btVector3 scaleVector = getLocalScaling();
+            btVector3 scaledHalfExtents = scaleVector * m_descaledHalfExtents;
+
+            btAssert(btFabs(result.getX()) <= scaledHalfExtents.getX());
+            btAssert(btFabs(result.getY()) <= scaledHalfExtents.getY());
+            btAssert(btFabs(result.getZ()) <= scaledHalfExtents.getZ());
+        }
+#endif
+
         return result;
     }
 
