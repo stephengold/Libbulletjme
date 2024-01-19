@@ -37,7 +37,9 @@ import jme3utilities.Validate;
 import jme3utilities.math.MyMath;
 
 /**
- * A ellipsoidal collision shape. Unlike a {@code SphereCollisionShape}, these
+ * A ellipsoidal collision shape.
+ * <p>
+ * Like a {@code Multisphere} but unlike a {@code SphereCollisionShape}, these
  * shapes have margins and can be scaled non-uniformly.
  *
  * @author Stephen Gold sgold@sonic.net
@@ -80,8 +82,8 @@ public class Ellipsoid extends CustomConvexShape {
      *
      * @param halfExtents the desired half extents on each local axis, for
      * scale=(1,1,1) and margin=0 (not null, all components &gt;0, unaffected)
-     * @param inertia the desired local inertia vector for a shape with mass=1
-     * and scale=(1,1,1) (not null, all components &gt;0, unaffected)
+     * @param inertia the desired local inertia vector for mass=1 and
+     * scale=(1,1,1) (not null, all components &gt;0, unaffected)
      */
     protected Ellipsoid(Vector3f halfExtents, Vector3f inertia) {
         super(halfExtents, inertia);
@@ -103,7 +105,7 @@ public class Ellipsoid extends CustomConvexShape {
      * @param c the desired unscaled half extent on the local Z axis (in shape
      * units, &gt;0)
      * @param inertiaFactor 0.2 for a uniform-density solid, 1/3 for a hollow
-     * shell (&ge;0, &le;1)
+     * shell, 0 for a point mass centered in a force field (&ge;0, &le;1)
      * @return a new instance
      */
     final public static Ellipsoid newInstance(
@@ -132,7 +134,7 @@ public class Ellipsoid extends CustomConvexShape {
 
     /**
      * Locate the ellipsoid's supporting vertex for the specified direction,
-     * ignoring collision margin.
+     * excluding collision margin.
      * <p>
      * This method is invoked by native code.
      *
@@ -166,7 +168,8 @@ public class Ellipsoid extends CustomConvexShape {
     }
 
     /**
-     * Calculate how far the scaled shape extends from its center.
+     * Calculate how far the scaled shape extends from its center, excluding
+     * margin.
      *
      * @return the distance (in physics-space units, &ge;0)
      */

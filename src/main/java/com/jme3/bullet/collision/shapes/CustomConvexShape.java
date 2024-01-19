@@ -99,7 +99,7 @@ abstract public class CustomConvexShape extends ConvexShape {
 
     /**
      * Locate the shape's supporting vertex for the specified direction,
-     * ignoring collision margin.
+     * excluding collision margin.
      * <p>
      * This method is invoked by native code.
      *
