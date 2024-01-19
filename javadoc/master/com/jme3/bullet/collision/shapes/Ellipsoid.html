@@ -89,7 +89,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Ellipsoid</span>
 <span class="extends-implements">extends <a href="CustomConvexShape.html" title="class in com.jme3.bullet.collision.shapes">CustomConvexShape</a></span></div>
-<div class="block">A ellipsoidal collision shape. Unlike a <code>SphereCollisionShape</code>, these
+<div class="block">A ellipsoidal collision shape.
+ <p>
+ Like a <code>Multisphere</code> but unlike a <code>SphereCollisionShape</code>, these
  shapes have margins and can be scaled non-uniformly.</div>
 </section>
 <section class="summary">
@@ -159,12 +161,13 @@ loadScripts(document, 'script');</script>
  float&nbsp;dirZ)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Locate the ellipsoid's supporting vertex for the specified direction,
- ignoring collision margin.</div>
+ excluding collision margin.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maxRadius()" class="member-name-link">maxRadius</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculate how far the scaled shape extends from its center.</div>
+<div class="block">Calculate how far the scaled shape extends from its center, excluding
+ margin.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static final <a href="Ellipsoid.html" title="class in com.jme3.bullet.collision.shapes">Ellipsoid</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newInstance(float,float,float,float)" class="member-name-link">newInstance</a><wbr>(float&nbsp;a,
@@ -236,8 +239,8 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>halfExtents</code> - the desired half extents on each local axis, for
  scale=(1,1,1) and margin=0 (not null, all components &gt;0, unaffected)</dd>
-<dd><code>inertia</code> - the desired local inertia vector for a shape with mass=1
- and scale=(1,1,1) (not null, all components &gt;0, unaffected)</dd>
+<dd><code>inertia</code> - the desired local inertia vector for mass=1 and
+ scale=(1,1,1) (not null, all components &gt;0, unaffected)</dd>
 </dl>
 </section>
 </li>
@@ -266,7 +269,7 @@ loadScripts(document, 'script');</script>
 <dd><code>c</code> - the desired unscaled half extent on the local Z axis (in shape
  units, &gt;0)</dd>
 <dd><code>inertiaFactor</code> - 0.2 for a uniform-density solid, 1/3 for a hollow
- shell (&ge;0, &le;1)</dd>
+ shell, 0 for a point mass centered in a force field (&ge;0, &le;1)</dd>
 <dt>Returns:</dt>
 <dd>a new instance</dd>
 </dl>
@@ -279,7 +282,7 @@ loadScripts(document, 'script');</script>
  float&nbsp;dirY,
  float&nbsp;dirZ)</span></div>
 <div class="block">Locate the ellipsoid's supporting vertex for the specified direction,
- ignoring collision margin.
+ excluding collision margin.
  <p>
  This method is invoked by native code.</div>
 <dl class="notes">
@@ -302,7 +305,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="maxRadius()">
 <h3>maxRadius</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">maxRadius</span>()</div>
-<div class="block">Calculate how far the scaled shape extends from its center.</div>
+<div class="block">Calculate how far the scaled shape extends from its center, excluding
+ margin.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="CollisionShape.html#maxRadius()">maxRadius</a></code>&nbsp;in class&nbsp;<code><a href="CollisionShape.html" title="class in com.jme3.bullet.collision.shapes">CollisionShape</a></code></dd>
