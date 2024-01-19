@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 
 /**
- * The abstract base class for custom collision shapes defined in terms of their
+ * An abstract base class for custom collision shapes defined in terms of their
  * supporting vertices, based on Bullet's {@code btConvexInternalShape}.
  *
  * @author Stephen Gold sgold@sonic.net
