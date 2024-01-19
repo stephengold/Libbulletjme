@@ -16,17 +16,17 @@ extern "C" {
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
  * Method:    getTriangles
- * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)Z
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
   (JNIEnv *, jclass, jlong, jint, jobject);
 
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
  * Method:    getVertices
- * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)Z
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
   (JNIEnv *, jclass, jlong, jint, jobject);
 
 #ifdef __cplusplus

@@ -78,13 +78,13 @@ public:
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
  * Method:    getTriangles
- * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)Z
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
 (JNIEnv *pEnv, jclass, jlong shapeId, jint resolution, jobject callback) {
     const btCollisionShape * const
             pShape = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     if (pShape->isConcave()) {
         const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
@@ -120,32 +120,34 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getTriangles
             pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertexA.getX(),
                     vertexA.getY(), vertexA.getZ());
-            EXCEPTION_CHK(pEnv,);
+            EXCEPTION_CHK(pEnv, JNI_FALSE);
 
             pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertexB.getX(),
                     vertexB.getY(), vertexB.getZ());
-            EXCEPTION_CHK(pEnv,);
+            EXCEPTION_CHK(pEnv, JNI_FALSE);
 
             pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertexC.getX(),
                     vertexC.getY(), vertexC.getZ());
-            EXCEPTION_CHK(pEnv,);
+            EXCEPTION_CHK(pEnv, JNI_FALSE);
         }
         delete pHull; //dance027
     }
+
+    return JNI_TRUE; // success!
 }
 
 /*
  * Class:     com_jme3_bullet_util_DebugShapeFactory
  * Method:    getVertices
- * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)V
+ * Signature: (JILcom/jme3/bullet/util/DebugMeshCallback;)Z
  */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
 (JNIEnv *pEnv, jclass, jlong shapeId, jint resolution, jobject callback) {
     const btCollisionShape * const
             pShape = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
 
     if (pShape->isConcave()) {
         const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
@@ -175,8 +177,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_DebugShapeFactory_getVertices
             pEnv->CallVoidMethod(callback,
                     jmeClasses::DebugMeshCallback_addVector, vertex.getX(),
                     vertex.getY(), vertex.getZ());
-            EXCEPTION_CHK(pEnv,);
+            EXCEPTION_CHK(pEnv, JNI_FALSE);
         }
         delete pHull; //dance026
     }
+
+    return JNI_TRUE; // success!
 }
