@@ -128,11 +128,12 @@ loadScripts(document, 'script');</script>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table two-column-summary">
-<div class="table-header col-first">Constructor</div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier</div>
+<div class="table-header col-second">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f)" class="member-name-link">CustomConvexShape</a><wbr>(<a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents,
- <a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;inertia)</code></div>
+<div class="col-first even-row-color"><code>protected </code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f)" class="member-name-link">CustomConvexShape</a><wbr>(<a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Instantiate a custom collision shape with the specified extent and
  inertia.</div>
@@ -145,7 +146,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab3" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab3', 3)" class="table-tab">Abstract Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
@@ -158,6 +159,13 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Locate the shape's supporting vertex for the specified direction,
  excluding collision margin.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScaledInertia(float,float,float)" class="member-name-link">setScaledInertia</a><wbr>(float&nbsp;ix,
+ float&nbsp;iy,
+ float&nbsp;iz)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Alter the scaled rotational inertia.</div>
 </div>
 </div>
 </div>
@@ -208,19 +216,16 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.jme3.math.Vector3f,com.jme3.math.Vector3f)">
+<section class="detail" id="&lt;init&gt;(com.jme3.math.Vector3f)">
 <h3>CustomConvexShape</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CustomConvexShape</span><wbr><span class="parameters">(<a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents,
- <a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;inertia)</span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">CustomConvexShape</span><wbr><span class="parameters">(<a href="../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;halfExtents)</span></div>
 <div class="block">Instantiate a custom collision shape with the specified extent and
  inertia.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>halfExtents</code> - the desired half extents on each local axis, for
- scale=(1,1,1) and margin=0 (unaffected), or <code>null</code> to calculate
- AABBs using the supporting vertices</dd>
-<dd><code>inertia</code> - the desired local inertia vector for a shape with mass=1
- and scale=(1,1,1) (not null, all components &gt;0, unaffected)</dd>
+ scale=(1,1,1) and margin=0 (all components &gt;0, unaffected), or
+ <code>null</code> to calculate AABBs using the supporting vertices</dd>
 </dl>
 </section>
 </li>
@@ -253,6 +258,22 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>the location of the supporting vertex (in scaled shape
  coordinates)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setScaledInertia(float,float,float)">
+<h3>setScaledInertia</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setScaledInertia</span><wbr><span class="parameters">(float&nbsp;ix,
+ float&nbsp;iy,
+ float&nbsp;iz)</span></div>
+<div class="block">Alter the scaled rotational inertia. Typically invoked during
+ instantiation or after a change of scale.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>ix</code> - the desired X-axis rotational inertia for mass=1 (&gt;0)</dd>
+<dd><code>iy</code> - the desired Y-axis rotational inertia for mass=1 (&gt;0)</dd>
+<dd><code>iz</code> - the desired Z-axis rotational inertia for mass=1 (&gt;0)</dd>
 </dl>
 </section>
 </li>
