@@ -4,8 +4,8 @@
 
 + Changed the Java API:
   + Privatized the `PhysicsCollisionObject.setIgnoreCollisionCheck()` method.
-  + Simplified the signature of `VectorSet.addAll()`
-  + Deleted 14 previouly deprecated methods:
+  + Simplified the signature of `VectorSet.addAll()`.
+  + Deleted 14 previously deprecated methods:
     + `MyMath.isFinite(Vec3d)`
     + `PhysicsCollisionObject.listIgnoredIds()`
     + `PhysicsCollisionObject.setIgnoreList()`
@@ -21,17 +21,17 @@
     + `Transform.transformVector()`
     + `Transform.transformInverseVector()`
 + Added return values to 2 native methods:
-  + `DebugShapeFactor.getTriangles()`
-  + `DebugShapeFactor.getVertices()`
+  + `DebugShapeFactory.getTriangles()`
+  + `DebugShapeFactory.getVertices()`
 
 + Added the `CustomConvexShape` class.
-+ Added 2 methods to pre-existing classes:
++ Added 2 methods to the pre-existing `CompoundMesh` class:
   + `CompoundMesh.countSubmeshes()`
   + `CompoundMesh.getSubmesh()`
 + Added runtime checks:
   + in the `MeshCollisionShape` class, for meshes that are too complex
   + in the `DebugShapeFactory` class, for `buildHull()` failures
-+ Upgraded Node.js to v20.11.0
++ Upgraded Node.js to v20.11.0 .
 
 ## Version 18.6.1 released on 4 December 2023
 
@@ -833,8 +833,8 @@ Added getters for the total force and torque on a rigid body.
 
 ## Version 6.1.0 released on 18 May 2020
 
- + bugfix: crash caused by `ShortBuffer` containing index > 32767
- + bugfix: `CompoundCollisionShape.correctAxes()` gave incorrect results for
+ + Bugfix: crash caused by `ShortBuffer` containing index > 32767
+ + Bugfix: `CompoundCollisionShape.correctAxes()` gave incorrect results for
    some shapes
  + Plugged native memory leaks found in:
    + `Java_vhacd_VHACD_compute()`
