@@ -131,8 +131,8 @@ abstract public class CustomConvexShape extends ConvexShape {
      * @return the location on the shape's surface with the specified normal (in
      * scaled shape coordinates, must lie on or within the shape's bounding box)
      */
-    abstract protected Vector3f locateSupport(
-            float dirX, float dirY, float dirZ);
+    abstract protected Vector3f
+            locateSupport(float dirX, float dirY, float dirZ);
 
     /**
      * Alter the scaled rotational inertia. Typically invoked during
