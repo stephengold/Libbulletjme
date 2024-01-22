@@ -22,7 +22,7 @@ For each desktop platform, 4 native libraries are distributed:
 + a debug build using single-precision arithmetic
 + a debug build using double-precision arithmetic
 
-In addition, multi-threaded native libraries
+In addition, multithreaded native libraries
 are provided for x86_64 architectures running Windows or Linux.
 
 Libbulletjme is used in
