@@ -48,24 +48,21 @@ public:
     /*
      * constructors:
      */
-    jmeConvexShape(
-        JNIEnv *pEnv, jweak javaShapeRef, const btVector3& descaledInertia)
+    jmeConvexShape(JNIEnv *pEnv, jweak javaShapeRef)
     : btConvexInternalShape() {
         m_useSlowAabb = true;
 
-        m_descaledInertia = descaledInertia;
         m_javaShapeRef = javaShapeRef;
         m_pCreateEnv = pEnv;
         m_shapeType = CUSTOM_CONVEX_SHAPE_TYPE;
     }
 
     jmeConvexShape(JNIEnv *pEnv, jweak javaShapeRef,
-        const btVector3& descaledHalfExtents, const btVector3& descaledInertia)
+        const btVector3& descaledHalfExtents)
     : btConvexInternalShape() {
         m_useSlowAabb = false;
         m_descaledHalfExtents = descaledHalfExtents;
 
-        m_descaledInertia = descaledInertia;
         m_javaShapeRef = javaShapeRef;
         m_pCreateEnv = pEnv;
         m_shapeType = CUSTOM_CONVEX_SHAPE_TYPE;
@@ -85,15 +82,7 @@ public:
 
     void
     calculateLocalInertia(btScalar mass, btVector3& storeResult) const {
-        btVector3 scaleVector = getLocalScaling();
-        btScalar x = scaleVector.x();
-        btScalar y = scaleVector.y();
-        btScalar z = scaleVector.z();
-        btScalar xx = x * x;
-        btScalar yy = y * y;
-        btScalar zz = z * z;
-        btVector3 factor(yy + zz, zz + xx, xx + yy);
-        storeResult = m_descaledInertia * mass * factor / 2;
+        storeResult = m_scaledInertia;
     }
 
     void
@@ -146,6 +135,11 @@ public:
         return result;
     }
 
+    void
+    setScaledInertia(btScalar x, btScalar y, btScalar z) {
+        m_scaledInertia.setValue(x, y, z);
+    }
+
 private:
     /*
      * true to calculate bounding boxes using supporting vertices,
@@ -158,9 +152,9 @@ private:
      */
     btVector3 m_descaledHalfExtents;
     /*
-     * moment of (rotational) inertia on each local axis for scale=(1,1,1):
+     * (rotational) inertia around each local axis, for mass=1:
      */
-    btVector3 m_descaledInertia;
+    btVector3 m_scaledInertia;
     /*
      * interface pointer for the thread that created this collision shape:
      */
@@ -174,34 +168,43 @@ private:
 /*
  * Class:     com_jme3_bullet_collision_shapes_CustomConvexShape
  * Method:    createShapeNative
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)J
+ * Signature: (Lcom/jme3/math/Vector3f;)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CustomConvexShape_createShapeNative
-(JNIEnv *pEnv, jobject javaShape, jobject heVector, jobject inertiaVector) {
+(JNIEnv *pEnv, jobject javaShape, jobject heVector) {
     jmeClasses::initJavaClasses(pEnv);
-
-    NULL_CHK(pEnv, inertiaVector, "The inertia vector does not exist.", 0);
-
-    btVector3 descaledInertia;
-    jmeBulletUtil::convert(pEnv, inertiaVector, &descaledInertia);
-    EXCEPTION_CHK(pEnv, 0);
 
     jweak javaShapeRef = pEnv->NewWeakGlobalRef(javaShape); // TODO leak
     EXCEPTION_CHK(pEnv, 0);
 
     jmeConvexShape *pShape;
     if (heVector == NULL) {
-        pShape = new jmeConvexShape(
-            pEnv, javaShapeRef, descaledInertia); //dance016
+        pShape = new jmeConvexShape(pEnv, javaShapeRef); //dance016
 
     } else {
         btVector3 descaledHalfExtents;
         jmeBulletUtil::convert(pEnv, heVector, &descaledHalfExtents);
         EXCEPTION_CHK(pEnv, 0);
 
-        pShape = new jmeConvexShape(pEnv, javaShapeRef,
-            descaledHalfExtents, descaledInertia); //dance016
+        pShape = new jmeConvexShape(
+                pEnv, javaShapeRef, descaledHalfExtents); //dance016
     }
 
     return reinterpret_cast<jlong> (pShape);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CustomConvexShape
+ * Method:    setScaledInertia
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CustomConvexShape_setScaledInertia
+(JNIEnv *pEnv, jclass, jlong shapeId, jfloat ix, jfloat iy, jfloat iz) {
+    jmeConvexShape *pShape = reinterpret_cast<jmeConvexShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The jmeConvexShape does not exist.",);
+
+    btScalar x = ix;
+    btScalar y = iy;
+    btScalar z = iz;
+    pShape->setScaledInertia(x, y, z);
 }

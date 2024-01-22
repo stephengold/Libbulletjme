@@ -377,8 +377,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(504, buf.capacity());
 
         // custom convex
-        CustomConvexShape custom = new CustomConvexShape(
-                null, new Vector3f(1f, 1f, 1f)) {
+        CustomConvexShape custom = new CustomConvexShape(null) {
             @Override
             protected Vector3f locateSupport(
                     float dirX, float dirY, float dirZ) {
