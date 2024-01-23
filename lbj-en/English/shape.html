@@ -450,6 +450,26 @@ objects are never detected.</p>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Furthermore, you can develop custom collision shapes in Java by extending the
+abstract <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CustomConvexShape.html"><code>CustomConvexShape</code></a> class.</p>
+</div>
+<table class="tableblock frame-all grid-none stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CustomConvexShape.html"><code>CustomConvexShape</code></a></p>
+<p class="tableblock">&rarr; convex<br>
+&rarr; positive margin<br>
+&rarr; imprecise<br>
+&rarr; subclass determines scalability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="_images/CustomConvex.png" alt="CustomConvex" height="160"></span></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -960,7 +980,7 @@ CollisionShape shape
 <div class="paragraph">
 <p>The V-HACD algorithm is costly to run, but for many applications it can
 be run in advance and the output stored until needed.
-During simulation, the resulting shape will usually be much far efficient
+During simulation, the resulting shape will usually be much more efficient
 than a GImpact shape.</p>
 </div>
 </div>
