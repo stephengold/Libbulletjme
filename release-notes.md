@@ -3,7 +3,7 @@
 ## Version 20.0.0 released on 22 January 2024
 
 + Changed both APIs (both Java and native) of the `CustomConvexShape` class
-  to better support scalable of custom shapes.
+  to better support scaling of custom shapes.
 + Added a 3-argument constructor to the `CustomConvexShape` class.
 
 ## Version 19.0.0 released on 19 January 2024
