@@ -450,9 +450,14 @@ objects are never detected.</p>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_custom_shape_classes"><a class="anchor" href="#_custom_shape_classes"></a>Custom shape classes</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Furthermore, you can develop custom collision shapes in Java by extending the
-abstract <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CustomConvexShape.html"><code>CustomConvexShape</code></a> class.</p>
+<p>Furthermore, you can define new shape classes by extending the
+abstract <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CustomConvexShape.html"><code>CustomConvexShape</code></a> class:</p>
 </div>
 <table class="tableblock frame-all grid-none stretch">
 <colgroup>
@@ -465,11 +470,15 @@ abstract <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/
 <p class="tableblock">&rarr; convex<br>
 &rarr; positive margin<br>
 &rarr; imprecise<br>
-&rarr; subclass determines scalability</p></td>
+&rarr; each subclass determines its scalability</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="_images/CustomConvex.png" alt="CustomConvex" height="160"></span></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Examples of this are found in
+<a href="https://github.com/stephengold/LbjExamples/tree/master/apps/src/main/java/com/github/stephengold/shapes/custom">the <code>com.github.stephengold.shapes.custom</code> package</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
