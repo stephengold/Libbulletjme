@@ -63,7 +63,7 @@ public:
 
     // Use the following method in place of onGround() to solve issue #18.
     bool isOnGround() const {
-        return !m_wasJumping;
+        return !m_wasJumping && onGround();
     }
 
     bool isUsingGhostSweepTest() const {
