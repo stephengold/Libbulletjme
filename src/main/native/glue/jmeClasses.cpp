@@ -183,11 +183,10 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
              * Invoke NativeLibrary.reinitialization()
              * in order to perform incremental cleanup.
              */
-            pEnv->CallStaticVoidMethod(NativeLibrary_Class,
-                    NativeLibrary_reinitialization);
+            pEnv->CallStaticVoidMethod(
+                    NativeLibrary_Class, NativeLibrary_reinitialization);
             // no check for exceptions!
         }
-
         return;
     }
 
@@ -203,12 +202,15 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 #ifdef BT_USE_DOUBLE_PRECISION
         printf("Dp_");
 #endif
+
 #if BT_THREADSAFE
         printf("Mt_");
 #endif
+
 #ifdef BT_ENABLE_PROFILE
         printf("Quickprof_");
 #endif
+
         printf("Libbulletjme version %s initializing\n", LIBBULLETJME_VERSION);
         fflush(stdout);
     }
@@ -410,13 +412,10 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass transform = pEnv->FindClass("com/jme3/math/Transform");
     EXCEPTION_CHK(pEnv,);
-
     GLOBAL_METHOD(Transform_rotation,
             transform, "getRotation", "()Lcom/jme3/math/Quaternion;");
-
     GLOBAL_METHOD(Transform_scale,
             transform, "getScale", "()Lcom/jme3/math/Vector3f;");
-
     GLOBAL_METHOD(Transform_translation,
             transform, "getTranslation", "()Lcom/jme3/math/Vector3f;");
 
