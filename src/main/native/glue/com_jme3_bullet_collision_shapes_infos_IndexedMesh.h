@@ -63,6 +63,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_finalizeNative
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    triangleIndexStride
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_triangleIndexStride
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif

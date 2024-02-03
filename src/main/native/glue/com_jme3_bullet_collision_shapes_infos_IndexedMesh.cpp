@@ -184,3 +184,17 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_f
 
     delete pMesh; //dance020
 }
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    triangleIndexStride
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_triangleIndexStride
+(JNIEnv *pEnv, jclass, jlong meshId) {
+    btIndexedMesh * const pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
+    NULL_CHK(pEnv, pMesh, "The btIndexedMesh does not exist.", 0);
+
+    jint result = pMesh->m_triangleIndexStride;
+    return result;
+}

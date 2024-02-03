@@ -497,4 +497,6 @@ public class IndexedMesh extends NativePhysicsObject {
             int vertexStride, int indexStride);
 
     native private static void finalizeNative(long meshId);
+
+    native private static int triangleIndexStride(long meshId);
 }
