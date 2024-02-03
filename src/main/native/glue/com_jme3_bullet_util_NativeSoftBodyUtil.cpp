@@ -97,7 +97,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
     NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
     EXCEPTION_CHK(pEnv,);
 
-    const jlong mapCapacity = pEnv->GetDirectBufferCapacity(indexMap);
+    const jlong mapCapacityInts = pEnv->GetDirectBufferCapacity(indexMap);
     EXCEPTION_CHK(pEnv,);
     const btVector3 offset
             = (meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0));
@@ -109,7 +109,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
         NULL_CHK(pEnv, pNormals, "The normals buffer is not direct.",);
         EXCEPTION_CHK(pEnv,);
 
-        for (int i = 0; i < mapCapacity; ++i) {
+        for (int i = 0; i < mapCapacityInts; ++i) {
             const btSoftBody::Node& n = pBody->m_nodes[pJme2bulletMap[i]];
             pPositions[i * 3] = n.m_x.getX() - offset.getX();
             pPositions[i * 3 + 1] = n.m_x.getY() - offset.getY();
@@ -120,7 +120,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
             pNormals[i * 3 + 2] = n.m_n.getZ();
         }
     } else {
-        for (int i = 0; i < mapCapacity; ++i) {
+        for (int i = 0; i < mapCapacityInts; ++i) {
             const btSoftBody::Node& n = pBody->m_nodes[pJme2bulletMap[i]];
             pPositions[i * 3] = n.m_x.getX() - offset.getX();
             pPositions[i * 3 + 1] = n.m_x.getY() - offset.getY();

@@ -83,7 +83,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     EXCEPTION_CHK(pEnv,);
 
     NULL_CHK(pEnv, pBuffer, "The mass buffer is not direct.",);
-    const jlong capacity = pEnv->GetDirectBufferCapacity(massBuffer);
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
     EXCEPTION_CHK(pEnv,);
 
     const int numChildren = pShape->getNumChildShapes();
@@ -91,7 +91,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     btVector3 inertia;
 
     btScalar *pMasses = new btScalar[numChildren]; //dance022
-    for (int i = 0; i < numChildren && i < capacity; ++i) {
+    for (int i = 0; i < numChildren && i < capacityFloats; ++i) {
         pMasses[i] = pBuffer[i];
     }
     pShape->calculatePrincipalAxisTransform(pMasses, principal, inertia);

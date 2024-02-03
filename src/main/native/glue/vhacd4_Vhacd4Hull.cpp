@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023 jMonkeyEngine
+ * Copyright (c) 2020-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,12 +74,12 @@ JNIEXPORT void JNICALL Java_vhacd4_Vhacd4Hull_getPositions
     NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
     EXCEPTION_CHK(pEnv,);
 
-    const jlong capacity = pEnv->GetDirectBufferCapacity(storeBuffer);
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
     EXCEPTION_CHK(pEnv,);
     const uint32_t numPoints = pHull->m_points.size();
     for (uint32_t i = 0; i < numPoints; ++i) {
         const uint32_t bp = 3 * i;
-        if (bp + 2 >= capacity)
+        if (bp + 2 >= capacityFloats)
             break;
         pPositions[bp] = pHull->m_points[i].mX;
         pPositions[bp + 1] = pHull->m_points[i].mY;

@@ -1072,10 +1072,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMasses
     NULL_CHK(pEnv, pMasses, "The mass buffer is not direct.",);
     EXCEPTION_CHK(pEnv,);
 
-    const jlong capacity = pEnv->GetDirectBufferCapacity(massBuffer);
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
     EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
-    for (int i = 0; i < numNodes && i < capacity; ++i) {
+    for (int i = 0; i < numNodes && i < capacityFloats; ++i) {
         pMasses[i] = pBody->getMass(i);
     }
 }
@@ -1728,10 +1728,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMasses
     NULL_CHK(pEnv, pBuffer, "The mass buffer is not direct.",);
     EXCEPTION_CHK(pEnv,);
 
-    const jlong capacity = pEnv->GetDirectBufferCapacity(massBuffer);
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
     EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
-    for (int i = 0; i < numNodes && i < capacity; ++i) {
+    for (int i = 0; i < numNodes && i < capacityFloats; ++i) {
         pBody->setMass(i, pBuffer[i]);
     }
 }
@@ -1772,11 +1772,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNormals
     NULL_CHK(pEnv, pBuffer, "The normal buffer is not direct.",);
     EXCEPTION_CHK(pEnv,);
 
-    const jlong capacity = pEnv->GetDirectBufferCapacity(normalBuffer) - 2;
+    const jlong capacityFloats
+            = pEnv->GetDirectBufferCapacity(normalBuffer) - 2;
     EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0, offset = 0;
-            nodeIndex < numNodes && offset < capacity;) {
+            nodeIndex < numNodes && offset < capacityFloats;) {
         btScalar x = pBuffer[offset++];
         btScalar y = pBuffer[offset++];
         btScalar z = pBuffer[offset++];
@@ -1916,11 +1917,12 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocitie
     NULL_CHK(pEnv, pBuffer, "The velocity buffer is not direct.",);
     EXCEPTION_CHK(pEnv,);
 
-    const jlong capacity = pEnv->GetDirectBufferCapacity(velocityBuffer) - 2;
+    const jlong capacityFloats
+            = pEnv->GetDirectBufferCapacity(velocityBuffer) - 2;
     EXCEPTION_CHK(pEnv,);
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0, offset = 0;
-            nodeIndex < numNodes && offset < capacity;) {
+            nodeIndex < numNodes && offset < capacityFloats;) {
         btScalar x = pBuffer[offset++];
         btScalar y = pBuffer[offset++];
         btScalar z = pBuffer[offset++];
