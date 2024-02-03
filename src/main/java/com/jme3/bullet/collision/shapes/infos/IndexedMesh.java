@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023 jMonkeyEngine
+ * Copyright (c) 2019-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -479,6 +479,10 @@ public class IndexedMesh extends NativePhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static int countTriangles(long meshId);
+
+    native private static int countVertices(long meshId);
 
     native private static long createByte(ByteBuffer indices,
             FloatBuffer vertexPositions, int numTriangles, int numVertices,

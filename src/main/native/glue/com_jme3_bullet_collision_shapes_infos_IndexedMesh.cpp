@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 jMonkeyEngine
+ * Copyright (c) 2019-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,6 +35,34 @@
  */
 #include "com_jme3_bullet_collision_shapes_infos_IndexedMesh.h"
 #include "jmeBulletUtil.h"
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    countTriangles
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_countTriangles
+(JNIEnv *pEnv, jclass, jlong meshId) {
+    btIndexedMesh * const pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
+    NULL_CHK(pEnv, pMesh, "The btIndexedMesh does not exist.", 0);
+
+    jint result = pMesh->m_numTriangles;
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    countVertices
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_countVertices
+(JNIEnv *pEnv, jclass, jlong meshId) {
+    btIndexedMesh * const pMesh = reinterpret_cast<btIndexedMesh *> (meshId);
+    NULL_CHK(pEnv, pMesh, "The btIndexedMesh does not exist.", 0);
+
+    jint result = pMesh->m_numVertices;
+    return result;
+}
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
