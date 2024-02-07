@@ -204,7 +204,7 @@ final public class DebugShapeFactory {
      * shape's scale and margin are taken into account, but not its debug-mesh
      * resolution.
      *
-     * @param shape (not null, convex, unaffected)
+     * @param shape the convex shape to analyze (not null, unaffected)
      * @param meshResolution (0=low, 1=high)
      * @return the scaled volume (in physics-space units cubed, &ge;0)
      */
