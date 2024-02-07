@@ -981,9 +981,23 @@ compound of hull shapes:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">VHACDParameters parms = new VHACDParameters();
-CollisionShape shape
-        = CollisionShapeFactory.createVhacdShape(modelRoot, parms, null);</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// using VHACD version 4:
+Vhacd4Parameters v4Parms = new Vhacd4Parameters();
+List&lt;Vhacd4Hull&gt; vhacd4Hulls = Vhacd4.compute(meshPositions, meshIndices, v4Parms);
+CompoundCollisionShape compound = new CompoundCollisionShape();
+for (Vhacd4Hull vhacdHull : vhacd4Hulls) {
+    HullCollisionShape hullShape = new HullCollisionShape(vhacdHull);
+    compound.addChildShape(hullShape);
+}
+
+// or alternatively, using classic VHACD:
+VHACDParameters parms = new VHACDParameters();
+List&lt;VHACDHull&gt; vhacdHulls = VHACD.compute(meshPositions, meshIndices, parms);
+CompoundCollisionShape compound2 = new CompoundCollisionShape();
+for (VHACDHull vhacdHull : vhacdHulls) {
+    HullCollisionShape hullShape = new HullCollisionShape(vhacdHull);
+    compound2.addChildShape(hullShape);
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
