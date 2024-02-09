@@ -198,9 +198,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     btAssert(meshResolution == 0 || meshResolution == 1);
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
-    assert(sizeof(jint) == 4);
+    btAssert(sizeof(jint) == 4);
     pMesh->m_vertexType = PHY_FLOAT;
-    assert(sizeof(float) == 4);
+    btAssert(sizeof(float) == 4);
     pMesh->m_vertexStride = 12;
     pMesh->m_triangleIndexStride = 12;
     pMesh->m_ownArrays = true;
