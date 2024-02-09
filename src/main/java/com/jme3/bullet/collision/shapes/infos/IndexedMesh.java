@@ -35,6 +35,7 @@ import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.math.Plane;
+import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
 import com.jme3.util.BufferUtils;
@@ -47,7 +48,9 @@ import java.util.logging.Logger;
 import jme3utilities.Validate;
 import jme3utilities.math.DistinctVectorValues;
 import jme3utilities.math.MyBuffer;
+import jme3utilities.math.MyMath;
 import jme3utilities.math.MyVector3f;
+import jme3utilities.math.MyVolume;
 
 /**
  * An indexed triangle mesh based on Bullet's {@code btIndexedMesh}. Immutable.
@@ -272,6 +275,28 @@ public class IndexedMesh extends NativePhysicsObject {
     }
 
     /**
+     * Copy the unindexed triangle vertices to a new buffer.
+     *
+     * @return a new, direct, unflipped buffer
+     */
+    public FloatBuffer copyTriangles() {
+        int numIndices = numTriangles * vpt;
+        int numFloats = numIndices * numAxes;
+        FloatBuffer result = BufferUtils.createFloatBuffer(numFloats);
+
+        for (int ii = 0; ii < numIndices; ++ii) {
+            int startOffset = indices.get(ii) * numAxes;
+            float x = vertexPositions.get(startOffset);
+            float y = vertexPositions.get(startOffset + 1);
+            float z = vertexPositions.get(startOffset + 2);
+            result.put(x).put(y).put(z);
+        }
+        assert result.position() == result.capacity();
+
+        return result;
+    }
+
+    /**
      * Copy the vertex positions to a new buffer.
      *
      * @return a new, direct, unflipped buffer
@@ -305,6 +330,31 @@ public class IndexedMesh extends NativePhysicsObject {
     public int countVertices() {
         assert numVertices >= 0 : numVertices;
         return numVertices;
+    }
+
+    /**
+     * Calculate how far the mesh extends from some origin.
+     *
+     * @param meshToWorld the transform to apply to vertex locations (not null,
+     * unaffected)
+     * @return the maximum length of the transformed vectors (&ge;0)
+     */
+    public float maxDistance(Transform meshToWorld) {
+        Validate.nonNull(meshToWorld, "meshToWorld");
+
+        double maxSquaredDistance = 0.0;
+        Vector3f tmpVector = new Vector3f(); // garbage
+        for (int i = 0; i < numVertices; ++i) {
+            MyBuffer.get(vertexPositions, numAxes * i, tmpVector);
+            MyMath.transform(meshToWorld, tmpVector, tmpVector);
+            double lengthSquared = MyVector3f.lengthSquared(tmpVector);
+            if (lengthSquared > maxSquaredDistance) {
+                maxSquaredDistance = lengthSquared;
+            }
+        }
+
+        float result = (float) Math.sqrt(maxSquaredDistance);
+        return result;
     }
 
     /**
@@ -367,6 +417,31 @@ public class IndexedMesh extends NativePhysicsObject {
             }
         }
 
+        return result;
+    }
+
+    /**
+     * Calculate volume of the mesh, assuming it's both closed and convex.
+     *
+     * @return the volume (in cubic mesh units, &ge;0)
+     */
+    public float volumeConvex() {
+        double total = 0.0;
+        if (numTriangles > 0) {
+            Vector3f v0 = new Vector3f();
+            MyBuffer.get(vertexPositions, 0, v0);
+
+            Triangle tri = new Triangle();
+            for (int triIndex = 0; triIndex < numTriangles; ++triIndex) {
+                copyTriangle(triIndex, tri);
+                double tetraVolume = MyVolume.tetrahedronVolume(
+                        tri.get1(), tri.get2(), tri.get3(), v0);
+                total += tetraVolume;
+            }
+        }
+
+        float result = (float) total;
+        assert result >= 0f : result;
         return result;
     }
     // *************************************************************************
