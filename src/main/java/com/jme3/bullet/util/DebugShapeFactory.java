@@ -36,6 +36,7 @@ import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.infos.ChildCollisionShape;
+import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.math.Plane;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
@@ -112,15 +113,8 @@ final public class DebugShapeFactory {
             result = createPlaneVertices((PlaneCollisionShape) shape, halfExt);
 
         } else {
-            long shapeId = shape.nativeId();
-            DebugMeshCallback callback = new DebugMeshCallback();
-            boolean success = getVertices(shapeId, meshResolution, callback);
-            if (!success) {
-                String shapeType = shape.getClass().getSimpleName();
-                throw new RuntimeException(
-                        "getVertices() failed, shapeType = " + shapeType);
-            }
-            result = callback.getVertices();
+            IndexedMesh debugMesh = new IndexedMesh(shape, meshResolution);
+            result = debugMesh.copyVertexPositions();
         }
 
         assert (result.capacity() % numAxes) == 0 : result.capacity();
@@ -152,15 +146,8 @@ final public class DebugShapeFactory {
             result = createPlaneTriangles((PlaneCollisionShape) shape, halfExt);
 
         } else {
-            long shapeId = shape.nativeId();
-            DebugMeshCallback callback = new DebugMeshCallback();
-            boolean success = getTriangles(shapeId, meshResolution, callback);
-            if (!success) {
-                String shapeType = shape.getClass().getSimpleName();
-                throw new RuntimeException(
-                        "getTriangles() failed, shapeType = " + shapeType);
-            }
-            result = callback.getVertices();
+            IndexedMesh debugMesh = new IndexedMesh(shape, meshResolution);
+            result = debugMesh.copyTriangles();
         }
 
         assert (result.capacity() % 9) == 0 : result.capacity();
@@ -188,15 +175,8 @@ final public class DebugShapeFactory {
         Validate.inRange(meshResolution, "mesh resolution", lowResolution,
                 highResolution);
 
-        long shapeId = shape.nativeId();
-        DebugMeshCallback callback = new DebugMeshCallback();
-        boolean success = getVertices(shapeId, meshResolution, callback);
-        if (!success) {
-            String shapeType = shape.getClass().getSimpleName();
-            throw new RuntimeException(
-                    "getVertices() failed, shapeType = " + shapeType);
-        }
-        float result = callback.maxDistance(transform);
+        IndexedMesh debugMesh = new IndexedMesh(shape, meshResolution);
+        float result = debugMesh.maxDistance(transform);
 
         return result;
     }
@@ -211,18 +191,12 @@ final public class DebugShapeFactory {
      * @return the scaled volume (in physics-space units cubed, &ge;0)
      */
     public static float volumeConvex(ConvexShape shape, int meshResolution) {
+        Validate.nonNull(shape, "shape");
         Validate.inRange(meshResolution, "mesh resolution", lowResolution,
                 highResolution);
 
-        long shapeId = shape.nativeId();
-        DebugMeshCallback callback = new DebugMeshCallback();
-        boolean success = getTriangles(shapeId, meshResolution, callback);
-        if (!success) {
-            String shapeType = shape.getClass().getSimpleName();
-            throw new RuntimeException(
-                    "getTriangles() failed, shapeType = " + shapeType);
-        }
-        float volume = callback.volumeConvex();
+        IndexedMesh debugMesh = new IndexedMesh(shape, meshResolution);
+        float volume = debugMesh.volumeConvex();
 
         assert volume >= 0f : volume;
         return volume;
