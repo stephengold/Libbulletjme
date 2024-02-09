@@ -68,7 +68,6 @@ public:
         jstring arg4 = pEnv->NewStringUTF(stageName);
         EXCEPTION_CHK(pEnv,);
 
-
         jstring arg5 = pEnv->NewStringUTF(operationName);
         EXCEPTION_CHK(pEnv,);
 
@@ -145,8 +144,8 @@ JNIEXPORT void JNICALL Java_vhacd4_Vhacd4_compute
     IVHACD * const pIvhacd = CreateVHACD();
     const uint32_t nPoints = capacityFloats / 3;
     const uint32_t nTriangles = capacityInts / 3;
-    const bool success = pIvhacd->Compute(pPositions, nPoints, pTriangles,
-            nTriangles, *pParams);
+    const bool success = pIvhacd->Compute(
+            pPositions, nPoints, pTriangles, nTriangles, *pParams);
 
     if (success) {
         const uint32_t n_hulls = pIvhacd->GetNConvexHulls();
@@ -157,8 +156,8 @@ JNIEXPORT void JNICALL Java_vhacd4_Vhacd4_compute
             pIvhacd->GetConvexHull(i, *pHull);
             const jlong hullId = reinterpret_cast<jlong> (pHull);
 
-            pEnv->CallStaticVoidMethod(jmeClasses::Vhacd4,
-                    jmeClasses::Vhacd4_addHull, hullId);
+            pEnv->CallStaticVoidMethod(
+                    jmeClasses::Vhacd4, jmeClasses::Vhacd4_addHull, hullId);
             EXCEPTION_CHK(pEnv,);
             delete pHull; //dance002
         }

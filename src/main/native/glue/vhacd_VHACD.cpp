@@ -135,8 +135,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
     IVHACD * const pIvhacd = CreateVHACD();
     const uint32_t nPoints = capacityFloats / 3;
     const uint32_t nTriangles = capacityInts / 3;
-    const bool success = pIvhacd->Compute(pPositions, nPoints, pTriangles,
-            nTriangles, *pParams);
+    const bool success = pIvhacd->Compute(
+            pPositions, nPoints, pTriangles, nTriangles, *pParams);
 
     if (success) {
         const uint32_t n_hulls = pIvhacd->GetNConvexHulls();
@@ -147,8 +147,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
             pIvhacd->GetConvexHull(i, *pHull);
             const jlong hullId = reinterpret_cast<jlong> (pHull);
 
-            pEnv->CallStaticVoidMethod(jmeClasses::Vhacd,
-                    jmeClasses::Vhacd_addHull, hullId);
+            pEnv->CallStaticVoidMethod(
+                    jmeClasses::Vhacd, jmeClasses::Vhacd_addHull, hullId);
             EXCEPTION_CHK(pEnv,);
             delete pHull; //dance002
         }
