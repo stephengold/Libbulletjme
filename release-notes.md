@@ -21,11 +21,11 @@
     + `PhysicsSpace.distributeEvents()`
     + `PhysicsSpace.removeCollisionListener()`
     + `PhysicsSpace.removeOngoingCollisionListener()`
-    + `Quaternion.multLocal(Vector3f)`
     + `Quaternion.mult(Vector3f, Vector3f)`
+    + `Quaternion.multLocal(Vector3f)`
     + `Transform.combineWithParent()`
-    + `Transform.transformVector()`
     + `Transform.transformInverseVector()`
+    + `Transform.transformVector()`
 + Added return values to 2 native methods:
   + `DebugShapeFactory.getTriangles()`
   + `DebugShapeFactory.getVertices()`
