@@ -1,5 +1,18 @@
 # Release log for the Libbulletjme project
 
+## Version 20.1.0 released on 9 February 2024
+
++ Bugfix: `CharacterController.onGround()` returns false positives after
+  stepping (not jumping) off a cliff
++ Added an `IndexMesh` constructor to efficiently generate visualization meshes
+  for collision shapes; replaced `DebugMeshCallback` with `IndexedMesh` in
+  `DebugShapeFactory`.
++ Added 3 public methods to the `IndexedMesh` class:
+  + `copyTriangles()`
+  + `maxDistance()`
+  + `volumeConvex()`
++ Improved validation of method arguments.
+
 ## Version 20.0.0 released on 22 January 2024
 
 + Changed both APIs (both Java and native) of the `CustomConvexShape` class
