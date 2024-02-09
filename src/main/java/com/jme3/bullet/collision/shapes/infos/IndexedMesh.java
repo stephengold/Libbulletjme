@@ -32,6 +32,8 @@
 package com.jme3.bullet.collision.shapes.infos;
 
 import com.jme3.bullet.NativePhysicsObject;
+import com.jme3.bullet.collision.shapes.CollisionShape;
+import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.math.Plane;
 import com.jme3.math.Triangle;
 import com.jme3.math.Vector3f;
@@ -199,6 +201,36 @@ public class IndexedMesh extends NativePhysicsObject {
         this.indexStride = vpt * intBytes;
 
         createMesh();
+    }
+
+    /**
+     * Instantiate a IndexedMesh to visualize the specified collision shape.
+     *
+     * @param shape shape to visualize (not null, not compound, unaffected)
+     * @param meshResolution (0=low, 1=high)
+     */
+    public IndexedMesh(CollisionShape shape, int meshResolution) {
+        Validate.require(
+                !(shape == null || shape instanceof CompoundCollisionShape),
+                "a non-null value, not a compound shape");
+        Validate.inRange(meshResolution, "mesh resolution", 0, 1);
+
+        long shapeId = shape.nativeId();
+        long meshId = createIntDebug(shapeId, meshResolution);
+        setNativeId(meshId);
+        logger.log(Level.FINE, "Created {0}", this);
+
+        this.numVertices = countVertices(meshId);
+        int numFloats = numVertices * numAxes;
+        this.vertexPositions = BufferUtils.createFloatBuffer(numFloats);
+        this.vertexStride = numAxes * floatBytes;
+
+        this.numTriangles = countTriangles(meshId);
+        int numIndices = numTriangles * vpt;
+        this.indices = BufferUtils.createIntBuffer(numIndices);
+        this.indexStride = vpt * intBytes;
+
+        fillBuffersInt(meshId, vertexPositions, indices);
     }
     // *************************************************************************
     // new methods exposed
