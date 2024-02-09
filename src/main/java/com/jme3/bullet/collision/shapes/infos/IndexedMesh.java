@@ -492,9 +492,14 @@ public class IndexedMesh extends NativePhysicsObject {
             FloatBuffer vertexPositions, int numTriangles, int numVertices,
             int vertexStride, int indexStride);
 
+    native private static long createIntDebug(long shapeId, int meshResolution);
+
     native private static long createShort(ShortBuffer indices,
             FloatBuffer vertexPositions, int numTriangles, int numVertices,
             int vertexStride, int indexStride);
+
+    native private static void fillBuffersInt(
+            long meshId, FloatBuffer vertexPositions, IntBuffer indices);
 
     native private static void finalizeNative(long meshId);
 

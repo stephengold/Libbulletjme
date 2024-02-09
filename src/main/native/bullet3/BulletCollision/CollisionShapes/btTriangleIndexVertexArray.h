@@ -33,6 +33,7 @@ btIndexedMesh
 	int m_triangleIndexStride;
 	int m_numVertices;
 	const unsigned char* m_vertexBase;
+	bool m_ownArrays; // stephengold added 2024-02-08
 	// Size of a vertex, in bytes
 	int m_vertexStride;
 
@@ -47,6 +48,7 @@ btIndexedMesh
 
 	btIndexedMesh()
 		: m_indexType(PHY_INTEGER),
+		  m_ownArrays(false), // stephengold added 2024-02-08
 #ifdef BT_USE_DOUBLE_PRECISION
 		  m_vertexType(PHY_DOUBLE)
 #else   // BT_USE_DOUBLE_PRECISION

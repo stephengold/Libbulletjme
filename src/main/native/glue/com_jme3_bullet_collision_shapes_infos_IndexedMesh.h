@@ -49,11 +49,27 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    createIntDebug
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createIntDebug
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
  * Method:    createShort
  * Signature: (Ljava/nio/ShortBuffer;Ljava/nio/FloatBuffer;IIII)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_createShort
   (JNIEnv *, jclass, jobject, jobject, jint, jint, jint, jint);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
+ * Method:    fillBuffersInt
+ * Signature: (JLjava/nio/FloatBuffer;Ljava/nio/IntBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_fillBuffersInt
+  (JNIEnv *, jclass, jlong, jobject, jobject);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_IndexedMesh
