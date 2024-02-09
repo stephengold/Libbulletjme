@@ -180,8 +180,10 @@ final public class DebugShapeFactory {
      */
     public static float maxDistance(
             CollisionShape shape, Transform transform, int meshResolution) {
-        assert !(shape instanceof CompoundCollisionShape);
-        assert !(shape instanceof PlaneCollisionShape);
+        Validate.require(
+                !(shape == null || shape instanceof CompoundCollisionShape
+                || shape instanceof PlaneCollisionShape),
+                "a non-null value, neither a compound nor a plane shape");
         Validate.nonNull(transform, "transform");
         Validate.inRange(meshResolution, "mesh resolution", lowResolution,
                 highResolution);
