@@ -10,7 +10,7 @@ jobs:
   include:
 
     # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64:
-    - dist: bionic
+    - dist: trusty
       language: android
       android:
         components:
@@ -29,6 +29,8 @@ after_failure:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+before_deploy:
+  - gem update --system 2.5.0
 cache:
   directories:
     - $HOME/.gradle/caches/
