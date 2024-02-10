@@ -17,7 +17,6 @@ jobs:
           - tools
       script:
         - date
-        - gem update --system 2.5.0
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
@@ -30,6 +29,8 @@ after_failure:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+before_deploy:
+  - gem update --system 2.5.0
 cache:
   directories:
     - $HOME/.gradle/caches/
