@@ -95,7 +95,7 @@ jobs:
         - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
     # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .8):
-    - dist: trusty
+    - dist: xenial
       language: android
       android:
         components:
