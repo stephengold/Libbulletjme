@@ -102,7 +102,6 @@ jobs:
           - tools
       script:
         - date
-        - sdkmanager --list
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
