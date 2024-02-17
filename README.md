@@ -153,6 +153,7 @@ The Libbulletjme Project is derived from open-source software:
 
 This project also made use of the following software tools:
 
+  + the [Antora] static website generator
   + the [Checkstyle] tool
   + the [FindBugs] source-code analyzer
   + the [GNU Compiler Collection][gcc] and [Project Debugger][gdb]
@@ -200,6 +201,7 @@ correct the situation: sgold@sonic.net
 [Jump to table of contents](#toc)
 
 
+[antora]: https://antora.org/ "Antora Project"
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [checkstyle]: https://checkstyle.org "Checkstyle"
