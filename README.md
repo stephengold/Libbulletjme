@@ -54,7 +54,7 @@ standalone Maven artifacts are provided.
 
 [How to add Libbulletjme to an existing project](https://stephengold.github.io/Libbulletjme/lbj-en/add.html)
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="examples"></a>
@@ -67,7 +67,7 @@ standalone Maven artifacts are provided.
 + [HelloVehicle0](https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/console/HelloVehicle0.java):
   drive a vehicle on a horizontal surface
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="build"></a>
@@ -76,7 +76,7 @@ standalone Maven artifacts are provided.
 
 [How to build Libbulletjme from source](https://stephengold.github.io/Libbulletjme/lbj-en/English/build.html)
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="lexicon"></a>
@@ -85,7 +85,7 @@ standalone Maven artifacts are provided.
 
 [Lexicon of class/enum/struct names](https://stephengold.github.io/Libbulletjme/lbj-en/English/lexicon.html)
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="todo"></a>
@@ -94,7 +94,7 @@ standalone Maven artifacts are provided.
 
 [What's missing](https://stephengold.github.io/Libbulletjme/lbj-en/English/overview.html#_whats_missing)
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="links"></a>
@@ -114,7 +114,7 @@ standalone Maven artifacts are provided.
 + ["Real-time Vehicle Simulation for Video Games Using the Bullet Physics Library" by Hammad Mazhar](https://sbel.wisc.edu/wp-content/uploads/sites/569/2018/05/Real-time-Vehicle-Simulation-for-Video-Games-Using-the-Bullet-Physics-Library.pdf)
 + ["Vehicle Simulation With Bullet" by Kester Maddock](https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc)
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="history"></a>
@@ -134,7 +134,7 @@ partly on [Riccardo's V-hacd-java-bindings][vhacdBindings],
 and partly on [Minie].
 Minie is, in turn, based on `jme3-bullet`, another jMonkeyEngine library.
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 <a name="acks"></a>
@@ -198,7 +198,7 @@ I'm also grateful to my dear Holly, for keeping me sane.
 If I've misattributed anything or left anyone out, please let me know, so I can
 correct the situation: sgold@sonic.net
 
-[Jump to table of contents](#toc)
+[Jump to the table of contents](#toc)
 
 
 [antora]: https://antora.org/ "Antora Project"
