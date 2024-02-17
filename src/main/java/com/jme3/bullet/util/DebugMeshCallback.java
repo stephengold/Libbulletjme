@@ -45,7 +45,9 @@ import jme3utilities.math.MyVolume;
  * Temporary objects used to return debug meshes from native Bullet.
  *
  * @author normenhansen
+ * @deprecated use {@link com.jme3.bullet.collision.shapes.infos.IndexedMesh}
  */
+@Deprecated
 class DebugMeshCallback {
     // *************************************************************************
     // constants and loggers
