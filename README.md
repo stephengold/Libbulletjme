@@ -218,7 +218,7 @@ correct the situation: sgold@sonic.net
 [heart]: https://github.com/stephengold/Heart "Heart Project"
 [idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [imgur]: https://imgur.com/ "Imgur"
-[java]: https://java.com "Java"
+[java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jbullet]: http://jbullet.advel.cz "JBullet"
 [jfrog]: https://www.jfrog.com "JFrog"
 [jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
