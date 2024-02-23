@@ -125,6 +125,18 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#circle(double)" class="member-name-link">circle</a><wbr>(double&nbsp;abscissa)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Return the circle function <code>sqrt(1 - x^2)</code> for a double-precision
+ value.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#circle(float)" class="member-name-link">circle</a><wbr>(float&nbsp;abscissa)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Return the circle function <code>sqrt(1 - x^2)</code> for a single-precision
+ value.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#clamp(double,double,double)" class="member-name-link">clamp</a><wbr>(double&nbsp;dValue,
  double&nbsp;min,
  double&nbsp;max)</code></div>
@@ -345,6 +357,37 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="circle(double)">
+<h3>circle</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">circle</span><wbr><span class="parameters">(double&nbsp;abscissa)</span></div>
+<div class="block">Return the circle function <code>sqrt(1 - x^2)</code> for a double-precision
+ value.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>abscissa</code> - input (&le;1, &ge;-1)</dd>
+<dt>Returns:</dt>
+<dd>positive ordinate of the unit circle at the abscissa (&le;1,
+ &ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="circle(float)">
+<h3>circle</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">circle</span><wbr><span class="parameters">(float&nbsp;abscissa)</span></div>
+<div class="block">Return the circle function <code>sqrt(1 - x^2)</code> for a single-precision
+ value. Double-precision arithmetic is used to reduce the risk of
+ overflow.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>abscissa</code> - input (&le;1, &ge;-1)</dd>
+<dt>Returns:</dt>
+<dd>positive ordinate of the unit circle at the abscissa (&le;1,
+ &ge;0)</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="clamp(double,double,double)">
 <h3>clamp</h3>
