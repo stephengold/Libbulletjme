@@ -163,29 +163,36 @@ loadScripts(document, 'script');</script>
 <div class="block">A direct call to Math.atan2.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#cos(float)" class="member-name-link">cos</a><wbr>(float&nbsp;v)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#clamp(float,float,float)" class="member-name-link">clamp</a><wbr>(float&nbsp;input,
+ float&nbsp;min,
+ float&nbsp;max)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Take a float input and clamp it between min and max.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#cos(float)" class="member-name-link">cos</a><wbr>(float&nbsp;v)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns cosine of an angle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#pow(float,float)" class="member-name-link">pow</a><wbr>(float&nbsp;fBase,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#pow(float,float)" class="member-name-link">pow</a><wbr>(float&nbsp;fBase,
  float&nbsp;fExponent)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns a number raised to an exponent power.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sin(float)" class="member-name-link">sin</a><wbr>(float&nbsp;v)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sin(float)" class="member-name-link">sin</a><wbr>(float&nbsp;v)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the sine of an angle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sqrt(float)" class="member-name-link">sqrt</a><wbr>(float&nbsp;fValue)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sqrt(float)" class="member-name-link">sqrt</a><wbr>(float&nbsp;fValue)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the square root of a given value.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#tan(float)" class="member-name-link">tan</a><wbr>(float&nbsp;fValue)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static float</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#tan(float)" class="member-name-link">tan</a><wbr>(float&nbsp;fValue)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Returns the tangent of the specified angle.</div>
 </div>
 </div>
@@ -471,6 +478,23 @@ loadScripts(document, 'script');</script>
 <li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Math.html#tan(double)" title="class or interface in java.lang" class="external-link"><code>Math.tan(double)</code></a></li>
 </ul>
 </dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="clamp(float,float,float)">
+<h3>clamp</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">float</span>&nbsp;<span class="element-name">clamp</span><wbr><span class="parameters">(float&nbsp;input,
+ float&nbsp;min,
+ float&nbsp;max)</span></div>
+<div class="block">Take a float input and clamp it between min and max.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>input</code> - the value to be clamped</dd>
+<dd><code>min</code> - the minimum output value</dd>
+<dd><code>max</code> - the maximum output value</dd>
+<dt>Returns:</dt>
+<dd>clamped input</dd>
 </dl>
 </section>
 </li>
