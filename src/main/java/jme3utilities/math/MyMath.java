@@ -104,7 +104,7 @@ final public class MyMath {
         assert Validate.inRange(abscissa, "abscissa", -1f, 1f);
 
         double x = abscissa;
-        float y = (float) circle(x);
+        float y = (float) Math.sqrt(1.0 - x * x);
 
         assert y >= 0f : y;
         assert y <= 1f : y;
