@@ -221,7 +221,7 @@ correct the situation: sgold@sonic.net
 [java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jbullet]: http://jbullet.advel.cz "JBullet"
 [jfrog]: https://www.jfrog.com "JFrog"
-[jme]: https://jmonkeyengine.org  "jMonkeyEngine Project"
+[jme]: https://jmonkeyengine.org "jMonkeyEngine Project"
 [libbulletjme]: https://stephengold.github.io/Libbulletjme "Libbulletjme Project"
 [license]: https://github.com/stephengold/Libbulletjme/blob/master/LICENSE "Libbulletjme license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
