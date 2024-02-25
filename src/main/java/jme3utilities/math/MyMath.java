@@ -118,6 +118,7 @@ final public class MyMath {
      * @param min lower limit of the clamp
      * @param max upper limit of the clamp
      * @return the value between min and max inclusive that is closest to fValue
+     * @see com.jme3.math.FastMath#clamp(float,float,float)
      */
     public static double clamp(double dValue, double min, double max) {
         double result;

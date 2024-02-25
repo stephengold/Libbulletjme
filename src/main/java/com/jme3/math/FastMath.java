@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2021 jMonkeyEngine
+ * Copyright (c) 2009-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -161,6 +161,18 @@ final public class FastMath {
      */
     public static float tan(float fValue) {
         return (float) Math.tan(fValue);
+    }
+
+    /**
+     * Take a float input and clamp it between min and max.
+     *
+     * @param input the value to be clamped
+     * @param min the minimum output value
+     * @param max the maximum output value
+     * @return clamped input
+     */
+    public static float clamp(float input, float min, float max) {
+        return (input < min) ? min : (input > max) ? max : input;
     }
 
     /**
