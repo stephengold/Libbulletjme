@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2017-2022, Stephen Gold
+ Copyright (c) 2017-2024 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
 /**
- * Generate pseudo-random numbers, vectors, and selections.
+ * Generate pseudo-random numbers, quaternions, vectors, and selections.
  *
  * @author Stephen Gold sgold@sonic.net
  */
