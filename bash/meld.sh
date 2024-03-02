@@ -3,6 +3,7 @@
 set -e
 
 GitDir=~/NetBeansProjects
+#GitDir="/c/Users/sgold/My Documents/NetBeansProjects"
 
 S1=$GitDir/ext/v-hacd/src/VHACD_Lib
 D1=$GitDir/Libbulletjme/src/main/native/v-hacd
@@ -22,4 +23,7 @@ D5=$GitDir/Libbulletjme/src/main/java
 S6=$GitDir/ext/SimMath/src/main/java
 D6=$GitDir/Libbulletjme/src/main/java
 
-/usr/bin/meld --diff $S1 $D1 --diff $S2 $D2 --diff $S3 $D3 --diff $S4 $D4 --diff $S5 $D5 --diff $S6 $D6
+Meld="/usr/bin/meld"
+#Meld="/c/Program Files/Meld/meld"
+
+"$Meld" --diff $S1 $D1 --diff $S2 $D2 --diff $S3 $D3 --diff $S4 $D4 --diff $S5 $D5 --diff $S6 $D6
