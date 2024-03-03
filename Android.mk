@@ -251,7 +251,6 @@ $(N)/glue/com_jme3_bullet_PhysicsSpace.cpp \
 $(N)/glue/com_jme3_bullet_RotationOrder.cpp \
 $(N)/glue/com_jme3_bullet_SoftBodyWorldInfo.cpp \
 $(N)/glue/com_jme3_bullet_SolverInfo.cpp \
-$(N)/glue/com_jme3_bullet_util_DebugShapeFactory.cpp \
 $(N)/glue/com_jme3_bullet_util_NativeLibrary.cpp \
 $(N)/glue/com_jme3_bullet_util_NativeSoftBodyUtil.cpp \
 $(N)/glue/jmeBulletUtil.cpp \
