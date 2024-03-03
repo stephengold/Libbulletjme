@@ -33,7 +33,7 @@
     <!-- Checks for size violations              -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
-        <property name="max" value="2500"/>
+        <property name="max" value="2200"/>
     </module>
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
@@ -197,17 +197,17 @@
                      value="Type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MemberName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9]{0,29}$"/>
             <message key="name.invalidPattern"
                      value="Member name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="ParameterName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9]{0,29}$"/>
             <message key="name.invalidPattern"
                      value="Parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="LambdaParameterName">
-            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+            <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
                      value="Lambda parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -217,13 +217,13 @@
                      value="Catch parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="LocalVariableName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9]{0,29}$"/>
             <message key="name.invalidPattern"
                      value="Local variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="LocalFinalVariableName"/>
         <module name="PatternVariableName">
-            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+            <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
                      value="Pattern variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
@@ -234,7 +234,7 @@
                      value="Class type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="RecordComponentName">
-            <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>
+            <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
                      value="Record component name ''{0}'' must match pattern ''{1}''."/>
         </module>
