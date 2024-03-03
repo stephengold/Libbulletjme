@@ -222,6 +222,11 @@
                      value="Local variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="LocalFinalVariableName"/>
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+            <message key="name.invalidPattern"
+                     value="Method name ''{0}'' must match pattern ''{1}''."/>
+        </module>
         <module name="PatternVariableName">
             <property name="format" value="^[a-z]{0,9}$"/>
             <message key="name.invalidPattern"
@@ -362,11 +367,6 @@
         </module>
         <module name="JavadocVariable">
             <property name="scope" value="package"/>
-        </module>
-        <module name="MethodName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-            <message key="name.invalidPattern"
-                     value="Method name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="SingleLineJavadoc"/>
 
