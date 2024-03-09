@@ -1033,30 +1033,30 @@ double BoundsAABB::SurfaceArea() const
     return double(2.0) * (d.GetX() * d.GetY() + d.GetX() * d.GetZ() + d.GetY() * d.GetZ());
 }
 
-inline double VHACD::BoundsAABB::Volume() const
+double VHACD::BoundsAABB::Volume() const
 {
     VHACD::Vect3 d = GetMax() - GetMin();
     return d.GetX() * d.GetY() * d.GetZ();
 }
 
-inline BoundsAABB VHACD::BoundsAABB::Inflate(double ratio) const
+BoundsAABB VHACD::BoundsAABB::Inflate(double ratio) const
 {
     double inflate = (GetMin() - GetMax()).GetNorm() * double(0.5) * ratio;
     return BoundsAABB(GetMin() - inflate,
                       GetMax() + inflate);
 }
 
-inline VHACD::Vect3 VHACD::BoundsAABB::ClosestPoint(const VHACD::Vect3& p) const
+VHACD::Vect3 VHACD::BoundsAABB::ClosestPoint(const VHACD::Vect3& p) const
 {
     return p.CWiseMax(GetMin()).CWiseMin(GetMax());
 }
 
-inline VHACD::Vect3& VHACD::BoundsAABB::GetMin()
+VHACD::Vect3& VHACD::BoundsAABB::GetMin()
 {
     return m_min;
 }
 
-inline VHACD::Vect3& VHACD::BoundsAABB::GetMax()
+VHACD::Vect3& VHACD::BoundsAABB::GetMax()
 {
     return m_max;
 }
@@ -1066,17 +1066,17 @@ inline const VHACD::Vect3& VHACD::BoundsAABB::GetMin() const
     return m_min;
 }
 
-inline const VHACD::Vect3& VHACD::BoundsAABB::GetMax() const
+const VHACD::Vect3& VHACD::BoundsAABB::GetMax() const
 {
     return m_max;
 }
 
-inline VHACD::Vect3 VHACD::BoundsAABB::GetSize() const
+VHACD::Vect3 VHACD::BoundsAABB::GetSize() const
 {
     return GetMax() - GetMin();
 }
 
-inline VHACD::Vect3 VHACD::BoundsAABB::GetCenter() const
+VHACD::Vect3 VHACD::BoundsAABB::GetCenter() const
 {
     return (GetMin() + GetMax()) * double(0.5);
 }
