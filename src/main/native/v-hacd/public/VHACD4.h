@@ -484,118 +484,6 @@ protected:
     {
     }
 };
-
-IVHACD* CreateVHACD();      // Create a synchronous (blocking) implementation of V-HACD
-IVHACD* CreateVHACD_ASYNC();    // Create an asynchronous (non-blocking) implementation of V-HACD
-
-} // namespace VHACD
-
-#if ENABLE_VHACD_IMPLEMENTATION
-#include <assert.h>
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
-#include <float.h>
-#include <limits.h>
-
-#include <algorithm>
-#include <array>
-#include <atomic>
-#include <chrono>
-#include <condition_variable>
-#include <deque>
-#include <future>
-#include <iostream>
-#include <list>
-#include <memory>
-#include <mutex>
-#include <queue>
-#include <thread>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
-#include <vector>
-
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable:4100 4127 4189 4244 4456 4701 4702 4996)
-#endif // _MSC_VER
-
-#ifdef __GNUC__
-#pragma GCC diagnostic push
-// Minimum set of warnings used for cleanup
-// #pragma GCC diagnostic warning "-Wall"
-// #pragma GCC diagnostic warning "-Wextra"
-// #pragma GCC diagnostic warning "-Wpedantic"
-// #pragma GCC diagnostic warning "-Wold-style-cast"
-// #pragma GCC diagnostic warning "-Wnon-virtual-dtor"
-// #pragma GCC diagnostic warning "-Wshadow"
-#endif // __GNUC__
-
-// Scoped Timer
-namespace VHACD {
-
-class Timer
-{
-public:
-    Timer()
-        : m_startTime(std::chrono::high_resolution_clock::now())
-    {
-    }
-
-    void Reset()
-    {
-        m_startTime = std::chrono::high_resolution_clock::now();
-    }
-
-    double GetElapsedSeconds()
-    {
-        auto s = PeekElapsedSeconds();
-        Reset();
-        return s;
-    }
-
-    double PeekElapsedSeconds()
-    {
-        auto now = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> diff = now - m_startTime;
-        return diff.count();
-    }
-
-private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
-};
-
-class ScopedTime
-{
-public:
-    ScopedTime(const char* action,
-               VHACD::IVHACD::IUserLogger* logger)
-        : m_action(action)
-        , m_logger(logger)
-    {
-        m_timer.Reset();
-    }
-
-    ~ScopedTime()
-    {
-        double dtime = m_timer.GetElapsedSeconds();
-        if( m_logger )
-        {
-            char scratch[512];
-            snprintf(scratch,
-                        sizeof(scratch),"%s took %0.5f seconds",
-                        m_action,
-                        dtime);
-            m_logger->Log(scratch);
-        }
-    }
-
-    const char* m_action{ nullptr };
-    Timer       m_timer;
-    VHACD::IVHACD::IUserLogger* m_logger{ nullptr };
-};
-
 /*
  * Out of line definitions
  */
@@ -988,9 +876,118 @@ inline Vector3<T>::operator VHACD::Vertex() const
     return ::VHACD::Vertex( GetX(), GetY(), GetZ());
 }
 
+IVHACD* CreateVHACD();      // Create a synchronous (blocking) implementation of V-HACD
+IVHACD* CreateVHACD_ASYNC();    // Create an asynchronous (non-blocking) implementation of V-HACD
+
+} // namespace VHACD
+
+#if ENABLE_VHACD_IMPLEMENTATION
+#include <assert.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <float.h>
+#include <limits.h>
+
+#include <array>
+#include <atomic>
+#include <chrono>
+#include <condition_variable>
+#include <deque>
+#include <future>
+#include <iostream>
+#include <list>
+#include <memory>
+#include <mutex>
+#include <queue>
+#include <thread>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable:4100 4127 4189 4244 4456 4701 4702 4996)
+#endif // _MSC_VER
+
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+// Minimum set of warnings used for cleanup
+// #pragma GCC diagnostic warning "-Wall"
+// #pragma GCC diagnostic warning "-Wextra"
+// #pragma GCC diagnostic warning "-Wpedantic"
+// #pragma GCC diagnostic warning "-Wold-style-cast"
+// #pragma GCC diagnostic warning "-Wnon-virtual-dtor"
+// #pragma GCC diagnostic warning "-Wshadow"
+#endif // __GNUC__
+
+// Scoped Timer
+namespace VHACD {
+
+class Timer
+{
+public:
+    Timer()
+        : m_startTime(std::chrono::high_resolution_clock::now())
+    {
+    }
+
+    void Reset()
+    {
+        m_startTime = std::chrono::high_resolution_clock::now();
+    }
+
+    double GetElapsedSeconds()
+    {
+        auto s = PeekElapsedSeconds();
+        Reset();
+        return s;
+    }
+
+    double PeekElapsedSeconds()
+    {
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diff = now - m_startTime;
+        return diff.count();
+    }
+
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
+};
+
+class ScopedTime
+{
+public:
+    ScopedTime(const char* action,
+               VHACD::IVHACD::IUserLogger* logger)
+        : m_action(action)
+        , m_logger(logger)
+    {
+        m_timer.Reset();
+    }
+
+    ~ScopedTime()
+    {
+        double dtime = m_timer.GetElapsedSeconds();
+        if( m_logger )
+        {
+            char scratch[512];
+            snprintf(scratch,
+                        sizeof(scratch),"%s took %0.5f seconds",
+                        m_action,
+                        dtime);
+            m_logger->Log(scratch);
+        }
+    }
+
+    const char* m_action{ nullptr };
+    Timer       m_timer;
+    VHACD::IVHACD::IUserLogger* m_logger{ nullptr };
+};
 BoundsAABB::BoundsAABB(const std::vector<VHACD::Vertex>& points)
-    : m_min(points[0])
-    , m_max(points[0])
+        : m_min(points[0])
+        , m_max(points[0])
 {
     for (uint32_t i = 1; i < points.size(); ++i)
     {
