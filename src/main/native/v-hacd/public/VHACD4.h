@@ -988,7 +988,7 @@ inline Vector3<T>::operator VHACD::Vertex() const
     return ::VHACD::Vertex( GetX(), GetY(), GetZ());
 }
 
-inline BoundsAABB::BoundsAABB(const std::vector<VHACD::Vertex>& points)
+BoundsAABB::BoundsAABB(const std::vector<VHACD::Vertex>& points)
     : m_min(points[0])
     , m_max(points[0])
 {
@@ -1000,7 +1000,7 @@ inline BoundsAABB::BoundsAABB(const std::vector<VHACD::Vertex>& points)
     }
 }
 
-inline BoundsAABB::BoundsAABB(const VHACD::Vect3& min,
+BoundsAABB::BoundsAABB(const VHACD::Vect3& min,
                               const VHACD::Vect3& max)
         : m_min(min)
         , m_max(max)
@@ -1013,7 +1013,7 @@ BoundsAABB BoundsAABB::Union(const BoundsAABB& b)
                       GetMax().CWiseMax(b.GetMax()));
 }
 
-inline bool VHACD::BoundsAABB::Intersects(const VHACD::BoundsAABB& b) const
+bool VHACD::BoundsAABB::Intersects(const VHACD::BoundsAABB& b) const
 {
     if (   (  GetMin().GetX() > b.GetMax().GetX())
            || (b.GetMin().GetX() >   GetMax().GetX()))
