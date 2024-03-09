@@ -5,8 +5,8 @@ set -e
 GitDir=~/NetBeansProjects
 #GitDir="/c/Users/sgold/My Documents/NetBeansProjects"
 
-S1="$GitDir/ext/v-hacd/src/VHACD_Lib"
-D1="$GitDir/Libbulletjme/src/main/native/v-hacd"
+S1="$GitDir/ext/v-hacd/include/VHACD.h"
+D1="$GitDir/Libbulletjme/src/main/native/v-hacd/public/VHACD4.h"
 
 S2="$GitDir/ext/bullet3/src"
 D2="$GitDir/Libbulletjme/src/main/native/bullet3"
