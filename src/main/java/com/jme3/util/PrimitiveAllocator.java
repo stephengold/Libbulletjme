@@ -41,8 +41,11 @@ import java.nio.ByteOrder;
 public final class PrimitiveAllocator implements BufferAllocator {
     /**
      * Instantiate an allocator.
+     * <p>
+     * This no-arg constructor was made explicit to avoid javadoc warnings from
+     * JDK 18+.
      */
-    public PrimitiveAllocator() { // to avoid a warning from JDK 18 javadoc
+    public PrimitiveAllocator() {
     }
 
     /**
