@@ -223,7 +223,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(FillMode.FloodFill, parameters4.getFillMode());
         Assert.assertFalse(parameters4.isFindBestPlane());
         Assert.assertEquals(64, parameters4.getMaxHulls());
-        Assert.assertEquals(14, parameters4.getMaxRecursion());
+        Assert.assertEquals(10, parameters4.getMaxRecursion());
         Assert.assertEquals(32, parameters4.getMaxVerticesPerHull());
         Assert.assertEquals(2, parameters4.getMinEdgeLength());
         Assert.assertTrue(parameters4.isShrinkWrap());

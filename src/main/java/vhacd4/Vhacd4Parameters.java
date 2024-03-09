@@ -332,7 +332,7 @@ public class Vhacd4Parameters
     /**
      * Alter the maximum recursion depth (native field: m_maxRecursionDepth).
      *
-     * @param depth default = 14, min = 2, max = 64
+     * @param depth default = 10, min = 2, max = 64
      */
     public void setMaxRecursion(int depth) {
         Validate.inRange(depth, "depth", 2, 64);
