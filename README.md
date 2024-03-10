@@ -26,7 +26,7 @@ In addition, multithreaded native libraries
 are provided for x86_64 architectures running Windows or Linux.
 
 Libbulletjme is used in
-[the DynamX Physics Mod for Minecraft](https://dynamx.fr).
+[the DynamX Physics Mod for Minecraft][dynamx].
 
 Libbulletjme's native libraries are used in [Minie],
 which integrates Libbulletjme into [the jMonkeyEngine game engine][jme].
@@ -208,6 +208,7 @@ correct the situation: sgold@sonic.net
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
 [checkstyle]: https://checkstyle.org "Checkstyle"
 [chrome]: https://www.google.com/chrome "Chrome"
+[dynamx]: https://dynamx.fr "DynamX Project"
 [examples]: https://github.com/stephengold/LbjExamples "LbjExamples Project"
 [findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
