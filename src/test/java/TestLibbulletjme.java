@@ -243,7 +243,7 @@ public class TestLibbulletjme {
             numHullVertices += hullShape.countHullVertices();
             compound.addChildShape(hullShape);
         }
-        Assert.assertEquals(58, numHullVertices);
+        Assert.assertEquals(72, numHullVertices);
 
         // Verify the VHACDParameters defaults.
         VHACDParameters parameters = new VHACDParameters();
