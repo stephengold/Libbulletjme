@@ -5158,7 +5158,7 @@ void Volume::Voxelize(const std::vector<VHACD::Vertex>& points,
             size_t j = static_cast<size_t>(p[c][1] + double(0.5));
             size_t k = static_cast<size_t>(p[c][2] + double(0.5));
 
-            assert(i < m_dim[0] && i >= 0 && j < m_dim[1] && j >= 0 && k < m_dim[2] && k >= 0);
+            assert(i < m_dim[0] && j < m_dim[1] && k < m_dim[2]);
 
             if (c == 0)
             {
@@ -5345,9 +5345,9 @@ void Volume::SetVoxel(const size_t i,
                       const size_t k,
                       VoxelValue value)
 {
-    assert(i < m_dim[0] || i >= 0);
-    assert(j < m_dim[1] || j >= 0);
-    assert(k < m_dim[2] || k >= 0);
+    assert(i < m_dim[0]);
+    assert(j < m_dim[1]);
+    assert(k < m_dim[2]);
 
     m_data[k + j * m_dim[2] + i * m_dim[1] * m_dim[2]] = value;
 }
@@ -5356,9 +5356,9 @@ VoxelValue& Volume::GetVoxel(const size_t i,
                              const size_t j,
                              const size_t k)
 {
-    assert(i < m_dim[0] || i >= 0);
-    assert(j < m_dim[1] || j >= 0);
-    assert(k < m_dim[2] || k >= 0);
+    assert(i < m_dim[0]);
+    assert(j < m_dim[1]);
+    assert(k < m_dim[2]);
     return m_data[k + j * m_dim[2] + i * m_dim[1] * m_dim[2]];
 }
 
@@ -5366,9 +5366,9 @@ const VoxelValue& Volume::GetVoxel(const size_t i,
                                    const size_t j,
                                    const size_t k) const
 {
-    assert(i < m_dim[0] || i >= 0);
-    assert(j < m_dim[1] || j >= 0);
-    assert(k < m_dim[2] || k >= 0);
+    assert(i < m_dim[0]);
+    assert(j < m_dim[1]);
+    assert(k < m_dim[2]);
     return m_data[k + j * m_dim[2] + i * m_dim[1] * m_dim[2]];
 }
 
