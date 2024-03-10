@@ -1778,7 +1778,7 @@ void Googol::ToString(char* const string) const
 void Googol::NegateMantissa(std::array<uint64_t, VHACD_GOOGOL_SIZE>& mantissa) const
 {
     uint64_t carrier = 1;
-    for (size_t i = mantissa.size() - 1; i >= 0 && i < mantissa.size(); i--)
+    for (size_t i = mantissa.size() - 1; i < mantissa.size(); i--)
     {
         uint64_t a = ~mantissa[i] + carrier;
         if (a)
