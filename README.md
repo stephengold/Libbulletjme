@@ -105,7 +105,7 @@ standalone Maven artifacts are provided.
 + [The Bullet source-code repository](https://github.com/bulletphysics/bullet3) at [GitHub]
 + [The LbjExamples project][examples] at [GitHub]
 + [The Minie project][minie]
-+ [The V-HACD Library][vhacd] at [GitHub]
++ [The V-HACD project][vhacd] at [GitHub]
 + [The SPORT project][sport] at [GitHub]
 + [The V-Sport project][vsport] at [GitHub]
 + [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/docs/3.4/physics/physics.html)
