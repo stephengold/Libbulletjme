@@ -106,6 +106,8 @@ standalone Maven artifacts are provided.
 + [The LbjExamples project][examples] at [GitHub]
 + [The Minie project][minie]
 + [The V-HACD Library][vhacd] at [GitHub]
++ [The SPORT project][sport] at [GitHub]
++ [The V-Sport project][vsport] at [GitHub]
 + [The physics section of the jMonkeyEngine Wiki](https://wiki.jmonkeyengine.org/docs/3.4/physics/physics.html)
 + [The Bullet Forum](https://pybullet.org/Bullet/phpBB3)
 + [The Bullet home page][bullet]
@@ -234,6 +236,8 @@ correct the situation: sgold@sonic.net
 [netbeans]: https://netbeans.org "NetBeans Project"
 [simmath]: https://github.com/Simsilica/SimMath "SimMath Library"
 [sonatype]: https://www.sonatype.com "Sonatype"
+[sport]: https://github.com/stephengold/sport "SPORT Project"
 [travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
 [vhacdBindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
+[vsport]: https://github.com/stephengold/V-Sport "V-Sport Project"
