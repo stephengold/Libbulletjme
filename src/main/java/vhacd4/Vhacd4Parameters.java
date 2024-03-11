@@ -74,6 +74,7 @@ public class Vhacd4Parameters
         super.setNativeId(objectId);
 
         setMaxNumVerticesPerCH(objectId, 32);
+        setMaxRecursion(14);
         setResolution(objectId, 100_000);
     }
     // *************************************************************************
@@ -331,8 +332,10 @@ public class Vhacd4Parameters
 
     /**
      * Alter the maximum recursion depth (native field: m_maxRecursionDepth).
+     * <p>
+     * Note: the native default is 10.
      *
-     * @param depth default = 10, min = 2, max = 64
+     * @param depth default = 14, min = 2, max = 64
      */
     public void setMaxRecursion(int depth) {
         Validate.inRange(depth, "depth", 2, 64);
