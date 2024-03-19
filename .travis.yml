@@ -11,13 +11,18 @@ jobs:
 
     - dist: xenial
       language: android
+      addons:
+        apt:
+          packages:
+            - openjdk-11-jdk
       android:
         components:
           - tools
       script:
         - date
+        - update-java-alternatives --list
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
-        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
+        - java -Xmx32m -version
 
 
 addons:
