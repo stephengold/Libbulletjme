@@ -328,10 +328,6 @@ tasks.withType(JavaCompile) { // Java compile-time options:
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 test.dependsOn('assemble')
 
 // Register publishing tasks:

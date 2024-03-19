@@ -1,13 +1,5 @@
 // Gradle script to build Android native libraries
 
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'com.android.library' version '7.4.0'
 }
@@ -63,11 +55,6 @@ archmap.each { arch ->
             into 'dist'
         }
     }
-}
-
-repositories {
-    google()
-    mavenCentral()
 }
 
 // Register cleanup tasks:
