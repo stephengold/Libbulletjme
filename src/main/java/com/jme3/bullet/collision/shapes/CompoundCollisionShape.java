@@ -599,8 +599,8 @@ public class CompoundCollisionShape extends CollisionShape {
             child.copyOffset(tmpTransform.getTranslation());
             tmpTransform.getTranslation().multLocal(scale);
             child.copyRotation(tmpTransform.getRotation());
-            float childRadius = DebugShapeFactory.maxDistance(baseShape,
-                    tmpTransform, DebugShapeFactory.lowResolution);
+            float childRadius = DebugShapeFactory.maxDistance(
+                    baseShape, tmpTransform, DebugShapeFactory.lowResolution);
             if (childRadius > result) {
                 result = childRadius;
             }

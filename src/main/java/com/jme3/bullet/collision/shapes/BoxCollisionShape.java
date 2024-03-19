@@ -90,8 +90,8 @@ public class BoxCollisionShape extends ConvexShape {
      * @param zHalfExtent the desired half extent on the local Z axis, before
      * scaling and excluding margin (&ge;0)
      */
-    public BoxCollisionShape(float xHalfExtent, float yHalfExtent,
-            float zHalfExtent) {
+    public BoxCollisionShape(
+            float xHalfExtent, float yHalfExtent, float zHalfExtent) {
         Validate.nonNegative(xHalfExtent, "half extent on X");
         Validate.nonNegative(yHalfExtent, "half extent on Y");
         Validate.nonNegative(zHalfExtent, "half extent on Z");
