@@ -1,15 +1,15 @@
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral() // to find libraries released to the Maven Central repository
-    }
-}
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
         mavenCentral() // to find plugins released to the Maven Central repository
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral() // to find libraries released to the Maven Central repository
     }
 }
 
