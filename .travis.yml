@@ -21,8 +21,8 @@ jobs:
       script:
         - date
         - sudo update-java-alternatives --set /usr/lib/jvm/java-1.11.0-openjdk-amd64
-        - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - java -Xmx32m -version
+        - echo y | sdkmanager "ndk;25.1.8937393" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 
