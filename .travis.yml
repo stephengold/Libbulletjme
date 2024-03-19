@@ -23,7 +23,6 @@ jobs:
         - sudo update-java-alternatives --set /usr/lib/jvm/java-1.11.0-openjdk-amd64
         - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
         - java -Xmx32m -version
-        - echo y | sdkmanager "ndk;23.1.7779620" > /dev/null
         - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 
