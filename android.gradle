@@ -1,12 +1,10 @@
 // Gradle script to build Android native libraries
 
-buildscript {
+pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.0'
     }
 }
 
