@@ -1,1 +1,9 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral() // to find plugins released to the Maven Central repository
+    }
+}
+
 rootProject.name = 'Libbulletjme'

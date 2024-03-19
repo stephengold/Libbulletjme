@@ -1,13 +1,5 @@
 // Gradle script to build Android native libraries
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'com.android.library' version '8.2.0'
 }
