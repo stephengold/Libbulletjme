@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:8.2.0'
     }
 }
 apply plugin: 'com.android.library'
@@ -31,7 +31,7 @@ android {
     externalNativeBuild.ndkBuild {
         path 'Android.mk'
     }
-    ndkVersion '21.3.6528147'
+    ndkVersion '25.1.8937393'
 }
 
 tasks.register('copyToDist') {}
