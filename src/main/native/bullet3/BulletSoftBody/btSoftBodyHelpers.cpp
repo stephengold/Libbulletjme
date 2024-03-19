@@ -748,11 +748,11 @@ btSoftBody* btSoftBodyHelpers::CreatePatch(btSoftBodyWorldInfo& worldInfo, const
 		for (int ix = 0; ix < rx; ++ix)
 		{
 			const btScalar tx = ix / (btScalar)(rx - 1);
-			btScalar pert = perturbation * btScalar(rand()) / RAND_MAX;
+			btScalar pert = perturbation * btScalar(rand()) / (btScalar)RAND_MAX; //stephengold changed 2024-03-19
 			btVector3 temp1 = py1;
 			temp1.setY(py1.getY() + pert);
 			btVector3 temp = py0;
-			pert = perturbation * btScalar(rand()) / RAND_MAX;
+			pert = perturbation * btScalar(rand()) / (btScalar)RAND_MAX; //stephengold changed 2024-03-19
 			temp.setY(py0.getY() + pert);
 			x[IDX(ix, iy)] = lerp(temp, temp1, tx);
 			m[IDX(ix, iy)] = 1;
