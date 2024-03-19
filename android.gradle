@@ -4,6 +4,10 @@ plugins {
     id 'com.android.library' version '8.2.0'
 }
 
+kotlin {
+    jvmToolchain 11
+}
+
 String flavor = 'Sp'
 if (project.hasProperty('flavor')) {
     flavor = project.ext.flavor
