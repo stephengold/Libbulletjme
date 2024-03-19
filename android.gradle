@@ -20,6 +20,10 @@ android {
     buildTypes.debug {
         jniDebuggable = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
     compileSdkVersion 30
     defaultConfig {
         minSdkVersion 22
@@ -32,6 +36,10 @@ android {
         path 'Android.mk'
     }
     ndkVersion '21.3.6528147'
+}
+
+dependencies {
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
 }
 
 tasks.register('copyToDist') {}
