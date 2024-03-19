@@ -45,8 +45,8 @@ import jme3utilities.math.RectangularSolid;
 
 /**
  * A convex collision shape based on Bullet's {@code btMultiSphereShape}. Unlike
- * a CapsuleCollisionShape or a SphereCollisionShape, these shapes have margins
- * and can be scaled non-uniformly.
+ * a {@code CapsuleCollisionShape} or a {@code SphereCollisionShape}, these
+ * shapes have margins and can be scaled non-uniformly.
  *
  * @author Stephen Gold sgold@sonic.net
  */
