@@ -1,5 +1,22 @@
 # Release log for the Libbulletjme project
 
+## Version 20.2.0 released on 18 March 2024
+
++ Deprecated the `DebugMeshCallback` class.
++ Deleted the (unused) native portion of the `DebugShapeFactory` class.
++ Added 7 new public methods:
+  + `FastMath.clamp()`
+  + `GImpactCollisionShape.countSubmeshes()`
+  + `GImpactCollisionShape.getSubmesh()`
+  + `MeshCollisionShape.countSubmeshes()`
+  + `MeshCollisionShape.getSubmesh()`
+  + `MyMath.circle(double)`
+  + `MyMath.circle(float)`
++ Updated VHACD v4 to version 4.1 .
++ Added more detail to descriptions of GImpact and mesh shapes.
++ Began building Android binaries on a xenial distro,
+  since trusty is nearing its end of life.
+
 ## Version 20.1.0 released on 9 February 2024
 
 + Bugfix: `CharacterController.onGround()` returns false positives after
