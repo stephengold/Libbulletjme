@@ -2,14 +2,15 @@
 
 buildscript {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
-    }
 }
-apply plugin: 'com.android.library'
+
+plugins {
+    id 'com.android.library' version '7.4.0'
+}
 
 String flavor = 'Sp'
 if (project.hasProperty('flavor')) {
@@ -35,7 +36,7 @@ android {
     externalNativeBuild.ndkBuild {
         path 'Android.mk'
     }
-    ndkVersion '21.3.6528147'
+    ndkVersion '23.1.7779620'
 }
 
 dependencies {
