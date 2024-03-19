@@ -1,7 +1,7 @@
 // Gradle script to build Android native libraries
 
 plugins {
-    id 'com.android.library' version '8.2.0'
+    id 'com.android.library' version '7.4.0'
 }
 
 kotlin {
