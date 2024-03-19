@@ -20,10 +20,10 @@ jobs:
           - tools
       script:
         - date
-        - update-java-alternatives --list
         - sudo update-java-alternatives --set /usr/lib/jvm/java-1.11.0-openjdk-amd64
         - echo y | sdkmanager "ndk;21.3.6528147" > /dev/null
         - java -Xmx32m -version
+        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
 
 
 addons:
