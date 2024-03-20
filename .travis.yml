@@ -9,8 +9,7 @@ os: linux
 jobs:
   include:
 
-    - dist: xenial
-      language: android
+    - language: android
       addons:
         apt:
           packages:
