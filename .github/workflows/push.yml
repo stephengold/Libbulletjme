@@ -103,14 +103,14 @@ jobs:
           name: crash-log
           path: '*.log'
 
-  Java17-Windows:
+  Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
     steps:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 21
       - uses: actions/checkout@v4
       - run: ./gradlew build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
