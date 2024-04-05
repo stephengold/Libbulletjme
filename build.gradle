@@ -135,9 +135,6 @@ model {
                 include '**/*.cpp'
             }
 
-            binaries.withType(StaticLibraryBinarySpec) {
-                buildable = false
-            }
             binaries.withType(SharedLibraryBinarySpec) {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
@@ -305,6 +302,10 @@ model {
                 } else {
                     //println 'Do not build ' + q // to debug this script
                 }
+            }
+
+            binaries.withType(StaticLibraryBinarySpec) {
+                buildable = false
             }
         }
     }
