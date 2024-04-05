@@ -148,8 +148,8 @@ model {
                 if (project.hasProperty('github')) {
                     // CI build with -Pgithub= specified on the command line
                     String github = project.ext.github
-                    if (github == 'debug64') { // skip all except debug/64-bit/non-ARM
-                        buildable = isDebug && pName.contains('64') && !pName.contains('_ARM')
+                    if (github == 'debug64') { // skip all except debug/64-bit
+                        buildable = isDebug && pName.contains('64')
                     }
                 } else if (project.hasProperty('travis')) {
                     // CI build with -Ptravis= specified on the command line
