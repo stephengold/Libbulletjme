@@ -1,4 +1,4 @@
-// Gradle build script for Maven artifacts and desktop native libraries
+// Gradle script to build Libbulletjme Maven artifacts and desktop native libraries
 
 plugins {
     id 'checkstyle'
