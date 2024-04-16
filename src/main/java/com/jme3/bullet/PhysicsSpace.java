@@ -32,9 +32,7 @@
 package com.jme3.bullet;
 
 import com.jme3.bullet.collision.ContactListener;
-import com.jme3.bullet.collision.PersistentManifolds;
 import com.jme3.bullet.collision.PhysicsCollisionEvent;
-import com.jme3.bullet.collision.PhysicsCollisionListener;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.joints.Constraint;
 import com.jme3.bullet.joints.PhysicsJoint;
@@ -138,16 +136,6 @@ public class PhysicsSpace
      * (&ge;0)
      */
     private int maxSubSteps = 4;
-    /**
-     * list of registered listeners for ongoing contacts
-     */
-    final private Collection<PhysicsCollisionListener> contactProcessedListeners
-            = new ArrayList<>(4);
-    /**
-     * list of registered listeners for new contacts
-     */
-    final private Collection<PhysicsCollisionListener> contactStartedListeners
-            = new ArrayList<>(4);
     /**
      * list of registered tick listeners
      */
@@ -724,8 +712,8 @@ public class PhysicsSpace
         assert Validate.nonNegative(maxSteps, "max steps");
 
         boolean doEnded = false;
-        boolean doProcessed = !contactProcessedListeners.isEmpty();
-        boolean doStarted = !contactStartedListeners.isEmpty();
+        boolean doProcessed = false;
+        boolean doStarted = false;
         update(timeInterval, maxSteps, doEnded, doProcessed, doStarted);
     }
 
@@ -995,14 +983,6 @@ public class PhysicsSpace
     public void onContactProcessed(PhysicsCollisionObject pcoA,
             PhysicsCollisionObject pcoB, long pointId) {
         assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
-
-        if (!contactProcessedListeners.isEmpty()) {
-            PhysicsCollisionEvent event
-                    = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
-
-            // Queue the event to be handled later by distributeEvents().
-            contactProcessedEvents.add(event);
-        }
     }
 
     /**
@@ -1017,30 +997,6 @@ public class PhysicsSpace
     @Override
     public void onContactStarted(long manifoldId) {
         assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
-
-        if (contactStartedListeners.isEmpty()) {
-            return;
-        }
-        int numPoints = PersistentManifolds.countPoints(manifoldId);
-        if (numPoints == 0) {
-            return;
-        }
-
-        long bodyAId = PersistentManifolds.getBodyAId(manifoldId);
-        PhysicsCollisionObject pcoA
-                = PhysicsCollisionObject.findInstance(bodyAId);
-        long bodyBId = PersistentManifolds.getBodyBId(manifoldId);
-        PhysicsCollisionObject pcoB
-                = PhysicsCollisionObject.findInstance(bodyBId);
-
-        for (int i = 0; i < numPoints; ++i) {
-            long pointId = PersistentManifolds.getPointId(manifoldId, i);
-            PhysicsCollisionEvent event
-                    = new PhysicsCollisionEvent(pcoA, pcoB, pointId);
-
-            // Queue the event to be handled later by distributeEvents().
-            contactStartedEvents.add(event);
-        }
     }
     // *************************************************************************
     // Java private methods
