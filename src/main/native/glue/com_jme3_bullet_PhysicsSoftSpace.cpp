@@ -38,6 +38,7 @@
 #include "jmeBulletUtil.h"
 #include "jmeUserInfo.h"
 #include "BulletSoftBody/btSoftBody.h"
+#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 
 /*
@@ -89,8 +90,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
 
     jmePhysicsSoftSpace * const
             pSpace = new jmePhysicsSoftSpace(pEnv, object); //dance003
-    btCollisionConfiguration * const pConfig
-            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    btSoftBodyRigidBodyCollisionConfiguration * const pConfig
+            = reinterpret_cast<btSoftBodyRigidBodyCollisionConfiguration *> (configId);
     NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
 
     pSpace->createPhysicsSoftSpace(min, max, (int) broadphase, pConfig);

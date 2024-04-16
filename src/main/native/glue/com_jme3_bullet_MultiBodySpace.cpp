@@ -36,6 +36,7 @@
 #include "BulletDynamics/MLCPSolvers/btDantzigSolver.h"
 #include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
 #include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
+#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_MultiBodySpace.h"
 #include "jmeBulletUtil.h"
 #include "jmeMultiBodySpace.h"
@@ -146,8 +147,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 
     jmeMultiBodySpace * const
             pSpace = new jmeMultiBodySpace(pEnv, object); //dance003
-    btCollisionConfiguration * const pConfig
-            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    btSoftBodyRigidBodyCollisionConfiguration * const pConfig
+            = reinterpret_cast<btSoftBodyRigidBodyCollisionConfiguration *> (configId);
     NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
 
     pSpace->createMultiBodySpace(min, max, (int) broadphase, pConfig);

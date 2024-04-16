@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 /**
  * Tuning parameters for a CollisionSpace, based on Bullet's
- * btCollisionConfiguration.
+ * btSoftBodyRigidBodyCollisionConfiguration.
  *
  * @author Stephen Gold sgold@sonic.net
  */

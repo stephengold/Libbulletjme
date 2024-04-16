@@ -38,6 +38,7 @@
 #include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
 #include "BulletDynamics/MLCPSolvers/btMLCPSolver.h"
 #include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
+#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_PhysicsSpace.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"
@@ -198,8 +199,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 
     jmePhysicsSpace * const
             pSpace = new jmePhysicsSpace(pEnv, object); //dance003
-    btCollisionConfiguration * const pConfig
-            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    btSoftBodyRigidBodyCollisionConfiguration * const pConfig
+            = reinterpret_cast<btSoftBodyRigidBodyCollisionConfiguration *> (configId);
     NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
 
 #if BT_THREADSAFE

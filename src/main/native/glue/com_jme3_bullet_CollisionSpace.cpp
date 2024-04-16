@@ -33,6 +33,7 @@
 /*
  * Author: Normen Hansen
  */
+#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_CollisionSpace.h"
 #include "jmeCollisionSpace.h"
 #include "jmeBulletUtil.h"
@@ -160,8 +161,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
             pSpace = new jmeCollisionSpace(pEnv, object); //dance003
     btVector3 min(minX, minY, minZ);
     btVector3 max(maxX, maxY, maxZ);
-    btCollisionConfiguration * const pConfig
-            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    btSoftBodyRigidBodyCollisionConfiguration * const pConfig
+            = reinterpret_cast<btSoftBodyRigidBodyCollisionConfiguration *> (configId);
     NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
 
     pSpace->createCollisionSpace(min, max, (int) broadphase, pConfig);
