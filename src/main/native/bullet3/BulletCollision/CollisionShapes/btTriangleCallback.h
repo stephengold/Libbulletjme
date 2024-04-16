@@ -48,6 +48,7 @@ public:// stephengold added 2021-11-04
 	}// stephengold added 2021-11-04
 	virtual void processTriangle(btVector3* pTriangle, int partId, int triangleIndex)// stephengold added 2021-11-04
 	{// stephengold added 2021-11-04
+                if (m_interiorCount != 0) return;// stephengold added 2024-04-15
  		if (partId == m_partId && triangleIndex == m_triangleIndex) return;// stephengold added 2021-11-04
 		btTriangleShape triangleShape(pTriangle[0], pTriangle[1], pTriangle[2]);// stephengold added 2021-11-04
 		bool isInside = triangleShape.isInside(m_local, m_margin);// stephengold added 2021-11-04
