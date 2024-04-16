@@ -73,10 +73,10 @@ public:
     void
 #if BT_THREADSAFE
     createMultiThreadedSpace(const btVector3& min, const btVector3& max,
-            int broadphaseType, int numSolvers);
+            int broadphaseType, int numSolvers, btCollisionConfiguration *);
 #else
     createPhysicsSpace(const btVector3& min, const btVector3& max,
-            int broadphaseType);
+            int broadphaseType, btCollisionConfiguration *);
 #endif // BT_THREADSAFE
 
     /*

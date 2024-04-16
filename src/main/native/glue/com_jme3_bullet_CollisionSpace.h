@@ -26,10 +26,10 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
 /*
  * Class:     com_jme3_bullet_CollisionSpace
  * Method:    createCollisionSpace
- * Signature: (FFFFFFI)J
+ * Signature: (FFFFFFIJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
-  (JNIEnv *, jobject, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jint);
+  (JNIEnv *, jobject, jfloat, jfloat, jfloat, jfloat, jfloat, jfloat, jint, jlong);
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace

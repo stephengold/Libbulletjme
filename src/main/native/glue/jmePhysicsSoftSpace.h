@@ -50,7 +50,7 @@ public:
 
     void
     createPhysicsSoftSpace(const btVector3& min, const btVector3& max,
-            int broadphaseType);
+            int broadphaseType, btCollisionConfiguration *);
 
     const btSoftRigidDynamicsWorld *
     getSoftDynamicsWorld() const {

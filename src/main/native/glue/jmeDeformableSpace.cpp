@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2023 jMonkeyEngine
+ * Copyright (c) 2009-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,15 +40,14 @@
  * Based on jmePhysicsSoftSpace.cpp by dokthar
  */
 void jmeDeformableSpace::createDeformableSpace(const btVector3& min,
-        const btVector3& max, jint broadphaseType) {
+        const btVector3& max, jint broadphaseType,
+        btCollisionConfiguration *pCollisionConfiguration) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Register some soft-body collision algorithms on top of the default
     // collision dispatcher plus GImpact.
-    btCollisionConfiguration * const pCollisionConfiguration
-            = new btSoftBodyRigidBodyCollisionConfiguration(); //dance010
     btCollisionDispatcher * const
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);

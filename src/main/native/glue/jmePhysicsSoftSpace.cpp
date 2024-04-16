@@ -36,15 +36,14 @@
  * Author: dokthar
  */
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
-        const btVector3& max, int broadphaseType) {
+        const btVector3& max, int broadphaseType,
+        btCollisionConfiguration *pCollisionConfiguration) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Register some soft-body collision algorithms on top of the default
     // collision dispatcher plus GImpact.
-    btCollisionConfiguration * const pCollisionConfiguration
-            = new btSoftBodyRigidBodyCollisionConfiguration(); //dance010
     btCollisionDispatcher * const
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);

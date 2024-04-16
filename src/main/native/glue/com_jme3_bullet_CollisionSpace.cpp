@@ -149,18 +149,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionSpace_contactTest
 /*
  * Class:     com_jme3_bullet_CollisionSpace
  * Method:    createCollisionSpace
- * Signature: (FFFFFFI)J
+ * Signature: (FFFFFFIJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionSpace_createCollisionSpace
 (JNIEnv *pEnv, jobject object, jfloat minX, jfloat minY, jfloat minZ,
-        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase) {
+        jfloat maxX, jfloat maxY, jfloat maxZ, jint broadphase, jlong configId) {
     jmeClasses::initJavaClasses(pEnv);
 
     jmeCollisionSpace * const
             pSpace = new jmeCollisionSpace(pEnv, object); //dance003
     btVector3 min(minX, minY, minZ);
     btVector3 max(maxX, maxY, maxZ);
-    pSpace->createCollisionSpace(min, max, (int) broadphase);
+    btCollisionConfiguration * const pConfig
+            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
+
+    pSpace->createCollisionSpace(min, max, (int) broadphase, pConfig);
 
     return reinterpret_cast<jlong> (pSpace);
 }

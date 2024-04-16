@@ -24,10 +24,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_DeformableSpace_addSoftBody
 /*
  * Class:     com_jme3_bullet_DeformableSpace
  * Method:    createSpace
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;I)J
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_DeformableSpace_createSpace
-  (JNIEnv *, jobject, jobject, jobject, jint);
+  (JNIEnv *, jobject, jobject, jobject, jint, jlong);
 
 /*
  * Class:     com_jme3_bullet_DeformableSpace

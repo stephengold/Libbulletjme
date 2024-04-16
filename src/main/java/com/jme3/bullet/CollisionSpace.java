@@ -75,6 +75,11 @@ public class CollisionSpace extends NativePhysicsObject {
      */
     final private PhysicsSpace.BroadphaseType broadphaseType;
     /**
+     * tuning parameters
+     */
+    final private CollisionConfiguration collisionConfiguration
+            = new CollisionConfiguration();
+    /**
      * comparator for raytest results
      */
     final private static Comparator<PhysicsRayTestResult> hitFractionComparator
@@ -269,6 +274,15 @@ public class CollisionSpace extends NativePhysicsObject {
      */
     public PhysicsSpace.BroadphaseType getBroadphaseType() {
         return broadphaseType;
+    }
+
+    /**
+     * Access the tuning parameters.
+     *
+     * @return the pre-existing instance (not null)
+     */
+    public CollisionConfiguration getConfiguration() {
+        return collisionConfiguration;
     }
 
     /**
@@ -692,8 +706,9 @@ public class CollisionSpace extends NativePhysicsObject {
         assert numSolvers == 1 : numSolvers;
 
         int broadphase = getBroadphaseType().ordinal();
+        long configId = collisionConfiguration.nativeId();
         long spaceId = createCollisionSpace(worldMin.x, worldMin.y, worldMin.z,
-                worldMax.x, worldMax.y, worldMax.z, broadphase);
+                worldMax.x, worldMax.y, worldMax.z, broadphase, configId);
         assert spaceId != 0L;
 
         initThread(spaceId);
@@ -794,8 +809,9 @@ public class CollisionSpace extends NativePhysicsObject {
     native private static int contactTest(
             long spaceId, long pcoId, PhysicsCollisionListener listener);
 
-    native private long createCollisionSpace(float minX, float minY, float minZ,
-            float maxX, float maxY, float maxZ, int broadphaseType);
+    native private long createCollisionSpace(
+            float minX, float minY, float minZ, float maxX, float maxY,
+            float maxZ, int broadphaseType, long configId);
 
     native private static void finalizeNative(long spaceId);
 

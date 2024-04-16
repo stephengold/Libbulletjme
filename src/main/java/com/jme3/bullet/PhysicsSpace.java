@@ -861,8 +861,10 @@ public class PhysicsSpace
         Vector3f max = getWorldMax(null);
         Vector3f min = getWorldMin(null);
         int numSolvers = countSolvers();
-        long nativeId
-                = createPhysicsSpace(min, max, broadphase, numSolvers);
+        CollisionConfiguration config = getConfiguration();
+        long configId = config.nativeId();
+        long nativeId = createPhysicsSpace(
+                min, max, broadphase, numSolvers, configId);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId) == 2 // BT_DISCRETE_DYNAMICS_WORLD
@@ -1205,8 +1207,9 @@ public class PhysicsSpace
 
     native private static int countManifolds(long spaceId);
 
-    native private long createPhysicsSpace(Vector3f minVector,
-            Vector3f maxVector, int broadphaseType, int numSolvers);
+    native private long createPhysicsSpace(
+            Vector3f minVector, Vector3f maxVector, int broadphaseType,
+            int numSolvers, long configId);
 
     native private static void getGravity(long spaceId, Vector3f storeVector);
 

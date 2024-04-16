@@ -70,11 +70,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
  * Method:    createPhysicsSoftSpace
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZ)J
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftSpace
 (JNIEnv *pEnv, jobject object, jobject minVector, jobject maxVector,
-        jint broadphase, jboolean) {
+        jint broadphase, jboolean, jlong configId) {
     jmeClasses::initJavaClasses(pEnv);
 
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
@@ -89,7 +89,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftS
 
     jmePhysicsSoftSpace * const
             pSpace = new jmePhysicsSoftSpace(pEnv, object); //dance003
-    pSpace->createPhysicsSoftSpace(min, max, (int) broadphase);
+    btCollisionConfiguration * const pConfig
+            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
+
+    pSpace->createPhysicsSoftSpace(min, max, (int) broadphase, pConfig);
 
     return reinterpret_cast<jlong> (pSpace);
 }

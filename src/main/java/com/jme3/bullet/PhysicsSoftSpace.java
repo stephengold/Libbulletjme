@@ -219,7 +219,10 @@ public class PhysicsSoftSpace extends PhysicsSpace {
         int broadphase = getBroadphaseType().ordinal();
         Vector3f max = getWorldMax(null);
         Vector3f min = getWorldMin(null);
-        long nativeId = createPhysicsSoftSpace(min, max, broadphase, false);
+        CollisionConfiguration config = getConfiguration();
+        long configId = config.nativeId();
+        long nativeId =
+                createPhysicsSoftSpace(min, max, broadphase, false, configId);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId) == 4 // BT_SOFT_RIGID_DYNAMICS_WORLD
@@ -349,8 +352,9 @@ public class PhysicsSoftSpace extends PhysicsSpace {
 
     native private static void addSoftBody(long softSpaceId, long softBodyId);
 
-    native private long createPhysicsSoftSpace(Vector3f minVector,
-            Vector3f maxVector, int broadphaseType, boolean threading);
+    native private long createPhysicsSoftSpace(
+            Vector3f minVector, Vector3f maxVector, int broadphaseType,
+            boolean threading, long configId);
 
     native private static int getNumSoftBodies(long softSpaceId);
 

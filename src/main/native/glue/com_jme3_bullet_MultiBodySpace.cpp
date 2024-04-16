@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023 jMonkeyEngine
+ * Copyright (c) 2020-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -127,11 +127,11 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
 /*
  * Class:     com_jme3_bullet_MultiBodySpace
  * Method:    createMultiBodySpace
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;I)J
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 (JNIEnv *pEnv, jobject object, jobject minVector, jobject maxVector,
-        jint broadphaseType) {
+        jint broadphaseType, jlong configId) {
     jmeClasses::initJavaClasses(pEnv);
 
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
@@ -146,7 +146,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 
     jmeMultiBodySpace * const
             pSpace = new jmeMultiBodySpace(pEnv, object); //dance003
-    pSpace->createMultiBodySpace(min, max, broadphaseType);
+    btCollisionConfiguration * const pConfig
+            = reinterpret_cast<btCollisionConfiguration *> (configId);
+    NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
+
+    pSpace->createMultiBodySpace(min, max, broadphaseType, pConfig);
 
     return reinterpret_cast<jlong> (pSpace);
 }

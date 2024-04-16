@@ -55,7 +55,7 @@ public:
      */
     void
     createMultiBodySpace(const btVector3& min, const btVector3& max,
-            jint broadphaseType);
+            jint broadphaseType, btCollisionConfiguration *);
     /*
      * getters:
      */

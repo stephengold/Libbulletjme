@@ -78,7 +78,7 @@ public:
 
     void
     createCollisionSpace(const btVector3& min, const btVector3& max,
-            int ordinal);
+            int broadphaseType, btCollisionConfiguration *);
 
     const btCollisionWorld *
     getCollisionWorld() const {
