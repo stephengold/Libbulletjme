@@ -93,7 +93,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_DeformableSpace_createSpace
             = reinterpret_cast<btCollisionConfiguration *> (configId);
     NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
 
-    pSpace->createDeformableSpace(min, max, broadphase, pConfig);
+    pSpace->createDeformableSpace(min, max, (int)broadphase, pConfig);
 
     return reinterpret_cast<jlong> (pSpace);
 }

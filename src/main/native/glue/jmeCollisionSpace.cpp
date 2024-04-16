@@ -120,9 +120,9 @@ void jmeCollisionSpace::attachThread() {
 }
 
 btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
-        const btVector3 & min, const btVector3 & max, int broadphaseId) {
+        const btVector3 & min, const btVector3 & max, int broadphaseType) {
     btBroadphaseInterface * pBroadphase;
-    switch (broadphaseId) {
+    switch (broadphaseType) {
         case 0:
             pBroadphase = new btSimpleBroadphase(); //dance009
             break;
@@ -150,10 +150,10 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
 }
 
 void jmeCollisionSpace::createCollisionSpace(const btVector3& min,
-        const btVector3& max, int broadphaseId,
+        const btVector3& max, int broadphaseType,
         btCollisionConfiguration *pCollisionConfiguration) {
     btBroadphaseInterface * const
-            pBroadphase = createBroadphase(min, max, broadphaseId);
+            pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Use the default collision dispatcher plus GImpact.
     btCollisionDispatcher * const

@@ -183,7 +183,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_countManifolds
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 (JNIEnv *pEnv, jobject object, jobject minVector, jobject maxVector,
-        jint broadphaseType, jint numSolvers, jlong configId) {
+        jint broadphase, jint numSolvers, jlong configId) {
     jmeClasses::initJavaClasses(pEnv);
 
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
@@ -205,11 +205,11 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 #if BT_THREADSAFE
     ASSERT_CHK(pEnv, numSolvers >= 1, 0);
     ASSERT_CHK(pEnv, numSolvers <= BT_MAX_THREAD_COUNT, 0);
-    pSpace->createMultiThreadedSpace(min, max, (int) broadphaseType,
+    pSpace->createMultiThreadedSpace(min, max, (int) broadphase,
             (int) numSolvers, pConfig);
 #else
     ASSERT_CHK(pEnv, numSolvers == 1, 0);
-    pSpace->createPhysicsSpace(min, max, (int) broadphaseType, pConfig);
+    pSpace->createPhysicsSpace(min, max, (int) broadphase, pConfig);
 #endif // BT_THREADSAFE
 
     return reinterpret_cast<jlong> (pSpace);

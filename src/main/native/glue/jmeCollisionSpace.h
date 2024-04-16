@@ -66,7 +66,7 @@ protected:
 
     void attachThread();
     btBroadphaseInterface * createBroadphase(const btVector3 & min,
-            const btVector3 & max, int broadphaseId);
+            const btVector3 & max, int broadphaseType);
 
 public:
     /*

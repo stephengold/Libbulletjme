@@ -38,7 +38,7 @@
  */
 void jmeMultiBodySpace::
 createMultiBodySpace(const btVector3& min, const btVector3& max,
-        jint broadphaseType, btCollisionConfiguration *pCollisionConfiguration) {
+        int broadphaseType, btCollisionConfiguration *pCollisionConfiguration) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);

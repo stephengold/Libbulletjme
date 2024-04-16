@@ -71,11 +71,11 @@ void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
 #else // BT_THREADSAFE
 
 void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
-        const btVector3& max, int broadphaseId,
+        const btVector3& max, int broadphaseType,
         btCollisionConfiguration *pCollisionConfiguration) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
-            pBroadphase = createBroadphase(min, max, broadphaseId);
+            pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Use the default collision dispatcher plus GImpact.
     btCollisionDispatcher * const

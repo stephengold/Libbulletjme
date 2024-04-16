@@ -131,7 +131,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBodySpace_addMultiBodyConstrain
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
 (JNIEnv *pEnv, jobject object, jobject minVector, jobject maxVector,
-        jint broadphaseType, jlong configId) {
+        jint broadphase, jlong configId) {
     jmeClasses::initJavaClasses(pEnv);
 
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
@@ -150,7 +150,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBodySpace_createMultiBodySpace
             = reinterpret_cast<btCollisionConfiguration *> (configId);
     NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
 
-    pSpace->createMultiBodySpace(min, max, broadphaseType, pConfig);
+    pSpace->createMultiBodySpace(min, max, (int) broadphase, pConfig);
 
     return reinterpret_cast<jlong> (pSpace);
 }
