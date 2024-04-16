@@ -24,10 +24,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_addSoftBody
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
  * Method:    createPhysicsSoftSpace
- * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IZJ)J
+ * Signature: (Lcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;IJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSoftSpace_createPhysicsSoftSpace
-  (JNIEnv *, jobject, jobject, jobject, jint, jboolean, jlong);
+  (JNIEnv *, jobject, jobject, jobject, jint, jlong);
 
 /*
  * Class:     com_jme3_bullet_PhysicsSoftSpace
