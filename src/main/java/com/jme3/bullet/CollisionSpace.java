@@ -164,22 +164,22 @@ public class CollisionSpace extends NativePhysicsObject {
      * @param broadphaseType which broadphase accelerator to use (not null)
      * @param numSolvers the number of contact-and-constraint solvers in the
      * thread-safe pool (&ge;1, &le;64, default=1)
-     * @param collisionConfiguration the desired configuration (not null)
+     * @param configuration the desired configuration (not null)
      */
     protected CollisionSpace(Vector3f worldMin, Vector3f worldMax,
             PhysicsSpace.BroadphaseType broadphaseType, int numSolvers,
-            CollisionConfiguration collisionConfiguration) {
+            CollisionConfiguration configuration) {
         Validate.finite(worldMin, "world min");
         Validate.finite(worldMax, "world max");
         Validate.nonNull(broadphaseType, "broadphase type");
         Validate.inRange(numSolvers, "number of solvers", 1, 64);
-        Validate.nonNull(collisionConfiguration, "collision configuration");
+        Validate.nonNull(configuration, "configuration");
 
         this.worldMin.set(worldMin);
         this.worldMax.set(worldMax);
         this.broadphaseType = broadphaseType;
         this.numSolvers = numSolvers;
-        this.collisionConfiguration = collisionConfiguration;
+        this.collisionConfiguration = configuration;
         create();
     }
     // *************************************************************************

@@ -234,13 +234,12 @@ public class PhysicsSpace
      * @param broadphaseType which broadphase accelerator to use (not null)
      * @param numSolvers the desired number of solvers in the thread-safe pool
      * (&ge;1, &le;64, default=numThreads)
-     * @param collisionConfiguration the desired configuration (not null)
+     * @param configuration the desired configuration (not null)
      */
-    public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
-            BroadphaseType broadphaseType, int numSolvers,
-            CollisionConfiguration collisionConfiguration) {
-        super(worldMin, worldMax, broadphaseType, numSolvers,
-                collisionConfiguration);
+    public PhysicsSpace(
+            Vector3f worldMin, Vector3f worldMax, BroadphaseType broadphaseType,
+            int numSolvers, CollisionConfiguration configuration) {
+        super(worldMin, worldMax, broadphaseType, numSolvers, configuration);
     }
 
     /**
