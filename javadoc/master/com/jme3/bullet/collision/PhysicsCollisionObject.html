@@ -1093,7 +1093,7 @@ loadScripts(document, 'script');</script>
  CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>the minimum distance per timestep to trigger CCD (in
+<dd>the minimum distance per simulation step to trigger CCD (in
  physics-space units, &ge;0)</dd>
 </dl>
 </section>
@@ -1605,8 +1605,9 @@ loadScripts(document, 'script');</script>
  CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>threshold</code> - the desired minimum distance per timestep to trigger CCD
- (in physics-space units, &gt;0) or zero to disable CCD (default=0)</dd>
+<dd><code>threshold</code> - the desired minimum distance per simulation step to
+ trigger CCD (in physics-space units, &gt;0) or zero to disable CCD
+ (default=0)</dd>
 </dl>
 </section>
 </li>
