@@ -67,3 +67,33 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionConfiguration_finalizeNativ
 
     delete pInfo; //dance045
 }
+
+/*
+ * Class:     com_jme3_bullet_CollisionConfiguration
+ * Method:    maxManifolds
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionConfiguration_maxManifolds
+(JNIEnv *pEnv, jclass, jlong infoId) {
+    const btDefaultCollisionConstructionInfo * const
+            pInfo = reinterpret_cast<btDefaultCollisionConstructionInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The construction info does not exist.", 0);
+
+    jint result = pInfo->m_defaultMaxPersistentManifoldPoolSize;
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionConfiguration
+ * Method:    penetrationDepthSolver
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionConfiguration_penetrationDepthSolver
+(JNIEnv *pEnv, jclass, jlong infoId) {
+    const btDefaultCollisionConstructionInfo * const
+            pInfo = reinterpret_cast<btDefaultCollisionConstructionInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The construction info does not exist.", 0);
+
+    jint result = pInfo->m_useEpaPenetrationAlgorithm;
+    return result;
+}

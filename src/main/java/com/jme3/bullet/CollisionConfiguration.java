@@ -78,6 +78,33 @@ public class CollisionConfiguration extends NativePhysicsObject {
         super.setNativeId(configId);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the size of the persistent-manifold pool. (native field:
+     * m_defaultMaxPersistentManifoldPoolSize)
+     *
+     * @return the count (&gt;0)
+     */
+    public int maxManifolds() {
+        long configId = nativeId();
+        int result = maxManifolds(configId);
+        return result;
+    }
+
+    /**
+     * Return which penetration-depth solver is used. (native field:
+     * m_useEpaPenetrationAlgorithm)
+     *
+     * @return 0 for {@code btMinkowskiPenetrationDepthSolver} or 1 for
+     * {@code btGjkEpaPenetrationDepthSolver}
+     */
+    public int penetrationDepthSolver() {
+        long configId = nativeId();
+        int result = penetrationDepthSolver(configId);
+        return result;
+    }
+    // *************************************************************************
     // Java private methods
 
     /**
@@ -96,4 +123,8 @@ public class CollisionConfiguration extends NativePhysicsObject {
             int maxManifolds, int penetrationDepthSolver);
 
     native private static void finalizeNative(long configId);
+
+    native private static int maxManifolds(long configId);
+
+    native private static int penetrationDepthSolver(long configId);
 }

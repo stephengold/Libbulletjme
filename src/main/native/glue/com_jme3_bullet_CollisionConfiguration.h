@@ -23,6 +23,22 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionConfiguration_createNative
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionConfiguration_finalizeNative
   (JNIEnv *, jclass, jlong);
 
+/*
+ * Class:     com_jme3_bullet_CollisionConfiguration
+ * Method:    maxManifolds
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionConfiguration_maxManifolds
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_CollisionConfiguration
+ * Method:    penetrationDepthSolver
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_CollisionConfiguration_penetrationDepthSolver
+  (JNIEnv *, jclass, jlong);
+
 #ifdef __cplusplus
 }
 #endif
