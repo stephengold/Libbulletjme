@@ -184,7 +184,7 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_PhysicsSpace_countManifolds
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 (JNIEnv *pEnv, jobject object, jobject minVector, jobject maxVector,
-        jint broadphase, jint numSolvers, jlong configId) {
+        jint broadphase, jint numSolvers, jlong infoId) {
     jmeClasses::initJavaClasses(pEnv);
 
     NULL_CHK(pEnv, minVector, "The min vector does not exist.", 0)
@@ -199,18 +199,19 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_PhysicsSpace_createPhysicsSpace
 
     jmePhysicsSpace * const
             pSpace = new jmePhysicsSpace(pEnv, object); //dance003
-    btSoftBodyRigidBodyCollisionConfiguration * const pConfig
-            = reinterpret_cast<btSoftBodyRigidBodyCollisionConfiguration *> (configId);
-    NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.", 0)
+
+    const btDefaultCollisionConstructionInfo * const pInfo
+            = reinterpret_cast<btDefaultCollisionConstructionInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The construction info does not exist.", 0)
 
 #if BT_THREADSAFE
     ASSERT_CHK(pEnv, numSolvers >= 1, 0);
     ASSERT_CHK(pEnv, numSolvers <= BT_MAX_THREAD_COUNT, 0);
-    pSpace->createMultiThreadedSpace(min, max, (int) broadphase,
-            (int) numSolvers, pConfig);
+    pSpace->createMultiThreadedSpace(
+            min, max, (int) broadphase, (int) numSolvers, pInfo);
 #else
     ASSERT_CHK(pEnv, numSolvers == 1, 0);
-    pSpace->createPhysicsSpace(min, max, (int) broadphase, pConfig);
+    pSpace->createPhysicsSpace(min, max, (int) broadphase, pInfo);
 #endif // BT_THREADSAFE
 
     return reinterpret_cast<jlong> (pSpace);

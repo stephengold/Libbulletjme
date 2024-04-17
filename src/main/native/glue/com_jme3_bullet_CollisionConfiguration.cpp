@@ -46,9 +46,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionConfiguration_createNative
 (JNIEnv *pEnv, jclass) {
     jmeClasses::initJavaClasses(pEnv);
 
-    btSoftBodyRigidBodyCollisionConfiguration *pConfig
-            = new btSoftBodyRigidBodyCollisionConfiguration(); //dance010
-    return reinterpret_cast<jlong> (pConfig);
+    btDefaultCollisionConstructionInfo *pInfo
+            = new btDefaultCollisionConstructionInfo(); //dance045
+    return reinterpret_cast<jlong> (pInfo);
 }
 
 /*
@@ -57,10 +57,10 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionConfiguration_createNative
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionConfiguration_finalizeNative
-(JNIEnv *pEnv, jclass, jlong configId) {
-    btSoftBodyRigidBodyCollisionConfiguration * const
-            pConfig = reinterpret_cast<btSoftBodyRigidBodyCollisionConfiguration *> (configId);
-    NULL_CHK(pEnv, pConfig, "The collision configuration does not exist.",);
+(JNIEnv *pEnv, jclass, jlong infoId) {
+    btDefaultCollisionConstructionInfo * const
+            pInfo = reinterpret_cast<btDefaultCollisionConstructionInfo *> (infoId);
+    NULL_CHK(pEnv, pInfo, "The construction info does not exist.",);
 
-    delete pConfig; //dance010
+    delete pInfo; //dance045
 }

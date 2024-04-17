@@ -57,7 +57,7 @@ public:
      */
     void
     createDeformableSpace(const btVector3& min, const btVector3& max,
-            int broadphaseType, btCollisionConfiguration *);
+            int broadphaseType, const btDefaultCollisionConstructionInfo *);
     /*
      * getters:
      */

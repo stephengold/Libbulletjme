@@ -44,12 +44,14 @@
 
 void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
         const btVector3& max, int broadphaseType, int numSolvers,
-        btCollisionConfiguration *pCollisionConfiguration) {
+        const btDefaultCollisionConstructionInfo *pInfo) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Use the default collision dispatcher plus GImpact.
+    btCollisionConfiguration * const
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(*pInfo); //dance010
     btCollisionDispatcher * const
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
@@ -72,12 +74,14 @@ void jmePhysicsSpace::createMultiThreadedSpace(const btVector3& min,
 
 void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
         const btVector3& max, int broadphaseType,
-        btCollisionConfiguration *pCollisionConfiguration) {
+        const btDefaultCollisionConstructionInfo *pInfo) {
     // Create the pair cache for broadphase collision detection.
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Use the default collision dispatcher plus GImpact.
+    btCollisionConfiguration * const
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(*pInfo); //dance010
     btCollisionDispatcher * const
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);

@@ -151,11 +151,13 @@ btBroadphaseInterface * jmeCollisionSpace::createBroadphase(
 
 void jmeCollisionSpace::createCollisionSpace(const btVector3& min,
         const btVector3& max, int broadphaseType,
-        btCollisionConfiguration *pCollisionConfiguration) {
+        const btDefaultCollisionConstructionInfo *pInfo) {
     btBroadphaseInterface * const
             pBroadphase = createBroadphase(min, max, broadphaseType);
 
     // Use the default collision dispatcher plus GImpact.
+    btCollisionConfiguration * const
+            pCollisionConfiguration = new btDefaultCollisionConfiguration(*pInfo); //dance010
     btCollisionDispatcher * const
             pDispatcher = new btCollisionDispatcher(pCollisionConfiguration); //dance008
     btGImpactCollisionAlgorithm::registerAlgorithm(pDispatcher);
@@ -211,6 +213,11 @@ jmeCollisionSpace::~jmeCollisionSpace() {
     btCollisionDispatcher *pDispatcher =
             (btCollisionDispatcher *) m_pCollisionWorld->getDispatcher();
     if (pDispatcher) {
+        btCollisionConfiguration *
+                pCollisionConfiguration = pDispatcher->getCollisionConfiguration();
+        if (pCollisionConfiguration) {
+            delete pCollisionConfiguration; //dance010
+        }
         delete pDispatcher; //dance008
     }
 
