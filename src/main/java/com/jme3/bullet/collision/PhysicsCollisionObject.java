@@ -389,7 +389,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * <p>
      * CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
-     * @return the minimum distance per timestep to trigger CCD (in
+     * @return the minimum distance per simulation step to trigger CCD (in
      * physics-space units, &ge;0)
      */
     public float getCcdMotionThreshold() {
@@ -966,8 +966,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
      * <p>
      * CCD doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
-     * @param threshold the desired minimum distance per timestep to trigger CCD
-     * (in physics-space units, &gt;0) or zero to disable CCD (default=0)
+     * @param threshold the desired minimum distance per simulation step to
+     * trigger CCD (in physics-space units, &gt;0) or zero to disable CCD
+     * (default=0)
      */
     public void setCcdMotionThreshold(float threshold) {
         long objectId = nativeId();

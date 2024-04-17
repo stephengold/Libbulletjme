@@ -622,7 +622,7 @@ Optimized Release-type builds that use Microsoft's Visual C++ compiler.
 ## Version 11.2.0 released on 13 August 2021
 
 + Bugfix: pure virtual call by btGImpactMeshShape destructor (Minie issue #17)
-+ Bugfix: Quickprof reset at the start of every timestep
++ Bugfix: Quickprof reset at the start of every simulation step
 + Bugfix: BT_PROFILE() macro never invokes CProfileManager
 + Added access to Quickprof profiling.
 

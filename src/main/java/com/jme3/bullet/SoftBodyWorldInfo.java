@@ -135,7 +135,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     }
 
     /**
-     * Read the maximum distance a node can travel per time step.
+     * Read the maximum distance a node can travel per simulation step.
      *
      * @return the distance (in physics-space units)
      */
@@ -168,7 +168,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     }
 
     /**
-     * Alter the maximum distance a node can travel per time step.
+     * Alter the maximum distance a node can travel per simulation step.
      *
      * @param maxDisplacement the desired value (&gt;0, default=1000)
      */
