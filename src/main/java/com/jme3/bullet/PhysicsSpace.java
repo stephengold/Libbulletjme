@@ -255,7 +255,26 @@ public class PhysicsSpace
      */
     public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType, SolverType solverType) {
-        super(worldMin, worldMax, broadphaseType);
+        this(worldMin, worldMax, broadphaseType, solverType,
+                new CollisionConfiguration());
+    }
+
+    /**
+     * Instantiate a PhysicsSpace with the specified contact-and-constraint
+     * solver. Must be invoked on the designated physics thread.
+     *
+     * @param worldMin the desired minimum coordinate values (not null,
+     * unaffected, default=(-10k,-10k,-10k))
+     * @param worldMax the desired maximum coordinate values (not null,
+     * unaffected, default=(10k,10k,10k))
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     * @param solverType the desired contact-and-constraint solver (not null)
+     * @param configuration the desired configuration (not null)
+     */
+    public PhysicsSpace(Vector3f worldMin, Vector3f worldMax,
+            BroadphaseType broadphaseType, SolverType solverType,
+            CollisionConfiguration configuration) {
+        super(worldMin, worldMax, broadphaseType, 1, configuration);
         Validate.nonNull(solverType, "solver type");
 
         if (this.solverType != solverType) {
