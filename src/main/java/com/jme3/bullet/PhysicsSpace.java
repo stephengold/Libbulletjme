@@ -882,10 +882,10 @@ public class PhysicsSpace
         Vector3f max = getWorldMax(null);
         Vector3f min = getWorldMin(null);
         int numSolvers = countSolvers();
-        CollisionConfiguration config = getConfiguration();
-        long configId = config.nativeId();
+        CollisionConfiguration configuration = getConfiguration();
+        long configurationId = configuration.nativeId();
         long nativeId = createPhysicsSpace(
-                min, max, broadphase, numSolvers, configId);
+                min, max, broadphase, numSolvers, configurationId);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId) == 2 // BT_DISCRETE_DYNAMICS_WORLD
@@ -1230,7 +1230,7 @@ public class PhysicsSpace
 
     native private long createPhysicsSpace(
             Vector3f minVector, Vector3f maxVector, int broadphaseType,
-            int numSolvers, long configId);
+            int numSolvers, long configurationId);
 
     native private static void getGravity(long spaceId, Vector3f storeVector);
 

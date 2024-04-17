@@ -74,8 +74,9 @@ public class CollisionConfiguration extends NativePhysicsObject {
         Validate.inRange(
                 penetrationDepthSolver, "penetration depth solver", 0, 1);
 
-        long configId = createNative(maxManifolds, penetrationDepthSolver);
-        super.setNativeId(configId);
+        long configurationId
+                = createNative(maxManifolds, penetrationDepthSolver);
+        super.setNativeId(configurationId);
     }
     // *************************************************************************
     // new methods exposed
@@ -87,8 +88,8 @@ public class CollisionConfiguration extends NativePhysicsObject {
      * @return the count (&gt;0)
      */
     public int maxManifolds() {
-        long configId = nativeId();
-        int result = maxManifolds(configId);
+        long configurationId = nativeId();
+        int result = maxManifolds(configurationId);
         return result;
     }
 
@@ -100,8 +101,8 @@ public class CollisionConfiguration extends NativePhysicsObject {
      * {@code btGjkEpaPenetrationDepthSolver}
      */
     public int penetrationDepthSolver() {
-        long configId = nativeId();
-        int result = penetrationDepthSolver(configId);
+        long configurationId = nativeId();
+        int result = penetrationDepthSolver(configurationId);
         return result;
     }
     // *************************************************************************
@@ -110,11 +111,11 @@ public class CollisionConfiguration extends NativePhysicsObject {
     /**
      * Free the identified tracked native object. Invoked by reflection.
      *
-     * @param configId the native identifier (not zero)
+     * @param configurationId the native identifier (not zero)
      */
-    private static void freeNativeObject(long configId) {
-        assert configId != 0L;
-        finalizeNative(configId);
+    private static void freeNativeObject(long configurationId) {
+        assert configurationId != 0L;
+        finalizeNative(configurationId);
     }
     // *************************************************************************
     // native private methods
@@ -122,9 +123,9 @@ public class CollisionConfiguration extends NativePhysicsObject {
     native private static long createNative(
             int maxManifolds, int penetrationDepthSolver);
 
-    native private static void finalizeNative(long configId);
+    native private static void finalizeNative(long configurationId);
 
-    native private static int maxManifolds(long configId);
+    native private static int maxManifolds(long configurationId);
 
-    native private static int penetrationDepthSolver(long configId);
+    native private static int penetrationDepthSolver(long configurationId);
 }

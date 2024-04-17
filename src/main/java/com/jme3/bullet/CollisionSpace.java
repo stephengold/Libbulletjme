@@ -726,9 +726,10 @@ public class CollisionSpace extends NativePhysicsObject {
         assert numSolvers == 1 : numSolvers;
 
         int broadphase = getBroadphaseType().ordinal();
-        long configId = collisionConfiguration.nativeId();
-        long spaceId = createCollisionSpace(worldMin.x, worldMin.y, worldMin.z,
-                worldMax.x, worldMax.y, worldMax.z, broadphase, configId);
+        long configurationId = collisionConfiguration.nativeId();
+        long spaceId = createCollisionSpace(
+                worldMin.x, worldMin.y, worldMin.z, worldMax.x, worldMax.y,
+                worldMax.z, broadphase, configurationId);
         assert spaceId != 0L;
 
         initThread(spaceId);
@@ -831,7 +832,7 @@ public class CollisionSpace extends NativePhysicsObject {
 
     native private long createCollisionSpace(
             float minX, float minY, float minZ, float maxX, float maxY,
-            float maxZ, int broadphaseType, long configId);
+            float maxZ, int broadphaseType, long configurationId);
 
     native private static void finalizeNative(long spaceId);
 

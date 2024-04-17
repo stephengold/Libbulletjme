@@ -209,9 +209,9 @@ public class DeformableSpace extends MultiBodySpace {
         int broadphase = getBroadphaseType().ordinal();
         Vector3f max = getWorldMax(null);
         Vector3f min = getWorldMin(null);
-        CollisionConfiguration config = getConfiguration();
-        long configId = config.nativeId();
-        long nativeId = createSpace(min, max, broadphase, configId);
+        CollisionConfiguration configuration = getConfiguration();
+        long configurationId = configuration.nativeId();
+        long nativeId = createSpace(min, max, broadphase, configurationId);
         assert nativeId != 0L;
 
         assert getWorldType(nativeId)
@@ -343,7 +343,7 @@ public class DeformableSpace extends MultiBodySpace {
     native private static void addSoftBody(long spaceId, long softBodyId);
 
     native private long createSpace(Vector3f minVector, Vector3f maxVector,
-            int broadphaseType, long configId);
+            int broadphaseType, long configurationId);
 
     native private static int getNumSoftBodies(long spaceId);
 
