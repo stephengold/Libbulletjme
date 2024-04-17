@@ -27,6 +27,7 @@
 package jme3utilities.minie;
 
 import com.jme3.bounding.BoundingBox;
+import com.jme3.bullet.CollisionConfiguration;
 import com.jme3.bullet.DeformableSpace;
 import com.jme3.bullet.MultiBody;
 import com.jme3.bullet.MultiBodyJointType;
@@ -808,8 +809,12 @@ public class PhysicsDumper extends Dumper {
         int mode = solverInfo.mode();
         stream.printf(" mode=%s]", SolverMode.describe(mode));
 
-        // 4th line: use flags, raytest flags, and world extent
-        addLine(indent);
+        // 4th line: configuration, use flags, raytest flags, and world extent
+        CollisionConfiguration configuration = space.getConfiguration();
+        PhysicsDescriber describer = getDescriber();
+        String confDesc = describer.describe(configuration);
+        stream.printf("%n%s conf[%s]", indent, confDesc);
+
         if (space.isCcdWithStaticOnly()) {
             stream.print(" CCDwso");
         }
@@ -833,7 +838,6 @@ public class PhysicsDumper extends Dumper {
         }
 
         // For soft spaces, 5th line has the world info.
-        PhysicsDescriber describer = getDescriber();
         if (space instanceof PhysicsSoftSpace) {
             SoftBodyWorldInfo info = ((PhysicsSoftSpace) space).getWorldInfo();
             String infoDesc = describer.describe(info);
