@@ -182,11 +182,20 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <div class="block">Instantiate a PhysicsSpace with the specified number of
  sequential-impulse solvers.</div>
 </div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.bullet.PhysicsSpace.BroadphaseType,com.jme3.bullet.SolverType)" class="member-name-link">PhysicsSpace</a><wbr>(<a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMin,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.bullet.PhysicsSpace.BroadphaseType,int,com.jme3.bullet.CollisionConfiguration)" class="member-name-link">PhysicsSpace</a><wbr>(<a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMin,
+ <a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMax,
+ <a href="PhysicsSpace.BroadphaseType.html" title="enum class in com.jme3.bullet">PhysicsSpace.BroadphaseType</a>&nbsp;broadphaseType,
+ int&nbsp;numSolvers,
+ <a href="CollisionConfiguration.html" title="class in com.jme3.bullet">CollisionConfiguration</a>&nbsp;collisionConfiguration)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Instantiate a PhysicsSpace with the specified number of
+ sequential-impulse solvers.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.bullet.PhysicsSpace.BroadphaseType,com.jme3.bullet.SolverType)" class="member-name-link">PhysicsSpace</a><wbr>(<a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMin,
  <a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMax,
  <a href="PhysicsSpace.BroadphaseType.html" title="enum class in com.jme3.bullet">PhysicsSpace.BroadphaseType</a>&nbsp;broadphaseType,
  <a href="SolverType.html" title="enum class in com.jme3.bullet">SolverType</a>&nbsp;solverType)</code></div>
-<div class="col-last even-row-color">
+<div class="col-last odd-row-color">
 <div class="block">Instantiate a PhysicsSpace with the specified contact-and-constraint
  solver.</div>
 </div>
@@ -616,6 +625,30 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <dd><code>broadphaseType</code> - which broadphase accelerator to use (not null)</dd>
 <dd><code>numSolvers</code> - the desired number of solvers in the thread-safe pool
  (&ge;1, &le;64, default=numThreads)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(com.jme3.math.Vector3f,com.jme3.math.Vector3f,com.jme3.bullet.PhysicsSpace.BroadphaseType,int,com.jme3.bullet.CollisionConfiguration)">
+<h3>PhysicsSpace</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PhysicsSpace</span><wbr><span class="parameters">(<a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMin,
+ <a href="../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;worldMax,
+ <a href="PhysicsSpace.BroadphaseType.html" title="enum class in com.jme3.bullet">PhysicsSpace.BroadphaseType</a>&nbsp;broadphaseType,
+ int&nbsp;numSolvers,
+ <a href="CollisionConfiguration.html" title="class in com.jme3.bullet">CollisionConfiguration</a>&nbsp;collisionConfiguration)</span></div>
+<div class="block">Instantiate a PhysicsSpace with the specified number of
+ sequential-impulse solvers. Must be invoked on the designated physics
+ thread.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>worldMin</code> - the desired minimum coordinate values (not null,
+ unaffected, default=(-10k,-10k,-10k))</dd>
+<dd><code>worldMax</code> - the desired maximum coordinate values (not null,
+ unaffected, default=(10k,10k,10k))</dd>
+<dd><code>broadphaseType</code> - which broadphase accelerator to use (not null)</dd>
+<dd><code>numSolvers</code> - the desired number of solvers in the thread-safe pool
+ (&ge;1, &le;64, default=numThreads)</dd>
+<dd><code>collisionConfiguration</code> - the desired configuration (not null)</dd>
 </dl>
 </section>
 </li>
