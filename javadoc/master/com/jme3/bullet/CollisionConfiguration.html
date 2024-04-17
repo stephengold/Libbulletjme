@@ -80,7 +80,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CollisionConfiguration</span>
 <span class="extends-implements">extends <a href="NativePhysicsObject.html" title="class in com.jme3.bullet">NativePhysicsObject</a></span></div>
 <div class="block">Tuning parameters for a CollisionSpace, based on Bullet's
- btDefaultCollisionConstructionInfo.</div>
+ btDefaultCollisionConstructionInfo. Immutable.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -115,6 +115,11 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">CollisionConfiguration</a>()</code></div>
 <div class="col-last even-row-color">
 <div class="block">Instantiate an instance with the default parameter values.</div>
+</div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">CollisionConfiguration</a><wbr>(int&nbsp;maxManifolds,
+ int&nbsp;penetrationDepthSolver)</code></div>
+<div class="col-last odd-row-color">
+<div class="block">Instantiate an instance with the specified parameter values.</div>
 </div>
 </div>
 </section>
@@ -160,6 +165,22 @@ loadScripts(document, 'script');</script>
 <h3>CollisionConfiguration</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CollisionConfiguration</span>()</div>
 <div class="block">Instantiate an instance with the default parameter values.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(int,int)">
+<h3>CollisionConfiguration</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">CollisionConfiguration</span><wbr><span class="parameters">(int&nbsp;maxManifolds,
+ int&nbsp;penetrationDepthSolver)</span></div>
+<div class="block">Instantiate an instance with the specified parameter values.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>maxManifolds</code> - the desired size of the persistent-manifold pool
+ (&gt;0, default=4096)</dd>
+<dd><code>penetrationDepthSolver</code> - 0 for
+ <code>btMinkowskiPenetrationDepthSolver</code> or 1 for
+ <code>btGjkEpaPenetrationDepthSolver</code> (default=1)</dd>
+</dl>
 </section>
 </li>
 </ul>
