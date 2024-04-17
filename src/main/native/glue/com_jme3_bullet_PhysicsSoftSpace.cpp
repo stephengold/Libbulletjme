@@ -38,7 +38,6 @@
 #include "jmeBulletUtil.h"
 #include "jmeUserInfo.h"
 #include "BulletSoftBody/btSoftBody.h"
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 
 /*

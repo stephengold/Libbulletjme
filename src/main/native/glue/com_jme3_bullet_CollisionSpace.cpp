@@ -33,7 +33,6 @@
 /*
  * Author: Normen Hansen
  */
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_CollisionSpace.h"
 #include "jmeCollisionSpace.h"
 #include "jmeBulletUtil.h"

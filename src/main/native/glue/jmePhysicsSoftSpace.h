@@ -33,7 +33,6 @@
 #define JME_PHYSICS_SOFT_SPACE_H
 
 #include "jmePhysicsSpace.h"
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
 
 /*

@@ -38,7 +38,6 @@
 #include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
 #include "BulletDynamics/MLCPSolvers/btMLCPSolver.h"
 #include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_PhysicsSpace.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"

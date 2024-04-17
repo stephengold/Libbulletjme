@@ -36,7 +36,6 @@
 #include "BulletDynamics/MLCPSolvers/btDantzigSolver.h"
 #include "BulletDynamics/MLCPSolvers/btLemkeSolver.h"
 #include "BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h"
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_MultiBodySpace.h"
 #include "jmeBulletUtil.h"
 #include "jmeMultiBodySpace.h"

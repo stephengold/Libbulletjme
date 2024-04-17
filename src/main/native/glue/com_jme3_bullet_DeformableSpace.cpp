@@ -33,7 +33,6 @@
 /*
  * Author: Stephen Gold
  */
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
 #include "com_jme3_bullet_DeformableSpace.h"
 #include "jmeBulletUtil.h"
 #include "jmeDeformableSpace.h"
