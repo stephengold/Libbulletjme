@@ -277,15 +277,6 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Access the tuning parameters.
-     *
-     * @return the pre-existing instance (not null)
-     */
-    public CollisionConfiguration getConfiguration() {
-        return collisionConfiguration;
-    }
-
-    /**
      * Access the CollisionSpace <b>running on this thread</b>. For parallel
      * physics, this may be invoked from the OpenGL thread.
      *
@@ -294,6 +285,15 @@ public class CollisionSpace extends NativePhysicsObject {
     public static CollisionSpace getCollisionSpace() {
         CollisionSpace result = physicsSpaceTL.get();
         return result;
+    }
+
+    /**
+     * Access the tuning parameters.
+     *
+     * @return the pre-existing instance (not null)
+     */
+    public CollisionConfiguration getConfiguration() {
+        return collisionConfiguration;
     }
 
     /**
