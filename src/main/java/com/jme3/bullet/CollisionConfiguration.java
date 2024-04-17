@@ -32,10 +32,11 @@
 package com.jme3.bullet;
 
 import java.util.logging.Logger;
+import jme3utilities.Validate;
 
 /**
  * Tuning parameters for a CollisionSpace, based on Bullet's
- * btDefaultCollisionConstructionInfo.
+ * btDefaultCollisionConstructionInfo. Immutable.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -55,8 +56,26 @@ public class CollisionConfiguration extends NativePhysicsObject {
      * Instantiate an instance with the default parameter values.
      */
     public CollisionConfiguration() {
-        long configId = createNative();
-        setNativeId(configId);
+        this(4_096, 1);
+    }
+
+    /**
+     * Instantiate an instance with the specified parameter values.
+     *
+     * @param maxManifolds the desired size of the persistent-manifold pool
+     * (&gt;0, default=4096)
+     * @param penetrationDepthSolver 0 for
+     * {@code btMinkowskiPenetrationDepthSolver} or 1 for
+     * {@code btGjkEpaPenetrationDepthSolver} (default=1)
+     */
+    public CollisionConfiguration(
+            int maxManifolds, int penetrationDepthSolver) {
+        Validate.positive(maxManifolds, "max manifolds");
+        Validate.inRange(
+                penetrationDepthSolver, "penetration depth solver", 0, 1);
+
+        long configId = createNative(maxManifolds, penetrationDepthSolver);
+        super.setNativeId(configId);
     }
     // *************************************************************************
     // Java private methods
@@ -73,7 +92,8 @@ public class CollisionConfiguration extends NativePhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static long createNative();
+    native private static long createNative(
+            int maxManifolds, int penetrationDepthSolver);
 
     native private static void finalizeNative(long configId);
 }

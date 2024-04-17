@@ -40,14 +40,17 @@
 /*
  * Class:     com_jme3_bullet_CollisionConfiguration
  * Method:    createNative
- * Signature: ()J
+ * Signature: (II)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionConfiguration_createNative
-(JNIEnv *pEnv, jclass) {
+(JNIEnv *pEnv, jclass, jint maxManifolds, jint penetrationDepthSolver) {
     jmeClasses::initJavaClasses(pEnv);
 
     btDefaultCollisionConstructionInfo *pInfo
             = new btDefaultCollisionConstructionInfo(); //dance045
+    pInfo->m_defaultMaxPersistentManifoldPoolSize = maxManifolds;
+    pInfo->m_useEpaPenetrationAlgorithm = penetrationDepthSolver;
+
     return reinterpret_cast<jlong> (pInfo);
 }
 

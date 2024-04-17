@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     com_jme3_bullet_CollisionConfiguration
  * Method:    createNative
- * Signature: ()J
+ * Signature: (II)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_CollisionConfiguration_createNative
-  (JNIEnv *, jclass);
+  (JNIEnv *, jclass, jint, jint);
 
 /*
  * Class:     com_jme3_bullet_CollisionConfiguration
