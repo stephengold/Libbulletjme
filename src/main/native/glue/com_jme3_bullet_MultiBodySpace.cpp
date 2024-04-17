@@ -29,6 +29,10 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * Author: Stephen Gold
+ */
 #include "btMultiBody.h"
 #include "btMultiBodyDynamicsWorld.h"
 #include "btMultiBodyLinkCollider.h"
@@ -40,9 +44,6 @@
 #include "jmeBulletUtil.h"
 #include "jmeMultiBodySpace.h"
 #include "jmeUserInfo.h"
-/*
- * Author: Stephen Gold
- */
 
 /*
  * Class:     com_jme3_bullet_MultiBodySpace

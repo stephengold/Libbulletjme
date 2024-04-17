@@ -29,13 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "jmeClasses.h"
-#include <stdio.h>
-#include "LinearMath/btThreads.h"
 
 /*
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
+#include "jmeClasses.h"
+#include <stdio.h>
+#include "LinearMath/btThreads.h"
 
 // public fields
 

@@ -32,16 +32,15 @@
 #ifndef _Included_jmeCollisionSpace
 #define _Included_jmeCollisionSpace
 
+/*
+ * Author: Normen Hansen
+ */
 #include <jni.h>
 #include "btBulletCollisionCommon.h"
 #include "BulletCollision/CollisionDispatch/btCollisionObject.h"
 #include "BulletCollision/CollisionDispatch/btGhostObject.h"
 #include "BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h"
 #include "LinearMath/btThreads.h"
-
-/*
- * Author: Normen Hansen
- */
 
 struct jmeFilterCallback : public btOverlapFilterCallback {
     bool needBroadphaseCollision(btBroadphaseProxy*, btBroadphaseProxy*) const;

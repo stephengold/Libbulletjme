@@ -32,14 +32,14 @@
 #ifndef _Included_jmeUserInfo
 #define _Included_jmeUserInfo
 
-#include "jmeCollisionSpace.h"
-
 /*
  * Information attached to each btCollisionObject or btMultiBody
  * via setUserPointer(), for the convenience of Libbulletjme.
  *
  * Author: Stephen Gold
  */
+#include "jmeCollisionSpace.h"
+
 typedef struct jmeUserInfo {
 public:
     jint m_group; // CollisionGroup: a bitmask with exactly one bit set

@@ -29,14 +29,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "com_jme3_bullet_MultiBody.h"
-#include "btMultiBody.h"
-#include "jmeBulletUtil.h"
-#include "jmeUserInfo.h"
 
 /*
  * Author: Stephen Gold
  */
+#include "com_jme3_bullet_MultiBody.h"
+#include "btMultiBody.h"
+#include "jmeBulletUtil.h"
+#include "jmeUserInfo.h"
 
 /*
  * Class:     com_jme3_bullet_MultiBody

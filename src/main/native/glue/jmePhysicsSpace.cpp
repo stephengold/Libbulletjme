@@ -29,16 +29,16 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/*
+ * Author: Normen Hansen
+ */
 #if BT_THREADSAFE
 #include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
 #endif
 #include "jmePhysicsSpace.h"
 #include "jmeClasses.h"
 #include "jmeUserInfo.h"
-
-/*
- * Author: Normen Hansen
- */
 
 #if BT_THREADSAFE
 

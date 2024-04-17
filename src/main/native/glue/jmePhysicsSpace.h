@@ -32,6 +32,9 @@
 #ifndef JME_PHYSICS_SPACE_H
 #define JME_PHYSICS_SPACE_H
 
+/*
+ * Author: Normen Hansen
+ */
 #include "jmeCollisionSpace.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision/CollisionDispatch/btCollisionDispatcher.h"
@@ -40,9 +43,6 @@
 #include "BulletCollision/NarrowPhaseCollision/btManifoldPoint.h"
 #include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 
-/*
- * Author: Normen Hansen
- */
 class jmePhysicsSpace : public jmeCollisionSpace {
 protected:
     void

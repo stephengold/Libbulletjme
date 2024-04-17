@@ -29,13 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "jmeCollisionSpace.h"
-#include "jmeClasses.h"
-#include "jmeUserInfo.h"
 
 /*
  * Author: Normen Hansen
  */
+#include "jmeCollisionSpace.h"
+#include "jmeClasses.h"
+#include "jmeUserInfo.h"
 
 /*
  * During the broadphase, test whether the specified pair of proxies

@@ -32,13 +32,13 @@
 #ifndef JME_BULLET_UTIL_H
 #define JME_BULLET_UTIL_H
 
+/*
+ * Author: Normen Hansen
+ */
 #include "jmeClasses.h"
 #include "btBulletDynamicsCommon.h"
 #include "LinearMath/btVector3.h"
 
-/*
- * Author: Normen Hansen
- */
 class jmeBulletUtil {
 public:
     // convert Bullet math objects to jMonkeyEngine/SimMath:

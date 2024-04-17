@@ -32,14 +32,13 @@
 #ifndef JME_DEFORMABLE_SPACE_H
 #define JME_DEFORMABLE_SPACE_H
 
-#include "jmeMultiBodySpace.h"
-#include "BulletSoftBody/btDeformableMultiBodyDynamicsWorld.h"
-
 /*
  * Author: Stephen Gold
  *
  * Based on jmePhysicsSoftSpace.h by dokthar
  */
+#include "jmeMultiBodySpace.h"
+#include "BulletSoftBody/btDeformableMultiBodyDynamicsWorld.h"
 
 /*
  * A jmeMultiBodySpace with support for deformables.

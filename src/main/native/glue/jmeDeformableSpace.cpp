@@ -29,16 +29,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.h"
-#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
-#include "jmeClasses.h"
-#include "jmeDeformableSpace.h"
 
 /*
  * Author: Stephen Gold
  *
  * Based on jmePhysicsSoftSpace.cpp by dokthar
  */
+#include "BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.h"
+#include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
+#include "jmeClasses.h"
+#include "jmeDeformableSpace.h"
+
 void jmeDeformableSpace::createDeformableSpace(const btVector3& min,
         const btVector3& max, int broadphaseType,
         const btDefaultCollisionConstructionInfo *pInfo) {

@@ -29,13 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include <math.h>
-#include "jmeBulletUtil.h"
-#include "jmeUserInfo.h"
 
 /*
  * Author: Normen Hansen, Empire Phoenix, Lutherion
  */
+#include <math.h>
+#include "jmeBulletUtil.h"
+#include "jmeUserInfo.h"
 
 // Copy JMonkeyEngine Vector3f data to a Bullet btVector3 object.
 

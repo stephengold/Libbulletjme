@@ -29,13 +29,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "jmeMultiBodySpace.h"
-#include "jmeClasses.h"
-#include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
 
 /*
  * Author: Stephen Gold
  */
+#include "jmeMultiBodySpace.h"
+#include "jmeClasses.h"
+#include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
+
 void jmeMultiBodySpace::
 createMultiBodySpace(const btVector3& min, const btVector3& max,
         int broadphaseType, const btDefaultCollisionConstructionInfo *pInfo) {

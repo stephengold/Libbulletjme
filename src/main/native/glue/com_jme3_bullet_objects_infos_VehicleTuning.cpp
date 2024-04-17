@@ -29,12 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "com_jme3_bullet_objects_infos_VehicleTuning.h"
-#include "jmeBulletUtil.h"
-#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
+
 /*
  * Author: Stephen Gold
  */
+#include "com_jme3_bullet_objects_infos_VehicleTuning.h"
+#include "jmeBulletUtil.h"
+#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
 
 /*
  * Class:     com_jme3_bullet_objects_infos_VehicleTuning

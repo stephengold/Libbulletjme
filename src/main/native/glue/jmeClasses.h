@@ -30,12 +30,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
- * Author: Normen Hansen
- */
 #ifndef _Included_jmeClasses
 #define _Included_jmeClasses
 
+/*
+ * Author: Normen Hansen
+ */
 #include <jni.h>
 
 #define LIBBULLETJME_VERSION "20.2.0"

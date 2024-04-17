@@ -29,12 +29,12 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "jmeMotionState.h"
-#include "jmeBulletUtil.h"
 
 /*
  * Author: Normen Hansen
  */
+#include "jmeMotionState.h"
+#include "jmeBulletUtil.h"
 
 jmeMotionState::jmeMotionState() {
     trans = new btTransform(); //dance024

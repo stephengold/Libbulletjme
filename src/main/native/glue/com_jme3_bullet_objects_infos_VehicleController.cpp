@@ -35,7 +35,6 @@
  *
  * Based on com_jme3_bullet_objects_infos_PhysicsVehicle by Normen Hansen.
  */
-
 #include "com_jme3_bullet_objects_infos_VehicleController.h"
 #include "jmeBulletUtil.h"
 #include "jmePhysicsSpace.h"

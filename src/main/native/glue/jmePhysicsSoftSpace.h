@@ -32,12 +32,12 @@
 #ifndef JME_PHYSICS_SOFT_SPACE_H
 #define JME_PHYSICS_SOFT_SPACE_H
 
-#include "jmePhysicsSpace.h"
-#include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
-
 /*
  * Author: Dokthar
  */
+#include "jmePhysicsSpace.h"
+#include "BulletSoftBody/btSoftRigidDynamicsWorld.h"
+
 class jmePhysicsSoftSpace : public jmePhysicsSpace {
 public:
     /*

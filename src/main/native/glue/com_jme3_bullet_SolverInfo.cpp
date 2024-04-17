@@ -29,13 +29,13 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
-#include "com_jme3_bullet_SolverInfo.h"
-#include "jmeClasses.h"
 
 /*
  * Author: Stephen Gold
  */
+#include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
+#include "com_jme3_bullet_SolverInfo.h"
+#include "jmeClasses.h"
 
 /*
  * Class:     com_jme3_bullet_SolverInfo

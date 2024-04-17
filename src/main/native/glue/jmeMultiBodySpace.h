@@ -32,12 +32,11 @@
 #ifndef JME_MULTI_BODY_SPACE_H
 #define JME_MULTI_BODY_SPACE_H
 
-#include "jmePhysicsSpace.h"
-#include "btMultiBodyDynamicsWorld.h"
-
 /*
  * Author: Stephen Gold
  */
+#include "jmePhysicsSpace.h"
+#include "btMultiBodyDynamicsWorld.h"
 
 /*
  * A jmePhysicsSpace with support for multibodies.

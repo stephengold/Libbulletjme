@@ -29,13 +29,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "jmePhysicsSoftSpace.h"
-#include "jmeClasses.h"
 
 /*
  * Author: dokthar
  */
 #include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
+#include "jmeClasses.h"
+#include "jmePhysicsSoftSpace.h"
+
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,
         const btVector3& max, int broadphaseType,
         const btDefaultCollisionConstructionInfo *pInfo) {

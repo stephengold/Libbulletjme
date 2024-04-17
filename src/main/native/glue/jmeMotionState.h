@@ -32,12 +32,12 @@
 #ifndef JME_MOTION_STATE_H
 #define JME_MOTION_STATE_H
 
-#include <jni.h>
-#include "btBulletDynamicsCommon.h"
-
 /*
  * Author: Normen Hansen
  */
+#include <jni.h>
+#include "btBulletDynamicsCommon.h"
+
 class jmeMotionState : public btMotionState {
 private:
     bool dirty;
