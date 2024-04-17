@@ -32,7 +32,6 @@
 package com.jme3.bullet;
 
 import com.jme3.bullet.collision.ContactListener;
-import com.jme3.bullet.collision.PhysicsCollisionEvent;
 import com.jme3.bullet.collision.PhysicsCollisionObject;
 import com.jme3.bullet.joints.Constraint;
 import com.jme3.bullet.joints.PhysicsJoint;
@@ -42,11 +41,9 @@ import com.jme3.bullet.objects.PhysicsRigidBody;
 import com.jme3.bullet.objects.PhysicsVehicle;
 import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Vector3f;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -113,16 +110,6 @@ public class PhysicsSpace
     // *************************************************************************
     // fields
 
-    /**
-     * contact-processed events not yet distributed to listeners
-     */
-    final private Deque<PhysicsCollisionEvent> contactProcessedEvents
-            = new ArrayDeque<>(20);
-    /**
-     * contact-started events not yet distributed to listeners
-     */
-    final private Deque<PhysicsCollisionEvent> contactStartedEvents
-            = new ArrayDeque<>(20);
     /**
      * time step (in seconds, &gt;0) ignored when maxSubSteps=0
      */
