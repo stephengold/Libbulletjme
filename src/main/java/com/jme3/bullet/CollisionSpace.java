@@ -77,8 +77,7 @@ public class CollisionSpace extends NativePhysicsObject {
     /**
      * tuning parameters
      */
-    final private CollisionConfiguration collisionConfiguration
-            = new CollisionConfiguration();
+    final private CollisionConfiguration collisionConfiguration;
     /**
      * comparator for raytest results
      */
@@ -151,15 +150,36 @@ public class CollisionSpace extends NativePhysicsObject {
      */
     protected CollisionSpace(Vector3f worldMin, Vector3f worldMax,
             PhysicsSpace.BroadphaseType broadphaseType, int numSolvers) {
+        this(worldMin, worldMax, broadphaseType, numSolvers,
+                new CollisionConfiguration());
+    }
+
+    /**
+     * Used internally.
+     *
+     * @param worldMin the desired minimum coordinate values (not null,
+     * unaffected, default=(-10k,-10k,-10k))
+     * @param worldMax the desired maximum coordinate values (not null,
+     * unaffected, default=(10k,10k,10k))
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     * @param numSolvers the number of contact-and-constraint solvers in the
+     * thread-safe pool (&ge;1, &le;64, default=1)
+     * @param collisionConfiguration the desired configuration (not null)
+     */
+    protected CollisionSpace(Vector3f worldMin, Vector3f worldMax,
+            PhysicsSpace.BroadphaseType broadphaseType, int numSolvers,
+            CollisionConfiguration collisionConfiguration) {
         Validate.finite(worldMin, "world min");
         Validate.finite(worldMax, "world max");
         Validate.nonNull(broadphaseType, "broadphase type");
         Validate.inRange(numSolvers, "number of solvers", 1, 64);
+        Validate.nonNull(collisionConfiguration, "collision configuration");
 
         this.worldMin.set(worldMin);
         this.worldMax.set(worldMax);
         this.broadphaseType = broadphaseType;
         this.numSolvers = numSolvers;
+        this.collisionConfiguration = collisionConfiguration;
         create();
     }
     // *************************************************************************
