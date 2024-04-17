@@ -95,7 +95,24 @@ public class PhysicsSoftSpace extends PhysicsSpace {
      */
     public PhysicsSoftSpace(Vector3f worldMin, Vector3f worldMax,
             BroadphaseType broadphaseType) {
-        super(worldMin, worldMax, broadphaseType, 1);
+        this(worldMin, worldMax, broadphaseType, new CollisionConfiguration());
+    }
+
+    /**
+     * Instantiate a PhysicsSoftSpace with a sequential-impulse solver. Must be
+     * invoked on the designated physics thread.
+     *
+     * @param worldMin the desired minimum coordinate value for each axis (not
+     * null, unaffected, default=(-10k,-10k,-10k))
+     * @param worldMax the desired maximum coordinate value for each axis (not
+     * null, unaffected, default=(10k,10k,10k))
+     * @param broadphaseType which broadphase accelerator to use (not null)
+     * @param configuration the desired configuration (not null)
+     */
+    public PhysicsSoftSpace(
+            Vector3f worldMin, Vector3f worldMax, BroadphaseType broadphaseType,
+            CollisionConfiguration configuration) {
+        super(worldMin, worldMax, broadphaseType, 1, configuration);
 
         long spaceId = super.nativeId();
         long worldInfoId = getWorldInfo(spaceId);
