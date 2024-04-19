@@ -121,13 +121,14 @@ public:
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	//12 bytes
-	unsigned short int m_quantizedAabbMin[3];
-	unsigned short int m_quantizedAabbMax[3];
+	uint16_t m_quantizedAabbMin[3];
+	uint16_t m_quantizedAabbMax[3];
 	//4 bytes, points to the root of the subtree
-	int m_rootNodeIndex;
+	int32_t m_rootNodeIndex;
 	//4 bytes
-	int m_subtreeSize;
-	int m_padding[3];
+	int32_t m_subtreeSize;
+	//pad the size to 32 bytes
+	char m_padding[12];
 
 	btBvhSubtreeInfo()
 	{
