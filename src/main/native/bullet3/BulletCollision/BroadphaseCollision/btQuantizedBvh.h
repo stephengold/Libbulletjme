@@ -79,8 +79,10 @@ btQuantizedBvhNode
 	int32_t getTriangleIndex() const // stephengold modified 2024-04-19
 	{
 		btAssert(isLeafNode());
+//		unsigned int x = 0;// stephengold commented out 2024-04-19
+//		unsigned int y = (~(x & 0)) << (31 - MAX_NUM_PARTS_IN_BITS);// stephengold commented out 2024-04-19
 		// Get only the lower bits where the triangle index is stored
-		return (m_escapeIndexOrTriangleIndex & TRIANGLE_INDEX_MASK);// stephengold added 2024-04-19
+		return (m_escapeIndexOrTriangleIndex & TRIANGLE_INDEX_MASK);// stephengold modified 2024-04-19
 	}
 	int getPartId() const
 	{
@@ -91,7 +93,7 @@ btQuantizedBvhNode
 };
 
 /// btOptimizedBvhNode contains both internal and leaf node information.
-// stephengold deleted 2024-04-19
+// stephengold deleted a comment 2024-04-19
 ATTRIBUTE_ALIGNED16(struct)
 btOptimizedBvhNode
 {
@@ -121,14 +123,13 @@ public:
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	//12 bytes
-	uint16_t m_quantizedAabbMin[3];
-	uint16_t m_quantizedAabbMax[3];
+	uint16_t m_quantizedAabbMin[3]; // stephengold modified 2024-04-19
+	uint16_t m_quantizedAabbMax[3]; // stephengold modified 2024-04-19
 	//4 bytes, points to the root of the subtree
-	int32_t m_rootNodeIndex;
+	int32_t m_rootNodeIndex; // stephengold modified 2024-04-19
 	//4 bytes
-	int32_t m_subtreeSize;
-	//pad the size to 32 bytes
-	char m_padding[12];
+	int32_t m_subtreeSize; // stephengold modified 2024-04-19
+	char m_padding[12]; // pad the size to 32 bytes // stephengold modified 2024-04-19
 
 	btBvhSubtreeInfo()
 	{
