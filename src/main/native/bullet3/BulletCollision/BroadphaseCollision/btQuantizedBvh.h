@@ -61,22 +61,22 @@ btQuantizedBvhNode
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	//12 bytes
-	unsigned short int m_quantizedAabbMin[3];
-	unsigned short int m_quantizedAabbMax[3];
+	uint16_t m_quantizedAabbMin[3]; // stephengold modified 2024-04-19
+	uint16_t m_quantizedAabbMax[3]; // stephengold modified 2024-04-19
 	//4 bytes
-	int m_escapeIndexOrTriangleIndex;
+	int32_t m_escapeIndexOrTriangleIndex; // stephengold modified 2024-04-19
 
 	bool isLeafNode() const
 	{
 		//skipindex is negative (internal node), triangleindex >=0 (leafnode)
 		return (m_escapeIndexOrTriangleIndex >= 0);
 	}
-	int getEscapeIndex() const
+	int32_t getEscapeIndex() const // stephengold modified 2024-04-19
 	{
 		btAssert(!isLeafNode());
 		return -m_escapeIndexOrTriangleIndex;
 	}
-	int getTriangleIndex() const
+	int32_t getTriangleIndex() const // stephengold modified 2024-04-19
 	{
 		btAssert(isLeafNode());
 		// Get only the lower bits where the triangle index is stored
