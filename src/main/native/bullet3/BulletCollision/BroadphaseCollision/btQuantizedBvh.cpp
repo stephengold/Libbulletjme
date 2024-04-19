@@ -34,6 +34,7 @@ btQuantizedBvh::btQuantizedBvh() : m_bulletVersion(BT_BULLET_VERSION),
         btAssert(sizeof(uint16_t) == 2); // stephengold added 2024-04-19
         btAssert(sizeof(uint32_t) == 4); // stephengold added 2024-04-19
         btAssert(sizeof(btQuantizedBvhNode) == 16); // stephengold added 2024-04-19
+        btAssert(sizeof(btOptimizedBvhNode) % 32 == 0); // stephengold added 2024-04-19
 	m_bvhAabbMin.setValue(-SIMD_INFINITY, -SIMD_INFINITY, -SIMD_INFINITY);
 	m_bvhAabbMax.setValue(SIMD_INFINITY, SIMD_INFINITY, SIMD_INFINITY);
 }

@@ -91,25 +91,25 @@ btQuantizedBvhNode
 };
 
 /// btOptimizedBvhNode contains both internal and leaf node information.
-/// Total node size is 44 bytes / node. You can use the compressed version of 16 bytes.
+// stephengold deleted 2024-04-19
 ATTRIBUTE_ALIGNED16(struct)
 btOptimizedBvhNode
 {
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
-	//32 bytes
+	//32 bytes or 64 bytes // stephengold modified 2024-04-19
 	btVector3 m_aabbMinOrg;
 	btVector3 m_aabbMaxOrg;
 
 	//4
-	int m_escapeIndex;
+	int32_t m_escapeIndex; // stephengold modified 2024-04-19
 
 	//8
 	//for child nodes
-	int m_subPart;
-	int m_triangleIndex;
+	int32_t m_subPart; // stephengold modified 2024-04-19
+	int32_t m_triangleIndex; // stephengold modified 2024-04-19
 
-	//pad the size to 64 bytes
+	//pad the struct to a multiple of 32 bytes // stephengold modified 2024-04-19
 	char m_padding[20];
 };
 
