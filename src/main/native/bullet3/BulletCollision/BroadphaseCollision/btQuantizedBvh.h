@@ -28,6 +28,7 @@ class btSerializer;
 #include <stdlib.h>
 #endif  //DEBUG_CHECK_DEQUANTIZATION
 
+#include <stdint.h> // stephengold added 2024-04-19
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btAlignedAllocator.h"
 
