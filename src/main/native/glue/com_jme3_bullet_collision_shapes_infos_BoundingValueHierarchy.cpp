@@ -37,6 +37,11 @@
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
 
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    deSerialize
+ * Signature: ([B)J
+ */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_deSerialize
 (JNIEnv *pEnv, jclass, jbyteArray bytearray) {
     int len = pEnv->GetArrayLength(bytearray);
