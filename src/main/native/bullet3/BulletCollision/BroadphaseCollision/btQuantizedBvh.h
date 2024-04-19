@@ -51,6 +51,7 @@ class btSerializer;
 // actually) triangles each (since the sign bit is reserved
 #define MAX_NUM_PARTS_IN_BITS 10 // stephengold uncommented 2024-03-09
 //#define MAX_NUM_PARTS_IN_BITS 4 // stephengold commented out 2024-03-09
+#define TRIANGLE_INDEX_MASK ((uint32_t)0x1fffffUL) // stephengold added 2024-04-19
 
 ///btQuantizedBvhNode is a compressed aabb node, 16 bytes.
 ///Node can be used for leafnode or internal node. Leafnodes can point to 32-bit triangle index (non-negative range).
@@ -78,10 +79,8 @@ btQuantizedBvhNode
 	int getTriangleIndex() const
 	{
 		btAssert(isLeafNode());
-		unsigned int x = 0;
-		unsigned int y = (~(x & 0)) << (31 - MAX_NUM_PARTS_IN_BITS);
 		// Get only the lower bits where the triangle index is stored
-		return (m_escapeIndexOrTriangleIndex & ~(y));
+		return (m_escapeIndexOrTriangleIndex & TRIANGLE_INDEX_MASK);// stephengold added 2024-04-19
 	}
 	int getPartId() const
 	{
