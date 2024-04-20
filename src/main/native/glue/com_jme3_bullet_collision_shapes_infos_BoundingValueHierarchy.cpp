@@ -53,7 +53,17 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
 
     btOptimizedBvh * const
             pBvh = btOptimizedBvh::deSerializeInPlace(pBuffer, len, true);
-    return reinterpret_cast<jlong> (pBvh);
+    /*
+     * sanity checks:
+     */
+    unsigned int bufferSize = pBvh->calculateSerializeBufferSize();
+    btAssert(bufferSize == len);
+
+    jlong id1 = reinterpret_cast<jlong> (pBvh);
+    jlong id2 = reinterpret_cast<jlong> (pBuffer);
+    btAssert(id1 == id2);
+
+    return id1;
 }
 
 /*
