@@ -116,7 +116,7 @@ public:
         btVector3 result;
         jmeBulletUtil::convert(m_pCreateEnv, javaVertex, &result);
 
-#ifdef BT_DEBUG
+#ifdef _DEBUG
         if (!m_useSlowAabb) {
             /*
              * The supporting vertex must lie on or inside
