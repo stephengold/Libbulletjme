@@ -453,7 +453,7 @@ public:
 
 	////////////////////////////////////////////////////////////////////
 
-	SIMD_FORCE_INLINE bool isQuantized()
+	SIMD_FORCE_INLINE bool isQuantized() const // stephengold modified 2024-04-20
 	{
 		return m_useQuantization;
 	}
