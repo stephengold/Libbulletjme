@@ -223,6 +223,7 @@ model {
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3/LinearMath"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args "/I$projectDir/src/main/native/v-hacd/public"
+                    linker.args 'ws2_32.lib' // for htons()
 
                     if (isDebug) {
                         cppCompiler.args '/FS' // serialize PDB writes

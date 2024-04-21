@@ -34,6 +34,11 @@
  * Author: Stephen Gold
  */
 #include "com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy.h"
+#ifdef _WIN32
+#include <Winsock2.h> // for htons()
+#else
+#include <arpa/inet.h> // for htons()
+#endif
 #include "jmeBulletUtil.h"
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
 
@@ -51,8 +56,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
             reinterpret_cast<jbyte *> (pBuffer));
     EXCEPTION_CHK(pEnv, 0);
 
+    bool swapEndian = (htons(1) != 1);
     btOptimizedBvh * const
-            pBvh = btOptimizedBvh::deSerializeInPlace(pBuffer, len, true);
+            pBvh = btOptimizedBvh::deSerializeInPlace(pBuffer, len, swapEndian);
     /*
      * sanity checks:
      */
@@ -139,7 +145,8 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_infos_Boundin
 
     unsigned int bufferSize = pBvh->calculateSerializeBufferSize();
     char *pBuffer = (char *) btAlignedAlloc(bufferSize, 16); //dance015
-    bool success = pBvh->serialize(pBuffer, bufferSize, true);
+    bool swapEndian = (htons(1) != 1);
+    bool success = pBvh->serialize(pBuffer, bufferSize, swapEndian);
     if (!success) {
         pEnv->ThrowNew(jmeClasses::RuntimeException,
                 "Unable to serialize, native error reported");
