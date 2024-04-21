@@ -40,7 +40,7 @@
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    createShape
- * Signature: (J)J
+ * Signature: (ZZJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_createShape
 (JNIEnv *pEnv, jclass, jboolean isMemoryEfficient, jboolean buildBVH,
