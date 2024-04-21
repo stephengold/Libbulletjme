@@ -59,6 +59,22 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
+ * Method:    hasBvh
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_hasBvh
+(JNIEnv *pEnv, jclass, jlong shapeId) {
+    btBvhTriangleMeshShape *pShape
+            = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.", JNI_FALSE);
+    ASSERT_CHK(pEnv, pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE, JNI_FALSE);
+
+    bool result = (pShape->getOptimizedBvh() != NULL);
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    recalcAabb
  * Signature: (J)V
  */

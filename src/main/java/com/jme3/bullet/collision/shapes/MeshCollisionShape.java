@@ -333,6 +333,8 @@ public class MeshCollisionShape extends CollisionShape {
     native private static long
             createShape(boolean useCompression, boolean buildBvh, long meshId);
 
+    native private static boolean hasBvh(long shapeId);
+
     native private static void recalcAabb(long shapeId);
 
     native private static void setOptimizedBvh(long shapeId, long bvhId);
