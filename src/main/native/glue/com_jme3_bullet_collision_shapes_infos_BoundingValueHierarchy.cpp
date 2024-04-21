@@ -59,19 +59,21 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
     bool swapEndian = (htons(1) != 1);
     btOptimizedBvh * const
             pBvh = btOptimizedBvh::deSerializeInPlace(pBuffer, len, swapEndian);
+    jlong result = reinterpret_cast<jlong> (pBvh);
+#ifdef _DEBUG
     /*
      * sanity checks:
      */
     unsigned int bufferSize = pBvh->calculateSerializeBufferSize();
     btAssert(bufferSize == len);
 
-    jlong id1 = reinterpret_cast<jlong> (pBvh);
-    jlong id2 = reinterpret_cast<jlong> (pBuffer);
-    btAssert(id1 == id2);
+    jlong bufferId = reinterpret_cast<jlong> (pBuffer);
+    btAssert(bufferId == result);
 
     pBvh->checkSanity();
+#endif
 
-    return id1;
+    return result;
 }
 
 /*
