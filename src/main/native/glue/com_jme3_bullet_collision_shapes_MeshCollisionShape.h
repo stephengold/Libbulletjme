@@ -38,10 +38,10 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    setOptimizedBvh
- * Signature: (JJ)V
+ * Signature: (JJLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setOptimizedBvh
-  (JNIEnv *, jclass, jlong, jlong);
+  (JNIEnv *, jclass, jlong, jlong, jobject);
 
 #ifdef __cplusplus
 }

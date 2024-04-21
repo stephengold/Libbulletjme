@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023 jMonkeyEngine
+ * Copyright (c) 2020-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -72,11 +72,14 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_finalizeNative
-(JNIEnv *, jclass, jlong bvhId) {
-    if (bvhId != 0) {
-        void *pBuffer = reinterpret_cast<void *> (bvhId);
-        btAlignedFree(pBuffer); //dance035
-    }
+(JNIEnv *pEnv, jclass, jlong bvhId) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
+    pBvh->~btOptimizedBvh();
+
+    void *pBuffer = reinterpret_cast<void *> (bvhId);
+    btAlignedFree(pBuffer); //dance035
 }
 
 /*
@@ -91,7 +94,12 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.", 0);
     ASSERT_CHK(pEnv, pShape->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE, 0);
 
-    btOptimizedBvh * const pBvh = pShape->getOptimizedBvh();
+    btOptimizedBvh *pBvh = pShape->getOptimizedBvh();
+    if (pBvh == NULL) {
+        pShape->buildOptimizedBvh();
+        pBvh = pShape->getOptimizedBvh();
+    }
+
     return reinterpret_cast<jlong> (pBvh);
 }
 

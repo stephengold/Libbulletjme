@@ -34,8 +34,8 @@
  * Author: Normen Hansen
  */
 #include "com_jme3_bullet_collision_shapes_MeshCollisionShape.h"
-#include "jmeClasses.h"
 #include "BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h"
+#include "jmeBulletUtil.h"
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
@@ -122,10 +122,10 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollision
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    setOptimizedBvh
- * Signature: (JJ)V
+ * Signature: (JJLcom/jme3/math/Vector3f;)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_setOptimizedBvh
-(JNIEnv *pEnv, jclass, jlong shapeId, jlong bvhId) {
+(JNIEnv *pEnv, jclass, jlong shapeId, jlong bvhId, jobject scaleVector) {
     btBvhTriangleMeshShape * const
             pShape = reinterpret_cast<btBvhTriangleMeshShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btBvhTriangleMeshShape does not exist.",);
@@ -134,5 +134,9 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
     btOptimizedBvh * const pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
 
-    pShape->setOptimizedBvh(pBvh);
+    btVector3 scaling;
+    jmeBulletUtil::convert(pEnv, scaleVector, &scaling);
+    EXCEPTION_CHK(pEnv,);
+
+    pShape->setOptimizedBvh(pBvh, scaling);
 }

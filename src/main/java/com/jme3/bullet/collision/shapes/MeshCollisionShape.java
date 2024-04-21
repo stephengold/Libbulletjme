@@ -35,6 +35,7 @@ import com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy;
 import com.jme3.bullet.collision.shapes.infos.CompoundMesh;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.math.Triangle;
+import com.jme3.math.Vector3f;
 import java.util.Collection;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
@@ -286,6 +287,26 @@ public class MeshCollisionShape extends CollisionShape {
         long shapeId = nativeId();
         recalcAabb(shapeId);
     }
+
+    /**
+     * Alter the scale of this shape.
+     * <p>
+     * Note that if shapes are shared (between collision objects and/or compound
+     * shapes) changes can have unintended consequences.
+     *
+     * @param scale the desired scale factor for each local axis (not null, no
+     * negative component, unaffected, default=(1,1,1))
+     */
+    @Override
+    public void setScale(Vector3f scale) {
+        super.setScale(scale);
+
+        long shapeId = nativeId();
+        if (hasBvh(shapeId)) {
+            // Since super.setScale() might've caused a rebuild of the BVH:
+            this.bvh = new BoundingValueHierarchy(this);
+        }
+    }
     // *************************************************************************
     // Java private methods
 
@@ -310,22 +331,25 @@ public class MeshCollisionShape extends CollisionShape {
                 }
             }
         }
-
-        boolean buildBvh = (bvh == null);
+        /*
+         * Even if (bvh == null), building the BVH in createShape() is
+         * potentially wasteful, since then setScale() might trigger a rebuild.
+         */
+        boolean buildBvh = false;
         long meshId = nativeMesh.nativeId();
         long shapeId = createShape(useCompression, buildBvh, meshId);
         setNativeId(shapeId);
 
-        if (buildBvh) {
-            this.bvh = new BoundingValueHierarchy(this);
-        } else {
-            long bvhId = bvh.nativeId();
-            setOptimizedBvh(shapeId, bvhId);
-        }
-
         setContactFilterEnabled(enableContactFilter);
         setScale(scale);
         setMargin(margin);
+
+        if (bvh == null) {
+            this.bvh = new BoundingValueHierarchy(this);
+        } else {
+            long bvhId = bvh.nativeId();
+            setOptimizedBvh(shapeId, bvhId, scale);
+        }
     }
     // *************************************************************************
     // native private methods
@@ -337,5 +361,6 @@ public class MeshCollisionShape extends CollisionShape {
 
     native private static void recalcAabb(long shapeId);
 
-    native private static void setOptimizedBvh(long shapeId, long bvhId);
+    native private static void setOptimizedBvh(
+            long shapeId, long bvhId, Vector3f scaleVector);
 }
