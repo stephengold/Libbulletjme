@@ -215,6 +215,7 @@ public class TestBvh {
             case Windows64:
                 Assert.assertEquals(dp ? 2528 : 2480, numBytes);
                 break;
+            default: // TODO
         }
 
         System.gc();
