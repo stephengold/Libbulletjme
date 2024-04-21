@@ -345,12 +345,16 @@ public class MeshCollisionShape extends CollisionShape {
         setScale(scale);
         setMargin(margin);
 
+        assert !hasBvh(shapeId);
         if (bvh == null) {
             this.bvh = new BoundingValueHierarchy(this);
         } else {
             long bvhId = bvh.nativeId();
             setOptimizedBvh(shapeId, bvhId, scale);
         }
+        assert hasBvh(shapeId);
+        assert bvh.isCompressed() == useCompression :
+                bvh.isCompressed() + " != " + useCompression;
     }
     // *************************************************************************
     // native private methods

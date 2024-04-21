@@ -63,6 +63,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
     jlong id2 = reinterpret_cast<jlong> (pBuffer);
     btAssert(id1 == id2);
 
+    pBvh->checkSanity();
+
     return id1;
 }
 
@@ -76,6 +78,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
     const btOptimizedBvh * const
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
+    pBvh->checkSanity();
+
     pBvh->~btOptimizedBvh();
 
     void *pBuffer = reinterpret_cast<void *> (bvhId);
@@ -98,7 +102,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
     if (pBvh == NULL) {
         pShape->buildOptimizedBvh();
         pBvh = pShape->getOptimizedBvh();
+        btAssert(pBvh);
     }
+    pBvh->checkSanity();
 
     return reinterpret_cast<jlong> (pBvh);
 }
@@ -113,6 +119,7 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingV
     const btOptimizedBvh * const
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", JNI_FALSE);
+    pBvh->checkSanity();
 
     bool result = pBvh->isQuantized();
     return result;
@@ -128,6 +135,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_infos_Boundin
     const btOptimizedBvh * const
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+    pBvh->checkSanity();
 
     unsigned int bufferSize = pBvh->calculateSerializeBufferSize();
     char *pBuffer = (char *) btAlignedAlloc(bufferSize, 16); //dance015

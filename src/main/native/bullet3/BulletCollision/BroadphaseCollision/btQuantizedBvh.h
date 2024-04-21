@@ -457,6 +457,17 @@ public:
 	{
 		return m_useQuantization;
 	}
+        void checkSanity() const // stephengold added 2024-04-20
+        { // stephengold added 2024-04-20
+            btAssert(m_bulletVersion == BT_BULLET_VERSION); // stephengold added 2024-04-20
+            btAssert(m_traversalMode == TRAVERSAL_STACKLESS || // stephengold added 2024-04-20
+		m_traversalMode == TRAVERSAL_STACKLESS_CACHE_FRIENDLY || // stephengold added 2024-04-20
+		m_traversalMode == TRAVERSAL_RECURSIVE); // stephengold added 2024-04-20
+            btAssert(m_bvhAabbMin.x() <= m_bvhAabbMax.x()); // stephengold added 2024-04-20
+            btAssert(m_bvhAabbMin.y() <= m_bvhAabbMax.y()); // stephengold added 2024-04-20
+            btAssert(m_bvhAabbMin.z() <= m_bvhAabbMax.z()); // stephengold added 2024-04-20
+            btAssert(m_subtreeHeaderCount == m_SubtreeHeaders.size()); // stephengold added 2024-04-20
+        } // stephengold added 2024-04-20
 
 private:
 	// Special "copy" constructor that allows for in-place deserialization
