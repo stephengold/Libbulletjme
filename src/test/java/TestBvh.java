@@ -209,10 +209,10 @@ public class TestBvh {
         Platform platform = JmeSystem.getPlatform();
         switch (platform) {
             case Linux64:
-                // TODO
+                Assert.assertEquals(dp ? 2520 : 2472, numBytes);
                 break;
             case MacOSX_ARM64:
-                // TODO
+                Assert.assertEquals(dp ? 2520 : 2480, numBytes);
                 break;
             case Windows64:
                 Assert.assertEquals(dp ? 2528 : 2480, numBytes);
