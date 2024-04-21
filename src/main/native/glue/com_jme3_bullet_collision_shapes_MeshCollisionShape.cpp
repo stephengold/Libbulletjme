@@ -43,17 +43,15 @@
  * Signature: (ZZJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_createShape
-(JNIEnv *pEnv, jclass, jboolean isMemoryEfficient, jboolean buildBVH,
-        jlong meshId) {
+(JNIEnv *pEnv, jclass, jboolean quantized, jboolean buildBVH, jlong meshId) {
     jmeClasses::initJavaClasses(pEnv);
 
     btStridingMeshInterface *pMesh
             = reinterpret_cast<btStridingMeshInterface *> (meshId);
     NULL_CHK(pEnv, pMesh, "The btStridingMeshInterface does not exist.", 0)
 
-    btBvhTriangleMeshShape *
-            pShape = new btBvhTriangleMeshShape(pMesh, isMemoryEfficient,
-            buildBVH); //dance016
+    btBvhTriangleMeshShape *pShape
+            = new btBvhTriangleMeshShape(pMesh, quantized, buildBVH); //dance016
     return reinterpret_cast<jlong> (pShape);
 }
 
