@@ -90,37 +90,6 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
- * Method:    saveBVH
- * Signature: (J)[B
- */
-JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_MeshCollisionShape_saveBVH
-(JNIEnv *pEnv, jclass, jlong meshobj) {
-    btBvhTriangleMeshShape *pMesh
-            = reinterpret_cast<btBvhTriangleMeshShape *> (meshobj);
-    NULL_CHK(pEnv, pMesh, "The btBvhTriangleMeshShape does not exist.", 0);
-    ASSERT_CHK(pEnv, pMesh->getShapeType() == TRIANGLE_MESH_SHAPE_PROXYTYPE, 0);
-
-    btOptimizedBvh *pBvh = pMesh->getOptimizedBvh();
-    unsigned int ssize = pBvh->calculateSerializeBufferSize();
-    char *pBuffer = (char *) btAlignedAlloc(ssize, 16); //dance015
-    bool success = pBvh->serialize(pBuffer, ssize, true);
-    if (!success) {
-        pEnv->ThrowNew(jmeClasses::RuntimeException,
-                "Unable to serialize, native error reported");
-        return 0;
-    }
-
-    jbyteArray byteArray = pEnv->NewByteArray(ssize);
-    EXCEPTION_CHK(pEnv, 0);
-    pEnv->SetByteArrayRegion(byteArray, 0, ssize, (jbyte *) pBuffer);
-    EXCEPTION_CHK(pEnv, 0);
-    btAlignedFree(pBuffer); //dance015
-
-    return byteArray;
-}
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_MeshCollisionShape
  * Method:    setOptimizedBvh
  * Signature: (JJLcom/jme3/math/Vector3f;)V
  */
