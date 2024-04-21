@@ -478,6 +478,29 @@ public class TestLibbulletjme {
                 hull, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
+        // MeshCollisionShape with compressed BVH:
+        int[] indexArray = {0, 0, 0};
+        Vector3f[] positionArray = {new Vector3f(0f, 0f, 0f)};
+        IndexedMesh indexedMesh = new IndexedMesh(positionArray, indexArray);
+        MeshCollisionShape mesh = new MeshCollisionShape(true, indexedMesh);
+        verifyCollisionShapeDefaults(mesh);
+        Assert.assertTrue(mesh.canSplit());
+        Assert.assertEquals(1, mesh.countSubmeshes());
+        Assert.assertEquals(1, mesh.countMeshTriangles());
+        Assert.assertEquals(1, mesh.countMeshVertices());
+        Assert.assertNotNull(mesh.getBvh());
+        Assert.assertTrue(mesh.getBvh().isCompressed());
+        Assert.assertEquals(0.04f, mesh.getMargin(), 0f);
+        Assert.assertEquals(21, mesh.getShapeType());
+        Assert.assertTrue(mesh.isConcave());
+        Assert.assertFalse(mesh.isConvex());
+        Assert.assertFalse(mesh.isInfinite());
+        Assert.assertTrue(mesh.isNonMoving());
+        Assert.assertFalse(mesh.isPolyhedral());
+        buf = DebugShapeFactory.getDebugTriangles(
+                mesh, DebugShapeFactory.lowResolution);
+        Assert.assertEquals(9, buf.capacity());
+
         // MinkowkiSum
         MinkowskiSum sum = new MinkowskiSum(box, cone);
         verifyCollisionShapeDefaults(sum);
