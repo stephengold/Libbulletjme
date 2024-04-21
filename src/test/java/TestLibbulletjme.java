@@ -81,11 +81,9 @@ import com.jme3.math.Plane;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import com.jme3.system.NativeLibraryLoader;
 import com.simsilica.mathd.Matrix3d;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
-import java.io.File;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +140,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test001() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         // Create a PhysicsSpace using DBVT for broadphase.
         PhysicsSpace space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
@@ -186,7 +184,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test002() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         // Generate an L-shaped mesh: 12 vertices, 20 triangles
         float[] positionArray = {
@@ -282,7 +280,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test003() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
         FloatBuffer buf;
 
         // Box2d
@@ -629,7 +627,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test004() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         float radius = 1f;
         CollisionShape sphereShape = new SphereCollisionShape(radius);
@@ -739,7 +737,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test005() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         float radius = 0.2f;
         CollisionShape boxShape = new BoxCollisionShape(radius);
@@ -756,7 +754,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test006() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         int numLinks = 5;
         float baseMass = 1f;
@@ -936,7 +934,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test007() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         PhysicsSoftSpace physicsSpace
                 = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
@@ -995,7 +993,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test008() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         PhysicsSoftSpace physicsSpace
                 = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
@@ -1035,7 +1033,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test009() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         PhysicsSoftSpace physicsSpace
                 = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
@@ -1079,7 +1077,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test010() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         PhysicsSoftSpace physicsSpace
                 = new PhysicsSoftSpace(PhysicsSpace.BroadphaseType.DBVT);
@@ -1115,7 +1113,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test011() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         Quaternion q = new Quaternion().fromAngles(0.3f, 0.7f, 1f);
         Matrix3f rotMatrix = new Matrix3f().set(q);
@@ -1134,7 +1132,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test012() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         Vector3f min = new Vector3f(-10f, -10f, -10f);
         Vector3f max = new Vector3f(10f, 10f, 10f);
@@ -1232,7 +1230,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test013() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         // Generate a subdivided square mesh with alternating diagonals.
         int numLines = 3;
@@ -1364,7 +1362,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test014() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         // near p0 (isosceles triangle)
         boolean isInside0 = NativeLibrary.isInsideTriangle(
@@ -1420,7 +1418,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test015() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         Assert.assertTrue(ManifoldPoints.isContactCalcArea3Points());
         ManifoldPoints.setContactCalcArea3Points(false);
@@ -1521,7 +1519,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test016() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         PhysicsSpace space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
         SolverInfo info = space.getSolverInfo();
@@ -1555,7 +1553,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test017() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
 
         // default margin for collision shapes
         float margin = CollisionShape.getDefaultMargin();
@@ -1587,7 +1585,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test018() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
         PhysicsSpace space = new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT);
         space.setAccuracy(0.001f);
         space.setMaxSubSteps(1001);
@@ -1621,7 +1619,7 @@ public class TestLibbulletjme {
      */
     @Test
     public void test019() {
-        loadNativeLibrary();
+        Utils.loadNativeLibrary();
         RigidBodyMotionState state = new RigidBodyMotionState();
 
         Vector3f x = state.getLocation(null);
@@ -1723,46 +1721,6 @@ public class TestLibbulletjme {
 
         IndexedMesh result = new IndexedMesh(positionArray, indexArray);
         return result;
-    }
-
-    private static void loadNativeLibrary() {
-        boolean fromDist = false;
-
-        File directory;
-        if (fromDist) {
-            directory = new File("dist");
-        } else {
-            directory = new File("build/libs/bulletjme/shared");
-        }
-
-        boolean success = NativeLibraryLoader.loadLibbulletjme(
-                fromDist, directory, "Debug", "SpMt");
-        if (success) {
-            Assert.assertFalse(NativeLibrary.isDoublePrecision());
-            Assert.assertTrue(NativeLibrary.isThreadSafe());
-
-        } else { // fallback to Sp-flavored library
-            success = NativeLibraryLoader.loadLibbulletjme(
-                    fromDist, directory, "Debug", "Sp");
-            if (success) {
-                Assert.assertFalse(NativeLibrary.isDoublePrecision());
-                Assert.assertFalse(NativeLibrary.isThreadSafe());
-            }
-        }
-
-        if (!success) { // fallback to Dp-flavored library
-            success = NativeLibraryLoader.loadLibbulletjme(
-                    fromDist, directory, "Debug", "Dp");
-            if (success) {
-                Assert.assertTrue(NativeLibrary.isDoublePrecision());
-                Assert.assertFalse(NativeLibrary.isThreadSafe());
-            }
-        }
-
-        Assert.assertTrue(success);
-        Assert.assertTrue(NativeLibrary.countThreads() > 0);
-        Assert.assertTrue(NativeLibrary.isDebug());
-        Assert.assertFalse(NativeLibrary.versionNumber().isEmpty());
     }
 
     /**

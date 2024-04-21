@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021-2023, Stephen Gold
+ Copyright (c) 2021-2024 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -25,10 +25,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.system.NativeLibraryLoader;
 import com.simsilica.mathd.Quatd;
 import com.simsilica.mathd.Vec3d;
+import java.io.File;
 import java.util.logging.Logger;
 import org.junit.Assert;
 
@@ -140,5 +143,55 @@ final public class Utils {
     public static void assertEquals(
             Vector3f expected, Vector3f actual, float tolerance) {
         assertEquals(expected.x, expected.y, expected.z, actual, tolerance);
+    }
+
+    /**
+     * Load a Debug native library and verify its properties.
+     * <p>
+     * The search order is:
+     * <ol>
+     * <li>DebugSpMt</li>
+     * <li>DebugSp</li>
+     * <li>DebugDp</li>
+     * </ol>
+     */
+    public static void loadNativeLibrary() {
+        boolean fromDist = false;
+
+        File directory;
+        if (fromDist) {
+            directory = new File("dist");
+        } else {
+            directory = new File("build/libs/bulletjme/shared");
+        }
+
+        boolean success = NativeLibraryLoader.loadLibbulletjme(
+                fromDist, directory, "Debug", "SpMt");
+        if (success) {
+            Assert.assertFalse(NativeLibrary.isDoublePrecision());
+            Assert.assertTrue(NativeLibrary.isThreadSafe());
+
+        } else { // fallback to Sp-flavored library
+            success = NativeLibraryLoader.loadLibbulletjme(
+                    fromDist, directory, "Debug", "Sp");
+            if (success) {
+                Assert.assertFalse(NativeLibrary.isDoublePrecision());
+                Assert.assertFalse(NativeLibrary.isThreadSafe());
+            }
+        }
+
+        if (!success) { // fallback to Dp-flavored library
+            success = NativeLibraryLoader.loadLibbulletjme(
+                    fromDist, directory, "Debug", "Dp");
+            if (success) {
+                Assert.assertTrue(NativeLibrary.isDoublePrecision());
+                Assert.assertFalse(NativeLibrary.isThreadSafe());
+            }
+        }
+
+        Assert.assertTrue(success);
+        Assert.assertTrue(NativeLibrary.countThreads() > 0);
+        Assert.assertTrue(NativeLibrary.isDebug());
+        Assert.assertFalse(NativeLibrary.versionNumber().isEmpty());
     }
 }
