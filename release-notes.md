@@ -1,5 +1,30 @@
 # Release log for the Libbulletjme project
 
+## Version 21.0.0 released on 22 April 2024
+
++ Made numerous breaking changes to the native API.
++ Deleted the (deprecated) `DebugMeshCallback` class. (API change)
++ Bugfix:  JVM crash while serializing `BoundingValueHierarchy` (Minie issue 41)
++ Added the new `CollisionConfiguration` class and related methods:
+  + `CollisionSpace.getConfiguration()`
+  + `PhysicsDescriber.describe(CollisionConfiguration)`
+  + a 5-argument `CollisionSpace` constructor
+  + a 4-argument `PhysicsSoftSpace` constructor
+  + a pair of 5-argument `PhysicsSpace` constructors
++ Added 2 other public methods:
+  + `BoundingValueHierarchy.isCompressed()`
+  + `MeshCollisionShape.getBvh()`
++ Improved the performance of contact filtering by adding an early return
+  from `FilteredInteriorCountCallback`.
++ Began building Android binaries
+  using OpenJDK 11 (with Android Gradle plugin v7.4.0 and NDK v23.1.7779620)
+  instead of JDK 8 (with Android Gradle plugin v4.2.2 and NDK v21.3.6528147).
++ Began using `htons()` to configure byte swapping when serializing and
+  deserializing a `BoundingValueHierarchy`.  (This would be a breaking
+  change for big-endian platforms, if any were supported!)
++ Updated the Bullet sources to match SHA1 id=e9c461b0 of the bullet3 project,
+  to add a test for constraint pass in btMultiBody.cpp. (Thanks to Ian Chen)
+
 ## Version 20.2.0 released on 18 March 2024
 
 + Deprecated the `DebugMeshCallback` class.
