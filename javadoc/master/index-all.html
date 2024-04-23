@@ -1716,10 +1716,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Count the configured links in this MultiBody.</div>
 </dd>
-<dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#countContiguousNodes()" class="member-name-link">countContiguousNodes()</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
-<dd>
-<div class="block">Count the contiguous nodes in the hierarchy.</div>
-</dd>
 <dt><a href="jme3utilities/math/DistinctVectorValues.html#countDistinct()" class="member-name-link">countDistinct()</a> - Method in class jme3utilities.math.<a href="jme3utilities/math/DistinctVectorValues.html" title="class in jme3utilities.math">DistinctVectorValues</a></dt>
 <dd>
 <div class="block">Count the number of distinct vectors in the original buffer range.</div>
@@ -1811,6 +1807,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/MultiBodySpace.html#countMultiBodies()" class="member-name-link">countMultiBodies()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/MultiBodySpace.html" title="class in com.jme3.bullet">MultiBodySpace</a></dt>
 <dd>
 <div class="block">Count the multibodies in this space.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#countNodes()" class="member-name-link">countNodes()</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
+<dd>
+<div class="block">Count the all nodes in the hierarchy.</div>
 </dd>
 <dt><a href="com/jme3/bullet/objects/PhysicsSoftBody.html#countNodes()" class="member-name-link">countNodes()</a> - Method in class com.jme3.bullet.objects.<a href="com/jme3/bullet/objects/PhysicsSoftBody.html" title="class in com.jme3.bullet.objects">PhysicsSoftBody</a></dt>
 <dd>
@@ -2589,6 +2589,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Replace all tab, quote, newline, and backslash characters in the
  specified text with escape sequences.</div>
+</dd>
+<dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#escapeIndex(int)" class="member-name-link">escapeIndex(int)</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
+<dd>
+<div class="block">Return the escape index of the specified node.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/Activation.html#exempt" class="member-name-link">exempt</a> - Static variable in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/Activation.html" title="class in com.jme3.bullet.collision">Activation</a></dt>
 <dd>
@@ -5393,6 +5397,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Test whether the contact point's lateral friction is initialized.</div>
 </dd>
+<dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#isLeafNode(int)" class="member-name-link">isLeafNode(int)</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
+<dd>
+<div class="block">Test whether the specified node is a leaf of the hierarchy.</div>
+</dd>
 <dt><a href="com/jme3/bullet/joints/motors/RotationMotor.html#isMotorEnabled()" class="member-name-link">isMotorEnabled()</a> - Method in class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/RotationMotor.html" title="class in com.jme3.bullet.joints.motors">RotationMotor</a></dt>
 <dd>
 <div class="block">Test whether the motor is enabled (native field: m_enableMotor).</div>
@@ -7437,7 +7445,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#partId(int)" class="member-name-link">partId(int)</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
 <dd>
-<div class="block">Return the part index of the specified contiguous node.</div>
+<div class="block">Return the part index of the specified node.</div>
 </dd>
 <dt><a href="com/jme3/bullet/collision/PhysicsRayTestResult.html#partIndex()" class="member-name-link">partIndex()</a> - Method in class com.jme3.bullet.collision.<a href="com/jme3/bullet/collision/PhysicsRayTestResult.html" title="class in com.jme3.bullet.collision">PhysicsRayTestResult</a></dt>
 <dd>
@@ -10890,7 +10898,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html#triangleIndex(int)" class="member-name-link">triangleIndex(int)</a> - Method in class com.jme3.bullet.collision.shapes.infos.<a href="com/jme3/bullet/collision/shapes/infos/BoundingValueHierarchy.html" title="class in com.jme3.bullet.collision.shapes.infos">BoundingValueHierarchy</a></dt>
 <dd>
-<div class="block">Return the triangle index of the specified contiguous node.</div>
+<div class="block">Return the triangle index of the specified node.</div>
 </dd>
 <dt><a href="com/jme3/math/FastMath.html#TWO_PI" class="member-name-link">TWO_PI</a> - Static variable in class com.jme3.math.<a href="com/jme3/math/FastMath.html" title="class in com.jme3.math">FastMath</a></dt>
 <dd>
