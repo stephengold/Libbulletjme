@@ -168,7 +168,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
      * Return the part index of the specified contiguous node.
      *
      * @param nodeIndex the index of the contiguous node (&ge;0)
-     * @return the part index (&ge;0)
+     * @return the part index (&ge;0) or -1 if the node isn't a leaf
      */
     public int partId(int nodeIndex) {
         long bvhId = nativeId();
@@ -176,7 +176,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         Validate.inRange(nodeIndex, "node index", 0, lastNode);
         int result = getPartId(bvhId, nodeIndex);
 
-        assert result >= 0 : result;
+        assert result >= -1 : result;
         return result;
     }
 
@@ -224,7 +224,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
      * Return the triangle index of the specified contiguous node.
      *
      * @param nodeIndex the index of the contiguous node (&ge;0)
-     * @return the triangle index (&ge;0)
+     * @return the triangle index (&ge;0) or -1 if the node isn't a leaf
      */
     public int triangleIndex(int nodeIndex) {
         long bvhId = nativeId();
@@ -232,7 +232,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         Validate.inRange(nodeIndex, "node index", 0, lastNode);
         int result = getTriangleIndex(bvhId, nodeIndex);
 
-        assert result >= 0 : result;
+        assert result >= -1 : result;
         return result;
     }
     // *************************************************************************

@@ -193,7 +193,11 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
 
-    int result = pBvh->getPartId(nodeIndex);
+    int result = -1;
+    if (pBvh->isLeafNode(nodeIndex)) {
+        result = pBvh->getPartId(nodeIndex);
+    }
+
     return result;
 }
 
@@ -223,7 +227,11 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
 
-    int result = pBvh->getTriangleIndex(nodeIndex);
+    int result = -1;
+    if (pBvh->isLeafNode(nodeIndex)) {
+        result = pBvh->getTriangleIndex(nodeIndex);
+    }
+
     return result;
 }
 
