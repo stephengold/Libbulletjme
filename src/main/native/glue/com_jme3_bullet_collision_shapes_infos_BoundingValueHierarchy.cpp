@@ -96,6 +96,52 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getNumContiguousNodes
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumContiguousNodes
+(JNIEnv *pEnv, jclass, jlong bvhId) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = pBvh->getNumContiguousNodes();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getNumLeafNodes
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumLeafNodes
+(JNIEnv *pEnv, jclass, jlong bvhId) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = pBvh->getNumLeafNodes();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getNumSubtreeHeaders
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumSubtreeHeaders
+(JNIEnv *pEnv, jclass, jlong bvhId) {
+    btOptimizedBvh * const pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    BvhSubtreeInfoArray &array = pBvh->getSubtreeInfoArray();
+    int result = array.size();
+
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
  * Method:    getOptimizedBvh
  * Signature: (J)J
  */
@@ -115,6 +161,51 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
     pBvh->checkSanity();
 
     return reinterpret_cast<jlong> (pBvh);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getPartId
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getPartId
+  (JNIEnv *pEnv, jclass, jlong bvhId, jint nodeIndex) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = pBvh->getPartId(nodeIndex);
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getTraversalMode
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getTraversalMode
+(JNIEnv *pEnv, jclass, jlong bvhId) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = pBvh->getTraversalMode();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getTriangleIndex
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getTriangleIndex
+(JNIEnv *pEnv, jclass, jlong bvhId, jint nodeIndex) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = pBvh->getTriangleIndex(nodeIndex);
+    return result;
 }
 
 /*
@@ -162,4 +253,23 @@ JNIEXPORT jbyteArray JNICALL Java_com_jme3_bullet_collision_shapes_infos_Boundin
     btAlignedFree(pBuffer); //dance015
 
     return byteArray;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    setTraversalMode
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_setTraversalMode
+(JNIEnv *pEnv, jclass, jlong bvhId, jint mode) {
+    btOptimizedBvh * const pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
+
+    enum btQuantizedBvh::btTraversalMode traversalMode
+            = static_cast<enum btQuantizedBvh::btTraversalMode> (mode);
+    btAssert(traversalMode == btQuantizedBvh::TRAVERSAL_STACKLESS ||
+            traversalMode == btQuantizedBvh::TRAVERSAL_STACKLESS_CACHE_FRIENDLY ||
+            traversalMode == btQuantizedBvh::TRAVERSAL_RECURSIVE);
+
+    pBvh->setTraversalMode(traversalMode);
 }

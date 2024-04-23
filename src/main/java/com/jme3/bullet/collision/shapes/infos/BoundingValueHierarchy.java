@@ -83,6 +83,46 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     // new methods exposed
 
     /**
+     * Count the contiguous nodes in the hierarchy.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countContiguousNodes() {
+        long bvhId = nativeId();
+        int result = getNumContiguousNodes(bvhId);
+
+        assert result >= 0;
+        return result;
+    }
+
+    /**
+     * Count the leaf nodes in the hierarchy.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countLeafNodes() {
+        long bvhId = nativeId();
+        int result = getNumLeafNodes(bvhId);
+
+        assert result >= 0;
+        return result;
+    }
+
+    /**
+     * Count the subtree headers in the hierarchy (native field:
+     * m_SubtreeHeaders).
+     *
+     * @return the count (&ge;0)
+     */
+    public int countSubtreeHeaders() {
+        long bvhId = nativeId();
+        int result = getNumSubtreeHeaders(bvhId);
+
+        assert result >= 0;
+        return result;
+    }
+
+    /**
      * Test whether the hierarchy uses quantized AABB compression.
      *
      * @return true if compressed, otherwise false
@@ -90,6 +130,22 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     public boolean isCompressed() {
         long bvhId = nativeId();
         boolean result = isCompressed(bvhId);
+        return result;
+    }
+
+    /**
+     * Return the part index of the specified contiguous node.
+     *
+     * @param nodeIndex the index of the contiguous node (&ge;0)
+     * @return the part index (&ge;0)
+     */
+    public int partId(int nodeIndex) {
+        long bvhId = nativeId();
+        int lastNode = getNumContiguousNodes(bvhId) - 1;
+        Validate.inRange(nodeIndex, "node index", 0, lastNode);
+        int result = getPartId(bvhId, nodeIndex);
+
+        assert result >= 0 : result;
         return result;
     }
 
@@ -103,6 +159,49 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         byte[] result = serialize(bvhId);
 
         assert result != null;
+        return result;
+    }
+
+    /**
+     * Alter the traversal mode (native field: m_traversalMode).
+     *
+     * @param mode 0 for "stackless" or 1 for "stackless cache-friendly" or 2
+     * for "recursive" (default=0)
+     */
+    public void setTraversalMode(int mode) {
+        Validate.inRange(mode, "mode", 0, 2);
+
+        long bvhId = nativeId();
+        setTraversalMode(bvhId, mode);
+    }
+
+    /**
+     * Return the traversal mode (native field: m_traversalMode).
+     *
+     * @return 0 for "stackless" or 1 for "stackless cache-friendly" or 2 for
+     * "recursive"
+     */
+    public int traversalMode() {
+        long bvhId = nativeId();
+        int result = getTraversalMode(bvhId);
+
+        assert result >= 0 && result <= 2;
+        return result;
+    }
+
+    /**
+     * Return the triangle index of the specified contiguous node.
+     *
+     * @param nodeIndex the index of the contiguous node (&ge;0)
+     * @return the triangle index (&ge;0)
+     */
+    public int triangleIndex(int nodeIndex) {
+        long bvhId = nativeId();
+        int lastNode = getNumContiguousNodes(bvhId) - 1;
+        Validate.inRange(nodeIndex, "node index", 0, lastNode);
+        int result = getTriangleIndex(bvhId, nodeIndex);
+
+        assert result >= 0 : result;
         return result;
     }
     // *************************************************************************
@@ -124,9 +223,23 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
     native private static void finalizeNative(long bvhId);
 
+    native private static int getNumContiguousNodes(long bvhId);
+
+    native private static int getNumLeafNodes(long bvhId);
+
+    native private static int getNumSubtreeHeaders(long bvhId);
+
     native private static long getOptimizedBvh(long shapeId);
+
+    native private static int getPartId(long bvhId, int nodeIndex);
+
+    native private static int getTraversalMode(long bvhId);
+
+    native private static int getTriangleIndex(long bvhId, int nodeIndex);
 
     native private static boolean isCompressed(long bvhId);
 
     native private static byte[] serialize(long bvhId);
+
+    native private static void setTraversalMode(long bvhId, int mode);
 }

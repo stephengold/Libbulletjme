@@ -468,6 +468,39 @@ public:
             btAssert(m_bvhAabbMin.z() <= m_bvhAabbMax.z()); // stephengold added 2024-04-20
             btAssert(m_subtreeHeaderCount == m_SubtreeHeaders.size()); // stephengold added 2024-04-20
         } // stephengold added 2024-04-20
+	int getNumContiguousNodes() const        // stephengold added 2024-04-23
+	{                                        // stephengold added 2024-04-23
+		if (m_useQuantization) {         // stephengold added 2024-04-23
+			return m_quantizedContiguousNodes.size(); // stephengold added 2024-04-23
+		} else {                         // stephengold added 2024-04-23
+			return m_contiguousNodes.size(); // stephengold added 2024-04-23
+		}                                // stephengold added 2024-04-23
+	}                                        // stephengold added 2024-04-23
+	int getNumLeafNodes() const              // stephengold added 2024-04-23
+	{                                        // stephengold added 2024-04-23
+		if (m_useQuantization) {         // stephengold added 2024-04-23
+			return m_quantizedLeafNodes.size(); // stephengold added 2024-04-23
+		} else {                         // stephengold added 2024-04-23
+			return m_leafNodes.size(); // stephengold added 2024-04-23
+		}                                // stephengold added 2024-04-23
+	}                                        // stephengold added 2024-04-23
+	int getPartId(int nodeIndex) const       // stephengold added 2024-04-23
+	{                                        // stephengold added 2024-04-23
+		if (m_useQuantization) {         // stephengold added 2024-04-23
+			return m_quantizedContiguousNodes[nodeIndex].getPartId(); // stephengold added 2024-04-23
+		} else {                         // stephengold added 2024-04-23
+			return m_contiguousNodes[nodeIndex].m_subPart; // stephengold added 2024-04-23
+		}                                // stephengold added 2024-04-23
+	}                                        // stephengold added 2024-04-23
+	btTraversalMode getTraversalMode() const { return m_traversalMode; } // stephengold added 2024-04-23
+	int getTriangleIndex(int nodeIndex) const // stephengold added 2024-04-23
+	{                                        // stephengold added 2024-04-23
+		if (m_useQuantization) {         // stephengold added 2024-04-23
+			return m_quantizedContiguousNodes[nodeIndex].getTriangleIndex(); // stephengold added 2024-04-23
+		} else {                         // stephengold added 2024-04-23
+			return m_contiguousNodes[nodeIndex].m_triangleIndex; // stephengold added 2024-04-23
+		}                                // stephengold added 2024-04-23
+	}                                        // stephengold added 2024-04-23
 
 private:
 	// Special "copy" constructor that allows for in-place deserialization
