@@ -279,7 +279,7 @@ public class TestLibbulletjme {
      * Generate various collision shapes and verify their properties.
      */
     @Test
-    public void test003() {
+    public void test003a() {
         Utils.loadNativeLibrary();
         FloatBuffer buf;
 
@@ -512,6 +512,15 @@ public class TestLibbulletjme {
         buf = DebugShapeFactory.getDebugTriangles(
                 sum, DebugShapeFactory.lowResolution);
         Assert.assertEquals(702, buf.capacity());
+    }
+
+    /**
+     * Generate more collision shapes and verify their properties.
+     */
+    @Test
+    public void test003b() {
+        Utils.loadNativeLibrary();
+        FloatBuffer buf;
 
         // MultiSphere
         MultiSphere multiSphere = new MultiSphere(1f);
