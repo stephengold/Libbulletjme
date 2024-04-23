@@ -96,7 +96,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
 
     /**
-     * Count the all nodes in the hierarchy.
+     * Count all nodes in the hierarchy.
      *
      * @return the count (&ge;0)
      */
@@ -150,7 +150,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
 
     /**
-     * Test whether the specified node is a leaf of the hierarchy.
+     * Test whether the specified node is a leaf.
      *
      * @param nodeIndex the index of the node (&ge;0)
      * @return true if a leaf, false if an internal node
