@@ -476,7 +476,7 @@ public:
 			return m_contiguousNodes[nodeIndex].m_escapeIndex; // stephengold added 2024-04-23
 		}                                // stephengold added 2024-04-23
 	}                                        // stephengold added 2024-04-23
-	int getNumContiguousNodes() const        // stephengold added 2024-04-23
+	int getNumNodes() const                  // stephengold added 2024-04-23
 	{                                        // stephengold added 2024-04-23
 		if (m_useQuantization) {         // stephengold added 2024-04-23
 			return m_quantizedContiguousNodes.size(); // stephengold added 2024-04-23

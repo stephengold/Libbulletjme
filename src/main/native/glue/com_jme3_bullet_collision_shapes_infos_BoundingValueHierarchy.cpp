@@ -115,16 +115,16 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
- * Method:    getNumContiguousNodes
+ * Method:    getNumNodes
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumContiguousNodes
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumNodes
 (JNIEnv *pEnv, jclass, jlong bvhId) {
     const btOptimizedBvh * const
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
 
-    int result = pBvh->getNumContiguousNodes();
+    int result = pBvh->getNumNodes();
     return result;
 }
 
