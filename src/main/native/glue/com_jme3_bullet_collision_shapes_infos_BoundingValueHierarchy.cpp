@@ -188,7 +188,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValu
  * Signature: (JI)I
  */
 JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getPartId
-  (JNIEnv *pEnv, jclass, jlong bvhId, jint nodeIndex) {
+(JNIEnv *pEnv, jclass, jlong bvhId, jint nodeIndex) {
     const btOptimizedBvh * const
             pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
