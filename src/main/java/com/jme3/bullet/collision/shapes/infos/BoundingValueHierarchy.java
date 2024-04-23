@@ -94,7 +94,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
 
     /**
-     * Serialize this hierarchy to a byte array.
+     * Serialize the hierarchy to a byte array.
      *
      * @return a new array containing serialized bytes (not null)
      */

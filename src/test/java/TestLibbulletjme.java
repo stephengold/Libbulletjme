@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2024, Stephen Gold
+ Copyright (c) 2020-2024 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -476,7 +476,7 @@ public class TestLibbulletjme {
                 hull, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
 
-        // MeshCollisionShape with compressed BVH:
+        // MeshCollisionShape with a compressed (quantized) BVH:
         int[] indexArray = {0, 0, 0};
         Vector3f[] positionArray = {new Vector3f(0f, 0f, 0f)};
         IndexedMesh indexedMesh = new IndexedMesh(positionArray, indexArray);
