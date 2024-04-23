@@ -1571,6 +1571,7 @@ public class TestLibbulletjme {
         CollisionShape.setDefaultMargin(2.1f);
         margin = CollisionShape.getDefaultMargin();
         Assert.assertEquals(2.1f, margin, 0f);
+        CollisionShape.setDefaultMargin(0.04f); // don't break other tests!
 
         // deactivation deadline
         float deadline = PhysicsBody.getDeactivationDeadline();
