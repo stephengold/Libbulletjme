@@ -139,15 +139,51 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCompressed()" class="member-name-link">isCompressed</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countContiguousNodes()" class="member-name-link">countContiguousNodes</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count the contiguous nodes in the hierarchy.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countLeafNodes()" class="member-name-link">countLeafNodes</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count the leaf nodes in the hierarchy.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countSubtreeHeaders()" class="member-name-link">countSubtreeHeaders</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count the subtree headers in the hierarchy (native field:
+ m_SubtreeHeaders).</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCompressed()" class="member-name-link">isCompressed</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Test whether the hierarchy uses quantized AABB compression.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#partId(int)" class="member-name-link">partId</a><wbr>(int&nbsp;nodeIndex)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Return the part index of the specified contiguous node.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>byte[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#serialize()" class="member-name-link">serialize</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Serialize the hierarchy to a byte array.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTraversalMode(int)" class="member-name-link">setTraversalMode</a><wbr>(int&nbsp;mode)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Alter the traversal mode (native field: m_traversalMode).</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#traversalMode()" class="member-name-link">traversalMode</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Return the traversal mode (native field: m_traversalMode).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#triangleIndex(int)" class="member-name-link">triangleIndex</a><wbr>(int&nbsp;nodeIndex)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Return the triangle index of the specified contiguous node.</div>
 </div>
 </div>
 </div>
@@ -216,6 +252,40 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="countContiguousNodes()">
+<h3>countContiguousNodes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">countContiguousNodes</span>()</div>
+<div class="block">Count the contiguous nodes in the hierarchy.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the count (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countLeafNodes()">
+<h3>countLeafNodes</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">countLeafNodes</span>()</div>
+<div class="block">Count the leaf nodes in the hierarchy.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the count (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countSubtreeHeaders()">
+<h3>countSubtreeHeaders</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">countSubtreeHeaders</span>()</div>
+<div class="block">Count the subtree headers in the hierarchy (native field:
+ m_SubtreeHeaders).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the count (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="isCompressed()">
 <h3>isCompressed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isCompressed</span>()</div>
@@ -227,6 +297,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="partId(int)">
+<h3>partId</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">partId</span><wbr><span class="parameters">(int&nbsp;nodeIndex)</span></div>
+<div class="block">Return the part index of the specified contiguous node.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nodeIndex</code> - the index of the contiguous node (&ge;0)</dd>
+<dt>Returns:</dt>
+<dd>the part index (&ge;0)</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="serialize()">
 <h3>serialize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">serialize</span>()</div>
@@ -234,6 +317,43 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>a new array containing serialized bytes (not null)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setTraversalMode(int)">
+<h3>setTraversalMode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTraversalMode</span><wbr><span class="parameters">(int&nbsp;mode)</span></div>
+<div class="block">Alter the traversal mode (native field: m_traversalMode).</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>mode</code> - 0 for "stackless" or 1 for "stackless cache-friendly" or 2
+ for "recursive" (default=0)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="traversalMode()">
+<h3>traversalMode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">traversalMode</span>()</div>
+<div class="block">Return the traversal mode (native field: m_traversalMode).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>0 for "stackless" or 1 for "stackless cache-friendly" or 2 for
+ "recursive"</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="triangleIndex(int)">
+<h3>triangleIndex</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">triangleIndex</span><wbr><span class="parameters">(int&nbsp;nodeIndex)</span></div>
+<div class="block">Return the triangle index of the specified contiguous node.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>nodeIndex</code> - the index of the contiguous node (&ge;0)</dd>
+<dt>Returns:</dt>
+<dd>the triangle index (&ge;0)</dd>
 </dl>
 </section>
 </li>
