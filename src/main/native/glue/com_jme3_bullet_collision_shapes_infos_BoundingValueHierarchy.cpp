@@ -115,21 +115,6 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
- * Method:    getNumNodes
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumNodes
-(JNIEnv *pEnv, jclass, jlong bvhId) {
-    const btOptimizedBvh * const
-            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
-    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
-
-    int result = pBvh->getNumNodes();
-    return result;
-}
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
  * Method:    getNumLeafNodes
  * Signature: (J)I
  */
@@ -140,6 +125,21 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
     NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
 
     int result = pBvh->getNumLeafNodes();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getNumNodes
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getNumNodes
+(JNIEnv *pEnv, jclass, jlong bvhId) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = pBvh->getNumNodes();
     return result;
 }
 

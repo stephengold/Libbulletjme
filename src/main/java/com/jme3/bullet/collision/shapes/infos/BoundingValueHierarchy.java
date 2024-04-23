@@ -83,19 +83,6 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Count the all nodes in the hierarchy.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countNodes() {
-        long bvhId = nativeId();
-        int result = getNumNodes(bvhId);
-
-        assert result >= 0;
-        return result;
-    }
-
-    /**
      * Count the leaf nodes in the hierarchy.
      *
      * @return the count (&ge;0)
@@ -103,6 +90,19 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     public int countLeafNodes() {
         long bvhId = nativeId();
         int result = getNumLeafNodes(bvhId);
+
+        assert result >= 0;
+        return result;
+    }
+
+    /**
+     * Count the all nodes in the hierarchy.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countNodes() {
+        long bvhId = nativeId();
+        int result = getNumNodes(bvhId);
 
         assert result >= 0;
         return result;
@@ -256,9 +256,9 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
     native private static int getEscapeIndex(long bvhId, int nodeIndex);
 
-    native private static int getNumNodes(long bvhId);
-
     native private static int getNumLeafNodes(long bvhId);
+
+    native private static int getNumNodes(long bvhId);
 
     native private static int getNumSubtreeHeaders(long bvhId);
 
