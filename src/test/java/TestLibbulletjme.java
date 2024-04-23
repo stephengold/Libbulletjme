@@ -62,6 +62,7 @@ import com.jme3.bullet.collision.shapes.MultiSphere;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
+import com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.joints.New6Dof;
 import com.jme3.bullet.objects.MultiBodyCollider;
@@ -281,6 +282,7 @@ public class TestLibbulletjme {
     @Test
     public void test003a() {
         Utils.loadNativeLibrary();
+        BoundingValueHierarchy bvh;
         FloatBuffer buf;
 
         // Box2d
@@ -481,23 +483,15 @@ public class TestLibbulletjme {
         Vector3f[] positionArray = {new Vector3f(0f, 0f, 0f)};
         IndexedMesh indexedMesh = new IndexedMesh(positionArray, indexArray);
         MeshCollisionShape mesh = new MeshCollisionShape(true, indexedMesh);
-        verifyCollisionShapeDefaults(mesh);
-        Assert.assertTrue(mesh.canSplit());
+        verifyMcsDefaults(mesh);
         Assert.assertEquals(1, mesh.countSubmeshes());
         Assert.assertEquals(1, mesh.countMeshTriangles());
         Assert.assertEquals(1, mesh.countMeshVertices());
-        Assert.assertNotNull(mesh.getBvh());
-        Assert.assertTrue(mesh.getBvh().isCompressed());
-        Assert.assertEquals(0.04f, mesh.getMargin(), 0f);
-        Assert.assertEquals(21, mesh.getShapeType());
-        Assert.assertTrue(mesh.isConcave());
-        Assert.assertFalse(mesh.isConvex());
-        Assert.assertFalse(mesh.isInfinite());
-        Assert.assertTrue(mesh.isNonMoving());
-        Assert.assertFalse(mesh.isPolyhedral());
         buf = DebugShapeFactory.getDebugTriangles(
                 mesh, DebugShapeFactory.lowResolution);
         Assert.assertEquals(9, buf.capacity());
+        bvh = mesh.getBvh();
+        Assert.assertTrue(bvh.isCompressed());
 
         // MinkowkiSum
         MinkowskiSum sum = new MinkowskiSum(box, cone);
@@ -2104,6 +2098,24 @@ public class TestLibbulletjme {
                 RayTestFlag.SubSimplexRaytest, space.getRayTestFlags());
         Assert.assertTrue(space.isForceUpdateAllAabbs());
         Assert.assertFalse(space.isUsingDeterministicDispatch());
+    }
+
+    /**
+     * Verify defaults common to all newly-created mesh collision shapes.
+     *
+     * @param shape the shape to test (not null, unaffected)
+     */
+    private static void verifyMcsDefaults(MeshCollisionShape shape) {
+        verifyCollisionShapeDefaults(shape);
+        
+        Assert.assertTrue(shape.canSplit());
+        Assert.assertEquals(0.04f, shape.getMargin(), 0f);
+        Assert.assertEquals(21, shape.getShapeType());
+        Assert.assertTrue(shape.isConcave());
+        Assert.assertFalse(shape.isConvex());
+        Assert.assertFalse(shape.isInfinite());
+        Assert.assertTrue(shape.isNonMoving());
+        Assert.assertFalse(shape.isPolyhedral());
     }
 
     /**
