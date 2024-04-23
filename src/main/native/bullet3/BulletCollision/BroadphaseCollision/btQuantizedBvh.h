@@ -468,6 +468,14 @@ public:
             btAssert(m_bvhAabbMin.z() <= m_bvhAabbMax.z()); // stephengold added 2024-04-20
             btAssert(m_subtreeHeaderCount == m_SubtreeHeaders.size()); // stephengold added 2024-04-20
         } // stephengold added 2024-04-20
+	int getEscapeIndex(int nodeIndex) const  // stephengold added 2024-04-23
+	{                                        // stephengold added 2024-04-23
+		if (m_useQuantization) {         // stephengold added 2024-04-23
+			return m_quantizedContiguousNodes[nodeIndex].getEscapeIndex(); // stephengold added 2024-04-23
+		} else {                         // stephengold added 2024-04-23
+			return m_contiguousNodes[nodeIndex].m_escapeIndex; // stephengold added 2024-04-23
+		}                                // stephengold added 2024-04-23
+	}                                        // stephengold added 2024-04-23
 	int getNumContiguousNodes() const        // stephengold added 2024-04-23
 	{                                        // stephengold added 2024-04-23
 		if (m_useQuantization) {         // stephengold added 2024-04-23
@@ -499,6 +507,14 @@ public:
 			return m_quantizedContiguousNodes[nodeIndex].getTriangleIndex(); // stephengold added 2024-04-23
 		} else {                         // stephengold added 2024-04-23
 			return m_contiguousNodes[nodeIndex].m_triangleIndex; // stephengold added 2024-04-23
+		}                                // stephengold added 2024-04-23
+	}                                        // stephengold added 2024-04-23
+	bool isLeafNode(int nodeIndex) const     // stephengold added 2024-04-23
+	{                                        // stephengold added 2024-04-23
+		if (m_useQuantization) {         // stephengold added 2024-04-23
+			return m_quantizedContiguousNodes[nodeIndex].isLeafNode(); // stephengold added 2024-04-23
+		} else {                         // stephengold added 2024-04-23
+			return m_contiguousNodes[nodeIndex].m_escapeIndex == -1; // stephengold added 2024-04-23
 		}                                // stephengold added 2024-04-23
 	}                                        // stephengold added 2024-04-23
 

@@ -96,6 +96,25 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getEscapeIndex
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getEscapeIndex
+(JNIEnv *pEnv, jclass, jlong bvhId, jint nodeIndex) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    int result = -1;
+    if (!pBvh->isLeafNode(nodeIndex)) {
+        result = pBvh->getEscapeIndex(nodeIndex);
+    }
+
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
  * Method:    getNumContiguousNodes
  * Signature: (J)I
  */
@@ -221,6 +240,21 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingV
     pBvh->checkSanity();
 
     bool result = pBvh->isQuantized();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    isLeafNode
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_isLeafNode
+(JNIEnv *pEnv, jclass, jlong bvhId, jint nodeIndex) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.", 0);
+
+    bool result = pBvh->isLeafNode(nodeIndex);
     return result;
 }
 

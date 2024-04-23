@@ -123,6 +123,22 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
 
     /**
+     * Return the escape index of the specified node.
+     *
+     * @param nodeIndex the index of the node (&ge;0)
+     * @return the escape index (&ge;0) or -1 if the node is a leaf
+     */
+    public int escapeIndex(int nodeIndex) {
+        long bvhId = nativeId();
+        int lastNode = getNumContiguousNodes(bvhId) - 1;
+        Validate.inRange(nodeIndex, "node index", 0, lastNode);
+        int result = getEscapeIndex(bvhId, nodeIndex);
+
+        assert result >= -1 : result;
+        return result;
+    }
+
+    /**
      * Test whether the hierarchy uses quantized AABB compression.
      *
      * @return true if compressed, otherwise false
@@ -130,6 +146,21 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     public boolean isCompressed() {
         long bvhId = nativeId();
         boolean result = isCompressed(bvhId);
+        return result;
+    }
+
+    /**
+     * Test whether the specified node is a leaf of the hierarchy.
+     *
+     * @param nodeIndex the index of the node (&ge;0)
+     * @return true if a leaf, false if an internal node
+     */
+    public boolean isLeafNode(int nodeIndex) {
+        long bvhId = nativeId();
+        int lastNode = getNumContiguousNodes(bvhId) - 1;
+        Validate.inRange(nodeIndex, "node index", 0, lastNode);
+
+        boolean result = isLeafNode(bvhId, nodeIndex);
         return result;
     }
 
@@ -223,6 +254,8 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
     native private static void finalizeNative(long bvhId);
 
+    native private static int getEscapeIndex(long bvhId, int nodeIndex);
+
     native private static int getNumContiguousNodes(long bvhId);
 
     native private static int getNumLeafNodes(long bvhId);
@@ -238,6 +271,8 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     native private static int getTriangleIndex(long bvhId, int nodeIndex);
 
     native private static boolean isCompressed(long bvhId);
+
+    native private static boolean isLeafNode(long bvhId, int nodeIndex);
 
     native private static byte[] serialize(long bvhId);
 

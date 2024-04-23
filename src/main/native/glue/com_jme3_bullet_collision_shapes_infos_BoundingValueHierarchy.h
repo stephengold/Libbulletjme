@@ -25,6 +25,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getEscapeIndex
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getEscapeIndex
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
  * Method:    getNumContiguousNodes
  * Signature: (J)I
  */
@@ -86,6 +94,14 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
  */
 JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_isCompressed
   (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    isLeafNode
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_isLeafNode
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
