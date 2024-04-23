@@ -2107,7 +2107,7 @@ public class TestLibbulletjme {
      */
     private static void verifyMcsDefaults(MeshCollisionShape shape) {
         verifyCollisionShapeDefaults(shape);
-        
+
         Assert.assertTrue(shape.canSplit());
         Assert.assertEquals(0.04f, shape.getMargin(), 0f);
         Assert.assertEquals(21, shape.getShapeType());
