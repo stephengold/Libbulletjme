@@ -139,6 +139,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../bounding/BoundingBox.html" title="class in com.jme3.bounding">BoundingBox</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copyAabb(com.jme3.bounding.BoundingBox)" class="member-name-link">copyAabb</a><wbr>(<a href="../../../../bounding/BoundingBox.html" title="class in com.jme3.bounding">BoundingBox</a>&nbsp;storeResult)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Copy the bounds of the hierarchy.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#copyQuantization(com.jme3.math.Vector3f)" class="member-name-link">copyQuantization</a><wbr>(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Copy the quantization vector of the hierarchy.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countLeafNodes()" class="member-name-link">countLeafNodes</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -261,6 +271,33 @@ loadScripts(document, 'script');</script>
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="copyAabb(com.jme3.bounding.BoundingBox)">
+<h3>copyAabb</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../bounding/BoundingBox.html" title="class in com.jme3.bounding">BoundingBox</a></span>&nbsp;<span class="element-name">copyAabb</span><wbr><span class="parameters">(<a href="../../../../bounding/BoundingBox.html" title="class in com.jme3.bounding">BoundingBox</a>&nbsp;storeResult)</span></div>
+<div class="block">Copy the bounds of the hierarchy.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>an axis-aligned bounding box (either <code>storeResult</code> or a new
+ instance)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="copyQuantization(com.jme3.math.Vector3f)">
+<h3>copyQuantization</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">copyQuantization</span><wbr><span class="parameters">(<a href="../../../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
+<div class="block">Copy the quantization vector of the hierarchy.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
+<dt>Returns:</dt>
+<dd>an vector (either <code>storeResult</code> or a new vector)</dd>
+</dl>
+</section>
+</li>
 <li>
 <section class="detail" id="countLeafNodes()">
 <h3>countLeafNodes</h3>
