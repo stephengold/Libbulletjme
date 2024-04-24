@@ -492,6 +492,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(9, buf.capacity());
         bvh = mesh.getBvh();
         Assert.assertTrue(bvh.isCompressed());
+        Assert.assertEquals(1, bvh.countNodes());
         // MeshCollisionShape with a non-quantized BVH:
         MeshCollisionShape mcs2 = new MeshCollisionShape(false, indexedMesh);
         verifyMcsDefaults(mcs2);
@@ -503,6 +504,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(9, buf.capacity());
         bvh = mcs2.getBvh();
         Assert.assertFalse(bvh.isCompressed());
+        Assert.assertEquals(1, bvh.countNodes());
 
         // MinkowkiSum
         MinkowskiSum sum = new MinkowskiSum(box, cone);

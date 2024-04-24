@@ -204,6 +204,7 @@ public class TestBvh {
         MeshCollisionShape shape = new MeshCollisionShape(true, submesh);
         BoundingValueHierarchy bvh = shape.getBvh();
         int numNodes = bvh.countNodes();
+        Assert.assertEquals(135, numNodes);
 
         // Serialize the BVH:
         byte[] bytes = bvh.serialize();
@@ -229,12 +230,10 @@ public class TestBvh {
         BoundingValueHierarchy b2 = new BoundingValueHierarchy(bytes);
 
         // Compare the cloned BVH with the original:
+        Assert.assertEquals(numNodes, b2.countNodes());
         Assert.assertEquals(bvh.isCompressed(), b2.isCompressed());
         Assert.assertEquals(
                 bvh.countSubtreeHeaders(), b2.countSubtreeHeaders());
-
-        //Assert.assertEquals(numNodes, b2.countNodes()); TODO why this fails?
-        numNodes = Math.min(numNodes, b2.countNodes());
 
         for (int i = 0; i < numNodes; ++i) {
             boolean isLeaf = bvh.isLeafNode(i);
