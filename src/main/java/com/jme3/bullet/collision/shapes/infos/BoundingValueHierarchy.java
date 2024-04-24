@@ -128,7 +128,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         long bvhId = nativeId();
         int result = getNumLeafNodes(bvhId);
 
-        assert result >= 0;
+        assert result >= 0 : result;
         return result;
     }
 
@@ -141,7 +141,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         long bvhId = nativeId();
         int result = getNumNodes(bvhId);
 
-        assert result >= 0;
+        assert result >= 0 : result;
         return result;
     }
 
@@ -155,7 +155,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         long bvhId = nativeId();
         int result = getNumSubtreeHeaders(bvhId);
 
-        assert result >= 0;
+        assert result >= 0 : result;
         return result;
     }
 
@@ -253,7 +253,7 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
         long bvhId = nativeId();
         int result = getTraversalMode(bvhId);
 
-        assert result >= 0 && result <= 2;
+        assert result >= 0 && result <= 2 : result;
         return result;
     }
 
