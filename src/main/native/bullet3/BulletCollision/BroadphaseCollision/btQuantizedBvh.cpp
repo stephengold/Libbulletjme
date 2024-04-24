@@ -13,6 +13,7 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#include <cstddef>                               // stephengold added 2024-04-24
 #include "btQuantizedBvh.h"
 
 #include "LinearMath/btAabbUtil2.h"
@@ -37,8 +38,34 @@ btQuantizedBvh::btQuantizedBvh() : m_bulletVersion(BT_BULLET_VERSION),
         btAssert(sizeof(btOptimizedBvhNode) % 32 == 0); // stephengold added 2024-04-19
         btAssert(sizeof(btBvhSubtreeInfo) == 32); // stephengold added 2024-04-19
 #ifdef BT_USE_DOUBLE_PRECISION                   // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bvhAabbMin) == 8); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bvhAabbMax) == 40); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bvhQuantization) == 72); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bulletVersion) == 104); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_curNodeIndex) == 108); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_useQuantization) == 112); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_leafNodes) == 120); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_contiguousNodes) == 152); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_quantizedLeafNodes) == 184); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_quantizedContiguousNodes) == 216); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_traversalMode) == 248); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_SubtreeHeaders) == 256); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_subtreeHeaderCount) == 288); // stephengold added 2024-04-24
         btAssert(sizeof(btQuantizedBvh) == 296); // stephengold added 2024-04-24
 #else                                            // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bvhAabbMin) == 8); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bvhAabbMax) == 24); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bvhQuantization) == 40); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_bulletVersion) == 56); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_curNodeIndex) == 60); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_useQuantization) == 64); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_leafNodes) == 72); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_contiguousNodes) == 104); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_quantizedLeafNodes) == 136); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_quantizedContiguousNodes) == 168); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_traversalMode) == 200); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_SubtreeHeaders) == 208); // stephengold added 2024-04-24
+        btAssert(offsetof(btQuantizedBvh, m_subtreeHeaderCount) == 240); // stephengold added 2024-04-24
         btAssert(sizeof(btQuantizedBvh) == 248); // stephengold added 2024-04-24
 #endif                                           // stephengold added 2024-04-24
 	m_bvhAabbMin.setValue(-SIMD_INFINITY, -SIMD_INFINITY, -SIMD_INFINITY);
