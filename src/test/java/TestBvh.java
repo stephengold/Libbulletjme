@@ -25,6 +25,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.collision.shapes.MeshCollisionShape;
 import com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
@@ -205,6 +206,16 @@ public class TestBvh {
         BoundingValueHierarchy bvh = shape.getBvh();
         int numNodes = bvh.countNodes();
         Assert.assertEquals(135, numNodes);
+        Assert.assertEquals(2, bvh.countSubtreeHeaders());
+        Assert.assertEquals(135, bvh.escapeIndex(0));
+        Assert.assertEquals(51, bvh.escapeIndex(1));
+        Assert.assertEquals(19, bvh.escapeIndex(2));
+        Assert.assertEquals(9, bvh.escapeIndex(3));
+        Assert.assertEquals(3, bvh.escapeIndex(4));
+
+        long shapeId = shape.nativeId();
+        long bvhId = BoundingValueHierarchy.getOptimizedBvh(shapeId);
+        Assert.assertEquals(bvh.nativeId(), bvhId);
 
         // Serialize the BVH:
         byte[] bytes = bvh.serialize();
@@ -230,6 +241,16 @@ public class TestBvh {
         BoundingValueHierarchy b2 = new BoundingValueHierarchy(bytes);
 
         // Compare the cloned BVH with the original:
+        BoundingBox aabb = bvh.copyAabb(null);
+        Vector3f aabbMax = aabb.getMax(null);
+        Vector3f aabbMin = aabb.getMin(null);
+        BoundingBox aabb2 = b2.copyAabb(null);
+        Assert.assertEquals(aabbMax, aabb2.getMax(null));
+        Assert.assertEquals(aabbMin, aabb2.getMin(null));
+
+        Vector3f quantization = bvh.copyQuantization(null);
+        Assert.assertEquals(quantization, b2.copyQuantization(null));
+
         Assert.assertEquals(numNodes, b2.countNodes());
         Assert.assertEquals(bvh.isCompressed(), b2.isCompressed());
         Assert.assertEquals(

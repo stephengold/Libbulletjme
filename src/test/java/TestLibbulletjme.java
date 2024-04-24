@@ -25,6 +25,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.CollisionSpace;
 import com.jme3.bullet.DeformableSpace;
 import com.jme3.bullet.FillMode;
@@ -492,7 +493,19 @@ public class TestLibbulletjme {
         Assert.assertEquals(9, buf.capacity());
         bvh = mesh.getBvh();
         Assert.assertTrue(bvh.isCompressed());
+        BoundingBox aabb = bvh.copyAabb(null);
+        Utils.assertEquals(2f, 2f, 2f, aabb.getMax(null), 0.000_1f);
+        Utils.assertEquals(-2f, -2f, -2f, aabb.getMin(null), 0.000_1f);
+        Utils.assertEquals(
+                16_384f, 16_384f, 16_384f, bvh.copyQuantization(null), 2f);
         Assert.assertEquals(1, bvh.countNodes());
+        Assert.assertEquals(1, bvh.countSubtreeHeaders());
+        Assert.assertEquals(0, bvh.traversalMode());
+        Assert.assertTrue(bvh.isLeafNode(0));
+        Assert.assertEquals(-1, bvh.escapeIndex(0));
+        Assert.assertEquals(0, bvh.partId(0));
+        Assert.assertEquals(0, bvh.triangleIndex(0));
+
         // MeshCollisionShape with a non-quantized BVH:
         MeshCollisionShape mcs2 = new MeshCollisionShape(false, indexedMesh);
         verifyMcsDefaults(mcs2);
@@ -505,6 +518,12 @@ public class TestLibbulletjme {
         bvh = mcs2.getBvh();
         Assert.assertFalse(bvh.isCompressed());
         Assert.assertEquals(1, bvh.countNodes());
+        Assert.assertEquals(0, bvh.countSubtreeHeaders());
+        Assert.assertEquals(0, bvh.traversalMode());
+        Assert.assertTrue(bvh.isLeafNode(0));
+        Assert.assertEquals(-1, bvh.escapeIndex(0));
+        Assert.assertEquals(0, bvh.partId(0));
+        Assert.assertEquals(0, bvh.triangleIndex(0));
 
         // MinkowkiSum
         MinkowskiSum sum = new MinkowskiSum(box, cone);
