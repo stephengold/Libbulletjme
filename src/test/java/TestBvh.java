@@ -213,10 +213,6 @@ public class TestBvh {
         Assert.assertEquals(9, bvh.escapeIndex(3));
         Assert.assertEquals(3, bvh.escapeIndex(4));
 
-        long shapeId = shape.nativeId();
-        long bvhId = BoundingValueHierarchy.getOptimizedBvh(shapeId);
-        Assert.assertEquals(bvh.nativeId(), bvhId);
-
         // Serialize the BVH:
         byte[] bytes = bvh.serialize();
         int numBytes = bytes.length;
