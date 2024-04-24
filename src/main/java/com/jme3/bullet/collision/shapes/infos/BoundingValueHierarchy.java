@@ -31,8 +31,10 @@
  */
 package com.jme3.bullet.collision.shapes.infos;
 
+import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.collision.shapes.MeshCollisionShape;
+import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import jme3utilities.Validate;
 
@@ -81,6 +83,41 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Copy the bounds of the hierarchy.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return an axis-aligned bounding box (either {@code storeResult} or a new
+     * instance)
+     */
+    public BoundingBox copyAabb(BoundingBox storeResult) {
+        BoundingBox result
+                = (storeResult == null) ? new BoundingBox() : storeResult;
+
+        long bvhId = nativeId();
+        Vector3f maxima = new Vector3f(); // TODO garbage
+        Vector3f minima = new Vector3f();
+        getAabb(bvhId, minima, maxima);
+        result.setMinMax(minima, maxima);
+
+        return result;
+    }
+
+    /**
+     * Copy the quantization vector of the hierarchy.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return an vector (either {@code storeResult} or a new vector)
+     */
+    public Vector3f copyQuantization(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+
+        long bvhId = nativeId();
+        getQuantization(bvhId, result);
+
+        return result;
+    }
 
     /**
      * Count the leaf nodes in the hierarchy.
@@ -254,6 +291,9 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
     native private static void finalizeNative(long bvhId);
 
+    native private static void getAabb(
+            long bvhId, Vector3f storeMinima, Vector3f storeMaxima);
+
     native private static int getEscapeIndex(long bvhId, int nodeIndex);
 
     native private static int getNumLeafNodes(long bvhId);
@@ -265,6 +305,9 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     native private static long getOptimizedBvh(long shapeId);
 
     native private static int getPartId(long bvhId, int nodeIndex);
+
+    native private static void getQuantization(
+            long bvhId, Vector3f storeVector);
 
     native private static int getTraversalMode(long bvhId);
 

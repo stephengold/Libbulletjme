@@ -96,6 +96,27 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getAabb
+ * Signature: (JLcom/jme3/math/Vector3f;Lcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getAabb
+(JNIEnv *pEnv, jclass, jlong bvhId, jobject storeMinima, jobject storeMaxima) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
+    NULL_CHK(pEnv, storeMaxima, "The storeMaxima does not exist.",);
+    NULL_CHK(pEnv, storeMinima, "The storeMinima does not exist.",);
+
+    const btVector3& aabbMin = pBvh->getAabbMin();
+    jmeBulletUtil::convert(pEnv, &aabbMin, storeMinima);
+    EXCEPTION_CHK(pEnv,);
+
+    const btVector3& aabbMax = pBvh->getAabbMax();
+    jmeBulletUtil::convert(pEnv, &aabbMax, storeMaxima);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
  * Method:    getEscapeIndex
  * Signature: (JI)I
  */
@@ -199,6 +220,22 @@ JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValue
     }
 
     return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
+ * Method:    getQuantization
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_getQuantization
+(JNIEnv *pEnv, jclass, jlong bvhId, jobject storeVector) {
+    const btOptimizedBvh * const
+            pBvh = reinterpret_cast<btOptimizedBvh *> (bvhId);
+    NULL_CHK(pEnv, pBvh, "The btOptimizedBvh does not exist.",);
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+
+    const btVector3& quantization = pBvh->getQuantization();
+    jmeBulletUtil::convert(pEnv, &quantization, storeVector);
 }
 
 /*

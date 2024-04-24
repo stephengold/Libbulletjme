@@ -468,6 +468,9 @@ public:
             btAssert(m_bvhAabbMin.z() <= m_bvhAabbMax.z()); // stephengold added 2024-04-20
             btAssert(m_subtreeHeaderCount == m_SubtreeHeaders.size()); // stephengold added 2024-04-20
         } // stephengold added 2024-04-20
+        const btVector3& getAabbMax() const { return m_bvhAabbMax; } // stephengold added 2024-04-24
+        const btVector3& getAabbMin() const { return m_bvhAabbMin; } // stephengold added 2024-04-24
+        const btVector3& getQuantization() const { return m_bvhQuantization; } // stephengold added 2024-04-24
 	int getEscapeIndex(int nodeIndex) const  // stephengold added 2024-04-23
 	{                                        // stephengold added 2024-04-23
 		if (m_useQuantization) {         // stephengold added 2024-04-23
