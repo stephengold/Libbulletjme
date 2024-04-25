@@ -88,10 +88,10 @@ final public class TestApp {
             directory = new File("build/libs/bulletjme/shared");
         }
 
-        boolean success = false && NativeLibraryLoader.loadLibbulletjme(
+        boolean success = NativeLibraryLoader.loadLibbulletjme(
                 fromDist, directory, "Debug", "SpMt");
         if (!success) { // fallback to Sp-flavored library
-            success = false && NativeLibraryLoader.loadLibbulletjme(
+            success = NativeLibraryLoader.loadLibbulletjme(
                     fromDist, directory, "Debug", "Sp");
         }
         if (!success) { // fallback to Dp-flavored library
