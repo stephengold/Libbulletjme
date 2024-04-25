@@ -1,6 +1,7 @@
 // Gradle script to build Libbulletjme Maven artifacts and desktop native libraries
 
 plugins {
+    id 'application' // to build a Java application
     id 'checkstyle'
     id 'cpp'
     id 'java-library'
@@ -338,6 +339,15 @@ tasks.withType(JavaCompile) { // Java compile-time options:
     }
 }
 
+application {
+    mainClass = 'jme3utilities.minie.TestApp'
+}
+
+tasks.withType(JavaExec).configureEach { // Java runtime options:
+    classpath sourceSets.main.runtimeClasspath
+}
+
+run.dependsOn('assemble')
 test.dependsOn('assemble')
 
 // Register publishing tasks:
