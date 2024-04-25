@@ -94,6 +94,22 @@ model {
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
         //clang(Clang) // to favor Clang over Gcc
+
+        //gcc9Arm(Gcc) {
+        //    target('Linux_ARM32') {
+        //        cppCompiler.executable = 'arm-linux-gnueabi-g++-9'
+        //        linker.executable = 'arm-linux-gnueabi-g++-9'
+        //    }
+        //    target('Linux_ARM32hf') {
+        //        cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
+        //        linker.executable = 'arm-linux-gnueabihf-g++-9'
+        //    }
+        //    target('Linux_ARM64') {
+        //        cppCompiler.executable = 'aarch64-linux-gnu-g++-9'
+        //        linker.executable = 'aarch64-linux-gnu-g++-9'
+        //    }
+        //}
+
         gcc(Gcc)
         gcc6Arm32hf(Gcc) {
             target('Linux_ARM32hf') {
@@ -174,6 +190,7 @@ model {
                     buildable = !pName.startsWith('Linux_ARM')
                     //buildable = (pName == 'Linux64') // to build Linux64 only
                     //buildable = (pName == 'Windows64') // to build Windows64 only
+                    //buildable = !pName.startsWith('Linux32')
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
