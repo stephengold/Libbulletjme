@@ -178,6 +178,9 @@ public:
 	};
 
 protected:
+#ifdef PAD_BVH
+	char m_padding[8];
+#endif
 	btVector3 m_bvhAabbMin;
 	btVector3 m_bvhAabbMax;
 	btVector3 m_bvhQuantization;

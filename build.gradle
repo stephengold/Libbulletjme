@@ -275,7 +275,11 @@ model {
 
                     if (os == 'osx') {
                         cppCompiler.args '-I', "$javaHome/include/darwin"
+                        if (isDp) {
+                            cppCompiler.define 'PAD_BVH'
+                        }
                     } else if (os == 'linux') {
+                        cppCompiler.define 'PAD_BVH'
                         cppCompiler.args '-I', "$javaHome/include/linux"
                         cppCompiler.args '-fPIC'
                         cppCompiler.args '-fvisibility=hidden'
