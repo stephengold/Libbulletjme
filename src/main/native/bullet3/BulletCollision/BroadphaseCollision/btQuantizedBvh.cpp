@@ -30,10 +30,6 @@ btQuantizedBvh::btQuantizedBvh() : m_bulletVersion(BT_BULLET_VERSION),
 								   ,
 								   m_subtreeHeaderCount(0)  //PCK: add this line
 {
-        btAssert(sizeof(int16_t) == 2); // stephengold added 2024-04-19
-        btAssert(sizeof(int32_t) == 4); // stephengold added 2024-04-19
-        btAssert(sizeof(uint16_t) == 2); // stephengold added 2024-04-19
-        btAssert(sizeof(uint32_t) == 4); // stephengold added 2024-04-19
         btAssert(sizeof(btQuantizedBvhNode) == 16); // stephengold added 2024-04-19
         btAssert(sizeof(btOptimizedBvhNode) % 32 == 0); // stephengold added 2024-04-19
         btAssert(sizeof(btBvhSubtreeInfo) == 32); // stephengold added 2024-04-19
