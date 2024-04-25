@@ -202,11 +202,6 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
 
     /**
-     * Dump information about native code.
-     */
-    native public static void dump();
-
-    /**
      * Return the part index of the specified node.
      *
      * @param nodeIndex the index of the node (&ge;0)

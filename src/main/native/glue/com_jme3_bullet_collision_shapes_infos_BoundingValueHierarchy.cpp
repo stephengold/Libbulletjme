@@ -44,17 +44,6 @@
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
- * Method:    dump
- * Signature: ()V
- */
-JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy_dump
-(JNIEnv *pEnv, jclass) {
-    jmeClasses::initJavaClasses(pEnv);
-    btQuantizedBvh::dump();
-}
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_infos_BoundingValueHierarchy
  * Method:    deSerialize
  * Signature: ([B)J
  */

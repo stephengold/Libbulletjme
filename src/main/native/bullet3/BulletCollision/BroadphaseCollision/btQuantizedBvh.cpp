@@ -47,36 +47,6 @@ btQuantizedBvh::btQuantizedBvh() : m_bulletVersion(BT_BULLET_VERSION),
 	m_bvhAabbMax.setValue(SIMD_INFINITY, SIMD_INFINITY, SIMD_INFINITY);
 }
 
-void btQuantizedBvh::dump() {                    // stephengold added 2024-04-24
-	printf("\nbtQuantizedBvh size is %lu bytes:\n", sizeof(btQuantizedBvh)); // stephengold added 2024-04-24
-	printf(" m_bvhAabbMin at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_bvhAabbMin)); // stephengold added 2024-04-24
-	printf(" m_bvhAabbMax at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_bvhAabbMax)); // stephengold added 2024-04-24
-	printf(" m_bvhQuantization at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_bvhQuantization)); // stephengold added 2024-04-24
-	printf(" m_bulletVersion at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_bulletVersion)); // stephengold added 2024-04-24
-	printf(" m_curNodeIndex at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_curNodeIndex)); // stephengold added 2024-04-24
-	printf(" m_useQuantization at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_useQuantization)); // stephengold added 2024-04-24
-	printf(" m_leafNodes at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_leafNodes)); // stephengold added 2024-04-24
-	printf(" m_contiguousNodes at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_contiguousNodes)); // stephengold added 2024-04-24
-	printf(" m_quantizedLeafNodes at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_quantizedLeafNodes)); // stephengold added 2024-04-24
-	printf(" m_quantizedContiguousNodes at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_quantizedContiguousNodes)); // stephengold added 2024-04-24
-	printf(" m_traversalMode at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_traversalMode)); // stephengold added 2024-04-24
-	printf(" m_SubtreeHeaders at +%lu bytes\n", // stephengold added 2024-04-24
-		offsetof(btQuantizedBvh, m_SubtreeHeaders)); // stephengold added 2024-04-24
-	printf(" m_subtreeHeaderCount at +%lu bytes\n\n", // stephengold added 2024-04-24
-		 offsetof(btQuantizedBvh, m_subtreeHeaderCount)); // stephengold added 2024-04-24
-	fflush(stdout);                          // stephengold added 2024-04-24
-}                                                // stephengold added 2024-04-24
 void btQuantizedBvh::buildInternal()
 {
 	///assumes that caller filled in the m_quantizedLeafNodes

@@ -26,7 +26,6 @@
  */
 package jme3utilities.minie;
 
-import com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy;
 import com.jme3.system.NativeLibraryLoader;
 import java.io.File;
 import java.util.logging.Logger;
@@ -63,7 +62,6 @@ final public class TestApp {
      */
     public static void main(String[] arguments) {
         loadNativeLibrary();
-        BoundingValueHierarchy.dump();
     }
     // *************************************************************************
     // private methods
