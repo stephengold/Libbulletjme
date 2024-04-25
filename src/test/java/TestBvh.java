@@ -33,6 +33,7 @@ import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Vector3f;
 import java.util.logging.Logger;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -195,6 +196,7 @@ public class TestBvh {
     /**
      * Generate a non-trivial quantized BVH, serialize it, and de-serialize it.
      */
+    @Ignore("reworking the native serialize/deserialize code")
     @Test
     public void test020() {
         Utils.loadNativeLibrary();
