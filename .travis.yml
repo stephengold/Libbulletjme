@@ -14,7 +14,7 @@ jobs:
       osx_image: xcode9.4.1
       script:
         - date
-        - ./gradlew build --console=plain --no-daemon -Ptravis=osx_intel
+        - ./gradlew run build --console=plain --no-daemon -Ptravis=osx_intel
 
     # Linux32 and Linux64 non-multithreaded (job .2):
     - env:
@@ -28,7 +28,7 @@ jobs:
         - sudo ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm
         - sudo ln -s /usr/include/x86_64-linux-gnu/bits /usr/include/bits
         - g++ --version
-        - ./gradlew build --console=plain --no-daemon -Ptravis=amd64
+        - ./gradlew run build --console=plain --no-daemon -Ptravis=amd64
 
     # Linux64 multithreaded (job .3):
     - env:
@@ -78,7 +78,7 @@ jobs:
       script:
         - date
         - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --exclude-task check --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
+        - travis_wait 20 ./gradlew run build --exclude-task check --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
 
     # Linux_ARM64 single-precision (job .7):
     - arch: arm64
@@ -92,7 +92,7 @@ jobs:
       script:
         - date
         - aarch64-linux-gnu-g++-6 -E -v
-        - travis_wait 20 ./gradlew build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
+        - travis_wait 20 ./gradlew run build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
 
     # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .8):
     - dist: xenial
