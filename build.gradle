@@ -49,6 +49,7 @@ model {
     }
 
     platforms {
+        // To build native libraries for Android, use "android.gradle" instead.
         Linux32 {
             architecture 'x86'
             operatingSystem 'linux'
@@ -57,7 +58,7 @@ model {
             architecture 'x86_64'
             operatingSystem 'linux'
         }
-        Linux_ARM32 {
+        Linux_ARM32 { // omitted from recent Minie releases
             architecture 'armel'
             operatingSystem 'linux'
         }
@@ -93,7 +94,7 @@ model {
 
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp)
-        //clang(Clang) // to favor Clang over Gcc
+        //clang(Clang) // to prefer Clang over Gcc
 
         //gcc9Arm(Gcc) {
         //    target('Linux_ARM32') {
@@ -133,10 +134,11 @@ model {
     }
 
     components {
+        // To build native libraries for Android, use "android.gradle" instead.
         bulletjme(NativeLibrarySpec) {
             targetPlatform 'Linux32'
             targetPlatform 'Linux64'
-            targetPlatform 'Linux_ARM32'
+            targetPlatform 'Linux_ARM32' // omitted from recent Minie releases
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX32'
