@@ -498,6 +498,7 @@ public class TestLibbulletjme {
         Utils.assertEquals(-2f, -2f, -2f, aabb.getMin(null), 0.000_1f);
         Utils.assertEquals(
                 16_384f, 16_384f, 16_384f, bvh.copyQuantization(null), 2f);
+        Assert.assertEquals(0, bvh.countLeafNodes());
         Assert.assertEquals(1, bvh.countNodes());
         Assert.assertEquals(1, bvh.countSubtreeHeaders());
         Assert.assertEquals(0, bvh.traversalMode());
@@ -517,6 +518,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(9, buf.capacity());
         bvh = mcs2.getBvh();
         Assert.assertFalse(bvh.isCompressed());
+        Assert.assertEquals(0, bvh.countLeafNodes());
         Assert.assertEquals(1, bvh.countNodes());
         Assert.assertEquals(0, bvh.countSubtreeHeaders());
         Assert.assertEquals(0, bvh.traversalMode());

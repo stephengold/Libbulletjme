@@ -252,17 +252,15 @@ public class TestBvh {
         Assert.assertEquals(bvh.isCompressed(), b2.isCompressed());
         Assert.assertEquals(
                 bvh.countSubtreeHeaders(), b2.countSubtreeHeaders());
+        Assert.assertEquals(bvh.countLeafNodes(), b2.countLeafNodes());
+        Assert.assertEquals(bvh.traversalMode(), b2.traversalMode());
 
         for (int i = 0; i < numNodes; ++i) {
             boolean isLeaf = bvh.isLeafNode(i);
             Assert.assertEquals(isLeaf, b2.isLeafNode(i));
-
-            if (isLeaf) {
-                Assert.assertEquals(bvh.triangleIndex(i), b2.triangleIndex(i));
-                Assert.assertEquals(bvh.partId(i), b2.partId(i));
-            } else {
-                Assert.assertEquals(bvh.escapeIndex(i), b2.escapeIndex(i));
-            }
+            Assert.assertEquals(bvh.triangleIndex(i), b2.triangleIndex(i));
+            Assert.assertEquals(bvh.partId(i), b2.partId(i));
+            Assert.assertEquals(bvh.escapeIndex(i), b2.escapeIndex(i));
         }
 
         System.gc();
