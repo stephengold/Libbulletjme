@@ -57,8 +57,8 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     // constructors
 
     /**
-     * Instantiate a reference to the hierarchy of the specified
-     * MeshCollisionShape. Used internally.
+     * Instantiate an (untracked) reference to the hierarchy of the specified
+     * {@code MeshCollisionShape}.
      *
      * @param meshShape the pre-existing shape (not null)
      */
@@ -71,7 +71,11 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
     }
 
     /**
-     * Instantiate a hierarchy from serialized bytes.
+     * Instantiate a (tracked) hierarchy from serialized bytes.
+     * <p>
+     * If the bytes weren't generated on the current {@code Platform} with the
+     * same floating-point precision, the results are undefined (likely a JVM
+     * crash).
      *
      * @param bytes the serialized bytes (not null, unaffected)
      */
@@ -219,6 +223,11 @@ public class BoundingValueHierarchy extends NativePhysicsObject {
 
     /**
      * Serialize the hierarchy to a byte array.
+     * <p>
+     * Serialization can be used to avoid re-generating the BVH of a
+     * `MeshCollisionShape` each time it is instantiated. The resulting bytes
+     * are specific to a particular `MeshCollisionShape`. They are also specific
+     * to the current {@code Platform} and floating-point precision.
      *
      * @return a new array containing serialized bytes (not null)
      */

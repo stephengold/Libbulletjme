@@ -31,7 +31,7 @@ import java.io.File;
 import java.util.logging.Logger;
 
 /**
- * Command-line application for manual testing.
+ * Command-line application for testing Libbulletjme.
  *
  * @author Stephen Gold sgold@sonic.net
  */
