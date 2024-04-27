@@ -31,9 +31,10 @@ import com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.util.NativeLibrary;
 import com.jme3.math.Vector3f;
+import com.jme3.system.JmeSystem;
+import com.jme3.system.Platform;
 import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -196,7 +197,6 @@ public class TestBvh {
     /**
      * Generate a non-trivial quantized BVH, serialize it, and de-serialize it.
      */
-    @Ignore("reworking the native serialize/deserialize code")
     @Test
     public void test020() {
         Utils.loadNativeLibrary();
@@ -219,8 +219,21 @@ public class TestBvh {
 
         // Check the number of bytes:
         boolean dp = NativeLibrary.isDoublePrecision();
-        Assert.assertEquals(dp ? 2528 : 2480, numBytes);
-
+        Platform platform = JmeSystem.getPlatform();
+        switch (platform) {
+            case Linux64:
+            case Linux_ARM64:
+                Assert.assertEquals(dp ? 2520 : 2472, numBytes);
+                break;
+            case MacOSX64:
+            case MacOSX_ARM64:
+                Assert.assertEquals(dp ? 2520 : 2480, numBytes);
+                break;
+            case Windows64:
+                Assert.assertEquals(dp ? 2528 : 2480, numBytes);
+                break;
+            default: // TODO more platforms
+        }
         // Clone the BVH by de-serializing the bytes:
         BoundingValueHierarchy b2 = new BoundingValueHierarchy(bytes);
 
