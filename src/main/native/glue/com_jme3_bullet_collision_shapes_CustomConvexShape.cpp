@@ -82,7 +82,7 @@ public:
 
     void
     calculateLocalInertia(btScalar mass, btVector3& storeResult) const {
-        storeResult = m_scaledInertia;
+        storeResult = mass * m_scaledInertia;
     }
 
     void
