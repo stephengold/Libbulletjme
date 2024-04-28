@@ -34,7 +34,6 @@
  * Author: Stephen Gold
  */
 #include "com_jme3_bullet_collision_shapes_CustomConvexShape.h"
-#include "BulletCollision/CollisionShapes/btConvexInternalShape.h"
 #include "jmeBulletUtil.h"
 
 /*
