@@ -28,7 +28,6 @@ class btSerializer;
 #include <stdlib.h>
 #endif  //DEBUG_CHECK_DEQUANTIZATION
 
-#include <stdint.h> // stephengold added 2024-04-19
 #include "LinearMath/btVector3.h"
 #include "LinearMath/btAlignedAllocator.h"
 
@@ -51,7 +50,7 @@ class btSerializer;
 // actually) triangles each (since the sign bit is reserved
 #define MAX_NUM_PARTS_IN_BITS 10 // stephengold uncommented 2024-03-09
 //#define MAX_NUM_PARTS_IN_BITS 4 // stephengold commented out 2024-03-09
-#define TRIANGLE_INDEX_MASK ((uint32_t)0x1fffffUL) // stephengold added 2024-04-19
+#define TRIANGLE_INDEX_MASK 0x1fffff             // stephengold added 2024-04-19
 
 ///btQuantizedBvhNode is a compressed aabb node, 16 bytes.
 ///Node can be used for leafnode or internal node. Leafnodes can point to 32-bit triangle index (non-negative range).
@@ -61,22 +60,22 @@ btQuantizedBvhNode
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	//12 bytes
-	uint16_t m_quantizedAabbMin[3]; // stephengold modified 2024-04-19
-	uint16_t m_quantizedAabbMax[3]; // stephengold modified 2024-04-19
+	unsigned short int m_quantizedAabbMin[3];
+	unsigned short int m_quantizedAabbMax[3];
 	//4 bytes
-	int32_t m_escapeIndexOrTriangleIndex; // stephengold modified 2024-04-19
+	int m_escapeIndexOrTriangleIndex;
 
 	bool isLeafNode() const
 	{
 		//skipindex is negative (internal node), triangleindex >=0 (leafnode)
 		return (m_escapeIndexOrTriangleIndex >= 0);
 	}
-	int32_t getEscapeIndex() const // stephengold modified 2024-04-19
+	int getEscapeIndex() const
 	{
 		btAssert(!isLeafNode());
 		return -m_escapeIndexOrTriangleIndex;
 	}
-	int32_t getTriangleIndex() const // stephengold modified 2024-04-19
+	int getTriangleIndex() const
 	{
 		btAssert(isLeafNode());
 //		unsigned int x = 0;// stephengold commented out 2024-04-19
@@ -123,13 +122,13 @@ public:
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	//12 bytes
-	uint16_t m_quantizedAabbMin[3]; // stephengold modified 2024-04-19
-	uint16_t m_quantizedAabbMax[3]; // stephengold modified 2024-04-19
+	unsigned short int m_quantizedAabbMin[3];
+	unsigned short int m_quantizedAabbMax[3];
 	//4 bytes, points to the root of the subtree
-	int32_t m_rootNodeIndex; // stephengold modified 2024-04-19
+	int m_rootNodeIndex;
 	//4 bytes
-	int32_t m_subtreeSize; // stephengold modified 2024-04-19
-	char m_padding[12]; // pad the size to 32 bytes // stephengold modified 2024-04-19
+	int m_subtreeSize;
+	int m_padding[3];
 
 	btBvhSubtreeInfo()
 	{

@@ -13,7 +13,6 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include <cstddef>                               // stephengold added 2024-04-24
 #include "btQuantizedBvh.h"
 
 #include "LinearMath/btAabbUtil2.h"
