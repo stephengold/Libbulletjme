@@ -210,6 +210,7 @@ $(N)/glue/com_jme3_bullet_collision_shapes_MultiSphere.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_PlaneCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_SimplexCollisionShape.cpp \
 $(N)/glue/com_jme3_bullet_collision_shapes_SphereCollisionShape.cpp \
+$(N)/glue/com_jme3_bullet_collision_shapes_SphericalSegment.cpp \
 $(N)/glue/com_jme3_bullet_CollisionConfiguration.cpp \
 $(N)/glue/com_jme3_bullet_CollisionSpace.cpp \
 $(N)/glue/com_jme3_bullet_DeformableSpace.cpp \
