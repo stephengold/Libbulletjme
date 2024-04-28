@@ -72,32 +72,32 @@ public:
      * constructors:
      */
     jmeConvexShape(JNIEnv *pEnv, jweak javaShapeRef)
-    : btConvexInternalShape() {
-        m_useSlowAabb = true;
-
-        m_javaShapeRef = javaShapeRef;
-        m_pCreateEnv = pEnv;
-        m_shapeType = CUSTOM_CONVEX_SHAPE_TYPE;
+    : btConvexInternalShape(),
+      m_javaShapeRef(javaShapeRef),
+      m_pCreateEnv(pEnv),
+      m_useSlowAabb(true)
+    {
+      m_shapeType = CUSTOM_CONVEX_SHAPE_TYPE;
     }
 
     jmeConvexShape(JNIEnv *pEnv, jweak javaShapeRef,
         const btVector3& descaledHalfExtents)
-    : btConvexInternalShape() {
-        m_useSlowAabb = false;
-        m_descaledHalfExtents = descaledHalfExtents;
-
-        m_javaShapeRef = javaShapeRef;
-        m_pCreateEnv = pEnv;
-        m_shapeType = CUSTOM_CONVEX_SHAPE_TYPE;
+    : btConvexInternalShape(),
+      m_descaledHalfExtents(descaledHalfExtents),
+      m_javaShapeRef(javaShapeRef),
+      m_pCreateEnv(pEnv),
+      m_useSlowAabb(false)
+    {
+      m_shapeType = CUSTOM_CONVEX_SHAPE_TYPE;
     }
 
     virtual ~jmeConvexShape() {}
 
     void
     batchedUnitVectorGetSupportingVertexWithoutMargin(
-        const btVector3 *pLocationsIn, btVector3 *pVerticesOut, int numV) const
+        const btVector3 *pLocationsIn, btVector3 *pVerticesOut, int numVectors) const
     {
-        for (int i = 0; i < numV; i++) {
+        for (int i = 0; i < numVectors; ++i) {
             const btVector3& testVector = pLocationsIn[i];
             pVerticesOut[i] = localGetSupportingVertexWithoutMargin(testVector);
         }
