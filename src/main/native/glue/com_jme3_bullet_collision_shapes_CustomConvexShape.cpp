@@ -43,6 +43,30 @@
  */
 ATTRIBUTE_ALIGNED16(class)
 jmeConvexShape : public btConvexInternalShape {
+protected:
+    /*
+     * true to calculate bounding boxes using supporting vertices,
+     * false to use the descaled half extents:
+     */
+    bool m_useSlowAabb;
+    /*
+     * if m_useSlowAabb is false, these are the shape's half extents
+     * on each local axis, for scale=(1,1,1) and margin=0:
+     */
+    btVector3 m_descaledHalfExtents;
+    /*
+     * (rotational) inertia around each local axis, for mass=1:
+     */
+    btVector3 m_scaledInertia;
+    /*
+     * interface pointer for the thread that created this collision shape:
+     */
+    JNIEnv *m_pCreateEnv;
+    /*
+     * weak reference to the corresponding Java instance:
+     */
+    jweak m_javaShapeRef;
+
 public:
     BT_DECLARE_ALIGNED_ALLOCATOR();
     /*
@@ -139,30 +163,6 @@ public:
     setScaledInertia(btScalar x, btScalar y, btScalar z) {
         m_scaledInertia.setValue(x, y, z);
     }
-
-private:
-    /*
-     * true to calculate bounding boxes using supporting vertices,
-     * false to use the descaled half extents:
-     */
-    bool m_useSlowAabb;
-    /*
-     * if m_useSlowAabb is false, these are the shape's half extents
-     * on each local axis, for scale=(1,1,1) and margin=0:
-     */
-    btVector3 m_descaledHalfExtents;
-    /*
-     * (rotational) inertia around each local axis, for mass=1:
-     */
-    btVector3 m_scaledInertia;
-    /*
-     * interface pointer for the thread that created this collision shape:
-     */
-    JNIEnv *m_pCreateEnv;
-    /*
-     * weak reference to the corresponding Java instance:
-     */
-    jweak m_javaShapeRef;
 };
 
 /*
