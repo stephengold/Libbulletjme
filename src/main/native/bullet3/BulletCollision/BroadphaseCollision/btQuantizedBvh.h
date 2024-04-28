@@ -103,12 +103,12 @@ btOptimizedBvhNode
 	btVector3 m_aabbMaxOrg;
 
 	//4
-	int32_t m_escapeIndex; // stephengold modified 2024-04-19
+	int m_escapeIndex;
 
 	//8
 	//for child nodes
-	int32_t m_subPart; // stephengold modified 2024-04-19
-	int32_t m_triangleIndex; // stephengold modified 2024-04-19
+	int m_subPart;
+	int m_triangleIndex;
 
 	//pad the struct to a multiple of 32 bytes // stephengold modified 2024-04-19
 	char m_padding[20];
