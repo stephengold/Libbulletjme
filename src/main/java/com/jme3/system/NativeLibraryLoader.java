@@ -75,27 +75,19 @@ public final class NativeLibraryLoader {
                 || flavor.equals("Dp") || flavor.equals("DpMt") : flavor;
 
         Platform platform = JmeSystem.getPlatform();
+        Platform.Os os = platform.getOs();
 
         String name;
-        switch (platform) {
-            case Windows32:
-            case Windows64:
-            case Windows_ARM32:
-            case Windows_ARM64:
-                name = "bulletjme.dll";
-                break;
-            case Android_ARM7:
-            case Android_ARM8:
-            case Linux32:
-            case Linux64:
-            case Linux_ARM32:
-            case Linux_ARM64:
+        switch (os) {
+            case Android:
+            case Linux:
                 name = "libbulletjme.so";
                 break;
-            case MacOSX32:
-            case MacOSX64:
-            case MacOSX_ARM64:
+            case MacOS:
                 name = "libbulletjme.dylib";
+                break;
+            case Windows:
+                name = "bulletjme.dll";
                 break;
             default:
                 throw new RuntimeException("platform = " + platform);
