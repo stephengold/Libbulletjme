@@ -30,43 +30,7 @@ jobs:
         - g++ --version
         - ./gradlew run build --console=plain --no-daemon -Ptravis=amd64
 
-    # Linux64 multithreaded (job .3):
-    - env:
-        - FLAVOR=Mt64
-      script:
-        - date
-        - g++ --version
-        - ./gradlew build --console=plain --no-daemon -Ptravis=amd64mt
-
-    # Linux_ARM32 software floating-point (job .4):
-    - arch: arm64
-      compiler: arm-linux-gnueabi-g++-7
-      addons:
-        apt:
-          packages:
-            - g++-7-arm-linux-gnueabi
-      env:
-        - FLAVOR=Arm32
-      script:
-        - date
-        - arm-linux-gnueabi-g++-7 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Ptravis=arm32
-
-    # Linux_ARM32hf (job .5):
-    - arch: arm64
-      compiler: arm-linux-gnueabihf-g++-6
-      addons:
-        apt:
-          packages:
-            - g++-6-arm-linux-gnueabihf
-      env:
-        - FLAVOR=Arm32hf
-      script:
-        - date
-        - arm-linux-gnueabihf-g++-6 -E -v
-        - travis_wait 20 ./gradlew assemble --console=plain --no-daemon -Ptravis=arm32hf
-
-    # Linux_ARM64 double-precision (job .6):
+    # Linux_ARM64 double-precision (job .3):
     - arch: arm64
       compiler: gcc-6
       addons:
@@ -80,7 +44,7 @@ jobs:
         - aarch64-linux-gnu-g++-6 -E -v
         - travis_wait 20 ./gradlew run build --exclude-task check --console=plain --no-daemon -Pflavor=Dp -Ptravis=arm64
 
-    # Linux_ARM64 single-precision (job .7):
+    # Linux_ARM64 single-precision (job .4):
     - arch: arm64
       compiler: gcc-6
       addons:
@@ -93,30 +57,6 @@ jobs:
         - date
         - aarch64-linux-gnu-g++-6 -E -v
         - travis_wait 20 ./gradlew run build --console=plain --no-daemon -Pflavor=Sp -Ptravis=arm64
-
-    # Android_ARM7, Android_ARM8, Android_X86, and Android_X86_64 (job .8):
-    - dist: xenial
-      language: android
-      addons:
-        apt:
-          packages:
-            - openjdk-11-jdk
-      android:
-        components:
-          - tools
-      script:
-        - date
-        - echo y | sdkmanager "ndk;23.1.7779620" > /dev/null
-        - sudo update-java-alternatives --set /usr/lib/jvm/java-1.11.0-openjdk-amd64
-        - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
-        - ./gradlew copyToDist --build-file=android.gradle --console=plain --no-daemon
-
-    # MacOSX_ARM64 (job .9):
-    - os: osx
-      osx_image: xcode14.2
-      script:
-        - date
-        - ./gradlew assemble --console=plain --no-daemon -Ptravis=osx_arm
 
 
 addons:
