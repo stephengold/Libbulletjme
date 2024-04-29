@@ -6,13 +6,13 @@
 + Bugfix:  wrong inertia for a `CustomConvexShape` when `mass != 1`
 + Added the `SphericalSegment` collision shape.
 + Added the `TestApp` application for manual testing.
-+ Added public methods:
++ Added 11 public methods:
   + `BoundingValueHierarchy.copyAabb()`
   + `BoundingValueHierarchy.copyQuantization()`
   + `BoundingValueHierarchy.countLeafNodes()`
   + `BoundingValueHierarchy.countNodes()`
   + `BoundingValueHierarchy.countSubtreeHeaders()`
-  + `BoundingValueHierarchy.escapeIndex()
+  + `BoundingValueHierarchy.escapeIndex()`
   + `BoundingValueHierarchy.isLeafNode()`
   + `BoundingValueHierarchy.partId()`
   + `BoundingValueHierarchy.setTraversalMode()`
