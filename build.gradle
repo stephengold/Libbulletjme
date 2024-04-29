@@ -110,6 +110,12 @@ model {
         //        linker.executable = 'aarch64-linux-gnu-g++-9'
         //    }
         //}
+        //gcc8Arm32hf(Gcc) {
+        //    target('Linux_ARM32hf') {
+        //        cppCompiler.executable = 'arm-linux-gnueabihf-g++-8'
+        //        linker.executable = 'arm-linux-gnueabihf-g++-8'
+        //    }
+        //}
 
         gcc(Gcc)
         gcc6Arm32hf(Gcc) {
@@ -192,7 +198,7 @@ model {
                     buildable = !pName.startsWith('Linux_ARM')
                     //buildable = (pName == 'Linux64') // to build Linux64 only
                     //buildable = (pName == 'Windows64') // to build Windows64 only
-                    //buildable = !pName.startsWith('Linux32')
+                    //buildable = (pName == 'Linux_ARM32hf') // to build Linux_ARM32hf only
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
