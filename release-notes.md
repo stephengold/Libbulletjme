@@ -1,5 +1,24 @@
 # Release log for the Libbulletjme project
 
+## Version 21.1.0 released on 28 April 2024
+
++ Bugfix:  crash in `processAllTriangles()` when `m_bvh==NULL` (Minie issue 43)
++ Bugfix:  wrong inertia for a `CustomConvexShape` when `mass != 1`
++ Added the `SphericalSegment` collision shape.
++ Added the `TestApp` application for manual testing.
++ Added public methods:
+  + `BoundingValueHierarchy.copyAabb()`
+  + `BoundingValueHierarchy.copyQuantization()`
+  + `BoundingValueHierarchy.countLeafNodes()`
+  + `BoundingValueHierarchy.countNodes()`
+  + `BoundingValueHierarchy.countSubtreeHeaders()`
+  + `BoundingValueHierarchy.escapeIndex()
+  + `BoundingValueHierarchy.isLeafNode()`
+  + `BoundingValueHierarchy.partId()`
+  + `BoundingValueHierarchy.setTraversalMode()`
+  + `BoundingValueHierarchy.traversalMode()`
+  + `BoundingValueHierarchy.triangleIndex()`
+
 ## Version 21.0.0 released on 22 April 2024
 
 + Made numerous breaking changes to the native API.
