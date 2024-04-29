@@ -63,6 +63,7 @@ import com.jme3.bullet.collision.shapes.MultiSphere;
 import com.jme3.bullet.collision.shapes.PlaneCollisionShape;
 import com.jme3.bullet.collision.shapes.SimplexCollisionShape;
 import com.jme3.bullet.collision.shapes.SphereCollisionShape;
+import com.jme3.bullet.collision.shapes.SphericalSegment;
 import com.jme3.bullet.collision.shapes.infos.BoundingValueHierarchy;
 import com.jme3.bullet.collision.shapes.infos.IndexedMesh;
 import com.jme3.bullet.joints.New6Dof;
@@ -654,6 +655,20 @@ public class TestLibbulletjme {
         Assert.assertFalse(sphere.isInfinite());
         Assert.assertFalse(sphere.isNonMoving());
         Assert.assertFalse(sphere.isPolyhedral());
+        buf = DebugShapeFactory.getDebugTriangles(
+                sphere, DebugShapeFactory.lowResolution);
+        Assert.assertEquals(720, buf.capacity());
+
+        // SphericalSegment
+        SphericalSegment segment = new SphericalSegment(1f);
+        verifyCollisionShapeDefaults(segment);
+        Assert.assertEquals(0.04f, segment.getMargin(), 0f);
+        Assert.assertEquals(19, segment.getShapeType());
+        Assert.assertFalse(segment.isConcave());
+        Assert.assertTrue(segment.isConvex());
+        Assert.assertFalse(segment.isInfinite());
+        Assert.assertFalse(segment.isNonMoving());
+        Assert.assertFalse(segment.isPolyhedral());
         buf = DebugShapeFactory.getDebugTriangles(
                 sphere, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
