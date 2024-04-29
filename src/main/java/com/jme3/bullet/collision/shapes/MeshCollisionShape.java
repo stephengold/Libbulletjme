@@ -80,7 +80,7 @@ public class MeshCollisionShape extends CollisionShape {
      */
     private BoundingValueHierarchy bvh;
     /**
-     * native mesh used to construct this shape
+     * native mesh used to construct the shape
      */
     final private CompoundMesh nativeMesh;
     // *************************************************************************
@@ -272,7 +272,7 @@ public class MeshCollisionShape extends CollisionShape {
     /**
      * Test whether this shape can be split by an arbitrary plane.
      *
-     * @return true if splittable, false otherwise
+     * @return true
      */
     @Override
     public boolean canSplit() {

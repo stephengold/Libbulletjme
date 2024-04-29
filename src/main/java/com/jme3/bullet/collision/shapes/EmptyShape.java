@@ -62,7 +62,7 @@ public class EmptyShape extends CollisionShape {
     // new methods exposed
 
     /**
-     * Return the unscaled volume of the shape.
+     * Return the volume of the shape.
      *
      * @return 0
      */
@@ -73,9 +73,9 @@ public class EmptyShape extends CollisionShape {
     // CollisionShape methods
 
     /**
-     * Test whether this shape can be split by an arbitrary plane.
+     * Test whether the shape can be split by an arbitrary plane.
      *
-     * @return true if splittable, false otherwise
+     * @return true
      */
     @Override
     public boolean canSplit() {
@@ -83,9 +83,9 @@ public class EmptyShape extends CollisionShape {
     }
 
     /**
-     * Determine how far the shape extends from its center.
+     * Calculate how far the shape extends from its center.
      *
-     * @return the distance (in physics-space units, &ge;0)
+     * @return 0
      */
     @Override
     public float maxRadius() {
@@ -93,7 +93,7 @@ public class EmptyShape extends CollisionShape {
     }
 
     /**
-     * Estimate the volume of this shape, including scale and margin.
+     * Return the volume of the shape, including scale and margin.
      *
      * @return 0
      */

@@ -171,8 +171,7 @@ public class BoxCollisionShape extends ConvexShape {
     // ConvexShape methods
 
     /**
-     * Calculate how far the scaled shape extends from its center of mass,
-     * excluding collision margin.
+     * Calculate how far the scaled shape extends from its center.
      *
      * @return the distance (in physics-space units, &ge;0)
      */

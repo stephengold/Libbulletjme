@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2022 jMonkeyEngine
+ * Copyright (c) 2019-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -129,9 +129,9 @@ public class Box2dShape extends ConvexShape {
     // ConvexShape methods
 
     /**
-     * Calculate how far the box extends from its center.
+     * Calculate how far the scaled shape extends from its center.
      *
-     * @return a distance (in physics-space units, &ge;0)
+     * @return the distance (in physics-space units, &ge;0)
      */
     @Override
     public float maxRadius() {

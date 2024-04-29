@@ -128,8 +128,8 @@ public class SphereCollisionShape extends ConvexShape {
     // ConvexShape methods
 
     /**
-     * Test whether the specified scale factors can be applied to this shape.
-     * For sphere shapes, scaling must be uniform.
+     * Test whether the specified scale factors can be applied to the shape. For
+     * sphere shapes, scaling must be uniform.
      *
      * @param scale the desired scale factor for each local axis (may be null,
      * unaffected)
@@ -143,9 +143,9 @@ public class SphereCollisionShape extends ConvexShape {
     }
 
     /**
-     * Return the collision margin for this shape.
+     * Return the collision margin of the shape.
      *
-     * @return the margin distance (in physics-space units, &ge;0)
+     * @return the margin thickness (in physics-space units, &ge;0)
      */
     @Override
     public float getMargin() {
@@ -153,7 +153,7 @@ public class SphereCollisionShape extends ConvexShape {
     }
 
     /**
-     * Calculate how far the sphere extends from its center.
+     * Calculate how far the scaled shape extends from its center.
      *
      * @return the distance (in physics-space units, &ge;0)
      */
@@ -178,7 +178,7 @@ public class SphereCollisionShape extends ConvexShape {
      * Alter the collision margin of this shape. This feature is disabled for
      * sphere shapes.
      *
-     * @param margin the desired margin distance (in physics-space units)
+     * @param margin the desired margin thickness (in physics-space units)
      */
     @Override
     public void setMargin(float margin) {

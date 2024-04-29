@@ -187,9 +187,9 @@ public class GImpactCollisionShape extends CollisionShape {
     // CollisionShape methods
 
     /**
-     * Test whether this shape can be split by an arbitrary plane.
+     * Test whether the shape can be split by an arbitrary plane.
      *
-     * @return true if splittable, false otherwise
+     * @return true
      */
     @Override
     public boolean canSplit() {

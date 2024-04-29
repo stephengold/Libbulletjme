@@ -230,8 +230,8 @@ public class MultiSphere extends ConvexShape {
      * Instantiate an eccentric sphere shape with the specified center and
      * radius.
      *
-     * @param center the location of the center (in shape coordinates, not null,
-     * unaffected)
+     * @param center the location of the sphere's center (in shape coordinates,
+     * not null, unaffected)
      * @param radius the desired radius (in shape units, &ge;0)
      */
     public MultiSphere(Vector3f center, float radius) {
@@ -295,7 +295,7 @@ public class MultiSphere extends ConvexShape {
     }
 
     /**
-     * Count the spheres in this shape.
+     * Count the spheres in the shape.
      *
      * @return the count (&gt;0)
      */
@@ -322,7 +322,7 @@ public class MultiSphere extends ConvexShape {
     // ConvexShape methods
 
     /**
-     * Recalculate this shape's bounding box if necessary.
+     * Recalculate the shape's bounding box if necessary.
      */
     @Override
     protected void recalculateAabb() {

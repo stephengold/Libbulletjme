@@ -164,8 +164,8 @@ public class CapsuleCollisionShape extends ConvexShape {
     // ConvexShape methods
 
     /**
-     * Test whether the specified scale factors can be applied to this shape.
-     * For capsule shapes, scaling must be uniform.
+     * Test whether the specified scale factors can be applied to the shape. For
+     * capsule shapes, scaling must be uniform.
      *
      * @param scale the desired scale factor for each local axis (may be null,
      * unaffected)
@@ -179,9 +179,9 @@ public class CapsuleCollisionShape extends ConvexShape {
     }
 
     /**
-     * Return the collision margin for this shape.
+     * Return the collision margin of the shape.
      *
-     * @return the margin distance (in physics-space units, &ge;0)
+     * @return the margin thickness (in physics-space units, &ge;0)
      */
     @Override
     public float getMargin() {
@@ -189,7 +189,7 @@ public class CapsuleCollisionShape extends ConvexShape {
     }
 
     /**
-     * Calculate how far the capsule extends from its center.
+     * Calculate how far the scaled shape extends from its center.
      *
      * @return the distance (in physics-space units, &ge;0)
      */
@@ -200,7 +200,7 @@ public class CapsuleCollisionShape extends ConvexShape {
     }
 
     /**
-     * Estimate the volume of this shape, including scale and margin.
+     * Estimate the volume of the shape, including scale and margin.
      *
      * @return the volume (in physics-space units cubed, &ge;0)
      */
@@ -211,10 +211,10 @@ public class CapsuleCollisionShape extends ConvexShape {
     }
 
     /**
-     * Alter the collision margin of this shape. This feature is disabled for
+     * Alter the collision margin of the shape. This feature is disabled for
      * capsule shapes.
      *
-     * @param margin the desired margin distance (in physics-space units)
+     * @param margin the desired margin thickness (in physics-space units)
      */
     @Override
     public void setMargin(float margin) {
