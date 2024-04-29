@@ -221,6 +221,9 @@ public class TestBvh {
         boolean dp = NativeLibrary.isDoublePrecision();
         Platform platform = JmeSystem.getPlatform();
         switch (platform) {
+            case Linux_ARM32:
+                Assert.assertEquals(dp ? 2448 : 2396, numBytes);
+                break;
             case Linux64:
             case Linux_ARM64:
                 Assert.assertEquals(dp ? 2520 : 2472, numBytes);
