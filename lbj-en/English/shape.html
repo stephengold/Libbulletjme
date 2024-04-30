@@ -264,11 +264,11 @@ describes the shape and size of a collision object such as a rigid body.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_17_shape_classes"><a class="anchor" href="#_the_17_shape_classes"></a>The 17 shape classes</h2>
+<h2 id="_the_18_shape_classes"><a class="anchor" href="#_the_18_shape_classes"></a>The 18 shape classes</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The examples so far have all used spheres, cubes, and/or cylinders.
-However, those are only 3 of the 17 concrete subclasses of
+However, those are only 3 of the 18 concrete subclasses of
 <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CollisionShape.html"><code>CollisionShape</code></a>.</p>
 </div>
 <div class="paragraph">
@@ -424,6 +424,15 @@ with illustrations and lists of key properties (explained below):</p>
 &rarr; symmetric</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="_images/sphere.png" alt="sphere" height="160"></span></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">18. <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphericalSegment.html"><code>SphericalSegment</code></a></p>
+<p class="tableblock">&rarr; convex<br>
+&rarr; positive margin<br>
+&rarr; imprecise<br>
+&rarr; uniform scaling only<br>
+&rarr; symmetric</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="_images/segment.png" alt="segment" height="160"></span></p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -567,8 +576,8 @@ doing so is not recommended.
 is unaffected by margin.</p>
 </div>
 <div class="paragraph">
-<p>While most collision-shape subtypes are precise, 5 of them are not.
-For 4 of them, margin simply expands their effective shapes:</p>
+<p>While most collision-shape subtypes are precise, 6 of them are not.
+For 5 of them, margin simply expands their effective shapes:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -583,6 +592,9 @@ For 4 of them, margin simply expands their effective shapes:</p>
 </li>
 <li>
 <p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SimplexCollisionShape.html"><code>SimplexCollisionShape</code></a></p>
+</li>
+<li>
+<p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphericalSegment.html"><code>SphericalSegment</code></a></p>
 </li>
 </ol>
 </div>
@@ -682,7 +694,7 @@ the simulator cannot determine their mass distributions:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The safest shapes for dynamic rigid bodies are the 5 <em>primitives</em> listed below.
+<p>The safest shapes for dynamic rigid bodies are the 6 <em>primitives</em> listed below.
 All have at least one <a href="https://en.wikipedia.org/wiki/Rotational_symmetry">axis of symmetry</a>,
 and their centers and axes are well-known:</p>
 </div>
@@ -698,10 +710,13 @@ and their centers and axes are well-known:</p>
 <p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/ConeCollisionShape.html"><code>ConeCollisionShape</code></a>,</p>
 </li>
 <li>
-<p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CylinderCollisionShape.html"><code>CylinderCollisionShape</code></a>, and</p>
+<p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CylinderCollisionShape.html"><code>CylinderCollisionShape</code></a>,</p>
 </li>
 <li>
-<p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphereCollisionShape.html"><code>SphereCollisionShape</code></a>.</p>
+<p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphereCollisionShape.html"><code>SphereCollisionShape</code></a>, and</p>
+</li>
+<li>
+<p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphericalSegment.html"><code>SphericalSegment</code></a>.</p>
 </li>
 </ol>
 </div>
@@ -818,8 +833,9 @@ the only allowed scale is (1,1,1).</p>
 </li>
 <li>
 <p><a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/CapsuleCollisionShape.html"><code>CapsuleCollisionShape</code></a>,
-<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/ConeCollisionShape.html"><code>ConeCollisionShape</code></a>, and
-<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphereCollisionShape.html"><code>SphereCollisionShape</code></a>
+<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/ConeCollisionShape.html"><code>ConeCollisionShape</code></a>,
+<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphereCollisionShape.html"><code>SphereCollisionShape</code></a>, and
+<a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/SphericalSegment.html"><code>SphericalSegment</code></a>
 support only uniform scaling, where all axes have the same scale factor,
 such as (0.2, 0.2, 0.2) or (9,9,9).</p>
 </li>
@@ -1017,7 +1033,7 @@ than a GImpact shape.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Libbulletjme provides 17 types of collision shapes,
+<p>Libbulletjme provides 18 types of collision shapes,
 ranging from the trivial <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/EmptyShape.html"><code>EmptyShape</code></a>
 to the costly <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/collision/shapes/GImpactCollisionShape.html"><code>GImpactCollisionShape</code></a>.</p>
 </li>
