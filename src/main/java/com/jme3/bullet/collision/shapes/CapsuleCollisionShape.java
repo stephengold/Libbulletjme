@@ -181,7 +181,7 @@ public class CapsuleCollisionShape extends ConvexShape {
     /**
      * Return the collision margin of the shape.
      *
-     * @return the margin thickness (in physics-space units, &ge;0)
+     * @return 0
      */
     @Override
     public float getMargin() {

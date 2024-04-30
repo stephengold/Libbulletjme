@@ -267,7 +267,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Return the encoded type of shape.
+     * Return the encoded type of the shape.
      *
      * @return the type code (from Bullet's {@code enum BroadphaseNativeTypes})
      */

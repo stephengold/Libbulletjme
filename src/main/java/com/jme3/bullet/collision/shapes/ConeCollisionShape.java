@@ -187,7 +187,7 @@ public class ConeCollisionShape extends ConvexShape {
     // Java private methods
 
     /**
-     * Instantiate the configured shape.
+     * Instantiate the configured shape in Bullet.
      */
     private void createShape() {
         assert axis == PhysicsSpace.AXIS_X
