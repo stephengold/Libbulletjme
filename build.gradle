@@ -93,7 +93,7 @@ model {
     }
 
     toolChains { // prioritize among the native toolchains
-        visualCpp(VisualCpp)
+        visualCpp(VisualCpp) // used when compiling on Windows
         //clang(Clang) // to prefer Clang over Gcc
 
         //gcc9Arm(Gcc) {
@@ -117,26 +117,26 @@ model {
         //    }
         //}
 
-        gcc(Gcc)
-        gcc6Arm32hf(Gcc) {
+        gcc(Gcc) // used when compiling on Linux
+        gcc6Arm32hf(Gcc) { // used at Travis CI (job .5)
             target('Linux_ARM32hf') {
                 cppCompiler.executable = 'arm-linux-gnueabihf-g++-6'
                 linker.executable = 'arm-linux-gnueabihf-g++-6'
             }
         }
-        gcc6Arm64(Gcc) {
+        gcc6Arm64(Gcc) { // used at Travis CI (jobs .6 and .7)
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-6'
                 linker.executable = 'aarch64-linux-gnu-g++-6'
             }
         }
-        gcc7Arm32(Gcc) {
+        gcc7Arm32(Gcc) { // used at Travis CI (job .4)
             target('Linux_ARM32') {
                 cppCompiler.executable = 'arm-linux-gnueabi-g++-7'
                 linker.executable = 'arm-linux-gnueabi-g++-7'
             }
         }
-        clang(Clang)
+        clang(Clang) // used when compiling on macOS
     }
 
     components {
