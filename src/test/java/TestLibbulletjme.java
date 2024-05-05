@@ -49,6 +49,7 @@ import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
 import com.jme3.bullet.collision.shapes.ConeCollisionShape;
+import com.jme3.bullet.collision.shapes.ConicalFrustum;
 import com.jme3.bullet.collision.shapes.Convex2dShape;
 import com.jme3.bullet.collision.shapes.ConvexShape;
 import com.jme3.bullet.collision.shapes.CustomConvexShape;
@@ -361,6 +362,21 @@ public class TestLibbulletjme {
         buf = DebugShapeFactory.getDebugTriangles(
                 cone, DebugShapeFactory.lowResolution);
         Assert.assertEquals(702, buf.capacity());
+
+
+        // ConicalFrustum
+        ConicalFrustum frustum = new ConicalFrustum(1f, 0.5f, 1f);
+        verifyCollisionShapeDefaults(frustum);
+        Assert.assertEquals(0.04f, frustum.getMargin(), 0f);
+        Assert.assertEquals(19, frustum.getShapeType());
+        Assert.assertFalse(frustum.isConcave());
+        Assert.assertTrue(frustum.isConvex());
+        Assert.assertFalse(frustum.isInfinite());
+        Assert.assertFalse(frustum.isNonMoving());
+        Assert.assertFalse(frustum.isPolyhedral());
+        buf = DebugShapeFactory.getDebugTriangles(
+                frustum, DebugShapeFactory.lowResolution);
+        Assert.assertEquals(720, buf.capacity());
 
         // Convex2d
         ConeCollisionShape flatCone
