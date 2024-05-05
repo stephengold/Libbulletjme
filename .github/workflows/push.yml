@@ -94,10 +94,7 @@ jobs:
       - run: ./gradlew run build --console=plain -Pflavor=Dp -Pgithub=debug64arm
       - run: ./gradlew run cleanTest build --console=plain -Pflavor=Sp -Pgithub=debug64arm
       - if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: crash-log
-          path: '*.log'
+        run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
