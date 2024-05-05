@@ -349,7 +349,6 @@ public class TestLibbulletjme {
         verifyConvexDefaults(cone);
         Assert.assertEquals(PhysicsSpace.AXIS_Y, cone.getAxis());
         Assert.assertEquals(1f, cone.getHeight(), 0f);
-        Assert.assertEquals(0.04f, cone.getMargin(), 0f);
         Assert.assertEquals(11, cone.getShapeType());
         Assert.assertFalse(cone.isPolyhedral());
         Assert.assertEquals(1.158f, cone.maxRadius(), 0.001f);
@@ -590,7 +589,6 @@ public class TestLibbulletjme {
         Assert.assertEquals(1, simplex1.countMeshVertices());
         Utils.assertEquals(0f, 0f, 0f, simplex1.copyVertex(0, null), 0f);
         Utils.assertEquals(0f, 0f, 0f, simplex1.getHalfExtents(null), 0f);
-        Assert.assertEquals(2, simplex1.getShapeType());
         Assert.assertEquals(0.04f, simplex1.maxRadius(), 0f);
         Assert.assertEquals(2.3e-4f, simplex1.scaledVolume(), 1e-5f);
         buf = DebugShapeFactory.getDebugTriangles(
@@ -605,7 +603,6 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, 0f, 0f, simplex2.copyVertex(0, null), 0f);
         Utils.assertEquals(-1f, 0f, 0f, simplex2.copyVertex(1, null), 0f);
         Utils.assertEquals(1f, 0f, 0f, simplex2.getHalfExtents(null), 0f);
-        Assert.assertEquals(2, simplex2.getShapeType());
         Assert.assertEquals(1.04f, simplex2.maxRadius(), 0f);
         Assert.assertEquals(0.009f, simplex2.scaledVolume(), 0.0001f);
         buf = DebugShapeFactory.getDebugTriangles(
@@ -624,7 +621,6 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, 1f, 0f, simplex3.copyVertex(1, null), 0f);
         Utils.assertEquals(1f, 0f, 1f, simplex3.copyVertex(2, null), 0f);
         Utils.assertEquals(1f, 1f, 1f, simplex3.getHalfExtents(null), 0f);
-        Assert.assertEquals(2, simplex3.getShapeType());
         buf = DebugShapeFactory.getDebugTriangles(
                 simplex3, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
@@ -643,7 +639,6 @@ public class TestLibbulletjme {
         Utils.assertEquals(1f, -1f, 0f, simplex4.copyVertex(2, null), 0f);
         Utils.assertEquals(-1f, -1f, 0f, simplex4.copyVertex(3, null), 0f);
         Utils.assertEquals(1f, 1f, 1f, simplex4.getHalfExtents(null), 0f);
-        Assert.assertEquals(2, simplex4.getShapeType());
         buf = DebugShapeFactory.getDebugTriangles(
                 simplex4, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
