@@ -2229,7 +2229,7 @@ public class TestLibbulletjme {
      *
      * @param simplex the shape to test (not null, unaffected)
      */
-    private static void verifySimplexDefaults(ConvexShape simplex) {
+    private static void verifySimplexDefaults(SimplexCollisionShape simplex) {
         verifyConvexDefaults(simplex);
 
         Assert.assertFalse(simplex.canSplit());
