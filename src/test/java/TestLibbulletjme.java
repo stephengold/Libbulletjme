@@ -670,7 +670,7 @@ public class TestLibbulletjme {
         Assert.assertFalse(segment.isNonMoving());
         Assert.assertFalse(segment.isPolyhedral());
         buf = DebugShapeFactory.getDebugTriangles(
-                sphere, DebugShapeFactory.lowResolution);
+                segment, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
     }
 
