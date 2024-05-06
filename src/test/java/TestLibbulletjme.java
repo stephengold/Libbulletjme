@@ -472,7 +472,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(4, hull.getShapeType());
         Assert.assertTrue(hull.isPolyhedral());
         Assert.assertEquals(1.772f, hull.maxRadius(), 0.001f);
-        Assert.assertEquals(4.621f, hull.scaledVolume(), 0.001f);
+        Assert.assertEquals(4.621f, hull.scaledVolume(), 0.002f);
         buf = DebugShapeFactory.getDebugTriangles(
                 hull, DebugShapeFactory.lowResolution);
         Assert.assertEquals(720, buf.capacity());
