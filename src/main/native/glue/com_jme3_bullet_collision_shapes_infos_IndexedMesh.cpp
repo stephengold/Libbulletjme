@@ -140,47 +140,94 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
 // A callback to count the triangles of a concave shape:
 
 class countingCallback : public btTriangleCallback {
+protected:
+    btScalar m_margin;
+    int m_resolution;
 public:
     jint m_count; // number of triangles processed
     /*
      * constructor:
      */
-    countingCallback() {
+    countingCallback(btScalar margin, int resolution) {
+        m_margin = margin;
+        m_resolution = resolution;
         m_count = 0;
     }
 
     void
     processTriangle(btVector3* pTriangle, int partId, int triangleIndex) {
-        ++m_count;
+        if (m_resolution == 2) {
+            btTriangleShape triangleShape(pTriangle[0], pTriangle[1], pTriangle[2]);
+            btShapeHull hull(&triangleShape);
+            const int hullResolution = 0;
+            bool success = hull.buildHull(m_margin, hullResolution);
+            btAssert(success);
+            m_count += hull.numTriangles();
+
+        } else { // m_resolution is 0 or 1
+            ++m_count;
+        }
     }
 };
 
 // A callback to copy the triangles of a concave shape:
 
 class copyingCallback : public btTriangleCallback {
+protected:
     float *m_pDest;   // the destination array
     jint m_count;     // number of triangles in m_pDest
+    btScalar m_margin;
+    int m_resolution;
     jint m_i;         // number of triangles copied
 public:
     /*
      * constructor:
      */
-    copyingCallback(jint count, float *pDest) {
+    copyingCallback(jint count, float *pDest, btScalar margin, int resolution) {
         m_pDest = pDest;
         m_count = count;
+        m_margin = margin;
+        m_resolution = resolution;
         m_i = 0;
     }
 
     void
     processTriangle(btVector3 *pTriangle, int partId, int triangleIndex) {
-        btAssert(m_i < m_count);
-        for (int i = 0; i < 3; ++i) {
-            btVector3 v = pTriangle[i];
-            m_pDest[9 * m_i + 3 * i] = v.x();
-            m_pDest[9 * m_i + 3 * i + 1] = v.y();
-            m_pDest[9 * m_i + 3 * i + 2] = v.z();
+        if (m_resolution == 2) {
+            btTriangleShape triangleShape(pTriangle[0], pTriangle[1], pTriangle[2]);
+            triangleShape.setMargin(m_margin);
+            btShapeHull hull(&triangleShape);
+            const int hullResolution = 0;
+            bool success = hull.buildHull(m_margin, hullResolution);
+            btAssert(success);
+            const unsigned int numTriangles = hull.numTriangles();
+            const unsigned int numVertices = hull.numVertices();
+            const unsigned int *pHullIndices = hull.getIndexPointer();
+            const btVector3 *pHullVertices = hull.getVertexPointer();
+
+            for (int j = 0; j < numTriangles; ++j) {
+                btAssert(m_i < m_count);
+                for (int i = 0; i < 3; ++i) {
+                    unsigned int vertexIndex = pHullIndices[3 * j + i];
+                    btAssert(vertexIndex < numVertices);
+                    btVector3 v = pHullVertices[vertexIndex];
+                    m_pDest[9 * m_i + 3 * i] = v.x();
+                    m_pDest[9 * m_i + 3 * i + 1] = v.y();
+                    m_pDest[9 * m_i + 3 * i + 2] = v.z();
+                }
+                ++m_i;
+            }
+
+        } else { // m_resolution is 0 or 1
+            btAssert(m_i < m_count);
+            for (int i = 0; i < 3; ++i) {
+                btVector3 v = pTriangle[i];
+                m_pDest[9 * m_i + 3 * i] = v.x();
+                m_pDest[9 * m_i + 3 * i + 1] = v.y();
+                m_pDest[9 * m_i + 3 * i + 2] = v.z();
+            }
+            ++m_i;
         }
-        ++m_i;
     }
 };
 
@@ -195,7 +242,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
             = reinterpret_cast<btCollisionShape *> (shapeId);
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);
 
-    btAssert(meshResolution == 0 || meshResolution == 1);
+    btAssert(meshResolution >= 0);
+    btAssert(meshResolution <= 2);
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     btAssert(sizeof(jint) == 4);
@@ -205,14 +253,16 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     pMesh->m_triangleIndexStride = 12;
     pMesh->m_ownArrays = true;
 
-    if (pShape->isConcave()) { // meshResolution is ignored.
+    const btScalar margin = pShape->getMargin();
+
+    if (pShape->isConcave()) {
         const btConcaveShape * const pConcave = (btConcaveShape *) pShape;
 
         const btVector3 min = btVector3(-1e30, -1e30, -1e30);
         const btVector3 max = btVector3(1e30, 1e30, 1e30);
 
         // Count the triangles:
-        countingCallback counting;
+        countingCallback counting(margin, meshResolution);
         pConcave->processAllTriangles(&counting, min, max);
         pMesh->m_numTriangles = counting.m_count;
 
@@ -228,7 +278,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
         // Copy the triangle vertex locations:
         const unsigned int numFloats = 3 * pMesh->m_numVertices;
         float * const pVertices = new float[numFloats]; //dance044
-        copyingCallback copying(pMesh->m_numTriangles, pVertices);
+        copyingCallback copying(
+            pMesh->m_numTriangles, pVertices, margin, meshResolution);
         pConcave->processAllTriangles(&copying, min, max);
         pMesh->m_vertexBase = (unsigned char *) pVertices;
 
@@ -236,9 +287,9 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
         const btConvexShape * const pConvex = (btConvexShape *) pShape;
 
         // Create a hull approximation:
-        btShapeHull * const pHull = new btShapeHull(pConvex); //dance043
-        const btScalar margin = pConvex->getMargin();
-        bool success = pHull->buildHull(margin, meshResolution);
+        btShapeHull * const pHull = new btShapeHull(pConvex); //dance043 TODO
+        const int hullResolution = (meshResolution == 0) ? 0 : 1;
+        bool success = pHull->buildHull(margin, hullResolution);
         if (!success) {
             delete pHull; //dance043
             delete pMesh; //dance020

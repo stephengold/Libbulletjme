@@ -34,6 +34,7 @@ package com.jme3.bullet.collision.shapes.infos;
 import com.jme3.bullet.NativePhysicsObject;
 import com.jme3.bullet.collision.shapes.CollisionShape;
 import com.jme3.bullet.collision.shapes.CompoundCollisionShape;
+import com.jme3.bullet.util.DebugShapeFactory;
 import com.jme3.math.Plane;
 import com.jme3.math.Transform;
 import com.jme3.math.Triangle;
@@ -210,13 +211,16 @@ public class IndexedMesh extends NativePhysicsObject {
      * Instantiate a IndexedMesh to visualize the specified collision shape.
      *
      * @param shape shape to visualize (not null, not compound, unaffected)
-     * @param meshResolution (0=low, 1=high)
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
+     * all
      */
     public IndexedMesh(CollisionShape shape, int meshResolution) {
         Validate.nonNull(shape, "shape");
         Validate.require(!(shape instanceof CompoundCollisionShape),
                 "not a compound shape");
-        Validate.inRange(meshResolution, "mesh resolution", 0, 1);
+        Validate.inRange(meshResolution, "mesh resolution",
+                DebugShapeFactory.lowResolution,
+                DebugShapeFactory.highResolution2);
 
         long shapeId = shape.nativeId();
         long meshId = createIntDebug(shapeId, meshResolution);
