@@ -287,21 +287,20 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
         const btConvexShape * const pConvex = (btConvexShape *) pShape;
 
         // Create a hull approximation:
-        btShapeHull * const pHull = new btShapeHull(pConvex); //dance043 TODO
+        btShapeHull hull(pConvex);
         const int hullResolution = (meshResolution == 0) ? 0 : 1;
-        bool success = pHull->buildHull(margin, hullResolution);
+        bool success = hull.buildHull(margin, hullResolution);
         if (!success) {
-            delete pHull; //dance043
             delete pMesh; //dance020
             return 0;
         }
 
-        pMesh->m_numTriangles = pHull->numTriangles();
-        pMesh->m_numVertices = pHull->numVertices();
+        pMesh->m_numTriangles = hull.numTriangles();
+        pMesh->m_numVertices = hull.numVertices();
 
         // Copy the triangle indices:
         const unsigned int numIndices = 3 * pMesh->m_numTriangles;
-        const unsigned int *pHullIndices = pHull->getIndexPointer();
+        const unsigned int *pHullIndices = hull.getIndexPointer();
         jint * const pIndices = new jint[numIndices]; //dance042
         for (unsigned int i = 0; i < numIndices; ++i) {
             pIndices[i] = pHullIndices[i];
@@ -310,7 +309,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
 
         // Copy the triangle vertex locations:
         const unsigned int numFloats = 3 * pMesh->m_numVertices;
-        const btVector3 *pHullVertices = pHull->getVertexPointer();
+        const btVector3 *pHullVertices = hull.getVertexPointer();
         float * const pVertices = new float[numFloats]; //dance044
         unsigned int floatIndex = 0;
         for (jint i = 0; i < pMesh->m_numVertices; ++i) {
@@ -321,8 +320,6 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
         }
         btAssert(floatIndex == numFloats);
         pMesh->m_vertexBase = (unsigned char *) pVertices;
-
-        delete pHull; //dance043
 
     } else { // probably a btCompoundShape
         delete pMesh; //dance020
