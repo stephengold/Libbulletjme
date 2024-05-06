@@ -788,7 +788,7 @@ public class PhysicsSpace
     /**
      * Access the map from native IDs to physics joints.
      *
-     * @return the pre-existing instance
+     * @return the pre-existing instance (not null)
      */
     protected Map<Long, PhysicsJoint> getJointMap() {
         return jointMap;
