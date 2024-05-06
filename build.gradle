@@ -219,6 +219,7 @@ model {
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
+                // flavor-specific defines:
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_ADDITIONAL_DEBUG'
@@ -281,6 +282,9 @@ model {
                     }
 
                 } else { // toolChain in Clang or Gcc
+                    //cppCompiler.args '-v' // to print compiler invocation
+                    //linker.args '-v' // to print linker invocation
+
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3/BulletDynamics/Featherstone"
@@ -288,6 +292,7 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
                     cppCompiler.args '-std=c++11'
+
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
