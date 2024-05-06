@@ -213,9 +213,9 @@ public class IndexedMesh extends NativePhysicsObject {
      * @param meshResolution (0=low, 1=high)
      */
     public IndexedMesh(CollisionShape shape, int meshResolution) {
-        Validate.require(
-                !(shape == null || shape instanceof CompoundCollisionShape),
-                "a non-null value, not a compound shape");
+        Validate.nonNull(shape, "shape");
+        Validate.require(!(shape instanceof CompoundCollisionShape),
+                "not a compound shape");
         Validate.inRange(meshResolution, "mesh resolution", 0, 1);
 
         long shapeId = shape.nativeId();
