@@ -1168,7 +1168,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     /**
      * Alter the primary user index. Applications may use this parameter for any
-     * purpose.
+     * purpose (native field: m_userIndex).
      *
      * @param index the desired value (default=-1)
      */
@@ -1179,7 +1179,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     /**
      * Alter the secondary user index. Applications may use this parameter for
-     * any purpose.
+     * any purpose (native field: m_userIndex2).
      *
      * @param index the desired value (default=-1)
      */
@@ -1190,7 +1190,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     /**
      * Alter the tertiary user index. Applications may use this parameter for
-     * any purpose.
+     * any purpose (native field: m_userIndex3).
      *
      * @param index the desired value (default=-1)
      */
@@ -1222,7 +1222,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the primary user index.
+     * Return the primary user index (native field: m_userIndex).
      *
      * @return the value
      */
@@ -1233,7 +1233,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the secondary user index.
+     * Return the secondary user index (native field: m_userIndex2).
      *
      * @return the value
      */
@@ -1244,7 +1244,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the tertiary user index.
+     * Return the tertiary user index (native field: m_userIndex3).
      *
      * @return the value
      */

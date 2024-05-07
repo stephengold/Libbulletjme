@@ -483,7 +483,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
 
     /**
      * Alter the primary user index. Applications may use this parameter for any
-     * purpose.
+     * purpose (native field: m_userIndex).
      *
      * @param index the desired value (default=-1)
      */
@@ -494,7 +494,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
 
     /**
      * Alter the secondary user index. Applications may use this parameter for
-     * any purpose.
+     * any purpose (native field: m_userIndex2).
      *
      * @param index the desired value (default=-1)
      */
@@ -517,7 +517,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Return the primary user index.
+     * Return the primary user index (native field: m_userIndex).
      *
      * @return the value
      */
@@ -528,7 +528,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
-     * Return the secondary user index.
+     * Return the secondary user index (native field: m_userIndex2).
      *
      * @return the value
      */
