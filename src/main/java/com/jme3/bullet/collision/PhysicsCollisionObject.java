@@ -1452,11 +1452,11 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     native private static float getSpinningFriction(long objectId);
 
-    native private static int getUserIndex(long shapeId);
+    native private static int getUserIndex(long objectId);
 
-    native private static int getUserIndex2(long shapeId);
+    native private static int getUserIndex2(long objectId);
 
-    native private static int getUserIndex3(long shapeId);
+    native private static int getUserIndex3(long objectId);
 
     native private static boolean
             hasAnisotropicFriction(long objectId, int mode);
