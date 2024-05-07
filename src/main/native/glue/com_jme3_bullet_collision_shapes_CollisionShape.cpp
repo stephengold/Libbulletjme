@@ -38,6 +38,21 @@
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getShapeType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getShapeType
+(JNIEnv *pEnv, jclass, jlong shapeId) {
+    const btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);
+
+    int shapeType = pShape->getShapeType();
+    return (jint) shapeType;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    finalizeNative
  * Signature: (J)V
  */
@@ -119,21 +134,6 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_ge
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);
 
     return pShape->getMargin();
-}
-
-/*
- * Class:     com_jme3_bullet_collision_shapes_CollisionShape
- * Method:    getShapeType
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getShapeType
-(JNIEnv *pEnv, jclass, jlong shapeId) {
-    const btCollisionShape * const pShape
-            = reinterpret_cast<btCollisionShape *> (shapeId);
-    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", 0);
-
-    int shapeType = pShape->getShapeType();
-    return (jint) shapeType;
 }
 
 /*
