@@ -249,6 +249,22 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    getUserIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getUserIndex
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getUserIndex2
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getUserIndex2
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    getWorldToBaseRot
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
@@ -374,6 +390,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupRevolute
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
   (JNIEnv *, jclass, jlong, jint, jfloat, jobject, jint, jobject, jobject, jobject, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setUserIndex
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setUserIndex
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setUserIndex2
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setUserIndex2
+  (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     com_jme3_bullet_MultiBody

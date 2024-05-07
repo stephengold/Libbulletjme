@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023 jMonkeyEngine
+ * Copyright (c) 2020-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -528,6 +528,34 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_MultiBody_getUseGyroTerm
 
 /*
  * Class:     com_jme3_bullet_MultiBody
+ * Method:    getUserIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getUserIndex
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
+    const btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
+
+    return pMultiBody->getUserIndex();
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    getUserIndex2
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_MultiBody_getUserIndex2
+(JNIEnv *pEnv, jclass, jlong multiBodyId) {
+    const btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.", JNI_FALSE);
+
+    return pMultiBody->getUserIndex2();
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
  * Method:    getWorldToBaseRot
  * Signature: (JLcom/jme3/math/Quaternion;)V
  */
@@ -967,6 +995,34 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setupSpherical
     pMultiBody->setupSpherical(i, m, inertia, parent, rotParentToThis,
             parentComToThisPivotOffset, thisPivotToThisComOffset,
             (bool)disableParentCollision);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setUserIndex
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setUserIndex
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint newIndex) {
+    btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
+
+    pMultiBody->setUserIndex(newIndex);
+}
+
+/*
+ * Class:     com_jme3_bullet_MultiBody
+ * Method:    setUserIndex2
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_setUserIndex2
+(JNIEnv *pEnv, jclass, jlong multiBodyId, jint newIndex) {
+    btMultiBody * const
+            pMultiBody = reinterpret_cast<btMultiBody *> (multiBodyId);
+    NULL_CHK(pEnv, pMultiBody, "The multibody does not exist.",);
+
+    pMultiBody->setUserIndex2(newIndex);
 }
 
 /*
