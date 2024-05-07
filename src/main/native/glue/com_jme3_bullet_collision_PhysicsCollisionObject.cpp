@@ -646,6 +646,51 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_g
 
 /*
  * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getUserIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getUserIndex
+(JNIEnv *pEnv, jclass, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+
+    jint result = pCollisionObject->getUserIndex();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getUserIndex2
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getUserIndex2
+(JNIEnv *pEnv, jclass, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+
+    jint result = pCollisionObject->getUserIndex2();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    getUserIndex3
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_getUserIndex3
+(JNIEnv *pEnv, jclass, jlong pcoId) {
+    const btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.", 0);
+
+    jint result = pCollisionObject->getUserIndex3();
+    return result;
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
  * Method:    hasAnisotropicFriction
  * Signature: (JI)Z
  */
@@ -960,4 +1005,46 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_set
     NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
 
     pCollisionObject->setSpinningFriction((btScalar) friction);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setUserIndex
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setUserIndex
+(JNIEnv *pEnv, jclass, jlong pcoId, jint newIndex) {
+    btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
+
+    pCollisionObject->setUserIndex(newIndex);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setUserIndex2
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setUserIndex2
+(JNIEnv *pEnv, jclass, jlong pcoId, jint newIndex) {
+    btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
+
+    pCollisionObject->setUserIndex2(newIndex);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_PhysicsCollisionObject
+ * Method:    setUserIndex3
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_setUserIndex3
+(JNIEnv *pEnv, jclass, jlong pcoId, jint newIndex) {
+    btCollisionObject * const
+            pCollisionObject = reinterpret_cast<btCollisionObject *> (pcoId);
+    NULL_CHK(pEnv, pCollisionObject, "The btCollisionObject does not exist.",)
+
+    pCollisionObject->setUserIndex3(newIndex);
 }

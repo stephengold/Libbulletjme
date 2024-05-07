@@ -1167,6 +1167,39 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
+     * Alter the primary user index. Applications may use this parameter for any
+     * purpose.
+     *
+     * @param index the desired value (default=-1)
+     */
+    public void setUserIndex(int index) {
+        long objectId = nativeId();
+        setUserIndex(objectId, index);
+    }
+
+    /**
+     * Alter the secondary user index. Applications may use this parameter for
+     * any purpose.
+     *
+     * @param index the desired value (default=-1)
+     */
+    public void setUserIndex2(int index) {
+        long objectId = nativeId();
+        setUserIndex2(objectId, index);
+    }
+
+    /**
+     * Alter the tertiary user index. Applications may use this parameter for
+     * any purpose.
+     *
+     * @param index the desired value (default=-1)
+     */
+    public void setUserIndex3(int index) {
+        long objectId = nativeId();
+        setUserIndex3(objectId, index);
+    }
+
+    /**
      * Associate a "user" with this collision object.
      *
      * @param user the desired scene object (alias created, default=null)
@@ -1186,6 +1219,39 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         long spaceId = getSpaceId(objectId);
 
         return spaceId;
+    }
+
+    /**
+     * Return the primary user index.
+     *
+     * @return the value
+     */
+    public int userIndex() {
+        long objectId = nativeId();
+        int result = getUserIndex(objectId);
+        return result;
+    }
+
+    /**
+     * Return the secondary user index.
+     *
+     * @return the value
+     */
+    public int userIndex2() {
+        long objectId = nativeId();
+        int result = getUserIndex2(objectId);
+        return result;
+    }
+
+    /**
+     * Return the tertiary user index.
+     *
+     * @return the value
+     */
+    public int userIndex3() {
+        long objectId = nativeId();
+        int result = getUserIndex3(objectId);
+        return result;
     }
     // *************************************************************************
     // new protected methods
@@ -1386,6 +1452,12 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     native private static float getSpinningFriction(long objectId);
 
+    native private static int getUserIndex(long shapeId);
+
+    native private static int getUserIndex2(long shapeId);
+
+    native private static int getUserIndex3(long shapeId);
+
     native private static boolean
             hasAnisotropicFriction(long objectId, int mode);
 
@@ -1435,4 +1507,10 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     native private static void
             setSpinningFriction(long objectId, float friction);
+
+    native private static void setUserIndex(long objectId, int index);
+
+    native private static void setUserIndex2(long objectId, int index);
+
+    native private static void setUserIndex3(long objectId, int index);
 }
