@@ -482,6 +482,28 @@ abstract public class CollisionShape extends NativePhysicsObject {
     }
 
     /**
+     * Alter the primary user index. Applications may use this parameter for any
+     * purpose.
+     *
+     * @param index the desired value (default=-1)
+     */
+    public void setUserIndex(int index) {
+        long shapeId = nativeId();
+        setUserIndex(shapeId, index);
+    }
+
+    /**
+     * Alter the secondary user index. Applications may use this parameter for
+     * any purpose.
+     *
+     * @param index the desired value (default=-1)
+     */
+    public void setUserIndex2(int index) {
+        long shapeId = nativeId();
+        setUserIndex2(shapeId, index);
+    }
+
+    /**
      * Approximate this shape with a splittable shape. Meant to be overridden.
      *
      * @return a new splittable shape
@@ -492,6 +514,28 @@ abstract public class CollisionShape extends NativePhysicsObject {
         } else {
             throw new IllegalArgumentException("this = " + this);
         }
+    }
+
+    /**
+     * Return the primary user index.
+     *
+     * @return the value
+     */
+    public int userIndex() {
+        long shapeId = nativeId();
+        int result = getUserIndex(shapeId);
+        return result;
+    }
+
+    /**
+     * Return the secondary user index.
+     *
+     * @return the value
+     */
+    public int userIndex2() {
+        long shapeId = nativeId();
+        int result = getUserIndex2(shapeId);
+        return result;
     }
     // *************************************************************************
     // new protected methods
@@ -608,6 +652,10 @@ abstract public class CollisionShape extends NativePhysicsObject {
 
     native private static float getMargin(long shapeId);
 
+    native private static int getUserIndex(long shapeId);
+
+    native private static int getUserIndex2(long shapeId);
+
     native private static boolean isConcave(long shapeId);
 
     native private static boolean isContactFilterEnabled(long shapeId);
@@ -626,4 +674,8 @@ abstract public class CollisionShape extends NativePhysicsObject {
     native private static void setLocalScaling(long shapeId, Vector3f scale);
 
     native private static void setMargin(long shapeId, float margin);
+
+    native private static void setUserIndex(long shapeId, int index);
+
+    native private static void setUserIndex2(long shapeId, int index);
 }

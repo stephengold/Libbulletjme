@@ -57,6 +57,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_ge
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getUserIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getUserIndex
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getUserIndex2
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getUserIndex2
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    isConcave
  * Signature: (J)Z
  */
@@ -126,6 +142,22 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setL
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setMargin
   (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    setUserIndex
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setUserIndex
+  (JNIEnv *, jclass, jlong, jint);
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    setUserIndex2
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setUserIndex2
+  (JNIEnv *, jclass, jlong, jint);
 
 #ifdef __cplusplus
 }

@@ -138,6 +138,34 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_ge
 
 /*
  * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getUserIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getUserIndex
+(JNIEnv *pEnv, jclass, jlong shapeId) {
+    const btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+
+    return pShape->getUserIndex();
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    getUserIndex2
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_getUserIndex2
+(JNIEnv *pEnv, jclass, jlong shapeId) {
+    const btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.", JNI_FALSE);
+
+    return pShape->getUserIndex2();
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
  * Method:    isConcave
  * Signature: (J)Z
  */
@@ -267,4 +295,32 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setM
     NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
 
     pShape->setMargin(newMargin);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    setUserIndex
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setUserIndex
+(JNIEnv *pEnv, jclass, jlong shapeId, jint newIndex) {
+    btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+
+    pShape->setUserIndex(newIndex);
+}
+
+/*
+ * Class:     com_jme3_bullet_collision_shapes_CollisionShape
+ * Method:    setUserIndex2
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CollisionShape_setUserIndex2
+(JNIEnv *pEnv, jclass, jlong shapeId, jint newIndex) {
+    btCollisionShape * const pShape
+            = reinterpret_cast<btCollisionShape *> (shapeId);
+    NULL_CHK(pEnv, pShape, "The btCollisionShape does not exist.",);
+
+    pShape->setUserIndex2(newIndex);
 }
