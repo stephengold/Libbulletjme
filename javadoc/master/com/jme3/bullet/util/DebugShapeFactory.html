@@ -244,8 +244,8 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>shape</code> - the input shape (not null, unaffected)</dd>
-<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
- all</dd>
+<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex shapes,
+ 2&rarr;high for all shapes</dd>
 <dt>Returns:</dt>
 <dd>a new, unflipped, direct buffer full of scaled shape coordinates
  (capacity a multiple of 3)</dd>
@@ -262,8 +262,8 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>shape</code> - the shape to visualize (not null, unaffected)</dd>
-<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
- all</dd>
+<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex shapes,
+ 2&rarr;high for all shapes</dd>
 <dt>Returns:</dt>
 <dd>a new, unflipped, direct buffer full of scaled shape coordinates
  (capacity a multiple of 9)</dd>
@@ -284,8 +284,8 @@ loadScripts(document, 'script');</script>
 <dd><code>shape</code> - (not null, not compound, not plane, unaffected)</dd>
 <dd><code>shapeToWorld</code> - the transform to apply to debug-mesh coordinates (not
  null, unaffected)</dd>
-<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
- all</dd>
+<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex shapes,
+ 2&rarr;high for all shapes</dd>
 <dt>Returns:</dt>
 <dd>the maximum length of the transformed vertex locations (&ge;0)</dd>
 </dl>
@@ -302,8 +302,8 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>shape</code> - the convex shape to analyze (not null, unaffected)</dd>
-<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
- all</dd>
+<dd><code>meshResolution</code> - 0&rarr;low, 1&rarr;high for convex shapes,
+ 2&rarr;high for all shapes</dd>
 <dt>Returns:</dt>
 <dd>the scaled volume (in physics-space units cubed, &ge;0)</dd>
 </dl>
