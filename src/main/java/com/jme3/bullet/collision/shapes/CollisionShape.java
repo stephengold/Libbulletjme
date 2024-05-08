@@ -82,7 +82,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     /**
      * copy of the contact-filter enable flag
      */
-    protected boolean enableContactFilter = true;
+    protected boolean enableContactFilter = false;
     /**
      * default margin for new non-sphere/non-capsule shapes (in physics-space
      * units, &gt;0)
@@ -392,7 +392,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
     /**
      * Enable/disable contact filtering for this shape.
      *
-     * @param setting the desired setting (default=true)
+     * @param setting the desired setting (default=false)
      */
     public void setContactFilterEnabled(boolean setting) {
         long shapeId = nativeId();

@@ -38,7 +38,7 @@ public:
 
 	btCollisionShape() : m_shapeType(INVALID_SHAPE_PROXYTYPE), m_userPointer(0), m_userIndex(-1), m_userIndex2(-1)
 	{
-		m_contactFilterEnabled = true;// stephengold added 2021-10-22
+		m_contactFilterEnabled = false;// stephengold added 2021-10-22, modified 2024-05-08
 	}
 
 	virtual ~btCollisionShape()

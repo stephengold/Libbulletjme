@@ -2129,7 +2129,7 @@ public class TestLibbulletjme {
         Assert.assertNotEquals(0L, shape.nativeId());
         Utils.assertEquals(1f, 1f, 1f, shape.getScale(null), 0f);
         Utils.assertEquals(1., 1., 1., shape.getScaleDp(null), 0.);
-        Assert.assertTrue(shape.isContactFilterEnabled());
+        Assert.assertFalse(shape.isContactFilterEnabled());
         Assert.assertEquals(-1, shape.userIndex());
         Assert.assertEquals(-1, shape.userIndex2());
     }
