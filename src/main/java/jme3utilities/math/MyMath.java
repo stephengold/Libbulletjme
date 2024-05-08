@@ -74,6 +74,27 @@ final public class MyMath {
     // new methods exposed
 
     /**
+     * Return the area of the specified triangle.
+     *
+     * @param triangle (not null, unaffected)
+     * @return the area (&ge;0)
+     */
+    public static double area(Triangle triangle) {
+        Vector3f a = triangle.get1();
+        Vector3f b = triangle.get2();
+        Vector3f c = triangle.get3();
+
+        Vector3f ab = b.subtract(a); // TODO garbage
+        Vector3f ac = c.subtract(a);
+
+        Vector3f cross = ab.cross(ac); // TODO garbage
+        double areaSquared = MyVector3f.lengthSquared(cross) / 4.0;
+        double area = Math.sqrt(areaSquared);
+
+        return area;
+    }
+
+    /**
      * Return the circle function {@code sqrt(1 - x^2)} for a double-precision
      * value.
      *
