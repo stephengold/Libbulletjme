@@ -1,12 +1,12 @@
 // Gradle script to build Libbulletjme Maven artifacts and desktop native libraries
 
 plugins {
-    id 'application' // to build a Java application
-    id 'checkstyle'
-    id 'cpp'
-    id 'java-library'
-    id 'maven-publish'
-    id 'signing'
+    id 'application'   // to build a JVM application
+    id 'checkstyle'    // to analyze Java sourcecode for style violations
+    id 'cpp'           // to compile C/C++ sourcecode and link native libraries
+    id 'java-library'  // to build a JVM library
+    id 'maven-publish' // to publish artifacts to Maven repositories
+    id 'signing'       // to sign artifacts for publication
 }
 
 ext {
