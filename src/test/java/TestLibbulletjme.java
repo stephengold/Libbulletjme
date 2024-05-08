@@ -444,7 +444,9 @@ public class TestLibbulletjme {
         HeightfieldCollisionShape hcs
                 = new HeightfieldCollisionShape(nineHeights);
         verifyCollisionShapeDefaults(hcs);
+        Assert.assertEquals(3, hcs.countColumns());
         Assert.assertEquals(9, hcs.countMeshVertices());
+        Assert.assertEquals(3, hcs.countRows());
         Assert.assertEquals(0.04f, hcs.getMargin(), 0f);
         Assert.assertEquals(24, hcs.getShapeType());
         Assert.assertTrue(hcs.isConcave());
@@ -452,6 +454,7 @@ public class TestLibbulletjme {
         Assert.assertFalse(hcs.isInfinite());
         Assert.assertTrue(hcs.isNonMoving());
         Assert.assertFalse(hcs.isPolyhedral());
+        Assert.assertEquals(PhysicsSpace.AXIS_Y, hcs.upAxis());
         buf = DebugShapeFactory.getDebugTriangles(
                 hcs, DebugShapeFactory.lowResolution);
         Assert.assertEquals(72, buf.capacity());

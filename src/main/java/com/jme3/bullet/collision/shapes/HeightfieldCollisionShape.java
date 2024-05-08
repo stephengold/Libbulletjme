@@ -194,6 +194,16 @@ public class HeightfieldCollisionShape extends CollisionShape {
     // new methods exposed
 
     /**
+     * Count how many columns are in the heightfield.
+     *
+     * @return the count (&ge;2)
+     */
+    public int countColumns() {
+        assert heightStickLength >= 2 : heightStickLength;
+        return heightStickLength;
+    }
+
+    /**
      * Count how many data points are in the heightfield.
      *
      * @return the count (&gt;0)
@@ -203,6 +213,28 @@ public class HeightfieldCollisionShape extends CollisionShape {
 
         assert count > 0 : count;
         return count;
+    }
+
+    /**
+     * Count how many rows are in the heightfield.
+     *
+     * @return the count (&ge;2)
+     */
+    public int countRows() {
+        assert heightStickLength >= 2 : heightStickLength;
+        return heightStickLength;
+    }
+
+    /**
+     * Return the index of the height axis.
+     *
+     * @return the axis index: 0&rarr;X, 1&rarr;Y, 2&rarr;Z
+     */
+    public int upAxis() {
+        assert upAxis == PhysicsSpace.AXIS_X
+                || upAxis == PhysicsSpace.AXIS_Y
+                || upAxis == PhysicsSpace.AXIS_Z : upAxis;
+        return upAxis;
     }
     // *************************************************************************
     // CollisionShape methods
