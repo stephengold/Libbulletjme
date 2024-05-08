@@ -425,6 +425,26 @@ public class IndexedMesh extends NativePhysicsObject {
     }
 
     /**
+     * Calculate the (one-sided) surface area of the mesh.
+     *
+     * @return the area (in square mesh units, &ge;0)
+     */
+    public float surfaceArea() {
+        double total = 0.0;
+
+        Triangle tmpTriangle = new Triangle();
+        for (int triIndex = 0; triIndex < numTriangles; ++triIndex) {
+            copyTriangle(triIndex, tmpTriangle);
+            double triangleArea = MyMath.area(tmpTriangle);
+            total += triangleArea;
+        }
+
+        float result = (float) total;
+        assert result >= 0f : result;
+        return result;
+    }
+
+    /**
      * Calculate volume of the mesh, assuming it's both closed and convex.
      *
      * @return the volume (in cubic mesh units, &ge;0)
