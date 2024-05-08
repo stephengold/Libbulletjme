@@ -195,7 +195,7 @@ public class CompoundMesh extends NativePhysicsObject {
      *
      * @param index the index of the desired submesh (in the order the submeshes
      * were added, &ge;0)
-     * @return the pre-existing instance
+     * @return the pre-existing instance (not null)
      */
     public IndexedMesh getSubmesh(int index) {
         Validate.inRange(index, "index", 0, submeshes.size() - 1);

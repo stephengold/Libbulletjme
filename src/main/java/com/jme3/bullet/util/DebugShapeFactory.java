@@ -100,8 +100,8 @@ final public class DebugShapeFactory {
      * recursive!
      *
      * @param shape the input shape (not null, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 3)
      */
@@ -134,8 +134,8 @@ final public class DebugShapeFactory {
      * collision shape. Note: recursive!
      *
      * @param shape the shape to visualize (not null, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 9)
      */
@@ -171,8 +171,8 @@ final public class DebugShapeFactory {
      * @param shape (not null, not compound, not plane, unaffected)
      * @param shapeToWorld the transform to apply to debug-mesh coordinates (not
      * null, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      * @return the maximum length of the transformed vertex locations (&ge;0)
      */
     public static float maxDistance(
@@ -197,8 +197,8 @@ final public class DebugShapeFactory {
      * resolution.
      *
      * @param shape the convex shape to analyze (not null, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      * @return the scaled volume (in physics-space units cubed, &ge;0)
      */
     public static float volumeConvex(ConvexShape shape, int meshResolution) {
@@ -220,8 +220,8 @@ final public class DebugShapeFactory {
      * CompoundCollisionShape.
      *
      * @param compoundShape (not null, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 9)
      */
@@ -262,8 +262,8 @@ final public class DebugShapeFactory {
      * Determine vertex locations for the specified CompoundCollisionShape.
      *
      * @param compoundShape (not null, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      * @return a new, unflipped, direct buffer full of scaled shape coordinates
      * (capacity a multiple of 3)
      */

@@ -211,8 +211,8 @@ public class IndexedMesh extends NativePhysicsObject {
      * Instantiate a IndexedMesh to visualize the specified collision shape.
      *
      * @param shape shape to visualize (not null, not compound, unaffected)
-     * @param meshResolution 0&rarr;low, 1&rarr;high for convex, 2&rarr;high for
-     * all
+     * @param meshResolution 0&rarr;low, 1&rarr;high for convex shapes,
+     * 2&rarr;high for all shapes
      */
     public IndexedMesh(CollisionShape shape, int meshResolution) {
         Validate.nonNull(shape, "shape");

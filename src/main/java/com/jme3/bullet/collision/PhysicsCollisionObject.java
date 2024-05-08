@@ -1167,8 +1167,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the primary user index. Applications may use this parameter for any
-     * purpose (native field: m_userIndex).
+     * Alter the object's primary user index. Applications may use this
+     * parameter for any purpose (native field: m_userIndex).
      *
      * @param index the desired value (default=-1)
      */
@@ -1178,8 +1178,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the secondary user index. Applications may use this parameter for
-     * any purpose (native field: m_userIndex2).
+     * Alter the object's secondary user index. Applications may use this
+     * parameter for any purpose (native field: m_userIndex2).
      *
      * @param index the desired value (default=-1)
      */
@@ -1189,8 +1189,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the tertiary user index. Applications may use this parameter for
-     * any purpose (native field: m_userIndex3).
+     * Alter the object's tertiary user index. Applications may use this
+     * parameter for any purpose (native field: m_userIndex3).
      *
      * @param index the desired value (default=-1)
      */
@@ -1222,9 +1222,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the primary user index (native field: m_userIndex).
+     * Return the object's primary user index (native field: m_userIndex).
      *
-     * @return the value
+     * @return the value of the index
      */
     public int userIndex() {
         long objectId = nativeId();
@@ -1233,9 +1233,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the secondary user index (native field: m_userIndex2).
+     * Return the object's secondary user index (native field: m_userIndex2).
      *
-     * @return the value
+     * @return the value of the index
      */
     public int userIndex2() {
         long objectId = nativeId();
@@ -1244,9 +1244,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the tertiary user index (native field: m_userIndex3).
+     * Return the object's tertiary user index (native field: m_userIndex3).
      *
-     * @return the value
+     * @return the value of the index
      */
     public int userIndex3() {
         long objectId = nativeId();
