@@ -199,8 +199,8 @@ public class HeightfieldCollisionShape extends CollisionShape {
      * @return the count (&ge;2)
      */
     public int countColumns() {
-        assert heightStickLength >= 2 : heightStickLength;
-        return heightStickLength;
+        assert heightStickWidth >= 2 : heightStickWidth;
+        return heightStickWidth;
     }
 
     /**
