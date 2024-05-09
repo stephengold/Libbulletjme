@@ -1,5 +1,23 @@
 # Release log for the Libbulletjme project
 
+## Version 21.2.0 released on TBD
+
++ Changed the default setting for collision-shape contact filtering
+  (from enabled to disabled) to address Minie issue 40.
+  This change may cause unwanted behavior for rigid bodies in contact
+  with a gimpact, heightfield, or mesh; see Minie issue 18 for details.
++ Added the `ConicalFrustum` collision shape.
++ Implemented actual-margin debug meshes for concave shapes with
+  `meshResolution == 2`.
++ Added 14 accessors for the native user indices
+  of `CollisionShape`, `MultiBody`, and `PhysicsCollisionObject`.
++ Added 5 other public methods:
+  + `Heightfield.countColumns()`
+  + `Heightfield.countRows()`
+  + `Heightfield.upAxis()`
+  + `IndexedMesh.surfaceArea()`
+  + `MyMath.area(Triangle)`
+
 ## Version 21.1.0 released on 28 April 2024
 
 + Bugfix:  crash in `processAllTriangles()` when `m_bvh==NULL` (Minie issue 43)
