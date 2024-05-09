@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 21.2.0 released on TBD
+## Version 21.2.1 released on 9 May 2024
 
 + Changed the default setting for collision-shape contact filtering
   (from enabled to disabled) to address Minie issue 40.

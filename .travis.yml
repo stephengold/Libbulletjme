@@ -143,7 +143,8 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: "NkSqiKOe/+4PFMxcDvyzGhwHlHERYUhWV6uF1m1y/WQ6KXYES+xLnnNPKVnNXDBC6IE8m5XoZ5Qa4JehPfS6zaQPVfPG44r0ihSY1irlHWHROKURwMnRmgWua31gC83lBNJD8QxFnSC3hfYEgWGhfWF5D5MZEdtNeyBoRnIoyihyQ+BQmcQZ5bro4gJNqvaT+EwgvVlXBr3pAmUvJdphdHFeVwZ0WOeU0BN8o5/Wpf40ULvoQioZHwZAublZv3mof24PVBdBAMJwsI1tlbA5ENwaJfkfg4MAD1HGt4UtkMmk5LyQcErBg+ZX6tUV5e0NtsJuhkkotdescDRUxMsw72IrDSu11ZRM6L5Uoh4t3F8lU3SPwbJUFafveijcXuK8gHFB9FuGqL5LvhGZPpw4tS6uCEm9wa6TrGq5fVXcIAR/pZdh6Gnj589xB6aEaBhVhGZgK9z8klA/X9mrkmNaIEkwWeNZp+kKSyfH2QhktKIlSyurMwIKcaKnPDaF7KQWRQ1RbKGEKcYgJZ6koWQDs8c0upzRFZcqXkLAiL9/4D4T5WFFpirMpyIS6ECkpTpdUwHGITiXFNgKcYlX58TAgZjaZ6rjfrFYzPb8zse2IVkvMj60aDHQZrks6dqwDg9felKbWHWwSpyuXzTYxsiB7JJQmSdCqXKqizoWFxER4/4="
-  edge: true
+  edge:
+    branch: v2.0.3-beta.4
   file:
     - dist/Android_ARM7DebugSp_libbulletjme.so
     - dist/Android_ARM7ReleaseSp_libbulletjme.so
