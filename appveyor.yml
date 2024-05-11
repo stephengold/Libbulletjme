@@ -58,7 +58,7 @@ artifacts:
   - path: dist/Windows64DebugSpMt_bulletjme.pdb
     name: pdb64DSM
 
-# Deploy using personal access token (classic) expiring on Mar 9 2024
+# Deploy using personal access token (classic) expiring on Jun 3 2024
 # Browse to GitHub user pulldown -> Settings -> "Developer settings"
 # Browse to AppVeyor menu bar -> "Account" -> "Encrypt YAML"
 deploy:
