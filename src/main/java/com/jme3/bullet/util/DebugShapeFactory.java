@@ -370,7 +370,7 @@ final public class DebugShapeFactory {
      * specified PlaneCollisionShape.
      *
      * @param shape (not null, unaffected) units, &gt;0)
-     * @return a new Transform with scale=1
+     * @return a new Transform with scale=(1,1,1)
      */
     private static Transform planeTransform(PlaneCollisionShape shape) {
         Transform result = new Transform();

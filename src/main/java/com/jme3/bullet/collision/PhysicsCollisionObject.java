@@ -290,7 +290,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     /**
      * Copy common properties from another collision object.
      *
-     * @param old (not null, unaffected)
+     * @param old the instance to copy from (not null, unaffected)
      */
     final public void copyPcoProperties(PhysicsCollisionObject old) {
         assert old.hasAssignedNativeObject();

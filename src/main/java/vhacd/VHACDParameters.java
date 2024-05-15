@@ -116,7 +116,7 @@ public class VHACDParameters
     }
 
     /**
-     * Return the bias toward clipping along symmetry planes (native field:
+     * Return the bias toward clipping along symmetry planes. (native field:
      * m_alpha).
      *
      * @return alpha (&ge;0, &le;1)

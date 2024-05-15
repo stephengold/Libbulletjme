@@ -82,8 +82,8 @@ public class CollisionConfiguration extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Return the size of the persistent-manifold pool (native field:
-     * m_defaultMaxPersistentManifoldPoolSize).
+     * Return the size of the persistent-manifold pool. (native field:
+     * m_defaultMaxPersistentManifoldPoolSize)
      *
      * @return the count (&gt;0)
      */
@@ -94,8 +94,8 @@ public class CollisionConfiguration extends NativePhysicsObject {
     }
 
     /**
-     * Return which penetration-depth solver is used (native field:
-     * m_useEpaPenetrationAlgorithm).
+     * Return which penetration-depth solver is used. (native field:
+     * m_useEpaPenetrationAlgorithm)
      *
      * @return 0 for {@code btMinkowskiPenetrationDepthSolver} or 1 for
      * {@code btGjkEpaPenetrationDepthSolver}
