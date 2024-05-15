@@ -98,7 +98,7 @@ public class MultiBody extends NativePhysicsObject {
         assert getNumLinks(nativeId) == numLinks;
         finalizeMultiDof(nativeId);
 
-        links = new MultiBodyLink[numLinks];
+        this.links = new MultiBodyLink[numLinks];
     }
     // *************************************************************************
     // new methods exposed
