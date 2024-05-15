@@ -314,6 +314,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
         setRestitution(old.getRestitution());
         setRollingFriction(old.getRollingFriction());
         setSpinningFriction(old.getSpinningFriction());
+        setUserIndex(old.userIndex());
+        setUserIndex2(old.userIndex2());
+        setUserIndex3(old.userIndex3());
 
         if (old.hasAnisotropicFriction(AfMode.basic)) {
             setAnisotropicFriction(
