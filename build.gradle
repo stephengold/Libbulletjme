@@ -373,6 +373,10 @@ application {
     mainClass = 'jme3utilities.minie.TestApp'
 }
 
+checkstyle {
+    toolVersion '9.3'
+}
+
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
 }
