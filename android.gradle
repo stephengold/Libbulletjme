@@ -1,7 +1,7 @@
 // Gradle script to build Android native libraries
 
 plugins {
-    id 'com.android.library' version '7.4.0'
+    alias(libs.plugins.android.library)
 }
 
 String flavor = 'Sp'
@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation(libs.jaxb.api)
 }
 
 tasks.register('copyToDist') {}
