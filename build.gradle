@@ -408,13 +408,9 @@ jar {
         attributes 'Created-By': "${JavaVersion.current()} (${System.getProperty("java.vendor")})"
     }
 }
-tasks.register('javadocJar', Jar) {
-    archiveBaseName = project.ext.baseName
-    archiveClassifier = 'javadoc'
-    dependsOn 'javadoc'
-    description 'Creates a JAR of javadoc.'
-    from javadoc.destinationDir
-}
+
+java.withJavadocJar()
+javadocJar { archiveBaseName = project.ext.baseName }
 tasks.register('sourcesJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
@@ -424,7 +420,7 @@ tasks.register('sourcesJar', Jar) {
 
 // add javadoc/source jar tasks as artifacts
 artifacts {
-    archives jar, javadocJar, sourcesJar
+    archives jar, sourcesJar
 }
 javadoc.dependsOn('compileTestJava')
 
