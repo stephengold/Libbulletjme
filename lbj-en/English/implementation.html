@@ -278,7 +278,7 @@ to access their objects and methods.</p>
 <div class="paragraph">
 <p>All C&#43;&#43; source code in Libbulletjme
 (a modified partial snapshot of Bullet, a snapshot of V-HACD, and some "glue code")
-resides in its "src/native" directory.
+resides in <a href="https://github.com/stephengold/Libbulletjme/tree/master/src/main/native">its "native" directory</a>.
 Before instantiating physics objects,
 a Libbulletjme application must <a href="https://en.wikipedia.org/wiki/Dynamic_loading">dynamically load</a>
 a <em>native library</em> of this code,
@@ -286,7 +286,23 @@ compiled for the <a href="https://en.wikipedia.org/wiki/Computing_platform">plat
 on which the app is executing.</p>
 </div>
 <div class="paragraph">
-<p>Libbulletjme publishes native libraries for 14 different platforms.</p>
+<p>Libbulletjme publishes native libraries for 14 different platforms:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows (32-bit and 64-bit),</p>
+</li>
+<li>
+<p>Linux (x86-64, x86, arm, armhf, and aarch64),</p>
+</li>
+<li>
+<p>macOS (x86-64, IA-32, and ARM64), and</p>
+</li>
+<li>
+<p>Android (armeabi-v7a, arm64-v8a, x86, and x86_64).</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -398,12 +414,12 @@ from <em>shape coordinates</em> (which depend on scale factors).</p>
 <h2 id="_discrete_time_and_collision_detection"><a class="anchor" href="#_discrete_time_and_collision_detection"></a>Discrete time and collision detection</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Within a physics space, simulation occurs in discrete steps.
-While it&#8217;s possible to vary the time step from step to step,
-a fixed time step tends to yield more reproducible results.</p>
+<p>Within a physics space, simulation occurs in discrete steps of short duration.
+While it&#8217;s possible to vary these durations from step to step,
+a fixed duration (or <em>time step</em>) tends to yield more reproducible results.</p>
 </div>
 <div class="paragraph">
-<p>Each time step consists of 4 <em>phases</em>:</p>
+<p>Each simulation step consists of 4 <em>phases</em>:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -453,7 +469,7 @@ whose corresponding java objects have been garbage collected.</p>
 <div class="paragraph">
 <p>As a performance enhancement,
 Libbulletjme can parallelize certain for-loops on platforms that support OpenMP.
-To enable this feature, a multi-threaded native library must be loaded.</p>
+To enable this feature, a multithreaded (Mt) native library must be loaded.</p>
 </div>
 </div>
 </div>
