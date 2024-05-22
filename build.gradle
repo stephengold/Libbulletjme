@@ -419,7 +419,7 @@ tasks.register('sourcesJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
     description 'Creates a JAR of Java sourcecode.'
-    from 'src/main/java'
+    from 'src/main/java' // default is ".allSource", which includes resources
 }
 
 // add javadoc/source jar tasks as artifacts
