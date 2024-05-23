@@ -563,7 +563,8 @@ physicsSpace.addCollisionObject(body1);</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">float timeStep = 0.02f; // in seconds
-physicsSpace.update(timeStep, 0);</code></pre>
+int maxSteps = 0; // for a single step of the specified duration
+physicsSpace.update(timeStep, maxSteps);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -637,7 +638,7 @@ you should be able to launch tutorial apps from a command shell, like so:</p>
 <p><code>cd LbjExamples</code></p>
 </li>
 <li>
-<p><code>./gradlew HelloLibbulletjme</code></p>
+<p><code>./gradlew :apps:HelloLibbulletjme</code></p>
 </li>
 </ol>
 </div>
