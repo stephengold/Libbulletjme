@@ -112,7 +112,7 @@ standalone Maven artifacts are provided.
 + [The Bullet Forum](https://pybullet.org/Bullet/phpBB3)
 + [The Bullet home page][bullet]
 + [JBullet], a known alternative to Libbulletjme
-+ [Alan Chou's game-physics tutorials](http://allenchou.net/game-physics-series/)
++ [Alan Chou's game-physics tutorials](https://allenchou.net/game-physics-series/)
 + ["Real-time Vehicle Simulation for Video Games Using the Bullet Physics Library" by Hammad Mazhar](https://sbel.wisc.edu/wp-content/uploads/sites/569/2018/05/Real-time-Vehicle-Simulation-for-Video-Games-Using-the-Bullet-Physics-Library.pdf)
 + ["Vehicle Simulation With Bullet" by Kester Maddock](https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc)
 
@@ -210,7 +210,7 @@ correct the situation: sgold@sonic.net
 [chrome]: https://www.google.com/chrome "Chrome"
 [dynamx]: https://dynamx.fr "DynamX Project"
 [examples]: https://github.com/stephengold/LbjExamples "LbjExamples Project"
-[findbugs]: http://findbugs.sourceforge.net "FindBugs Project"
+[findbugs]: https://findbugs.sourceforge.net/ "FindBugs Project"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [gcc]: https://gcc.gnu.org "GNU Compiler Collection"
 [gdb]: https://www.gnu.org/software/gdb/ "GNU Project Debugger"
