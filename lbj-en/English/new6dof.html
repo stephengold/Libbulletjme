@@ -175,6 +175,9 @@
     <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/macana">Macana</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="https://github.com/stephengold/sport">SPORT</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -460,8 +463,8 @@ connects to the physics space itself.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Different <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/joints/Constraint.html"><code>Constraint</code></a>
-subclasses use different end-naming conventions for single-ended constraints.
+Certain other <a href="https://stephengold.github.io/Libbulletjme/javadoc/master/com/jme3/bullet/joints/Constraint.html"><code>Constraint</code></a>
+subclasses use the opposite end-naming convention for single-ended constraints.
 </td>
 </tr>
 </table>
@@ -556,7 +559,7 @@ Then you can specify <code>Matrix3f.IDENTITY</code> for each "rot" parameter.
 <div class="sect2">
 <h3 id="_example_apps"><a class="anchor" href="#_example_apps"></a>Example apps</h3>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloJoint.java">HelloJoint</a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloJoint.java">HelloJoint</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloJoint.kt">in Kotlin</a>) is a SPORT app
 that demonstrates a single-ended <code>New6Dof</code> constraint.</p>
 </div>
 <div class="paragraph">
@@ -578,7 +581,7 @@ a constant distance from the pivot point.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloDoubleEnded.java">HelloDoubleEnded</a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloDoubleEnded.java">HelloDoubleEnded</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloDoubleEnded.kt">in Kotlin</a>) is a SPORT app
 that demonstrates a double-ended <code>New6Dof</code> constraint.</p>
 </div>
 <div class="paragraph">
@@ -662,11 +665,11 @@ The limits of a rotational DOF are measured in radians.
 </table>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloLimit.java">HelloLimit</a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloLimit.java">HelloLimit</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloLimit.kt">in Kotlin</a>) is a SPORT app
 that demonstrates a single-ended <code>New6Dof</code> constraint
 with limited translation DOFs.
 The joint&#8217;s translations are limited,
-confining the ball to a 6x6 horizontal square centered on the origin.</p>
+confining the ball to a horizontal square centered on the origin.</p>
 </div>
 </div>
 </div>
@@ -678,7 +681,7 @@ confining the ball to a 6x6 horizontal square centered on the origin.</p>
 In <code>New6Dof</code>, each DOF has its own motor, which is disabled by default.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloMotor.java">HelloMotor</a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloMotor.java">HelloMotor</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloMotor.kt">in Kotlin</a>) is a SPORT app
 that demonstrates a double-ended <code>New6Dof</code>
 with its Y-rotation motor enabled.</p>
 </div>
@@ -745,7 +748,7 @@ For a servo to be effective, its corresponding motor must also be enabled.
 </table>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloServo.java">HelloServo</a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloServo.java">HelloServo</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloServo.kt">in Kotlin</a>) is a SPORT app
 that demonstrates a double-ended <code>New6Dof</code> constraint
 with its Y-rotation servo enabled.</p>
 </div>
@@ -806,7 +809,7 @@ If desired, you can also configure
 the spring&#8217;s equilibrium value and damping ratio.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSpring.java">HelloSpring</a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSpring.java">HelloSpring</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloSpring.kt">in Kotlin</a>) is a SPORT app
 that demonstrates a single-ended constraint with springs.</p>
 </div>
 <div class="paragraph">

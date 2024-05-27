@@ -175,6 +175,9 @@
     <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/macana">Macana</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="https://github.com/stephengold/sport">SPORT</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -347,8 +350,8 @@ In order to work, the ghost must be added to a space.</p>
 <div class="paragraph">
 <p>The constructor allows you to specify a collision shape.
 However, the details of the shape are unimportant.
-The key property of a ghost is its axis-aligned bounding box,
-which is determined by the ghost&#8217;s shape and position.</p>
+The key property of a ghost is its axis-aligned bounding box (AABB),
+which is determined by the ghost&#8217;s size and position.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -366,7 +369,7 @@ However, they are usually accurate enough to be useful.
 </table>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloGhost.java"><code>HelloGhost</code></a> is a SPORT app
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloGhost.java"><code>HelloGhost</code></a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloGhost.kt">in Kotlin</a>) is a SPORT app
 that illustrates how a ghost could be used
 to detect a character entering/leaving a box-shaped zone.</p>
 </div>
@@ -376,17 +379,19 @@ to detect a character entering/leaving a box-shaped zone.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The ghost has a spherical shape, but its AABB (in yellow) is box-shaped.</p>
+<p>The ghost has a spherical shape, but its AABB (shown here in yellow) is box-shaped.</p>
 </li>
 <li>
-<p>The character has a capsule shape.
-To clarify what&#8217;s going on, its AABB is outlined in white.</p>
+<p>The character has a capsule shape.</p>
+</li>
+<li>
+<p>To clarify what&#8217;s going on, the character&#8217;s AABB is outlined in white.</p>
 </li>
 <li>
 <p>Press <kbd>Right arrow</kbd> to walk the character toward the ghost.</p>
 </li>
 <li>
-<p>As soon as the character&#8217;s AABB touches the ghost&#8217;s AABB, the ghost turns red,
+<p>As soon as the character&#8217;s AABB overlaps the ghost&#8217;s AABB, the ghost turns red,
 even though their collision shapes haven&#8217;t intersected yet.</p>
 </li>
 <li>

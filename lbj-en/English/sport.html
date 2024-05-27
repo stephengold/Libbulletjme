@@ -175,6 +175,9 @@
     <a class="nav-link" href="https://github.com/stephengold/LbjExamples">LbjExamples</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="https://github.com/stephengold/macana">Macana</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="https://github.com/stephengold/sport">SPORT</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -265,14 +268,14 @@ However, as a console app, its output is limited to text.</p>
 </div>
 <div class="paragraph">
 <p>Text provides scant insight into what the 3-D physics simulation is doing.
-For most people, pictures are far easier to understand.</p>
+For most people, pictures are much easier to understand.</p>
 </div>
 <div class="paragraph">
 <p>For the purpose of this tutorial series,
 we&#8217;ve created a graphics engine named SPORT
 (the Simple Physics-ORienTed engine).
 SPORT enables us to visualize physics objects
-without cluttering up the physics code with too many rendering calls.
+without adding much code to the tutorial apps.
 It is open-source, written in Java, and available from
 <a href="https://github.com/stephengold/sport">GitHub</a> and
 <a href="https://central.sonatype.com/artifact/com.github.stephengold/sport">Maven Central</a>.</p>
@@ -283,7 +286,7 @@ It is open-source, written in Java, and available from
 <h2 id="_hellosport"><a class="anchor" href="#_hellosport"></a>HelloSport</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSport.java">HelloSport</a>
+<p><a href="https://github.com/stephengold/LbjExamples/blob/master/apps/src/main/java/com/github/stephengold/lbjexamples/apps/HelloSport.java">HelloSport</a> (also <a href="https://github.com/stephengold/LbjExamples/blob/master/kotlin-apps/src/main/kotlin/com/github/stephengold/lbjexamples/ktapps/HelloSport.kt">in Kotlin</a>)
 is a direct conversion of <code>HelloLibbulletjme</code> into a SPORT app.</p>
 </div>
 <div class="paragraph">
@@ -298,7 +301,7 @@ indicating that it will simulate a plain <code>PhysicsSpace</code>.</p>
 <li>
 <p>The app implements the 3 abstract methods of <code>BasePhysicsApp</code>
 (<code>createSpace</code>, <code>populateSpace</code>, and <code>updateSpace</code>),
-all of which are invoked automatically.</p>
+which are all invoked automatically.</p>
 </li>
 <li>
 <p><code>BasePhysicsApp</code> automatically loads the Libbulletjme native library.</p>
