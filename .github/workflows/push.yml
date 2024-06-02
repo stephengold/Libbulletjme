@@ -66,22 +66,6 @@ jobs:
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-  Java17-Linux:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: 17
-      - uses: actions/checkout@v4
-      - run: ./gradlew run build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
-      - if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: crash-log
-          path: '*.log'
-
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-14
@@ -107,6 +91,22 @@ jobs:
       - uses: actions/checkout@v4
       - run: ./gradlew run build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
         shell: bash
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crash-log
+          path: '*.log'
+
+  Java22-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 22
+      - uses: actions/checkout@v4
+      - run: ./gradlew run build --console=plain --no-daemon -Pflavor=Dp -Pgithub=debug64
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
