@@ -372,17 +372,21 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 application {
     mainClass = 'jme3utilities.minie.TestApp'
 }
-
-checkstyle {
-    toolVersion libs.versions.checkstyle.get()
-}
-
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
 }
 
 run.dependsOn('assemble')
 test.dependsOn('assemble')
+
+checkstyle {
+    toolVersion libs.versions.checkstyle.get()
+}
+tasks.register('checkstyle') {
+    dependsOn 'checkstyleMain', 'checkstyleTest'
+    description 'Checks the style of all Java sourcecode.'
+}
+checkstyleMain.dependsOn('compileTestJava')
 
 // Register publishing tasks:
 
@@ -423,8 +427,6 @@ artifacts {
     archives jar, sourcesJar
 }
 javadoc.dependsOn('compileTestJava')
-
-checkstyleMain.dependsOn('compileTestJava')
 
 assemble.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
 tasks.register('module', Copy) {
@@ -508,11 +510,6 @@ tasks.withType(Sign) {
     onlyIf { project.hasProperty('signing.keyId') }
 }
 signMavenPublication.dependsOn('module')
-
-tasks.register('checkstyle') {
-    dependsOn 'checkstyleMain', 'checkstyleTest'
-    description 'Checks the style of all Java sourcecode.'
-}
 
 // Register cleanup tasks:
 
