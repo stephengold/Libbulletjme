@@ -3,7 +3,7 @@
 plugins {
     id 'application'   // to build JVM applications
     id 'checkstyle'    // to analyze Java sourcecode for style violations
-    id 'cpp'           // to compile C/C++ sourcecode and link native libraries
+    id 'cpp'           // to compile C/C++ code and link native libraries
     id 'java-library'  // to build JVM libraries
     id 'maven-publish' // to publish artifacts to Maven repositories
     id 'signing'       // to sign artifacts for publication
@@ -21,12 +21,11 @@ sourceSets.main.java {
     srcDir 'src/main/java'
     srcDir 'src/main/native' // for IDE access (no Java there)
 }
-
 sourceSets.test.java {
     srcDir 'src/test/java'
 }
 
-// Regenerate all JNI header files before compiling any C++ source code.
+// Regenerate all JNI header files before compiling any C++ code.
 tasks.withType(CppCompile) {
     dependsOn('classes', 'compileTestJava')
 }
@@ -415,6 +414,7 @@ jar {
 
 java.withJavadocJar()
 javadocJar { archiveBaseName = project.ext.baseName }
+
 tasks.register('sourcesJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'

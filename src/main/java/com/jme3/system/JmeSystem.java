@@ -32,7 +32,7 @@
 package com.jme3.system;
 
 /**
- * Utility class to access platform-dependant features.
+ * Utility class to access platform-dependent features.
  */
 public class JmeSystem {
     // *************************************************************************

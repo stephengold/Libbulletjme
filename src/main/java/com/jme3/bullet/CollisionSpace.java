@@ -303,7 +303,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Access the CollisionSpace associated with this thread.
+     * Access the CollisionSpace associated with the current thread.
      *
      * @return the pre-existing CollisionSpace, or {@code null} if none
      */
