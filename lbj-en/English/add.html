@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/English/add.html">
     <link rel="prev" href="implementation.html">
     <link rel="next" href="sport.html">
-    <meta name="generator" content="Antora 3.1.8">
+    <meta name="generator" content="Antora 3.1.9">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta property="og:image" content="../../_/img/iconx128.png">
 <meta property="og:description" content="How to add Libbulletjme to an existing project">
@@ -297,7 +297,7 @@ and add them to the physics space.</p>
 <div class="sect2">
 <h3 id="_gradle_built_projects"><a class="anchor" href="#_gradle_built_projects"></a>Gradle-built projects</h3>
 <div class="paragraph">
-<p>Add to the project&#8217;s "build.gradle" file:</p>
+<p>Add to the project&#8217;s "build.gradle" or "build.gradle.kts" file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -305,7 +305,7 @@ and add them to the physics space.</p>
     mavenCentral()
 }
 dependencies {
-    implementation 'com.github.stephengold:Libbulletjme:21.2.1'
+    implementation("com.github.stephengold:Libbulletjme:21.2.1")
 }</code></pre>
 </div>
 </div>
