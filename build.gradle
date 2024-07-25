@@ -374,6 +374,7 @@ application {
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
+    enableAssertions true
 }
 
 run.dependsOn('assemble')
