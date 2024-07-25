@@ -160,8 +160,6 @@ model {
             }
 
             binaries.withType(SharedLibraryBinarySpec) {
-                Boolean isDebug = (buildType == buildTypes.Debug)
-                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 String pName = targetPlatform.name
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
@@ -201,6 +199,7 @@ model {
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
+                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof)
                 String os = targetPlatform.operatingSystem.name
                 if (buildable) {
@@ -219,6 +218,7 @@ model {
                 }
 
                 // flavor-specific CPP defines:
+                Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_ADDITIONAL_DEBUG'
