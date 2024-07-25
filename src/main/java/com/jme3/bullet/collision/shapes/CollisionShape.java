@@ -558,7 +558,7 @@ abstract public class CollisionShape extends NativePhysicsObject {
         float result = getMargin(shapeId);
 
         assert result >= 0f : result;
-        return margin;
+        return result;
     }
 
     /**
