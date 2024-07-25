@@ -291,6 +291,7 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/inc"
                     cppCompiler.args '-I', "$projectDir/src/main/native/v-hacd/public"
                     cppCompiler.args '-std=c++11'
+                    cppCompiler.args '-Werror=return-type'
 
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
