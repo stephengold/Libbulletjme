@@ -218,7 +218,7 @@ model {
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
-                // flavor-specific defines:
+                // flavor-specific CPP defines:
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_ADDITIONAL_DEBUG'
@@ -281,8 +281,8 @@ model {
                     }
 
                 } else { // toolChain in Clang or Gcc
-                    //cppCompiler.args '-v' // to print compiler invocation
-                    //linker.args '-v' // to print linker invocation
+                    //cppCompiler.args '-v' // to log compiler details
+                    //linker.args '-v' // to log linker details
 
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native/bullet3"
