@@ -164,6 +164,8 @@ model {
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
                 // Decide whether to build for the target platform:
+                Boolean isDebug = (buildType == buildTypes.Debug)
+                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 if (project.hasProperty('github')) {
                     // CI build with -Pgithub= specified on the command line
                     String github = project.ext.github
@@ -199,7 +201,6 @@ model {
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
-                Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof)
                 String os = targetPlatform.operatingSystem.name
                 if (buildable) {
@@ -218,7 +219,6 @@ model {
                 }
 
                 // flavor-specific CPP defines:
-                Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_ADDITIONAL_DEBUG'
