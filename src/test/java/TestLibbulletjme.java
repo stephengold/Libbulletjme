@@ -1606,12 +1606,12 @@ public class TestLibbulletjme {
         Utils.loadNativeLibrary();
 
         // default margin for collision shapes
-        float margin = CollisionShape.getDefaultMargin();
-        Assert.assertEquals(0.04f, margin, 0f);
+        float defaultMargin = CollisionShape.getDefaultMargin();
+        Assert.assertEquals(0.04f, defaultMargin, 0f);
 
         CollisionShape.setDefaultMargin(2.1f);
-        margin = CollisionShape.getDefaultMargin();
-        Assert.assertEquals(2.1f, margin, 0f);
+        defaultMargin = CollisionShape.getDefaultMargin();
+        Assert.assertEquals(2.1f, defaultMargin, 0f);
         CollisionShape.setDefaultMargin(0.04f); // don't break other tests!
 
         // deactivation deadline
