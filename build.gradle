@@ -39,12 +39,12 @@ model {
     }
 
     flavors {
+        Dp            // double-precision arithmetic
+        DpMt          // double-precision arithmetic, multithreaded
         Sp            // single-precision arithmetic
         SpMt          // single-precision arithmetic, multithreaded
         SpMtQuickprof // single-precision arithmetic, multithreaded, Quickprof profiling
         SpQuickprof   // single-precision arithmetic, Quickprof profiling
-        Dp   // double-precision arithmetic
-        DpMt // double-precision arithmetic, multithreaded
     }
 
     platforms {
