@@ -101,6 +101,10 @@ public class HullCollisionShape extends ConvexShape {
         this.points = new float[numAxes * numLocations];
         int j = 0;
         for (Vector3f location : locations) {
+            if (!Vector3f.isValidVector(location)) {
+                throw new IllegalArgumentException(
+                        "illegal coordinates: " + location);
+            }
             this.points[j + PhysicsSpace.AXIS_X] = location.x;
             this.points[j + PhysicsSpace.AXIS_Y] = location.y;
             this.points[j + PhysicsSpace.AXIS_Z] = location.z;
@@ -143,7 +147,11 @@ public class HullCollisionShape extends ConvexShape {
 
         this.points = new float[numFloats];
         for (int i = 0; i < numFloats; ++i) {
-            this.points[i] = flippedBuffer.get(i);
+            float f = flippedBuffer.get(i);
+            if (!Float.isFinite(f)) {
+                throw new IllegalArgumentException("illegal coordinate: " + f);
+            }
+            this.points[i] = f;
         }
 
         createShape();
@@ -194,12 +202,16 @@ public class HullCollisionShape extends ConvexShape {
      * null, not empty, unaffected)
      */
     public HullCollisionShape(Vector3f... locations) {
-        Validate.nonEmpty(locations, "points");
+        Validate.nonEmpty(locations, "locations");
 
         int numFloats = numAxes * locations.length;
         this.points = new float[numFloats];
         int floatIndex = 0;
         for (Vector3f location : locations) {
+            if (!Vector3f.isValidVector(location)) {
+                throw new IllegalArgumentException(
+                        "illegal coordinates: " + location);
+            }
             this.points[floatIndex + PhysicsSpace.AXIS_X] = location.x;
             this.points[floatIndex + PhysicsSpace.AXIS_Y] = location.y;
             this.points[floatIndex + PhysicsSpace.AXIS_Z] = location.z;
