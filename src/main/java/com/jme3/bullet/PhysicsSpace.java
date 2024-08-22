@@ -111,6 +111,11 @@ public class PhysicsSpace
     // fields
 
     /**
+     * list of registered tick listeners
+     */
+    final private Collection<PhysicsTickListener> tickListeners
+            = new ArrayList<>(4);
+    /**
      * time step (in seconds, &gt;0) ignored when maxSubSteps=0
      */
     private float accuracy = 1f / 60f;
@@ -124,12 +129,7 @@ public class PhysicsSpace
      */
     private int maxSubSteps = 4;
     /**
-     * list of registered tick listeners
-     */
-    final private Collection<PhysicsTickListener> tickListeners
-            = new ArrayList<>(4);
-    /**
-     * map character IDs to added objects
+     * map character IDs to added collision objects
      */
     final private Map<Long, PhysicsCharacter> characterMap
             = new ConcurrentHashMap<>(64);
@@ -161,7 +161,7 @@ public class PhysicsSpace
      * is 9.81 in the -Y direction, approximating Earth-normal gravity in MKS
      * units for a Y-up coordinate system)
      */
-    final private Vector3f gravity = new Vector3f(0, -9.81f, 0);
+    final private Vector3f gravity = new Vector3f(0f, -9.81f, 0f);
     // *************************************************************************
     // constructors
 

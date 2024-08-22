@@ -121,31 +121,31 @@ public class HeightfieldCollisionShape extends CollisionShape {
     /**
      * Instantiate a square shape for the specified array of heights.
      *
-     * @param heightmap (not null, length&ge;4, length a perfect square,
+     * @param heightArray (not null, length&ge;4, length a perfect square,
      * unaffected)
      */
-    public HeightfieldCollisionShape(float[] heightmap) {
-        Validate.nonEmpty(heightmap, "heightmap");
-        assert heightmap.length >= 4 : heightmap.length;
+    public HeightfieldCollisionShape(float[] heightArray) {
+        Validate.nonEmpty(heightArray, "height array");
+        assert heightArray.length >= 4 : heightArray.length;
 
-        createCollisionHeightfield(heightmap, scaleIdentity);
+        createCollisionHeightfield(heightArray, scaleIdentity);
     }
 
     /**
      * Instantiate a square shape for the specified height array and scale
      * vector.
      *
-     * @param heightmap (not null, length&ge;4, length a perfect square,
+     * @param heightArray (not null, length&ge;4, length a perfect square,
      * unaffected)
      * @param scale the desired scale factor for each local axis (not null, no
      * negative component, unaffected, default=(1,1,1))
      */
-    public HeightfieldCollisionShape(float[] heightmap, Vector3f scale) {
-        Validate.nonEmpty(heightmap, "heightmap");
-        assert heightmap.length >= 4 : heightmap.length;
+    public HeightfieldCollisionShape(float[] heightArray, Vector3f scale) {
+        Validate.nonEmpty(heightArray, "height array");
+        assert heightArray.length >= 4 : heightArray.length;
         Validate.nonNegative(scale, "scale");
 
-        createCollisionHeightfield(heightmap, scale);
+        createCollisionHeightfield(heightArray, scale);
     }
 
     /**
@@ -296,16 +296,16 @@ public class HeightfieldCollisionShape extends CollisionShape {
     /**
      * Instantiate a square {@code btHeightfieldTerrainShape}.
      *
-     * @param heightmap (not null, length&ge;4, length a perfect square,
+     * @param heightArray (not null, length&ge;4, length a perfect square,
      * unaffected)
      * @param worldScale the desired scale factor for each local axis (not null,
      * no negative component, unaffected)
      */
-    private void
-            createCollisionHeightfield(float[] heightmap, Vector3f worldScale) {
+    private void createCollisionHeightfield(
+            float[] heightArray, Vector3f worldScale) {
         scale.set(worldScale);
 
-        this.heightfieldData = heightmap.clone();
+        this.heightfieldData = heightArray.clone();
         this.heightStickWidth = (int) FastMath.sqrt(heightfieldData.length);
         assert heightStickWidth > 1 : heightStickWidth;
 
