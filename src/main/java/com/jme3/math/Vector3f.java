@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2021 jMonkeyEngine
+ * Copyright (c) 2009-2024 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * locations, offsets, velocities, and directions in 3-dimensional space.
  *
  * <p>Methods with names ending in "Local" modify the current instance. They are
- * used to to avoid creating temporary vectors.
+ * used to cut down on the creation of new instances.
  *
  * @author Mark Powell
  * @author Joshua Slack

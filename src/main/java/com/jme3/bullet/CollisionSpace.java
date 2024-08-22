@@ -92,7 +92,7 @@ public class CollisionSpace extends NativePhysicsObject {
         }
     };
     /**
-     * number of contact-and-constraint solvers (&ge;1, &le;64, default=1)
+     * number of worker threads (&ge;1, &le;64, default=1)
      */
     final private int numSolvers;
     /**
@@ -192,9 +192,9 @@ public class CollisionSpace extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Add the specified object to this space.
+     * Add the specified object to the space.
      *
-     * @param object the collision object to add (not null)
+     * @param object the object to add (not null)
      */
     public void add(Object object) {
         Validate.nonNull(object, "object");
@@ -209,7 +209,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Add the specified collision object to this space.
+     * Add the specified collision object to the space.
      *
      * @param pco the collision object to add (not null, modified)
      */
@@ -243,7 +243,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Test whether the specified collision object is added to this space.
+     * Test whether the specified collision object is added to the space.
      *
      * @param pco the object to test (not null, unaffected)
      * @return true if currently added, otherwise false
@@ -263,7 +263,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Count the collision objects in this space.
+     * Count the collision objects in the space.
      *
      * @return the count (&ge;0)
      */
@@ -275,7 +275,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Count the solvers.
+     * Count the worker threads.
      *
      * @return the count (&ge;1, &le;64)
      */
@@ -284,7 +284,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Remove all collision objects and physics joints.
+     * Remove all collision objects and physics joints. Meant to be overridden.
      */
     public void destroy() {
         for (PhysicsGhostObject character : ghostMap.values()) {
@@ -293,7 +293,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Read the type of acceleration structure used for broadphase collision
+     * Return the type of acceleration structure used for broadphase collision
      * detection.
      *
      * @return an enum value (not null)
@@ -322,7 +322,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Enumerate ghost objects that have been added to this space and not yet
+     * Enumerate ghost objects that have been added to the space and not yet
      * removed.
      *
      * @return a new unmodifiable collection of pre-existing instances (not
@@ -336,8 +336,8 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Enumerate collision objects that have been added to this space and not
-     * yet removed.
+     * Enumerate collision objects that have been added to the space and not yet
+     * removed.
      *
      * @return a new modifiable collection of pre-existing instances (not null)
      */
@@ -359,7 +359,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Copy the maximum coordinate values for this space.
+     * Copy the maximum coordinate values for the space.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the maximum coordinates (either storeResult or a new vector, not
@@ -377,7 +377,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Copy the minimum coordinate values for this space.
+     * Copy the minimum coordinate values for the space.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return the minimum coordinates (either storeResult or a new vector, not
@@ -429,7 +429,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Test whether this space is empty.
+     * Test whether the space is empty.
      *
      * @return true if empty, otherwise false
      */
@@ -464,7 +464,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Return the address of the JNIEnv that this space uses for callbacks. For
+     * Return the address of the JNIEnv that the space uses for callbacks. For
      * debugging and testing.
      *
      * @return the virtual address of the (native) object (not zero)
@@ -609,9 +609,9 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Remove the specified object from this space.
+     * Remove the specified object from the space.
      *
-     * @param object the collision object to remove, or null
+     * @param object the object to remove, or null
      */
     public void remove(Object object) {
         if (object == null) {
@@ -628,7 +628,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Remove the specified collision object from this space.
+     * Remove the specified collision object from the space.
      *
      * @param pco the collision object to remove (not null, modified)
      */
@@ -745,7 +745,7 @@ public class CollisionSpace extends NativePhysicsObject {
     /**
      * Must be invoked on the designated physics thread.
      *
-     * @param spaceId the Bullet identifier for this space (non-zero)
+     * @param spaceId the Bullet identifier for the space (non-zero)
      */
     protected void initThread(long spaceId) {
         setNativeId(spaceId);
@@ -755,7 +755,7 @@ public class CollisionSpace extends NativePhysicsObject {
     // Java private methods
 
     /**
-     * Add the specified PhysicsGhostObject to this space.
+     * Add the specified PhysicsGhostObject to the space.
      *
      * @param ghost the object to add (not null, alias created)
      */
@@ -807,7 +807,7 @@ public class CollisionSpace extends NativePhysicsObject {
     }
 
     /**
-     * Remove the specified PhysicsGhostObject from this space.
+     * Remove the specified PhysicsGhostObject from the space.
      *
      * @param ghost the object to remove (not null)
      */

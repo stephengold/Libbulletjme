@@ -192,7 +192,7 @@ public class ConeJoint extends Constraint {
     }
 
     /**
-     * Read the span of the first swing axis.
+     * Return the span of the first swing axis.
      *
      * @return the span (in radians)
      */
@@ -201,7 +201,7 @@ public class ConeJoint extends Constraint {
     }
 
     /**
-     * Read the span of the 2nd swing axis.
+     * Return the span of the 2nd swing axis.
      *
      * @return the span (in radians)
      */
@@ -210,7 +210,7 @@ public class ConeJoint extends Constraint {
     }
 
     /**
-     * Read the span of the twist (local X) axis.
+     * Return the span of the twist (local X) axis.
      *
      * @return the span (in radians)
      */

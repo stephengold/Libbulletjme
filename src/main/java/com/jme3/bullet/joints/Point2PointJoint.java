@@ -118,7 +118,7 @@ public class Point2PointJoint extends Constraint {
     // new methods exposed
 
     /**
-     * Read the joint's damping ratio.
+     * Return the joint's damping ratio.
      *
      * @return the viscous damping ratio (0&rarr;no damping, 1&rarr;critically
      * damped)
@@ -131,7 +131,7 @@ public class Point2PointJoint extends Constraint {
     }
 
     /**
-     * Read the joint's impulse clamp.
+     * Return the joint's impulse clamp.
      *
      * @return the clamp value
      */
@@ -171,7 +171,7 @@ public class Point2PointJoint extends Constraint {
     }
 
     /**
-     * Read the joint's tau value.
+     * Return the joint's tau value.
      *
      * @return the tau value
      */

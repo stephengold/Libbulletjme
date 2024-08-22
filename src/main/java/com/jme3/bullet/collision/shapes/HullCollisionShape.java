@@ -73,7 +73,7 @@ public class HullCollisionShape extends ConvexShape {
     // fields
 
     /**
-     * direct buffer for passing vertices to Bullet
+     * non-flipped direct buffer for passing vertices to Bullet
      * <p>
      * A Java reference must persist after createShape() completes, or else the
      * buffer might get garbage collected.
@@ -111,7 +111,7 @@ public class HullCollisionShape extends ConvexShape {
     }
 
     /**
-     * Instantiate a shape based on an array containing coordinates. For best
+     * Instantiate a shape based on the specified array of coordinates. For best
      * performance and stability, the convex hull should have no more than 100
      * vertices.
      *
@@ -186,8 +186,9 @@ public class HullCollisionShape extends ConvexShape {
     }
 
     /**
-     * Instantiate a shape based on an array of locations. For best performance
-     * and stability, the convex hull should have no more than 100 vertices.
+     * Instantiate a shape based on the specified array of locations. For best
+     * performance and stability, the convex hull should have no more than 100
+     * vertices.
      *
      * @param locations an array of location vectors (in shape coordinates, not
      * null, not empty, unaffected)

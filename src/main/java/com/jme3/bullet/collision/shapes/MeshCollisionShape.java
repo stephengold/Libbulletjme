@@ -72,7 +72,7 @@ public class MeshCollisionShape extends CollisionShape {
     // fields
 
     /**
-     * if true, use quantized AABB compression
+     * if true, use quantized AABB compression (default=true)
      */
     final private boolean useCompression;
     /**

@@ -90,7 +90,7 @@ public class VehicleTuning extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Read the friction between tires and ground (native field:
+     * Return the friction between tires and ground (native field:
      * m_frictionSlip).
      *
      * @return the coefficient of friction
@@ -100,8 +100,8 @@ public class VehicleTuning extends NativePhysicsObject {
     }
 
     /**
-     * Read the maximum force exerted by each wheel's suspension (native field:
-     * m_maxSuspensionForce).
+     * Return the maximum force exerted by each wheel's suspension (native
+     * field: m_maxSuspensionForce).
      *
      * @return the maximum force
      */
@@ -112,7 +112,7 @@ public class VehicleTuning extends NativePhysicsObject {
     /**
      * Determine the maximum travel distance for each wheel's suspension (native
      * field: m_maxSuspensionTravelCm).
-     *
+     * <p>
      * Note that the units are centimeters ONLY if the physics-space unit is
      * exactly one meter.
      *
@@ -124,7 +124,7 @@ public class VehicleTuning extends NativePhysicsObject {
     }
 
     /**
-     * Read the suspension damping when compressed (native field:
+     * Return the suspension damping when compressed (native field:
      * m_suspensionCompression).
      *
      * @return the damping amount
@@ -134,7 +134,7 @@ public class VehicleTuning extends NativePhysicsObject {
     }
 
     /**
-     * Read the suspension damping when expanded (native field:
+     * Return the suspension damping when expanded (native field:
      * m_suspensionDamping).
      *
      * @return the damping amount (0&rarr;no damping, default=0.88)
@@ -144,7 +144,7 @@ public class VehicleTuning extends NativePhysicsObject {
     }
 
     /**
-     * Read the suspension stiffness (native field: m_suspensionStiffness).
+     * Return the suspension stiffness (native field: m_suspensionStiffness).
      *
      * @return the stiffness constant
      */

@@ -80,7 +80,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Read the air density.
+     * Return the air density.
      *
      * @return the density
      */
@@ -135,7 +135,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     }
 
     /**
-     * Read the maximum distance a node can travel per simulation step.
+     * Return the maximum distance a node can travel in a simulation step.
      *
      * @return the distance (in physics-space units)
      */
@@ -212,7 +212,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     }
 
     /**
-     * Read the water density.
+     * Return the water density.
      *
      * @return the density
      */
@@ -224,7 +224,7 @@ public class SoftBodyWorldInfo extends NativePhysicsObject {
     }
 
     /**
-     * Read the water offset.
+     * Return the water offset.
      *
      * @return the offset distance (in physics-space units)
      */

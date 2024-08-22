@@ -175,7 +175,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     // new methods exposed
 
     /**
-     * Reactivate this object if it has been deactivated due to lack of motion.
+     * Reactivate the collision object if it has been deactivated due to lack of
+     * motion.
      * <p>
      * Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -455,7 +456,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Access the shape of this object.
+     * Access the shape of the collision object.
      *
      * @return the pre-existing instance, or null if none
      */
@@ -464,7 +465,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Access the space where this object is added.
+     * Access the space where the collision object is added.
      *
      * @return the pre-existing instance, or null if none
      */
@@ -538,7 +539,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return this object's friction parameter (native field: m_friction).
+     * Return the collision object's friction parameter (native field:
+     * m_friction).
      * <p>
      * Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -552,7 +554,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Copy the location of this object's center to a Vector3f.
+     * Locate the collision object's center.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in physics-space coordinates, either
@@ -569,7 +571,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Copy the location of this object's center to a Vec3d.
+     * Locate the collision object's center in double precision.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a location vector (in physics-space coordinates, either
@@ -586,7 +588,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Copy the orientation (rotation) of this object to a Quaternion.
+     * Copy the orientation (rotation) of the collision object to a Quaternion.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a rotation Quaternion (in physics-space coordinates, either
@@ -619,8 +621,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Copy the orientation of this object (the basis of its local coordinate
-     * system) to a Matrix3f.
+     * Copy the orientation of the collision object (the basis of its local
+     * coordinate system) to a Matrix3f.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a rotation matrix (in physics-space coordinates, either
@@ -636,8 +638,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Copy the orientation of this object (the basis of its local coordinate
-     * system) to a Matrix3d.
+     * Copy the orientation of the collision object (the basis of its local
+     * coordinate system) to a Matrix3d.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a rotation matrix (in physics-space coordinates, either
@@ -653,7 +655,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return this object's restitution (bounciness) (native field:
+     * Return the collision object's restitution (bounciness) (native field:
      * m_restitution).
      * <p>
      * Restitution doesn't affect a PhysicsCharacter or PhysicsGhostObject.
@@ -757,7 +759,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Test whether this object has anisotropic friction.
+     * Test whether the collision object has anisotropic friction.
      * <p>
      * Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -775,8 +777,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Test whether the specified collision object is in this object's ignore
-     * list.
+     * Test whether the specified collision object is in the current collision
+     * object's ignore list.
      *
      * @param other the collision object to search for
      * @return true if found, otherwise false
@@ -794,7 +796,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Test whether this object has been deactivated due to lack of motion.
+     * Test whether the collision object has been deactivated due to lack of
+     * motion.
      * <p>
      * Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -808,8 +811,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Test whether this object responds to contact with other objects. All
-     * ghost objects are non-responsive. Other types are responsive by default.
+     * Test whether the collision object responds to contact with other objects.
+     * All ghost objects are non-responsive. Other types are responsive by
+     * default.
      *
      * @return true if responsive, otherwise false
      */
@@ -822,7 +826,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Test whether this object is added to a space.
+     * Test whether the collision object is added to a space.
      *
      * @return true&rarr;added to a space, false&rarr;not added to a space
      */
@@ -834,7 +838,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Test whether this object is static (immobile).
+     * Test whether the collision object is static (immobile).
      *
      * @return true if static, otherwise false
      */
@@ -872,9 +876,10 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the collision group of this object's broadphase proxy. A proxy is
-     * created when the object is added to a space, and its group is 32 for a
-     * PhysicsCharacter, 2 for a static object, or 1 for anything else.
+     * Return the collision group of the collision object's broadphase proxy. A
+     * proxy is created when the collision object is added to a space, and its
+     * group is 32 for a PhysicsCharacter, 2 for a static object, or 1 for
+     * anything else.
      *
      * @return the proxy's collision group (a bitmask with exactly one bit set)
      * or null if this object has no proxy
@@ -891,8 +896,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
 
     /**
      * Return the collision mask of this object's broadphase proxy. A proxy is
-     * created when the object is added to a space, and its mask is -3 for a
-     * static object or -1 for anything else.
+     * created when the collision object is added to a space, and its mask is -3
+     * for a static object or -1 for anything else.
      *
      * @return the proxy's bitmask, or null if this object has no proxy
      */
@@ -1025,7 +1030,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Apply the specified shape to this object. Meant to be overridden.
+     * Apply the specified shape to the collision object. Meant to be
+     * overridden.
      *
      * @param collisionShape the shape to apply (not null, alias created)
      */
@@ -1092,7 +1098,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter this object's friction (native field: m_friction).
+     * Alter the collision object's friction (native field: m_friction).
      * <p>
      * Friction doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -1130,7 +1136,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter this object's restitution (bounciness) (native field:
+     * Alter the collision object's restitution (bounciness) (native field:
      * m_restitution). For perfect elasticity, set restitution=1.
      * <p>
      * Restitution doesn't affect a PhysicsCharacter or PhysicsGhostObject.
@@ -1170,8 +1176,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the object's primary user index. Applications may use this
-     * parameter for any purpose (native field: m_userIndex).
+     * Alter the collision object's primary user index. Applications may use
+     * this parameter for any purpose (native field: m_userIndex).
      *
      * @param index the desired value (default=-1)
      */
@@ -1181,8 +1187,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the object's secondary user index. Applications may use this
-     * parameter for any purpose (native field: m_userIndex2).
+     * Alter the collision object's secondary user index. Applications may use
+     * this parameter for any purpose (native field: m_userIndex2).
      *
      * @param index the desired value (default=-1)
      */
@@ -1192,8 +1198,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the object's tertiary user index. Applications may use this
-     * parameter for any purpose (native field: m_userIndex3).
+     * Alter the collision object's tertiary user index. Applications may use
+     * this parameter for any purpose (native field: m_userIndex3).
      *
      * @param index the desired value (default=-1)
      */
@@ -1203,7 +1209,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Associate a "user" with this collision object.
+     * Associate a "user" with the collision object.
      *
      * @param user the desired scene object (alias created, default=null)
      * @see #getUserObject()
@@ -1213,7 +1219,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the ID of the space where this object is added.
+     * Return the ID of the space where the collision object is added.
      *
      * @return the ID, or zero if not added to any space
      */
@@ -1225,7 +1231,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the object's primary user index (native field: m_userIndex).
+     * Return the collision object's primary user index (native field:
+     * m_userIndex).
      *
      * @return the value of the index
      */
@@ -1236,7 +1243,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the object's secondary user index (native field: m_userIndex2).
+     * Return the collision object's secondary user index (native field:
+     * m_userIndex2).
      *
      * @return the value of the index
      */
@@ -1247,7 +1255,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Return the object's tertiary user index (native field: m_userIndex3).
+     * Return the collision object's tertiary user index (native field:
+     * m_userIndex3).
      *
      * @return the value of the index
      */
@@ -1260,8 +1269,8 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     // new protected methods
 
     /**
-     * Attach the identified btCollisionShape to the identified
-     * btCollisionObject. Native method.
+     * Attach the identified {@code btCollisionShape} to the identified
+     * {@code btCollisionObject}. Native method.
      *
      * @param objectId the identifier of the btCollisionObject (not zero)
      * @param collisionShapeId the identifier of the btCollisionShape (not zero)
@@ -1286,9 +1295,9 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     final native protected static int getInternalType(long objectId);
 
     /**
-     * (Re-)initialize the native user info of this object, which stores the
-     * collision group, collide-with groups, and spaceId (native field:
-     * m_userPointer).
+     * (Re-)initialize the native user info of this collision object, which
+     * stores the collision group, collide-with groups, and spaceId (native
+     * field: m_userPointer).
      */
     protected void initUserPointer() {
         logger.log(Level.FINE, "initUserPointer() for {0}", this);
@@ -1301,7 +1310,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     }
 
     /**
-     * Alter the activation state of this object. Native method.
+     * Alter the activation state of the collision object. Native method.
      * <p>
      * Deactivation doesn't affect a PhysicsCharacter or PhysicsGhostObject.
      *
@@ -1312,7 +1321,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             setActivationState(long objectId, int desiredState);
 
     /**
-     * Alter the collision flags of this object (native field:
+     * Alter the collision flags of the collision object (native field:
      * m_collisionFlags). Flag values are defined in
      * {@link com.jme3.bullet.collision.CollisionFlag}. Native method.
      *
@@ -1323,12 +1332,12 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
             setCollisionFlags(long objectId, int desiredFlags);
 
     /**
-     * Directly alter this object's location and basis.
+     * Directly alter the collision object's location and basis.
      *
-     * @param centerLocation the desired location for this object's center (in
-     * physics-space coordinates, not null, unaffected)
-     * @param orientation the desired orientation for this object (rotation
-     * matrix in physics-space coordinates, not null, unaffected)
+     * @param centerLocation the desired location for the collision object's
+     * center (in physics-space coordinates, not null, unaffected)
+     * @param orientation the desired orientation for the collision object
+     * (rotation matrix in physics-space coordinates, not null, unaffected)
      */
     protected void
             setLocationAndBasis(Vector3f centerLocation, Matrix3f orientation) {
@@ -1342,7 +1351,7 @@ abstract public class PhysicsCollisionObject extends NativePhysicsObject {
     // NativePhysicsObject methods
 
     /**
-     * Represent this object as a String.
+     * Represent the collision object as a {@code String}.
      *
      * @return a descriptive string of text (not null, not empty)
      */

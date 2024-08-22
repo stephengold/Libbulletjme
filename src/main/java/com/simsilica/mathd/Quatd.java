@@ -255,7 +255,7 @@ public final class Quatd implements Cloneable {
      * Takes the Hamilton product of the current instance times the argument to
      * yield a new Quatd. The current instance is unaffected.
      * <p>
-     * It IS safe for {@code q} and {@code this} to be the same object.
+     * It is safe for {@code q} and {@code this} to be the same object.
      * <p>
      * This method is used to combine rotations. Note that the Hamilton product
      * is noncommutative, so generally q * p != p * q.
@@ -285,7 +285,7 @@ public final class Quatd implements Cloneable {
      * This method is used to combine rotations. Note that the Hamilton product
      * is noncommutative, so generally q * p != p * q.
      * <p>
-     * It IS safe for any or all of {@code q}, {@code result}, and {@code this}
+     * It is safe for any or all of {@code q}, {@code result}, and {@code this}
      * to be the same object.
      *
      * @param q the right factor (not null, unaffected unless it's
