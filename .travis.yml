@@ -133,17 +133,12 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-# Deploy using personal access token (classic) expiring on 31 August 2024
-# Browse to GitHub user pulldown -> Settings -> "Developer settings"
-# cdn Libbulletjme
-# travis login --pro --github-token={token}
-# travis encrypt --pro {token}
-# cat /dev/null > ~/.bash_history && history -c && exit
+# Deploy using personal access token (classic) expiring on 28 November 2024
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: "eqOKIVGOB/Vj8MEExhGSk+Zzn7Lj4gzQg0AGXJi+YieP2Thd3VI4snjA3MutEqrXfg23Gzifs21TgIVT1wFAqA/YEumd6WmxB95VTpzEJbsdFITRQWITPxF/ANceE/M5v5041NlCwuFJtbEr3prwDPRJ2g43Hvm2jlpmQegsx8Pai7mzrjDr6gOVeRNQhPLKtqIjmyvojt2DPM+4SMe2pubZG95U6znpHCWOLdAwc7WXduSLywNVJo6dHkWFXilkCTrzXnnxzq/Jg5dawuMJZaCxQxxf+MnuKprbH+KeTzyYdjjOXY96zee6QYiyWgSLRXGFXJnTQXZ64wAqPD4l64EPlKYiD5HjmDl3q6nC8U3ppeqIqYAdUAsm9+Qn1PI9ZWjywOGskiqPLolXopbxS11yn1kR/g3ncbprL/GCbrSeGU/QB20zEkhcbeZA6j9EIgepZPjcTf0cYznAa21/uC8TsDh+cPczGTYwlm8IMcdBlKIh8M/xMq4ikCuklRMgX0x7g3u4hABfQEfMZ5TTOHkt2mJrjr5fwUfMxWwdQ8PwAuN3qd0400QVgBwukRRp27YN/nZxvSKy5ZgmFyle9r9THrPmEDWAKK/QQ1qZ5EDrvGPIjRJpYo8/M6rHKOau8ySNZ6tT7aEIeAEKd5rJbszFWjq5w9B+Nx8NPZl2ODo="
+    secure: "SO3RikvA/uavjTHl0N3E4qSBs75SYaC5K1OhUl0LyX68F4vUQ721mKx1CRM4oQ9JAf7zhsHcJie0nDF6Cl1dihL+w4YQ4R8G+ZMozF7PResaHkERmFQFz5ZrZ0bpZUo9++nC8xOoQ5ihEEZJvIkmD0CTeHUFbOGNbwZs3uEHIwnRpKlGt547QMUP3r5DCVYNVUQVPfdkrtGZIBwdc7gQT+q7VmuBnE9a9axH/WNZkLxzMwVfV7rJ6kFZ2m13MdE/caId0OjhTkus8E9QqT52QcqsxIjUSOpCPFjm2NuhpdHSPdbwz41JSuKuKfxD7HaxtDWoJFQSjDvV9OK/PnoNs1Wo5iUC1tPp0vaywridyJTFsG2/K+NKJ4l80dkv4eEziJafiYAmQ4wjqwt6BiPQcYSV4F45ZTEtmNTt0LkCb0kygOfx4z0xXvgu0d97SNM3Ivew0ORTx0NCCgUwSuj7VCUoNf+LDkese3z7eVgHIhrKv7jb3XMZ0iESXwNs7RG6/kC2OUjdPKCs9c9tRAt6n/IBjRCEhioFhpM2uAul/cKXGuJHdQgzZ93kOzrovZAtmGdzTi7l0Nz9q3T1dXHFdlaE7XNMto/fQbczBy4GDozxy/+knT+mornf92Ckyql5aGTVQjRSw3PLns5G/uYdOyePSujxj3xtt17KV2wOYFI="
   edge:
     branch: v2.0.3-beta.4
   file:
