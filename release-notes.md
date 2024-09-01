@@ -1,5 +1,13 @@
 # Release log for the Libbulletjme project
 
+## Version 21.3.0 released on 31 August 2024
+
++ Bugfix: `copyPcoProperties()` doesn't copy user indices
++ Bugfix:  logic error in `CollisionShape.nativeMargin()`
++ Publicized the `CollisionSpace.setLocalThreadPhysicsSpace()` method so
+  per-thread physics spaces can nulled and garbage collected.
++ Added public method `Quaternion.isValidQuaternion()`.
+
 ## Version 21.2.1 released on 9 May 2024
 
 + Changed the default setting for collision-shape contact filtering
