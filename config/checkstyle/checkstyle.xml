@@ -44,7 +44,8 @@
     <module name="TreeWalker">
         <module name="OuterTypeFilename"/>
         <module name="IllegalToken">
-            <property name="tokens" value="POST_DEC, POST_INC, STATIC_IMPORT"/>
+            <property name="tokens"
+                      value="POST_DEC, POST_INC, STATIC_IMPORT"/>
         </module>
         <module name="IllegalTokenText">
             <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
@@ -359,7 +360,7 @@
             <property name="scope" value="protected"/>
             <property name="tokens"
                       value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
-                      RECORD_DEF, ANNOTATION_DEF"/>
+                    RECORD_DEF, ANNOTATION_DEF"/>
             <property name="excludeScope" value="nothing"/>
         </module>
         <module name="JavadocStyle">
@@ -374,7 +375,8 @@
             <property name="exceptionVariableName" value="expected"/>
         </module>
         <module name="CommentsIndentation">
-            <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
+            <property name="tokens"
+                      value="BLOCK_COMMENT_BEGIN"/>
         </module>
 
         <!-- Checks for size violations              -->
