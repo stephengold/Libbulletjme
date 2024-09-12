@@ -140,7 +140,7 @@ deploy:
   api_key:
     secure: "SO3RikvA/uavjTHl0N3E4qSBs75SYaC5K1OhUl0LyX68F4vUQ721mKx1CRM4oQ9JAf7zhsHcJie0nDF6Cl1dihL+w4YQ4R8G+ZMozF7PResaHkERmFQFz5ZrZ0bpZUo9++nC8xOoQ5ihEEZJvIkmD0CTeHUFbOGNbwZs3uEHIwnRpKlGt547QMUP3r5DCVYNVUQVPfdkrtGZIBwdc7gQT+q7VmuBnE9a9axH/WNZkLxzMwVfV7rJ6kFZ2m13MdE/caId0OjhTkus8E9QqT52QcqsxIjUSOpCPFjm2NuhpdHSPdbwz41JSuKuKfxD7HaxtDWoJFQSjDvV9OK/PnoNs1Wo5iUC1tPp0vaywridyJTFsG2/K+NKJ4l80dkv4eEziJafiYAmQ4wjqwt6BiPQcYSV4F45ZTEtmNTt0LkCb0kygOfx4z0xXvgu0d97SNM3Ivew0ORTx0NCCgUwSuj7VCUoNf+LDkese3z7eVgHIhrKv7jb3XMZ0iESXwNs7RG6/kC2OUjdPKCs9c9tRAt6n/IBjRCEhioFhpM2uAul/cKXGuJHdQgzZ93kOzrovZAtmGdzTi7l0Nz9q3T1dXHFdlaE7XNMto/fQbczBy4GDozxy/+knT+mornf92Ckyql5aGTVQjRSw3PLns5G/uYdOyePSujxj3xtt17KV2wOYFI="
   edge:
-    branch: v2.0.3-beta.4
+    branch: v1.10.16
   file:
     - dist/Android_ARM7DebugSp_libbulletjme.so
     - dist/Android_ARM7ReleaseSp_libbulletjme.so
