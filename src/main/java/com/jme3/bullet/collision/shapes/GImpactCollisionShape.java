@@ -70,11 +70,14 @@ public class GImpactCollisionShape extends CollisionShape {
     /**
      * Instantiate a shape based on the specified CompoundMesh and offset.
      *
-     * @param mesh the mesh on which to base the shape (not null, unaffected)
+     * @param mesh the mesh on which to base the shape (not null, must contain
+     * at least one triangle, unaffected)
      * @param offset the offset to add to the vertex positions (not null,
      * unaffected)
      */
     public GImpactCollisionShape(CompoundMesh mesh, Vector3f offset) {
+        Validate.require(mesh.countTriangles() > 0, "at least one triangle");
+
         this.nativeMesh = new CompoundMesh(mesh, offset);
         createShape();
     }
@@ -82,13 +85,17 @@ public class GImpactCollisionShape extends CollisionShape {
     /**
      * Instantiate a shape based on the specified native mesh(es).
      *
-     * @param submeshes the mesh(es) on which to base the shape (not null)
+     * @param submeshes the mesh(es) on which to base the shape (not null, must
+     * contain at least one triangle)
      */
     public GImpactCollisionShape(IndexedMesh... submeshes) {
         this.nativeMesh = new CompoundMesh();
         for (IndexedMesh submesh : submeshes) {
             nativeMesh.add(submesh);
         }
+        Validate.require(
+                nativeMesh.countTriangles() > 0, "at least one triangle");
+
         createShape();
     }
     // *************************************************************************
@@ -226,6 +233,9 @@ public class GImpactCollisionShape extends CollisionShape {
      * Instantiate the configured {@code btGImpactMeshShape}.
      */
     private void createShape() {
+        int numTriangles = nativeMesh.countTriangles();
+        assert numTriangles > 0 : numTriangles;
+
         long meshId = nativeMesh.nativeId();
         long shapeId = createShape(meshId);
         setNativeId(shapeId);

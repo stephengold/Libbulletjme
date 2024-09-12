@@ -1191,14 +1191,15 @@ public class TestLibbulletjme {
 
         CollisionShape box = new BoxCollisionShape(0.1f, 0.2f, 0.3f);
         CollisionShape compound = new CompoundCollisionShape();
-        CollisionShape gimpact = new GImpactCollisionShape();
-
-        float[] hf = {0f, 0f, 0f, 0f};
-        CollisionShape heightfield = new HeightfieldCollisionShape(hf);
 
         int[] indexArray = {0, 0, 0};
         Vector3f[] positionArray = {new Vector3f(0f, 0f, 0f)};
         IndexedMesh indexedMesh = new IndexedMesh(positionArray, indexArray);
+        CollisionShape gimpact = new GImpactCollisionShape(indexedMesh);
+
+        float[] hf = {0f, 0f, 0f, 0f};
+        CollisionShape heightfield = new HeightfieldCollisionShape(hf);
+
         CollisionShape mesh = new MeshCollisionShape(true, indexedMesh);
 
         Plane pl = new Plane(Vector3f.UNIT_Y, 0f);
