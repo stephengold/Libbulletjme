@@ -232,7 +232,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Instantiate a shape based on the specified CompoundMesh and offset.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>mesh</code> - the mesh on which to base the shape (not null, unaffected)</dd>
+<dd><code>mesh</code> - the mesh on which to base the shape (not null, must contain
+ at least one triangle, unaffected)</dd>
 <dd><code>offset</code> - the offset to add to the vertex positions (not null,
  unaffected)</dd>
 </dl>
@@ -245,7 +246,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Instantiate a shape based on the specified native mesh(es).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>submeshes</code> - the mesh(es) on which to base the shape (not null)</dd>
+<dd><code>submeshes</code> - the mesh(es) on which to base the shape (not null, must
+ contain at least one triangle)</dd>
 </dl>
 </section>
 </li>
