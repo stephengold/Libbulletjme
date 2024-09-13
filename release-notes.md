@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 21.3.0 released on 31 August 2024
+## Version 21.3.1 released on 12 September 2024
 
 + Bugfix: `copyPcoProperties()` doesn't copy user indices
 + Bugfix:  logic error in `CollisionShape.nativeMargin()`
