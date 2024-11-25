@@ -133,12 +133,12 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-# Deploy using personal access token (classic) expiring on 28 November 2024
+# Deploy using personal access token (classic) expiring on 22 February 2025
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: "SO3RikvA/uavjTHl0N3E4qSBs75SYaC5K1OhUl0LyX68F4vUQ721mKx1CRM4oQ9JAf7zhsHcJie0nDF6Cl1dihL+w4YQ4R8G+ZMozF7PResaHkERmFQFz5ZrZ0bpZUo9++nC8xOoQ5ihEEZJvIkmD0CTeHUFbOGNbwZs3uEHIwnRpKlGt547QMUP3r5DCVYNVUQVPfdkrtGZIBwdc7gQT+q7VmuBnE9a9axH/WNZkLxzMwVfV7rJ6kFZ2m13MdE/caId0OjhTkus8E9QqT52QcqsxIjUSOpCPFjm2NuhpdHSPdbwz41JSuKuKfxD7HaxtDWoJFQSjDvV9OK/PnoNs1Wo5iUC1tPp0vaywridyJTFsG2/K+NKJ4l80dkv4eEziJafiYAmQ4wjqwt6BiPQcYSV4F45ZTEtmNTt0LkCb0kygOfx4z0xXvgu0d97SNM3Ivew0ORTx0NCCgUwSuj7VCUoNf+LDkese3z7eVgHIhrKv7jb3XMZ0iESXwNs7RG6/kC2OUjdPKCs9c9tRAt6n/IBjRCEhioFhpM2uAul/cKXGuJHdQgzZ93kOzrovZAtmGdzTi7l0Nz9q3T1dXHFdlaE7XNMto/fQbczBy4GDozxy/+knT+mornf92Ckyql5aGTVQjRSw3PLns5G/uYdOyePSujxj3xtt17KV2wOYFI="
+    secure: "QXgn5EGy+hXd+elyecVmETgtJHvnKr/ZyXqDyF6wm1BAsu2/Oxk+gBS2TdOy62TL67bjXl1BOSHJ+zYijIYkbsWs1VAadgf2fV4td4MhHqEzijQcsbyfiqMqXTPIo3hX9qj9NxkcghOks4twMZrwgM7cP8VslKHFM1ioe6Ou0kAM/E9qeRm3ZCVzvEQ9JXCVXQSSkGuodAcJirbGVBTTVBbph+VmV2qrL1SP7XmYyE83dX18Nu9qWa0ntx8XxlfKm/QsSbXFxTTRZPYWRmdOKvVVzpYTFs9gfblo+6ZeA98cVxWptmXTjMu46RWfERAQMTwWliYLwU9m/GhT9amJU5+/SRpOsPNtHtlRaRZUMmmozT9s/qdHbXl0LN0qKnPeTnZv/czmxBSc0uwW+KeWLhItav8YWrPAbzLHZ3QxBz2zmDFa1t9EuA4SAiCSshzEWg2FcHZPzEWKll9X6V7YPRc9/hnDk+sVHA0CizkBoz92UQd6xM3VbBT9PDMq8rfqALBdnliKFlzre2phcXCO7bS2nW1DnBDYy9KUWXy/byF4kbfE/Zz+dy7wjd3uSab42jIYJdbhRYcm8GgkLpz3/kThsWMu6rY648DORuYdUJF6UcKEUckvwaIrcU+D5VIsSZPLwULgAcmLa87j9/KrVl57dIGJxSzhwnEpkC7ALUM="
   file:
     - dist/Android_ARM7DebugSp_libbulletjme.so
     - dist/Android_ARM7ReleaseSp_libbulletjme.so

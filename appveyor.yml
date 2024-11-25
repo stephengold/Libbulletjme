@@ -58,13 +58,13 @@ artifacts:
   - path: dist/Windows64DebugSpMt_bulletjme.pdb
     name: pdb64DSM
 
-# Deploy using personal access token (classic) expiring on 28 November 2024
+# Deploy using personal access token (classic) expiring on 22 February 2025
 deploy:
   description: release description goes here
   artifact: classJar,javadocJar,sourcesJar,pom,module,dll32DD,dll32DS,dll32RD,dll32RS,dll64DD,dll64DDM,dll64DS,dll64DSM,dll64RD,dll64RDM,dll64RS,dll64RSM,pdb32DD,pdb32DS,pdb64DD,pdb64DDM,pdb64DS,pdb64DSM
   provider: GitHub
   auth_token:
-    secure: TLXEVA+TnJOQShSTdihMkCzUaamgn8QT9CGiy7cbLP2He7BlEoNh/FNPGEtA1FEG
+    secure: 5TFjRLmxsZ2yJbX+muWsLZMaZV1VIbDu9t2SwpwJ498MdHjsmzq4Ke353jmYtaFx
   force_update: true               # overwrite existing release if present
   on:
     appveyor_repo_tag: true        # deploy on tag push only
