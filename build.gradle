@@ -374,18 +374,18 @@ application {
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
-    enableAssertions true
+    enableAssertions = true
 }
 
 run.dependsOn('assemble')
 test.dependsOn('assemble')
 
 checkstyle {
-    toolVersion libs.versions.checkstyle.get()
+    toolVersion = libs.versions.checkstyle.get()
 }
 tasks.register('checkstyle') {
     dependsOn 'checkstyleMain', 'checkstyleTest'
-    description 'Checks the style of all Java sourcecode.'
+    description = 'Checks the style of all Java sourcecode.'
 }
 checkstyleMain.dependsOn('compileTestJava')
 
@@ -393,7 +393,7 @@ checkstyleMain.dependsOn('compileTestJava')
 
 tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
-    description 'Installs Maven artifacts to the local repository.'
+    description = 'Installs Maven artifacts to the local repository.'
 }
 
 assemble.dependsOn('copyToDistJars')
@@ -420,7 +420,7 @@ javadocJar { archiveBaseName = project.ext.baseName }
 tasks.register('sourcesJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
-    description 'Creates a JAR of Java sourcecode.'
+    description = 'Creates a JAR of Java sourcecode.'
     from 'src/main/java' // default is ".allSource", which includes resources
 }
 
@@ -433,28 +433,28 @@ javadoc.dependsOn('compileTestJava')
 assemble.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
 tasks.register('module', Copy) {
     dependsOn 'generateMetadataFileForMavenPublication'
-    description 'Copies the module metadata to dist.'
+    description = 'Copies the module metadata to dist.'
     from "${buildDir}/publications/maven/module.json"
     into 'dist'
     rename 'module.json', project.ext.baseName + '.module'
 }
 tasks.register('moduleAsc', Copy) {
     dependsOn 'signMavenPublication'
-    description 'Copies the signature of the module metadata to dist.'
+    description = 'Copies the signature of the module metadata to dist.'
     from "${buildDir}/publications/maven/module.json.asc"
     into 'dist'
     rename 'module.json.asc', project.ext.baseName + '.module.asc'
 }
 tasks.register('pom', Copy) {
     dependsOn 'generatePomFileForMavenPublication'
-    description 'Copies the Maven POM to dist.'
+    description = 'Copies the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml"
     into 'dist'
     rename 'pom-default.xml', project.ext.baseName + '.pom'
 }
 tasks.register('pomAsc', Copy) {
     dependsOn 'signMavenPublication'
-    description 'Copies the signature of the Maven POM to dist.'
+    description = 'Copies the signature of the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml.asc"
     into 'dist'
     rename 'pom-default.xml.asc', project.ext.baseName + '.pom.asc'
@@ -463,9 +463,9 @@ tasks.register('pomAsc', Copy) {
 publishing {
     publications {
         maven(MavenPublication) {
-            artifactId artifact
+            artifactId = artifact
             from components.java
-            groupId project.ext.group
+            groupId = project.ext.group
             pom {
                 description = 'a JNI interface for Bullet Physics and V-HACD'
                 developers {
@@ -489,7 +489,7 @@ publishing {
                 }
                 url = 'https://stephengold.github.io/Libbulletjme'
             }
-            version project.ext.version
+            version = project.ext.version
         }
     }
 }
