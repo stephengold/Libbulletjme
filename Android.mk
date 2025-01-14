@@ -13,6 +13,7 @@ $(N)/v-hacd/public
 
 LOCAL_CFLAGS := -std=c++11 -Wno-single-bit-bitfield-constant-conversion
 LOCAL_MODULE := bulletjme
+LOCAL_SHORT_COMMANDS := true
 
 LOCAL_SRC_FILES := \
 $(N)/bullet3/BulletCollision/BroadphaseCollision/btAxisSweep3.cpp \
