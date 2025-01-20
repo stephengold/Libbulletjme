@@ -20,7 +20,7 @@ jobs:
           node-version: 22.13.0
       - uses: actions/checkout@v4
       - run: npx antora src/site/ci-playbook.yml
-      - run: ./gradlew copyJavadocToSite --console=plain --no-daemon --stacktrace
+      - run: ./gradlew copyJavadocToSite --console=plain --stacktrace
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

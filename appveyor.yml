@@ -8,7 +8,7 @@ image: Visual Studio 2022
 skip_non_tags: true
 
 build_script:
-  - cmd: gradlew.bat build --console=plain --no-daemon
+  - cmd: gradlew.bat build --console=plain
 
 artifacts:
   - path: dist/Libbulletjme-21.3.2.jar
