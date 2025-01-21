@@ -32,45 +32,45 @@ jobs:
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-  Java11-MacOS:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: macOS-13
-    steps:
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: 11
-      - uses: actions/checkout@v4
-      - run: ./gradlew run build --console=plain -Pflavor=Dp -Pgithub=debug64
-      - run: ./gradlew run cleanTest build --console=plain -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64
-      - if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: crash-log
-          path: '*.log'
-
-  Java11-Windows:
+  Java17-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2019
     steps:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 11
+          java-version: 17
       - uses: actions/checkout@v4
       - run: ./gradlew run build --console=plain -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64
         shell: bash
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-  Java17-MacOS:
+
+  Java21-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - run: ./gradlew run build --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crash-log
+          path: '*.log'
+
+  Java21-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-14
     steps:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 21
       - uses: actions/checkout@v4
       - run: ./gradlew run build --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64
       - run: ./gradlew run cleanTest build --console=plain -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX_ARM64
