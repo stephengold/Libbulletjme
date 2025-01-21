@@ -163,7 +163,13 @@ model {
                 String pName = targetPlatform.name
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
+                buildable = true
                 // Decide whether to build for the target platform:
+                if (buildable && project.hasProperty('target')) {
+                    // set in gradle.properties file or -Ptarget= on the command line
+                    String targetArg = project.ext.target
+                    buildable = (pName == targetArg)
+                }
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
                 if (project.hasProperty('github')) {
