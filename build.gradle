@@ -232,6 +232,27 @@ model {
 
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
+
+                    String replaceWith = targetPlatform.operatingSystem.name \
+                        + '/' + targetPlatform.architecture.name \
+                        + '/com/github/stephengold/$1'
+                    project.tasks.register('nativesJar' + q, Jar) {
+                        archiveBaseName = project.ext.baseName
+                        archiveClassifier = buildType.name + flavor.name
+                        dependsOn "bulletjme${q}SharedLibrary"
+                        description = "Creates a JAR of the ${q} native library."
+                        from sharedLibraryFile
+                        rename '(.+)', replaceWith
+                    }
+
+                    Task njTask = project.tasks.named('nativesJar' + q, Jar).get()
+                    project.artifacts {
+                        archives njTask.archiveFile
+                    }
+                    project.publishing.publications.maven {
+                        artifact njTask
+                    }
+
                 } else { // not buildable
                     //println 'Do not build ' + q // to debug this script
                 }
@@ -306,6 +327,7 @@ jar {
     }
 }
 
+javadoc.dependsOn('compileTestJava')
 java.withJavadocJar()
 javadocJar { archiveBaseName = baseName }
 
@@ -316,15 +338,10 @@ tasks.register('sourcesJar', Jar) {
     from 'src/main/java' // default is ".allSource", which includes resources
 }
 
-// add javadoc/source jar tasks as artifacts
-artifacts {
-    archives jar, sourcesJar
-}
-javadoc.dependsOn('compileTestJava')
-
 publishing {
     publications {
         maven(MavenPublication) {
+            artifact sourcesJar
             artifactId = artifact
             from components.java
             groupId = groupID
@@ -374,7 +391,6 @@ signing {
 tasks.withType(Sign).configureEach {
     onlyIf { project.hasProperty('signing.keyId') }
 }
-signMavenPublication.dependsOn('module')
 
 // Register cleanup tasks:
 
