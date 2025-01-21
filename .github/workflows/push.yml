@@ -14,7 +14,8 @@ jobs:
           distribution: 'zulu'
           java-version: 8
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 \
+      - run: |
+          ./gradlew run build install -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -31,7 +32,8 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - uses: gradle/actions/wrapper-validation@v4
-      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 \
+      - run: |
+          ./gradlew run build install -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -47,7 +49,8 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 \
+      - run: |
+          ./gradlew run build install -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -65,7 +68,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 \
+      - run: |
+          ./gradlew run build install -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -84,11 +88,13 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 run build install \
+      - run: |
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - run: ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX_ARM64 run cleanTest build install \
+      - run: |
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX_ARM64 run cleanTest build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -104,7 +110,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows64 run build install \
+      - run: |
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows64 run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -124,8 +131,9 @@ jobs:
           distribution: 'zulu'
           java-version: 23
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 run build install \
-             --console=plain \
+      - run: |
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 run build install \
+            --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - if: failure()
