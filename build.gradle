@@ -297,7 +297,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-tasks.withType(JavaCompile) { // Java compile-time options:
+tasks.withType(JavaCompile).configureEach { // Java compile-time options:
     options.compilerArgs << '-Xdiags:verbose'
     if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_20)) {
         // Suppress warnings that source value 8 is obsolete.
@@ -452,7 +452,7 @@ signing {
     sign configurations.archives
     sign publishing.publications.maven
 }
-tasks.withType(Sign) {
+tasks.withType(Sign).configureEach {
     onlyIf { project.hasProperty('signing.keyId') }
 }
 signMavenPublication.dependsOn('module')
