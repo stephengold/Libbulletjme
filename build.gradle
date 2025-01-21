@@ -107,6 +107,20 @@ model {
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
                 buildable = true
+                // Decide whether to build the current type:
+                if (buildable && project.hasProperty('bt')) {
+                    // set in gradle.properties file or -Pbt= on the command line
+                    String btArg = project.ext.bt
+                    buildable = (buildType.name == btArg)
+                }
+
+                // Decide whether to build the current flavor:
+                if (buildable && project.hasProperty('flavor')) {
+                    // set in gradle.properties file or -Pflavor= on the command line
+                    String flavorArg = project.ext.flavor
+                    buildable = (flavor.name == flavorArg)
+                }
+
                 // Decide whether to build for the target platform:
                 if (buildable && project.hasProperty('target')) {
                     // set in gradle.properties file or -Ptarget= on the command line
@@ -115,30 +129,14 @@ model {
                 }
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 Boolean isMt = (flavor == flavors.SpMt || flavor == flavors.SpMtQuickprof || flavor == flavors.DpMt)
-                if (project.hasProperty('github')) {
-                    // CI build with -Pgithub= specified on the command line
-                    String github = project.ext.github
-                    if (github == 'debug64') { // skip all except debug/64-bit/non-ARM
-                        buildable = isDebug && pName.contains('64') && !pName.contains('_ARM')
-                    } else if (github == 'debug64arm') { // skip all except debug/64-bit/ARM
-                        buildable = isDebug && pName.contains('64') && pName.contains('_ARM')
-                    }
-                }
-
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
                 Boolean isQuickprof = (flavor == flavors.SpMtQuickprof || flavor == flavors.SpQuickprof)
                 String os = targetPlatform.operatingSystem.name
                 if (buildable) {
-                    // Decide whether to build the current flavor:
-                    if (project.hasProperty('flavor')) {
-                        // -Pflavor= specified on the command line
-                        String flavorArg = project.ext.flavor
-                        buildable = (flavor.name == flavorArg)
-                    } else if (isMt) {
+                    if (isMt) {
                         // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
                         buildable = (os != 'osx') && pName.contains('64')
                     }
-                    //if (isDp) buildable = false // to skip all double-precision flavors
                     //if (isMt) buildable = false // to skip all multithreaded flavors
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
