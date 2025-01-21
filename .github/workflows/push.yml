@@ -14,7 +14,8 @@ jobs:
           distribution: 'zulu'
           java-version: 8
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64
+      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 \
+            --console=plain
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
@@ -28,7 +29,8 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - uses: gradle/actions/wrapper-validation@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64
+      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 \
+            --console=plain
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
@@ -41,7 +43,8 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64
+      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 \
+            --console=plain
         shell: bash
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
@@ -56,7 +59,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64
+      - run: ./gradlew run build install -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 \
+            --console=plain
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -72,8 +76,10 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64
-      - run: ./gradlew run cleanTest build install --console=plain -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX_ARM64
+      - run: ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 run build install \
+             --console=plain
+      - run: ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX_ARM64 run cleanTest build install \
+             --console=plain
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
@@ -86,7 +92,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=Windows64
+      - run: ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows64 run build install \
+             --console=plain
         shell: bash
       - if: failure()
         uses: actions/upload-artifact@v4
@@ -103,7 +110,8 @@ jobs:
           distribution: 'zulu'
           java-version: 23
       - uses: actions/checkout@v4
-      - run: ./gradlew run build install --console=plain -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64
+      - run: ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 run build install \
+             --console=plain
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
