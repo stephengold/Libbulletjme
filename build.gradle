@@ -71,10 +71,6 @@ model {
             architecture 'aarch64'
             operatingSystem 'linux'
         }
-        MacOSX32 {
-            architecture 'x86'
-            operatingSystem 'osx'
-        }
         MacOSX64 {
             architecture 'x86_64'
             operatingSystem 'osx'
@@ -97,46 +93,7 @@ model {
         visualCpp(VisualCpp) // used when compiling on Windows
         //clang(Clang) // to prefer Clang over Gcc on Linux
 
-        //gcc9Arm(Gcc) {
-        //    target('Linux_ARM32') {
-        //        cppCompiler.executable = 'arm-linux-gnueabi-g++-9'
-        //        linker.executable = 'arm-linux-gnueabi-g++-9'
-        //    }
-        //    target('Linux_ARM32hf') {
-        //        cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
-        //        linker.executable = 'arm-linux-gnueabihf-g++-9'
-        //    }
-        //    target('Linux_ARM64') {
-        //        cppCompiler.executable = 'aarch64-linux-gnu-g++-9'
-        //        linker.executable = 'aarch64-linux-gnu-g++-9'
-        //    }
-        //}
-        //gcc8Arm32hf(Gcc) {
-        //    target('Linux_ARM32hf') {
-        //        cppCompiler.executable = 'arm-linux-gnueabihf-g++-8'
-        //        linker.executable = 'arm-linux-gnueabihf-g++-8'
-        //    }
-        //}
-
         gcc(Gcc) // default when compiling on Linux
-        gcc6Arm32hf(Gcc) { // used at Travis CI (job .5)
-            target('Linux_ARM32hf') {
-                cppCompiler.executable = 'arm-linux-gnueabihf-g++-6'
-                linker.executable = 'arm-linux-gnueabihf-g++-6'
-            }
-        }
-        gcc6Arm64(Gcc) { // used at Travis CI (jobs .6 and .7)
-            target('Linux_ARM64') {
-                cppCompiler.executable = 'aarch64-linux-gnu-g++-6'
-                linker.executable = 'aarch64-linux-gnu-g++-6'
-            }
-        }
-        gcc7Arm32(Gcc) { // used at Travis CI (job .4)
-            target('Linux_ARM32') {
-                cppCompiler.executable = 'arm-linux-gnueabi-g++-7'
-                linker.executable = 'arm-linux-gnueabi-g++-7'
-            }
-        }
         clang(Clang) // used when compiling on macOS
     }
 
@@ -148,7 +105,6 @@ model {
             targetPlatform 'Linux_ARM32' // omitted from recent Minie releases
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
-            targetPlatform 'MacOSX32'
             targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows32'
@@ -182,26 +138,8 @@ model {
                     } else if (github == 'debug64arm') { // skip all except debug/64-bit/ARM
                         buildable = isDebug && pName.contains('64') && pName.contains('_ARM')
                     }
-                } else if (project.hasProperty('travis')) {
-                    // CI build with -Ptravis= specified on the command line
-                    String travis = project.ext.travis
-                    if (travis == 'amd64') { // using g++-7, skip Mt flavors
-                        buildable = (!isMt) && !pName.contains('_ARM')
-                    } else if (travis == 'amd64mt') { // using g++-7 to build Mt flavors
-                        buildable = isMt && (pName == 'Linux64')
-                    } else if (travis == 'arm32') {
-                        buildable = (pName == 'Linux_ARM32')
-                    } else if (travis == 'arm32hf') {
-                        buildable = (pName == 'Linux_ARM32hf')
-                    } else if (travis == 'arm64') {
-                        buildable = (pName == 'Linux_ARM64')
-                    } else if (travis == 'osx_intel') { // xcode9.4.1 job
-                        buildable = pName.startsWith('MacOSX') && !pName.contains('_ARM')
-                    } else if (travis == 'osx_arm') { // xcode14.2 job
-                        buildable = (pName == 'MacOSX_ARM64')
-                    }
                 } else {
-                    // non-CI build (neither -Pgithub= nor -Ptravis= specified)
+                    // non-CI build
                     buildable = !pName.startsWith('Linux_ARM')
                     //buildable = (pName == 'Linux64') // to build Linux64 only
                     //buildable = (pName == 'Windows64') // to build Windows64 only
@@ -320,12 +258,6 @@ model {
                         cppCompiler.args '-fPIC'
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
-                    } else if (os == 'windows') { // not tested recently
-                        cppCompiler.define 'WIN32'
-                        cppCompiler.args '-I', "$javaHome/include/win32"
-                        cppCompiler.args '-static'
-                        linker.args '-static'
-                        linker.args '-Wl,--exclude-all-symbols'
                     } else {
                         buildable = false
                     }
