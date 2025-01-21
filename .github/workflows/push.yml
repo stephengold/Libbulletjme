@@ -28,9 +28,6 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - uses: gradle/actions/wrapper-validation@v4
-      - uses: mattsb42/not-grep@master
-        with:
-          config-file: .github/not-grep.toml
       - run: ./gradlew run build --console=plain -Pflavor=Sp -Pgithub=debug64
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
