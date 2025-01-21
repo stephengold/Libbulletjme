@@ -10,26 +10,30 @@ if (project.hasProperty('flavor')) {
 }
 
 android {
-    buildTypes.debug {
-        jniDebuggable = true
+    buildTypes {
+        debug {
+            jniDebuggable = true
+        }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
-    compileSdkVersion 30
+    compileSdk = 30
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 30
+        minSdk = 22
         ndk {
             //abiFilters 'x86_64'
         }
+        targetSdk = 30
     }
-    externalNativeBuild.ndkBuild {
-        path 'Android.mk'
+    externalNativeBuild {
+        ndkBuild {
+            path 'Android.mk'
+        }
     }
-    namespace 'com.github.stephengold.libbulletjme'
-    ndkVersion '27.2.12479018'
+    namespace = 'com.github.stephengold.libbulletjme'
+    ndkVersion = '27.2.12479018'
 }
 
 dependencies {
