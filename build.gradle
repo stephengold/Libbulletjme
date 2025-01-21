@@ -186,16 +186,6 @@ model {
                             String pdbFile = 'build/libs/bulletjme/shared/'
                             pdbFile += pName + '/debug/'
                             pdbFile += flavor.name + '/bulletjme.pdb'
-
-                            project.tasks.register('copyPdbToDist' + q, Copy) {
-                                dependsOn "bulletjme${q}SharedLibrary"
-                                from pdbFile
-                                rename { String filename ->
-                                    return q + '_' + filename
-                                }
-                                into 'dist'
-                            }
-                            jar.dependsOn('copyPdbToDist' + q)
                         }
                     } else { // buildType == Release
                         cppCompiler.args '/O2'
@@ -242,17 +232,6 @@ model {
 
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
-
-                    project.tasks.register('copyToDist' + q, Copy) {
-                        dependsOn "bulletjme${q}SharedLibrary"
-                        from sharedLibraryFile
-                        rename { String filename ->
-                            return q + '_' + filename
-                        }
-                        into 'dist'
-                    }
-                    jar.dependsOn('copyToDist' + q)
-
                 } else { // not buildable
                     //println 'Do not build ' + q // to debug this script
                 }
@@ -316,13 +295,6 @@ tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
     description = 'Installs Maven artifacts to the local repository.'
 }
-assemble.dependsOn('copyToDistJars')
-tasks.register('copyToDistJars', Copy) {
-    dependsOn 'jar', 'javadocJar', 'signArchives', 'signMavenPublication', 'sourcesJar'
-    from 'build/libs'
-    include '*.jar', '*.jar.asc'
-    into 'dist'
-}
 
 jar {
     archiveBaseName = baseName
@@ -349,36 +321,6 @@ artifacts {
     archives jar, sourcesJar
 }
 javadoc.dependsOn('compileTestJava')
-
-assemble.dependsOn('module', 'moduleAsc', 'pom', 'pomAsc')
-tasks.register('module', Copy) {
-    dependsOn 'generateMetadataFileForMavenPublication'
-    description = 'Copies the module metadata to dist.'
-    from "${buildDir}/publications/maven/module.json"
-    into 'dist'
-    rename 'module.json', baseName + '.module'
-}
-tasks.register('moduleAsc', Copy) {
-    dependsOn 'signMavenPublication'
-    description = 'Copies the signature of the module metadata to dist.'
-    from "${buildDir}/publications/maven/module.json.asc"
-    into 'dist'
-    rename 'module.json.asc', baseName + '.module.asc'
-}
-tasks.register('pom', Copy) {
-    dependsOn 'generatePomFileForMavenPublication'
-    description = 'Copies the Maven POM to dist.'
-    from "${buildDir}/publications/maven/pom-default.xml"
-    into 'dist'
-    rename 'pom-default.xml', baseName + '.pom'
-}
-tasks.register('pomAsc', Copy) {
-    dependsOn 'signMavenPublication'
-    description = 'Copies the signature of the Maven POM to dist.'
-    from "${buildDir}/publications/maven/pom-default.xml.asc"
-    into 'dist'
-    rename 'pom-default.xml.asc', baseName + '.pom.asc'
-}
 
 publishing {
     publications {
@@ -436,13 +378,10 @@ signMavenPublication.dependsOn('module')
 
 // Register cleanup tasks:
 
-clean.dependsOn('cleanCxx', 'cleanDist', 'cleanLogs')
+clean.dependsOn('cleanCxx', 'cleanLogs')
 
 tasks.register('cleanCxx', Delete) {
     delete '.cxx'
-}
-tasks.register('cleanDist', Delete) { // files to be distributed
-    delete 'dist'
 }
 tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
