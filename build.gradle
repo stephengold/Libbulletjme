@@ -13,9 +13,9 @@ plugins {
 // or by a -Partifact= option on the command line.
 
 ext {
-    group = 'com.github.stephengold'
-    version = '21.3.2'
-    baseName = "${artifact}-${version}" // for artifacts
+    groupID = 'com.github.stephengold'
+    lbjVersion = '21.3.2'
+    baseName = "${artifact}-${lbjVersion}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
 
@@ -342,7 +342,7 @@ tasks.register('copyToDistJars', Copy) {
 }
 
 jar {
-    archiveBaseName = project.ext.baseName
+    archiveBaseName = baseName
     doLast {
         println "using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
     }
@@ -352,10 +352,10 @@ jar {
 }
 
 java.withJavadocJar()
-javadocJar { archiveBaseName = project.ext.baseName }
+javadocJar { archiveBaseName = baseName }
 
 tasks.register('sourcesJar', Jar) {
-    archiveBaseName = project.ext.baseName
+    archiveBaseName = baseName
     archiveClassifier = 'sources'
     description = 'Creates a JAR of Java sourcecode.'
     from 'src/main/java' // default is ".allSource", which includes resources
@@ -373,28 +373,28 @@ tasks.register('module', Copy) {
     description = 'Copies the module metadata to dist.'
     from "${buildDir}/publications/maven/module.json"
     into 'dist'
-    rename 'module.json', project.ext.baseName + '.module'
+    rename 'module.json', baseName + '.module'
 }
 tasks.register('moduleAsc', Copy) {
     dependsOn 'signMavenPublication'
     description = 'Copies the signature of the module metadata to dist.'
     from "${buildDir}/publications/maven/module.json.asc"
     into 'dist'
-    rename 'module.json.asc', project.ext.baseName + '.module.asc'
+    rename 'module.json.asc', baseName + '.module.asc'
 }
 tasks.register('pom', Copy) {
     dependsOn 'generatePomFileForMavenPublication'
     description = 'Copies the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml"
     into 'dist'
-    rename 'pom-default.xml', project.ext.baseName + '.pom'
+    rename 'pom-default.xml', baseName + '.pom'
 }
 tasks.register('pomAsc', Copy) {
     dependsOn 'signMavenPublication'
     description = 'Copies the signature of the Maven POM to dist.'
     from "${buildDir}/publications/maven/pom-default.xml.asc"
     into 'dist'
-    rename 'pom-default.xml.asc', project.ext.baseName + '.pom.asc'
+    rename 'pom-default.xml.asc', baseName + '.pom.asc'
 }
 
 publishing {
@@ -402,7 +402,7 @@ publishing {
         maven(MavenPublication) {
             artifactId = artifact
             from components.java
-            groupId = project.ext.group
+            groupId = groupID
             pom {
                 description = 'a JNI interface for Bullet Physics and V-HACD'
                 developers {
@@ -418,21 +418,21 @@ publishing {
                         url = 'https://opensource.org/licenses/BSD-3-Clause'
                     }
                 }
-                name = project.ext.group + ':' + artifact
+                name = groupID + ':' + artifact
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/Libbulletjme.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/Libbulletjme.git'
-                    url = project.ext.websiteUrl + '/tree/master'
+                    url = websiteUrl + '/tree/master'
                 }
-                url = 'https://stephengold.github.io/Libbulletjme'
+                url = websiteUrl
             }
-            version = project.ext.version
+            version = lbjVersion
         }
     }
 }
 publishMavenPublicationToMavenLocal.dependsOn('assemble')
 publishMavenPublicationToMavenLocal.doLast {
-    println 'installed locally as ' + project.ext.baseName
+    println 'installed locally as ' + baseName
 }
 
 // Register tasks to sign artifacts for publication:
