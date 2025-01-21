@@ -27,7 +27,7 @@ sourceSets.test.java {
     srcDir 'src/test/java'
 }
 
-// Regenerate all JNI header files before compiling any C++ code.
+// Generate all JNI header files before compiling any C/C++ code:
 tasks.withType(CppCompile) {
     dependsOn('classes', 'compileTestJava')
 }
@@ -95,7 +95,7 @@ model {
 
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp) // used when compiling on Windows
-        //clang(Clang) // to prefer Clang over Gcc
+        //clang(Clang) // to prefer Clang over Gcc on Linux
 
         //gcc9Arm(Gcc) {
         //    target('Linux_ARM32') {
@@ -118,7 +118,7 @@ model {
         //    }
         //}
 
-        gcc(Gcc) // used when compiling on Linux
+        gcc(Gcc) // default when compiling on Linux
         gcc6Arm32hf(Gcc) { // used at Travis CI (job .5)
             target('Linux_ARM32hf') {
                 cppCompiler.executable = 'arm-linux-gnueabihf-g++-6'
@@ -226,7 +226,7 @@ model {
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
-                // flavor-specific CPP defines:
+                // buildtype-specific CPP defines:
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
                     //cppCompiler.define 'BT_ADDITIONAL_DEBUG'
@@ -234,6 +234,8 @@ model {
                     //cppCompiler.define 'DEBUG_PERSISTENCY'
                     //cppCompiler.define 'VERBOSE_RESIDUAL_PRINTF'
                 }
+
+                // flavor-specific CPP defines:
                 if (isDp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                 }
@@ -341,7 +343,8 @@ model {
                         into 'dist'
                     }
                     jar.dependsOn('copyToDist' + q)
-                } else {
+
+                } else { // not buildable
                     //println 'Do not build ' + q // to debug this script
                 }
             }
@@ -384,9 +387,10 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
     enableAssertions = true
 }
-
 run.dependsOn('assemble')
 test.dependsOn('assemble')
+
+// Register style-checking tasks:
 
 checkstyle {
     toolVersion = libs.versions.checkstyle.get()
@@ -403,7 +407,6 @@ tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
     description = 'Installs Maven artifacts to the local repository.'
 }
-
 assemble.dependsOn('copyToDistJars')
 tasks.register('copyToDistJars', Copy) {
     dependsOn 'jar', 'javadocJar', 'signArchives', 'signMavenPublication', 'sourcesJar'
@@ -506,11 +509,12 @@ publishMavenPublicationToMavenLocal.doLast {
     println 'installed locally as ' + project.ext.baseName
 }
 
-// Register signing tasks:
+// Register tasks to sign artifacts for publication:
 
-// Signing relies on the existence of 3 properties
-// (signing.keyId, signing.password, and signing.secretKeyRingFile)
-// which should be stored in ~/.gradle/gradle.properties
+//   Signing relies on the existence of 3 properties
+//   (signing.keyId, signing.password, and signing.secretKeyRingFile)
+//   which should be set in the ~/.gradle/gradle.properties file
+//   or by -P options on the command line.
 
 signing {
     sign configurations.archives
