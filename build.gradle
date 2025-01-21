@@ -51,16 +51,8 @@ model {
 
     platforms {
         // To build native libraries for Android, use "android.gradle" instead.
-        Linux32 {
-            architecture 'x86'
-            operatingSystem 'linux'
-        }
         Linux64 {
             architecture 'x86_64'
-            operatingSystem 'linux'
-        }
-        Linux_ARM32 { // omitted from recent Minie releases
-            architecture 'armel'
             operatingSystem 'linux'
         }
         Linux_ARM32hf {
@@ -79,10 +71,6 @@ model {
             architecture 'arm-v8'
             operatingSystem 'osx'
         }
-        Windows32 {
-            architecture 'x86'
-            operatingSystem 'windows'
-        }
         Windows64 {
             architecture 'x86_64'
             operatingSystem 'windows'
@@ -100,14 +88,11 @@ model {
     components {
         // To build native libraries for Android, use "android.gradle" instead.
         bulletjme(NativeLibrarySpec) {
-            targetPlatform 'Linux32'
             targetPlatform 'Linux64'
-            targetPlatform 'Linux_ARM32' // omitted from recent Minie releases
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
-            targetPlatform 'Windows32'
             targetPlatform 'Windows64'
 
             sources.cpp.source {
