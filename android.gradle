@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.android.library)
 }
 
+// $artifact is set in the gradle.properties file
+// or by a -Partifact= option on the command line.
+
 String flavor = 'Sp'
 if (project.hasProperty('flavor')) {
     flavor = project.ext.flavor

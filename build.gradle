@@ -9,9 +9,11 @@ plugins {
     id 'signing'       // to sign artifacts for publication
 }
 
+// $artifact is set in the gradle.properties file
+// or by a -Partifact= option on the command line.
+
 ext {
     group = 'com.github.stephengold'
-    artifact = 'Libbulletjme'
     version = '21.3.2'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
