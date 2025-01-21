@@ -400,17 +400,30 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // Register tasks to sign artifacts for publication:
 
-//   Signing relies on the existence of 3 properties
-//   (signing.keyId, signing.password, and signing.secretKeyRingFile)
+//   Signing relies on the existence of 2 properties
+//   (signingKeyEncoded and signingPassword)
 //   which should be set in the ~/.gradle/gradle.properties file
 //   or by -P options on the command line.
 
 signing {
+    def signingKey = base64Decode(findProperty('signingKeyEncoded'))
+    def signingPassword = findProperty('signingPassword')
+    useInMemoryPgpKeys(signingKey, signingPassword)
+
     sign configurations.archives
     sign publishing.publications.maven
 }
 tasks.withType(Sign).configureEach {
-    onlyIf { project.hasProperty('signing.keyId') }
+    onlyIf { project.hasProperty('signingKeyEncoded') }
+}
+
+static def base64Decode(encodedString) {
+    if (encodedString != null) {
+        byte[] decoded = encodedString.decodeBase64()
+        String decode = new String(decoded)
+        return decode
+    }
+    return null
 }
 
 // Register cleanup tasks:
