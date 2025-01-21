@@ -316,6 +316,10 @@ tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
     description = 'Installs Maven artifacts to the local repository.'
 }
+tasks.register('release') {
+    dependsOn 'publishMavenPublicationToOSSRHRepository'
+    description = 'Stages Maven artifacts to Sonatype OSSRH.'
+}
 
 jar {
     archiveBaseName = baseName
@@ -369,6 +373,23 @@ publishing {
                 url = websiteUrl
             }
             version = lbjVersion
+        }
+    }
+
+    repositories {
+        maven { // the staging repo of Sonatype OSSRH
+
+            // Staging to OSSRH relies on the existence of 2 properties
+            // (ossrhUsername and ossrhPassword)
+            // which should be set in the ~/.gradle/gradle.properties file
+            // or by -P options on the command line.
+
+            credentials {
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : 'Unknown password'
+            }
+            name = 'OSSRH'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2'
         }
     }
 }
