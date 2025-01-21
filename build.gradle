@@ -138,12 +138,6 @@ model {
                     } else if (github == 'debug64arm') { // skip all except debug/64-bit/ARM
                         buildable = isDebug && pName.contains('64') && pName.contains('_ARM')
                     }
-                } else {
-                    // non-CI build
-                    buildable = !pName.startsWith('Linux_ARM')
-                    //buildable = (pName == 'Linux64') // to build Linux64 only
-                    //buildable = (pName == 'Windows64') // to build Windows64 only
-                    //buildable = (pName == 'Linux_ARM32hf') // to build Linux_ARM32hf only
                 }
 
                 Boolean isDp = (flavor == flavors.Dp || flavor == flavors.DpMt)
