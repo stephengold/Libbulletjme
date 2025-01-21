@@ -13,4 +13,4 @@ junit4 = "junit:junit:4.13.2"
 
 [plugins]
 
-android-library = "com.android.library:8.7.3"
+android-library = { id = "com.android.library", version = "8.8.0" }
