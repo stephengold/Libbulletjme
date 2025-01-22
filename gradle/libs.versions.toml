@@ -6,7 +6,6 @@ checkstyle = "9.3"
 
 [libraries]
 
-jaxb-api = "javax.xml.bind:jaxb-api:2.3.1"
 junit4 = "junit:junit:4.13.2"
 
 [bundles]
