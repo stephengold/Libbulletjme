@@ -448,11 +448,7 @@ static def base64Decode(encodedString) {
 
 // Register cleanup tasks:
 
-clean.dependsOn('cleanCxx', 'cleanLogs')
-
-tasks.register('cleanCxx', Delete) {
-    delete '.cxx'
-}
+clean.dependsOn('cleanLogs')
 tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
