@@ -22,8 +22,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    compileSdk = 30
+    compileSdk = 35
     defaultConfig {
+        aarMetadata {
+            minCompileSdk = 22
+        }
         minSdk = 22
         ndk {
             if (!project.hasProperty('target')) {
@@ -38,7 +41,7 @@ android {
                 abiFilters 'x86_64'
             }
         }
-        targetSdk = 30
+        targetSdk = 22
     }
     externalNativeBuild {
         ndkBuild {
@@ -50,13 +53,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.jaxb.api)
-}
-
-// Register cleanup tasks:
-
-clean.dependsOn('cleanCxx')
-
-tasks.register('cleanCxx', Delete) {
-    delete '.cxx'
+    testImplementation(libs.junit4)
 }
