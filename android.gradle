@@ -7,10 +7,6 @@ plugins {
 // $artifact is set in the gradle.properties file
 // or by a -Partifact= option on the command line.
 
-String flavor = 'Sp'
-if (project.hasProperty('flavor')) {
-    flavor = project.ext.flavor
-}
 
 android {
     buildTypes {
@@ -60,8 +56,26 @@ android {
             path 'Android.mk'
         }
     }
+    flavorDimensions 'precision'
     namespace = 'com.github.stephengold.libbulletjme'
     ndkVersion = '27.2.12479018'
+    productFlavors {
+        if (!project.hasProperty('flavor') || flavor == 'Dp') {
+            Dp { // flavor with double-precision locations
+                dimension 'precision'
+                externalNativeBuild {
+                    ndkBuild {
+                        cppFlags '-DBT_USE_DOUBLE_PRECISION'
+                    }
+                }
+            }
+        }
+        if (!project.hasProperty('flavor') || flavor == 'Sp') {
+            Sp { // flavor with single-precision locations
+                dimension 'precision'
+            }
+        }
+    }
 }
 
 dependencies {
