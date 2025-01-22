@@ -122,6 +122,40 @@ jobs:
           name: crash-log
           path: '*.log'
 
+  Java21-x-Linux_ARM32hf:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - run: sudo apt install g++-9-arm-linux-gnueabihf
+      - run: arm-linux-gnueabihf-g++-9 --version
+      - run: |
+          ./gradlew -Ptarget=Linux_ARM32hf install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+
+  Java21-x-Linux_ARM64:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - run: sudo apt install g++-10-aarch64-linux-gnu
+      - run: aarch64-linux-gnu-g++-10 --version
+      - run: |
+          ./gradlew -Ptarget=Linux_ARM64 install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+
   Java23-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04

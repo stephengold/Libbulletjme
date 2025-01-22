@@ -80,9 +80,21 @@ model {
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp) // used when compiling on Windows
         //clang(Clang) // to prefer Clang over Gcc on Linux
-
         gcc(Gcc) // default when compiling on Linux
         clang(Clang) // used when compiling on macOS
+
+        gcc10Arm(Gcc) { // used when cross-compiling on Linux
+            target('Linux_ARM64') {
+                cppCompiler.executable = 'aarch64-linux-gnu-g++-10'
+                linker.executable = 'aarch64-linux-gnu-g++-10'
+            }
+        }
+        gcc9Arm(Gcc) { // used when cross-compiling on Linux
+            target('Linux_ARM32hf') {
+                cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
+                linker.executable = 'arm-linux-gnueabihf-g++-9'
+            }
+        }
     }
 
     components {
