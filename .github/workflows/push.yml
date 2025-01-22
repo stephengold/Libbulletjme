@@ -102,7 +102,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
       - run: |
-          ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=MacOSX64 run build install \
+          ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=MacOSX64 install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
