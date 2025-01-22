@@ -8,6 +8,7 @@ jobs:
   Java8-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-20.04
+    timeout-minutes: 5
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -26,6 +27,7 @@ jobs:
   Java11-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
+    timeout-minutes: 5
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -45,6 +47,7 @@ jobs:
   Java17-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2019
+    timeout-minutes: 7
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -64,6 +67,7 @@ jobs:
   Java21-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
+    timeout-minutes: 20
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -94,6 +98,7 @@ jobs:
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-13
+    timeout-minutes: 15
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -120,6 +125,7 @@ jobs:
   Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-15
+    timeout-minutes: 9
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -146,6 +152,7 @@ jobs:
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
+    timeout-minutes: 24
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -177,6 +184,7 @@ jobs:
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -201,6 +209,7 @@ jobs:
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
+    timeout-minutes: 20
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -227,6 +236,7 @@ jobs:
   Java21-x-Linux_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
+    timeout-minutes: 40
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -253,6 +263,7 @@ jobs:
   Java23-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
+    timeout-minutes: 8
     steps:
       - uses: actions/setup-java@v4
         with:
