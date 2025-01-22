@@ -117,7 +117,7 @@ model {
 
             binaries.withType(SharedLibraryBinarySpec) {
                 String pName = targetPlatform.name
-                //println " - $pName  $buildType  $flavor" // to debug this script
+                //println " - $pName  $flavor  $buildType" // to debug this script
 
                 buildable = true
                 // Decide whether to build the current type:
@@ -177,7 +177,7 @@ model {
                     //cppCompiler.define 'BT_LINUX_REALTIME'
                 }
 
-                String q = pName + buildType.name + flavor.name
+                String q = pName + flavor.name + buildType.name
                 if (toolChain in VisualCpp) {
                     cppCompiler.define 'WIN32'
                     cppCompiler.args '/EHsc' // synchronous exceptions only
@@ -253,8 +253,8 @@ model {
                         + targetPlatform.operatingSystem.name + '/' + archName + '/$1'
                     project.tasks.register('nativesJar' + q, Jar) {
                         archiveBaseName = project.ext.baseName
-                        archiveClassifier = buildType.name + flavor.name
-                        dependsOn "bulletjme${q}SharedLibrary"
+                        archiveClassifier = flavor.name + buildType.name
+                        dependsOn 'bulletjme' + pName + buildType.name + flavor.name + 'SharedLibrary'
                         description = "Creates a JAR of the ${q} native library."
                         from sharedLibraryFile
                         rename '(.+)', replaceWith

@@ -189,14 +189,6 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     }
 
     if (printFlag) {
-#ifdef _DEBUG
-        printf("Debug_");
-#endif
-
-#ifdef DEBUG_PERSISTENCY
-        printf("DebugPersistency_");
-#endif // DEBUG_PERSISTENCY
-
 #ifdef BT_USE_DOUBLE_PRECISION
         printf("Dp_");
 #endif
@@ -207,6 +199,14 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
 #ifdef BT_ENABLE_PROFILE
         printf("Quickprof_");
+#endif
+
+#ifdef _DEBUG
+        printf("Debug_");
+#endif
+
+#ifdef DEBUG_PERSISTENCY
+        printf("DebugPersistency_");
 #endif
 
         printf("Libbulletjme version %s initializing\n", LIBBULLETJME_VERSION);
