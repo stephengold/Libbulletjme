@@ -61,7 +61,6 @@ jobs:
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
-
   Java21-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
@@ -83,9 +82,9 @@ jobs:
           name: crash-log
           path: '*.log'
 
-  Java21-MacOS:
+  Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: macOS-14
+    runs-on: macOS-15
     steps:
       - uses: actions/setup-java@v4
         with:
