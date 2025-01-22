@@ -1,13 +1,24 @@
 # Release log for the Libbulletjme project
 
-## Version 21.3.2 released on 18 November 2024
+## Version 22.0.0 released on 22 January 2025
 
++ Stopped deploying artifacts to GitHub.
++ Stopped deploying Windows PDBs.
++ Began deploying artifacts to MavenCentral with new artifact IDs:
+  "Libbulletjme-Android", "Libbulletjme-MacOSX_ARM64", and so on.
++ Began deploying natives with signatures and classifers,
+  in JAR format (desktop) and AAR format (Android).
++ Ended support for three 32-bit desktop platforms:
+  Linux32, Linux_ARM32, and Windows32.
 + Bugfix: `copyPcoProperties()` doesn't copy user indices
 + Bugfix:  logic error in `CollisionShape.nativeMargin()`
 + Publicized the `CollisionSpace.setLocalThreadPhysicsSpace()` method so
   per-thread physics spaces can nulled and garbage collected.
 + Added public method `Quaternion.isValidQuaternion()`.
 + Disallowed GImpact shapes with zero triangles.
++ Modified `PhysicsDumper` to skip linear/angular factors that are 1.
++ Enabled support for flexible page sizes on Android.
++ Updated Android NDK to version "r27c".
 
 ## Version 21.2.1 released on 9 May 2024
 

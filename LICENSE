@@ -1,5 +1,5 @@
 The src/main/java/com/jme3 and src/main/native/glue software
-are Copyright (c) 2009-2024 jMonkeyEngine
+are Copyright (c) 2009-2025 jMonkeyEngine
 All rights reserved.
 
 The src/main/native/v-hacd software except vhacdMutex.h
