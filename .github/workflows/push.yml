@@ -122,6 +122,21 @@ jobs:
           name: crash-log
           path: '*.log'
 
+  Java21-x-Android:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - run: |
+          ./gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
