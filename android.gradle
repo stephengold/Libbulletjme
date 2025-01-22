@@ -15,7 +15,19 @@ if (project.hasProperty('flavor')) {
 android {
     buildTypes {
         debug {
+            externalNativeBuild {
+                ndkBuild {
+                    cppFlags '-D_DEBUG'
+                    //cppFlags '-DBT_ADDITIONAL_DEBUG'
+                    //cppFlags '-DBT_DEBUG_MEMORY_ALLOCATIONS'
+                    //cppFlags '-DDEBUG_PERSISTENCY'
+                    //cppFlags '-DVERBOSE_RESIDUAL_PRINTF'
+                }
+            }
             jniDebuggable = true
+        }
+        release {
+            minifyEnabled = true
         }
     }
     compileOptions {
