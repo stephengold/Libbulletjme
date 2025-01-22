@@ -11,12 +11,11 @@ plugins {
     alias(libs.plugins.validate.poms) // to verify POMs provide all info required by Maven Central
 }
 
-// $artifact is set in the gradle.properties file
-// or by a -Partifact= option on the command line.
+// $artifact and $lbjVersion are set in the gradle.properties file
+// or by -P options on the Gradle command line.
 
 ext {
     groupID = 'com.github.stephengold'
-    lbjVersion = '21.3.2'
     baseName = "${artifact}-${lbjVersion}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
