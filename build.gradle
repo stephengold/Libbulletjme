@@ -189,9 +189,9 @@ model {
                     linker.args 'ws2_32.lib' // for htons()
 
                     if (isDebug) {
-                        cppCompiler.args '/FS' // to serialize PDB-file writes
+                        //cppCompiler.args '/FS' // to serialize PDB-file writes
                         cppCompiler.args '/MTd' // to use LIBCMTD
-                        cppCompiler.args '/Zi' // to generate a PDB file containing debug info
+                        //cppCompiler.args '/Zi' // to generate a PDB file containing debug info
                         //cppCompiler.args '/Z7' // to embed debug info in OBJ files
                         linker.args '/DEBUG'
                         if (buildable) {
