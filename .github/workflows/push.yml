@@ -81,6 +81,15 @@ jobs:
         with:
           name: crash-log
           path: '*.log'
+      - name: gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 clean release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -99,6 +108,14 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-MacOSX64 -Ptarget=MacOSX64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -117,6 +134,14 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-MacOSX_ARM64 -Ptarget=MacOSX_ARM64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -139,6 +164,15 @@ jobs:
         with:
           name: crash-log
           path: '*.log'
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Windows64 -Ptarget=Windows64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+        shell: bash
 
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -155,6 +189,14 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew --build-file=android.gradle -Partifact=Libbulletjme-Android -Pflavor=Sp clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -173,6 +215,14 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Linux_ARM32hf -Ptarget=Linux_ARM32hf clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-x-Linux_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -191,6 +241,14 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java23-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
