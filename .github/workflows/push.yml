@@ -82,6 +82,24 @@ jobs:
           name: crash-log
           path: '*.log'
 
+  Java21-MacOSX64:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: macOS-13
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - uses: gradle/actions/setup-gradle@v4
+      - run: |
+          ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=MacOSX64 run build install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - if: failure()
+        run: cat build/reports/tests/test/classes/TestLibbulletjme.html
+
   Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-15
