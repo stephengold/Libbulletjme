@@ -233,9 +233,10 @@ model {
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
 
-                    String replaceWith = targetPlatform.operatingSystem.name \
-                        + '/' + targetPlatform.architecture.name \
-                        + '/com/github/stephengold/$1'
+                    String archName = targetPlatform.architecture.name;
+                    archName = archName.replaceAll('x86-64', 'x86_64')
+                    String replaceWith = 'native/' \
+                        + targetPlatform.operatingSystem.name + '/' + archName + '/$1'
                     project.tasks.register('nativesJar' + q, Jar) {
                         archiveBaseName = project.ext.baseName
                         archiveClassifier = buildType.name + flavor.name
