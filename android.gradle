@@ -1,6 +1,7 @@
 // Gradle script to build Android native libraries
 
 plugins {
+    id 'maven-publish' // to publish artifacts to Maven repositories
     id 'signing'       // to sign artifacts for publication
 
     alias(libs.plugins.android.library)
@@ -9,6 +10,12 @@ plugins {
 // $artifact is set in the gradle.properties file
 // or by a -Partifact= option on the command line.
 
+ext {
+    groupID = 'com.github.stephengold'
+    lbjVersion = '21.3.2'
+    baseName = "${artifact}-${lbjVersion}" // for artifacts
+    websiteUrl = 'https://github.com/stephengold/Libbulletjme'
+}
 
 android {
     buildTypes {
@@ -78,11 +85,86 @@ android {
             }
         }
     }
+    publishing {
+        multipleVariants('complete') {
+            allVariants()
+            withJavadocJar()
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
     testImplementation(libs.junit4)
 }
+
+// Register publishing tasks:
+
+tasks.register('install') {
+    dependsOn 'publishMavenPublicationToMavenLocal'
+    description = 'Installs Maven artifacts to the local repository.'
+}
+tasks.register('release') {
+    dependsOn 'publishMavenPublicationToOSSRHRepository'
+    description = 'Stages Maven artifacts to Sonatype OSSRH.'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = artifact
+            afterEvaluate { from components.complete }
+            groupId = groupID
+            pom {
+                description = 'a JNI interface for Bullet Physics and V-HACD'
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        id = 'stephengold'
+                        name = 'Stephen Gold'
+                    }
+                }
+                licenses {
+                    license {
+                        distribution = 'repo'
+                        name = 'New BSD (3-clause) License'
+                        url = 'https://opensource.org/licenses/BSD-3-Clause'
+                    }
+                }
+                name = groupID + ':' + artifact
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/Libbulletjme.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/Libbulletjme.git'
+                    url = websiteUrl + '/tree/master'
+                }
+                url = websiteUrl
+            }
+            version = lbjVersion
+        }
+    }
+
+    repositories {
+        maven { // the staging repo of Sonatype OSSRH
+
+            // Staging to OSSRH relies on the existence of 2 properties
+            // (ossrhUsername and ossrhPassword)
+            // which should be set in the ~/.gradle/gradle.properties file
+            // or by -P options on the command line.
+
+            credentials {
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : 'Unknown password'
+            }
+            name = 'OSSRH'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2'
+        }
+    }
+}
+publishMavenPublicationToMavenLocal.dependsOn('assemble')
+publishMavenPublicationToMavenLocal.doLast {
+    println 'installed locally as ' + baseName
+}
+
 // Register tasks to sign artifacts for publication:
 
 //   Signing relies on the existence of 2 properties
