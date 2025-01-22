@@ -97,11 +97,6 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX_ARM64 run cleanTest build install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - if: failure()
         run: cat build/reports/tests/test/classes/TestLibbulletjme.html
 
