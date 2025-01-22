@@ -1,10 +1,10 @@
-// Gradle script to build Android native libraries
+// Gradle script to build/publish Libbulletjme Android artifacts
 
 plugins {
     id 'maven-publish' // to publish artifacts to Maven repositories
     id 'signing'       // to sign artifacts for publication
 
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.library) // to build Android libraries
 }
 
 // $artifact is set in the gradle.properties file
@@ -66,8 +66,8 @@ android {
         }
     }
     flavorDimensions 'precision'
-    namespace = 'com.github.stephengold.libbulletjme'
-    ndkVersion = '27.2.12479018'
+    namespace = groupID + '.libbulletjme'
+    ndkVersion = '27.2.12479018' // r27c
     productFlavors {
         if (!project.hasProperty('flavor') || flavor == 'Dp') {
             Dp { // flavor with double-precision locations
