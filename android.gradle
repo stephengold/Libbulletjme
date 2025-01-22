@@ -5,6 +5,7 @@ plugins {
     id 'signing'       // to sign artifacts for publication
 
     alias(libs.plugins.android.library) // to build Android libraries
+    alias(libs.plugins.validate.poms) // to verify POMs provide all info required by Maven Central
 }
 
 // $artifact is set in the gradle.properties file
