@@ -1,5 +1,9 @@
 # Release log for the Libbulletjme project
 
+## Version 22.0.1 released on 24 January 2025
+
+Bugfix:  desktop ARM natives are stored at wrong paths in JARs
+
 ## Version 22.0.0 released on 22 January 2025
 
 + Stopped deploying artifacts to GitHub.
