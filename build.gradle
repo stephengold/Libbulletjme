@@ -248,6 +248,8 @@ model {
                     println 'Build ' + q + ' using ' + toolChain
 
                     String archName = targetPlatform.architecture.name;
+                    archName = archName.replaceAll('aarch64', 'arm64')
+                    archName = archName.replaceAll('armhf', 'arm32')
                     archName = archName.replaceAll('x86-64', 'x86_64')
                     String replaceWith = 'native/' \
                         + targetPlatform.operatingSystem.name + '/' + archName + '/$1'
