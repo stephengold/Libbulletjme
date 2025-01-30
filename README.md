@@ -7,6 +7,7 @@ enabling 3-D physics simulation from [Java] applications.
 
 Complete source code (in C++ and Java) is provided under
 [a mixed open-source license][license].
+Pre-built Maven artifacts are also provided.
 
 The project supports the 3 major desktop operating systems on x86_64 architecture:
 Windows, Linux, and macOS.
@@ -14,22 +15,20 @@ It also supports Linux on ARM (both armhf and aarch64) and macOS on ARM
 and 4 Android ABIs (armeabi-v7a, arm64-v8a, x86, and x86_64),
 making a total of 10 platforms.
 
-For each desktop platform, 4 native libraries are distributed:
+For each desktop platform, 4 native libraries are provided:
 + a release build using single-precision arithmetic (the default library)
 + a release build using double-precision arithmetic
 + a debug build using single-precision arithmetic
 + a debug build using double-precision arithmetic
 
 In addition, multithreaded native libraries
-are provided for x86_64 architectures running Windows or Linux.
+are provided for 64-bit architectures running Windows or Linux.
 
 Libbulletjme is used in
 [the DynamX Physics Mod for Minecraft][dynamx].
 
 Libbulletjme's native libraries are used in [Minie],
 which integrates Libbulletjme into [the jMonkeyEngine game engine][jme].
-For applications that don't use jMonkeyEngine,
-standalone Maven artifacts are provided.
 
 
 <a name="toc"></a>
