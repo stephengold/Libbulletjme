@@ -37,8 +37,8 @@ String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 
 model {
     buildTypes {
-        Debug
-        Release
+        Debug   // for development, debugging, and functional testing
+        Release // for performance testing and production use
     }
 
     flavors {
@@ -246,6 +246,14 @@ model {
 
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
+
+                    // Generate resource path for native library (per jme3-desktop) one of:
+                    //   native/linux/arm32/libbulletjme.so
+                    //   native/linux/arm64/libbulletjme.so
+                    //   native/linux/x86_64/libbulletjme.so
+                    //   native/osx/arm64/libbulletjme.dylib
+                    //   native/osx/x86_64/libbulletjme.dylib
+                    //   native/windows/x86_64/bulletjme.dll
 
                     String archName = targetPlatform.architecture.name;
                     archName = archName.replaceAll('aarch64', 'arm64')
