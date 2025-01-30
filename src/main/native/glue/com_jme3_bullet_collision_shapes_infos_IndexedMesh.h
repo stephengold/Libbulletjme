@@ -7,10 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#undef com_jme3_bullet_collision_shapes_infos_IndexedMesh_floatBytes
-#define com_jme3_bullet_collision_shapes_infos_IndexedMesh_floatBytes 4L
-#undef com_jme3_bullet_collision_shapes_infos_IndexedMesh_intBytes
-#define com_jme3_bullet_collision_shapes_infos_IndexedMesh_intBytes 4L
 #undef com_jme3_bullet_collision_shapes_infos_IndexedMesh_numAxes
 #define com_jme3_bullet_collision_shapes_infos_IndexedMesh_numAxes 3L
 #undef com_jme3_bullet_collision_shapes_infos_IndexedMesh_vpt

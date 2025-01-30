@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 jMonkeyEngine
+ * Copyright (c) 2019-2025 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -63,14 +63,6 @@ public class IndexedMesh extends NativePhysicsObject {
     // constants and loggers
 
     /**
-     * number of bytes in a float
-     */
-    final private static int floatBytes = 4;
-    /**
-     * number of bytes in an int
-     */
-    final private static int intBytes = 4;
-    /**
      * number of axes in a vector
      */
     final private static int numAxes = 3;
@@ -129,11 +121,11 @@ public class IndexedMesh extends NativePhysicsObject {
 
         this.numVertices = positionArray.length;
         this.vertexPositions = BufferUtils.createFloatBuffer(positionArray);
-        this.vertexStride = numAxes * floatBytes;
+        this.vertexStride = numAxes * Float.BYTES;
 
         this.numTriangles = numIndices / vpt;
         this.indices = BufferUtils.createIntBuffer(indexArray);
-        this.indexStride = vpt * intBytes;
+        this.indexStride = vpt * Integer.BYTES;
 
         createMesh();
     }
@@ -157,12 +149,12 @@ public class IndexedMesh extends NativePhysicsObject {
         this.numVertices = dvv.countDistinct();
         this.vertexPositions
                 = BufferUtils.createFloatBuffer(numAxes * numVertices);
-        this.vertexStride = numAxes * floatBytes;
+        this.vertexStride = numAxes * Float.BYTES;
 
         int numIndices = numFloats / numAxes;
         this.numTriangles = numIndices / vpt;
         this.indices = BufferUtils.createIntBuffer(numIndices);
-        this.indexStride = vpt * intBytes;
+        this.indexStride = vpt * Integer.BYTES;
 
         Vector3f tmpVector = new Vector3f();
         for (int oldVi = 0; oldVi < numIndices; ++oldVi) {
@@ -198,11 +190,11 @@ public class IndexedMesh extends NativePhysicsObject {
 
         this.numVertices = numFloats / numAxes;
         this.vertexPositions = positionBuffer;
-        this.vertexStride = numAxes * floatBytes;
+        this.vertexStride = numAxes * Float.BYTES;
 
         this.numTriangles = numIndices / vpt;
         this.indices = indexBuffer;
-        this.indexStride = vpt * intBytes;
+        this.indexStride = vpt * Integer.BYTES;
 
         createMesh();
     }
@@ -230,12 +222,12 @@ public class IndexedMesh extends NativePhysicsObject {
         this.numVertices = countVertices(meshId);
         int numFloats = numVertices * numAxes;
         this.vertexPositions = BufferUtils.createFloatBuffer(numFloats);
-        this.vertexStride = numAxes * floatBytes;
+        this.vertexStride = numAxes * Float.BYTES;
 
         this.numTriangles = countTriangles(meshId);
         int numIndices = numTriangles * vpt;
         this.indices = BufferUtils.createIntBuffer(numIndices);
-        this.indexStride = vpt * intBytes;
+        this.indexStride = vpt * Integer.BYTES;
 
         fillBuffersInt(meshId, vertexPositions, indices);
     }
