@@ -126,7 +126,8 @@ public class HeightfieldCollisionShape extends CollisionShape {
      */
     public HeightfieldCollisionShape(float[] heightArray) {
         Validate.nonEmpty(heightArray, "height array");
-        assert heightArray.length >= 4 : heightArray.length;
+        Validate.inRange(heightArray.length, "number of heights",
+                4, Integer.MAX_VALUE);
 
         createCollisionHeightfield(heightArray, scaleIdentity);
     }
@@ -142,7 +143,8 @@ public class HeightfieldCollisionShape extends CollisionShape {
      */
     public HeightfieldCollisionShape(float[] heightArray, Vector3f scale) {
         Validate.nonEmpty(heightArray, "height array");
-        assert heightArray.length >= 4 : heightArray.length;
+        Validate.inRange(heightArray.length, "number of heights",
+                4, Integer.MAX_VALUE);
         Validate.nonNegative(scale, "scale");
 
         createCollisionHeightfield(heightArray, scale);
