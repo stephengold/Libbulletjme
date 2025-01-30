@@ -8,13 +8,11 @@ enabling 3-D physics simulation from [Java] applications.
 Complete source code (in C++ and Java) is provided under
 [a mixed open-source license][license].
 
-The project supports the 3 major desktop operating systems:
-Windows, Linux, and macOS.  Both the x86 and x86-64 architectures
-are supported for each operating system.
-It also supports Linux on ARM (armel, armhf, and aarch64) and macOS on ARM
-and provides native libraries for the 4 supported Android ABIs
-(armeabi-v7a, arm64-v8a, x86, and x86_64),
-making a total of 14 platforms.
+The project supports the 3 major desktop operating systems on x86_64 architecture:
+Windows, Linux, and macOS.
+It also supports Linux on ARM (both armhf and aarch64) and macOS on ARM
+and 4 Android ABIs (armeabi-v7a, arm64-v8a, x86, and x86_64),
+making a total of 10 platforms.
 
 For each desktop platform, 4 native libraries are distributed:
 + a release build using single-precision arithmetic (the default library)
@@ -155,6 +153,8 @@ The Libbulletjme Project is derived from open-source software:
 
 This project also made use of the following software tools:
 
+  + the [Android Studio][android], [IntelliJ IDEA][idea], and [NetBeans]
+    integrated development environments
   + the [Antora] static website generator
   + the [Checkstyle] tool
   + the [FindBugs] source-code analyzer
@@ -163,7 +163,6 @@ This project also made use of the following software tools:
   + the [Firefox] and [Google Chrome][chrome] web browsers
   + the [GitKraken] client
   + the [Gradle] build tool
-  + the [IntelliJ IDEA][idea] and [NetBeans] integrated development environments
   + the [Java] compiler, standard doclet, and runtime environment
   + [jMonkeyEngine][jme] and the jME3 Software Development Kit
   + the [Linux Mint][mint] operating system
@@ -203,6 +202,7 @@ correct the situation: sgold@sonic.net
 [Jump to the table of contents](#toc)
 
 
+[android]: https://developer.android.com/studio "Android Studio IDE"
 [antora]: https://antora.org/ "Antora Project"
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
