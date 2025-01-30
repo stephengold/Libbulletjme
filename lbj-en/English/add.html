@@ -261,15 +261,12 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Adding Libbulletjme to an existing Java project is a 7-step process:</p>
+<p>Adding Libbulletjme to an existing Java project is a 6-step process:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add the JVM library to the classpath.</p>
-</li>
-<li>
-<p>Download an appropriate native library.</p>
+<p>Add libraries to the classpath.</p>
 </li>
 <li>
 <p>Load the native library.</p>
@@ -292,12 +289,31 @@ and add them to the physics space.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_jvm_library_to_classpath"><a class="anchor" href="#_add_jvm_library_to_classpath"></a>Add JVM library to classpath</h2>
+<h2 id="_add_a_libraries_to_classpath"><a class="anchor" href="#_add_a_libraries_to_classpath"></a>Add a libraries to classpath</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_gradle_built_projects"><a class="anchor" href="#_gradle_built_projects"></a>Gradle-built projects</h3>
 <div class="paragraph">
-<p>Add to the project&#8217;s "build.gradle" or "build.gradle.kts" file:</p>
+<p>Libbulletjme requires at least 2 libraries: a JVM library and a native library.</p>
+</div>
+<div class="paragraph">
+<p>Pre-built Libbulletjme libraries are available from from Maven Central.</p>
+</div>
+<div class="paragraph">
+<p>Build types:  use "Debug" native libraries for development and troubleshooting,
+then switch to "Release" libraries for performance testing and production.</p>
+</div>
+<div class="paragraph">
+<p>Build flavors:  use "Dp" to simulate large worlds (&gt;1000 units in diameter)
+otherwise use "Sp".</p>
+</div>
+<div class="sect2">
+<h3 id="_gradle_built_android_projects"><a class="anchor" href="#_gradle_built_android_projects"></a>Gradle-built Android projects</h3>
+<div class="paragraph">
+<p>Libbulletjme comes pre-built for Android as a pair of AARs (one for each build type).
+Each AAR includes both the JVM library and all necessary native libraries.</p>
+</div>
+<div class="paragraph">
+<p>I suggest starting out with the Debug-flavored AAR.
+Add to the relevant "build.gradle" or "build.gradle.kts" file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -305,7 +321,13 @@ and add them to the physics space.</p>
     mavenCentral()
 }
 dependencies {
-    implementation("com.github.stephengold:Libbulletjme:21.2.1")
+    implementation(
+            group: "com.github.stephengold",
+            name: "Libbulletjme-Android",
+            version: "22.0.1",
+            classifier: "SpDebug",
+            ext: "aar"
+    )
 }</code></pre>
 </div>
 </div>
@@ -315,145 +337,52 @@ it&#8217;s necessary to replace <code>implementation</code> with <code>compile</
 </div>
 </div>
 <div class="sect2">
-<h3 id="_maven_built_projects"><a class="anchor" href="#_maven_built_projects"></a>Maven-built projects</h3>
+<h3 id="_gradle_built_desktop_projects"><a class="anchor" href="#_gradle_built_desktop_projects"></a>Gradle-built desktop projects</h3>
 <div class="paragraph">
-<p>Add to the project&#8217;s "pom.xml" file:</p>
+<p>Libbulletjme comes pre-built for desktops as a platform-independent JVM library
+plus a set of (separately-packaged) native libraries.</p>
+</div>
+<div class="paragraph">
+<p>Because of how releases are built,
+the desktop JVM library is released under 6 distinct names (artifact IDs).
+In contrast, each desktop native library is specific to a particular platform,
+build type, and flavor.</p>
+</div>
+<div class="paragraph">
+<p>I suggest starting with the platform-independent JVM library
+plus the "SpDebug" native library for your development environment.
+For a "Linux on x86_64" environment,
+add to the relevant "build.gradle" or "build.gradle.kts" file:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;repositories&gt;
-    &lt;repository&gt;
-      &lt;id&gt;mvnrepository&lt;/id&gt;
-      &lt;url&gt;https://repo1.maven.org/maven2/&lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">repositories {
+    mavenCentral()
+}
+dependencies {
+    // JVM library:
+    implementation("com.github.stephengold:Libbulletjme-Windows64:22.0.1")
 
-&lt;dependency&gt;
-  &lt;groupId&gt;com.github.stephengold&lt;/groupId&gt;
-  &lt;artifactId&gt;Libbulletjme&lt;/artifactId&gt;
-  &lt;version&gt;21.2.1&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+    // native libraries:
+    runtimeOnly("com.github.stephengold:Libbulletjme-Linux64:22.0.1:SpDebug")
+        // Native libraries for other platforms could be added.
+}</code></pre>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ant_built_projects"><a class="anchor" href="#_ant_built_projects"></a>Ant-built projects</h3>
-<div class="paragraph">
-<p>Download the Libbulletjme library from GitHub:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/stephengold/Libbulletjme/releases/latest" class="bare">https://github.com/stephengold/Libbulletjme/releases/latest</a></p>
+<p>For a 64-bit MS-Windows environment, replace "Linux64" with "Windows64".</p>
+</li>
+<li>
+<p>For an "Apple silicon" Mac environment, replace "Linux64" with "MacOSX_ARM64".</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll definitely need the class JAR ("Libbulletjme-21.2.1.jar")
-and probably the "-sources" and "-javadoc" JARs as well.</p>
+<p>For some older versions of Gradle,
+it&#8217;s necessary to replace <code>implementation</code> with <code>compile</code>.</p>
 </div>
-<div class="paragraph">
-<p>Open the project&#8217;s properties in the NetBeans IDE:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Right-click on the project (not its assets) in the "Projects" window.</p>
-</li>
-<li>
-<p>Select <b class="menuref">Properties</b> to open the "Project Properties" dialog.</p>
-</li>
-<li>
-<p>Under "Categories:", click on <b class="button">Libraries</b>.</p>
-</li>
-<li>
-<p>Click on the <b class="button">Compile</b> tab.</p>
-</li>
-<li>
-<p>Add the Heart class JAR:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Click on the <b class="button">Add JAR/Folder</b> button.</p>
-</li>
-<li>
-<p>Navigate to the download directory.</p>
-</li>
-<li>
-<p>Select the "Libbulletjme-21.2.1" file.</p>
-</li>
-<li>
-<p>Click on the <b class="button">Open</b> button.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>(optional) Add JARs for javadoc and sources:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Click on the <b class="button">Edit</b> button.</p>
-</li>
-<li>
-<p>Click on the <b class="button">Browse&#8230;&#8203;</b> button to the right of "Javadoc:"</p>
-</li>
-<li>
-<p>Select the "Libbulletjme-21.2.1-javadoc.jar" file.</p>
-</li>
-<li>
-<p>Click on the <b class="button">Open</b> button.</p>
-</li>
-<li>
-<p>Click on the <b class="button">Browse&#8230;&#8203;</b> button to the right of "Sources:"</p>
-</li>
-<li>
-<p>Select the "Libbulletjme-21.2.1-sources.jar" file.</p>
-</li>
-<li>
-<p>Click on the <b class="button">Open</b> button button again.</p>
-</li>
-<li>
-<p>Click on the <b class="button">OK</b> button to close the "Edit Jar Reference" dialog.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Click on the <b class="button">OK</b> button to exit the "Project Properties" dialog.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_download_a_native_library"><a class="anchor" href="#_download_a_native_library"></a>Download a native library</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Pre-built native libraries can be downloaded from GitHub:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://github.com/stephengold/Libbulletjme/releases/latest" class="bare">https://github.com/stephengold/Libbulletjme/releases/latest</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>You don&#8217;t need all 56 native libraries.
-Start with the "DebugSp" library for your development environment,
-for instance:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>"Linux64DebugSp_libbulletjme.so" for Linux on x86_64</p>
-</li>
-<li>
-<p>"Windows64DebugSp_libbulletjme.so" for 64-bit Windows</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -461,12 +390,62 @@ for instance:</p>
 <h2 id="_load_the_native_library"><a class="anchor" href="#_load_the_native_library"></a>Load the native library</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Load Libbulletjme&#8217;s native library before instantiating any physics objects:</p>
+<p>You must load Libbulletjme&#8217;s native library
+before instantiating any physics objects.</p>
+</div>
+<div class="sect2">
+<h3 id="_android_projects"><a class="anchor" href="#_android_projects"></a>Android projects</h3>
+<div class="paragraph">
+<p>Add to your physics initialization:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import com.jme3.system.NativeLibraryLoader;
-NativeLibraryLoader.loadLibbulletjme(true, downloadDirectory, "Debug", "Sp");</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">System.loadLibrary("bulletjme");</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_desktop_projects"><a class="anchor" href="#_desktop_projects"></a>Desktop projects</h3>
+<div class="paragraph">
+<p>The JSnapLoader library may be used for this purpose.
+Add to the relevant "build.gradle" or "build.gradle.kts" file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">dependencies {
+    implementation("io.github.electrostat-lab:snaploader:1.0.0-stable")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add to your physics initialization:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import electrostatic4j.snaploader.LibraryInfo;
+import electrostatic4j.snaploader.LoadingCriterion;
+import electrostatic4j.snaploader.NativeBinaryLoader;
+import electrostatic4j.snaploader.filesystem.DirectoryPath;
+import electrostatic4j.snaploader.platform.NativeDynamicLibrary;
+import electrostatic4j.snaploader.platform.util.PlatformPredicate;
+
+// ...
+
+LibraryInfo info = new LibraryInfo(
+        new DirectoryPath("linux/x86-64/com/github/stephengold"),
+        "bulletjme", DirectoryPath.USER_DIR);
+NativeBinaryLoader loader = new NativeBinaryLoader(info);
+NativeDynamicLibrary[] libraries = new NativeDynamicLibrary[]{
+    new NativeDynamicLibrary("native/linux/arm64", PlatformPredicate.LINUX_ARM_64),
+    new NativeDynamicLibrary("native/linux/arm32", PlatformPredicate.LINUX_ARM_32),
+    new NativeDynamicLibrary("native/linux/x86_64", PlatformPredicate.LINUX_X86_64),
+    new NativeDynamicLibrary("native/osx/arm64", PlatformPredicate.MACOS_ARM_64),
+    new NativeDynamicLibrary("native/osx/x86_64", PlatformPredicate.MACOS_X86_64),
+    new NativeDynamicLibrary("native/windows/x86_64", PlatformPredicate.WIN_X86_64)
+};
+loader.registerNativeLibraries(libraries).initPlatformLibrary();
+loader.loadLibrary(LoadingCriterion.INCREMENTAL_LOADING);</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -599,7 +578,7 @@ that serves as a starting point for using Libbulletjme.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>loading a native library from the "~/Downloads" directory</p>
+<p>loading a native library</p>
 </li>
 <li>
 <p>creating a <code>PhysicsSpace</code></p>
@@ -678,7 +657,7 @@ you should be able to launch tutorial apps from a command shell, like so:</p>
 </main>
 </div>
 <footer class="footer">
-  <p>Copyright &copy; 2020&ndash;2024 by Stephen Gold</p>
+  <p>Copyright &copy; 2020&ndash;2025 by Stephen Gold</p>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>

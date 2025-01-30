@@ -261,8 +261,8 @@
 <p>Libbulletjme is free, open-source software.</p>
 </div>
 <div class="paragraph">
-<p>While pre-built artifacts (including JARs and native libraries)
-can be downloaded from GitHub and the Maven Central Repository,
+<p>While pre-built artifacts (including AARs and JARs)
+can be downloaded from the Maven Central Repository,
 some people prefer to build them from source.</p>
 </div>
 <div class="paragraph">
@@ -354,7 +354,7 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 <p><code>cd Libbulletjme</code></p>
 </li>
 <li>
-<p><code>git checkout -b latest 21.2.1</code></p>
+<p><code>git checkout -b latest 22.0.1</code></p>
 </li>
 </ol>
 </div>
@@ -395,6 +395,9 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 </div>
 </li>
 <li>
+<p>(optional) Edit the "gradle.properties" file to configure the build.</p>
+</li>
+<li>
 <p>Run the Gradle wrapper on the desktop build script:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -408,27 +411,19 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 </div>
 </li>
 <li>
-<p>Building Android native libraries requires additional software:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>the Android SDK Tools</p>
-</li>
-<li>
-<p>version 23.1.7779620 of the Android Native Development Kit (NDK)</p>
-</li>
-</ol>
-</div>
+<p>To build Android artifacts, you&#8217;ll need to
+install <a href="https://developer.android.com/studio">Android Studio</a>
+and point the <code>ANDROID_HOME</code> environment variable to that installation.</p>
 </li>
 <li>
 <p>Run the Gradle wrapper on the Android build script:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew copyToDist --build-file=android.gradle</code></p>
+<p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew -b android.gradle build</code></p>
 </li>
 <li>
-<p>using Windows Command Prompt: <code>.\gradlew copyToDist --build-file=android.gradle</code></p>
+<p>using Windows Command Prompt: <code>.\gradlew -b android.gradle build</code></p>
 </li>
 </ol>
 </div>
@@ -437,7 +432,7 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 </div>
 <div class="paragraph">
 <p>After a successful build,
-artifacts and native libraries will be found in the "dist" directory.</p>
+artifacts will be found in "build/libs" (desktop) and "build/outputs/aar" (Android).</p>
 </div>
 <div class="sect2">
 <h3 id="_install_artifacts"><a class="anchor" href="#_install_artifacts"></a>Install artifacts</h3>
@@ -447,10 +442,20 @@ artifacts and native libraries will be found in the "dist" directory.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew install</code></p>
+<p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew install;./gradlew -b android.gradle install</code></p>
 </li>
 <li>
-<p>using Windows Command Prompt: <code>.\gradlew install</code></p>
+<p>using Windows Command Prompt:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>.\gradlew install</code></p>
+</li>
+<li>
+<p><code>.\gradlew -b android.gradle install</code></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -463,10 +468,20 @@ artifacts and native libraries will be found in the "dist" directory.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew clean</code></p>
+<p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew clean;./gradlew -b android.gradle clean</code></p>
 </li>
 <li>
-<p>using Windows Command Prompt: <code>.\gradlew clean</code></p>
+<p>using Windows Command Prompt:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>.\gradlew clean</code></p>
+</li>
+<li>
+<p><code>.\gradlew -b android.gradle clean</code></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -524,7 +539,7 @@ the local copy of the site will be found in the "docs/build/site" directory.</p>
 </main>
 </div>
 <footer class="footer">
-  <p>Copyright &copy; 2020&ndash;2024 by Stephen Gold</p>
+  <p>Copyright &copy; 2020&ndash;2025 by Stephen Gold</p>
 </footer>
 <script src="../../_/js/site.js"></script>
 <script async src="../../_/js/vendor/highlight.js"></script>
