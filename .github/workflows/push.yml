@@ -37,7 +37,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - uses: gradle/actions/wrapper-validation@v4
       - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 run build install \
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 -Ptool=gcc run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
