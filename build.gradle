@@ -79,12 +79,20 @@ model {
     }
 
     toolChains { // prioritize among the native toolchains
-        //visualCpp(VisualCpp) // to prefer Visual C++ over Clang
-        //gcc(Gcc)             // to prefer Gcc over Clang
-        clang(Clang) // the default when not cross-compiling
-        gcc(Gcc)
-        visualCpp(VisualCpp)
+        if (project.hasProperty('tool')) {
+            // set in gradle.properties file or -Ptool= on the command line
+            if (project.ext.tool == 'clang') {
+                clang(Clang)
+            } else if (project.ext.tool == 'gcc') {
+                gcc(Gcc)
+            } else if (project.ext.tool == 'visualCpp') {
+                visualCpp(VisualCpp)
+            }
+        }
 
+        visualCpp(VisualCpp)
+        clang(Clang)
+        gcc(Gcc)
         gcc10Arm(Gcc) { // used when cross-compiling on Linux
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-10'
