@@ -38,7 +38,7 @@ String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 model {
     buildTypes {
         Debug   // for development, debugging, and functional testing
-        Release // for performance testing and production use
+        Release // for performance testing and production
     }
 
     flavors {
@@ -78,7 +78,7 @@ model {
         }
     }
 
-    toolChains { // prioritize among the native toolchains
+    toolChains { // prioritize the available native toolchains
         if (project.hasProperty('tool')) {
             // set in gradle.properties file or -Ptool= on the command line
             if (project.ext.tool == 'clang') {
@@ -163,7 +163,7 @@ model {
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
                 }
 
-                // buildtype-specific CPP defines:
+                // buildtype-specific preprocessor defines:
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
@@ -173,7 +173,7 @@ model {
                     //cppCompiler.define 'VERBOSE_RESIDUAL_PRINTF'
                 }
 
-                // flavor-specific CPP defines:
+                // flavor-specific preprocessor defines:
                 if (isDp) {
                     cppCompiler.define 'BT_USE_DOUBLE_PRECISION'
                 }
