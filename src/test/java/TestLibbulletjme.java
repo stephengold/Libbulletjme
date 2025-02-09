@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2024 Stephen Gold
+ Copyright (c) 2020-2025 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -198,7 +198,7 @@ public class TestLibbulletjme {
             2f, 1f, 0f,
             1f, 1f, 0f,
             1f, 3f, 0f,
-            0f, 3f, 1f,
+            0f, 3f, 0f,
             0f, 0f, 1f,
             2f, 0f, 1f,
             2f, 1f, 1f,
@@ -237,7 +237,7 @@ public class TestLibbulletjme {
         parameters4.setMaxRecursion(2);
         List<Vhacd4Hull> vhacd4Hulls
                 = Vhacd4.compute(positionArray, indexArray, parameters4);
-        Assert.assertEquals(6, vhacd4Hulls.size());
+        Assert.assertEquals(3, vhacd4Hulls.size());
 
         CompoundCollisionShape compound = new CompoundCollisionShape();
         int numHullVertices = 0;
@@ -246,7 +246,7 @@ public class TestLibbulletjme {
             numHullVertices += hullShape.countHullVertices();
             compound.addChildShape(hullShape);
         }
-        Assert.assertEquals(72, numHullVertices);
+        Assert.assertEquals(24, numHullVertices);
 
         // Verify the VHACDParameters defaults.
         VHACDParameters parameters = new VHACDParameters();
@@ -273,7 +273,7 @@ public class TestLibbulletjme {
             numHullVertices += hullShape.countHullVertices();
             compound.addChildShape(hullShape);
         }
-        Assert.assertEquals(25, numHullVertices);
+        Assert.assertEquals(16, numHullVertices);
 
         vhacd4Hulls = null;
         vhacdHulls = null;
