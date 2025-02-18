@@ -24,9 +24,6 @@ sourceSets.main.java {
     srcDir 'src/main/java'
     srcDir 'src/main/native' // for IDE access (no Java there)
 }
-sourceSets.test.java {
-    srcDir 'src/test/java'
-}
 
 // Generate all JNI header files before compiling any C/C++ code:
 tasks.withType(CppCompile) {
