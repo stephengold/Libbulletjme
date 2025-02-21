@@ -152,7 +152,7 @@ The Libbulletjme Project is derived from open-source software:
 
 This project also made use of the following software tools:
 
-  + the [Android Studio][android], [IntelliJ IDEA][idea], and [NetBeans]
+  + the [Android Studio][studio], [IntelliJ IDEA][idea], and [NetBeans]
     integrated development environments
   + the [Antora] static website generator
   + the [Checkstyle] tool
@@ -201,7 +201,6 @@ correct the situation: sgold@sonic.net
 [Jump to the table of contents](#toc)
 
 
-[android]: https://developer.android.com/studio "Android Studio IDE"
 [antora]: https://antora.org/ "Antora Project"
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [bullet]: https://pybullet.org/wordpress "Bullet Real-Time Physics Simulation"
@@ -237,6 +236,7 @@ correct the situation: sgold@sonic.net
 [simmath]: https://github.com/Simsilica/SimMath "SimMath Library"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [sport]: https://github.com/stephengold/sport "SPORT Project"
+[studio]: https://developer.android.com/studio "Android Studio IDE"
 [travis]: https://travis-ci.com "Travis CI"
 [vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"
 [vhacdBindings]: https://github.com/riccardobl/v-hacd-java-bindings "Riccardo's V-hacd-java-bindings Project"
