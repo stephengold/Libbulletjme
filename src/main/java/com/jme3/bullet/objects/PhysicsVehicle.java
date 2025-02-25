@@ -699,7 +699,8 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     }
 
     /**
-     * Used internally.
+     * Update the wheel transforms for visualization. (In Minie this gets
+     * invoked when the VehicleControl is updated.)
      */
     public void updateWheels() {
         if (controller != null) {
