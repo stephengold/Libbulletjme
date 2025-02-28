@@ -216,6 +216,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
+      - run: sudo apt-get update
       - run: sudo apt install g++-9-arm-linux-gnueabihf
       - run: arm-linux-gnueabihf-g++-9 --version
       - uses: gradle/actions/setup-gradle@v4
@@ -243,6 +244,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
+      - run: sudo apt-get update
       - run: sudo apt install g++-10-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-10 --version
       - uses: gradle/actions/setup-gradle@v4
