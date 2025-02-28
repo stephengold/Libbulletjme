@@ -6,8 +6,8 @@ The src/main/native/v-hacd software except vhacdMutex.h
 is Copyright (c) 2011 Khaled Mamou (kmamou at gmail dot com)
 All rights reserved.
 
-The src/main/java/jme3utilities and src/test software
-are Copyright (c) 2013-2024, Stephen Gold
+The buildSrc, src/main/java/jme3utilities, and src/test software
+are Copyright (c) 2013-2025 Stephen Gold
 All rights reserved.
 
 The src/main/java/vhacd and src/main/java/vhacd4 software

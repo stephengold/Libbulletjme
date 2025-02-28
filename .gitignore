@@ -1,10 +1,12 @@
 /.cxx/
 
-# Ignore Gradle's project-specific cache directory:
+# Ignore Gradle's project-specific cache directories:
 /.gradle/
+/buildSrc/.gradle/
 
 # Ignore Gradle's build output directories:
 /build/
+/buildSrc/build/
 
 # Ignore IDE-specific directories:
 /.idea/

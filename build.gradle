@@ -1,5 +1,7 @@
 // Gradle script to build/publish Libbulletjme desktop artifacts
 
+import com.github.stephengold.build.BuildSrc
+
 plugins {
     id 'application'   // to build JVM applications
     id 'checkstyle'    // to analyze Java sourcecode for style violations
@@ -444,8 +446,8 @@ publishMavenPublicationToMavenLocal.doLast {
 //   or by -P options on the command line.
 
 signing {
-    def signingKey = base64Decode(findProperty('signingKeyEncoded'))
-    def signingPassword = findProperty('signingPassword')
+    String signingKey = BuildSrc.decodeBase64(findProperty('signingKeyEncoded'))
+    String signingPassword = findProperty('signingPassword')
     useInMemoryPgpKeys(signingKey, signingPassword)
 
     sign configurations.archives
@@ -453,15 +455,6 @@ signing {
 }
 tasks.withType(Sign).configureEach {
     onlyIf { project.hasProperty('signingKeyEncoded') }
-}
-
-static def base64Decode(encodedString) {
-    if (encodedString != null) {
-        byte[] decoded = encodedString.decodeBase64()
-        String decode = new String(decoded)
-        return decode
-    }
-    return null
 }
 
 // Register cleanup tasks:
