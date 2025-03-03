@@ -102,7 +102,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>static boolean</code></div>
 <div class="col-second odd-row-color"><code><a href="#throwNpe" class="member-name-link">throwNpe</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">If true, throw NullPointerException for null arguments.</div>
+<div class="block">If <code>true</code>, throw <code>NullPointerException</code> for null arguments.</div>
 </div>
 </div>
 </section>
@@ -176,7 +176,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;min,
  int&nbsp;max)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Validate a limited integer as a method argument.</div>
+<div class="block">Validate a limited integer value as a method argument.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nonEmpty(float%5B%5D,java.lang.String)" class="member-name-link">nonEmpty</a><wbr>(float[]&nbsp;array,
@@ -212,7 +212,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nonNegative(int,java.lang.String)" class="member-name-link">nonNegative</a><wbr>(int&nbsp;iValue,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Validate a non-negative integer as a method argument.</div>
+<div class="block">Validate a non-negative integer value as a method argument.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#nonNegative(com.jme3.math.Vector3f,java.lang.String)" class="member-name-link">nonNegative</a><wbr>(<a href="../com/jme3/math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;vector,
@@ -309,8 +309,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="throwNpe">
 <h3>throwNpe</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">throwNpe</span></div>
-<div class="block">If true, throw NullPointerException for null arguments. Otherwise, throw
- IllegalArgumentException.</div>
+<div class="block">If <code>true</code>, throw <code>NullPointerException</code> for null arguments.
+ Otherwise, throw <code>IllegalArgumentException</code>.</div>
 </section>
 </li>
 </ul>
@@ -332,7 +332,7 @@ loadScripts(document, 'script');</script>
 <dd><code>iValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range [0, 2]</dd>
 </dl>
@@ -349,7 +349,7 @@ loadScripts(document, 'script');</script>
 <dd><code>fValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is NaN or infinite</dd>
 </dl>
@@ -366,12 +366,12 @@ loadScripts(document, 'script');</script>
 <dd><code>vector</code> - the vector to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the vector has a NaN or infinite
  component</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the vector is
- null</dd>
+ <code>null</code></dd>
 </dl>
 </section>
 </li>
@@ -386,12 +386,12 @@ loadScripts(document, 'script');</script>
 <dd><code>vector</code> - the vector to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the vector has a NaN or infinite
  component</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the vector is
- null</dd>
+ <code>null</code></dd>
 </dl>
 </section>
 </li>
@@ -406,7 +406,7 @@ loadScripts(document, 'script');</script>
 <dd><code>fValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range [0, 1]</dd>
 </dl>
@@ -423,7 +423,7 @@ loadScripts(document, 'script');</script>
 <dd><code>dValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range [0, 1]</dd>
 </dl>
@@ -436,7 +436,7 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description,
  int&nbsp;min,
  int&nbsp;max)</span></div>
-<div class="block">Validate a limited integer as a method argument.</div>
+<div class="block">Validate a limited integer value as a method argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>iValue</code> - the value to validate</dd>
@@ -444,7 +444,7 @@ loadScripts(document, 'script');</script>
 <dd><code>min</code> - the smallest valid value (&le;max)</dd>
 <dd><code>max</code> - the largest valid value (&ge;max)</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range [min,
  max]
@@ -468,7 +468,7 @@ loadScripts(document, 'script');</script>
 <dd><code>min</code> - the smallest valid value (&le;max)</dd>
 <dd><code>max</code> - the largest valid value (&ge;max)</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range</dd>
 </dl>
@@ -489,9 +489,10 @@ loadScripts(document, 'script');</script>
 <dd><code>min</code> - the smallest valid value (&le;max)</dd>
 <dd><code>max</code> - the largest valid value (&ge;max)</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the specified
+ range</dd>
 </dl>
 </section>
 </li>
@@ -506,7 +507,7 @@ loadScripts(document, 'script');</script>
 <dd><code>collection</code> - the collection to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the
  collection is null</dd>
@@ -525,7 +526,7 @@ loadScripts(document, 'script');</script>
 <dd><code>array</code> - the array to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the array is
  null</dd>
@@ -544,7 +545,7 @@ loadScripts(document, 'script');</script>
 <dd><code>array</code> - the array to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the array is
  null</dd>
@@ -563,7 +564,7 @@ loadScripts(document, 'script');</script>
 <dd><code>string</code> - the String to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the String is
  null</dd>
@@ -576,13 +577,13 @@ loadScripts(document, 'script');</script>
 <h3>nonNegative</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">nonNegative</span><wbr><span class="parameters">(int&nbsp;iValue,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description)</span></div>
-<div class="block">Validate a non-negative integer as a method argument.</div>
+<div class="block">Validate a non-negative integer value as a method argument.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>iValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is negative</dd>
 </dl>
@@ -599,7 +600,7 @@ loadScripts(document, 'script');</script>
 <dd><code>fValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is negative or NaN</dd>
 </dl>
@@ -616,7 +617,7 @@ loadScripts(document, 'script');</script>
 <dd><code>vector</code> - the vector to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the vector has a negative or NaN
  component</dd>
@@ -645,7 +646,7 @@ loadScripts(document, 'script');</script>
 <dd><code>object</code> - the reference to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the reference
  is null</dd>
@@ -663,7 +664,7 @@ loadScripts(document, 'script');</script>
 <dd><code>lValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is zero</dd>
 </dl>
@@ -680,7 +681,7 @@ loadScripts(document, 'script');</script>
 <dd><code>quaternion</code> - the Quaternion to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the Quaternion equals (0,0,0,0)</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the
@@ -699,7 +700,7 @@ loadScripts(document, 'script');</script>
 <dd><code>quaternion</code> - the Quatd to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the Quatd equals (0,0,0,0)</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the Quatd is
@@ -718,7 +719,7 @@ loadScripts(document, 'script');</script>
 <dd><code>vector</code> - the vector to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the vector equals (0,0,0)</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the vector is
@@ -737,7 +738,7 @@ loadScripts(document, 'script');</script>
 <dd><code>iValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is negative or zero</dd>
 </dl>
@@ -754,9 +755,9 @@ loadScripts(document, 'script');</script>
 <dd><code>fValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is not positive</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is negative or zero or NaN</dd>
 </dl>
 </section>
 </li>
@@ -771,7 +772,7 @@ loadScripts(document, 'script');</script>
 <dd><code>vector</code> - the vector to validate (unaffected)</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if any component is not positive</dd>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NullPointerException.html" title="class or interface in java.lang" class="external-link">NullPointerException</a></code> - or IllegalArgumentException if the vector is
@@ -791,7 +792,7 @@ loadScripts(document, 'script');</script>
 <dd><code>value</code> - the value of the expression (required to be true)</dd>
 <dd><code>what</code> - a description of the requirement</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is false</dd>
 </dl>
@@ -808,7 +809,7 @@ loadScripts(document, 'script');</script>
 <dd><code>fValue</code> - the value to validate</dd>
 <dd><code>description</code> - a description of the argument</dd>
 <dt>Returns:</dt>
-<dd>true</dd>
+<dd><code>true</code> (for use in <code>assert</code> statements)</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - if the value is outside the range [-PI,
  PI]</dd>
