@@ -77,7 +77,7 @@ final public class Validate {
     /**
      * Validate an axis index as a method argument.
      *
-     * @param iValue the value to validate
+     * @param iValue the index to validate
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
      * @throws IllegalArgumentException if the value is outside the range [0, 2]
@@ -112,7 +112,7 @@ final public class Validate {
     }
 
     /**
-     * Validate a finite Vector3f as a method argument.
+     * Validate a finite {@code Vector3f} as a method argument.
      *
      * @param vector the vector to validate (unaffected)
      * @param description a description of the argument
@@ -141,7 +141,7 @@ final public class Validate {
     }
 
     /**
-     * Validate a finite Vec3d as a method argument.
+     * Validate a finite {@code Vec3d} as a method argument.
      *
      * @param vector the vector to validate (unaffected)
      * @param description a description of the argument
@@ -247,7 +247,8 @@ final public class Validate {
      * @param min the smallest valid value (&le;max)
      * @param max the largest valid value (&ge;max)
      * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the value is outside the range
+     * @throws IllegalArgumentException if the value is outside the range [min,
+     * max]
      */
     public static boolean inRange(
             float fValue, String description, float min, float max) {
@@ -288,8 +289,8 @@ final public class Validate {
      * @param min the smallest valid value (&le;max)
      * @param max the largest valid value (&ge;max)
      * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the value is outside the specified
-     * range
+     * @throws IllegalArgumentException if the value is outside the range [min,
+     * max]
      */
     public static boolean inRange(
             double dValue, String description, double min, double max) {
@@ -406,7 +407,7 @@ final public class Validate {
     /**
      * Validate a non-null, non-empty string as a method argument.
      *
-     * @param string the String to validate
+     * @param string the string to validate
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
      * @throws NullPointerException or IllegalArgumentException if the String is
@@ -479,7 +480,7 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-negative Vector3f as a method argument.
+     * Validate a non-negative {@code Vector3f} as a method argument.
      *
      * @param vector the vector to validate (unaffected)
      * @param description a description of the argument
@@ -508,8 +509,8 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-null reference. In many methods, validation can be omitted
-     * because the object in question is about to be dereferenced.
+     * Validate a non-null reference. In many situations, validation can be
+     * omitted because the object in question is about to be dereferenced.
      * <p>
      * While it might seem more logical to throw an IllegalArgumentException in
      * the case of a method argument, the javadoc for NullPointerException says,
@@ -519,11 +520,11 @@ final public class Validate {
      * <p>
      * Compare with {@code java.util.Objects.requireNonNull()}.
      *
-     * @param object the reference to validate
+     * @param object the reference to validate (unaffected)
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
      * @throws NullPointerException or IllegalArgumentException if the reference
-     * is null
+     * is {@code null}
      */
     public static boolean nonNull(Object object, String description) {
         if (object == null) {
@@ -568,9 +569,9 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-zero Quaternion as a method argument.
+     * Validate a non-zero {@code Quaternion} as a method argument.
      *
-     * @param quaternion the Quaternion to validate (unaffected)
+     * @param quaternion the value to validate (unaffected)
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
      * @throws IllegalArgumentException if the Quaternion equals (0,0,0,0)
@@ -595,9 +596,9 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-zero Quatd as a method argument.
+     * Validate a non-zero {@code Quatd} as a method argument.
      *
-     * @param quaternion the Quatd to validate (unaffected)
+     * @param quaternion the value to validate (unaffected)
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
      * @throws IllegalArgumentException if the Quatd equals (0,0,0,0)
@@ -622,7 +623,7 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-zero Vector3f as a method argument.
+     * Validate a non-zero {@code Vector3f} as a method argument.
      *
      * @param vector the vector to validate (unaffected)
      * @param description a description of the argument
@@ -697,7 +698,7 @@ final public class Validate {
     }
 
     /**
-     * Validate an all-positive Vector3f as a method argument.
+     * Validate an all-positive {@code Vector3f} as a method argument.
      *
      * @param vector the vector to validate (unaffected)
      * @param description a description of the argument
@@ -728,10 +729,10 @@ final public class Validate {
      * Validate an arbitrary boolean-valued expression involving method
      * arguments.
      *
-     * @param value the value of the expression (required to be true)
+     * @param value the value of the expression (required to be {@code true})
      * @param what a description of the requirement
      * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the value is false
+     * @throws IllegalArgumentException if the value is {@code false}
      */
     public static boolean require(boolean value, String what) {
         if (!value) {
@@ -750,7 +751,7 @@ final public class Validate {
     /**
      * Validate a standardized angle as a method argument.
      *
-     * @param fValue the value to validate
+     * @param fValue the angle to validate
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
      * @throws IllegalArgumentException if the value is outside the range [-PI,
