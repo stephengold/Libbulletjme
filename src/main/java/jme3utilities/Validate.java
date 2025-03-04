@@ -112,35 +112,6 @@ final public class Validate {
     }
 
     /**
-     * Validate a finite {@code Vector3f} as a method argument.
-     *
-     * @param vector the vector to validate (unaffected)
-     * @param description a description of the argument
-     * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the vector has a NaN or infinite
-     * component
-     * @throws NullPointerException or IllegalArgumentException if the vector is
-     * {@code null}
-     */
-    public static boolean finite(Vector3f vector, String description) {
-        nonNull(vector, description);
-
-        if (!Vector3f.isValidVector(vector)) {
-            String what;
-            if (description == null) {
-                what = "Vector3f argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, vector});
-            String message = what + " must have all components finite.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a finite {@code Vec3d} as a method argument.
      *
      * @param vector the vector to validate (unaffected)
@@ -170,15 +141,31 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-negative proper fraction as a method argument.
+     * Validate a finite {@code Vector3f} as a method argument.
      *
-     * @param fValue the value to validate
+     * @param vector the vector to validate (unaffected)
      * @param description a description of the argument
      * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the value is outside the range [0, 1]
+     * @throws IllegalArgumentException if the vector has a NaN or infinite
+     * component
+     * @throws NullPointerException or IllegalArgumentException if the vector is
+     * {@code null}
      */
-    public static boolean fraction(float fValue, String description) {
-        inRange(fValue, description, 0f, 1f);
+    public static boolean finite(Vector3f vector, String description) {
+        nonNull(vector, description);
+
+        if (!Vector3f.isValidVector(vector)) {
+            String what;
+            if (description == null) {
+                what = "Vector3f argument";
+            } else {
+                what = description;
+            }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, vector});
+            String message = what + " must have all components finite.";
+            throw new IllegalArgumentException(message);
+        }
+
         return true;
     }
 
@@ -196,43 +183,54 @@ final public class Validate {
     }
 
     /**
-     * Validate a limited integer value as a method argument.
+     * Validate a non-negative proper fraction as a method argument.
      *
-     * @param iValue the value to validate
+     * @param fValue the value to validate
+     * @param description a description of the argument
+     * @return {@code true} (for use in {@code assert} statements)
+     * @throws IllegalArgumentException if the value is outside the range [0, 1]
+     */
+    public static boolean fraction(float fValue, String description) {
+        inRange(fValue, description, 0f, 1f);
+        return true;
+    }
+
+    /**
+     * Validate a limited double-precision value as a method argument.
+     *
+     * @param dValue the value to validate
      * @param description a description of the argument
      * @param min the smallest valid value (&le;max)
      * @param max the largest valid value (&ge;max)
      * @return {@code true} (for use in {@code assert} statements)
      * @throws IllegalArgumentException if the value is outside the range [min,
      * max]
-     * <p>
-     * Compare with {@code Objects.checkIndex()} in Java 9.
      */
     public static boolean inRange(
-            int iValue, String description, int min, int max) {
-        if (iValue < min) {
+            double dValue, String description, double min, double max) {
+        if (!(dValue >= min)) {
             String what;
             if (description == null) {
-                what = "int argument";
+                what = "double argument";
             } else {
                 what = description;
             }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
             String message = String.format(
-                    "%s must be greater than or equal to %d.", what, min);
+                    "%s must be greater than or equal to %f.", what, min);
             throw new IllegalArgumentException(message);
         }
 
-        if (iValue > max) {
+        if (!(dValue <= max)) {
             String what;
             if (description == null) {
-                what = "int argument";
+                what = "double argument";
             } else {
                 what = description;
             }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
             String message = String.format(
-                    "%s must be less than or equal to %d.", what, max);
+                    "%s must be less than or equal to %f.", what, max);
             throw new IllegalArgumentException(message);
         }
 
@@ -282,41 +280,43 @@ final public class Validate {
     }
 
     /**
-     * Validate a limited double-precision value as a method argument.
+     * Validate a limited integer value as a method argument.
      *
-     * @param dValue the value to validate
+     * @param iValue the value to validate
      * @param description a description of the argument
      * @param min the smallest valid value (&le;max)
      * @param max the largest valid value (&ge;max)
      * @return {@code true} (for use in {@code assert} statements)
      * @throws IllegalArgumentException if the value is outside the range [min,
      * max]
+     * <p>
+     * Compare with {@code Objects.checkIndex()} in Java 9.
      */
     public static boolean inRange(
-            double dValue, String description, double min, double max) {
-        if (!(dValue >= min)) {
+            int iValue, String description, int min, int max) {
+        if (iValue < min) {
             String what;
             if (description == null) {
-                what = "double argument";
+                what = "int argument";
             } else {
                 what = description;
             }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
             String message = String.format(
-                    "%s must be greater than or equal to %f.", what, min);
+                    "%s must be greater than or equal to %d.", what, min);
             throw new IllegalArgumentException(message);
         }
 
-        if (!(dValue <= max)) {
+        if (iValue > max) {
             String what;
             if (description == null) {
-                what = "double argument";
+                what = "int argument";
             } else {
                 what = description;
             }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, dValue});
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
             String message = String.format(
-                    "%s must be less than or equal to %f.", what, max);
+                    "%s must be less than or equal to %d.", what, max);
             throw new IllegalArgumentException(message);
         }
 
@@ -432,30 +432,6 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-negative integer value as a method argument.
-     *
-     * @param iValue the value to validate
-     * @param description a description of the argument
-     * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the value is negative
-     */
-    public static boolean nonNegative(int iValue, String description) {
-        if (iValue < 0) {
-            String what;
-            if (description == null) {
-                what = "int argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
-            String message = what + " must not be negative.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a non-negative single-precision value as a method argument.
      *
      * @param fValue the value to validate
@@ -473,6 +449,30 @@ final public class Validate {
             }
             logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
             String message = what + " must not be negative or NaN.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
+     * Validate a non-negative integer value as a method argument.
+     *
+     * @param iValue the value to validate
+     * @param description a description of the argument
+     * @return {@code true} (for use in {@code assert} statements)
+     * @throws IllegalArgumentException if the value is negative
+     */
+    public static boolean nonNegative(int iValue, String description) {
+        if (iValue < 0) {
+            String what;
+            if (description == null) {
+                what = "int argument";
+            } else {
+                what = description;
+            }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
+            String message = what + " must not be negative.";
             throw new IllegalArgumentException(message);
         }
 
@@ -569,33 +569,6 @@ final public class Validate {
     }
 
     /**
-     * Validate a non-zero {@code Quaternion} as a method argument.
-     *
-     * @param quaternion the value to validate (unaffected)
-     * @param description a description of the argument
-     * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the Quaternion equals (0,0,0,0)
-     * @throws NullPointerException or IllegalArgumentException if the
-     * Quaternion is null
-     */
-    public static boolean nonZero(Quaternion quaternion, String description) {
-        nonNull(quaternion, description);
-
-        if (MyQuaternion.isZero(quaternion)) {
-            String what;
-            if (description == null) {
-                what = "Quaternion argument";
-            } else {
-                what = description;
-            }
-            String message = what + " must not be zero.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a non-zero {@code Quatd} as a method argument.
      *
      * @param quaternion the value to validate (unaffected)
@@ -612,6 +585,33 @@ final public class Validate {
             String what;
             if (description == null) {
                 what = "Quatd argument";
+            } else {
+                what = description;
+            }
+            String message = what + " must not be zero.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
+     * Validate a non-zero {@code Quaternion} as a method argument.
+     *
+     * @param quaternion the value to validate (unaffected)
+     * @param description a description of the argument
+     * @return {@code true} (for use in {@code assert} statements)
+     * @throws IllegalArgumentException if the Quaternion equals (0,0,0,0)
+     * @throws NullPointerException or IllegalArgumentException if the
+     * Quaternion is null
+     */
+    public static boolean nonZero(Quaternion quaternion, String description) {
+        nonNull(quaternion, description);
+
+        if (MyQuaternion.isZero(quaternion)) {
+            String what;
+            if (description == null) {
+                what = "Quaternion argument";
             } else {
                 what = description;
             }
@@ -650,30 +650,6 @@ final public class Validate {
     }
 
     /**
-     * Validate a positive integer value as a method argument.
-     *
-     * @param iValue the value to validate
-     * @param description a description of the argument
-     * @return {@code true} (for use in {@code assert} statements)
-     * @throws IllegalArgumentException if the value is negative or zero
-     */
-    public static boolean positive(int iValue, String description) {
-        if (iValue <= 0) {
-            String what;
-            if (description == null) {
-                what = "int argument";
-            } else {
-                what = description;
-            }
-            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
-            String message = what + " must be positive.";
-            throw new IllegalArgumentException(message);
-        }
-
-        return true;
-    }
-
-    /**
      * Validate a positive single-precision value as a method argument.
      *
      * @param fValue the value to validate
@@ -690,6 +666,30 @@ final public class Validate {
                 what = description;
             }
             logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
+            String message = what + " must be positive.";
+            throw new IllegalArgumentException(message);
+        }
+
+        return true;
+    }
+
+    /**
+     * Validate a positive integer value as a method argument.
+     *
+     * @param iValue the value to validate
+     * @param description a description of the argument
+     * @return {@code true} (for use in {@code assert} statements)
+     * @throws IllegalArgumentException if the value is negative or zero
+     */
+    public static boolean positive(int iValue, String description) {
+        if (iValue <= 0) {
+            String what;
+            if (description == null) {
+                what = "int argument";
+            } else {
+                what = description;
+            }
+            logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, iValue});
             String message = what + " must be positive.";
             throw new IllegalArgumentException(message);
         }
