@@ -472,7 +472,7 @@ final public class Validate {
                 what = description;
             }
             logger.log(Level.SEVERE, "{0}={1}", new Object[]{what, fValue});
-            String message = what + " must not be negative.";
+            String message = what + " must not be negative or NaN.";
             throw new IllegalArgumentException(message);
         }
 
