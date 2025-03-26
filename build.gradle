@@ -167,8 +167,8 @@ model {
 
                 if (buildable) {
                     if (isMt) {
-                        // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
-                        buildable = (os != 'osx') && pName.contains('64')
+                        // Skip Mt for MacOSX, LoongArch, and 32-bit targets
+                        buildable = !pName.contains('Loong') && (os != 'osx') && pName.contains('64')
                     }
                     //if (isMt) buildable = false // to skip all multithreaded flavors
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
