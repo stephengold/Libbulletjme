@@ -109,10 +109,10 @@ model {
                 linker.executable = 'arm-linux-gnueabihf-g++-9'
             }
         }
-        gccLoongarch64(Gcc) { // used when cross-compiling on Linux
+        gcc13Loong(Gcc) { // used when cross-compiling on Linux
             target('Linux_LoongArch64') {
-                cppCompiler.executable = 'loongarch64-unknown-linux-gnu-g++'
-                linker.executable = 'loongarch64-unknown-linux-gnu-g++'
+                cppCompiler.executable = 'loongarch64-linux-gnu-g++-13'
+                linker.executable = 'loongarch64-linux-gnu-g++-13'
             }
         }
     }
