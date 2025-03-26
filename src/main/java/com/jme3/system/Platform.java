@@ -79,7 +79,7 @@ public enum Platform {
     /**
      * Linux 64-bit LoongArch
      */
-    Linux_LOONGARCH64(Os.Linux, true),
+    Linux_LoongArch64(Os.Linux, true),
 
     /**
      * Apple Mac OS X 32-bit Intel

@@ -92,7 +92,7 @@ public class JmeSystem {
             if (arch.startsWith("arm") || arch.startsWith("aarch")) {
                 return is64 ? Platform.Linux_ARM64 : Platform.Linux_ARM32;
             } else if (arch.startsWith("loong")) {
-                return Platform.Linux_LOONGARCH64; // currently 32-bit version not supported
+                return Platform.Linux_LoongArch64; // currently 32-bit version not supported
             } else {
                 return is64 ? Platform.Linux64 : Platform.Linux32;
             }
