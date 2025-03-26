@@ -431,11 +431,10 @@ import electrostatic4j.snaploader.platform.util.PlatformPredicate;
 
 // ...
 
-LibraryInfo info = new LibraryInfo(
-        new DirectoryPath("linux/x86-64/com/github/stephengold"),
-        "bulletjme", DirectoryPath.USER_DIR);
+LibraryInfo info = new LibraryInfo(null, "bulletjme", DirectoryPath.USER_DIR);
 NativeBinaryLoader loader = new NativeBinaryLoader(info);
-NativeDynamicLibrary[] libraries = new NativeDynamicLibrary[]{
+
+NativeDynamicLibrary[] libraries = {
     new NativeDynamicLibrary("native/linux/arm64", PlatformPredicate.LINUX_ARM_64),
     new NativeDynamicLibrary("native/linux/arm32", PlatformPredicate.LINUX_ARM_32),
     new NativeDynamicLibrary("native/linux/x86_64", PlatformPredicate.LINUX_X86_64),
@@ -444,7 +443,7 @@ NativeDynamicLibrary[] libraries = new NativeDynamicLibrary[]{
     new NativeDynamicLibrary("native/windows/x86_64", PlatformPredicate.WIN_X86_64)
 };
 loader.registerNativeLibraries(libraries).initPlatformLibrary();
-loader.loadLibrary(LoadingCriterion.INCREMENTAL_LOADING);</code></pre>
+loader.loadLibrary(LoadingCriterion.CLEAN_EXTRACTION);</code></pre>
 </div>
 </div>
 </div>
