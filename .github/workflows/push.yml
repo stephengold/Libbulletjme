@@ -262,6 +262,34 @@ jobs:
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
+  Java21-x-Linux_LoongArch64:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update
+      - run: sudo apt install g++-13-loongarch64-linux-gnu
+      - run: loongarch64-linux-gnu-g++-13 --version
+      - uses: gradle/actions/setup-gradle@v4
+      - run: |
+          ./gradlew -Ptarget=Linux_LoongArch64 install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Linux_LoongArch64 -Ptarget=Linux_LoongArch64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+
   Java23-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
