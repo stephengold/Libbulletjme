@@ -14,6 +14,7 @@
  */
 #include "vhacdICHull.h"
 #include <limits>
+#include <cstdint>
 
 #ifdef _MSC_VER
 #pragma warning(disable:4456 4706)

@@ -17,6 +17,7 @@
 #define VHACD_ICHULL_H
 #include "vhacdManifoldMesh.h"
 #include "vhacdVector.h"
+#include <stdint.h>
 
 namespace VHACD {
 //!    Incremental Convex Hull algorithm (cf. http://cs.smith.edu/~orourke/books/ftp.html ).
