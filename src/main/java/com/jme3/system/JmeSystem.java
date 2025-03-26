@@ -64,6 +64,8 @@ public class JmeSystem {
             return false;
         } else if (arch.equals("arm")) {
             return false;
+        } else if (arch.equals("loong64") || arch.equals("loongarch64")) {
+            return true;
         } else {
             throw new UnsupportedOperationException("Unsupported architecture: " + arch);
         }
@@ -89,6 +91,8 @@ public class JmeSystem {
                 || os.contains("sunos") || os.contains("unix")) {
             if (arch.startsWith("arm") || arch.startsWith("aarch")) {
                 return is64 ? Platform.Linux_ARM64 : Platform.Linux_ARM32;
+            } else if (arch.startsWith("loong")) {
+                return Platform.Linux_LoongArch64; // currently 32-bit version not supported
             } else {
                 return is64 ? Platform.Linux64 : Platform.Linux32;
             }

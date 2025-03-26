@@ -64,6 +64,10 @@ model {
             architecture 'aarch64'
             operatingSystem 'linux'
         }
+        Linux_LoongArch64 {
+            architecture 'loongarch64'
+            operatingSystem 'linux'
+        }
         MacOSX64 {
             architecture 'x86_64'
             operatingSystem 'osx'
@@ -105,6 +109,12 @@ model {
                 linker.executable = 'arm-linux-gnueabihf-g++-9'
             }
         }
+        gcc13Loong(Gcc) { // used when cross-compiling on Linux
+            target('Linux_LoongArch64') {
+                cppCompiler.executable = 'loongarch64-linux-gnu-g++-13'
+                linker.executable = 'loongarch64-linux-gnu-g++-13'
+            }
+        }
     }
 
     components {
@@ -113,6 +123,7 @@ model {
             targetPlatform 'Linux64'
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
+            targetPlatform 'Linux_LoongArch64'
             targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows64'
@@ -156,8 +167,8 @@ model {
 
                 if (buildable) {
                     if (isMt) {
-                        // Skip Mt for MacOSX (Xcode does not support OpenMP) and 32-bit targets
-                        buildable = (os != 'osx') && pName.contains('64')
+                        // Skip Mt for MacOSX, LoongArch, and 32-bit targets
+                        buildable = !pName.contains('Loong') && (os != 'osx') && pName.contains('64')
                     }
                     //if (isMt) buildable = false // to skip all multithreaded flavors
                     if (isQuickprof) buildable = false // to skip all Quickprof flavors
@@ -263,6 +274,7 @@ model {
                     //   native/linux/arm32/libbulletjme.so
                     //   native/linux/arm64/libbulletjme.so
                     //   native/linux/x86_64/libbulletjme.so
+                    //   native/linux/loongarch64/libbulletjme.so
                     //   native/osx/arm64/libbulletjme.dylib
                     //   native/osx/x86_64/libbulletjme.dylib
                     //   native/windows/x86_64/bulletjme.dll
@@ -271,6 +283,7 @@ model {
                     archName = archName.replaceAll('aarch64', 'arm64')
                     archName = archName.replaceAll('armhf', 'arm32')
                     archName = archName.replaceAll('x86-64', 'x86_64')
+                    archName = archName.replaceAll('loong64', 'loongarch64')
                     String replaceWith = 'native/' \
                         + targetPlatform.operatingSystem.name + '/' + archName + '/$1'
                     project.tasks.register('nativesJar' + q, Jar) {
