@@ -13,4 +13,4 @@ junit4 = "junit:junit:4.13.2"
 [plugins]
 
 android-library = { id = "com.android.library", version = "8.8.0" }
-validate-poms = { id = "io.freefair.maven-central.validate-poms", version = "8.13" }
+validate-poms = { id = "io.freefair.maven-central.validate-poms", version = "8.13.1" }
