@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2021-2024 Stephen Gold
+ Copyright (c) 2021-2025 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 
 /**
- * Utility methods for automated testing of the Minie Physics Library.
+ * Utility methods for automated testing of the Libbulletjme Physics Library.
  *
  * @author Stephen Gold sgold@sonic.net
  */

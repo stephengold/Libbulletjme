@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2013-2024 Stephen Gold
+ Copyright (c) 2013-2025 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -86,7 +86,7 @@ import jme3utilities.math.MyQuaternion;
 import jme3utilities.math.MyVector3f;
 
 /**
- * Dump Minie data structures for debugging purposes.
+ * Dump Libbulletjme data structures for debugging purposes.
  * <p>
  * The level of detail can be configured dynamically.
  *
