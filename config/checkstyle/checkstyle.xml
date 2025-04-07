@@ -183,8 +183,7 @@
         <module name="MissingJavadocType">
             <property name="scope" value="protected"/>
             <property name="tokens"
-                      value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
-                    RECORD_DEF, ANNOTATION_DEF"/>
+                      value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, RECORD_DEF, ANNOTATION_DEF"/>
             <property name="excludeScope" value="nothing"/>
         </module>
         <module name="NonEmptyAtclauseDescription"/>
@@ -350,7 +349,7 @@
             <property name="tokens"
                       value="BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR,
                     LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR, METHOD_REF,
-                    TYPE_EXTENSION_AND "/>
+                    TYPE_EXTENSION_AND"/>
         </module>
         <module name="ParenPad">
             <property name="tokens"
