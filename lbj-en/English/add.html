@@ -289,10 +289,10 @@ and add them to the physics space.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_a_libraries_to_classpath"><a class="anchor" href="#_add_a_libraries_to_classpath"></a>Add a libraries to classpath</h2>
+<h2 id="_add_libraries_to_classpath"><a class="anchor" href="#_add_libraries_to_classpath"></a>Add libraries to classpath</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Libbulletjme requires at least 2 libraries: a JVM library and a native library.</p>
+<p>Libbulletjme requires both a JVM library and a native library.</p>
 </div>
 <div class="paragraph">
 <p>Pre-built Libbulletjme libraries are available from from Maven Central.</p>
@@ -312,7 +312,7 @@ otherwise use "Sp".</p>
 Each AAR includes both the JVM library and all necessary native libraries.</p>
 </div>
 <div class="paragraph">
-<p>I suggest starting out with the Debug-flavored AAR.
+<p>I suggest starting out with the Debug-type AAR.
 Add to the relevant "build.gradle" or "build.gradle.kts" file:</p>
 </div>
 <div class="listingblock">
@@ -349,7 +349,7 @@ In contrast, each desktop native library is specific to a particular platform,
 build type, and flavor.</p>
 </div>
 <div class="paragraph">
-<p>I suggest starting with the platform-independent JVM library
+<p>I suggest starting with a JVM library
 plus the "SpDebug" native library for your development environment.
 For a "Linux on x86_64" environment,
 add to the relevant "build.gradle" or "build.gradle.kts" file:</p>
@@ -375,7 +375,7 @@ dependencies {
 <p>For a 64-bit MS-Windows environment, replace "Linux64" with "Windows64".</p>
 </li>
 <li>
-<p>For an "Apple silicon" Mac environment, replace "Linux64" with "MacOSX_ARM64".</p>
+<p>For an "Apple silicon" MacOS environment, replace "Linux64" with "MacOSX_ARM64".</p>
 </li>
 </ul>
 </div>
