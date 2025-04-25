@@ -9,7 +9,7 @@
     <property name="severity" value="error"/>
     <property name="fileExtensions" value="java, properties, xml"/>
 
-    <!-- Files excluded from style checking:                                            -->
+    <!-- Exclude simsilica and JME files from style checking:                                            -->
     <!-- See https://checkstyle.org/filefilters/beforeexecutionexclusionfilefilter.html -->
     <module name="BeforeExecutionExclusionFileFilter">
         <property name="fileNamePattern" value="java[/\\]com[/\\](simsilica|jme3[/\\](math|system|util))"/>
