@@ -345,9 +345,13 @@ application {
     // default settings for the 'run' task:
     mainClass = 'jme3utilities.minie.TestApp'
 }
+Boolean enableNativeAccess = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.main.runtimeClasspath
     enableAssertions = true
+    if (enableNativeAccess) {
+        jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
+    }
 }
 run.dependsOn('assemble')
 test.dependsOn('assemble')
