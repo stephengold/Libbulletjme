@@ -290,7 +290,7 @@ jobs:
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
-  Java23-Linux:
+  Java24-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
     timeout-minutes: 8
@@ -298,7 +298,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 23
+          java-version: 24
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
       - run: |
