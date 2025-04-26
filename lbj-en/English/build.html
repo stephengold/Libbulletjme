@@ -261,19 +261,19 @@
 <p>Libbulletjme is free, open-source software.</p>
 </div>
 <div class="paragraph">
-<p>While pre-built artifacts (including AARs and JARs)
+<p>While pre-built library artifacts (including AARs and JARs)
 can be downloaded from the Maven Central Repository,
 some people prefer to build them from source.</p>
 </div>
 <div class="paragraph">
-<p>You can also build a local copy of the documentation (website content).
-This is useful if you are editing the content,
+<p>You can also build a local copy of the documentation website (including HTML).
+This is useful if you are editing the documentation,
 or if your Internet access is limited or unreliable.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_jars_and_native_libraries"><a class="anchor" href="#_jars_and_native_libraries"></a>JARs and native libraries</h2>
+<h2 id="_libraries"><a class="anchor" href="#_libraries"></a>Libraries</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Here&#8217;s the recommended procedure:</p>
@@ -293,19 +293,19 @@ if you don&#8217;t already have one, and</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>for Linux:  the <a href="https://gcc.gnu.org/">GNU Compiler Collection</a> or <a href="https://www.llvm.org">Clang</a></p>
-</li>
-<li>
-<p>for Windows:  <a href="https://visualstudio.microsoft.com">Microsoft Visual Studio</a></p>
+<p>for Linux:  <a href="https://gcc.gnu.org/">the GNU Compiler Collection</a> or <a href="https://www.llvm.org">Clang</a></p>
 </li>
 <li>
 <p>for macOS:  <a href="https://developer.apple.com/xcode">Xcode</a></p>
+</li>
+<li>
+<p>for Windows:  <a href="https://visualstudio.microsoft.com">Microsoft Visual Studio</a></p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>If you use GCC, you might need to install the "g++-multilib" package:</p>
+<p>If you use GCC, you might also need to install the "g++-multilib" package:</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
@@ -319,7 +319,7 @@ if you don&#8217;t already have one, and</p>
 </li>
 <li>
 <p>Point the <code>JAVA_HOME</code> environment variable to your JDK installation:
-(The path might be something like "C:\Program Files\Java\jre1.8.0_301"
+(The path might look something like "C:\Program Files\Java\jre1.8.0_301"
 or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 "/Library/Java/JavaVirtualMachines/liberica-jdk-17-full.jdk/Contents/Home" .)</p>
 <div class="olist loweralpha">
@@ -328,7 +328,7 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 <p>using Bash or Zsh: <code>export JAVA_HOME="</code> <strong>path to installation</strong> <code>"</code></p>
 </li>
 <li>
-<p>using Fish: <code>set -g JAVA_HOME "</code> <strong>path to installation</strong> <code>"</code></p>
+<p>using <a href="https://fishshell.com/">Fish</a>: <code>set -g JAVA_HOME "</code> <strong>path to installation</strong> <code>"</code></p>
 </li>
 <li>
 <p>using Windows Command Prompt: <code>set JAVA_HOME="</code> <strong>path to installation</strong> <code>"</code></p>
@@ -344,7 +344,7 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>using Git:</p>
+<p>using <a href="https://git-scm.com">Git</a>:</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
@@ -398,7 +398,7 @@ or "/usr/lib/jvm/java-8-openjdk-amd64/" or
 <p>(optional) Edit the "gradle.properties" file to configure the build.</p>
 </li>
 <li>
-<p>Run the Gradle wrapper on the desktop build script:</p>
+<p>Run the <a href="https://gradle.org">Gradle</a> wrapper on the desktop build script:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
