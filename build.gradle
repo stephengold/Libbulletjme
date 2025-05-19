@@ -29,7 +29,7 @@ sourceSets.main.java {
 }
 
 // Generate all JNI header files before compiling any C/C++ code:
-tasks.withType(CppCompile) {
+tasks.withType(CppCompile).configureEach {
     dependsOn('classes', 'compileTestJava')
 }
 
