@@ -13,8 +13,8 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    groupID = 'com.github.stephengold'
     baseName = "${artifact}-${lbjVersion}" // for artifacts
+    groupID = 'com.github.stephengold'
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
 
@@ -113,8 +113,8 @@ tasks.register('release') {
 publishing {
     publications {
         maven(MavenPublication) {
-            artifactId = artifact
             afterEvaluate { from components.complete }
+            artifactId = artifact
             groupId = groupID
             pom {
                 description = 'a JNI interface for Bullet Physics and V-HACD'
