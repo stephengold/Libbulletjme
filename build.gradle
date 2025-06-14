@@ -9,8 +9,6 @@ plugins {
     id 'java-library'  // to build JVM libraries
     id 'maven-publish' // to publish artifacts to Maven repositories
     id 'signing'       // to sign artifacts for publication
-
-    alias(libs.plugins.validate.poms) // to verify POMs provide all info required by Maven Central
 }
 
 // $artifact and $lbjVersion are set in the gradle.properties file
@@ -374,8 +372,8 @@ tasks.register('install') {
     description = 'Installs Maven artifacts to the local repository.'
 }
 tasks.register('release') {
-    dependsOn 'publishMavenPublicationToOSSRHRepository'
-    description = 'Stages Maven artifacts to Sonatype OSSRH.'
+    dependsOn 'publishMavenPublicationToCentralRepository'
+    description = 'Stages the Maven artifacts to the Central Publisher Portal.'
 }
 
 jar {
@@ -435,19 +433,19 @@ publishing {
     }
 
     repositories {
-        maven { // the staging repo of Sonatype OSSRH
+        maven { // the staging repo of the Sonatype Central Publisher Portal
 
-            // Staging to OSSRH relies on the existence of 2 properties
-            // (ossrhUsername and ossrhPassword)
+            // Staging to the Central Publisher Portal relies on the existence of 2 properties
+            // (centralUsername and centralPassword)
             // which should be set in the ~/.gradle/gradle.properties file
             // or by -P options on the command line.
 
             credentials {
-                username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
-                password = project.hasProperty('ossrhPassword') ? ossrhPassword : 'Unknown password'
+                username = project.hasProperty('centralUsername') ? centralUsername : 'Unknown user'
+                password = project.hasProperty('centralPassword') ? centralPassword : 'Unknown password'
             }
-            name = 'OSSRH'
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2'
+            name = 'Central'
+            url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
         }
     }
 }

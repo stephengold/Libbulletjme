@@ -92,8 +92,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -119,8 +119,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -146,8 +146,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -177,8 +177,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
   Java21-x-Android:
@@ -203,8 +203,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -231,8 +231,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -259,8 +259,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -287,8 +287,8 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
   Java24-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
