@@ -1,4 +1,4 @@
-// Gradle script to build/publish Libbulletjme Android artifacts
+// Gradle script to build and publish Libbulletjme Android artifacts
 
 import com.github.stephengold.build.BuildSrc
 
@@ -96,7 +96,7 @@ android {
 }
 
 dependencies {
-    testImplementation(libs.junit4)
+    testImplementation(libs.junit4)      // framework for automated testing
 }
 
 // Register publishing tasks:
@@ -168,10 +168,10 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // Register tasks to sign artifacts for publication:
 
-//   Signing relies on the existence of 2 properties
-//   (signingKeyEncoded and signingPassword)
-//   which should be set in the ~/.gradle/gradle.properties file
-//   or by -P options on the command line.
+// Signing relies on the existence of 2 properties
+// (signingKeyEncoded and signingPassword)
+// which should be set in the ~/.gradle/gradle.properties file
+// or by -P options on the command line.
 
 signing {
     String signingKey = BuildSrc.decodeBase64(findProperty('signingKeyEncoded'))
