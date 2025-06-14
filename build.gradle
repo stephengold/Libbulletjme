@@ -369,7 +369,7 @@ checkstyleMain.dependsOn('compileTestJava')
 
 tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
-    description = 'Installs Maven artifacts to the local repository.'
+    description = 'Installs the Maven artifacts to the local repository.'
 }
 tasks.register('release') {
     dependsOn 'publishMavenPublicationToCentralRepository'
@@ -379,7 +379,7 @@ tasks.register('release') {
 jar {
     archiveBaseName = baseName
     doLast {
-        println "using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
+        println "built using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
     }
     manifest {
         attributes 'Created-By': "${JavaVersion.current()} (${System.getProperty("java.vendor")})"
