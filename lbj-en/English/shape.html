@@ -995,7 +995,7 @@ should be your last resort!
 <div class="paragraph">
 <p>Faced with the task of simulating a non-convex rigid body
 (such as a cross or ring),
-it&#8217;s best to decompose it into convex shapes that,
+it&#8217;s best to decompose it into a small number of convex shapes that,
 when recombined, will approximate the desired behavior.</p>
 </div>
 <div class="paragraph">
@@ -1013,11 +1013,11 @@ into meshes that are convex or nearly so.</p>
 <h2 id="_automated_decomposition"><a class="anchor" href="#_automated_decomposition"></a>Automated decomposition</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For situations where manual decomposition is impractical,
+<p>For situations where other decomposition approaches are impractical,
 Libbulletjme incorporates Khaled Mamou&#8217;s
 <a href="https://github.com/kmammou/v-hacd">Volumetric-Hierarchical Approximate Convex Decomposition (V-HACD) algorithm</a>.
-V-HACD makes it easy to decompose a 3-D model into a
-compound of hull shapes:</p>
+V-HACD makes it easy to decompose a 3-D mesh of triangles into a
+compound of convex-hull shapes:</p>
 </div>
 <div class="listingblock">
 <div class="content">
