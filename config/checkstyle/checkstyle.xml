@@ -197,7 +197,7 @@
         <module name="SingleLineJavadoc"/>
         <module name="SummaryJavadoc">
             <property name="forbiddenSummaryFragments"
-                      value="^@return the *|^This method returns |^A [{]@code [a-zA-Z0-9]+[}]( is a )"/>
+                      value="^@return the *|^This method returns |^A [{]@code [0-9A-Za-z]+[}]( is a )"/>
             <property name="period" value=""/>
         </module>
 
