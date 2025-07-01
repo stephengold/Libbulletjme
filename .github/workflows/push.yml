@@ -46,7 +46,7 @@ jobs:
 
   Java17-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: windows-2019
+    runs-on: windows-2022
     timeout-minutes: 7
     steps:
       - uses: actions/setup-java@v4
