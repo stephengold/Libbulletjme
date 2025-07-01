@@ -94,6 +94,11 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -121,6 +126,11 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -148,6 +158,11 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -180,6 +195,12 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
+        shell: bash
 
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -205,6 +226,11 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -233,6 +259,11 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -261,6 +292,11 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
