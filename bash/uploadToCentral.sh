@@ -28,8 +28,41 @@ token=$(printf %s:%s "${centralUsername}" "${centralPassword}" | base64)
 
 # Send a POST request to upload the repository:
 
-curl --include --request POST \
-  'https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/com.github.stephengold' \
+server='ossrh-staging-api.central.sonatype.com'
+endpoint='/manual/upload/defaultRepository/com.github.stephengold'
+url="https://${server}${endpoint}"
+
+statusCode=$(curl "${url}" \
+  --no-progress-meter \
+  --output postData1.txt \
+  --write-out '%{response_code}' \
+  --request POST \
   --header 'accept: */*' \
-  --header "Authorization: Bearer $token" \
-  --data ''
+  --header "Authorization: Bearer ${token}" \
+  --data '')
+
+echo "Status code = ${statusCode}"
+echo 'Received data:'
+cat postData1.txt
+echo '[EOF]'
+
+# Retry if the default repository isn't found (status=400).
+
+if [ "${statusCode}" == "400" ]; then
+  echo "Will retry after 30 seconds."
+  sleep 30 
+
+  statusCode2=$(curl "${url}" \
+    --no-progress-meter \
+    --output postData2.txt \
+    --write-out '%{response_code}' \
+    --request POST \
+    --header 'accept: */*' \
+    --header "Authorization: Bearer ${token}" \
+    --data '')
+
+  echo "Status code = ${statusCode2}"
+  echo 'Received data:'
+  cat postData2.txt
+  echo '[EOF]'
+fi
