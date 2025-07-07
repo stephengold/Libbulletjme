@@ -1,13 +1,13 @@
 #! /bin/bash
 set -euo pipefail
 
-## Upload the default repository for com.github.stephengold
-## (staged using the Portal OSSRH Staging API)
-## to the Central Publisher Portal
-## so it can be tested and then published or dropped.
+## Upload a deployment
+## from the "com.github.stephengold" namespace in Sonatype's OSSRH staging area
+## to Sonatype's Central Publisher Portal
+## so the deployment can be tested and then published or dropped.
 
 ## IMPORTANT:  The upload request must originate
-## from the IP address used to stage the deployment!
+## from the IP address used to stage the deployment to the staging area!
 
 # The required -p and -u flags on the command line
 # specify the password and username components of a "user token"
@@ -26,7 +26,7 @@ done
 
 token=$(printf %s:%s "${centralUsername}" "${centralPassword}" | base64)
 
-# Send a POST request to upload the repository:
+# Send a POST request to upload the deployment:
 
 server='ossrh-staging-api.central.sonatype.com'
 endpoint='/manual/upload/defaultRepository/com.github.stephengold'
@@ -50,7 +50,7 @@ echo '[EOF]'
 
 if [ "${statusCode}" == "400" ]; then
   echo "Will retry after 30 seconds."
-  sleep 30 
+  sleep 30
 
   statusCode2=$(curl "${url}" \
     --no-progress-meter \
