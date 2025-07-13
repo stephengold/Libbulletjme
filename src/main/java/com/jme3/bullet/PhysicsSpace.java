@@ -1272,7 +1272,6 @@ public class PhysicsSpace
             setSpeculativeContactRestitution(long spaceId, boolean apply);
 
     native private static void stepSimulation(long spaceId, float timeInterval,
-            int maxSubSteps, float accuracy, boolean enableContactEndedCallback,
-            boolean enableContactProcessedCallback,
-            boolean enableContactStartedCallback);
+            int maxSubSteps, float accuracy, boolean enableContactEnded,
+            boolean enableContactProcessed, boolean enableContactStarted);
 }

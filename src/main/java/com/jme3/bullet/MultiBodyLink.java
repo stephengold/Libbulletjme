@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2025 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -385,8 +385,8 @@ public class MultiBodyLink extends NativePhysicsObject {
     public boolean isCollisionWithParent() {
         long linkId = nativeId();
         int flags = getFlags(linkId);
-        int disableCollisionWithParentFlag = 0x1;
-        if ((flags & disableCollisionWithParentFlag) != 0x0) {
+        int disableParentCollision = 0x1;
+        if ((flags & disableParentCollision) != 0x0) {
             return false;
         } else {
             return true;

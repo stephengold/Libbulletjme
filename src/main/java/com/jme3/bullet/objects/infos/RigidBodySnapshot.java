@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 jMonkeyEngine
+ * Copyright (c) 2022-2025 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -173,7 +173,7 @@ public class RigidBodySnapshot {
     /**
      * anisotropic friction components
      */
-    final private Vector3f anisotropicFrictionComponents;
+    final private Vector3f anisoFrictionComponents;
     /**
      * linear factors
      */
@@ -249,7 +249,7 @@ public class RigidBodySnapshot {
         this.location = body.getPhysicsLocationDp(null);
 
         // Vector3f
-        this.anisotropicFrictionComponents = body.getAnisotropicFriction(null);
+        this.anisoFrictionComponents = body.getAnisotropicFriction(null);
         this.angularFactor = body.getAngularFactor(null);
         this.linearFactor = body.getLinearFactor(null);
         this.totalAppliedForce = body.totalAppliedForce(null);
@@ -289,7 +289,7 @@ public class RigidBodySnapshot {
         body.setSpinningFriction(spinningFriction);
 
         body.setAnisotropicFriction(
-                anisotropicFrictionComponents, anisotropicFrictionModes);
+                anisoFrictionComponents, anisotropicFrictionModes);
         body.setUserIndex(userIndex);
         body.setUserIndex2(userIndex2);
         body.setUserIndex3(userIndex3);
