@@ -155,7 +155,6 @@ public class PhysicsDumper extends Dumper {
      * Instantiate a PhysicsDumper that uses {@code System.out} for output.
      */
     public PhysicsDumper() {
-        super();
         PhysicsDescriber newDescriber = new PhysicsDescriber();
         setDescriber(newDescriber);
     }
