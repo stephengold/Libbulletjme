@@ -167,12 +167,12 @@
         <module name="MissingJavadocMethod">
             <property name="allowedAnnotations" value=""/>
             <property name="minLineCount" value="-1"/>
-            <property name="scope" value="public"/>
+            <property name="scope" value="package"/>
             <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
         </module>
         <module name="MissingJavadocType">
             <property name="excludeScope" value="nothing"/>
-            <property name="scope" value="protected"/>
+            <property name="scope" value="private"/>
             <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, RECORD_DEF, ANNOTATION_DEF"/>
         </module>
         <module name="NonEmptyAtclauseDescription"/>
@@ -226,15 +226,15 @@
         </module>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,29}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,23}$"/>
             <message key="name.invalidPattern" value="Local variable name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MemberName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,28}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,25}$"/>
             <message key="name.invalidPattern" value="Member name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MethodName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,34}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,33}$"/>
             <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MethodTypeParameterName">
@@ -246,7 +246,7 @@
             <message key="name.invalidPattern" value="Package name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="ParameterName">
-            <property name="format" value="^[a-z][0-9A-Za-z]{0,29}$"/>
+            <property name="format" value="^[a-z][0-9A-Za-z]{0,23}$"/>
             <message key="name.invalidPattern" value="Parameter name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="PatternVariableName">
