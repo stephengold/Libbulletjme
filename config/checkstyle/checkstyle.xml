@@ -125,6 +125,7 @@
             <property name="message" value="Use special escape sequence instead of octal value or Unicode escaped value."/>
             <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
         </module>
+        <module name="IllegalType"/>
         <module name="MissingSwitchDefault"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="NoFinalizer"/>
@@ -133,6 +134,7 @@
         <!-- Checks for imports:                       -->
         <!-- See https://checkstyle.org/checks/imports -->
         <module name="AvoidStarImport"/>
+        <module name="AvoidStaticImport"/>
         <module name="CustomImportOrder">
             <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
             <property name="separateLineBetweenGroups" value="true"/>
@@ -272,6 +274,10 @@
 
         <!-- Regexp checks:                           -->
         <!-- See https://checkstyle.org/checks/regexp -->
+        <module name="RegexpSinglelineJava">
+            <property name="format" value="static (abstract|final|native|package|private|protected)|(native|package|private|protected) (abstract|final)"/>
+            <property name="message" value="Modifiers must appear in alphabetical order."/>
+        </module>
         <module name="RegexpSinglelineJava">
             <property name="format" value="\{[ ]+\}"/>
             <property name="message" value="Empty blocks must not contain spaces."/>
