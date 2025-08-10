@@ -7,7 +7,7 @@
     <link rel="canonical" href="https://stephengold.github.io/Libbulletjme/lbj-en/English/shape.html">
     <link rel="prev" href="rigidbody.html">
     <link rel="next" href="character.html">
-    <meta name="generator" content="Antora 3.1.10">
+    <meta name="generator" content="Antora 3.1.12">
     <link rel="stylesheet" href="../../_/css/site.css">
 <meta property="og:image" content="../../_/img/iconx128.png">
 <meta property="og:description" content="Choosing collision shapes">
@@ -530,8 +530,8 @@ assert convexClass == isConvex;</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In this context, "convex" is a property of classes, not instances.
-While specific <strong>instances</strong> of non-convex classes have the convex property,
+In Libbulletjme, "convex" is a property of classes, not objects.
+While specific <strong>instances</strong> of non-convex classes possess the convex property,
 those classes don&#8217;t guarantee it for <strong>all</strong> instances.
 </td>
 </tr>
@@ -1005,7 +1005,7 @@ depending how much you know about the body&#8217;s shape.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If the model&#8217;s mesh is generated procedurally, it may be convenient
+<p>If the mesh was generated procedurally, it may be convenient
 to decompose it during the generation process.</p>
 </li>
 <li>
