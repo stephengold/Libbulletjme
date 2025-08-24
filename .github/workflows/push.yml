@@ -2,7 +2,7 @@
 # GitHub Actions workflow for commits pushed to the Libbulletjme repo - all branches
 
 name: CI at GitHub
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   Java8-Linux:
