@@ -4,7 +4,6 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google() // to find plugins released to Google's Maven Repository
-        mavenCentral() // to find plugins released to the Maven Central repository
     }
 }
 
