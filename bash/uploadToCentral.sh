@@ -18,6 +18,7 @@ do
     case "${flag}" in
         p) centralPassword=${OPTARG};;
         u) centralUsername=${OPTARG};;
+        *) echo "Unknown argument: ${flag}" ; exit 1
     esac
 done
 
