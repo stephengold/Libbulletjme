@@ -2,7 +2,7 @@
 
 [versions]
 
-checkstyle = "9.3"
+checkstyle = "11.0.0"
 
 [libraries]
 
