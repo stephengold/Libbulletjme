@@ -1,5 +1,14 @@
 # Release log for the Libbulletjme project
 
+## Version 22.0.2 released on 12 September 2025
+
++ Strengthened argument checking in `HeightfieldCollisionShape` constructors.
++ Disabled 20 diagnostic jmePhysicsSpace.cpp printfs in Release natives.
++ Added capability to build natives for LoongArch.
++ Added an inception year (2018) to the POMs.
++ Updated Android NDK to version "r28c".
++ Began publishing via Sonatype's Central Publisher Portal instead of OSSRH.
+
 ## Version 22.0.1 released on 24 January 2025
 
 Bugfix:  desktop ARM natives are stored at wrong paths in JARs
