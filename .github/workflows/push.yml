@@ -76,7 +76,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: gradle/actions/setup-gradle@v4
       - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 run build install \
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 -Ptool=gcc run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -85,10 +85,10 @@ jobs:
         with:
           name: crash-log
           path: '*.log'
-      - name: gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 clean release
+      - name: gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 -Ptool=gcc clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ./gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 clean release \
+          ./gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 -Ptool=gcc clean release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
