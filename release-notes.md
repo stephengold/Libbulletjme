@@ -1,6 +1,6 @@
 # Release log for the Libbulletjme project
 
-## Version 22.0.2 released on 12 September 2025
+## Version 22.0.3 released on 12 September 2025
 
 + Strengthened argument checking in `HeightfieldCollisionShape` constructors.
 + Disabled 20 diagnostic jmePhysicsSpace.cpp printfs in Release natives.
