@@ -297,7 +297,7 @@
             <message key="ws.preceded" value="GenericWhitespace ''{0}'' is preceded with whitespace."/>
         </module>
         <module name="MethodParamPad">
-            <property name="tokens" value="CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF, SUPER_CTOR_CALL, ENUM_CONSTANT_DEF, RECORD_DEF"/>
+            <property name="tokens" value="CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF, CTOR_CALL, SUPER_CTOR_CALL, ENUM_CONSTANT_DEF, RECORD_DEF, RECORD_PATTERN_DEF"/>
         </module>
         <module name="NoLineWrap">
             <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT"/>
@@ -344,7 +344,7 @@
         </module>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter">
-            <property name="tokens" value="COMMA, SEMI, TYPECAST, LITERAL_IF, LITERAL_ELSE, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, DO_WHILE"/>
+            <property name="tokens" value="COMMA, SEMI, TYPECAST, LITERAL_IF, LITERAL_ELSE, LITERAL_RETURN, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, LITERAL_FINALLY, DO_WHILE, ELLIPSIS, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_CATCH, LAMBDA, LITERAL_YIELD, LITERAL_CASE, LITERAL_WHEN"/>
         </module>
         <module name="WhitespaceAround">
             <property name="allowEmptyConstructors" value="true"/>
