@@ -425,35 +425,101 @@ and point the <code>ANDROID_HOME</code> environment variable to that installatio
 artifacts will be found in "build/libs" (desktop) and "build/outputs/aar" (Android).</p>
 </div>
 <div class="sect2">
-<h3 id="_install_artifacts"><a class="anchor" href="#_install_artifacts"></a>Install artifacts</h3>
+<h3 id="_local_installation"><a class="anchor" href="#_local_installation"></a>Local installation</h3>
 <div class="paragraph">
-<p>You can install the built artifacts to your local Maven repository:</p>
+<p>Once you&#8217;ve successfully built one or more libraries,
+You can install them to your local Maven repository.</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>using Bash or Fish or PowerShell or Zsh: <code>./gradlew install;./gradlew -b android.gradle install</code></p>
 </li>
 <li>
 <p>using Windows Command Prompt:</p>
-<div class="ulist">
-<ul>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
 <p><code>.\gradlew install</code></p>
 </li>
 <li>
 <p><code>.\gradlew -b android.gradle install</code></p>
 </li>
-</ul>
+</ol>
 </div>
 </li>
-</ul>
+</ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_website"><a class="anchor" href="#_website"></a>Website</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download and extract the LbjExamples source code from GitHub:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>using Git:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p><code>git clone <a href="https://github.com/stephengold/LbjExamples.git" class="bare">https://github.com/stephengold/LbjExamples.git</a></code></p>
+</li>
+<li>
+<p><code>cd LbjExamples</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>using a web browser:</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>browse to <a href="https://github.com/stephengold/LbjExamples/archive/refs/heads/master.zip" class="bare">https://github.com/stephengold/LbjExamples/archive/refs/heads/master.zip</a></p>
+</li>
+<li>
+<p>extract the contents of the downloaded ZIP file</p>
+</li>
+<li>
+<p><code>cd</code> to the extracted directory</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Edit "docs/playbook.yml" and replace "/home/sgold/NetBeansProjects/LbjExamples"
+with an absolute path to your extracted directory (2 places).</p>
+</li>
+<li>
+<p><a href="https://docs.antora.org/antora/latest/install-and-run-quickstart/#install-nodejs">Install Node.js</a></p>
+</li>
+<li>
+<p>Install Antora: <code>npm i -D -E @antora/cli@3.1</code></p>
+</li>
+<li>
+<p>Run Antora: <code>npx antora docs/playbook.yml</code></p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
-<p>After a build, you can restore the project to a pristine state:</p>
+<p>After a successful build,
+your local site copy will be found in the "docs/build/site" directory.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cleanup"><a class="anchor" href="#_cleanup"></a>Cleanup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>At any time, you can restore the project to a pristine state:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -474,50 +540,6 @@ artifacts will be found in "build/libs" (desktop) and "build/outputs/aar" (Andro
 </div>
 </li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_website_content"><a class="anchor" href="#_website_content"></a>Website content</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Download and extract the source code from GitHub:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><code>git clone <a href="https://github.com/stephengold/LbjExamples.git" class="bare">https://github.com/stephengold/LbjExamples.git</a></code></p>
-</li>
-<li>
-<p><code>cd LbjExamples</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Edit "docs/playbook.yml" and replace "/home/sgold/NetBeansProjects/LbjExamples"
-with an absolute path to your checkout directory (2 places).</p>
-</li>
-<li>
-<p><a href="https://docs.antora.org/antora/latest/install-and-run-quickstart/#install-nodejs">Install Node.js</a></p>
-</li>
-<li>
-<p>Run Antora:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><code>npx antora docs/playbook.yml</code></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>After a successful build,
-the local copy of the site will be found in the "docs/build/site" directory.</p>
 </div>
 </div>
 </div>
