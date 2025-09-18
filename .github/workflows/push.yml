@@ -326,15 +326,15 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
-  Java25-Linux:
+  Java24-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - uses: actions/setup-java@v5
         with:
-          distribution: 'liberica'
-          java-version: 25
+          distribution: 'zulu'
+          java-version: 24
       - uses: actions/checkout@v5
       - uses: gradle/actions/setup-gradle@v4
       - run: |
