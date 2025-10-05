@@ -15,7 +15,7 @@ jobs:
           distribution: 'zulu'
           java-version: 8
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 -x checkstyleMain -x checkstyleTest run build install \
             --console=plain \
