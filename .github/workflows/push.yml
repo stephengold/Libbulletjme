@@ -102,7 +102,7 @@ jobs:
 
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: macos-13
+    runs-on: macos-15-intel
     timeout-minutes: 15
     steps:
       - uses: actions/setup-java@v5
