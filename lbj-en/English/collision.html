@@ -497,7 +497,9 @@ to disable collisions between the ends of a joint.
 <div class="sect2">
 <h3 id="_using_a_dynamic_filter"><a class="anchor" href="#_using_a_dynamic_filter"></a>Using a dynamic filter</h3>
 <div class="paragraph">
-<p>Libbulletjme invokes <code>space.needsCollision()</code> for each AABB overlap
+<p>For each collision group in a space,
+you can register a collision-group listener.
+Libbulletjme invokes the collision-group listeners for each AABB overlap
 that isn&#8217;t suppressed by collision groups or ignore lists.
 The default implementation returns <code>true</code>, meaning "process this overlap".</p>
 </div>
