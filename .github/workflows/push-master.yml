@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 22.20.0
       - uses: actions/checkout@v5
-      - run: npm i -D -E antora
+      - run: npm install --save-dev --save-exact antora
       - run: npx antora src/site/ci-playbook.yml
       - run: ./gradlew copyJavadocToSite --console=plain --stacktrace
       - uses: peaceiris/actions-gh-pages@v4
