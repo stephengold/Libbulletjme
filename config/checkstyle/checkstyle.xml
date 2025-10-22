@@ -186,6 +186,7 @@
         <module name="CommentsIndentation">
             <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
         </module>
+        <module name="HexLiteralCase"/>
         <module name="OuterTypeFilename"/>
         <module name="UpperEll"/>
 

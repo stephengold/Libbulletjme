@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022-2023, Stephen Gold
+ Copyright (c) 2022-2025 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -196,9 +196,9 @@ public class IndexBuffer {
     public int get(int position) {
         int result;
         if (bytes != null) {
-            result = bytes.get(position) & 0xff;
+            result = bytes.get(position) & 0xFF;
         } else if (shorts != null) {
-            result = shorts.get(position) & 0xffff;
+            result = shorts.get(position) & 0xFFFF;
         } else {
             result = ints.get(position);
         }
@@ -288,9 +288,9 @@ public class IndexBuffer {
     protected int get() {
         int result;
         if (bytes != null) {
-            result = bytes.get() & 0xff;
+            result = bytes.get() & 0xFF;
         } else if (shorts != null) {
-            result = shorts.get() & 0xffff;
+            result = shorts.get() & 0xFFFF;
         } else {
             result = ints.get();
         }
