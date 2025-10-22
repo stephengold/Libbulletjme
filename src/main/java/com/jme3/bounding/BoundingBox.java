@@ -43,6 +43,9 @@ import com.jme3.math.Vector3f;
  * @version $Id: BoundingBox.java,v 1.50 2007/09/22 16:46:35 irrisor Exp $
  */
 public class BoundingBox {
+    /**
+     * location of the box's center
+     */
     final private Vector3f center = new Vector3f();
     /**
      * the X-extent of the box (>=0, may be +Infinity)
