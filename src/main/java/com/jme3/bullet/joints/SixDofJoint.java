@@ -512,6 +512,9 @@ public class SixDofJoint extends Constraint {
         gatherMotors();
     }
 
+    /**
+     * Allocate and initialize references to all motors, during joint creation.
+     */
     private void gatherMotors() {
         assert rotationalMotors == null;
         assert translationalMotor == null;

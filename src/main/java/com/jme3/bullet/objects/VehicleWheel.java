@@ -688,6 +688,9 @@ public class VehicleWheel {
     // *************************************************************************
     // Java private methods
 
+    /**
+     * Apply the cached tuning parameters to the native object.
+     */
     private void applyInfo() {
         if (vehicleId != 0L) {
             applyInfo(vehicleId, wheelIndex,
