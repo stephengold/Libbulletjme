@@ -14,7 +14,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 8
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 -x checkstyleMain -x checkstyleTest run build install \
@@ -31,7 +31,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 11
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - uses: gradle/actions/wrapper-validation@v4
       - run: |
@@ -49,7 +49,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 run build install \
@@ -67,7 +67,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 -Ptool=gcc run build install \
@@ -98,7 +98,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=MacOSX64 install \
@@ -128,7 +128,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 run build install \
@@ -158,7 +158,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows64 run build install \
@@ -191,7 +191,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 install \
@@ -221,7 +221,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: sudo apt-get update
       - run: sudo apt install g++-9-arm-linux-gnueabihf
       - run: arm-linux-gnueabihf-g++-9 --version
@@ -254,7 +254,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: sudo apt-get update
       - run: sudo apt install g++-10-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-10 --version
@@ -287,7 +287,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: sudo apt-get update
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - run: loongarch64-linux-gnu-g++-13 --version
@@ -315,7 +315,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 24
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 run build install \
