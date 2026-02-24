@@ -50,8 +50,8 @@ echo '[EOF]'
 # Retry if the default repository isn't found (status=400).
 
 if [ "${statusCode}" == "400" ]; then
-  echo "Will retry after 90 seconds."
-  sleep 90
+  echo "Will retry after 200 seconds."
+  sleep 200
 
   statusCode2=$(curl "${url}" \
     --no-progress-meter \
