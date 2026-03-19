@@ -121,13 +121,35 @@ void jmePhysicsSpace::contactEndedCallback(btPersistentManifold * const &pm) {
         return;
     }
 
-    jmePhysicsSpace * const pSpace = (jmePhysicsSpace *) pUser0->m_jmeSpace;
+    jmePhysicsSpace * pSpace = (jmePhysicsSpace *) pUser0->m_jmeSpace;
+    // pSpace could be NULL if Body0 was removed from the space.
     if (pSpace == NULL) {
+        const btCollisionObject * const pBody1 = pm->getBody1();
+        if (pBody1 == NULL) {
 #ifdef _DEBUG
-        printf("null jmePhysicsSpace in contactEndedCallback\n");
-        fflush(stdout);
+            printf("null body 1 in contactEndedCallback\n");
+            fflush(stdout);
 #endif
-        return;
+            return;
+        }
+
+        jmeUserPointer const pUser1 = (jmeUserPointer) pBody1->getUserPointer();
+        if (pUser1 == NULL) {
+#ifdef _DEBUG
+            printf("null body 1 user pointer in contactEndedCallback\n");
+            fflush(stdout);
+#endif
+            return;
+        }
+
+        pSpace = (jmePhysicsSpace *) pUser1->m_jmeSpace;
+        if (pSpace == NULL) {
+#ifdef _DEBUG
+            printf("can't access jmePhysicsSpace in contactEndedCallback\n");
+            fflush(stdout);
+#endif
+            return;
+        }
     }
 
 #if BT_THREADSAFE
