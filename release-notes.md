@@ -1,5 +1,22 @@
 # Release log for the Libbulletjme project
 
+## Version 23.0.0 released on 22 March 2026
+
++ Added the `onContactConceived()` method to
+  the `ContactListener` interface (issue #49). (API change)
++ Changed how step flags are passed
+  to `PhysicsSpace.update()` and `PhysicsSpace.stepSimulation()`. (API change)
++ Bugfix:  contactEnded callback is skipped after removal of Body0 (issue #41)
++ Bugfix:  crash in `btSoftBody::setPose()` due to singular matrix
++ Added the `StepFlag` class.
++ Added 2 public methods to manage overlap filtering:
+  + `CollisionSpace.isOverlapFilterEnabled()`
+  + `CollisionSpace.setOverlapFilterEnabled()`
++ Added `SWAPPED` and `PREDICTIVE` bits to the contact-point flags.
++ More checking of JNI return values in the glue code.
++ Removed unnecessary exception checks from the glue code.
++ Updated Android NDK to version "r29".
+
 ## Version 22.0.3 released on 12 September 2025
 
 + Strengthened argument checking in `HeightfieldCollisionShape` constructors.
