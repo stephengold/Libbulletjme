@@ -901,7 +901,8 @@ void btDiscreteDynamicsWorld::createPredictiveContactsInternal(btRigidBody** bod
 						btVector3 worldPointB = body->getWorldTransform().getOrigin() + distVec;
 						btVector3 localPointB = sweepResults.m_hitCollisionObject->getWorldTransform().inverse() * worldPointB;
 
-						btManifoldPoint newPoint(btVector3(0, 0, 0), localPointB, sweepResults.m_hitNormalWorld, distance);
+						bool isSwapped = false; // stephengold added 2026-03-21
+						btManifoldPoint newPoint(btVector3(0, 0, 0), localPointB, sweepResults.m_hitNormalWorld, distance, isSwapped); // stephengold modified 2026-03-21
 
 						bool isPredictive = true;
 						int index = manifold->addManifoldPoint(newPoint, isPredictive);

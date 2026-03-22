@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 jMonkeyEngine
+ * Copyright (c) 2020-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -65,6 +65,10 @@ final public class ContactPointFlag {
      * contact has a friction anchor
      */
     final public static int FRICTION_ANCHOR = 0x10;
+    /**
+     * contact is swapped (bodyA is body1 and bodyB is body0)
+     */
+    final public static int SWAPPED = 0x20;
     /**
      * message logger for this class
      */

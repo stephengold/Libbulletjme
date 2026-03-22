@@ -1158,7 +1158,7 @@ struct btBridgedManifoldResult : public btManifoldResult
 			localB = m_body1Wrap->getCollisionObject()->getWorldTransform().invXform(pointInWorld);
 		}
 
-		btManifoldPoint newPt(localA, localB, normalOnBInWorld, depth);
+		btManifoldPoint newPt(localA, localB, normalOnBInWorld, depth, isSwapped); // stephengold modified 2026-03-21
 		newPt.m_positionWorldOnA = pointA;
 		newPt.m_positionWorldOnB = pointInWorld;
 
