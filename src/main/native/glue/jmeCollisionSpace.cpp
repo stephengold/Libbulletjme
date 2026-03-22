@@ -107,6 +107,7 @@ jmeCollisionSpace::jmeCollisionSpace(JNIEnv *pEnv, jobject javaSpace) {
 
     m_javaSpace = pEnv->NewWeakGlobalRef(javaSpace); // TODO leak
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, m_javaSpace, "unable to make reference global",)
 }
 
 void jmeCollisionSpace::attachThread() {

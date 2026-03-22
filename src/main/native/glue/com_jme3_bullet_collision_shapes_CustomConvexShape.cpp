@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 jMonkeyEngine
+ * Copyright (c) 2024-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -175,6 +175,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_CustomConvexShape_
 
     jweak javaShapeRef = pEnv->NewWeakGlobalRef(javaShape); // TODO leak
     EXCEPTION_CHK(pEnv, 0);
+    NULL_CHK(pEnv, javaShapeRef, "unable to make reference global", 0)
 
     jmeConvexShape *pShape;
     if (heVector == NULL) {

@@ -140,6 +140,7 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_MultiBody_create
     jmeUserPointer const pUser = new jmeUserInfo(); //dance005
     pUser->m_javaRef = pEnv->NewWeakGlobalRef(object); //dance039
     EXCEPTION_CHK(pEnv, 0);
+    NULL_CHK(pEnv, pUser->m_javaRef, "unable to make reference global", 0)
     pUser->m_group = 0x1;
     pUser->m_groups = 0x1;
     pUser->m_jmeSpace = NULL;
