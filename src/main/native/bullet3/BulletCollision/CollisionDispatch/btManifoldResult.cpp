@@ -148,7 +148,8 @@ void btManifoldResult::addContactPoint(const btVector3& normalOnBInWorld, const 
 		valid = pShape->isValidContact(localB, m_partId1, m_index1);// stephengold added 2021-10-22
 	}// stephengold added 2021-10-22
 	if (!valid) return;// stephengold added 2021-10-22
-	btManifoldPoint newPt(localA, localB, normalOnBInWorld, depth, isSwapped); // stephengold modified 2026-03-21
+	const bool isPredictive = false;
+	btManifoldPoint newPt(localA, localB, normalOnBInWorld, depth, isPredictive, isSwapped); // stephengold modified 2026-03-21
 	newPt.m_positionWorldOnA = pointA;
 	newPt.m_positionWorldOnB = pointInWorld;
 

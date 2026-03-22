@@ -45,6 +45,7 @@ enum btContactPointFlags
 	BT_CONTACT_FLAG_CONTACT_STIFFNESS_DAMPING = 8,
 	BT_CONTACT_FLAG_FRICTION_ANCHOR = 16,
 	BT_CONTACT_FLAG_SWAPPED = 32, // stephengold added 2026-03-21
+	BT_CONTACT_FLAG_PREDICTIVE = 64, // stephengold added 2026-03-21
 };
 
 /// ManifoldContactPoint collects and maintains persistent contactpoints.
@@ -70,7 +71,7 @@ public:
 
 	btManifoldPoint(const btVector3& pointA, const btVector3& pointB,
 					const btVector3& normal,
-					btScalar distance, bool isSwapped) : m_localPointA(pointA), // stephengold modified 2026-03-21
+					btScalar distance, bool isPredictive, bool isSwapped) : m_localPointA(pointA), // stephengold modified 2026-03-21
 										 m_localPointB(pointB),
 										 m_positionWorldOnB(0,0,0),
 										 m_positionWorldOnA(0,0,0),
@@ -85,7 +86,7 @@ public:
 										 m_index0(-1),
 										 m_index1(-1),
 										 m_userPersistentData(0),
-										 m_contactPointFlags(isSwapped ? BT_CONTACT_FLAG_SWAPPED : 0), // stephengold modified 2026-03-21
+										 m_contactPointFlags((isSwapped ? BT_CONTACT_FLAG_SWAPPED : 0)|(isPredictive ? BT_CONTACT_FLAG_PREDICTIVE : 0)), // stephengold modified 2026-03-21
 										 m_appliedImpulse(0.f),
 										 m_prevRHS(0.f),
 										 m_appliedImpulseLateral1(0.f),
