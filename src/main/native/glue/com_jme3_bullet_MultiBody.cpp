@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2024 jMonkeyEngine
+ * Copyright (c) 2020-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -178,7 +178,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_MultiBody_finalizeNative
         if (pUser) {
             if (pUser->m_javaRef) {
                 pEnv->DeleteWeakGlobalRef(pUser->m_javaRef); //dance039
-                EXCEPTION_CHK(pEnv,);
+                // no check for exceptions!
             }
             delete pUser; //dance005
         }

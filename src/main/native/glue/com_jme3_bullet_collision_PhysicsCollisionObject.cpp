@@ -112,7 +112,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_PhysicsCollisionObject_fin
             }
         }
         pEnv->DeleteWeakGlobalRef(pUser->m_javaRef); //dance041
-        EXCEPTION_CHK(pEnv,);
+        // no check for exceptions!
 
         delete pUser; //dance013
     }
