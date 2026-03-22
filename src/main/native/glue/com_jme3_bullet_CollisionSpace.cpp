@@ -110,6 +110,7 @@ struct JmeContactResultCallback
                 jmeClasses::PhysicsCollisionEvent_Class,
                 jmeClasses::PhysicsCollisionEvent_init, pcoA, pcoB, manifoldId);
         EXCEPTION_CHK(m_pEnv, btScalar(1));
+        NULL_CHK(m_pEnv, eventObject, "unable to create", btScalar(1))
 
         m_pEnv->CallVoidMethod(m_listener,
                 jmeClasses::PhysicsCollisionListener_method, eventObject);
