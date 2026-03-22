@@ -58,6 +58,10 @@ public:
 
     virtual ~jmePhysicsSpace();
 
+    static bool
+    contactConceivedCallback(btManifoldPoint&, btPersistentManifold*,
+            const btCollisionObject* pBodyA, const btCollisionObject* pBodyB);
+
     static void
     contactEndedCallback(btPersistentManifold * const &);
 

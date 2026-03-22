@@ -21,6 +21,7 @@ subject to the following restrictions:
 
 ///This is to allow MaterialCombiner/Custom Friction/Restitution values
 ContactAddedCallback gContactAddedCallback = 0;
+ContactConceivedCallback gContactConceivedCallback = 0;// stephengold added 2026-03-22
 
 CalculateCombinedCallback gCalculateCombinedRestitutionCallback = &btManifoldResult::calculateCombinedRestitution;
 CalculateCombinedCallback gCalculateCombinedFrictionCallback = &btManifoldResult::calculateCombinedFriction;
@@ -192,6 +193,12 @@ void btManifoldResult::addContactPoint(const btVector3& normalOnBInWorld, const 
 		newPt.m_index1 = m_index1;
 	}
 	//printf("depth=%f\n",depth);
+        if (gContactConceivedCallback) {// stephengold added 2026-03-22
+	        const btCollisionObject* pco0 = getBody0Internal();// stephengold added 2026-03-22
+	        const btCollisionObject* pco1 = getBody1Internal();// stephengold added 2026-03-22
+                bool accept = (*gContactConceivedCallback)(newPt, m_manifoldPtr, pcoA, pcoB);// stephengold added 2026-03-22
+                if (!accept) return;// stephengold added 2026-03-22
+        }// stephengold added 2026-03-22
 	///@todo, check this for any side effects
 	if (insertIndex >= 0)
 	{

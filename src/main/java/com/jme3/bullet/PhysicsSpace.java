@@ -1004,6 +1004,27 @@ public class PhysicsSpace
     // ContactListener methods
 
     /**
+     * Invoked by native code immediately before a contact point is added to a
+     * manifold. Skipped if stepSimulation() was invoked without the
+     * {@code contactConceived} flag set.
+     * <p>
+     * Override this method to customize how contacts are handled.
+     *
+     * @param pointId the native ID of the {@code btManifoldPoint} (not zero)
+     * @param manifoldId the native ID of the {@code btPersistentManifold} (not
+     * zero)
+     * @param pcoA the "A" collision object (not null)
+     * @param pcoB the "B" collision object (not null)
+     * @return true to accept the contact, or false to reject it
+     */
+    @Override
+    public boolean onContactConceived(long pointId, long manifoldId,
+            PhysicsCollisionObject pcoA, PhysicsCollisionObject pcoB) {
+        assert NativeLibrary.jniEnvId() == jniEnvId() : "wrong thread";
+        return true;
+    }
+
+    /**
      * Invoked by native code immediately after a contact manifold is destroyed.
      * Skipped if stepSimulation() was invoked without the {@code contactEnded}
      * flag set.

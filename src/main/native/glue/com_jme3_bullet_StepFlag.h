@@ -13,6 +13,8 @@ extern "C" {
 #define com_jme3_bullet_StepFlag_contactProcessed 2L
 #undef com_jme3_bullet_StepFlag_contactStarted
 #define com_jme3_bullet_StepFlag_contactStarted 4L
+#undef com_jme3_bullet_StepFlag_contactConceived
+#define com_jme3_bullet_StepFlag_contactConceived 8L
 /*
  * Class:     com_jme3_bullet_StepFlag
  * Method:    generateJniHeaderFile

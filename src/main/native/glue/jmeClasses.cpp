@@ -51,6 +51,7 @@ jmethodID jmeClasses::CustomConvexShape_locateSupport;
 
 jmethodID jmeClasses::PhysicsSpace_preTick;
 jmethodID jmeClasses::PhysicsSpace_postTick;
+jmethodID jmeClasses::PhysicsSpace_onContactConceived;
 jmethodID jmeClasses::PhysicsSpace_onContactEnded;
 jmethodID jmeClasses::PhysicsSpace_onContactProcessed;
 jmethodID jmeClasses::PhysicsSpace_onContactStarted;
@@ -248,6 +249,9 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     EXCEPTION_CHK(pEnv,);
     GLOBAL_METHOD(PhysicsSpace_preTick, physicsSpace, "preTick", "(F)V");
     GLOBAL_METHOD(PhysicsSpace_postTick, physicsSpace, "postTick", "(F)V");
+    GLOBAL_METHOD(PhysicsSpace_onContactConceived,
+            physicsSpace, "onContactConceived",
+            "(JJLcom/jme3/bullet/collision/PhysicsCollisionObject;Lcom/jme3/bullet/collision/PhysicsCollisionObject;)Z");
     GLOBAL_METHOD(PhysicsSpace_onContactEnded,
             physicsSpace, "onContactEnded", "(J)V");
     GLOBAL_METHOD(PhysicsSpace_onContactProcessed,

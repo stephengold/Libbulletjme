@@ -101,6 +101,116 @@ void jmePhysicsSpace::createPhysicsSpace(const btVector3& min,
 
 #endif // BT_THREADSAFE
 
+bool jmePhysicsSpace::contactConceivedCallback(btManifoldPoint& contactPoint,
+            btPersistentManifold* pManifold,
+            const btCollisionObject* pBodyA, const btCollisionObject* pBodyB) {
+    btAssert(pManifold->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
+    BT_PROFILE("contactConceivedCallback");
+
+    if (pBodyA == NULL || pBodyB == NULL) {
+#ifdef _DEBUG
+        printf("null collision object in contactConceivedCallback\n");
+        fflush(stdout);
+#endif
+        return true;
+    }
+    jmeUserPointer const pUserA = (jmeUserPointer) pBodyA->getUserPointer();
+    jmeUserPointer const pUserB = (jmeUserPointer) pBodyB->getUserPointer();
+    if (pUserA == NULL || pUserB == NULL) {
+#ifdef _DEBUG
+        printf("null userPointer in contactConceivedCallback\n");
+        fflush(stdout);
+#endif
+        return true;
+    }
+
+    jmePhysicsSpace * pSpace = (jmePhysicsSpace *) pUserA->m_jmeSpace;
+    if (pSpace == NULL) {
+#ifdef _DEBUG
+        printf("can't access jmePhysicsSpace in contactConceivedCallback\n");
+        fflush(stdout);
+#endif
+        return true;
+    }
+
+#if BT_THREADSAFE
+    pSpace->m_mutex.lock();
+#endif
+    JNIEnv * const pEnv = pSpace->getEnvAndAttach();
+    jobject javaPhysicsSpace = pEnv->NewLocalRef(pSpace->getJavaPhysicsSpace());
+    if (javaPhysicsSpace == NULL) {
+#ifdef _DEBUG
+        printf("null javaPhysicsSpace in contactConceivedCallback\n");
+        fflush(stdout);
+#endif
+#if BT_THREADSAFE
+        pSpace->m_mutex.unlock();
+#endif
+        return true;
+    }
+
+    jobject javaCollisionObjectA = pEnv->NewLocalRef(pUserA->m_javaRef);
+    if (pEnv->ExceptionCheck()) {
+#if BT_THREADSAFE
+        pSpace->m_mutex.unlock();
+#endif
+        return true;
+    }
+    jobject javaCollisionObjectB = pEnv->NewLocalRef(pUserB->m_javaRef);
+    if (pEnv->ExceptionCheck()) {
+#if BT_THREADSAFE
+        pSpace->m_mutex.unlock();
+#endif
+        return true;
+    }
+    jlong pointId = reinterpret_cast<jlong> (&contactPoint);
+    jlong manifoldId = reinterpret_cast<jlong> (pManifold);
+    jboolean accept = pEnv->CallBooleanMethod(javaPhysicsSpace,
+            jmeClasses::PhysicsSpace_onContactConceived,
+            pointId, manifoldId, javaCollisionObjectA, javaCollisionObjectB);
+    if (pEnv->ExceptionCheck()) {
+#ifdef _DEBUG
+        printf("exception in contactConceivedCallback CallBooleanMethod\n");
+        fflush(stdout);
+#endif
+#if BT_THREADSAFE
+        pSpace->m_mutex.unlock();
+#endif
+        return accept;
+    }
+
+    pEnv->DeleteLocalRef(javaPhysicsSpace);
+#ifdef _DEBUG
+    if (pEnv->ExceptionCheck()) {
+        printf("exception in contactConceivedCallback DeleteLocalRef space\n");
+        fflush(stdout);
+    }
+#endif
+    pEnv->DeleteLocalRef(javaCollisionObjectA);
+    if (pEnv->ExceptionCheck()) {
+#ifdef _DEBUG
+        printf("exception in contactConceivedCallback DeleteLocalRef A\n");
+        fflush(stdout);
+#endif
+#if BT_THREADSAFE
+        pSpace->m_mutex.unlock();
+#endif
+        return true;
+    }
+    pEnv->DeleteLocalRef(javaCollisionObjectB);
+#ifdef _DEBUG
+    if (pEnv->ExceptionCheck()) {
+        printf("exception in contactConceivedCallback DeleteLocalRef B\n");
+        fflush(stdout);
+    }
+#endif
+#if BT_THREADSAFE
+    pSpace->m_mutex.unlock();
+#endif
+
+    return accept;
+}
+
 void jmePhysicsSpace::contactEndedCallback(btPersistentManifold * const &pm) {
     btAssert(pm->getObjectType() == BT_PERSISTENT_MANIFOLD_TYPE);
     BT_PROFILE("contactEndedCallback");
@@ -440,6 +550,13 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 
 void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
         jfloat accuracy, jint stepFlags) {
+
+    if (stepFlags & com_jme3_bullet_StepFlag_contactConceived) {
+        gContactConceivedCallback = &contactConceivedCallback;
+    } else {
+        gContactConceivedCallback = NULL;
+    }
+
     if (stepFlags & com_jme3_bullet_StepFlag_contactEnded) {
         gContactEndedCallback = &contactEndedCallback;
     } else {

@@ -58,6 +58,10 @@ final public class StepFlag {
      */
     final public static int contactStarted = 0x4;
     /**
+     * enable {@code onContactConceived()} callbacks
+     */
+    final public static int contactConceived = 0x8;
+    /**
      * message logger for this class
      */
     final public static Logger logger
@@ -81,6 +85,9 @@ final public class StepFlag {
      */
     public static String describe(int flags) {
         Collection<String> flagList = new ArrayList<>(3);
+        if ((flags & contactConceived) != 0x0) {
+            flagList.add("contactConceived");
+        }
         if ((flags & contactStarted) != 0x0) {
             flagList.add("contactStarted");
         }

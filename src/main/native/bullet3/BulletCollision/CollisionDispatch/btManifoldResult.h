@@ -30,6 +30,8 @@ class btManifoldPoint;
 
 typedef bool (*ContactAddedCallback)(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1);
 extern ContactAddedCallback gContactAddedCallback;
+typedef bool (*ContactConceivedCallback)(btManifoldPoint&, btPersistentManifold*, const btCollisionObject* pBodyA, const btCollisionObject* pBodyB);// stephengold added 2026-03-22
+extern ContactConceivedCallback gContactConceivedCallback;// stephengold added 2026-03-22
 
 //#define DEBUG_PART_INDEX 1
 

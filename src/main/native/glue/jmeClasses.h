@@ -78,6 +78,7 @@ public:
 
     static jmethodID PhysicsSpace_preTick;
     static jmethodID PhysicsSpace_postTick;
+    static jmethodID PhysicsSpace_onContactConceived;
     static jmethodID PhysicsSpace_onContactEnded;
     static jmethodID PhysicsSpace_onContactProcessed;
     static jmethodID PhysicsSpace_onContactStarted;
