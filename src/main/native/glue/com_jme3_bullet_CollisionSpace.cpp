@@ -301,6 +301,30 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_isForceUpdateAllA
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    isOverlapFilterEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_isOverlapFilterEnabled
+  (JNIEnv *pEnv, jclass, jlong spaceId) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.", JNI_FALSE);
+    btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.", JNI_FALSE)
+    btOverlappingPairCache * const pPairCache = pWorld->getPairCache();
+    NULL_CHK(pEnv, pPairCache, "The pair cache does not exist.", JNI_FALSE)
+
+    const btOverlapFilterCallback *
+            pOFCallback = pPairCache->getOverlapFilterCallback();
+    if (pOFCallback) {
+        return JNI_TRUE;
+    } else {
+        return JNI_FALSE;
+    }
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    pairTest
  * Signature: (JJJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
  */
@@ -484,6 +508,30 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setDeterministicOverl
 
     btDispatcherInfo& dispatchInfo = pWorld->getDispatchInfo();
     dispatchInfo.m_deterministicOverlappingPairs = (bool)desiredSetting;
+}
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    setOverlapFilterEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setOverlapFilterEnabled
+  (JNIEnv *pEnv, jclass, jlong spaceId, jboolean enable) {
+    jmeCollisionSpace * const
+            pSpace = reinterpret_cast<jmeCollisionSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The collision space does not exist.",);
+    btCollisionWorld * const pWorld = pSpace->getCollisionWorld();
+    NULL_CHK(pEnv, pWorld, "The collision world does not exist.",)
+    btOverlappingPairCache * const pPairCache = pWorld->getPairCache();
+    NULL_CHK(pEnv, pPairCache, "The pair cache does not exist.",)
+
+    btOverlapFilterCallback *
+            pOFCallback = pPairCache->getOverlapFilterCallback();
+    if (pOFCallback) {
+        delete pOFCallback; //dance011
+    }
+    pOFCallback = enable ? new jmeFilterCallback() : NULL;
+    pPairCache->setOverlapFilterCallback(pOFCallback); //dance011
 }
 
 /*

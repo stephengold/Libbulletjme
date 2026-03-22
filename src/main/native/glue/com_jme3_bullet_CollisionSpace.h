@@ -89,6 +89,14 @@ JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_isForceUpdateAllA
 
 /*
  * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    isOverlapFilterEnabled
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_jme3_bullet_CollisionSpace_isOverlapFilterEnabled
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
  * Method:    pairTest
  * Signature: (JJJLcom/jme3/bullet/collision/PhysicsCollisionListener;)I
  */
@@ -125,6 +133,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_removeCollisionObject
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setDeterministicOverlappingPairs
+  (JNIEnv *, jclass, jlong, jboolean);
+
+/*
+ * Class:     com_jme3_bullet_CollisionSpace
+ * Method:    setOverlapFilterEnabled
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_CollisionSpace_setOverlapFilterEnabled
   (JNIEnv *, jclass, jlong, jboolean);
 
 /*

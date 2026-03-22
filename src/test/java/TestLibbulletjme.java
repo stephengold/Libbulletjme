@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2020-2025 Stephen Gold
+ Copyright (c) 2020-2026 Stephen Gold
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
@@ -2150,6 +2150,7 @@ public class TestLibbulletjme {
         Assert.assertEquals(
                 RayTestFlag.SubSimplexRaytest, space.getRayTestFlags());
         Assert.assertTrue(space.isForceUpdateAllAabbs());
+        Assert.assertTrue(space.isOverlapFilterEnabled());
         Assert.assertFalse(space.isUsingDeterministicDispatch());
     }
 
