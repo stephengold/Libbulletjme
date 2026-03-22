@@ -789,7 +789,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Callback to determine whether the specified objects should be allowed to
  collide. Invoked during broadphase, after axis-aligned bounding boxes,
  ignore lists, and collision groups have been checked. Override this
- method to implement dynamic collision filtering.</div>
+ method to implement dynamic collision filtering. When not needed, the
+ callback can be disabled by <code>setOverlapFilterEnabled(false)</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>pcoA</code> - the first collision object (not null)</dd>
