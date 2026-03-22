@@ -163,14 +163,17 @@ bool jmeClasses::reinitializationCallbackFlag = false;
 #define GLOBAL_FIELD(var, clss, name, sig) { \
     (var) = pEnv->GetFieldID((clss), (name), (sig)); \
     EXCEPTION_CHK(pEnv,); \
+    NULL_CHK(pEnv, var, "field not found",) \
 }
 #define GLOBAL_METHOD(var, clss, name, sig) { \
     (var) = pEnv->GetMethodID((clss), (name), (sig)); \
     EXCEPTION_CHK(pEnv,); \
+    NULL_CHK(pEnv, var, "method not found",) \
 }
 #define GLOBAL_STATIC_METHOD(var, clss, name, sig) { \
     (var) = pEnv->GetStaticMethodID((clss), (name), (sig)); \
     EXCEPTION_CHK(pEnv,); \
+    NULL_CHK(pEnv, var, "static method not found",) \
 }
 
 /*
