@@ -476,7 +476,7 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(float,int)" class="member-name-link">update</a><wbr>(float&nbsp;timeInterval,
  int&nbsp;maxSteps)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Update the space.</div>
+<div class="block">Update the space, enabling the default callbacks.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(float,int,boolean,boolean,boolean)" class="member-name-link">update</a><wbr>(float&nbsp;timeInterval,
@@ -485,17 +485,24 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
  boolean&nbsp;doProcessed,
  boolean&nbsp;doStarted)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Update the space.</div>
+<div class="block">Update the space, enabling the specified callbacks.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateSolver()" class="member-name-link">updateSolver</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(float,int,int)" class="member-name-link">update</a><wbr>(float&nbsp;timeInterval,
+ int&nbsp;maxSteps,
+ int&nbsp;stepFlags)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Update the space with the specified callbacks.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateSolver()" class="member-name-link">updateSolver</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Replace the existing contact-and-constraint solver with a new one of the
  correct type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#useScr(boolean)" class="member-name-link">useScr</a><wbr>(boolean&nbsp;setting)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#useScr(boolean)" class="member-name-link">useScr</a><wbr>(boolean&nbsp;setting)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Alter whether the space uses Speculative Contact Restitution (native
  field: m_applySpeculativeContactRestitution).</div>
 </div>
@@ -1128,8 +1135,8 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(float&nbsp;timeInterval,
  int&nbsp;maxSteps)</span></div>
-<div class="block">Update the space. This method should be invoked on the thread that
- created the space.</div>
+<div class="block">Update the space, enabling the default callbacks. This method should be
+ invoked on the thread that created the space.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>timeInterval</code> - the time interval to simulate (in seconds, &ge;0)</dd>
@@ -1146,19 +1153,42 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
  boolean&nbsp;doEnded,
  boolean&nbsp;doProcessed,
  boolean&nbsp;doStarted)</span></div>
-<div class="block">Update the space. This method should be invoked from the thread that
- created the space.</div>
+<div class="block">Update the space, enabling the specified callbacks. This method should be
+ invoked on the thread that created the space.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>timeInterval</code> - the time interval to simulate (in seconds, &ge;0)</dd>
 <dd><code>maxSteps</code> - the maximum number of steps of size <code>accuracy</code>
  (&ge;1) or 0 for a single step of size <code>timeInterval</code></dd>
 <dd><code>doEnded</code> - true to enable <code>onContactEnded()</code> callbacks, false
- to skip them</dd>
+ to skip them (default=false)</dd>
 <dd><code>doProcessed</code> - true to enable <code>onContactProcessed()</code> callbacks,
- false to skip them</dd>
+ false to skip them (default=false)</dd>
 <dd><code>doStarted</code> - true to enable <code>onContactStarted()</code> callbacks,
- false to skip them</dd>
+ false to skip them (default=false)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="update(float,int,int)">
+<h3>update</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(float&nbsp;timeInterval,
+ int&nbsp;maxSteps,
+ int&nbsp;stepFlags)</span></div>
+<div class="block">Update the space with the specified callbacks. This method should be
+ invoked on the thread that created the space.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>timeInterval</code> - the time interval to simulate (in seconds, &ge;0)</dd>
+<dd><code>maxSteps</code> - the maximum number of steps of size <code>accuracy</code>
+ (&ge;1) or 0 for a single step of size <code>timeInterval</code></dd>
+<dd><code>stepFlags</code> - the desired flags, ORed together (default=0x0)</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list">
+<li><a href="StepFlag.html" title="class in com.jme3.bullet"><code>StepFlag</code></a></li>
+</ul>
+</dd>
 </dl>
 </section>
 </li>
@@ -1334,7 +1364,8 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <h3>onContactEnded</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onContactEnded</span><wbr><span class="parameters">(long&nbsp;manifoldId)</span></div>
 <div class="block">Invoked by native code immediately after a contact manifold is destroyed.
- Skipped if stepSimulation() was invoked with doEnded=false.
+ Skipped if stepSimulation() was invoked without the <code>contactEnded</code>
+ flag set.
  <p>
  Override this method to customize how contacts are handled.</div>
 <dl class="notes">
@@ -1354,7 +1385,8 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
  long&nbsp;pointId)</span></div>
 <div class="block">Invoked by native code immediately after a contact point is refreshed
  without being destroyed. Skipped for Sphere-Sphere contacts. Skipped if
- stepSimulation() was invoked with doProcessed=false.
+ stepSimulation() was invoked without the <code>contactProcessed</code> flag
+ set.
  <p>
  Override this method to customize how contacts are handled.</div>
 <dl class="notes">
@@ -1372,7 +1404,8 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <h3>onContactStarted</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onContactStarted</span><wbr><span class="parameters">(long&nbsp;manifoldId)</span></div>
 <div class="block">Invoked by native code immediately after a contact manifold is created.
- Skipped if stepSimulation() was invoked with doStarted=false.
+ Skipped if stepSimulation() was invoked without the
+ <code>contactStarted</code> flag.
  <p>
  Override this method to customize how contacts are handled.</div>
 <dl class="notes">

@@ -1508,6 +1508,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">contact has stiffness damping</div>
 </dd>
+<dt><a href="com/jme3/bullet/StepFlag.html#contactEnded" class="member-name-link">contactEnded</a> - Static variable in class com.jme3.bullet.<a href="com/jme3/bullet/StepFlag.html" title="class in com.jme3.bullet">StepFlag</a></dt>
+<dd>
+<div class="block">enable <code>onContactEnded()</code> callbacks</div>
+</dd>
 <dt><a href="com/jme3/bullet/SolverInfo.html#contactErp()" class="member-name-link">contactErp()</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/SolverInfo.html" title="class in com.jme3.bullet">SolverInfo</a></dt>
 <dd>
 <div class="block">Return the error-reduction parameter for contact constraints (native
@@ -1521,6 +1525,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/jme3/bullet/collision/ContactPointFlag.html" class="type-name-link" title="class in com.jme3.bullet.collision">ContactPointFlag</a> - Class in <a href="com/jme3/bullet/collision/package-summary.html">com.jme3.bullet.collision</a></dt>
 <dd>
 <div class="block">Named flags for a PhysicsCollisionEvent.</div>
+</dd>
+<dt><a href="com/jme3/bullet/StepFlag.html#contactProcessed" class="member-name-link">contactProcessed</a> - Static variable in class com.jme3.bullet.<a href="com/jme3/bullet/StepFlag.html" title="class in com.jme3.bullet">StepFlag</a></dt>
+<dd>
+<div class="block">enable <code>onContactProcessed()</code> callbacks</div>
+</dd>
+<dt><a href="com/jme3/bullet/StepFlag.html#contactStarted" class="member-name-link">contactStarted</a> - Static variable in class com.jme3.bullet.<a href="com/jme3/bullet/StepFlag.html" title="class in com.jme3.bullet">StepFlag</a></dt>
+<dd>
+<div class="block">enable <code>onContactStarted()</code> callbacks</div>
 </dd>
 <dt><a href="com/jme3/bullet/CollisionSpace.html#contactTest(com.jme3.bullet.collision.PhysicsCollisionObject,com.jme3.bullet.collision.PhysicsCollisionListener)" class="member-name-link">contactTest(PhysicsCollisionObject, PhysicsCollisionListener)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/CollisionSpace.html" title="class in com.jme3.bullet">CollisionSpace</a></dt>
 <dd>
@@ -2218,6 +2230,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Generate a textual description of the specified flags.</div>
 </dd>
 <dt><a href="com/jme3/bullet/SolverMode.html#describe(int)" class="member-name-link">describe(int)</a> - Static method in class com.jme3.bullet.<a href="com/jme3/bullet/SolverMode.html" title="class in com.jme3.bullet">SolverMode</a></dt>
+<dd>
+<div class="block">Generate a textual description of the specified flags.</div>
+</dd>
+<dt><a href="com/jme3/bullet/StepFlag.html#describe(int)" class="member-name-link">describe(int)</a> - Static method in class com.jme3.bullet.<a href="com/jme3/bullet/StepFlag.html" title="class in com.jme3.bullet">StepFlag</a></dt>
 <dd>
 <div class="block">Generate a textual description of the specified flags.</div>
 </dd>
@@ -6117,6 +6133,10 @@ loadScripts(document, 'script');</script>
 <div class="block">message logger for this class</div>
 </dd>
 <dt><a href="com/jme3/bullet/SolverMode.html#logger" class="member-name-link">logger</a> - Static variable in class com.jme3.bullet.<a href="com/jme3/bullet/SolverMode.html" title="class in com.jme3.bullet">SolverMode</a></dt>
+<dd>
+<div class="block">message logger for this class</div>
+</dd>
+<dt><a href="com/jme3/bullet/StepFlag.html#logger" class="member-name-link">logger</a> - Static variable in class com.jme3.bullet.<a href="com/jme3/bullet/StepFlag.html" title="class in com.jme3.bullet">StepFlag</a></dt>
 <dd>
 <div class="block">message logger for this class</div>
 </dd>
@@ -10606,6 +10626,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Alter the steering angle of the specified wheel.</div>
 </dd>
+<dt><a href="com/jme3/bullet/StepFlag.html" class="type-name-link" title="class in com.jme3.bullet">StepFlag</a> - Class in <a href="com/jme3/bullet/package-summary.html">com.jme3.bullet</a></dt>
+<dd>
+<div class="block">Named flags used when stepping a <code>PhysicsSpace</code> simulation.</div>
+</dd>
 <dt><a href="com/jme3/bullet/joints/motors/MotorParam.html#Stiffness" class="member-name-link">Stiffness</a> - Enum constant in enum class com.jme3.bullet.joints.motors.<a href="com/jme3/bullet/joints/motors/MotorParam.html" title="enum class in com.jme3.bullet.joints.motors">MotorParam</a></dt>
 <dd>
 <div class="block">spring's stiffness (m_springStiffness, default=0)</div>
@@ -11169,11 +11193,15 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#update(float,int)" class="member-name-link">update(float, int)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
-<div class="block">Update the space.</div>
+<div class="block">Update the space, enabling the default callbacks.</div>
 </dd>
 <dt><a href="com/jme3/bullet/PhysicsSpace.html#update(float,int,boolean,boolean,boolean)" class="member-name-link">update(float, int, boolean, boolean, boolean)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
 <dd>
-<div class="block">Update the space.</div>
+<div class="block">Update the space, enabling the specified callbacks.</div>
+</dd>
+<dt><a href="com/jme3/bullet/PhysicsSpace.html#update(float,int,int)" class="member-name-link">update(float, int, int)</a> - Method in class com.jme3.bullet.<a href="com/jme3/bullet/PhysicsSpace.html" title="class in com.jme3.bullet">PhysicsSpace</a></dt>
+<dd>
+<div class="block">Update the space with the specified callbacks.</div>
 </dd>
 <dt><a href="com/jme3/bullet/util/NativeSoftBodyUtil.html#updateClusterMesh(com.jme3.bullet.objects.PhysicsSoftBody,jme3utilities.lbj.Mesh,boolean)" class="member-name-link">updateClusterMesh(PhysicsSoftBody, Mesh, boolean)</a> - Static method in class com.jme3.bullet.util.<a href="com/jme3/bullet/util/NativeSoftBodyUtil.html" title="class in com.jme3.bullet.util">NativeSoftBodyUtil</a></dt>
 <dd>
