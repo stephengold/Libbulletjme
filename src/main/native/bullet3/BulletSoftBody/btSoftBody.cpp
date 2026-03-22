@@ -1225,7 +1225,12 @@ void btSoftBody::setPose(bool bvolume, bool bframe)
 		m_pose.m_aqq[1] += mq.y() * q;
 		m_pose.m_aqq[2] += mq.z() * q;
 	}
+      btScalar det = m_pose.m_aqq.determinant();// stephengold added 2026-03-22
+      if (btFabs(det) > SIMD_EPSILON) {// stephengold added 2026-03-22
 	m_pose.m_aqq = m_pose.m_aqq.inverse();
+      } else {// stephengold added 2026-03-22
+        m_pose.m_aqq.setIdentity();// stephengold added 2026-03-22
+      }// stephengold added 2026-03-22
 
 	updateConstants();
 }
