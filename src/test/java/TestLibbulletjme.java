@@ -1866,6 +1866,9 @@ public class TestLibbulletjme {
             performDropTest(CollisionShape dropShape, PhysicsSpace space) {
         verifyPhysicsSpaceDefaults(space);
 
+        space.setOverlapFilterEnabled(false);
+        Assert.assertFalse(space.isOverlapFilterEnabled());
+
         if (space.getSolverType() == SolverType.Lemke) {
             space.getSolverInfo().setGlobalCfm(0.001f);
         }
@@ -1967,6 +1970,9 @@ public class TestLibbulletjme {
     private static void
             performRayTests(CollisionShape shape, CollisionSpace space) {
         Assert.assertTrue(space.isEmpty());
+
+        space.setOverlapFilterEnabled(false);
+        Assert.assertFalse(space.isOverlapFilterEnabled());
 
         PhysicsGhostObject ghost = new PhysicsGhostObject(shape);
 

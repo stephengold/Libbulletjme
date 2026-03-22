@@ -27,7 +27,7 @@
     <!-- Checks for size violations:             -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
-        <property name="max" value="2250"/>
+        <property name="max" value="2300"/>
     </module>
     <module name="LineLength">
         <property name="ignorePattern" value="https://"/>
