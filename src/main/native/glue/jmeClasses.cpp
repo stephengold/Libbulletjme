@@ -156,6 +156,7 @@ bool jmeClasses::reinitializationCallbackFlag = false;
 #define GLOBAL_CLASS(var, resource) { \
     (var) = pEnv->FindClass(resource); \
     EXCEPTION_CHK(pEnv,); \
+    NULL_CHK(pEnv, var, "class not found",) \
     (var) = (jclass) pEnv->NewGlobalRef(var); \
     EXCEPTION_CHK(pEnv,); \
 }
@@ -229,10 +230,12 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass list = pEnv->FindClass("java/util/List");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, list, "class not found",)
     GLOBAL_METHOD(List_addMethod, list, "add", "(Ljava/lang/Object;)Z");
 
     jclass collisionSpace = pEnv->FindClass("com/jme3/bullet/CollisionSpace");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, collisionSpace, "class not found",)
     GLOBAL_METHOD(CollisionSpace_notifyCollisionGroupListeners,
             collisionSpace,
             "notifyCollisionGroupListeners",
@@ -242,11 +245,13 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     jclass customConvexShape
             = pEnv->FindClass("com/jme3/bullet/collision/shapes/CustomConvexShape");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, customConvexShape, "class not found",)
     GLOBAL_METHOD(CustomConvexShape_locateSupport, customConvexShape,
             "locateSupport", "(FFF)Lcom/jme3/math/Vector3f;");
 
     jclass physicsSpace = pEnv->FindClass("com/jme3/bullet/PhysicsSpace");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, physicsSpace, "class not found",)
     GLOBAL_METHOD(PhysicsSpace_preTick, physicsSpace, "preTick", "(F)V");
     GLOBAL_METHOD(PhysicsSpace_postTick, physicsSpace, "postTick", "(F)V");
     GLOBAL_METHOD(PhysicsSpace_onContactConceived,
@@ -265,6 +270,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     jclass physicsGhostObject
             = pEnv->FindClass("com/jme3/bullet/objects/PhysicsGhostObject");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, physicsGhostObject, "class not found",)
     GLOBAL_METHOD(PhysicsGhostObject_addOverlappingObject,
             physicsGhostObject,
             "addOverlappingObject",
@@ -272,7 +278,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     );
 
     jclass vec3d = pEnv->FindClass("com/simsilica/mathd/Vec3d");
-    if (pEnv->ExceptionCheck()) {
+    if (pEnv->ExceptionCheck() || vec3d == NULL) {
         pEnv->ExceptionClear();
 
         printf("WARNING: Libbulletjme didn't find the SimMath library.\n");
@@ -308,6 +314,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
         jclass quatd = pEnv->FindClass("com/simsilica/mathd/Quatd");
         EXCEPTION_CHK(pEnv,);
+        NULL_CHK(pEnv, quatd, "class not found",)
         GLOBAL_FIELD(Quatd_x, quatd, "x", "D");
         GLOBAL_FIELD(Quatd_y, quatd, "y", "D");
         GLOBAL_FIELD(Quatd_z, quatd, "z", "D");
@@ -317,6 +324,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
         jclass matrix3d = pEnv->FindClass("com/simsilica/mathd/Matrix3d");
         EXCEPTION_CHK(pEnv,);
+        NULL_CHK(pEnv, matrix3d, "class not found",)
         GLOBAL_FIELD(Matrix3d_m00, matrix3d, "m00", "D");
         GLOBAL_FIELD(Matrix3d_m01, matrix3d, "m01", "D");
         GLOBAL_FIELD(Matrix3d_m02, matrix3d, "m02", "D");
@@ -337,6 +345,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass quaternion = pEnv->FindClass("com/jme3/math/Quaternion");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, quaternion, "class not found",)
     GLOBAL_FIELD(Quaternion_x, quaternion, "x", "F");
     GLOBAL_FIELD(Quaternion_y, quaternion, "y", "F");
     GLOBAL_FIELD(Quaternion_z, quaternion, "z", "F");
@@ -346,6 +355,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass matrix3f = pEnv->FindClass("com/jme3/math/Matrix3f");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, matrix3f, "class not found",)
     GLOBAL_FIELD(Matrix3f_m00, matrix3f, "m00", "F");
     GLOBAL_FIELD(Matrix3f_m01, matrix3f, "m01", "F");
     GLOBAL_FIELD(Matrix3f_m02, matrix3f, "m02", "F");
@@ -369,6 +379,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
     jclass physicsCollisionListener = pEnv->FindClass(
             "com/jme3/bullet/collision/PhysicsCollisionListener");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, physicsCollisionListener, "class not found",)
     GLOBAL_METHOD(PhysicsCollisionListener_method,
             physicsCollisionListener,
             "collision",
@@ -408,6 +419,7 @@ void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
 
     jclass transform = pEnv->FindClass("com/jme3/math/Transform");
     EXCEPTION_CHK(pEnv,);
+    NULL_CHK(pEnv, transform, "class not found",)
     GLOBAL_METHOD(Transform_rotation,
             transform, "getRotation", "()Lcom/jme3/math/Quaternion;");
     GLOBAL_METHOD(Transform_scale,
