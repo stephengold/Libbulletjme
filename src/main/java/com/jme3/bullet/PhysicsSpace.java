@@ -727,8 +727,8 @@ public class PhysicsSpace
     }
 
     /**
-     * Update the space. This method should be invoked on the thread that
-     * created the space.
+     * Update the space, enabling the default callbacks. This method should be
+     * invoked on the thread that created the space.
      *
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      * @param maxSteps the maximum number of steps of size {@code accuracy}
@@ -737,29 +737,50 @@ public class PhysicsSpace
     public void update(float timeInterval, int maxSteps) {
         assert Validate.nonNegative(timeInterval, "time interval");
         assert Validate.nonNegative(maxSteps, "max steps");
-
-        boolean doEnded = false;
-        boolean doProcessed = false;
-        boolean doStarted = false;
-        update(timeInterval, maxSteps, doEnded, doProcessed, doStarted);
+        update(timeInterval, maxSteps, 0x0);
     }
 
     /**
-     * Update the space. This method should be invoked from the thread that
-     * created the space.
+     * Update the space, enabling the specified callbacks. This method should be
+     * invoked on the thread that created the space.
      *
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      * @param maxSteps the maximum number of steps of size {@code accuracy}
      * (&ge;1) or 0 for a single step of size {@code timeInterval}
      * @param doEnded true to enable {@code onContactEnded()} callbacks, false
-     * to skip them
+     * to skip them (default=false)
      * @param doProcessed true to enable {@code onContactProcessed()} callbacks,
-     * false to skip them
+     * false to skip them (default=false)
      * @param doStarted true to enable {@code onContactStarted()} callbacks,
-     * false to skip them
+     * false to skip them (default=false)
      */
     public void update(float timeInterval, int maxSteps, boolean doEnded,
             boolean doProcessed, boolean doStarted) {
+        int stepFlags = 0x0;
+        if (doEnded) {
+            stepFlags |= StepFlag.contactEnded;
+        }
+        if (doProcessed) {
+            stepFlags |= StepFlag.contactProcessed;
+        }
+        if (doStarted) {
+            stepFlags |= StepFlag.contactStarted;
+        }
+
+        update(timeInterval, maxSteps, stepFlags);
+    }
+
+    /**
+     * Update the space with the specified callbacks. This method should be
+     * invoked on the thread that created the space.
+     *
+     * @param timeInterval the time interval to simulate (in seconds, &ge;0)
+     * @param maxSteps the maximum number of steps of size {@code accuracy}
+     * (&ge;1) or 0 for a single step of size {@code timeInterval}
+     * @param stepFlags the desired flags, ORed together (default=0x0)
+     * @see com.jme3.bullet.StepFlag
+     */
+    public void update(float timeInterval, int maxSteps, int stepFlags) {
         assert Validate.nonNegative(timeInterval, "time interval");
         assert Validate.nonNegative(maxSteps, "max steps");
 
@@ -769,8 +790,7 @@ public class PhysicsSpace
 
         long spaceId = nativeId();
         assert accuracy > 0f : accuracy;
-        stepSimulation(spaceId, timeInterval, maxSteps, accuracy, doEnded,
-                doProcessed, doStarted);
+        stepSimulation(spaceId, timeInterval, maxSteps, accuracy, stepFlags);
     }
 
     /**
@@ -985,7 +1005,8 @@ public class PhysicsSpace
 
     /**
      * Invoked by native code immediately after a contact manifold is destroyed.
-     * Skipped if stepSimulation() was invoked with doEnded=false.
+     * Skipped if stepSimulation() was invoked without the {@code contactEnded}
+     * flag set.
      * <p>
      * Override this method to customize how contacts are handled.
      *
@@ -1000,7 +1021,8 @@ public class PhysicsSpace
     /**
      * Invoked by native code immediately after a contact point is refreshed
      * without being destroyed. Skipped for Sphere-Sphere contacts. Skipped if
-     * stepSimulation() was invoked with doProcessed=false.
+     * stepSimulation() was invoked without the {@code contactProcessed} flag
+     * set.
      * <p>
      * Override this method to customize how contacts are handled.
      *
@@ -1016,7 +1038,8 @@ public class PhysicsSpace
 
     /**
      * Invoked by native code immediately after a contact manifold is created.
-     * Skipped if stepSimulation() was invoked with doStarted=false.
+     * Skipped if stepSimulation() was invoked without the
+     * {@code contactStarted} flag.
      * <p>
      * Override this method to customize how contacts are handled.
      *
@@ -1272,6 +1295,5 @@ public class PhysicsSpace
             setSpeculativeContactRestitution(long spaceId, boolean apply);
 
     native private static void stepSimulation(long spaceId, float timeInterval,
-            int maxSubSteps, float accuracy, boolean enableContactEnded,
-            boolean enableContactProcessed, boolean enableContactStarted);
+            int maxSubSteps, float accuracy, int stepFlags);
 }

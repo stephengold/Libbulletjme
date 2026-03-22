@@ -101,9 +101,7 @@ public:
 
     void
     stepSimulation(jfloat timeInterval, jint maxSteps, jfloat accuracy,
-            jboolean enableContactEndedCallback,
-            jboolean enableContactProcessedCallback,
-            jboolean enableContactStartedCallback);
+            jint stepFlags);
 };
 
 #endif // JME_PHYSICS_SPACE_H

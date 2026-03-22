@@ -36,6 +36,8 @@
 #if BT_THREADSAFE
 #include "BulletDynamics/Dynamics/btDiscreteDynamicsWorldMt.h"
 #endif
+
+#include "com_jme3_bullet_StepFlag.h"
 #include "jmePhysicsSpace.h"
 #include "jmeClasses.h"
 #include "jmeUserInfo.h"
@@ -437,23 +439,20 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 }
 
 void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
-        jfloat accuracy, jboolean enableContactEndedCallback,
-        jboolean enableContactProcessedCallback,
-        jboolean enableContactStartedCallback) {
-
-    if ((bool) enableContactEndedCallback) {
+        jfloat accuracy, jint stepFlags) {
+    if (stepFlags & com_jme3_bullet_StepFlag_contactEnded) {
         gContactEndedCallback = &contactEndedCallback;
     } else {
         gContactEndedCallback = NULL;
     }
 
-    if ((bool) enableContactProcessedCallback) {
+    if (stepFlags & com_jme3_bullet_StepFlag_contactProcessed) {
         gContactProcessedCallback = &contactProcessedCallback;
     } else {
         gContactProcessedCallback = NULL;
     }
 
-    if ((bool) enableContactStartedCallback) {
+    if (stepFlags & com_jme3_bullet_StepFlag_contactStarted) {
         gContactStartedCallback = &contactStartedCallback;
     } else {
         gContactStartedCallback = NULL;
