@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2024 jMonkeyEngine
+ * Copyright (c) 2020-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -113,7 +113,7 @@ JNIEXPORT void JNICALL Java_vhacd4_Vhacd4_compute
     const jfloat * const pPositions
             = (jfloat *) pEnv->GetDirectBufferAddress(positionsBuffer);
     NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(positionsBuffer);
     EXCEPTION_CHK(pEnv,);
 
@@ -121,7 +121,7 @@ JNIEXPORT void JNICALL Java_vhacd4_Vhacd4_compute
     const jint * const pIndices
             = (jint *) pEnv->GetDirectBufferAddress(indicesBuffer);
     NULL_CHK(pEnv, pIndices, "The indices buffer is not direct.",);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
     const jlong capacityInts = pEnv->GetDirectBufferCapacity(indicesBuffer);
     EXCEPTION_CHK(pEnv,);
 

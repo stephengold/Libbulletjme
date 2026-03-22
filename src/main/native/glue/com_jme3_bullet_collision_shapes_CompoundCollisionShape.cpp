@@ -80,8 +80,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     NULL_CHK(pEnv, massBuffer, "The mass buffer does not exist.",);
     const jfloat * const pBuffer
             = (jfloat *) pEnv->GetDirectBufferAddress(massBuffer);
-    EXCEPTION_CHK(pEnv,);
-
+    // no check for exceptions!
     NULL_CHK(pEnv, pBuffer, "The mass buffer is not direct.",);
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
     EXCEPTION_CHK(pEnv,);

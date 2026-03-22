@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 jMonkeyEngine
+ * Copyright (c) 2019-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -80,13 +80,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     const unsigned char * const pIndices
             = (unsigned char *) pEnv->GetDirectBufferAddress(byteBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
 
     NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_UCHAR;
@@ -116,13 +116,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     const unsigned char * const pIndices
             = (unsigned char *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
 
     NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_INTEGER;
@@ -344,13 +344,13 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_
     const unsigned char * const pIndices
             = (unsigned char *) pEnv->GetDirectBufferAddress(shortBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.", 0);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
 
     NULL_CHK(pEnv, floatBuffer, "The position buffer does not exist.", 0);
     const unsigned char * const pVertices
             = (unsigned char *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.", 0);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
 
     btIndexedMesh * const pMesh = new btIndexedMesh(); //dance020
     pMesh->m_indexType = PHY_SHORT;
@@ -380,7 +380,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_f
     float * const pVertices
             = (float *) pEnv->GetDirectBufferAddress(floatBuffer);
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.",);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
     EXCEPTION_CHK(pEnv,);
     btAssert(capacityFloats == 3 * pMesh->m_numVertices);
@@ -388,7 +388,7 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_f
     NULL_CHK(pEnv, intBuffer, "The index buffer does not exist.",);
     jint * const pIndices = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.",);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
     const jlong capacityInts = pEnv->GetDirectBufferCapacity(intBuffer);
     EXCEPTION_CHK(pEnv,);
     btAssert(capacityInts == 3 * pMesh->m_numTriangles);
