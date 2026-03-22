@@ -494,7 +494,8 @@ public class CollisionSpace extends NativePhysicsObject {
      * Callback to determine whether the specified objects should be allowed to
      * collide. Invoked during broadphase, after axis-aligned bounding boxes,
      * ignore lists, and collision groups have been checked. Override this
-     * method to implement dynamic collision filtering.
+     * method to implement dynamic collision filtering. When not needed, the
+     * callback can be disabled by {@code setOverlapFilterEnabled(false)}.
      *
      * @param pcoA the first collision object (not null)
      * @param pcoB the 2nd collision object (not null)
