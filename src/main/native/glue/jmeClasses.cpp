@@ -158,7 +158,7 @@ bool jmeClasses::reinitializationCallbackFlag = false;
     EXCEPTION_CHK(pEnv,); \
     NULL_CHK(pEnv, var, "class not found",) \
     (var) = (jclass) pEnv->NewGlobalRef(var); \
-    EXCEPTION_CHK(pEnv,); \
+    NULL_CHK(pEnv, var, "unable to make reference global",) \
 }
 #define GLOBAL_FIELD(var, clss, name, sig) { \
     (var) = pEnv->GetFieldID((clss), (name), (sig)); \
