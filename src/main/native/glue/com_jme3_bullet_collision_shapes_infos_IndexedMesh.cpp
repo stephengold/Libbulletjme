@@ -382,7 +382,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_f
     NULL_CHK(pEnv, pVertices, "The position buffer is not direct.",);
     // no check for exceptions!
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -1);
     btAssert(capacityFloats == 3 * pMesh->m_numVertices);
 
     NULL_CHK(pEnv, intBuffer, "The index buffer does not exist.",);
@@ -390,7 +391,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_infos_IndexedMesh_f
     NULL_CHK(pEnv, pIndices, "The index buffer is not direct.",);
     // no check for exceptions!
     const jlong capacityInts = pEnv->GetDirectBufferCapacity(intBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityInts != -1);
     btAssert(capacityInts == 3 * pMesh->m_numTriangles);
 
     jint * const pMeshIndices = (jint *) pMesh->m_triangleIndexBase;

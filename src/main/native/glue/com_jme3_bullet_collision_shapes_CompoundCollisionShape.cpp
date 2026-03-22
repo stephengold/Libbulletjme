@@ -83,7 +83,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_CompoundCollisionSh
     // no check for exceptions!
     NULL_CHK(pEnv, pBuffer, "The mass buffer is not direct.",);
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -1);
 
     const int numChildren = pShape->getNumChildShapes();
     btTransform principal;

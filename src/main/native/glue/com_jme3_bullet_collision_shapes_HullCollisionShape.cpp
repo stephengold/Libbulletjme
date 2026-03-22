@@ -73,7 +73,8 @@ JNIEXPORT jlong JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape
 
     NULL_CHK(pEnv, buffer, "The buffer does not exist.", 0);
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    EXCEPTION_CHK(pEnv, 0);
+    // no check for exceptions!
+    btAssert(capacityFloats != -1);
     if (capacityFloats < 3 * n) {
         pEnv->ThrowNew(jmeClasses::IllegalArgumentException,
                 "The buffer is too small.");
@@ -112,7 +113,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_collision_shapes_HullCollisionShape_
 
     NULL_CHK(pEnv, storeBuffer, "The store buffer does not exist.",);
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -1);
     int numVerts = pShape->getNumPoints();
     jlong floatsNeeded = 3 * (jlong) numVerts;
     if (floatsNeeded > capacityFloats) {

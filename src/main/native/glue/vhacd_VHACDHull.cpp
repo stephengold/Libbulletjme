@@ -33,6 +33,7 @@
 /*
  * Author: Stephen Gold
  */
+#include <cassert>
 #include "vhacd_VHACDHull.h"
 #include "jmeClasses.h"
 #include "VHACD.h"
@@ -73,7 +74,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACDHull_getPositions
     // no check for exceptions!
 
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    assert(capacityFloats != -1);
     const uint32_t numFloats = 3 * pHull->m_nPoints;
     for (uint32_t i = 0; i < numFloats && i < capacityFloats; ++i) {
         pPositions[i] = pHull->m_points[i];

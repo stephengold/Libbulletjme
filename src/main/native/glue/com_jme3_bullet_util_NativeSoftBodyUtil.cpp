@@ -98,7 +98,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_util_NativeSoftBodyUtil_updateMesh__
     // no check for exceptions!
 
     const jlong mapCapacityInts = pEnv->GetDirectBufferCapacity(indexMap);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(mapCapacityInts != -1);
     const btVector3 offset
             = (meshInLocalSpace ? getBoundingCenter(pBody) : btVector3(0, 0, 0));
 

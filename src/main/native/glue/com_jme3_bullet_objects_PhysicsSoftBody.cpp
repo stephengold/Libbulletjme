@@ -1073,7 +1073,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_getMasses
     // no check for exceptions!
 
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -1);
     int numNodes = pBody->m_nodes.size();
     for (int i = 0; i < numNodes && i < capacityFloats; ++i) {
         pMasses[i] = pBody->getMass(i);
@@ -1729,7 +1730,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setMasses
     // no check for exceptions!
 
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(massBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -1);
     int numNodes = pBody->m_nodes.size();
     for (int i = 0; i < numNodes && i < capacityFloats; ++i) {
         pBody->setMass(i, pBuffer[i]);
@@ -1774,7 +1776,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setNormals
 
     const jlong capacityFloats
             = pEnv->GetDirectBufferCapacity(normalBuffer) - 2;
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -3);
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0, offset = 0;
             nodeIndex < numNodes && offset < capacityFloats;) {
@@ -1919,7 +1922,8 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_PhysicsSoftBody_setVelocitie
 
     const jlong capacityFloats
             = pEnv->GetDirectBufferCapacity(velocityBuffer) - 2;
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    btAssert(capacityFloats != -3);
     int numNodes = pBody->m_nodes.size();
     for (int nodeIndex = 0, offset = 0;
             nodeIndex < numNodes && offset < capacityFloats;) {

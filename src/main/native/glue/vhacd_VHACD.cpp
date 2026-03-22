@@ -33,6 +33,7 @@
 /*
  * Author: Stephen Gold
  */
+#include <cassert>
 #ifndef NO_DEBUG
 #include <iostream>
 #endif
@@ -106,7 +107,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
     NULL_CHK(pEnv, pPositions, "The positions buffer is not direct.",);
     // no check for exceptions!
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(positionsBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    assert(capacityFloats != -1);
 
     NULL_CHK(pEnv, indicesBuffer, "The indices buffer does not exist.",);
     const jint * const pIndices
@@ -114,7 +116,8 @@ JNIEXPORT void JNICALL Java_vhacd_VHACD_compute
     NULL_CHK(pEnv, pIndices, "The indices buffer is not direct.",);
     // no check for exceptions!
     const jlong capacityInts = pEnv->GetDirectBufferCapacity(indicesBuffer);
-    EXCEPTION_CHK(pEnv,);
+    // no check for exceptions!
+    assert(capacityFloats != -1);
 
     IVHACD::Parameters * const pParams
             = reinterpret_cast<IVHACD::Parameters *> (paramsId);
