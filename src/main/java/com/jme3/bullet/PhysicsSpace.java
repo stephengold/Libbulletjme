@@ -737,6 +737,7 @@ public class PhysicsSpace
     public void update(float timeInterval, int maxSteps) {
         assert Validate.nonNegative(timeInterval, "time interval");
         assert Validate.nonNegative(maxSteps, "max steps");
+
         update(timeInterval, maxSteps, 0x0);
     }
 
