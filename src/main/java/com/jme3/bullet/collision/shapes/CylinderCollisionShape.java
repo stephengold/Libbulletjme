@@ -267,7 +267,7 @@ public class CylinderCollisionShape extends ConvexShape {
             default:
                 throw new IllegalStateException("axis = " + axis);
         }
-        float result = (float) Math.hypot(halfHeight, bigRadius);
+        float result = (float) MyMath.hypotenuseDouble(halfHeight, bigRadius);
 
         return result;
     }
