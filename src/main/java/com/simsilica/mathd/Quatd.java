@@ -305,10 +305,10 @@ public final class Quatd implements Cloneable {
         double wr = -x * qx - y * qy - z * qz + w * qw;
 
         if( result == null ) {
-            result = new Quatd(xr, yr, zr, wr); 
+            result = new Quatd(xr, yr, zr, wr);
         } else {
             result.set(xr, yr, zr, wr);
-        } 
+        }
         return result;
     }
 

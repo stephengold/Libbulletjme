@@ -1,36 +1,36 @@
 /*
  * $Id$
- * 
+ *
  * Copyright (c) 2015, Simsilica, LLC
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions 
+ * modification, are permitted provided that the following conditions
  * are met:
- * 
- * 1. Redistributions of source code must retain the above copyright 
+ *
+ * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright 
- *    notice, this list of conditions and the following disclaimer in 
- *    the documentation and/or other materials provided with the 
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
  *    distribution.
- * 
- * 3. Neither the name of the copyright holder nor the names of its 
- *    contributors may be used to endorse or promote products derived 
+ *
+ * 3. Neither the name of the copyright holder nor the names of its
+ *    contributors may be used to endorse or promote products derived
  *    from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS 
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
- * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES 
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+ * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -81,13 +81,13 @@ public class Vec3d implements Cloneable {
      * The 3rd (Z) component.
      */
     public double z;
- 
+
     /**
      * Instantiates an all-zero vector (0,0,0).
      */
     public Vec3d() {
     }
-    
+
     /**
      * Instantiates a vector with the specified components.
      *
@@ -118,7 +118,7 @@ public class Vec3d implements Cloneable {
     public Vec3d( Vector3f v ) {
         this(v.x, v.y, v.z);
     }
- 
+
     /**
      * Creates a single-precision copy of the current instance.
      *
@@ -127,7 +127,7 @@ public class Vec3d implements Cloneable {
     public Vector3f toVector3f() {
         return new Vector3f((float)x, (float)y, (float)z);
     }
- 
+
     /**
      * Returns a hash code. If two vectors have identical values, they will
      * have the same hash code. The current instance is unaffected.
@@ -139,10 +139,10 @@ public class Vec3d implements Cloneable {
         long bits = Double.doubleToLongBits(x);
         bits ^= Double.doubleToLongBits(y) * 31;
         bits ^= Double.doubleToLongBits(z) * 31;
-        
+
         return ((int)bits) ^ ((int)(bits >> 32));
     }
-    
+
     /**
      * Tests for exact equality with the argument, distinguishing -0 from 0. If
      * {@code o} is null, false is returned. Either way, the current instance is
@@ -196,7 +196,7 @@ public class Vec3d implements Cloneable {
         this.z = z;
         return this;
     }
-    
+
     /**
      * Copies all 3 components from the argument.
      *
@@ -233,7 +233,7 @@ public class Vec3d implements Cloneable {
     public final Vec3d clone() {
         return new Vec3d(x,y,z);
     }
- 
+
     /**
      * Returns the indexed component. The vector is unaffected.
      *
@@ -254,7 +254,7 @@ public class Vec3d implements Cloneable {
                 throw new IndexOutOfBoundsException( "Index:" + i );
         }
     }
-    
+
     /**
      * Alters the indexed component.
      *
@@ -280,7 +280,7 @@ public class Vec3d implements Cloneable {
         }
         return this;
     }
- 
+
     /**
      * Adds the argument and returns the sum as a new instance. The current
      * instance is unaffected.
@@ -409,7 +409,7 @@ public class Vec3d implements Cloneable {
         z /= v.z;
         return this;
     }
- 
+
     /**
      * Returns the square of the length. The current instance is unaffected.
      *
@@ -418,7 +418,7 @@ public class Vec3d implements Cloneable {
     public final double lengthSq() {
         return x * x + y * y + z * z;
     }
-    
+
     /**
      * Returns the length (or magnitude). The current instance is unaffected.
      *
@@ -437,7 +437,7 @@ public class Vec3d implements Cloneable {
     public final Vec3d normalizeLocal() {
         return multLocal(1.0 / length());
     }
- 
+
     /**
      * Returns the dot (or inner) product with the argument. The current
      * instance is unaffected.
@@ -448,7 +448,7 @@ public class Vec3d implements Cloneable {
     public final double dot( Vec3d v ) {
         return x * v.x + y * v.y + z * v.z;
     }
- 
+
     /**
      * Calculates a cross product with the argument and returns the product as a
      * new instance. The current instance is unaffected.
@@ -460,7 +460,7 @@ public class Vec3d implements Cloneable {
         double xNew = (y * v.z) - (z * v.y);
         double yNew = (z * v.x) - (x * v.z);
         double zNew = (x * v.y) - (y * v.x);
-        return new Vec3d(xNew, yNew, zNew);         
+        return new Vec3d(xNew, yNew, zNew);
     }
 
     /**
