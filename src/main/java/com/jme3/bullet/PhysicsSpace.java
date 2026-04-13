@@ -56,9 +56,7 @@ import jme3utilities.Validate;
  *
  * @author normenhansen
  */
-public class PhysicsSpace
-        extends CollisionSpace
-        implements ContactListener {
+public class PhysicsSpace extends CollisionSpace implements ContactListener {
     // *************************************************************************
     // enums
 
@@ -727,8 +725,8 @@ public class PhysicsSpace
     }
 
     /**
-     * Update the space, enabling the default callbacks. This method should be
-     * invoked on the thread that created the space.
+     * Update the space. This method should be invoked on the thread that
+     * created the space.
      *
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      * @param maxSteps the maximum number of steps of size {@code accuracy}
@@ -778,7 +776,7 @@ public class PhysicsSpace
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      * @param maxSteps the maximum number of steps of size {@code accuracy}
      * (&ge;1) or 0 for a single step of size {@code timeInterval}
-     * @param stepFlags the desired flags, ORed together (default=0x0)
+     * @param stepFlags the desired callbacks, ORed together (default=0x0)
      * @see com.jme3.bullet.StepFlag
      */
     public void update(float timeInterval, int maxSteps, int stepFlags) {
@@ -1006,7 +1004,7 @@ public class PhysicsSpace
 
     /**
      * Invoked by native code immediately before a contact point is added to a
-     * manifold. Skipped if stepSimulation() was invoked without the
+     * manifold. Skipped if {@code stepSimulation()} was invoked without the
      * {@code contactConceived} flag set.
      * <p>
      * Override this method to customize how contacts are handled.
@@ -1027,8 +1025,8 @@ public class PhysicsSpace
 
     /**
      * Invoked by native code immediately after a contact manifold is destroyed.
-     * Skipped if stepSimulation() was invoked without the {@code contactEnded}
-     * flag set.
+     * Skipped if {@code stepSimulation()} was invoked without the
+     * {@code contactEnded} flag set.
      * <p>
      * Override this method to customize how contacts are handled.
      *
@@ -1043,8 +1041,8 @@ public class PhysicsSpace
     /**
      * Invoked by native code immediately after a contact point is refreshed
      * without being destroyed. Skipped for Sphere-Sphere contacts. Skipped if
-     * stepSimulation() was invoked without the {@code contactProcessed} flag
-     * set.
+     * {@code stepSimulation()} was invoked without the {@code contactProcessed}
+     * flag set.
      * <p>
      * Override this method to customize how contacts are handled.
      *
@@ -1060,7 +1058,7 @@ public class PhysicsSpace
 
     /**
      * Invoked by native code immediately after a contact manifold is created.
-     * Skipped if stepSimulation() was invoked without the
+     * Skipped if {@code stepSimulation()} was invoked without the
      * {@code contactStarted} flag.
      * <p>
      * Override this method to customize how contacts are handled.
