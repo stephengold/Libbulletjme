@@ -150,7 +150,7 @@ jobs:
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: windows-2025
+    runs-on: windows-2025-vs2026
     timeout-minutes: 24
     steps:
       - uses: actions/setup-java@v5
