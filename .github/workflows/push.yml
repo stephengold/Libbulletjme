@@ -99,6 +99,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v6
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '26.4.1'
       - run: |
           ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=MacOSX64 install \
             --console=plain \
@@ -129,6 +132,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v6
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '26.4.1'
       - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 run build install \
             --console=plain \
