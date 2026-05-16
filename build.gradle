@@ -78,6 +78,10 @@ model {
             architecture 'x86_64'
             operatingSystem 'windows'
         }
+        Windows_ARM64 {
+            architecture 'arm-v8'
+            operatingSystem 'windows'
+        }
     }
 
     toolChains { // prioritize the available native toolchains
@@ -125,6 +129,7 @@ model {
             targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows64'
+            targetPlatform 'Windows_ARM64'
 
             sources.cpp.source {
                 srcDir 'src/main/native/bullet3'
@@ -275,6 +280,7 @@ model {
                     //   native/linux/loongarch64/libbulletjme.so
                     //   native/osx/arm64/libbulletjme.dylib
                     //   native/osx/x86_64/libbulletjme.dylib
+                    //   native/windows/arm64/bulletjme.dll
                     //   native/windows/x86_64/bulletjme.dll
 
                     String archName = targetPlatform.architecture.name;

@@ -233,6 +233,7 @@ public class TestBvh {
                 Assert.assertEquals(dp ? 2520 : 2480, numBytes);
                 break;
             case Windows64:
+            case Windows_ARM64:
                 Assert.assertEquals(dp ? 2528 : 2480, numBytes);
                 break;
             default: // TODO more platforms
