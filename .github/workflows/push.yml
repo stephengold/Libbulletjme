@@ -88,6 +88,37 @@ jobs:
           bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
+  Java21-Linux_ARM64:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-22.04-arm
+    steps:
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v6
+      - run: g++ --version
+      - uses: gradle/actions/setup-gradle@v6
+      - run: |
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux_ARM64 -Ptool=gcc run build install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - name: gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 -Ptool=gcc clean release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 -Ptool=gcc clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
+
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macos-26-intel
@@ -239,39 +270,6 @@ jobs:
       - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=Libbulletjme-Linux_ARM32hf -Ptarget=Linux_ARM32hf clean release \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
-            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
-            -u '${{ secrets.CENTRAL_USERNAME }}'
-
-  Java21-x-Linux_ARM64:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
-    timeout-minutes: 40
-    steps:
-      - uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: 21
-      - uses: actions/checkout@v6
-      - run: sudo apt-get update
-      - run: sudo apt install g++-10-aarch64-linux-gnu
-      - run: aarch64-linux-gnu-g++-10 --version
-      - uses: gradle/actions/setup-gradle@v6
-      - run: |
-          ./gradlew -Ptarget=Linux_ARM64 install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          ./gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 clean release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
