@@ -187,25 +187,6 @@ jobs:
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
-  Java21-Windows_ARM64:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: windows-11-arm
-    steps:
-      - uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: 21
-      - uses: actions/checkout@v6
-      - uses: gradle/actions/setup-gradle@v6
-      - run: |
-          ./gradlew wrapper --gradle-version=9.5.1 && ./gradlew wrapper
-      - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows_ARM64 run build install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-        shell: bash
-
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
