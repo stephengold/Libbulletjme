@@ -198,6 +198,8 @@ jobs:
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v6
       - run: |
+          ./gradlew wrapper --gradle-version=9.5.1 && ./gradlew wrapper
+      - run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Windows_ARM64 run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
