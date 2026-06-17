@@ -5,7 +5,7 @@ name: CI at GitHub
 on: [push, workflow_dispatch]
 
 jobs:
-  Java8-Linux:
+  Java8-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
     timeout-minutes: 5
@@ -22,7 +22,7 @@ jobs:
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
 
-  Java11-Linux:
+  Java11-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
     timeout-minutes: 5
@@ -39,7 +39,7 @@ jobs:
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
 
-  Java17-Windows:
+  Java17-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
     timeout-minutes: 7
@@ -57,7 +57,7 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash
 
-  Java21-Linux:
+  Java21-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
     timeout-minutes: 20
@@ -185,7 +185,7 @@ jobs:
           bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
-  Java21-Windows:
+  Java21-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2025-vs2026
     timeout-minutes: 24
