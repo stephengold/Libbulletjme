@@ -320,7 +320,7 @@ model {
 }
 
 dependencies {
-    testImplementation(libs.junit4)      // framework for automated testing
+    testImplementation(libs.junit4) // framework for automated testing
 }
 
 java {
