@@ -5,40 +5,6 @@ name: CI at GitHub
 on: [push, workflow_dispatch]
 
 jobs:
-  Java8-Linux64:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
-    timeout-minutes: 5
-    steps:
-      - uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: 8
-      - uses: actions/checkout@v6
-      - uses: gradle/actions/setup-gradle@v6
-      - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 -x checkstyleMain -x checkstyleTest run build install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-
-  Java11-Linux64:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
-    timeout-minutes: 5
-    steps:
-      - uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: 11
-      - uses: actions/checkout@v6
-      - uses: gradle/actions/setup-gradle@v6
-      - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 -Ptool=gcc -x checkstyleMain -x checkstyleTest run build install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-
   Java17-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
