@@ -11,9 +11,10 @@ Pre-built Maven artifacts are also provided.
 
 The project supports the 3 major desktop operating systems on x86_64 architecture:
 Windows, Linux, and macOS.
-It also supports Linux on ARM (both armhf and aarch64) and macOS on ARM
+It also supports Linux on ARM (both armhf and aarch64),
+macOS on ARM, Windows on ARM,
 and 4 Android ABIs (armeabi-v7a, arm64-v8a, x86, and x86_64),
-making a total of 10 platforms.
+making a total of 11 platforms.
 
 For each desktop platform, 4 native libraries are provided:
 + a release build using single-precision arithmetic (the default library)

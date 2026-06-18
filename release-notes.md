@@ -1,5 +1,15 @@
 # Release log for the Libbulletjme project
 
+## Version 23.0.1 released on 18 June 2026
+
++ Changed the build procedures for Android:  no longer use `-b`/`--build-file`.
++ Raised the minimum JDK to build Libbulletjme, from v8 to v17.
++ Added support for the Windows_ARM64 platform, including a new artifact ID.
++ Began building for Linux_ARM64 using GCC v11 instead of v10.
++ Began building for macOS using Xcode v26.5.0 .
++ Began building for Windows using Visual Studio 2026 instead of VS 2022.
++ Added "CONTRIBUTING.md" document.
+
 ## Version 23.0.0 released on 22 March 2026
 
 + Added the `onContactConceived()` method to
