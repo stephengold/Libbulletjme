@@ -333,7 +333,7 @@ dependencies {
     implementation(
             group: "com.github.stephengold",
             name: "Libbulletjme-Android",
-            version: "23.0.0",
+            version: "23.0.1",
             classifier: "SpDebug",
             ext: "aar"
     )
@@ -353,7 +353,7 @@ plus a set of (separately-packaged) native libraries.</p>
 </div>
 <div class="paragraph">
 <p>Because of how releases are built,
-the desktop JVM library is released under 6 distinct names (artifact IDs).
+the desktop JVM library is released under 7 distinct names (artifact IDs).
 In contrast, each desktop native library is specific to a particular platform,
 build type, and flavor.</p>
 </div>
@@ -370,10 +370,10 @@ add to the relevant "build.gradle" or "build.gradle.kts" file:</p>
 }
 dependencies {
     // JVM library:
-    implementation("com.github.stephengold:Libbulletjme-Windows64:23.0.0")
+    implementation("com.github.stephengold:Libbulletjme-Windows64:23.0.1")
 
     // native libraries:
-    runtimeOnly("com.github.stephengold:Libbulletjme-Linux64:23.0.0:SpDebug")
+    runtimeOnly("com.github.stephengold:Libbulletjme-Linux64:23.0.1:SpDebug")
         // Native libraries for other platforms could be added.
 }</code></pre>
 </div>
@@ -450,6 +450,7 @@ NativeDynamicLibrary[] libraries = {
     new NativeDynamicLibrary("native/linux/x86_64", PlatformPredicate.LINUX_X86_64),
     new NativeDynamicLibrary("native/osx/arm64", PlatformPredicate.MACOS_ARM_64),
     new NativeDynamicLibrary("native/osx/x86_64", PlatformPredicate.MACOS_X86_64),
+    new NativeDynamicLibrary("native/windows/arm64", PlatformPredicate.WIN_ARM_64),
     new NativeDynamicLibrary("native/windows/x86_64", PlatformPredicate.WIN_X86_64)
 };
 loader.registerNativeLibraries(libraries).initPlatformLibrary();
