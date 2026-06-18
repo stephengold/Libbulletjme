@@ -300,9 +300,7 @@ model {
                     }
 
                     Task njTask = project.tasks.named('nativesJar' + q, Jar).get()
-                    project.artifacts {
-                        archives njTask.archiveFile
-                    }
+                    assemble.dependsOn(njTask)
                     project.publishing.publications.maven {
                         artifact njTask
                     }
