@@ -184,6 +184,38 @@ jobs:
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
+  Java21-Windows_ARM64:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: windows-11-vs2026-arm
+    steps:
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v6
+      - uses: gradle/actions/setup-gradle@v6
+      - run: |
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows_ARM64 run build install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+        shell: bash
+      - if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew -Partifact=Libbulletjme-Windows_ARM64 -Ptarget=Windows_ARM64 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
+            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+        shell: bash
+      - name: uploadToCentral.sh
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+            -u '${{ secrets.CENTRAL_USERNAME }}'
+        shell: bash
+
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
