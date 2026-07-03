@@ -55,6 +55,14 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    clearForces
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_clearForces
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    countManifolds
  * Signature: (J)I
  */

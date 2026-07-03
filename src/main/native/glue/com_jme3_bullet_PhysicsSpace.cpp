@@ -159,6 +159,21 @@ JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_addRigidBody
 
 /*
  * Class:     com_jme3_bullet_PhysicsSpace
+ * Method:    clearForces
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_PhysicsSpace_clearForces
+  (JNIEnv *pEnv, jclass, jlong spaceId) {
+    jmePhysicsSpace * const
+            pSpace = reinterpret_cast<jmePhysicsSpace *> (spaceId);
+    NULL_CHK(pEnv, pSpace, "The physics space does not exist.",)
+    btDynamicsWorld * const pWorld = pSpace->getDynamicsWorld();
+    NULL_CHK(pEnv, pWorld, "The dynamics world does not exist.",);
+    pWorld->clearForces();
+}
+
+/*
+ * Class:     com_jme3_bullet_PhysicsSpace
  * Method:    countManifolds
  * Signature: (J)I
  */
