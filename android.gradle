@@ -89,8 +89,12 @@ android {
     publishing {
         multipleVariants('complete') {
             allVariants()
-            withJavadocJar()
-            withSourcesJar()
+            if (project.hasProperty('withJavadocJar')) {
+                withJavadocJar()
+            }
+            if (project.hasProperty('withSourcesJar')) {
+                withSourcesJar()
+            }
         }
     }
 }

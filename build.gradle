@@ -391,21 +391,29 @@ jar {
     }
 }
 
-javadoc.dependsOn('compileTestJava')
-java.withJavadocJar()
-javadocJar { archiveBaseName = baseName }
+if (project.hasProperty('withJavadocJar')) {
+    javadoc.dependsOn('compileTestJava')
+    java.withJavadocJar()
+    javadocJar { archiveBaseName = baseName }
+}
 
-tasks.register('sourcesJar', Jar) {
-    archiveBaseName = baseName
-    archiveClassifier = 'sources'
-    description = 'Creates a JAR of Java sourcecode.'
-    from 'src/main/java' // default is ".allSource", which includes resources
+if (project.hasProperty('withSourcesJar')) {
+    tasks.register('sourcesJar', Jar) {
+        archiveBaseName = baseName
+        archiveClassifier = 'sources'
+        description = 'Creates a JAR of Java sourcecode.'
+        from 'src/main/java' // default is ".allSource", which includes resources
+    }
+    publishing.publications {
+        maven(MavenPublication) {
+            artifact sourcesJar
+        }
+    }
 }
 
 publishing {
     publications {
         maven(MavenPublication) {
-            artifact sourcesJar
             artifactId = artifact
             from components.java
             groupId = groupID
