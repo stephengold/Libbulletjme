@@ -11,7 +11,8 @@ plugins {
     id 'signing'       // to sign artifacts for publication
 }
 
-// $artifact and $lbjVersion are set in the gradle.properties file
+// $artifact and $lbjVersion are set in
+// the gradle.properties file
 // or by -P options on the Gradle command line.
 
 ext {
@@ -99,19 +100,19 @@ model {
         visualCpp(VisualCpp)
         clang(Clang)
         gcc(Gcc)
-        gcc10Arm(Gcc) { // used when cross-compiling on Linux
+        gcc10Arm(Gcc) { // cross-compile on Linux
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-10'
                 linker.executable = 'aarch64-linux-gnu-g++-10'
             }
         }
-        gcc9Arm(Gcc) { // used when cross-compiling on Linux
+        gcc9Arm(Gcc) { // cross-compile on Linux
             target('Linux_ARM32hf') {
                 cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
                 linker.executable = 'arm-linux-gnueabihf-g++-9'
             }
         }
-        gcc13Loong(Gcc) { // used when cross-compiling on Linux
+        gcc13Loong(Gcc) { // cross-compile on Linux
             target('Linux_LoongArch64') {
                 cppCompiler.executable = 'loongarch64-linux-gnu-g++-13'
                 linker.executable = 'loongarch64-linux-gnu-g++-13'
