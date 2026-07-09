@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2022 jMonkeyEngine
+ * Copyright (c) 2009-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -121,8 +121,8 @@ public class CharacterController extends NativePhysicsObject {
      * Determine the character's angular velocity.
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return the velocity vector (either storeResult or a new vector, not
-     * null)
+     * @return the velocity vector (in radians per second, either storeResult or
+     * a new vector, not null)
      */
     public Vector3f getAngularVelocity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -188,10 +188,12 @@ public class CharacterController extends NativePhysicsObject {
     }
 
     /**
-     * Determine the linear velocity of the character's center.
+     * Determine the linear velocity of this character's center. Note that the
+     * units differ from PhysicsRigidBody!
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a vector (either storeResult or a new vector, not null)
+     * @return a vector (in physics-space units per time step, either
+     * storeResult or a new vector, not null)
      */
     public Vector3f getLinearVelocity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -330,8 +332,8 @@ public class CharacterController extends NativePhysicsObject {
     /**
      * Alter the character's angular velocity.
      *
-     * @param angularVelocity the desired angular velocity vector (not null,
-     * unaffected)
+     * @param angularVelocity the desired angular velocity vector (in radians
+     * per second, not null, unaffected)
      */
     public void setAngularVelocity(Vector3f angularVelocity) {
         long controllerId = nativeId();
@@ -386,9 +388,11 @@ public class CharacterController extends NativePhysicsObject {
     }
 
     /**
-     * Alter the linear velocity of the character's center.
+     * Alter the linear velocity of this character's center. Note that the units
+     * differ from PhysicsRigidBody!
      *
-     * @param velocity the desired velocity vector (not null, finite)
+     * @param velocity the desired velocity vector (in physics-space units per
+     * time step, not null, finite)
      */
     public void setLinearVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
