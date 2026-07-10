@@ -28,7 +28,7 @@ Comparison and criticism should be kept professional and impersonal.
 ## Pull requests
 
 Contributions of source code and documentation should be submitted
-as GitHub pull requests to the relevent repository.
+as GitHub pull requests to the relevant repository.
 Pull requests should always target the "master" branch.
 
 Each pull request should have a single, specific purpose.
