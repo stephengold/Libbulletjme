@@ -25,9 +25,9 @@ subject to the following restrictions:
 
 btScalar gContactBreakingThreshold = btScalar(0.02);
 ContactDestroyedCallback gContactDestroyedCallback = 0;
-ContactProcessedCallback gContactProcessedCallback = 0;
-ContactStartedCallback gContactStartedCallback = 0;
-ContactEndedCallback gContactEndedCallback = 0;
+//ContactProcessedCallback gContactProcessedCallback = 0;// stephengold commented out 2026-07-10
+//ContactStartedCallback gContactStartedCallback = 0;// stephengold commented out 2026-07-10
+//ContactEndedCallback gContactEndedCallback = 0;// stephengold commented out 2026-07-10
 ///gContactCalcArea3Points will approximate the convex hull area using 3 points
 ///when setting it to false, it will use 4 points to compute the area: it is more accurate but slower
 bool gContactCalcArea3Points = true;
@@ -291,8 +291,9 @@ void btPersistentManifold::refreshContactPoints(const btTransform& trA, const bt
 			else
 			{
 				//contact point processed callback
-				if (gContactProcessedCallback)
-					(*gContactProcessedCallback)(manifoldPoint, (void*)m_body0, (void*)m_body1);
+				ContactProcessedCallback callback = m_callbacks->m_contactProcessedCallback;// stephengold added 2026-07-10
+				if (callback)// stephengold modified 2026-07-10
+					callback(manifoldPoint, (void*)m_body0, (void*)m_body1);// stephengold modified 2026-07-10
 			}
 		}
 	}

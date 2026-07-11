@@ -550,32 +550,33 @@ void jmePhysicsSpace::preTickCallback(btDynamicsWorld *pWorld,
 
 void jmePhysicsSpace::stepSimulation(jfloat timeInterval, jint maxSteps,
         jfloat accuracy, jint stepFlags) {
+    btDynamicsWorld * const pWorld = getDynamicsWorld();
+    btContactCallbacks * const pCallbacks = pWorld->m_callbacks;
 
     if (stepFlags & com_jme3_bullet_StepFlag_contactConceived) {
-        gContactConceivedCallback = &contactConceivedCallback;
+        pCallbacks->m_contactConceivedCallback = &contactConceivedCallback;
     } else {
-        gContactConceivedCallback = NULL;
+        pCallbacks->m_contactConceivedCallback = NULL;
     }
 
     if (stepFlags & com_jme3_bullet_StepFlag_contactEnded) {
-        gContactEndedCallback = &contactEndedCallback;
+        pCallbacks->m_contactEndedCallback = &contactEndedCallback;
     } else {
-        gContactEndedCallback = NULL;
+        pCallbacks->m_contactEndedCallback = NULL;
     }
 
     if (stepFlags & com_jme3_bullet_StepFlag_contactProcessed) {
-        gContactProcessedCallback = &contactProcessedCallback;
+        pCallbacks->m_contactProcessedCallback = &contactProcessedCallback;
     } else {
-        gContactProcessedCallback = NULL;
+        pCallbacks->m_contactProcessedCallback = NULL;
     }
 
     if (stepFlags & com_jme3_bullet_StepFlag_contactStarted) {
-        gContactStartedCallback = &contactStartedCallback;
+        pCallbacks->m_contactStartedCallback = &contactStartedCallback;
     } else {
-        gContactStartedCallback = NULL;
+        pCallbacks->m_contactStartedCallback = NULL;
     }
 
-    btDynamicsWorld * const pWorld = getDynamicsWorld();
     pWorld->stepSimulation((btScalar) timeInterval, (int) maxSteps,
             (btScalar) accuracy);
 }

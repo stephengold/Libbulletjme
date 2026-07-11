@@ -32,14 +32,15 @@ extern btScalar gContactBreakingThreshold;
 #ifndef SWIG
 class btPersistentManifold;
 
+#include "BulletCollision/NarrowPhaseCollision/btContactCallbacks.h"// stephengold added 2026-07-10
 typedef bool (*ContactDestroyedCallback)(void* userPersistentData);
-typedef bool (*ContactProcessedCallback)(btManifoldPoint& cp, void* body0, void* body1);
-typedef void (*ContactStartedCallback)(btPersistentManifold* const& manifold);
-typedef void (*ContactEndedCallback)(btPersistentManifold* const& manifold);
+//typedef bool (*ContactProcessedCallback)(btManifoldPoint& cp, void* body0, void* body1);// stephengold commented out 2026-07-10
+//typedef void (*ContactStartedCallback)(btPersistentManifold* const& manifold);// stephengold commented out 2026-07-10
+//typedef void (*ContactEndedCallback)(btPersistentManifold* const& manifold);// stephengold commented out 2026-07-10
 extern ContactDestroyedCallback gContactDestroyedCallback;
-extern ContactProcessedCallback gContactProcessedCallback;
-extern ContactStartedCallback gContactStartedCallback;
-extern ContactEndedCallback gContactEndedCallback;
+//extern ContactProcessedCallback gContactProcessedCallback;// stephengold commented out 2026-07-10
+//extern ContactStartedCallback gContactStartedCallback;// stephengold commented out 2026-07-10
+//extern ContactEndedCallback gContactEndedCallback;// stephengold commented out 2026-07-10
 #endif  //SWIG
 
 //the enum starts at 1024 to avoid type conflicts with btTypedConstraint
@@ -69,6 +70,7 @@ btPersistentManifold : public btTypedObject
 	const btCollisionObject* m_body0;
 	const btCollisionObject* m_body1;
 
+ 	const btContactCallbacks* m_callbacks;// stephengold added 2026-07-10
 	int m_cachedPoints;
 
 	btScalar m_contactBreakingThreshold;
@@ -89,8 +91,9 @@ public:
 
 	btPersistentManifold();
 
-	btPersistentManifold(const btCollisionObject* body0, const btCollisionObject* body1, int, btScalar contactBreakingThreshold, btScalar contactProcessingThreshold)
+	btPersistentManifold(const btContactCallbacks* callbacks, const btCollisionObject* body0, const btCollisionObject* body1, int, btScalar contactBreakingThreshold, btScalar contactProcessingThreshold)// stephengold modified 2026-07-10
 		: btTypedObject(BT_PERSISTENT_MANIFOLD_TYPE),
+		  m_callbacks(callbacks),// stephengold added 2026-07-10
 		  m_body0(body0),
 		  m_body1(body1),
 		  m_cachedPoints(0),
@@ -183,9 +186,10 @@ public:
 		btAssert(m_pointCache[lastUsedIndex].m_userPersistentData == 0);
 		m_cachedPoints--;
 
-		if (gContactEndedCallback && m_cachedPoints == 0)
+		ContactEndedCallback callback = m_callbacks->m_contactEndedCallback;// stephengold added 2026-07-10
+		if (callback && m_cachedPoints == 0)// stephengold modified 2026-07-10
 		{
-			gContactEndedCallback(this);
+			(*callback)(this);// stephengold modified 2026-07-10
 		}
 	}
 	void replaceContactPoint(const btManifoldPoint& newPoint, int insertIndex)
@@ -253,9 +257,10 @@ public:
 			clearUserCache(m_pointCache[i]);
 		}
 
-		if (gContactEndedCallback && m_cachedPoints)
+		ContactEndedCallback callback = m_callbacks->m_contactEndedCallback;// stephengold added 2026-07-10
+		if (callback && m_cachedPoints)// stephengold modified 2026-07-10
 		{
-			gContactEndedCallback(this);
+			(*callback)(this);// stephengold modified 2026-07-10
 		}
 		m_cachedPoints = 0;
 	}

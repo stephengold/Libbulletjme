@@ -223,6 +223,7 @@ struct btPerturbedContactResult : public btManifoldResult
 
 	btPerturbedContactResult(btManifoldResult* originalResult, const btTransform& transformA, const btTransform& transformB, const btTransform& unPerturbedTransform, bool perturbA, btIDebugDraw* debugDrawer)
 		: m_originalManifoldResult(originalResult),
+		  btManifoldResult(originalResult->getCallbacks()),// stephengold added 2026-07-10
 		  m_transformA(transformA),
 		  m_transformB(transformB),
 		  m_unPerturbedTransform(unPerturbedTransform),

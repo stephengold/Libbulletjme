@@ -905,7 +905,8 @@ void btDiscreteDynamicsWorld::createPredictiveContactsInternal(btRigidBody** bod
 						bool isSwapped = false; // stephengold added 2026-03-21
 						btManifoldPoint newPoint(btVector3(0, 0, 0), localPointB, sweepResults.m_hitNormalWorld, distance, isPredictive, isSwapped); // stephengold modified 2026-03-21
 
-					      if (gContactConceivedCallback == NULL || (*gContactConceivedCallback)(newPoint, manifold, body, sweepResults.m_hitCollisionObject)) {// stephengold modified 2026-03-22
+					      ContactConceivedCallback callback = m_callbacks->m_contactConceivedCallback;// stephengold added 2026-07-10
+					      if (callback == NULL || (*callback)(newPoint, manifold, body, sweepResults.m_hitCollisionObject)) {// stephengold modified 2026-07-10
 						int index = manifold->addManifoldPoint(newPoint, isPredictive);
 						btManifoldPoint& pt = manifold->getContactPoint(index);
 						pt.m_combinedRestitution = 0;

@@ -91,7 +91,7 @@ btPersistentManifold* btCollisionDispatcher::getNewManifold(const btCollisionObj
 			return 0;
 		}
 	}
-	btPersistentManifold* manifold = new (mem) btPersistentManifold(body0, body1, 0, contactBreakingThreshold, contactProcessingThreshold);
+	btPersistentManifold* manifold = new (mem) btPersistentManifold(&m_callbacks, body0, body1, 0, contactBreakingThreshold, contactProcessingThreshold);// stephengold modified 2026-07-10
 	manifold->m_index1a = m_manifoldsPtr.size();
 	m_manifoldsPtr.push_back(manifold);
 
@@ -247,7 +247,7 @@ void btCollisionDispatcher::defaultNearCallback(btBroadphasePair& collisionPair,
 
 		if (collisionPair.m_algorithm)
 		{
-			btManifoldResult contactPointResult(&obj0Wrap, &obj1Wrap);
+			btManifoldResult contactPointResult(&dispatcher.m_callbacks, &obj0Wrap, &obj1Wrap);// stephengold modified 2026-07-10
 
 			if (dispatchInfo.m_dispatchFunc == btDispatcherInfo::DISPATCH_DISCRETE)
 			{

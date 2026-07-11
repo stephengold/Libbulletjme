@@ -17,6 +17,7 @@ subject to the following restrictions:
 #define BT_DYNAMICS_WORLD_H
 
 #include "BulletCollision/CollisionDispatch/btCollisionWorld.h"
+#include "BulletCollision/NarrowPhaseCollision/btContactCallbacks.h"// stephengold added 2026-07-10
 #include "BulletDynamics/ConstraintSolver/btContactSolverInfo.h"
 
 class btTypedConstraint;
@@ -49,8 +50,10 @@ protected:
 	btContactSolverInfo m_solverInfo;
 
 public:
+	btContactCallbacks *m_callbacks;// stephengold added 2026-07-10
 	btDynamicsWorld(btDispatcher* dispatcher, btBroadphaseInterface* broadphase, btCollisionConfiguration* collisionConfiguration)
 		: btCollisionWorld(dispatcher, broadphase, collisionConfiguration), m_internalTickCallback(0), m_internalPreTickCallback(0), m_worldUserInfo(0)
+		, m_callbacks(&dispatcher->m_callbacks)// stephengold added 2026-07-10
 	{
 	}
 

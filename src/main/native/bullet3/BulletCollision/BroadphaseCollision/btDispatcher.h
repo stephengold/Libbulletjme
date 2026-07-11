@@ -15,6 +15,7 @@ subject to the following restrictions:
 
 #ifndef BT_DISPATCHER_H
 #define BT_DISPATCHER_H
+#include "BulletCollision/NarrowPhaseCollision/btContactCallbacks.h"// stephengold added 2026-07-10
 #include "LinearMath/btScalar.h"
 
 class btCollisionAlgorithm;
@@ -76,6 +77,7 @@ enum ebtDispatcherQueryType
 class btDispatcher
 {
 public:
+	btContactCallbacks m_callbacks;// stephengold added 2026-07-10
 	virtual ~btDispatcher();
 
 	virtual btCollisionAlgorithm* findAlgorithm(const btCollisionObjectWrapper* body0Wrap, const btCollisionObjectWrapper* body1Wrap, btPersistentManifold* sharedManifold, ebtDispatcherQueryType queryType) = 0;

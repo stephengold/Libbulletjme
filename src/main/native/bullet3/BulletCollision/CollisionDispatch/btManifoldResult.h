@@ -22,6 +22,7 @@ struct btCollisionObjectWrapper;
 #include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 class btManifoldPoint;
 
+#include "BulletCollision/NarrowPhaseCollision/btContactCallbacks.h"// stephengold added 2026-07-10
 #include "BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h"
 
 #include "LinearMath/btTransform.h"
@@ -30,8 +31,6 @@ class btManifoldPoint;
 
 typedef bool (*ContactAddedCallback)(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1);
 extern ContactAddedCallback gContactAddedCallback;
-typedef bool (*ContactConceivedCallback)(btManifoldPoint&, btPersistentManifold*, const btCollisionObject* pBodyA, const btCollisionObject* pBodyB);// stephengold added 2026-03-22
-extern ContactConceivedCallback gContactConceivedCallback;// stephengold added 2026-03-22
 
 //#define DEBUG_PART_INDEX 1
 
@@ -53,13 +52,14 @@ protected:
 
 	const btCollisionObjectWrapper* m_body0Wrap;
 	const btCollisionObjectWrapper* m_body1Wrap;
+	const btContactCallbacks* m_callbacks;// stephengold added 2026-07-10
 	int m_partId0;
 	int m_partId1;
 	int m_index0;
 	int m_index1;
 
 public:
-	btManifoldResult()
+	btManifoldResult(const btContactCallbacks* callbacks)// stephengold modified 2026-07-10
 		:
 #ifdef DEBUG_PART_INDEX
 
@@ -68,14 +68,16 @@ public:
 		  m_index0(-1),
 		  m_index1(-1)
 #endif  //DEBUG_PART_INDEX
+			  m_callbacks(callbacks),// stephengold added 2026-07-10
 			  m_closestPointDistanceThreshold(0)
 	{
 	}
 
-	btManifoldResult(const btCollisionObjectWrapper* body0Wrap, const btCollisionObjectWrapper* body1Wrap);
+	btManifoldResult(const btContactCallbacks* callbacks, const btCollisionObjectWrapper* body0Wrap, const btCollisionObjectWrapper* body1Wrap);// stephengold modified 2026-07-10
 
 	virtual ~btManifoldResult(){};
 
+	const btContactCallbacks* getCallbacks() { return m_callbacks; }// stephengold added 2026-07-10
 	void setPersistentManifold(btPersistentManifold* manifoldPtr)
 	{
 		m_manifoldPtr = manifoldPtr;

@@ -1136,7 +1136,7 @@ struct btBridgedManifoldResult : public btManifoldResult
 	btCollisionWorld::ContactResultCallback& m_resultCallback;
 
 	btBridgedManifoldResult(const btCollisionObjectWrapper* obj0Wrap, const btCollisionObjectWrapper* obj1Wrap, btCollisionWorld::ContactResultCallback& resultCallback)
-		: btManifoldResult(obj0Wrap, obj1Wrap),
+		: btManifoldResult(m_callbacks, obj0Wrap, obj1Wrap),// stephengold modified 2026-07-10
 		  m_resultCallback(resultCallback)
 	{
 	}

@@ -21,7 +21,6 @@ subject to the following restrictions:
 
 ///This is to allow MaterialCombiner/Custom Friction/Restitution values
 ContactAddedCallback gContactAddedCallback = 0;
-ContactConceivedCallback gContactConceivedCallback = 0;// stephengold added 2026-03-22
 
 CalculateCombinedCallback gCalculateCombinedRestitutionCallback = &btManifoldResult::calculateCombinedRestitution;
 CalculateCombinedCallback gCalculateCombinedFrictionCallback = &btManifoldResult::calculateCombinedFriction;
@@ -88,8 +87,9 @@ btScalar btManifoldResult::calculateCombinedContactStiffness(const btCollisionOb
 	return combinedStiffness;
 }
 
-btManifoldResult::btManifoldResult(const btCollisionObjectWrapper* body0Wrap, const btCollisionObjectWrapper* body1Wrap)
+btManifoldResult::btManifoldResult(const btContactCallbacks* callbacks, const btCollisionObjectWrapper* body0Wrap, const btCollisionObjectWrapper* body1Wrap)// stephengold modified 2026-07-10
 	: m_manifoldPtr(0),
+	  m_callbacks(callbacks),// stephengold added 2026-07-10
 	  m_body0Wrap(body0Wrap),
 	  m_body1Wrap(body1Wrap)
 	  ,
@@ -193,10 +193,11 @@ void btManifoldResult::addContactPoint(const btVector3& normalOnBInWorld, const 
 		newPt.m_index1 = m_index1;
 	}
 	//printf("depth=%f\n",depth);
-        if (gContactConceivedCallback) {// stephengold added 2026-03-22
+	ContactConceivedCallback callback = m_callbacks->m_contactConceivedCallback;// stephengold added 2026-07-10
+	if (callback) {// stephengold added 2026-07-10
 	        const btCollisionObject* pco0 = getBody0Internal();// stephengold added 2026-03-22
 	        const btCollisionObject* pco1 = getBody1Internal();// stephengold added 2026-03-22
-                bool accept = (*gContactConceivedCallback)(newPt, m_manifoldPtr, pcoA, pcoB);// stephengold added 2026-03-22
+	        bool accept = (*callback)(newPt, m_manifoldPtr, pcoA, pcoB);// stephengold added 2026-07-10
                 if (!accept) return;// stephengold added 2026-03-22
         }// stephengold added 2026-03-22
 	///@todo, check this for any side effects
@@ -222,8 +223,9 @@ void btManifoldResult::addContactPoint(const btVector3& normalOnBInWorld, const 
 		(*gContactAddedCallback)(m_manifoldPtr->getContactPoint(insertIndex), obj0Wrap, newPt.m_partId0, newPt.m_index0, obj1Wrap, newPt.m_partId1, newPt.m_index1);
 	}
 
-	if (gContactStartedCallback && isNewCollision)
+	ContactStartedCallback callback2 = m_callbacks->m_contactStartedCallback;// stephengold added 2026-07-10
+	if (callback2 && isNewCollision)// stephengold modified 2026-07-10
 	{
-		gContactStartedCallback(m_manifoldPtr);
+		(*callback2)(m_manifoldPtr);// stephengold modified 2026-07-10
 	}
 }
