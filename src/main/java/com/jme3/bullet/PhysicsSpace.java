@@ -751,12 +751,6 @@ public class PhysicsSpace extends CollisionSpace implements ContactListener {
     /**
      * Update the space, enabling the specified callbacks. This method should be
      * invoked on the thread that created the space.
-     * <p>
-     * Disabling specific callbacks is an optimization, primarily intended for
-     * applications with a single physics space. The Bullet variables that
-     * enable the callbacks are global (shared by all physics spaces), so if
-     * multiple spaces are updated from different threads, be sure to pass the
-     * same flags to all invocations of {@code update()}.
      *
      * @param timeInterval the time interval to simulate (in seconds, &ge;0)
      * @param maxSteps the maximum number of steps of size {@code accuracy}
@@ -793,12 +787,6 @@ public class PhysicsSpace extends CollisionSpace implements ContactListener {
      * (&ge;1) or 0 for a single step of size {@code timeInterval}
      * @param stepFlags the desired callbacks, ORed together (default=0x0)
      * @see com.jme3.bullet.StepFlag
-     * <p>
-     * Disabling specific callbacks is an optimization, primarily intended for
-     * applications with a single physics space. The Bullet variables that
-     * enable the callbacks are global (shared by all physics spaces), so if
-     * multiple spaces are updated from different threads, be sure to pass the
-     * same flags to all invocations of {@code update()}.
      */
     public void update(float timeInterval, int maxSteps, int stepFlags) {
         assert Validate.nonNegative(timeInterval, "time interval");
