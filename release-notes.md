@@ -1,5 +1,13 @@
 # Release log for the Libbulletjme project
 
+## Version 23.1.0 released on 11 July 2026
+
++ Bugfix: the native variables that enable contact callbacks are shared
+  among all physics spaces
++ Began supporting the Android_RISCV64 platform.
++ Added the `PhysicsSpace.clearForces()` method.
++ Began using Xcode v26.6.0 to build for macOS platforms.
+
 ## Version 23.0.1 released on 18 June 2026
 
 + Changed the build procedures for Android:  no longer use `-b`/`--build-file`.

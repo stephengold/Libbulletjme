@@ -13,8 +13,8 @@ The project supports the 3 major desktop operating systems on x86_64 architectur
 Windows, Linux, and macOS.
 It also supports Linux on ARM (both armhf and aarch64),
 macOS on ARM, Windows on ARM,
-and 4 Android ABIs (armeabi-v7a, arm64-v8a, x86, and x86_64),
-making a total of 11 platforms.
+and 5 Android ABIs (armeabi-v7a, arm64-v8a, riscv64, x86, and x86_64),
+making a total of 12 platforms.
 
 For each desktop platform, 4 native libraries are provided:
 + a release build using single-precision arithmetic (the default library)
