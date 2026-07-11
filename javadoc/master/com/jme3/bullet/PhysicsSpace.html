@@ -1176,13 +1176,7 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
  boolean&nbsp;doProcessed,
  boolean&nbsp;doStarted)</span></div>
 <div class="block">Update the space, enabling the specified callbacks. This method should be
- invoked on the thread that created the space.
- <p>
- Disabling specific callbacks is an optimization, primarily intended for
- applications with a single physics space. The Bullet variables that
- enable the callbacks are global (shared by all physics spaces), so if
- multiple spaces are updated from different threads, be sure to pass the
- same flags to all invocations of <code>update()</code>.</div>
+ invoked on the thread that created the space.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>timeInterval</code> - the time interval to simulate (in seconds, &ge;0)</dd>
@@ -1213,13 +1207,8 @@ implements <a href="collision/ContactListener.html" title="interface in com.jme3
 <dd><code>stepFlags</code> - the desired callbacks, ORed together (default=0x0)</dd>
 <dt>See Also:</dt>
 <dd>
-<ul class="tag-list-long">
-<li><a href="StepFlag.html" title="class in com.jme3.bullet"><code><p>
- Disabling specific callbacks is an optimization, primarily intended for
- applications with a single physics space. The Bullet variables that
- enable the callbacks are global (shared by all physics spaces), so if
- multiple spaces are updated from different threads, be sure to pass the
- same flags to all invocations of <code>update()</code>.</code></a></li>
+<ul class="tag-list">
+<li><a href="StepFlag.html" title="class in com.jme3.bullet"><code>StepFlag</code></a></li>
 </ul>
 </dd>
 </dl>
