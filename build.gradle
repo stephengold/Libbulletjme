@@ -16,8 +16,8 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    groupID = 'com.github.stephengold'
     baseName = "${artifact}-${lbjVersion}" // for artifacts
+    groupID = 'com.github.stephengold'
     websiteUrl = 'https://github.com/stephengold/Libbulletjme'
 }
 
