@@ -8,7 +8,6 @@ jobs:
   Java17-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
-    timeout-minutes: 7
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -26,7 +25,6 @@ jobs:
   Java21-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -88,7 +86,6 @@ jobs:
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macos-26-intel
-    timeout-minutes: 15
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -121,7 +118,6 @@ jobs:
   Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macos-26
-    timeout-minutes: 9
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -154,7 +150,6 @@ jobs:
   Java21-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2025-vs2026
-    timeout-minutes: 24
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -219,7 +214,6 @@ jobs:
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -250,7 +244,6 @@ jobs:
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -283,7 +276,6 @@ jobs:
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -311,7 +303,6 @@ jobs:
   Java26-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
     steps:
       - uses: actions/setup-java@v5
         with:
