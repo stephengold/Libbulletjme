@@ -3,7 +3,7 @@
 [versions]
 
 android-ndk = "29.0.14206865"
-checkstyle = "13.7.0"
+checkstyle = "13.8.0"
 
 [libraries]
 
