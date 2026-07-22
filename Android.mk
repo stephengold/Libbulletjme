@@ -11,7 +11,9 @@ $(N)/glue \
 $(N)/v-hacd/inc \
 $(N)/v-hacd/public
 
-LOCAL_CFLAGS := -std=c++11 -Wno-single-bit-bitfield-constant-conversion
+LOCAL_CFLAGS := \
+-std=c++11 \
+-Wno-single-bit-bitfield-constant-conversion
 LOCAL_MODULE := bulletjme
 LOCAL_SHORT_COMMANDS := true
 

@@ -257,6 +257,8 @@ model {
                     }
 
                     if (os == 'osx') {
+                        // workaround when Xcode isn't installed:
+                        //cppCompiler.args '-I', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
                         cppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {
                         cppCompiler.args '-I', "$javaHome/include/linux"
