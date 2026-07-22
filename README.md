@@ -1,9 +1,9 @@
 <img height="150" src="https://i.imgur.com/YEPFEcx.png" alt="Libbulletjme Project logo">
 
-The [Libbulletjme Project][libbulletjme] adds JNI "glue code"
-to portions of [Bullet Physics][bullet]
+The [Libbulletjme Project][libbulletjme] provides
+[JVM] bindings for portions of [Bullet Physics][bullet]
 and [Khaled Mamou's V-HACD Library][vhacd],
-enabling 3-D physics simulation from [Java] applications.
+to facilitate 3-D physics simulation in JVM languages such as [Java] and [Kotlin].
 
 Complete source code (in C++ and Java) is provided under
 [a mixed open-source license][license].
