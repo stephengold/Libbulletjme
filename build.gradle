@@ -52,7 +52,7 @@ model {
     platforms {
         // To build native libraries for Android, use "android.gradle" instead.
         Linux64 {
-            architecture 'x86_64'
+            architecture 'x86-64'
             operatingSystem 'linux'
         }
         Linux_ARM32hf {
@@ -68,7 +68,7 @@ model {
             operatingSystem 'linux'
         }
         MacOSX64 {
-            architecture 'x86_64'
+            architecture 'x86-64'
             operatingSystem 'osx'
         }
         MacOSX_ARM64 {
@@ -76,7 +76,7 @@ model {
             operatingSystem 'osx'
         }
         Windows64 {
-            architecture 'x86_64'
+            architecture 'x86-64'
             operatingSystem 'windows'
         }
         Windows_ARM64 {
