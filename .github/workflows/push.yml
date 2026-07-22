@@ -300,7 +300,7 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
 
-  Java26-Linux:
+  Java26-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
     steps:
