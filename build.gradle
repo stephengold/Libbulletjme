@@ -246,6 +246,13 @@ model {
                     cppCompiler.args '-std=c++11'
                     cppCompiler.args '-Werror=return-type'
 
+                    // Override target architecture on Linux systems:
+                    if (pName == 'Linux64') {
+                        cppCompiler.args '-march=x86-64';
+                    } else if (pName == 'Linux_ARM64') {
+                        cppCompiler.args '-march=armv8-a';
+                    }
+
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
