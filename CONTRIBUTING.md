@@ -56,7 +56,6 @@ when you think your pull request is ready.
 It's fine to question or discuss review comments.
 Multiple review passes may be needed; please be patient.
 
-
 ### Code style
 
 Libbulletjme has an established code style for Java,
