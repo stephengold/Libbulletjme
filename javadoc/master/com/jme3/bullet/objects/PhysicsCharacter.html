@@ -493,13 +493,14 @@ loadScripts(document, 'script');</script>
 <h3>getLinearVelocity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getLinearVelocity</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
 <div class="block">Determine the linear velocity of this character's center. Note that the
- units differ from PhysicsRigidBody!</div>
+ horizontal units differ from PhysicsRigidBody!</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
 <dt>Returns:</dt>
-<dd>a vector (in physics-space units per time step, either
- storeResult or a new vector, not null)</dd>
+<dd>a vector (X and Z components in physics-space units per time
+ step, Y component in physics-space units per second, either storeResult
+ or a new vector, not null)</dd>
 </dl>
 </section>
 </li>
@@ -735,12 +736,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setLinearVelocity(com.jme3.math.Vector3f)">
 <h3>setLinearVelocity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setLinearVelocity</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;velocity)</span></div>
-<div class="block">Alter the linear velocity of this character's center. Note that the units
- differ from PhysicsRigidBody!</div>
+<div class="block">Alter the linear velocity of this character's center. Note that the
+ horizontal units differ from PhysicsRigidBody!</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>velocity</code> - the desired velocity vector (in physics-space units per
- time step, not null, finite)</dd>
+<dd><code>velocity</code> - the desired velocity vector (X and Z components in
+ physics-space units per time step, Y component in physics-space units per
+ second, not null, finite)</dd>
 </dl>
 </section>
 </li>
