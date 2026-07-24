@@ -192,9 +192,9 @@ public class CharacterController extends NativePhysicsObject {
      * horizontal units differ from PhysicsRigidBody!
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a vector (X and Z components in physics-space units per time
-     * step, Y component in physics-space units per second, either storeResult
-     * or a new vector, not null)
+     * @return a vector (horizontal components in physics-space units per time
+     * step, vertical component in physics-space units per second, either
+     * storeResult or a new vector, not null)
      */
     public Vector3f getLinearVelocity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -392,9 +392,9 @@ public class CharacterController extends NativePhysicsObject {
      * Alter the linear velocity of this character's center. Note that the
      * horizontal units differ from PhysicsRigidBody!
      *
-     * @param velocity the desired velocity vector (X and Z components in
-     * physics-space units per time step, Y component in physics-space units per
-     * second, not null, finite)
+     * @param velocity the desired velocity vector (horizontal components in
+     * physics-space units per time step, vertical component in physics-space
+     * units per second, not null, finite)
      */
     public void setLinearVelocity(Vector3f velocity) {
         Validate.finite(velocity, "velocity");
