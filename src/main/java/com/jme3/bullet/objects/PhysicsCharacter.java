@@ -202,11 +202,12 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
 
     /**
      * Determine the linear velocity of this character's center. Note that the
-     * units differ from PhysicsRigidBody!
+     * horizontal units differ from PhysicsRigidBody!
      *
      * @param storeResult storage for the result (modified if not null)
-     * @return a vector (in physics-space units per time step, either
-     * storeResult or a new vector, not null)
+     * @return a vector (X and Z components in physics-space units per time
+     * step, Y component in physics-space units per second, either storeResult
+     * or a new vector, not null)
      */
     public Vector3f getLinearVelocity(Vector3f storeResult) {
         Vector3f result = controller.getLinearVelocity(storeResult);
@@ -435,11 +436,12 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
-     * Alter the linear velocity of this character's center. Note that the units
-     * differ from PhysicsRigidBody!
+     * Alter the linear velocity of this character's center. Note that the
+     * horizontal units differ from PhysicsRigidBody!
      *
-     * @param velocity the desired velocity vector (in physics-space units per
-     * time step, not null, finite)
+     * @param velocity the desired velocity vector (X and Z components in
+     * physics-space units per time step, Y component in physics-space units per
+     * second, not null, finite)
      */
     public void setLinearVelocity(Vector3f velocity) {
         Validate.nonNull(velocity, "velocity");
