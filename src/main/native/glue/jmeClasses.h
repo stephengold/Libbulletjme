@@ -39,7 +39,7 @@
 #include <jni.h>
 #include <mutex>
 
-#define LIBBULLETJME_VERSION "23.1.0"
+#define LIBBULLETJME_VERSION "23.1.1"
 
 #define EXCEPTION_CHK(pEnv, retval) \
     if (pEnv->ExceptionCheck()) { \

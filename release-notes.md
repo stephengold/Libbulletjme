@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 23.1.1 released on 8 September 2026
+
++ Bugfix:  race conditions in jmeClasses::initJavaClasses()  (issue #56)
++ Began overriding the target architecture when compiling on Linux systems,
+  to ensure a certain degree of native-library portability.
++ Added "SECURITY.md" document.
+
 ## Version 23.1.0 released on 11 July 2026
 
 + Bugfix: the native variables that enable contact callbacks are shared
