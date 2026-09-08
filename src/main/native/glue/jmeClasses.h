@@ -37,6 +37,7 @@
  * Author: Normen Hansen
  */
 #include <jni.h>
+#include <mutex>
 
 #define LIBBULLETJME_VERSION "23.1.0"
 
@@ -164,6 +165,7 @@ public:
     static jmethodID Vhacd_addHull;
     static jmethodID Vhacd_update;
 
+    static std::mutex initMutex;
     static bool printFlag;
     static bool reinitializationCallbackFlag;
 

@@ -137,6 +137,10 @@ jclass jmeClasses::Vhacd;
 jmethodID jmeClasses::Vhacd_addHull;
 jmethodID jmeClasses::Vhacd_update;
 /*
+ * global mutex to avoid race conditions during initialization
+ */
+std::mutex jmeClasses::initMutex;
+/*
  * global flag to enable/disable the initialization message
  *
  * Invoke Java_com_jme3_bullet_util_NativeLibrary_setStartupMessageEnabled
@@ -180,6 +184,8 @@ bool jmeClasses::reinitializationCallbackFlag = false;
  * Initialize this instance for the specified environment.
  */
 void jmeClasses::initJavaClasses(JNIEnv *pEnv) {
+    std::lock_guard<std::mutex> guard(jmeClasses::initMutex);
+
     if (vm != NULL) { // already initialized
         if (jmeClasses::reinitializationCallbackFlag) {
             /*
