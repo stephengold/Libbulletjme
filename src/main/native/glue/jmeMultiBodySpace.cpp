@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2024 jMonkeyEngine
+ * Copyright (c) 2020-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,6 @@
  * Author: Stephen Gold
  */
 #include "jmeMultiBodySpace.h"
-#include "jmeClasses.h"
 #include "BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h"
 
 void jmeMultiBodySpace::

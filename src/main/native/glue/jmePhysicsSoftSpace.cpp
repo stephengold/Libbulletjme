@@ -34,7 +34,6 @@
  * Author: dokthar
  */
 #include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
-#include "jmeClasses.h"
 #include "jmePhysicsSoftSpace.h"
 
 void jmePhysicsSoftSpace::createPhysicsSoftSpace(const btVector3& min,

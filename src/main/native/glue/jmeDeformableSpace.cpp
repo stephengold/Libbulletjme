@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2024 jMonkeyEngine
+ * Copyright (c) 2009-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,6 @@
  */
 #include "BulletSoftBody/BulletReducedDeformableBody/btReducedDeformableBodySolver.h"
 #include "BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h"
-#include "jmeClasses.h"
 #include "jmeDeformableSpace.h"
 
 void jmeDeformableSpace::createDeformableSpace(const btVector3& min,
