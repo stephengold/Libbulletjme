@@ -2,7 +2,7 @@
 
 [versions]
 
-android-ndk = "29.0.14206865"
+android-ndk = "30.0.16248370"
 checkstyle = "14.1.0"
 
 [libraries]
