@@ -15,7 +15,8 @@ jobs:
           java-version: 17
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
-      - run: |
+      - if: "!startsWith(github.ref, 'refs/tags/')"
+        run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
@@ -310,7 +311,8 @@ jobs:
           java-version: 26
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
-      - run: |
+      - if: "!startsWith(github.ref, 'refs/tags/')"
+        run: |
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=Linux64 run build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
