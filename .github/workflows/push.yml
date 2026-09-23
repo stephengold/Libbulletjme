@@ -38,8 +38,7 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 -Ptool=gcc clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=Libbulletjme-Linux64 -Ptarget=Linux64 -Ptool=gcc clean release \
             --console=plain \
@@ -47,10 +46,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-Linux_ARM64:
@@ -69,8 +68,7 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 -Ptool=gcc clean release
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 -Ptool=gcc clean release \
             --console=plain \
@@ -78,10 +76,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX64:
@@ -110,10 +108,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-MacOSX_ARM64:
@@ -142,10 +140,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-Windows64:
@@ -173,10 +171,10 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
@@ -205,10 +203,10 @@ jobs:
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
         shell: bash
 
@@ -236,10 +234,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_ARM32hf:
@@ -268,10 +266,10 @@ jobs:
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
             -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
-      - name: uploadToCentral.sh
-        if: startsWith(github.ref, 'refs/tags/')
+      - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          bash/uploadToCentral.sh -p '${{ secrets.CENTRAL_PASSWORD }}' \
+          bash/uploadToCentral.sh \
+            -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
   Java21-x-Linux_LoongArch64:
