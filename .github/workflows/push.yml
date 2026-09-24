@@ -285,19 +285,10 @@ jobs:
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - run: loongarch64-linux-gnu-g++-13 --version
       - uses: gradle/actions/setup-gradle@v6
-      - run: |
-          ./gradlew -Ptarget=Linux_LoongArch64 install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - if: startsWith(github.ref, 'refs/tags/')
+      - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Partifact=Libbulletjme-Linux_LoongArch64 -Ptarget=Linux_LoongArch64 clean release \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PcentralPassword='${{ secrets.CENTRAL_PASSWORD }}' \
-            -PcentralUsername='${{ secrets.CENTRAL_USERNAME }}'
+          ./gradlew -Ptarget=Linux_LoongArch64 assemble \
+            --console=plain
 
   Java26-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
