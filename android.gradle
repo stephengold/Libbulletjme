@@ -43,9 +43,9 @@ android {
     compileSdk = 35
     defaultConfig {
         aarMetadata {
-            minCompileSdk = 22
+            minCompileSdk = 24
         }
-        minSdk = 22
+        minSdk = 24 // to use java.util.List#sort
         ndk {
             if (!project.hasProperty('target')) {
                 abiFilters 'arm64-v8a', 'armeabi-v7a', 'riscv64', 'x86', 'x86_64'
@@ -61,7 +61,7 @@ android {
                 abiFilters 'x86_64'
             }
         }
-        targetSdk = 22
+        targetSdk = 24
     }
     externalNativeBuild {
         ndkBuild {

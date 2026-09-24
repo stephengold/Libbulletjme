@@ -232,7 +232,7 @@ jobs:
       - run: cp android.gradle build.gradle
       - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Pflavor=Sp -Ptarget=Android_ARM8 install \
+          ./gradlew -Pflavor=Sp -Ptarget=Android_ARM8 install lint \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
