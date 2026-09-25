@@ -54,9 +54,9 @@ jobs:
             -p '${{ secrets.CENTRAL_PASSWORD }}' \
             -u '${{ secrets.CENTRAL_USERNAME }}'
 
-  Java21-Linux_ARM64:
+  Java21-x-Linux_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04-arm
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/setup-java@v6
         with:
@@ -64,16 +64,16 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v7
       - uses: gradle/actions/setup-gradle@v6
-      - run: g++ --version
+      - run: sudo apt-get update
+      - run: sudo apt install g++-11-aarch64-linux-gnu
+      - run: aarch64-linux-gnu-g++-11 --version
       - if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux_ARM64 -Ptool=gcc run build install \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux_ARM64 assemble \
+            --console=plain
       - if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ./gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 -Ptool=gcc clean release \
+          ./gradlew -Partifact=Libbulletjme-Linux_ARM64 -Ptarget=Linux_ARM64 clean release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
