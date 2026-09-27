@@ -1,5 +1,11 @@
 # Release log for the Libbulletjme project
 
+## Version 23.1.2 released on TBD
+
++ Bugfix:  JVM crash with `SIGILL` on some Linux_ARM64 platforms (issue #57)
++ Raised the Android minSdk and targetSdk to 24.
++ Updated Android NDK to version "r30".
+
 ## Version 23.1.1 released on 8 September 2026
 
 + Bugfix:  race conditions in jmeClasses::initJavaClasses()  (issue #56)
