@@ -429,7 +429,7 @@ public class PhysicsVehicle extends PhysicsRigidBody {
     public void removeWheel(int wheelIndex) {
         wheels.remove(wheelIndex);
         rebuildRigidBody();
-        //Bullet has no API to remove a wheel.
+        // Bullet has no API to remove a wheel.
     }
 
     /**
