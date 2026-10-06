@@ -136,6 +136,7 @@ btKinematicCharacterController::btKinematicCharacterController(btPairCachingGhos
 	m_ghostObject = ghostObject;
 	m_up.setValue(0.0f, 0.0f, 1.0f);
 	m_jumpAxis.setValue(0.0f, 0.0f, 1.0f);
+	m_mostRecentDisplacement.setValue(0.0, 0.0, 0.0); // stephengold added 2026-10-05
 	m_addedMargin = 0.02;
 	m_walkDirection.setValue(0.0, 0.0, 0.0);
 	m_AngVel.setValue(0.0, 0.0, 0.0);
