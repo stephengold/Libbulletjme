@@ -235,6 +235,18 @@ public class PhysicsCharacter extends PhysicsCollisionObject {
     }
 
     /**
+     * Copy the character's displacement during the most recent simulation step.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return an offset vector (in physics-space coordinates, either
+     * storeResult or a new vector, not null)
+     */
+    public Vector3f getMostRecentDisplacement(Vector3f storeResult) {
+        Vector3f result = controller.getMostRecentDisplacement(storeResult);
+        return result;
+    }
+
+    /**
      * Determine this character's step height.
      *
      * @return the maximum amount of vertical movement without jumping or
