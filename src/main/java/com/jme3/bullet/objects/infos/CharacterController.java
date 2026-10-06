@@ -230,6 +230,21 @@ public class CharacterController extends NativePhysicsObject {
     }
 
     /**
+     * Copy the character's displacement during the most recent simulation step.
+     *
+     * @param storeResult storage for the result (modified if not null)
+     * @return an offset vector (in physics-space coordinates, either
+     * storeResult or a new vector, not null)
+     */
+    public Vector3f getMostRecentDisplacement(Vector3f storeResult) {
+        Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
+        long controllerId = nativeId();
+        getMostRecentDisplacement(controllerId, result);
+
+        return result;
+    }
+
+    /**
      * Determine the character's step height.
      *
      * @return the maximum amount of vertical movement without jumping or
@@ -547,6 +562,9 @@ public class CharacterController extends NativePhysicsObject {
     native private static float getMaxPenetrationDepth(long controllerId);
 
     native private static float getMaxSlope(long controllerId);
+
+    native private static void
+            getMostRecentDisplacement(long controllerId, Vector3f storeVector);
 
     native private static float getStepHeight(long controllerId);
 

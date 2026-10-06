@@ -97,6 +97,14 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_
 
 /*
  * Class:     com_jme3_bullet_objects_infos_CharacterController
+ * Method:    getMostRecentDisplacement
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_getMostRecentDisplacement
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_CharacterController
  * Method:    getStepHeight
  * Signature: (J)F
  */

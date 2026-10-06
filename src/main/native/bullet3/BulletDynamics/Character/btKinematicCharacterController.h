@@ -89,6 +89,7 @@ protected:
 	btScalar m_velocityTimeInterval;
 	btVector3 m_up;
 	btVector3 m_jumpAxis;
+	btVector3 m_mostRecentDisplacement; // stephengold added 2026-10-05
 
 	static btVector3* getUpAxisDirections();
 	bool m_interpolateUp;
@@ -120,8 +121,11 @@ public:
 	///btActionInterface interface
 	virtual void updateAction(btCollisionWorld * collisionWorld, btScalar deltaTime)
 	{
+		btVector3 startLocation = m_ghostObject->getWorldTransform().getOrigin(); // stephengold added 2026-10-05
 		preStep(collisionWorld);
 		playerStep(collisionWorld, deltaTime);
+		btVector3 endLocation = m_ghostObject->getWorldTransform().getOrigin(); // stephengold added 2026-10-05
+		m_mostRecentDisplacement = endLocation - startLocation; // stephengold added 2026-10-05
 	}
 
 	///btActionInterface interface

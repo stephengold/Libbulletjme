@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2024 jMonkeyEngine
+ * Copyright (c) 2009-2026 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,6 +55,10 @@ public:
     jmeKcc(btPairCachingGhostObject *ghost, btConvexShape *shape,
             btScalar stepHeight)
     : btKinematicCharacterController(ghost, shape, stepHeight) {
+    }
+
+    const btVector3 & getMostRecentDisplacement() const {
+        return m_mostRecentDisplacement;
     }
 
     const btVector3 & getWalkOffset() const {
@@ -236,6 +240,22 @@ JNIEXPORT jfloat JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_
     NULL_CHK(pEnv, pController, "The controller does not exist.", 0);
 
     return pController->getMaxSlope();
+}
+
+/*
+ * Class:     com_jme3_bullet_objects_infos_CharacterController
+ * Method:    getMostRecentDisplacement
+ * Signature: (JLcom/jme3/math/Vector3f;)V
+ */
+JNIEXPORT void JNICALL Java_com_jme3_bullet_objects_infos_CharacterController_getMostRecentDisplacement
+(JNIEnv *pEnv, jclass, jlong kccId, jobject storeVector) {
+    jmeKcc * const pController = reinterpret_cast<jmeKcc *> (kccId);
+    NULL_CHK(pEnv, pController, "The controller does not exist.",);
+
+    const btVector3& offset = pController->getMostRecentDisplacement();
+
+    NULL_CHK(pEnv, storeVector, "The store vector does not exist.",);
+    jmeBulletUtil::convert(pEnv, &offset, storeVector);
 }
 
 /*
