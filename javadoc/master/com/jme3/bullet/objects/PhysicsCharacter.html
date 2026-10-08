@@ -226,7 +226,8 @@ step height.</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLinearVelocity(com.jme3.math.Vector3f)" class="member-name-link">getLinearVelocity</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the linear velocity of this character's center.</div>
+<div class="block">Determine the character's linear motion command: the sum of its
+horizontal (walk) offset plus its vertical (jump) velocity.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>float</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMaxPenetrationDepth()" class="member-name-link">getMaxPenetrationDepth</a>()</code></div>
@@ -256,7 +257,7 @@ step height.</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWalkDirection(com.jme3.math.Vector3f)" class="member-name-link">getWalkDirection</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Determine the character's walk offset.</div>
+<div class="block">Determine the character's walk offset: its horizontal motion command.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isUsingGhostSweepTest()" class="member-name-link">isUsingGhostSweepTest</a>()</code></div>
@@ -332,7 +333,7 @@ step height.</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLinearVelocity(com.jme3.math.Vector3f)" class="member-name-link">setLinearVelocity</a><wbr>(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;velocity)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Alter the linear velocity of this character's center.</div>
+<div class="block">Command the linear velocity of this character's center.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMaxPenetrationDepth(float)" class="member-name-link">setMaxPenetrationDepth</a><wbr>(float&nbsp;depth)</code></div>
@@ -549,8 +550,13 @@ damped)</dd>
 <h3>getLinearVelocity</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getLinearVelocity</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Determine the linear velocity of this character's center. Note that the
-horizontal units differ from PhysicsRigidBody!</div>
+<div class="block">Determine the character's linear motion command: the sum of its
+horizontal (walk) offset plus its vertical (jump) velocity. Note that the
+horizontal units differ from PhysicsRigidBody.
+<p>
+Collisions can cause the achieved motion to be less than commanded. To
+determine the achieved displacement, use
+<a href="#getMostRecentDisplacement(com.jme3.math.Vector3f)"><code>getMostRecentDisplacement(com.jme3.math.Vector3f)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -558,6 +564,13 @@ horizontal units differ from PhysicsRigidBody!</div>
 <dd>a vector (horizontal components in physics-space units per time
 step, vertical component in physics-space units per second, either
 storeResult or a new vector, not null)</dd>
+<dt>See Also:</dt>
+<dd>
+<ul class="tag-list-long">
+<li><a href="#getWalkDirection(com.jme3.math.Vector3f)"><code>getWalkDirection(com.jme3.math.Vector3f)</code></a></li>
+<li><a href="#setLinearVelocity(com.jme3.math.Vector3f)"><code>setLinearVelocity(com.jme3.math.Vector3f)</code></a></li>
+</ul>
+</dd>
 </dl>
 </div>
 </section>
@@ -593,7 +606,10 @@ storeResult or a new vector, not null)</dd>
 <h3>getMostRecentDisplacement</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getMostRecentDisplacement</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Copy the character's displacement during the most recent simulation step.</div>
+<div class="block">Copy the character's displacement during the most recent simulation step.
+<p>
+Unlike <a href="#getLinearVelocity(com.jme3.math.Vector3f)"><code>getLinearVelocity(com.jme3.math.Vector3f)</code></a>, the units are
+simply physics-space units per time step.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -640,7 +656,11 @@ null)</dd>
 <h3>getWalkDirection</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a></span>&nbsp;<span class="element-name">getWalkDirection</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;storeResult)</span></div>
-<div class="block">Determine the character's walk offset.</div>
+<div class="block">Determine the character's walk offset: its horizontal motion command.
+<p>
+Collisions can cause the achieved motion to be less than commanded. To
+determine the achieved displacement, use
+<a href="#getMostRecentDisplacement(com.jme3.math.Vector3f)"><code>getMostRecentDisplacement(com.jme3.math.Vector3f)</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>storeResult</code> - storage for the result (modified if not null)</dd>
@@ -849,8 +869,10 @@ default=10)</dd>
 <h3>setLinearVelocity</h3>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setLinearVelocity</span><wbr><span class="parameters">(<a href="../../math/Vector3f.html" title="class in com.jme3.math">Vector3f</a>&nbsp;velocity)</span></div>
-<div class="block">Alter the linear velocity of this character's center. Note that the
-horizontal units differ from PhysicsRigidBody!</div>
+<div class="block">Command the linear velocity of this character's center. Note that the
+horizontal units differ from PhysicsRigidBody!
+<p>
+Collisions can cause the achieved motion to be less than commanded.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>velocity</code> - the desired velocity vector (horizontal components in
