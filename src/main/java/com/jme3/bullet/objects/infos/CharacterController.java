@@ -188,13 +188,21 @@ public class CharacterController extends NativePhysicsObject {
     }
 
     /**
-     * Determine the linear velocity of this character's center. Note that the
-     * horizontal units differ from PhysicsRigidBody!
+     * Determine the character's linear motion command: the sum of its
+     * horizontal (walk) offset plus its vertical (jump) velocity. Note that the
+     * horizontal units differ from PhysicsRigidBody.
+     * <p>
+     * Collisions can cause the achieved motion to be less than commanded. To
+     * determine the achieved displacement, use
+     * {@link #getMostRecentDisplacement(com.jme3.math.Vector3f)}.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return a vector (horizontal components in physics-space units per time
      * step, vertical component in physics-space units per second, either
      * storeResult or a new vector, not null)
+     *
+     * @see #getWalkDirection(com.jme3.math.Vector3f)
+     * @see #setLinearVelocity(com.jme3.math.Vector3f)
      */
     public Vector3f getLinearVelocity(Vector3f storeResult) {
         Vector3f result = (storeResult == null) ? new Vector3f() : storeResult;
@@ -231,6 +239,9 @@ public class CharacterController extends NativePhysicsObject {
 
     /**
      * Copy the character's displacement during the most recent simulation step.
+     * <p>
+     * Unlike {@link #getLinearVelocity(com.jme3.math.Vector3f)}, the units are
+     * simply physics-space units per time step.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return an offset vector (in physics-space coordinates, either
@@ -274,7 +285,11 @@ public class CharacterController extends NativePhysicsObject {
     }
 
     /**
-     * Determine the character's walk offset.
+     * Determine the character's walk offset: its horizontal motion command.
+     * <p>
+     * Collisions can cause the achieved motion to be less than commanded. To
+     * determine the achieved displacement, use
+     * {@link #getMostRecentDisplacement(com.jme3.math.Vector3f)}.
      *
      * @param storeResult storage for the result (modified if not null)
      * @return an offset vector (either storeResult or a new vector, not null)
@@ -404,8 +419,10 @@ public class CharacterController extends NativePhysicsObject {
     }
 
     /**
-     * Alter the linear velocity of this character's center. Note that the
+     * Command the linear velocity of this character's center. Note that the
      * horizontal units differ from PhysicsRigidBody!
+     * <p>
+     * Collisions can cause the achieved motion to be less than commanded.
      *
      * @param velocity the desired velocity vector (horizontal components in
      * physics-space units per time step, vertical component in physics-space
