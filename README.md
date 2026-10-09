@@ -5,6 +5,12 @@ The [Libbulletjme Project][libbulletjme] provides
 and [Khaled Mamou's V-HACD Library][vhacd],
 to facilitate 3-D physics simulation in JVM languages such as [Java] and [Kotlin].
 
+***Maintenance of the official Bullet Physics repository ceased in October 2025.
+For now, Libbulletjme continues to be maintained.
+However, long-term projects should plan to transition
+to another 3-D physics engine
+such as [Jolt JNI](https://stephengold.github.io/jolt-jni-docs).***
+
 Complete source code (in C++ and Java) is provided under
 [a mixed open-source license][license].
 Pre-built Maven artifacts are also provided.
