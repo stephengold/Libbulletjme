@@ -1,5 +1,12 @@
 # Release log for the Libbulletjme project
 
+## Version 23.2.0 released on 12 October 2026
+
++ Bugfix:  Exception Access Violation while simulating kinematic bodies
+  with a ReleaseSpMt native library (issue #59)
++ Added the `getMostRecentDisplacement()` method
+  to the `CharacterController` and `PhysicsCharacter` classes.
+
 ## Version 23.1.2 released on 27 September 2026
 
 + Bugfix:  JVM crash with `SIGILL` on some Linux_ARM64 platforms (issue #57)
