@@ -61,7 +61,7 @@ android {
                 abiFilters 'x86_64'
             }
         }
-        targetSdk = 24
+        targetSdk = 35
     }
     externalNativeBuild {
         ndkBuild {
