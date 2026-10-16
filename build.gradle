@@ -1,4 +1,4 @@
-// Gradle script to build and publish Libbulletjme desktop artifacts
+// Gradle script to build, publish, and run Libbulletjme desktop artifacts
 
 import com.github.stephengold.build.BuildSrc
 
@@ -204,7 +204,7 @@ model {
                 String q = pName + flavor.name + buildType.name
                 if (toolChain in VisualCpp) {
                     cppCompiler.define 'WIN32'
-                    cppCompiler.args '/EHsc' // synchronous exceptions only
+                    cppCompiler.args '/EHsc' // to enable synchronous C++ exceptions
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/main/native/bullet3"
@@ -364,8 +364,9 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
 }
 run.dependsOn('assemble')
 
-tasks.withType(Test).configureEach { // Java runtime options:
+tasks.withType(Test).configureEach { // Java runtime options for automated tests:
     jvmArgs '--enable-native-access=ALL-UNNAMED' // suppress System::load() warning
+    //testLogging.showStandardStreams = true
 }
 test.dependsOn('assemble')
 

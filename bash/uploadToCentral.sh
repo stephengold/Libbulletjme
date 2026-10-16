@@ -11,7 +11,7 @@ set -euo pipefail
 
 # The required -p and -u flags on the command line
 # specify the password and username components of a "user token"
-# generated using the web interface at https://central.sonatype.com/account
+# generated using the web interface at https://central.sonatype.com/usertoken
 
 while getopts p:u: flag
 do
