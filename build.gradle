@@ -226,8 +226,10 @@ model {
                             pdbFile += flavor.name + '/bulletjme.pdb'
                         }
                     } else { // buildType == Release
+                        cppCompiler.args '/GS-' // disable buffer-overrun checks
                         cppCompiler.args '/O2'
                         cppCompiler.args '/Ob3'
+                        cppCompiler.args '/Zc:inline' // omit unreferenced symbols
                     }
                     if (isMt) {
                         cppCompiler.args '/openmp'
