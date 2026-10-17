@@ -100,13 +100,13 @@ model {
         visualCpp(VisualCpp)
         clang(Clang)
         gcc(Gcc)
-        gcc9Arm(Gcc) { // cross-compile on Linux
+        gcc9Arm32hf(Gcc) { // cross-compile on Linux
             target('Linux_ARM32hf') {
                 cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
                 linker.executable = 'arm-linux-gnueabihf-g++-9'
             }
         }
-        gcc11Arm(Gcc) { // cross-compile on Linux
+        gcc11Arm64(Gcc) { // cross-compile on Linux
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-11'
                 linker.executable = 'aarch64-linux-gnu-g++-11'
