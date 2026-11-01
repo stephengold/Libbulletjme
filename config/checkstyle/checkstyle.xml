@@ -65,7 +65,9 @@
         </module>
         <module name="AnnotationUseStyle"/>
         <module name="MissingDeprecated"/>
+        <module name="MissingOverride"/>
         <module name="MissingOverrideOnRecordAccessor"/>
+        <module name="OpenjdkAnnotationLocation"/>
         <module name="SuppressWarningsHolder"/>
 
         <!-- Checks for blocks:                       -->
@@ -146,6 +148,16 @@
             <property name="query" value="//SINGLE_LINE_COMMENT[./COMMENT_CONTENT[not(starts-with(@text, ' ')) and not(starts-with(@text, '/')) and not(@text = '\n') and not(ends-with(@text, '//\n'))]]"/>
             <message key="matchxpath.match" value="''//'' must be followed by a whitespace."/>
         </module>
+        <module name="MatchXpath">
+            <property name="id" value="CompactSourceFileNotAllowed"/>
+            <property name="query" value="/COMPACT_COMPILATION_UNIT"/>
+            <message key="matchxpath.match" value="Compact source file is not allowed."/>
+        </module>
+        <module name="MatchXpath">
+            <property name="id" value="unnecessaryParenthesesInReturn"/>
+            <property name="query" value="//LITERAL_RETURN/EXPR[./LPAREN and ./RPAREN and not(./LPAREN/preceding-sibling::*)]"/>
+            <message key="matchxpath.match" value="Unnecessary parentheses in return statement."/>
+        </module>
         <module name="MissingSwitchDefault"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="NoFinalizer"/>
@@ -202,6 +214,7 @@
         <!-- See https://checkstyle.org/checks/misc -->
         <module name="ArrayTypeStyle"/>
         <module name="AvoidEscapedUnicodeCharacters"/>
+        <module name="ClassHeaderWrapOpenjdk"/>
         <module name="CommentsIndentation"/>
         <module name="HexLiteralCase"/>
         <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
@@ -211,6 +224,10 @@
         <!-- Modifier check:                            -->
         <!-- See https://checkstyle.org/checks/modifier -->
         <module name="RedundantModifier"/>
+
+        <!-- Module check:                            -->
+        <!-- See https://checkstyle.org/checks/modules -->
+        <module name="ModuleDirectiveOrder"/>
 
         <!-- Checks for naming conventions:           -->
         <!-- See https://checkstyle.org/checks/naming -->
@@ -296,6 +313,9 @@
 
         <!-- Checks for size violations:             -->
         <!-- See https://checkstyle.org/checks/sizes -->
+        <module name="LambdaBodyLength">
+            <property name="max" value="1"/>
+        </module>
         <module name="MethodLength">
             <property name="max" value="260"/>
         </module>
@@ -330,6 +350,7 @@
             <property name="tokens" value="COMMA, SEMI, POST_INC, POST_DEC, DOT, LABELED_STAT, METHOD_REF, ELLIPSIS"/>
         </module>
         <module name="NoWhitespaceBeforeCaseDefaultColon"/>
+        <module name="OpenjdkMethodParameterAlignment"/>
         <module name="OperatorWrap">
             <property name="id" value="OperatorWrapEOL"/>
             <property name="option" value="EOL"/>
