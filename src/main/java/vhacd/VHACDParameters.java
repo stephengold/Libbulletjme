@@ -44,9 +44,7 @@ import jme3utilities.Validate;
  * A set of tuning parameters for convex decomposition, based on classic
  * V-HACD's IVHACD::Parameters.
  */
-public class VHACDParameters
-        extends NativePhysicsObject
-        implements Cloneable {
+public class VHACDParameters extends NativePhysicsObject implements Cloneable {
     // *************************************************************************
     // constants and loggers
 
