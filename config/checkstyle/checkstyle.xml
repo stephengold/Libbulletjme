@@ -221,8 +221,11 @@
         <module name="OuterTypeFilename"/>
         <module name="UpperEll"/>
 
-        <!-- Modifier check:                            -->
+        <!-- Modifier checks:                           -->
         <!-- See https://checkstyle.org/checks/modifier -->
+        <module name="ModifierOrder">
+            <property name="modifiersOrder" value="abstract, default, final, native, non-sealed, private, protected, public, sealed, static, strictfp, synchronized, transient, volatile"/>
+        </module>
         <module name="RedundantModifier"/>
 
         <!-- Module check:                            -->
@@ -300,12 +303,8 @@
             <message key="name.invalidPattern" value="Type name ''{0}'' must match pattern ''{1}''."/>
         </module>
 
-        <!-- Regexp checks:                           -->
+        <!-- Regexp check:                           -->
         <!-- See https://checkstyle.org/checks/regexp -->
-        <module name="RegexpSinglelineJava">
-            <property name="format" value="static (abstract|final|native|private|protected|public)|(native|private|protected|public) (abstract|final)"/>
-            <property name="message" value="Modifiers must appear in alphabetical order."/>
-        </module>
         <module name="RegexpSinglelineJava">
             <property name="format" value="\{[ ]+\}"/>
             <property name="message" value="Empty blocks must not contain spaces."/>
