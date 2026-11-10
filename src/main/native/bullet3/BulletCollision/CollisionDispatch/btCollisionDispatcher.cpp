@@ -263,6 +263,12 @@ void btCollisionDispatcher::defaultNearCallback(btBroadphasePair& collisionPair,
 					dispatchInfo.m_timeOfImpact = toi;
 			}
 		}
+	} else if (collisionPair.m_algorithm) {// stephengold added 2026-11-10
+		// Remove contact points invalidated by collision filtering, but retain all manifolds.      stephengold added 2026-11-10
+		btManifoldArray manifolds;// stephengold added 2026-11-10
+		collisionPair.m_algorithm->getAllContactManifolds(manifolds);// stephengold added 2026-11-10
+		for (int i = 0; i < manifolds.size(); ++i)// stephengold added 2026-11-10
+			manifolds[i]->clearManifold();// stephengold added 2026-11-10
 	}
 }
 
